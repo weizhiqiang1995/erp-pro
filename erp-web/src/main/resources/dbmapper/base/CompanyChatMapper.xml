@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyeye.dao.CompanyChatDao">
+	
+	<select id="queryUserMineByUserId" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			k.user_name username,
+			a.id,
+			'online' status,
+			k.user_photo avatar,
+			c.company_name companyName,
+			d.department_name departmentName,
+			k.user_sign sign
+		FROM
+			sys_eve_user a,
+			company_user b LEFT JOIN company_mation c ON b.company_id = c.id
+							LEFT JOIN company_department d ON d.id = b.department_id,
+			sys_eve_user_staff k
+		WHERE a.id = b.user_id
+		AND k.user_id = a.id
+		AND a.id = #{userId}
+	</select>
+	
+	<select id="queryUserGroupByUserId" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			b.id,
+			b.group_name groupname,
+			b.group_img avatar,
+			b.create_id createId
+		FROM
+			sys_talk_group_user a,
+			sys_talk_group b
+		WHERE
+			a.group_id = b.id
+		AND a.user_id = #{userId}
+		AND b.state = '1'
+	</select>
+	
+	<select id="queryCompanyDepartmentByUserId" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			b.id,
+			b.department_name groupname,
+			@rownum := @rownum + 1 AS `online`,
+			#{userId} thisUserId
+		FROM
+			company_user a,
+			company_department b,
+			( SELECT @rownum := 0 ) r
+		WHERE a.user_id = #{userId}
+		AND a.company_id = b.company_id
+	</select>
+	
+	<select id="queryDepartmentUserByDepartId" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			k.user_name username,
+			b.id,
+			'offline' status,
+			k.user_photo avatar,
+			IFNULL(k.user_sign, '暂无签名') sign,
+			m.company_name companyName,
+			m.department_name departmentName,
+			m.job_name jobName
+		FROM
+			company_user a
+			LEFT JOIN (SELECT 
+							o.user_id,
+							p.job_name,
+							q.department_name,
+							u.company_name
+						FROM 
+							company_user o, 
+							company_job p, 
+							company_department q, 
+							company_mation u 
+						WHERE o.company_id = u.id 
+							AND o.department_id = q.id 
+							AND o.job_id = p.id) m ON m.user_id = a.user_id,
+			sys_eve_user b,
+			sys_eve_user_staff k
+		WHERE a.department_id = #{id}
+		AND a.user_id = b.id
+		AND b.id = k.user_id
+		AND b.id != #{thisUserId}
+		AND b.id != '0dc9dd4cd4d446ae9455215fe753c44e'
+	</select>
+	
+	<update id="editUserSignByUserId" parameterType="java.util.Map">
+		UPDATE sys_eve_user_staff
+		<set>
+			user_sign = #{userSign},
+		</set>
+		WHERE user_id = #{userId}
+	</update>
+	
+</mapper>

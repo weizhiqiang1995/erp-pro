@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<controller>
+	<!-- 
+		- allUse  是否需要登录才能使用   1是   0否  2需要登陆才能访问，但无需授权    默认为否
+	 -->
+	 
+	<!-- 公共请求开始 -->
+	<url id="common001" path="/post/RmTypeController/queryRmTypeAllList" val="获取所有小程序分类" allUse="2">
+	</url>
+	<url id="common002" path="/post/RmGroupController/queryRmGroupAllList" val="获取所有小程序分组根据小程序分类ID" allUse="2">
+		<property id="parentId" name="id" ref="required" var="小程序分类ID"/>
+	</url>
+	<url id="common003" path="/post/CommonController/uploadFile" val="上传文件" allUse="0">
+		<property id="type" name="type" ref="required,num" var="图片类型"/>
+	</url>
+	<url id="common004" path="/post/CommonController/uploadFileBase64" val="上传文件Base64" allUse="2">
+		<property id="type" name="type" ref="required,num" var="图片类型"/>
+		<property id="images" name="images" ref="required" var="图片Base64"/>
+	</url>
+	
+	<url id="commontarea001" path="/post/SysTAreaController/querySysTAreaProvinceList" val="获取一级省行政区划信息" allUse="2">
+	</url>
+	<url id="commontarea002" path="/post/SysTAreaController/querySysTAreaCityList" val="获取二级市行政区划信息" allUse="2">
+		<property id="rowId" name="id" ref="required" var="省级行政区划id"/>
+	</url>
+	<url id="commontarea003" path="/post/SysTAreaController/querySysTAreaChildAreaList" val="获取三级县行政区划信息" allUse="2">
+		<property id="rowId" name="id" ref="required" var="市级行政区划id"/>
+	</url>
+	<url id="commontarea004" path="/post/SysTAreaController/querySysTAreaTownShipList" val="获取四级镇行政区划信息" allUse="2">
+		<property id="rowId" name="id" ref="required" var="县级行政区划id"/>
+	</url>
+	
+	<url id="sysevewinmation001" path="/post/CommonController/querySysWinMationById" val="获取win系统桌列表信息供展示" allUse="2">
+	</url>
+	<!-- 公共请求结束 -->
+	
+	<!-- 人员选择开始 -->
+	<url id="commonselpeople001" path="/post/CommonController/queryAllPeopleToTree" val="人员选择获取所有公司和人" allUse="2">
+		<property id="chooseOrNotMy" name="chooseOrNotMy" ref="required,num" var="人员列表中是否包含自己--1.包含；其他参数不包含" />
+		<property id="chooseOrNotEmail" name="chooseOrNotEmail" ref="required,num" var="人员列表中是否必须绑定邮箱--1.必须；其他参数没必要" />
+	</url>
+	<url id="commonselpeople002" path="/post/CommonController/queryCompanyPeopleToTreeByUserBelongCompany" val="人员选择根据当前用户所属公司获取这个公司的人" allUse="2">
+		<property id="chooseOrNotMy" name="chooseOrNotMy" ref="required,num" var="人员列表中是否包含自己--1.包含；其他参数不包含" />
+		<property id="chooseOrNotEmail" name="chooseOrNotEmail" ref="required,num" var="人员列表中是否必须绑定邮箱--1.必须；其他参数没必要" />
+	</url>
+	<url id="commonselpeople003" path="/post/CommonController/queryDepartmentPeopleToTreeByUserBelongDepartment" val="人员选择根据当前用户所属公司获取这个公司部门展示的人" allUse="2">
+		<property id="chooseOrNotMy" name="chooseOrNotMy" ref="required,num" var="人员列表中是否包含自己--1.包含；其他参数不包含" />
+		<property id="chooseOrNotEmail" name="chooseOrNotEmail" ref="required,num" var="人员列表中是否必须绑定邮箱--1.必须；其他参数没必要" />
+	</url>
+	<url id="commonselpeople004" path="/post/CommonController/queryJobPeopleToTreeByUserBelongJob" val="人员选择根据当前用户所属公司获取这个公司岗位展示的人" allUse="2">
+		<property id="chooseOrNotMy" name="chooseOrNotMy" ref="required,num" var="人员列表中是否包含自己--1.包含；其他参数不包含" />
+		<property id="chooseOrNotEmail" name="chooseOrNotEmail" ref="required,num" var="人员列表中是否必须绑定邮箱--1.必须；其他参数没必要" />
+	</url>
+	<url id="commonselpeople005" path="/post/CommonController/querySimpleDepPeopleToTreeByUserBelongSimpleDep" val="人员选择根据当前用户所属公司获取这个公司同级部门展示的人" allUse="2">
+		<property id="chooseOrNotMy" name="chooseOrNotMy" ref="required,num" var="人员列表中是否包含自己--1.包含；其他参数不包含" />
+		<property id="chooseOrNotEmail" name="chooseOrNotEmail" ref="required,num" var="人员列表中是否必须绑定邮箱--1.必须；其他参数没必要" />
+	</url>
+	<url id="commonselpeople006" path="/post/CommonController/queryTalkGroupUserListByUserId" val="根据聊天组展示用户" allUse="2">
+		<property id="chooseOrNotMy" name="chooseOrNotMy" ref="required,num" var="人员列表中是否包含自己--1.包含；其他参数不包含" />
+		<property id="chooseOrNotEmail" name="chooseOrNotEmail" ref="required,num" var="人员列表中是否必须绑定邮箱--1.必须；其他参数没必要" />
+	</url>
+	<!-- 人员选择结束 -->
+	
+	<url id="sysevewindragdrop001" path="/post/SysEveWinDragDropController/insertWinCustomMenuBox" val="用户自定义创建菜单盒子" allUse="2">
+		<property id="menuBoxName" name="menuBoxName" ref="required" var="菜单盒子名称"/>
+	</url>
+	<url id="sysevewindragdrop002" path="/post/SysEveWinDragDropController/insertWinCustomMenu" val="用户自定义创建菜单" allUse="2">
+		<property id="menuName" name="menuName" ref="required" var="菜单盒子名称"/>
+		<property id="titleName" name="titleName" ref="required" var="窗口标题"/>
+		<property id="menuIconType" name="menuIconType" ref="required,num" var="菜单图标类型"/>
+		<property id="menuIconPic" name="menuIconPic" ref="" var="菜单图片地址"/>
+		<property id="menuIcon" name="menuIcon" ref="" var="菜单图标"/>
+		<property id="menuUrl" name="menuUrl" ref="required" var="菜单链接"/>
+		<property id="menuIconBg" name="menuIconBg" ref="" var="菜单图标背景颜色"/>
+		<property id="menuIconColor" name="menuIconColor" ref="" var="菜单图标颜色"/>
+	</url>
+	<url id="sysevewindragdrop003" path="/post/SysEveWinDragDropController/deleteWinMenuOrBoxById" val="用户删除自定义菜单或文件夹" allUse="2">
+		<property id="rowId" name="id" ref="required" var="要删除的菜单或者文件夹id"/>
+	</url>
+	<url id="sysevewindragdrop004" path="/post/SysEveWinDragDropController/editMenuParentIdById" val="用户自定义父菜单" allUse="2">
+		<property id="rowId" name="menuId" ref="required" var="菜单id"/>
+		<property id="parentId" name="parentId" ref="" var="菜单父id"/>
+	</url>
+	<url id="sysevewindragdrop005" path="/post/SysEveWinDragDropController/queryMenuMationTypeById" val="获取菜单类型" allUse="2">
+		<property id="rowId" name="id" ref="required" var="要修改的菜单或者文件夹id"/>
+	</url>
+	<url id="sysevewindragdrop006" path="/post/SysEveWinDragDropController/queryCustomMenuBoxMationEditById" val="编辑自定义盒子时回显信息" allUse="2">
+		<property id="rowId" name="id" ref="required" var="菜单盒子id"/>
+	</url>
+	<url id="sysevewindragdrop007" path="/post/SysEveWinDragDropController/editCustomMenuBoxMationById" val="编辑自定义盒子" allUse="2">
+		<property id="menuBoxName" name="menuBoxName" ref="required" var="菜单盒子名称"/>
+		<property id="rowId" name="id" ref="required" var="菜单盒子id"/>
+	</url>
+	<url id="sysevewindragdrop008" path="/post/SysEveWinDragDropController/queryCustomMenuMationEditById" val="编辑快捷方式时回显信息" allUse="2">
+		<property id="rowId" name="id" ref="required" var="快捷方式id"/>
+	</url>
+	<url id="sysevewindragdrop009" path="/post/SysEveWinDragDropController/editCustomMenuMationById" val="编辑快捷方式" allUse="2">
+		<property id="menuName" name="menuName" ref="required" var="菜单盒子名称"/>
+		<property id="titleName" name="titleName" ref="required" var="窗口标题"/>
+		<property id="menuIconType" name="menuIconType" ref="required,num" var="菜单图标类型"/>
+		<property id="menuIconPic" name="menuIconPic" ref="" var="菜单图片地址"/>
+		<property id="menuIcon" name="menuIcon" ref="" var="菜单图标"/>
+		<property id="menuUrl" name="menuUrl" ref="required" var="菜单链接"/>
+		<property id="menuIconBg" name="menuIconBg" ref="" var="菜单图标背景颜色"/>
+		<property id="menuIconColor" name="menuIconColor" ref="" var="菜单图标颜色"/>
+		<property id="rowId" name="id" ref="required" var="快捷方式id"/>
+	</url>
+	<url id="sysevewindragdrop010" path="/post/SysEveWinDragDropController/editCustomMenuToDeskTopById" val="系统菜单发送到桌面快捷方式" allUse="2">
+		<property id="rowId" name="id" ref="required" var="系统菜单id"/>
+	</url>
+	
+	<!-- 公司管理开始 -->
+	<url id="companymation001" path="/post/CompanyMationController/queryCompanyMationList" val="获取公司信息列表" allUse="1">
+		<property id="companyName" name="companyName" ref="" var="公司名称"/>
+	</url>
+	<url id="companymation002" path="/post/CompanyMationController/insertCompanyMation" val="添加公司信息信息" allUse="1">
+		<property id="companyName" name="companyName" ref="required" var="公司名称"/>
+		<property id="companyDesc" name="companyDesc" ref="" var="公司简介"/>
+		<property id="pId" name="pId" ref="required" var="公司总公司"/>
+		<property id="provinceId" name="provinceId" ref="required" var="行政区划省"/>
+		<property id="cityId" name="cityId" ref="" var="行政区划市"/>
+		<property id="areaId" name="areaId" ref="" var="行政区划县"/>
+		<property id="townshipId" name="townshipId" ref="" var="行政区划镇"/>
+		<property id="addressDetailed" name="addressDetailed" ref="required" var="行政区划具体地址"/>
+	</url>
+	<url id="companymation003" path="/post/CompanyMationController/deleteCompanyMationById" val="删除公司信息信息" allUse="1">
+	    <property id="rowId" name="id" ref="required" var="公司信息id"/>
+	</url>
+	<url id="companymation004" path="/post/CompanyMationController/queryCompanyMationToEditById" val="编辑公司信息信息时进行回显" allUse="2">
+	    <property id="rowId" name="id" ref="required" var="公司信息id"/>
+	</url>
+	<url id="companymation005" path="/post/CompanyMationController/editCompanyMationById" val="编辑公司信息信息" allUse="1">
+	    <property id="rowId" name="id" ref="required" var="公司信息id"/>
+	    <property id="companyName" name="companyName" ref="required" var="公司名称"/>
+		<property id="companyDesc" name="companyDesc" ref="" var="公司简介"/>
+		<property id="pId" name="pId" ref="required" var="公司总公司"/>
+		<property id="provinceId" name="provinceId" ref="required" var="行政区划省"/>
+		<property id="cityId" name="cityId" ref="" var="行政区划市"/>
+		<property id="areaId" name="areaId" ref="" var="行政区划县"/>
+		<property id="townshipId" name="townshipId" ref="" var="行政区划镇"/>
+		<property id="addressDetailed" name="addressDetailed" ref="required" var="行政区划具体地址"/>
+	</url>
+	<url id="companymation006" path="/post/CompanyMationController/queryOverAllCompanyMationList" val="获取总公司信息列表" allUse="2">
+	</url>
+	<url id="companymation007" path="/post/CompanyMationController/queryCompanyMationListTree" val="获取公司信息列表展示为树" allUse="2">
+	</url>
+	
+	<url id="companydepartment001" path="/post/CompanyDepartmentController/queryCompanyDepartmentList" val="获取公司部门信息列表" allUse="1">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	    <property id="departmentName" name="departmentName" ref="" var="部门名称"/>
+	    <property id="companyId" name="companyId" ref="" var="公司id"/>
+	</url>
+	<url id="companydepartment002" path="/post/CompanyDepartmentController/insertCompanyDepartmentMation" val="添加公司部门信息信息" allUse="1">
+		<property id="departmentName" name="departmentName" ref="required" var="部门名称"/>
+		<property id="departmentDesc" name="departmentDesc" ref="" var="部门简介"/>
+		<property id="companyId" name="companyId" ref="required" var="公司id"/>
+	</url>
+	<url id="companydepartment003" path="/post/CompanyDepartmentController/deleteCompanyDepartmentMationById" val="删除公司部门信息信息" allUse="1">
+	    <property id="rowId" name="id" ref="required" var="公司部门信息id"/>
+	</url>
+	<url id="companydepartment004" path="/post/CompanyDepartmentController/queryCompanyDepartmentMationToEditById" val="编辑公司部门信息信息时进行回显" allUse="2">
+	    <property id="rowId" name="id" ref="required" var="公司部门信息id"/>
+	</url>
+	<url id="companydepartment005" path="/post/CompanyDepartmentController/editCompanyDepartmentMationById" val="编辑公司部门信息信息" allUse="1">
+	    <property id="rowId" name="id" ref="required" var="公司部门信息id"/>
+	    <property id="departmentName" name="departmentName" ref="required" var="部门名称"/>
+		<property id="departmentDesc" name="departmentDesc" ref="" var="部门简介"/>
+		<property id="companyId" name="companyId" ref="required" var="公司id"/>
+	</url>
+	<url id="companydepartment006" path="/post/CompanyDepartmentController/queryCompanyDepartmentListTreeByCompanyId" val="获取公司部门信息列表展示为树根据公司id" allUse="2">
+		<property id="companyId" name="companyId" ref="required" var="公司id"/>
+	</url>
+	
+	<url id="companyjob001" path="/post/CompanyJobController/queryCompanyJobList" val="获取公司部门职位信息列表" allUse="1">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	    <property id="departmentId" name="departmentId" ref="" var="部门id"/>
+	    <property id="jobName" name="jobName" ref="" var="部门职位名称"/>
+	</url>
+	<url id="companyjob002" path="/post/CompanyJobController/insertCompanyJobMation" val="添加公司部门职位信息信息" allUse="1">
+		<property id="companyId" name="companyId" ref="required" var="公司id"/>
+		<property id="departmentId" name="departmentId" ref="required" var="部门id"/>
+		<property id="jobName" name="jobName" ref="" var="部门职位名称"/>
+		<property id="jobDesc" name="jobDesc" ref="" var="部门职位简介"/>
+	</url>
+	<url id="companyjob003" path="/post/CompanyJobController/deleteCompanyJobMationById" val="删除公司部门职位信息信息" allUse="1">
+	    <property id="rowId" name="id" ref="required" var="公司部门职位信息id"/>
+	</url>
+	<url id="companyjob004" path="/post/CompanyJobController/queryCompanyJobMationToEditById" val="编辑公司部门职位信息信息时进行回显" allUse="2">
+	    <property id="rowId" name="id" ref="required" var="公司部门职位信息id"/>
+	</url>
+	<url id="companyjob005" path="/post/CompanyJobController/editCompanyJobMationById" val="编辑公司部门职位信息信息" allUse="1">
+	    <property id="rowId" name="id" ref="required" var="公司部门职位信息id"/>
+		<property id="jobName" name="jobName" ref="" var="部门职位名称"/>
+		<property id="jobDesc" name="jobDesc" ref="" var="部门职位简介"/>
+	</url>
+	<url id="companyjob006" path="/post/CompanyJobController/queryCompanyJobListTreeByDepartmentId" val="获取公司部门职位信息列表展示为树根据公司id" allUse="2">
+	    <property id="departmentId" name="departmentId" ref="required" var="部门id"/>
+	</url>
+	<!-- 公司管理结束 -->
+	
+	<!-- 聊天开始 -->
+	<url id="companychat001" path="/post/CompanyChatController/getList" val="获取好友列表，群聊信息，个人信息" allUse="2">
+	</url>
+	<url id="companychat002" path="/post/CompanyChatController/editUserSignByUserId" val="编辑签名" allUse="2">
+		<property id="userSign" name="userSign" ref="" var="签名"/>
+	</url>
+	<url id="companytalkgroup001" path="/post/CompanyTalkGroupController/insertGroupMation" val="添加群组信息" allUse="2">
+		<property id="groupName" name="groupName" ref="required" var="群组名称"/>
+		<property id="groupImg" name="groupImg" ref="required" var="群组logo"/>
+		<property id="groupDesc" name="groupDesc" ref="" var="群组简介"/>
+		<property id="userIds" name="userIds" ref="required" var="成员id，逗号隔开"/>
+	</url>
+	<url id="companytalkgroup002" path="/post/CompanyTalkGroupController/queryGroupInvitationMation" val="获取邀请信息/入群信息" allUse="2">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="companytalkgroup003" path="/post/CompanyTalkGroupController/editAgreeInGroupInvitationMation" val="同意入群" allUse="2">
+		<property id="rowId" name="id" ref="required" var="邀请信息id" />
+	</url>
+	<url id="companytalkgroup004" path="/post/CompanyTalkGroupController/editRefuseInGroupInvitationMation" val="拒绝入群" allUse="2">
+		<property id="rowId" name="id" ref="required" var="邀请信息id" />
+	</url>
+	<url id="companytalkgroup005" path="/post/CompanyTalkGroupController/queryGroupMationList" val="搜索群组列表" allUse="2">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	    <property id="groupNameOrNum" name="groupNameOrNum" ref="" var="群组名称/群组账号" />
+	</url>
+	<url id="companytalkgroup006" path="/post/CompanyTalkGroupController/insertGroupMationToTalk" val="申请加入群聊" allUse="2">
+	    <property id="groupId" name="groupId" ref="required" var="群聊id" />
+	</url>
+	<url id="companytalkgroup007" path="/post/CompanyTalkGroupController/queryGroupMemberByGroupId" val="获取群成员" allUse="2">
+	    <property id="id" name="id" ref="required" var="群聊id" />
+	</url>
+	<url id="companytalkgroup008" path="/post/CompanyTalkGroupController/queryChatLogByType" val="获取聊天记录" allUse="2">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	    <property id="receiveId" name="receiveId" ref="required" var="接收人id" />
+	    <property id="chatType" name="chatType" ref="required" var="消息类型   1个人对个人   2群组聊天  该字段决定receive_id值的类型" />
+	</url>
+	<url id="companytalkgroup009" path="/post/CompanyTalkGroupController/editUserToExitGroup" val="退出群聊" allUse="2">
+		<property id="groupId" name="groupId" ref="required" var="群聊id" />
+	</url>
+	<url id="companytalkgroup010" path="/post/CompanyTalkGroupController/editCreateToExitGroup" val="解散群聊" allUse="2">
+		<property id="groupId" name="groupId" ref="required" var="群聊id" />
+	</url>
+	<!-- 聊天结束 -->
+	
+	<!-- 登录开始 -->
+	<url id="login001" path="/post/SysEveUserController/queryUserToLogin" val="登录" allUse="0">
+		<property id="userCode" name="userCode" ref="required" var="账号"/>
+		<property id="password" name="password" ref="required" var="密码"/>
+	</url>
+	<url id="login002" path="/post/SysEveUserController/queryUserMationBySession" val="从session中获取用户信息" allUse="2">
+	</url>
+	<url id="login003" path="/post/SysEveUserController/deleteUserMationBySession" val="退出" allUse="2">
+	</url>
+	<url id="login004" path="/post/SysEveUserController/queryDeskTopMenuBySession" val="获取桌面菜单列表" allUse="2">
+	</url>
+	<url id="login005" path="/post/SysEveUserController/queryAllMenuBySession" val="获取全部菜单列表" allUse="2">
+	</url>
+	<url id="login006" path="/post/SysWorkLogController/querySysWorkLogList" val="获取日志列表" allUse="1">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="login007" path="/post/SysEveUserController/editUserPassword" val="修改密码" allUse="2">
+		<property id="newPassword" name="newPassword" ref="required" var="新密码"/>
+		<property id="oldPassword" name="oldPassword" ref="required" var="旧密码"/>
+	</url>
+	<url id="login008" path="/post/SysEveUserController/queryUserLockByLockPwd" val="锁屏密码解锁" allUse="2">
+		<property id="password" name="password" ref="required" var="密码"/>
+	</url>
+	<!-- 登录结束 -->
+	
+	<!-- 系统数据库管理开始 -->
+	<url id="database001" path="/post/SysDataBaseController/querySysDataBaseList" val="获取数据库信息" allUse="1">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+		<property id="tableName" name="tableName" ref="" var="表名"/>
+		<property id="tableDesc" name="tableDesc" ref="" var="表备注"/>
+	</url>
+	<url id="database002" path="/post/SysDataBaseController/querySysDataBaseSelectList" val="获取数据库表名信息" allUse="2">
+	</url>
+	<url id="database003" path="/post/SysDataBaseController/querySysDataBaseDescSelectList" val="获取数据库表备注信息" allUse="2">
+	</url>
+	<!-- 系统数据库管理结束 -->
+	
+	<!-- 系统管理开始 -->
+	<url id="sys001" path="/post/SysEveUserController/querySysUserList" val="获取用户列表" allUse="1">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+		<property id="userCode" name="userCode" ref="" var="用户账号"/>
+		<property id="userName" name="userName" ref="" var="用户名称"/>
+	</url>
+	<url id="sys002" path="/post/SysEveUserController/editSysUserLockStateToLockById" val="锁定账号" allUse="2">
+		<property id="rowId" name="id" ref="required" var="账号ID" />
+	</url>
+	<url id="sys003" path="/post/SysEveUserController/editSysUserLockStateToUnLockById" val="解锁账号" allUse="2">
+		<property id="rowId" name="id" ref="required" var="账号ID" />
+	</url>
+	<url id="sys004" path="/post/SysEveUserController/querySysUserMationToEditById" val="编辑账号时获取账号信息" allUse="2">
+		<property id="rowId" name="id" ref="required" var="账号ID" />
+	</url>
+	<url id="sys005" path="/post/SysEveUserController/editSysUserMationById" val="编辑账号" allUse="1">
+		<property id="rowId" name="id" ref="required" var="账号ID" />
+		<property id="userSex" name="userSex" ref="required,num" var="性别" />
+		<property id="userIdCard" name="userIdCard" ref="idcard" var="身份证" />
+		<property id="userName" name="userName" ref="required" var="用户名" />
+		<property id="userPhoto" name="userPhoto" ref="required" var="头像" />
+		<property id="companyId" name="companyId" ref="required" var="所属公司" />
+		<property id="departmentId" name="departmentId" ref="required" var="所属部门" />
+		<property id="jobId" name="jobId" ref="required" var="所属职位" />
+		<property id="userEmail" name="userEmail" ref="email" var="邮箱" />
+		<property id="userQq" name="userQq" ref="" var="QQ" />
+		<property id="userPhone" name="userPhone" ref="phone" var="手机号" />
+		<property id="userHomePhone" name="userHomePhone" ref="" var="家庭电话" />
+	</url>
+	<url id="sysAdd005" path="/post/SysEveUserController/insertSysUserMationById" val="创建账号" allUse="1">
+		<property id="userCode" name="userCode" ref="required" var="账号" />
+		<property id="userSex" name="userSex" ref="required,num" var="性别" />
+		<property id="password" name="password" ref="required" var="密码" />
+		<property id="userIdCard" name="userIdCard" ref="idcard" var="身份证" />
+		<property id="userName" name="userName" ref="required" var="用户名" />
+		<property id="userPhoto" name="userPhoto" ref="required" var="头像" />
+		<property id="companyId" name="companyId" ref="required" var="所属公司" />
+		<property id="departmentId" name="departmentId" ref="required" var="所属部门" />
+		<property id="jobId" name="jobId" ref="required" var="所属职位" />
+		<property id="userEmail" name="userEmail" ref="email" var="邮箱" />
+		<property id="userQq" name="userQq" ref="" var="QQ" />
+		<property id="userPhone" name="userPhone" ref="phone" var="手机号" />
+		<property id="userHomePhone" name="userHomePhone" ref="" var="家庭电话" />
+	</url>
+	<url id="sys006" path="/post/SysEveMenuController/querySysMenuList" val="获取菜单列表" allUse="1">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+		<property id="menuName" name="menuName" ref="" var="菜单名称"/>
+		<property id="menuUrl" name="menuUrl" ref="" var="菜单链接"/>
+		<property id="menuLevel" name="menuLevel" ref="" var="菜单级别"/>
+		<property id="parentId" name="parentId" ref="" var="系统id"/>
+		<property id="isShare" name="isShare" ref="num" var="是否同步共享"/>
+	</url>
+	<url id="sys007" path="/post/SysEveMenuController/insertSysMenuMation" val="添加菜单" allUse="1">
+		<property id="menuName" name="menuName" ref="required" var="菜单名称"/>
+		<property id="titleName" name="titleName" ref="required" var="标题名称" />
+		<property id="menuIconType" name="menuIconType" ref="required,num" var="菜单图标类型"/>
+		<property id="menuIconPic" name="menuIconPic" ref="" var="菜单图片地址"/>
+		<property id="menuIcon" name="menuIcon" ref="" var="菜单logo"/>
+		<property id="menuIconColor" name="menuIconColor" ref="" var="菜单logo颜色"/>
+		<property id="menuIconBg" name="menuIconBg" ref="" var="菜单logo背景"/>
+		<property id="menuUrl" name="menuUrl" ref="required" var="菜单链接"/>
+		<property id="menuType" name="menuType" ref="required" var="菜单类型"/>
+		<property id="menuSysType" name="menuSysType" ref="required,num" var="是否为系统菜单"/>
+		<property id="parentId" name="parentId" ref="required" var="菜单父ID"/>
+		<property id="sysWinId" name="sysWinId" ref="required" var="菜单所属系统"/>
+		<property id="isShare" name="isShare" ref="required,num" var="是否同步共享"/>
+	</url>
+	<url id="sys008" path="/post/SysEveMenuController/querySysMenuMationToEditById" val="编辑菜单时进行信息回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="菜单ID" />
+	</url>
+	<url id="sys009" path="/post/SysEveMenuController/querySysMenuMationBySimpleLevel" val="查看同级菜单" allUse="2">
+		<property id="parentId" name="parentId" ref="required" var="父菜单ID" />
+	</url>
+	<url id="sys010" path="/post/SysEveMenuController/editSysMenuMationById" val="编辑菜单" allUse="1">
+		<property id="menuName" name="menuName" ref="required" var="菜单名称"/>
+		<property id="titleName" name="titleName" ref="required" var="标题名称" />
+		<property id="menuIconType" name="menuIconType" ref="required,num" var="菜单图标类型"/>
+		<property id="menuIconPic" name="menuIconPic" ref="" var="菜单图片地址"/>
+		<property id="menuIcon" name="menuIcon" ref="" var="菜单logo"/>
+		<property id="menuIconColor" name="menuIconColor" ref="" var="菜单logo颜色"/>
+		<property id="menuIconBg" name="menuIconBg" ref="" var="菜单logo背景"/>
+		<property id="menuUrl" name="menuUrl" ref="required" var="菜单链接"/>
+		<property id="menuType" name="menuType" ref="required" var="菜单类型"/>
+		<property id="menuSysType" name="menuSysType" ref="required,num" var="是否为系统菜单"/>
+		<property id="parentId" name="parentId" ref="required" var="菜单父ID"/>
+		<property id="rowId" name="id" ref="required" var="菜单ID" />
+		<property id="sysWinId" name="sysWinId" ref="required" var="菜单所属系统"/>
+		<property id="isShare" name="isShare" ref="required,num" var="是否同步共享"/>
+	</url>
+	<url id="sys011" path="/post/SysEveMenuController/deleteSysMenuMationById" val="删除菜单信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="菜单ID" />
+	</url>
+	<url id="sys012" path="/post/SysEveMenuController/queryTreeSysMenuMationBySimpleLevel" val="异步加载树查看商户拥有的系统" allUse="2">
+	</url>
+	<url id="sys013" path="/post/SysEveRoleController/querySysRoleList" val="获取角色列表" allUse="1">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+		<property id="roleName" name="roleName" ref="" var="角色名称"/>
+	</url>
+	<url id="sys014" path="/post/SysEveRoleController/querySysRoleBandMenuList" val="获取角色需要绑定的菜单列表" allUse="2">
+	</url>
+	<url id="sys015" path="/post/SysEveRoleController/insertSysRoleMation" val="新增角色" allUse="1">
+		<property id="roleName" name="roleName" ref="required" var="角色名称"/>
+		<property id="roleDesc" name="roleDesc" ref="" var="角色描述"/>
+		<property id="menuIds" name="menuIds" ref="required" var="菜单权限"/>
+	</url>
+	<url id="sys016" path="/post/SysEveRoleController/querySysRoleMationToEditById" val="编辑角色时的信息回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="角色ID"/>
+	</url>
+	<url id="sys017" path="/post/SysEveRoleController/editSysRoleMationById" val="编辑角色" allUse="1">
+		<property id="roleName" name="roleName" ref="required" var="角色名称"/>
+		<property id="roleDesc" name="roleDesc" ref="" var="角色描述"/>
+		<property id="menuIds" name="menuIds" ref="required" var="菜单权限"/>
+		<property id="rowId" name="id" ref="required" var="角色ID"/>
+	</url>
+	<url id="sys018" path="/post/SysEveRoleController/deleteSysRoleMationById" val="删除角色" allUse="1">
+		<property id="rowId" name="id" ref="required" var="角色ID"/>
+	</url>
+	<url id="sys019" path="/post/SysEveUserController/queryRoleAndBindRoleByUserId" val="获取角色和当前已经绑定的角色信息" allUse="2">
+		<property id="rowId" name="id" ref="required" var="账号ID" />
+	</url>
+	<url id="sys020" path="/post/SysEveUserController/editRoleIdsByUserId" val="编辑用户绑定的角色" allUse="1">
+		<property id="rowId" name="id" ref="required" var="账号ID" />
+		<property id="roleIds" name="roleIds" ref="required" var="角色ID串" />
+	</url>
+	<url id="sys021" path="/post/SysEveMenuController/querySysMenuLevelList" val="获取菜单级别列表" allUse="2">
+	</url>
+	<url id="sys022" path="/post/SysEveMenuController/editSysEveMenuSortTopById" val="菜单展示顺序上移" allUse="1">
+		<property id="rowId" name="id" ref="required" var="菜单ID" />
+	</url>
+	<url id="sys023" path="/post/SysEveMenuController/editSysEveMenuSortLowerById" val="菜单展示顺序下移" allUse="1">
+		<property id="rowId" name="id" ref="required" var="菜单ID" />
+	</url>
+	
+	<url id="sys024" path="/post/SysEveUserController/editUserInstallThemeColor" val="自定义设置主题颜色" allUse="2">
+		<property id="themeColor" name="themeColor" ref="required,num" var="颜色的color数字" />
+	</url>
+	<url id="sys025" path="/post/SysEveUserController/editUserInstallWinBgPic" val="自定义设置win背景图片" allUse="2">
+		<property id="winBgPicUrl" name="winBgPicUrl" ref="required" var="图片url链接" />
+	</url>
+	<url id="sys026" path="/post/SysEveUserController/editUserInstallWinLockBgPic" val="自定义设置win锁屏背景图片" allUse="2">
+		<property id="winLockBgPicUrl" name="winLockBgPicUrl" ref="required" var="图片url链接" />
+	</url>
+	<url id="sys027" path="/post/SysEveUserController/editUserInstallWinStartMenuSize" val="自定义设置win开始菜单尺寸" allUse="2">
+		<property id="winStartMenuSize" name="winStartMenuSize" ref="required" var="尺寸size" />
+	</url>
+	<url id="sys028" path="/post/SysEveUserController/editUserInstallWinTaskPosition" val="自定义设置win任务栏在屏幕的位置" allUse="2">
+		<property id="winTaskPosition" name="winTaskPosition" ref="required" var="位置属性" />
+	</url>
+	<url id="sys029" path="/post/SysEveUserController/editUserInstallVagueBgSrc" val="自定义设置win雾化" allUse="2">
+		<property id="winBgPicVague" name="winBgPicVague" ref="required,num" var="背景图片是否雾化  1正常0模糊" />
+		<property id="winBgPicVagueValue" name="winBgPicVagueValue" ref="required,num" var="雾化值  0~1" />
+	</url>
+	<url id="sys030" path="/post/SysEveUserController/editUserInstallLoadMenuIconById" val="自定义设置窗口下面展示的是图标还是图标+文字" allUse="2">
+		<property id="loadBottomMenuIcon" name="loadBottomMenuIcon" ref="required,num" var="是否只展示图标，1是  0否" />
+	</url>
+	<url id="sys031" path="/post/SysEveMenuController/querySysWinMationListBySysId" val="获取该系统商户拥有的系统" allUse="2">
+	</url>
+	<url id="sys032" path="/post/SysEveUserController/queryUserDetailsMationByUserId" val="修改个人信息时获取数据回显" allUse="2">
+	</url>
+	<url id="sys033" path="/post/SysEveUserController/editUserDetailsMationByUserId" val="修改个人信息" allUse="2">
+		<property id="userSex" name="userSex" ref="required,num" var="性别" />
+		<property id="userIdCard" name="userIdCard" ref="idcard" var="身份证" />
+		<property id="userPhoto" name="userPhoto" ref="required" var="头像" />
+		<property id="userEmail" name="userEmail" ref="email" var="邮箱" />
+		<property id="userQq" name="userQq" ref="" var="QQ" />
+		<property id="userPhone" name="userPhone" ref="phone" var="手机号" />
+		<property id="userHomePhone" name="userHomePhone" ref="" var="家庭电话" />
+		<property id="userSign" name="userSign" ref="" var="签名" />
+	</url>
+	
+	<url id="icon001" path="/post/SysEveIconController/querySysIconList" val="获取ICON列表" allUse="1">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+		<property id="iconClass" name="iconClass" ref="" var="icon属性"/>
+	</url>
+	<url id="icon002" path="/post/SysEveIconController/insertSysIconMation" val="添加ICON信息" allUse="1">
+		<property id="iconClass" name="iconClass" ref="required" var="icon属性"/>
+	</url>
+	<url id="icon003" path="/post/SysEveIconController/deleteSysIconMationById" val="删除ICON信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="icon属性id"/>
+	</url>
+	<url id="icon004" path="/post/SysEveIconController/querySysIconMationToEditById" val="编辑ICON信息时进行回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="icon属性id"/>
+	</url>
+	<url id="icon005" path="/post/SysEveIconController/editSysIconMationById" val="编辑ICON信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="icon属性id"/>
+		<property id="iconClass" name="iconClass" ref="required" var="icon属性"/>
+	</url>
+	<url id="icon006" path="/post/SysEveIconController/querySysIconListToMenu" val="获取ICON列表供menu菜单使用" allUse="2">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	
+	<url id="sysevewinbgpic001" path="/post/SysEveWinBgPicController/querySysEveWinBgPicList" val="获取win系统桌面图片列表" allUse="1">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="sysevewinbgpic002" path="/post/SysEveWinBgPicController/insertSysEveWinBgPicMation" val="添加win系统桌面图片信息" allUse="1">
+		<property id="picUrl" name="picUrl" ref="required" var="图片路径"/>
+	</url>
+	<url id="sysevewinbgpic003" path="/post/SysEveWinBgPicController/deleteSysEveWinBgPicMationById" val="删除win系统桌面图片信息" allUse="1">
+	    <property id="rowId" name="id" ref="required" var="win系统桌面图片id"/>
+	</url>
+	<url id="sysevewinbgpic005" path="/post/SysEveWinBgPicController/insertSysEveWinBgPicMationByCustom" val="用户自定义上传win系统桌面图片信息" allUse="1">
+		<property id="picUrl" name="picUrl" ref="required" var="图片路径"/>
+	</url>
+	<url id="sysevewinbgpic006" path="/post/SysEveWinBgPicController/querySysEveWinBgPicCustomList" val="获取win系统桌面图片列表用户自定义" allUse="2">
+	</url>
+	<url id="sysevewinbgpic007" path="/post/SysEveWinBgPicController/deleteSysEveWinBgPicMationCustomById" val="删除win系统桌面图片信息用户自定义" allUse="1">
+	    <property id="rowId" name="id" ref="required" var="win系统桌面图片id"/>
+	</url>
+	
+	<url id="sysevewinlockbgpic001" path="/post/SysEveWinLockBgPicController/querySysEveWinLockBgPicList" val="获取win系统锁屏桌面图片列表" allUse="1">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="sysevewinlockbgpic002" path="/post/SysEveWinLockBgPicController/insertSysEveWinLockBgPicMation" val="添加win系统锁屏桌面图片信息" allUse="1">
+		<property id="picUrl" name="picUrl" ref="required" var="图片路径"/>
+	</url>
+	<url id="sysevewinlockbgpic003" path="/post/SysEveWinLockBgPicController/deleteSysEveWinLockBgPicMationById" val="删除win系统锁屏桌面图片信息" allUse="1">
+	    <property id="rowId" name="id" ref="required" var="win系统锁屏桌面图片id"/>
+	</url>
+	<url id="sysevewinlockbgpic005" path="/post/SysEveWinLockBgPicController/insertSysEveWinBgPicMationByCustom" val="用户自定义上传win系统锁屏桌面图片信息" allUse="1">
+		<property id="picUrl" name="picUrl" ref="required" var="图片路径"/>
+	</url>
+	<url id="sysevewinlockbgpic006" path="/post/SysEveWinLockBgPicController/querySysEveWinBgPicCustomList" val="获取win系统锁屏桌面图片列表用户自定义" allUse="2">
+	</url>
+	<url id="sysevewinlockbgpic007" path="/post/SysEveWinLockBgPicController/deleteSysEveWinBgPicMationCustomById" val="删除win系统锁屏桌面图片信息用户自定义" allUse="1">
+	    <property id="rowId" name="id" ref="required" var="win系统桌面图片id"/>
+	</url>
+	
+	<url id="sysevewinthemecolor001" path="/post/SysEveWinThemeColorController/querySysEveWinThemeColorList" val="获取win系统主题颜色列表" allUse="1">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	    <property id="colorClass" name="colorClass" ref="" var="win系统主题颜色属性"/>
+	</url>
+	<url id="sysevewinthemecolor002" path="/post/SysEveWinThemeColorController/insertSysEveWinThemeColorMation" val="添加win系统主题颜色信息" allUse="1">
+		<property id="colorClass" name="colorClass" ref="required" var="win系统主题颜色属性"/>
+	</url>
+	<url id="sysevewinthemecolor003" path="/post/SysEveWinThemeColorController/deleteSysEveWinThemeColorMationById" val="删除win系统主题颜色信息" allUse="1">
+	    <property id="rowId" name="id" ref="required" var="win系统主题颜色id"/>
+	</url>
+	<url id="sysevewinthemecolor004" path="/post/SysEveWinThemeColorController/querySysEveWinThemeColorMationToEditById" val="编辑win系统主题颜色信息时进行回显" allUse="2">
+	    <property id="rowId" name="id" ref="required" var="win系统主题颜色id"/>
+	</url>
+	<url id="sysevewinthemecolor005" path="/post/SysEveWinThemeColorController/editSysEveWinThemeColorMationById" val="编辑win系统主题颜色信息" allUse="1">
+	    <property id="rowId" name="id" ref="required" var="win系统主题颜色id"/>
+	    <property id="colorClass" name="colorClass" ref="required" var="win系统主题颜色属性"/>
+	</url>
+	
+	<url id="systarea001" path="/post/SysTAreaController/querySysTAreaList" val="获取行政区划信息" allUse="1">
+		<property id="addressName" name="addressName" ref="" var="地域名称"/>
+	</url>
+	<!-- 系统管理结束 -->
+	
+	<!-- 系统管理开始 -->
+	<url id="sysevewin001" path="/post/SysEveWinController/queryWinMationList" val="获取系统信息列表" allUse="1">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	    <property id="sysName" name="sysName" ref="" var="系统名称"/>
+	</url>
+	<url id="sysevewin002" path="/post/SysEveWinController/insertWinMation" val="新增系统信息" allUse="1">
+	    <property id="sysName" name="sysName" ref="required" var="系统名称"/>
+		<property id="sysDesc" name="sysDesc" ref="" var="系统介绍" />
+	    <property id="sysUrl" name="sysUrl" ref="required" var="系统域名"/>
+	    <property id="sysPic" name="sysPic" ref="required" var="系统图片"/>
+	    <property id="sysFirstType" name="sysFirstType" ref="required" var="一级分类"/>
+	    <property id="sysSecondType" name="sysSecondType" ref="required" var="二级分类"/>
+	</url>
+	<url id="sysevewin003" path="/post/SysEveWinController/queryWinMationToEditById" val="编辑系统信息时进行回显" allUse="2">
+	    <property id="rowId" name="id" ref="required" var="系统id"/>
+	</url>
+	<url id="sysevewin004" path="/post/SysEveWinController/editWinMationById" val="编辑系统信息" allUse="1">
+	    <property id="sysName" name="sysName" ref="required" var="系统名称"/>
+		<property id="sysDesc" name="sysDesc" ref="" var="系统介绍" />
+	    <property id="sysUrl" name="sysUrl" ref="required" var="系统域名"/>
+	    <property id="rowId" name="id" ref="required" var="系统id"/>
+	    <property id="sysPic" name="sysPic" ref="required" var="系统图片"/>
+	    <property id="sysFirstType" name="sysFirstType" ref="required" var="一级分类"/>
+	    <property id="sysSecondType" name="sysSecondType" ref="required" var="二级分类"/>
+	</url>
+	<url id="sysevewin005" path="/post/SysEveWinController/deleteWinMationById" val="删除系统信息" allUse="1">
+	    <property id="rowId" name="id" ref="required" var="系统id"/>
+	</url>
+	<url id="sysevewin006" path="/post/SysEveWinController/editAuthorizationById" val="进行商户系统授权" allUse="1">
+	    <property id="rowId" name="winId" ref="required" var="系统id"/>
+	</url>
+	<url id="sysevewin007" path="/post/SysEveWinController/editCancleAuthorizationById" val="进行商户系统取消授权" allUse="1">
+	    <property id="rowId" name="winId" ref="required" var="系统id"/>
+	</url>
+	<url id="sysevewin008" path="/post/SysEveWinController/queryWinMationListToShow" val="获取应用商店" allUse="2">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	    <property id="firstType" name="firstType" ref="" var="第一分类"/>
+	    <property id="secondType" name="secondType" ref="" var="第二分类"/>
+	</url>
+	<!-- 系统管理结束 -->
+	
+	<!-- 系统分类开始 -->
+	<url id="sysevewintype001" path="/post/SysEveWinTypeController/querySysWinTypeList" val="获取分类列表" allUse="1">
+		<property id="typeName" name="typeName" ref="" var="分类名称" />
+	    <property id="state" name="state" ref="" var="状态"/>
+	</url>
+	<url id="sysevewintype002" path="/post/SysEveWinTypeController/querySysWinFirstTypeList" val="获取所有一级分类展示为下拉选项" allUse="2">
+	</url>
+	<url id="sysevewintype003" path="/post/SysEveWinTypeController/insertSysWinTypeMation" val="新增系统分类" allUse="1">
+		<property id="typeName" name="typeName" ref="required" var="分类名称" />
+	    <property id="parentId" name="parentId" ref="required" var="分类父id"/>
+	</url>
+	<url id="sysevewintype004" path="/post/SysEveWinTypeController/querySysWinTypeMationToEditById" val="编辑系统分类时进行回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="分类id" />
+	</url>
+	<url id="sysevewintype005" path="/post/SysEveWinTypeController/editSysWinTypeMationById" val="编辑系统分类时" allUse="1">
+		<property id="typeName" name="typeName" ref="required" var="分类名称" />
+	    <property id="parentId" name="parentId" ref="required" var="分类父id"/>
+	    <property id="rowId" name="id" ref="required" var="分类id" />
+	</url>
+	<url id="sysevewintype006" path="/post/SysEveWinTypeController/querySysWinFirstTypeListNotIsThisId" val="获取所有不是当前分类的一级分类展示为下拉选项" allUse="2">
+		<property id="rowId" name="id" ref="required" var="分类id" />
+	</url>
+	<url id="sysevewintype007" path="/post/SysEveWinTypeController/deleteSysWinTypeMationById" val="删除系统分类" allUse="1">
+		<property id="rowId" name="id" ref="required" var="分类id" />
+	</url>
+	<url id="sysevewintype008" path="/post/SysEveWinTypeController/editSysWinTypeMationOrderNumUpById" val="系统分类上移" allUse="1">
+		<property id="rowId" name="id" ref="required" var="分类id" />
+	</url>
+	<url id="sysevewintype009" path="/post/SysEveWinTypeController/editSysWinTypeMationOrderNumDownById" val="系统分类下移" allUse="1">
+		<property id="rowId" name="id" ref="required" var="分类id" />
+	</url>
+	<url id="sysevewintype010" path="/post/SysEveWinTypeController/editSysWinTypeMationStateUpById" val="系统分类上线" allUse="1">
+		<property id="rowId" name="id" ref="required" var="分类id" />
+	</url>
+	<url id="sysevewintype011" path="/post/SysEveWinTypeController/editSysWinTypeMationStateDownById" val="系统分类下线" allUse="1">
+		<property id="rowId" name="id" ref="required" var="分类id" />
+	</url>
+	<url id="sysevewintype012" path="/post/SysEveWinTypeController/querySysWinTypeFirstMationStateIsUp" val="获取已经上线的一级分类" allUse="2">
+	</url>
+	<url id="sysevewintype013" path="/post/SysEveWinTypeController/querySysWinTypeSecondMationStateIsUp" val="获取已经上线的二级分类" allUse="2">
+		<property id="rowId" name="parentId" ref="required" var="分类父id" />
+	</url>
+	<!-- 系统分类结束 -->
+	
+	<!-- 系统菜单同步开始 -->
+	<url id="sysimportantsynchronization001" path="/post/SysEveWinController/insertWinMationImportantSynchronization" val="系统重要的同步操作" allUse="1">
+		<property id="rowId" name="id" ref="required" var="系统id" />
+		<property id="url" name="url" ref="required" var="系统部署地址" />
+	</url>
+	<url id="sysimportantsynchronization002" path="/post/SysEveWinController/queryWinMationImportantSynchronizationData" val="系统重要的同步操作获取数据" allUse="0">
+		<property id="winid" name="winid" ref="required" var="系统id" />
+	</url>
+	<!-- 系统菜单同步结束 -->
+	
+	<!-- 菜单权限点开始 -->
+	<url id="sysevemenuauthpoint001" path="/post/SysEveMenuAuthPointController/querySysEveMenuAuthPointListByMenuId" val="获取菜单权限点列表根据菜单id" allUse="1">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	    <property id="menuId" name="menuId" ref="required" var="菜单id"/>
+	    <property id="authMenuName" name="authMenuName" ref="" var="权限点名称"/>
+	    <property id="authMenu" name="authMenu" ref="" var="权限点后台链接"/>
+	    <property id="menuNum" name="menuNum" ref="" var="菜单数字码"/>
+	</url>
+	<url id="sysevemenuauthpoint002" path="/post/SysEveMenuAuthPointController/insertSysEveMenuAuthPointMation" val="添加菜单权限点" allUse="1">
+	    <property id="menuId" name="menuId" ref="required" var="菜单id"/>
+	    <property id="authMenuName" name="authMenuName" ref="required" var="权限点名称"/>
+	    <property id="authMenu" name="authMenu" ref="required" var="权限点后台链接"/>
+	</url>
+	<url id="sysevemenuauthpoint003" path="/post/SysEveMenuAuthPointController/querySysEveMenuAuthPointMationToEditById" val="编辑菜单权限点时进行回显" allUse="2">
+	    <property id="rowId" name="id" ref="required" var="权限id"/>
+	</url>
+	<url id="sysevemenuauthpoint004" path="/post/SysEveMenuAuthPointController/editSysEveMenuAuthPointMationById" val="编辑菜单权限点" allUse="1">
+	    <property id="rowId" name="id" ref="required" var="权限id"/>
+	    <property id="authMenuName" name="authMenuName" ref="required" var="权限点名称"/>
+	    <property id="authMenu" name="authMenu" ref="required" var="权限点后台链接"/>
+	</url>
+	<url id="sysevemenuauthpoint005" path="/post/SysEveMenuAuthPointController/deleteSysEveMenuAuthPointMationById" val="删除菜单权限点" allUse="1">
+	    <property id="rowId" name="id" ref="required" var="权限id"/>
+	</url>
+	<!-- 菜单权限点结束 -->
+	
+</controller>
