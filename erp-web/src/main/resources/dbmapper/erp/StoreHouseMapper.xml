@@ -19,8 +19,8 @@
             erp_depot d
         WHERE
             d.delete_Flag = #{delete_Flag}
-        <if test="houseName != '' and houseName != null">
-            d.name LIKE '%${houseName}%'
+        <if test="name != '' and name != null">
+            AND d.name LIKE '%${name}%'
         </if>
         ORDER BY d.create_time DESC
     </select>
@@ -32,12 +32,10 @@
         FROM
             erp_depot d
         WHERE
-            d.name = #{houseName}
+            d.name = #{name}
         AND
-            d.id = #{id}
-        AND
-            d.delete_Flag = #{delete_Flag}
-        ORDER BY d.create_time DESC
+            d.delete_Flag = 0
+        ORDER BY d.create_time DESC LIMIT 0,1
 
     </select>
 
@@ -45,7 +43,7 @@
         INSERT into erp_depot(
             id,
 	        name,
-	        <if test="address != '' and adress != null">
+	        <if test="address != '' and address != null">
 	            address,
             </if>
             <if test="warehousing != '' and warehousing != null">
@@ -67,8 +65,8 @@
 	        editer_id
 	    )VALUES(
 	        #{id},
-	        #{houseName},
-            <if test="address != '' and adress != null">
+	        #{name},
+            <if test="address != '' and address != null">
                 #{address},
             </if>
             <if test="warehousing != '' and warehousing != null">
@@ -107,8 +105,6 @@
             erp_depot d
         WHERE
             d.id = #{id}
-        AND
-            d.delete_Flag = #{delete_Flag}
         ORDER BY d.create_time DESC LIMIT 0,1
     </select>
 
@@ -123,10 +119,10 @@
     <update id="editStoreHouseById" parameterType="java.util.Map">
         UPDATE erp_depot
         <set>
-            <if test="houseName != '' and houseName != null">
-                name = #{houseName},
+            <if test="name != '' and name != null">
+                name = #{name},
             </if>
-            <if test="address != '' and adress != null">
+            <if test="address != '' and address != null">
                 address = #{address},
             </if>
             <if test="warehousing != '' and warehousing != null">

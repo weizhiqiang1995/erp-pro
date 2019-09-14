@@ -1,43 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-    <link href="../../assets/lib/layui/css/layui.css" rel="stylesheet" />
-    <link href="../../assets/lib/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
-    <link href="../../assets/lib/winui/css/winui.css" rel="stylesheet" />
-</head>
-<body>
-<div style="padding:20px; margin:0 auto;">
-    <form class="layui-form" action="" id="showForm">
+{{#bean}}
         <div class="layui-form-item layui-col-xs8">
             <label class="layui-form-label">仓库名称<i class="red">*</i></label>
             <div class="layui-input-block">
-                <input type="text" id="houseName" name="houseName" win-verify="required" placeholder="请输入仓库名称" class="layui-input" maxlength="25" />
+                <input type="text" id="houseName" name="houseName" win-verify="required" placeholder="请输入仓库名称" class="layui-input" maxlength="25" value="{{houseName}}"/>
             </div>
         </div>
         <div class="layui-form-item layui-col-xs8">
             <label class="layui-form-label">仓库地址</label>
             <div class="layui-input-block">
-                <input type="text" id="address" name="address" placeholder="请输入仓库地址" class="layui-input" />
+                <input type="text" id="address" name="address" placeholder="请输入仓库地址" class="layui-input" value="{{address}}"/>
             </div>
         </div>
         <div class="layui-form-item layui-col-xs8">
             <label class="layui-form-label">仓储费</label>
             <div class="layui-input-block">
-                <input type="text" id="warehousing" name="warehousing" win-verify="required" lay-verify="warehousing" placeholder="请输入仓储费" class="layui-input" />
+                <input type="text" id="warehousing" name="warehousing" win-verify="required" lay-verify="warehousing" placeholder="请输入仓储费" class="layui-input" value="{{warehousing}}"/>
             </div>
         </div>
         <div class="layui-form-item layui-col-xs8">
             <label class="layui-form-label">搬运费</label>
             <div class="layui-input-block">
-                <input type="text" id="truckage" name="truckage" win-verify="required" lay-verify="truckage" placeholder="请输入搬运费" class="layui-input" />
+                <input type="text" id="truckage" name="truckage" win-verify="required" lay-verify="truckage" placeholder="请输入搬运费" class="layui-input" value="{{truckage}}"/>
             </div>
         </div>
         <div class="layui-form-item layui-col-xs8">
             <label class="layui-form-label">负责人</label>
             <div class="layui-input-block">
-                <input type="text" id="principal" name="principal" placeholder="请输入负责人名称" class="layui-input" />
+                <input type="text" id="principal" name="principal" placeholder="请输入负责人名称" class="layui-input" value="{{principal}}"/>
             </div>
         </div>
         <div class="layui-form-item layui-col-xs8">
@@ -50,7 +39,7 @@
         <div class="layui-form-item layui-col-xs8">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
-                <textarea id="remark" name="remark" placeholder="请输入备注信息" class="layui-input" maxlength="200" ></textarea>
+                <textarea id="remark" name="remark" placeholder="请输入备注信息" class="layui-input" maxlength="200" value="{{remark}}"></textarea>
             </div>
         </div>
 
@@ -60,12 +49,4 @@
                 <button class="winui-btn" lay-submit lay-filter="formEditBean">保存</button>
             </div>
         </div>
-    </form>
-</div>
-<script src="../../assets/lib/layui/layui.js"></script>
-<script src="../../assets/lib/layui/custom.js"></script>
-<script type="text/javascript">
-    layui.config({base: '../../js/storehouse/'}).use('storehouseedit');
-</script>
-</body>
-</html>
+{{/bean}}

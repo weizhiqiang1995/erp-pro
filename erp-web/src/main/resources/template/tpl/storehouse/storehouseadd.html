@@ -8,47 +8,53 @@
     <link href="../../assets/lib/winui/css/winui.css" rel="stylesheet" />
 </head>
 <body>
-<div style="margin:0 auto;padding:20px;">
-    <form class="layui-form" action="" id="showForm" autocomplete="off">
-        <div class="layui-form-item">
-            <label class="layui-form-label">公司名称<i class="red">*</i></label>
+<div style="padding:20px; margin:0 auto;">
+    <form class="layui-form" action="" id="showForm">
+        <div class="layui-form-item layui-col-xs8">
+            <label class="layui-form-label">仓库名称<i class="red">*</i></label>
             <div class="layui-input-block">
-                <input type="text" id="companyName" name="companyName" win-verify="required" placeholder="请输入公司名称" class="layui-input" maxlength="50"/>
+                <input type="text" id="houseName" name="houseName" win-verify="required" placeholder="请输入仓库名称" class="layui-input" maxlength="25"/>
             </div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">公司类型<i class="red">*</i></label>
+        <div class="layui-form-item layui-col-xs8">
+            <label class="layui-form-label">仓库地址</label>
+            <div class="layui-input-block">
+                <input type="text" id="address" name="address" placeholder="请输入仓库地址" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-form-item layui-col-xs8">
+            <label class="layui-form-label">仓储费</label>
+            <div class="layui-input-block">
+                <input type="text" id="warehousing" name="warehousing" win-verify="required" lay-verify="warehousing" placeholder="请输入仓储费" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-form-item layui-col-xs8">
+            <label class="layui-form-label">搬运费</label>
+            <div class="layui-input-block">
+                <input type="text" id="truckage" name="truckage" win-verify="required" lay-verify="truckage" placeholder="请输入搬运费" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-form-item layui-col-xs8">
+            <label class="layui-form-label">负责人</label>
+            <div class="layui-input-block">
+                <input type="text" id="principal" name="principal" placeholder="请输入负责人名称" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-form-item layui-col-xs8">
+            <label class="layui-form-label">是否默认<i class="red">*</i></label>
             <div class="layui-input-block winui-radio">
-                <input type="radio" name="companyType" value="1" title="总公司" lay-filter="companyType" checked/>
-                <input type="radio" name="companyType" value="2" title="子公司" lay-filter="companyType" />
+                <input type="radio" name="is_default" value="1" title="是" checked="checked"/>
+                <input type="radio" name="is_default" value="2" title="否" />
             </div>
         </div>
-        <div class="layui-form-item" id="parentIdBox">
-            <label class="layui-form-label">总公司<i class="red">*</i></label>
+        <div class="layui-form-item layui-col-xs8">
+            <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
-                <select id="OverAllCompany" lay-filter="OverAllCompany" lay-search="">
-                    <option value="">请选择</option>
-                </select>
+                <textarea id="remark" name="remark" placeholder="请输入备注信息" class="layui-input" maxlength="200"></textarea>
             </div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">公司地址<i class="red">*</i></label>
-            <div class="layui-input-block" id="lockParentSel">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">详细地址<i class="red">*</i></label>
-            <div class="layui-input-block">
-                <input type="text" id="addressDetailed" name="addressDetailed" win-verify="required" placeholder="请输入公司详细地址" class="layui-input" maxlength="50"/>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">公司简介</label>
-            <div class="layui-input-block">
-                <textarea id="content" name="content" style="display: none;"></textarea>
-            </div>
-        </div>
-        <div class="layui-form-item">
+
+        <div class="layui-form-item layui-col-xs8">
             <div class="layui-input-block">
                 <button class="winui-btn" id="cancle">取消</button>
                 <button class="winui-btn" lay-submit lay-filter="formAddBean">保存</button>
