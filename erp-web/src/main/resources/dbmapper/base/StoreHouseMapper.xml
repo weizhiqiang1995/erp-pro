@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyeye.dao.StoreHouseDao">
+
+    <!-- 获取仓库信息 -->
+    <select id="queryStoreHouseByList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+            d.id,
+            d.`name` houseName,
+            d.address,
+            d.warehousing,
+            d.truckage,
+            d.remark,
+            d.principal,
+            d.tenant_id,
+            d.is_default,
+            CONVERT (d.create_time, CHAR) createTime,
+            CONVERT (d.edit_time, CHAR) editTime
+        FROM
+            erp_depot d
+        WHERE
+            d.delete_Flag = #{delete_Flag}
+        <if test="houseName != '' and houseName != null">
+            d.name LIKE '%${houseName}%'
+        </if>
+        ORDER BY d.create_time DESC
+    </select>
+
+    <!-- 查询名称为xxx的仓库信息 -->
+    <select id="queryStoreHouseByName" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+            d.id,
+            d.`name` houseName
+        FROM
+            erp_depot d
+        WHERE
+            d.name = #{houseName}
+        AND
+            d.id = #{id}
+        AND
+            d.delete_Flag = #{delete_Flag}
+        ORDER BY d.create_time DESC
+
+    </select>
+
+    <!-- 添加仓库信息 -->
+    <insert id="insertStoreHouse" parameterType="java.util.Map">
+        INSERT into erp_depot(
+            id,
+	        name,
+	        <if test="address != '' and adress != null">
+	            address,
+            </if>
+            <if test="warehousing != '' and warehousing != null">
+                warehousing,
+            </if>
+            <if test="truckage != '' and truckage != null">
+                truckage,
+            </if>
+	        <if test="remark != '' and remark != null">
+                remark,
+            </if>
+            <if test="principal != '' and principal != null">
+                principal,
+            </if>
+	        tenant_id,
+	        is_default,
+	        create_time,
+	        edit_time,
+	        editer_id
+	    )VALUES(
+	        #{id},
+	        #{houseName},
+            <if test="address != '' and adress != null">
+                #{address},
+            </if>
+            <if test="warehousing != '' and warehousing != null">
+                #{warehousing},
+            </if>
+            <if test="truckage != '' and truckage != null">
+                #{truckage},
+            </if>
+            <if test="remark != '' and remark != null">
+                #{remark},
+            </if>
+            <if test="principal != '' and principal != null">
+                #{principal},
+            </if>
+	        #{tenant_id},
+	        #{is_default},
+	        #{create_time},
+	        #{edit_time},
+	        #{editer_id})
+    </insert>
+
+    <!-- 查询单个仓库信息，用于数据回显 -->
+    <select id="queryStoreHouseById" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+            d.id,
+            d.`name` houseName,
+            d.address,
+            d.warehousing,
+            d.truckage,
+            d.remark,
+            d.principal,
+            d.tenant_id,
+            d.is_default,
+            CONVERT (d.create_time, CHAR) createTime,
+            CONVERT (d.edit_time, CHAR) editTime
+        FROM
+            erp_depot d
+        WHERE
+            d.id = #{id}
+        AND
+            d.delete_Flag = #{delete_Flag}
+        ORDER BY d.create_time DESC LIMIT 0,1
+    </select>
+
+    <!-- 删除仓库信息 -->
+    <delete id="deleteStoreHouseById" parameterType="java.util.Map">
+        DELETE
+		FROM
+			erp_depot
+		WHERE
+			id = #{id}
+    </delete>
+
+    <!-- 编辑仓库信息 -->
+    <update id="editStoreHouseById" parameterType="java.util.Map">
+        UPDATE erp_depot
+        <set>
+            <if test="houseName != '' and houseName != null">
+                name = #{houseName},
+            </if>
+            <if test="address != '' and adress != null">
+                address = #{address},
+            </if>
+            <if test="warehousing != '' and warehousing != null">
+                warehousing = #{warehousing},
+            </if>
+            <if test="truckage != '' and truckage != null">
+                truckage = #{truckage},
+            </if>
+            <if test="remark != '' and remark != null">
+                remark = #{remark},
+            </if>
+            <if test="principal != '' and principal != null">
+                principal = #{principal},
+            </if>
+            <if test="delete_Flag !='' and delete_Flag != null">
+                delete_Flag = #{delete_Flag},
+            </if>
+            <if test="is_default != '' and is_default != null">
+                is_default = #{is_default},
+            </if>
+            edit_time = #{edit_time},
+            editer_id = #{editer_id}
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+</mapper>
