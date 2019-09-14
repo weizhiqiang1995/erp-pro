@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.skyeye.dao.StoreHouseDao">
 
-    <!-- 获取仓库信息 -->
     <select id="queryStoreHouseByList" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
             d.id,
@@ -26,7 +25,6 @@
         ORDER BY d.create_time DESC
     </select>
 
-    <!-- 查询名称为xxx的仓库信息 -->
     <select id="queryStoreHouseByName" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
             d.id,
@@ -43,7 +41,6 @@
 
     </select>
 
-    <!-- 添加仓库信息 -->
     <insert id="insertStoreHouse" parameterType="java.util.Map">
         INSERT into erp_depot(
             id,
@@ -93,7 +90,6 @@
 	        #{editer_id})
     </insert>
 
-    <!-- 查询单个仓库信息，用于数据回显 -->
     <select id="queryStoreHouseById" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
             d.id,
@@ -116,7 +112,6 @@
         ORDER BY d.create_time DESC LIMIT 0,1
     </select>
 
-    <!-- 删除仓库信息 -->
     <delete id="deleteStoreHouseById" parameterType="java.util.Map">
         DELETE
 		FROM
@@ -125,7 +120,6 @@
 			id = #{id}
     </delete>
 
-    <!-- 编辑仓库信息 -->
     <update id="editStoreHouseById" parameterType="java.util.Map">
         UPDATE erp_depot
         <set>

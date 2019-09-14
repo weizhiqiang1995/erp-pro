@@ -13,8 +13,6 @@ layui.config({
         form = layui.form,
         table = layui.table;
 
-    authBtn('1552960199302');
-
     //表格渲染
     table.render({
         id: 'messageTable',
@@ -29,26 +27,10 @@ layui.config({
         cols: [[
             { title: '序号', type: 'numbers'},
             { field: 'houseName', title: '仓库名称', width: 80},
-            { field: 'address', title: '仓库地址', width: 120, templat: function (d) {
-                    if(isNull(d.address)){
-                        return "";
-                    }
-                }},
-            { field: 'warehousing', title: '仓储费', width: 50, templat: function (d) {
-                    if(isNull(d.warehousing)){
-                        return "";
-                    }
-                }},
-            { field: 'truckage', title: '搬运费', width: 60, templet: function(d){
-                    if(isNull(d.truckage)){
-                        return '';
-                    }
-                }},
-            { field: 'principal', title: '负责人', width: 80, templat: function (d) {
-                    if(isNull(d.principal)){
-                        return "";
-                    }
-                } },
+            { field: 'address', title: '仓库地址', width: 120},
+            { field: 'warehousing', title: '仓储费', width: 50},
+            { field: 'truckage', title: '搬运费', width: 60},
+            { field: 'principal', title: '负责人', width: 80},
             { field: 'is_default', title: '是否默认', width: 60, templet: function(d){
                     if(d.is_default == '1'){
                         return "是";
