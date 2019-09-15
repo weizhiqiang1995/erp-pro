@@ -56,27 +56,27 @@
             <if test="principal != '' and principal != null">
                 principal,
             </if>
-        tenant_id,
-        is_default,
-        create_time
+	        tenant_id,
+	        is_default,
+	        create_time
         )VALUES(
-        #{id},
-        #{name},
-        <if test="address != '' and address != null">#{address},
-        </if>
-            <if test="
-        warehousing != '' and warehousing != null">
-                #{warehousing},
-            </if>
-            <if test="truckage != '' and truckage != null">
-                #{truckage},
-            </if>
-            <if test="remark != '' and remark != null">
-                #{remark},
-            </if>
-            <if test="principal != '' and principal != null">
-                #{principal},
-            </if>
+	        #{id},
+	        #{name},
+	        <if test="address != '' and address != null">
+	        	#{address},
+	        </if>
+	           <if test="warehousing != '' and warehousing != null">
+	               #{warehousing},
+	           </if>
+	           <if test="truckage != '' and truckage != null">
+	               #{truckage},
+	           </if>
+	           <if test="remark != '' and remark != null">
+	               #{remark},
+	           </if>
+	           <if test="principal != '' and principal != null">
+	               #{principal},
+	           </if>
 	        #{userId},
 	        #{isDefault},
 	        #{createTime}

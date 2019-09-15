@@ -70,7 +70,7 @@ layui.config({
         rowId = data.id;
         _openNewWindows({
             url: "../../tpl/storehouse/storehouseedit.html",
-            title: "编辑用户",
+            title: "编辑仓库",
             pageId: "storehouseedit",
             area: ['90vw', '90vh'],
             callBack: function(refreshCode){
