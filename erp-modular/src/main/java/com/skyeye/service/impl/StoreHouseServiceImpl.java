@@ -89,7 +89,6 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     @Override
     public void deleteStoreHouseById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-//        storeHouseDao.deleteStoreHouseById(params);
         Map<String, Object> user = inputObject.getLogParams();
         params.put("deleteFlag", 1);
         storeHouseDao.editStoreHouseById(params);
@@ -104,6 +103,19 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     @Override
     public void editStoreHouseById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
+        storeHouseDao.editStoreHouseById(params);
+    }
+
+    /**
+     * 设置仓库为默认状态
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void editStoreHouseByDefault(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> params = inputObject.getParams();
+        params.put("isDefault", "1");//默认状态
         storeHouseDao.editStoreHouseById(params);
     }
 }

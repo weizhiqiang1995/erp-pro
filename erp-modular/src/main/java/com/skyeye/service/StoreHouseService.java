@@ -19,4 +19,6 @@ public interface StoreHouseService {
     public void deleteStoreHouseById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
     public void editStoreHouseById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+    public void editStoreHouseByDefault(InputObject inputObject, OutputObject outputObject) throws Exception;
 }

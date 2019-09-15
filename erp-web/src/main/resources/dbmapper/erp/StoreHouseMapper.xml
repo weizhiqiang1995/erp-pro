@@ -79,7 +79,7 @@
                 #{principal},
             </if>
 	        #{tenantId},
-	        #{is_default},
+	        #{isDefault},
 	        #{createTime}
     </insert>
 
@@ -104,14 +104,6 @@
         ORDER BY d.create_time DESC LIMIT 0,1
     </select>
 
-    <delete id="deleteStoreHouseById" parameterType="java.util.Map">
-        DELETE
-		FROM
-			erp_depot
-		WHERE
-			id = #{id}
-    </delete>
-
     <update id="editStoreHouseById" parameterType="java.util.Map">
         UPDATE erp_depot
         <set>
@@ -133,8 +125,8 @@
             <if test="deleteFlag !='' and deleteFlag != null">
                 delete_Flag = #{deleteFlag},
             </if>
-            <if test="is_default != '' and is_default != null">
-                is_default = #{is_default},
+            <if test="isDefault != '' and isDefault != null">
+                is_default = #{isDefault},
             </if>
             name = #{name},
         </set>

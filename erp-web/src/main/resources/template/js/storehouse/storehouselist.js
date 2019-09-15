@@ -7,7 +7,7 @@ layui.config({
     window: 'js/winui.window',
 }).define(['window', 'table', 'jquery', 'winui', 'form'], function (exports) {
     winui.renderColor();
-    authBtn('1552963122253');
+    authBtn('1568523956068');
     var $ = layui.$,
         form = layui.form,
         table = layui.table;
@@ -29,7 +29,7 @@ layui.config({
             { field: 'warehousing', title: '仓储费', width: 130},
             { field: 'truckage', title: '搬运费', width: 130},
             { field: 'principal', title: '负责人', width: 150},
-            { field: 'is_default', title: '是否默认', width: 150, templet: function(d){
+            { field: 'is_default', title: '是否默认', width: 100, templet: function(d){
                     if(d.is_default == '1'){
                         return "是";
                     }else if(d.is_default == '2'){
@@ -39,7 +39,7 @@ layui.config({
                     }
                 }},
             { field: 'createTime', title: '创建时间', align: 'center', width: 150 },
-            { title: '操作', fixed: 'right', align: 'center', width: 150, toolbar: '#tableBar'}
+            { title: '操作', fixed: 'right', align: 'center', width: 200, toolbar: '#tableBar'}
         ]]
     });
 
@@ -50,6 +50,8 @@ layui.config({
             edit(data);
         }else if (layEvent === 'delete') { //删除
             deleteHouse(data);
+        }else if (layEvent === 'default') { //设置默认
+            defaultHouse(data);
         }
     });
 
@@ -89,7 +91,7 @@ layui.config({
         };
         AjaxPostUtil.request({url:reqBasePath + "storehouse004", params:params, type:'json', callback:function(json){
             if(json.returnCode == 0){
-                winui.window.msg("该仓库已删除成功。", {icon: 1,time: 2000});
+                winui.window.msg("设置成功。", {icon: 1,time: 2000});
                 loadTable();
             }else{
                 winui.window.msg(json.returnMessage, {icon: 2,time: 2000});
@@ -97,6 +99,21 @@ layui.config({
         }});
     }
 
+    //设置是否默认
+    function defaultHouse(data){
+        var params = {
+            rowId: data.id,
+            houseName: data.houseName,
+        };
+        AjaxPostUtil.request({url:reqBasePath + "storehouse006", params:params, type:'json', callback:function(json){
+                if(json.returnCode == 0){
+                    winui.window.msg("该仓库已删除成功。", {icon: 1,time: 2000});
+                    loadTable();
+                }else{
+                    winui.window.msg(json.returnMessage, {icon: 2,time: 2000});
+                }
+            }});
+    }
     //添加仓库
     $("body").on("click", "#addBean", function(){
         _openNewWindows({

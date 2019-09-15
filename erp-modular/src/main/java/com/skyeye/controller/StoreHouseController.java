@@ -78,4 +78,16 @@ public class StoreHouseController {
     public void editStoreHouseById(InputObject inputObject, OutputObject outputObject) throws Exception{
         storeHouseService.editStoreHouseById(inputObject, outputObject);
     }
+
+    /**
+     * 设置仓库为默认状态
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/StoreHouseController/editStoreHouseByDefault")
+    @ResponseBody
+    public void editStoreHouseByDefault(InputObject inputObject, OutputObject outputObject) throws Exception{
+        storeHouseService.editStoreHouseByDefault(inputObject, outputObject);
+    }
 }

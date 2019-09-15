@@ -24,18 +24,21 @@
 <div class="winui-toolbar">
     <div class="winui-tool">
         <button id="reloadTable" class="winui-toolbtn"><i class="fa fa-refresh" aria-hidden="true"></i>刷新数据</button>
-        <button id="addBean" class="winui-toolbtn" auth="1552960199302"><i class="fa fa-plus" aria-hidden="true"></i>新增仓库</button>
+        <button id="addBean" class="winui-toolbtn" auth="1568523956068"><i class="fa fa-plus" aria-hidden="true"></i>新增仓库</button>
     </div>
 </div>
 <div style="margin:auto 10px;">
     <table id="messageTable" lay-filter="messageTable"></table>
 
     <script type="text/html" id="tableBar">
-        {{# if(auth('1552960326068')){ }}
+        {{# if(auth('1568524015623')){ }}
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         {{# } }}
-        {{# if(auth('1552960399251')){ }}
+        {{# if(auth('1568523987812')){ }}
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+        {{# } }}
+        {{# if(d.is_default == 2 && auth('1568526024398')){ }}
+        <a class="layui-btn layui-btn-xs" lay-event="default">设置默认</a>
         {{# } }}
     </script>
 </div>
