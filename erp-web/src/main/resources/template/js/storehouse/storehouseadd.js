@@ -13,7 +13,7 @@ layui.config({
         form.on('submit(formAddBean)', function (data) {
             //表单验证
             if (winui.verifyForm(data.elem)) {
-                if(isNull($.trim($("#houseName").val()))){
+                if(isNull($("#houseName").val())){
                     winui.window.msg('请输入仓库名称', {icon: 2,time: 2000});
                     return false;
                 }

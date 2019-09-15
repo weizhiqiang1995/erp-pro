@@ -17,7 +17,7 @@ layui.config({
         elem: '#messageTable',
         method: 'post',
         url: reqBasePath + 'storehouse001',
-        where: {houseName:$.trim($("#houseName").val())},
+        where: {houseName:$("#houseName").val()},
         even: true,  //隔行变色
         page: true,
         limits: [8, 16, 24, 32, 40, 48, 56],
@@ -72,7 +72,7 @@ layui.config({
             url: "../../tpl/storehouse/storehouseedit.html",
             title: "编辑用户",
             pageId: "storehouseedit",
-            area: ['950px', '90vh'],
+            area: ['90vw', '90vh'],
             callBack: function(refreshCode){
                 if (refreshCode == '0') {
                     winui.window.msg("操作成功", {icon: 1,time: 2000});
@@ -85,27 +85,28 @@ layui.config({
 
     //删除仓库
     function deleteHouse(data){
-        var params = {
-            rowId: data.id,
-            deleteFlag: '1'
-        };
-        AjaxPostUtil.request({url:reqBasePath + "storehouse004", params:params, type:'json', callback:function(json){
-            if(json.returnCode == 0){
-                winui.window.msg("删除成功。", {icon: 1,time: 2000});
-                loadTable();
-            }else{
-                winui.window.msg(json.returnMessage, {icon: 2,time: 2000});
-            }
-        }});
+        layer.confirm('确认删除该仓库吗？', { icon: 3, title: '删除仓库' }, function (index) {
+            var params = {
+                rowId: data.id,
+            };
+            AjaxPostUtil.request({url:reqBasePath + "storehouse004", params:params, type:'json', callback:function(json){
+                if(json.returnCode == 0){
+                    winui.window.msg("删除成功。", {icon: 1,time: 2000});
+                    loadTable();
+                }else{
+                    winui.window.msg(json.returnMessage, {icon: 2,time: 2000});
+                }
+            }});
+        });
     }
 
     //设置是否默认
     function defaultHouse(data){
-        var params = {
-            rowId: data.id,
-            isDefault: "1",
-        };
-        AjaxPostUtil.request({url:reqBasePath + "storehouse006", params:params, type:'json', callback:function(json){
+        layer.confirm('确认要设置该仓库为默认状态吗？', { icon: 3, title: '设置仓库状态' }, function (index) {
+            var params = {
+                rowId: data.id,
+            };
+            AjaxPostUtil.request({url:reqBasePath + "storehouse006", params:params, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("设置成功。", {icon: 1,time: 2000});
                     loadTable();
@@ -113,6 +114,7 @@ layui.config({
                     winui.window.msg(json.returnMessage, {icon: 2,time: 2000});
                 }
             }});
+        });
     }
     //添加仓库
     $("body").on("click", "#addBean", function(){
@@ -140,12 +142,12 @@ layui.config({
     })
     //刷新
     function loadTable(){
-        table.reload("messageTable", {where:{houseName:$.trim($("#houseName").val())}});
+        table.reload("messageTable", {where:{houseName:$("#houseName").val()}});
     }
 
     //搜索
     function refreshTable(){
-        table.reload("messageTable", {page: {curr: 1}, where:{houseName:$.trim($("#houseName").val())}})
+        table.reload("messageTable", {page: {curr: 1}, where:{houseName:$("#houseName").val()}})
     }
 
     exports('storehouselist', {});

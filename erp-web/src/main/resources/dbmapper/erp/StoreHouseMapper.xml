@@ -77,7 +77,7 @@
             <if test="principal != '' and principal != null">
                 #{principal},
             </if>
-	        #{tenantId},
+	        #{userId},
 	        #{is_default},
 	        #{createTime}
         )
@@ -141,7 +141,7 @@
     <update id="editStoreHouseBydeleteFlag" parameterType="java.util.Map">
         UPDATE erp_depot
         <set>
-            delete_Flag = #{delete_Flag}
+            delete_Flag = #{deleteFlag}
         </set>
         WHERE
           id = #{id}
@@ -152,11 +152,20 @@
     <update id="editStoreHouseByDefault" parameterType="java.util.Map">
         UPDATE erp_depot
         <set>
-            is_default = #{is_default}
+            is_default = #{isDefault}
         </set>
         WHERE
           id = #{id}
         AND
+          tenant_id = #{userId}
+    </update>
+
+    <update id="editStoreHouseByDefaultAll" parameterType="java.util.Map">
+        UPDATE erp_depot
+        <set>
+            is_default = #{isDefault}
+        </set>
+        WHERE
           tenant_id = #{userId}
     </update>
 </mapper>

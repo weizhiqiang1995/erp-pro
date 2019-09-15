@@ -51,7 +51,11 @@ public class StoreHouseServiceImpl implements StoreHouseService {
         if(bean == null){
             Map<String, Object> user = inputObject.getLogParams();
             params.put("id", ToolUtil.getSurFaceId());
-            params.put("tenantId", user.get("id"));
+            params.put("userId", user.get("id"));
+            if(params.get("is_default").toString().equals("1")){
+                params.put("isDefault", "2");
+                storeHouseDao.editStoreHouseByDefaultAll(params);
+            }
             params.put("createTime", ToolUtil.getTimeAndToString());
             storeHouseDao.insertStoreHouse(params);
         }else{
@@ -89,6 +93,7 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     public void deleteStoreHouseById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("deleteFlag", "1");
         storeHouseDao.editStoreHouseBydeleteFlag(params);
     }
 
@@ -101,7 +106,12 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     @Override
     public void editStoreHouseById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        Map<String, Object> user = inputObject.getLogParams();
+        params.put("userId", user.get("id"));
+        if(params.get("is_default").toString().equals("1")){
+            params.put("isDefault", "2");
+            storeHouseDao.editStoreHouseByDefaultAll(params);
+        }
         storeHouseDao.editStoreHouseById(params);
     }
 
@@ -114,7 +124,11 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     @Override
     public void editStoreHouseByDefault(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        Map<String, Object> user = inputObject.getLogParams();
+        params.put("userId", user.get("id"));
+        params.put("isDefault", "2");
+        storeHouseDao.editStoreHouseByDefaultAll(params);
+        params.put("isDefault", "1");
         storeHouseDao.editStoreHouseByDefault(params);
     }
 }

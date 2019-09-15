@@ -23,4 +23,6 @@ public interface StoreHouseDao {
     public void editStoreHouseBydeleteFlag(Map<String, Object> params) throws Exception;
 
     public void editStoreHouseByDefault(Map<String, Object> params) throws Exception;
+
+    public void editStoreHouseByDefaultAll(Map<String, Object> params) throws Exception;
 }
