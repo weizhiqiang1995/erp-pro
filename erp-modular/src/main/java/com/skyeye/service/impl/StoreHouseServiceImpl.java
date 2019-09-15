@@ -31,7 +31,6 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     @Override
     public void queryStoreHouseByList(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("deleteFlag", "0");
         List<Map<String, Object>> beans = storeHouseDao.queryStoreHouseByList(params);
         if(!beans.isEmpty()){
             outputObject.setBeans(beans);
@@ -89,9 +88,8 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     @Override
     public void deleteStoreHouseById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        params.put("deleteFlag", 1);
-        storeHouseDao.editStoreHouseById(params);
+        params.put("userId", inputObject.getLogParams().get("id"));
+        storeHouseDao.editStoreHouseBydeleteFlag(params);
     }
 
     /**
@@ -103,6 +101,7 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     @Override
     public void editStoreHouseById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
+        params.put("userId", inputObject.getLogParams().get("id"));
         storeHouseDao.editStoreHouseById(params);
     }
 
@@ -115,7 +114,7 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     @Override
     public void editStoreHouseByDefault(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("isDefault", "1");//默认状态
-        storeHouseDao.editStoreHouseById(params);
+        params.put("userId", inputObject.getLogParams().get("id"));
+        storeHouseDao.editStoreHouseByDefault(params);
     }
 }

@@ -19,4 +19,8 @@ public interface StoreHouseDao {
     public Map<String, Object> queryStoreHouseById(Map<String, Object> params) throws Exception;
 
     public void editStoreHouseById(Map<String, Object> params) throws Exception;
+
+    public void editStoreHouseBydeleteFlag(Map<String, Object> params) throws Exception;
+
+    public void editStoreHouseByDefault(Map<String, Object> params) throws Exception;
 }

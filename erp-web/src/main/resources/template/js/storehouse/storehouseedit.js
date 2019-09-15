@@ -20,7 +20,7 @@ layui.config({
             },
             ajaxSendAfter:function(json){
                 //设置是否默认
-                $("input:radio[name=is_default][value=" + json.bean.is_default + "]").attr("checked", true);
+                $("input:radio[name=isDefault][value=" + json.bean.isDefault + "]").attr("checked", true);
                 form.render();
                 form.on('submit(formEditBean)', function (data) {
                     //表单验证
@@ -35,7 +35,7 @@ layui.config({
                             address: $("#address").val(),
                             warehousing: $("#warehousing").val(),
                             truckage: $("#truckage").val(),
-                            is_default: $("input[name='is_default']:checked").val(),
+                            isDefault: $("input[name='isDefault']:checked").val(),
                             principal: $("#principal").val(),
                             remark: $("#remark").val(),
                         };

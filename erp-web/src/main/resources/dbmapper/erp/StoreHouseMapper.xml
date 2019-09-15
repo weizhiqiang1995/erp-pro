@@ -12,12 +12,12 @@
             d.remark,
             d.principal,
             d.tenant_id,
-            d.is_default,
+            d.is_default isDefault,
             CONVERT (d.create_time, CHAR) createTime
         FROM
             erp_depot d
         WHERE
-            d.delete_Flag = #{deleteFlag}
+            d.delete_Flag = 0
         <if test="name != '' and name != null">
             AND d.name LIKE '%${name}%'
         </if>
@@ -35,7 +35,6 @@
         AND
             d.delete_Flag = 0
         ORDER BY d.create_time DESC LIMIT 0,1
-
     </select>
 
     <insert id="insertStoreHouse" parameterType="java.util.Map">
@@ -57,16 +56,16 @@
             <if test="principal != '' and principal != null">
                 principal,
             </if>
-	        tenant_id,
-	        is_default,
-	        create_time
-	    )VALUES(
-	        #{id},
-	        #{name},
-            <if test="address != '' and address != null">
-                #{address},
-            </if>
-            <if test="warehousing != '' and warehousing != null">
+        tenant_id,
+        is_default,
+        create_time
+        )VALUES(
+        #{id},
+        #{name},
+        <if test="address != '' and address != null">#{address},
+        </if>
+            <if test="
+        warehousing != '' and warehousing != null">
                 #{warehousing},
             </if>
             <if test="truckage != '' and truckage != null">
@@ -79,8 +78,9 @@
                 #{principal},
             </if>
 	        #{tenantId},
-	        #{isDefault},
+	        #{is_default},
 	        #{createTime}
+        )
     </insert>
 
     <select id="queryStoreHouseById" parameterType="java.util.Map" resultType="java.util.Map">
@@ -93,7 +93,7 @@
             d.remark,
             d.principal,
             d.tenant_id,
-            d.is_default,
+            d.is_default isDefault,
             CONVERT (d.create_time, CHAR) createTime
         FROM
             erp_depot d
@@ -122,16 +122,41 @@
             <if test="principal != '' and principal != null">
                 principal = #{principal},
             </if>
-            <if test="deleteFlag !='' and deleteFlag != null">
-                delete_Flag = #{deleteFlag},
+            <if test="delete_Flag !='' and delete_Flag != null">
+                delete_Flag = #{delete_Flag},
             </if>
-            <if test="isDefault != '' and isDefault != null">
-                is_default = #{isDefault},
+            <if test="is_default != '' and is_default != null">
+                is_default = #{is_default},
             </if>
-            name = #{name},
+            <if test="name != '' and name != null">
+                name = #{name},
+            </if>
         </set>
         WHERE
             id = #{id}
+        AND
+            tenant_id = #{userId}
     </update>
 
+    <update id="editStoreHouseBydeleteFlag" parameterType="java.util.Map">
+        UPDATE erp_depot
+        <set>
+            delete_Flag = #{delete_Flag}
+        </set>
+        WHERE
+          id = #{id}
+        AND
+          tenant_id = #{userId}
+    </update>
+
+    <update id="editStoreHouseByDefault" parameterType="java.util.Map">
+        UPDATE erp_depot
+        <set>
+            is_default = #{is_default}
+        </set>
+        WHERE
+          id = #{id}
+        AND
+          tenant_id = #{userId}
+    </update>
 </mapper>

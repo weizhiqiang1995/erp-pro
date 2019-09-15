@@ -22,7 +22,7 @@ layui.config({
                     address: $("#address").val(),
                     warehousing: $("#warehousing").val(),
                     truckage: $("#truckage").val(),
-                    is_default: $("input[name='is_default']:checked").val(),
+                    isDefault: $("input[name='isDefault']:checked").val(),
                     principal: $("#principal").val(),
                     remark: $("#remark").val(),
                 };
