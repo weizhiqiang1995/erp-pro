@@ -1,5 +1,7 @@
 package com.skyeye.dao;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +12,7 @@ import java.util.Map;
  */
 public interface StoreHouseDao {
 
-    public List<Map<String, Object>> queryStoreHouseByList(Map<String, Object> params) throws Exception;
+    public List<Map<String, Object>> queryStoreHouseByList(Map<String, Object> params, PageBounds pageBounds) throws Exception;
 
     public Map<String, Object> queryStoreHouseByName(Map<String, Object> params) throws Exception;
 

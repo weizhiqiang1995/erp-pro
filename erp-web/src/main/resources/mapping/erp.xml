@@ -17,7 +17,7 @@
 		<property id="truckage" name="truckage" ref="" var="搬运费"></property>
 		<property id="remark" name="remark" ref="" var="描述"></property>
 		<property id="principal" name="principal" ref="" var="负责人"></property>
-		<property id="isDefault" name="is_default" ref="required,num" var="是否默认"></property>
+		<property id="isDefault" name="isDefault" ref="required,num" var="是否默认"></property>
 	</url>
 	<url id="storehouse003" path="/post/StoreHouseController/queryStoreHouseById" val="查询单个仓库信息，用于数据回显" allUse="2">
 		<property id="rowId" name="id" ref="required" var="仓库ID"></property>
@@ -33,7 +33,7 @@
 		<property id="truckage" name="truckage" ref="" var="搬运费"></property>
 		<property id="remark" name="remark" ref="" var="描述"></property>
 		<property id="principal" name="principal" ref="" var="负责人"></property>
-		<property id="isDefault" name="is_default" ref="required,num" var="是否默认"></property>
+		<property id="isDefault" name="isDefault" ref="required,num" var="是否默认"></property>
 	</url>
 	<url id="storehouse006" path="/post/StoreHouseController/editStoreHouseByDefault" val="设置仓库为默认状态" allUse="1">
 		<property id="rowId" name="id" ref="required" var="仓库ID"></property>

@@ -78,7 +78,7 @@
                 #{principal},
             </if>
 	        #{userId},
-	        #{is_default},
+	        #{isDefault},
 	        #{createTime}
         )
     </insert>
@@ -125,8 +125,8 @@
             <if test="delete_Flag !='' and delete_Flag != null">
                 delete_Flag = #{delete_Flag},
             </if>
-            <if test="is_default != '' and is_default != null">
-                is_default = #{is_default},
+            <if test="isDefault != '' and isDefault != null">
+                is_default = #{isDefault},
             </if>
             <if test="name != '' and name != null">
                 name = #{name},

@@ -1,5 +1,7 @@
 package com.skyeye.service.impl;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.ToolUtil;
@@ -30,12 +32,14 @@ public class StoreHouseServiceImpl implements StoreHouseService {
      */
     @Override
     public void queryStoreHouseByList(InputObject inputObject, OutputObject outputObject) throws Exception {
+
         Map<String, Object> params = inputObject.getParams();
-        List<Map<String, Object>> beans = storeHouseDao.queryStoreHouseByList(params);
-        if(!beans.isEmpty()){
-            outputObject.setBeans(beans);
-            outputObject.settotal(beans.size());
-        }
+        List<Map<String, Object>> beans = storeHouseDao.queryStoreHouseByList(params,
+                new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
+        PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
+        int total = beansPageList.getPaginator().getTotalCount();
+        outputObject.setBeans(beans);
+        outputObject.settotal(total);
     }
 
     /**
@@ -52,9 +56,10 @@ public class StoreHouseServiceImpl implements StoreHouseService {
             Map<String, Object> user = inputObject.getLogParams();
             params.put("id", ToolUtil.getSurFaceId());
             params.put("userId", user.get("id"));
-            if(params.get("is_default").toString().equals("1")){
+            if(params.get("isDefault").toString().equals("1")){
                 params.put("isDefault", "2");
                 storeHouseDao.editStoreHouseByDefaultAll(params);
+                params.put("isDefault", "1");
             }
             params.put("createTime", ToolUtil.getTimeAndToString());
             storeHouseDao.insertStoreHouse(params);
@@ -108,9 +113,10 @@ public class StoreHouseServiceImpl implements StoreHouseService {
         Map<String, Object> params = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         params.put("userId", user.get("id"));
-        if(params.get("is_default").toString().equals("1")){
+        if(params.get("isDefault").toString().equals("1")){
             params.put("isDefault", "2");
             storeHouseDao.editStoreHouseByDefaultAll(params);
+            params.put("isDefault", "1");
         }
         storeHouseDao.editStoreHouseById(params);
     }
