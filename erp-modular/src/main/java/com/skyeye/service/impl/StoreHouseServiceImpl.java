@@ -31,7 +31,7 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     @Override
     public void queryStoreHouseByList(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("delete_Flag", "0");
+        params.put("deleteFlag", "0");
         List<Map<String, Object>> beans = storeHouseDao.queryStoreHouseByList(params);
         if(!beans.isEmpty()){
             outputObject.setBeans(beans);
@@ -52,11 +52,8 @@ public class StoreHouseServiceImpl implements StoreHouseService {
         if(bean == null){
             Map<String, Object> user = inputObject.getLogParams();
             params.put("id", ToolUtil.getSurFaceId());
-            params.put("tenant_id", user.get("id"));
-            params.put("create_time", ToolUtil.getTimeAndToString());
-            params.put("editer_id", user.get("id"));
-            params.put("edit_time", ToolUtil.getTimeAndToString());
-            System.out.printf("---params="+params);
+            params.put("tenantId", user.get("id"));
+            params.put("createTime", ToolUtil.getTimeAndToString());
             storeHouseDao.insertStoreHouse(params);
         }else{
             outputObject.setreturnMessage("该仓库信息已存在，请确认！");
@@ -73,6 +70,7 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     @Override
     public void queryStoreHouseById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
+        params.put("userId", inputObject.getLogParams().get("id"));
         Map<String, Object> bean = storeHouseDao.queryStoreHouseById(params);
         if(bean == null){
             outputObject.setreturnMessage("未查询到信息，请重试！");
@@ -93,9 +91,7 @@ public class StoreHouseServiceImpl implements StoreHouseService {
         Map<String, Object> params = inputObject.getParams();
 //        storeHouseDao.deleteStoreHouseById(params);
         Map<String, Object> user = inputObject.getLogParams();
-        params.put("editer_id", user.get("id"));
-        params.put("edit_time", ToolUtil.getTimeAndToString());
-        params.put("delete_Flag", 1);
+        params.put("deleteFlag", 1);
         storeHouseDao.editStoreHouseById(params);
     }
 
@@ -108,9 +104,6 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     @Override
     public void editStoreHouseById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        params.put("editer_id", user.get("id"));
-        params.put("edit_time", ToolUtil.getTimeAndToString());
         storeHouseDao.editStoreHouseById(params);
     }
 }

@@ -6,15 +6,11 @@ layui.config({
 }).extend({  //指定js别名
     window: 'js/winui.window',
 }).define(['window', 'table', 'jquery', 'winui', 'form'], function (exports) {
-
     winui.renderColor();
-
     authBtn('1552963122253');
-
     var $ = layui.$,
         form = layui.form,
         table = layui.table;
-
     //表格渲染
     table.render({
         id: 'messageTable',
@@ -67,7 +63,6 @@ layui.config({
         return false;
     });
 
-
     //编辑
     function edit(data){
         rowId = data.id;
@@ -88,7 +83,11 @@ layui.config({
 
     //删除仓库
     function deleteHouse(data){
-        AjaxPostUtil.request({url:reqBasePath + "storehouse004", params:{rowId: data.id}, type:'json', callback:function(json){
+        var params = {
+            rowId: data.id,
+            houseName: data.houseName
+        };
+        AjaxPostUtil.request({url:reqBasePath + "storehouse004", params:params, type:'json', callback:function(json){
             if(json.returnCode == 0){
                 winui.window.msg("该仓库已删除成功。", {icon: 1,time: 2000});
                 loadTable();
@@ -104,7 +103,7 @@ layui.config({
             url: "../../tpl/storehouse/storehouseadd.html",
             title: "新增仓库",
             pageId: "storehouseadd",
-            area: ['950px', '90vh'],
+            area: ['90vw', '90vh'],
             callBack: function(refreshCode){
                 if (refreshCode == '0') {
                     winui.window.msg("操作成功", {icon: 1,time: 2000});
@@ -115,12 +114,21 @@ layui.config({
             }});
     });
 
-    $("body").on("click", "#reloadTable", function(){
+    $("body").on("click", "#reloadTable", function() {
         loadTable();
     });
 
+    $("body").on("click", "#formSearch", function () {
+        refreshTable();
+    })
+    //刷新
     function loadTable(){
         table.reload("messageTable", {where:{houseName:$.trim($("#houseName").val())}});
+    }
+
+    //搜索
+    function refreshTable(){
+        table.reload("messageTable", {page: {curr: 1}, where:{houseName:$.trim($("#houseName").val())}})
     }
 
     exports('storehouselist', {});

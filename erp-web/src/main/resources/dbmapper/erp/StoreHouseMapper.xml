@@ -13,12 +13,11 @@
             d.principal,
             d.tenant_id,
             d.is_default,
-            CONVERT (d.create_time, CHAR) createTime,
-            CONVERT (d.edit_time, CHAR) editTime
+            CONVERT (d.create_time, CHAR) createTime
         FROM
             erp_depot d
         WHERE
-            d.delete_Flag = #{delete_Flag}
+            d.delete_Flag = #{deleteFlag}
         <if test="name != '' and name != null">
             AND d.name LIKE '%${name}%'
         </if>
@@ -60,9 +59,7 @@
             </if>
 	        tenant_id,
 	        is_default,
-	        create_time,
-	        edit_time,
-	        editer_id
+	        create_time
 	    )VALUES(
 	        #{id},
 	        #{name},
@@ -81,11 +78,9 @@
             <if test="principal != '' and principal != null">
                 #{principal},
             </if>
-	        #{tenant_id},
+	        #{tenantId},
 	        #{is_default},
-	        #{create_time},
-	        #{edit_time},
-	        #{editer_id})
+	        #{createTime}
     </insert>
 
     <select id="queryStoreHouseById" parameterType="java.util.Map" resultType="java.util.Map">
@@ -99,12 +94,13 @@
             d.principal,
             d.tenant_id,
             d.is_default,
-            CONVERT (d.create_time, CHAR) createTime,
-            CONVERT (d.edit_time, CHAR) editTime
+            CONVERT (d.create_time, CHAR) createTime
         FROM
             erp_depot d
         WHERE
             d.id = #{id}
+        AND
+            d.tenant_id = #{userId}
         ORDER BY d.create_time DESC LIMIT 0,1
     </select>
 
@@ -119,9 +115,6 @@
     <update id="editStoreHouseById" parameterType="java.util.Map">
         UPDATE erp_depot
         <set>
-            <if test="name != '' and name != null">
-                name = #{name},
-            </if>
             <if test="address != '' and address != null">
                 address = #{address},
             </if>
@@ -137,14 +130,13 @@
             <if test="principal != '' and principal != null">
                 principal = #{principal},
             </if>
-            <if test="delete_Flag !='' and delete_Flag != null">
-                delete_Flag = #{delete_Flag},
+            <if test="deleteFlag !='' and deleteFlag != null">
+                delete_Flag = #{deleteFlag},
             </if>
             <if test="is_default != '' and is_default != null">
                 is_default = #{is_default},
             </if>
-            edit_time = #{edit_time},
-            editer_id = #{editer_id}
+            name = #{name},
         </set>
         WHERE
             id = #{id}
