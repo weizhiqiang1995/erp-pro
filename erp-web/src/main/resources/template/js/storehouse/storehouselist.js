@@ -60,7 +60,7 @@ layui.config({
     form.on('submit(formSearch)', function (data) {
         //表单验证
         if (winui.verifyForm(data.elem)) {
-            loadTable();
+        	refreshTable();
         }
         return false;
     });
@@ -137,9 +137,6 @@ layui.config({
         loadTable();
     });
 
-    $("body").on("click", "#formSearch", function () {
-        refreshTable();
-    })
     //刷新
     function loadTable(){
         table.reload("messageTable", {where:{houseName:$("#houseName").val()}});
