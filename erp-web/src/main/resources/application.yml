@@ -33,6 +33,8 @@ spring:
         testOnReturn: false
         #通过connectProperties属性来打开mergeSql功能；慢SQL记录
         connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    transaction:
+        rollback-on-commit-failure: true
 
 #热部署配置
 devtools:

@@ -45,45 +45,37 @@ public class AOPOutputObjectput {
 	/**
 	 * 环绕通知
 	 * @param pjp
-	 * @throws Exception
+	 * @throws Throwable 
 	 */
 	@SuppressWarnings("unchecked")
 	@Around("execution(* com.skyeye.service.impl.*.*(..))")
-	public void doAround(ProceedingJoinPoint pjp) throws Exception {
+	public void doAround(ProceedingJoinPoint pjp) throws Throwable {
 		String methodName = pjp.getSignature().getName();
 		if(methodName.endsWith("DownLoad")){
-			try {
-				pjp.proceed();
-			} catch (Throwable e) {
-				e.printStackTrace();
-			}
+			pjp.proceed();
 		}else{
 			String result = InputObject.setParams();
-			try {
-				if(ToolUtil.isBlank(result)){
-					Map<String, Object> params = InputObject.getMap();
-					if("1".equals(params.get("urlUseJurisdiction").toString()) || "2".equals(params.get("urlUseJurisdiction").toString())){//是否需要登录才能使用   1是   0否  2需要登陆才能访问，但无需授权    默认为否
-						if(!jedisClient.exists("userMation:" + params.get("userToken").toString())){
-							OutputObject.setMessage("登录超时，请重新登录。");
-						}else{
-							Map<String, Object> userMation = JSONObject.fromObject(jedisClient.get("userMation:" + params.get("userToken").toString()));//用户信息
-							List<Map<String, Object>> deskTops = JSONArray.fromObject(jedisClient.get("deskTopsMation:" + params.get("userToken").toString()));//桌面菜单信息
-							List<Map<String, Object>> allMenu = JSONArray.fromObject(jedisClient.get("allMenuMation:" + params.get("userToken").toString()));//所有菜单信息
-							InputObject.setUSER_MATION(userMation);
-							InputObject.setUSER_DESKTOP_MENU_MATION(deskTops);
-							InputObject.setUSER_ALL_MENU_MATION(allMenu);
-							pjp.proceed();
-						}
+			if(ToolUtil.isBlank(result)){
+				Map<String, Object> params = InputObject.getMap();
+				if("1".equals(params.get("urlUseJurisdiction").toString()) || "2".equals(params.get("urlUseJurisdiction").toString())){//是否需要登录才能使用   1是   0否  2需要登陆才能访问，但无需授权    默认为否
+					if(!jedisClient.exists("userMation:" + params.get("userToken").toString())){
+						OutputObject.setMessage("登录超时，请重新登录。");
 					}else{
+						Map<String, Object> userMation = JSONObject.fromObject(jedisClient.get("userMation:" + params.get("userToken").toString()));//用户信息
+						List<Map<String, Object>> deskTops = JSONArray.fromObject(jedisClient.get("deskTopsMation:" + params.get("userToken").toString()));//桌面菜单信息
+						List<Map<String, Object>> allMenu = JSONArray.fromObject(jedisClient.get("allMenuMation:" + params.get("userToken").toString()));//所有菜单信息
+						InputObject.setUSER_MATION(userMation);
+						InputObject.setUSER_DESKTOP_MENU_MATION(deskTops);
+						InputObject.setUSER_ALL_MENU_MATION(allMenu);
 						pjp.proceed();
 					}
 				}else{
-					System.out.println("result:" + result + "         错误时间：" + ToolUtil.getTimeAndToString() + "       方法名：" + pjp.getSignature().getName());
-					logger.info("result:" + result + "         错误时间：" + ToolUtil.getTimeAndToString() + "       方法名：" + pjp.getSignature().getName());
-					OutputObject.setMessage(result);
+					pjp.proceed();
 				}
-			} catch (Throwable e) {
-				e.printStackTrace();
+			}else{
+				System.out.println("result:" + result + "         错误时间：" + ToolUtil.getTimeAndToString() + "       方法名：" + pjp.getSignature().getName());
+				logger.info("result:" + result + "         错误时间：" + ToolUtil.getTimeAndToString() + "       方法名：" + pjp.getSignature().getName());
+				OutputObject.setMessage(result);
 			}
 		}
 	}
