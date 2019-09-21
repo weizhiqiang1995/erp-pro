@@ -1,0 +1,30 @@
+package com.skyeye.dao;
+
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @Author: 奈何繁华如云烟
+ * @Description: TODO
+ * @Date: 2019/9/16 21:23
+ */
+public interface MemberDao {
+
+    public List<Map<String, Object>> queryMemberByList(Map<String, Object> params, PageBounds pageBounds) throws Exception;
+
+    public Map<String, Object> queryMemberByUserIdAndMember(Map<String, Object> params) throws Exception;
+
+    public void insertMember(Map<String, Object> params) throws Exception;
+
+    public Map<String, Object> queryMemberById(Map<String, Object> params) throws Exception;
+
+    public void editMemberByDeleteFlag(Map<String, Object> params) throws Exception;
+
+    public void editMemberById(Map<String, Object> params) throws Exception;
+
+    public void editMemberByEnabled(Map<String, Object> params) throws Exception;
+
+    public void editMemberByNotEnabled(Map<String, Object> params) throws Exception;
+}

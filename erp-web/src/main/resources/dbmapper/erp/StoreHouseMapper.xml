@@ -31,6 +31,8 @@
         FROM
             erp_depot d
         WHERE
+            d.tenant_id = #{userId}
+        AND
             d.name = #{name}
         AND
             d.delete_Flag = 0

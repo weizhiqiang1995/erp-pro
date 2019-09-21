@@ -9,6 +9,7 @@ import com.skyeye.dao.StoreHouseDao;
 import com.skyeye.service.StoreHouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,6 @@ public class StoreHouseServiceImpl implements StoreHouseService {
      */
     @Override
     public void queryStoreHouseByList(InputObject inputObject, OutputObject outputObject) throws Exception {
-
         Map<String, Object> params = inputObject.getParams();
         List<Map<String, Object>> beans = storeHouseDao.queryStoreHouseByList(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
@@ -49,13 +49,14 @@ public class StoreHouseServiceImpl implements StoreHouseService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void insertStoreHouse(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
+        Map<String, Object> user = inputObject.getLogParams();
+        params.put("userId", user.get("id"));
         Map<String, Object> bean = storeHouseDao.queryStoreHouseByName(params);
         if(bean == null){
-            Map<String, Object> user = inputObject.getLogParams();
             params.put("id", ToolUtil.getSurFaceId());
-            params.put("userId", user.get("id"));
             if(params.get("isDefault").toString().equals("1")){
                 params.put("isDefault", "2");
                 storeHouseDao.editStoreHouseByDefaultAll(params);
@@ -95,6 +96,7 @@ public class StoreHouseServiceImpl implements StoreHouseService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void deleteStoreHouseById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
@@ -109,6 +111,7 @@ public class StoreHouseServiceImpl implements StoreHouseService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void editStoreHouseById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -128,6 +131,7 @@ public class StoreHouseServiceImpl implements StoreHouseService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void editStoreHouseByDefault(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
