@@ -47,4 +47,30 @@
 		<property id="parentId" name="parentId" ref="required" var="类型id" />
 	</url>
 	<!-- 产品类型结束 -->
+	
+	<!-- 产品计量单位开始 -->
+	<url id="materialunit001" path="/post/MaterialUnitController/queryMaterialUnitList" val="获取计量单位列表" allUse="1">
+		<property id="groupName" name="groupName" ref="" var="计量单位组名" />
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="materialunit002" path="/post/MaterialUnitController/insertMaterialUnitMation" val="新增计量单位" allUse="1">
+		<property id="groupName" name="groupName" ref="required" var="计量单位组名" />
+		<property id="unitName" name="unitName" ref="required" var="基础单位名称" />
+		<property id="unitNameStr" name="unitNameStr" ref="required" var="副单位集合串"/>
+	</url>
+	<url id="materialunit003" path="/post/MaterialUnitController/deleteMaterialUnitMationById" val="删除计量单位" allUse="1">
+		<property id="rowId" name="id" ref="required" var="计量单位组id" />
+	</url>
+	<url id="materialunit004" path="/post/MaterialUnitController/queryMaterialUnitMationToEditById" val="编辑计量单位时进行回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="计量单位组id" />
+	</url>
+	<url id="materialunit005" path="/post/MaterialUnitController/editMaterialUnitMationById" val="编辑计量单位" allUse="1">
+		<property id="groupName" name="groupName" ref="required" var="计量单位组名" />
+		<property id="unitName" name="unitName" ref="required" var="基础单位名称" />
+		<property id="unitNameStr" name="unitNameStr" ref="required" var="副单位集合串"/>
+		<property id="rowId" name="id" ref="required" var="计量单位组id" />
+	</url>
+	<!-- 产品计量单位结束 -->
+	
 </controller>
