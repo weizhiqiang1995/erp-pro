@@ -20,11 +20,13 @@ public interface CustomerDao {
 
     public Map<String, Object> queryCustomerById(Map<String, Object> params) throws Exception;
 
-    public void editCustomerByDeleteFlag(Map<String, Object> params) throws Exception;
+    public int editCustomerByDeleteFlag(Map<String, Object> params) throws Exception;
 
-    public void editCustomerById(Map<String, Object> params) throws Exception;
+    public int editCustomerById(Map<String, Object> params) throws Exception;
 
-    public void editCustomerByEnabled(Map<String, Object> params) throws Exception;
+    public int editCustomerByEnabled(Map<String, Object> params) throws Exception;
 
-    public void editCustomerByNotEnabled(Map<String, Object> params) throws Exception;
+    public int editCustomerByNotEnabled(Map<String, Object> params) throws Exception;
+
+    public Map<String, Object> queryCustomerByIdAndName(Map<String, Object> params) throws Exception;
 }

@@ -32,10 +32,8 @@
             erp_depot d
         WHERE
             d.tenant_id = #{userId}
-        AND
-            d.name = #{name}
-        AND
-            d.delete_Flag = 0
+        AND d.name = #{name}
+        AND d.delete_Flag = 0
         ORDER BY d.create_time DESC LIMIT 0,1
     </select>
 
@@ -43,42 +41,22 @@
         INSERT into erp_depot(
             id,
 	        name,
-	        <if test="address != '' and address != null">
-	            address,
-            </if>
-            <if test="warehousing != '' and warehousing != null">
-                warehousing,
-            </if>
-            <if test="truckage != '' and truckage != null">
-                truckage,
-            </if>
-	        <if test="remark != '' and remark != null">
-                remark,
-            </if>
-            <if test="principal != '' and principal != null">
-                principal,
-            </if>
+            address,
+            warehousing,
+            truckage,
+            remark,
+            principal,
 	        tenant_id,
 	        is_default,
 	        create_time
         )VALUES(
 	        #{id},
 	        #{name},
-	        <if test="address != '' and address != null">
-	        	#{address},
-	        </if>
-	           <if test="warehousing != '' and warehousing != null">
-	               #{warehousing},
-	           </if>
-	           <if test="truckage != '' and truckage != null">
-	               #{truckage},
-	           </if>
-	           <if test="remark != '' and remark != null">
-	               #{remark},
-	           </if>
-	           <if test="principal != '' and principal != null">
-	               #{principal},
-	           </if>
+            #{address},
+            #{warehousing},
+            #{truckage},
+            #{remark},
+	        #{principal},
 	        #{userId},
 	        #{isDefault},
 	        #{createTime}
@@ -101,43 +79,25 @@
             erp_depot d
         WHERE
             d.id = #{id}
-        AND
-            d.tenant_id = #{userId}
+        AND d.tenant_id = #{userId}
         ORDER BY d.create_time DESC LIMIT 0,1
     </select>
 
     <update id="editStoreHouseById" parameterType="java.util.Map">
         UPDATE erp_depot
         <set>
-            <if test="address != '' and address != null">
-                address = #{address},
-            </if>
-            <if test="warehousing != '' and warehousing != null">
-                warehousing = #{warehousing},
-            </if>
-            <if test="truckage != '' and truckage != null">
-                truckage = #{truckage},
-            </if>
-            <if test="remark != '' and remark != null">
-                remark = #{remark},
-            </if>
-            <if test="principal != '' and principal != null">
-                principal = #{principal},
-            </if>
-            <if test="delete_Flag !='' and delete_Flag != null">
-                delete_Flag = #{delete_Flag},
-            </if>
-            <if test="isDefault != '' and isDefault != null">
-                is_default = #{isDefault},
-            </if>
-            <if test="name != '' and name != null">
-                name = #{name},
-            </if>
+            address = #{address},
+            warehousing = #{warehousing},
+            truckage = #{truckage},
+            remark = #{remark},
+            principal = #{principal},
+            delete_Flag = #{delete_Flag},
+            is_default = #{isDefault},
+            name = #{name}
         </set>
         WHERE
             id = #{id}
-        AND
-            tenant_id = #{userId}
+        AND tenant_id = #{userId}
     </update>
 
     <update id="editStoreHouseBydeleteFlag" parameterType="java.util.Map">
@@ -146,9 +106,8 @@
             delete_Flag = #{deleteFlag}
         </set>
         WHERE
-          id = #{id}
-        AND
-          tenant_id = #{userId}
+            id = #{id}
+        AND tenant_id = #{userId}
     </update>
 
     <update id="editStoreHouseByDefault" parameterType="java.util.Map">
@@ -157,9 +116,8 @@
             is_default = #{isDefault}
         </set>
         WHERE
-          id = #{id}
-        AND
-          tenant_id = #{userId}
+            id = #{id}
+        AND tenant_id = #{userId}
     </update>
 
     <update id="editStoreHouseByDefaultAll" parameterType="java.util.Map">
@@ -168,6 +126,6 @@
             is_default = #{isDefault}
         </set>
         WHERE
-          tenant_id = #{userId}
+            tenant_id = #{userId}
     </update>
 </mapper>

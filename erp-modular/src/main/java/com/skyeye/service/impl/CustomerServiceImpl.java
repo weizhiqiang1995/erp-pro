@@ -9,6 +9,7 @@ import com.skyeye.dao.CustomerDao;
 import com.skyeye.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -49,17 +50,31 @@ public class CustomerServiceImpl implements CustomerService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void insertCustomer(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
+        if(!ToolUtil.isBlank(params.get("email").toString())){
+            if(!ToolUtil.isEmail(params.get("email").toString())){
+                outputObject.setreturnMessage("邮箱格式不正确！");
+                return;
+            }
+        }
+        if(!ToolUtil.isBlank(params.get("telephone").toString())){
+            if(!ToolUtil.isPhone(params.get("telephone").toString())){
+                outputObject.setreturnMessage("手机号码格式不正确！");
+                return;
+            }
+        }
         //验证某租户下客户信息是否存在
         Map<String, Object> bean = customerDao.queryCustomerByUserIdAndCustomer(params);
         if(bean != null){
             outputObject.setreturnMessage("该客户信息已存在！");
             return;
         }
+        params.put("customerId", ToolUtil.getSurFaceId());
         params.put("createTime", ToolUtil.getTimeAndToString());
-        params.put("type", 2);
+        params.put("customerType", 2);
         params.put("enabled", 1);
         params.put("isystem", 1);
         params.put("deleteFlag", 0);
@@ -92,11 +107,16 @@ public class CustomerServiceImpl implements CustomerService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void deleteCustomerById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         params.put("deleteFlag", 1);
-        customerDao.editCustomerByDeleteFlag(params);
+        int result = customerDao.editCustomerByDeleteFlag(params);
+        if(result != 1){
+            outputObject.setreturnMessage("删除失败!");
+            return;
+        }
     }
 
     /**
@@ -106,10 +126,35 @@ public class CustomerServiceImpl implements CustomerService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void editCustomerById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        customerDao.editCustomerById(params);
+        if(!ToolUtil.isBlank(params.get("email").toString())){
+            if(!ToolUtil.isEmail(params.get("email").toString())){
+                outputObject.setreturnMessage("邮箱格式不正确！");
+                return;
+            }
+        }
+        if(!ToolUtil.isBlank(params.get("telephone").toString())){
+            if(!ToolUtil.isPhone(params.get("telephone").toString())){
+                outputObject.setreturnMessage("手机号码格式不正确！");
+                return;
+            }
+        }
+        Map<String, Object> customerName = customerDao.queryCustomerByIdAndName(params);
+        if(customerName == null){
+            Map<String, Object> bean = customerDao.queryCustomerByUserIdAndCustomer(params);
+            if(bean != null){
+                outputObject.setreturnMessage("该客户信息已存在！");
+                return;
+            }
+        }
+        int result = customerDao.editCustomerById(params);
+        if(result != 1){
+            outputObject.setreturnMessage("编辑信息失败！");
+            return;
+        }
     }
 
     /**
@@ -119,11 +164,15 @@ public class CustomerServiceImpl implements CustomerService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void editCustomerByEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         params.put("enabled", 1);
-        customerDao.editCustomerByEnabled(params);
+        int result = customerDao.editCustomerByEnabled(params);
+        if(result != 1){
+            outputObject.setreturnMessage("修改状态失败！");
+        }
     }
 
     /**
@@ -133,10 +182,14 @@ public class CustomerServiceImpl implements CustomerService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void editCustomerByNotEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         params.put("enabled", 2);
-        customerDao.editCustomerByNotEnabled(params);
+        int result = customerDao.editCustomerByNotEnabled(params);
+        if(result != 1){
+            outputObject.setreturnMessage("修改状态失败！");
+        }
     }
 }

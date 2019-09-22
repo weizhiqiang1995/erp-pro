@@ -9,6 +9,7 @@ import com.skyeye.dao.MemberDao;
 import com.skyeye.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -49,17 +50,31 @@ public class MemberServiceImpl implements MemberService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void insertMember(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
+        if(!ToolUtil.isBlank(params.get("email").toString())){
+            if(!ToolUtil.isEmail(params.get("email").toString())){
+                outputObject.setreturnMessage("邮箱格式不正确！");
+                return;
+            }
+        }
+        if(!ToolUtil.isBlank(params.get("telephone").toString())){
+            if(!ToolUtil.isPhone(params.get("telephone").toString())){
+                outputObject.setreturnMessage("手机号码格式不正确！");
+                return;
+            }
+        }
         //验证某一租户下会员信息是否存
         Map<String, Object> bean = memberDao.queryMemberByUserIdAndMember(params);
         if(bean != null){
             outputObject.setreturnMessage("该会员信息已存在！");
             return;
         }
+        params.put("memberId", ToolUtil.getSurFaceId());
         params.put("createTime", ToolUtil.getTimeAndToString());
-        params.put("type", 1);
+        params.put("memberType", 3);
         params.put("enabled", 1);
         params.put("isystem", 1);
         params.put("deleteFlag", 0);
@@ -92,11 +107,16 @@ public class MemberServiceImpl implements MemberService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void deleteMemberById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         params.put("deleteFlag", 1);
-        memberDao.editMemberByDeleteFlag(params);
+        int result = memberDao.editMemberByDeleteFlag(params);
+        if(result != 1){
+            outputObject.setreturnMessage("删除失败!");
+            return;
+        }
     }
 
     /**
@@ -106,10 +126,35 @@ public class MemberServiceImpl implements MemberService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void editMemberById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        memberDao.editMemberById(params);
+        if(!ToolUtil.isBlank(params.get("email").toString())){
+            if(!ToolUtil.isEmail(params.get("email").toString())){
+                outputObject.setreturnMessage("邮箱格式不正确！");
+                return;
+            }
+        }
+        if(!ToolUtil.isBlank(params.get("telephone").toString())){
+            if(!ToolUtil.isPhone(params.get("telephone").toString())){
+                outputObject.setreturnMessage("手机号码格式不正确！");
+                return;
+            }
+        }
+        Map<String, Object> memberName = memberDao.queryMemberByIdAndName(params);
+        if(memberName == null){
+            Map<String, Object> bean = memberDao.queryMemberByUserIdAndMember(params);
+            if(bean != null){
+                outputObject.setreturnMessage("该会员信息已存在！");
+                return;
+            }
+        }
+        int result = memberDao.editMemberById(params);
+        if(result != 1){
+            outputObject.setreturnMessage("编辑信息失败！");
+            return;
+        }
     }
 
     /**
@@ -119,11 +164,15 @@ public class MemberServiceImpl implements MemberService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void editMemberByEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         params.put("enabled", 1);
-        memberDao.editMemberByEnabled(params);
+        int result = memberDao.editMemberByEnabled(params);
+        if(result != 1){
+            outputObject.setreturnMessage("修改状态失败！");
+        }
     }
 
     /**
@@ -133,10 +182,14 @@ public class MemberServiceImpl implements MemberService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void editMemberByNotEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         params.put("enabled", 2);
-        memberDao.editMemberByNotEnabled(params);
+        int result = memberDao.editMemberByNotEnabled(params);
+        if(result != 1){
+            outputObject.setreturnMessage("修改状态失败！");
+        }
     }
 }

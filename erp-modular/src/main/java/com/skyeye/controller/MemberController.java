@@ -37,7 +37,7 @@ public class MemberController {
      * @param outputObject
      * @throws Exception
      */
-    @RequestMapping("/post/MemberContronller/insertMember")
+    @RequestMapping("/post/MemberController/insertMember")
     @ResponseBody
     public void insertMember(InputObject inputObject, OutputObject outputObject) throws Exception{
         memberService.insertMember(inputObject, outputObject);

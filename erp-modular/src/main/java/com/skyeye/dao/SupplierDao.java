@@ -19,11 +19,13 @@ public interface SupplierDao {
 
     public Map<String, Object> querySupplierById(Map<String, Object> params) throws Exception;
 
-    public void editSupplierByDeleteFlag(Map<String, Object> params) throws Exception;
+    public int editSupplierByDeleteFlag(Map<String, Object> params) throws Exception;
 
-    public void editSupplierById(Map<String, Object> params) throws Exception;
+    public int editSupplierById(Map<String, Object> params) throws Exception;
 
-    public void editSupplierByEnabled(Map<String, Object> params) throws Exception;
+    public int editSupplierByEnabled(Map<String, Object> params) throws Exception;
 
-    public void editSupplierByNotEnabled(Map<String, Object> params) throws Exception;
+    public int editSupplierByNotEnabled(Map<String, Object> params) throws Exception;
+
+    public Map<String, Object> querySupplierByIdAndName(Map<String, Object> params) throws Exception;
 }

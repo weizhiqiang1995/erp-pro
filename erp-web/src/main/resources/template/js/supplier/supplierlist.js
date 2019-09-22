@@ -7,7 +7,7 @@ layui.config({
     window: 'js/winui.window',
 }).define(['window', 'table', 'jquery', 'winui', 'form'], function (exports) {
     winui.renderColor();
-    authBtn('1568523956068');
+    authBtn('1569132969654');
     var $ = layui.$,
         form = layui.form,
         table = layui.table;
@@ -59,6 +59,8 @@ layui.config({
             deleteSupplier(data);
         }else if (layEvent === 'enabled') { //设置状态
             editEnabled(data);
+        }else if(layEvent == 'unenabled'){
+            editNotEnabled(data)
         }
     });
 
@@ -121,6 +123,22 @@ layui.config({
                     winui.window.msg(json.returnMessage, {icon: 2,time: 2000});
                 }
             }});
+        });
+    }
+    //设置禁用状态
+    function editNotEnabled(data){
+        layer.confirm('确认要更改该供应商为禁用状态吗？', { icon: 3, title: '设置供应商状态' }, function (index) {
+            var params = {
+                rowId: data.id,
+            };
+            AjaxPostUtil.request({url:reqBasePath + "supplier007", params:params, type:'json', callback:function(json){
+                    if(json.returnCode == 0){
+                        winui.window.msg("设置成功。", {icon: 1,time: 2000});
+                        loadTable();
+                    }else{
+                        winui.window.msg(json.returnMessage, {icon: 2,time: 2000});
+                    }
+                }});
         });
     }
     //添加供应商

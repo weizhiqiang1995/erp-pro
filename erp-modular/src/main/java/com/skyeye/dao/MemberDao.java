@@ -20,11 +20,13 @@ public interface MemberDao {
 
     public Map<String, Object> queryMemberById(Map<String, Object> params) throws Exception;
 
-    public void editMemberByDeleteFlag(Map<String, Object> params) throws Exception;
+    public int editMemberByDeleteFlag(Map<String, Object> params) throws Exception;
 
-    public void editMemberById(Map<String, Object> params) throws Exception;
+    public int editMemberById(Map<String, Object> params) throws Exception;
 
-    public void editMemberByEnabled(Map<String, Object> params) throws Exception;
+    public int editMemberByEnabled(Map<String, Object> params) throws Exception;
 
-    public void editMemberByNotEnabled(Map<String, Object> params) throws Exception;
+    public int editMemberByNotEnabled(Map<String, Object> params) throws Exception;
+
+    public Map<String, Object> queryMemberByIdAndName(Map<String, Object> params) throws Exception;
 }

@@ -65,7 +65,7 @@
 		<property id="accountNumber" name="accountNumber" ref="" var="账号"></property>
 		<property id="taxRate" name="taxRate" ref="" var="税率"></property>
 	</url>
-	<url id="supplier003" path="/post/SupplierController/querySupplierById" val="据ID查询供应商信息，用于信息回显" allUse="0">
+	<url id="supplier003" path="/post/SupplierController/querySupplierById" val="根据ID查询供应商信息，用于信息回显" allUse="0">
 		<property id="rowId" name="id" ref="required" var="供应商ID"></property>
 	</url>
 	<url id="supplier004" path="/post/SupplierController/deleteSupplierById" val="删除供应商信息" allUse="0">
@@ -189,7 +189,7 @@
 	<url id="member004" path="/post/MemberController/deleteMemberById" val="删除会员信息" allUse="0">
 		<property id="rowId" name="id" ref="required" var="会员ID"></property>
 	</url>
-	<url id="member005" path="/post/MemberController/editMemberById" val="编辑会员商信息" allUse="0">
+	<url id="member005" path="/post/MemberController/editMemberById" val="编辑会员信息" allUse="0">
 		<property id="rowId" name="id" ref="required" var="会员ID"></property>
 		<property id="memberName" name="memberName" ref="required" var="会员名称"></property>
 		<property id="contacts" name="contacts" ref="" var="联系人"></property>

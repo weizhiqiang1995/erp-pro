@@ -25,19 +25,10 @@
             erp_supplier s
         WHERE
             s.delete_flag = 0
-        AND
-            s.tenant_id = #{userId}
+        AND s.tenant_id = #{userId}
+        AND s.type = 1
         <if test="supplierName != '' and supplierName != null">
-        AND
-            s.supplier LIKE '%${supplierName}%'
-        </if>
-        <if test="phonenum != '' and phonenum != null">
-            AND
-            s.phonenum LIKE '%${phonenum}%'
-        </if>
-        <if test="telephone != '' and telephone != null">
-            AND
-            s.telephone LIKE '%${telephone}%'
+            AND s.supplier LIKE '%${supplierName}%'
         </if>
         ORDER BY s.create_time DESC
     </select>
@@ -57,63 +48,31 @@
             erp_supplier s
         WHERE
             s.tenant_id = #{userId}
-        AND
-            s.supplier = #{supplierName}
-        AND
-            s.delete_flag = 0
+        AND s.supplier = #{supplierName}
+        AND s.delete_flag = 0
+        AND s.type = 1
         ORDER BY s.id DESC LIMIT 0,1
     </select>
 
     <insert id="insertSupplier" parameterType="java.util.Map">
         INSERT INTO erp_supplier(
-            <if test="contacts != '' and contacts != null">
-                contacts,
-            </if>
-            <if test="phonenum != '' and phonenum != null">
-                phonenum,
-            </if>
-            <if test="email != '' and email != null">
-                email,
-            </if>
-            <if test="description != '' and description != null">
-                description,
-            </if>
-            <if test="advanceIn != '' and advanceIn != null">
-                advance_in,
-            </if>
-            <if test="beginNeedGet != '' and beginNeedGet != null">
-                begin_need_get,
-            </if>
-            <if test="beginNeedPay != '' and beginNeedPay != null">
-                begin_need_pay,
-            </if>
-            <if test="allNeedGet != '' and allNeedGet != null">
-                all_need_get,
-            </if>
-            <if test="allNeedPay != '' and allNeedPay != null">
-                all_need_pay,
-            </if>
-            <if test="fax != '' and fax != null">
-                fax,
-            </if>
-            <if test="telephone != '' and telephone != null">
-                telephone,
-            </if>
-            <if test="address != '' and address != null">
-                address,
-            </if>
-            <if test="taxNum != '' and taxNum != null">
-                tax_num,
-            </if>
-            <if test="bankName != '' and bankName != null">
-                bank_name,
-            </if>
-            <if test="accountNumber != '' and accountNumber != null">
-                account_number,
-            </if>
-            <if test="taxRate != '' and taxRate != null">
-                tax_rate,
-            </if>
+            contacts,
+            phonenum,
+            email,
+            description,
+            advance_in,
+            begin_need_get,
+            begin_need_pay,
+            all_need_get,
+            all_need_pay,
+            fax,
+            telephone,
+            address,
+            tax_num,
+            bank_name,
+            account_number,
+            tax_rate,
+            id,
             supplier,
             isystem,
             type,
@@ -122,54 +81,23 @@
             delete_flag,
             create_time
         ) VALUES (
-            <if test="contacts != '' and contacts != null">
-                #{contacts},
-            </if>
-            <if test="phonenum != '' and phonenum != null">
-                #{phonenum},
-            </if>
-            <if test="email != '' and email != null">
-                #{email},
-            </if>
-            <if test="description != '' and description != null">
-                #{description},
-            </if>
-            <if test="advanceIn != '' and advanceIn != null">
-                #{advanceIn},
-            </if>
-            <if test="beginNeedGet != '' and beginNeedGet != null">
-                #{beginNeedGet},
-            </if>
-            <if test="beginNeedPay != '' and beginNeedPay != null">
-                #{beginNeedPay},
-            </if>
-            <if test="allNeedGet != '' and allNeedGet != null">
-                #{allNeedGet},
-            </if>
-            <if test="allNeedPay != '' and allNeedPay != null">
-                #{allNeedPay},
-            </if>
-            <if test="fax != '' and fax != null">
-                #{fax},
-            </if>
-            <if test="telephone != '' and telephone != null">
-                #{telephone},
-            </if>
-            <if test="address != '' and address != null">
-                #{address},
-            </if>
-            <if test="taxNum != '' and taxNum != null">
-                #{taxNum},
-            </if>
-            <if test="bankName != '' and bankName != null">
-                #{bankName},
-            </if>
-            <if test="accountNumber != '' and accountNumber != null">
-                #{accountNumber},
-            </if>
-            <if test="taxRate != '' and taxRate != null">
-                #{taxRate},
-            </if>
+            #{contacts},
+            #{phonenum},
+            #{email},
+            #{description},
+            #{advanceIn},
+            #{beginNeedGet},
+            #{beginNeedPay},
+            #{allNeedGet},
+            #{allNeedPay},
+            #{fax},
+            #{telephone},
+            #{address},
+            #{taxNum},
+            #{bankName},
+            #{accountNumber},
+            #{taxRate},
+            #{supplierId},
             #{supplierName},
             #{isystem},
             #{supplierType},
@@ -207,8 +135,8 @@
             erp_supplier s
         WHERE
             s.tenant_id = #{userId}
-        AND
-            s.id = #{id}
+        AND s.id = #{id}
+        AND s.type = 1
         ORDER BY s.id DESC LIMIT 0,1
     </select>
 
@@ -219,78 +147,33 @@
         </set>
         WHERE
             tenant_id = #{userId}
-        AND
-            id = #{id}
+        AND id = #{id}
     </update>
 
     <update id="editSupplierById" parameterType="java.util.Map">
         UPDATE erp_supplier
         <set>
-            <if test="supplierName != '' and supplierName != null">
-                supplier = #{supplierName},
-            </if>
-            <if test="contacts != '' and contacts != null">
-                contacts = #{contacts},
-            </if>
-            <if test="phonenum != '' and phonenum != null">
-                phonenum = #{phonenum},
-            </if>
-            <if test="email != '' and email != null">
-                email = #{email},
-            </if>
-            <if test="description != '' and description != null">
-                description = #{description},
-            </if>
-            <if test="isystem != '' and isystem != null">
-                isystem = #{isystem},
-            </if>
-            <if test="supplierType != '' and supplierType != null">
-                type = #{supplierType},
-            </if>
-            <if test="enabled != '' and enabled != null">
-                enabled = #{enabled},
-            </if>
-            <if test="advanceIn != '' and advanceIn != null">
-                advance_in = #{advanceIn},
-            </if>
-            <if test="beginNeedGet != '' and beginNeedGet != null">
-                begin_need_get = #{beginNeedGet},
-            </if>
-            <if test="beginNeedPay != '' and beginNeedPay != null">
-                begin_need_pay = #{beginNeedPay},
-            </if>
-            <if test="allNeedGet != '' and allNeedGet != null">
-                all_need_get = #{allNeedGet},
-            </if>
-            <if test="allNeedPay != '' and allNeedPay != null">
-                all_need_pay = #{allNeedPay},
-            </if>
-            <if test="fax != '' and fax != null">
-                fax = #{fax},
-            </if>
-            <if test="telephone != '' and telephone != null">
-                telephone = #{telephone},
-            </if>
-            <if test="address != '' and address != null">
-                address = #{address},
-            </if>
-            <if test="taxNum != '' and taxNum != null">
-                tax_num = #{taxNum},
-            </if>
-            <if test="bankName != '' and bankName != null">
-                bank_name = #{bankName},
-            </if>
-            <if test="accountNumber != '' and accountNumber != null">
-                account_number = #{accountNumber},
-            </if>
-            <if test="taxRate != '' and taxRate != null">
-                tax_rate = #{taxRate},
-            </if>
+            supplier = #{supplierName},
+            contacts = #{contacts},
+            phonenum = #{phonenum},
+            email = #{email},
+            description = #{description},
+            advance_in = #{advanceIn},
+            begin_need_get = #{beginNeedGet},
+            begin_need_pay = #{beginNeedPay},
+            all_need_get = #{allNeedGet},
+            all_need_pay = #{allNeedPay},
+            fax = #{fax},
+            telephone = #{telephone},
+            tax_num = #{taxNum},
+            bank_name = #{bankName},
+            address = #{address},
+            account_number = #{accountNumber},
+            tax_rate = #{taxRate}
         </set>
         WHERE
             tenant_id = #{userId}
-        AND
-            id = #{id}
+        AND id = #{id}
     </update>
     
     <update id="editSupplierByEnabled" parameterType="java.util.Map">
@@ -300,8 +183,7 @@
         </set>
         WHERE
             tenant_id = #{userId}
-        AND
-            id = #{id}
+        AND id = #{id}
     </update>
 
     <update id="editSupplierByNotEnabled" parameterType="java.util.Map">
@@ -311,7 +193,27 @@
         </set>
         WHERE
             tenant_id = #{userId}
-        AND
-            id = #{id}
+        AND id = #{id}
     </update>
+
+    <select id="querySupplierByIdAndName" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+            s.id,
+            s.supplier supplierName,
+            s.contacts,
+            s.phonenum,
+            s.email,
+            s.description,
+            s.isystem,
+            s.type supplierType,
+            s.enabled
+        FROM
+            erp_supplier s
+        WHERE
+            s.tenant_id = #{userId}
+        AND s.id = #{id}
+        AND s.type = 1
+        AND s.supplier = #{supplierName}
+        ORDER BY s.id DESC LIMIT 0,1
+    </select>
 </mapper>

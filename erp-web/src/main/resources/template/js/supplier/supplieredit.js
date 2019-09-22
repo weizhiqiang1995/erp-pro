@@ -19,12 +19,32 @@ layui.config({
             ajaxSendAfter:function(json){
                 form.render();
                 form.on('submit(formEditBean)', function (data) {
+                    var advanceIn = $("#advanceIn").val();
+                    var beginNeedGet = $("#beginNeedGet").val();
+                    var beginNeedPay = $("#beginNeedPay").val();
+                    var allNeedGet = $("#allNeedGet").val();
+                    var allNeedPay = $("#allNeedPay").val();
+                    var taxRate = $("#taxRate").val();
+                    if(isNull(advanceIn)){
+                        advanceIn = 0;
+                    }
+                    if(isNull(beginNeedGet)){
+                        beginNeedGet = 0;
+                    }
+                    if(isNull(beginNeedPay)){
+                        beginNeedPay = 0;
+                    }
+                    if(isNull(allNeedGet)){
+                        allNeedGet = 0;
+                    }
+                    if(isNull(allNeedPay)){
+                        allNeedPay = 0;
+                    }
+                    if(isNull(taxRate)){
+                        taxRate = 0;
+                    }
                     //表单验证
                     if (winui.verifyForm(data.elem)) {
-                        if(isNull($("#supplierName").val())){
-                            winui.window.msg('请输入供应商名称', {icon: 2,time: 2000});
-                            return false;
-                        }
                         var params = {
                             rowId: parent.rowId,
                             supplierName: $("#supplierName").val(),
@@ -32,20 +52,19 @@ layui.config({
                             phonenum: $("#phonenum").val(),
                             email: $("#email").val(),
                             description: $("#description").val(),
-                            advanceIn: $("#advanceIn").val(),
-                            beginNeedGet: $("#beginNeedGet").val(),
-                            beginNeedPay: $("#beginNeedPay").val(),
-                            allNeedGet: $("#allNeedGet").val(),
-                            allNeedPay: $("#allNeedPay").val(),
+                            advanceIn: advanceIn,
+                            beginNeedGet: beginNeedGet,
+                            beginNeedPay: beginNeedPay,
+                            allNeedGet: allNeedGet,
+                            allNeedPay: allNeedPay,
                             fax: $("#fax").val(),
                             telephone: $("#telephone").val(),
                             address: $("#address").val(),
                             taxNum: $("#taxNum").val(),
                             bankName: $("#bankName").val(),
                             accountNumber: $("#accountNumber").val(),
-                            taxRate: $("#taxRate").val(),
+                            taxRate: taxRate,
                         };
-                        console.log(params)
                         AjaxPostUtil.request({url:reqBasePath + "supplier005", params:params, type:'json', callback:function(json){
                             if(json.returnCode == 0){
                                 parent.layer.close(index);
@@ -87,6 +106,12 @@ layui.config({
                         var reg = /^0{1}([.]\d{1,2})?$|^[1-9]\d*([.]{1}[0-9]{1,2})?$/;
                         if(!isNull(value) && !reg.test(value)){
                             return "请输入正确的金额, 可保留小数点后两位";
+                        }
+                    },
+                    taxRate : function(value, item){
+                        var reg = /^0{1}([.]\d{1,2})?$|^[1-9]\d*([.]{1}[0-9]{1,2})?$/;
+                        if(!isNull(value) && !reg.test(value)){
+                            return "请输入正确的税率, 可保留小数点后两位";
                         }
                     },
                 });

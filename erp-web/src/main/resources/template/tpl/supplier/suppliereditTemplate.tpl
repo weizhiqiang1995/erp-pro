@@ -14,7 +14,7 @@
     <div class="layui-form-item layui-col-xs6">
         <label class="layui-form-label">联系电话</label>
         <div class="layui-input-block">
-            <input type="text" id="phonenum" name="phonenum" value="{{phonenum}}" placeholder="请输入联系电话" class="layui-input"/>
+            <input type="text" id="phonenum" name="phonenum" value="{{phonenum}}" placeholder="请输入联系电话" class="layui-input" maxlength="20"/>
         </div>
     </div>
     <div class="layui-form-item layui-col-xs6">
@@ -26,7 +26,7 @@
     <div class="layui-form-item layui-col-xs6">
         <label class="layui-form-label">手机号码</label>
         <div class="layui-input-block">
-            <input type="text" id="telephone" name="telephone" value="{{telephone}}" placeholder="请输入手机号码" class="layui-input"/>
+            <input type="text" id="telephone" name="telephone" value="{{telephone}}" placeholder="请输入手机号码" class="layui-input" maxlength="11"/>
         </div>
     </div>
     <div class="layui-form-item layui-col-xs6">
@@ -74,7 +74,7 @@
     <div class="layui-form-item layui-col-xs6">
         <label class="layui-form-label">税率(%)</label>
         <div class="layui-input-block">
-            <input type="text" id="taxRate" name="taxRate" value="{{taxRate}}" placeholder="请输入税率" class="layui-input"/>
+            <input type="text" id="taxRate" name="taxRate" value="{{taxRate}}" lay-verify="taxRate" placeholder="请输入税率" class="layui-input"/>
         </div>
     </div>
     <div class="layui-form-item layui-col-xs6">
