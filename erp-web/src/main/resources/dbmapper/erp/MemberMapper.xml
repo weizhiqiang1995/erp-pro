@@ -131,7 +131,8 @@
             s.telephone,
             s.tax_num taxNum,
             s.bank_name bankName,
-            s.account_number accountNumber
+            s.account_number accountNumber,
+            s.delete_flag deleteFlag
         FROM
             erp_supplier s
         WHERE
@@ -176,6 +177,7 @@
         WHERE
             tenant_id = #{userId}
         AND id = #{id}
+        AND delete_flag = 0
     </update>
 
     <update id="editMemberByEnabled" parameterType="java.util.Map">
@@ -186,6 +188,7 @@
         WHERE
             tenant_id = #{userId}
         AND id = #{id}
+        AND delete_flag = 0
     </update>
 
     <update id="editMemberByNotEnabled" parameterType="java.util.Map">
@@ -196,6 +199,7 @@
         WHERE
             tenant_id = #{userId}
         AND id = #{id}
+        AND delete_flag = 0
     </update>
 
     <select id="queryMemberByIdAndName" parameterType="java.util.Map" resultType="java.util.Map">
@@ -208,7 +212,8 @@
             s.description,
             s.isystem,
             s.type memberType,
-            s.enabled
+            s.enabled,
+            s.delete_flag deleteFlag
         FROM
             erp_supplier s
         WHERE

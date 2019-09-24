@@ -177,6 +177,7 @@
         WHERE
             tenant_id = #{userId}
         AND id = #{id}
+        AND delete_flag = 0
     </update>
 
     <update id="editCustomerByEnabled" parameterType="java.util.Map">
@@ -187,6 +188,7 @@
         WHERE
             tenant_id = #{userId}
         AND id = #{id}
+        AND delete_flag = 0
     </update>
 
     <update id="editCustomerByNotEnabled" parameterType="java.util.Map">
@@ -197,6 +199,7 @@
         WHERE
             tenant_id = #{userId}
         AND id = #{id}
+        AND delete_flag = 0
     </update>
 
     <select id="queryCustomerByIdAndName" parameterType="java.util.Map" resultType="java.util.Map">
@@ -209,7 +212,8 @@
             s.description,
             s.isystem,
             s.type customerType,
-            s.enabled
+            s.enabled,
+            s.delete_flag deleteFlag
         FROM
             erp_supplier s
         WHERE

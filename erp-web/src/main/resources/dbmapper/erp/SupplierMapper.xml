@@ -130,7 +130,8 @@
             s.telephone,
             s.tax_num taxNum,
             s.bank_name bankName,
-            s.account_number accountNumber
+            s.account_number accountNumber,
+            s.delete_flag deleteFlag
         FROM
             erp_supplier s
         WHERE
@@ -174,6 +175,7 @@
         WHERE
             tenant_id = #{userId}
         AND id = #{id}
+        AND delete_flag = 0
     </update>
     
     <update id="editSupplierByEnabled" parameterType="java.util.Map">
@@ -184,6 +186,7 @@
         WHERE
             tenant_id = #{userId}
         AND id = #{id}
+        AND delete_flag = 0
     </update>
 
     <update id="editSupplierByNotEnabled" parameterType="java.util.Map">
@@ -194,6 +197,7 @@
         WHERE
             tenant_id = #{userId}
         AND id = #{id}
+        AND delete_flag = 0
     </update>
 
     <select id="querySupplierByIdAndName" parameterType="java.util.Map" resultType="java.util.Map">
@@ -206,7 +210,8 @@
             s.description,
             s.isystem,
             s.type supplierType,
-            s.enabled
+            s.enabled,
+            s.delete_flag deleteFlag
         FROM
             erp_supplier s
         WHERE

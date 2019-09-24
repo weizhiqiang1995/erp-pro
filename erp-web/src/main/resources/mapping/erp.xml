@@ -50,7 +50,7 @@
 		<property id="supplierName" name="supplierName" ref="required" var="仓库名称"></property>
 		<property id="contacts" name="contacts" ref="" var="联系人"></property>
 		<property id="phonenum" name="phonenum" ref="" var="联系电话"></property>
-		<property id="email" name="email" ref="" var="电子邮箱"></property>
+		<property id="email" name="email" ref="email" var="电子邮箱"></property>
 		<property id="description" name="description" ref="" var="备注"></property>
 		<property id="advanceIn" name="advanceIn" ref="" var="预收款"></property>
 		<property id="beginNeedGet" name="beginNeedGet" ref="" var="期初应收"></property>
@@ -58,7 +58,7 @@
 		<property id="allNeedGet" name="allNeedGet" ref="" var="累计应收"></property>
 		<property id="allNeedPay" name="allNeedPay" ref="" var="累计应付"></property>
 		<property id="fax" name="fax" ref="" var="传真"></property>
-		<property id="telephone" name="telephone" ref="" var="手机"></property>
+		<property id="telephone" name="telephone" ref="phone" var="手机"></property>
 		<property id="address" name="address" ref="" var="地址"></property>
 		<property id="taxNum" name="taxNum" ref="" var="纳税人识别号"></property>
 		<property id="bankName" name="bankName" ref="" var="开户行"></property>
@@ -76,7 +76,7 @@
 		<property id="supplierName" name="supplierName" ref="required" var="供应商名称"></property>
 		<property id="contacts" name="contacts" ref="" var="联系人"></property>
 		<property id="phonenum" name="phonenum" ref="" var="联系电话"></property>
-		<property id="email" name="email" ref="" var="电子邮箱"></property>
+		<property id="email" name="email" ref="email" var="电子邮箱"></property>
 		<property id="description" name="description" ref="" var="备注"></property>
 		<property id="advanceIn" name="advanceIn" ref="" var="预收款"></property>
 		<property id="beginNeedGet" name="beginNeedGet" ref="" var="期初应收"></property>
@@ -84,7 +84,7 @@
 		<property id="allNeedGet" name="allNeedGet" ref="" var="累计应收"></property>
 		<property id="allNeedPay" name="allNeedPay" ref="" var="累计应付"></property>
 		<property id="fax" name="fax" ref="" var="传真"></property>
-		<property id="telephone" name="telephone" ref="" var="手机"></property>
+		<property id="telephone" name="telephone" ref="phone" var="手机"></property>
 		<property id="address" name="address" ref="" var="地址"></property>
 		<property id="taxNum" name="taxNum" ref="" var="纳税人识别号"></property>
 		<property id="bankName" name="bankName" ref="" var="开户行"></property>
@@ -109,7 +109,7 @@
 		<property id="customerName" name="customerName" ref="required" var="客户名称"></property>
 		<property id="contacts" name="contacts" ref="" var="联系人"></property>
 		<property id="phonenum" name="phonenum" ref="" var="联系电话"></property>
-		<property id="email" name="email" ref="" var="电子邮箱"></property>
+		<property id="email" name="email" ref="email" var="电子邮箱"></property>
 		<property id="description" name="description" ref="" var="备注"></property>
 		<property id="advanceIn" name="advanceIn" ref="" var="预收款"></property>
 		<property id="beginNeedGet" name="beginNeedGet" ref="" var="期初应收"></property>
@@ -117,7 +117,7 @@
 		<property id="allNeedGet" name="allNeedGet" ref="" var="累计应收"></property>
 		<property id="allNeedPay" name="allNeedPay" ref="" var="累计应付"></property>
 		<property id="fax" name="fax" ref="" var="传真"></property>
-		<property id="telephone" name="telephone" ref="" var="手机"></property>
+		<property id="telephone" name="telephone" ref="phone" var="手机"></property>
 		<property id="address" name="address" ref="" var="地址"></property>
 		<property id="taxNum" name="taxNum" ref="" var="纳税人识别号"></property>
 		<property id="bankName" name="bankName" ref="" var="开户行"></property>
@@ -135,7 +135,7 @@
 		<property id="customerName" name="customerName" ref="required" var="客户名称"></property>
 		<property id="contacts" name="contacts" ref="" var="联系人"></property>
 		<property id="phonenum" name="phonenum" ref="" var="联系电话"></property>
-		<property id="email" name="email" ref="" var="电子邮箱"></property>
+		<property id="email" name="email" ref="email" var="电子邮箱"></property>
 		<property id="description" name="description" ref="" var="备注"></property>
 		<property id="advanceIn" name="advanceIn" ref="" var="预收款"></property>
 		<property id="beginNeedGet" name="beginNeedGet" ref="" var="期初应收"></property>
@@ -143,7 +143,7 @@
 		<property id="allNeedGet" name="allNeedGet" ref="" var="累计应收"></property>
 		<property id="allNeedPay" name="allNeedPay" ref="" var="累计应付"></property>
 		<property id="fax" name="fax" ref="" var="传真"></property>
-		<property id="telephone" name="telephone" ref="" var="手机"></property>
+		<property id="telephone" name="telephone" ref="phone" var="手机"></property>
 		<property id="address" name="address" ref="" var="地址"></property>
 		<property id="taxNum" name="taxNum" ref="" var="纳税人识别号"></property>
 		<property id="bankName" name="bankName" ref="" var="开户行"></property>
@@ -168,7 +168,7 @@
 		<property id="memberName" name="memberName" ref="required" var="会员名称"></property>
 		<property id="contacts" name="contacts" ref="" var="联系人"></property>
 		<property id="phonenum" name="phonenum" ref="" var="联系电话"></property>
-		<property id="email" name="email" ref="" var="电子邮箱"></property>
+		<property id="email" name="email" ref="email" var="电子邮箱"></property>
 		<property id="description" name="description" ref="" var="备注"></property>
 		<property id="advanceIn" name="advanceIn" ref="" var="预收款"></property>
 		<property id="beginNeedGet" name="beginNeedGet" ref="" var="期初应收"></property>
@@ -176,7 +176,7 @@
 		<property id="allNeedGet" name="allNeedGet" ref="" var="累计应收"></property>
 		<property id="allNeedPay" name="allNeedPay" ref="" var="累计应付"></property>
 		<property id="fax" name="fax" ref="" var="传真"></property>
-		<property id="telephone" name="telephone" ref="" var="手机"></property>
+		<property id="telephone" name="telephone" ref="phone" var="手机"></property>
 		<property id="address" name="address" ref="" var="地址"></property>
 		<property id="taxNum" name="taxNum" ref="" var="纳税人识别号"></property>
 		<property id="bankName" name="bankName" ref="" var="开户行"></property>
@@ -194,7 +194,7 @@
 		<property id="memberName" name="memberName" ref="required" var="会员名称"></property>
 		<property id="contacts" name="contacts" ref="" var="联系人"></property>
 		<property id="phonenum" name="phonenum" ref="" var="联系电话"></property>
-		<property id="email" name="email" ref="" var="电子邮箱"></property>
+		<property id="email" name="email" ref="email" var="电子邮箱"></property>
 		<property id="description" name="description" ref="" var="备注"></property>
 		<property id="advanceIn" name="advanceIn" ref="" var="预收款"></property>
 		<property id="beginNeedGet" name="beginNeedGet" ref="" var="期初应收"></property>
@@ -202,7 +202,7 @@
 		<property id="allNeedGet" name="allNeedGet" ref="" var="累计应收"></property>
 		<property id="allNeedPay" name="allNeedPay" ref="" var="累计应付"></property>
 		<property id="fax" name="fax" ref="" var="传真"></property>
-		<property id="telephone" name="telephone" ref="" var="手机"></property>
+		<property id="telephone" name="telephone" ref="phone" var="手机"></property>
 		<property id="address" name="address" ref="" var="地址"></property>
 		<property id="taxNum" name="taxNum" ref="" var="纳税人识别号"></property>
 		<property id="bankName" name="bankName" ref="" var="开户行"></property>

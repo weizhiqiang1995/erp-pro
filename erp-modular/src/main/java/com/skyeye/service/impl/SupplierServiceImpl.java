@@ -54,18 +54,6 @@ public class SupplierServiceImpl implements SupplierService {
     public void insertSupplier(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        if(!ToolUtil.isBlank(params.get("email").toString())){
-            if(!ToolUtil.isEmail(params.get("email").toString())){
-                outputObject.setreturnMessage("邮箱格式不正确！");
-                return;
-            }
-        }
-        if(!ToolUtil.isBlank(params.get("telephone").toString())){
-            if(!ToolUtil.isPhone(params.get("telephone").toString())){
-                outputObject.setreturnMessage("手机号码格式不正确！");
-                return;
-            }
-        }
         //查询某一租户下是否存在相同供应商的信息
         Map<String, Object> bean = supplierDao.querySupplierByUserIdAndSupplier(params);
         if(bean != null){
@@ -112,11 +100,7 @@ public class SupplierServiceImpl implements SupplierService {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         params.put("deleteFlag", 1);
-        int result = supplierDao.editSupplierByDeleteFlag(params);
-        if(result != 1){
-            outputObject.setreturnMessage("删除失败!");
-            return;
-        }
+        supplierDao.editSupplierByDeleteFlag(params);
     }
 
     /**
@@ -130,18 +114,6 @@ public class SupplierServiceImpl implements SupplierService {
     public void editSupplierById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        if(!ToolUtil.isBlank(params.get("email").toString())){
-            if(!ToolUtil.isEmail(params.get("email").toString())){
-                outputObject.setreturnMessage("邮箱格式不正确！");
-                return;
-            }
-        }
-        if(!ToolUtil.isBlank(params.get("telephone").toString())){
-            if(!ToolUtil.isPhone(params.get("telephone").toString())){
-                outputObject.setreturnMessage("手机号码格式不正确！");
-                return;
-            }
-        }
         Map<String, Object> supplierName = supplierDao.querySupplierByIdAndName(params);
         if(supplierName == null){
             Map<String, Object> bean = supplierDao.querySupplierByUserIdAndSupplier(params);
@@ -150,11 +122,7 @@ public class SupplierServiceImpl implements SupplierService {
                 return;
             }
         }
-        int result = supplierDao.editSupplierById(params);
-        if(result != 1){
-            outputObject.setreturnMessage("编辑信息失败！");
-            return;
-        }
+        supplierDao.editSupplierById(params);
     }
 
     /**
@@ -168,11 +136,13 @@ public class SupplierServiceImpl implements SupplierService {
     public void editSupplierByEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        params.put("enabled", 1);
-        int result = supplierDao.editSupplierByEnabled(params);
-        if(result != 1){
-            outputObject.setreturnMessage("修改状态失败！");
+        Map<String, Object> bean = supplierDao.querySupplierById(params);
+        if ("1".equals(bean.get("enabled").toString())){
+            outputObject.setreturnMessage("状态已改变，请不要重复操作！");
+            return;
         }
+        params.put("enabled", 1);
+        supplierDao.editSupplierByEnabled(params);
     }
 
     /**
@@ -186,10 +156,12 @@ public class SupplierServiceImpl implements SupplierService {
     public void editSupplierByNotEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        params.put("enabled", 2);
-        int result = supplierDao.editSupplierByNotEnabled(params);
-        if(result != 1){
-            outputObject.setreturnMessage("修改状态失败！");
+        Map<String, Object> bean = supplierDao.querySupplierById(params);
+        if ("2".equals(bean.get("enabled").toString())){
+            outputObject.setreturnMessage("状态已改变，请不要重复操作！");
+            return;
         }
+        params.put("enabled", 2);
+        supplierDao.editSupplierByNotEnabled(params);
     }
 }

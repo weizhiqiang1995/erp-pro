@@ -131,7 +131,7 @@ layui.config({
             var params = {
                 rowId: data.id,
             };
-            AjaxPostUtil.request({url:reqBasePath + "supplier007", params:params, type:'json', callback:function(json){
+            AjaxPostUtil.request({url:reqBasePath + "customer007", params:params, type:'json', callback:function(json){
                     if(json.returnCode == 0){
                         winui.window.msg("设置成功。", {icon: 1,time: 2000});
                         loadTable();

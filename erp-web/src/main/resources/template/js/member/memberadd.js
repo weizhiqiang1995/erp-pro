@@ -11,30 +11,6 @@ layui.config({
         var $ = layui.$;
         form.render();
         form.on('submit(formAddBean)', function (data) {
-            var advanceIn = $("#advanceIn").val();
-            var beginNeedGet = $("#beginNeedGet").val();
-            var beginNeedPay = $("#beginNeedPay").val();
-            var allNeedGet = $("#allNeedGet").val();
-            var allNeedPay = $("#allNeedPay").val();
-            var taxRate = $("#taxRate").val();
-            if(isNull(advanceIn)){
-                advanceIn = 0;
-            }
-            if(isNull(beginNeedGet)){
-                beginNeedGet = 0;
-            }
-            if(isNull(beginNeedPay)){
-                beginNeedPay = 0;
-            }
-            if(isNull(allNeedGet)){
-                allNeedGet = 0;
-            }
-            if(isNull(allNeedPay)){
-                allNeedPay = 0;
-            }
-            if(isNull(taxRate)){
-                taxRate = 0;
-            }
             //表单验证
             if (winui.verifyForm(data.elem)) {
                 var params = {
@@ -43,18 +19,18 @@ layui.config({
                     phonenum: $("#phonenum").val(),
                     email: $("#email").val(),
                     description: $("#description").val(),
-                    advanceIn: advanceIn,
-                    beginNeedGet: beginNeedGet,
-                    beginNeedPay: beginNeedPay,
-                    allNeedGet: allNeedGet,
-                    allNeedPay: allNeedPay,
+                    advanceIn: isNull($("#advanceIn").val()) ? '0' : $("#advanceIn").val(),
+                    beginNeedGet: isNull($("#beginNeedGet").val()) ? '0' : $("#beginNeedGet").val(),
+                    beginNeedPay: isNull($("#beginNeedPay").val()) ? '0' : $("#beginNeedPay").val(),
+                    allNeedGet: isNull($("#allNeedGet").val()) ? '0' : $("#allNeedGet").val(),
+                    allNeedPay: isNull($("#allNeedPay").val()) ? '0' : $("#allNeedPay").val(),
                     fax: $("#fax").val(),
                     telephone: $("#telephone").val(),
                     address: $("#address").val(),
                     taxNum: $("#taxNum").val(),
                     bankName: $("#bankName").val(),
                     accountNumber: $("#accountNumber").val(),
-                    taxRate: taxRate,
+                    taxRate: isNull($("#taxRate").val()) ? '0' : $("#taxRate").val(),
                 };
                 AjaxPostUtil.request({url:reqBasePath + "member002", params:params, type:'json', callback:function(json){
                     if(json.returnCode == 0){
