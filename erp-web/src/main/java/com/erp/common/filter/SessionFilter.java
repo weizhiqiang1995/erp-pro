@@ -75,6 +75,11 @@ public class SessionFilter implements Filter {
 			}
 		}
 		
+		if (url.indexOf("/actuator") != -1) {//actuator请求通过
+			chain.doFilter(new XssHttpServletRequestWrapper((HttpServletRequest) request), response);
+			return;
+		}
+		
 		//3.转换请求过滤
 		if(request.getParameter("sessionKey") != null){
 			for(String str : Constants.FILTER_FILE_REQUEST_OPTION){
