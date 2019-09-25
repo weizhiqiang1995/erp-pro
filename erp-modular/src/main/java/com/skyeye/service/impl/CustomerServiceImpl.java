@@ -119,12 +119,9 @@ public class CustomerServiceImpl implements CustomerService {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         Map<String, Object> customerName = customerDao.queryCustomerByIdAndName(params);
-        if(customerName == null){
-            Map<String, Object> bean = customerDao.queryCustomerByUserIdAndCustomer(params);
-            if(bean != null){
-                outputObject.setreturnMessage("该客户信息已存在！");
-                return;
-            }
+        if(customerName != null){
+            outputObject.setreturnMessage("客户名称已存在！");
+            return;
         }
         customerDao.editCustomerById(params);
 
@@ -141,12 +138,12 @@ public class CustomerServiceImpl implements CustomerService {
     public void editCustomerByEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        Map<String, Object> bean = customerDao.queryCustomerById(params);
-        if ("1".equals(bean.get("enabled").toString())){
+        params.put("enabled", 1);
+        Map<String, Object> bean = customerDao.queryCustomerByEnabled(params);
+        if (bean != null){
             outputObject.setreturnMessage("状态已改变，请不要重复操作！");
             return;
         }
-        params.put("enabled", 1);
         customerDao.editCustomerByEnabled(params);
     }
 
@@ -161,12 +158,12 @@ public class CustomerServiceImpl implements CustomerService {
     public void editCustomerByNotEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        Map<String, Object> bean = customerDao.queryCustomerById(params);
-        if ("2".equals(bean.get("enabled").toString())){
+        params.put("enabled", 2);
+        Map<String, Object> bean = customerDao.queryCustomerByEnabled(params);
+        if (bean != null){
             outputObject.setreturnMessage("状态已改变，请不要重复操作！");
             return;
         }
-        params.put("enabled", 2);
         customerDao.editCustomerByNotEnabled(params);
     }
 }

@@ -101,7 +101,7 @@ public class StoreHouseServiceImpl implements StoreHouseService {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         params.put("deleteFlag", "1");
-        storeHouseDao.editStoreHouseBydeleteFlag(params);
+        storeHouseDao.editStoreHouseByDeleteFlag(params);
     }
 
     /**
@@ -116,6 +116,11 @@ public class StoreHouseServiceImpl implements StoreHouseService {
         Map<String, Object> params = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         params.put("userId", user.get("id"));
+        Map<String, Object> houseName = storeHouseDao.queryStoreHouseByIdAndName(params);
+        if(houseName != null){
+            outputObject.setreturnMessage("仓库名称已存在！");
+            return;
+        }
         if(params.get("isDefault").toString().equals("1")){
             params.put("isDefault", "2");
             storeHouseDao.editStoreHouseByDefaultAll(params);
@@ -136,6 +141,11 @@ public class StoreHouseServiceImpl implements StoreHouseService {
         Map<String, Object> params = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         params.put("userId", user.get("id"));
+        Map<String, Object> bean = storeHouseDao.queryStoreHouseByIsDefault(params);
+        if(bean != null){
+            outputObject.setreturnMessage("状态已改变，请勿重复操作！");
+            return;
+        }
         params.put("isDefault", "2");
         storeHouseDao.editStoreHouseByDefaultAll(params);
         params.put("isDefault", "1");

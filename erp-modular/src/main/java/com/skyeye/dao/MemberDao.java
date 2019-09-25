@@ -29,4 +29,6 @@ public interface MemberDao {
     public int editMemberByNotEnabled(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> queryMemberByIdAndName(Map<String, Object> params) throws Exception;
+
+    public Map<String, Object> queryMemberByEnabled(Map<String, Object> params) throws Exception;
 }

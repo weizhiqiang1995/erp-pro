@@ -41,12 +41,12 @@
 	<!-- 仓库管理结束 -->
 
 	<!-- 供应商管理开始 -->
-	<url id="supplier001" path="/post/SupplierController/querySupplierByList" val="获取供应商信息" allUse="0">
+	<url id="supplier001" path="/post/SupplierController/querySupplierByList" val="获取供应商信息" allUse="1">
 		<property id="supplierName" name="supplierName" ref="" var="供应商名称"></property>
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>
-	<url id="supplier002" path="/post/SupplierContronller/insertSupplier" val="添加供应商信息" allUse="0">
+	<url id="supplier002" path="/post/SupplierContronller/insertSupplier" val="添加供应商信息" allUse="1">
 		<property id="supplierName" name="supplierName" ref="required" var="仓库名称"></property>
 		<property id="contacts" name="contacts" ref="" var="联系人"></property>
 		<property id="phonenum" name="phonenum" ref="" var="联系电话"></property>
@@ -65,13 +65,13 @@
 		<property id="accountNumber" name="accountNumber" ref="" var="账号"></property>
 		<property id="taxRate" name="taxRate" ref="" var="税率"></property>
 	</url>
-	<url id="supplier003" path="/post/SupplierController/querySupplierById" val="根据ID查询供应商信息，用于信息回显" allUse="0">
+	<url id="supplier003" path="/post/SupplierController/querySupplierById" val="根据ID查询供应商信息，用于信息回显" allUse="2">
 		<property id="rowId" name="id" ref="required" var="供应商ID"></property>
 	</url>
-	<url id="supplier004" path="/post/SupplierController/deleteSupplierById" val="删除供应商信息" allUse="0">
+	<url id="supplier004" path="/post/SupplierController/deleteSupplierById" val="删除供应商信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="供应商ID"></property>
 	</url>
-	<url id="supplier005" path="/post/SupplierController/editSupplierById" val="编辑供应商信息" allUse="0">
+	<url id="supplier005" path="/post/SupplierController/editSupplierById" val="编辑供应商信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="供应商ID"></property>
 		<property id="supplierName" name="supplierName" ref="required" var="供应商名称"></property>
 		<property id="contacts" name="contacts" ref="" var="联系人"></property>
@@ -91,21 +91,21 @@
 		<property id="accountNumber" name="accountNumber" ref="" var="账号"></property>
 		<property id="taxRate" name="taxRate" ref="" var="税率"></property>
 	</url>
-	<url id="supplier006" path="/post/SupplierController/editSupplierByEnabled" val="设置供应商状态改为启用" allUse="0">
+	<url id="supplier006" path="/post/SupplierController/editSupplierByEnabled" val="设置供应商状态改为启用" allUse="1">
 		<property id="rowId" name="id" ref="required" var="供应商ID"></property>
 	</url>
-	<url id="supplier007" path="/post/SupplierController/editSupplierByNotEnabled" val="设置供应商状态改为未启用" allUse="0">
+	<url id="supplier007" path="/post/SupplierController/editSupplierByNotEnabled" val="设置供应商状态改为未启用" allUse="1">
 		<property id="rowId" name="id" ref="required" var="供应商ID"></property>
 	</url>
 	<!-- 供应商管理结束-->
 
 	<!-- 客户信息管理开始 -->
-	<url id="customer001" path="/post/CustomerController/queryCustomerByList" val="获取客户信息" allUse="0">
+	<url id="customer001" path="/post/CustomerController/queryCustomerByList" val="获取客户信息" allUse="1">
 		<property id="customerName" name="customerName" ref="" var="客户名称"></property>
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>
-	<url id="customer002" path="/post/CustomerContronller/insertCustomer" val="添加客户信息" allUse="0">
+	<url id="customer002" path="/post/CustomerContronller/insertCustomer" val="添加客户信息" allUse="1">
 		<property id="customerName" name="customerName" ref="required" var="客户名称"></property>
 		<property id="contacts" name="contacts" ref="" var="联系人"></property>
 		<property id="phonenum" name="phonenum" ref="" var="联系电话"></property>
@@ -124,13 +124,13 @@
 		<property id="accountNumber" name="accountNumber" ref="" var="账号"></property>
 		<property id="taxRate" name="taxRate" ref="" var="税率"></property>
 	</url>
-	<url id="customer003" path="/post/CustomerController/queryCustomerById" val="据ID查询客户信息，用于信息回显" allUse="0">
+	<url id="customer003" path="/post/CustomerController/queryCustomerById" val="据ID查询客户信息，用于信息回显" allUse="2">
 		<property id="rowId" name="id" ref="required" var="客户ID"></property>
 	</url>
-	<url id="customer004" path="/post/CustomerController/deleteCustomerById" val="删除客户信息" allUse="0">
+	<url id="customer004" path="/post/CustomerController/deleteCustomerById" val="删除客户信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="客户ID"></property>
 	</url>
-	<url id="customer005" path="/post/CustomerController/editCustomerById" val="编辑客户信息" allUse="0">
+	<url id="customer005" path="/post/CustomerController/editCustomerById" val="编辑客户信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="客户ID"></property>
 		<property id="customerName" name="customerName" ref="required" var="客户名称"></property>
 		<property id="contacts" name="contacts" ref="" var="联系人"></property>
@@ -150,21 +150,21 @@
 		<property id="accountNumber" name="accountNumber" ref="" var="账号"></property>
 		<property id="taxRate" name="taxRate" ref="" var="税率"></property>
 	</url>
-	<url id="customer006" path="/post/CustomerController/editCustomerByEnabled" val="设置客户状态改为启用" allUse="0">
+	<url id="customer006" path="/post/CustomerController/editCustomerByEnabled" val="设置客户状态改为启用" allUse="1">
 		<property id="rowId" name="id" ref="required" var="客户ID"></property>
 	</url>
-	<url id="customer007" path="/post/CustomerController/editCustomerByNotEnabled" val="设置客户状态改为未启用" allUse="0">
+	<url id="customer007" path="/post/CustomerController/editCustomerByNotEnabled" val="设置客户状态改为未启用" allUse="1">
 		<property id="rowId" name="id" ref="required" var="客户ID"></property>
 	</url>
 	<!-- 客户信息管理结束-->
 
 	<!-- 会员信息管理开始 -->
-	<url id="member001" path="/post/MemberController/queryMemberByList" val="获取会员信息" allUse="0">
+	<url id="member001" path="/post/MemberController/queryMemberByList" val="获取会员信息" allUse="1">
 		<property id="memberName" name="memberName" ref="" var="会员名称"></property>
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>
-	<url id="member002" path="/post/MemberController/insertMember" val="添加会员商信息" allUse="0">
+	<url id="member002" path="/post/MemberController/insertMember" val="添加会员商信息" allUse="1">
 		<property id="memberName" name="memberName" ref="required" var="会员名称"></property>
 		<property id="contacts" name="contacts" ref="" var="联系人"></property>
 		<property id="phonenum" name="phonenum" ref="" var="联系电话"></property>
@@ -183,13 +183,13 @@
 		<property id="accountNumber" name="accountNumber" ref="" var="账号"></property>
 		<property id="taxRate" name="taxRate" ref="" var="税率"></property>
 	</url>
-	<url id="member003" path="/post/MemberController/queryMemberById" val="据ID查询会员信息，用于信息回显" allUse="0">
+	<url id="member003" path="/post/MemberController/queryMemberById" val="据ID查询会员信息，用于信息回显" allUse="2">
 		<property id="rowId" name="id" ref="required" var="会员ID"></property>
 	</url>
-	<url id="member004" path="/post/MemberController/deleteMemberById" val="删除会员信息" allUse="0">
+	<url id="member004" path="/post/MemberController/deleteMemberById" val="删除会员信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="会员ID"></property>
 	</url>
-	<url id="member005" path="/post/MemberController/editMemberById" val="编辑会员信息" allUse="0">
+	<url id="member005" path="/post/MemberController/editMemberById" val="编辑会员信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="会员ID"></property>
 		<property id="memberName" name="memberName" ref="required" var="会员名称"></property>
 		<property id="contacts" name="contacts" ref="" var="联系人"></property>
@@ -209,10 +209,10 @@
 		<property id="accountNumber" name="accountNumber" ref="" var="账号"></property>
 		<property id="taxRate" name="taxRate" ref="" var="税率"></property>
 	</url>
-	<url id="member006" path="/post/MemberController/editMemberByEnabled" val="设置会员状态改为启用" allUse="0">
+	<url id="member006" path="/post/MemberController/editMemberByEnabled" val="设置会员状态改为启用" allUse="1">
 		<property id="rowId" name="id" ref="required" var="会员ID"></property>
 	</url>
-	<url id="member007" path="/post/MemberController/editMemberByNotEnabled" val="设置会员状态改为未启用" allUse="0">
+	<url id="member007" path="/post/MemberController/editMemberByNotEnabled" val="设置会员状态改为未启用" allUse="1">
 		<property id="rowId" name="id" ref="required" var="会员ID"></property>
 	</url>
 	<!-- 会员信息管理结束 -->

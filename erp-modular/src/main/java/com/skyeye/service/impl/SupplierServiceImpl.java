@@ -115,12 +115,9 @@ public class SupplierServiceImpl implements SupplierService {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         Map<String, Object> supplierName = supplierDao.querySupplierByIdAndName(params);
-        if(supplierName == null){
-            Map<String, Object> bean = supplierDao.querySupplierByUserIdAndSupplier(params);
-            if(bean != null){
-                outputObject.setreturnMessage("供应商信息已存在！");
-                return;
-            }
+        if(supplierName != null){
+            outputObject.setreturnMessage("供应商名称已存在！");
+            return;
         }
         supplierDao.editSupplierById(params);
     }
@@ -136,12 +133,12 @@ public class SupplierServiceImpl implements SupplierService {
     public void editSupplierByEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        Map<String, Object> bean = supplierDao.querySupplierById(params);
-        if ("1".equals(bean.get("enabled").toString())){
+        params.put("enabled", 1);
+        Map<String, Object> bean = supplierDao.querySupplierByEnabled(params);
+        if (bean != null){
             outputObject.setreturnMessage("状态已改变，请不要重复操作！");
             return;
         }
-        params.put("enabled", 1);
         supplierDao.editSupplierByEnabled(params);
     }
 
@@ -156,12 +153,12 @@ public class SupplierServiceImpl implements SupplierService {
     public void editSupplierByNotEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        Map<String, Object> bean = supplierDao.querySupplierById(params);
-        if ("2".equals(bean.get("enabled").toString())){
+        params.put("enabled", 2);
+        Map<String, Object> bean = supplierDao.querySupplierByEnabled(params);
+        if (bean != null){
             outputObject.setreturnMessage("状态已改变，请不要重复操作！");
             return;
         }
-        params.put("enabled", 2);
         supplierDao.editSupplierByNotEnabled(params);
     }
 }

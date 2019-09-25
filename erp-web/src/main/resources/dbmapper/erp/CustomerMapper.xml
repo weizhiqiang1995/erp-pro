@@ -204,23 +204,29 @@
 
     <select id="queryCustomerByIdAndName" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
-            s.id,
-            s.supplier customerName,
-            s.contacts,
-            s.phonenum,
-            s.email,
-            s.description,
-            s.isystem,
-            s.type customerType,
-            s.enabled,
-            s.delete_flag deleteFlag
+            s.id
+        FROM
+            erp_supplier s
+        WHERE
+            s.tenant_id = #{userId}
+        AND s.id != #{id}
+        AND s.type = 2
+        AND s.supplier = #{customerName}
+        AND s.delete_flag = 0
+        ORDER BY s.id DESC LIMIT 0,1
+    </select>
+
+    <select id="queryCustomerByEnabled" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+            s.id
         FROM
             erp_supplier s
         WHERE
             s.tenant_id = #{userId}
         AND s.id = #{id}
         AND s.type = 2
-        AND s.supplier = #{customerName}
+        AND s.enabled = #{enabled}
+        AND s.delete_flag = 0
         ORDER BY s.id DESC LIMIT 0,1
     </select>
 </mapper>

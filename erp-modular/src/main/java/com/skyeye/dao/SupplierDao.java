@@ -28,4 +28,6 @@ public interface SupplierDao {
     public int editSupplierByNotEnabled(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> querySupplierByIdAndName(Map<String, Object> params) throws Exception;
+
+    public Map<String, Object> querySupplierByEnabled(Map<String, Object> params) throws Exception;
 }

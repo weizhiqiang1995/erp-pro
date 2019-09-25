@@ -115,12 +115,9 @@ public class MemberServiceImpl implements MemberService {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         Map<String, Object> memberName = memberDao.queryMemberByIdAndName(params);
-        if(memberName == null){
-            Map<String, Object> bean = memberDao.queryMemberByUserIdAndMember(params);
-            if(bean != null){
-                outputObject.setreturnMessage("该会员信息已存在！");
-                return;
-            }
+        if(memberName != null){
+            outputObject.setreturnMessage("会员名称已存在！");
+            return;
         }
         memberDao.editMemberById(params);
     }
@@ -136,12 +133,12 @@ public class MemberServiceImpl implements MemberService {
     public void editMemberByEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        Map<String, Object> bean = memberDao.queryMemberById(params);
-        if ("1".equals(bean.get("enabled").toString())){
+        params.put("enabled", 1);
+        Map<String, Object> bean = memberDao.queryMemberByEnabled(params);
+        if (bean != null){
             outputObject.setreturnMessage("状态已改变，请不要重复操作！");
             return;
         }
-        params.put("enabled", 1);
         memberDao.editMemberByEnabled(params);
     }
 
@@ -156,12 +153,12 @@ public class MemberServiceImpl implements MemberService {
     public void editMemberByNotEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        Map<String, Object> bean = memberDao.queryMemberById(params);
-        if ("2".equals(bean.get("enabled").toString())){
+        params.put("enabled", 2);
+        Map<String, Object> bean = memberDao.queryMemberByEnabled(params);
+        if (bean != null){
             outputObject.setreturnMessage("状态已改变，请不要重复操作！");
             return;
         }
-        params.put("enabled", 2);
         memberDao.editMemberByNotEnabled(params);
     }
 }

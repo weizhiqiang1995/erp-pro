@@ -7,7 +7,7 @@ layui.config({
     window: 'js/winui.window',
 }).define(['window', 'table', 'jquery', 'winui', 'form'], function (exports) {
     winui.renderColor();
-    authBtn('1569133219314');
+    authBtn('1569133228443');
     var $ = layui.$,
         form = layui.form,
         table = layui.table;

@@ -91,16 +91,16 @@
             truckage = #{truckage},
             remark = #{remark},
             principal = #{principal},
-            delete_Flag = #{delete_Flag},
             is_default = #{isDefault},
             name = #{name}
         </set>
         WHERE
             id = #{id}
         AND tenant_id = #{userId}
+        AND delete_Flag = 0
     </update>
 
-    <update id="editStoreHouseBydeleteFlag" parameterType="java.util.Map">
+    <update id="editStoreHouseByDeleteFlag" parameterType="java.util.Map">
         UPDATE erp_depot
         <set>
             delete_Flag = #{deleteFlag}
@@ -118,6 +118,7 @@
         WHERE
             id = #{id}
         AND tenant_id = #{userId}
+        AND delete_Flag = 0
     </update>
 
     <update id="editStoreHouseByDefaultAll" parameterType="java.util.Map">
@@ -127,5 +128,32 @@
         </set>
         WHERE
             tenant_id = #{userId}
+        AND delete_Flag = 0
     </update>
+
+    <select id="queryStoreHouseByIdAndName" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+            d.id
+        FROM
+            erp_depot d
+        WHERE
+            d.id != #{id}
+        AND d.tenant_id = #{userId}
+        AND d.name = #{name}
+        AND d.delete_Flag = 0
+        ORDER BY d.create_time DESC LIMIT 0,1
+    </select>
+
+    <select id="queryStoreHouseByIsDefault" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+            d.id
+        FROM
+            erp_depot d
+        WHERE
+            d.id = #{id}
+        AND d.tenant_id = #{userId}
+        AND d.is_default = 1
+        AND d.delete_Flag = 0
+        ORDER BY d.create_time DESC LIMIT 0,1
+    </select>
 </mapper>

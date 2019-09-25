@@ -29,4 +29,6 @@ public interface CustomerDao {
     public int editCustomerByNotEnabled(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> queryCustomerByIdAndName(Map<String, Object> params) throws Exception;
+
+    public Map<String, Object> queryCustomerByEnabled(Map<String, Object> params) throws Exception;
 }
