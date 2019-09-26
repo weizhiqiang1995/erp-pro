@@ -17,35 +17,39 @@ layui.config({
         elem: '#messageTable',
         method: 'post',
         url: reqBasePath + 'supplier001',
-        where: {supplierName:$("#supplierName").val()},
+        where: {supplierName:$("#supplierName").val(),
+            telephone: $("#telephone").val(),
+            email: $("#email").val(),
+            fax: $("#fax").val(),
+            enabled: $("#enabled").val()},
         even: true,  //隔行变色
         page: true,
         limits: [8, 16, 24, 32, 40, 48, 56],
         limit: 8,
         cols: [[
             { title: '序号', type: 'numbers'},
-            { field: 'supplierName', title: '供应商名称', width: 200},
-            { field: 'contacts', title: '联系人', width: 150},
-            { field: 'phonenum', title: '联系电话', width: 150},
-            { field: 'email', title: '电子邮箱', width: 150},
-            { field: 'telephone', title: '手机号码', width: 150},
-            { field: 'fax', title: '传真', width: 150},
-            { field: 'advanceIn', title: '预收款', width: 150},
-            { field: 'beginNeedGet', title: '期初应收', width: 150},
-            { field: 'beginNeedPay', title: '期初应付', width: 150},
-            { field: 'allNeedGet', title: '累计应收', width: 150},
-            { field: 'allNeedPay', title: '累计应付', width: 150},
-            { field: 'taxRate', title: '税率(%)', width: 150},
-            { field: 'enabled', title: '状态', width: 100, templet: function(d){
+            { field: 'supplierName', title: '供应商名称', align: 'left', width: 200},
+            { field: 'contacts', title: '联系人', align: 'left', width: 150},
+            { field: 'phonenum', title: '联系电话', align: 'center', width: 150},
+            { field: 'email', title: '电子邮箱', align: 'center', width: 220},
+            { field: 'telephone', title: '手机号码', align: 'center', width: 120},
+            { field: 'fax', title: '传真', align: 'left', width: 150},
+            { field: 'advanceIn', title: '预收款', align: 'left',width: 100},
+            { field: 'beginNeedGet', title: '期初应收', align: 'left', width: 100},
+            { field: 'beginNeedPay', title: '期初应付', align: 'left', width: 100},
+            { field: 'allNeedGet', title: '累计应收', align: 'left', width: 100},
+            { field: 'allNeedPay', title: '累计应付', align: 'left', width: 100},
+            { field: 'taxRate', title: '税率(%)',  align: 'left',width: 100},
+            { field: 'enabled', title: '状态', align: 'center',width: 100, templet: function(d){
                     if(d.enabled == '1'){
-                        return "启用";
+                        return "<span class='state-up'>启用</span>";
                     }else if(d.enabled == '2'){
-                        return "禁用";
+                        return "<span class='state-down'>禁用</span>";
                     }else{
-                        return "参数错误";
+                        return "<span class='state-error'>参数错误</span>";
                     }
                 }},
-            { field: 'createTime', title: '创建时间', align: 'center', width: 150 },
+            { field: 'createTime', title: '创建时间', align: 'center', width: 180 },
             { title: '操作', fixed: 'right', align: 'center', width: 200, toolbar: '#tableBar'}
         ]]
     });
@@ -167,12 +171,20 @@ layui.config({
     })
     //刷新
     function loadTable(){
-        table.reload("messageTable", {where:{supplierName:$("#supplierName").val()}});
+        table.reload("messageTable", {where:{supplierName:$("#supplierName").val(),
+                telephone: $("#telephone").val(),
+                email: $("#email").val(),
+                fax: $("#fax").val(),
+                enabled: $("#enabled").val()}});
     }
 
     //搜索
     function refreshTable(){
-        table.reload("messageTable", {page: {curr: 1}, where:{supplierName:$("#supplierName").val()}})
+        table.reload("messageTable", {page: {curr: 1}, where:{supplierName:$("#supplierName").val(),
+                telephone: $("#telephone").val(),
+                email: $("#email").val(),
+                fax: $("#fax").val(),
+                enabled: $("#enabled").val()}})
     }
 
     exports('supplierlist', {});

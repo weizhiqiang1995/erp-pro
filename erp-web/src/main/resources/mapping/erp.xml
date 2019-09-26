@@ -43,6 +43,10 @@
 	<!-- 供应商管理开始 -->
 	<url id="supplier001" path="/post/SupplierController/querySupplierByList" val="获取供应商信息" allUse="1">
 		<property id="supplierName" name="supplierName" ref="" var="供应商名称"></property>
+		<property id="telephone" name="telephone" ref="" var="手机号码"></property>
+		<property id="email" name="email" ref="" var="邮箱"></property>
+		<property id="fax" name="fax" ref="" var="传真"></property>
+		<property id="enabled" name="enabled" ref="" var="状态"></property>-->
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>
@@ -102,6 +106,10 @@
 	<!-- 客户信息管理开始 -->
 	<url id="customer001" path="/post/CustomerController/queryCustomerByList" val="获取客户信息" allUse="1">
 		<property id="customerName" name="customerName" ref="" var="客户名称"></property>
+		<property id="telephone" name="telephone" ref="" var="手机号码"></property>
+		<property id="email" name="email" ref="" var="邮箱"></property>
+		<property id="fax" name="fax" ref="" var="传真"></property>
+		<property id="enabled" name="enabled" ref="" var="状态"></property>
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>
@@ -161,6 +169,10 @@
 	<!-- 会员信息管理开始 -->
 	<url id="member001" path="/post/MemberController/queryMemberByList" val="获取会员信息" allUse="1">
 		<property id="memberName" name="memberName" ref="" var="会员名称"></property>
+		<property id="telephone" name="telephone" ref="" var="手机号码"></property>
+		<property id="email" name="email" ref="" var="邮箱"></property>
+		<property id="fax" name="fax" ref="" var="传真"></property>
+		<property id="enabled" name="enabled" ref="" var="状态"></property>
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>

@@ -13,13 +13,13 @@
             s.isystem,
             s.type customerType,
             s.enabled,
-            s.advance_in advanceIn,
-            s.begin_need_get beginNeedGet,
-            s.begin_need_pay beginNeedPay,
-            s.all_need_get allNeedGet,
-            s.all_need_pay allNeedPay,
+            FORMAT(s.advance_in, 2) advanceIn,
+            FORMAT(s.begin_need_get, 2) beginNeedGet,
+            FORMAT(s.begin_need_pay, 2) beginNeedPay,
+            FORMAT(s.all_need_get, 2) allNeedGet,
+            FORMAT(s.all_need_pay, 2) allNeedPay,
             s.fax,
-            s.tax_rate taxRate,
+            FORMAT(s.tax_rate, 2) taxRate,
             s.telephone,
             CONVERT (s.create_time, CHAR) createTime
         FROM
@@ -31,7 +31,19 @@
         AND
             s.type = 2
         <if test="customerName != '' and customerName != null">
-        AND s.supplier LIKE '%${customerName}%'
+            AND s.supplier LIKE '%${customerName}%'
+        </if>
+        <if test="telephone != '' and telephone != null">
+            AND s.telephone LIKE '%${telephone}%'
+        </if>
+        <if test="email != '' and email != null">
+            AND s.email LIKE '%${email}%'
+        </if>
+        <if test="fax != '' and fax != null">
+            AND s.fax LIKE '%${fax}%'
+        </if>
+        <if test="enabled != '' and enabled != null">
+            AND s.enabled = #{enabled}
         </if>
         ORDER BY s.create_time DESC
     </select>

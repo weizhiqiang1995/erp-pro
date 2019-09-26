@@ -24,21 +24,21 @@ layui.config({
         limit: 8,
         cols: [[
             { title: '序号', type: 'numbers'},
-            { field: 'houseName', title: '仓库名称', width: 150},
-            { field: 'address', title: '仓库地址', width: 300},
-            { field: 'warehousing', title: '仓储费', width: 130},
-            { field: 'truckage', title: '搬运费', width: 130},
-            { field: 'principal', title: '负责人', width: 150},
-            { field: 'isDefault', title: '是否默认', width: 100, templet: function(d){
-                    if(d.isDefault == '1'){
-                        return "是";
-                    }else if(d.isDefault == '2'){
-                        return "否";
-                    }else{
-                        return "参数错误";
-                    }
-                }},
-            { field: 'createTime', title: '创建时间', align: 'center', width: 150 },
+            { field: 'houseName', title: '仓库名称', align: 'left',width: 200},
+            { field: 'address', title: '仓库地址', align: 'left',width: 300},
+            { field: 'warehousing', title: '仓储费', align: 'left',width: 100},
+            { field: 'truckage', title: '搬运费', align: 'left',width: 100},
+            { field: 'principal', title: '负责人', align: 'left',width: 150},
+            { field: 'isDefault', title: '是否默认', align: 'center',width: 100, templet: function(d){
+                if(d.isDefault == '1'){
+                    return "<span class='state-up'>是</span>";
+                }else if(d.isDefault == '2'){
+                    return "<span class='state-down'>否</span>";
+                }else{
+                    return "<span class='state-error'>参数错误</span>";
+                }
+            }},
+            { field: 'createTime', title: '创建时间', align: 'center', width: 180 },
             { title: '操作', fixed: 'right', align: 'center', width: 200, toolbar: '#tableBar'}
         ]]
     });

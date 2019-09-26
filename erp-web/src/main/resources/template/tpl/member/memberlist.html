@@ -16,6 +16,26 @@
                 <div class="layui-input-inline">
                     <input type="text" id="memberName" name="memberName" placeholder="请输入会员名称" class="layui-input" />
                 </div>
+                <label class="layui-form-label">手机号码</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="telephone" name="telephone" placeholder="请输入手机号码" class="layui-input" />
+                </div>
+                <label class="layui-form-label">电子邮箱</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="email" name="email" placeholder="请输入电子邮箱" class="layui-input" />
+                </div>
+                <label class="layui-form-label">传真</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="fax" name="fax" placeholder="请输入传真" class="layui-input" />
+                </div>
+                <label class="layui-form-label">状态</label>
+                <div class="layui-input-inline">
+                    <select id="enabled" name="enabled">
+                        <option value="">全部</option>
+                        <option value="1">启用</option>
+                        <option value="2">禁用</option>
+                    </select>
+                </div>
                 <button type="reset" class="layui-btn layui-btn-primary list-form-search">重置</button>
                 <button class="layui-btn list-form-search" lay-submit lay-filter="formSearch">搜索</button>
             </div>
@@ -32,10 +52,10 @@
     <table id="messageTable" lay-filter="messageTable"></table>
 
     <script type="text/html" id="tableBar">
-        {{# if(auth('1569133258254')){ }}
+        {{# if(d.enabled == 2 && auth('1569133258254')){ }}
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         {{# } }}
-        {{# if(auth('1569133240001')){ }}
+        {{# if(d.enabled == 2 && auth('1569133240001')){ }}
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
         {{# } }}
         {{# if(d.enabled == 1 && auth('1569133276824')){ }}
