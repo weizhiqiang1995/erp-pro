@@ -662,6 +662,7 @@
 	    <property id="rowId" name="id" ref="required" var="权限id"/>
 	    <property id="authMenuName" name="authMenuName" ref="required" var="权限点名称"/>
 	    <property id="authMenu" name="authMenu" ref="required" var="权限点后台链接"/>
+	    <property id="menuId" name="menuId" ref="required" var="菜单id"/>
 	</url>
 	<url id="sysevemenuauthpoint005" path="/post/SysEveMenuAuthPointController/deleteSysEveMenuAuthPointMationById" val="删除菜单权限点" allUse="1">
 	    <property id="rowId" name="id" ref="required" var="权限id"/>

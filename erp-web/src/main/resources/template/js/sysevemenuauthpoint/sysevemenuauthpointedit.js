@@ -22,7 +22,8 @@ layui.config({
 	   					var params = {
    							authMenuName: $("#authMenuName").val(),
    							authMenu: $("#authMenu").val(),
-   							rowId: parent.rowId
+   							rowId: parent.rowId,
+   							menuId: parent.menuId
 	   					};
 	   					
 	   					AjaxPostUtil.request({url:reqBasePath + "sysevemenuauthpoint004", params:params, type:'json', callback:function(json){

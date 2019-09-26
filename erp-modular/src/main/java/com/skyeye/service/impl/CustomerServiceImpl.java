@@ -100,11 +100,7 @@ public class CustomerServiceImpl implements CustomerService {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         params.put("deleteFlag", 1);
-        int result = customerDao.editCustomerByDeleteFlag(params);
-        if(result != 1){
-            outputObject.setreturnMessage("删除失败!");
-            return;
-        }
+        customerDao.editCustomerByDeleteFlag(params);
     }
 
     /**
