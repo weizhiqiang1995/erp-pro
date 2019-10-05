@@ -9,13 +9,12 @@ var refreshCode = "";
  * @param title
  */
 function _openNewWindows(mation){
-	var index = layer.load(1);
 	if(isNull(mation.url)){
-		top.winui.window.msg("页面路径不能为空", {icon: 2,time: 2000});
+		winui.window.msg("页面路径不能为空", {icon: 2,time: 2000});
 		return;
 	}
 	if(isNull(mation.pageId)){
-		top.winui.window.msg("缺少页面ID", {icon: 2,time: 2000});
+		winui.window.msg("缺少页面ID", {icon: 2,time: 2000});
 		return;
 	}
 	if(isNull(mation.title)){
@@ -26,12 +25,6 @@ function _openNewWindows(mation){
 		for(var param in mation.params)
 			s += "&" + param + "=" + mation.params[param];
 		mation.url = mation.url + "?" + s.slice(1);
-	}
-	if(!getMessageCookiesByUrl){//跨域获取页面需要加上cookies
-		if(mation.url.indexOf("?") >= 0)
-			mation.url = mation.url + '&userToken=' + getCookie("userToken");
-		else
-			mation.url = mation.url + '?userToken=' + getCookie("userToken");
 	}
 	if(isNull(mation.area)){
 		if(mation.maxmin){
@@ -49,135 +42,43 @@ function _openNewWindows(mation){
 	if(isNull(mation.shade) && mation.shade != false && mation.shade != 0){//遮罩层
 		mation.shade = 0.5;
 	}
-	if(isNull(mation.skin)){//用户自定义皮肤或者层级
-		mation.skin = '';
-	}
-    var index = layer.load(1);
-    refreshCode = "";
-    layui.$.ajax({
-        type: 'get',
-        url: mation.url,
-        async: true,
-        success: function (data) {
-            layer.close(index);
-            var pageIndex = layer.open({
-            	id: mation.pageId,
-                type: 2,
-                skin: mation.skin,
-                title: mation.title,
-                content: mation.url,
-                area: mation.area,
-                offset: mation.offset,
-                maxmin: mation.maxmin,
-                shade: mation.shade,
-                zIndex: mation.zIndex,
-                scrollbar: false,
-                end: function(){
-                	if(typeof(mation.callBack) == "function") {
-                		mation.callBack(refreshCode);
-        			}
-                },
-                success: function(){
-                	var times = layui.$("#" + mation.pageId).parent().attr("times");
-    				var zIndex = layui.$("#" + mation.pageId).parent().css("z-index");
-    				layui.$("#layui-layer-shade" + times).css({'z-index': zIndex});
-                	if(typeof(mation.success) == "function") {
-                		mation.success();
-        			}
-                }
-            });
-            if(mation.maxmin){
-        		layer.full(pageIndex);
-            }
-        },
-        error: function (xml) {
-            layer.close(index);
-            top.winui.window.msg("获取页面失败", {icon: 2,time: 2000});
-        }
-    });
-}
-
-function _openNewWindowsNoRel(mation){
-	var index = layer.load(1);
-	if(isNull(mation.url)){
-		top.winui.window.msg("页面路径不能为空", {icon: 2,time: 2000});
-		return;
-	}
-	if(isNull(mation.pageId)){
-		top.winui.window.msg("缺少页面ID", {icon: 2,time: 2000});
-		return;
-	}
-	if(isNull(mation.title)){
-		mation.title = "窗口";
-	}
-	if(!isNull(mation.params)){
-		var s = "";
-		for(var param in mation.params)
-			s += "&" + param + "=" + mation.params[param];
-		mation.url = mation.url + "?" + s.slice(1);
-	}
-	if(isNull(mation.area)){
-		mation.area = [window.screen.width / 3 * 2 + 'px', (layui.$(window.parent.window).height() - 200) + 'px'];
-	}
-	if(isNull(mation.offset)){
-		mation.offset = 'auto';
-	}
-	if(isNull(mation.maxmin)){//是否最大化
-		mation.maxmin = false;
-	}
-	if(isNull(mation.shade)){//遮罩层
-		mation.shade = 0.5;
-	}
 	if(isNull(mation.closeBtn) && mation.closeBtn != '0'){//关闭按钮
 		mation.closeBtn = 1;
 	}
 	if(isNull(mation.skin)){//用户自定义皮肤或者层级
 		mation.skin = '';
 	}
-    var index = layer.load(1);
     refreshCode = "";
-    layui.$.ajax({
-        type: 'get',
-        url: mation.url,
-        async: true,
-        success: function (data) {
-            layer.close(index);
-            var pageIndex = layer.open({
-            	id: mation.pageId,
-                type: 2,
-                skin: mation.skin,
-                title: mation.title,
-                content: mation.url,
-                area: mation.area,
-                offset: mation.offset,
-                maxmin: mation.maxmin,
-                shade: mation.shade,
-                zIndex: mation.zIndex,
-                scrollbar: false,
-                closeBtn: mation.closeBtn,
-                end: function(){
-                	if(typeof(mation.callBack) == "function") {
-                		mation.callBack(refreshCode);
-        			}
-                },
-                success: function(){
-                	var times = layui.$("#" + mation.pageId).parent().attr("times");
-    				var zIndex = layui.$("#" + mation.pageId).parent().css("z-index");
-    				layui.$("#layui-layer-shade" + times).css({'z-index': zIndex});
-                	if(typeof(mation.success) == "function") {
-                		mation.success();
-        			}
-                }
-            });
-            if(mation.maxmin){
-        		layer.full(pageIndex);
-            }
+    var pageIndex = layer.open({
+    	id: mation.pageId,
+        type: 2,
+        skin: mation.skin,
+        title: mation.title,
+        content: mation.url,
+        area: mation.area,
+        offset: mation.offset,
+        maxmin: mation.maxmin,
+        shade: mation.shade,
+        zIndex: mation.zIndex,
+        scrollbar: false,
+        closeBtn: mation.closeBtn,
+        end: function(){
+        	if(typeof(mation.callBack) == "function") {
+        		mation.callBack(refreshCode);
+			}
         },
-        error: function (xml) {
-            layer.close(index);
-            top.winui.window.msg("获取页面失败", {icon: 2,time: 2000});
+        success: function(){
+        	var times = layui.$("#" + mation.pageId).parent().attr("times");
+			var zIndex = layui.$("#" + mation.pageId).parent().css("z-index");
+			layui.$("#layui-layer-shade" + times).css({'z-index': zIndex});
+        	if(typeof(mation.success) == "function") {
+        		mation.success();
+			}
         }
     });
+    if(mation.maxmin){
+		layer.full(pageIndex);
+    }
 }
 
 /**
