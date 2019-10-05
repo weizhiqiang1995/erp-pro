@@ -1,2 +1,0 @@
-[erp][ERROR] [2019-09-26 09:39:41] com.erp.exception.CustomExtHanlder.handleException(32) | url /post/SysEveMenuAuthPointController/editSysEveMenuAuthPointMationById, msg nested exception is org.apache.ibatis.exceptions.TooManyResultsException: Expected one result (or null) to be returned by selectOne(), but found: 2, method org.mybatis.spring.MyBatisExceptionTranslator, line 77
-  

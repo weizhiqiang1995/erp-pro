@@ -75,7 +75,7 @@ select,
 optgroup,
 option {
 	font-family: inherit;
-	font-size: 0.8em;
+	font-size: 1em;
 	font-style: inherit;
 	font-weight: inherit;
 	outline: 0;
@@ -836,7 +836,7 @@ a cite {
 .layui-header {
 	position: relative;
 	z-index: 1000;
-	height: 60px;
+	height: 50px;
 }
 
 .layui-header a:hover {
@@ -928,7 +928,6 @@ a cite {
 
 .layui-layout-left {
 	position: absolute !important;
-	left: 200px;
 	top: 0;
 }
 
@@ -2161,23 +2160,27 @@ hr,
 .layui-textarea::-webkit-input-placeholder,
 .layui-select::-webkit-input-placeholder {
 	line-height: 1.3;
+	font-size: 12px;
 }
 
 .layui-input,
 .layui-textarea {
 	display: block;
 	width: 100%;
-	padding-left: 10px;
+	padding-left: 5px;
+	border-radius: .25rem;
 }
 
 .layui-input:hover,
 .layui-textarea:hover {
-	border-color: #D2D2D2 !important;
+	border-color: #80bdff !important;
 }
 
 .layui-input:focus,
 .layui-textarea:focus {
-	border-color: #C9C9C9 !important;
+	border-color: #80bdff !important;
+	outline: 0;
+	box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25);
 }
 
 .layui-textarea {
@@ -2187,6 +2190,7 @@ hr,
 	line-height: 20px;
 	padding: 6px 10px;
 	resize: vertical;
+	margin-bottom: 5px;
 }
 
 .layui-select {
@@ -2220,8 +2224,8 @@ hr,
 	position: relative;
 	float: left;
 	display: block;
-	padding: 7px 15px;
-	width: 80px;
+	padding: 7px 7px;
+	width: 90px;
 	font-weight: 400;
 	line-height: 20px;
 	text-align: right;
@@ -2246,8 +2250,8 @@ hr,
 }
 
 .layui-input-block {
-	margin-left: 110px;
-	min-height: 30px;
+	margin-left: 105px;
+	min-height: 40px;
 }
 
 .layui-input-inline {
@@ -2265,29 +2269,24 @@ hr,
 	width: auto;
 }
 
-
 /* 分割块 */
-
 .layui-form-mid {
 	position: relative;
 	float: left;
 	display: block;
-	padding: 9px 0 !important;
+	padding: 2px 0 9px 0 !important;
 	line-height: 20px;
 	margin-right: 10px;
+	font-size: 12px;
 }
 
-
 /* 警告域 */
-
 .layui-form-danger:focus,
 .layui-form-danger+.layui-form-select .layui-input {
 	border-color: #FF5722 !important;
 }
 
-
 /* 下拉选择 */
-
 .layui-form-select {
 	position: relative;
 }
@@ -2411,8 +2410,8 @@ hr,
 	position: relative;
 	display: inline-block;
 	vertical-align: middle;
-	height: 30px;
-	line-height: 28px;
+	height: 24px;
+	line-height: 22px;
 	margin-right: 10px;
 	padding-right: 30px;
 	border: 1px solid #d2d2d2;
@@ -2435,9 +2434,9 @@ hr,
 }
 
 .layui-form-checkbox span {
-	padding: 0 10px;
+	padding: 0 7px;
 	height: 100%;
-	font-size: 14px;
+	font-size: 13px;
 	background-color: #d2d2d2;
 	color: #fff;
 	overflow: hidden;
@@ -2633,6 +2632,7 @@ hr,
 	padding-right: 10px;
 	cursor: pointer;
 	font-size: 0;
+	float: left;
 }
 
 .layui-form-radio * {
@@ -2677,7 +2677,7 @@ hr,
 
 .layui-form-pane .layui-input-inline {
 	margin-left: -1px;
-    margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 .layui-form-pane .layui-input-block {
@@ -2790,6 +2790,7 @@ hr,
 	border-width: 1px;
 	border-style: solid;
 	border-radius: 2px;
+    margin: 7px 0px;
 }
 
 .layui-layedit-tool {
@@ -3202,6 +3203,7 @@ hr,
 .layui-table-box {
 	position: relative;
 	overflow: hidden;
+	border-radius: 3px;
 }
 
 .layui-table-view {
@@ -3226,7 +3228,7 @@ hr,
 
 .layui-table-view .layui-table th,
 .layui-table-view .layui-table td {
-	padding: 5px 0;
+	padding: 3px 0;
 	border-top: none;
 	border-left: none;
 }
@@ -3248,6 +3250,10 @@ hr,
 
 .layui-table-header .layui-table {
 	margin-bottom: -1px;
+}
+
+.layui-table-header .layui-table-cell{
+	font-weight: 600;
 }
 
 .layui-table-sort {
@@ -3296,7 +3302,7 @@ hr,
 .layui-table-cell {
 	height: 28px;
 	line-height: 28px;
-	padding: 0 15px;
+	padding: 0 8px;
 	position: relative;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -3331,6 +3337,10 @@ hr,
 	line-height: 40px;
 	text-align: center;
 	color: #999;
+}
+
+.layui-table-body .layui-table-cell{
+	font-size: 13px;
 }
 
 .layui-table-fixed {
@@ -3485,6 +3495,11 @@ select.layui-table-edit {
 	top: -1px;
 	height: 26px;
 	line-height: 26px;
+}
+
+body .layui-layer {
+	border: 0px !important;
+	overflow-y: hidden; 
 }
 
 body .layui-table-tips .layui-layer-content {
@@ -3684,13 +3699,11 @@ body .layui-table-tips .layui-layer-content {
 	padding-right: 5px;
 }
 
-
 /** 导航菜单 **/
-
 .layui-nav {
 	position: relative;
 	padding: 0 20px;
-	background-color: #393D49;
+	background-color: #fff;
 	color: #fff;
 	border-radius: 2px;
 	font-size: 0;
@@ -3707,13 +3720,12 @@ body .layui-table-tips .layui-layer-content {
 	*display: inline;
 	*zoom: 1;
 	vertical-align: middle;
-	line-height: 60px;
+	line-height: 50px;
 }
 
 .layui-nav .layui-nav-item a {
 	display: block;
-	padding: 0 20px;
-	color: #fff;
+	padding: 0 15px;
 	color: rgba(255, 255, 255, .7);
 	transition: all .3s;
 	-webkit-transition: all .3s;
@@ -3738,7 +3750,7 @@ body .layui-table-tips .layui-layer-content {
 
 .layui-nav .layui-this a,
 .layui-nav .layui-nav-item a:hover {
-	color: #fff;
+	color: rgba(255, 255, 255, .7);
 }
 
 .layui-nav .layui-this:after {
@@ -3751,8 +3763,9 @@ body .layui-table-tips .layui-layer-content {
 .layui-nav-img {
 	width: 30px;
 	height: 30px;
-	margin-right: 10px;
+	margin: 5px;
 	border-radius: 50%;
+	float: left;
 }
 
 .layui-nav .layui-nav-more {
@@ -3834,7 +3847,7 @@ body .layui-table-tips .layui-layer-content {
 /* 垂直导航菜单 */
 
 .layui-nav-tree {
-	width: 200px;
+	width: 100%;
 	padding: 0;
 }
 
@@ -3985,12 +3998,12 @@ body .layui-table-tips .layui-layer-content {
 	color: #999;
 }
 
-
 /** Tab选项卡 **/
-
 .layui-tab {
-	margin: 10px 0;
 	text-align: left !important;
+	height: 100%;
+	width: calc(100% - 2px);
+    float: left;
 }
 
 .layui-tab[overflow]>.layui-tab-title {
@@ -4103,6 +4116,7 @@ body .layui-table-tips .layui-layer-content {
 
 .layui-tab-content {
 	padding: 10px;
+	height: calc(100% - 61px);
 }
 
 
