@@ -40,30 +40,6 @@ layui.define(['layer', 'winui'], function (exports) {
             $('.winui-start').fadeOut(200);
             //移除开始按钮的选中样式
             $('.winui-taskbar-start').removeClass(THIS);
-            
-            //获取当前显示的任务栏id
-            var visiShowTaskId = $(".winui-taskbar").find("ul:visible").attr("rowid");
-            //获取该窗口所在的任务栏id
-            var visiWinTaskId = $('.winui-taskbar li[win-id="' + options.id + '"]').parent().attr("rowid");
-            if(visiShowTaskId != visiWinTaskId){//如果要打开的窗口所在的任务栏没有显示，则操作显示
-            	$(".winui-taskbar").find("ul:visible").animate({'opacity': '0'}, 500, function(){
-        			$(this).hide();
-        			var id = $(this).attr("rowid");
-            		//遍历该任务栏上的任务项并隐藏
-            		$(".winui-taskbar").find('ul[rowid="' +id + '"]').find("li").each(function(e){
-            			var winId = $(this).attr("win-id");
-            			$('div[class="layui-layer-content"][id="' + winId + '"]').parent().addClass('layui-hide');
-            		});
-        		});
-            	$(".win-box-content").find(".win-box").removeClass("win-box-check");
-            	$(".win-box-content").find('div[data-id="' + visiWinTaskId + '"]').addClass("win-box-check");
-            	var text = $(".win-box-content").find('div[data-id="' + visiWinTaskId + '"]').data("text");
-        		$(".winui-taskbar").find('ul[rowid="' + visiWinTaskId + '"]').animate({'opacity': '1'}, 500, function(){
-        			$(this).show();
-        			$(".winui-taskbar-task-name").html(text);
-        		});
-            }
-            
             //返回windowId
             return options.id;
         }
@@ -127,7 +103,7 @@ layui.define(['layer', 'winui'], function (exports) {
             	var times = $("#" + options.id || winui.guid()).parent().attr("times");
 				var zIndex = $("#" + options.id || winui.guid()).parent().css("z-index");
 				$("#layui-layer-shade" + times).css({'z-index': zIndex});
-				
+            	
         		common.setWindowBody(layero);
         		common.showLoading(layero, options);
         		if(typeof(options.success) == "function") {
@@ -194,28 +170,6 @@ layui.define(['layer', 'winui'], function (exports) {
             },
             //拖动完毕后的回调方法
             moveEnd: function (window) {
-            	//获取当前显示的任务栏id
-                var visiShowTaskId = $(".winui-taskbar").find("ul:visible").attr("rowid");
-                //获取该窗口所在的任务栏id
-                var visiWinTaskId = $('.winui-taskbar li[win-id="' + options.id + '"]').parent().attr("rowid");
-                if(visiShowTaskId != visiWinTaskId){//如果要打开的窗口所在的任务栏没有显示，则操作显示
-                	$(".winui-taskbar").find("ul:visible").animate({'opacity': '0'}, 500, function(){
-            			$(this).hide();
-            			var id = $(this).attr("rowid");
-                		//遍历该任务栏上的任务项并隐藏
-                		$(".winui-taskbar").find('ul[rowid="' +id + '"]').find("li").each(function(e){
-                			var winId = $(this).attr("win-id");
-                			$('div[class="layui-layer-content"][id="' + winId + '"]').parent().addClass('layui-hide');
-                		});
-            		});
-                	$(".win-box-content").find(".win-box").removeClass("win-box-check");
-                	$(".win-box-content").find('div[data-id="' + visiWinTaskId + '"]').addClass("win-box-check");
-                	var text = $(".win-box-content").find('div[data-id="' + visiWinTaskId + '"]').data("text");
-            		$(".winui-taskbar").find('ul[rowid="' + visiWinTaskId + '"]').animate({'opacity': '1'}, 500, function(){
-            			$(this).show();
-            			$(".winui-taskbar-task-name").html(text);
-            		});
-                }
             }
         });
         var windowDom = common.getWindow(options.id);
@@ -488,12 +442,13 @@ layui.define(['layer', 'winui'], function (exports) {
             	}
             	str += '<div class="page-icon-load"><i class="fa page-icon-title-load fa-fw fa-spin fa-spinner"></i>';
             	str += '<font>加载中</font></div></div>';
-                body.append(str);
-                $(window).ready(function(e){
-                	setTimeout(function(e){
-                		body.find(".page-load").remove();
-                	}, 1500);
-                });
+                //页面加载项
+//            	body.append(str);
+//                $(window).ready(function(e){
+//                	setTimeout(function(e){
+//                		body.find(".page-load").remove();
+//                	}, 1500);
+//                });
             }
         }
     };
@@ -618,6 +573,8 @@ layui.define(['layer', 'winui'], function (exports) {
 
     //显示信息（为了显示在所有窗口最前面而添加的方法）
     winLayer.msg = function (msg, options, func) {
+    	//移除请求遮罩层
+        $("body").find(".mask-req-str").remove();
         if (!options) {
             options = {
                 offset: '40px'
@@ -693,20 +650,14 @@ layui.define(['layer', 'winui'], function (exports) {
     
     //打开我的消息通知
     winLayer.openSysNotice = function (loadBottomMenuIcon) {
-    	var that = this;
+        var that = this;
     	var title = '<i class="fa title-icon fa-fw fa-list-ul" style="background-color: #0491fe;color: #ecf3f8;"></i>' + '<font class="win-title-class">我的消息</font>';
     	var iconTitle = '<i class="fa title-icon-big fa-fw fa-list-ul" style="background-color: #0491fe;color: #ecf3f8;"></i>';
-    	var url = '';
-    	if(!getMessageCookiesByUrl){
-    		url = sysMessageMainMation.messageSysUrl;
-    	}else{
-    		url = reqBasePath;
-    	}
-        that.open({
+    	that.open({
             id: 'winui-sys-notice',
             type: 2,
             title: title,
-            content: url + 'tpl/mymessage/myNoticeList.html?userToken=' + getCookie("userToken"),
+            content: sysMainMation.messageSysUrl + 'tpl/mymessage/myNoticeList.html?userToken=' + getCookie("userToken"),
             loadBottomMenuIcon: loadBottomMenuIcon,
             iconTitle: iconTitle,
         });
