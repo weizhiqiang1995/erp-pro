@@ -7993,6 +7993,32 @@ select option{
     text-decoration: underline;
 }
 
+.mask-req-str{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+    z-index: 100;
+    top: 0px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.mask-req-str .cent{
+    position: absolute;
+    top: calc(50% - 50px);
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+
+.mask-req-str .cent i{
+    font-size: 40px;
+    color: darkgray;
+}
+
+.mask-req-str .cent font{
+	color: darkgray;
+}
+
 @-webkit-keyframes cloud_three {
 	0% {
 	left:0
