@@ -73,4 +73,58 @@
 	</url>
 	<!-- 产品计量单位结束 -->
 	
+	<!-- 产品开始 -->
+	<url id="material001" path="/post/MaterialController/queryMaterialListByUserId" val="获取产品信息" allUse="2">
+		<property id="materialName" name="materialName" ref="" var="产品名称" />
+		<property id="categoryId" name="categoryId" ref="" var="一级分类id" />
+		<property id="categoryIdSec" name="categoryIdSec" ref="" var="二级分类id" />
+		<property id="enabled" name="enabled" ref="" var="状态" />
+		<property id="model" name="model" ref="" var="型号" />
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="material002" path="/post/MaterialController/queryMaterialUnitListToSelectByUserId" val="获取租户拥有的产品计量单位" allUse="2">
+	</url>
+	<url id="material003" path="/post/MaterialController/insertMaterialMation" val="新增产品信息" allUse="2">
+		<property id="materialName" name="materialName" ref="required" var="产品名称" />
+		<property id="categoryId" name="categoryId" ref="required" var="一级分类id" />
+		<property id="categoryIdSec" name="categoryIdSec" ref="required" var="二级分类id" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="unit" name="unit" ref="required,num" var="产品单位，是多个还是单个,  1.单个  2.多个" />
+		<property id="model" name="model" ref="required" var="型号" />
+		<property id="unitGroupId" name="unitGroupId" ref="" var="计量单位组id  当unit=2时，必填" />
+		<property id="firstInUnit" name="firstInUnit" ref="" var="首选入库单位" />
+		<property id="firstOutUnit" name="firstOutUnit" ref="" var="首选出库单位" />
+		<property id="materialNormsStr" name="materialNormsStr" ref="required" var="产品规格字符串" />
+	</url>
+	<url id="material004" path="/post/MaterialController/editMaterialEnabledToDisablesById" val="禁用产品信息" allUse="2">
+		<property id="rowId" name="id" ref="required" var="产品id" />
+	</url>
+	<url id="material005" path="/post/MaterialController/editMaterialEnabledToEnablesById" val="启用产品信息" allUse="2">
+		<property id="rowId" name="id" ref="required" var="产品id" />
+	</url>
+	<url id="material006" path="/post/MaterialController/deleteMaterialMationById" val="删除产品信息" allUse="2">
+		<property id="rowId" name="id" ref="required" var="产品id" />
+	</url>
+	<url id="material007" path="/post/MaterialController/queryMaterialMationDetailsById" val="产品信息详情" allUse="2">
+		<property id="rowId" name="id" ref="required" var="产品id" />
+	</url>
+	<url id="material008" path="/post/MaterialController/queryMaterialMationToEditById" val="编辑产品信息进行回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="产品id" />
+	</url>
+	<url id="material009" path="/post/MaterialController/editMaterialMationById" val="编辑产品信息" allUse="2">
+		<property id="materialName" name="materialName" ref="required" var="产品名称" />
+		<property id="categoryId" name="categoryId" ref="required" var="一级分类id" />
+		<property id="categoryIdSec" name="categoryIdSec" ref="required" var="二级分类id" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="unit" name="unit" ref="required,num" var="产品单位，是多个还是单个,  1.单个  2.多个" />
+		<property id="model" name="model" ref="required" var="型号" />
+		<property id="unitGroupId" name="unitGroupId" ref="" var="计量单位组id  当unit=2时，必填" />
+		<property id="firstInUnit" name="firstInUnit" ref="" var="首选入库单位" />
+		<property id="firstOutUnit" name="firstOutUnit" ref="" var="首选出库单位" />
+		<property id="materialNormsStr" name="materialNormsStr" ref="required" var="产品规格字符串" />
+		<property id="rowId" name="id" ref="required" var="产品id" />
+	</url>
+	<!-- 产品结束 -->
+	
 </controller>

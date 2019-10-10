@@ -17,7 +17,7 @@
         FROM
             erp_depot d
         WHERE
-            d.delete_Flag = 0
+            d.delete_flag = 0
         <if test="name != '' and name != null">
             AND d.name LIKE '%${name}%'
         </if>
@@ -33,7 +33,7 @@
         WHERE
             d.tenant_id = #{userId}
         AND d.name = #{name}
-        AND d.delete_Flag = 0
+        AND d.delete_flag = 0
         ORDER BY d.create_time DESC LIMIT 0,1
     </select>
 
@@ -97,13 +97,13 @@
         WHERE
             id = #{id}
         AND tenant_id = #{userId}
-        AND delete_Flag = 0
+        AND delete_flag = 0
     </update>
 
     <update id="editStoreHouseByDeleteFlag" parameterType="java.util.Map">
         UPDATE erp_depot
         <set>
-            delete_Flag = #{deleteFlag}
+            delete_flag = #{deleteFlag}
         </set>
         WHERE
             id = #{id}
@@ -118,7 +118,7 @@
         WHERE
             id = #{id}
         AND tenant_id = #{userId}
-        AND delete_Flag = 0
+        AND delete_flag = 0
     </update>
 
     <update id="editStoreHouseByDefaultAll" parameterType="java.util.Map">
@@ -128,7 +128,7 @@
         </set>
         WHERE
             tenant_id = #{userId}
-        AND delete_Flag = 0
+        AND delete_flag = 0
     </update>
 
     <select id="queryStoreHouseByIdAndName" parameterType="java.util.Map" resultType="java.util.Map">
@@ -140,7 +140,7 @@
             d.id != #{id}
         AND d.tenant_id = #{userId}
         AND d.name = #{name}
-        AND d.delete_Flag = 0
+        AND d.delete_flag = 0
         ORDER BY d.create_time DESC LIMIT 0,1
     </select>
 
@@ -153,7 +153,7 @@
             d.id = #{id}
         AND d.tenant_id = #{userId}
         AND d.is_default = 1
-        AND d.delete_Flag = 0
+        AND d.delete_flag = 0
         ORDER BY d.create_time DESC LIMIT 0,1
     </select>
 </mapper>

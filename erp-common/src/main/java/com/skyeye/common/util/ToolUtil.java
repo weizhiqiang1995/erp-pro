@@ -2162,7 +2162,12 @@ public class ToolUtil {
 			net.sf.json.JSONObject.fromObject(content);
 			return true;
 		} catch (Exception e) {
-			return false;
+			try {
+				net.sf.json.JSONArray.fromObject(content);
+				return true;
+			} catch (Exception e2) {
+				return false;
+			}
 		}
 	}
 	

@@ -12,14 +12,32 @@
 	    <form class="layui-form layui-form-pane" action="" autocomplete="off">
 	        <div class="layui-form-item">
 	            <div class="layui-inline">
-	                <label class="layui-form-label">名称</label>
+	                <label class="layui-form-label">产品名称</label>
 	                <div class="layui-input-inline">
-	                    <input type="text" id="name" name="name" placeholder="请输入类型名称" class="layui-input" />
+	                    <input type="text" id="materialName" name="materialName" placeholder="请输入产品名称" class="layui-input" />
+	                </div>
+	                <label class="layui-form-label">型号</label>
+	                <div class="layui-input-inline">
+	                    <input type="text" id="model" name="model" placeholder="请输入产品型号" class="layui-input" />
 	                </div>
 	                <label class="layui-form-label">一级类型</label>
 	                <div class="layui-input-inline">
-	                    <select lay-filter="firstType" lay-search="" id="firstType">
+	                    <select lay-filter="categoryId" lay-search="" id="categoryId">
 	                    
+	                    </select>
+	                </div>
+	                <label class="layui-form-label">二级类型</label>
+	                <div class="layui-input-inline">
+	                    <select lay-filter="categoryIdSec" lay-search="" id="categoryIdSec">
+	                    
+	                    </select>
+	                </div>
+	                <label class="layui-form-label">状态</label>
+	                <div class="layui-input-inline">
+	                    <select lay-filter="enabled" lay-search="" id="enabled">
+	                    	<option value="">全部</option>
+	                    	<option value="0">禁用</option>
+	                    	<option value="1">启用</option>
 	                    </select>
 	                </div>
 	                <button type="reset" class="layui-btn layui-btn-primary list-form-search">重置</button>
@@ -31,37 +49,31 @@
     <div class="winui-toolbar">
         <div class="winui-tool">
             <button id="reloadTable" class="winui-toolbtn"><i class="fa fa-refresh" aria-hidden="true"></i>刷新数据</button>
-            <button id="addBean" class="winui-toolbtn" auth="1568558491168"><i class="fa fa-plus" aria-hidden="true"></i>新增类型</button>
+            <button id="addBean" class="winui-toolbtn" auth=""><i class="fa fa-plus" aria-hidden="true"></i>新增</button>
         </div>
     </div>
     <div style="margin:auto 10px;">
         <table id="messageTable" lay-filter="messageTable"></table>
         <script type="text/html" id="tableBar">
-			{{# if(d.status == 1 && auth('1568558813191')){ }}
+			{{# if(d.enabled == 1 && auth('1552960199302')){ }}
 				<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="down">禁用</a>
-			{{# }else if(d.status == 2){ }}
-				{{# if(auth('1568558823143')){ }}
-            		<a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
-				{{# } }}
-				{{# if(auth('1568558803335')){ }}
+			{{# }else if(d.enabled == 0){ }}
+				{{# if(auth('1552960199302')){ }}
             		<a class="layui-btn layui-btn-xs" lay-event="up">启用</a>
 				{{# } }}
-				{{# if(auth('1568558794203')){ }}
-            		<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delet">删除</a>
-				{{# } }}
 			{{# } }}
-			{{# if(auth('1568558832391')){ }}
-            	<a class="layui-btn layui-btn-xs" lay-event="upMove">上移</a>
+			{{# if(auth('1552960199302')){ }}
+            	<a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
 			{{# } }}
-			{{# if(auth('1568558841199')){ }}
-            	<a class="layui-btn layui-btn-xs" lay-event="downMove">下移</a>
+			{{# if(auth('1552960199302')){ }}
+            	<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delet">删除</a>
 			{{# } }}
         </script>
     </div>
     <script src="../../assets/lib/layui/layui.js"></script>
     <script src="../../assets/lib/layui/custom.js"></script>
     <script type="text/javascript">
-        layui.config({base: '../../js/materialcategory/'}).use('materialcategorylist');
+        layui.config({base: '../../js/material/'}).use('materiallist');
     </script>
 </body>
 </html>

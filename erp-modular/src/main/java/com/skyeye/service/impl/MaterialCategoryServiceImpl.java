@@ -66,6 +66,7 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
 			map.put("createId", user.get("id"));
 			map.put("createName", user.get("userName"));
 			map.put("createTime", ToolUtil.getTimeAndToString());
+			jedisClient.del(Constants.getSysMaterialCategoryRedisKeyById(map.get("parentId").toString()));//删除上线产品类型的redis
 			materialCategoryDao.insertMaterialCategoryMation(map);
 		}
 	}
