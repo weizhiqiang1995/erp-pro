@@ -15,7 +15,7 @@ layui.config({
 		form = layui.form,
 		table = layui.table;
 	
-	authBtn('1569160351079');
+	authBtn('1570697180609');
 	
 	//表格渲染
 	table.render({

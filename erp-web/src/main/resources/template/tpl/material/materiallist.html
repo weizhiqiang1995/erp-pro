@@ -49,23 +49,23 @@
     <div class="winui-toolbar">
         <div class="winui-tool">
             <button id="reloadTable" class="winui-toolbtn"><i class="fa fa-refresh" aria-hidden="true"></i>刷新数据</button>
-            <button id="addBean" class="winui-toolbtn" auth=""><i class="fa fa-plus" aria-hidden="true"></i>新增</button>
+            <button id="addBean" class="winui-toolbtn" auth="1570697180609"><i class="fa fa-plus" aria-hidden="true"></i>新增</button>
         </div>
     </div>
     <div style="margin:auto 10px;">
         <table id="messageTable" lay-filter="messageTable"></table>
         <script type="text/html" id="tableBar">
-			{{# if(d.enabled == 1 && auth('1552960199302')){ }}
+			{{# if(d.enabled == 1 && auth('1570697191121')){ }}
 				<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="down">禁用</a>
 			{{# }else if(d.enabled == 0){ }}
-				{{# if(auth('1552960199302')){ }}
+				{{# if(auth('1570697199781')){ }}
             		<a class="layui-btn layui-btn-xs" lay-event="up">启用</a>
 				{{# } }}
 			{{# } }}
-			{{# if(auth('1552960199302')){ }}
+			{{# if(auth('1570697233834')){ }}
             	<a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
 			{{# } }}
-			{{# if(auth('1552960199302')){ }}
+			{{# if(auth('1570697208099')){ }}
             	<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delet">删除</a>
 			{{# } }}
         </script>

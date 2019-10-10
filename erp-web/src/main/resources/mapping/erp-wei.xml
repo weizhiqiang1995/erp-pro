@@ -74,7 +74,7 @@
 	<!-- 产品计量单位结束 -->
 	
 	<!-- 产品开始 -->
-	<url id="material001" path="/post/MaterialController/queryMaterialListByUserId" val="获取产品信息" allUse="2">
+	<url id="material001" path="/post/MaterialController/queryMaterialListByUserId" val="获取产品信息" allUse="1">
 		<property id="materialName" name="materialName" ref="" var="产品名称" />
 		<property id="categoryId" name="categoryId" ref="" var="一级分类id" />
 		<property id="categoryIdSec" name="categoryIdSec" ref="" var="二级分类id" />
@@ -85,7 +85,7 @@
 	</url>
 	<url id="material002" path="/post/MaterialController/queryMaterialUnitListToSelectByUserId" val="获取租户拥有的产品计量单位" allUse="2">
 	</url>
-	<url id="material003" path="/post/MaterialController/insertMaterialMation" val="新增产品信息" allUse="2">
+	<url id="material003" path="/post/MaterialController/insertMaterialMation" val="新增产品信息" allUse="1">
 		<property id="materialName" name="materialName" ref="required" var="产品名称" />
 		<property id="categoryId" name="categoryId" ref="required" var="一级分类id" />
 		<property id="categoryIdSec" name="categoryIdSec" ref="required" var="二级分类id" />
@@ -97,13 +97,13 @@
 		<property id="firstOutUnit" name="firstOutUnit" ref="" var="首选出库单位" />
 		<property id="materialNormsStr" name="materialNormsStr" ref="required" var="产品规格字符串" />
 	</url>
-	<url id="material004" path="/post/MaterialController/editMaterialEnabledToDisablesById" val="禁用产品信息" allUse="2">
+	<url id="material004" path="/post/MaterialController/editMaterialEnabledToDisablesById" val="禁用产品信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="产品id" />
 	</url>
-	<url id="material005" path="/post/MaterialController/editMaterialEnabledToEnablesById" val="启用产品信息" allUse="2">
+	<url id="material005" path="/post/MaterialController/editMaterialEnabledToEnablesById" val="启用产品信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="产品id" />
 	</url>
-	<url id="material006" path="/post/MaterialController/deleteMaterialMationById" val="删除产品信息" allUse="2">
+	<url id="material006" path="/post/MaterialController/deleteMaterialMationById" val="删除产品信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="产品id" />
 	</url>
 	<url id="material007" path="/post/MaterialController/queryMaterialMationDetailsById" val="产品信息详情" allUse="2">
@@ -112,7 +112,7 @@
 	<url id="material008" path="/post/MaterialController/queryMaterialMationToEditById" val="编辑产品信息进行回显" allUse="2">
 		<property id="rowId" name="id" ref="required" var="产品id" />
 	</url>
-	<url id="material009" path="/post/MaterialController/editMaterialMationById" val="编辑产品信息" allUse="2">
+	<url id="material009" path="/post/MaterialController/editMaterialMationById" val="编辑产品信息" allUse="1">
 		<property id="materialName" name="materialName" ref="required" var="产品名称" />
 		<property id="categoryId" name="categoryId" ref="required" var="一级分类id" />
 		<property id="categoryIdSec" name="categoryIdSec" ref="required" var="二级分类id" />
