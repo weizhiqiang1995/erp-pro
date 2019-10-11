@@ -356,14 +356,14 @@ button{
 
 .winui-taskbar-task {
     position: absolute;
-    left: 108px;
+    left: 50px;
     right: 200px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     color: #fff;
     overflow: hidden;
-    width: calc(100% - 308px);
+    width: calc(100% - 250px);
     height: 30px;
 }
 
@@ -3234,8 +3234,9 @@ body .layer-ext-winconfirm .layui-layer-title {
 }
 
 .ver-center{
-	display: flex;
-    align-items: Center;
+	align-items: Center;
+    padding-top: 8px;
+    min-height: 32px;
 }
 
 .padding-l-r-10{
