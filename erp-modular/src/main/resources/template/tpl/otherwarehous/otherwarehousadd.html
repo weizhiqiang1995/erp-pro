@@ -41,11 +41,13 @@
 		                <thead>
 		                    <tr>
 		                    	<th></th>
-		                        <th>用品类别</th>
-		                        <th>用品名称</th>
-		                        <th style="min-width: 100px;">规格(单位)</th>
-		                        <th style="min-width: 50px;">库存</th>
-		                        <th style="min-width: 50px;">领用数量</th>
+		                        <th>仓库</th>
+		                        <th>产品(型号)</th>
+		                        <th>单位</th>
+		                        <th style="width: 50px;">库存</th>
+		                        <th style="width: 50px;">数量</th>
+		                        <th style="width: 50px;">单价</th>
+		                        <th style="width: 50px;">金额</th>
 		                        <th>备注</th>
 		                    </tr>
 		                </thead>
@@ -61,16 +63,9 @@
 		        </div>
 		    </div>
 		    <div class="layui-form-item layui-col-xs12">
-		        <label class="layui-form-label">相关附件</label>
-		        <div class="layui-input-block">
-		        	<button type="button" class="layui-btn layui-btn-primary layui-btn-xs" id="enclosureUploadBtn">附件上传</button>
-		        </div>
-		    </div>
-		    <div class="layui-form-item layui-col-xs12">
 		        <div class="layui-input-block">
 		            <button class="winui-btn" id="cancle">取消</button>
-		            <button class="winui-btn" lay-submit lay-filter="formAddBean">保存为草稿</button>
-		            <button class="winui-btn" lay-submit lay-filter="formSubBean">提交审批</button>
+		            <button class="winui-btn" lay-submit lay-filter="formAddBean">保存</button>
 		        </div>
 		    </div>
 	    </form>
@@ -92,7 +87,7 @@
 	<script src="../../assets/lib/layui/layui.js"></script>
    	<script src="../../assets/lib/layui/custom.js"></script>
    	<script type="text/javascript">
-		layui.config({base: '../../js/assetarticles/'}).use('assetarticlesuseadd');
+		layui.config({base: '../../js/otherwarehous/'}).use('otherwarehousadd');
 	</script>
 </body>
 </html>
