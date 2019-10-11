@@ -90,4 +90,17 @@ public class StoreHouseController {
     public void editStoreHouseByDefault(InputObject inputObject, OutputObject outputObject) throws Exception{
         storeHouseService.editStoreHouseByDefault(inputObject, outputObject);
     }
+    
+    /**
+     * 获取所有仓库展示为下拉框
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/StoreHouseController/queyrStoreHouseListToSelect")
+    @ResponseBody
+    public void queyrStoreHouseListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception{
+        storeHouseService.queyrStoreHouseListToSelect(inputObject, outputObject);
+    }
+    
 }

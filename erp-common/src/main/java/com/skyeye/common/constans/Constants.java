@@ -168,11 +168,4 @@ public class Constants {
 		return SYS_EVE_PIC_TYPE_UP_STATE_LIST;
 	}
 	
-	//产品类型在redis中的key
-	public static final String SYS_MATERIAL_CATEGORY_REDIS_KEY = "sys_material_category_redis_key";
-	public static String getSysMaterialCategoryRedisKeyById(String id){
-		return SYS_MATERIAL_CATEGORY_REDIS_KEY + id;
-	}
-	
-	
 }

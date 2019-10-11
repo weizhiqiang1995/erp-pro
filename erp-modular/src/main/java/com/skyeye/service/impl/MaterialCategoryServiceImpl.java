@@ -3,16 +3,19 @@ package com.skyeye.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.alibaba.fastjson.JSON;
-import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.MaterialCategoryDao;
+import com.skyeye.erp.util.ErpConstants;
 import com.skyeye.jedis.JedisClientService;
 import com.skyeye.service.MaterialCategoryService;
+
 import net.sf.json.JSONArray;
 
 @Service
@@ -53,7 +56,8 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
 	public void insertMaterialCategoryMation(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		Map<String, Object> user = inputObject.getLogParams();
-		map.put("userId", user.get("id"));
+		String userId = user.get("id").toString();
+		map.put("userId", userId);
 		Map<String, Object> bean = materialCategoryDao.queryMaterialCategoryMationByName(map);//查询是否已经存在该产品类型名称
 		if(bean != null && !bean.isEmpty()){
 			outputObject.setreturnMessage("该类型已存在，请更换");
@@ -63,10 +67,10 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
 			map.put("orderBy", thisOrderBy);
 			map.put("id", ToolUtil.getSurFaceId());
 			map.put("status", "1");//默认启用
-			map.put("createId", user.get("id"));
+			map.put("createId", userId);
 			map.put("createName", user.get("userName"));
 			map.put("createTime", ToolUtil.getTimeAndToString());
-			jedisClient.del(Constants.getSysMaterialCategoryRedisKeyById(map.get("parentId").toString()));//删除上线产品类型的redis
+			jedisClient.del(ErpConstants.getSysMaterialCategoryRedisKeyById(userId, map.get("parentId").toString()));//删除上线产品类型的redis
 			materialCategoryDao.insertMaterialCategoryMation(map);
 		}
 	}
@@ -105,11 +109,11 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
 		Map<String, Object> map = inputObject.getParams();
 		Map<String, Object> bean = materialCategoryDao.queryMaterialCategoryStateById(map);
 		if("2".equals(bean.get("status").toString())){//禁用状态下可以启用
-			Map<String, Object> user = inputObject.getLogParams();
-			map.put("userId", user.get("id"));
+			String userId = inputObject.getLogParams().get("id").toString();
+			map.put("userId", userId);
 			materialCategoryDao.updateUpMaterialCategoryById(map);
 			bean = materialCategoryDao.queryMaterialCategoryById(map);	//查询该产品类型的父级id
-			jedisClient.del(Constants.getSysMaterialCategoryRedisKeyById(bean.get("parentId").toString()));//删除上线产品类型的redis
+			jedisClient.del(ErpConstants.getSysMaterialCategoryRedisKeyById(userId, bean.get("parentId").toString()));//删除上线产品类型的redis
 		}else{
 			outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
 		}
@@ -127,11 +131,11 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
 		Map<String, Object> map = inputObject.getParams();
 		Map<String, Object> bean = materialCategoryDao.queryMaterialCategoryStateById(map);
 		if("1".equals(bean.get("status").toString())){//启用状态下可以禁用
-			Map<String, Object> user = inputObject.getLogParams();
-			map.put("userId", user.get("id"));
+			String userId = inputObject.getLogParams().get("id").toString();
+			map.put("userId", userId);
 			materialCategoryDao.updateDownMaterialCategoryById(map);
 			bean = materialCategoryDao.queryMaterialCategoryById(map);	//查询该产品类型的父级id
-			jedisClient.del(Constants.getSysMaterialCategoryRedisKeyById(bean.get("parentId").toString()));//删除上线产品类型的redis
+			jedisClient.del(ErpConstants.getSysMaterialCategoryRedisKeyById(userId, bean.get("parentId").toString()));//删除上线产品类型的redis
 		}else{
 			outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
 		}
@@ -189,8 +193,8 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
 	@Override
 	public void editMaterialCategoryMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> user = inputObject.getLogParams();
-		map.put("userId", user.get("id"));
+		String userId = inputObject.getLogParams().get("id").toString();
+		map.put("userId", userId);
 		Map<String, Object> bean = materialCategoryDao.queryMaterialCategoryUpMationById(map);//获取当前数据的同级分类下的上一条数据
 		if(bean == null){
 			outputObject.setreturnMessage("当前类型已经是首位，无须进行上移。");
@@ -198,11 +202,11 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
 			//进行位置交换
 			map.put("upOrderBy", bean.get("prevOrderBy"));
 			bean.put("upOrderBy", bean.get("thisOrderBy"));
-			bean.put("userId", user.get("id"));
+			bean.put("userId", userId);
 			materialCategoryDao.editMaterialCategoryMationOrderNumUpById(map);	//该产品类型与上一条数据互换orderBy
 			materialCategoryDao.editMaterialCategoryMationOrderNumUpById(bean);
 			bean = materialCategoryDao.queryMaterialCategoryById(map);	//查询该产品类型的父级id
-			jedisClient.del(Constants.getSysMaterialCategoryRedisKeyById(bean.get("parentId").toString()));//删除上线产品类型的redis
+			jedisClient.del(ErpConstants.getSysMaterialCategoryRedisKeyById(userId, bean.get("parentId").toString()));//删除上线产品类型的redis
 		}
 	}
 	
@@ -216,8 +220,8 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
 	@Override
 	public void editMaterialCategoryMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> user = inputObject.getLogParams();
-		map.put("userId", user.get("id"));
+		String userId = inputObject.getLogParams().get("id").toString();
+		map.put("userId", userId);
 		Map<String, Object> bean = materialCategoryDao.queryMaterialCategoryDownMationById(map);//获取当前数据的同级分类下的下一条数据
 		if(bean == null){
 			outputObject.setreturnMessage("当前类型已经是末位，无须进行下移。");
@@ -225,11 +229,11 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
 			//进行位置交换
 			map.put("upOrderBy", bean.get("prevOrderBy"));
 			bean.put("upOrderBy", bean.get("thisOrderBy"));
-			bean.put("userId", user.get("id"));
+			bean.put("userId", userId);
 			materialCategoryDao.editMaterialCategoryMationOrderNumUpById(map);//该产品类型与下一条数据互换orderBy
 			materialCategoryDao.editMaterialCategoryMationOrderNumUpById(bean);
 			bean = materialCategoryDao.queryMaterialCategoryById(map);	//查询该产品类型的父级id
-			jedisClient.del(Constants.getSysMaterialCategoryRedisKeyById(bean.get("parentId").toString()));//删除上线产品类型的redis
+			jedisClient.del(ErpConstants.getSysMaterialCategoryRedisKeyById(userId, bean.get("parentId").toString()));//删除上线产品类型的redis
 		}
 	}
 
@@ -244,14 +248,14 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
 	@Override
 	public void queryFirstMaterialCategoryUpStateList(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> user = inputObject.getLogParams();
-		map.put("userId", user.get("id"));
+		String userId = inputObject.getLogParams().get("id").toString();
+		map.put("userId", userId);
 		List<Map<String, Object>> beans = new ArrayList<>();
-		if(ToolUtil.isBlank(jedisClient.get(Constants.getSysMaterialCategoryRedisKeyById("")))){	//若缓存中无值
+		if(ToolUtil.isBlank(jedisClient.get(ErpConstants.getSysMaterialCategoryRedisKeyById(userId, "")))){	//若缓存中无值
 			beans = materialCategoryDao.queryFirstMaterialCategoryUpStateList(map);	//从数据库中查询
-			jedisClient.set(Constants.getSysMaterialCategoryRedisKeyById(""), JSON.toJSONString(beans));	//将从数据库中查来的内容存到缓存中
+			jedisClient.set(ErpConstants.getSysMaterialCategoryRedisKeyById(userId, ""), JSON.toJSONString(beans));	//将从数据库中查来的内容存到缓存中
 		}else{
-			beans = JSONArray.fromObject(jedisClient.get(Constants.getSysMaterialCategoryRedisKeyById("")).toString());
+			beans = JSONArray.fromObject(jedisClient.get(ErpConstants.getSysMaterialCategoryRedisKeyById(userId, "")).toString());
 		}
 		if(!beans.isEmpty()){
 			outputObject.setBeans(beans);
@@ -270,14 +274,14 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
 	@Override
 	public void querySecondMaterialCategoryUpStateList(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> user = inputObject.getLogParams();
-		map.put("userId", user.get("id"));
+		String userId = inputObject.getLogParams().get("id").toString();
+		map.put("userId", userId);
 		List<Map<String, Object>> beans = new ArrayList<>();
-		if(ToolUtil.isBlank(jedisClient.get(Constants.getSysMaterialCategoryRedisKeyById(map.get("parentId").toString())))){//若缓存中无值
+		if(ToolUtil.isBlank(jedisClient.get(ErpConstants.getSysMaterialCategoryRedisKeyById(userId, map.get("parentId").toString())))){//若缓存中无值
 			beans = materialCategoryDao.querySecondMaterialCategoryUpStateList(map);	//从数据库中查询
-			jedisClient.set(Constants.getSysMaterialCategoryRedisKeyById(map.get("parentId").toString()), JSON.toJSONString(beans));//将从数据库中查来的内容存到缓存中
+			jedisClient.set(ErpConstants.getSysMaterialCategoryRedisKeyById(userId, map.get("parentId").toString()), JSON.toJSONString(beans));//将从数据库中查来的内容存到缓存中
 		}else{
-			beans = JSONArray.fromObject(jedisClient.get(Constants.getSysMaterialCategoryRedisKeyById(map.get("parentId").toString())).toString());
+			beans = JSONArray.fromObject(jedisClient.get(ErpConstants.getSysMaterialCategoryRedisKeyById(userId, map.get("parentId").toString())));
 		}
 		if(!beans.isEmpty()){
 			outputObject.setBeans(beans);

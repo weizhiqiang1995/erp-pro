@@ -1,18 +1,24 @@
 package com.skyeye.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.alibaba.fastjson.JSON;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.StoreHouseDao;
+import com.skyeye.erp.util.ErpConstants;
+import com.skyeye.jedis.JedisClientService;
 import com.skyeye.service.StoreHouseService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Map;
+import net.sf.json.JSONArray;
 
 /**
  * @Author 奈何繁华如云烟
@@ -24,6 +30,9 @@ public class StoreHouseServiceImpl implements StoreHouseService {
 
     @Autowired
     private StoreHouseDao storeHouseDao;
+    
+    @Autowired
+	private JedisClientService jedisClient;
 
     /**
      * 获取仓库信息列表
@@ -52,8 +61,8 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     @Transactional(value="transactionManager")
     public void insertStoreHouse(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        params.put("userId", user.get("id"));
+        String userId = inputObject.getLogParams().get("id").toString();
+        params.put("userId", userId);
         Map<String, Object> bean = storeHouseDao.queryStoreHouseByName(params);
         if(bean == null){
             params.put("id", ToolUtil.getSurFaceId());
@@ -64,6 +73,7 @@ public class StoreHouseServiceImpl implements StoreHouseService {
             }
             params.put("createTime", ToolUtil.getTimeAndToString());
             storeHouseDao.insertStoreHouse(params);
+            jedisClient.del(jedisClient.get(ErpConstants.getStoreHouseRedisKeyByUserId(userId)));
         }else{
             outputObject.setreturnMessage("该仓库信息已存在，请确认！");
         }
@@ -99,9 +109,11 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     @Transactional(value="transactionManager")
     public void deleteStoreHouseById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        String userId = inputObject.getLogParams().get("id").toString();
+        params.put("userId", userId);
         params.put("deleteFlag", "1");
         storeHouseDao.editStoreHouseByDeleteFlag(params);
+        jedisClient.del(jedisClient.get(ErpConstants.getStoreHouseRedisKeyByUserId(userId)));
     }
 
     /**
@@ -114,8 +126,8 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     @Transactional(value="transactionManager")
     public void editStoreHouseById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        params.put("userId", user.get("id"));
+        String userId = inputObject.getLogParams().get("id").toString();
+        params.put("userId", userId);
         Map<String, Object> houseName = storeHouseDao.queryStoreHouseByIdAndName(params);
         if(houseName != null){
             outputObject.setreturnMessage("仓库名称已存在！");
@@ -127,6 +139,7 @@ public class StoreHouseServiceImpl implements StoreHouseService {
             params.put("isDefault", "1");
         }
         storeHouseDao.editStoreHouseById(params);
+        jedisClient.del(jedisClient.get(ErpConstants.getStoreHouseRedisKeyByUserId(userId)));
     }
 
     /**
@@ -139,8 +152,8 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     @Transactional(value="transactionManager")
     public void editStoreHouseByDefault(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        params.put("userId", user.get("id"));
+        String userId = inputObject.getLogParams().get("id").toString();
+        params.put("userId", userId);
         Map<String, Object> bean = storeHouseDao.queryStoreHouseByIsDefault(params);
         if(bean != null){
             outputObject.setreturnMessage("状态已改变，请勿重复操作！");
@@ -150,5 +163,31 @@ public class StoreHouseServiceImpl implements StoreHouseService {
         storeHouseDao.editStoreHouseByDefaultAll(params);
         params.put("isDefault", "1");
         storeHouseDao.editStoreHouseByDefault(params);
+        jedisClient.del(jedisClient.get(ErpConstants.getStoreHouseRedisKeyByUserId(userId)));
     }
+
+    /**
+     * 获取所有仓库展示为下拉框
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void queyrStoreHouseListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String, Object> map = inputObject.getParams();
+		String userId = inputObject.getLogParams().get("id").toString();
+		map.put("userId", userId);
+		List<Map<String, Object>> beans;
+		if(ToolUtil.isBlank(jedisClient.get(ErpConstants.getStoreHouseRedisKeyByUserId(userId)))){//若缓存中无值
+			beans = storeHouseDao.queyrStoreHouseListToSelect(map);	//从数据库中查询
+			jedisClient.set(ErpConstants.getStoreHouseRedisKeyByUserId(userId), JSON.toJSONString(beans));//将从数据库中查来的内容存到缓存中
+		}else{
+			beans = JSONArray.fromObject(jedisClient.get(ErpConstants.getStoreHouseRedisKeyByUserId(userId)).toString());
+		}
+		if(!beans.isEmpty()){
+			outputObject.setBeans(beans);
+			outputObject.settotal(beans.size());
+		}
+	}
 }

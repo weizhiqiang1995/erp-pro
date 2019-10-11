@@ -16,19 +16,21 @@ public interface StoreHouseDao {
 
     public Map<String, Object> queryStoreHouseByName(Map<String, Object> params) throws Exception;
 
-    public void insertStoreHouse(Map<String, Object> params) throws Exception;
+    public int insertStoreHouse(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> queryStoreHouseById(Map<String, Object> params) throws Exception;
 
-    public void editStoreHouseById(Map<String, Object> params) throws Exception;
+    public int editStoreHouseById(Map<String, Object> params) throws Exception;
 
-    public void editStoreHouseByDeleteFlag(Map<String, Object> params) throws Exception;
+    public int editStoreHouseByDeleteFlag(Map<String, Object> params) throws Exception;
 
-    public void editStoreHouseByDefault(Map<String, Object> params) throws Exception;
+    public int editStoreHouseByDefault(Map<String, Object> params) throws Exception;
 
-    public void editStoreHouseByDefaultAll(Map<String, Object> params) throws Exception;
+    public int editStoreHouseByDefaultAll(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> queryStoreHouseByIdAndName(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> queryStoreHouseByIsDefault(Map<String, Object> params) throws Exception;
+
+	public List<Map<String, Object>> queyrStoreHouseListToSelect(Map<String, Object> map) throws Exception;
 }

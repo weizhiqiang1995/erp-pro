@@ -156,4 +156,17 @@
         AND d.delete_flag = 0
         ORDER BY d.create_time DESC LIMIT 0,1
     </select>
+    
+    <select id="queyrStoreHouseListToSelect" parameterType="java.util.Map" resultType="java.util.Map">
+    	SELECT
+			a.id,
+			a.`name`
+		FROM
+			erp_depot a
+		WHERE
+			a.tenant_id = #{userId}
+		AND a.delete_flag = '0'
+		ORDER BY a.is_default ASC
+    </select>
+    
 </mapper>
