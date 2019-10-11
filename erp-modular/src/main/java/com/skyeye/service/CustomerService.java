@@ -22,4 +22,6 @@ public interface CustomerService {
     public void editCustomerByEnabled(InputObject inputObject, OutputObject outputObject) throws Exception;
 
     public void editCustomerByNotEnabled(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+    public void queryCustomerByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception;
 }

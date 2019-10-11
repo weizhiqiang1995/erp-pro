@@ -103,4 +103,15 @@ public class SupplierController {
         supplierService.editSupplierByNotEnabled(inputObject, outputObject);
     }
 
+    /**
+     * 查看供应商详情
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SupplierController/querySupplierByIdAndInfo")
+    @ResponseBody
+    public void querySupplierByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception{
+        supplierService.querySupplierByIdAndInfo(inputObject, outputObject);
+    }
 }

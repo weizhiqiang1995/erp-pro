@@ -31,7 +31,7 @@ layui.config({
 
 		//初始化用品类别
 		function initTypeHtml() {
-			AjaxPostUtil.request({url: reqBasePath + "storehouse007", params: {}, type: 'json', callback: function(json) {
+			AjaxPostUtil.request({url: reqBasePath + "storehouse008", params: {}, type: 'json', callback: function(json) {
 				if(json.returnCode == 0) {
 					typeHtml = getDataUseHandlebars(selOption, json); //加载类别数据
 					//渲染

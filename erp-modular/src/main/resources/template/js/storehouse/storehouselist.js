@@ -39,7 +39,7 @@ layui.config({
                 }
             }},
             { field: 'createTime', title: '创建时间', align: 'center', width: 180 },
-            { title: '操作', fixed: 'right', align: 'center', width: 200, toolbar: '#tableBar'}
+            { title: '操作', fixed: 'right', align: 'center', width: 300, toolbar: '#tableBar'}
         ]]
     });
 
@@ -52,6 +52,8 @@ layui.config({
             deleteHouse(data);
         }else if (layEvent === 'default') { //设置默认
             defaultHouse(data);
+        }else if (layEvent === 'select') {
+            selectHouse(data);
         }
     });
 
@@ -114,6 +116,23 @@ layui.config({
                     winui.window.msg(json.returnMessage, {icon: 2,time: 2000});
                 }
             }});
+        });
+    }
+    function selectHouse(data){
+        rowId = data.id;
+        _openNewWindows({
+            url: "../../tpl/storehouse/storehouseinfo.html",
+            title: "查看仓库详情",
+            pageId: "storehouseinfo",
+            area: ['90vw', '90vh'],
+            callBack: function(refreshCode){
+                if (refreshCode == '0') {
+                    winui.window.msg("操作成功", {icon: 1,time: 2000});
+                    loadTable();
+                } else if (refreshCode == '-9999') {
+                    winui.window.msg("操作失败", {icon: 2,time: 2000});
+                }
+            }
         });
     }
     //添加仓库

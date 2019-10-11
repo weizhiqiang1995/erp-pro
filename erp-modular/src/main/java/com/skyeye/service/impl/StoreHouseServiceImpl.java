@@ -190,4 +190,23 @@ public class StoreHouseServiceImpl implements StoreHouseService {
 			outputObject.settotal(beans.size());
 		}
 	}
+
+	/**
+	 * 查看仓库详情
+	 * @param inputObject
+	 * @param outputObject
+	 * @throws Exception
+	 */
+    @Override
+    public void queryStoreHouseByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> params = inputObject.getParams();
+        params.put("userId", inputObject.getLogParams().get("id"));
+        Map<String, Object> bean = storeHouseDao.queryStoreHouseByIdAndInfo(params);
+        if(bean == null){
+            outputObject.setreturnMessage("未查询到信息！");
+            return;
+        }
+        outputObject.setBean(bean);
+        outputObject.settotal(1);
+    }
 }

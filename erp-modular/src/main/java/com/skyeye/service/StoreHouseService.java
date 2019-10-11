@@ -23,4 +23,7 @@ public interface StoreHouseService {
     public void editStoreHouseByDefault(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 	public void queyrStoreHouseListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception;
+	
+    public void queryStoreHouseByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception;
+    
 }

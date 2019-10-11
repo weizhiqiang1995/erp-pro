@@ -102,4 +102,16 @@ public class CustomerController {
     public void editCustomerByNotEnabled(InputObject inputObject, OutputObject outputObject) throws Exception{
         customerService.editCustomerByNotEnabled(inputObject, outputObject);
     }
+
+    /**
+     * 查看客户详情
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/CustomerController/queryCustomerByIdAndInfo")
+    @ResponseBody
+    public void queryCustomerByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception{
+        customerService.queryCustomerByIdAndInfo(inputObject, outputObject);
+    }
 }

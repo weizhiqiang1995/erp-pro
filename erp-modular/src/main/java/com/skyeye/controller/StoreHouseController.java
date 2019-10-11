@@ -103,4 +103,15 @@ public class StoreHouseController {
         storeHouseService.queyrStoreHouseListToSelect(inputObject, outputObject);
     }
     
+    /**
+     * 查看仓库详情
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/StoreHouseController/queryStoreHouseByIdAndInfo")
+    @ResponseBody
+    public void queryStoreHouseByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception{
+        storeHouseService.queryStoreHouseByIdAndInfo(inputObject, outputObject);
+    }
 }

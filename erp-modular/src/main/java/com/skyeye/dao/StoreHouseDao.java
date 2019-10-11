@@ -33,4 +33,7 @@ public interface StoreHouseDao {
     public Map<String, Object> queryStoreHouseByIsDefault(Map<String, Object> params) throws Exception;
 
 	public List<Map<String, Object>> queyrStoreHouseListToSelect(Map<String, Object> map) throws Exception;
+	
+    public Map<String, Object> queryStoreHouseByIdAndInfo(Map<String, Object> params) throws Exception;
+    
 }

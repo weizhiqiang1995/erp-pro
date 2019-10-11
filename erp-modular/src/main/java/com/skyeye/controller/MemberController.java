@@ -102,4 +102,16 @@ public class MemberController {
     public void editMemberByNotEnabled(InputObject inputObject, OutputObject outputObject) throws Exception{
         memberService.editMemberByNotEnabled(inputObject, outputObject);
     }
+
+    /**
+     * 查看会员详情
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/MemberController/queryMemberByIdAndInfo")
+    @ResponseBody
+    public void queryMemberByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception{
+        memberService.queryMemberByIdAndInfo(inputObject, outputObject);
+    }
 }

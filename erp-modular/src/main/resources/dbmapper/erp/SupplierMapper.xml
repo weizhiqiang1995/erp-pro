@@ -239,4 +239,37 @@
         AND s.delete_flag = 0
         ORDER BY s.id DESC LIMIT 0,1
     </select>
+
+    <select id="querySupplierByIdAndInfo" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+            s.id,
+            s.supplier supplierName,
+            s.contacts,
+            s.phonenum,
+            s.email,
+            s.description,
+            s.isystem,
+            s.type supplierType,
+            s.enabled,
+            FORMAT(s.advance_in, 2) advanceIn,
+            FORMAT(s.begin_need_get, 2) beginNeedGet,
+            FORMAT(s.begin_need_pay, 2) beginNeedPay,
+            FORMAT(s.all_need_get, 2) allNeedGet,
+            FORMAT(s.all_need_pay, 2) allNeedPay,
+            s.fax,
+            FORMAT(s.tax_rate, 2) taxRate,
+            s.address,
+            s.telephone,
+            s.tax_num taxNum,
+            s.bank_name bankName,
+            s.account_number accountNumber,
+            s.delete_flag deleteFlag
+        FROM
+            erp_supplier s
+        WHERE
+            s.tenant_id = #{userId}
+        AND s.id = #{id}
+        AND s.type = 1
+        ORDER BY s.id DESC LIMIT 0,1
+    </select>
 </mapper>
