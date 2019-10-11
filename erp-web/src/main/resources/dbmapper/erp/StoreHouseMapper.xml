@@ -156,4 +156,24 @@
         AND d.delete_Flag = 0
         ORDER BY d.create_time DESC LIMIT 0,1
     </select>
+
+    <select id="queryStoreHouseByIdAndInfo" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+            d.id,
+            d.`name` houseName,
+            d.address,
+            FORMAT(d.warehousing, 2) warehousing,
+            FORMAT(d.truckage, 2) truckage,
+            d.remark,
+            d.principal,
+            d.tenant_id,
+            d.is_default isDefault,
+            CONVERT (d.create_time, CHAR) createTime
+        FROM
+            erp_depot d
+        WHERE
+            d.id = #{id}
+        AND d.tenant_id = #{userId}
+        ORDER BY d.create_time DESC LIMIT 0,1
+    </select>
 </mapper>

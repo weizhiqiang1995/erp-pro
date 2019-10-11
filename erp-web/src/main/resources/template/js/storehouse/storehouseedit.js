@@ -46,22 +46,6 @@ layui.config({
                     }
                     return false;
                 });
-                //自定义表单验证（金额）
-                form.verify({
-                    warehousing : function(value, item){
-                        var reg = /^0{1}([.]\d{1,2})?$|^[1-9]\d*([.]{1}[0-9]{1,2})?$/;//正则表达式
-                        if(!isNull(value) && !reg.test(value)){
-                            return "请输入正确的金额, 可保留小数点后两位";
-                        }
-                    },
-                    truckage : function(value, item){
-                        var reg = /^0{1}([.]\d{1,2})?$|^[1-9]\d*([.]{1}[0-9]{1,2})?$/;
-                        if(!isNull(value) && !reg.test(value)){
-                            return "请输入正确的金额, 可保留小数点后两位";
-                        }
-                    },
-
-                });
             }
         });
 

@@ -50,7 +50,7 @@ layui.config({
                 }
             }},
             { field: 'createTime', title: '创建时间', align: 'center', width: 180 },
-            { title: '操作', fixed: 'right', align: 'center', width: 200, toolbar: '#tableBar'}
+            { title: '操作', fixed: 'right', align: 'center', width: 300, toolbar: '#tableBar'}
         ]]
     });
 
@@ -65,6 +65,8 @@ layui.config({
             editEnabled(data);
         }else if(layEvent == 'unenabled'){
             editNotEnabled(data)
+        }else if(layEvent == 'select'){
+            selectCustomer(data)
         }
     });
 
@@ -136,13 +138,30 @@ layui.config({
                 rowId: data.id,
             };
             AjaxPostUtil.request({url:reqBasePath + "customer007", params:params, type:'json', callback:function(json){
-                    if(json.returnCode == 0){
-                        winui.window.msg("设置成功。", {icon: 1,time: 2000});
-                        loadTable();
-                    }else{
-                        winui.window.msg(json.returnMessage, {icon: 2,time: 2000});
-                    }
-                }});
+                if(json.returnCode == 0){
+                    winui.window.msg("设置成功。", {icon: 1,time: 2000});
+                    loadTable();
+                }else{
+                    winui.window.msg(json.returnMessage, {icon: 2,time: 2000});
+                }
+            }});
+        });
+    }
+    function selectCustomer(data){
+        rowId = data.id;
+        _openNewWindows({
+            url: "../../tpl/customer/customerinfo.html",
+            title: "查看会员详情",
+            pageId: "customerinfo",
+            area: ['90vw', '90vh'],
+            callBack: function(refreshCode){
+                if (refreshCode == '0') {
+                    winui.window.msg("操作成功", {icon: 1,time: 2000});
+                    loadTable();
+                } else if (refreshCode == '-9999') {
+                    winui.window.msg("操作失败", {icon: 2,time: 2000});
+                }
+            }
         });
     }
     //添加客户

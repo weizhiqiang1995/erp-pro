@@ -14,13 +14,13 @@
     <div class="layui-form-item layui-col-xs6">
         <label class="layui-form-label">仓储费</label>
         <div class="layui-input-block">
-            <input type="text" id="warehousing" name="warehousing" lay-verify="warehousing" placeholder="请输入仓储费" class="layui-input" value="{{warehousing}}"/>
+            <input type="text" id="warehousing" name="warehousing" win-verify="required|money" placeholder="请输入仓储费" class="layui-input" value="{{warehousing}}"/>
         </div>
     </div>
     <div class="layui-form-item layui-col-xs6">
         <label class="layui-form-label">搬运费</label>
         <div class="layui-input-block">
-            <input type="text" id="truckage" name="truckage" lay-verify="truckage" placeholder="请输入搬运费" class="layui-input" value="{{truckage}}"/>
+            <input type="text" id="truckage" name="truckage" win-verify="required|money" placeholder="请输入搬运费" class="layui-input" value="{{truckage}}"/>
         </div>
     </div>
     <div class="layui-form-item layui-col-xs12">

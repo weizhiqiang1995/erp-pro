@@ -44,46 +44,6 @@ layui.config({
             return false;
         });
 
-        //自定义表单验证（金额）
-        form.verify({
-            advanceIn : function(value, item){
-                var reg = /^0{1}([.]\d{1,2})?$|^[1-9]\d*([.]{1}[0-9]{1,2})?$/;//正则表达式
-                if(!isNull(value) && !reg.test(value)){
-                    return "请输入正确的金额, 可保留小数点后两位";
-                }
-            },
-            beginNeedGet : function(value, item){
-                var reg = /^0{1}([.]\d{1,2})?$|^[1-9]\d*([.]{1}[0-9]{1,2})?$/;
-                if(!isNull(value) && !reg.test(value)){
-                    return "请输入正确的金额, 可保留小数点后两位";
-                }
-            },
-            beginNeedPay : function(value, item){
-                var reg = /^0{1}([.]\d{1,2})?$|^[1-9]\d*([.]{1}[0-9]{1,2})?$/;
-                if(!isNull(value) && !reg.test(value)){
-                    return "请输入正确的金额, 可保留小数点后两位";
-                }
-            },
-            allNeedGet : function(value, item){
-                var reg = /^0{1}([.]\d{1,2})?$|^[1-9]\d*([.]{1}[0-9]{1,2})?$/;
-                if(!isNull(value) && !reg.test(value)){
-                    return "请输入正确的金额, 可保留小数点后两位";
-                }
-            },
-            allNeedPay : function(value, item){
-                var reg = /^0{1}([.]\d{1,2})?$|^[1-9]\d*([.]{1}[0-9]{1,2})?$/;
-                if(!isNull(value) && !reg.test(value)){
-                    return "请输入正确的金额, 可保留小数点后两位";
-                }
-            },
-            taxRate : function(value, item){
-                var reg = /^0{1}([.]\d{1,2})?$|^[1-9]\d*([.]{1}[0-9]{1,2})?$/;
-                if(!isNull(value) && !reg.test(value)){
-                    return "请输入正确的税率, 可保留小数点后两位";
-                }
-            },
-        });
-
         $("body").on("click", "#cancle", function(){
             parent.layer.close(index);
         });

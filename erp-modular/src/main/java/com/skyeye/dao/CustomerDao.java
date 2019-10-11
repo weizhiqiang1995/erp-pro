@@ -31,4 +31,6 @@ public interface CustomerDao {
     public Map<String, Object> queryCustomerByIdAndName(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> queryCustomerByEnabled(Map<String, Object> params) throws Exception;
+
+    public Map<String, Object> queryCustomerByIdAndInfo(Map<String, Object> params) throws Exception;
 }

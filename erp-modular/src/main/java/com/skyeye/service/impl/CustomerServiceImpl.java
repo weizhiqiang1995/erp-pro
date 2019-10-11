@@ -60,8 +60,7 @@ public class CustomerServiceImpl implements CustomerService {
             outputObject.setreturnMessage("该客户信息已存在！");
             return;
         }
-        params.put("customerId", ToolUtil.getSurFaceId());
-        params.put("createTime", ToolUtil.getTimeAndToString());
+
         params.put("customerType", 2);
         params.put("enabled", 1);
         params.put("isystem", 1);
@@ -161,5 +160,24 @@ public class CustomerServiceImpl implements CustomerService {
             return;
         }
         customerDao.editCustomerByNotEnabled(params);
+    }
+
+    /**
+     * 查看客户详情
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void queryCustomerByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> params = inputObject.getParams();
+        params.put("userId", inputObject.getLogParams().get("id"));
+        Map<String, Object> bean = customerDao.queryCustomerByIdAndInfo(params);
+        if(bean == null){
+            outputObject.setreturnMessage("未查询到信息！");
+            return;
+        }
+        outputObject.setBean(bean);
+        outputObject.settotal(1);
     }
 }
