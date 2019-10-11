@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<controller>
+	<!-- 
+		- allUse  是否需要登录才能使用   1是   0否  2需要登陆才能访问，但无需授权    默认为否
+	 -->
+	 
+	<!-- 仓库管理开始 -->
+	<url id="storehouse001" path="/post/StoreHouseController/queryStoreHouseByList" val="获取仓库信息" allUse="1">
+		<property id="houseName" name="name" ref="" var="仓库名称"></property>
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="storehouse002" path="/post/StoreHouseController/insertStoreHouse" val="添加仓库信息" allUse="1">
+		<property id="houseName" name="name" ref="required" var="仓库名称"></property>
+		<property id="address" name="address" ref="" var="仓库地址"></property>
+		<property id="warehousing" name="warehousing" ref="" var="仓储费"></property>
+		<property id="truckage" name="truckage" ref="" var="搬运费"></property>
+		<property id="remark" name="remark" ref="" var="描述"></property>
+		<property id="principal" name="principal" ref="" var="负责人"></property>
+		<property id="isDefault" name="isDefault" ref="required,num" var="是否默认"></property>
+	</url>
+	<url id="storehouse003" path="/post/StoreHouseController/queryStoreHouseById" val="查询单个仓库信息，用于数据回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="仓库ID"></property>
+	</url>
+	<url id="storehouse004" path="/post/StoreHouseController/deleteStoreHouseById" val="删除仓库信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="仓库ID"></property>
+	</url>
+	<url id="storehouse005" path="/post/StoreHouseController/editStoreHouseById" val="编辑仓库信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="仓库ID"></property>
+		<property id="houseName" name="name" ref="required" var="仓库名称"></property>
+		<property id="address" name="address" ref="" var="仓库地址"></property>
+		<property id="warehousing" name="warehousing" ref="" var="仓储费"></property>
+		<property id="truckage" name="truckage" ref="" var="搬运费"></property>
+		<property id="remark" name="remark" ref="" var="描述"></property>
+		<property id="principal" name="principal" ref="" var="负责人"></property>
+		<property id="isDefault" name="isDefault" ref="required,num" var="是否默认"></property>
+	</url>
+	<url id="storehouse006" path="/post/StoreHouseController/editStoreHouseByDefault" val="设置仓库为默认状态" allUse="1">
+		<property id="rowId" name="id" ref="required" var="仓库ID"></property>
+	</url>
+	<url id="storehouse007" path="/post/StoreHouseController/queryStoreHouseByIdAndInfo" val="查看仓库详情" allUse="1">
+		<property id="rowId" name="id" ref="required" var="仓库ID"></property>
+	</url>
+	<!-- 仓库管理结束 -->
+
+	<!-- 供应商管理开始 -->
+	<url id="supplier001" path="/post/SupplierController/querySupplierByList" val="获取供应商信息" allUse="1">
+		<property id="supplierName" name="supplierName" ref="" var="供应商名称"></property>
+		<property id="telephone" name="telephone" ref="" var="手机号码"></property>
+		<property id="email" name="email" ref="" var="邮箱"></property>
+		<property id="fax" name="fax" ref="" var="传真"></property>
+		<property id="enabled" name="enabled" ref="" var="状态"></property>-->
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="supplier002" path="/post/SupplierContronller/insertSupplier" val="添加供应商信息" allUse="1">
+		<property id="supplierName" name="supplierName" ref="required" var="仓库名称"></property>
+		<property id="contacts" name="contacts" ref="" var="联系人"></property>
+		<property id="phonenum" name="phonenum" ref="" var="联系电话"></property>
+		<property id="email" name="email" ref="email" var="电子邮箱"></property>
+		<property id="description" name="description" ref="" var="备注"></property>
+		<property id="advanceIn" name="advanceIn" ref="" var="预收款"></property>
+		<property id="beginNeedGet" name="beginNeedGet" ref="" var="期初应收"></property>
+		<property id="beginNeedPay" name="beginNeedPay" ref="" var="期初应付"></property>
+		<property id="allNeedGet" name="allNeedGet" ref="" var="累计应收"></property>
+		<property id="allNeedPay" name="allNeedPay" ref="" var="累计应付"></property>
+		<property id="fax" name="fax" ref="" var="传真"></property>
+		<property id="telephone" name="telephone" ref="phone" var="手机"></property>
+		<property id="address" name="address" ref="" var="地址"></property>
+		<property id="taxNum" name="taxNum" ref="" var="纳税人识别号"></property>
+		<property id="bankName" name="bankName" ref="" var="开户行"></property>
+		<property id="accountNumber" name="accountNumber" ref="" var="账号"></property>
+		<property id="taxRate" name="taxRate" ref="" var="税率"></property>
+	</url>
+	<url id="supplier003" path="/post/SupplierController/querySupplierById" val="根据ID查询供应商信息，用于信息回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="供应商ID"></property>
+	</url>
+	<url id="supplier004" path="/post/SupplierController/deleteSupplierById" val="删除供应商信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="供应商ID"></property>
+	</url>
+	<url id="supplier005" path="/post/SupplierController/editSupplierById" val="编辑供应商信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="供应商ID"></property>
+		<property id="supplierName" name="supplierName" ref="required" var="供应商名称"></property>
+		<property id="contacts" name="contacts" ref="" var="联系人"></property>
+		<property id="phonenum" name="phonenum" ref="" var="联系电话"></property>
+		<property id="email" name="email" ref="email" var="电子邮箱"></property>
+		<property id="description" name="description" ref="" var="备注"></property>
+		<property id="advanceIn" name="advanceIn" ref="" var="预收款"></property>
+		<property id="beginNeedGet" name="beginNeedGet" ref="" var="期初应收"></property>
+		<property id="beginNeedPay" name="beginNeedPay" ref="" var="期初应付"></property>
+		<property id="allNeedGet" name="allNeedGet" ref="" var="累计应收"></property>
+		<property id="allNeedPay" name="allNeedPay" ref="" var="累计应付"></property>
+		<property id="fax" name="fax" ref="" var="传真"></property>
+		<property id="telephone" name="telephone" ref="phone" var="手机"></property>
+		<property id="address" name="address" ref="" var="地址"></property>
+		<property id="taxNum" name="taxNum" ref="" var="纳税人识别号"></property>
+		<property id="bankName" name="bankName" ref="" var="开户行"></property>
+		<property id="accountNumber" name="accountNumber" ref="" var="账号"></property>
+		<property id="taxRate" name="taxRate" ref="" var="税率"></property>
+	</url>
+	<url id="supplier006" path="/post/SupplierController/editSupplierByEnabled" val="设置供应商状态改为启用" allUse="1">
+		<property id="rowId" name="id" ref="required" var="供应商ID"></property>
+	</url>
+	<url id="supplier007" path="/post/SupplierController/editSupplierByNotEnabled" val="设置供应商状态改为未启用" allUse="1">
+		<property id="rowId" name="id" ref="required" var="供应商ID"></property>
+	</url>
+	<url id="supplier008" path="/post/SupplierController/querySupplierByIdAndInfo" val="查看供应商详情" allUse="1">
+		<property id="rowId" name="id" ref="required" var="供应商ID"></property>
+	</url>
+	<!-- 供应商管理结束-->
+
+	<!-- 客户信息管理开始 -->
+	<url id="customer001" path="/post/CustomerController/queryCustomerByList" val="获取客户信息" allUse="1">
+		<property id="customerName" name="customerName" ref="" var="客户名称"></property>
+		<property id="telephone" name="telephone" ref="" var="手机号码"></property>
+		<property id="email" name="email" ref="" var="邮箱"></property>
+		<property id="fax" name="fax" ref="" var="传真"></property>
+		<property id="enabled" name="enabled" ref="" var="状态"></property>
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="customer002" path="/post/CustomerContronller/insertCustomer" val="添加客户信息" allUse="1">
+		<property id="customerName" name="customerName" ref="required" var="客户名称"></property>
+		<property id="contacts" name="contacts" ref="" var="联系人"></property>
+		<property id="phonenum" name="phonenum" ref="" var="联系电话"></property>
+		<property id="email" name="email" ref="email" var="电子邮箱"></property>
+		<property id="description" name="description" ref="" var="备注"></property>
+		<property id="advanceIn" name="advanceIn" ref="" var="预收款"></property>
+		<property id="beginNeedGet" name="beginNeedGet" ref="" var="期初应收"></property>
+		<property id="beginNeedPay" name="beginNeedPay" ref="" var="期初应付"></property>
+		<property id="allNeedGet" name="allNeedGet" ref="" var="累计应收"></property>
+		<property id="allNeedPay" name="allNeedPay" ref="" var="累计应付"></property>
+		<property id="fax" name="fax" ref="" var="传真"></property>
+		<property id="telephone" name="telephone" ref="phone" var="手机"></property>
+		<property id="address" name="address" ref="" var="地址"></property>
+		<property id="taxNum" name="taxNum" ref="" var="纳税人识别号"></property>
+		<property id="bankName" name="bankName" ref="" var="开户行"></property>
+		<property id="accountNumber" name="accountNumber" ref="" var="账号"></property>
+		<property id="taxRate" name="taxRate" ref="" var="税率"></property>
+	</url>
+	<url id="customer003" path="/post/CustomerController/queryCustomerById" val="据ID查询客户信息，用于信息回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="客户ID"></property>
+	</url>
+	<url id="customer004" path="/post/CustomerController/deleteCustomerById" val="删除客户信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="客户ID"></property>
+	</url>
+	<url id="customer005" path="/post/CustomerController/editCustomerById" val="编辑客户信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="客户ID"></property>
+		<property id="customerName" name="customerName" ref="required" var="客户名称"></property>
+		<property id="contacts" name="contacts" ref="" var="联系人"></property>
+		<property id="phonenum" name="phonenum" ref="" var="联系电话"></property>
+		<property id="email" name="email" ref="email" var="电子邮箱"></property>
+		<property id="description" name="description" ref="" var="备注"></property>
+		<property id="advanceIn" name="advanceIn" ref="" var="预收款"></property>
+		<property id="beginNeedGet" name="beginNeedGet" ref="" var="期初应收"></property>
+		<property id="beginNeedPay" name="beginNeedPay" ref="" var="期初应付"></property>
+		<property id="allNeedGet" name="allNeedGet" ref="" var="累计应收"></property>
+		<property id="allNeedPay" name="allNeedPay" ref="" var="累计应付"></property>
+		<property id="fax" name="fax" ref="" var="传真"></property>
+		<property id="telephone" name="telephone" ref="phone" var="手机"></property>
+		<property id="address" name="address" ref="" var="地址"></property>
+		<property id="taxNum" name="taxNum" ref="" var="纳税人识别号"></property>
+		<property id="bankName" name="bankName" ref="" var="开户行"></property>
+		<property id="accountNumber" name="accountNumber" ref="" var="账号"></property>
+		<property id="taxRate" name="taxRate" ref="" var="税率"></property>
+	</url>
+	<url id="customer006" path="/post/CustomerController/editCustomerByEnabled" val="设置客户状态改为启用" allUse="1">
+		<property id="rowId" name="id" ref="required" var="客户ID"></property>
+	</url>
+	<url id="customer007" path="/post/CustomerController/editCustomerByNotEnabled" val="设置客户状态改为未启用" allUse="1">
+		<property id="rowId" name="id" ref="required" var="客户ID"></property>
+	</url>
+	<url id="customer008" path="/post/CustomerController/queryCustomerByIdAndInfo" val="查看客户详情" allUse="1">
+		<property id="rowId" name="id" ref="required" var="客户ID"></property>
+	</url>
+	<!-- 客户信息管理结束-->
+
+	<!-- 会员信息管理开始 -->
+	<url id="member001" path="/post/MemberController/queryMemberByList" val="获取会员信息" allUse="1">
+		<property id="memberName" name="memberName" ref="" var="会员名称"></property>
+		<property id="telephone" name="telephone" ref="" var="手机号码"></property>
+		<property id="email" name="email" ref="" var="邮箱"></property>
+		<property id="fax" name="fax" ref="" var="传真"></property>
+		<property id="enabled" name="enabled" ref="" var="状态"></property>
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="member002" path="/post/MemberController/insertMember" val="添加会员商信息" allUse="1">
+		<property id="memberName" name="memberName" ref="required" var="会员名称"></property>
+		<property id="contacts" name="contacts" ref="" var="联系人"></property>
+		<property id="phonenum" name="phonenum" ref="" var="联系电话"></property>
+		<property id="email" name="email" ref="email" var="电子邮箱"></property>
+		<property id="description" name="description" ref="" var="备注"></property>
+		<property id="advanceIn" name="advanceIn" ref="" var="预收款"></property>
+		<property id="beginNeedGet" name="beginNeedGet" ref="" var="期初应收"></property>
+		<property id="beginNeedPay" name="beginNeedPay" ref="" var="期初应付"></property>
+		<property id="allNeedGet" name="allNeedGet" ref="" var="累计应收"></property>
+		<property id="allNeedPay" name="allNeedPay" ref="" var="累计应付"></property>
+		<property id="fax" name="fax" ref="" var="传真"></property>
+		<property id="telephone" name="telephone" ref="phone" var="手机"></property>
+		<property id="address" name="address" ref="" var="地址"></property>
+		<property id="taxNum" name="taxNum" ref="" var="纳税人识别号"></property>
+		<property id="bankName" name="bankName" ref="" var="开户行"></property>
+		<property id="accountNumber" name="accountNumber" ref="" var="账号"></property>
+		<property id="taxRate" name="taxRate" ref="" var="税率"></property>
+	</url>
+	<url id="member003" path="/post/MemberController/queryMemberById" val="据ID查询会员信息，用于信息回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="会员ID"></property>
+	</url>
+	<url id="member004" path="/post/MemberController/deleteMemberById" val="删除会员信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="会员ID"></property>
+	</url>
+	<url id="member005" path="/post/MemberController/editMemberById" val="编辑会员信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="会员ID"></property>
+		<property id="memberName" name="memberName" ref="required" var="会员名称"></property>
+		<property id="contacts" name="contacts" ref="" var="联系人"></property>
+		<property id="phonenum" name="phonenum" ref="" var="联系电话"></property>
+		<property id="email" name="email" ref="email" var="电子邮箱"></property>
+		<property id="description" name="description" ref="" var="备注"></property>
+		<property id="advanceIn" name="advanceIn" ref="" var="预收款"></property>
+		<property id="beginNeedGet" name="beginNeedGet" ref="" var="期初应收"></property>
+		<property id="beginNeedPay" name="beginNeedPay" ref="" var="期初应付"></property>
+		<property id="allNeedGet" name="allNeedGet" ref="" var="累计应收"></property>
+		<property id="allNeedPay" name="allNeedPay" ref="" var="累计应付"></property>
+		<property id="fax" name="fax" ref="" var="传真"></property>
+		<property id="telephone" name="telephone" ref="phone" var="手机"></property>
+		<property id="address" name="address" ref="" var="地址"></property>
+		<property id="taxNum" name="taxNum" ref="" var="纳税人识别号"></property>
+		<property id="bankName" name="bankName" ref="" var="开户行"></property>
+		<property id="accountNumber" name="accountNumber" ref="" var="账号"></property>
+		<property id="taxRate" name="taxRate" ref="" var="税率"></property>
+	</url>
+	<url id="member006" path="/post/MemberController/editMemberByEnabled" val="设置会员状态改为启用" allUse="1">
+		<property id="rowId" name="id" ref="required" var="会员ID"></property>
+	</url>
+	<url id="member007" path="/post/MemberController/editMemberByNotEnabled" val="设置会员状态改为未启用" allUse="1">
+		<property id="rowId" name="id" ref="required" var="会员ID"></property>
+	</url>
+	<url id="member008" path="/post/MemberController/queryMemberByIdAndInfo" val="查看会员详情" allUse="1">
+		<property id="rowId" name="id" ref="required" var="会员ID"></property>
+	</url>
+	<!-- 会员信息管理结束 -->
+
+	<!-- 收支项目管理开始 -->
+	<url id="inoutitem001" path="/post/InoutitemController/queryInoutitemByList" val="查询收支项目信息" allUse="1">
+		<property id="inoutitemName" name="inoutitemName" ref="" var="收支项目名称"/>
+		<property id="inoutitemType" name="inoutitemType" ref="" var="收支项目类型"/>
+		<property id="remark" name="remark" ref="" var="收支项目备注"/>
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="inoutitem002" path="/post/InoutitemController/insertInoutitem" val="添加收支项目信息" allUse="1">
+		<property id="inoutitemName" name="inoutitemName" ref="required" var="收支项目名称"/>
+		<property id="inoutitemType" name="inoutitemType" ref="required, num" var="收支项目类型"/>
+		<property id="remark" name="remark" ref="" var="收支项目备注"/>
+	</url>
+	<url id="inoutitem003" path="/post/InoutitemController/queryInoutitemById" val="查询单个收支项目信息，用于信息回显" allUse="1">
+		<property id="rowId" name="id" ref="required" var="收支项目Id"></property>
+	</url>
+	<url id="inoutitem004" path="/post/InoutitemController/deleteInoutitemById" val="删除收支项目信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="收支项目Id"></property>
+	</url>
+	<url id="inoutitem005" path="/post/InoutitemController/editInoutitemById" val="编辑收支项目信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="收支项目Id"></property>
+		<property id="inoutitemName" name="inoutitemName" ref="required" var="收支项目名称"/>
+		<property id="inoutitemType" name="inoutitemType" ref="required, num" var="收支项目类型"/>
+		<property id="remark" name="remark" ref="" var="收支项目备注"/>
+	</url>
+	<url id="inoutitem006" path="/post/InoutitemController/queryInoutitemByIdAndInfo" val="查看收支项目详情" allUse="1">
+		<property id="rowId" name="id" ref="required" var="收支项目Id"></property>
+	</url>
+	<!-- 收支项目管理结束 -->
+
+	<!-- 结算账户管理开始 -->
+	<url id="account001" path="/post/AccountController/queryAccountByList" val="查询账户信息" allUse="1">
+		<property id="accountName" name="accountName" ref="" var="结算账户名称"/>
+		<property id="serialNo" name="serialNo" ref="" var="结算账户编号"/>
+		<property id="remark" name="remark" ref="" var="结算账户备注"/>
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="account002" path="/post/AccountController/insertAccount" val="添加账户信息" allUse="1">
+		<property id="accountName" name="accountName" ref="required" var="结算账户名称"/>
+		<property id="serialNo" name="serialNo" ref="required" var="结算账户编号"/>
+		<property id="initialAmount" name="initialAmount" ref="" var="结算账户期初金额"/>
+		<property id="currentAmount" name="currentAmount" ref="" var="结算账户当前余额"/>
+		<property id="remark" name="remark" ref="" var="结算账户备注"/>
+		<property id="isDefault" name="isDefault" ref="required,num" var="结算账户默认状态"/>
+	</url>
+	<url id="account003" path="/post/AccountController/queryAccountById" val="查询单个账户信息，用于信息回显" allUse="1">
+		<property id="rowId" name="id" ref="required" var="结算账户Id"></property>
+	</url>
+	<url id="account004" path="/post/AccountController/deleteAccountById" val="删除账户信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="结算账户Id"></property>
+	</url>
+	<url id="account005" path="/post/AccountController/editAccountById" val="编辑账户信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="结算账户Id"></property>
+		<property id="accountName" name="accountName" ref="required" var="结算账户名称"/>
+		<property id="serialNo" name="serialNo" ref="required" var="结算账户编号"/>
+		<property id="initialAmount" name="initialAmount" ref="" var="结算账户期初金额"/>
+		<property id="currentAmount" name="currentAmount" ref="" var="结算账户当前余额"/>
+		<property id="remark" name="remark" ref="" var="结算账户备注"/>
+		<property id="isDefault" name="isDefault" ref="required,num" var="结算账户默认状态"/>
+	</url>
+	<url id="account006" path="/post/AccountController/editAccountByIdAndIsDefault" val="设置默认" allUse="1">
+		<property id="rowId" name="id" ref="required" var="结算账户Id"></property>
+	</url>
+	<url id="account007" path="/post/AccountController/queryAccountByIdAndInfo" val="查看账户详情" allUse="1">
+		<property id="rowId" name="id" ref="required" var="结算账户Id"></property>
+	</url>
+	<url id="account008" path="/post/AccountController/queryAccountStreamById" val="查看账户流水" allUse="1">
+		<property id="rowId" name="id" ref="required" var="结算账户Id"></property>
+	</url>
+	<!-- 结算账户管理结束 -->
+</controller>
