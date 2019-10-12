@@ -122,5 +122,29 @@ public class MaterialController {
     public void editMaterialMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
     	materialService.editMaterialMationById(inputObject, outputObject);
     }
+    
+    /**
+     * 获取产品列表信息展示为下拉框
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/MaterialController/queryMaterialListToSelect")
+    @ResponseBody
+    public void queryMaterialListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	materialService.queryMaterialListToSelect(inputObject, outputObject);
+    }
+    
+    /**
+     * 根据产品规格id和仓库id获取库存
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/MaterialController/queryMaterialTockByNormsIdAndDepotId")
+    @ResponseBody
+    public void queryMaterialTockByNormsIdAndDepotId(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	materialService.queryMaterialTockByNormsIdAndDepotId(inputObject, outputObject);
+    }
 	
 }

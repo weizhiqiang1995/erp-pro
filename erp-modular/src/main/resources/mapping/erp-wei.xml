@@ -125,6 +125,12 @@
 		<property id="materialNormsStr" name="materialNormsStr" ref="required" var="产品规格字符串" />
 		<property id="rowId" name="id" ref="required" var="产品id" />
 	</url>
+	<url id="material010" path="/post/MaterialController/queryMaterialListToSelect" val="获取产品列表信息展示为下拉框" allUse="2">
+	</url>
+	<url id="material011" path="/post/MaterialController/queryMaterialTockByNormsIdAndDepotId" val="根据产品规格id和仓库id获取库存" allUse="2">
+		<property id="depotId" name="depotId" ref="required" var="仓库id"/>
+		<property id="mUnitId" name="mUnitId" ref="required" var="规格id"/>
+	</url>
 	<!-- 产品结束 -->
 	
 	<!-- 其他入库开始 -->

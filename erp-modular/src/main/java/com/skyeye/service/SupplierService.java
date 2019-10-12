@@ -24,4 +24,6 @@ public interface SupplierService {
     public void editSupplierByNotEnabled(InputObject inputObject, OutputObject outputObject) throws Exception;
 
     public void querySupplierByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+	public void querySupplierListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception;
 }

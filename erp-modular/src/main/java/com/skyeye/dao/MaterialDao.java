@@ -53,4 +53,10 @@ public interface MaterialDao {
 
 	public void editMaterialNormsById(Map<String, Object> entity) throws Exception;
 
+	public List<Map<String, Object>> queryMaterialListToSelect(Map<String, Object> params) throws Exception;
+
+	public List<Map<String, Object>> queryMaterialUnitByIdToSelect(Map<String, Object> bean) throws Exception;
+
+	public Map<String, Object> queryMaterialTockByNormsIdAndDepotId(Map<String, Object> params) throws Exception;
+
 }

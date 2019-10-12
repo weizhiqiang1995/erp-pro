@@ -23,4 +23,8 @@ public interface MaterialService {
 
 	public void editMaterialMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void queryMaterialListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+	public void queryMaterialTockByNormsIdAndDepotId(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }

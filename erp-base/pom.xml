@@ -19,13 +19,6 @@
 	
 	<dependencies>
 
-		<!-- 引入公共模块的依赖 -->
-		<dependency>
-			<groupId>com.erp</groupId>
-			<artifactId>erp-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		
 		<!-- 引入redis的依赖 -->
 		<dependency>
 			<groupId>com.erp</groupId>

@@ -13,7 +13,6 @@
 	</parent>
 
 	<modules>
-		<module>erp-common</module>
 		<module>erp-redis</module>
 		<module>erp-modular</module>
 		<module>erp-base</module>

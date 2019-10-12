@@ -21,9 +21,11 @@
 	
 		<!-- 引入公共模块的依赖 -->
 		<dependency>
-			<groupId>com.erp</groupId>
-			<artifactId>erp-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>ky.com.skyeye</groupId>
+			<artifactId>skyeye-common</artifactId>
+			<version>1.0.2-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/skyeye-common-1.0.2-SNAPSHOT.jar</systemPath>
 		</dependency>
 		
 	</dependencies>

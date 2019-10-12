@@ -346,5 +346,49 @@
 		WHERE id = #{id}
 		AND delete_flag = '0'
 	</update>
+	
+	<select id="queryMaterialListToSelect" parameterType="java.util.Map" resultType="java.util.Map">
+    	SELECT
+			a.id,
+			CONCAT(a.`name`, '(', a.model, ')') `name`,
+			a.unit,
+			a.unit_name unitName,
+			a.first_in_unit firstInUnit,
+			a.first_out_unit firstOutUnit
+		FROM
+			erp_material a
+		WHERE
+			a.delete_flag = '0'
+		AND a.tenant_id = #{userId}
+		AND a.enabled = '1'
+    </select>
+    
+    <select id="queryMaterialUnitByIdToSelect" parameterType="java.util.Map" resultType="java.util.Map">
+    	SELECT
+			a.id,
+			b.`name`,
+			CONVERT(a.estimate_purchase_price, decimal) estimatePurchasePrice
+		FROM
+			erp_material_norms a
+			LEFT JOIN erp_unit b ON a.unit_id = b.id
+		WHERE
+			a.meterial_id = #{id}
+		AND a.delete_flag = '0'
+		ORDER BY b.number ASC
+    </select>
+    
+    <select id="queryMaterialTockByNormsIdAndDepotId" parameterType="java.util.Map" resultType="java.util.Map">
+    	SELECT
+			IFNULL(SUM(a.oper_number * (CASE b.type WHEN '1' THEN 1 ELSE -1 END)), '0') AS currentTock
+		FROM
+			erp_depotitem a,
+			erp_depothead b
+		WHERE
+			a.tenant_id = #{userId}
+		AND a.depot_id = #{depotId}
+		AND a.m_unit_id = #{mUnitId}
+		AND a.header_id = b.id
+		GROUP BY a.m_unit_id
+    </select>
 
 </mapper>

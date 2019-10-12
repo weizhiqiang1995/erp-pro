@@ -455,5 +455,37 @@ public class MaterialServiceImpl implements MaterialService{
 			outputObject.setreturnMessage("数据格式错误");
 		}
 	}
+
+	/**
+     * 获取产品列表信息展示为下拉框
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+	@Override
+	public void queryMaterialListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String, Object> params = inputObject.getParams();
+        params.put("userId", inputObject.getLogParams().get("id"));
+        List<Map<String, Object>> beans = materialDao.queryMaterialListToSelect(params);
+        for(Map<String, Object> bean : beans){
+        	bean.put("unitList", materialDao.queryMaterialUnitByIdToSelect(bean));
+        }
+        outputObject.setBeans(beans);
+        outputObject.settotal(beans.size());
+	}
+
+	/**
+     * 根据产品规格id和仓库id获取库存
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+	@Override
+	public void queryMaterialTockByNormsIdAndDepotId(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String, Object> params = inputObject.getParams();
+        params.put("userId", inputObject.getLogParams().get("id"));
+        Map<String, Object> bean = materialDao.queryMaterialTockByNormsIdAndDepotId(params);
+        outputObject.setBean(bean);
+	}
 	
 }

@@ -114,4 +114,17 @@ public class SupplierController {
     public void querySupplierByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception{
         supplierService.querySupplierByIdAndInfo(inputObject, outputObject);
     }
+    
+    /**
+     * 获取供应商列表信息展示为下拉框
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SupplierController/querySupplierListToSelect")
+    @ResponseBody
+    public void querySupplierListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception{
+        supplierService.querySupplierListToSelect(inputObject, outputObject);
+    }
+    
 }

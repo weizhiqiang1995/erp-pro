@@ -8,28 +8,16 @@
     <link href="../../assets/lib/winui/css/winui.css" rel="stylesheet" />
 </head>
 <body>
-	<div style="margin:0 auto;padding:20px;">
+	<div style="margin: 0 auto; padding: 20px;">
 	    <form class="layui-form" action="" id="showForm">
-		    <div class="layui-form-item layui-col-xs12">
-		        <label class="layui-form-label">标题<i class="red">*</i></label>
-		        <div class="layui-input-block ver-center" id="useTitle">
-		            
-		        </div>
-		    </div>
 		    <div class="layui-form-item layui-col-xs6">
-		        <label class="layui-form-label">步骤</label>
-		        <div class="layui-input-block ver-center">
-		            填单
-		        </div>
-		    </div>
-		    <div class="layui-form-item layui-col-xs6">
-		        <label class="layui-form-label">责任人<i class="red">*</i></label>
-		        <div class="layui-input-block ver-center" id="useName">
-		            
+		        <label class="layui-form-label">供应商<i class="red">*</i></label>
+		        <div class="layui-input-block">
+		            <select id="supplierId" lay-search win-verify="required"></select>
 		        </div>
 		    </div>
 		    <div class="layui-form-item layui-col-xs12">
-		        <label class="layui-form-label">用品<i class="red">*</i></label>
+		        <label class="layui-form-label">列表项<i class="red">*</i></label>
 		        <div class="layui-input-block">
 		        	<div class="winui-toolbar">
 				        <div class="winui-tool" style="text-align: left;">
@@ -40,15 +28,15 @@
 		            <table class="layui-table">
 		                <thead>
 		                    <tr>
-		                    	<th></th>
-		                        <th>仓库</th>
-		                        <th>产品(型号)</th>
-		                        <th>单位</th>
-		                        <th style="width: 50px;">库存</th>
-		                        <th style="width: 50px;">数量</th>
-		                        <th style="width: 50px;">单价</th>
-		                        <th style="width: 50px;">金额</th>
-		                        <th>备注</th>
+		                    	<th style="width: 30px;"></th>
+		                        <th style="width: 120px;">仓库</th>
+		                        <th style="width: 120px;">产品(型号)</th>
+		                        <th style="width: 70px;">单位</th>
+		                        <th style="width: 80px;">库存</th>
+		                        <th style="width: 80px;">数量</th>
+		                        <th style="width: 80px;">单价</th>
+		                        <th style="width: 80px;">金额</th>
+		                        <th style="width: 100px;">备注</th>
 		                    </tr>
 		                </thead>
 		                <tbody id="useTable" class="insurance-table">
@@ -57,9 +45,15 @@
 		        </div>
 		    </div>
 		    <div class="layui-form-item layui-col-xs12">
-		        <label class="layui-form-label">相关描述</label>
+		        <label class="layui-form-label">共计金额</label>
+		        <div class="layui-input-block ver-center" id="allPrice">
+		            0.00
+		        </div>
+		    </div>
+		    <div class="layui-form-item layui-col-xs12">
+		        <label class="layui-form-label">备注</label>
 		        <div class="layui-input-block">
-		        	<textarea id="remark" name="remark" placeholder="请输入相关描述" class="layui-textarea" style="height: 100px;" maxlength="200"></textarea>
+		        	<textarea id="remark" name="remark" placeholder="请输入备注" class="layui-textarea" style="height: 100px;" maxlength="200"></textarea>
 		        </div>
 		    </div>
 		    <div class="layui-form-item layui-col-xs12">
@@ -75,11 +69,13 @@
 	<script type="text/x-handlebars-template" id="usetableTemplate">
 		<tr trcusid="{{trId}}">
 			<td><input type="checkbox" rowId="{{id}}" lay-filter="checkboxProperty" name="tableCheckRow"/></td>
-			<td><select id="{{typeId}}" lay-filter="selectTypeProperty" win-verify="required"></select></td>
-			<td><select id="{{assetarId}}" lay-filter="selectAssetarProperty" win-verify="required"></select></td>
-			<td id="{{specificationsName}}"></td>
-			<td id="{{residualNum}}"></td>
-			<td><input type="text" class="layui-input" value="1" id="{{useNum}}" win-verify="required|number"/></td>
+			<td><select id="{{depotId}}" lay-filter="selectDepotProperty" lay-search win-verify="required"></select></td>
+			<td><select id="{{materialId}}" lay-filter="selectMaterialProperty" lay-search win-verify="required"></select></td>
+			<td><select id="{{unitId}}" lay-filter="selectUnitProperty" lay-search win-verify="required"></select></td>
+			<td id="{{currentTock}}"></td>
+			<td><input type="text" class="layui-input rkNum" value="1" id="{{rkNum}}" win-verify="required|number"/></td>
+			<td id="{{unitPrice}}"></td>
+			<td id="{{amountOfMoney}}"></td>
 			<td><input type="text" class="layui-input" id="{{remark}}"/></td>
 		</tr>
 	</script>

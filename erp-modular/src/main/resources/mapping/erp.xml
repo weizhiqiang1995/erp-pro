@@ -109,6 +109,8 @@
 	<url id="supplier008" path="/post/SupplierController/querySupplierByIdAndInfo" val="查看供应商详情" allUse="1">
 		<property id="rowId" name="id" ref="required" var="供应商ID"></property>
 	</url>
+	<url id="supplier009" path="/post/SupplierController/querySupplierListToSelect" val="获取供应商列表信息展示为下拉框" allUse="2">
+	</url>
 	<!-- 供应商管理结束-->
 
 	<!-- 客户信息管理开始 -->
