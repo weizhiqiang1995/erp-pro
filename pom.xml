@@ -26,7 +26,7 @@
 		<jackjson.version>1.9.13</jackjson.version>
 		<fastjson.version>1.2.3</fastjson.version>
 		<quartz.version>2.2.2</quartz.version>
-		<commons-fileupload.version>1.3.1</commons-fileupload.version>
+		<commons-fileupload.version>1.3.3</commons-fileupload.version>
 		<druid.version>1.0.20</druid.version>
 		<mybatis.paginator.version>1.2.15</mybatis.paginator.version>
 		<aliyun.java.sdk.core.version>3.7.1</aliyun.java.sdk.core.version>
