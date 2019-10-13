@@ -19,6 +19,14 @@
 	
 	<dependencies>
 	
+		<!-- 引入中文拼音的依赖 -->
+		<dependency>
+			<groupId>com.belerweb</groupId>
+			<artifactId>pinyin4j</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+		
+	
 		<!-- 引入公共模块的依赖 -->
 		<dependency>
 			<groupId>ky.com.skyeye</groupId>
