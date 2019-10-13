@@ -114,4 +114,17 @@ public class CustomerController {
     public void queryCustomerByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception{
         customerService.queryCustomerByIdAndInfo(inputObject, outputObject);
     }
+    
+    /**
+     * 获取客户列表信息展示为下拉框
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/CustomerController/queryCustomerListToSelect")
+    @ResponseBody
+    public void queryCustomerListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	customerService.queryCustomerListToSelect(inputObject, outputObject);
+    }
+    
 }

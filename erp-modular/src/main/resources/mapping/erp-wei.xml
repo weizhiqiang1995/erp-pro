@@ -168,6 +168,15 @@
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>
+	<url id="statistics002" path="/post/StatisticsController/queryOutgoingDetails" val="出库明细" allUse="1">
+		<property id="materialName" name="materialName" ref="" var="产品名称" />
+		<property id="depotId" name="depotId" ref="" var="仓库id" />
+		<property id="organId" name="organId" ref="" var="供应商id" />
+		<property id="startTime" name="startTime" ref="" var="单据开始时间"/>
+		<property id="endTime" name="endTime" ref="" var="单据结束时间"/>
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
 	<!-- 统计结束 -->
 	
 </controller>

@@ -70,11 +70,11 @@ layui.config({
 	var selOption = getFileContent('tpl/template/select-option.tpl');
 	
 	initSupplierHtml();
-	//初始化供应商
+	//初始化客户
 	function initSupplierHtml() {
-		AjaxPostUtil.request({url: reqBasePath + "supplier009", params: {}, type: 'json', callback: function(json) {
+		AjaxPostUtil.request({url: reqBasePath + "customer009", params: {}, type: 'json', callback: function(json) {
 			if(json.returnCode == 0) {
-				//加载供应商数据
+				//加载客户数据
 				$("#organId").html(getDataUseHandlebars(selOption, json)); 
 				//初始化仓库
 				initDepotHtml();
@@ -111,7 +111,7 @@ layui.config({
 	        id: 'messageTable',
 	        elem: '#messageTable',
 	        method: 'post',
-	        url: reqBasePath + 'statistics001',
+	        url: reqBasePath + 'statistics002',
 	        where: {materialName: $("#materialName").val(), depotId: $("#depotId").val(), organId: $("#organId").val(), startTime: startTime, endTime: endTime},
 	        even: true,  //隔行变色
 	        page: true,
@@ -125,18 +125,18 @@ layui.config({
 	            { field: 'materialName', title: '商品名称', align: 'left', width: 150},
 	            { field: 'materialModel', title: '商品型号', align: 'left', width: 100},
 	            { field: 'unitPrice', title: '单价', align: 'left', width: 120},
-	            { field: 'operNumber', title: '入库数量', align: 'left', width: 100},
+	            { field: 'operNumber', title: '出库数量', align: 'left', width: 100},
 	            { field: 'allPrice', title: '金额', align: 'left', width: 120 },
 	            { field: 'supplierName', title: '供应商', align: 'left', width: 140 },
 	            { field: 'depotName', title: '仓库', align: 'left', width: 140 },
-	            { field: 'operTime', title: '入库日期', align: 'center', width: 140 }
+	            { field: 'operTime', title: '出库日期', align: 'center', width: 140 }
 	        ]]
 	    });
 	    table.on('tool(messageTable)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
 	        var data = obj.data; //获得当前行数据
 	        var layEvent = obj.event; //获得 lay-event 对应的值
 	        if (layEvent === 'details') { //详情
-	        	if(data.subType == '4'){//其他入库
+	        	if(data.subType == '4'){//其他出库
 		        	details(data);
 	        	}
 	        }
@@ -154,11 +154,11 @@ layui.config({
         return false;
     });
 
-    //其他入库详情
+    //其他出库详情
 	function details(data){
 		rowId = data.headerId;
 		_openNewWindows({
-			url: "../../tpl/otherwarehous/otherwarehousdetails.html", 
+			url: "", 
 			title: "详情",
 			pageId: "otherwarehousdetails",
 			area: ['90vw', '90vh'],

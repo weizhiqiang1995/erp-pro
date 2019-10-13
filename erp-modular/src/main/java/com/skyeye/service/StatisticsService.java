@@ -7,4 +7,6 @@ public interface StatisticsService {
 
 	public void queryWarehousingDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void queryOutgoingDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }
