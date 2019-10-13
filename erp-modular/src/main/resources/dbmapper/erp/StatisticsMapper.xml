@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyeye.dao.StatisticsDao">
+
+    <select id="queryWarehousingDetails" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+			b.id headerId,
+			b.default_number defaultNumber,
+			b.sub_type subType,
+			CONVERT(b.oper_time, CHAR) operTime,
+			a.material_name materialName,
+			a.material_model materialModel,
+			a.oper_number operNumber,
+			FORMAT(a.unit_price, 2) unitPrice,
+			FORMAT(a.all_price, 2) allPrice,
+			c.supplier supplierName,
+			d.`name` depotName
+		FROM
+			erp_depotitem a
+			LEFT JOIN erp_depot d ON a.depot_id = d.id,
+			erp_depothead b
+			LEFT JOIN erp_supplier c ON b.organ_id = c.id
+		WHERE a.tenant_id = #{userId}
+		AND a.delete_flag = '0'
+		AND a.header_id = b.id
+		AND b.type = '2'
+        <if test="materialName != '' and materialName != null">
+            AND a.material_name LIKE '%${materialName}%'
+        </if>
+        <if test="depotId != '' and depotId != null">
+            AND a.depot_id = #{depotId}
+        </if>
+        <if test="organId != '' and organId != null">
+            AND b.organ_id = #{organId}
+        </if>
+        <if test="startTime != '' and startTime != null and endTime != '' and endTime != null">
+			AND b.oper_time >= #{startTime} AND #{endTime} >= b.oper_time
+		</if>
+        ORDER BY b.oper_time DESC
+    </select>
+
+</mapper>
