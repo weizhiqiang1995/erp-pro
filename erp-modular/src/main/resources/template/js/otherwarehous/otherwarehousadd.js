@@ -255,10 +255,10 @@ layui.config({
 						noError = true;
 						return false;
 					}
-					if(inTableDataArrayByAssetarId($("#depotId" + rowNum).val(), $("#unitId" + rowNum).val(), tableData)) {
+					if(inTableDataArrayByAssetarId($("#materialId" + rowNum).val(), $("#depotId" + rowNum).val(), $("#unitId" + rowNum).val(), tableData)) {
 						$("#depotId" + rowNum).addClass("layui-form-danger");
 						$("#depotId" + rowNum).focus();
-						winui.window.msg('一张单中不允许出现相同当库的产品信息.', {icon: 2, time: 2000});
+						winui.window.msg('一张单中不允许出现相同当库的产品信息，且单位不能重复.', {icon: 2, time: 2000});
 						noError = true;
 						return false;
 					}
@@ -296,10 +296,10 @@ layui.config({
 		});
 		
 		//判断选中的产品是否也在数组中
-		function inTableDataArrayByAssetarId(depotId, unitId, array) {
+		function inTableDataArrayByAssetarId(materialId, depotId, unitId, array) {
 			var isIn = false;
 			$.each(array, function(i, item) {
-				if(item.depotId === depotId && item.mUnitId === unitId) {
+				if(item.depotId === depotId && item.mUnitId === unitId && item.materialId === materialId) {
 					isIn = true;
 					return false;
 				}

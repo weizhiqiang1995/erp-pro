@@ -1,30 +1,43 @@
 
 var rowId = "";
+
+//单据的开始时间、结束时间
+var startTime = "", endTime = "";
+
 layui.config({
     base: basePath,
     version: skyeyeVersion
 }).extend({  //指定js别名
     window: 'js/winui.window'
-}).define(['window', 'table', 'jquery', 'winui', 'form'], function (exports) {
+}).define(['window', 'table', 'jquery', 'winui', 'form', 'laydate'], function (exports) {
     winui.renderColor();
-    authBtn('1569133228443');
+    authBtn('1570958309701');
     var $ = layui.$,
         form = layui.form,
+        laydate = layui.laydate,
         table = layui.table;
+        
+    laydate.render({
+		elem: '#operTime', //指定元素
+		range: '~'
+	});
+        
     //表格渲染
     table.render({
         id: 'messageTable',
         elem: '#messageTable',
         method: 'post',
         url: reqBasePath + 'otherwarehous001',
-        where: {defaultNumber: $("#defaultNumber").val(), material: $("#material").val()},
+        where: {defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime},
         even: true,  //隔行变色
         page: true,
         limits: [8, 16, 24, 32, 40, 48, 56],
         limit: 8,
         cols: [[
             { title: '序号', type: 'numbers'},
-            { field: 'defaultNumber', title: '单据编号', align: 'left', width: 200},
+            { field: 'defaultNumber', title: '单据编号', align: 'left', width: 200, templet: function(d){
+		        	return '<a lay-event="details" class="notice-title-click">' + d.defaultNumber + '</a>';
+		    }},
             { field: 'supplierName', title: '供应商', align: 'left', width: 150},
             { field: 'materialNames', title: '关联产品', align: 'left', width: 300},
             { field: 'totalPrice', title: '合计金额', align: 'left', width: 120},
@@ -37,10 +50,10 @@ layui.config({
     table.on('tool(messageTable)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
         var data = obj.data; //获得当前行数据
         var layEvent = obj.event; //获得 lay-event 对应的值
-        if (layEvent === 'edit') { //编辑
-            editmember(data);
-        }else if (layEvent === 'delete') { //删除
+        if (layEvent === 'delete') { //删除
             deletemember(data);
+        }else if (layEvent === 'details') { //详情
+        	details(data);
         }
     });
 
@@ -53,24 +66,6 @@ layui.config({
         }
         return false;
     });
-
-    //编辑
-    function editmember(data){
-        rowId = data.id;
-        _openNewWindows({
-            url: "../../tpl/member/memberedit.html",
-            title: "编辑",
-            pageId: "memberedit",
-            area: ['90vw', '90vh'],
-            callBack: function(refreshCode){
-                if (refreshCode == '0') {
-                    winui.window.msg("操作成功", {icon: 1,time: 2000});
-                    loadTable();
-                } else if (refreshCode == '-9999') {
-                    winui.window.msg("操作失败", {icon: 2,time: 2000});
-                }
-            }});
-    }
 
     //删除
     function deletemember(data){
@@ -88,6 +83,24 @@ layui.config({
             }});
         });
     }
+    
+    //详情
+	function details(data){
+		rowId = data.id;
+		_openNewWindows({
+			url: "../../tpl/otherwarehous/otherwarehousdetails.html", 
+			title: "详情",
+			pageId: "otherwarehousdetails",
+			area: ['90vw', '90vh'],
+			callBack: function(refreshCode){
+                if (refreshCode == '0') {
+                	winui.window.msg("操作成功", {icon: 1,time: 2000});
+                	loadTable();
+                } else if (refreshCode == '-9999') {
+                	winui.window.msg("操作失败", {icon: 2,time: 2000});
+                }
+			}});
+	}
 
     //添加
     $("body").on("click", "#addBean", function(){
@@ -116,13 +129,27 @@ layui.config({
     
     //刷新
     function loadTable(){
-        table.reload("messageTable", {where:{defaultNumber: $("#defaultNumber").val(), material: $("#material").val()}});
+    	if(isNull($("#operTime").val())){//一定要记得，当createTime为空时
+    		startTime = "";
+    		endTime = "";
+    	}else {
+    		startTime = $("#operTime").val().split('~')[0].trim() + ' 00:00:00';
+    		endTime = $("#operTime").val().split('~')[1].trim() + ' 23:59:59';
+    	}
+        table.reload("messageTable", {where:{defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime}});
     }
 
     //搜索
     function refreshTable(){
-        table.reload("messageTable", {page: {curr: 1}, where:{defaultNumber: $("#defaultNumber").val(), material: $("#material").val()}})
+    	if(isNull($("#operTime").val())){//一定要记得，当createTime为空时
+    		startTime = "";
+    		endTime = "";
+    	}else {
+    		startTime = $("#operTime").val().split('~')[0].trim() + ' 00:00:00';
+    		endTime = $("#operTime").val().split('~')[1].trim() + ' 23:59:59';
+    	}
+        table.reload("messageTable", {page: {curr: 1}, where:{defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime}})
     }
 
-    exports('memberlist', {});
+    exports('otherwarehouslist', {});
 });

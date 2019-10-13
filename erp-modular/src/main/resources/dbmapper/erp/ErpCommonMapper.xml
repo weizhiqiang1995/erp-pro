@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyeye.dao.ErpCommonDao">
+
+    <select id="queryDepotHeadDetailsMationById" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+			a.id,
+			a.default_number defaultNumber,
+			a.oper_person_name operPersonName,
+			CONVERT (a.create_time, CHAR) createTime,
+			CONVERT (a.oper_time, CHAR) operTime,
+			b.supplier supplierName,
+			c.`name` accountName,
+			FORMAT(a.total_price, 2) totalPrice,
+			CASE a.pay_type WHEN '1' THEN '现金' WHEN '2' THEN '记账' WHEN '3' THEN '其他' ELSE '' END payType,
+			a.remark,
+			a.status,
+			a.link_number linkNumber
+		FROM
+			erp_depothead a
+			LEFT JOIN erp_supplier b ON a.organ_id = b.id
+			LEFT JOIN erp_account c ON a.account_id = c.id
+		WHERE a.id = #{id}
+		AND a.tenant_id = #{userId}
+		AND a.delete_flag = '0'
+    </select>
+    
+    <select id="queryDepotItemDetailsMationById" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+			a.id,
+			a.material_id materialId,
+			CONCAT(a.material_name, '(', a.material_model, ')') materialNames,
+			a.oper_number operNumber,
+			FORMAT(a.unit_price, 2) unitPrice,
+			FORMAT(a.all_price, 2) allPrice,
+			a.remark,
+			b.`name` deportName,
+			IFNULL(e.`name`, c.unit_name) unitName
+		FROM
+			erp_depotitem a
+			LEFT JOIN erp_depot b ON a.depot_id = b.id,
+			erp_material c,
+			erp_material_norms d
+			LEFT JOIN erp_unit e ON d.unit_id = e.id
+		WHERE
+			a.header_id = #{id}
+		AND a.delete_flag = '0'
+		AND a.material_id = c.id
+		AND a.m_unit_id = d.id
+    </select>
+    
+</mapper>

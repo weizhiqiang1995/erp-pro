@@ -1,0 +1,12 @@
+package com.skyeye.dao;
+
+import java.util.List;
+import java.util.Map;
+
+public interface ErpCommonDao {
+
+	public Map<String, Object> queryDepotHeadDetailsMationById(Map<String, Object> map) throws Exception;
+
+	public List<Map<String, Object>> queryDepotItemDetailsMationById(Map<String, Object> bean) throws Exception;
+
+}

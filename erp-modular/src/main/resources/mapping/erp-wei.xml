@@ -4,6 +4,12 @@
 		- allUse  是否需要登录才能使用   1是   0否  2需要登陆才能访问，但无需授权    默认为否
 	 -->
 	 
+	<!-- erp公共部分开始 -->
+	<url id="erpcommon001" path="/post/ErpCommonController/queryDepotHeadDetailsMationById" val="获取单据详情信息" allUse="2">
+		<property id="rowId" name="id" ref="required" var="单据主表id"></property>
+	</url>
+	<!-- erp公共部分结束 -->
+	
 	<!-- 产品类型开始 -->
 	<url id="materialcategory001" path="/post/MaterialCategoryController/queryMaterialCategoryList" val="获取产品类型信息" allUse="1">
 		<property id="name" name="name" ref="" var="类型名称"></property>
@@ -134,13 +140,15 @@
 	<!-- 产品结束 -->
 	
 	<!-- 其他入库开始 -->
-	<url id="otherwarehous001" path="/post/OtherWareHousController/queryOtherWareHousToList" val="获取产品信息" allUse="2">
+	<url id="otherwarehous001" path="/post/OtherWareHousController/queryOtherWareHousToList" val="获取产品信息" allUse="1">
 		<property id="defaultNumber" name="defaultNumber" ref="" var="票据单号" />
 		<property id="material" name="material" ref="" var="产品信息：名称或者型号" />
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+		<property id="startTime" name="startTime" ref="" var="单据开始时间"/>
+		<property id="endTime" name="endTime" ref="" var="单据结束时间"/>
 	</url>
-	<url id="otherwarehous002" path="/post/OtherWareHousController/insertOtherWareHousMation" val="新增其他入库信息" allUse="2">
+	<url id="otherwarehous002" path="/post/OtherWareHousController/insertOtherWareHousMation" val="新增其他入库信息" allUse="1">
 		<property id="supplierId" name="supplierId" ref="required" var="供应商" />
 		<property id="operTime" name="operTime" ref="required" var="单据日期" />
 		<property id="accountId" name="accountId" ref="" var="账户" />

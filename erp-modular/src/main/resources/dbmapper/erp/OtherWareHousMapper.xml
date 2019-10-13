@@ -25,6 +25,9 @@
         <if test="defaultNumber != '' and defaultNumber != null">
             AND a.default_number LIKE '%${defaultNumber}%'
         </if>
+        <if test="startTime != '' and startTime != null and endTime != '' and endTime != null">
+			AND a.oper_time >= #{startTime} AND #{endTime} >= a.oper_time
+		</if>
         GROUP BY a.id
         ORDER BY a.create_time DESC
     </select>
