@@ -206,13 +206,17 @@
 			FORMAT(a.retail_price, 2) retailPrice,
 			FORMAT(a.low_price, 2) lowPrice,
 			FORMAT(a.estimate_purchase_price, 2) estimatePurchasePrice,
-			FORMAT(a.sale_price, 2) salePrice
+			FORMAT(a.sale_price, 2) salePrice,
+			SUM(c.oper_number * (CASE d.type WHEN 2 THEN 1 ELSE -1 END)) currentTock
 		FROM
 			erp_material_norms a
 			LEFT JOIN erp_unit b ON a.unit_id = b.id
+			LEFT JOIN erp_depotitem c ON a.id = c.m_unit_id
+			LEFT JOIN erp_depothead d ON c.header_id = d.id
 		WHERE
 			a.meterial_id = #{id}
 		AND a.delete_flag = '0'
+		GROUP BY a.id
 		ORDER BY b.number ASC
 	</select>
 	
