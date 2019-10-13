@@ -24,11 +24,11 @@ layui.config({
         limit: 8,
         cols: [[
             { title: '序号', type: 'numbers'},
-            { field: 'defaultNumber', title: '单据编号', align: 'left', width: 150},
+            { field: 'defaultNumber', title: '单据编号', align: 'left', width: 200},
             { field: 'supplierName', title: '供应商', align: 'left', width: 150},
             { field: 'materialNames', title: '关联产品', align: 'left', width: 300},
             { field: 'totalPrice', title: '合计金额', align: 'left', width: 120},
-            { field: 'supplierName', title: '操作人', align: 'left', width: 100},
+            { field: 'operPersonName', title: '操作人', align: 'left', width: 100},
             { field: 'operTime', title: '单据日期', align: 'center', width: 140 },
             { title: '操作', fixed: 'right', align: 'center', width: 200, toolbar: '#tableBar'}
         ]]

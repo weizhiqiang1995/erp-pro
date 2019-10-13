@@ -73,4 +73,10 @@ public class ErpConstants {
 		
     }
 	
+	//单据编号在redis中的key
+	public static final String SYS_DEPOTHEAD_REDIS_KEY = "sys_depothead_redis_key";
+	public static String getSysDepotHeadRedisKeyById(String userId, String subType){
+		return SYS_DEPOTHEAD_REDIS_KEY + userId + "_" + subType;
+	}
+	
 }

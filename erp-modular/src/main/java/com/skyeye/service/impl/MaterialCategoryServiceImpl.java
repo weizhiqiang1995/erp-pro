@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
 import com.skyeye.common.object.InputObject;
@@ -53,6 +54,7 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
      * @param @throws Exception
 	 */
 	@Override
+	@Transactional(value="transactionManager")
 	public void insertMaterialCategoryMation(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		Map<String, Object> user = inputObject.getLogParams();
@@ -83,6 +85,7 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
      * @param @throws Exception
 	 */
 	@Override
+	@Transactional(value="transactionManager")
 	public void deleteMaterialCategoryById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		Map<String, Object> bean = materialCategoryDao.queryMaterialCategoryStateById(map);
@@ -105,6 +108,7 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
      * @param @throws Exception
 	 */
 	@Override
+	@Transactional(value="transactionManager")
 	public void updateUpMaterialCategoryById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		Map<String, Object> bean = materialCategoryDao.queryMaterialCategoryStateById(map);
@@ -127,6 +131,7 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
      * @param @throws Exception
 	 */
 	@Override
+	@Transactional(value="transactionManager")
 	public void updateDownMaterialCategoryById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		Map<String, Object> bean = materialCategoryDao.queryMaterialCategoryStateById(map);
@@ -166,6 +171,7 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
      * @param @throws Exception
 	 */
 	@Override
+	@Transactional(value="transactionManager")
 	public void editMaterialCategoryMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		Map<String, Object> bean = materialCategoryDao.queryMaterialCategoryStateById(map);//查询这条产品类型的状态
@@ -191,6 +197,7 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
      * @param @throws Exception
 	 */
 	@Override
+	@Transactional(value="transactionManager")
 	public void editMaterialCategoryMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		String userId = inputObject.getLogParams().get("id").toString();
@@ -218,6 +225,7 @@ public class MaterialCategoryServiceImpl implements MaterialCategoryService{
      * @param @throws Exception
 	 */
 	@Override
+	@Transactional(value="transactionManager")
 	public void editMaterialCategoryMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		String userId = inputObject.getLogParams().get("id").toString();

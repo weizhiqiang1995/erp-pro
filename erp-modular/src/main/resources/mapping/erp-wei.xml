@@ -141,8 +141,12 @@
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>
 	<url id="otherwarehous002" path="/post/OtherWareHousController/insertOtherWareHousMation" val="新增其他入库信息" allUse="2">
-		<property id="defaultNumber" name="defaultNumber" ref="" var="票据单号" />
-		<property id="material" name="material" ref="" var="产品信息：名称或者型号" />
+		<property id="supplierId" name="supplierId" ref="required" var="供应商" />
+		<property id="operTime" name="operTime" ref="required" var="单据日期" />
+		<property id="accountId" name="accountId" ref="" var="账户" />
+		<property id="payType" name="payType" ref="required,num" var="付款类型" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
 	</url>
 	<!-- 其他入库结束 -->
 	

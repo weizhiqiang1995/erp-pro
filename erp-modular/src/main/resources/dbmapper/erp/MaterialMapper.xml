@@ -367,7 +367,8 @@
     	SELECT
 			a.id,
 			b.`name`,
-			CONVERT(a.estimate_purchase_price, decimal) estimatePurchasePrice
+			CONVERT(a.estimate_purchase_price, decimal) estimatePurchasePrice,
+			a.unit_id unitId
 		FROM
 			erp_material_norms a
 			LEFT JOIN erp_unit b ON a.unit_id = b.id
@@ -379,7 +380,7 @@
     
     <select id="queryMaterialTockByNormsIdAndDepotId" parameterType="java.util.Map" resultType="java.util.Map">
     	SELECT
-			IFNULL(SUM(a.oper_number * (CASE b.type WHEN '1' THEN 1 ELSE -1 END)), '0') AS currentTock
+			SUM(a.oper_number * (CASE b.type WHEN 2 THEN 1 ELSE -1 END)) AS currentTock
 		FROM
 			erp_depotitem a,
 			erp_depothead b

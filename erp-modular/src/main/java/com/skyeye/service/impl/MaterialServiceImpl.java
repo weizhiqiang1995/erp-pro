@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
@@ -68,6 +69,7 @@ public class MaterialServiceImpl implements MaterialService{
      */
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional(value="transactionManager")
 	public void insertMaterialMation(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		String materialNormsStr = map.get("materialNormsStr").toString();
@@ -189,6 +191,7 @@ public class MaterialServiceImpl implements MaterialService{
      * @throws Exception
      */
 	@Override
+	@Transactional(value="transactionManager")
 	public void editMaterialEnabledToDisablesById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		map.put("userId", inputObject.getLogParams().get("id"));
@@ -210,6 +213,7 @@ public class MaterialServiceImpl implements MaterialService{
      * @throws Exception
      */
 	@Override
+	@Transactional(value="transactionManager")
 	public void editMaterialEnabledToEnablesById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		map.put("userId", inputObject.getLogParams().get("id"));
@@ -231,6 +235,7 @@ public class MaterialServiceImpl implements MaterialService{
      * @throws Exception
      */
 	@Override
+	@Transactional(value="transactionManager")
 	public void deleteMaterialMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		map.put("userId", inputObject.getLogParams().get("id"));
@@ -299,6 +304,7 @@ public class MaterialServiceImpl implements MaterialService{
      */
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional(value="transactionManager")
 	public void editMaterialMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		String materialNormsStr = map.get("materialNormsStr").toString();
@@ -467,8 +473,13 @@ public class MaterialServiceImpl implements MaterialService{
 		Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         List<Map<String, Object>> beans = materialDao.queryMaterialListToSelect(params);
+        List<Map<String, Object>> unitList;
         for(Map<String, Object> bean : beans){
-        	bean.put("unitList", materialDao.queryMaterialUnitByIdToSelect(bean));
+        	unitList = materialDao.queryMaterialUnitByIdToSelect(bean);
+        	if("1".equals(bean.get("unit").toString())){//不是多单位
+        		unitList.get(0).put("name", bean.get("unitName").toString());
+            }
+        	bean.put("unitList", unitList);
         }
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());

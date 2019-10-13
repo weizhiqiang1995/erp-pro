@@ -105,6 +105,7 @@ public class MaterialUnitServiceImpl implements MaterialUnitService{
      * @throws Exception
      */
 	@Override
+	@Transactional(value="transactionManager")
 	public void deleteMaterialUnitMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		map.put("userId", inputObject.getLogParams().get("id"));
@@ -140,6 +141,7 @@ public class MaterialUnitServiceImpl implements MaterialUnitService{
      */
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional(value="transactionManager")
 	public void editMaterialUnitMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		map.put("userId", inputObject.getLogParams().get("id"));

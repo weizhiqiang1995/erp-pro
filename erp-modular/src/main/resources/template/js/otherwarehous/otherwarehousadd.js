@@ -101,6 +101,23 @@ layui.config({
 				$.each(material, function(i, item) {
 					if(thisRowValue == item.id){
 						$("#unitId" + thisRowNum).html(getDataUseHandlebars(selOption, {rows: item.unitList}));
+						var rkNum = parseInt($("#rkNum" + thisRowNum).val());
+						//设置默认选中
+						if(item.unit == 2){//多单位
+							$.each(item.unitList, function(j, bean) {
+								if(item.firstInUnit == bean.unitId){
+									$("#unitId" + thisRowNum).val(bean.id);
+									$("#unitPrice" + thisRowNum).html(bean.estimatePurchasePrice.toFixed(2));//单价
+									$("#amountOfMoney" + thisRowNum).html((rkNum * parseFloat(bean.estimatePurchasePrice)).toFixed(2));//金额
+									return false;
+								}
+							});
+						}else{//不是多单位
+							var firstItem = item.unitList[0];
+							$("#unitId" + thisRowNum).val(firstItem.id);
+							$("#unitPrice" + thisRowNum).html(firstItem.estimatePurchasePrice.toFixed(2));//单价
+							$("#amountOfMoney" + thisRowNum).html((rkNum * parseFloat(firstItem.estimatePurchasePrice)).toFixed(2));//金额
+						}
 						form.render('select');
 						return false;
 					}
@@ -109,7 +126,10 @@ layui.config({
 				$("#unitId" + thisRowNum).html(""); //重置规格为空
 				form.render('select');
 			}
+			//加载库存
 			loadTockByDepotAndMUnit(thisRowNum);
+			//计算价格
+			calculatedTotalPrice();
 		});
 		
 		//产品规格加载变化事件
@@ -137,7 +157,9 @@ layui.config({
 				$("#unitPrice" + thisRowNum).html("");//重置单价为空
 				$("#amountOfMoney" + thisRowNum).html("");//重置金额为空
 			}
+			//加载库存
 			loadTockByDepotAndMUnit(thisRowNum);
+			//计算价格
 			calculatedTotalPrice();
 		});
 		
@@ -218,37 +240,33 @@ layui.config({
 				//获取已选用品数据
 				var rowTr = $("#useTable tr");
 				if(rowTr.length == 0) {
-					winui.window.msg('请选择需要领用的用品~', {icon: 2, time: 2000});
+					winui.window.msg('请选择产品.', {icon: 2, time: 2000});
 					return false;
 				}
 				var tableData = new Array();
 				var noError = false; //循环遍历表格数据时，是否有其他错误信息
 				$.each(rowTr, function(i, item) {
+					//获取行编号
 					var rowNum = $(item).attr("trcusid").replace("tr", "");
-					var residualNum = parseInt($("#residualNum" + rowNum).html());
-					if(parseInt($("#useNum" + rowNum).val()) == 0) {
-						$("#useNum" + rowNum).addClass("layui-form-danger");
-						$("#useNum" + rowNum).focus();
-						winui.window.msg('领用数量不能为0', {icon: 2, time: 2000});
+					if(parseInt($("#rkNum" + rowNum).val()) == 0) {
+						$("#rkNum" + rowNum).addClass("layui-form-danger");
+						$("#rkNum" + rowNum).focus();
+						winui.window.msg('数量不能为0', {icon: 2, time: 2000});
 						noError = true;
 						return false;
 					}
-					if(parseInt($("#useNum" + rowNum).val()) > residualNum) {
-						$("#useNum" + rowNum).addClass("layui-form-danger");
-						$("#useNum" + rowNum).focus();
-						winui.window.msg('领用数量不能超过库存数量', {icon: 2, time: 2000});
-						noError = true;
-						return false;
-					}
-					if(inTableDataArrayByAssetarId($("#assetarId" + rowNum).val(), tableData)){
-						winui.window.msg('领用单存在相同的用品', {icon: 2, time: 2000});
+					if(inTableDataArrayByAssetarId($("#depotId" + rowNum).val(), $("#unitId" + rowNum).val(), tableData)) {
+						$("#depotId" + rowNum).addClass("layui-form-danger");
+						$("#depotId" + rowNum).focus();
+						winui.window.msg('一张单中不允许出现相同当库的产品信息.', {icon: 2, time: 2000});
 						noError = true;
 						return false;
 					}
 					var row = {
-						typeId: $("#typeId" + rowNum).val(),
-						assetarId: $("#assetarId" + rowNum).val(),
-						useNum: $("#useNum" + rowNum).val(),
+						depotId: $("#depotId" + rowNum).val(),
+						materialId: $("#materialId" + rowNum).val(),
+						mUnitId: $("#unitId" + rowNum).val(),
+						rkNum: $("#rkNum" + rowNum).val(),
 						remark: $("#remark" + rowNum).val()
 					};
 					tableData.push(row);
@@ -258,27 +276,30 @@ layui.config({
 				}
 
 				var params = {
-					title: $("#useTitle").html(),
+					supplierId: $("#supplierId").val(),
+					operTime: $("#operTime").val(),
+					accountId: $("#accountId").val(),
+					payType: $("#payType").val(),
 					remark: $("#remark").val(),
 					depotheadStr: JSON.stringify(tableData)
 				};
-//				AjaxPostUtil.request({url: reqBasePath + "assetarticles019", params: params, type: 'json', callback: function(json) {
-//					if(json.returnCode == 0) {
-//						parent.layer.close(index);
-//						parent.refreshCode = '0';
-//					} else {
-//						winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
-//					}
-//				}});
+				AjaxPostUtil.request({url: reqBasePath + "otherwarehous002", params: params, type: 'json', callback: function(json) {
+					if(json.returnCode == 0) {
+						parent.layer.close(index);
+						parent.refreshCode = '0';
+					} else {
+						winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
+					}
+				}});
 			}
 			return false;
 		});
 		
 		//判断选中的产品是否也在数组中
-		function inTableDataArrayByAssetarId(str, array) {
+		function inTableDataArrayByAssetarId(depotId, unitId, array) {
 			var isIn = false;
 			$.each(array, function(i, item) {
-				if(item.assetarId === str) {
+				if(item.depotId === depotId && item.mUnitId === unitId) {
 					isIn = true;
 					return false;
 				}

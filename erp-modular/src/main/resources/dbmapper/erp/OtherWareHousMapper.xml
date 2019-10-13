@@ -10,7 +10,7 @@
 			a.oper_person_name operPersonName,
 			b.supplier supplierName,
 			FORMAT(a.total_price, 2) totalPrice,
-			GROUP_CONCAT(CONCAT(c.material_name, c.material_model) SEPARATOR ',') materialNames
+			GROUP_CONCAT(DISTINCT CONCAT(c.material_name, c.material_model) SEPARATOR ',') materialNames
 		FROM
 			erp_depothead a
 			LEFT JOIN erp_supplier b ON a.organ_id = b.id
@@ -28,5 +28,56 @@
         GROUP BY a.id
         ORDER BY a.create_time DESC
     </select>
+    
+    <select id="queryMaterialsById" parameterType="java.util.Map" resultType="java.util.Map">
+    	SELECT
+			a.id materialId,
+			a.`name` materialName,
+			a.model materialModel,
+			b.id mUnitId,
+			b.estimate_purchase_price estimatePurchasePrice,
+			IFNULL(c.`name`, a.unit_name) unitName,
+			IFNULL(c.number, '1') baseNumber,
+			#{depotId} depotId
+		FROM
+			erp_material a,
+			erp_material_norms b
+			LEFT JOIN erp_unit c ON b.unit_id = c.id
+		WHERE
+			a.id = b.meterial_id
+		AND b.id = #{mUnitId}
+		AND a.id = b.meterial_id
+		AND a.delete_flag = '0'
+		AND b.delete_flag = '0'
+    </select>
+    
+    <insert id="insertOtherWareHousMation" parameterType="java.util.Map">
+        INSERT into erp_depothead
+        (id, `type`, sub_type, default_number, number, oper_person_id, oper_person_name, create_time, oper_time, organ_id, account_id, total_price,
+        	pay_type, remark, status, tenant_id, delete_flag)
+        VALUES(#{id}, #{type}, #{subType}, #{defaultNumber}, #{number}, #{operPersonId}, #{operPersonName}, #{createTime}, #{operTime}, #{organId}, #{accountId}, #{totalPrice},
+        		#{payType}, #{remark}, #{status}, #{userId}, #{deleteFlag})
+    </insert>
+    
+    <insert id="insertOtherWareHousChildMation" parameterType="java.util.Map">
+	     INSERT INTO erp_depotitem
+	     (id, header_id, material_id, material_name, material_model, m_unit_id, oper_number, basic_number, unit_price, all_price, remark, depot_id,
+	     	m_type, tenant_id, delete_flag)
+	     values
+		<foreach collection="list" item="item" index="index" separator="," >  
+			(#{item.id}, #{item.headerId}, #{item.materialId}, #{item.materialName}, #{item.materialModel}, #{item.mUnitId}, #{item.operNumber}, #{item.baseNumber}, #{item.estimatePurchasePrice}, #{item.allPrice}, #{item.remark}, #{item.depotId},
+				#{item.mType}, #{item.userId}, #{item.deleteFlag})  
+		</foreach>  
+	</insert>
+	
+	<select id="queryOddNumberBySubType" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			COUNT(a.id) num
+		FROM
+			erp_depothead a
+		WHERE
+			a.tenant_id = #{userId}
+		AND a.sub_type = #{subType}
+	</select>
 
 </mapper>
