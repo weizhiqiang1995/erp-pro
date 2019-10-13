@@ -174,4 +174,19 @@ public class AccountServiceImpl implements AccountService {
         outputObject.setBeans(beans);
         outputObject.settotal(total);
     }
+
+    /**
+     * 获取账户信息展示为下拉框
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+	@Override
+	public void queryAccountListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String, Object> params = inputObject.getParams();
+        params.put("userId", inputObject.getLogParams().get("id"));
+        List<Map<String, Object>> beans = accountDao.queryAccountListToSelect(params);
+        outputObject.setBeans(beans);
+        outputObject.settotal(beans.size());
+	}
 }

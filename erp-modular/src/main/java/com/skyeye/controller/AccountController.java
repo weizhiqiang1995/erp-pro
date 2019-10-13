@@ -114,4 +114,17 @@ public class AccountController {
     public void queryAccountStreamById(InputObject inputObject, OutputObject outputObject) throws Exception{
         accountService.queryAccountStreamById(inputObject, outputObject);
     }
+    
+    /**
+     * 获取账户信息展示为下拉框
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/AccountController/queryAccountListToSelect")
+    @ResponseBody
+    public void queryAccountListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception{
+        accountService.queryAccountListToSelect(inputObject, outputObject);
+    }
+    
 }

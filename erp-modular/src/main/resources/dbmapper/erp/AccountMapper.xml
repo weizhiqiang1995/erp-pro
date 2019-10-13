@@ -172,4 +172,17 @@
             a.tenant_id = #{userId}
         AND a.id = #{id}
     </select>
+    
+    <select id="queryAccountListToSelect" parameterType="java.util.Map" resultType="java.util.Map">
+    	SELECT
+			a.id,
+			a.`name`
+		FROM
+			erp_account a
+		WHERE
+			a.tenant_id = #{userId}
+		AND a.delete_flag = '0'
+		ORDER BY a.is_default ASC
+    </select>
+    
 </mapper>

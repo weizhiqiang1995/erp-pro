@@ -15,23 +15,25 @@ public interface AccountDao {
 
     public Map<String, Object> queryAccountByName(Map<String, Object> params) throws Exception;
 
-    public void insertAccount(Map<String, Object> params) throws Exception;
+    public int insertAccount(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> queryAccountById(Map<String, Object> params) throws Exception;
 
-    public void editAccountByDeleteFlag(Map<String, Object> params) throws Exception;
+    public int editAccountByDeleteFlag(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> queryAccountByIdAndName(Map<String, Object> params) throws Exception;
 
-    public void editAccountById(Map<String, Object> params) throws Exception;
+    public int editAccountById(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> queryAccountByIdAndIsDeafault(Map<String, Object> params) throws Exception;
 
-    public void editAccountByIsDefault(Map<String, Object> params) throws Exception;
+    public int editAccountByIsDefault(Map<String, Object> params) throws Exception;
 
-    public void editAccountByIdAndIsDefault(Map<String, Object> params) throws Exception;
+    public int editAccountByIdAndIsDefault(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> queryAccountByIdAndInfo(Map<String, Object> params) throws Exception;
 
     public List<Map<String, Object>> queryAccountStreamById(Map<String, Object> params, PageBounds pageBounds) throws Exception;
+
+	public List<Map<String, Object>> queryAccountListToSelect(Map<String, Object> params) throws Exception;
 }

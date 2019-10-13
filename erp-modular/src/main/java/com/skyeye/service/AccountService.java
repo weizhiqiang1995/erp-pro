@@ -25,4 +25,6 @@ public interface AccountService {
     public void queryAccountByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception;
 
     public void queryAccountStreamById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+	public void queryAccountListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception;
 }

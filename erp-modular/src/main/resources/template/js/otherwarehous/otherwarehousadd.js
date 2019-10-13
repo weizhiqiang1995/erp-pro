@@ -5,11 +5,12 @@ layui.config({
 	version: skyeyeVersion
 }).extend({ //指定js别名
 	window: 'js/winui.window'
-}).define(['window', 'jquery', 'winui'], function(exports) {
+}).define(['window', 'jquery', 'winui', 'laydate'], function(exports) {
 	winui.renderColor();
 	layui.use(['form'], function(form) {
 		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
-		var $ = layui.$;
+		var $ = layui.$,
+			laydate = layui.laydate;
 		var enclosureInfo = ""; //附件id
 		var rowNum = 1; //表格的序号
 		var depotHtml = "", materialHtml = "";//仓库
@@ -18,7 +19,28 @@ layui.config({
 		var usetableTemplate = $("#usetableTemplate").html();
 		var selOption = getFileContent('tpl/template/select-option.tpl');
 		
-		initSupplierHtml();
+		//事故时间
+ 		laydate.render({ 
+ 		  elem: '#operTime',
+ 		  type: 'datetime',
+ 	 	  trigger: 'click'
+ 		});
+		
+ 		initAccountHtml();
+ 		//初始化账户
+		function initAccountHtml() {
+			AjaxPostUtil.request({url: reqBasePath + "account009", params: {}, type: 'json', callback: function(json) {
+				if(json.returnCode == 0) {
+					//加载供应商数据
+					$("#accountId").html(getDataUseHandlebars(selOption, json)); 
+					//初始化供应商
+					initSupplierHtml();
+				} else {
+					winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
+				}
+			}});
+		}
+ 		
 		//初始化供应商
 		function initSupplierHtml() {
 			AjaxPostUtil.request({url: reqBasePath + "supplier009", params: {}, type: 'json', callback: function(json) {

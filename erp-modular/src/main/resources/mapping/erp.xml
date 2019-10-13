@@ -315,5 +315,7 @@
 	<url id="account008" path="/post/AccountController/queryAccountStreamById" val="查看账户流水" allUse="1">
 		<property id="rowId" name="id" ref="required" var="结算账户Id"></property>
 	</url>
+	<url id="account009" path="/post/AccountController/queryAccountListToSelect" val="获取账户信息展示为下拉框" allUse="2">
+	</url>
 	<!-- 结算账户管理结束 -->
 </controller>
