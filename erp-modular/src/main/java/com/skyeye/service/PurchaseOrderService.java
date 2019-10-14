@@ -9,4 +9,6 @@ public interface PurchaseOrderService {
 
 	public void insertPurchaseOrderMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void deletePurchaseOrderMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }

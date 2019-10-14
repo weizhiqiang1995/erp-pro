@@ -43,5 +43,17 @@ public class PurchaseOrderController {
     public void insertPurchaseOrderMation(InputObject inputObject, OutputObject outputObject) throws Exception{
     	purchaseOrderService.insertPurchaseOrderMation(inputObject, outputObject);
     }
+    
+    /**
+     * 删除采购单信息
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/PurchaseOrderController/deletePurchaseOrderMationById")
+    @ResponseBody
+    public void deletePurchaseOrderMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	purchaseOrderService.deletePurchaseOrderMationById(inputObject, outputObject);
+    }
 	
 }

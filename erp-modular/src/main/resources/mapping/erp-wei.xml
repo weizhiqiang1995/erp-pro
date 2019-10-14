@@ -175,6 +175,9 @@
 		<property id="remark" name="remark" ref="" var="备注" />
 		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
 	</url>
+	<url id="purchaseorder003" path="/post/PurchaseOrderController/deletePurchaseOrderMationById" val="删除采购单信息" allUse="2">
+		<property id="rowId" name="id" ref="required" var="采购单id" />
+	</url>
 	<!-- 采购管理结束 -->
 	
 	<!-- 统计开始 -->

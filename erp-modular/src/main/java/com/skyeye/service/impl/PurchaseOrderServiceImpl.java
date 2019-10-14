@@ -121,5 +121,29 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService{
 			outputObject.setreturnMessage("数据格式错误");
 		}
 	}
+
+	/**
+     * 删除采购单信息
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+	@Override
+	public void deletePurchaseOrderMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String, Object> map = inputObject.getParams();
+		map.put("userId", inputObject.getLogParams().get("id"));
+		//获取采购单状态
+		Map<String, Object> bean = purchaseOrderDao.queryPurchaseOrderStateById(map);
+		if(bean != null && !bean.isEmpty()){
+			if("0".equals(bean.get("status").toString()) || "3".equals(bean.get("status").toString())){//未提交审核或者审核拒绝的可以删除
+				//删除采购单
+				purchaseOrderDao.deletePurchaseOrderMationById(map);
+				//删除采购单关联产品
+				purchaseOrderDao.deletePurchaseOrderNormsMationById(map);
+			}
+		}else{
+			outputObject.setreturnMessage("该采购单状态已经改变或数据不存在.");
+		}
+	}
 	
 }

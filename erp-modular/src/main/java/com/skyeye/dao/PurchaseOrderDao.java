@@ -15,4 +15,10 @@ public interface PurchaseOrderDao {
 
 	public int insertPurchaseOrderChildMation(List<Map<String, Object>> entitys) throws Exception;
 
+	public Map<String, Object> queryPurchaseOrderStateById(Map<String, Object> map) throws Exception;
+
+	public int deletePurchaseOrderMationById(Map<String, Object> map) throws Exception;
+
+	public int deletePurchaseOrderNormsMationById(Map<String, Object> map) throws Exception;
+
 }

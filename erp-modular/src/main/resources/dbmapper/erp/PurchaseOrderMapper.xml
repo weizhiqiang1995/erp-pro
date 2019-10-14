@@ -74,4 +74,34 @@
 		</foreach>  
 	</insert>
 	
+	<select id="queryPurchaseOrderStateById" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			a.id,
+			a.`status`
+		FROM
+			erp_depothead a
+		WHERE
+			a.id = #{id}
+		AND a.tenant_id = #{userId}
+		AND a.delete_flag = '0'
+		AND a.sub_type = '10' <!-- 限制采购单 -->
+	</select>
+	
+	<delete id="deletePurchaseOrderMationById" parameterType="java.util.Map">
+		DELETE
+		FROM
+			erp_depothead
+		WHERE
+			id = #{id}
+		AND (status = '0' OR status = '3')
+	</delete>
+	
+	<delete id="deletePurchaseOrderNormsMationById" parameterType="java.util.Map">
+		DELETE
+		FROM
+			erp_depotitem
+		WHERE
+			header_id = #{id}
+	</delete>
+	
 </mapper>
