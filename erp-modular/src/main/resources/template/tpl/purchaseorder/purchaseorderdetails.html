@@ -100,6 +100,17 @@
 		        	{{remark}}
 		        </div>
 		    </div>
+			<div class="layui-form-item layui-col-xs6">
+		        <label class="layui-form-label">状态：</label>
+		        <div class="layui-input-block ver-center" id="statusName">
+		        </div>
+		    </div>
+			<div class="layui-form-item layui-col-xs12">
+		        <label class="layui-form-label">审批意见：</label>
+		        <div class="layui-input-block ver-center">
+		        	{{statusContent}}
+		        </div>
+		    </div>
 		{{/bean}}
 		</script>
 	    
@@ -107,7 +118,7 @@
 	<script src="../../assets/lib/layui/layui.js"></script>
    	<script src="../../assets/lib/layui/custom.js"></script>
    	<script type="text/javascript">
-        layui.config({base: '../../js/otherwarehous/'}).use('otherwarehousdetails');
+        layui.config({base: '../../js/purchaseorder/'}).use('purchaseorderdetails');
     </script>
 </body>
 </html>

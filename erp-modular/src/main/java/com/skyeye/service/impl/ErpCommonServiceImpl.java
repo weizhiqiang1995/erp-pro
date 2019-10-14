@@ -16,7 +16,7 @@ public class ErpCommonServiceImpl implements ErpCommonService{
 	
 	@Autowired
 	private ErpCommonDao erpCommonDao;
-
+	
 	/**
      * 获取单据详情信息
      * @param inputObject

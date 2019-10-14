@@ -9,4 +9,6 @@ public interface ErpCommonDao {
 
 	public List<Map<String, Object>> queryDepotItemDetailsMationById(Map<String, Object> bean) throws Exception;
 
+	public Map<String, Object> queryOddNumberBySubType(Map<String, Object> bean) throws Exception;
+
 }

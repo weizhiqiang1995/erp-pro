@@ -15,6 +15,7 @@
 			CASE a.pay_type WHEN '1' THEN '现金' WHEN '2' THEN '记账' WHEN '3' THEN '其他' ELSE '' END payType,
 			a.remark,
 			a.status,
+			a.status_content statusContent,
 			a.link_number linkNumber
 		FROM
 			erp_depothead a
@@ -48,5 +49,15 @@
 		AND a.material_id = c.id
 		AND a.m_unit_id = d.id
     </select>
+    
+    <select id="queryOddNumberBySubType" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			COUNT(a.id) num
+		FROM
+			erp_depothead a
+		WHERE
+			a.tenant_id = #{userId}
+		AND a.sub_type = #{subType}
+	</select>
     
 </mapper>

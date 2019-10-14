@@ -180,4 +180,19 @@ public class CustomerServiceImpl implements CustomerService {
         outputObject.setBean(bean);
         outputObject.settotal(1);
     }
+
+    /**
+     * 获取客户列表信息展示为下拉框
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+	@Override
+	public void queryCustomerListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String, Object> params = inputObject.getParams();
+        params.put("userId", inputObject.getLogParams().get("id"));
+        List<Map<String, Object>> beans = customerDao.queryCustomerListToSelect(params);
+        outputObject.setBeans(beans);
+        outputObject.settotal(beans.size());
+	}
 }

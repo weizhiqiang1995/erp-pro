@@ -177,6 +177,8 @@
 	<url id="customer008" path="/post/CustomerController/queryCustomerByIdAndInfo" val="查看客户详情" allUse="2">
 		<property id="rowId" name="id" ref="required" var="客户ID"></property>
 	</url>
+	<url id="customer009" path="/post/CustomerController/queryCustomerListToSelect" val="获取客户列表信息展示为下拉框" allUse="2">
+	</url>
 	<!-- 客户信息管理结束-->
 
 	<!-- 会员信息管理开始 -->

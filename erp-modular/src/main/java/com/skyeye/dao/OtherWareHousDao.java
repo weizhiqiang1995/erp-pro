@@ -15,6 +15,4 @@ public interface OtherWareHousDao {
 
 	public int insertOtherWareHousChildMation(List<Map<String, Object>> entitys) throws Exception;
 
-	public Map<String, Object> queryOddNumberBySubType(Map<String, Object> bean) throws Exception;
-
 }

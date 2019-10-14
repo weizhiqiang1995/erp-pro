@@ -73,14 +73,4 @@
 		</foreach>  
 	</insert>
 	
-	<select id="queryOddNumberBySubType" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			COUNT(a.id) num
-		FROM
-			erp_depothead a
-		WHERE
-			a.tenant_id = #{userId}
-		AND a.sub_type = #{subType}
-	</select>
-
 </mapper>

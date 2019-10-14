@@ -14,6 +14,12 @@
 	    </form>
 	    
 	    <script type="text/x-handlebars-template" id="simpleTemplate">
+			<div class="layui-form-item layui-col-xs12">
+		        <label class="layui-form-label">当前存量：</label>
+		        <div class="layui-input-block ver-center">
+		        	<a class="notice-title-click">{{currentTock}}</a>
+		        </div>
+		    </div>
 			<div class="layui-form-item layui-col-xs6">
 		        <label class="layui-form-label">安全存量：</label>
 		        <div class="layui-input-block ver-center">
@@ -80,6 +86,7 @@
 		                    	<th style="width: 60px;">单位类型</th>
 		                        <th style="width: 60px;">计量单位</th>
 		                        <th>安全存量</th>
+								<th>当前存量</th>
 		                        <th>零售价</th>
 		                        <th>最低售价</th>
 		                        <th>预计采购价</th>
@@ -92,6 +99,7 @@
 									<td>{{baseUnit}}</td>
 									<td>{{unitName}}</td>
 									<td>{{safetyTock}}</td>
+									<td><a class="notice-title-click">{{currentTock}}</a></td>
 									<td>{{retailPrice}}</td>
 									<td>{{lowPrice}}</td>
 									<td>{{estimatePurchasePrice}}</td>

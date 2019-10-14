@@ -17,9 +17,7 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.OtherWareHousDao;
 import com.skyeye.erp.util.ErpConstants;
-import com.skyeye.erp.util.NumAdd;
-import com.skyeye.erp.util.Tool;
-import com.skyeye.jedis.JedisClientService;
+import com.skyeye.erp.util.ErpOrderNum;
 import com.skyeye.service.OtherWareHousService;
 
 import net.sf.json.JSONArray;
@@ -30,9 +28,6 @@ public class OtherWareHousServiceImpl implements OtherWareHousService{
 	@Autowired
 	private OtherWareHousDao otherWareHousDao;
 	
-	@Autowired
-	private JedisClientService jedisClient;
-
 	/**
      * 获取其他入库列表信息
      * @param inputObject
@@ -104,7 +99,8 @@ public class OtherWareHousServiceImpl implements OtherWareHousService{
 			depothead.put("id", useId);
 			depothead.put("type", 2);//类型(1.出库/2.入库)
 			depothead.put("subType", ErpConstants.DepoTheadSubType.PUT_IS_OTHERS.getNum());//其他入库
-			String orderNum = getOrderNumBySubType(userId, ErpConstants.DepoTheadSubType.PUT_IS_OTHERS.getNum());
+			ErpOrderNum erpOrderNum = new ErpOrderNum();
+			String orderNum = erpOrderNum.getOrderNumBySubType(userId, ErpConstants.DepoTheadSubType.PUT_IS_OTHERS.getNum());
 			depothead.put("defaultNumber", orderNum);//初始票据号
 			depothead.put("number", orderNum);//票据号
 			depothead.put("operPersonId", userId);//操作员id
@@ -116,7 +112,7 @@ public class OtherWareHousServiceImpl implements OtherWareHousService{
 			depothead.put("remark", map.get("remark"));//备注
 			depothead.put("payType", map.get("payType"));//付款类型
 			depothead.put("totalPrice", allPrice);//合计金额
-			depothead.put("status", "1");//状态，0未审核、1已审核、2已转采购|销售
+			depothead.put("status", "2");//状态，0未审核、1.审核中、2.审核通过、3.审核拒绝、4.已转采购|销售
 			depothead.put("userId", userId);
 			depothead.put("deleteFlag", 0);//删除标记，0未删除，1删除
 			otherWareHousDao.insertOtherWareHousMation(depothead);
@@ -124,36 +120,6 @@ public class OtherWareHousServiceImpl implements OtherWareHousService{
 		}else{
 			outputObject.setreturnMessage("数据格式错误");
 		}
-	}
-	
-	/**
-	 * 根据类型获取订单编号
-	 * @param subType
-	 * @return
-	 * @throws Exception 
-	 */
-	public String getOrderNumBySubType(String userId, String subType) throws Exception{
-		//获取在redis中的key
-		String key = ErpConstants.getSysDepotHeadRedisKeyById(userId, subType);
-		if(ToolUtil.isBlank(jedisClient.get(key))){//若缓存中无值
-			Map<String, Object> bean = new HashMap<>();
-			bean.put("subType", subType);
-			bean.put("userId", userId);
-			bean = otherWareHousDao.queryOddNumberBySubType(bean);	//从数据库中查询
-			if(bean == null || bean.isEmpty()){
-				jedisClient.set(key, "1");//将从数据库中查来的内容存到缓存中
-			}else{
-				jedisClient.set(key, bean.get("num").toString());//将从数据库中查来的内容存到缓存中
-			}
-		}
-		//获取当前最大的值
-		String num = jedisClient.get(key);
-		//1为int类型，0代表前面要补的字符 10代表字符串长度,d表示参数为整数类型 
-		//类型 + 年月日 + num
-		String orderNum = ErpConstants.DepoTheadSubType.getClockInName(subType) + Tool.getTimeISDayStr() + String.format("%010d", Integer.parseInt(num));
-		//redis缓存+1
-		jedisClient.set(key, NumAdd.BigNumAdd(jedisClient.get(key), "1"));
-		return orderNum;
 	}
 	
 }

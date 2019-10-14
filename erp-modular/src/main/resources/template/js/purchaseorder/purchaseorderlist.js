@@ -27,7 +27,7 @@ layui.config({
         id: 'messageTable',
         elem: '#messageTable',
         method: 'post',
-        url: reqBasePath + 'otherwarehous001',
+        url: reqBasePath + 'purchaseorder001',
         where: {defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime},
         even: true,  //隔行变色
         page: true,
@@ -40,6 +40,21 @@ layui.config({
 		    }},
             { field: 'supplierName', title: '供应商', align: 'left', width: 150},
             { field: 'materialNames', title: '关联产品', align: 'left', width: 300},
+            { field: 'status', title: '状态', align: 'left', width: 80, templet: function(d){
+		        if(d.status == '0'){
+	        		return "<span class='state-down'>未审核</span>";
+	        	}else if(d.status == '1'){
+	        		return "<span class='state-up'>审核中</span>";
+	        	}else if(d.status == '2'){
+	        		return "<span class='state-new'>审核通过</span>";
+	        	}else if(d.status == '3'){
+	        		return "<span class='state-down'>拒绝通过</span>";
+	        	}else if(d.status == '4'){
+	        		return "<span class='state-new'>已转采购</span>";
+	        	}else{
+	        		return "参数错误";
+	        	}
+		    }},
             { field: 'totalPrice', title: '合计金额', align: 'left', width: 120},
             { field: 'operPersonName', title: '操作人', align: 'left', width: 100},
             { field: 'operTime', title: '单据日期', align: 'center', width: 140 },
@@ -54,6 +69,14 @@ layui.config({
             deletemember(data);
         }else if (layEvent === 'details') { //详情
         	details(data);
+        }else if (layEvent === 'edit') { //编辑
+        	edit(data);
+        }else if (layEvent === 'subExamine') { //提交审核
+        	subExamine(data);
+        }else if (layEvent === 'examine') { //审核
+        	examine(data);
+        }else if (layEvent === 'turnPurchase') { //转采购单
+        	turnPurchase(data);
         }
     });
 
@@ -66,14 +89,29 @@ layui.config({
         }
         return false;
     });
+    
+    //编辑
+    function edit(data){
+        rowId = data.id;
+        _openNewWindows({
+            url: "../../tpl/purchaseorder/purchaseorderedit.html",
+            title: "编辑",
+            pageId: "purchaseorderedit",
+            area: ['90vw', '90vh'],
+            callBack: function(refreshCode){
+                if (refreshCode == '0') {
+                    winui.window.msg("操作成功", {icon: 1,time: 2000});
+                    loadTable();
+                } else if (refreshCode == '-9999') {
+                    winui.window.msg("操作失败", {icon: 2,time: 2000});
+                }
+            }});
+    }
 
     //删除
     function deletemember(data){
         layer.confirm('确认要删除信息吗？', { icon: 3, title: '删除操作' }, function (index) {
-            var params = {
-                rowId: data.id
-            };
-            AjaxPostUtil.request({url:reqBasePath + "member004", params:params, type:'json', callback:function(json){
+            AjaxPostUtil.request({url:reqBasePath + "purchaseorder003", params: {rowId: data.id}, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("删除成功。", {icon: 1,time: 2000});
                     loadTable();
@@ -88,9 +126,9 @@ layui.config({
 	function details(data){
 		rowId = data.id;
 		_openNewWindows({
-			url: "../../tpl/otherwarehous/otherwarehousdetails.html", 
+			url: "../../tpl/purchaseorder/purchaseorderdetails.html", 
 			title: "详情",
-			pageId: "otherwarehousdetails",
+			pageId: "purchaseorderdetails",
 			area: ['90vw', '90vh'],
 			callBack: function(refreshCode){
                 if (refreshCode == '0') {
@@ -101,13 +139,59 @@ layui.config({
                 }
 			}});
 	}
-
+	
+	//提交审批
+	function subExamine(data){
+        layer.confirm('确认要提交审核吗？', { icon: 3, title: '提交审核操作' }, function (index) {
+            AjaxPostUtil.request({url:reqBasePath + "purchaseorder006", params: {rowId: data.id}, type:'json', callback:function(json){
+                if(json.returnCode == 0){
+                    winui.window.msg("提交成功。", {icon: 1,time: 2000});
+                    loadTable();
+                }else{
+                    winui.window.msg(json.returnMessage, {icon: 2,time: 2000});
+                }
+            }});
+        });
+    }
+    
+    //审核
+	function examine(data){
+		rowId = data.id;
+		_openNewWindows({
+			url: "../../tpl/purchaseorder/purchaseorderexamine.html", 
+			title: "审核",
+			pageId: "purchaseorderdetails",
+			area: ['90vw', '90vh'],
+			callBack: function(refreshCode){
+                if (refreshCode == '0') {
+                	winui.window.msg("操作成功", {icon: 1,time: 2000});
+                	loadTable();
+                } else if (refreshCode == '-9999') {
+                	winui.window.msg("操作失败", {icon: 2,time: 2000});
+                }
+			}});
+    }
+    
+    //转采购单
+	function turnPurchase(data){
+//        layer.confirm('确认要转采购入库吗？', { icon: 3, title: '采购入库操作' }, function (index) {
+//            AjaxPostUtil.request({url:reqBasePath + "purchaseorder003", params: {rowId: data.id}, type:'json', callback:function(json){
+//                if(json.returnCode == 0){
+//                    winui.window.msg("转单成功。", {icon: 1,time: 2000});
+//                    loadTable();
+//                }else{
+//                    winui.window.msg(json.returnMessage, {icon: 2,time: 2000});
+//                }
+//            }});
+//        });
+    }
+	
     //添加
     $("body").on("click", "#addBean", function(){
         _openNewWindows({
-            url: "../../tpl/otherwarehous/otherwarehousadd.html",
+            url: "../../tpl/purchaseorder/purchaseorderadd.html",
             title: "新增",
-            pageId: "otherwarehousadd",
+            pageId: "purchaseorderadd",
             area: ['90vw', '90vh'],
             callBack: function(refreshCode){
                 if (refreshCode == '0') {
