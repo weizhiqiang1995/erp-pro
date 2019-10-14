@@ -123,7 +123,7 @@ var layer = {
       content: content,
       btn: ready.btn,
       yes: yes,
-      btn2: cancel
+      btn2: cancel ? cancel: function(){$("body").find(".mask-req-str").remove();}
     }, type ? {} : options));
   },
   
