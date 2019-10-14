@@ -178,6 +178,26 @@
 	<url id="purchaseorder003" path="/post/PurchaseOrderController/deletePurchaseOrderMationById" val="删除采购单信息" allUse="2">
 		<property id="rowId" name="id" ref="required" var="采购单id" />
 	</url>
+	<url id="purchaseorder004" path="/post/PurchaseOrderController/queryPurchaseOrderToEditById" val="采购单信息编辑回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="采购单id" />
+	</url>
+	<url id="purchaseorder005" path="/post/PurchaseOrderController/editPurchaseOrderMationById" val="编辑采购单信息" allUse="2">
+		<property id="supplierId" name="supplierId" ref="required" var="供应商" />
+		<property id="operTime" name="operTime" ref="required" var="单据日期" />
+		<property id="accountId" name="accountId" ref="" var="账户" />
+		<property id="payType" name="payType" ref="required,num" var="付款类型" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
+		<property id="rowId" name="id" ref="required" var="采购单id" />
+	</url>
+	<url id="purchaseorder006" path="/post/PurchaseOrderController/editPurchaseOrderStateToSubExamineById" val="采购单信息提交审核" allUse="2">
+		<property id="rowId" name="id" ref="required" var="采购单id" />
+	</url>
+	<url id="purchaseorder007" path="/post/PurchaseOrderController/editPurchaseOrderStateToExamineById" val="采购单信息审核" allUse="2">
+		<property id="rowId" name="id" ref="required" var="采购单id" />
+		<property id="status" name="status" ref="required,num" var="审核结果" />
+		<property id="content" name="content" ref="" var="审核意见" />
+	</url>
 	<!-- 采购管理结束 -->
 	
 	<!-- 统计开始 -->

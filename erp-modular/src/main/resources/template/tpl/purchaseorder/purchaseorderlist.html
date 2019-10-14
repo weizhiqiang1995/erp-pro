@@ -40,12 +40,15 @@
 	    <table id="messageTable" lay-filter="messageTable"></table>
 	
 	    <script type="text/html" id="tableBar">
-        	{{# if(d.enabled == 0){ }}
-       			<a class="layui-btn layui-btn-xs" lay-event="edit">未用到</a>
-        	{{# } }}
-        	{{# if(d.status == 0){ }}
+        	{{# if(d.status == 0 || d.status == 3){ }}
+       			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
-        	{{# } }}
+				<a class="layui-btn layui-btn-xs" lay-event="subExamine">提交审核</a>
+        	{{# } else if(d.status == 1) { }}
+				<a class="layui-btn layui-btn-xs" lay-event="examine">审核</a>
+			{{# } else if(d.status == 2) { }}
+				<a class="layui-btn layui-btn-xs" lay-event="turnPurchase">转采购单</a>
+			{{# } }}
     	</script>
 	</div>
 	<script src="../../assets/lib/layui/layui.js"></script>

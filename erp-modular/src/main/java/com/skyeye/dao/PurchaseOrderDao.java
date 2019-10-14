@@ -21,4 +21,14 @@ public interface PurchaseOrderDao {
 
 	public int deletePurchaseOrderNormsMationById(Map<String, Object> map) throws Exception;
 
+	public Map<String, Object> queryPurchaseOrderToEditById(Map<String, Object> map) throws Exception;
+
+	public List<Map<String, Object>> queryPurchaseOrderNormsToEditById(Map<String, Object> map) throws Exception;
+
+	public int editPurchaseOrderMationById(Map<String, Object> depothead) throws Exception;
+
+	public int editPurchaseOrderStateToSubExamineById(Map<String, Object> map) throws Exception;
+
+	public int editPurchaseOrderStateToExamineById(Map<String, Object> map) throws Exception;
+
 }

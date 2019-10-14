@@ -11,4 +11,12 @@ public interface PurchaseOrderService {
 
 	public void deletePurchaseOrderMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void queryPurchaseOrderToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+	public void editPurchaseOrderMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+	public void editPurchaseOrderStateToSubExamineById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+	public void editPurchaseOrderStateToExamineById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }

@@ -56,4 +56,52 @@ public class PurchaseOrderController {
     	purchaseOrderService.deletePurchaseOrderMationById(inputObject, outputObject);
     }
 	
+    /**
+     * 采购单信息编辑回显
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/PurchaseOrderController/queryPurchaseOrderToEditById")
+    @ResponseBody
+    public void queryPurchaseOrderToEditById(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	purchaseOrderService.queryPurchaseOrderToEditById(inputObject, outputObject);
+    }
+    
+    /**
+     * 编辑采购单信息
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/PurchaseOrderController/editPurchaseOrderMationById")
+    @ResponseBody
+    public void editPurchaseOrderMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	purchaseOrderService.editPurchaseOrderMationById(inputObject, outputObject);
+    }
+    
+    /**
+     * 采购单信息提交审核
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/PurchaseOrderController/editPurchaseOrderStateToSubExamineById")
+    @ResponseBody
+    public void editPurchaseOrderStateToSubExamineById(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	purchaseOrderService.editPurchaseOrderStateToSubExamineById(inputObject, outputObject);
+    }
+    
+    /**
+     * 采购单信息审核
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/PurchaseOrderController/editPurchaseOrderStateToExamineById")
+    @ResponseBody
+    public void editPurchaseOrderStateToExamineById(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	purchaseOrderService.editPurchaseOrderStateToExamineById(inputObject, outputObject);
+    }
+    
 }
