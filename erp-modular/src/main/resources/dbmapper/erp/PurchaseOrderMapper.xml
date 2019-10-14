@@ -10,13 +10,14 @@
 			a.oper_person_name operPersonName,
 			b.supplier supplierName,
 			FORMAT(a.total_price, 2) totalPrice,
+			a.status,
 			GROUP_CONCAT(DISTINCT CONCAT(c.material_name, c.material_model) SEPARATOR ',') materialNames
 		FROM
 			erp_depothead a
 			LEFT JOIN erp_supplier b ON a.organ_id = b.id
 			LEFT JOIN erp_depotitem c ON c.header_id = a.id
 		WHERE
-			a.sub_type = '4'
+			a.sub_type = '10'
 		AND a.tenant_id = #{userId}
 		AND a.delete_flag = '0'
         <if test="material != '' and material != null">

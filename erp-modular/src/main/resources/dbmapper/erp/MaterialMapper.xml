@@ -216,6 +216,7 @@
 		WHERE
 			a.meterial_id = #{id}
 		AND a.delete_flag = '0'
+		AND d.sub_type != '10'
 		GROUP BY a.id
 		ORDER BY b.number ASC
 	</select>
@@ -393,6 +394,7 @@
 		AND a.depot_id = #{depotId}
 		AND a.m_unit_id = #{mUnitId}
 		AND a.header_id = b.id
+		AND b.sub_type != '10'
 		GROUP BY a.m_unit_id
     </select>
 

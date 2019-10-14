@@ -98,9 +98,9 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService{
 			Map<String, Object> depothead = new HashMap<>();
 			depothead.put("id", useId);
 			depothead.put("type", 2);//类型(1.出库/2.入库)
-			depothead.put("subType", ErpConstants.DepoTheadSubType.PUT_IS_OTHERS.getNum());//其他入库
+			depothead.put("subType", ErpConstants.DepoTheadSubType.PURCHASE_ORDER.getNum());//采购单
 			ErpOrderNum erpOrderNum = new ErpOrderNum();
-			String orderNum = erpOrderNum.getOrderNumBySubType(userId, ErpConstants.DepoTheadSubType.PUT_IS_OTHERS.getNum());
+			String orderNum = erpOrderNum.getOrderNumBySubType(userId, ErpConstants.DepoTheadSubType.PURCHASE_ORDER.getNum());
 			depothead.put("defaultNumber", orderNum);//初始票据号
 			depothead.put("number", orderNum);//票据号
 			depothead.put("operPersonId", userId);//操作员id
@@ -112,7 +112,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService{
 			depothead.put("remark", map.get("remark"));//备注
 			depothead.put("payType", map.get("payType"));//付款类型
 			depothead.put("totalPrice", allPrice);//合计金额
-			depothead.put("status", "1");//状态，0未审核、1已审核、2已转采购|销售
+			depothead.put("status", "0");//状态，0未审核、1已审核、2已转采购|销售
 			depothead.put("userId", userId);
 			depothead.put("deleteFlag", 0);//删除标记，0未删除，1删除
 			purchaseOrderDao.insertPurchaseOrderMation(depothead);

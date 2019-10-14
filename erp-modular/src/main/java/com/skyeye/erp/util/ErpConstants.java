@@ -26,7 +26,9 @@ public class ErpConstants {
     	OUT_IS_PURCHASE_RETURNS("采购退货", "CGTH", "6"),
     	OUT_IS_ALLOCATION("调拨", "DBCK", "7"),
     	OUT_IS_RETAIL("零售", "LSCK", "8"),
-    	OUT_IS_OTHERS("其他出库", "QTCK", "9");
+    	OUT_IS_OTHERS("其他出库", "QTCK", "9"),
+		//采购单
+    	PURCHASE_ORDER("采购订单", "CGDD", "10");
 		
         private String nameCode;
         private String code;

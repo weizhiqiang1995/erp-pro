@@ -27,7 +27,7 @@ layui.config({
         id: 'messageTable',
         elem: '#messageTable',
         method: 'post',
-        url: reqBasePath + 'otherwarehous001',
+        url: reqBasePath + 'purchaseorder001',
         where: {defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime},
         even: true,  //隔行变色
         page: true,
@@ -43,6 +43,17 @@ layui.config({
             { field: 'totalPrice', title: '合计金额', align: 'left', width: 120},
             { field: 'operPersonName', title: '操作人', align: 'left', width: 100},
             { field: 'operTime', title: '单据日期', align: 'center', width: 140 },
+            { field: 'status', title: '状态', align: 'left', width: 100, templet: function(d){
+		        if(d.status == '0'){
+	        		return "<span class='state-down'>未审核</span>";
+	        	}else if(d.status == '1'){
+	        		return "<span class='state-up'>已审核</span>";
+	        	}else if(d.status == '2'){
+	        		return "<span class='state-new'>已转采购</span>";
+	        	}else{
+	        		return "参数错误";
+	        	}
+		    }},
             { title: '操作', fixed: 'right', align: 'center', width: 200, toolbar: '#tableBar'}
         ]]
     });
@@ -88,9 +99,9 @@ layui.config({
 	function details(data){
 		rowId = data.id;
 		_openNewWindows({
-			url: "../../tpl/otherwarehous/otherwarehousdetails.html", 
+			url: "../../tpl/purchaseorder/purchaseorderdetails.html", 
 			title: "详情",
-			pageId: "otherwarehousdetails",
+			pageId: "purchaseorderdetails",
 			area: ['90vw', '90vh'],
 			callBack: function(refreshCode){
                 if (refreshCode == '0') {
@@ -105,9 +116,9 @@ layui.config({
     //添加
     $("body").on("click", "#addBean", function(){
         _openNewWindows({
-            url: "../../tpl/otherwarehous/otherwarehousadd.html",
+            url: "../../tpl/purchaseorder/purchaseorderadd.html",
             title: "新增",
-            pageId: "otherwarehousadd",
+            pageId: "purchaseorderadd",
             area: ['90vw', '90vh'],
             callBack: function(refreshCode){
                 if (refreshCode == '0') {

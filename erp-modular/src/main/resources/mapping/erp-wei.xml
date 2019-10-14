@@ -167,7 +167,7 @@
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>
-	<url id="purchaseorder002" path="/post/PurchaseOrderController/insertPurchaseOrderMation" val="新增其他入库信息" allUse="2">
+	<url id="purchaseorder002" path="/post/PurchaseOrderController/insertPurchaseOrderMation" val="新增采购单信息" allUse="2">
 		<property id="supplierId" name="supplierId" ref="required" var="供应商" />
 		<property id="operTime" name="operTime" ref="required" var="单据日期" />
 		<property id="accountId" name="accountId" ref="" var="账户" />
