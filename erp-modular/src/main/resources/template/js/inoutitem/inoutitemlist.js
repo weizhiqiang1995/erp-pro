@@ -26,8 +26,10 @@ layui.config({
         limit: 8,
         cols: [[
             { title: '序号', type: 'numbers'},
-            { field: 'inoutitemName', title: '名称', align: 'left',width: 300},
-            { field: 'inoutitemType', title: '类型', align: 'center',width: 200, templet: function(d){
+            { field: 'inoutitemName', title: '名称', align: 'left',width: 200,templet: function(d){
+                return '<a lay-event="select" class="notice-title-click">' + d.inoutitemName + '</a>';
+            }},
+            { field: 'inoutitemType', title: '类型', align: 'center',width: 120, templet: function(d){
                 if(d.inoutitemType == '1'){
                     return "<span class='state-up'>收入</span>";
                 }else if(d.inoutitemType == '2'){
@@ -71,7 +73,7 @@ layui.config({
             url: "../../tpl/inoutitem/inoutitemedit.html",
             title: "编辑收支项目",
             pageId: "inoutitemedit",
-            area: ['90vw', '90vh'],
+            area: ['60vw', '60vh'],
             callBack: function(refreshCode){
                 if (refreshCode == '0') {
                     winui.window.msg("操作成功", {icon: 1,time: 2000});
@@ -105,7 +107,7 @@ layui.config({
             url: "../../tpl/inoutitem/inoutiteminfo.html",
             title: "查看收支项目详情",
             pageId: "inoutiteminfo",
-            area: ['90vw', '90vh'],
+            area: ['60vw', '60vh'],
             callBack: function(refreshCode){
                 if (refreshCode == '0') {
                     winui.window.msg("操作成功", {icon: 1,time: 2000});
@@ -123,7 +125,7 @@ layui.config({
             url: "../../tpl/inoutitem/inoutitemadd.html",
             title: "新增收支项目",
             pageId: "inoutitemadd",
-            area: ['90vw', '90vh'],
+            area: ['60vw', '60vh'],
             callBack: function(refreshCode){
                 if (refreshCode == '0') {
                     winui.window.msg("操作成功", {icon: 1,time: 2000});

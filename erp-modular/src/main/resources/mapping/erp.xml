@@ -38,7 +38,7 @@
 	<url id="storehouse006" path="/post/StoreHouseController/editStoreHouseByDefault" val="设置仓库为默认状态" allUse="1">
 		<property id="rowId" name="id" ref="required" var="仓库ID"></property>
 	</url>
-	<url id="storehouse007" path="/post/StoreHouseController/queryStoreHouseByIdAndInfo" val="查看仓库详情" allUse="1">
+	<url id="storehouse007" path="/post/StoreHouseController/queryStoreHouseByIdAndInfo" val="查看仓库详情" allUse="2">
 		<property id="rowId" name="id" ref="required" var="仓库ID"></property>
 	</url>
 	<url id="storehouse008" path="/post/StoreHouseController/queyrStoreHouseListToSelect" val="获取所有仓库展示为下拉框" allUse="2">
@@ -106,7 +106,7 @@
 	<url id="supplier007" path="/post/SupplierController/editSupplierByNotEnabled" val="设置供应商状态改为未启用" allUse="1">
 		<property id="rowId" name="id" ref="required" var="供应商ID"></property>
 	</url>
-	<url id="supplier008" path="/post/SupplierController/querySupplierByIdAndInfo" val="查看供应商详情" allUse="1">
+	<url id="supplier008" path="/post/SupplierController/querySupplierByIdAndInfo" val="查看供应商详情" allUse="2">
 		<property id="rowId" name="id" ref="required" var="供应商ID"></property>
 	</url>
 	<url id="supplier009" path="/post/SupplierController/querySupplierListToSelect" val="获取供应商列表信息展示为下拉框" allUse="2">
@@ -174,7 +174,7 @@
 	<url id="customer007" path="/post/CustomerController/editCustomerByNotEnabled" val="设置客户状态改为未启用" allUse="1">
 		<property id="rowId" name="id" ref="required" var="客户ID"></property>
 	</url>
-	<url id="customer008" path="/post/CustomerController/queryCustomerByIdAndInfo" val="查看客户详情" allUse="1">
+	<url id="customer008" path="/post/CustomerController/queryCustomerByIdAndInfo" val="查看客户详情" allUse="2">
 		<property id="rowId" name="id" ref="required" var="客户ID"></property>
 	</url>
 	<!-- 客户信息管理结束-->
@@ -240,7 +240,7 @@
 	<url id="member007" path="/post/MemberController/editMemberByNotEnabled" val="设置会员状态改为未启用" allUse="1">
 		<property id="rowId" name="id" ref="required" var="会员ID"></property>
 	</url>
-	<url id="member008" path="/post/MemberController/queryMemberByIdAndInfo" val="查看会员详情" allUse="1">
+	<url id="member008" path="/post/MemberController/queryMemberByIdAndInfo" val="查看会员详情" allUse="2">
 		<property id="rowId" name="id" ref="required" var="会员ID"></property>
 	</url>
 	<!-- 会员信息管理结束 -->
@@ -258,7 +258,7 @@
 		<property id="inoutitemType" name="inoutitemType" ref="required, num" var="收支项目类型"/>
 		<property id="remark" name="remark" ref="" var="收支项目备注"/>
 	</url>
-	<url id="inoutitem003" path="/post/InoutitemController/queryInoutitemById" val="查询单个收支项目信息，用于信息回显" allUse="1">
+	<url id="inoutitem003" path="/post/InoutitemController/queryInoutitemById" val="查询单个收支项目信息，用于信息回显" allUse="2">
 		<property id="rowId" name="id" ref="required" var="收支项目Id"></property>
 	</url>
 	<url id="inoutitem004" path="/post/InoutitemController/deleteInoutitemById" val="删除收支项目信息" allUse="1">
@@ -270,7 +270,7 @@
 		<property id="inoutitemType" name="inoutitemType" ref="required, num" var="收支项目类型"/>
 		<property id="remark" name="remark" ref="" var="收支项目备注"/>
 	</url>
-	<url id="inoutitem006" path="/post/InoutitemController/queryInoutitemByIdAndInfo" val="查看收支项目详情" allUse="1">
+	<url id="inoutitem006" path="/post/InoutitemController/queryInoutitemByIdAndInfo" val="查看收支项目详情" allUse="2">
 		<property id="rowId" name="id" ref="required" var="收支项目Id"></property>
 	</url>
 	<!-- 收支项目管理结束 -->
@@ -291,7 +291,7 @@
 		<property id="remark" name="remark" ref="" var="结算账户备注"/>
 		<property id="isDefault" name="isDefault" ref="required,num" var="结算账户默认状态"/>
 	</url>
-	<url id="account003" path="/post/AccountController/queryAccountById" val="查询单个账户信息，用于信息回显" allUse="1">
+	<url id="account003" path="/post/AccountController/queryAccountById" val="查询单个账户信息，用于信息回显" allUse="2">
 		<property id="rowId" name="id" ref="required" var="结算账户Id"></property>
 	</url>
 	<url id="account004" path="/post/AccountController/deleteAccountById" val="删除账户信息" allUse="1">
@@ -309,11 +309,13 @@
 	<url id="account006" path="/post/AccountController/editAccountByIdAndIsDefault" val="设置默认" allUse="1">
 		<property id="rowId" name="id" ref="required" var="结算账户Id"></property>
 	</url>
-	<url id="account007" path="/post/AccountController/queryAccountByIdAndInfo" val="查看账户详情" allUse="1">
+	<url id="account007" path="/post/AccountController/queryAccountByIdAndInfo" val="查看账户详情" allUse="2">
 		<property id="rowId" name="id" ref="required" var="结算账户Id"></property>
 	</url>
 	<url id="account008" path="/post/AccountController/queryAccountStreamById" val="查看账户流水" allUse="1">
 		<property id="rowId" name="id" ref="required" var="结算账户Id"></property>
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>
 	<url id="account009" path="/post/AccountController/queryAccountListToSelect" val="获取账户信息展示为下拉框" allUse="2">
 	</url>

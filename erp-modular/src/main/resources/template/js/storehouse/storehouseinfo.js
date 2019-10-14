@@ -9,22 +9,18 @@ layui.config({
     layui.use(['form'], function (form) {
         var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
         var $ = layui.$;
-        var params = {
-            rowId:parent.rowId
-        };
-        AjaxPostUtil.request({url:reqBasePath + "storehouse007", params:params, type:'json', callback:function(json){
-            if(json.returnCode == 0){
-                $("#houseName").html(json.bean.houseName);
-                $("#address").html(json.bean.address);
-                $("#warehousing").html(json.bean.warehousing);
-                $("#truckage").html(json.bean.truckage);
-                $("#principal").html(json.bean.principal);
-                $("#isDefault").html(json.bean.isDefault == "1" ? "是" : "否");
-                $("#remark").html(json.bean.remark);
-            }else{
-                winui.window.msg(json.returnMessage, {icon: 2,time: 2000});
+        var simpleTemplate = $("#simpleTemplate").html();
+        showGrid({
+            id: "showForm",
+            url: reqBasePath + "storehouse007",
+            params: {rowId: parent.rowId},
+            pagination: false,
+            template: simpleTemplate,
+            ajaxSendAfter:function(json){
+                $("#isDefault").html(json.bean.isDefault == "1" ? "<span class='state-up'>是</span>" : "<span class='state-down'>否</span>");
+                form.render();
             }
-        }});
+        });
 
         $("body").on("click", "#cancle", function(){
             parent.layer.close(index);

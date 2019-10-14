@@ -6,13 +6,13 @@
         </div>
     </div>
     <div class="layui-form-item layui-col-xs6">
-        <label class="layui-form-label">编号</label>
+        <label class="layui-form-label">编号<i class="red">*</i></label>
         <div class="layui-input-block">
             <input type="text" id="serialNo" name="serialNo" value="{{serialNo}}" placeholder="请输入编号" class="layui-input"/>
         </div>
     </div>
     <div class="layui-form-item layui-col-xs6">
-        <label class="layui-form-label">期初金额</label>
+        <label class="layui-form-label">期初金额<i class="red">*</i></label>
         <div class="layui-input-block">
             <input type="text" id="initialAmount" name="initialAmount" value="{{initialAmount}}" win-verify="required|money" placeholder="请输入期初金额" class="layui-input"/>
         </div>
@@ -23,7 +23,7 @@
             <input type="text" id="currentAmount" name="currentAmount" value="{{currentAmount}}" win-verify="required|money" placeholder="0" class="layui-input" readonly="readonly"/>
         </div>
     </div>
-    <div class="layui-form-item layui-col-xs12">
+    <div class="layui-form-item layui-col-xs6">
         <label class="layui-form-label">是否默认<i class="red">*</i></label>
         <div class="layui-input-block winui-radio">
             <input type="radio" name="isDefault" value="0" title="否" checked="checked"/>

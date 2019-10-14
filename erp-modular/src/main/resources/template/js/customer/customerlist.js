@@ -28,7 +28,9 @@ layui.config({
         limit: 8,
         cols: [[
             { title: '序号', type: 'numbers'},
-            { field: 'customerName', title: '客户名称', align: 'left',width: 200},
+            { field: 'customerName', title: '客户名称', align: 'left',width: 200,templet: function(d){
+                return '<a lay-event="select" class="notice-title-click">' + d.customerName + '</a>';
+            }},
             { field: 'contacts', title: '联系人', align: 'left',width: 150},
             { field: 'phonenum', title: '联系电话', align: 'center',width: 150},
             { field: 'email', title: '电子邮箱', align: 'center',width: 150},

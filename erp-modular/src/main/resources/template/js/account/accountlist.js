@@ -24,11 +24,13 @@ layui.config({
         limit: 8,
         cols: [[
             { title: '序号', type: 'numbers'},
-            { field: 'accountName', title: '名称', align: 'left',width: 200},
-            { field: 'serialNo', title: '编号', align: 'left',width: 300},
+            { field: 'accountName', title: '名称', align: 'left',width: 200,templet: function(d){
+                return '<a lay-event="select" class="notice-title-click">' + d.accountName + '</a>';
+            }},
+            { field: 'serialNo', title: '编号', align: 'center',width: 150},
             { field: 'initialAmount', title: '期初金额', align: 'left',width: 100},
             { field: 'currentAmount', title: '当前余额', align: 'left',width: 100},
-            { field: 'remark', title: '备注', align: 'left',width: 150},
+            { field: 'remark', title: '备注', align: 'left',width: 200},
             { field: 'isDefault', title: '是否默认', align: 'center',width: 100, templet: function(d){
                     if(d.isDefault == '1'){
                         return "<span class='state-up'>是</span>";
@@ -54,8 +56,8 @@ layui.config({
             defaultAccount(data);
         }else if (layEvent === 'select'){//查看详情
             selectAccount(data);
-        }else if (layEvent === 'stream'){
-            layer.alert("查看流水")
+        }else if (layEvent === 'item'){
+            selectItem(data);
         }
     });
 
@@ -128,7 +130,7 @@ layui.config({
             url: "../../tpl/account/accountinfo.html",
             title: "查看结算账户详情",
             pageId: "accountinfo",
-            area: ['90vw', '90vh'],
+            area: ['60vw', '60vh'],
             callBack: function(refreshCode){
                 if (refreshCode == '0') {
                     winui.window.msg("操作成功", {icon: 1,time: 2000});
@@ -157,6 +159,24 @@ layui.config({
             }});
     });
 
+    //查看流水
+    function selectItem(data){
+        rowId = data.id;
+        _openNewWindows({
+            url: "../../tpl/account/accountitem.html",
+            title: "结算账户流水",
+            pageId: "accountitem",
+            area: ['90vw', '90vh'],
+            callBack: function(refreshCode){
+                if (refreshCode == '0') {
+                    winui.window.msg("操作成功", {icon: 1,time: 2000});
+                    loadTable();
+                } else if (refreshCode == '-9999') {
+                    winui.window.msg("操作失败", {icon: 2,time: 2000});
+                }
+            }
+        });
+    }
     $("body").on("click", "#reloadTable", function() {
         loadTable();
     });

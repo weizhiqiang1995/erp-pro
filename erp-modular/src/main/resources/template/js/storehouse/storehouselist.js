@@ -24,7 +24,9 @@ layui.config({
         limit: 8,
         cols: [[
             { title: '序号', type: 'numbers'},
-            { field: 'houseName', title: '仓库名称', align: 'left',width: 200},
+            { field: 'houseName', title: '仓库名称', align: 'left',width: 200,templet: function(d){
+                return '<a lay-event="select" class="notice-title-click">' + d.houseName + '</a>';
+            }},
             { field: 'address', title: '仓库地址', align: 'left',width: 300},
             { field: 'warehousing', title: '仓储费', align: 'left',width: 100},
             { field: 'truckage', title: '搬运费', align: 'left',width: 100},
@@ -124,7 +126,7 @@ layui.config({
             url: "../../tpl/storehouse/storehouseinfo.html",
             title: "查看仓库详情",
             pageId: "storehouseinfo",
-            area: ['90vw', '90vh'],
+            area: ['60vw', '60vh'],
             callBack: function(refreshCode){
                 if (refreshCode == '0') {
                     winui.window.msg("操作成功", {icon: 1,time: 2000});

@@ -159,18 +159,28 @@
 
     <select id="queryAccountStreamById" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
-            s.id,
-            s.odd_number oddNumber,
-            s.settle_company settleCompany,
-            FORMAT(s.settle_balance, 2) settleBalance,
-            FORMAT(s.settle_price, 2) settlePrice,
-            s.type_name typeName
+            d.id,
+            d.type,
+            d.sub_type subType,
+            d.default_number defaultNumber,
+            d.number,
+            CONVERT (d.oper_time, CHAR) operTime,
+            CONVERT (d.create_time, CHAR) createTime,
+            FORMAT(d.change_amount, 2) changeAmount,
+            FORMAT(d.total_price, 2) totalPrice,
+            d.pay_type payType,
+            d.remark,
+            FORMAT(a.current_amount, 2) currentAmount
         FROM
-            erp_account a
-        JOIN erp_account_stream s ON a.tenant_id = s.operation_id
+            erp_account a,
+            erp_depothead d
         WHERE
-            a.tenant_id = #{userId}
+            a.id = d.account_id
+        AND a.tenant_id = d.tenant_id
+        AND a.delete_flag = d.delete_flag
         AND a.id = #{id}
+        AND a.tenant_id = #{userId}
+        AND a.delete_flag = 0
     </select>
     
     <select id="queryAccountListToSelect" parameterType="java.util.Map" resultType="java.util.Map">

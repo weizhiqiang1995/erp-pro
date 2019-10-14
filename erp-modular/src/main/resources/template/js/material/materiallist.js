@@ -125,7 +125,7 @@ layui.config({
 			url: "../../tpl/material/materialdetails.html", 
 			title: "详情",
 			pageId: "licencedetails",
-			area: ['90vw', '90vh'],
+			area: ['60vw', '60vh'],
 			callBack: function(refreshCode){
                 if (refreshCode == '0') {
                 	winui.window.msg("操作成功", {icon: 1,time: 2000});
