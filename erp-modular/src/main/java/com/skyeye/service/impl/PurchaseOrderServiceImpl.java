@@ -15,30 +15,30 @@ import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.ToolUtil;
-import com.skyeye.dao.OtherWareHousDao;
+import com.skyeye.dao.PurchaseOrderDao;
 import com.skyeye.erp.util.ErpConstants;
 import com.skyeye.erp.util.ErpOrderNum;
-import com.skyeye.service.OtherWareHousService;
+import com.skyeye.service.PurchaseOrderService;
 
 import net.sf.json.JSONArray;
 
 @Service
-public class OtherWareHousServiceImpl implements OtherWareHousService{
+public class PurchaseOrderServiceImpl implements PurchaseOrderService{
 	
 	@Autowired
-	private OtherWareHousDao otherWareHousDao;
-	
+	private PurchaseOrderDao purchaseOrderDao;
+
 	/**
-     * 获取其他入库列表信息
+     * 获取采购单列表信息
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
 	@Override
-	public void queryOtherWareHousToList(InputObject inputObject, OutputObject outputObject) throws Exception {
+	public void queryPurchaseOrderToList(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        List<Map<String, Object>> beans = otherWareHousDao.queryOtherWareHousToList(params,
+        List<Map<String, Object>> beans = purchaseOrderDao.queryPurchaseOrderToList(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
         int total = beansPageList.getPaginator().getTotalCount();
@@ -47,7 +47,7 @@ public class OtherWareHousServiceImpl implements OtherWareHousService{
 	}
 
 	/**
-     * 新增其他入库信息
+     * 新增采购单信息
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -55,7 +55,7 @@ public class OtherWareHousServiceImpl implements OtherWareHousService{
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(value="transactionManager")
-	public void insertOtherWareHousMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+	public void insertPurchaseOrderMation(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		String depotheadStr = map.get("depotheadStr").toString();
 		if(ToolUtil.isJson(depotheadStr)){
@@ -70,7 +70,7 @@ public class OtherWareHousServiceImpl implements OtherWareHousService{
 			BigDecimal itemAllPrice = null;//子单对象
 			for(int i = 0; i < jArray.size(); i++){
 				bean = jArray.getJSONObject(i);
-				entity = otherWareHousDao.queryMaterialsById(bean);
+				entity = purchaseOrderDao.queryMaterialsById(bean);
 				if(entity != null && !entity.isEmpty()){
 					//获取单价
 					itemAllPrice = new BigDecimal(entity.get("estimatePurchasePrice").toString());
@@ -115,8 +115,8 @@ public class OtherWareHousServiceImpl implements OtherWareHousService{
 			depothead.put("status", "1");//状态，0未审核、1已审核、2已转采购|销售
 			depothead.put("userId", userId);
 			depothead.put("deleteFlag", 0);//删除标记，0未删除，1删除
-			otherWareHousDao.insertOtherWareHousMation(depothead);
-			otherWareHousDao.insertOtherWareHousChildMation(entitys);
+			purchaseOrderDao.insertPurchaseOrderMation(depothead);
+			purchaseOrderDao.insertPurchaseOrderChildMation(entitys);
 		}else{
 			outputObject.setreturnMessage("数据格式错误");
 		}

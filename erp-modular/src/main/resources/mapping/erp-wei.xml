@@ -140,7 +140,7 @@
 	<!-- 产品结束 -->
 	
 	<!-- 其他入库开始 -->
-	<url id="otherwarehous001" path="/post/OtherWareHousController/queryOtherWareHousToList" val="获取产品信息" allUse="1">
+	<url id="otherwarehous001" path="/post/OtherWareHousController/queryOtherWareHousToList" val="获取其他入库列表信息" allUse="1">
 		<property id="defaultNumber" name="defaultNumber" ref="" var="票据单号" />
 		<property id="material" name="material" ref="" var="产品信息：名称或者型号" />
 		<property id="startTime" name="startTime" ref="" var="单据开始时间"/>
@@ -157,6 +157,25 @@
 		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
 	</url>
 	<!-- 其他入库结束 -->
+	
+	<!-- 采购管理开始 -->
+	<url id="purchaseorder001" path="/post/PurchaseOrderController/queryPurchaseOrderToList" val="获取采购单列表信息" allUse="2">
+		<property id="defaultNumber" name="defaultNumber" ref="" var="票据单号" />
+		<property id="material" name="material" ref="" var="产品信息：名称或者型号" />
+		<property id="startTime" name="startTime" ref="" var="单据开始时间"/>
+		<property id="endTime" name="endTime" ref="" var="单据结束时间"/>
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="purchaseorder002" path="/post/PurchaseOrderController/insertPurchaseOrderMation" val="新增其他入库信息" allUse="2">
+		<property id="supplierId" name="supplierId" ref="required" var="供应商" />
+		<property id="operTime" name="operTime" ref="required" var="单据日期" />
+		<property id="accountId" name="accountId" ref="" var="账户" />
+		<property id="payType" name="payType" ref="required,num" var="付款类型" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
+	</url>
+	<!-- 采购管理结束 -->
 	
 	<!-- 统计开始 -->
 	<url id="statistics001" path="/post/StatisticsController/queryWarehousingDetails" val="入库明细" allUse="1">

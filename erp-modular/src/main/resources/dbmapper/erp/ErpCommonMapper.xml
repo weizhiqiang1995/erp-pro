@@ -49,4 +49,14 @@
 		AND a.m_unit_id = d.id
     </select>
     
+    <select id="queryOddNumberBySubType" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			COUNT(a.id) num
+		FROM
+			erp_depothead a
+		WHERE
+			a.tenant_id = #{userId}
+		AND a.sub_type = #{subType}
+	</select>
+    
 </mapper>
