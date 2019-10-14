@@ -22,8 +22,12 @@ layui.config({
 		 		if(json.bean.status == 0){
 		 			$("#statusName").html("<span class='state-down'>未审核</span>");
 		 		}else if(json.bean.status == 1){
-		 			$("#statusName").html("<span class='state-up'>已审核</span>");
+		 			$("#statusName").html("<span class='state-up'>审核中</span>");
 		 		}else if(json.bean.status == 2){
+		 			$("#statusName").html("<span class='state-new'>审核通过</span>");
+		 		}else if(json.bean.status == 3){
+		 			$("#statusName").html("<span class='state-down'>拒绝通过</span>");
+		 		}else if(json.bean.status == 4){
 		 			$("#statusName").html("<span class='state-new'>已转采购</span>");
 		 		}
 		 		form.render();

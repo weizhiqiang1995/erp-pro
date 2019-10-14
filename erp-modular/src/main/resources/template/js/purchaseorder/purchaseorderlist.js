@@ -47,8 +47,12 @@ layui.config({
 		        if(d.status == '0'){
 	        		return "<span class='state-down'>未审核</span>";
 	        	}else if(d.status == '1'){
-	        		return "<span class='state-up'>已审核</span>";
+	        		return "<span class='state-up'>审核中</span>";
 	        	}else if(d.status == '2'){
+	        		return "<span class='state-new'>审核通过</span>";
+	        	}else if(d.status == '3'){
+	        		return "<span class='state-down'>拒绝通过</span>";
+	        	}else if(d.status == '4'){
 	        		return "<span class='state-new'>已转采购</span>";
 	        	}else{
 	        		return "参数错误";
@@ -81,10 +85,7 @@ layui.config({
     //删除
     function deletemember(data){
         layer.confirm('确认要删除信息吗？', { icon: 3, title: '删除操作' }, function (index) {
-            var params = {
-                rowId: data.id
-            };
-            AjaxPostUtil.request({url:reqBasePath + "member004", params:params, type:'json', callback:function(json){
+            AjaxPostUtil.request({url:reqBasePath + "member004", params: {rowId: data.id}, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("删除成功。", {icon: 1,time: 2000});
                     loadTable();

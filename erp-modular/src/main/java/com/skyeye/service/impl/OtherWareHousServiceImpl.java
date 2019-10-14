@@ -112,7 +112,7 @@ public class OtherWareHousServiceImpl implements OtherWareHousService{
 			depothead.put("remark", map.get("remark"));//备注
 			depothead.put("payType", map.get("payType"));//付款类型
 			depothead.put("totalPrice", allPrice);//合计金额
-			depothead.put("status", "1");//状态，0未审核、1已审核、2已转采购|销售
+			depothead.put("status", "2");//状态，0未审核、1.审核中、2.审核通过、3.审核拒绝、4.已转采购|销售
 			depothead.put("userId", userId);
 			depothead.put("deleteFlag", 0);//删除标记，0未删除，1删除
 			otherWareHousDao.insertOtherWareHousMation(depothead);
