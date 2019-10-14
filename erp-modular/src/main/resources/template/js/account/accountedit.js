@@ -1,4 +1,3 @@
-
 layui.config({
     base: basePath,
     version: skyeyeVersion

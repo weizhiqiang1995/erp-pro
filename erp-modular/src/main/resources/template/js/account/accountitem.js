@@ -1,15 +1,12 @@
-var rowId = "";
 layui.config({
     base: basePath,
     version: skyeyeVersion
 }).extend({  //指定js别名
     window: 'js/winui.window',
-}).define(['window', 'table', 'jquery', 'winui', 'form'], function (exports) {
+}).define(['window', 'table', 'jquery', 'winui'], function (exports) {
     winui.renderColor();
     var $ = layui.$,
-        form = layui.form,
         table = layui.table;
-
     //表格渲染
     table.render({
         id: 'messageTable',
@@ -81,18 +78,5 @@ layui.config({
             { field: 'operTime', title: '出入库日期', align: 'center', width: 180 },
         ]]
     });
-
-    //搜索表单
-    form.render();
-
-    $("body").on("click", "#reloadTable", function() {
-        loadTable();
-    });
-
-    //刷新
-    function loadTable(){
-        table.reload("messageTable", {where:{rowId:parent.rowId}});
-    }
-
     exports('accountitem', {});
 });

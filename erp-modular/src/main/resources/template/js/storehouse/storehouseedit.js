@@ -1,4 +1,3 @@
-
 layui.config({
     base: basePath,
     version: skyeyeVersion
@@ -16,7 +15,6 @@ layui.config({
             pagination: false,
             template: getFileContent('tpl/storehouse/storehouseeditTemplate.tpl'),
             ajaxSendLoadBefore: function(hdb){
-
             },
             ajaxSendAfter:function(json){
                 //设置是否默认

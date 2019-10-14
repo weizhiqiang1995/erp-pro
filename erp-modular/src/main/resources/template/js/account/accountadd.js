@@ -1,4 +1,3 @@
-
 layui.config({
     base: basePath,
     version: skyeyeVersion
@@ -6,8 +5,6 @@ layui.config({
     window: 'js/winui.window',
 }).define(['window', 'table', 'jquery', 'winui'], function (exports) {
     winui.renderColor();
-
-
     layui.use(['form'], function (form) {
         var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
         var $ = layui.$;

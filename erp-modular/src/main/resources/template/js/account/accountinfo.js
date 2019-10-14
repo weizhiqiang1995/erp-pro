@@ -1,4 +1,3 @@
-
 layui.config({
     base: basePath,
     version: skyeyeVersion
@@ -9,9 +8,7 @@ layui.config({
     layui.use(['form'], function (form) {
         var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
         var $ = layui.$;
-
         var simpleTemplate = $("#simpleTemplate").html();
-
         showGrid({
             id: "showForm",
             url: reqBasePath + "account007",
