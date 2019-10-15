@@ -198,6 +198,15 @@
 		<property id="status" name="status" ref="required,num" var="审核结果" />
 		<property id="content" name="content" ref="" var="审核意见" />
 	</url>
+	
+	<url id="purchaseput001" path="/post/PurchasePutController/queryPurchasePutToList" val="获取采购入库列表信息" allUse="2">
+		<property id="defaultNumber" name="defaultNumber" ref="" var="票据单号" />
+		<property id="material" name="material" ref="" var="产品信息：名称或者型号" />
+		<property id="startTime" name="startTime" ref="" var="单据开始时间"/>
+		<property id="endTime" name="endTime" ref="" var="单据结束时间"/>
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
 	<!-- 采购管理结束 -->
 	
 	<!-- 统计开始 -->
