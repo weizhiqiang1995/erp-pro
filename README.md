@@ -30,7 +30,9 @@
 权限管理|资源图标|日志管理|多桌面管理
 系统基础设置|系统的基础信息设置|计量单位|产品分类
 产品信息|客户管理|供应商管理|会员管理
-仓库管理|账户信息|收支项目|
+仓库管理|账户信息|收支项目|结算账户
+账户流水|采购单|其他入库|入库明细
+出库明细|||
 
 #### 技术选型
 
@@ -110,6 +112,7 @@ public void 方法名(InputObject inputObject, OutputObject outputObject) throws
 |![](https://images.gitee.com/uploads/images/2019/1011/084458_e0c2e256_1541735.png "")|![](https://s2.ax1x.com/2019/10/11/uHSaY8.png "")|
 |![](https://images.gitee.com/uploads/images/2019/1011/084630_9326c93d_1541735.png "")|![](https://s2.ax1x.com/2019/10/11/uHpkh8.png "")|
 |![](https://images.gitee.com/uploads/images/2019/1011/084706_8c921d85_1541735.png "")|![](https://s2.ax1x.com/2019/10/11/uHpeXj.png "")|
+|![](https://images.gitee.com/uploads/images/2019/1015/091741_4030a2f0_1541735.png "")|![](https://s2.ax1x.com/2019/10/15/K9meR1.png "")|
 
 #### 环境搭建
 ##### 开发工具:
