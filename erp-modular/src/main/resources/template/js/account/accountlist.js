@@ -4,7 +4,7 @@ layui.config({
     base: basePath,
     version: skyeyeVersion
 }).extend({  //指定js别名
-    window: 'js/winui.window',
+    window: 'js/winui.window'
 }).define(['window', 'table', 'jquery', 'winui', 'form'], function (exports) {
     winui.renderColor();
     authBtn('1570756544366');
@@ -27,11 +27,11 @@ layui.config({
             { field: 'accountName', title: '名称', align: 'left',width: 200,templet: function(d){
                 return '<a lay-event="select" class="notice-title-click">' + d.accountName + '</a>';
             }},
-            { field: 'serialNo', title: '编号', align: 'center',width: 150},
+            { field: 'serialNo', title: '编号', align: 'left',width: 120},
             { field: 'initialAmount', title: '期初金额', align: 'left',width: 100},
             { field: 'currentAmount', title: '当前余额', align: 'left',width: 100},
             { field: 'remark', title: '备注', align: 'left',width: 200},
-            { field: 'isDefault', title: '是否默认', align: 'center',width: 100, templet: function(d){
+            { field: 'isDefault', title: '默认', align: 'center',width: 60, templet: function(d){
                     if(d.isDefault == '1'){
                         return "<span class='state-up'>是</span>";
                     }else if(d.isDefault == '0'){
@@ -40,7 +40,7 @@ layui.config({
                         return "<span class='state-error'>参数错误</span>";
                     }
                 }},
-            { field: 'createTime', title: '创建时间', align: 'center', width: 180 },
+            { field: 'createTime', title: '创建时间', align: 'center', width: 150 },
             { title: '操作', fixed: 'right', align: 'center', width: 300, toolbar: '#tableBar'}
         ]]
     });
@@ -76,9 +76,9 @@ layui.config({
         rowId = data.id;
         _openNewWindows({
             url: "../../tpl/account/accountedit.html",
-            title: "编辑结算账户",
+            title: "编辑",
             pageId: "accountedit",
-            area: ['90vw', '90vh'],
+            area: ['60vw', '60vh'],
             callBack: function(refreshCode){
                 if (refreshCode == '0') {
                     winui.window.msg("操作成功", {icon: 1,time: 2000});
@@ -93,10 +93,7 @@ layui.config({
     //删除结算账户
     function deleteAccount(data){
         layer.confirm('确认删除该结算账户吗？', { icon: 3, title: '删除结算账户' }, function (index) {
-            var params = {
-                rowId: data.id,
-            };
-            AjaxPostUtil.request({url:reqBasePath + "account004", params:params, type:'json', callback:function(json){
+            AjaxPostUtil.request({url:reqBasePath + "account004", params: {rowId: data.id}, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("删除成功。", {icon: 1,time: 2000});
                     loadTable();
@@ -110,10 +107,7 @@ layui.config({
     //设置是否默认
     function defaultAccount(data){
         layer.confirm('确认要设置该结算账户为默认状态吗？', { icon: 3, title: '设置结算账户状态' }, function (index) {
-            var params = {
-                rowId: data.id,
-            };
-            AjaxPostUtil.request({url:reqBasePath + "account006", params:params, type:'json', callback:function(json){
+            AjaxPostUtil.request({url:reqBasePath + "account006", params: {rowId: data.id}, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("设置成功。", {icon: 1,time: 2000});
                     loadTable();
@@ -128,7 +122,7 @@ layui.config({
         rowId = data.id;
         _openNewWindows({
             url: "../../tpl/account/accountinfo.html",
-            title: "查看结算账户详情",
+            title: "详情",
             pageId: "accountinfo",
             area: ['60vw', '60vh'],
             callBack: function(refreshCode){
@@ -146,9 +140,9 @@ layui.config({
     $("body").on("click", "#addBean", function(){
         _openNewWindows({
             url: "../../tpl/account/accountadd.html",
-            title: "新增结算账户",
+            title: "新增",
             pageId: "accountadd",
-            area: ['90vw', '90vh'],
+            area: ['60vw', '60vh'],
             callBack: function(refreshCode){
                 if (refreshCode == '0') {
                     winui.window.msg("操作成功", {icon: 1,time: 2000});
@@ -164,7 +158,7 @@ layui.config({
         rowId = data.id;
         _openNewWindows({
             url: "../../tpl/account/accountitem.html",
-            title: "结算账户流水",
+            title: "流水详情",
             pageId: "accountitem",
             area: ['90vw', '90vh'],
             callBack: function(refreshCode){
