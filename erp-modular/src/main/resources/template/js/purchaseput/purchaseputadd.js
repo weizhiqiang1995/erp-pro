@@ -475,7 +475,6 @@ layui.config({
 						mUnitId: $("#unitId" + rowNum).val(),
 						rkNum: $("#rkNum" + rowNum).val(),
 						unitPrice: $("#unitPrice" + rowNum).val(),
-						amountOfMoney: $("#amountOfMoney" + rowNum).val(),
 						taxRate: $("#taxRate" + rowNum).val(),
 						taxMoney: $("#taxMoney" + rowNum).val(),
 						taxUnitPrice: $("#taxUnitPrice" + rowNum).val(),
@@ -487,6 +486,20 @@ layui.config({
 				if(noError) {
 					return false;
 				}
+				//获取采购费用
+				var rowPriceTr = $("#otherPriceTable tr");
+				var tablePriceData = new Array();
+				var otherMoney = 0;
+				$.each(rowPriceTr, function(i, item) {
+					//获取行编号
+					var rowNum = $(item).attr("trcusid").replace("tr", "");
+					var row = {
+						inoutitemId: $("#inoutitemId" + rowNum).val(),
+						otherPrice: $("#otherPrice" + rowNum).val()
+					};
+					otherMoney += parseFloat(isNull($("#otherPrice" + rowNum).val()) ? 0 : $("#otherPrice" + rowNum).val());
+					tablePriceData.push(row);
+				});
 
 				var params = {
 					supplierId: $("#supplierId").val(),
@@ -497,17 +510,18 @@ layui.config({
 					discount: isNull($("#discount").val()) ? "0.00" : $("#discount").val(),
 					discountMoney: isNull($("#discountMoney").val()) ? "0.00" : $("#discountMoney").val(),
 					changeAmount: isNull($("#changeAmount").val()) ? "0.00" : $("#changeAmount").val(),
-					depotheadStr: JSON.stringify(tableData)
+					depotheadStr: JSON.stringify(tableData),
+					otherMoney: otherMoney.toFixed(2),
+					otherMoneyList: JSON.stringify(tablePriceData)
 				};
-				console.log(params);
-//				AjaxPostUtil.request({url: reqBasePath + "otherwarehous002", params: params, type: 'json', callback: function(json) {
-//					if(json.returnCode == 0) {
-//						parent.layer.close(index);
-//						parent.refreshCode = '0';
-//					} else {
-//						winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
-//					}
-//				}});
+				AjaxPostUtil.request({url: reqBasePath + "purchaseput002", params: params, type: 'json', callback: function(json) {
+					if(json.returnCode == 0) {
+						parent.layer.close(index);
+						parent.refreshCode = '0';
+					} else {
+						winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
+					}
+				}});
 			}
 			return false;
 		});

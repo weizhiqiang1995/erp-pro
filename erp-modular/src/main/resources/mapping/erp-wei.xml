@@ -207,6 +207,19 @@
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>
+	<url id="purchaseput002" path="/post/PurchasePutController/insertPurchasePutMation" val="新增采购单信息" allUse="2">
+		<property id="supplierId" name="supplierId" ref="required" var="供应商" />
+		<property id="operTime" name="operTime" ref="required" var="单据日期" />
+		<property id="accountId" name="accountId" ref="" var="账户" />
+		<property id="payType" name="payType" ref="required,num" var="付款类型" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="discount" name="discount" ref="required,double" var="优惠率,默认为0.00" />
+		<property id="discountMoney" name="discountMoney" ref="required,double" var="优惠金额,默认为0.00" />
+		<property id="changeAmount" name="changeAmount" ref="required,double" var="本次付款,默认为0.00" />
+		<property id="otherMoney" name="otherMoney" ref="required,double" var="采购总金额,默认为0.00" />
+		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
+		<property id="otherMoneyList" name="otherMoneyList" ref="required" var="采购金额json" />
+	</url>
 	<!-- 采购管理结束 -->
 	
 	<!-- 统计开始 -->

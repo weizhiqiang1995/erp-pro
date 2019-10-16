@@ -16,7 +16,16 @@
 			a.remark,
 			a.status,
 			a.status_content statusContent,
-			a.link_number linkNumber
+			a.link_number linkNumber,
+			FORMAT(a.change_amount, 2) changeAmount,
+			FORMAT(a.discount, 2) discount,
+			FORMAT(a.discount_money, 2) discountMoney,
+			FORMAT(a.discount_last_money , 2) discountLastMoney,
+			FORMAT(a.other_money, 2) otherMoney,
+			FORMAT((IFNULL(a.discount_money, 0) + IFNULL(a.discount_last_money, 0)), 2) taxLastMoneyPrice,
+			<!-- 优惠后金额 - 本次付款金额 -->
+			FORMAT((IFNULL(a.discount_last_money, 0) - IFNULL(a.change_amount, 0)), 2) arrears,
+			a.other_money_list otherMoneyList
 		FROM
 			erp_depothead a
 			LEFT JOIN erp_supplier b ON a.organ_id = b.id
@@ -36,7 +45,11 @@
 			FORMAT(a.all_price, 2) allPrice,
 			a.remark,
 			b.`name` deportName,
-			IFNULL(e.`name`, c.unit_name) unitName
+			IFNULL(e.`name`, c.unit_name) unitName,
+			FORMAT(a.tax_unit_price, 2) taxUnitPrice,
+			FORMAT(a.tax_rate, 2) taxRate,
+			FORMAT(a.tax_money, 2) taxMoney,
+			FORMAT(a.tax_last_money, 2) taxLastMoney
 		FROM
 			erp_depotitem a
 			LEFT JOIN erp_depot b ON a.depot_id = b.id,
@@ -58,6 +71,18 @@
 		WHERE
 			a.tenant_id = #{userId}
 		AND a.sub_type = #{subType}
+	</select>
+	
+	<select id="queryInoutitemMationById" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			a.id,
+			a.`name`,
+			#{otherPrice} otherPrice
+		FROM
+			erp_inoutitem a
+		WHERE
+			a.id = #{inoutitemId}
+		AND delete_flag = '0'
 	</select>
     
 </mapper>

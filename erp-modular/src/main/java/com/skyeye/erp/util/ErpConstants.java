@@ -28,7 +28,9 @@ public class ErpConstants {
     	OUT_IS_RETAIL("零售", "LSCK", "8"),
     	OUT_IS_OTHERS("其他出库", "QTCK", "9"),
 		//采购单
-    	PURCHASE_ORDER("采购订单", "CGDD", "10");
+    	PURCHASE_ORDER("采购订单", "CGDD", "10"),
+		//销售单
+		OUTCHASE_ORDER("销售订单", "XSDD", "11");
 		
         private String nameCode;
         private String code;

@@ -7,4 +7,6 @@ public interface PurchasePutService {
 
 	public void queryPurchasePutToList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void insertPurchasePutMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }

@@ -136,9 +136,7 @@ layui.config({
 	        var data = obj.data; //获得当前行数据
 	        var layEvent = obj.event; //获得 lay-event 对应的值
 	        if (layEvent === 'details') { //详情
-	        	if(data.subType == '4'){//其他入库
-		        	details(data);
-	        	}
+	        	details(data);
 	        }
 	    });
 	    
@@ -154,11 +152,17 @@ layui.config({
         return false;
     });
 
-    //其他入库详情
+    //详情
 	function details(data){
 		rowId = data.headerId;
+		var url = "";
+		if(data.subType == '1'){//采购入库
+			url = "../../tpl/purchaseput/purchaseputdetails.html";
+		}else if(data.subType == '4'){//其他入库
+			url = "../../tpl/otherwarehous/otherwarehousdetails.html";
+		}
 		_openNewWindows({
-			url: "../../tpl/otherwarehous/otherwarehousdetails.html", 
+			url: url, 
 			title: "详情",
 			pageId: "otherwarehousdetails",
 			area: ['90vw', '90vh'],

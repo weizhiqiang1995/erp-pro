@@ -36,4 +36,48 @@
         ORDER BY a.create_time DESC
     </select>
     
+    <select id="queryMaterialsById" parameterType="java.util.Map" resultType="java.util.Map">
+    	SELECT
+			a.id materialId,
+			a.`name` materialName,
+			a.model materialModel,
+			b.id mUnitId,
+			IFNULL(c.`name`, a.unit_name) unitName,
+			IFNULL(c.number, '1') baseNumber,
+			#{depotId} depotId
+		FROM
+			erp_material a,
+			erp_material_norms b
+			LEFT JOIN erp_unit c ON b.unit_id = c.id
+		WHERE
+			a.id = b.meterial_id
+		AND b.id = #{mUnitId}
+		AND a.id = b.meterial_id
+		AND a.delete_flag = '0'
+		AND b.delete_flag = '0'
+    </select>
+    
+    <insert id="insertOtherWareHousMation" parameterType="java.util.Map">
+        INSERT into erp_depothead
+        (id, `type`, sub_type, default_number, number, oper_person_id, oper_person_name, create_time, oper_time, organ_id, account_id, total_price,
+        	pay_type, remark, status, tenant_id, delete_flag,
+        	discount, discount_money, discount_last_money, other_money, other_money_list, change_amount)
+        VALUES(#{id}, #{type}, #{subType}, #{defaultNumber}, #{number}, #{operPersonId}, #{operPersonName}, #{createTime}, #{operTime}, #{organId}, #{accountId}, #{totalPrice},
+        		#{payType}, #{remark}, #{status}, #{userId}, #{deleteFlag},
+        		#{discount}, #{discountMoney}, #{discountLastMoney}, #{otherMoney}, #{otherMoneyList}, #{changeAmount})
+    </insert>
+    
+    <insert id="insertOtherWareHousChildMation" parameterType="java.util.Map">
+	     INSERT INTO erp_depotitem
+	     (id, header_id, material_id, material_name, material_model, m_unit_id, oper_number, basic_number, unit_price, all_price, remark, depot_id,
+	     	m_type, tenant_id, delete_flag,
+	     	tax_unit_price, tax_rate, tax_money, tax_last_money)
+	     values
+		<foreach collection="list" item="item" index="index" separator="," >  
+			(#{item.id}, #{item.headerId}, #{item.materialId}, #{item.materialName}, #{item.materialModel}, #{item.mUnitId}, #{item.operNumber}, #{item.baseNumber}, #{item.estimatePurchasePrice}, #{item.allPrice}, #{item.remark}, #{item.depotId},
+				#{item.mType}, #{item.userId}, #{item.deleteFlag},
+				#{item.taxUnitPrice}, #{item.taxRate}, #{item.taxMoney}, #{item.taxLastMoney})  
+		</foreach>  
+	</insert>
+    
 </mapper>

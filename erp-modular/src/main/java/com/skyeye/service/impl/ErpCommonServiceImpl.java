@@ -1,5 +1,6 @@
 package com.skyeye.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,8 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.ErpCommonDao;
 import com.skyeye.service.ErpCommonService;
+
+import net.sf.json.JSONArray;
 
 @Service
 public class ErpCommonServiceImpl implements ErpCommonService{
@@ -23,6 +27,7 @@ public class ErpCommonServiceImpl implements ErpCommonService{
      * @param outputObject
      * @throws Exception
      */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void queryDepotHeadDetailsMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
@@ -33,6 +38,18 @@ public class ErpCommonServiceImpl implements ErpCommonService{
 			//获取子表信息
 			List<Map<String, Object>> norms = erpCommonDao.queryDepotItemDetailsMationById(bean);
 			bean.put("items", norms);
+			//获取采购项目列表
+			if(bean.containsKey("otherMoneyList") && !ToolUtil.isBlank(bean.get("otherMoneyList").toString()) && ToolUtil.isJson(bean.get("otherMoneyList").toString())){
+				JSONArray jArray = JSONArray.fromObject(bean.get("otherMoneyList").toString());
+				List<Map<String, Object>> otherMoneyList = new ArrayList<>();
+				Map<String, Object> item;//中间转换对象
+				for(int i = 0; i < jArray.size(); i++){
+					item = jArray.getJSONObject(i);
+					item = erpCommonDao.queryInoutitemMationById(item);
+					otherMoneyList.add(item);
+				}
+				bean.put("otherMoneyList", otherMoneyList);
+			}
 			outputObject.setBean(bean);
 			outputObject.settotal(1);
 		}else{

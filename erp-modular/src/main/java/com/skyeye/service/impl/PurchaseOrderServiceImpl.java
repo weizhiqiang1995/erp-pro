@@ -176,6 +176,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService{
      */
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional(value="transactionManager")
 	public void editPurchaseOrderMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		String depotheadStr = map.get("depotheadStr").toString();
@@ -243,6 +244,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService{
      * @throws Exception
      */
 	@Override
+	@Transactional(value="transactionManager")
 	public void editPurchaseOrderStateToSubExamineById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		map.put("userId", inputObject.getLogParams().get("id"));
@@ -264,6 +266,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService{
      * @throws Exception
      */
 	@Override
+	@Transactional(value="transactionManager")
 	public void editPurchaseOrderStateToExamineById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		map.put("userId", inputObject.getLogParams().get("id"));

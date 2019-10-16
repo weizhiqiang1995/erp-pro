@@ -34,7 +34,12 @@ public class ErpOrderNum {
 			if(bean == null || bean.isEmpty()){
 				jedisClient.set(key, "1");//将从数据库中查来的内容存到缓存中
 			}else{
-				jedisClient.set(key, bean.get("num").toString());//将从数据库中查来的内容存到缓存中
+				//将从数据库中查来的内容存到缓存中
+				if("0".equals(bean.get("num").toString())){
+					jedisClient.set(key, "1");
+				}else{
+					jedisClient.set(key, bean.get("num").toString());
+				}
 			}
 		}
 		//获取当前最大的值

@@ -32,4 +32,16 @@ public class PurchasePutController {
     	purchasePutService.queryPurchasePutToList(inputObject, outputObject);
     }
 	
+    /**
+     * 新增采购入库信息
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/PurchasePutController/insertPurchasePutMation")
+    @ResponseBody
+    public void insertPurchasePutMation(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	purchasePutService.insertPurchasePutMation(inputObject, outputObject);
+    }
+    
 }
