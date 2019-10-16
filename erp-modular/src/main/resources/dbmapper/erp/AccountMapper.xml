@@ -166,21 +166,16 @@
             d.number,
             CONVERT (d.oper_time, CHAR) operTime,
             CONVERT (d.create_time, CHAR) createTime,
-            FORMAT(d.change_amount, 2) changeAmount,
             FORMAT(d.total_price, 2) totalPrice,
             d.pay_type payType,
             d.remark,
-            FORMAT(a.current_amount, 2) currentAmount
+            d.status
         FROM
-            erp_account a,
             erp_depothead d
         WHERE
-            a.id = d.account_id
-        AND a.tenant_id = d.tenant_id
-        AND a.delete_flag = d.delete_flag
-        AND a.id = #{id}
-        AND a.tenant_id = #{userId}
-        AND a.delete_flag = 0
+            d.account_id = #{id}
+        AND d.tenant_id = #{userId}
+        AND d.delete_flag = 0
     </select>
     
     <select id="queryAccountListToSelect" parameterType="java.util.Map" resultType="java.util.Map">
@@ -194,5 +189,15 @@
 		AND a.delete_flag = '0'
 		ORDER BY a.is_default ASC
     </select>
-    
+
+    <select id="queryAccountItemMoneyById" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+            SUM(d.total_price) totalPrice
+        FROM
+            erp_account a,
+            erp_depothead d
+        WHERE
+            d.account_id = #{id}
+        AND d.tenant_id = #{userId}
+    </select>
 </mapper>
