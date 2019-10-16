@@ -90,4 +90,17 @@ public class InoutitemController {
     public void queryInoutitemByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception{
         inoutitemService.queryInoutitemByIdAndInfo(inputObject, outputObject);
     }
+    
+    /**
+     * 查看所有的支出项目展示为下拉框
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/InoutitemController/queryInoutitemISExpenditureToSelect")
+    @ResponseBody
+    public void queryInoutitemISExpenditureToSelect(InputObject inputObject, OutputObject outputObject) throws Exception{
+        inoutitemService.queryInoutitemISExpenditureToSelect(inputObject, outputObject);
+    }
+    
 }

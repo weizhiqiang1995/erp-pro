@@ -136,4 +136,19 @@ public class InoutitemServiceImpl implements InoutitemService {
         outputObject.setBean(bean);
         outputObject.settotal(1);
     }
+
+    /**
+     * 查看所有的支出项目展示为下拉框
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+	@Override
+	public void queryInoutitemISExpenditureToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String, Object> params = inputObject.getParams();
+        params.put("userId", inputObject.getLogParams().get("id"));
+        List<Map<String, Object>> beans = inoutitemDao.queryInoutitemISExpenditureToSelect(params);
+        outputObject.setBeans(beans);
+        outputObject.settotal(beans.size());
+	}
 }

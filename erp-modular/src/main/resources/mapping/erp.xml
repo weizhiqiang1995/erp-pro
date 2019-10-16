@@ -275,6 +275,8 @@
 	<url id="inoutitem006" path="/post/InoutitemController/queryInoutitemByIdAndInfo" val="查看收支项目详情" allUse="2">
 		<property id="rowId" name="id" ref="required" var="收支项目Id"></property>
 	</url>
+	<url id="inoutitem007" path="/post/InoutitemController/queryInoutitemISExpenditureToSelect" val="查看所有的支出项目展示为下拉框" allUse="2">
+	</url>
 	<!-- 收支项目管理结束 -->
 
 	<!-- 结算账户管理开始 -->

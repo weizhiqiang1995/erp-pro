@@ -115,4 +115,16 @@
         AND m.id = #{id}
         ORDER BY m.create_time DESC LIMIT 0,1
     </select>
+    
+    <select id="queryInoutitemISExpenditureToSelect" parameterType="java.util.Map" resultType="java.util.Map">
+    	SELECT
+			a.id,
+			a.`name`
+		FROM
+			erp_inoutitem a
+		WHERE
+			a.tenant_id = #{userId}
+		AND a.type = '2'
+    </select>
+    
 </mapper>

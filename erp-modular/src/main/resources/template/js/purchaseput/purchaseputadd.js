@@ -13,10 +13,11 @@ layui.config({
 			laydate = layui.laydate;
 		var enclosureInfo = ""; //附件id
 		var rowNum = 1; //表格的序号
-		var depotHtml = "", materialHtml = "";//仓库
+		var depotHtml = "", materialHtml = "", inoutitemHtml = "";//仓库,产品,支出项目
 		var tockObject = new Array();//根据仓库和规格id查询出来的对应库存信息
 
-		var usetableTemplate = $("#usetableTemplate").html();
+		var usetableTemplate = $("#usetableTemplate").html(),
+			otherTemplate = $("#otherTemplate").html();
 		var selOption = getFileContent('tpl/template/select-option.tpl');
 		
 		//事故时间
@@ -31,8 +32,22 @@ layui.config({
 		function initAccountHtml() {
 			AjaxPostUtil.request({url: reqBasePath + "account009", params: {}, type: 'json', callback: function(json) {
 				if(json.returnCode == 0) {
-					//加载供应商数据
+					//加载账户数据
 					$("#accountId").html(getDataUseHandlebars(selOption, json)); 
+					//初始化支出项目
+					initInoutitemHtml();
+				} else {
+					winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
+				}
+			}});
+		}
+		
+		//初始化支出项目
+		function initInoutitemHtml() {
+			AjaxPostUtil.request({url: reqBasePath + "inoutitem007", params: {}, type: 'json', callback: function(json) {
+				if(json.returnCode == 0) {
+					//加载支出项目
+					inoutitemHtml = getDataUseHandlebars(selOption, json); 
 					//初始化供应商
 					initSupplierHtml();
 				} else {
@@ -508,7 +523,7 @@ layui.config({
 			});
 			return isIn;
 		}
-
+/*********************** 产品表格操作 start ****************************/
 		//新增行
 		$("body").on("click", "#addRow", function() {
 			addRow();
@@ -560,7 +575,76 @@ layui.config({
 				winui.window.msg('请选择要删除的行', {icon: 2, time: 2000});
 			}
 		}
+/*********************** 产品表格操作 end ****************************/
 
+/*********************** 采购费用表格操作 start ****************************/
+		
+		//采购费用变化
+		$("body").on("input", ".otherPrice", function() {
+			//计算价格
+			calculationPrice();
+		});
+		$("body").on("change", ".otherPrice", function() {
+			//计算价格
+			calculationPrice();
+		});
+		
+		//计算采购费用总价格
+		function calculationPrice(){
+			var rowTr = $("#otherPriceTable tr");
+			var allPrice = 0;
+			$.each(rowTr, function(i, item) {
+				//获取行坐标
+				var rowNum = $(item).attr("trcusid").replace("tr", "");
+				//获取
+				var otherPrice = parseFloat(isNull($("#otherPrice" + rowNum).val()) ? 0 : $("#otherPrice" + rowNum).val());
+				allPrice += otherPrice;
+			});
+			$("#otherPriceTotal").html("费用合计：" + allPrice.toFixed(2));
+		}
+		
+		var priceNum = 1;
+		//新增行
+		$("body").on("click", "#addPriceRow", function() {
+			addPriceRow();
+		});
+
+		//删除行
+		$("body").on("click", "#deletePriceRow", function() {
+			deletePriceRow();
+		});
+
+		//新增行
+		function addPriceRow() {
+			var par = {
+				id: "row" + priceNum.toString(), //checkbox的id
+				trId: "tr" + priceNum.toString(), //行的id
+				inoutitemId: "inoutitemId" + priceNum.toString(), //支出项目id
+				otherPrice: "otherPrice" + priceNum.toString() //金额id
+			};
+			$("#otherPriceTable").append(getDataUseHandlebars(otherTemplate, par));
+			//赋值给仓库
+			$("#" + "inoutitemId" + priceNum.toString()).html(inoutitemHtml);
+			form.render('select');
+			form.render('checkbox');
+			priceNum++;
+		}
+
+		//删除行
+		function deletePriceRow() {
+			var checkRow = $("#otherPriceTable input[type='checkbox'][name='tableCheckRow']:checked");
+			if(checkRow.length > 0) {
+				$.each(checkRow, function(i, item) {
+					$(item).parent().parent().remove();
+				});
+			} else {
+				winui.window.msg('请选择要删除的行', {icon: 2, time: 2000});
+			}
+			//计算价格
+			calculationPrice();
+		}
+/*********************** 采购费用表格操作 end ****************************/
+		
 		$("body").on("click", "#cancle", function() {
 			parent.layer.close(index);
 		});

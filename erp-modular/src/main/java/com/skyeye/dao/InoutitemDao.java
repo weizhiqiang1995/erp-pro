@@ -15,15 +15,17 @@ public interface InoutitemDao {
 
     public Map<String, Object> queryInoutitemByName(Map<String, Object> params) throws Exception;
 
-    public void insertInoutitem(Map<String, Object> params) throws Exception;
+    public int insertInoutitem(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> queryInoutitemById(Map<String, Object> params) throws Exception;
 
-    public void editInoutitemByDeleteFlag(Map<String, Object> params) throws Exception;
+    public int editInoutitemByDeleteFlag(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> queryInoutitemByIdAndName(Map<String, Object> params) throws Exception;
 
-    public void editInoutitemById(Map<String, Object> params) throws Exception;
+    public int editInoutitemById(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> queryInoutitemByIdAndInfo(Map<String, Object> params) throws Exception;
+
+	public List<Map<String, Object>> queryInoutitemISExpenditureToSelect(Map<String, Object> params) throws Exception;
 }

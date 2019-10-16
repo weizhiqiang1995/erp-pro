@@ -10,9 +10,9 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.service.PurchasePutService;
 
 /**
- * 采购入库
- * @author Lenovo
- *
+ * @Author 卫志强
+ * @Description 采购入库
+ * @Date 2019/10/16 15:32
  */
 @Controller
 public class PurchasePutController {
