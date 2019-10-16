@@ -46,10 +46,6 @@ layui.config({
             }
         });
 
-        $("body").on("change", "#initialAmount", function () {
-            $("#currentAmount").val($(this).val());
-        });
-
         $("body").on("click", "#cancle", function(){
             parent.layer.close(index);
         });
