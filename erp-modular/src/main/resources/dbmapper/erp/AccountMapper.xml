@@ -176,6 +176,7 @@
             d.account_id = #{id}
         AND d.tenant_id = #{userId}
         AND d.delete_flag = 0
+        AND d.sub_type NOT IN(10,11)
     </select>
     
     <select id="queryAccountListToSelect" parameterType="java.util.Map" resultType="java.util.Map">
@@ -199,5 +200,6 @@
         WHERE
             d.account_id = #{id}
         AND d.tenant_id = #{userId}
+        AND d.sub_type NOT IN(10,11)
     </select>
 </mapper>

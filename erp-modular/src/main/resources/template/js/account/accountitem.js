@@ -21,7 +21,7 @@ layui.config({
         cols: [[
             { title: '序号', type: 'numbers'},
             { field: 'number', title: '票据号', align: 'center',width: 200},
-            { field: 'type', title: '类型', align: 'center',width: 150, templet: function (d) {
+            { field: 'type', title: '类型', align: 'center',width: 80, templet: function (d) {
                 if(d.type == '1'){
                     return "<span class='state-down'>出库</span>";
                 }else if(d.type == '2'){
@@ -30,7 +30,7 @@ layui.config({
                     return "<span class='state-error'>参数错误</span>";
                 }
             }},
-            { field: 'subType', title: '出入库分类', align: 'left',width: 150, templet: function(d){
+            { field: 'subType', title: '出入库分类', align: 'left',width: 100, templet: function(d){
                 if(d.subType == '1'){
                     return "<span class='state-up'>入库</span>";
                 }else if(d.subType == '2'){
@@ -55,7 +55,7 @@ layui.config({
                     return "<span class='state-error'>参数错误</span>";
                 }
             }},
-            { field: 'status', title: '状态', align: 'left',width: 150, templet: function (d) {
+            { field: 'status', title: '状态', align: 'left',width: 120, templet: function (d) {
                     if(d.status == '0'){
                         return "<span class='state-error'>未审核</span>";
                     }else if(d.status == '1'){
@@ -69,7 +69,7 @@ layui.config({
                     }
                 }},
             { field: 'totalPrice', title: '合计金额', align: 'left',width: 100},
-            { field: 'payType', title: '付款类型', align: 'center',width: 100, templet: function (d) {
+            { field: 'payType', title: '付款类型', align: 'center',width: 80, templet: function (d) {
                 if(d.payType == '1'){
                     return "<span class='state-up'>现金</span>";
                 }else if(d.payType == '2'){

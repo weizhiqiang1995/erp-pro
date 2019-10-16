@@ -97,6 +97,7 @@ public class AccountServiceImpl implements AccountService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void deleteAccountById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
@@ -111,6 +112,7 @@ public class AccountServiceImpl implements AccountService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void editAccountById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
@@ -140,6 +142,7 @@ public class AccountServiceImpl implements AccountService {
      * @throws Exception
      */
     @Override
+    @Transactional(value="transactionManager")
     public void editAccountByIdAndIsDefault(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
