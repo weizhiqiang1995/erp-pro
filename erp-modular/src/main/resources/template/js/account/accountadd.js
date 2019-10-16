@@ -16,7 +16,6 @@ layui.config({
                     accountName: $("#accountName").val(),
                     serialNo: $("#serialNo").val(),
                     initialAmount: $("#initialAmount").val(),
-                    currentAmount: $("#currentAmount").val(),
                     isDefault: $("input[name='isDefault']:checked").val(),
                     remark: $("#remark").val(),
                 };

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -60,8 +61,12 @@ public class AccountServiceImpl implements AccountService {
             return;
         }
         params.put("id", ToolUtil.getSurFaceId());
+        if(params.get("isDefault").toString().equals("1")){
+            params.put("isDefault", "0");
+            accountDao.editAccountByIsDefault(params);
+            params.put("isDefault", "1");
+        }
         params.put("createTime", ToolUtil.getTimeAndToString());
-        params.put("isDefault", 0);
         params.put("deleteFlag", 0);
         accountDao.insertAccount(params);
     }
@@ -114,6 +119,17 @@ public class AccountServiceImpl implements AccountService {
             outputObject.setreturnMessage("账户名称已存在！");
             return;
         }
+        if(params.get("isDefault").toString().equals("1")){
+            params.put("isDefault", "0");
+            accountDao.editAccountByIsDefault(params);
+            params.put("isDefault", "1");
+        }
+        Map<String, Object> account = accountDao.queryAccountItemMoneyById(params);
+        String total = (account == null) ? "0" : account.get("totalPrice").toString();
+        BigDecimal totalPrice = new BigDecimal(total);
+        BigDecimal initialAmount = new BigDecimal(params.get("initialAmount").toString());
+        BigDecimal currentAmount = initialAmount.add(totalPrice);
+        params.put("currentAmount", currentAmount);
         accountDao.editAccountById(params);
     }
 
