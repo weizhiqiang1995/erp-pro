@@ -30,40 +30,42 @@
 权限管理|资源图标|日志管理|多桌面管理
 系统基础设置|系统的基础信息设置|计量单位|产品分类
 产品信息|客户管理|供应商管理|会员管理
-仓库管理|账户信息|收支项目|
+仓库管理|账户信息|收支项目|结算账户
+账户流水|采购单|其他入库|入库明细
+出库明细|||
 
 #### 技术选型
 
 ##### 后端技术:
 
-技术|名称|官网
----|---|---
-SpringBoot|核心框架|http://spring.io/projects/spring-boot
-MyBatis|ORM框架|http://www.mybatis.org/mybatis-3/zh/index.html
-Druid|数据库连接池|https://github.com/alibaba/druid
-Maven|项目构建管理|http://maven.apache.org/
-redis|key-value存储系统|https://redis.io/
-webSocket|浏览器与服务器全双工(full-duplex)通信|http://www.runoob.com/html/html5-websocket.html
-Activiti|工作流引擎|https://www.activiti.org/
-spring mvc|视图框架|http://spring.io/
-quartz 2.2.2|定时任务|http://www.quartz-scheduler.org/
-ActiveMQ|消息队列|http://activemq.apache.org/replicated-leveldb-store.html
-solr|企业级搜索应用服务器|https://lucene.apache.org/solr/
-Spring Cloud|微服务框架(目前用户APP端接口)|https://springcloud.cc/
+技术|名称
+---|---
+[SpringBoot](http://spring.io/projects/spring-boot)|核心框架
+[MyBatis](http://www.mybatis.org/mybatis-3/zh/index.html)|ORM框架
+[Druid](https://github.com/alibaba/druid)|数据库连接池
+[Maven](http://maven.apache.org/)|项目构建管理
+[redis](https://redis.io/)|key-value存储系统
+[webSocket](http://www.runoob.com/html/html5-websocket.html)|浏览器与服务器全双工(full-duplex)通信
+[Activiti](https://www.activiti.org/)|工作流引擎
+[spring mvc](http://spring.io/)|视图框架
+[quartz 2.2.2](http://www.quartz-scheduler.org/)|定时任务
+[ActiveMQ](http://activemq.apache.org/replicated-leveldb-store.html)|消息队列
+[solr](https://lucene.apache.org/solr/)|企业级搜索应用服务器
+[Spring Cloud](https://springcloud.cc/)|微服务框架(目前用户APP端接口)
 
 ##### 前端技术：
 
-技术|名称|官网
----|---|---
-jQuery|函式库|http://jquery.com/
-zTree|树插件|http://www.treejs.cn/v3/
-layui|模块化前端UI|https://www.layui.com/
-winui|win10风格UI|https://gitee.com/doc_wei01_admin/skyeye
-codemirror|codemirror代码编辑器|https://codemirror.net/
-handlebars|js模板引擎|http://www.ghostchina.com/introducing-the-handlebars-js-templating-engine/
-webSocket|浏览器与服务器全双工(full-duplex)通信|http://www.runoob.com/html/html5-websocket.html
-G6|流程图开发|https://antv.alipay.com/zh-cn/index.html
-FullCalendar|日历插件|https://blog.csdn.net/qw_xingzhe/article/details/44920943
+技术|名称
+---|---
+[jQuery](http://jquery.com/)|函式库
+[zTree](http://www.treejs.cn/v3/)|树插件
+[layui](https://www.layui.com/)|模块化前端UI
+[winui](https://gitee.com/doc_wei01_admin/skyeye)|win10风格UI
+[codemirror](https://codemirror.net/)|codemirror代码编辑器
+[handlebars](http://www.ghostchina.com/introducing-the-handlebars-js-templating-engine/)|js模板引擎
+[webSocket](http://www.runoob.com/html/html5-websocket.html)|浏览器与服务器全双工(full-duplex)通信
+[G6](https://antv.alipay.com/zh-cn/index.html)|流程图开发
+[FullCalendar](https://blog.csdn.net/qw_xingzhe/article/details/44920943)|日历插件
 
 #### 代码描述
 ##### 前后台接口映射
@@ -110,6 +112,7 @@ public void 方法名(InputObject inputObject, OutputObject outputObject) throws
 |![](https://images.gitee.com/uploads/images/2019/1011/084458_e0c2e256_1541735.png "")|![](https://s2.ax1x.com/2019/10/11/uHSaY8.png "")|
 |![](https://images.gitee.com/uploads/images/2019/1011/084630_9326c93d_1541735.png "")|![](https://s2.ax1x.com/2019/10/11/uHpkh8.png "")|
 |![](https://images.gitee.com/uploads/images/2019/1011/084706_8c921d85_1541735.png "")|![](https://s2.ax1x.com/2019/10/11/uHpeXj.png "")|
+|![](https://images.gitee.com/uploads/images/2019/1015/091741_4030a2f0_1541735.png "")|![](https://s2.ax1x.com/2019/10/15/K9meR1.png "")|
 
 #### 环境搭建
 ##### 开发工具:
@@ -125,18 +128,18 @@ public void 方法名(InputObject inputObject, OutputObject outputObject) throws
 
 #### 资源下载
 
-- JDK8 https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</br>
-- Maven http://maven.apache.org/download.cgi</br>
-- Redis https://redis.io/download</br>
-- Nginx http://nginx.org/en/download.html</br>
+- [JDK8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+- [Maven](http://maven.apache.org/download.cgi)
+- [Redis](https://redis.io/download)
+- [Nginx](http://nginx.org/en/download.html)
 
 #### 在线文档
 
-- [JDK8中文文档](https://blog.fondme.cn/apidoc/jdk-1.8-youdao/)</br>
-- [Spring4.x文档](http://spring.oschina.mopaas.com/)</br>
-- [Mybatis3官网](http://www.mybatis.org/mybatis-3/zh/index.html)</br>
-- [Nginx中文文档](http://tool.oschina.net/apidocs/apidoc?api=nginx-zh)</br>
-- [Git官网中文文档](https://git-scm.com/book/zh/v2)</br>
+- [JDK8中文文档](https://blog.fondme.cn/apidoc/jdk-1.8-youdao/)
+- [Spring4.x文档](http://spring.oschina.mopaas.com/)
+- [Mybatis3官网](http://www.mybatis.org/mybatis-3/zh/index.html)
+- [Nginx中文文档](http://tool.oschina.net/apidocs/apidoc?api=nginx-zh)
+- [Git官网中文文档](https://git-scm.com/book/zh/v2)
 
 #### 项目交流：
 

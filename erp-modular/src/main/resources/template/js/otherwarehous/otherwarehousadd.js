@@ -353,53 +353,6 @@ layui.config({
 			}
 		}
 
-		//根据仓库和商品重置库存
-		function resetAssetList(thisRowNum, list) {
-			var sHtml = getDataUseHandlebars(selOption, {
-				rows: list
-			});
-			$("#assetarId" + thisRowNum).html(sHtml); //重置商品列表下拉框
-			$("#specificationsName" + thisRowNum).html(""); //重置规格为空
-			$("#residualNum" + thisRowNum).html(""); //重置库存为空
-			form.render('select');
-		}
-
-		//判断是否在数组中
-		function inPointArray(str, array) {
-			var isIn = false;
-			$.each(array, function(i, item) {
-				if(item.id === str) {
-					isIn = true;
-					return false;
-				}
-			});
-			return isIn;
-		}
-
-		//获取指定key对应的集合
-		function getListPointArray(str, array) {
-			var isList = [];
-			$.each(array, function(i, item) {
-				if(item.id === str) {
-					$.extend(true, isList, item.list);
-					return false;
-				}
-			});
-			return isList;
-		}
-
-		//获取在数组集合中的下标
-		function getIndexPointArray(str, array) {
-			var isIndex = -1;
-			$.each(array, function(i, item) {
-				if(item.id === str) {
-					isIndex = i;
-					return false;
-				}
-			});
-			return isIndex;
-		}
-
 		$("body").on("click", "#cancle", function() {
 			parent.layer.close(index);
 		});
