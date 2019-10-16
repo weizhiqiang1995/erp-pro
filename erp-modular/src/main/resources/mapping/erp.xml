@@ -289,6 +289,7 @@
 		<property id="accountName" name="accountName" ref="required" var="结算账户名称"/>
 		<property id="serialNo" name="serialNo" ref="required" var="结算账户编号"/>
 		<property id="initialAmount" name="initialAmount" ref="" var="结算账户期初金额"/>
+		<property id="currentAmount" name="currentAmount" ref="" var="结算账户当前余额"/>
 		<property id="remark" name="remark" ref="" var="结算账户备注"/>
 		<property id="isDefault" name="isDefault" ref="required,num" var="结算账户默认状态"/>
 	</url>
@@ -303,6 +304,7 @@
 		<property id="accountName" name="accountName" ref="required" var="结算账户名称"/>
 		<property id="serialNo" name="serialNo" ref="required" var="结算账户编号"/>
 		<property id="initialAmount" name="initialAmount" ref="" var="结算账户期初金额"/>
+		<property id="currentAmount" name="currentAmount" ref="" var="结算账户当前余额"/>
 		<property id="remark" name="remark" ref="" var="结算账户备注"/>
 		<property id="isDefault" name="isDefault" ref="required,num" var="结算账户默认状态"/>
 	</url>

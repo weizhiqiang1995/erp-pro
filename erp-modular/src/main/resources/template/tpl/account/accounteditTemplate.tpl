@@ -18,9 +18,15 @@
         </div>
     </div>
     <div class="layui-form-item layui-col-xs6">
+        <label class="layui-form-label">当前余额</label>
+        <div class="layui-input-block">
+            <input type="text" id="currentAmount" name="currentAmount" value="{{currentAmount}}" win-verify="required|money" placeholder="0" class="layui-input" readonly="readonly"/>
+        </div>
+    </div>
+    <div class="layui-form-item layui-col-xs6">
         <label class="layui-form-label">是否默认<i class="red">*</i></label>
         <div class="layui-input-block winui-radio">
-            <input type="radio" name="isDefault" value="0" title="否"/>
+            <input type="radio" name="isDefault" value="0" title="否" checked="checked"/>
             <input type="radio" name="isDefault" value="1" title="是"/>
         </div>
     </div>

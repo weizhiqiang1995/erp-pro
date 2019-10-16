@@ -16,6 +16,7 @@ layui.config({
                     accountName: $("#accountName").val(),
                     serialNo: $("#serialNo").val(),
                     initialAmount: $("#initialAmount").val(),
+                    currentAmount: $("#currentAmount").val(),
                     isDefault: $("input[name='isDefault']:checked").val(),
                     remark: $("#remark").val(),
                 };
@@ -29,6 +30,10 @@ layui.config({
                 }});
             }
             return false;
+        });
+
+        $("body").on("change", "#initialAmount", function () {
+            $("#currentAmount").val($(this).val());
         });
 
         $("body").on("click", "#cancle", function(){

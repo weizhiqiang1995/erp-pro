@@ -55,7 +55,7 @@
         {{# if(d.enabled == 2 && auth('1569133258254')){ }}
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         {{# } }}
-        {{# if(d.enabled == 2 && auth('1571154301068')){ }}
+        {{# if(d.enabled == 2 && auth('1569133240001')){ }}
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
         {{# } }}
         {{# if(d.enabled == 1 && auth('1569133276824')){ }}
@@ -63,6 +63,9 @@
         {{# } }}
         {{# if(d.enabled == 2 && auth('1569133267244')){ }}
         <a class="layui-btn layui-btn-xs" lay-event="enabled">启用</a>
+        {{# } }}
+        {{# if(auth('1570719070280')){ }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="select">详情</a>
         {{# } }}
     </script>
 </div>
