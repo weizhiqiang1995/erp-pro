@@ -36,4 +36,6 @@ public interface AccountDao {
     public List<Map<String, Object>> queryAccountStreamById(Map<String, Object> params, PageBounds pageBounds) throws Exception;
 
 	public List<Map<String, Object>> queryAccountListToSelect(Map<String, Object> params) throws Exception;
+
+    Map<String, Object> queryAccountItemMoneyById(Map<String, Object> params) throws Exception;
 }

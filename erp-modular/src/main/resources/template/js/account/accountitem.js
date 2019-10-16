@@ -20,9 +20,8 @@ layui.config({
         limit: 8,
         cols: [[
             { title: '序号', type: 'numbers'},
-            { field: 'defaultNumber', title: '初始票据号', align: 'center',width: 200},
             { field: 'number', title: '票据号', align: 'center',width: 200},
-            { field: 'type', title: '类型', align: 'center',width: 150, template: function (d) {
+            { field: 'type', title: '类型', align: 'center',width: 150, templet: function (d) {
                 if(d.type == '1'){
                     return "<span class='state-down'>出库</span>";
                 }else if(d.type == '2'){
@@ -50,22 +49,27 @@ layui.config({
                     return "<span class='state-down'>零售</span>";
                 }else if(d.subType == '9'){
                     return "<span class='state-down'>其他出库</span>";
+                }else if(d.subType == '10'){
+                    return "采购单";
                 }else{
                     return "<span class='state-error'>参数错误</span>";
                 }
             }},
-            { field: 'status', title: '状态', align: 'left',width: 150, template: function () {
-                    if(d.status == '1'){
+            { field: 'status', title: '状态', align: 'left',width: 150, templet: function (d) {
+                    if(d.status == '0'){
                         return "<span class='state-error'>未审核</span>";
+                    }else if(d.status == '1'){
+                        return "<span class='state-down'>审核中</span>";
                     }else if(d.status == '2'){
-                        return "<span class='state-up'>已审核</span>";
+                        return "<span class='state-up'>审核通过</span>";
                     }else if(d.status == '3'){
+                        return "<span class='state-error'>审核拒绝</span>";
+                    }else if(d.status == '4'){
                         return "<span class='state-up'>已转采购|销售</span>";
                     }
                 }},
-            { field: 'changeAmount', title: '变动金额', align: 'left',width: 100},
-            { field: 'currentAmount', title: '余额', align: 'left',width: 100},
-            { field: 'payType', title: '付款类型', align: 'center',width: 100, template: function (d) {
+            { field: 'totalPrice', title: '合计金额', align: 'left',width: 100},
+            { field: 'payType', title: '付款类型', align: 'center',width: 100, templet: function (d) {
                 if(d.payType == '1'){
                     return "<span class='state-up'>现金</span>";
                 }else if(d.payType == '2'){
