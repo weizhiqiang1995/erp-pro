@@ -57,7 +57,7 @@
 		AND b.delete_flag = '0'
     </select>
     
-    <insert id="insertOtherWareHousMation" parameterType="java.util.Map">
+    <insert id="insertPurchasePutMation" parameterType="java.util.Map">
         INSERT into erp_depothead
         (id, `type`, sub_type, default_number, number, oper_person_id, oper_person_name, create_time, oper_time, organ_id, account_id, total_price,
         	pay_type, remark, status, tenant_id, delete_flag,
@@ -67,7 +67,7 @@
         		#{discount}, #{discountMoney}, #{discountLastMoney}, #{otherMoney}, #{otherMoneyList}, #{changeAmount})
     </insert>
     
-    <insert id="insertOtherWareHousChildMation" parameterType="java.util.Map">
+    <insert id="insertPurchasePutChildMation" parameterType="java.util.Map">
 	     INSERT INTO erp_depotitem
 	     (id, header_id, material_id, material_name, material_model, m_unit_id, oper_number, basic_number, unit_price, all_price, remark, depot_id,
 	     	m_type, tenant_id, delete_flag,
@@ -79,5 +79,94 @@
 				#{item.taxUnitPrice}, #{item.taxRate}, #{item.taxMoney}, #{item.taxLastMoney})  
 		</foreach>  
 	</insert>
+	
+	<select id="queryPurchasePutMationToEditById" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+			a.id,
+			a.default_number defaultNumber,
+			CONVERT (a.oper_time, CHAR) operTime,
+			a.organ_id organId,
+			a.account_id accountId,
+			CONVERT(a.total_price, decimal(24, 2)) totalPrice,
+			a.pay_type payType,
+			a.remark,
+			CONVERT(a.change_amount, decimal(24, 2)) changeAmount,
+			a.link_number linkNumber,
+			CONVERT(a.discount, decimal(24, 2)) discount,
+			CONVERT(a.discount_money, decimal(24, 2)) discountMoney,
+			CONVERT(a.discount_last_money, decimal(24, 2)) discountLastMoney,
+			CONVERT(a.other_money, decimal(24, 2)) otherMoney,
+			CONVERT((IFNULL(a.discount_money, 0) + IFNULL(a.discount_last_money, 0)), decimal(24, 2)) taxLastMoneyPrice,
+			<!-- 优惠后金额 - 本次付款金额 -->
+			CONVERT((IFNULL(a.discount_last_money, 0) - IFNULL(a.change_amount, 0)), decimal(24, 2)) arrears,
+			a.other_money_list otherMoneyList
+		FROM
+			erp_depothead a
+		WHERE a.id = #{id}
+		AND a.tenant_id = #{userId}
+		AND a.delete_flag = '0'
+    </select>
+    
+    <select id="queryPurchasePutItemMationToEditById" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+			a.id,
+			a.material_id materialId,
+			a.oper_number operNumber,
+			a.m_unit_id mUnitId,
+			CONVERT(a.unit_price, decimal(24, 2)) unitPrice,
+			CONVERT(a.all_price, decimal(24, 2)) allPrice,
+			a.remark,
+			a.depot_id depotId,
+			CONVERT(a.tax_unit_price, decimal(24, 2)) taxUnitPrice,
+			CONVERT(a.tax_rate, decimal(24, 2)) taxRate,
+			CONVERT(a.tax_money, decimal(24, 2)) taxMoney,
+			SUM(b.oper_number * (CASE c.type WHEN 2 THEN 1 ELSE -1 END)) AS currentTock,
+			CONVERT(a.tax_last_money, decimal(24, 2)) taxLastMoney
+		FROM
+			erp_depotitem a
+			LEFT JOIN erp_depotitem b ON b.depot_id = a.depot_id AND b.m_unit_id = a.m_unit_id AND b.header_id != a.header_id
+			LEFT JOIN erp_depothead c ON c.id = b.header_id
+		WHERE
+			a.header_id = #{id}
+		AND a.delete_flag = '0'
+		GROUP BY a.id
+    </select>
+    
+    <delete id="deletePurchasePutChildMation" parameterType="java.util.Map">
+		DELETE
+		FROM
+			erp_depotitem
+		WHERE
+			header_id = #{id}
+	</delete>
+	
+	<update id="editPurchasePutMationById" parameterType="java.util.Map">
+		UPDATE erp_depothead
+		<set>
+			<if test="operTime != '' and operTime != null">
+	            oper_time = #{operTime},
+	        </if>
+	        <if test="organId != '' and organId != null">
+	            organ_id = #{organId},
+	        </if>
+            account_id = #{accountId},
+            remark = #{remark},
+	        <if test="payType != '' and payType != null">
+	            pay_type = #{payType},
+	        </if>
+	        <if test="totalPrice != '' and totalPrice != null">
+	            total_price = #{totalPrice},
+	        </if>
+	        discount = #{discount},
+	        discount_money = #{discountMoney},
+	        discount_last_money = #{discountLastMoney},
+	        change_amount = #{changeAmount},
+	        other_money = #{otherMoney},
+	        other_money_list = #{otherMoneyList},
+		</set>
+		WHERE id = #{id}
+		AND tenant_id = #{userId}
+		AND sub_type = '1'
+	</update>
     
 </mapper>

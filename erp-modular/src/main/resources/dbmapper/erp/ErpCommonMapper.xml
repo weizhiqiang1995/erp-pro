@@ -20,7 +20,7 @@
 			FORMAT(a.change_amount, 2) changeAmount,
 			FORMAT(a.discount, 2) discount,
 			FORMAT(a.discount_money, 2) discountMoney,
-			FORMAT(a.discount_last_money , 2) discountLastMoney,
+			FORMAT(a.discount_last_money, 2) discountLastMoney,
 			FORMAT(a.other_money, 2) otherMoney,
 			FORMAT((IFNULL(a.discount_money, 0) + IFNULL(a.discount_last_money, 0)), 2) taxLastMoneyPrice,
 			<!-- 优惠后金额 - 本次付款金额 -->

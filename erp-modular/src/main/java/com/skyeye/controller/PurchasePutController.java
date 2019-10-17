@@ -44,4 +44,28 @@ public class PurchasePutController {
     	purchasePutService.insertPurchasePutMation(inputObject, outputObject);
     }
     
+    /**
+     * 编辑采购入库信息时进行回显
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/PurchasePutController/queryPurchasePutMationToEditById")
+    @ResponseBody
+    public void queryPurchasePutMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	purchasePutService.queryPurchasePutMationToEditById(inputObject, outputObject);
+    }
+    
+    /**
+     * 编辑采购入库信息
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/PurchasePutController/editPurchasePutMationById")
+    @ResponseBody
+    public void editPurchasePutMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	purchasePutService.editPurchasePutMationById(inputObject, outputObject);
+    }
+    
 }

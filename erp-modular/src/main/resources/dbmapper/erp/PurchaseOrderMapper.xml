@@ -110,7 +110,7 @@
 			a.organ_id supplierId,
 			CONVERT (a.oper_time, char) operTime,
 			a.account_id accountId,
-			CONVERT(a.total_price, decimal) totalPrice,
+			CONVERT(a.total_price, decimal(24, 2)) totalPrice,
 			a.pay_type payType,
 			a.remark
 		FROM
@@ -131,16 +131,15 @@
 			a.m_unit_id mUnitId,
 			SUM(b.oper_number * (CASE c.type WHEN 2 THEN 1 ELSE -1 END)) AS currentTock,
 			a.oper_number operNum,
-			a.unit_price unitPrice,
-			a.all_price allPrice,
+			CONVERT(a.unit_price, decimal(24, 2)) unitPrice,
+			CONVERT(a.all_price, decimal(24, 2)) allPrice,
 			a.remark
 		FROM
 			erp_depotitem a
-			LEFT JOIN erp_depotitem b ON b.depot_id = a.depot_id AND b.m_unit_id = a.m_unit_id
+			LEFT JOIN erp_depotitem b ON b.depot_id = a.depot_id AND b.m_unit_id = a.m_unit_id AND b.header_id != a.header_id
 			LEFT JOIN erp_depothead c ON c.id = b.header_id
 		WHERE
 			a.header_id = #{id}
-		AND b.header_id != a.header_id
 		AND a.delete_flag = '0'
 		GROUP BY a.id
 	</select>
@@ -154,12 +153,8 @@
 	        <if test="organId != '' and organId != null">
 	            organ_id = #{organId},
 	        </if>
-	        <if test="accountId != '' and accountId != null">
-	            account_id = #{accountId},
-	        </if>
-	        <if test="remark != '' and remark != null">
-	            remark = #{remark},
-	        </if>
+            account_id = #{accountId},
+            remark = #{remark},
 	        <if test="payType != '' and payType != null">
 	            pay_type = #{payType},
 	        </if>

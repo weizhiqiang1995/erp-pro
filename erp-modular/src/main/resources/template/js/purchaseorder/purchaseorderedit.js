@@ -116,8 +116,8 @@ layui.config({
 				$("#materialId" + (rowNum - 1)).val(item.materialId);//产品回显
 				$("#currentTock" + (rowNum - 1)).html(item.currentTock);//库存回显
 				$("#rkNum" + (rowNum - 1)).val(item.operNum);//数量回显
-				$("#unitPrice" + (rowNum - 1)).html(item.unitPrice);//单价回显
-				$("#amountOfMoney" + (rowNum - 1)).html(item.allPrice);//金额回显
+				$("#unitPrice" + (rowNum - 1)).html(item.unitPrice.toFixed(2));//单价回显
+				$("#amountOfMoney" + (rowNum - 1)).html(item.allPrice.toFixed(2));//金额回显
 				$("#remark" + (rowNum - 1)).val(item.remark);//备注回显
 				//设置标识
 				$("tr[trcusid='tr" + (rowNum - 1) + "']").attr("thisid", item.id);

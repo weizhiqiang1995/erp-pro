@@ -9,4 +9,8 @@ public interface PurchasePutService {
 
 	public void insertPurchasePutMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void queryPurchasePutMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+	public void editPurchasePutMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }

@@ -57,6 +57,8 @@ layui.config({
             deletemember(data);
         }else if (layEvent === 'details') { //详情
         	details(data);
+        }else if (layEvent === 'edit') { //编辑
+        	edit(data);
         }
     });
 
@@ -85,12 +87,12 @@ layui.config({
     }
     
     //详情
-	function details(data){
+	function edit(data){
 		rowId = data.id;
 		_openNewWindows({
-			url: "../../tpl/purchaseput/purchaseputdetails.html", 
-			title: "详情",
-			pageId: "otherwarehousdetails",
+			url: "../../tpl/purchaseput/purchaseputedit.html", 
+			title: "编辑",
+			pageId: "purchaseputedit",
 			area: ['90vw', '90vh'],
 			callBack: function(refreshCode){
                 if (refreshCode == '0') {
@@ -99,6 +101,18 @@ layui.config({
                 } else if (refreshCode == '-9999') {
                 	winui.window.msg("操作失败", {icon: 2,time: 2000});
                 }
+			}});
+	}
+    
+    //详情
+	function details(data){
+		rowId = data.id;
+		_openNewWindows({
+			url: "../../tpl/purchaseput/purchaseputdetails.html", 
+			title: "详情",
+			pageId: "purchaseputdetails",
+			area: ['90vw', '90vh'],
+			callBack: function(refreshCode){
 			}});
 	}
 
@@ -151,5 +165,5 @@ layui.config({
         table.reload("messageTable", {page: {curr: 1}, where:{defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime}})
     }
 
-    exports('otherwarehouslist', {});
+    exports('purchaseputlist', {});
 });
