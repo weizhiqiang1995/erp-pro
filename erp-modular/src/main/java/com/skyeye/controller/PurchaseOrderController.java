@@ -104,4 +104,28 @@ public class PurchaseOrderController {
     	purchaseOrderService.editPurchaseOrderStateToExamineById(inputObject, outputObject);
     }
     
+    /**
+     * 采购单信息转采购入库回显
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/PurchaseOrderController/queryPurchaseOrderToTurnPutById")
+    @ResponseBody
+    public void queryPurchaseOrderToTurnPutById(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	purchaseOrderService.queryPurchaseOrderToTurnPutById(inputObject, outputObject);
+    }
+    
+    /**
+     * 采购单信息转采购入库
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/PurchaseOrderController/insertPurchaseOrderToTurnPut")
+    @ResponseBody
+    public void insertPurchaseOrderToTurnPut(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	purchaseOrderService.insertPurchaseOrderToTurnPut(inputObject, outputObject);
+    }
+    
 }

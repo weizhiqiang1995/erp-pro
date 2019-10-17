@@ -31,4 +31,14 @@ public interface PurchaseOrderDao {
 
 	public int editPurchaseOrderStateToExamineById(Map<String, Object> map) throws Exception;
 
+	public Map<String, Object> queryPurchaseOrderToTurnPutById(Map<String, Object> map) throws Exception;
+
+	public List<Map<String, Object>> queryPurchaseOrderNormsToTurnPutById(Map<String, Object> map) throws Exception;
+
+	public int insertPurchasePutMation(Map<String, Object> depothead) throws Exception;
+
+	public int insertPurchasePutChildMation(List<Map<String, Object>> entitys) throws Exception;
+
+	public Map<String, Object> queryOrderIsStandardById(Map<String, Object> entity) throws Exception;
+
 }

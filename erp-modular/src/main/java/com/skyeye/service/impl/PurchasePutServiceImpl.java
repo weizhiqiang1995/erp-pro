@@ -161,6 +161,8 @@ public class PurchasePutServiceImpl implements PurchasePutService{
 			//获取采购项目列表
 			if(bean.containsKey("otherMoneyList") && !ToolUtil.isBlank(bean.get("otherMoneyList").toString()) && ToolUtil.isJson(bean.get("otherMoneyList").toString())){
 				bean.put("otherMoneyList", JSONArray.fromObject(bean.get("otherMoneyList").toString()));
+			}else {
+				bean.put("otherMoneyList", new JSONArray());
 			}
 			outputObject.setBean(bean);
 			outputObject.settotal(1);

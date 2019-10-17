@@ -198,6 +198,25 @@
 		<property id="status" name="status" ref="required,num" var="审核结果" />
 		<property id="content" name="content" ref="" var="审核意见" />
 	</url>
+	<url id="purchaseorder008" path="/post/PurchaseOrderController/queryPurchaseOrderToTurnPutById" val="采购单信息转采购入库回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="采购单id" />
+	</url>
+	<url id="purchaseorder009" path="/post/PurchaseOrderController/insertPurchaseOrderToTurnPut" val="采购单信息转采购入库" allUse="2">
+		<property id="supplierId" name="supplierId" ref="required" var="供应商" />
+		<property id="operTime" name="operTime" ref="required" var="单据日期" />
+		<property id="accountId" name="accountId" ref="" var="账户" />
+		<property id="payType" name="payType" ref="required,num" var="付款类型" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="discount" name="discount" ref="required,double" var="优惠率,默认为0.00" />
+		<property id="discountMoney" name="discountMoney" ref="required,double" var="优惠金额,默认为0.00" />
+		<property id="changeAmount" name="changeAmount" ref="required,double" var="本次付款,默认为0.00" />
+		<property id="otherMoney" name="otherMoney" ref="required,double" var="采购总金额,默认为0.00" />
+		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
+		<property id="otherMoneyList" name="otherMoneyList" ref="required" var="采购金额json" />
+		<property id="cgddOrderNum" name="cgddOrderNum" ref="required" var="采购单编号" />
+		<property id="rowId" name="id" ref="required" var="采购单id" />
+	</url>
+	
 	
 	<url id="purchaseput001" path="/post/PurchasePutController/queryPurchasePutToList" val="获取采购入库列表信息" allUse="2">
 		<property id="defaultNumber" name="defaultNumber" ref="" var="票据单号" />

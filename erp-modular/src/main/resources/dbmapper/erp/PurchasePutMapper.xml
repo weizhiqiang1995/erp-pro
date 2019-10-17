@@ -14,6 +14,7 @@
 			GROUP_CONCAT(DISTINCT CONCAT(c.material_name, c.material_model) SEPARATOR ',') materialNames,
 			FORMAT(a.discount_last_money, 2) discountLastMoney,
 			FORMAT(IFNULL(a.discount_last_money, 0) + IFNULL(a.discount_money, 0), 2) taxMoney,
+			a.link_number linkNumber,
 			FORMAT(a.change_amount, 2) changeAmount
 		FROM
 			erp_depothead a

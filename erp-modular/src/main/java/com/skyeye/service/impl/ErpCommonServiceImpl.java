@@ -49,6 +49,8 @@ public class ErpCommonServiceImpl implements ErpCommonService{
 					otherMoneyList.add(item);
 				}
 				bean.put("otherMoneyList", otherMoneyList);
+			}else {
+				bean.put("otherMoneyList", new JSONArray());
 			}
 			outputObject.setBean(bean);
 			outputObject.settotal(1);

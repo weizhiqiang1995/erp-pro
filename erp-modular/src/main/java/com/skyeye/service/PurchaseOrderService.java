@@ -19,4 +19,8 @@ public interface PurchaseOrderService {
 
 	public void editPurchaseOrderStateToExamineById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void queryPurchaseOrderToTurnPutById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+	public void insertPurchaseOrderToTurnPut(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }

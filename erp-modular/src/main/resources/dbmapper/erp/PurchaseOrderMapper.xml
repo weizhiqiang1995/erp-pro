@@ -188,4 +188,109 @@
 		AND sub_type = '10'
 	</update>
 	
+	<select id="queryPurchaseOrderToTurnPutById" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			a.id,
+			a.default_number defaultNumber,
+			a.organ_id organId,
+			a.account_id accountId,
+			CONVERT(a.total_price, decimal(24, 2)) totalPrice,
+			a.pay_type payType,
+			CONVERT(IFNULL(a.change_amount, a.total_price), decimal(24, 2)) changeAmount,
+			CONVERT(IFNULL(a.discount, 0), decimal(24, 2)) discount,
+			CONVERT(IFNULL(a.discount_money, 0), decimal(24, 2)) discountMoney,
+			CONVERT(IFNULL(a.discount_last_money, total_price), decimal(24, 2)) discountLastMoney,
+			CONVERT(IFNULL(a.other_money, 0), decimal(24, 2)) otherMoney,
+			CONVERT((IFNULL(a.discount_money, a.total_price) + IFNULL(a.discount_last_money, 0)), decimal(24, 2)) taxLastMoneyPrice,
+			<!-- 优惠后金额 - 本次付款金额 -->
+			CONVERT((IFNULL(a.discount_last_money, a.total_price) - IFNULL(a.change_amount, a.total_price)), decimal(24, 2)) arrears,
+			a.other_money_list otherMoneyList,
+			a.remark
+		FROM
+			erp_depothead a
+		WHERE
+			a.id = #{id}
+		AND a.`status` = '2'
+		AND a.delete_flag = '0'
+		AND a.tenant_id = #{userId}
+		AND a.sub_type = '10'
+	</select>
+	
+	<select id="queryPurchaseOrderNormsToTurnPutById" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			a.id,
+			a.depot_id depotId,
+			a.material_id materialId,
+			a.m_unit_id mUnitId,
+			SUM(b.oper_number * (CASE c.type WHEN 2 THEN 1 ELSE -1 END)) AS currentTock,
+			a.oper_number operNumber,
+			CONVERT(a.unit_price, decimal(24, 2)) unitPrice,
+			CONVERT(a.all_price, decimal(24, 2)) allPrice,
+			CONVERT(IFNULL(a.tax_unit_price, 0), decimal(24, 2)) taxUnitPrice,
+			CONVERT(IFNULL(a.tax_rate, 0), decimal(24, 2)) taxRate,
+			CONVERT(IFNULL(a.tax_money, 0), decimal(24, 2)) taxMoney,
+			CONVERT(IFNULL(a.tax_last_money, a.all_price), decimal(24, 2)) taxLastMoney,
+			a.remark
+		FROM
+			erp_depotitem a
+			LEFT JOIN erp_depotitem b ON b.depot_id = a.depot_id AND b.m_unit_id = a.m_unit_id AND b.header_id != a.header_id
+			LEFT JOIN erp_depothead c ON c.id = b.header_id
+		WHERE
+			a.header_id = #{id}
+		AND a.delete_flag = '0'
+		GROUP BY a.id
+	</select>
+	
+	<insert id="insertPurchasePutMation" parameterType="java.util.Map">
+        INSERT into erp_depothead
+        (id, `type`, sub_type, default_number, number, oper_person_id, oper_person_name, create_time, oper_time, organ_id, account_id, total_price,
+        	pay_type, remark, status, tenant_id, delete_flag,
+        	discount, discount_money, discount_last_money, other_money, other_money_list, change_amount, link_number)
+        VALUES(#{id}, #{type}, #{subType}, #{defaultNumber}, #{number}, #{operPersonId}, #{operPersonName}, #{createTime}, #{operTime}, #{organId}, #{accountId}, #{totalPrice},
+        		#{payType}, #{remark}, #{status}, #{userId}, #{deleteFlag},
+        		#{discount}, #{discountMoney}, #{discountLastMoney}, #{otherMoney}, #{otherMoneyList}, #{changeAmount}, #{linkNumber})
+    </insert>
+    
+    <insert id="insertPurchasePutChildMation" parameterType="java.util.Map">
+	     INSERT INTO erp_depotitem
+	     (id, header_id, material_id, material_name, material_model, m_unit_id, oper_number, basic_number, unit_price, all_price, remark, depot_id,
+	     	m_type, tenant_id, delete_flag,
+	     	tax_unit_price, tax_rate, tax_money, tax_last_money)
+	     values
+		<foreach collection="list" item="item" index="index" separator="," >  
+			(#{item.id}, #{item.headerId}, #{item.materialId}, #{item.materialName}, #{item.materialModel}, #{item.mUnitId}, #{item.operNumber}, #{item.baseNumber}, #{item.estimatePurchasePrice}, #{item.allPrice}, #{item.remark}, #{item.depotId},
+				#{item.mType}, #{item.userId}, #{item.deleteFlag},
+				#{item.taxUnitPrice}, #{item.taxRate}, #{item.taxMoney}, #{item.taxLastMoney})  
+		</foreach>  
+	</insert>
+	
+	<select id="queryOrderIsStandardById" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			b.oper_number - (
+				SELECT
+					SUM(d.oper_number)
+				FROM
+					erp_depothead c,
+					erp_depotitem d
+				WHERE
+					c.id = d.header_id
+				AND c.link_number = a.default_number
+				AND c.id != #{cgddId}
+				AND c.tenant_id = #{userId}
+				AND d.m_unit_id = #{mUnitId}
+				AND c.delete_flag = '0'
+				GROUP BY
+					c.link_number
+			) nowNum
+		FROM
+			erp_depothead a,
+			erp_depotitem b
+		WHERE
+			a.id = #{cgddId}
+		AND a.id = b.header_id
+		AND a.tenant_id = #{userId}
+		AND b.m_unit_id = #{mUnitId}
+		AND a.delete_flag = '0'
+	</select>
+	
 </mapper>

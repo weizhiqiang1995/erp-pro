@@ -172,18 +172,22 @@ layui.config({
 			}});
     }
     
-    //转采购单
+    //转采购入库
 	function turnPurchase(data){
-//        layer.confirm('确认要转采购入库吗？', { icon: 3, title: '采购入库操作' }, function (index) {
-//            AjaxPostUtil.request({url:reqBasePath + "purchaseorder003", params: {rowId: data.id}, type:'json', callback:function(json){
-//                if(json.returnCode == 0){
-//                    winui.window.msg("转单成功。", {icon: 1,time: 2000});
-//                    loadTable();
-//                }else{
-//                    winui.window.msg(json.returnMessage, {icon: 2,time: 2000});
-//                }
-//            }});
-//        });
+		rowId = data.id;
+		_openNewWindows({
+			url: "../../tpl/purchaseorder/purchaseorderpurchase.html", 
+			title: "转采购入库",
+			pageId: "purchaseorderpurchase",
+			area: ['90vw', '90vh'],
+			callBack: function(refreshCode){
+                if (refreshCode == '0') {
+                	winui.window.msg("操作成功", {icon: 1,time: 2000});
+                	loadTable();
+                } else if (refreshCode == '-9999') {
+                	winui.window.msg("操作失败", {icon: 2,time: 2000});
+                }
+			}});
     }
 	
     //添加
