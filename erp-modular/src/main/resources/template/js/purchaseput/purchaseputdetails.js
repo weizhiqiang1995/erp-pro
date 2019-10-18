@@ -19,6 +19,19 @@ layui.config({
 		 	pagination: false,
 		 	template: beanTemplate,
 		 	ajaxSendAfter:function(json){
+		 		var str = '无';
+		 		var defaultNumber = json.bean.defaultNumber;
+		        if(!isNull(json.bean.linkNumber)){
+		        	str = '<a lay-event="details" class="notice-title-click">' + json.bean.linkNumber + '</a>';
+		        	defaultNumber += '<span class="state-new">[转]</span>';
+			        if(json.bean.status == 2){
+			        	defaultNumber += '<span class="state-up"> [正常]</span>';
+			        }else{
+			        	defaultNumber += '<span class="state-down"> [预警]</span>';
+			        }
+		        }
+		        $("#linkNumber").html(str);
+		        $("#defaultNumber").html(defaultNumber);
 		 		form.render();
 		 	}
 		});
