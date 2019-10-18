@@ -38,7 +38,6 @@
 			a.`name` materialName,
 			a.model materialModel,
 			b.id mUnitId,
-			b.estimate_purchase_price estimatePurchasePrice,
 			IFNULL(c.`name`, a.unit_name) unitName,
 			IFNULL(c.number, '1') baseNumber,
 			#{depotId} depotId

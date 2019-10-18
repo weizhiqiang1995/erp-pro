@@ -73,13 +73,14 @@ public class OtherWareHousServiceImpl implements OtherWareHousService{
 				entity = otherWareHousDao.queryMaterialsById(bean);
 				if(entity != null && !entity.isEmpty()){
 					//获取单价
-					itemAllPrice = new BigDecimal(entity.get("estimatePurchasePrice").toString());
+					itemAllPrice = new BigDecimal(bean.get("estimatePurchasePrice").toString());
 					entity.put("id", ToolUtil.getSurFaceId());
 					entity.put("headerId", useId);//单据主表id
 					entity.put("operNumber", bean.get("rkNum"));//数量
 					//计算子单总价：单价*数量
 					itemAllPrice = itemAllPrice.multiply(new BigDecimal(bean.get("rkNum").toString()));
 					entity.put("allPrice", itemAllPrice);//单据子表总价
+					entity.put("estimatePurchasePrice", bean.get("estimatePurchasePrice"));//单价
 					entity.put("remark", bean.get("remark"));//备注
 					entity.put("depotId", bean.get("depotId"));//仓库
 					entity.put("mType", 0);//商品类型  0.普通  1.组合件  2.普通子件

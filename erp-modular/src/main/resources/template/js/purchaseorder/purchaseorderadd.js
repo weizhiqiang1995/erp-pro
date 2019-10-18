@@ -23,6 +23,7 @@ layui.config({
  		laydate.render({ 
  		  elem: '#operTime',
  		  type: 'datetime',
+ 		  value: getFormatDate(),
  	 	  trigger: 'click'
  		});
 		
