@@ -18,20 +18,8 @@ layui.config({
         table = layui.table;
         
     //初始化统计时间
-	var day = getTodayDay();
-	endTime = getYesterdayYMDFormatDate();//结束日期为今天的前一天
-	if(day === "1" || day == 1){//如果当前为本月一号，则查询上个月的
-		startTime = getTOneYMDFormatDate();//开始日期为上个月一号
-	}else{
-		startTime = getOneYMDFormatDate();//开始日期为本月一号
-	}
-	
-	//获取今天是本月的几号
-	function getTodayDay(){
-		var today = new Date();//获取当前时间(没有格式化)
-		var todayDay = today.getDate();//获取几号
-		return todayDay;
-	}
+	startTime = getOneYMDFormatDate();//开始日期为本月一号
+	endTime = getYMDFormatDate();//结束今天的日期
 	
 	//获取本月一号的日期
 	function getOneYMDFormatDate(){
@@ -40,26 +28,17 @@ layui.config({
 		 var month = date.getMonth() + 1;
 		 month = (month < 10 ? "0" + month : month); 
 		 return year.toString() + "-" + month.toString() + "-" + "01";
-	};
+	}
 	
-	//获取上个月一号的日期
-	function getTOneYMDFormatDate(){
-		 var date = new Date;
-		 var year = date.getFullYear(); 
-		 var month = date.getMonth();
-		 month = (month < 10 ? "0" + month : month); 
-		 return year.toString() + "-" + month.toString() + "-" + "01";
-	};
-	
-	//获取前一天的时间 
-	function getYesterdayYMDFormatDate(){
+	//获取今天的时间 
+	function getYMDFormatDate(){
 		var myDate = new Date();
-	    var lw = new Date(myDate - 1000 * 60 * 60 * 24 * 1);
+	    var lw = new Date(myDate);
 	    var lastY = lw.getFullYear();
 	    var lastM = lw.getMonth() + 1;
 	    var lastD = lw.getDate();
 	    return lastY + "-" + (lastM < 10 ? "0" + lastM : lastM) + "-" + (lastD < 10 ? "0" + lastD : lastD);
-	};
+	}
         
     laydate.render({
 		elem: '#operTime', //指定元素

@@ -214,7 +214,7 @@
 		FROM
 			erp_material_norms a
 			LEFT JOIN erp_unit b ON a.unit_id = b.id
-			LEFT JOIN erp_depotitem c ON a.id = c.m_unit_id
+			LEFT JOIN erp_depotitem c ON a.id = c.m_unit_id AND c.delete_flag = '0'
 			LEFT JOIN erp_depothead d ON c.header_id = d.id
 		WHERE
 			a.meterial_id = #{id}
@@ -414,15 +414,17 @@
 			CONVERT (b.oper_time, CHAR) operTime,
 			c.supplier supplierName
 		FROM
-			erp_depotitem a
-			LEFT JOIN erp_depothead b ON a.header_id = b.id
+			erp_depotitem a,
+			erp_depothead b
 			LEFT JOIN erp_supplier c ON b.organ_id = c.id
 		WHERE
 			a.m_unit_id = #{mUnitId}
 		AND a.tenant_id = #{userId}
 		AND a.delete_flag = '0'
 		AND b.sub_type != '10'
-		ORDER BY b.oper_time DESC
+		AND a.header_id = b.id 
+		AND b.delete_flag = '0'
+		ORDER BY b.oper_time DESC, a.id
     </select>
 
 </mapper>

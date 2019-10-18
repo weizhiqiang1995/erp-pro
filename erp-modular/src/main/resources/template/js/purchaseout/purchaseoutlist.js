@@ -26,7 +26,7 @@ layui.config({
         id: 'messageTable',
         elem: '#messageTable',
         method: 'post',
-        url: reqBasePath + 'purchaseput001',
+        url: reqBasePath + 'purchaseout001',
         where: {defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime},
         even: true,  //隔行变色
         page: true,
@@ -98,9 +98,9 @@ layui.config({
 	function edit(data){
 		rowId = data.id;
 		_openNewWindows({
-			url: "../../tpl/purchaseput/purchaseputedit.html", 
+			url: "../../tpl/purchaseout/purchaseoutedit.html", 
 			title: "编辑",
-			pageId: "purchaseputedit",
+			pageId: "purchaseoutedit",
 			area: ['90vw', '90vh'],
 			callBack: function(refreshCode){
                 if (refreshCode == '0') {
@@ -116,9 +116,9 @@ layui.config({
 	function details(data){
 		rowId = data.id;
 		_openNewWindows({
-			url: "../../tpl/purchaseput/purchaseputdetails.html", 
+			url: "../../tpl/purchaseout/purchaseoutdetails.html", 
 			title: "详情",
-			pageId: "purchaseputdetails",
+			pageId: "purchaseoutdetails",
 			area: ['90vw', '90vh'],
 			callBack: function(refreshCode){
 			}});
@@ -127,9 +127,9 @@ layui.config({
     //添加
     $("body").on("click", "#addBean", function(){
         _openNewWindows({
-            url: "../../tpl/purchaseput/purchaseputadd.html",
+            url: "../../tpl/purchaseout/purchaseoutadd.html",
             title: "新增",
-            pageId: "purchaseputadd",
+            pageId: "purchaseoutadd",
             area: ['90vw', '90vh'],
             callBack: function(refreshCode){
                 if (refreshCode == '0') {
@@ -173,5 +173,5 @@ layui.config({
         table.reload("messageTable", {page: {curr: 1}, where:{defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime}})
     }
 
-    exports('purchaseputlist', {});
+    exports('purchaseoutlist', {});
 });

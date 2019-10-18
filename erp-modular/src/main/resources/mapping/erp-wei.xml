@@ -261,6 +261,46 @@
 		<property id="otherMoneyList" name="otherMoneyList" ref="required" var="采购金额json" />
 		<property id="rowId" name="id" ref="required" var="采购入库id" />
 	</url>
+	
+	
+	<url id="purchaseout001" path="/post/PurchaseOutController/queryPurchaseOutToList" val="获取采购退货列表信息" allUse="2">
+		<property id="defaultNumber" name="defaultNumber" ref="" var="票据单号" />
+		<property id="material" name="material" ref="" var="产品信息：名称或者型号" />
+		<property id="startTime" name="startTime" ref="" var="单据开始时间"/>
+		<property id="endTime" name="endTime" ref="" var="单据结束时间"/>
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="purchaseout002" path="/post/PurchaseOutController/insertPurchaseOutMation" val="新增采购退货信息" allUse="2">
+		<property id="supplierId" name="supplierId" ref="required" var="供应商" />
+		<property id="operTime" name="operTime" ref="required" var="单据日期" />
+		<property id="accountId" name="accountId" ref="" var="账户" />
+		<property id="payType" name="payType" ref="required,num" var="付款类型" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="discount" name="discount" ref="required,double" var="优惠率,默认为0.00" />
+		<property id="discountMoney" name="discountMoney" ref="required,double" var="优惠金额,默认为0.00" />
+		<property id="changeAmount" name="changeAmount" ref="required,double" var="本次付款,默认为0.00" />
+		<property id="otherMoney" name="otherMoney" ref="required,double" var="采购总金额,默认为0.00" />
+		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
+		<property id="otherMoneyList" name="otherMoneyList" ref="required" var="采购金额json" />
+	</url>
+	<url id="purchaseout003" path="/post/PurchaseOutController/queryPurchaseOutMationToEditById" val="编辑采购退货信息时进行回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="采购退货id" />
+	</url>
+	<url id="purchaseout004" path="/post/PurchaseOutController/editPurchaseOutMationById" val="编辑采购退货信息" allUse="2">
+		<property id="supplierId" name="supplierId" ref="required" var="供应商" />
+		<property id="operTime" name="operTime" ref="required" var="单据日期" />
+		<property id="accountId" name="accountId" ref="" var="账户" />
+		<property id="payType" name="payType" ref="required,num" var="付款类型" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="discount" name="discount" ref="required,double" var="优惠率,默认为0.00" />
+		<property id="discountMoney" name="discountMoney" ref="required,double" var="优惠金额,默认为0.00" />
+		<property id="changeAmount" name="changeAmount" ref="required,double" var="本次付款,默认为0.00" />
+		<property id="otherMoney" name="otherMoney" ref="required,double" var="采购总金额,默认为0.00" />
+		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
+		<property id="otherMoneyList" name="otherMoneyList" ref="required" var="采购金额json" />
+		<property id="rowId" name="id" ref="required" var="采购退货id" />
+	</url>
 	<!-- 采购管理结束 -->
 	
 	<!-- 统计开始 -->
