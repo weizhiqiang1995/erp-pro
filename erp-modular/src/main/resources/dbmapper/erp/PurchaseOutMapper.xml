@@ -106,6 +106,7 @@
 		WHERE a.id = #{id}
 		AND a.tenant_id = #{userId}
 		AND a.delete_flag = '0'
+		AND a.sub_type = '6'
     </select>
     
     <select id="queryPurchaseOutItemMationToEditById" parameterType="java.util.Map" resultType="java.util.Map">

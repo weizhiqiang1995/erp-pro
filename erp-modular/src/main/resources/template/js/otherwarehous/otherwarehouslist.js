@@ -54,6 +54,8 @@ layui.config({
             deletemember(data);
         }else if (layEvent === 'details') { //详情
         	details(data);
+        }else if (layEvent === 'edit') { //编辑
+        	edit(data);
         }
     });
 
@@ -66,6 +68,24 @@ layui.config({
         }
         return false;
     });
+    
+    //编辑
+    function edit(data){
+        rowId = data.id;
+        _openNewWindows({
+            url: "../../tpl/otherwarehous/otherwarehousedit.html",
+            title: "编辑",
+            pageId: "otherwarehousedit",
+            area: ['90vw', '90vh'],
+            callBack: function(refreshCode){
+                if (refreshCode == '0') {
+                    winui.window.msg("操作成功", {icon: 1,time: 2000});
+                    loadTable();
+                } else if (refreshCode == '-9999') {
+                    winui.window.msg("操作失败", {icon: 2,time: 2000});
+                }
+            }});
+    }
 
     //删除
     function deletemember(data){
@@ -93,12 +113,6 @@ layui.config({
 			pageId: "otherwarehousdetails",
 			area: ['90vw', '90vh'],
 			callBack: function(refreshCode){
-                if (refreshCode == '0') {
-                	winui.window.msg("操作成功", {icon: 1,time: 2000});
-                	loadTable();
-                } else if (refreshCode == '-9999') {
-                	winui.window.msg("操作失败", {icon: 2,time: 2000});
-                }
 			}});
 	}
 

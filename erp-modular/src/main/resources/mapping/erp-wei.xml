@@ -161,6 +161,18 @@
 		<property id="remark" name="remark" ref="" var="备注" />
 		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
 	</url>
+	<url id="otherwarehous003" path="/post/OtherWareHousController/queryOtherWareHousToEditById" val="其他入库信息编辑回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="采购单id" />
+	</url>
+	<url id="otherwarehous004" path="/post/OtherWareHousController/editOtherWareHousMationById" val="编辑其他入库信息" allUse="2">
+		<property id="supplierId" name="supplierId" ref="required" var="供应商" />
+		<property id="operTime" name="operTime" ref="required" var="单据日期" />
+		<property id="accountId" name="accountId" ref="" var="账户" />
+		<property id="payType" name="payType" ref="required,num" var="付款类型" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
+		<property id="rowId" name="id" ref="required" var="其他入库单id" />
+	</url>
 	<!-- 其他入库结束 -->
 	
 	<!-- 采购管理开始 -->

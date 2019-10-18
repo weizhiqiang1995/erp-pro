@@ -15,4 +15,12 @@ public interface OtherWareHousDao {
 
 	public int insertOtherWareHousChildMation(List<Map<String, Object>> entitys) throws Exception;
 
+	public Map<String, Object> queryOtherWareHousToEditById(Map<String, Object> map) throws Exception;
+
+	public List<Map<String, Object>> queryOtherWareHousNormsToEditById(Map<String, Object> map) throws Exception;
+
+	public int editOtherWareHousMationById(Map<String, Object> depothead) throws Exception;
+
+	public int deleteOtherWareHousNormsMationById(Map<String, Object> map) throws Exception;
+
 }

@@ -43,5 +43,29 @@ public class OtherWareHousController {
     public void insertOtherWareHousMation(InputObject inputObject, OutputObject outputObject) throws Exception{
     	otherWareHousService.insertOtherWareHousMation(inputObject, outputObject);
     }
+    
+    /**
+     * 其他入库信息编辑回显
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/OtherWareHousController/queryOtherWareHousToEditById")
+    @ResponseBody
+    public void queryOtherWareHousToEditById(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	otherWareHousService.queryOtherWareHousToEditById(inputObject, outputObject);
+    }
+    
+    /**
+     * 编辑其他入库信息
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/OtherWareHousController/editOtherWareHousMationById")
+    @ResponseBody
+    public void editOtherWareHousMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	otherWareHousService.editOtherWareHousMationById(inputObject, outputObject);
+    }
 	
 }
