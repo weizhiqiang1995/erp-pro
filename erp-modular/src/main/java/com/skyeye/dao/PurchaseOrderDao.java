@@ -41,4 +41,6 @@ public interface PurchaseOrderDao {
 
 	public Map<String, Object> queryOrderIsStandardById(Map<String, Object> entity) throws Exception;
 
+	public int editPurchaseOrderStateToTurnById(Map<String, Object> map) throws Exception;
+
 }

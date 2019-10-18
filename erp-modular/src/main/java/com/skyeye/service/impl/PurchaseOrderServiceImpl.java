@@ -329,100 +329,114 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService{
 	@Transactional(value="transactionManager")
 	public void insertPurchaseOrderToTurnPut(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		String depotheadStr = map.get("depotheadStr").toString();//采购产品列表
-		String otherMoneyList = map.get("otherMoneyList").toString();//采购项目费用列表
-		if(ToolUtil.isJson(depotheadStr) && ToolUtil.isJson(otherMoneyList)){
-			String useId = ToolUtil.getSurFaceId();//单据主表id
-			String userId = inputObject.getLogParams().get("id").toString();
-			//处理数据
-			JSONArray jArray = JSONArray.fromObject(depotheadStr);
-			//产品中间转换对象，单据子表存储对象，获取该子表产品数量是否已超标
-			Map<String, Object> bean, entity, item;
-			List<Map<String, Object>> entitys = new ArrayList<>();//单据子表实体集合信息
-			BigDecimal allPrice = new BigDecimal("0");//主单总价
-			BigDecimal taxLastMoneyPrice = new BigDecimal("0");//价税合计
-			BigDecimal itemAllPrice = null;//子单对象
-			String status = "2";//采购入库单状态
-			for(int i = 0; i < jArray.size(); i++){
-				bean = jArray.getJSONObject(i);
-				entity = purchaseOrderDao.queryMaterialsById(bean);
-				if(entity != null && !entity.isEmpty()){
-					//判断是否超标
-					entity.put("cgddId", map.get("id"));
-					entity.put("userId", userId);
-					item = purchaseOrderDao.queryOrderIsStandardById(entity);
-					if(item == null || item.isEmpty()){
-						status = "5";//超标
-					}else{
-						if(Integer.parseInt(bean.get("rkNum").toString()) > Integer.parseInt(item.get("nowNum").toString())){
-							status = "5";//超标
+		String userId = inputObject.getLogParams().get("id").toString();
+		map.put("userId", userId);
+		//获取采购单状态
+		Map<String, Object> cgBean = purchaseOrderDao.queryPurchaseOrderStateById(map);
+		if(cgBean != null && !cgBean.isEmpty()){
+			//审核通过/已经入库的可以进行入库
+			if("2".equals(cgBean.get("status").toString()) || "4".equals(cgBean.get("status").toString())){
+				String depotheadStr = map.get("depotheadStr").toString();//采购产品列表
+				String otherMoneyList = map.get("otherMoneyList").toString();//采购项目费用列表
+				if(ToolUtil.isJson(depotheadStr) && ToolUtil.isJson(otherMoneyList)){
+					String useId = ToolUtil.getSurFaceId();//单据主表id
+					//处理数据
+					JSONArray jArray = JSONArray.fromObject(depotheadStr);
+					//产品中间转换对象，单据子表存储对象，获取该子表产品数量是否已超标
+					Map<String, Object> bean, entity, item;
+					List<Map<String, Object>> entitys = new ArrayList<>();//单据子表实体集合信息
+					BigDecimal allPrice = new BigDecimal("0");//主单总价
+					BigDecimal taxLastMoneyPrice = new BigDecimal("0");//价税合计
+					BigDecimal itemAllPrice = null;//子单对象
+					String status = "2";//采购入库单状态
+					for(int i = 0; i < jArray.size(); i++){
+						bean = jArray.getJSONObject(i);
+						entity = purchaseOrderDao.queryMaterialsById(bean);
+						if(entity != null && !entity.isEmpty()){
+							//判断是否超标
+							entity.put("cgddId", map.get("id"));
+							entity.put("userId", userId);
+							item = purchaseOrderDao.queryOrderIsStandardById(entity);
+							if(item == null || item.isEmpty()){
+								status = "5";//超标
+							}else{
+								if(Integer.parseInt(bean.get("rkNum").toString()) > Integer.parseInt(item.get("nowNum").toString())){
+									status = "5";//超标
+								}
+							}
+							//获取单价
+							itemAllPrice = new BigDecimal(bean.get("unitPrice").toString());
+							entity.put("id", ToolUtil.getSurFaceId());
+							entity.put("headerId", useId);//单据主表id
+							entity.put("operNumber", bean.get("rkNum"));//数量
+							//计算子单总价：单价*数量
+							itemAllPrice = itemAllPrice.multiply(new BigDecimal(bean.get("rkNum").toString()));
+							entity.put("allPrice", itemAllPrice);//单据子表总价
+							
+							entity.put("estimatePurchasePrice", bean.get("unitPrice"));//单价
+							entity.put("taxRate", bean.get("taxRate"));//税率
+							entity.put("taxMoney", bean.get("taxMoney"));//税额
+							entity.put("taxUnitPrice", bean.get("taxUnitPrice"));//含税单价
+							entity.put("taxLastMoney", bean.get("taxLastMoney"));//价税合计
+							
+							entity.put("remark", bean.get("remark"));//备注
+							entity.put("depotId", bean.get("depotId"));//仓库
+							entity.put("mType", 0);//商品类型  0.普通  1.组合件  2.普通子件
+							entity.put("deleteFlag", 0);//删除标记，0未删除，1删除
+							entitys.add(entity);
+							//计算主单总价
+							allPrice = allPrice.add(itemAllPrice);
+							//计算价税合计金额
+							taxLastMoneyPrice = taxLastMoneyPrice.add(new BigDecimal(bean.get("taxLastMoney").toString()));
 						}
 					}
-					//获取单价
-					itemAllPrice = new BigDecimal(bean.get("unitPrice").toString());
-					entity.put("id", ToolUtil.getSurFaceId());
-					entity.put("headerId", useId);//单据主表id
-					entity.put("operNumber", bean.get("rkNum"));//数量
-					//计算子单总价：单价*数量
-					itemAllPrice = itemAllPrice.multiply(new BigDecimal(bean.get("rkNum").toString()));
-					entity.put("allPrice", itemAllPrice);//单据子表总价
+					if(entitys.size() == 0){
+						outputObject.setreturnMessage("请选择产品");
+						return;
+					}
+					//单据主表对象
+					Map<String, Object> depothead = new HashMap<>();
+					depothead.put("id", useId);
+					depothead.put("type", 2);//类型(1.出库/2.入库)
+					depothead.put("subType", ErpConstants.DepoTheadSubType.PUT_IS_PURCHASE.getNum());//采购入库
+					ErpOrderNum erpOrderNum = new ErpOrderNum();
+					String orderNum = erpOrderNum.getOrderNumBySubType(userId, ErpConstants.DepoTheadSubType.PUT_IS_PURCHASE.getNum());
+					depothead.put("defaultNumber", orderNum);//初始票据号
+					depothead.put("number", orderNum);//票据号
+					depothead.put("operPersonId", userId);//操作员id
+					depothead.put("operPersonName", inputObject.getLogParams().get("userName"));//操作员名字
+					depothead.put("createTime", ToolUtil.getTimeAndToString());//创建时间
+					depothead.put("operTime", map.get("operTime"));//采购入库时间即单据日期
+					depothead.put("organId", map.get("supplierId"));//供应商Id
+					depothead.put("accountId", map.get("accountId"));//账户Id
+					depothead.put("remark", map.get("remark"));//备注
+					depothead.put("payType", map.get("payType"));//付款类型
 					
-					entity.put("estimatePurchasePrice", bean.get("unitPrice"));//单价
-					entity.put("taxRate", bean.get("taxRate"));//税率
-					entity.put("taxMoney", bean.get("taxMoney"));//税额
-					entity.put("taxUnitPrice", bean.get("taxUnitPrice"));//含税单价
-					entity.put("taxLastMoney", bean.get("taxLastMoney"));//价税合计
+					BigDecimal discountMoney = new BigDecimal(map.get("discountMoney").toString());//优惠金额
+					depothead.put("discount", map.get("discount"));//优惠率
+					depothead.put("linkNumber", map.get("cgddOrderNum"));//采购单编号
+					depothead.put("discountMoney", map.get("discountMoney"));//优惠金额
+					depothead.put("discountLastMoney", taxLastMoneyPrice.subtract(discountMoney));//优惠后金额
+					depothead.put("changeAmount", map.get("changeAmount"));//本次付款金额
+					depothead.put("otherMoney", map.get("otherMoney"));//采购费用合计
+					depothead.put("otherMoneyList", map.get("otherMoneyList"));//采购费用涉及项目Id（包括快递、招待等）json串
 					
-					entity.put("remark", bean.get("remark"));//备注
-					entity.put("depotId", bean.get("depotId"));//仓库
-					entity.put("mType", 0);//商品类型  0.普通  1.组合件  2.普通子件
-					entity.put("deleteFlag", 0);//删除标记，0未删除，1删除
-					entitys.add(entity);
-					//计算主单总价
-					allPrice = allPrice.add(itemAllPrice);
-					//计算价税合计金额
-					taxLastMoneyPrice = taxLastMoneyPrice.add(new BigDecimal(bean.get("taxLastMoney").toString()));
+					depothead.put("totalPrice", allPrice);//合计金额
+					depothead.put("status", status);//状态，采购单/销售单（0未审核、1.审核中、2.审核通过、3.审核拒绝、4.已转采购|销售）  采购单转入库（5.预警）
+					depothead.put("userId", userId);
+					depothead.put("deleteFlag", 0);//删除标记，0未删除，1删除
+					purchaseOrderDao.insertPurchasePutMation(depothead);
+					purchaseOrderDao.insertPurchasePutChildMation(entitys);
+					//修改采购单状态
+					purchaseOrderDao.editPurchaseOrderStateToTurnById(map);
+				}else{
+					outputObject.setreturnMessage("数据格式错误");
 				}
+			}else{
+				outputObject.setreturnMessage("状态错误，无法入库.");
 			}
-			if(entitys.size() == 0){
-				outputObject.setreturnMessage("请选择产品");
-				return;
-			}
-			//单据主表对象
-			Map<String, Object> depothead = new HashMap<>();
-			depothead.put("id", useId);
-			depothead.put("type", 2);//类型(1.出库/2.入库)
-			depothead.put("subType", ErpConstants.DepoTheadSubType.PUT_IS_PURCHASE.getNum());//采购入库
-			ErpOrderNum erpOrderNum = new ErpOrderNum();
-			String orderNum = erpOrderNum.getOrderNumBySubType(userId, ErpConstants.DepoTheadSubType.PUT_IS_PURCHASE.getNum());
-			depothead.put("defaultNumber", orderNum);//初始票据号
-			depothead.put("number", orderNum);//票据号
-			depothead.put("operPersonId", userId);//操作员id
-			depothead.put("operPersonName", inputObject.getLogParams().get("userName"));//操作员名字
-			depothead.put("createTime", ToolUtil.getTimeAndToString());//创建时间
-			depothead.put("operTime", map.get("operTime"));//采购入库时间即单据日期
-			depothead.put("organId", map.get("supplierId"));//供应商Id
-			depothead.put("accountId", map.get("accountId"));//账户Id
-			depothead.put("remark", map.get("remark"));//备注
-			depothead.put("payType", map.get("payType"));//付款类型
-			
-			BigDecimal discountMoney = new BigDecimal(map.get("discountMoney").toString());//优惠金额
-			depothead.put("discount", map.get("discount"));//优惠率
-			depothead.put("linkNumber", map.get("cgddOrderNum"));//采购单编号
-			depothead.put("discountMoney", map.get("discountMoney"));//优惠金额
-			depothead.put("discountLastMoney", taxLastMoneyPrice.subtract(discountMoney));//优惠后金额
-			depothead.put("changeAmount", map.get("changeAmount"));//本次付款金额
-			depothead.put("otherMoney", map.get("otherMoney"));//采购费用合计
-			depothead.put("otherMoneyList", map.get("otherMoneyList"));//采购费用涉及项目Id（包括快递、招待等）json串
-			
-			depothead.put("totalPrice", allPrice);//合计金额
-			depothead.put("status", status);//状态，采购单/销售单（0未审核、1.审核中、2.审核通过、3.审核拒绝、4.已转采购|销售）  采购单转入库（5.预警）
-			depothead.put("userId", userId);
-			depothead.put("deleteFlag", 0);//删除标记，0未删除，1删除
-			purchaseOrderDao.insertPurchasePutMation(depothead);
-			purchaseOrderDao.insertPurchasePutChildMation(entitys);
 		}else{
-			outputObject.setreturnMessage("数据格式错误");
+			outputObject.setreturnMessage("该数据不存在.");
 		}
 	}
 	
