@@ -107,16 +107,16 @@ layui.config({
 							$.each(item.unitList, function(j, bean) {
 								if(item.firstInUnit == bean.unitId){
 									$("#unitId" + thisRowNum).val(bean.id);
-									$("#unitPrice" + thisRowNum).html(bean.estimatePurchasePrice.toFixed(2));//单价
-									$("#amountOfMoney" + thisRowNum).html((rkNum * parseFloat(bean.estimatePurchasePrice)).toFixed(2));//金额
+									$("#unitPrice" + thisRowNum).val(bean.estimatePurchasePrice.toFixed(2));//单价
+									$("#amountOfMoney" + thisRowNum).val((rkNum * parseFloat(bean.estimatePurchasePrice)).toFixed(2));//金额
 									return false;
 								}
 							});
 						}else{//不是多单位
 							var firstItem = item.unitList[0];
 							$("#unitId" + thisRowNum).val(firstItem.id);
-							$("#unitPrice" + thisRowNum).html(firstItem.estimatePurchasePrice.toFixed(2));//单价
-							$("#amountOfMoney" + thisRowNum).html((rkNum * parseFloat(firstItem.estimatePurchasePrice)).toFixed(2));//金额
+							$("#unitPrice" + thisRowNum).val(firstItem.estimatePurchasePrice.toFixed(2));//单价
+							$("#amountOfMoney" + thisRowNum).val((rkNum * parseFloat(firstItem.estimatePurchasePrice)).toFixed(2));//金额
 						}
 						form.render('select');
 						return false;
@@ -145,8 +145,8 @@ layui.config({
 							if(thisRowValue == bean.id){//获取规格
 								//获取当前行数量
 								var rkNum = parseInt($("#rkNum" + thisRowNum).val());
-								$("#unitPrice" + thisRowNum).html(bean.estimatePurchasePrice.toFixed(2));//单价
-								$("#amountOfMoney" + thisRowNum).html((rkNum * parseFloat(bean.estimatePurchasePrice)).toFixed(2));//金额
+								$("#unitPrice" + thisRowNum).val(bean.estimatePurchasePrice.toFixed(2));//单价
+								$("#amountOfMoney" + thisRowNum).val((rkNum * parseFloat(bean.estimatePurchasePrice)).toFixed(2));//金额
 								return false;
 							}
 						});
@@ -154,8 +154,8 @@ layui.config({
 					}
 				});
 			} else {
-				$("#unitPrice" + thisRowNum).html("");//重置单价为空
-				$("#amountOfMoney" + thisRowNum).html("");//重置金额为空
+				$("#unitPrice" + thisRowNum).val("0.00");//重置单价为空
+				$("#amountOfMoney" + thisRowNum).val("0.00");//重置金额为空
 			}
 			//加载库存
 			loadTockByDepotAndMUnit(thisRowNum);
@@ -208,11 +208,22 @@ layui.config({
 			}
 		}
 		
+		var showTdByEdit = 'rkNum';//根据那一列的值进行变化,默认根据数量
 		//数量变化
-		$("body").on("input", ".rkNum", function() {
+		$("body").on("input", ".rkNum, .unitPrice, .amountOfMoney", function() {
+			if($(this).attr("class").replace("layui-input change-input ", "") != showTdByEdit){
+				showTdByEdit = $(this).attr("class").replace("layui-input change-input ", "");
+				$(".change-input").parent().removeAttr("style");
+				$("." + showTdByEdit).parent().css({'background-color': '#e6e6e6'});
+			}
 			calculatedTotalPrice();
 		});
-		$("body").on("change", ".rkNum", function() {
+		$("body").on("change", ".rkNum, .unitPrice, .amountOfMoney", function() {
+			if($(this).attr("class").replace("layui-input change-input ", "") != showTdByEdit){
+				showTdByEdit = $(this).attr("class").replace("layui-input change-input ", "");
+				$(".change-input").parent().removeAttr("style");
+				$("." + showTdByEdit).parent().css({'background-color': '#e6e6e6'});
+			}
 			calculatedTotalPrice();
 		});
 		
@@ -226,10 +237,20 @@ layui.config({
 				//获取数量
 				var rkNum = parseInt(isNull($("#rkNum" + rowNum).val()) ? "0" : $("#rkNum" + rowNum).val());
 				//获取单价
-				var unitPrice = parseFloat(isNull($("#unitPrice" + rowNum).html()) ? "0" : $("#unitPrice" + rowNum).html());
-				//输出金额
-				$("#amountOfMoney" + rowNum).html((rkNum * unitPrice).toFixed(2));
-				allPrice += rkNum * unitPrice;
+				var unitPrice = parseFloat(isNull($("#unitPrice" + rowNum).val()) ? "0" : $("#unitPrice" + rowNum).val());
+				//获取单价
+				var amountOfMoney = parseFloat(isNull($("#amountOfMoney" + rowNum).val()) ? "0" : $("#amountOfMoney" + rowNum).val());
+				if("rkNum" === showTdByEdit){//数量
+					//输出金额
+					$("#amountOfMoney" + rowNum).val((rkNum * unitPrice).toFixed(2));
+				}else if("unitPrice" === showTdByEdit){//单价
+					//输出金额
+					$("#amountOfMoney" + rowNum).val((rkNum * unitPrice).toFixed(2));
+				}else if("amountOfMoney" === showTdByEdit){//金额
+					//输出单价
+					$("#unitPrice" + rowNum).val((amountOfMoney / rkNum).toFixed(2));
+				}
+				allPrice += parseFloat($("#amountOfMoney" + rowNum).val());
 			});
 			$("#allPrice").html(allPrice.toFixed(2));
 		}
@@ -267,6 +288,7 @@ layui.config({
 						materialId: $("#materialId" + rowNum).val(),
 						mUnitId: $("#unitId" + rowNum).val(),
 						rkNum: $("#rkNum" + rowNum).val(),
+						estimatePurchasePrice: $("#unitPrice" + rowNum).val(),
 						remark: $("#remark" + rowNum).val()
 					};
 					tableData.push(row);
@@ -339,6 +361,8 @@ layui.config({
 			form.render('select');
 			form.render('checkbox');
 			rowNum++;
+			//设置根据某列变化的颜色
+			$("." + showTdByEdit).parent().css({'background-color': '#e6e6e6'});
 		}
 
 		//删除行
