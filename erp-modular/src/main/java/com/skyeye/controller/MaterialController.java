@@ -146,5 +146,17 @@ public class MaterialController {
     public void queryMaterialTockByNormsIdAndDepotId(InputObject inputObject, OutputObject outputObject) throws Exception{
     	materialService.queryMaterialTockByNormsIdAndDepotId(inputObject, outputObject);
     }
+    
+    /**
+     * 根据产品规格id获取库存订单
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/MaterialController/queryMaterialDepotItemByNormsId")
+    @ResponseBody
+    public void queryMaterialDepotItemByNormsId(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	materialService.queryMaterialDepotItemByNormsId(inputObject, outputObject);
+    }
 	
 }

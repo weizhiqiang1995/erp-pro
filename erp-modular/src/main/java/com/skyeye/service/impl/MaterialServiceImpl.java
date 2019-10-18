@@ -498,5 +498,23 @@ public class MaterialServiceImpl implements MaterialService{
         Map<String, Object> bean = materialDao.queryMaterialTockByNormsIdAndDepotId(params);
         outputObject.setBean(bean);
 	}
+
+	/**
+     * 根据产品规格id获取库存订单
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+	@Override
+	public void queryMaterialDepotItemByNormsId(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String, Object> params = inputObject.getParams();
+        params.put("userId", inputObject.getLogParams().get("id"));
+        List<Map<String, Object>> beans = materialDao.queryMaterialDepotItemByNormsId(params,
+                new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
+        PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
+        int total = beansPageList.getPaginator().getTotalCount();
+        outputObject.setBeans(beans);
+        outputObject.settotal(total);
+	}
 	
 }

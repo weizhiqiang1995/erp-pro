@@ -27,4 +27,6 @@ public interface MaterialService {
 
 	public void queryMaterialTockByNormsIdAndDepotId(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void queryMaterialDepotItemByNormsId(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }

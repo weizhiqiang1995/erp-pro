@@ -17,7 +17,7 @@
 			<div class="layui-form-item layui-col-xs12">
 		        <label class="layui-form-label">当前存量：</label>
 		        <div class="layui-input-block ver-center">
-		        	<a class="notice-title-click">{{currentTock}}</a>
+		        	<a class="notice-title-click" rowid="{{id}}">{{currentTock}}</a>
 		        </div>
 		    </div>
 			<div class="layui-form-item layui-col-xs6">
@@ -99,7 +99,7 @@
 									<td>{{baseUnit}}</td>
 									<td>{{unitName}}</td>
 									<td>{{safetyTock}}</td>
-									<td><a class="notice-title-click">{{currentTock}}</a></td>
+									<td><a class="notice-title-click" rowid="{{id}}">{{currentTock}}</a></td>
 									<td>{{retailPrice}}</td>
 									<td>{{lowPrice}}</td>
 									<td>{{estimatePurchasePrice}}</td>
