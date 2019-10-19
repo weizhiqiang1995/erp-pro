@@ -15,9 +15,10 @@
 #### 软件架构
 
 - Spring Boot 2.X
-- Layui
-- MySql
+- Layui 
+- MySql 5.5.28
 - JDK 1.8
+- Redis 3.2集群（不要问我单机的能不能行）
 
 #### 声明
 如有定制需求，可入群或将需求发送至邮箱`598748873@qq.com`。
@@ -46,12 +47,8 @@
 [Maven](http://maven.apache.org/)|项目构建管理
 [redis](https://redis.io/)|key-value存储系统
 [webSocket](http://www.runoob.com/html/html5-websocket.html)|浏览器与服务器全双工(full-duplex)通信
-[Activiti](https://www.activiti.org/)|工作流引擎
-[spring mvc](http://spring.io/)|视图框架
 [quartz 2.2.2](http://www.quartz-scheduler.org/)|定时任务
 [ActiveMQ](http://activemq.apache.org/replicated-leveldb-store.html)|消息队列
-[solr](https://lucene.apache.org/solr/)|企业级搜索应用服务器
-[Spring Cloud](https://springcloud.cc/)|微服务框架(目前用户APP端接口)
 
 ##### 前端技术：
 
@@ -61,11 +58,8 @@
 [zTree](http://www.treejs.cn/v3/)|树插件
 [layui](https://www.layui.com/)|模块化前端UI
 [winui](https://gitee.com/doc_wei01_admin/skyeye)|win10风格UI
-[codemirror](https://codemirror.net/)|codemirror代码编辑器
 [handlebars](http://www.ghostchina.com/introducing-the-handlebars-js-templating-engine/)|js模板引擎
 [webSocket](http://www.runoob.com/html/html5-websocket.html)|浏览器与服务器全双工(full-duplex)通信
-[G6](https://antv.alipay.com/zh-cn/index.html)|流程图开发
-[FullCalendar](https://blog.csdn.net/qw_xingzhe/article/details/44920943)|日历插件
 
 #### 代码描述
 ##### 前后台接口映射
