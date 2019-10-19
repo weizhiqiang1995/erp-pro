@@ -25,7 +25,8 @@
 			FORMAT((IFNULL(a.discount_money, 0) + IFNULL(a.discount_last_money, 0)), 2) taxLastMoneyPrice,
 			<!-- 优惠后金额 - 本次付款金额 -->
 			FORMAT((IFNULL(a.discount_last_money, 0) - IFNULL(a.change_amount, 0)), 2) arrears,
-			a.other_money_list otherMoneyList
+			a.other_money_list otherMoneyList,
+			(SELECT group_concat(distinct m.user_name) FROM sys_eve_user_staff m WHERE INSTR(CONCAT(',', a.salesman, ','), CONCAT(',', m.user_id, ','))) salesMan
 		FROM
 			erp_depothead a
 			LEFT JOIN erp_supplier b ON a.organ_id = b.id

@@ -26,7 +26,7 @@ layui.config({
         id: 'messageTable',
         elem: '#messageTable',
         method: 'post',
-        url: reqBasePath + 'purchaseout001',
+        url: reqBasePath + 'salesoutlet001',
         where: {defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime},
         even: true,  //隔行变色
         page: true,
@@ -51,7 +51,7 @@ layui.config({
             { field: 'totalPrice', title: '合计金额', align: 'left', width: 120},
             { field: 'taxMoney', title: '含税合计', align: 'left', width: 120 },
             { field: 'discountLastMoney', title: '优惠后金额', align: 'left', width: 120 },
-            { field: 'changeAmount', title: '退款', align: 'left', width: 120 },
+            { field: 'changeAmount', title: '收款', align: 'left', width: 120 },
             { field: 'operPersonName', title: '操作人', align: 'left', width: 100},
             { field: 'operTime', title: '单据日期', align: 'center', width: 140 },
             { title: '操作', fixed: 'right', align: 'center', width: 200, toolbar: '#tableBar'}
@@ -98,9 +98,9 @@ layui.config({
 	function edit(data){
 		rowId = data.id;
 		_openNewWindows({
-			url: "../../tpl/purchaseout/purchaseoutedit.html", 
+			url: "../../tpl/salesoutlet/salesoutletedit.html", 
 			title: "编辑",
-			pageId: "purchaseoutedit",
+			pageId: "salesoutletedit",
 			area: ['90vw', '90vh'],
 			callBack: function(refreshCode){
                 if (refreshCode == '0') {
@@ -116,9 +116,9 @@ layui.config({
 	function details(data){
 		rowId = data.id;
 		_openNewWindows({
-			url: "../../tpl/purchaseout/purchaseoutdetails.html", 
+			url: "../../tpl/salesoutlet/salesoutletdetails.html", 
 			title: "详情",
-			pageId: "purchaseoutdetails",
+			pageId: "salesoutletdetails",
 			area: ['90vw', '90vh'],
 			callBack: function(refreshCode){
 			}});
@@ -127,9 +127,9 @@ layui.config({
     //添加
     $("body").on("click", "#addBean", function(){
         _openNewWindows({
-            url: "../../tpl/purchaseout/purchaseoutadd.html",
+            url: "../../tpl/salesoutlet/salesoutletadd.html",
             title: "新增",
-            pageId: "purchaseoutadd",
+            pageId: "salesoutletadd",
             area: ['90vw', '90vh'],
             callBack: function(refreshCode){
                 if (refreshCode == '0') {
@@ -173,5 +173,5 @@ layui.config({
         table.reload("messageTable", {page: {curr: 1}, where:{defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime}})
     }
 
-    exports('purchaseoutlist', {});
+    exports('salesoutletlist', {});
 });

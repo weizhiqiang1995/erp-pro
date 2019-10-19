@@ -12,4 +12,18 @@ public interface CommonDao {
 
 	public int insertCodeModelHistory(List<Map<String, Object>> inBeans) throws Exception;
 
+	public List<Map<String, Object>> queryAllPeopleToTree(Map<String, Object> map) throws Exception;
+
+	public Map<String, Object> queryCompanyMationByUserId(Map<String, Object> user) throws Exception;
+
+	public List<Map<String, Object>> queryCompanyPeopleToTreeByUserBelongCompany(Map<String, Object> map) throws Exception;
+
+	public List<Map<String, Object>> queryDepartmentPeopleToTreeByUserBelongDepartment(Map<String, Object> map) throws Exception;
+
+	public List<Map<String, Object>> queryJobPeopleToTreeByUserBelongJob(Map<String, Object> map) throws Exception;
+
+	public List<Map<String, Object>> querySimpleDepPeopleToTreeByUserBelongSimpleDep(Map<String, Object> map) throws Exception;
+
+	public List<Map<String, Object>> queryTalkGroupUserListByUserId(Map<String, Object> map) throws Exception;
+
 }
