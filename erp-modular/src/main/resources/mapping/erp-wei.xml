@@ -175,6 +175,37 @@
 	</url>
 	<!-- 其他入库结束 -->
 	
+	<!-- 其他出库开始 -->
+	<url id="otheroutlets001" path="/post/OtherOutLetsController/queryOtherOutLetsToList" val="获取其他出库列表信息" allUse="2">
+		<property id="defaultNumber" name="defaultNumber" ref="" var="票据单号" />
+		<property id="material" name="material" ref="" var="产品信息：名称或者型号" />
+		<property id="startTime" name="startTime" ref="" var="单据开始时间"/>
+		<property id="endTime" name="endTime" ref="" var="单据结束时间"/>
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="otheroutlets002" path="/post/OtherOutLetsController/insertOtherOutLetsMation" val="新增其他出库信息" allUse="2">
+		<property id="supplierId" name="supplierId" ref="required" var="客户" />
+		<property id="operTime" name="operTime" ref="required" var="单据日期" />
+		<property id="accountId" name="accountId" ref="" var="账户" />
+		<property id="payType" name="payType" ref="required,num" var="付款类型" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
+	</url>
+	<url id="otheroutlets003" path="/post/OtherOutLetsController/queryOtherOutLetsToEditById" val="其他出库信息编辑回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="采购单id" />
+	</url>
+	<url id="otheroutlets004" path="/post/OtherOutLetsController/editOtherOutLetsMationById" val="编辑其他出库信息" allUse="2">
+		<property id="supplierId" name="supplierId" ref="required" var="客户" />
+		<property id="operTime" name="operTime" ref="required" var="单据日期" />
+		<property id="accountId" name="accountId" ref="" var="账户" />
+		<property id="payType" name="payType" ref="required,num" var="付款类型" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
+		<property id="rowId" name="id" ref="required" var="其他出库单id" />
+	</url>
+	<!-- 其他出库结束 -->
+	
 	<!-- 采购管理开始 -->
 	<url id="purchaseorder001" path="/post/PurchaseOrderController/queryPurchaseOrderToList" val="获取采购单列表信息" allUse="2">
 		<property id="defaultNumber" name="defaultNumber" ref="" var="票据单号" />
