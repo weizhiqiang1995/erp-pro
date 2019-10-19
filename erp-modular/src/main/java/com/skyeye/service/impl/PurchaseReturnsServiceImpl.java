@@ -15,18 +15,18 @@ import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.ToolUtil;
-import com.skyeye.dao.PurchaseOutDao;
+import com.skyeye.dao.PurchaseReturnsDao;
 import com.skyeye.erp.util.ErpConstants;
 import com.skyeye.erp.util.ErpOrderNum;
-import com.skyeye.service.PurchaseOutService;
+import com.skyeye.service.PurchaseReturnsService;
 
 import net.sf.json.JSONArray;
 
 @Service
-public class PurchaseOutServiceImpl implements PurchaseOutService{
+public class PurchaseReturnsServiceImpl implements PurchaseReturnsService{
 	
 	@Autowired
-	private PurchaseOutDao purchaseOutDao;
+	private PurchaseReturnsDao purchaseReturnsDao;
 
 	/**
      * 获取采购退货列表信息
@@ -35,10 +35,10 @@ public class PurchaseOutServiceImpl implements PurchaseOutService{
      * @throws Exception
      */
 	@Override
-	public void queryPurchaseOutToList(InputObject inputObject, OutputObject outputObject) throws Exception {
+	public void queryPurchaseReturnsToList(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        List<Map<String, Object>> beans = purchaseOutDao.queryPurchaseOutToList(params,
+        List<Map<String, Object>> beans = purchaseReturnsDao.queryPurchaseReturnsToList(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
         int total = beansPageList.getPaginator().getTotalCount();
@@ -55,7 +55,7 @@ public class PurchaseOutServiceImpl implements PurchaseOutService{
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(value="transactionManager")
-	public void insertPurchaseOutMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+	public void insertPurchaseReturnsMation(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		String depotheadStr = map.get("depotheadStr").toString();//采购产品列表
 		String otherMoneyList = map.get("otherMoneyList").toString();//采购项目费用列表
@@ -72,7 +72,7 @@ public class PurchaseOutServiceImpl implements PurchaseOutService{
 			BigDecimal itemAllPrice = null;//子单对象
 			for(int i = 0; i < jArray.size(); i++){
 				bean = jArray.getJSONObject(i);
-				entity = purchaseOutDao.queryMaterialsById(bean);
+				entity = purchaseReturnsDao.queryMaterialsById(bean);
 				if(entity != null && !entity.isEmpty()){
 					//获取单价
 					itemAllPrice = new BigDecimal(bean.get("unitPrice").toString());
@@ -135,8 +135,8 @@ public class PurchaseOutServiceImpl implements PurchaseOutService{
 			depothead.put("status", "2");//状态，0未审核、1.审核中、2.审核通过、3.审核拒绝、4.已转采购|销售
 			depothead.put("userId", userId);
 			depothead.put("deleteFlag", 0);//删除标记，0未删除，1删除
-			purchaseOutDao.insertPurchaseOutMation(depothead);
-			purchaseOutDao.insertPurchaseOutChildMation(entitys);
+			purchaseReturnsDao.insertPurchaseReturnsMation(depothead);
+			purchaseReturnsDao.insertPurchaseReturnsChildMation(entitys);
 		}else{
 			outputObject.setreturnMessage("数据格式错误");
 		}
@@ -149,14 +149,14 @@ public class PurchaseOutServiceImpl implements PurchaseOutService{
      * @throws Exception
      */
 	@Override
-	public void queryPurchaseOutMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+	public void queryPurchaseReturnsMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		map.put("userId", inputObject.getLogParams().get("id"));
 		//获取主表信息
-		Map<String, Object> bean = purchaseOutDao.queryPurchaseOutMationToEditById(map);
+		Map<String, Object> bean = purchaseReturnsDao.queryPurchaseReturnsMationToEditById(map);
 		if(bean != null && !bean.isEmpty()){
 			//获取子表信息
-			List<Map<String, Object>> norms = purchaseOutDao.queryPurchaseOutItemMationToEditById(bean);
+			List<Map<String, Object>> norms = purchaseReturnsDao.queryPurchaseReturnsItemMationToEditById(bean);
 			bean.put("items", norms);
 			//获取采购项目列表
 			if(bean.containsKey("otherMoneyList") && !ToolUtil.isBlank(bean.get("otherMoneyList").toString()) && ToolUtil.isJson(bean.get("otherMoneyList").toString())){
@@ -180,7 +180,7 @@ public class PurchaseOutServiceImpl implements PurchaseOutService{
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(value="transactionManager")
-	public void editPurchaseOutMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+	public void editPurchaseReturnsMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		String depotheadStr = map.get("depotheadStr").toString();//采购产品列表
 		String otherMoneyList = map.get("otherMoneyList").toString();//采购项目费用列表
@@ -197,7 +197,7 @@ public class PurchaseOutServiceImpl implements PurchaseOutService{
 			BigDecimal itemAllPrice = null;//子单对象
 			for(int i = 0; i < jArray.size(); i++){
 				bean = jArray.getJSONObject(i);
-				entity = purchaseOutDao.queryMaterialsById(bean);
+				entity = purchaseReturnsDao.queryMaterialsById(bean);
 				if(entity != null && !entity.isEmpty()){
 					//获取单价
 					itemAllPrice = new BigDecimal(bean.get("unitPrice").toString());
@@ -250,10 +250,10 @@ public class PurchaseOutServiceImpl implements PurchaseOutService{
 			depothead.put("totalPrice", allPrice);//合计金额
 			depothead.put("userId", userId);
 			//删除之前绑定的产品
-			purchaseOutDao.deletePurchaseOutChildMation(map);
+			purchaseReturnsDao.deletePurchaseReturnsChildMation(map);
 			//重新添加
-			purchaseOutDao.editPurchaseOutMationById(depothead);
-			purchaseOutDao.insertPurchaseOutChildMation(entitys);
+			purchaseReturnsDao.editPurchaseReturnsMationById(depothead);
+			purchaseReturnsDao.insertPurchaseReturnsChildMation(entitys);
 		}else{
 			outputObject.setreturnMessage("数据格式错误");
 		}

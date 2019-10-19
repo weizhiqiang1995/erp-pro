@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.skyeye.dao.PurchaseOutDao">
+<mapper namespace="com.skyeye.dao.PurchaseReturnsDao">
 
-    <select id="queryPurchaseOutToList" parameterType="java.util.Map" resultType="java.util.Map">
+    <select id="queryPurchaseReturnsToList" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
 			a.id,
 			a.default_number defaultNumber,
@@ -58,7 +58,7 @@
 		AND b.delete_flag = '0'
     </select>
     
-    <insert id="insertPurchaseOutMation" parameterType="java.util.Map">
+    <insert id="insertPurchaseReturnsMation" parameterType="java.util.Map">
         INSERT into erp_depothead
         (id, `type`, sub_type, default_number, number, oper_person_id, oper_person_name, create_time, oper_time, organ_id, account_id, total_price,
         	pay_type, remark, status, tenant_id, delete_flag,
@@ -68,7 +68,7 @@
         		#{discount}, #{discountMoney}, #{discountLastMoney}, #{otherMoney}, #{otherMoneyList}, #{changeAmount})
     </insert>
     
-    <insert id="insertPurchaseOutChildMation" parameterType="java.util.Map">
+    <insert id="insertPurchaseReturnsChildMation" parameterType="java.util.Map">
 	     INSERT INTO erp_depotitem
 	     (id, header_id, material_id, material_name, material_model, m_unit_id, oper_number, basic_number, unit_price, all_price, remark, depot_id,
 	     	m_type, tenant_id, delete_flag,
@@ -81,7 +81,7 @@
 		</foreach>  
 	</insert>
 	
-	<select id="queryPurchaseOutMationToEditById" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryPurchaseReturnsMationToEditById" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
 			a.id,
 			a.default_number defaultNumber,
@@ -109,7 +109,7 @@
 		AND a.sub_type = '6'
     </select>
     
-    <select id="queryPurchaseOutItemMationToEditById" parameterType="java.util.Map" resultType="java.util.Map">
+    <select id="queryPurchaseReturnsItemMationToEditById" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
 			a.id,
 			a.material_id materialId,
@@ -139,7 +139,7 @@
 		GROUP BY a.id
     </select>
     
-    <delete id="deletePurchaseOutChildMation" parameterType="java.util.Map">
+    <delete id="deletePurchaseReturnsChildMation" parameterType="java.util.Map">
 		DELETE
 		FROM
 			erp_depotitem
@@ -147,7 +147,7 @@
 			header_id = #{id}
 	</delete>
 	
-	<update id="editPurchaseOutMationById" parameterType="java.util.Map">
+	<update id="editPurchaseReturnsMationById" parameterType="java.util.Map">
 		UPDATE erp_depothead
 		<set>
 			<if test="operTime != '' and operTime != null">

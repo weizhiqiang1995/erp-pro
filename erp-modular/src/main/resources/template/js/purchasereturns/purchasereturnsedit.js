@@ -24,7 +24,6 @@ layui.config({
  		laydate.render({ 
  		  elem: '#operTime',
  		  type: 'datetime',
- 		  value: getFormatDate(),
  	 	  trigger: 'click'
  		});
 		
@@ -92,12 +91,76 @@ layui.config({
 					material = json.rows;
 					//加载产品数据
 					materialHtml = getDataUseHandlebars(selOption, json);
-					//渲染
-					form.render();
-					//初始化一行数据
-					addRow();
+					//初始化回显数据
+					initDataShow();
 				} else {
 					winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
+				}
+			}});
+		}
+		
+		//初始化回显数据
+		function initDataShow(){
+			AjaxPostUtil.request({url: reqBasePath + "purchasereturns003", params: {rowId: parent.rowId}, type: 'json', callback: function(json) {
+				if(json.returnCode == 0) {
+					if(isNull(json.bean)){
+						$("#showForm").html("");
+						winui.window.msg('数据不存在~', {icon: 2, time: 2000});
+						return;
+					}
+					$("#supplierId").val(json.bean.organId);
+					$("#operTime").val(json.bean.operTime);
+					$("#accountId").val(json.bean.accountId);
+					$("#payType").val(json.bean.payType);
+					$("#allPrice").html(json.bean.totalPrice.toFixed(2));
+					$("#taxLastMoneyPrice").html(json.bean.taxLastMoneyPrice.toFixed(2));
+					$("#remark").val(json.bean.remark);
+					$("#discount").val(json.bean.discount.toFixed(2));
+					$("#discountMoney").val(json.bean.discountMoney.toFixed(2));
+					$("#discountLastMoney").html(json.bean.discountLastMoney.toFixed(2));
+					$("#changeAmount").val(json.bean.changeAmount.toFixed(2));
+					$("#arrears").html(json.bean.arrears.toFixed(2));
+					$("#otherPriceTotal").html("费用合计：" + json.bean.otherMoney.toFixed(2));
+					
+					//加载列表项
+					$.each(json.bean.items, function(i, item){
+						addRow();
+						$("#depotId" + (rowNum - 1)).val(item.depotId);
+						$("#materialId" + (rowNum - 1)).val(item.materialId);
+						
+						$.each(material, function(j, bean) {
+							if(item.materialId == bean.id){
+								$("#unitId" + (rowNum - 1)).html(getDataUseHandlebars(selOption, {rows: bean.unitList}));
+								$("#unitId" + (rowNum - 1)).val(item.mUnitId);//单位回显
+								return false;
+							}
+						});
+						$("#currentTock" + (rowNum - 1)).html(item.currentTock);
+						
+						$("#rkNum" + (rowNum - 1)).val(item.operNumber);
+						$("#unitPrice" + (rowNum - 1)).val(item.unitPrice.toFixed(2));
+						$("#amountOfMoney" + (rowNum - 1)).val(item.allPrice.toFixed(2));
+						$("#taxRate" + (rowNum - 1)).val(item.taxRate.toFixed(2));
+						$("#taxMoney" + (rowNum - 1)).val(item.taxMoney.toFixed(2));
+						$("#taxUnitPrice" + (rowNum - 1)).val(item.taxUnitPrice.toFixed(2));
+						$("#taxLastMoney" + (rowNum - 1)).val(item.taxLastMoney.toFixed(2));
+						$("#remark" + (rowNum - 1)).val(item.remark);
+					});
+					
+					//加载采购费用
+					$.each(json.bean.otherMoneyList, function(i, item){
+						addPriceRow();
+						$("#inoutitemId" + (priceNum - 1)).val(item.inoutitemId);
+						$("#otherPrice" + (priceNum - 1)).val(parseFloat(item.otherPrice).toFixed(2));
+					});					
+					
+					//渲染
+					form.render();
+				} else {
+					winui.window.msg(json.returnMessage, {icon: 2, time: 2000}, function(){
+						parent.layer.close(index);
+						parent.refreshCode = '-9999';
+					});
 				}
 			}});
 		}
@@ -442,7 +505,7 @@ layui.config({
 			$("#arrears").html((discountLastMoney - changeAmount).toFixed(2));
 		});
 		
-		form.on('submit(formAddBean)', function(data) {
+		form.on('submit(formEditBean)', function(data) {
 			//表单验证
 			if(winui.verifyForm(data.elem)) {
 				//获取已选用品数据
@@ -520,9 +583,10 @@ layui.config({
 					changeAmount: isNull($("#changeAmount").val()) ? "0.00" : $("#changeAmount").val(),
 					depotheadStr: JSON.stringify(tableData),
 					otherMoney: otherMoney.toFixed(2),
-					otherMoneyList: JSON.stringify(tablePriceData)
+					otherMoneyList: JSON.stringify(tablePriceData),
+					rowId: parent.rowId
 				};
-				AjaxPostUtil.request({url: reqBasePath + "purchaseout002", params: params, type: 'json', callback: function(json) {
+				AjaxPostUtil.request({url: reqBasePath + "purchasereturns004", params: params, type: 'json', callback: function(json) {
 					if(json.returnCode == 0) {
 						parent.layer.close(index);
 						parent.refreshCode = '0';
