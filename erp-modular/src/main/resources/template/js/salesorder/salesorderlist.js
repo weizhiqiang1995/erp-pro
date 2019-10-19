@@ -26,7 +26,7 @@ layui.config({
         id: 'messageTable',
         elem: '#messageTable',
         method: 'post',
-        url: reqBasePath + 'purchaseorder001',
+        url: reqBasePath + 'salesorder001',
         where: {defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime},
         even: true,  //隔行变色
         page: true,
@@ -37,7 +37,7 @@ layui.config({
             { field: 'defaultNumber', title: '单据编号', align: 'left', width: 200, templet: function(d){
 		        return '<a lay-event="details" class="notice-title-click">' + d.defaultNumber + '</a>';
 		    }},
-            { field: 'supplierName', title: '供应商', align: 'left', width: 150},
+            { field: 'supplierName', title: '客户', align: 'left', width: 150},
             { field: 'materialNames', title: '关联产品', align: 'left', width: 300},
             { field: 'status', title: '状态', align: 'left', width: 80, templet: function(d){
 		        if(d.status == '0'){
@@ -74,8 +74,8 @@ layui.config({
         	subExamine(data);
         }else if (layEvent === 'examine') { //审核
         	examine(data);
-        }else if (layEvent === 'turnPurchase') { //转采购入库单
-        	turnPurchase(data);
+        }else if (layEvent === 'turnSales') { //转销售出库单
+        	turnSales(data);
         }
     });
 
@@ -93,9 +93,9 @@ layui.config({
     function edit(data){
         rowId = data.id;
         _openNewWindows({
-            url: "../../tpl/purchaseorder/purchaseorderedit.html",
+            url: "../../tpl/salesorder/salesorderedit.html",
             title: "编辑",
-            pageId: "purchaseorderedit",
+            pageId: "salesorderedit",
             area: ['90vw', '90vh'],
             callBack: function(refreshCode){
                 if (refreshCode == '0') {
@@ -110,7 +110,7 @@ layui.config({
     //删除
     function deletemember(data){
         layer.confirm('确认要删除信息吗？', { icon: 3, title: '删除操作' }, function (index) {
-            AjaxPostUtil.request({url:reqBasePath + "purchaseorder003", params: {rowId: data.id}, type:'json', callback:function(json){
+            AjaxPostUtil.request({url:reqBasePath + "salesorder003", params: {rowId: data.id}, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("删除成功。", {icon: 1,time: 2000});
                     loadTable();
@@ -125,9 +125,9 @@ layui.config({
 	function details(data){
 		rowId = data.id;
 		_openNewWindows({
-			url: "../../tpl/purchaseorder/purchaseorderdetails.html", 
+			url: "../../tpl/salesorder/salesorderdetails.html", 
 			title: "详情",
-			pageId: "purchaseorderdetails",
+			pageId: "salesorderdetails",
 			area: ['90vw', '90vh'],
 			callBack: function(refreshCode){
 			}});
@@ -136,7 +136,7 @@ layui.config({
 	//提交审批
 	function subExamine(data){
         layer.confirm('确认要提交审核吗？', { icon: 3, title: '提交审核操作' }, function (index) {
-            AjaxPostUtil.request({url:reqBasePath + "purchaseorder006", params: {rowId: data.id}, type:'json', callback:function(json){
+            AjaxPostUtil.request({url:reqBasePath + "salesorder006", params: {rowId: data.id}, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("提交成功。", {icon: 1,time: 2000});
                     loadTable();
@@ -151,9 +151,9 @@ layui.config({
 	function examine(data){
 		rowId = data.id;
 		_openNewWindows({
-			url: "../../tpl/purchaseorder/purchaseorderexamine.html", 
+			url: "../../tpl/salesorder/salesorderexamine.html", 
 			title: "审核",
-			pageId: "purchaseorderdetails",
+			pageId: "salesorderdetails",
 			area: ['90vw', '90vh'],
 			callBack: function(refreshCode){
                 if (refreshCode == '0') {
@@ -165,13 +165,13 @@ layui.config({
 			}});
     }
     
-    //转采购入库
-	function turnPurchase(data){
+    //转销售出库
+	function turnSales(data){
 		rowId = data.id;
 		_openNewWindows({
-			url: "../../tpl/purchaseorder/purchaseorderpurchase.html", 
-			title: "转采购入库",
-			pageId: "purchaseorderpurchase",
+			url: "../../tpl/salesorder/salesorderpurchase.html", 
+			title: "转销售出库",
+			pageId: "salesorderpurchase",
 			area: ['90vw', '90vh'],
 			callBack: function(refreshCode){
                 if (refreshCode == '0') {
@@ -186,9 +186,9 @@ layui.config({
     //添加
     $("body").on("click", "#addBean", function(){
         _openNewWindows({
-            url: "../../tpl/purchaseorder/purchaseorderadd.html",
+            url: "../../tpl/salesorder/salesorderadd.html",
             title: "新增",
-            pageId: "purchaseorderadd",
+            pageId: "salesorderadd",
             area: ['90vw', '90vh'],
             callBack: function(refreshCode){
                 if (refreshCode == '0') {
@@ -232,5 +232,5 @@ layui.config({
         table.reload("messageTable", {page: {curr: 1}, where:{defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime}})
     }
 
-    exports('purchaseorderlist', {});
+    exports('salesorderlist', {});
 });

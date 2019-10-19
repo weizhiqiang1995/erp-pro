@@ -162,7 +162,7 @@
 		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
 	</url>
 	<url id="otherwarehous003" path="/post/OtherWareHousController/queryOtherWareHousToEditById" val="其他入库信息编辑回显" allUse="2">
-		<property id="rowId" name="id" ref="required" var="采购单id" />
+		<property id="rowId" name="id" ref="required" var="其他入库单id" />
 	</url>
 	<url id="otherwarehous004" path="/post/OtherWareHousController/editOtherWareHousMationById" val="编辑其他入库信息" allUse="2">
 		<property id="supplierId" name="supplierId" ref="required" var="供应商" />
@@ -193,7 +193,7 @@
 		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
 	</url>
 	<url id="otheroutlets003" path="/post/OtherOutLetsController/queryOtherOutLetsToEditById" val="其他出库信息编辑回显" allUse="2">
-		<property id="rowId" name="id" ref="required" var="采购单id" />
+		<property id="rowId" name="id" ref="required" var="其他出库单id" />
 	</url>
 	<url id="otheroutlets004" path="/post/OtherOutLetsController/editOtherOutLetsMationById" val="编辑其他出库信息" allUse="2">
 		<property id="supplierId" name="supplierId" ref="required" var="客户" />
@@ -347,6 +347,64 @@
 	<!-- 采购管理结束 -->
 	
 	<!-- 销售管理开始 -->
+	<url id="salesorder001" path="/post/SalesOrderController/querySalesOrderToList" val="获取销售单列表信息" allUse="2">
+		<property id="defaultNumber" name="defaultNumber" ref="" var="票据单号" />
+		<property id="material" name="material" ref="" var="产品信息：名称或者型号" />
+		<property id="startTime" name="startTime" ref="" var="单据开始时间"/>
+		<property id="endTime" name="endTime" ref="" var="单据结束时间"/>
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="salesorder002" path="/post/SalesOrderController/insertSalesOrderMation" val="新增销售单信息" allUse="2">
+		<property id="supplierId" name="supplierId" ref="required" var="客户" />
+		<property id="operTime" name="operTime" ref="required" var="单据日期" />
+		<property id="accountId" name="accountId" ref="" var="账户" />
+		<property id="payType" name="payType" ref="required,num" var="付款类型" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
+	</url>
+	<url id="salesorder003" path="/post/SalesOrderController/deleteSalesOrderMationById" val="删除销售单信息" allUse="2">
+		<property id="rowId" name="id" ref="required" var="销售单id" />
+	</url>
+	<url id="salesorder004" path="/post/SalesOrderController/querySalesOrderToEditById" val="销售单信息编辑回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="销售单id" />
+	</url>
+	<url id="salesorder005" path="/post/SalesOrderController/editSalesOrderMationById" val="编辑销售单信息" allUse="2">
+		<property id="supplierId" name="supplierId" ref="required" var="客户" />
+		<property id="operTime" name="operTime" ref="required" var="单据日期" />
+		<property id="accountId" name="accountId" ref="" var="账户" />
+		<property id="payType" name="payType" ref="required,num" var="付款类型" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
+		<property id="rowId" name="id" ref="required" var="销售单id" />
+	</url>
+	<url id="salesorder006" path="/post/SalesOrderController/editSalesOrderStateToSubExamineById" val="销售单信息提交审核" allUse="2">
+		<property id="rowId" name="id" ref="required" var="销售单id" />
+	</url>
+	<url id="salesorder007" path="/post/SalesOrderController/editSalesOrderStateToExamineById" val="销售单信息审核" allUse="2">
+		<property id="rowId" name="id" ref="required" var="销售单id" />
+		<property id="status" name="status" ref="required,num" var="审核结果" />
+		<property id="content" name="content" ref="" var="审核意见" />
+	</url>
+	<url id="salesorder008" path="/post/SalesOrderController/querySalesOrderToTurnPutById" val="销售单信息转销售出库回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="销售单id" />
+	</url>
+	<url id="salesorder009" path="/post/SalesOrderController/insertSalesOrderToTurnPut" val="销售单信息转销售出库" allUse="2">
+		<property id="supplierId" name="supplierId" ref="required" var="客户" />
+		<property id="operTime" name="operTime" ref="required" var="单据日期" />
+		<property id="accountId" name="accountId" ref="" var="账户" />
+		<property id="payType" name="payType" ref="required,num" var="付款类型" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="discount" name="discount" ref="required,double" var="优惠率,默认为0.00" />
+		<property id="discountMoney" name="discountMoney" ref="required,double" var="优惠金额,默认为0.00" />
+		<property id="changeAmount" name="changeAmount" ref="required,double" var="本次付款,默认为0.00" />
+		<property id="otherMoney" name="otherMoney" ref="required,double" var="销售总金额,默认为0.00" />
+		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
+		<property id="otherMoneyList" name="otherMoneyList" ref="required" var="销售金额json" />
+		<property id="xsddOrderNum" name="xsddOrderNum" ref="required" var="销售单编号" />
+		<property id="rowId" name="id" ref="required" var="销售单id" />
+		<property id="salesMan" name="salesMan" ref="" var="销售人员" />
+	</url>
 	
 	
 	<url id="salesoutlet001" path="/post/SalesOutLetController/querySalesOutLetToList" val="获取销售出库列表信息" allUse="2">

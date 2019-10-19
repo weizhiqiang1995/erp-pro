@@ -1,5 +1,10 @@
 var material = new Array(); //产品集合
 
+var userReturnList = new Array();//选择用户返回的集合或者进行回显的集合
+var chooseOrNotMy = "1";//人员列表中是否包含自己--1.包含；其他参数不包含
+var chooseOrNotEmail = "2";//人员列表中是否必须绑定邮箱--1.必须；其他参数没必要
+var checkType = "1";//人员选择类型，1.多选；其他。单选
+
 layui.config({
 	base: basePath,
 	version: skyeyeVersion
@@ -7,7 +12,7 @@ layui.config({
 	window: 'js/winui.window'
 }).define(['window', 'jquery', 'winui', 'laydate'], function(exports) {
 	winui.renderColor();
-	layui.use(['form'], function(form) {
+	layui.use(['form', 'tagEditor'], function(form) {
 		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 		var $ = layui.$,
 			laydate = layui.laydate;
@@ -15,8 +20,9 @@ layui.config({
 		var rowNum = 1; //表格的序号
 		var depotHtml = "", materialHtml = "", inoutitemHtml = "";//仓库,产品,支出项目
 		var tockObject = new Array();//根据仓库和规格id查询出来的对应库存信息
+		var salesManList = new Array();//销售人员
 		
-		var cgddOrderNum = "";//采购订单编号
+		var xsddOrderNum = "";//销售订单编号
 
 		var usetableTemplate = $("#usetableTemplate").html(),
 			otherTemplate = $("#otherTemplate").html();
@@ -51,7 +57,7 @@ layui.config({
 				if(json.returnCode == 0) {
 					//加载支出项目
 					inoutitemHtml = getDataUseHandlebars(selOption, json); 
-					//初始化供应商
+					//初始化客户
 					initSupplierHtml();
 				} else {
 					winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
@@ -59,11 +65,11 @@ layui.config({
 			}});
 		}
  		
-		//初始化供应商
+		//初始化客户
 		function initSupplierHtml() {
-			AjaxPostUtil.request({url: reqBasePath + "supplier009", params: {}, type: 'json', callback: function(json) {
+			AjaxPostUtil.request({url: reqBasePath + "customer009", params: {}, type: 'json', callback: function(json) {
 				if(json.returnCode == 0) {
-					//加载供应商数据
+					//加载客户数据
 					$("#supplierId").html(getDataUseHandlebars(selOption, json)); 
 					//初始化仓库
 					initDepotHtml();
@@ -104,15 +110,15 @@ layui.config({
 		
 		//初始化回显数据
 		function initDataShow(){
-			AjaxPostUtil.request({url: reqBasePath + "purchaseorder008", params: {rowId: parent.rowId}, type: 'json', callback: function(json) {
+			AjaxPostUtil.request({url: reqBasePath + "salesorder008", params: {rowId: parent.rowId}, type: 'json', callback: function(json) {
 				if(json.returnCode == 0) {
 					if(isNull(json.bean)){
 						$("#showForm").html("");
 						winui.window.msg('数据不存在~', {icon: 2, time: 2000});
 						return;
 					}
-					cgddOrderNum = json.bean.defaultNumber;
-					$("#cgddOrderNum").html(json.bean.defaultNumber);
+					xsddOrderNum = json.bean.defaultNumber;
+					$("#xsddOrderNum").html(json.bean.defaultNumber);
 					$("#supplierId").val(json.bean.organId);
 					$("#accountId").val(json.bean.accountId);
 					$("#payType").val(json.bean.payType);
@@ -573,7 +579,12 @@ layui.config({
 					otherMoney += parseFloat(isNull($("#otherPrice" + rowNum).val()) ? 0 : $("#otherPrice" + rowNum).val());
 					tablePriceData.push(row);
 				});
-
+				
+				var salesMan = "";
+				$.each(salesManList, function (i, item) {
+                    salesMan += item.id + ',';
+                });
+				
 				var params = {
 					supplierId: $("#supplierId").val(),
 					operTime: $("#operTime").val(),
@@ -586,12 +597,13 @@ layui.config({
 					depotheadStr: JSON.stringify(tableData),
 					otherMoney: otherMoney.toFixed(2),
 					otherMoneyList: JSON.stringify(tablePriceData),
-					cgddOrderNum: cgddOrderNum,
-					rowId: parent.rowId
+					xsddOrderNum: xsddOrderNum,
+					rowId: parent.rowId,
+					salesMan: salesMan
 				};
 				if(isStandard){
-					layer.confirm('该入库单已超出采购单数量，是否继续？', { icon: 3, title: '超标提示' }, function (i) {
-			            AjaxPostUtil.request({url: reqBasePath + "purchaseorder009", params: params, type: 'json', callback: function(json) {
+					layer.confirm('该出库单已超出销售单数量，是否继续？', { icon: 3, title: '超标提示' }, function (i) {
+			            AjaxPostUtil.request({url: reqBasePath + "salesorder009", params: params, type: 'json', callback: function(json) {
 							if(json.returnCode == 0) {
 								parent.layer.close(index);
 								parent.refreshCode = '0';
@@ -601,7 +613,7 @@ layui.config({
 						}});
 			        });
 				}else{
-					AjaxPostUtil.request({url: reqBasePath + "purchaseorder009", params: params, type: 'json', callback: function(json) {
+					AjaxPostUtil.request({url: reqBasePath + "salesorder009", params: params, type: 'json', callback: function(json) {
 						if(json.returnCode == 0) {
 							parent.layer.close(index);
 							parent.refreshCode = '0';
@@ -625,6 +637,50 @@ layui.config({
 			});
 			return isIn;
 		}
+		
+		$('#salesMan').tagEditor({
+	        initialTags: [],
+	        placeholder: '请选择销售人员',
+	        beforeTagDelete: function(field, editor, tags, val) {
+	        	var inArray = -1;
+		    	$.each(salesManList, function(i, item) {
+		    		if(val === item.name) {
+		    			inArray = i;
+		    			return false;
+		    		}
+		    	});
+		    	if(inArray != -1) { //如果该元素在集合中存在
+		    		salesManList.splice(inArray, 1);
+		    	}
+	        }
+	    });
+	    
+	    //人员选择
+		$("body").on("click", "#toSalesManSelPeople", function(e){
+			userReturnList = [].concat(salesManList);
+			_openNewWindows({
+				url: "../../tpl/common/sysusersel.html", 
+				title: "人员选择",
+				pageId: "sysuserselpage",
+				area: ['80vw', '80vh'],
+				callBack: function(refreshCode){
+					if (refreshCode == '0') {
+						//移除所有tag
+						var tags = $('#salesMan').tagEditor('getTags')[0].tags;
+						for (i = 0; i < tags.length; i++) { 
+							$('#salesMan').tagEditor('removeTag', tags[i]);
+						}
+						salesManList = [].concat(userReturnList);
+					    //添加新的tag
+						$.each(salesManList, function(i, item){
+							$('#salesMan').tagEditor('addTag', item.name);
+						});
+	                } else if (refreshCode == '-9999') {
+	                	winui.window.msg("操作失败", {icon: 2,time: 2000});
+	                }
+				}});
+		});
+		
 /*********************** 产品表格操作 start ****************************/
 		//新增行
 		$("body").on("click", "#addRow", function() {

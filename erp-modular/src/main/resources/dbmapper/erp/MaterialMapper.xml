@@ -209,6 +209,7 @@
 			FORMAT(a.sale_price, 2) salePrice,
 			IFNULL(SUM(c.oper_number * (CASE d.sub_type 
 									WHEN 10 THEN 0 
+									WHEN 11 THEN 0 
 									ELSE CASE d.type WHEN 2 THEN 1 ELSE -1 END
 								END)), 0) currentTock
 		FROM
@@ -397,6 +398,7 @@
 		AND a.m_unit_id = #{mUnitId}
 		AND a.header_id = b.id
 		AND b.sub_type != '10'
+		AND b.sub_type != '11'
 		GROUP BY a.m_unit_id
     </select>
     
@@ -422,6 +424,7 @@
 		AND a.tenant_id = #{userId}
 		AND a.delete_flag = '0'
 		AND b.sub_type != '10'
+		AND b.sub_type != '11'
 		AND a.header_id = b.id 
 		AND b.delete_flag = '0'
 		ORDER BY b.oper_time DESC, a.id

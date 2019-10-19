@@ -65,6 +65,7 @@
 		AND a.delete_flag = '0'
 		AND a.header_id = b.id
 		AND b.type = '1'
+		AND b.sub_type != '11'
         <if test="materialName != '' and materialName != null">
             AND a.material_name LIKE '%${materialName}%'
         </if>

@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="../../assets/lib/layui/css/layui.css" rel="stylesheet" />
+    <link href="../../assets/lib/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../assets/lib/winui/css/winui.css" rel="stylesheet" />
+</head>
+<body>
+	<div style="padding:20px; margin:0 auto;">
+	    <form class="layui-form" action="" id="showForm">
+	        
+	    </form>
+	    
+	    <script type="text/x-handlebars-template" id="beanTemplate">
+		{{#bean}}
+			<div class="layui-form-item layui-col-xs6">
+		        <label class="layui-form-label">客户：</label>
+		        <div class="layui-input-block ver-center">
+		        	{{supplierName}}
+		        </div>
+		    </div>
+		    <div class="layui-form-item layui-col-xs6">
+		        <label class="layui-form-label">单据日期：</label>
+		        <div class="layui-input-block ver-center">
+		        	{{operTime}}
+		        </div>
+		    </div>
+			<div class="layui-form-item layui-col-xs12">
+		        <label class="layui-form-label">单据编号：</label>
+		        <div class="layui-input-block ver-center">
+		        	{{defaultNumber}}
+		        </div>
+		    </div>
+			<div class="layui-form-item layui-col-xs6">
+		        <label class="layui-form-label">操作人：</label>
+		        <div class="layui-input-block ver-center">
+		        	{{operPersonName}}
+		        </div>
+		    </div>
+			<div class="layui-form-item layui-col-xs6">
+		        <label class="layui-form-label">操作日期：</label>
+		        <div class="layui-input-block ver-center">
+		        	{{createTime}}
+		        </div>
+		    </div>
+			<div class="layui-form-item layui-col-xs12">
+		        <label class="layui-form-label">列表项：</label>
+		        <div class="layui-input-block ver-center">
+		            <table class="layui-table">
+		                <thead>
+		                    <tr>
+		                        <th style="width: 120px;">仓库</th>
+		                        <th style="width: 150px;">产品(型号)</th>
+		                        <th style="width: 70px;">单位</th>
+		                        <th style="width: 80px;">数量</th>
+		                        <th style="width: 80px;">单价</th>
+		                        <th style="width: 80px;">金额</th>
+		                        <th style="min-width: 100px;">备注</th>
+		                    </tr>
+		                </thead>
+		                <tbody id="useTable" class="insurance-table">
+							{{#each items}}
+								<tr>
+									<td>{{deportName}}</td>
+									<td>{{materialNames}}</td>
+									<td>{{unitName}}</td>
+									<td>{{operNumber}}</td>
+									<td>{{unitPrice}}</td>
+									<td>{{allPrice}}</td>
+									<td>{{remark}}</td>
+								</tr>
+							{{/each}}
+		                </tbody>
+					</table>
+		        </div>
+		    </div>
+			<div class="layui-form-item layui-col-xs6">
+		        <label class="layui-form-label">结算账户：</label>
+		        <div class="layui-input-block ver-center">
+		        	{{accountName}}
+		        </div>
+		    </div>
+		    <div class="layui-form-item layui-col-xs6">
+		        <label class="layui-form-label">共计金额：</label>
+		        <div class="layui-input-block ver-center">
+		        	{{totalPrice}}元
+		        </div>
+		    </div>
+		    <div class="layui-form-item layui-col-xs6">
+		        <label class="layui-form-label">收款类型：</label>
+		        <div class="layui-input-block ver-center">
+		        	{{payType}}
+		        </div>
+		    </div>
+		    <div class="layui-form-item layui-col-xs12">
+		        <label class="layui-form-label">备注：</label>
+		        <div class="layui-input-block ver-center">
+		        	{{remark}}
+		        </div>
+		    </div>
+			<div class="layui-form-item layui-col-xs12">
+   				<span class="hr-title">审批</span><hr>
+    		</div>
+	    	<form class="layui-form" action="">
+	       		<div class="layui-form-item">
+					<label class="layui-form-label">审批结果<i class="red">*</i></label>
+					<div class="layui-input-block winui-radio">
+						<input type="radio" name="flag" value="1" title="同意" checked="checked"/>
+						<input type="radio" name="flag" value="0" title="拒绝" />
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">审批意见</label>
+					<div class="layui-input-block">
+						<textarea id="opinion" placeholder="请输入审批意见" maxlength="200" class="layui-textarea" style="height: 100px;"></textarea>
+					</div>
+				</div>
+				<div class="layui-input-block">
+                	<button class="winui-btn" id="cancle">取消</button>
+                	<button class="winui-btn" lay-submit lay-filter="formAddBean">提交</button>
+            	</div>
+	    	</form>
+		{{/bean}}
+		</script>
+	    
+	</div>
+	<script src="../../assets/lib/layui/layui.js"></script>
+   	<script src="../../assets/lib/layui/custom.js"></script>
+   	<script type="text/javascript">
+        layui.config({base: '../../js/salesorder/'}).use('salesorderexamine');
+    </script>
+</body>
+</html>

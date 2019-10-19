@@ -98,6 +98,7 @@
 			a.m_unit_id mUnitId,
 			IFNULL(SUM(b.oper_number * (CASE c.sub_type 
 									WHEN 10 THEN 0 
+									WHEN 11 THEN 0 
 									ELSE CASE c.type WHEN 2 THEN 1 ELSE -1 END
 								END)), 0) currentTock,
 			a.oper_number operNum,
