@@ -152,7 +152,7 @@ layui.config({
 		_openNewWindows({
 			url: url, 
 			title: "详情",
-			pageId: "otherwarehousdetails",
+			pageId: "warehousingdetailschildpage",
 			area: ['90vw', '90vh'],
 			callBack: function(refreshCode){
                 if (refreshCode == '0') {

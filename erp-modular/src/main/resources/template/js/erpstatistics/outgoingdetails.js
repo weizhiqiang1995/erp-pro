@@ -106,7 +106,7 @@ layui.config({
 	            { field: 'unitPrice', title: '单价', align: 'left', width: 120},
 	            { field: 'operNumber', title: '出库数量', align: 'left', width: 100},
 	            { field: 'allPrice', title: '金额', align: 'left', width: 120 },
-	            { field: 'supplierName', title: '供应商', align: 'left', width: 140 },
+	            { field: 'supplierName', title: '供应商/客户/会员', align: 'left', width: 140 },
 	            { field: 'depotName', title: '仓库', align: 'left', width: 140 },
 	            { field: 'operTime', title: '出库日期', align: 'center', width: 140 }
 	        ]]
@@ -115,9 +115,7 @@ layui.config({
 	        var data = obj.data; //获得当前行数据
 	        var layEvent = obj.event; //获得 lay-event 对应的值
 	        if (layEvent === 'details') { //详情
-	        	if(data.subType == '4'){//其他出库
-		        	details(data);
-	        	}
+	        	details(data);
 	        }
 	    });
 	    
@@ -133,13 +131,19 @@ layui.config({
         return false;
     });
 
-    //其他出库详情
+    //详情
 	function details(data){
 		rowId = data.headerId;
+		var url = "";
+		if(data.subType == 6){//采购退货
+			url = "../../tpl/purchaseout/purchaseoutdetails.html";
+		}else if(data.subType == 9){//其他出库
+			url = "../../tpl/otheroutlets/otheroutletsdetails.html";
+		}
 		_openNewWindows({
-			url: "", 
+			url: url, 
 			title: "详情",
-			pageId: "otherwarehousdetails",
+			pageId: "outgoingdetailschildpage",
 			area: ['90vw', '90vh'],
 			callBack: function(refreshCode){
                 if (refreshCode == '0') {

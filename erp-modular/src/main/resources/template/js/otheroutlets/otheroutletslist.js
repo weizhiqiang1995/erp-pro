@@ -37,7 +37,7 @@ layui.config({
             { field: 'defaultNumber', title: '单据编号', align: 'left', width: 200, templet: function(d){
 		        return '<a lay-event="details" class="notice-title-click">' + d.defaultNumber + '</a>';
 		    }},
-            { field: 'supplierName', title: '供应商', align: 'left', width: 150},
+            { field: 'supplierName', title: '客户', align: 'left', width: 150},
             { field: 'materialNames', title: '关联产品', align: 'left', width: 300},
             { field: 'totalPrice', title: '合计金额', align: 'left', width: 120},
             { field: 'operPersonName', title: '操作人', align: 'left', width: 100},
