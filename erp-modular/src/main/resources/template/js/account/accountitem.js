@@ -72,11 +72,11 @@ layui.config({
 	function details(data){
 		rowId = data.id;
 		var url = "";
-		if(data.subType == '1'){//采购入库
+		if(data.subType == 1){//采购入库
 			url = "../../tpl/purchaseput/purchaseputdetails.html";
-		}else if(data.subType == '4'){//其他入库
+		}else if(data.subType == 4){//其他入库
 			url = "../../tpl/otherwarehous/otherwarehousdetails.html";
-		}else if(data.subType == '2'){//销售退货
+		}else if(data.subType == 2){//销售退货
 			url = "../../tpl/salesreturns/salesreturnsdetails.html";
 		}else if(data.subType == 6){//采购退货
 			url = "../../tpl/purchasereturns/purchasereturnsdetails.html";
@@ -86,6 +86,8 @@ layui.config({
 			url = "../../tpl/salesoutlet/salesoutletdetails.html";
 		}else if(data.subType == 8){//零售出库
 			url = "../../tpl/retailoutlet/retailoutletdetails.html";
+		}else if(data.subType == 3){//零售退货
+			url = "../../tpl/retailreturns/retailreturnsdetails.html";
 		}
 		_openNewWindows({
 			url: url, 

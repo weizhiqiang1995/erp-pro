@@ -151,6 +151,8 @@ layui.config({
 			url = "../../tpl/otherwarehous/otherwarehousdetails.html";
 		}else if(data.subType == '2'){//销售退货
 			url = "../../tpl/salesreturns/salesreturnsdetails.html";
+		}else if(data.subType == '3'){//零售退货
+			url = "../../tpl/retailreturns/retailreturnsdetails.html";
 		}
 		_openNewWindows({
 			url: url, 
