@@ -247,6 +247,8 @@
 	<url id="member008" path="/post/MemberController/queryMemberByIdAndInfo" val="查看会员详情" allUse="2">
 		<property id="rowId" name="id" ref="required" var="会员ID"></property>
 	</url>
+	<url id="member009" path="/post/MemberController/queryMemberListToSelect" val="获取会员列表信息展示为下拉框" allUse="2">
+	</url>
 	<!-- 会员信息管理结束 -->
 
 	<!-- 收支项目管理开始 -->

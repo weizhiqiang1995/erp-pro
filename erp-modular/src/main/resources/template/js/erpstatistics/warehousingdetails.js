@@ -17,21 +17,9 @@ layui.config({
         laydate = layui.laydate,
         table = layui.table;
         
-    //初始化统计时间
-	var day = getTodayDay();
-	endTime = getYesterdayYMDFormatDate();//结束日期为今天的前一天
-	if(day === "1" || day == 1){//如果当前为本月一号，则查询上个月的
-		startTime = getTOneYMDFormatDate();//开始日期为上个月一号
-	}else{
-		startTime = getOneYMDFormatDate();//开始日期为本月一号
-	}
-	
-	//获取今天是本月的几号
-	function getTodayDay(){
-		var today = new Date();//获取当前时间(没有格式化)
-		var todayDay = today.getDate();//获取几号
-		return todayDay;
-	}
+	//初始化统计时间
+	startTime = getOneYMDFormatDate();//开始日期为本月一号
+	endTime = getYMDFormatDate();//结束今天的日期
 	
 	//获取本月一号的日期
 	function getOneYMDFormatDate(){
@@ -40,26 +28,17 @@ layui.config({
 		 var month = date.getMonth() + 1;
 		 month = (month < 10 ? "0" + month : month); 
 		 return year.toString() + "-" + month.toString() + "-" + "01";
-	};
+	}
 	
-	//获取上个月一号的日期
-	function getTOneYMDFormatDate(){
-		 var date = new Date;
-		 var year = date.getFullYear(); 
-		 var month = date.getMonth();
-		 month = (month < 10 ? "0" + month : month); 
-		 return year.toString() + "-" + month.toString() + "-" + "01";
-	};
-	
-	//获取前一天的时间 
-	function getYesterdayYMDFormatDate(){
+	//获取今天的时间 
+	function getYMDFormatDate(){
 		var myDate = new Date();
-	    var lw = new Date(myDate - 1000 * 60 * 60 * 24 * 1);
+	    var lw = new Date(myDate);
 	    var lastY = lw.getFullYear();
 	    var lastM = lw.getMonth() + 1;
 	    var lastD = lw.getDate();
 	    return lastY + "-" + (lastM < 10 ? "0" + lastM : lastM) + "-" + (lastD < 10 ? "0" + lastD : lastD);
-	};
+	}
         
     laydate.render({
 		elem: '#operTime', //指定元素
@@ -119,15 +98,25 @@ layui.config({
 	        limit: 8,
 	        cols: [[
 	            { title: '序号', type: 'numbers'},
-	            { field: 'defaultNumber', title: '单据编号', align: 'left', width: 200, templet: function(d){
-			        	return '<a lay-event="details" class="notice-title-click">' + d.defaultNumber + '</a>';
+	            { field: 'defaultNumber', title: '单据编号', align: 'left', width: 250, templet: function(d){
+			        var str = '<a lay-event="details" class="notice-title-click">' + d.defaultNumber + '</a>';
+			        if(!isNull(d.linkNumber)){
+			        	str += '<span class="state-new">[转]</span>';
+				        if(d.status == 2){
+				        	str += '<span class="state-up"> [正常]</span>';
+				        }else{
+				        	str += '<span class="state-down"> [预警]</span>';
+				        }
+			        }
+			        return str;
 			    }},
+			    { field: 'subTypeName', title: '单据类型', align: 'left', width: 100},
 	            { field: 'materialName', title: '商品名称', align: 'left', width: 150},
 	            { field: 'materialModel', title: '商品型号', align: 'left', width: 100},
 	            { field: 'unitPrice', title: '单价', align: 'left', width: 120},
 	            { field: 'operNumber', title: '入库数量', align: 'left', width: 100},
 	            { field: 'allPrice', title: '金额', align: 'left', width: 120 },
-	            { field: 'supplierName', title: '供应商', align: 'left', width: 140 },
+	            { field: 'supplierName', title: '供应商/客户/会员', align: 'left', width: 140 },
 	            { field: 'depotName', title: '仓库', align: 'left', width: 140 },
 	            { field: 'operTime', title: '入库日期', align: 'center', width: 140 }
 	        ]]
@@ -160,11 +149,15 @@ layui.config({
 			url = "../../tpl/purchaseput/purchaseputdetails.html";
 		}else if(data.subType == '4'){//其他入库
 			url = "../../tpl/otherwarehous/otherwarehousdetails.html";
+		}else if(data.subType == '2'){//销售退货
+			url = "../../tpl/salesreturns/salesreturnsdetails.html";
+		}else if(data.subType == '3'){//零售退货
+			url = "../../tpl/retailreturns/retailreturnsdetails.html";
 		}
 		_openNewWindows({
 			url: url, 
 			title: "详情",
-			pageId: "otherwarehousdetails",
+			pageId: "warehousingdetailschildpage",
 			area: ['90vw', '90vh'],
 			callBack: function(refreshCode){
                 if (refreshCode == '0') {

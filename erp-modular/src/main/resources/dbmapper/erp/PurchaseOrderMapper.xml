@@ -39,7 +39,6 @@
 			a.`name` materialName,
 			a.model materialModel,
 			b.id mUnitId,
-			b.estimate_purchase_price estimatePurchasePrice,
 			IFNULL(c.`name`, a.unit_name) unitName,
 			IFNULL(c.number, '1') baseNumber,
 			#{depotId} depotId
@@ -129,7 +128,11 @@
 			a.depot_id depotId,
 			a.material_id materialId,
 			a.m_unit_id mUnitId,
-			SUM(b.oper_number * (CASE c.type WHEN 2 THEN 1 ELSE -1 END)) AS currentTock,
+			IFNULL(SUM(b.oper_number * (CASE c.sub_type 
+									WHEN 10 THEN 0 
+									WHEN 11 THEN 0 
+									ELSE CASE c.type WHEN 2 THEN 1 ELSE -1 END
+								END)), 0) currentTock,
 			a.oper_number operNum,
 			CONVERT(a.unit_price, decimal(24, 2)) unitPrice,
 			CONVERT(a.all_price, decimal(24, 2)) allPrice,
@@ -205,12 +208,13 @@
 			<!-- 优惠后金额 - 本次付款金额 -->
 			CONVERT((IFNULL(a.discount_last_money, a.total_price) - IFNULL(a.change_amount, a.total_price)), decimal(24, 2)) arrears,
 			a.other_money_list otherMoneyList,
+			a.tenant_id userId,
 			a.remark
 		FROM
 			erp_depothead a
 		WHERE
 			a.id = #{id}
-		AND a.`status` = '2'
+		AND (a.`status` = '2' OR a.`status` = '4')
 		AND a.delete_flag = '0'
 		AND a.tenant_id = #{userId}
 		AND a.sub_type = '10'
@@ -223,7 +227,22 @@
 			a.material_id materialId,
 			a.m_unit_id mUnitId,
 			SUM(b.oper_number * (CASE c.type WHEN 2 THEN 1 ELSE -1 END)) AS currentTock,
-			a.oper_number operNumber,
+			a.oper_number - IFNULL((
+				SELECT
+					SUM(m.oper_number)
+				FROM
+					erp_depothead k,
+					erp_depotitem m
+				WHERE
+					k.id = m.header_id
+				AND k.link_number = #{defaultNumber}
+				AND k.id != a.id
+				AND k.tenant_id = #{userId}
+				AND m.m_unit_id = a.m_unit_id
+				AND k.delete_flag = '0'
+				GROUP BY
+					k.link_number
+			), 0) nowNumber,
 			CONVERT(a.unit_price, decimal(24, 2)) unitPrice,
 			CONVERT(a.all_price, decimal(24, 2)) allPrice,
 			CONVERT(IFNULL(a.tax_unit_price, 0), decimal(24, 2)) taxUnitPrice,
@@ -233,7 +252,21 @@
 			a.remark
 		FROM
 			erp_depotitem a
-			LEFT JOIN erp_depotitem b ON b.depot_id = a.depot_id AND b.m_unit_id = a.m_unit_id AND b.header_id != a.header_id
+			LEFT JOIN (
+				SELECT
+					q.header_id,
+					q.oper_number,
+					q.m_unit_id,
+					q.depot_id
+				FROM
+					erp_depothead p,
+					erp_depotitem q
+				WHERE
+					p.id = q.header_id
+				AND p.sub_type != '10'
+				AND p.sub_type != '11'
+				AND p.tenant_id = #{userId}
+			) AS b ON b.header_id != a.header_id AND b.depot_id = a.depot_id AND b.m_unit_id = a.m_unit_id
 			LEFT JOIN erp_depothead c ON c.id = b.header_id
 		WHERE
 			a.header_id = #{id}
@@ -266,7 +299,7 @@
 	
 	<select id="queryOrderIsStandardById" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
-			b.oper_number - (
+			b.oper_number - IFNULL((
 				SELECT
 					SUM(d.oper_number)
 				FROM
@@ -281,7 +314,7 @@
 				AND c.delete_flag = '0'
 				GROUP BY
 					c.link_number
-			) nowNum
+			), 0) nowNum
 		FROM
 			erp_depothead a,
 			erp_depotitem b
@@ -292,5 +325,15 @@
 		AND b.m_unit_id = #{mUnitId}
 		AND a.delete_flag = '0'
 	</select>
+	
+	<update id="editPurchaseOrderStateToTurnById" parameterType="java.util.Map">
+		UPDATE erp_depothead
+		<set>
+            `status` = '4'
+		</set>
+		WHERE id = #{id}
+		AND tenant_id = #{userId}
+		AND sub_type = '10'
+	</update>
 	
 </mapper>

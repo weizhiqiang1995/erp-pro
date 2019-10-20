@@ -27,10 +27,14 @@
 		        	{{operTime}}
 		        </div>
 		    </div>
-			<div class="layui-form-item layui-col-xs12">
+			<div class="layui-form-item layui-col-xs6">
 		        <label class="layui-form-label">单据编号：</label>
-		        <div class="layui-input-block ver-center">
-		        	{{defaultNumber}}
+		        <div class="layui-input-block ver-center" id="defaultNumber">
+		        </div>
+		    </div>
+			<div class="layui-form-item layui-col-xs6">
+		        <label class="layui-form-label">所属采购单：</label>
+		        <div class="layui-input-block ver-center" id="linkNumber">
 		        </div>
 		    </div>
 			<div class="layui-form-item layui-col-xs6">
@@ -123,7 +127,7 @@
 		    <div class="layui-form-item layui-col-xs3">
 		        <label class="layui-form-label">优惠金额：</label>
 		        <div class="layui-input-block ver-center">
-		        	{{discountMoney}}
+		        	{{discountMoney}}元
 		        </div>
 		    </div>
 		    <div class="layui-form-item layui-col-xs3">
@@ -139,13 +143,13 @@
 		        </div>
 		    </div>
 			<div class="layui-form-item layui-col-xs3">
-		        <label class="layui-form-label">本次欠款</label>
+		        <label class="layui-form-label">本次欠款：</label>
 		        <div class="layui-input-block ver-center">
 		            {{arrears}}元
 		        </div>
 		    </div>
 			<div class="layui-form-item layui-col-xs12">
-		        <label class="layui-form-label">采购费用</label>
+		        <label class="layui-form-label">采购费用：</label>
 		        <div class="layui-input-block">
 		            <table class="layui-table">
 		                <thead>
@@ -172,7 +176,7 @@
 	<script src="../../assets/lib/layui/layui.js"></script>
    	<script src="../../assets/lib/layui/custom.js"></script>
    	<script type="text/javascript">
-        layui.config({base: '../../js/otherwarehous/'}).use('otherwarehousdetails');
+        layui.config({base: '../../js/purchaseput/'}).use('purchaseputdetails');
     </script>
 </body>
 </html>

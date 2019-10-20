@@ -38,7 +38,6 @@
 			a.`name` materialName,
 			a.model materialModel,
 			b.id mUnitId,
-			b.estimate_purchase_price estimatePurchasePrice,
 			IFNULL(c.`name`, a.unit_name) unitName,
 			IFNULL(c.number, '1') baseNumber,
 			#{depotId} depotId
@@ -72,5 +71,79 @@
 				#{item.mType}, #{item.userId}, #{item.deleteFlag})  
 		</foreach>  
 	</insert>
+	
+	<select id="queryOtherWareHousToEditById" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			a.id,
+			a.organ_id supplierId,
+			CONVERT (a.oper_time, char) operTime,
+			a.account_id accountId,
+			CONVERT(a.total_price, decimal(24, 2)) totalPrice,
+			a.pay_type payType,
+			a.remark
+		FROM
+			erp_depothead a
+		WHERE
+			a.id = #{id}
+		AND a.delete_flag = '0'
+		AND a.tenant_id = #{userId}
+		AND a.sub_type = '4'
+	</select>
+	
+	<select id="queryOtherWareHousNormsToEditById" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			a.id,
+			a.depot_id depotId,
+			a.material_id materialId,
+			a.m_unit_id mUnitId,
+			IFNULL(SUM(b.oper_number * (CASE c.sub_type 
+									WHEN 10 THEN 0 
+									WHEN 11 THEN 0 
+									ELSE CASE c.type WHEN 2 THEN 1 ELSE -1 END
+								END)), 0) currentTock,
+			a.oper_number operNum,
+			CONVERT(a.unit_price, decimal(24, 2)) unitPrice,
+			CONVERT(a.all_price, decimal(24, 2)) allPrice,
+			a.remark
+		FROM
+			erp_depotitem a
+			LEFT JOIN erp_depotitem b ON b.depot_id = a.depot_id AND b.m_unit_id = a.m_unit_id AND b.header_id != a.header_id
+			LEFT JOIN erp_depothead c ON c.id = b.header_id
+		WHERE
+			a.header_id = #{id}
+		AND a.delete_flag = '0'
+		GROUP BY a.id
+	</select>
+	
+	<update id="editOtherWareHousMationById" parameterType="java.util.Map">
+		UPDATE erp_depothead
+		<set>
+			<if test="operTime != '' and operTime != null">
+	            oper_time = #{operTime},
+	        </if>
+	        <if test="organId != '' and organId != null">
+	            organ_id = #{organId},
+	        </if>
+            account_id = #{accountId},
+            remark = #{remark},
+	        <if test="payType != '' and payType != null">
+	            pay_type = #{payType},
+	        </if>
+	        <if test="totalPrice != '' and totalPrice != null">
+	            total_price = #{totalPrice},
+	        </if>
+		</set>
+		WHERE id = #{id}
+		AND tenant_id = #{userId}
+		AND sub_type = '4'
+	</update>
+	
+	<delete id="deleteOtherWareHousNormsMationById" parameterType="java.util.Map">
+		DELETE
+		FROM
+			erp_depotitem
+		WHERE
+			header_id = #{id}
+	</delete>
 	
 </mapper>

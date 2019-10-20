@@ -2,7 +2,6 @@
 
 > win10风格的一套系统，前端采用layui作为前端框架，后端采用SpringBoot作为服务框架，采用自封装的xml对所有请求进行参数校验，以保证接口安全性。`项目长期更新`，觉得不错的点下star吧
 
-> 注：开源社区版只限学习，内设授权码，默认十天删除所有非基础数据
 
 #### 介绍
 基于SpringBoot框架和SaaS模式，立志为中小企业提供开源好用的多租户ERP软件，目前专注进销存+财务功能。主要模块有零售管理、采购管理、销售管理、仓库管理、财务管理、报表查询、系统管理等。支持预付款、收入支出、仓库调拨、组装拆卸、订单等特色功能。拥有库存状况、出入库统计等报表。同时对角色和权限进行了细致全面控制，精确到每个按钮和菜单。
@@ -15,24 +14,30 @@
 #### 软件架构
 
 - Spring Boot 2.X
-- Layui
-- MySql
+- Layui 
+- MySql 5.5.28
 - JDK 1.8
+- Redis 3.2集群（不要问我单机的能不能行）
 
 #### 声明
 如有定制需求，可入群或将需求发送至邮箱`598748873@qq.com`。
 
 #### 功能介绍
 
-功能|功能|功能|功能
--------|-------|-------|-------
-菜单管理|员工管理|用户管理|角色管理
-权限管理|资源图标|日志管理|多桌面管理
-系统基础设置|系统的基础信息设置|计量单位|产品分类
-产品信息|客户管理|供应商管理|会员管理
-仓库管理|账户信息|收支项目|结算账户
-账户流水|采购单|其他入库|入库明细
-出库明细|||
+- 系统功能：包含菜单、用户、角色、权限(具体到每一个按钮)、日志等管理
+- 基础设置：包含背景图片设置、锁屏图片设置等
+- 仓库管理：管理用户所拥有的仓库
+- 计量单位：产品规格单位管理
+- 产品信息：管理用户所拥有的产品信息
+- 结算账户：自定义账户的结算方式以及结算明细的查看
+- 收支项目：自定义除了采购/销售等产生的费用外，其他产生费用的项目
+- 基本资料：包含客户管理、会员管理、供应商管理
+- 采购管理：包含采购单、转入库单、采购入库、采购退货等功能
+- 销售管理：包含销售单、转出库单、销售出库、销售退货等功能
+- 仓库管理：包含其他入库、其他出库、调拨、组装单、拆分单等功能
+- 零售管理：包含零售出库、零售退货等功能
+- 报表管理：包含入库/出库明细、入库/出库汇总、库存状况、客户/供应商/会员对账等报表
+- 财务管理：设计已完成，等待开发
 
 #### 技术选型
 
@@ -46,12 +51,8 @@
 [Maven](http://maven.apache.org/)|项目构建管理
 [redis](https://redis.io/)|key-value存储系统
 [webSocket](http://www.runoob.com/html/html5-websocket.html)|浏览器与服务器全双工(full-duplex)通信
-[Activiti](https://www.activiti.org/)|工作流引擎
-[spring mvc](http://spring.io/)|视图框架
 [quartz 2.2.2](http://www.quartz-scheduler.org/)|定时任务
 [ActiveMQ](http://activemq.apache.org/replicated-leveldb-store.html)|消息队列
-[solr](https://lucene.apache.org/solr/)|企业级搜索应用服务器
-[Spring Cloud](https://springcloud.cc/)|微服务框架(目前用户APP端接口)
 
 ##### 前端技术：
 
@@ -61,11 +62,8 @@
 [zTree](http://www.treejs.cn/v3/)|树插件
 [layui](https://www.layui.com/)|模块化前端UI
 [winui](https://gitee.com/doc_wei01_admin/skyeye)|win10风格UI
-[codemirror](https://codemirror.net/)|codemirror代码编辑器
 [handlebars](http://www.ghostchina.com/introducing-the-handlebars-js-templating-engine/)|js模板引擎
 [webSocket](http://www.runoob.com/html/html5-websocket.html)|浏览器与服务器全双工(full-duplex)通信
-[G6](https://antv.alipay.com/zh-cn/index.html)|流程图开发
-[FullCalendar](https://blog.csdn.net/qw_xingzhe/article/details/44920943)|日历插件
 
 #### 代码描述
 ##### 前后台接口映射
@@ -147,6 +145,6 @@ QQ群号：[696070023](http://shang.qq.com/wpa/qunwpa?idkey=e9aace2bf3e05f37ed5f
 
 > 需要了解的请加微信或者进群：wzq_598748873，备注：码云-公司（姓名）。
 
-|QQ群|公众号|
-|-------|-------|
-|![](https://images.gitee.com/uploads/images/2018/1205/145236_4fce6966_1541735.jpeg "微信图片_20181205145217.jpg")|![](https://images.gitee.com/uploads/images/2018/1207/083137_48330589_1541735.jpeg "qrcode_for_gh_e7f97ff1beda_258.jpg")|
+|QQ群|公众号|微信群|
+|-------|-------|-------|
+|![](https://images.gitee.com/uploads/images/2018/1205/145236_4fce6966_1541735.jpeg "微信图片_20181205145217.jpg")|![](https://images.gitee.com/uploads/images/2018/1207/083137_48330589_1541735.jpeg "qrcode_for_gh_e7f97ff1beda_258.jpg")|![输入图片说明](https://images.gitee.com/uploads/images/2019/1019/135228_3c09578a_1541735.jpeg "微信图片_20191019134948.jpg")|

@@ -23,14 +23,12 @@ import com.alibaba.fastjson.JSON;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.HttpClient;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.CommonDao;
 import com.skyeye.dao.SysEveWinBgPicDao;
 import com.skyeye.dao.SysEveWinLockBgPicDao;
 import com.skyeye.dao.SysEveWinThemeColorDao;
 import com.skyeye.jedis.JedisClientService;
-import com.skyeye.properties.MainPropertiesConfig;
 import com.skyeye.service.CommonService;
 
 import net.sf.json.JSONArray;
@@ -54,9 +52,6 @@ public class CommonServiceImpl implements CommonService{
 	
 	@Autowired
 	public JedisClientService jedisClient;
-	
-	@Autowired
-	public MainPropertiesConfig mainPropertiesConfig;
 	
 	@Value("${IMAGES_PATH}")
 	private String tPath;
@@ -398,26 +393,12 @@ public class CommonServiceImpl implements CommonService{
 	     * @return void    返回类型
 	     * @throws
 	 */
-	@SuppressWarnings({ "static-access", "deprecation", "unchecked" })
 	@Override
 	public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("loginPCIp", inputObject.getRequest().getParameter("loginPCIp"));
-		map.put("userToken", inputObject.getRequest().getParameter("userToken"));
-		List<Map<String, Object>> beans = null;
-		String url = mainPropertiesConfig.getMessagePostNoticeListIsEightByUserId();
-		String str = HttpClient.doPost(url, map);
-		JSONObject json = JSONObject.fromObject(str);
-		if("0".equals(json.get("returnCode").toString())){
-			if(!ToolUtil.isBlank(json.get("rows").toString()))
-				beans = JSONArray.toList(JSONArray.fromObject(json.get("rows").toString()), Map.class);
-		}else{
-			outputObject.setreturnMessage(json.get("returnMessage").toString());
-		}
-		if(beans != null && !beans.isEmpty()){
-			outputObject.setBeans(beans);
-			outputObject.settotal(beans.size());
-		}
+		map = compareSelUserListByParams(map, inputObject);
+		List<Map<String, Object>> beans = commonDao.queryAllPeopleToTree(map);
+		outputObject.setBeans(beans);
 	}
 
 	/**
@@ -430,28 +411,17 @@ public class CommonServiceImpl implements CommonService{
 	     * @return void    返回类型
 	     * @throws
 	 */
-	@SuppressWarnings({ "static-access", "deprecation", "unchecked" })
 	@Override
 	public void queryCompanyPeopleToTreeByUserBelongCompany(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("loginPCIp", inputObject.getRequest().getParameter("loginPCIp"));
-		map.put("userToken", inputObject.getRequest().getParameter("userToken"));
-		List<Map<String, Object>> beans = null;
-		String url = mainPropertiesConfig.getMessagePostNoticeListIsThisCompanyByUserId();
-		String str = HttpClient.doPost(url, map);
-		JSONObject json = JSONObject.fromObject(str);
-		if("0".equals(json.get("returnCode").toString())){
-			if(!ToolUtil.isBlank(json.get("rows").toString()))
-				beans = JSONArray.toList(JSONArray.fromObject(json.get("rows").toString()), Map.class);
-		}else{
-			outputObject.setreturnMessage(json.get("returnMessage").toString());
-		}
-		if(beans != null && !beans.isEmpty()){
-			outputObject.setBeans(beans);
-			outputObject.settotal(beans.size());
-		}
+		map = compareSelUserListByParams(map, inputObject);
+		Map<String, Object> user = inputObject.getLogParams();
+		Map<String, Object> company = commonDao.queryCompanyMationByUserId(user);//根据用户信息获取该用户所属的公司id。部门id，职位id
+		map.put("companyId", company.get("companyId"));
+		List<Map<String, Object>> beans = commonDao.queryCompanyPeopleToTreeByUserBelongCompany(map);
+		outputObject.setBeans(beans);
 	}
-
+	
 	/**
 	 * 
 	     * @Title: queryDepartmentPeopleToTreeByUserBelongDepartment
@@ -462,28 +432,17 @@ public class CommonServiceImpl implements CommonService{
 	     * @return void    返回类型
 	     * @throws
 	 */
-	@SuppressWarnings({ "static-access", "deprecation", "unchecked" })
 	@Override
 	public void queryDepartmentPeopleToTreeByUserBelongDepartment(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("loginPCIp", inputObject.getRequest().getParameter("loginPCIp"));
-		map.put("userToken", inputObject.getRequest().getParameter("userToken"));
-		List<Map<String, Object>> beans = null;
-		String url = mainPropertiesConfig.getMessagePostNoticeListIsThisDepartmentByUserId();
-		String str = HttpClient.doPost(url, map);
-		JSONObject json = JSONObject.fromObject(str);
-		if("0".equals(json.get("returnCode").toString())){
-			if(!ToolUtil.isBlank(json.get("rows").toString()))
-				beans = JSONArray.toList(JSONArray.fromObject(json.get("rows").toString()), Map.class);
-		}else{
-			outputObject.setreturnMessage(json.get("returnMessage").toString());
-		}
-		if(beans != null && !beans.isEmpty()){
-			outputObject.setBeans(beans);
-			outputObject.settotal(beans.size());
-		}
+		map = compareSelUserListByParams(map, inputObject);
+		Map<String, Object> user = inputObject.getLogParams();
+		Map<String, Object> company = commonDao.queryCompanyMationByUserId(user);//根据用户信息获取该用户所属的公司id。部门id，职位id
+		map.put("companyId", company.get("companyId"));
+		List<Map<String, Object>> beans = commonDao.queryDepartmentPeopleToTreeByUserBelongDepartment(map);
+		outputObject.setBeans(beans);
 	}
-
+	
 	/**
 	 * 
 	     * @Title: queryJobPeopleToTreeByUserBelongJob
@@ -494,28 +453,17 @@ public class CommonServiceImpl implements CommonService{
 	     * @return void    返回类型
 	     * @throws
 	 */
-	@SuppressWarnings({ "static-access", "deprecation", "unchecked" })
 	@Override
 	public void queryJobPeopleToTreeByUserBelongJob(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("loginPCIp", inputObject.getRequest().getParameter("loginPCIp"));
-		map.put("userToken", inputObject.getRequest().getParameter("userToken"));
-		List<Map<String, Object>> beans = null;
-		String url = mainPropertiesConfig.getMessagePostNoticeListIsThisJobByUserId();
-		String str = HttpClient.doPost(url, map);
-		JSONObject json = JSONObject.fromObject(str);
-		if("0".equals(json.get("returnCode").toString())){
-			if(!ToolUtil.isBlank(json.get("rows").toString()))
-				beans = JSONArray.toList(JSONArray.fromObject(json.get("rows").toString()), Map.class);
-		}else{
-			outputObject.setreturnMessage(json.get("returnMessage").toString());
-		}
-		if(beans != null && !beans.isEmpty()){
-			outputObject.setBeans(beans);
-			outputObject.settotal(beans.size());
-		}
+		map = compareSelUserListByParams(map, inputObject);
+		Map<String, Object> user = inputObject.getLogParams();
+		Map<String, Object> company = commonDao.queryCompanyMationByUserId(user);//根据用户信息获取该用户所属的公司id。部门id，职位id
+		map.put("companyId", company.get("companyId"));
+		List<Map<String, Object>> beans = commonDao.queryJobPeopleToTreeByUserBelongJob(map);
+		outputObject.setBeans(beans);
 	}
-
+	
 	/**
 	 * 
 	     * @Title: querySimpleDepPeopleToTreeByUserBelongSimpleDep
@@ -526,28 +474,17 @@ public class CommonServiceImpl implements CommonService{
 	     * @return void    返回类型
 	     * @throws
 	 */
-	@SuppressWarnings({ "static-access", "deprecation", "unchecked" })
 	@Override
 	public void querySimpleDepPeopleToTreeByUserBelongSimpleDep(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("loginPCIp", inputObject.getRequest().getParameter("loginPCIp"));
-		map.put("userToken", inputObject.getRequest().getParameter("userToken"));
-		List<Map<String, Object>> beans = null;
-		String url = mainPropertiesConfig.getMessagePostNoticeListIsThisSimpleDepByUserId();
-		String str = HttpClient.doPost(url, map);
-		JSONObject json = JSONObject.fromObject(str);
-		if("0".equals(json.get("returnCode").toString())){
-			if(!ToolUtil.isBlank(json.get("rows").toString()))
-				beans = JSONArray.toList(JSONArray.fromObject(json.get("rows").toString()), Map.class);
-		}else{
-			outputObject.setreturnMessage(json.get("returnMessage").toString());
-		}
-		if(beans != null && !beans.isEmpty()){
-			outputObject.setBeans(beans);
-			outputObject.settotal(beans.size());
-		}
+		map = compareSelUserListByParams(map, inputObject);
+		Map<String, Object> user = inputObject.getLogParams();
+		Map<String, Object> company = commonDao.queryCompanyMationByUserId(user);//根据用户信息获取该用户所属的公司id。部门id，职位id
+		map.put("departmentId", company.get("departmentId"));
+		List<Map<String, Object>> beans = commonDao.querySimpleDepPeopleToTreeByUserBelongSimpleDep(map);
+		outputObject.setBeans(beans);
 	}
-
+	
 	/**
 	 * 
 	     * @Title: queryTalkGroupUserListByUserId
@@ -558,26 +495,34 @@ public class CommonServiceImpl implements CommonService{
 	     * @return void    返回类型
 	     * @throws
 	 */
-	@SuppressWarnings({ "static-access", "deprecation", "unchecked" })
 	@Override
 	public void queryTalkGroupUserListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("loginPCIp", inputObject.getRequest().getParameter("loginPCIp"));
-		map.put("userToken", inputObject.getRequest().getParameter("userToken"));
-		List<Map<String, Object>> beans = null;
-		String url = mainPropertiesConfig.getMessagePostNoticeListIsThisTalkGroupByUserId();
-		String str = HttpClient.doPost(url, map);
-		JSONObject json = JSONObject.fromObject(str);
-		if("0".equals(json.get("returnCode").toString())){
-			if(!ToolUtil.isBlank(json.get("rows").toString()))
-				beans = JSONArray.toList(JSONArray.fromObject(json.get("rows").toString()), Map.class);
-		}else{
-			outputObject.setreturnMessage(json.get("returnMessage").toString());
+		map = compareSelUserListByParams(map, inputObject);
+		Map<String, Object> user = inputObject.getLogParams();
+		map.put("createId", user.get("id"));
+		List<Map<String, Object>> beans = commonDao.queryTalkGroupUserListByUserId(map);
+		outputObject.setBeans(beans);
+	}
+	
+	/**
+	 * 获取人员列表时的参数转换
+	 * @param map
+	 * @param inputObject
+	 * @return
+	 * @throws Exception
+	 */
+	public Map<String, Object> compareSelUserListByParams(Map<String, Object> map, InputObject inputObject) throws Exception{
+		String chooseOrNotMy = map.get("chooseOrNotMy").toString();//人员列表中是否包含自己--1.包含；其他参数不包含
+		if(!"1".equals(chooseOrNotMy)){
+			Map<String, Object> user = inputObject.getLogParams();
+			map.put("userId", user.get("id"));
 		}
-		if(beans != null && !beans.isEmpty()){
-			outputObject.setBeans(beans);
-			outputObject.settotal(beans.size());
+		String chooseOrNotEmail = map.get("chooseOrNotEmail").toString();//人员列表中是否必须绑定邮箱--1.必须；其他参数没必要
+		if("1".equals(chooseOrNotEmail)){
+			map.put("hasEmail", "1");
 		}
+		return map;
 	}
 	
 }

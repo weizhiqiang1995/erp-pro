@@ -114,4 +114,17 @@ public class MemberController {
     public void queryMemberByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception{
         memberService.queryMemberByIdAndInfo(inputObject, outputObject);
     }
+    
+    /**
+     * 获取会员列表信息展示为下拉框
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/MemberController/queryMemberListToSelect")
+    @ResponseBody
+    public void queryMemberListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception{
+        memberService.queryMemberListToSelect(inputObject, outputObject);
+    }
+    
 }

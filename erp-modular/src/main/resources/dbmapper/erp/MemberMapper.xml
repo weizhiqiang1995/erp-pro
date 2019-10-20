@@ -274,4 +274,17 @@
         AND s.type = 3
         ORDER BY s.id DESC LIMIT 0,1
     </select>
+    
+    <select id="queryMemberListToSelect" parameterType="java.util.Map" resultType="java.util.Map">
+    	SELECT
+			a.id,
+			a.supplier `name`
+		FROM
+			erp_supplier a
+		WHERE
+			a.tenant_id = #{userId}
+		AND a.delete_flag = '0'
+		AND a.type = '3'
+    </select>
+    
 </mapper>

@@ -11,7 +11,7 @@
 	<div style="margin: 0 auto; padding: 20px;">
 	    <form class="layui-form" action="" id="showForm">
 	    	<div class="layui-form-item layui-col-xs12">
-		        <label class="layui-form-label">供应商<i class="red">*</i></label>
+		        <label class="layui-form-label">采购单号<i class="red">*</i></label>
 		        <div class="layui-input-block ver-center" id="cgddOrderNum">
 		            
 		        </div>
@@ -45,6 +45,7 @@
 		                        <th style="width: 120px;">产品(型号)</th>
 		                        <th style="width: 70px;">单位</th>
 		                        <th style="width: 80px;">库存</th>
+		                        <th style="width: 80px;">剩余数量</th>
 		                        <th style="width: 80px;">数量</th>
 		                        <th style="width: 80px;">单价</th>
 		                        <th style="width: 80px;">金额</th>
@@ -163,7 +164,8 @@
 			<td><select id="{{materialId}}" lay-filter="selectMaterialProperty" lay-search win-verify="required"></select></td>
 			<td><select id="{{unitId}}" lay-filter="selectUnitProperty" lay-search win-verify="required"></select></td>
 			<td id="{{currentTock}}"></td>
-			<td><input type="text" class="layui-input change-input rkNum" value="1" id="{{rkNum}}" win-verify="required|number"/></td>
+			<td id="{{nowNum}}">0</td>
+			<td><input type="text" class="layui-input change-input rkNum" value="0" id="{{rkNum}}" win-verify="required|number"/></td>
 			<td><input type="text" class="layui-input change-input unitPrice" id="{{unitPrice}}" win-verify="required|money"/></td>
 			<td><input type="text" class="layui-input change-input amountOfMoney" id="{{amountOfMoney}}" win-verify="required|money"/></td>
 			<td><input type="text" class="layui-input change-input taxRate" value="0.00" id="{{taxRate}}" win-verify="required|double"/></td>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyeye.dao.OtherOutLetsDao">
+
+    <select id="queryOtherOutLetsToList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+			a.id,
+			a.default_number defaultNumber,
+			CONVERT (a.oper_time, char) operTime,
+			a.oper_person_name operPersonName,
+			b.supplier supplierName,
+			FORMAT(a.total_price, 2) totalPrice,
+			GROUP_CONCAT(DISTINCT CONCAT(c.material_name, c.material_model) SEPARATOR ',') materialNames
+		FROM
+			erp_depothead a
+			LEFT JOIN erp_supplier b ON a.organ_id = b.id
+			LEFT JOIN erp_depotitem c ON c.header_id = a.id
+		WHERE
+			a.sub_type = '9'
+		AND a.tenant_id = #{userId}
+		AND a.delete_flag = '0'
+        <if test="material != '' and material != null">
+            AND c.material_name LIKE '%${material}%'
+        </if>
+        <if test="defaultNumber != '' and defaultNumber != null">
+            AND a.default_number LIKE '%${defaultNumber}%'
+        </if>
+        <if test="startTime != '' and startTime != null and endTime != '' and endTime != null">
+			AND a.oper_time >= #{startTime} AND #{endTime} >= a.oper_time
+		</if>
+        GROUP BY a.id
+        ORDER BY a.create_time DESC
+    </select>
+    
+    <select id="queryMaterialsById" parameterType="java.util.Map" resultType="java.util.Map">
+    	SELECT
+			a.id materialId,
+			a.`name` materialName,
+			a.model materialModel,
+			b.id mUnitId,
+			IFNULL(c.`name`, a.unit_name) unitName,
+			IFNULL(c.number, '1') baseNumber,
+			#{depotId} depotId
+		FROM
+			erp_material a,
+			erp_material_norms b
+			LEFT JOIN erp_unit c ON b.unit_id = c.id
+		WHERE
+			a.id = b.meterial_id
+		AND b.id = #{mUnitId}
+		AND a.id = b.meterial_id
+		AND a.delete_flag = '0'
+		AND b.delete_flag = '0'
+    </select>
+    
+    <insert id="insertOtherOutLetsMation" parameterType="java.util.Map">
+        INSERT into erp_depothead
+        (id, `type`, sub_type, default_number, number, oper_person_id, oper_person_name, create_time, oper_time, organ_id, account_id, total_price,
+        	pay_type, remark, status, tenant_id, delete_flag)
+        VALUES(#{id}, #{type}, #{subType}, #{defaultNumber}, #{number}, #{operPersonId}, #{operPersonName}, #{createTime}, #{operTime}, #{organId}, #{accountId}, #{totalPrice},
+        		#{payType}, #{remark}, #{status}, #{userId}, #{deleteFlag})
+    </insert>
+    
+    <insert id="insertOtherOutLetsChildMation" parameterType="java.util.Map">
+	     INSERT INTO erp_depotitem
+	     (id, header_id, material_id, material_name, material_model, m_unit_id, oper_number, basic_number, unit_price, all_price, remark, depot_id,
+	     	m_type, tenant_id, delete_flag)
+	     values
+		<foreach collection="list" item="item" index="index" separator="," >  
+			(#{item.id}, #{item.headerId}, #{item.materialId}, #{item.materialName}, #{item.materialModel}, #{item.mUnitId}, #{item.operNumber}, #{item.baseNumber}, #{item.estimatePurchasePrice}, #{item.allPrice}, #{item.remark}, #{item.depotId},
+				#{item.mType}, #{item.userId}, #{item.deleteFlag})  
+		</foreach>  
+	</insert>
+	
+	<select id="queryOtherOutLetsToEditById" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			a.id,
+			a.organ_id supplierId,
+			CONVERT (a.oper_time, char) operTime,
+			a.account_id accountId,
+			CONVERT(a.total_price, decimal(24, 2)) totalPrice,
+			a.pay_type payType,
+			a.remark
+		FROM
+			erp_depothead a
+		WHERE
+			a.id = #{id}
+		AND a.delete_flag = '0'
+		AND a.tenant_id = #{userId}
+		AND a.sub_type = '9'
+	</select>
+	
+	<select id="queryOtherOutLetsNormsToEditById" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			a.id,
+			a.depot_id depotId,
+			a.material_id materialId,
+			a.m_unit_id mUnitId,
+			IFNULL(SUM(b.oper_number * (CASE c.sub_type 
+									WHEN 10 THEN 0 
+									WHEN 11 THEN 0 
+									ELSE CASE c.type WHEN 2 THEN 1 ELSE -1 END
+								END)), 0) currentTock,
+			a.oper_number operNum,
+			CONVERT(a.unit_price, decimal(24, 2)) unitPrice,
+			CONVERT(a.all_price, decimal(24, 2)) allPrice,
+			a.remark
+		FROM
+			erp_depotitem a
+			LEFT JOIN erp_depotitem b ON b.depot_id = a.depot_id AND b.m_unit_id = a.m_unit_id AND b.header_id != a.header_id
+			LEFT JOIN erp_depothead c ON c.id = b.header_id
+		WHERE
+			a.header_id = #{id}
+		AND a.delete_flag = '0'
+		GROUP BY a.id
+	</select>
+	
+	<update id="editOtherOutLetsMationById" parameterType="java.util.Map">
+		UPDATE erp_depothead
+		<set>
+			<if test="operTime != '' and operTime != null">
+	            oper_time = #{operTime},
+	        </if>
+	        <if test="organId != '' and organId != null">
+	            organ_id = #{organId},
+	        </if>
+            account_id = #{accountId},
+            remark = #{remark},
+	        <if test="payType != '' and payType != null">
+	            pay_type = #{payType},
+	        </if>
+	        <if test="totalPrice != '' and totalPrice != null">
+	            total_price = #{totalPrice},
+	        </if>
+		</set>
+		WHERE id = #{id}
+		AND tenant_id = #{userId}
+		AND sub_type = '9'
+	</update>
+	
+	<delete id="deleteOtherOutLetsNormsMationById" parameterType="java.util.Map">
+		DELETE
+		FROM
+			erp_depotitem
+		WHERE
+			header_id = #{id}
+	</delete>
+	
+</mapper>

@@ -9,4 +9,8 @@ public interface OtherWareHousService {
 
 	public void insertOtherWareHousMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void queryOtherWareHousToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+	public void editOtherWareHousMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }

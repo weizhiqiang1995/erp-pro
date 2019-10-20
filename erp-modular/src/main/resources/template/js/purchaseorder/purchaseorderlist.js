@@ -11,7 +11,6 @@ layui.config({
     window: 'js/winui.window'
 }).define(['window', 'table', 'jquery', 'winui', 'form', 'laydate'], function (exports) {
     winui.renderColor();
-    authBtn('1570958309701');
     var $ = layui.$,
         form = layui.form,
         laydate = layui.laydate,
@@ -75,7 +74,7 @@ layui.config({
         	subExamine(data);
         }else if (layEvent === 'examine') { //审核
         	examine(data);
-        }else if (layEvent === 'turnPurchase') { //转采购单
+        }else if (layEvent === 'turnPurchase') { //转采购入库单
         	turnPurchase(data);
         }
     });
@@ -131,12 +130,6 @@ layui.config({
 			pageId: "purchaseorderdetails",
 			area: ['90vw', '90vh'],
 			callBack: function(refreshCode){
-                if (refreshCode == '0') {
-                	winui.window.msg("操作成功", {icon: 1,time: 2000});
-                	loadTable();
-                } else if (refreshCode == '-9999') {
-                	winui.window.msg("操作失败", {icon: 2,time: 2000});
-                }
 			}});
 	}
 	
@@ -239,5 +232,5 @@ layui.config({
         table.reload("messageTable", {page: {curr: 1}, where:{defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime}})
     }
 
-    exports('otherwarehouslist', {});
+    exports('purchaseorderlist', {});
 });

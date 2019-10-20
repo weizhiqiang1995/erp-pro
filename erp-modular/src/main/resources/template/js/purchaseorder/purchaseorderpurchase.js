@@ -26,6 +26,7 @@ layui.config({
  		laydate.render({ 
  		  elem: '#operTime',
  		  type: 'datetime',
+ 		  value: getFormatDate(),
  	 	  trigger: 'click'
  		});
 		
@@ -113,7 +114,6 @@ layui.config({
 					cgddOrderNum = json.bean.defaultNumber;
 					$("#cgddOrderNum").html(json.bean.defaultNumber);
 					$("#supplierId").val(json.bean.organId);
-					$("#operTime").val(json.bean.operTime);
 					$("#accountId").val(json.bean.accountId);
 					$("#payType").val(json.bean.payType);
 					$("#allPrice").html(json.bean.totalPrice.toFixed(2));
@@ -141,7 +141,8 @@ layui.config({
 						});
 						$("#currentTock" + (rowNum - 1)).html(item.currentTock);
 						
-						$("#rkNum" + (rowNum - 1)).val(item.operNumber);
+						$("#nowNum" + (rowNum - 1)).html(isNull(item.nowNumber) ? 0 : item.nowNumber);
+						$("#rkNum" + (rowNum - 1)).val(isNull(item.nowNumber) ? 0 : item.nowNumber);
 						$("#unitPrice" + (rowNum - 1)).val(item.unitPrice.toFixed(2));
 						$("#amountOfMoney" + (rowNum - 1)).val(item.allPrice.toFixed(2));
 						$("#taxRate" + (rowNum - 1)).val(item.taxRate.toFixed(2));
@@ -520,6 +521,7 @@ layui.config({
 				}
 				var tableData = new Array();
 				var noError = false; //循环遍历表格数据时，是否有其他错误信息
+				var isStandard = false;//判断是否超标
 				$.each(rowTr, function(i, item) {
 					//获取行编号
 					var rowNum = $(item).attr("trcusid").replace("tr", "");
@@ -529,6 +531,9 @@ layui.config({
 						winui.window.msg('数量不能为0', {icon: 2, time: 2000});
 						noError = true;
 						return false;
+					}
+					if(parseInt($("#rkNum" + rowNum).val()) > parseInt($("#nowNum" + rowNum).html())){
+						isStandard = true;
 					}
 					if(inTableDataArrayByAssetarId($("#materialId" + rowNum).val(), $("#depotId" + rowNum).val(), $("#unitId" + rowNum).val(), tableData)) {
 						$("#depotId" + rowNum).addClass("layui-form-danger");
@@ -584,14 +589,27 @@ layui.config({
 					cgddOrderNum: cgddOrderNum,
 					rowId: parent.rowId
 				};
-				AjaxPostUtil.request({url: reqBasePath + "purchaseorder009", params: params, type: 'json', callback: function(json) {
-					if(json.returnCode == 0) {
-						parent.layer.close(index);
-						parent.refreshCode = '0';
-					} else {
-						winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
-					}
-				}});
+				if(isStandard){
+					layer.confirm('该入库单已超出采购单数量，是否继续？', { icon: 3, title: '超标提示' }, function (i) {
+			            AjaxPostUtil.request({url: reqBasePath + "purchaseorder009", params: params, type: 'json', callback: function(json) {
+							if(json.returnCode == 0) {
+								parent.layer.close(index);
+								parent.refreshCode = '0';
+							} else {
+								winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
+							}
+						}});
+			        });
+				}else{
+					AjaxPostUtil.request({url: reqBasePath + "purchaseorder009", params: params, type: 'json', callback: function(json) {
+						if(json.returnCode == 0) {
+							parent.layer.close(index);
+							parent.refreshCode = '0';
+						} else {
+							winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
+						}
+					}});
+				}
 			}
 			return false;
 		});
@@ -627,6 +645,7 @@ layui.config({
 				materialId: "materialId" + rowNum.toString(), //产品id
 				unitId: "unitId" + rowNum.toString(), //规格id
 				currentTock: "currentTock" + rowNum.toString(), //库存id
+				nowNum: "nowNum" + rowNum.toString(), //剩余数量id
 				rkNum: "rkNum" + rowNum.toString(), //数量id
 				unitPrice: "unitPrice"  + rowNum.toString(), //单价id
 				amountOfMoney: "amountOfMoney"  + rowNum.toString(), //金额id

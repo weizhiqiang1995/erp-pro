@@ -95,9 +95,9 @@
 			<td><select id="{{materialId}}" lay-filter="selectMaterialProperty" lay-search win-verify="required"></select></td>
 			<td><select id="{{unitId}}" lay-filter="selectUnitProperty" lay-search win-verify="required"></select></td>
 			<td id="{{currentTock}}"></td>
-			<td><input type="text" class="layui-input rkNum" value="1" id="{{rkNum}}" win-verify="required|number"/></td>
-			<td id="{{unitPrice}}"></td>
-			<td id="{{amountOfMoney}}"></td>
+			<td><input type="text" class="layui-input change-input rkNum" value="1" id="{{rkNum}}" win-verify="required|number"/></td>
+			<td><input type="text" class="layui-input change-input unitPrice" id="{{unitPrice}}" win-verify="required|money"/></td>
+			<td><input type="text" class="layui-input change-input amountOfMoney" id="{{amountOfMoney}}" win-verify="required|money"/></td>
 			<td><input type="text" class="layui-input" id="{{remark}}"/></td>
 		</tr>
 	</script>

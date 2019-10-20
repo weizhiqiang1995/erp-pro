@@ -33,7 +33,7 @@
 	<div class="winui-toolbar">
 	    <div class="winui-tool">
 	        <button id="reloadTable" class="winui-toolbtn"><i class="fa fa-refresh" aria-hidden="true"></i>刷新数据</button>
-	        <button id="addBean" class="winui-toolbtn" auth="1570958309701"><i class="fa fa-plus" aria-hidden="true"></i>新增</button>
+	        <button id="addBean" class="winui-toolbtn"><i class="fa fa-plus" aria-hidden="true"></i>新增</button>
 	    </div>
 	</div>
 	<div style="margin:auto 10px;">
@@ -46,7 +46,7 @@
 				<a class="layui-btn layui-btn-xs" lay-event="subExamine">提交审核</a>
         	{{# } else if(d.status == 1) { }}
 				<a class="layui-btn layui-btn-xs" lay-event="examine">审核</a>
-			{{# } else if(d.status == 2) { }}
+			{{# } else if(d.status == 2 || d.status == 4) { }}
 				<a class="layui-btn layui-btn-xs" lay-event="turnPurchase">转采购入库</a>
 			{{# } }}
     	</script>

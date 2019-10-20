@@ -293,14 +293,14 @@ layui.define(["jquery"], function(exports) {
 
             // create initial tags
             var tags = o.initialTags.length ? o.initialTags : el.val().split(o.dregex);
-            for (i in tags) {
-                var tag = $.trim(tags[i].replace(/ +/, ' '));
-                if (tag) {
-                    if (o.forceLowercase) tag = tag.toLowerCase();
-                    tag_list.push(tag);
-                    ed.append('<li><div class="tag-editor-spacer">&nbsp;'+o.delimiter[0]+'</div><div class="tag-editor-tag">'+tag+'</div><div class="tag-editor-delete"><i></i></div></li>');
-                }
-            }
+            $.each(tags, function(i, item){
+            	var tag = $.trim(item.replace(/ +/, ' '));
+            	if (tag) {
+            		if (o.forceLowercase) tag = tag.toLowerCase();
+            		tag_list.push(tag);
+            		ed.append('<li><div class="tag-editor-spacer">&nbsp;'+o.delimiter[0]+'</div><div class="tag-editor-tag">'+tag+'</div><div class="tag-editor-delete"><i></i></div></li>');
+            	}
+            });
             update_globals(true); // true -> no onChange callback
 
             // init sortable

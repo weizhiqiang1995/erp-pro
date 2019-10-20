@@ -1,4 +1,6 @@
 
+var mUnitId = "";
+
 layui.config({
 	base: basePath, 
 	version: skyeyeVersion
@@ -34,6 +36,17 @@ layui.config({
 		 		}
 		 		form.render();
 		 	}
+		});
+		
+		$("body").on("click", ".notice-title-click", function(e){
+			mUnitId = $(this).attr("rowid");
+			_openNewWindows({
+				url: "../../tpl/material/materialstocklist.html", 
+				title: "库存明细",
+				pageId: "materialstocklist",
+				area: ['100vw', '100vh'],
+				callBack: function(refreshCode){
+				}});
 		});
 	    
 	});

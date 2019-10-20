@@ -33,7 +33,7 @@
 <div class="winui-toolbar">
     <div class="winui-tool">
         <button id="reloadTable" class="winui-toolbtn"><i class="fa fa-refresh" aria-hidden="true"></i>刷新数据</button>
-        <button id="addBean" class="winui-toolbtn" auth="1570756544366"><i class="fa fa-plus" aria-hidden="true"></i>新增账户</button>
+        <button id="addBean" class="winui-toolbtn" auth="1570756544366"><i class="fa fa-plus" aria-hidden="true"></i>新增</button>
     </div>
 </div>
 <div style="margin:auto 10px;">
@@ -41,16 +41,16 @@
 
     <script type="text/html" id="tableBar">
         {{# if(auth('1570756554334')){ }}
-        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         {{# } }}
         {{# if(auth('1570756566725')){ }}
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+        	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
         {{# } }}
         {{# if(d.isDefault == 0 && auth('1570756580639')){ }}
-        <a class="layui-btn layui-btn-xs" lay-event="default">默认</a>
+        	<a class="layui-btn layui-btn-xs" lay-event="default">默认</a>
         {{# } }}
         {{# if(auth('1570756608495')){ }}
-        <a class="layui-btn layui-btn-xs" lay-event="item">流水</a>
+        	<a class="layui-btn layui-btn-xs" lay-event="item">流水</a>
         {{# } }}
     </script>
 </div>

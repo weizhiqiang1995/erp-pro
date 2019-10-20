@@ -59,4 +59,6 @@ public interface MaterialDao {
 
 	public Map<String, Object> queryMaterialTockByNormsIdAndDepotId(Map<String, Object> params) throws Exception;
 
+	public List<Map<String, Object>> queryMaterialDepotItemByNormsId(Map<String, Object> params, PageBounds pageBounds) throws Exception;
+
 }
