@@ -36,14 +36,23 @@ layui.config({
 		        }
 		        return str;
 		    }},
+		    { field: 'subTypeName', title: '单据类型', align: 'left', width: 100},
 	        { field: 'supplierName', title: '供应商', align: 'left', width: 150},
 	        { field: 'unitPrice', title: '入库单价', align: 'left', width: 120 },
 	        { field: 'operNumber', title: '数量', align: 'left', width: 120, templet: function(d){
-		        if(d.type == 2){
-		        	return d.operNumber;
-		        }else{
-		        	return "-" + d.operNumber;
-		        }
+	        	if(d.subType == 12){//拆分单
+	        		if(d.mType == 2){//普通子件
+	        			return d.operNumber;
+	        		}else{
+	        			return "-" + d.operNumber;
+	        		}
+	        	}else{
+			        if(d.type == 2){
+			        	return d.operNumber;
+			        }else{
+			        	return "-" + d.operNumber;
+			        }
+	        	}
 		    }},
 	        { field: 'taxLastMoney', title: '含税合计', align: 'left', width: 120 },
 	        { field: 'operTime', title: '单据日期', align: 'center', width: 140 }
@@ -63,11 +72,24 @@ layui.config({
     //详情
 	function details(data){
 		rowId = data.id;
-		var url = "";
-		if(data.subType == '1'){//采购入库
+		if(data.subType == 1){//采购入库
 			url = "../../tpl/purchaseput/purchaseputdetails.html";
-		}else if(data.subType == '4'){//其他入库
+		}else if(data.subType == 4){//其他入库
 			url = "../../tpl/otherwarehous/otherwarehousdetails.html";
+		}else if(data.subType == 2){//销售退货
+			url = "../../tpl/salesreturns/salesreturnsdetails.html";
+		}else if(data.subType == 6){//采购退货
+			url = "../../tpl/purchasereturns/purchasereturnsdetails.html";
+		}else if(data.subType == 9){//其他出库
+			url = "../../tpl/otheroutlets/otheroutletsdetails.html";
+		}else if(data.subType == 5){//销售出库
+			url = "../../tpl/salesoutlet/salesoutletdetails.html";
+		}else if(data.subType == 8){//零售出库
+			url = "../../tpl/retailoutlet/retailoutletdetails.html";
+		}else if(data.subType == 3){//零售退货
+			url = "../../tpl/retailreturns/retailreturnsdetails.html";
+		}else if(data.subType == 12){//拆分单
+			url = "../../tpl/splitlist/splitlistdetails.html";
 		}
 		_openNewWindows({
 			url: url, 

@@ -189,12 +189,8 @@
             CONVERT (d.oper_time, CHAR) operTime,
             CONVERT (d.create_time, CHAR) createTime,
             FORMAT(IFNULL(CASE WHEN d.sub_type IN (1,2,3,4) THEN -abs(d.total_price) ELSE d.total_price END,0), 2) totalPrice,
-            s.supplier,
-            FORMAT((IFNULL(d.discount_money,0) + IFNULL(d.discount_last_money,0)) ,2) taxLastMoneyPrice
-        FROM
-            erp_depothead d,
-            erp_supplier s
-            FORMAT(d.total_price, 2) totalPrice,
+            FORMAT((IFNULL(d.discount_money,0) + IFNULL(d.discount_last_money,0)) ,2) taxLastMoneyPrice,
+            d.type,
             c.supplier supplierName,
             d.pay_type payType,
             d.remark,
@@ -205,8 +201,7 @@
             erp_depothead d
             LEFT JOIN erp_supplier c ON d.organ_id = c.id
         WHERE
-            d.organ_id = s.id
-        AND d.account_id = #{id}
+            d.account_id = #{id}
         AND d.tenant_id = #{userId}
         AND d.delete_flag = 0
         AND d.sub_type NOT IN(10,11)

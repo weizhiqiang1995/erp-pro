@@ -210,6 +210,7 @@
 			IFNULL(SUM(c.oper_number * (CASE d.sub_type 
 									WHEN 10 THEN 0 
 									WHEN 11 THEN 0 
+									WHEN 12 THEN (CASE c.m_type WHEN 1 THEN -1 ELSE 1 END)
 									ELSE CASE d.type WHEN 2 THEN 1 ELSE -1 END
 								END)), 0) currentTock
 		FROM
@@ -399,8 +400,7 @@
 		AND a.depot_id = #{depotId}
 		AND a.m_unit_id = #{mUnitId}
 		AND a.header_id = b.id
-		AND b.sub_type != '10'
-		AND b.sub_type != '11'
+		AND b.sub_type NOT IN(10, 11)
 		GROUP BY a.m_unit_id
     </select>
     
@@ -416,6 +416,10 @@
 			b.sub_type subType,
 			CONVERT(IFNULL(a.tax_last_money, a.all_price), decimal(24, 2)) taxLastMoney,
 			CONVERT (b.oper_time, CHAR) operTime,
+			a.m_type mType,
+			CASE b.sub_type WHEN 1 THEN '采购入库' WHEN 2 THEN '销售退货' WHEN 3 THEN '零售退货' WHEN 4 THEN '其他入库' WHEN 5 THEN '销售出库' 
+							WHEN 6 THEN '采购退货' WHEN 7 THEN '调拨' WHEN 8 THEN '零售出库' WHEN 9 THEN '其他出库' WHEN 12 THEN '拆分单'
+							WHEN 13 THEN '组装单' ELSE '' END subTypeName,
 			c.supplier supplierName
 		FROM
 			erp_depotitem a,
@@ -425,8 +429,7 @@
 			a.m_unit_id = #{mUnitId}
 		AND a.tenant_id = #{userId}
 		AND a.delete_flag = '0'
-		AND b.sub_type != '10'
-		AND b.sub_type != '11'
+		AND b.sub_type NOT IN(10, 11)
 		AND a.header_id = b.id 
 		AND b.delete_flag = '0'
 		ORDER BY b.oper_time DESC, a.id
