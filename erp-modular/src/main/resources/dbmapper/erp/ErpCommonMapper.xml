@@ -51,7 +51,8 @@
 			FORMAT(a.tax_unit_price, 2) taxUnitPrice,
 			FORMAT(a.tax_rate, 2) taxRate,
 			FORMAT(a.tax_money, 2) taxMoney,
-			FORMAT(a.tax_last_money, 2) taxLastMoney
+			FORMAT(a.tax_last_money, 2) taxLastMoney,
+			CASE a.m_type WHEN 0 THEN '普通' WHEN 1 THEN '组合件' WHEN 2 THEN '普通子件' ELSE '' END mTypeName
 		FROM
 			erp_depotitem a
 			LEFT JOIN erp_depot b ON a.depot_id = b.id,
@@ -63,6 +64,7 @@
 		AND a.delete_flag = '0'
 		AND a.material_id = c.id
 		AND a.m_unit_id = d.id
+		ORDER BY a.m_type ASC
     </select>
     
     <select id="queryOddNumberBySubType" parameterType="java.util.Map" resultType="java.util.Map">

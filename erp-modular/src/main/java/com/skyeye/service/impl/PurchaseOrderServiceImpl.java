@@ -98,7 +98,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService{
 			//单据主表对象
 			Map<String, Object> depothead = new HashMap<>();
 			depothead.put("id", useId);
-			depothead.put("type", 2);//类型(1.出库/2.入库)
+			depothead.put("type", 2);//类型(1.出库/2.入库3.其他)
 			depothead.put("subType", ErpConstants.DepoTheadSubType.PURCHASE_ORDER.getNum());//采购单
 			ErpOrderNum erpOrderNum = new ErpOrderNum();
 			String orderNum = erpOrderNum.getOrderNumBySubType(userId, ErpConstants.DepoTheadSubType.PURCHASE_ORDER.getNum());
@@ -399,7 +399,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService{
 					//单据主表对象
 					Map<String, Object> depothead = new HashMap<>();
 					depothead.put("id", useId);
-					depothead.put("type", 2);//类型(1.出库/2.入库)
+					depothead.put("type", 2);//类型(1.出库/2.入库3.其他)
 					depothead.put("subType", ErpConstants.DepoTheadSubType.PUT_IS_PURCHASE.getNum());//采购入库
 					ErpOrderNum erpOrderNum = new ErpOrderNum();
 					String orderNum = erpOrderNum.getOrderNumBySubType(userId, ErpConstants.DepoTheadSubType.PUT_IS_PURCHASE.getNum());

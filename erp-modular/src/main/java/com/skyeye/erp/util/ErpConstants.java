@@ -30,7 +30,13 @@ public class ErpConstants {
 		//采购单
     	PURCHASE_ORDER("采购订单", "CGDD", "10"),
 		//销售单
-		OUTCHASE_ORDER("销售订单", "XSDD", "11");
+		OUTCHASE_ORDER("销售订单", "XSDD", "11"),
+		//拆分单
+		SPLIT_LIST_ORDER("拆分订单", "CFDD", "12"),
+		//组装单
+		ASSEMBLY_SHEET_ORDER("组装订单", "ZZDD", "13"),
+		//调拨单
+		ALLOCATION_FORM_ORDER("调拨订单", "DBDD", "14");
 		
         private String nameCode;
         private String code;

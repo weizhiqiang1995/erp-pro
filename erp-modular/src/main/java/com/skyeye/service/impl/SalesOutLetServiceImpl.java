@@ -108,7 +108,7 @@ public class SalesOutLetServiceImpl implements SalesOutLetService{
 			//单据主表对象
 			Map<String, Object> depothead = new HashMap<>();
 			depothead.put("id", useId);
-			depothead.put("type", 1);//类型(1.出库/2.入库)
+			depothead.put("type", 1);//类型(1.出库/2.入库3.其他)
 			depothead.put("subType", ErpConstants.DepoTheadSubType.OUT_IS_SALES_OUTLET.getNum());//销售出库
 			ErpOrderNum erpOrderNum = new ErpOrderNum();
 			String orderNum = erpOrderNum.getOrderNumBySubType(userId, ErpConstants.DepoTheadSubType.OUT_IS_SALES_OUTLET.getNum());
