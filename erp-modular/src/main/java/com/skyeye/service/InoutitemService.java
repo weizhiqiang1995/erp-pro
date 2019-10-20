@@ -23,4 +23,6 @@ public interface InoutitemService {
     public void queryInoutitemByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 	public void queryInoutitemISExpenditureToSelect(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+    public void queryInoutitemISExpenditureIncomeToSelect(InputObject inputObject, OutputObject outputObject) throws Exception;
 }

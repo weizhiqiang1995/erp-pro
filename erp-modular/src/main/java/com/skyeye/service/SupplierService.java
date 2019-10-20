@@ -26,4 +26,6 @@ public interface SupplierService {
     public void querySupplierByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 	public void querySupplierListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+    public void querySupplierListToSelectAll(InputObject inputObject, OutputObject outputObject) throws Exception;
 }

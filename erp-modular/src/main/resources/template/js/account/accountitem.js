@@ -23,6 +23,28 @@ layui.config({
         limit: 8,
         cols: [[
             { title: '序号', type: 'numbers'},
+            { field: 'number', title: '票据号', align: 'center',width: 200},
+            { field: 'subType', title: '出入库分类', align: 'left',width: 100, templet: function(d){
+                if(d.subType == '1'){
+                    return "<span class='state-up'>采购入库</span>";
+                }else if(d.subType == '2'){
+                    return "<span class='state-up'>销售退货</span>";
+                }else if(d.subType == '3'){
+                    return "<span class='state-up'>零售退货</span>";
+                }else if(d.subType == '4'){
+                    return "<span class='state-up'>其他入库</span>";
+                }else if(d.subType == '5'){
+                    return "<span class='state-down'>销售出库</span>";
+                }else if(d.subType == '6'){
+                    return "<span class='state-down'>采购退货</span>";
+                }else if(d.subType == '7'){
+                    return "<span class='state-down'>调拨</span>";
+                }else if(d.subType == '8'){
+                    return "<span class='state-down'>零售</span>";
+                }else if(d.subType == '9') {
+                    return "<span class='state-down'>其他出库</span>";
+                }
+            }},
             { field: 'defaultNumber', title: '单据编号', align: 'left', width: 250, templet: function(d){
 		        var str = '<a lay-event="details" class="notice-title-click">' + d.defaultNumber + '</a>';
 		        if(!isNull(d.linkNumber)){
@@ -44,6 +66,10 @@ layui.config({
                     return "<span class='state-error'>参数错误</span>";
                 }
             }},
+            { field: 'supplier', title: '单位信息', align: 'left',width: 100},
+            { field: 'totalPrice', title: '合计金额', align: 'left',width: 100},
+            { field: 'taxLastMoneyPrice', title: '合计价税', align: 'left',width: 100},
+            { field: 'operTime', title: '出入库日期', align: 'center', width: 180 },
             { field: 'subTypeName', title: '单据类型', align: 'left',width: 100},
             { field: 'supplierName', title: '状态', align: 'left',width: 120},
             { field: 'totalPrice', title: '合计金额', align: 'left',width: 100},

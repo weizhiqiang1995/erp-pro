@@ -3,30 +3,52 @@
 <mapper namespace="com.skyeye.dao.AccountDao">
     <select id="queryAccountByList" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
-            a.id,
-            a.name accountName,
-            a.serial_no serialNo,
-            FORMAT(a.initial_amount, 2) initialAmount,
-            FORMAT(a.current_amount, 2) currentAmount,
-            a.remark,
-            a.is_default isDefault,
-            a.delete_flag deleteFlag,
-            CONVERT (a.create_time, CHAR) createTime
+            n.id,
+            n.name accountName,
+            n.serial_no serialNo,
+            FORMAT(n.initial_amount,2) initialAmount,
+            FORMAT((CASE IF(n.tax_last_money_price=0, 1, 2) WHEN 2 THEN n.initial_amount + n.tax_last_money_price ELSE n.initial_amount + n.total_price END),2) currentAmount,
+            n.remark,
+            n.is_default isDefault,
+            n.delete_flag deleteFlag,
+            CONVERT (n.create_time, CHAR) createTime,
+            n.tenant_id tenantId
         FROM
-            erp_account a
-        WHERE
-            a.delete_flag = 0
-        AND a.tenant_id = #{userId}
-        <if test="accountName != '' and accountName != null">
-            AND a.name LIKE '%${accountName}%'
-        </if>
-        <if test="serialNo != '' and serialNo != null">
-            AND a.serial_no LIKE '%${serialNo}%'
-        </if>
-        <if test="remark != '' and remark != null">
-            AND a.remark LIKE '%${remark}%'
-        </if>
-        ORDER BY a.create_time DESC
+            (
+            SELECT
+                a.id,
+                a.name,
+                a.serial_no,
+                a.initial_amount,
+                a.current_amount,
+                a.remark,
+                a.is_default,
+                a.delete_flag,
+                a.create_time,
+                a.tenant_id,
+                (SELECT IFNULL(
+                    (CASE WHEN ed.sub_type IN (1, 2, 3, 4) THEN -ABS(SUM(ed.total_price)) ELSE SUM(ed.total_price) END), 0)
+                FROM erp_depothead ed WHERE ed.account_id = a.id) total_price,
+                (SELECT IFNULL(
+                    CASE WHEN ed.sub_type IN (1, 2, 3, 4) THEN -ABS(SUM(IFNULL(ed.discount_money, 0) + IFNULL(ed.discount_last_money, 0)))
+                    ELSE SUM(IFNULL(ed.discount_money, 0) + IFNULL(ed.discount_last_money, 0)) END, 0)
+                FROM erp_depothead ed WHERE ed.account_id = a.id ) tax_last_money_price
+            FROM
+                erp_account a
+            WHERE
+                a.delete_flag = 0
+            AND a.tenant_id = #{userId}
+            <if test="accountName != '' and accountName != null">
+                AND a.name LIKE '%${accountName}%'
+            </if>
+            <if test="serialNo != '' and serialNo != null">
+                AND a.serial_no LIKE '%${serialNo}%'
+            </if>
+            <if test="remark != '' and remark != null">
+                AND a.remark LIKE '%${remark}%'
+            </if>
+            ORDER BY a.create_time DESC
+        ) n
     </select>
 
     <select id="queryAccountByName" parameterType="java.util.Map" resultType="java.util.Map">
@@ -160,13 +182,18 @@
     <select id="queryAccountStreamById" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
             d.id,
-            d.type,
             d.sub_type subType,
             CASE d.sub_type WHEN 1 THEN '采购入库' WHEN 2 THEN '销售退货' WHEN 3 THEN '零售退货' WHEN 4 THEN '其他入库' WHEN 5 THEN '销售出库' 
 							WHEN 6 THEN '采购退货' WHEN 7 THEN '调拨' WHEN 8 THEN '零售出库' WHEN 9 THEN '其他出库' ELSE '' END subTypeName,
             d.default_number defaultNumber,
             CONVERT (d.oper_time, CHAR) operTime,
             CONVERT (d.create_time, CHAR) createTime,
+            FORMAT(IFNULL(CASE WHEN d.sub_type IN (1,2,3,4) THEN -abs(d.total_price) ELSE d.total_price END,0), 2) totalPrice,
+            s.supplier,
+            FORMAT((IFNULL(d.discount_money,0) + IFNULL(d.discount_last_money,0)) ,2) taxLastMoneyPrice
+        FROM
+            erp_depothead d,
+            erp_supplier s
             FORMAT(d.total_price, 2) totalPrice,
             c.supplier supplierName,
             d.pay_type payType,
@@ -178,7 +205,8 @@
             erp_depothead d
             LEFT JOIN erp_supplier c ON d.organ_id = c.id
         WHERE
-            d.account_id = #{id}
+            d.organ_id = s.id
+        AND d.account_id = #{id}
         AND d.tenant_id = #{userId}
         AND d.delete_flag = 0
         AND d.sub_type NOT IN(10,11)
@@ -198,9 +226,8 @@
 
     <select id="queryAccountItemMoneyById" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
-            SUM(d.total_price) totalPrice
+            IFNULL(CASE WHEN d.sub_type IN (1,2,3,4) THEN -ABS(SUM(d.total_price)) ELSE SUM(d.total_price) END, 0) totalPrice
         FROM
-            erp_account a,
             erp_depothead d
         WHERE
             d.account_id = #{id}

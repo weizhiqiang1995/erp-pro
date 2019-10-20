@@ -195,4 +195,19 @@ public class SupplierServiceImpl implements SupplierService {
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
 	}
+
+    /**
+     * 获取供应商，客户，会员列表信息展示为下拉框
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void querySupplierListToSelectAll(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> params = inputObject.getParams();
+        params.put("userId", inputObject.getLogParams().get("id"));
+        List<Map<String, Object>> beans = supplierDao.querySupplierListToSelectAll(params);
+        outputObject.setBeans(beans);
+        outputObject.settotal(beans.size());
+    }
 }

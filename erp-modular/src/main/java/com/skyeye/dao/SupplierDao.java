@@ -34,4 +34,6 @@ public interface SupplierDao {
     public Map<String, Object> querySupplierByIdAndInfo(Map<String, Object> params) throws Exception;
 
 	public List<Map<String, Object>> querySupplierListToSelect(Map<String, Object> params) throws Exception;
+
+    public List<Map<String, Object>> querySupplierListToSelectAll(Map<String, Object> params) throws Exception;
 }
