@@ -141,6 +141,8 @@ layui.config({
 			url = "../../tpl/otheroutlets/otheroutletsdetails.html";
 		}else if(data.subType == 5){//销售出库
 			url = "../../tpl/salesoutlet/salesoutletdetails.html";
+		}else if(data.subType == 8){//零售出库
+			url = "../../tpl/retailoutlet/retailoutletdetails.html";
 		}
 		_openNewWindows({
 			url: url, 

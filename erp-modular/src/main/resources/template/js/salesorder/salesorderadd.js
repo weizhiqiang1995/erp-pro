@@ -108,16 +108,16 @@ layui.config({
 							$.each(item.unitList, function(j, bean) {
 								if(item.firstInUnit == bean.unitId){
 									$("#unitId" + thisRowNum).val(bean.id);
-									$("#unitPrice" + thisRowNum).val(bean.estimatePurchasePrice.toFixed(2));//单价
-									$("#amountOfMoney" + thisRowNum).val((rkNum * parseFloat(bean.estimatePurchasePrice)).toFixed(2));//金额
+									$("#unitPrice" + thisRowNum).val(bean.salePrice.toFixed(2));//单价
+									$("#amountOfMoney" + thisRowNum).val((rkNum * parseFloat(bean.salePrice)).toFixed(2));//金额
 									return false;
 								}
 							});
 						}else{//不是多单位
 							var firstItem = item.unitList[0];
 							$("#unitId" + thisRowNum).val(firstItem.id);
-							$("#unitPrice" + thisRowNum).val(firstItem.estimatePurchasePrice.toFixed(2));//单价
-							$("#amountOfMoney" + thisRowNum).val((rkNum * parseFloat(firstItem.estimatePurchasePrice)).toFixed(2));//金额
+							$("#unitPrice" + thisRowNum).val(firstItem.salePrice.toFixed(2));//单价
+							$("#amountOfMoney" + thisRowNum).val((rkNum * parseFloat(firstItem.salePrice)).toFixed(2));//金额
 						}
 						form.render('select');
 						return false;
@@ -146,8 +146,8 @@ layui.config({
 							if(thisRowValue == bean.id){//获取规格
 								//获取当前行数量
 								var rkNum = parseInt($("#rkNum" + thisRowNum).val());
-								$("#unitPrice" + thisRowNum).val(bean.estimatePurchasePrice.toFixed(2));//单价
-								$("#amountOfMoney" + thisRowNum).val((rkNum * parseFloat(bean.estimatePurchasePrice)).toFixed(2));//金额
+								$("#unitPrice" + thisRowNum).val(bean.salePrice.toFixed(2));//单价
+								$("#amountOfMoney" + thisRowNum).val((rkNum * parseFloat(bean.salePrice)).toFixed(2));//金额
 								return false;
 							}
 						});
@@ -274,6 +274,13 @@ layui.config({
 						$("#rkNum" + rowNum).addClass("layui-form-danger");
 						$("#rkNum" + rowNum).focus();
 						winui.window.msg('数量不能为0', {icon: 2, time: 2000});
+						noError = true;
+						return false;
+					}
+					if(parseInt($("#rkNum" + rowNum).val()) > parseInt($("#currentTock" + rowNum).html())){
+						$("#rkNum" + rowNum).addClass("layui-form-danger");
+						$("#rkNum" + rowNum).focus();
+						winui.window.msg('超过库存数量.', {icon: 2, time: 2000});
 						noError = true;
 						return false;
 					}

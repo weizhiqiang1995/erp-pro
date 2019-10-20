@@ -376,6 +376,8 @@
 			a.id,
 			b.`name`,
 			CONVERT(a.estimate_purchase_price, decimal) estimatePurchasePrice,
+			CONVERT(a.retail_price, decimal) retailPrice,
+			CONVERT(a.sale_price, decimal) salePrice,
 			a.unit_id unitId
 		FROM
 			erp_material_norms a
