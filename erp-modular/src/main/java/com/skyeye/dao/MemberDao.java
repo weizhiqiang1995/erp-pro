@@ -33,4 +33,6 @@ public interface MemberDao {
     public Map<String, Object> queryMemberByEnabled(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> queryMemberByIdAndInfo(Map<String, Object> params) throws Exception;
+
+	public List<Map<String, Object>> queryMemberListToSelect(Map<String, Object> params) throws Exception;
 }

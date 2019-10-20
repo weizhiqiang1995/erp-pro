@@ -24,4 +24,6 @@ public interface MemberService {
     public void editMemberByNotEnabled(InputObject inputObject, OutputObject outputObject) throws Exception;
 
     public void queryMemberByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+	public void queryMemberListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception;
 }
