@@ -136,7 +136,7 @@ layui.config({
 		rowId = data.headerId;
 		var url = "";
 		if(data.subType == 6){//采购退货
-			url = "../../tpl/purchaseout/purchaseoutdetails.html";
+			url = "../../tpl/purchasereturns/purchasereturnsdetails.html";
 		}else if(data.subType == 9){//其他出库
 			url = "../../tpl/otheroutlets/otheroutletsdetails.html";
 		}else if(data.subType == 5){//销售出库
