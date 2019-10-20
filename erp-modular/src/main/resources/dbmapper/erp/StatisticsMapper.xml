@@ -7,6 +7,8 @@
 			b.id headerId,
 			b.default_number defaultNumber,
 			b.sub_type subType,
+			CASE b.sub_type WHEN 1 THEN '采购入库' WHEN 2 THEN '销售退货' WHEN 3 THEN '零售退货' WHEN 4 THEN '其他入库' WHEN 5 THEN '销售出库' 
+							WHEN 6 THEN '采购退货' WHEN 7 THEN '调拨' WHEN 8 THEN '零售出库' WHEN 9 THEN '其他出库' ELSE '' END subTypeName,
 			CONVERT(b.oper_time, CHAR) operTime,
 			a.material_name materialName,
 			a.material_model materialModel,
@@ -48,6 +50,8 @@
 			b.id headerId,
 			b.default_number defaultNumber,
 			b.sub_type subType,
+			CASE b.sub_type WHEN 1 THEN '采购入库' WHEN 2 THEN '销售退货' WHEN 3 THEN '零售退货' WHEN 4 THEN '其他入库' WHEN 5 THEN '销售出库' 
+							WHEN 6 THEN '采购退货' WHEN 7 THEN '调拨' WHEN 8 THEN '零售出库' WHEN 9 THEN '其他出库' ELSE '' END subTypeName,
 			CONVERT(b.oper_time, CHAR) operTime,
 			a.material_name materialName,
 			a.material_model materialModel,
@@ -55,7 +59,10 @@
 			FORMAT(a.unit_price, 2) unitPrice,
 			FORMAT(a.all_price, 2) allPrice,
 			c.supplier supplierName,
-			d.`name` depotName
+			d.`name` depotName,
+			b.status,
+			b.status_content statusContent,
+			b.link_number linkNumber
 		FROM
 			erp_depotitem a
 			LEFT JOIN erp_depot d ON a.depot_id = d.id,

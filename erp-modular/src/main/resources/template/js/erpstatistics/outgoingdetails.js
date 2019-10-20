@@ -98,9 +98,19 @@ layui.config({
 	        limit: 8,
 	        cols: [[
 	            { title: '序号', type: 'numbers'},
-	            { field: 'defaultNumber', title: '单据编号', align: 'left', width: 200, templet: function(d){
-			        	return '<a lay-event="details" class="notice-title-click">' + d.defaultNumber + '</a>';
+	            { field: 'defaultNumber', title: '单据编号', align: 'left', width: 250, templet: function(d){
+			        var str = '<a lay-event="details" class="notice-title-click">' + d.defaultNumber + '</a>';
+			        if(!isNull(d.linkNumber)){
+			        	str += '<span class="state-new">[转]</span>';
+				        if(d.status == 2){
+				        	str += '<span class="state-up"> [正常]</span>';
+				        }else{
+				        	str += '<span class="state-down"> [预警]</span>';
+				        }
+			        }
+			        return str;
 			    }},
+			    { field: 'subTypeName', title: '单据类型', align: 'left', width: 100},
 	            { field: 'materialName', title: '商品名称', align: 'left', width: 150},
 	            { field: 'materialModel', title: '商品型号', align: 'left', width: 100},
 	            { field: 'unitPrice', title: '单价', align: 'left', width: 120},

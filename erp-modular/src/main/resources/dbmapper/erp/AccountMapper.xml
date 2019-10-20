@@ -162,16 +162,21 @@
             d.id,
             d.type,
             d.sub_type subType,
+            CASE d.sub_type WHEN 1 THEN '采购入库' WHEN 2 THEN '销售退货' WHEN 3 THEN '零售退货' WHEN 4 THEN '其他入库' WHEN 5 THEN '销售出库' 
+							WHEN 6 THEN '采购退货' WHEN 7 THEN '调拨' WHEN 8 THEN '零售出库' WHEN 9 THEN '其他出库' ELSE '' END subTypeName,
             d.default_number defaultNumber,
-            d.number,
             CONVERT (d.oper_time, CHAR) operTime,
             CONVERT (d.create_time, CHAR) createTime,
             FORMAT(d.total_price, 2) totalPrice,
+            c.supplier supplierName,
             d.pay_type payType,
             d.remark,
-            d.status
+            d.status,
+			d.status_content statusContent,
+			d.link_number linkNumber
         FROM
             erp_depothead d
+            LEFT JOIN erp_supplier c ON d.organ_id = c.id
         WHERE
             d.account_id = #{id}
         AND d.tenant_id = #{userId}

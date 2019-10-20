@@ -110,12 +110,13 @@ layui.config({
 			        }
 			        return str;
 			    }},
+			    { field: 'subTypeName', title: '单据类型', align: 'left', width: 100},
 	            { field: 'materialName', title: '商品名称', align: 'left', width: 150},
 	            { field: 'materialModel', title: '商品型号', align: 'left', width: 100},
 	            { field: 'unitPrice', title: '单价', align: 'left', width: 120},
 	            { field: 'operNumber', title: '入库数量', align: 'left', width: 100},
 	            { field: 'allPrice', title: '金额', align: 'left', width: 120 },
-	            { field: 'supplierName', title: '供应商', align: 'left', width: 140 },
+	            { field: 'supplierName', title: '供应商/客户/会员', align: 'left', width: 140 },
 	            { field: 'depotName', title: '仓库', align: 'left', width: 140 },
 	            { field: 'operTime', title: '入库日期', align: 'center', width: 140 }
 	        ]]
