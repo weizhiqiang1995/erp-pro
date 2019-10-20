@@ -126,5 +126,16 @@
 			a.tenant_id = #{userId}
 		AND a.type = '2'
     </select>
+
+    <select id="queryInoutitemISExpenditureIncomeToSelect" parameterType="java.util.Map" resultType="java.util.Map">
+    	SELECT
+			a.id,
+			a.`name`
+		FROM
+			erp_inoutitem a
+		WHERE
+			a.tenant_id = #{userId}
+		AND a.type = '1'
+    </select>
     
 </mapper>

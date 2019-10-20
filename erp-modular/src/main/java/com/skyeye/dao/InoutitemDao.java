@@ -28,4 +28,6 @@ public interface InoutitemDao {
     public Map<String, Object> queryInoutitemByIdAndInfo(Map<String, Object> params) throws Exception;
 
 	public List<Map<String, Object>> queryInoutitemISExpenditureToSelect(Map<String, Object> params) throws Exception;
+
+    public List<Map<String, Object>> queryInoutitemISExpenditureIncomeToSelect(Map<String, Object> params) throws Exception;
 }

@@ -111,6 +111,8 @@
 	</url>
 	<url id="supplier009" path="/post/SupplierController/querySupplierListToSelect" val="获取供应商列表信息展示为下拉框" allUse="2">
 	</url>
+	<url id="supplier010" path="/post/SupplierController/querySupplierListToSelectAll" val="获取供应商，客户，会员列表信息展示为下拉框" allUse="2">
+	</url>
 	<!-- 供应商管理结束-->
 
 	<!-- 客户信息管理开始 -->
@@ -277,6 +279,8 @@
 	</url>
 	<url id="inoutitem007" path="/post/InoutitemController/queryInoutitemISExpenditureToSelect" val="查看所有的支出项目展示为下拉框" allUse="2">
 	</url>
+	<url id="inoutitem008" path="/post/InoutitemController/queryInoutitemISExpenditureIncomeToSelect" val="查看所有的收入项目展示为下拉框" allUse="2">
+	</url>
 	<!-- 收支项目管理结束 -->
 
 	<!-- 结算账户管理开始 -->
@@ -322,4 +326,44 @@
 	<url id="account009" path="/post/AccountController/queryAccountListToSelect" val="获取账户信息展示为下拉框" allUse="2">
 	</url>
 	<!-- 结算账户管理结束 -->
+
+	<!--收入单管理开始-->
+	<url id="income001" path="/post/IncomeController/queryIncomeByList" val="查询收入单列表信息" allUse="1">
+		<property id="billNo" name="billNo" ref="" var="单据编号" />
+		<property id="startTime" name="startTime" ref="" var="开始日期" />
+		<property id="endTime" name="endTime" ref="" var="结束日期" />
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="income002" path="/post/IncomeController/insertIncome" val="添加收入单" allUse="1">
+		<property id="organId" name="organId" ref="required" var="单位Id"></property>
+		<property id="billTime" name="billTime" ref="required" var="单据日期"></property>
+		<property id="accountId" name="accountId" ref="required" var="账户Id"></property>
+		<property id="handsPersonId" name="handsPersonId" ref="required" var="账户Id"></property>
+		<property id="payType" name="type" ref="required,num" var="收款类型"></property>
+		<property id="remark" name="remark" ref="" var="备注"></property>
+		<property id="changeAmount" name="changeAmount" ref="required,double" var="实收金额"></property>
+		<property id="initemStr" name="initemStr" ref="required" var="收入项目列表" />
+	</url>
+	<url id="income003" path="/post/IncomeController/queryIncomeById" val="查询单个收入单，用于数据回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="收入单Id"></property>
+	</url>
+	<url id="income004" path="/post/IncomeController/editIncomeById" val="编辑收入单信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="收入单Id"></property>
+		<property id="organId" name="organId" ref="required" var="单位Id"></property>
+		<property id="billTime" name="billTime" ref="required" var="单据日期"></property>
+		<property id="accountId" name="accountId" ref="required" var="账户Id"></property>
+		<property id="handsPersonId" name="handsPersonId" ref="required" var="账户Id"></property>
+		<property id="payType" name="type" ref="required,num" var="收款类型"></property>
+		<property id="remark" name="remark" ref="" var="备注"></property>
+		<property id="changeAmount" name="changeAmount" ref="required,double" var="实收金额"></property>
+		<property id="initemStr" name="initemStr" ref="required" var="收入项目列表" />
+	</url>
+	<url id="income005" path="/post/IncomeController/deleteIncomeById" val="删除收入单信息" allUse="1">
+		<property id="rowId" name="id" ref="required" var="收入单Id"></property>
+	</url>
+	<url id="income006" path="/post/IncomeController/queryIncomeByDetail" val="查询收入单详情" allUse="2">
+		<property id="rowId" name="id" ref="required" var="收入单Id"></property>
+	</url>
+	<!--收入单管理结束-->
 </controller>
