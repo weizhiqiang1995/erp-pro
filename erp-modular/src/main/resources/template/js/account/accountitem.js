@@ -5,7 +5,7 @@ layui.config({
     base: basePath,
     version: skyeyeVersion
 }).extend({  //指定js别名
-    window: 'js/winui.window',
+    window: 'js/winui.window'
 }).define(['window', 'table', 'jquery', 'winui'], function (exports) {
     winui.renderColor();
     var $ = layui.$,
@@ -58,7 +58,7 @@ layui.config({
                     return "<span class='state-error'>其他</span>";
                 }
             }},
-            { field: 'operTime', title: '单据日期', align: 'center', width: 180 },
+            { field: 'operTime', title: '单据日期', align: 'center', width: 180 }
         ]]
     });
     table.on('tool(messageTable)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"

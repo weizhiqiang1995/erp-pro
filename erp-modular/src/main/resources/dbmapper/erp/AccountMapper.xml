@@ -3,52 +3,31 @@
 <mapper namespace="com.skyeye.dao.AccountDao">
     <select id="queryAccountByList" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
-            n.id,
-            n.name accountName,
-            n.serial_no serialNo,
-            FORMAT(n.initial_amount,2) initialAmount,
-            FORMAT((CASE IF(n.tax_last_money_price=0, 1, 2) WHEN 2 THEN n.initial_amount + n.tax_last_money_price ELSE n.initial_amount + n.total_price END),2) currentAmount,
-            n.remark,
-            n.is_default isDefault,
-            n.delete_flag deleteFlag,
-            CONVERT (n.create_time, CHAR) createTime,
-            n.tenant_id tenantId
+            a.id,
+            a.name accountName,
+            a.serial_no serialNo,
+            FORMAT(a.initial_amount, 2) initialAmount,
+            FORMAT(IFNULL(SUM(IFNULL(b.change_amount, b.total_price) * CASE b.type WHEN 1 THEN 1 WHEN 2 THEN -1 WHEN 3 THEN 0 ELSE '' END), 0) + a.current_amount, 2) currentAmount,
+            a.remark,
+            a.is_default isDefault,
+            CONVERT (a.create_time, CHAR) createTime
         FROM
-            (
-            SELECT
-                a.id,
-                a.name,
-                a.serial_no,
-                a.initial_amount,
-                a.current_amount,
-                a.remark,
-                a.is_default,
-                a.delete_flag,
-                a.create_time,
-                a.tenant_id,
-                (SELECT IFNULL(
-                    (CASE WHEN ed.sub_type IN (1, 2, 3, 4) THEN -ABS(SUM(ed.total_price)) ELSE SUM(ed.total_price) END), 0)
-                FROM erp_depothead ed WHERE ed.account_id = a.id) total_price,
-                (SELECT IFNULL(
-                    CASE WHEN ed.sub_type IN (1, 2, 3, 4) THEN -ABS(SUM(IFNULL(ed.discount_money, 0) + IFNULL(ed.discount_last_money, 0)))
-                    ELSE SUM(IFNULL(ed.discount_money, 0) + IFNULL(ed.discount_last_money, 0)) END, 0)
-                FROM erp_depothead ed WHERE ed.account_id = a.id ) tax_last_money_price
-            FROM
-                erp_account a
-            WHERE
-                a.delete_flag = 0
-            AND a.tenant_id = #{userId}
-            <if test="accountName != '' and accountName != null">
-                AND a.name LIKE '%${accountName}%'
-            </if>
-            <if test="serialNo != '' and serialNo != null">
-                AND a.serial_no LIKE '%${serialNo}%'
-            </if>
-            <if test="remark != '' and remark != null">
-                AND a.remark LIKE '%${remark}%'
-            </if>
-            ORDER BY a.create_time DESC
-        ) n
+            erp_account a
+            LEFT JOIN erp_depothead b ON a.id = b.account_id AND b.sub_type NOT IN(10, 11) AND b.delete_flag = '0'
+        WHERE
+            a.delete_flag = 0
+        AND a.tenant_id = #{userId}
+        <if test="accountName != '' and accountName != null">
+            AND a.name LIKE '%${accountName}%'
+        </if>
+        <if test="serialNo != '' and serialNo != null">
+            AND a.serial_no LIKE '%${serialNo}%'
+        </if>
+        <if test="remark != '' and remark != null">
+            AND a.remark LIKE '%${remark}%'
+        </if>
+        GROUP BY a.id
+        ORDER BY a.create_time DESC
     </select>
 
     <select id="queryAccountByName" parameterType="java.util.Map" resultType="java.util.Map">
@@ -66,9 +45,7 @@
     <insert id="insertAccount" parameterType="java.util.Map">
         INSERT INTO erp_account(
             id, name, serial_no, initial_amount, current_amount, remark, is_default, tenant_id, delete_flag, create_time
-        ) values (
-            #{id}, #{accountName}, #{serialNo}, #{initialAmount}, #{currentAmount}, #{remark}, #{isDefault}, #{userId}, #{deleteFlag}, #{createTime}
-        )
+        ) values (#{id}, #{accountName}, #{serialNo}, #{initialAmount}, #{currentAmount}, #{remark}, #{isDefault}, #{userId}, #{deleteFlag}, #{createTime})
     </insert>
 
     <select id="queryAccountById" parameterType="java.util.Map" resultType="java.util.Map">
@@ -119,7 +96,7 @@
             name = #{accountName},
             serial_no = #{serialNo},
             initial_amount = #{initialAmount},
-            current_amount = #{currentAmount},
+            current_amount = #{initialAmount},
             remark = #{remark},
             is_default = #{isDefault}
         </set>
@@ -188,13 +165,11 @@
             d.default_number defaultNumber,
             CONVERT (d.oper_time, CHAR) operTime,
             CONVERT (d.create_time, CHAR) createTime,
-            FORMAT(IFNULL(CASE WHEN d.sub_type IN (1,2,3,4) THEN -abs(d.total_price) ELSE d.total_price END,0), 2) totalPrice,
-            FORMAT((IFNULL(d.discount_money,0) + IFNULL(d.discount_last_money,0)) ,2) taxLastMoneyPrice,
+            FORMAT(d.total_price * (CASE d.type WHEN 2 THEN -1 ELSE 1 END), 2) totalPrice,
             d.type,
             c.supplier supplierName,
             d.pay_type payType,
-            d.remark,
-            d.status,
+            d.`status`,
 			d.status_content statusContent,
 			d.link_number linkNumber
         FROM
@@ -204,7 +179,8 @@
             d.account_id = #{id}
         AND d.tenant_id = #{userId}
         AND d.delete_flag = 0
-        AND d.sub_type NOT IN(10,11)
+    	AND d.type IN(1, 2)
+        AND d.sub_type NOT IN(10, 11)
     </select>
     
     <select id="queryAccountListToSelect" parameterType="java.util.Map" resultType="java.util.Map">
@@ -219,14 +195,4 @@
 		ORDER BY a.is_default ASC
     </select>
 
-    <select id="queryAccountItemMoneyById" parameterType="java.util.Map" resultType="java.util.Map">
-        SELECT
-            IFNULL(CASE WHEN d.sub_type IN (1,2,3,4) THEN -ABS(SUM(d.total_price)) ELSE SUM(d.total_price) END, 0) totalPrice
-        FROM
-            erp_depothead d
-        WHERE
-            d.account_id = #{id}
-        AND d.tenant_id = #{userId}
-        AND d.sub_type NOT IN(10,11)
-    </select>
 </mapper>

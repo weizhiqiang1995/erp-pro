@@ -37,5 +37,4 @@ public interface AccountDao {
 
 	public List<Map<String, Object>> queryAccountListToSelect(Map<String, Object> params) throws Exception;
 
-    public Map<String, Object> queryAccountItemMoneyById(Map<String, Object> params) throws Exception;
 }
