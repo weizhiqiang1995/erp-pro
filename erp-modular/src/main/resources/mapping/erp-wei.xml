@@ -610,6 +610,31 @@
 	</url>
 	<!-- 组装单结束 -->
 	
+	<!-- 调拨单开始 -->
+	<url id="allocation001" path="/post/AllocationController/queryAllocationToList" val="获取调拨单列表信息" allUse="2">
+		<property id="defaultNumber" name="defaultNumber" ref="" var="票据单号" />
+		<property id="material" name="material" ref="" var="产品信息：名称或者型号" />
+		<property id="startTime" name="startTime" ref="" var="单据开始时间"/>
+		<property id="endTime" name="endTime" ref="" var="单据结束时间"/>
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="allocation002" path="/post/AllocationController/insertAllocationMation" val="新增调拨单信息" allUse="2">
+		<property id="operTime" name="operTime" ref="required" var="单据日期" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
+	</url>
+	<url id="allocation003" path="/post/AllocationController/queryAllocationMationToEditById" val="编辑调拨单信息时进行回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="调拨单id" />
+	</url>
+	<url id="allocation004" path="/post/AllocationController/editAllocationMationById" val="编辑调拨单信息" allUse="2">
+		<property id="operTime" name="operTime" ref="required" var="单据日期" />
+		<property id="remark" name="remark" ref="" var="备注" />
+		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
+		<property id="rowId" name="id" ref="required" var="调拨单id" />
+	</url>
+	<!-- 调拨单结束 -->
+	
 	<!-- 统计开始 -->
 	<url id="statistics001" path="/post/StatisticsController/queryWarehousingDetails" val="入库明细" allUse="1">
 		<property id="materialName" name="materialName" ref="" var="产品名称" />

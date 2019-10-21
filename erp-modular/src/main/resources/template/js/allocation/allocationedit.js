@@ -17,18 +17,29 @@ layui.config({
 		var tockObject = new Array();//根据仓库和规格id查询出来的对应库存信息
 
 		var usetableTemplate = $("#usetableTemplate").html();
+		var beanTemplate = $("#beanTemplate").html();
 		var selOption = getFileContent('tpl/template/select-option.tpl');
 		
-		//单据时间
- 		laydate.render({ 
- 		  elem: '#operTime',
- 		  type: 'datetime',
- 		  value: getFormatDate(),
- 	 	  trigger: 'click'
- 		});
-		
- 		initDepotHtml();
-		
+ 		//加载单据数据
+ 		var orderObject = [];
+		showGrid({
+		 	id: "showForm",
+		 	url: reqBasePath + "allocation003",
+		 	params: {rowId: parent.rowId},
+		 	pagination: false,
+		 	template: beanTemplate,
+		 	ajaxSendAfter:function(json){
+		 		//单据时间
+		 		laydate.render({ 
+		 		  elem: '#operTime',
+		 		  type: 'datetime',
+		 	 	  trigger: 'click'
+		 		});
+		 		orderObject = json;
+		 		initDepotHtml();
+		 	}
+		});
+ 		
 		//初始化仓库
 		function initDepotHtml() {
 			AjaxPostUtil.request({url: reqBasePath + "storehouse008", params: {}, type: 'json', callback: function(json) {
@@ -50,14 +61,40 @@ layui.config({
 					material = json.rows;
 					//加载产品数据
 					materialHtml = getDataUseHandlebars(selOption, json);
-					//渲染
-					form.render();
-					//初始化一行数据
-					addRow();
+					//渲染数据到页面
+					initDataToShow();
 				} else {
 					winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
 				}
 			}});
+		}
+		
+		//渲染数据到页面
+		function initDataToShow(){
+			//渲染列表项
+			$.each(orderObject.bean.items, function(i, item){
+				addRow();
+				$.each(material, function(j, bean) {
+					if(item.materialId == bean.id){
+						$("#unitId" + (rowNum - 1)).html(getDataUseHandlebars(selOption, {rows: bean.unitList}));
+						$("#unitId" + (rowNum - 1)).val(item.mUnitId);//单位回显
+						return false;
+					}
+				});
+				$("#materialTypeId" + (rowNum - 1)).val(item.mType);//产品类型回显
+				$("#depotId" + (rowNum - 1)).val(item.depotId);//仓库回显
+				$("#anotherDepotId" + (rowNum - 1)).val(item.anotherDepotId);//对方仓库回显
+				$("#materialId" + (rowNum - 1)).val(item.materialId);//产品回显
+				$("#currentTock" + (rowNum - 1)).html(item.currentTock);//库存回显
+				$("#rkNum" + (rowNum - 1)).val(item.operNumber);//数量回显
+				$("#unitPrice" + (rowNum - 1)).val(item.unitPrice.toFixed(2));//单价回显
+				$("#amountOfMoney" + (rowNum - 1)).val(item.allPrice.toFixed(2));//金额回显
+				$("#remark" + (rowNum - 1)).val(item.remark);//备注回显
+				//设置标识
+				$("tr[trcusid='tr" + (rowNum - 1) + "']").attr("thisid", item.id);
+			});
+			//渲染
+ 			form.render();
 		}
 		
 		//仓库加载变化事件
@@ -228,8 +265,8 @@ layui.config({
 			});
 			$("#allPrice").html(allPrice.toFixed(2));
 		}
-
-		form.on('submit(formAddBean)', function(data) {
+		
+		form.on('submit(formEditBean)', function(data) {
 			//表单验证
 			if(winui.verifyForm(data.elem)) {
 				//获取已选用品数据
@@ -240,12 +277,20 @@ layui.config({
 				}
 				var tableData = new Array();
 				var noError = false; //循环遍历表格数据时，是否有其他错误信息
-				var hasAssembly = false;//判断是否有组合件
 				$.each(rowTr, function(i, item) {
 					//获取行编号
 					var rowNum = $(item).attr("trcusid").replace("tr", "");
-					//商品类型
-					var materialTypeId = $("#materialTypeId" + rowNum).val();
+					//我的仓库类型
+					var depotId = $("#depotId" + rowNum).val();
+					//对方仓库类型
+					var anotherDepotId = $("#anotherDepotId" + rowNum).val();
+					if(depotId === anotherDepotId) {
+						$("#anotherDepotId" + rowNum).addClass("layui-form-danger");
+						$("#anotherDepotId" + rowNum).focus();
+						winui.window.msg('调入仓库不能和调出仓库一致.', {icon: 2, time: 2000});
+						noError = true;
+						return false;
+					}
 					if(parseInt($("#rkNum" + rowNum).val()) == 0) {
 						$("#rkNum" + rowNum).addClass("layui-form-danger");
 						$("#rkNum" + rowNum).focus();
@@ -253,24 +298,12 @@ layui.config({
 						noError = true;
 						return false;
 					}
-					if(materialTypeId === "1"){
-						if(!hasAssembly){
-							//当前没有组合件
-							hasAssembly = true;
-						}else{
-							$("#materialTypeId" + rowNum).addClass("layui-form-danger");
-							$("#materialTypeId" + rowNum).focus();
-							winui.window.msg('拆分单中只能存在一个组合件.', {icon: 2, time: 2000});
-							noError = true;
-							return false;
-						}
-						if(parseInt($("#rkNum" + rowNum).val()) > parseInt($("#currentTock" + rowNum).html())){
-							$("#rkNum" + rowNum).addClass("layui-form-danger");
-							$("#rkNum" + rowNum).focus();
-							winui.window.msg('超过库存数量.', {icon: 2, time: 2000});
-							noError = true;
-							return false;
-						}
+					if(parseInt($("#rkNum" + rowNum).val()) > parseInt($("#currentTock" + rowNum).html())){
+						$("#rkNum" + rowNum).addClass("layui-form-danger");
+						$("#rkNum" + rowNum).focus();
+						winui.window.msg('超过库存数量.', {icon: 2, time: 2000});
+						noError = true;
+						return false;
 					}
 					if(inTableDataArrayByAssetarId($("#materialId" + rowNum).val(), $("#depotId" + rowNum).val(), $("#unitId" + rowNum).val(), tableData)) {
 						$("#depotId" + rowNum).addClass("layui-form-danger");
@@ -285,7 +318,8 @@ layui.config({
 						mUnitId: $("#unitId" + rowNum).val(),
 						rkNum: $("#rkNum" + rowNum).val(),
 						estimatePurchasePrice: $("#unitPrice" + rowNum).val(),
-						materialType: materialTypeId,
+						anotherDepotId: anotherDepotId,
+						thisId: isNull($(item).attr("thisid")) ? "" : $(item).attr("thisid"),
 						remark: $("#remark" + rowNum).val()
 					};
 					tableData.push(row);
@@ -293,17 +327,14 @@ layui.config({
 				if(noError) {
 					return false;
 				}
-				if(!hasAssembly){
-					winui.window.msg('请选择组合件.', {icon: 2, time: 2000});
-					return false;
-				}
 
 				var params = {
 					operTime: $("#operTime").val(),
 					remark: $("#remark").val(),
-					depotheadStr: JSON.stringify(tableData)
+					depotheadStr: JSON.stringify(tableData),
+					rowId: parent.rowId
 				};
-				AjaxPostUtil.request({url: reqBasePath + "splitlist002", params: params, type: 'json', callback: function(json) {
+				AjaxPostUtil.request({url: reqBasePath + "allocation004", params: params, type: 'json', callback: function(json) {
 					if(json.returnCode == 0) {
 						parent.layer.close(index);
 						parent.refreshCode = '0';
@@ -342,7 +373,7 @@ layui.config({
 			var par = {
 				id: "row" + rowNum.toString(), //checkbox的id
 				trId: "tr" + rowNum.toString(), //行的id
-				materialTypeId: "materialTypeId" + rowNum.toString(), //商品类型的id
+				anotherDepotId: "anotherDepotId" + rowNum.toString(), //对方仓库的id
 				depotId: "depotId" + rowNum.toString(), //仓库id
 				materialId: "materialId" + rowNum.toString(), //产品id
 				unitId: "unitId" + rowNum.toString(), //规格id
@@ -355,6 +386,8 @@ layui.config({
 			$("#useTable").append(getDataUseHandlebars(usetableTemplate, par));
 			//赋值给仓库
 			$("#" + "depotId" + rowNum.toString()).html(depotHtml);
+			//赋值给对方仓库
+			$("#" + "anotherDepotId" + rowNum.toString()).html(depotHtml);
 			//赋值给产品
 			$("#" + "materialId" + rowNum.toString()).html(materialHtml);
 			form.render('select');

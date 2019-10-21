@@ -81,16 +81,16 @@ layui.config({
 							$.each(item.unitList, function(j, bean) {
 								if(item.firstInUnit == bean.unitId){
 									$("#unitId" + thisRowNum).val(bean.id);
-									$("#unitPrice" + thisRowNum).val(bean.retailPrice.toFixed(2));//单价
-									$("#amountOfMoney" + thisRowNum).val((rkNum * parseFloat(bean.retailPrice)).toFixed(2));//金额
+									$("#unitPrice" + thisRowNum).val(bean.estimatePurchasePrice.toFixed(2));//单价
+									$("#amountOfMoney" + thisRowNum).val((rkNum * parseFloat(bean.estimatePurchasePrice)).toFixed(2));//金额
 									return false;
 								}
 							});
 						}else{//不是多单位
 							var firstItem = item.unitList[0];
 							$("#unitId" + thisRowNum).val(firstItem.id);
-							$("#unitPrice" + thisRowNum).val(firstItem.retailPrice.toFixed(2));//单价
-							$("#amountOfMoney" + thisRowNum).val((rkNum * parseFloat(firstItem.retailPrice)).toFixed(2));//金额
+							$("#unitPrice" + thisRowNum).val(firstItem.estimatePurchasePrice.toFixed(2));//单价
+							$("#amountOfMoney" + thisRowNum).val((rkNum * parseFloat(firstItem.estimatePurchasePrice)).toFixed(2));//金额
 						}
 						form.render('select');
 						return false;
@@ -119,8 +119,8 @@ layui.config({
 							if(thisRowValue == bean.id){//获取规格
 								//获取当前行数量
 								var rkNum = parseInt($("#rkNum" + thisRowNum).val());
-								$("#unitPrice" + thisRowNum).val(bean.retailPrice.toFixed(2));//单价
-								$("#amountOfMoney" + thisRowNum).val((rkNum * parseFloat(bean.retailPrice)).toFixed(2));//金额
+								$("#unitPrice" + thisRowNum).val(bean.estimatePurchasePrice.toFixed(2));//单价
+								$("#amountOfMoney" + thisRowNum).val((rkNum * parseFloat(bean.estimatePurchasePrice)).toFixed(2));//金额
 								return false;
 							}
 						});

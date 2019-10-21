@@ -47,6 +47,7 @@
 			FORMAT(a.all_price, 2) allPrice,
 			a.remark,
 			b.`name` deportName,
+			f.`name` anotherDepotName,
 			IFNULL(e.`name`, c.unit_name) unitName,
 			FORMAT(a.tax_unit_price, 2) taxUnitPrice,
 			FORMAT(a.tax_rate, 2) taxRate,
@@ -55,7 +56,8 @@
 			CASE a.m_type WHEN 0 THEN '普通' WHEN 1 THEN '组合件' WHEN 2 THEN '普通子件' ELSE '' END mTypeName
 		FROM
 			erp_depotitem a
-			LEFT JOIN erp_depot b ON a.depot_id = b.id,
+			LEFT JOIN erp_depot b ON a.depot_id = b.id
+			LEFT JOIN erp_depot f ON a.another_depot_id = f.id,
 			erp_material c,
 			erp_material_norms d
 			LEFT JOIN erp_unit e ON d.unit_id = e.id
