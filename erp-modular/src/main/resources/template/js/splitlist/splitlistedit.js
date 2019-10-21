@@ -413,6 +413,13 @@ layui.config({
 				winui.window.msg('请选择要删除的行', {icon: 2, time: 2000});
 			}
 		}
+		
+		$("body").on("click", "#currentTockQuestion", function() {
+			layer.tips(getFileContent('tpl/erpcommon/currentTockQuestion.tpl'), $("#currentTockQuestion"), {
+				tips: [1, '#3595CC'],
+				time: 4000
+			});
+		});
 
 		$("body").on("click", "#cancle", function() {
 			parent.layer.close(index);

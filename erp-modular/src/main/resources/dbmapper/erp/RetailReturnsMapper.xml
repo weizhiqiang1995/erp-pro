@@ -118,7 +118,7 @@
 								END)), 0) currentTock
 		FROM
 			erp_depotitem a
-			LEFT JOIN erp_depotitem b ON b.depot_id = a.depot_id AND b.m_unit_id = a.m_unit_id AND b.header_id != a.header_id
+			LEFT JOIN erp_depotitem b ON (b.depot_id = a.depot_id OR b.another_depot_id = a.depot_id) AND b.m_unit_id = a.m_unit_id AND b.header_id != a.header_id
 			LEFT JOIN erp_depothead c ON c.id = b.header_id
 		WHERE
 			a.header_id = #{id}

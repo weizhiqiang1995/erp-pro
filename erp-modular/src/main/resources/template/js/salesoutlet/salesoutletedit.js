@@ -794,6 +794,13 @@ layui.config({
 		}
 /*********************** 采购费用表格操作 end ****************************/
 		
+		$("body").on("click", "#currentTockQuestion", function() {
+			layer.tips(getFileContent('tpl/erpcommon/currentTockQuestion.tpl'), $("#currentTockQuestion"), {
+				tips: [1, '#3595CC'],
+				time: 4000
+			});
+		});
+		
 		$("body").on("click", "#cancle", function() {
 			parent.layer.close(index);
 		});
