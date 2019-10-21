@@ -211,6 +211,8 @@
 									WHEN 10 THEN 0 
 									WHEN 11 THEN 0 
 									WHEN 12 THEN (CASE c.m_type WHEN 1 THEN -1 ELSE 1 END)
+									WHEN 13 THEN (CASE c.m_type WHEN 1 THEN 1 ELSE -1 END)
+									WHEN 14 THEN 0
 									ELSE CASE d.type WHEN 2 THEN 1 ELSE -1 END
 								END)), 0) currentTock
 		FROM
@@ -391,16 +393,26 @@
     
     <select id="queryMaterialTockByNormsIdAndDepotId" parameterType="java.util.Map" resultType="java.util.Map">
     	SELECT
-			SUM(a.oper_number * (CASE b.type WHEN 2 THEN 1 ELSE -1 END)) AS currentTock
+			IFNULL(SUM(a.oper_number * (CASE b.sub_type 
+									WHEN 10 THEN 0 
+									WHEN 11 THEN 0 
+									WHEN 12 THEN (CASE a.m_type WHEN 1 THEN -1 ELSE 1 END)
+									WHEN 13 THEN (CASE a.m_type WHEN 1 THEN 1 ELSE -1 END)
+									WHEN 14 THEN (CASE WHEN a.depot_id = #{depotId} THEN -1 ELSE 1 END)
+									ELSE CASE b.type WHEN 2 THEN 1 ELSE -1 END
+								END)), 0) currentTock
 		FROM
 			erp_depotitem a,
 			erp_depothead b
 		WHERE
 			a.tenant_id = #{userId}
-		AND a.depot_id = #{depotId}
+		AND (a.depot_id = #{depotId} OR a.another_depot_id = #{depotId})
 		AND a.m_unit_id = #{mUnitId}
 		AND a.header_id = b.id
-		AND b.sub_type NOT IN(10, 11)
+		AND b.sub_type NOT IN(10, 11) <!-- 采购单，销售单不计入列表查询 -->
+		<if test="id != '' and id != null">
+            AND b.id != #{id}
+        </if>
 		GROUP BY a.m_unit_id
     </select>
     
@@ -429,7 +441,7 @@
 			a.m_unit_id = #{mUnitId}
 		AND a.tenant_id = #{userId}
 		AND a.delete_flag = '0'
-		AND b.sub_type NOT IN(10, 11)
+		AND b.sub_type NOT IN(10, 11, 14) <!-- 采购单，销售单，调拨单不计入列表查询 -->
 		AND a.header_id = b.id 
 		AND b.delete_flag = '0'
 		ORDER BY b.oper_time DESC, a.id

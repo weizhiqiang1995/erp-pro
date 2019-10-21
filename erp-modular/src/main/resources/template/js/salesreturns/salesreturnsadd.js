@@ -203,7 +203,7 @@ layui.config({
 				//如果数组中不包含对应的库存
 				if(inTockObject < 0){
 					//获取库存
-					AjaxPostUtil.request({url: reqBasePath + "material011", params: {depotId: chooseDepotId, mUnitId: chooseUnitId}, type: 'json', callback: function(json) {
+					AjaxPostUtil.request({url: reqBasePath + "material011", params: {depotId: chooseDepotId, mUnitId: chooseUnitId, rowId: ''}, type: 'json', callback: function(json) {
 						if(json.returnCode == 0) {
 							var currentTock = 0;
 							if(!isNull(json.bean)){

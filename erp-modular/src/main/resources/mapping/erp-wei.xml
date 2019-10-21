@@ -136,6 +136,7 @@
 	<url id="material011" path="/post/MaterialController/queryMaterialTockByNormsIdAndDepotId" val="根据产品规格id和仓库id获取库存" allUse="2">
 		<property id="depotId" name="depotId" ref="required" var="仓库id"/>
 		<property id="mUnitId" name="mUnitId" ref="required" var="规格id"/>
+		<property id="rowId" name="id" ref="" var="单据id"/>
 	</url>
 	<url id="material012" path="/post/MaterialController/queryMaterialDepotItemByNormsId" val="根据产品规格id获取库存订单" allUse="2">
 		<property id="mUnitId" name="mUnitId" ref="required" var="规格id"/>
