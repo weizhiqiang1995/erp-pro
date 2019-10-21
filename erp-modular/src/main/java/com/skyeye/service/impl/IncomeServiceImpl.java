@@ -79,7 +79,6 @@ public class IncomeServiceImpl implements IncomeService {
                 itemAllPrice = new BigDecimal(bean.get("initemMoney").toString());
                 entity.put("id", ToolUtil.getSurFaceId());
                 entity.put("headerId", useId);
-                entity.put("accountId", params.get("accountId"));
                 entity.put("inOutItemId", bean.get("initemId"));
                 entity.put("eachAmount", bean.get("initemMoney"));
                 entity.put("remark", bean.get("remark"));
@@ -168,7 +167,6 @@ public class IncomeServiceImpl implements IncomeService {
                 itemAllPrice = new BigDecimal(bean.get("initemMoney").toString());
                 entity.put("id", ToolUtil.getSurFaceId());
                 entity.put("headerId", useId);
-                entity.put("accountId", params.get("accountId"));
                 entity.put("inOutItemId", bean.get("initemId"));
                 entity.put("eachAmount", bean.get("initemMoney"));
                 entity.put("remark", bean.get("remark"));

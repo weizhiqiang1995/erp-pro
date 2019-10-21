@@ -37,10 +37,10 @@
 
     <insert id="insertExpenditureItem" parameterType="java.util.Map">
         INSERT INTO erp_accountitem(
-            id, header_id, account_id, in_out_item_id, each_amount, remark, tenant_id, delete_flag
+            id, header_id, in_out_item_id, each_amount, remark, tenant_id, delete_flag
         ) VALUES
         <foreach collection="list" item="item" index="index" separator="," >
-        (#{item.id}, #{item.headerId}, #{item.accountId}, #{item.inOutItemId}, #{item.eachAmount}, #{item.remark}, #{item.userId}, #{item.deleteFlag})
+        (#{item.id}, #{item.headerId}, #{item.inOutItemId}, #{item.eachAmount}, #{item.remark}, #{item.userId}, #{item.deleteFlag})
         </foreach>
     </insert>
 
