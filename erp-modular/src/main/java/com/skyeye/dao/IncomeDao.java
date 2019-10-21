@@ -19,7 +19,7 @@ public interface IncomeDao {
 
     public Map<String, Object> queryIncomeToEditById(Map<String, Object> params) throws Exception;
 
-    public int editIncomById(Map<String, Object> params) throws Exception;
+    public int editIncomeById(Map<String, Object> params) throws Exception;
 
     public int editIncomeByDeleteFlag(Map<String, Object> params) throws Exception;
 
@@ -31,9 +31,7 @@ public interface IncomeDao {
 
     public int editIncomeItemsByDeleteFlag(Map<String, Object> params) throws Exception;
 
-    public int editIncomItemById(List<Map<String, Object>> entitys) throws Exception;
-
-    public int deleteIncomItemById(Map<String, Object> params) throws Exception;
+    public int deleteIncomeItemById(Map<String, Object> params) throws Exception;
 
 	public List<Map<String, Object>> queryUserInfoById(Map<String, Object> bean) throws Exception;
 }

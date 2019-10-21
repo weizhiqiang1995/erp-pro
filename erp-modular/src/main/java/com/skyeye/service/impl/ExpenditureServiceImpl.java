@@ -1,24 +1,26 @@
 package com.skyeye.service.impl;
 
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
-import com.skyeye.common.object.InputObject;
-import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.ToolUtil;
-import com.skyeye.dao.IncomeDao;
-import com.skyeye.erp.util.ErpConstants;
-import com.skyeye.erp.util.ErpOrderNum;
-import com.skyeye.service.IncomeService;
-import net.sf.json.JSONArray;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import com.skyeye.common.object.InputObject;
+import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.ToolUtil;
+import com.skyeye.dao.ExpenditureDao;
+import com.skyeye.erp.util.ErpConstants;
+import com.skyeye.erp.util.ErpOrderNum;
+import com.skyeye.service.ExpenditureService;
+
+import net.sf.json.JSONArray;
 
 /**
  * @Author 卫志强
@@ -26,22 +28,22 @@ import java.util.Map;
  * @Date 2019/10/20 10:23
  */
 @Service
-public class IncomeServiceImpl implements IncomeService {
+public class ExpenditureServiceImpl implements ExpenditureService {
 
     @Autowired
-    private IncomeDao incomeDao;
+    private ExpenditureDao expenditureDao;
 
     /**
-     * 查询收入单列表信息
+     * 查询支出单列表信息
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @Override
-    public void queryIncomeByList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryExpenditureByList(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        List<Map<String, Object>> beans = incomeDao.queryIncomeByList(params,
+        List<Map<String, Object>> beans = expenditureDao.queryExpenditureByList(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>) beans;
         int total = beansPageList.getPaginator().getTotalCount();
@@ -50,7 +52,7 @@ public class IncomeServiceImpl implements IncomeService {
     }
 
     /**
-     * 添加收入单
+     * 添加支出单
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -58,7 +60,7 @@ public class IncomeServiceImpl implements IncomeService {
     @SuppressWarnings("unchecked")
 	@Override
     @Transactional(value="transactionManager")
-    public void insertIncome(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertExpenditure(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         String initemStr = params.get("initemStr").toString();
         if(ToolUtil.isJson(initemStr)) {
@@ -67,7 +69,7 @@ public class IncomeServiceImpl implements IncomeService {
             String userId = inputObject.getLogParams().get("id").toString();
             //处理数据
             JSONArray jArray = JSONArray.fromObject(initemStr);
-            //收入单中间转换对象，财务子表存储对象
+            //支出单中间转换对象，财务子表存储对象
             Map<String, Object> bean;
             List<Map<String, Object>> entitys = new ArrayList<>();//财务子表实体集合信息
             BigDecimal allPrice = new BigDecimal("0");//主单总价
@@ -95,9 +97,9 @@ public class IncomeServiceImpl implements IncomeService {
             }
             Map<String, Object> accountHead = new HashMap<>();
             ErpOrderNum erpOrderNum = new ErpOrderNum();
-            String orderNum = erpOrderNum.getAccountOrderNumBySubType(userId, ErpConstants.AccountTheadSubType.INCOME_ORDER.getNum());
+            String orderNum = erpOrderNum.getAccountOrderNumBySubType(userId, ErpConstants.AccountTheadSubType.EXPENDITURE_ORDER.getNum());
             accountHead.put("id", useId);
-            accountHead.put("type", ErpConstants.AccountTheadSubType.INCOME_ORDER.getNum());//收入单
+            accountHead.put("type", ErpConstants.AccountTheadSubType.EXPENDITURE_ORDER.getNum());//支出单
             accountHead.put("billNo", orderNum);
             accountHead.put("totalPrice", allPrice);
             accountHead.put("userId", userId);
@@ -108,29 +110,29 @@ public class IncomeServiceImpl implements IncomeService {
             accountHead.put("remark", params.get("remark"));
             accountHead.put("changeAmount", params.get("changeAmount"));
             accountHead.put("deleteFlag", 0);
-            incomeDao.insertIncome(accountHead);
-            incomeDao.insertIncomeItem(entitys);
+            expenditureDao.insertExpenditure(accountHead);
+            expenditureDao.insertExpenditureItem(entitys);
         }else{
             outputObject.setreturnMessage("数据格式错误");
         }
     }
 
     /**
-     * 查询收入单用于数据回显
+     * 查询支出单用于数据回显
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @Override
-    public void queryIncomeToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryExpenditureToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        Map<String, Object> bean = incomeDao.queryIncomeToEditById(params);
+        Map<String, Object> bean = expenditureDao.queryExpenditureToEditById(params);
         if(bean != null && !bean.isEmpty()){
-        	List<Map<String, Object>> beans = incomeDao.queryIncomeItemsToEditById(params);
+        	List<Map<String, Object>> beans = expenditureDao.queryExpenditureItemsToEditById(params);
         	bean.put("items", beans);
         	//获取经手人员
-        	List<Map<String, Object>> userInfo = incomeDao.queryUserInfoById(bean);
+        	List<Map<String, Object>> userInfo = expenditureDao.queryUserInfoById(bean);
         	bean.put("userInfo", userInfo);
         	outputObject.setBean(bean);
         	outputObject.settotal(1);
@@ -140,7 +142,7 @@ public class IncomeServiceImpl implements IncomeService {
     }
 
     /**
-     * 编辑收入单信息
+     * 编辑支出单信息
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -148,7 +150,7 @@ public class IncomeServiceImpl implements IncomeService {
     @SuppressWarnings("unchecked")
 	@Override
     @Transactional(value="transactionManager")
-    public void editIncomeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editExpenditureById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         String initemStr = params.get("initemStr").toString();
         if(ToolUtil.isJson(initemStr)) {
@@ -156,7 +158,7 @@ public class IncomeServiceImpl implements IncomeService {
         	String userId = inputObject.getLogParams().get("id").toString();
             //处理数据
             JSONArray jArray = JSONArray.fromObject(initemStr);
-            //收入单中间转换对象，财务子表存储对象
+            //支出单中间转换对象，财务子表存储对象
             Map<String, Object> bean;
             List<Map<String, Object>> entitys = new ArrayList<>();//财务子表实体集合信息
             BigDecimal allPrice = new BigDecimal("0");//主单总价
@@ -192,46 +194,46 @@ public class IncomeServiceImpl implements IncomeService {
             accountHead.put("handsPersonId", params.get("handsPersonId"));
             accountHead.put("remark", params.get("remark"));
             accountHead.put("changeAmount", params.get("changeAmount"));
-            incomeDao.editIncomeById(accountHead);
+            expenditureDao.editExpenditureById(accountHead);
             //删除之前的绑定信息
-            incomeDao.deleteIncomeItemById(params);
-            incomeDao.insertIncomeItem(entitys);
+            expenditureDao.deleteExpenditureItemById(params);
+            expenditureDao.insertExpenditureItem(entitys);
         }else{
             outputObject.setreturnMessage("数据格式错误");
         }
     }
 
     /**
-     * 删除收入单信息
+     * 删除支出单信息
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @Override
     @Transactional(value="transactionManager")
-    public void deleteIncomeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteExpenditureById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         params.put("deleteFlag", 1);
-        incomeDao.editIncomeByDeleteFlag(params);
-        incomeDao.editIncomeItemsByDeleteFlag(params);
+        expenditureDao.editExpenditureByDeleteFlag(params);
+        expenditureDao.editExpenditureItemsByDeleteFlag(params);
     }
 
     /**
-     * 查看收入单详情
+     * 查看支出单详情
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @Override
-    public void queryIncomeByDetail(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryExpenditureByDetail(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         //获取财务主表信息
-        Map<String, Object> bean = incomeDao.queryIncomeDetailById(params);
+        Map<String, Object> bean = expenditureDao.queryExpenditureDetailById(params);
         if(bean != null && !bean.isEmpty()){
             //获取子表信息
-            List<Map<String, Object>> beans = incomeDao.queryIncomeItemsDetailById(bean);
+            List<Map<String, Object>> beans = expenditureDao.queryExpenditureItemsDetailById(bean);
             bean.put("items", beans);
             outputObject.setBean(bean);
             outputObject.settotal(1);

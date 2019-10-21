@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.skyeye.dao.IncomeDao">
+<mapper namespace="com.skyeye.dao.ExpenditureDao">
 
-    <select id="queryIncomeByList" parameterType="java.util.Map" resultType="java.util.Map">
+    <select id="queryExpenditureByList" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
             a.id,
             a.change_amount changeAmount,
@@ -18,7 +18,7 @@
         WHERE
             a.delete_flag = '0'
         AND a.tenant_id = #{userId}
-        AND a.type = '2'
+        AND a.type = '1'
         <if test="billNo != '' and billNo != null">
             AND a.bill_no LIKE '%${billNo}%'
         </if>
@@ -28,14 +28,14 @@
         ORDER BY a.bill_time DESC, a.id ASC
     </select>
 
-    <insert id="insertIncome" parameterType="java.util.Map">
+    <insert id="insertExpenditure" parameterType="java.util.Map">
         INSERT INTO erp_accounthead(
             id, type, organ_id, hands_person_id, change_amount, total_price, account_id, bill_no, bill_time, remark, tenant_id, delete_flag
         ) VALUES 
         (#{id}, #{type}, #{organId}, #{handsPersonId}, #{changeAmount}, #{totalPrice}, #{accountId}, #{billNo}, #{operTime}, #{remark}, #{userId}, #{deleteFlag})
     </insert>
 
-    <insert id="insertIncomeItem" parameterType="java.util.Map">
+    <insert id="insertExpenditureItem" parameterType="java.util.Map">
         INSERT INTO erp_accountitem(
             id, header_id, account_id, in_out_item_id, each_amount, remark, tenant_id, delete_flag
         ) VALUES
@@ -44,7 +44,7 @@
         </foreach>
     </insert>
 
-    <select id="queryIncomeToEditById" parameterType="java.util.Map" resultType="java.util.Map">
+    <select id="queryExpenditureToEditById" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
             a.id,
             a.type payType,
@@ -60,12 +60,12 @@
             erp_accounthead a
         WHERE
             a.id = #{id}
-        AND a.type = '2'
+        AND a.type = '1'
         AND a.delete_flag = '0'
         ORDER BY a.bill_time DESC
     </select>
 
-    <select id="queryIncomeItemsToEditById" parameterType="java.util.Map" resultType="java.util.Map">
+    <select id="queryExpenditureItemsToEditById" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
             a.id,
             a.in_out_item_id initemId,
@@ -77,7 +77,7 @@
             a.header_id = #{id}
     </select>
 
-    <update id="editIncomeById" parameterType="java.util.Map">
+    <update id="editExpenditureById" parameterType="java.util.Map">
         UPDATE erp_accounthead
         <set>
             organ_id = #{organId},
@@ -93,7 +93,7 @@
         AND tenant_id = #{userId}
     </update>
 
-    <delete id="deleteIncomeItemById" parameterType="java.util.Map">
+    <delete id="deleteExpenditureItemById" parameterType="java.util.Map">
         DELETE
 		FROM
 			erp_accountitem
@@ -101,7 +101,7 @@
 			header_id = #{id}
     </delete>
 
-    <update id="editIncomeByDeleteFlag" parameterType="java.util.Map">
+    <update id="editExpenditureByDeleteFlag" parameterType="java.util.Map">
         UPDATE erp_accounthead
         <set>
             delete_flag = #{deleteFlag}
@@ -111,7 +111,7 @@
         AND tenant_id = #{userId}
     </update>
 
-    <update id="editIncomeItemsByDeleteFlag" parameterType="java.util.Map">
+    <update id="editExpenditureItemsByDeleteFlag" parameterType="java.util.Map">
         UPDATE erp_accountitem
         <set>
             delete_flag = #{deleteFlag}
@@ -121,7 +121,7 @@
         AND tenant_id = #{userId}
     </update>
 
-    <select id="queryIncomeDetailById" parameterType="java.util.Map" resultType="java.util.Map">
+    <select id="queryExpenditureDetailById" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
             a.id,
             FORMAT(a.change_amount, 2) changeAmount,
@@ -141,11 +141,11 @@
             a.delete_flag = '0'
         AND a.tenant_id = #{userId}
         AND a.id = #{id}
-        AND a.type = '2'
+        AND a.type = '1'
         ORDER BY a.bill_time DESC
     </select>
 
-    <select id="queryIncomeItemsDetailById" parameterType="java.util.Map" resultType="java.util.Map">
+    <select id="queryExpenditureItemsDetailById" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
             a.id,
             FORMAT(a.each_amount, 2) eachAmount,

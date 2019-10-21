@@ -27,7 +27,7 @@ layui.config({
         var orderObject = [];
         showGrid({
             id: "showForm",
-            url: reqBasePath + "income003",
+            url: reqBasePath + "expenditure003",
             params: {rowId: parent.rowId},
             pagination: false,
             template: beanTemplate,
@@ -86,7 +86,7 @@ layui.config({
                 if(json.returnCode == 0) {
                     //加载往来单位数据
                     $("#organId").html(getDataUseHandlebars(selOption, json));
-                    //初始化收入项目
+                    //初始化支出项目
                     initItemHtml();
                 } else {
                     winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
@@ -94,11 +94,11 @@ layui.config({
             }});
         }
 
-        //初始化收入项目
+        //初始化支出项目
         function initItemHtml() {
-            AjaxPostUtil.request({url: reqBasePath + "inoutitem008", params: {}, type: 'json', callback: function(json) {
+            AjaxPostUtil.request({url: reqBasePath + "inoutitem007", params: {}, type: 'json', callback: function(json) {
                 if(json.returnCode == 0) {
-                    //加载收入项目数据
+                    //加载支出项目数据
                     initemHtml = getDataUseHandlebars(selOption, json);
                     //渲染数据到页面
                     initDataToShow();
@@ -117,7 +117,7 @@ layui.config({
             //渲染列表项
             $.each(orderObject.bean.items, function(i, item){
                 addRow();
-                $("#initemId" + (rowNum - 1)).val(item.initemId);//收入项目回显
+                $("#initemId" + (rowNum - 1)).val(item.initemId);//支出项目回显
                 $("#initemMoney" + (rowNum - 1)).val(item.initemMoney.toFixed(2));//金额回显
                 $("#remark" + (rowNum - 1)).val(item.remark);//备注回显
                 //设置标识
@@ -178,7 +178,7 @@ layui.config({
                     changeAmount: $("#changeAmount").val(),
                     initemStr: JSON.stringify(tableData)
                 };
-                AjaxPostUtil.request({url: reqBasePath + "income004", params: params, type: 'json', callback: function(json) {
+                AjaxPostUtil.request({url: reqBasePath + "expenditure004", params: params, type: 'json', callback: function(json) {
                     if(json.returnCode == 0) {
                         parent.layer.close(index);
                         parent.refreshCode = '0';
