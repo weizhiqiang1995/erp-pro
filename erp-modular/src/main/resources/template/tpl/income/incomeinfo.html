@@ -22,15 +22,9 @@
                 </div>
             </div>
             <div class="layui-form-item layui-col-xs6">
-                <label class="layui-form-label">经手人：</label>
-                <div class="layui-input-block ver-center">
-                    {{supplierName}}
-                </div>
-            </div>
-            <div class="layui-form-item layui-col-xs6">
                 <label class="layui-form-label">单据日期：</label>
                 <div class="layui-input-block ver-center">
-                    {{billTime}}
+                    {{operTime}}
                 </div>
             </div>
             <div class="layui-form-item layui-col-xs12">
@@ -45,7 +39,7 @@
                     <table class="layui-table">
                         <thead>
                         <tr>
-                            <th style="width: 120px;">收支项目</th>
+                            <th style="width: 120px;">收入项目</th>
                             <th style="width: 80px;">金额</th>
                             <th style="min-width: 100px;">备注</th>
                         </tr>
@@ -62,28 +56,28 @@
                     </table>
                 </div>
             </div>
-            <div class="layui-form-item layui-col-xs4">
-                <label class="layui-form-label">支付账户：</label>
+            <div class="layui-form-item layui-col-xs3">
+                <label class="layui-form-label">收款账户：</label>
                 <div class="layui-input-block ver-center">
                     {{accountName}}
                 </div>
             </div>
-            <div class="layui-form-item layui-col-xs4">
-                <label class="layui-form-label">付款类型：</label>
-                <div class="layui-input-block ver-center">
-                    {{payType}}
-                </div>
-            </div>
-            <div class="layui-form-item layui-col-xs4">
+            <div class="layui-form-item layui-col-xs3">
                 <label class="layui-form-label">共计金额：</label>
                 <div class="layui-input-block ver-center">
                     {{totalPrice}}元
                 </div>
             </div>
-            <div class="layui-form-item layui-col-xs12">
+            <div class="layui-form-item layui-col-xs3">
                 <label class="layui-form-label">实收金额：</label>
                 <div class="layui-input-block ver-center">
                     {{changeAmount}}元
+                </div>
+            </div>
+			<div class="layui-form-item layui-col-xs6">
+                <label class="layui-form-label">经手人：</label>
+                <div class="layui-input-block ver-center">
+                    {{hansPersonName}}
                 </div>
             </div>
             <div class="layui-form-item layui-col-xs12">

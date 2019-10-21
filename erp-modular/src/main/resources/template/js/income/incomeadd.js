@@ -1,3 +1,9 @@
+
+var userReturnList = new Array();//选择用户返回的集合或者进行回显的集合
+var chooseOrNotMy = "1";//人员列表中是否包含自己--1.包含；其他参数不包含
+var chooseOrNotEmail = "2";//人员列表中是否必须绑定邮箱--1.必须；其他参数没必要
+var checkType = "2";//人员选择类型，1.多选；其他。单选
+
 layui.config({
     base: basePath,
     version: skyeyeVersion
@@ -5,7 +11,7 @@ layui.config({
     window: 'js/winui.window'
 }).define(['window', 'jquery', 'winui', 'laydate'], function(exports) {
     winui.renderColor();
-    layui.use(['form'], function(form) {
+    layui.use(['form', 'tagEditor'], function(form) {
         var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
         var $ = layui.$,
             laydate = layui.laydate;
@@ -14,11 +20,13 @@ layui.config({
 
         var usetableTemplate = $("#usetableTemplate").html();
         var selOption = getFileContent('tpl/template/select-option.tpl');
+        var handsPersonList = new Array();//经手人员
 
         //单据时间
         laydate.render({
-            elem: '#billTime',
+            elem: '#operTime',
             type: 'datetime',
+            value: getFormatDate(),
             trigger: 'click'
         });
 
@@ -95,10 +103,10 @@ layui.config({
         form.on('submit(formAddBean)', function(data) {
             //表单验证
             if(winui.verifyForm(data.elem)) {
-                //获取已选用品数据
+                //获取数据
                 var rowTr = $("#useTable tr");
                 if(rowTr.length == 0) {
-                    winui.window.msg('请选择产品.', {icon: 2, time: 2000});
+                    winui.window.msg('请选择收入项目.', {icon: 2, time: 2000});
                     return false;
                 }
                 var tableData = new Array();
@@ -106,13 +114,6 @@ layui.config({
                 $.each(rowTr, function(i, item) {
                     //获取行编号
                     var rowNum = $(item).attr("trcusid").replace("tr", "");
-                    if(parseInt($("#rkNum" + rowNum).val()) == 0) {
-                        $("#rkNum" + rowNum).addClass("layui-form-danger");
-                        $("#rkNum" + rowNum).focus();
-                        winui.window.msg('数量不能为0', {icon: 2, time: 2000});
-                        noError = true;
-                        return false;
-                    }
                     if(inTableDataArrayByAssetarId($("#initemId" + rowNum).val(), tableData)) {
                         $("#initemId" + rowNum).addClass("layui-form-danger");
                         $("#initemId" + rowNum).focus();
@@ -123,7 +124,6 @@ layui.config({
                     var row = {
                         initemId: $("#initemId" + rowNum).val(),
                         initemMoney: $("#initemMoney" +rowNum).val(),
-                        rkNum: $("#rkNum" + rowNum).val(),
                         remark: $("#remark" + rowNum).val()
                     };
                     tableData.push(row);
@@ -131,16 +131,22 @@ layui.config({
                 if(noError) {
                     return false;
                 }
+                
+                var handsPersonId = "";
+				$.each(handsPersonList, function (i, item) {
+                    handsPersonId = item.id;
+                });
+                if(isNull(handsPersonId)){
+                	winui.window.msg('请选择经手人.', {icon: 2, time: 2000});
+                    return false;
+                }
 
                 var params = {
                     organId: $("#organId").val(),
-                    // handsPersonId: $("#handsPersonId").val(),
-                    handsPersonId: '000',
-                    billTime: $("#billTime").val(),
+                    handsPersonId: handsPersonId,
+                    operTime: $("#operTime").val(),
                     accountId: $("#accountId").val(),
-                    payType: $("#payType").val(),
                     remark: $("#remark").val(),
-                    allPrice: allPrice,
                     changeAmount: $("#changeAmount").val(),
                     initemStr: JSON.stringify(tableData)
                 };
@@ -167,6 +173,49 @@ layui.config({
             });
             return isIn;
         }
+        
+        $('#handsPersonId').tagEditor({
+	        initialTags: [],
+	        placeholder: '请选择经手人员',
+	        beforeTagDelete: function(field, editor, tags, val) {
+	        	var inArray = -1;
+		    	$.each(handsPersonList, function(i, item) {
+		    		if(val === item.name) {
+		    			inArray = i;
+		    			return false;
+		    		}
+		    	});
+		    	if(inArray != -1) { //如果该元素在集合中存在
+		    		handsPersonList.splice(inArray, 1);
+		    	}
+	        }
+	    });
+	    
+	    //人员选择
+		$("body").on("click", "#toHandsPersonSelPeople", function(e){
+			userReturnList = [].concat(handsPersonList);
+			_openNewWindows({
+				url: "../../tpl/common/sysusersel.html", 
+				title: "人员选择",
+				pageId: "sysuserselpage",
+				area: ['80vw', '80vh'],
+				callBack: function(refreshCode){
+					if (refreshCode == '0') {
+						//移除所有tag
+						var tags = $('#handsPersonId').tagEditor('getTags')[0].tags;
+						for (i = 0; i < tags.length; i++) { 
+							$('#handsPersonId').tagEditor('removeTag', tags[i]);
+						}
+						handsPersonList = [].concat(userReturnList);
+					    //添加新的tag
+						$.each(handsPersonList, function(i, item){
+							$('#handsPersonId').tagEditor('addTag', item.name);
+						});
+	                } else if (refreshCode == '-9999') {
+	                	winui.window.msg("操作失败", {icon: 2,time: 2000});
+	                }
+				}});
+		});
 
         //新增行
         $("body").on("click", "#addRow", function() {

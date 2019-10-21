@@ -90,5 +90,15 @@
 			a.id = #{inoutitemId}
 		AND delete_flag = '0'
 	</select>
+	
+	<select id="getAccountOrderNumBySubType" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			COUNT(a.id) num
+		FROM
+			erp_accounthead a
+		WHERE
+			a.tenant_id = #{userId}
+		AND a.type = #{type}
+	</select>
     
 </mapper>

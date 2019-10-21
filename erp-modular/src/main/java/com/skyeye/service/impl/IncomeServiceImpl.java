@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Author 奈何繁华如云烟
+ * @Author 卫志强
  * @Description TODO
  * @Date 2019/10/20 10:23
  */
@@ -63,7 +63,7 @@ public class IncomeServiceImpl implements IncomeService {
         String initemStr = params.get("initemStr").toString();
         if(ToolUtil.isJson(initemStr)) {
             //财务主表ID
-            String incomeId = ToolUtil.getSurFaceId();
+            String useId = ToolUtil.getSurFaceId();
             String userId = inputObject.getLogParams().get("id").toString();
             //处理数据
             JSONArray jArray = JSONArray.fromObject(initemStr);
@@ -78,7 +78,7 @@ public class IncomeServiceImpl implements IncomeService {
                 //获取子项金额
                 itemAllPrice = new BigDecimal(bean.get("initemMoney").toString());
                 entity.put("id", ToolUtil.getSurFaceId());
-                entity.put("headerId", incomeId);
+                entity.put("headerId", useId);
                 entity.put("accountId", params.get("accountId"));
                 entity.put("inOutItemId", bean.get("initemId"));
                 entity.put("eachAmount", bean.get("initemMoney"));
@@ -93,22 +93,22 @@ public class IncomeServiceImpl implements IncomeService {
                 outputObject.setreturnMessage("请选择收入项目");
                 return;
             }
-            Map<String, Object> income = new HashMap<>();
+            Map<String, Object> accountHead = new HashMap<>();
             ErpOrderNum erpOrderNum = new ErpOrderNum();
-            String orderNum = erpOrderNum.getOrderNumBySubType(userId, ErpConstants.DepoTheadSubType.PURCHASE_ORDER.getNum());
-            income.put("billNo", orderNum);
-            income.put("totalPrice", allPrice);
-            income.put("userId", userId);
-            income.put("incomeId", incomeId);
-            income.put("type", params.get("type"));
-            income.put("organId", params.get("organId"));
-            income.put("billTime", params.get("billTime"));
-            income.put("accountId", params.get("accountId"));
-            income.put("handsPersonId", params.get("handsPersonId"));
-            income.put("remark", params.get("remark"));
-            income.put("changeAmount", params.get("changeAmount"));
-            income.put("deleteFlag", 0);
-            incomeDao.insertIncome(income);
+            String orderNum = erpOrderNum.getAccountOrderNumBySubType(userId, ErpConstants.AccountTheadSubType.INCOME_ORDER.getNum());
+            accountHead.put("id", useId);
+            accountHead.put("type", ErpConstants.AccountTheadSubType.INCOME_ORDER.getNum());//收入单
+            accountHead.put("billNo", orderNum);
+            accountHead.put("totalPrice", allPrice);
+            accountHead.put("userId", userId);
+            accountHead.put("organId", params.get("organId"));
+            accountHead.put("operTime", params.get("operTime"));
+            accountHead.put("accountId", params.get("accountId"));
+            accountHead.put("handsPersonId", params.get("handsPersonId"));
+            accountHead.put("remark", params.get("remark"));
+            accountHead.put("changeAmount", params.get("changeAmount"));
+            accountHead.put("deleteFlag", 0);
+            incomeDao.insertIncome(accountHead);
             incomeDao.insertIncomeItem(entitys);
         }else{
             outputObject.setreturnMessage("数据格式错误");
@@ -125,14 +125,16 @@ public class IncomeServiceImpl implements IncomeService {
     public void queryIncomeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        Map<String, Object> bean = incomeDao.queryIncomeById(params);
+        Map<String, Object> bean = incomeDao.queryIncomeToEditById(params);
         if(bean == null){
             outputObject.setreturnMessage("未查询到信息！");
             return;
         }
-        List<Map<String, Object>> beans = incomeDao.queryIncomeItemsById(params);
-
+        List<Map<String, Object>> beans = incomeDao.queryIncomeItemsToEditById(params);
         bean.put("items", beans);
+        //获取经手人员
+		List<Map<String, Object>> userInfo = incomeDao.queryUserInfoById(bean);
+        bean.put("userInfo", userInfo);
         outputObject.setBean(bean);
         outputObject.settotal(1);
     }
@@ -148,10 +150,10 @@ public class IncomeServiceImpl implements IncomeService {
     @Transactional(value="transactionManager")
     public void editIncomeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        String incomeId = params.get("id").toString();
-        String userId = inputObject.getLogParams().get("id").toString();
         String initemStr = params.get("initemStr").toString();
         if(ToolUtil.isJson(initemStr)) {
+        	String useId = params.get("id").toString();
+        	String userId = inputObject.getLogParams().get("id").toString();
             //处理数据
             JSONArray jArray = JSONArray.fromObject(initemStr);
             //收入单中间转换对象，财务子表存储对象
@@ -165,7 +167,7 @@ public class IncomeServiceImpl implements IncomeService {
                 //获取子项金额
                 itemAllPrice = new BigDecimal(bean.get("initemMoney").toString());
                 entity.put("id", ToolUtil.getSurFaceId());
-                entity.put("headerId", incomeId);
+                entity.put("headerId", useId);
                 entity.put("accountId", params.get("accountId"));
                 entity.put("inOutItemId", bean.get("initemId"));
                 entity.put("eachAmount", bean.get("initemMoney"));
@@ -180,19 +182,18 @@ public class IncomeServiceImpl implements IncomeService {
                 outputObject.setreturnMessage("请选择收入项目");
                 return;
             }
-            Map<String, Object> income = new HashMap<>();
-            income.put("totalPrice", allPrice);
-            income.put("id", params.get("id"));
-            income.put("userId", userId);
-            income.put("incomeId", incomeId);
-            income.put("type", params.get("type"));
-            income.put("organId", params.get("organId"));
-            income.put("billTime", params.get("billTime"));
-            income.put("accountId", params.get("accountId"));
-            income.put("handsPersonId", params.get("handsPersonId"));
-            income.put("remark", params.get("remark"));
-            income.put("changeAmount", params.get("changeAmount"));
-            incomeDao.editIncomById(income);
+            Map<String, Object> accountHead = new HashMap<>();
+            accountHead.put("id", useId);
+            accountHead.put("userId", userId);
+            accountHead.put("totalPrice", allPrice);
+            accountHead.put("organId", params.get("organId"));
+            accountHead.put("operTime", params.get("operTime"));
+            accountHead.put("accountId", params.get("accountId"));
+            accountHead.put("handsPersonId", params.get("handsPersonId"));
+            accountHead.put("remark", params.get("remark"));
+            accountHead.put("changeAmount", params.get("changeAmount"));
+            incomeDao.editIncomById(accountHead);
+            //删除之前的绑定信息
             incomeDao.deleteIncomItemById(params);
             incomeDao.insertIncomeItem(entitys);
         }else{
@@ -213,7 +214,7 @@ public class IncomeServiceImpl implements IncomeService {
         params.put("userId", inputObject.getLogParams().get("id"));
         params.put("deleteFlag", 1);
         incomeDao.editIncomeByDeleteFlag(params);
-        incomeDao.editIncomesByDeleteFlag(params);
+        incomeDao.editIncomeItemsByDeleteFlag(params);
     }
 
     /**
@@ -227,10 +228,10 @@ public class IncomeServiceImpl implements IncomeService {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         //获取财务主表信息
-        Map<String, Object> bean = incomeDao.queryIncomeByDetail(params);
+        Map<String, Object> bean = incomeDao.queryIncomeDetailById(params);
         if(bean != null && !bean.isEmpty()){
             //获取子表信息
-            List<Map<String, Object>> beans = incomeDao.queryIncomeItemsByDetail(bean);
+            List<Map<String, Object>> beans = incomeDao.queryIncomeItemsDetailById(bean);
             bean.put("items", beans);
             outputObject.setBean(bean);
             outputObject.settotal(1);

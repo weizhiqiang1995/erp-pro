@@ -13,4 +13,6 @@ public interface ErpCommonDao {
 
 	public Map<String, Object> queryInoutitemMationById(Map<String, Object> map) throws Exception;
 
+	public Map<String, Object> getAccountOrderNumBySubType(Map<String, Object> bean) throws Exception;
+
 }

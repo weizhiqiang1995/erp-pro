@@ -12,22 +12,16 @@
     <!-- beanTemplate -->
     <script type="text/x-handlebars-template" id="beanTemplate">
         {{#bean}}
-            <div class="layui-form-item layui-col-xs4">
+            <div class="layui-form-item layui-col-xs6">
                 <label class="layui-form-label">往来单位<i class="red">*</i></label>
                 <div class="layui-input-block">
                     <select id="organId" lay-search win-verify="required"></select>
                 </div>
             </div>
-            <div class="layui-form-item layui-col-xs4">
-                <label class="layui-form-label">经手人<i class="red">*</i></label>
-                <div class="layui-input-block">
-                    <select id="handsPersonId" lay-search win-verify="required"></select>
-                </div>
-            </div>
-            <div class="layui-form-item layui-col-xs4">
+            <div class="layui-form-item layui-col-xs6">
                 <label class="layui-form-label">单据日期<i class="red">*</i></label>
                 <div class="layui-input-block">
-                    <input type="text" id="billTime" name="billTime" win-verify="required" placeholder="请选择单据日期" class="layui-input" value="{{billTime}}"/>
+                    <input type="text" id="operTime" name="operTime" win-verify="required" placeholder="请选择单据日期" class="layui-input" value="{{billTime}}"/>
                 </div>
             </div>
             <div class="layui-form-item layui-col-xs12">
@@ -43,7 +37,7 @@
                         <thead>
                         <tr>
                             <th style="width: 30px;"></th>
-                            <th style="width: 120px;">收支项目</th>
+                            <th style="width: 120px;">收入项目</th>
                             <th style="width: 80px;">金额</th>
                             <th style="min-width: 100px;">备注</th>
                         </tr>
@@ -53,34 +47,31 @@
                     </table>
                 </div>
             </div>
-            <div class="layui-form-item layui-col-xs4">
+            <div class="layui-form-item layui-col-xs3">
                 <label class="layui-form-label">收款账户</label>
                 <div class="layui-input-block">
                     <select id="accountId" lay-search></select>
                 </div>
             </div>
-            <div class="layui-form-item layui-col-xs4">
-                <label class="layui-form-label">收款类型</label>
-                <div class="layui-input-block">
-                    <select id="payType" lay-search>
-                        <option value="2">收入</option>
-                        <option value="3">收款</option>
-                        <option value="6">收预付款</option>
-                    </select>
-                </div>
-            </div>
-            <div class="layui-form-item layui-col-xs4">
+            <div class="layui-form-item layui-col-xs3">
                 <label class="layui-form-label">共计金额</label>
                 <div class="layui-input-block ver-center" id="allPrice">
                     {{totalPrice}}
                 </div>
             </div>
-            <div class="layui-form-item layui-col-xs12">
+            <div class="layui-form-item layui-col-xs3">
                 <label class="layui-form-label">实收金额</label>
                 <div class="layui-input-block">
                     <input type="text" id="changeAmount" name="changeAmount" win-verify="required|money" placeholder="请输入实收金额" class="layui-input" value="{{changeAmount}}"/>
                 </div>
             </div>
+			<div class="layui-form-item layui-col-xs6">
+            	<label class="layui-form-label">经手人<i class="red">*</i></label>
+            	<div class="layui-input-block">
+              		<input type="text" id="handsPersonId" name="handsPersonId" placeholder="请选择经手人员" class="layui-input" style="padding-right: 30px;"/>
+	            	<i class="fa fa-user-plus input-icon" id="toHandsPersonSelPeople"></i>
+            	</div>
+        	</div>
             <div class="layui-form-item layui-col-xs12">
                 <label class="layui-form-label">备注</label>
                 <div class="layui-input-block">

@@ -11,11 +11,11 @@ layui.config({
     window: 'js/winui.window'
 }).define(['window', 'table', 'jquery', 'winui', 'form', 'laydate'], function (exports) {
     winui.renderColor();
-    authBtn('1571566220980');
     var $ = layui.$,
         form = layui.form,
         laydate = layui.laydate,
         table = layui.table;
+    authBtn('1571638020191');
 
     laydate.render({
         elem: '#billTime', //指定元素
@@ -39,9 +39,8 @@ layui.config({
                 return '<a lay-event="details" class="notice-title-click">' + d.billNo + '</a>';
             }},
             { field: 'supplierName', title: '往来单位', align: 'left', width: 150},
-            { field: 'changeAmount', title: '变动金额', align: 'left', width: 120},
             { field: 'totalPrice', title: '合计金额', align: 'left', width: 120},
-            { field: 'hansPersonId', title: '经手人', align: 'left', width: 100},
+            { field: 'hansPersonName', title: '经手人', align: 'left', width: 100},
             { field: 'billTime', title: '单据日期', align: 'center', width: 140 },
             { field: 'remark', title: '备注', align: 'center', width: 140 },
             { title: '操作', fixed: 'right', align: 'center', width: 200, toolbar: '#tableBar'}

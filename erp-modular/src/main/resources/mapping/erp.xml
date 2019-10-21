@@ -339,10 +339,9 @@
 	</url>
 	<url id="income002" path="/post/IncomeController/insertIncome" val="添加收入单" allUse="1">
 		<property id="organId" name="organId" ref="required" var="单位Id"></property>
-		<property id="billTime" name="billTime" ref="required" var="单据日期"></property>
+		<property id="operTime" name="operTime" ref="required" var="单据日期"></property>
 		<property id="accountId" name="accountId" ref="required" var="账户Id"></property>
-		<property id="handsPersonId" name="handsPersonId" ref="required" var="账户Id"></property>
-		<property id="payType" name="type" ref="required,num" var="收款类型"></property>
+		<property id="handsPersonId" name="handsPersonId" ref="required" var="经手人Id"></property>
 		<property id="remark" name="remark" ref="" var="备注"></property>
 		<property id="changeAmount" name="changeAmount" ref="required,double" var="实收金额"></property>
 		<property id="initemStr" name="initemStr" ref="required" var="收入项目列表" />
@@ -353,10 +352,9 @@
 	<url id="income004" path="/post/IncomeController/editIncomeById" val="编辑收入单信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="收入单Id"></property>
 		<property id="organId" name="organId" ref="required" var="单位Id"></property>
-		<property id="billTime" name="billTime" ref="required" var="单据日期"></property>
+		<property id="operTime" name="operTime" ref="required" var="单据日期"></property>
 		<property id="accountId" name="accountId" ref="required" var="账户Id"></property>
 		<property id="handsPersonId" name="handsPersonId" ref="required" var="账户Id"></property>
-		<property id="payType" name="type" ref="required,num" var="收款类型"></property>
 		<property id="remark" name="remark" ref="" var="备注"></property>
 		<property id="changeAmount" name="changeAmount" ref="required,double" var="实收金额"></property>
 		<property id="initemStr" name="initemStr" ref="required" var="收入项目列表" />

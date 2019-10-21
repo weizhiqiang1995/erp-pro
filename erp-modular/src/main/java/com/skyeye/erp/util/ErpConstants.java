@@ -83,10 +83,70 @@ public class ErpConstants {
 		
     }
 	
+	//财务单据主表类型
+	public static enum AccountTheadSubType {
+		EXPENDITURE_ORDER("支出订单", "ZCDD", "1"),
+		INCOME_ORDER("收入订单", "SRDD", "2"),
+		RECEIVABLES_ORDER("收款订单", "SKDD", "3"),
+		PAYMENT_ORDER("付款订单", "FKDD", "4"),
+		TRANSFER_ORDER("转账订单", "ZZDD", "5"),
+		ADVANCE_ORDER("收预付款", "YFDD", "6");
+		
+        private String nameCode;
+        private String code;
+        private String num;
+		
+        AccountTheadSubType(String nameCode, String code, String num){
+            this.nameCode = nameCode;
+            this.code = code;
+            this.num = num;
+        }
+	
+        public static String getClockInName(String num){
+            for (AccountTheadSubType q : AccountTheadSubType.values()){
+                if(q.getNum().equals(num)){
+                    return q.getCode();
+                }
+            }
+            return "";
+        }
+        
+        public String getNameCode() {
+			return nameCode;
+		}
+
+		public void setNameCode(String nameCode) {
+			this.nameCode = nameCode;
+		}
+
+		public String getNum() {
+			return num;
+		}
+
+		public void setNum(String num) {
+			this.num = num;
+		}
+
+		public String getCode() {
+			return code;
+		}
+
+		public void setCode(String code) {
+			this.code = code;
+		}
+		
+    }
+	
 	//单据编号在redis中的key
 	public static final String SYS_DEPOTHEAD_REDIS_KEY = "sys_depothead_redis_key";
 	public static String getSysDepotHeadRedisKeyById(String userId, String subType){
 		return SYS_DEPOTHEAD_REDIS_KEY + userId + "_" + subType;
+	}
+	
+	//财务单据编号在redis中的key
+	public static final String SYS_ACCOUNTHEAD_REDIS_KEY = "sys_accounthead_redis_key";
+	public static String getSysAccountHeadRedisKeyById(String userId, String subType){
+		return SYS_ACCOUNTHEAD_REDIS_KEY + userId + "_" + subType;
 	}
 	
 }
