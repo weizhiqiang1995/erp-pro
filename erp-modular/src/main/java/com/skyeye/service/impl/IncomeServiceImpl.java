@@ -55,7 +55,8 @@ public class IncomeServiceImpl implements IncomeService {
      * @param outputObject
      * @throws Exception
      */
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     @Transactional(value="transactionManager")
     public void insertIncome(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
@@ -142,7 +143,8 @@ public class IncomeServiceImpl implements IncomeService {
      * @param outputObject
      * @throws Exception
      */
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     @Transactional(value="transactionManager")
     public void editIncomeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
