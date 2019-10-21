@@ -5,9 +5,8 @@
     <select id="queryIncomeByList" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
             a.id,
-            a.type,
             a.change_amount changeAmount,
-            FORMAT(a.total_price,2) totalPrice,
+            FORMAT(a.total_price, 2) totalPrice,
             a.bill_no billNo,
             CONVERT (a.bill_time, CHAR) billTime,
             (SELECT group_concat(distinct m.user_name) FROM sys_eve_user_staff m WHERE INSTR(CONCAT(',', a.hands_person_id, ','), CONCAT(',', m.user_id, ','))) hansPersonName,
@@ -19,6 +18,7 @@
         WHERE
             a.delete_flag = '0'
         AND a.tenant_id = #{userId}
+        AND a.type = '2'
         <if test="billNo != '' and billNo != null">
             AND a.bill_no LIKE '%${billNo}%'
         </if>
@@ -60,7 +60,9 @@
             erp_accounthead a
         WHERE
             a.id = #{id}
-        ORDER BY a.bill_time DESC LIMIT 0,1
+        AND a.type = '2'
+        AND a.delete_flag = '0'
+        ORDER BY a.bill_time DESC
     </select>
 
     <select id="queryIncomeItemsToEditById" parameterType="java.util.Map" resultType="java.util.Map">

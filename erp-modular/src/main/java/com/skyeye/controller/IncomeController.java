@@ -44,15 +44,15 @@ public class IncomeController {
     }
 
     /**
-     * 查询单个收入单，用于数据回显
+     * 查询收入单用于数据回显
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
-    @RequestMapping("/post/IncomeController/queryIncomeById")
+    @RequestMapping("/post/IncomeController/queryIncomeToEditById")
     @ResponseBody
-    public void queryIncomeById(InputObject inputObject, OutputObject outputObject) throws Exception{
-        incomeService.queryIncomeById(inputObject, outputObject);
+    public void queryIncomeToEditById(InputObject inputObject, OutputObject outputObject) throws Exception{
+        incomeService.queryIncomeToEditById(inputObject, outputObject);
     }
 
     /**

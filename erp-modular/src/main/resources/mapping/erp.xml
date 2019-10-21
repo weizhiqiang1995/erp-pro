@@ -346,7 +346,7 @@
 		<property id="changeAmount" name="changeAmount" ref="required,double" var="实收金额"></property>
 		<property id="initemStr" name="initemStr" ref="required" var="收入项目列表" />
 	</url>
-	<url id="income003" path="/post/IncomeController/queryIncomeById" val="查询单个收入单，用于数据回显" allUse="2">
+	<url id="income003" path="/post/IncomeController/queryIncomeToEditById" val="查询收入单用于数据回显" allUse="2">
 		<property id="rowId" name="id" ref="required" var="收入单Id"></property>
 	</url>
 	<url id="income004" path="/post/IncomeController/editIncomeById" val="编辑收入单信息" allUse="1">

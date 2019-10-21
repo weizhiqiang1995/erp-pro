@@ -116,27 +116,27 @@ public class IncomeServiceImpl implements IncomeService {
     }
 
     /**
-     * 查询单个收入单，用于数据回显
+     * 查询收入单用于数据回显
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @Override
-    public void queryIncomeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryIncomeToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         Map<String, Object> bean = incomeDao.queryIncomeToEditById(params);
-        if(bean == null){
-            outputObject.setreturnMessage("未查询到信息！");
-            return;
+        if(bean != null && !bean.isEmpty()){
+        	List<Map<String, Object>> beans = incomeDao.queryIncomeItemsToEditById(params);
+        	bean.put("items", beans);
+        	//获取经手人员
+        	List<Map<String, Object>> userInfo = incomeDao.queryUserInfoById(bean);
+        	bean.put("userInfo", userInfo);
+        	outputObject.setBean(bean);
+        	outputObject.settotal(1);
+        }else{
+        	outputObject.setreturnMessage("未查询到信息！");
         }
-        List<Map<String, Object>> beans = incomeDao.queryIncomeItemsToEditById(params);
-        bean.put("items", beans);
-        //获取经手人员
-		List<Map<String, Object>> userInfo = incomeDao.queryUserInfoById(bean);
-        bean.put("userInfo", userInfo);
-        outputObject.setBean(bean);
-        outputObject.settotal(1);
     }
 
     /**

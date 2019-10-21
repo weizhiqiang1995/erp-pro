@@ -13,7 +13,7 @@ public interface IncomeService {
 
     public void insertIncome(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-    public void queryIncomeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryIncomeToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
     public void editIncomeById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
