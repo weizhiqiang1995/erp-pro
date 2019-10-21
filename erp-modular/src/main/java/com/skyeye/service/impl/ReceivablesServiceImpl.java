@@ -15,10 +15,10 @@ import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.ToolUtil;
-import com.skyeye.dao.ExpenditureDao;
+import com.skyeye.dao.ReceivablesDao;
 import com.skyeye.erp.util.ErpConstants;
 import com.skyeye.erp.util.ErpOrderNum;
-import com.skyeye.service.ExpenditureService;
+import com.skyeye.service.ReceivablesService;
 
 import net.sf.json.JSONArray;
 
@@ -28,22 +28,22 @@ import net.sf.json.JSONArray;
  * @Date 2019/10/20 10:23
  */
 @Service
-public class ExpenditureServiceImpl implements ExpenditureService {
+public class ReceivablesServiceImpl implements ReceivablesService {
 
     @Autowired
-    private ExpenditureDao expenditureDao;
+    private ReceivablesDao receivablesDao;
 
     /**
-     * 查询支出单列表信息
+     * 查询收款单列表信息
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @Override
-    public void queryExpenditureByList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryReceivablesByList(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        List<Map<String, Object>> beans = expenditureDao.queryExpenditureByList(params,
+        List<Map<String, Object>> beans = receivablesDao.queryReceivablesByList(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>) beans;
         int total = beansPageList.getPaginator().getTotalCount();
@@ -52,7 +52,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     }
 
     /**
-     * 添加支出单
+     * 添加收款单
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -60,7 +60,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     @SuppressWarnings("unchecked")
 	@Override
     @Transactional(value="transactionManager")
-    public void insertExpenditure(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertReceivables(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         String initemStr = params.get("initemStr").toString();
         if(ToolUtil.isJson(initemStr)) {
@@ -69,7 +69,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
             String userId = inputObject.getLogParams().get("id").toString();
             //处理数据
             JSONArray jArray = JSONArray.fromObject(initemStr);
-            //支出单中间转换对象，财务子表存储对象
+            //收款单中间转换对象，财务子表存储对象
             Map<String, Object> bean;
             List<Map<String, Object>> entitys = new ArrayList<>();//财务子表实体集合信息
             BigDecimal allPrice = new BigDecimal("0");//主单总价
@@ -81,7 +81,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
                 itemAllPrice = new BigDecimal(bean.get("initemMoney").toString());
                 entity.put("id", ToolUtil.getSurFaceId());
                 entity.put("headerId", useId);
-                entity.put("inOutItemId", bean.get("initemId"));
+                entity.put("accountId", bean.get("accountId"));
                 entity.put("eachAmount", bean.get("initemMoney"));
                 entity.put("remark", bean.get("remark"));
                 entity.put("userId", userId);
@@ -91,47 +91,46 @@ public class ExpenditureServiceImpl implements ExpenditureService {
                 allPrice = allPrice.add(itemAllPrice);
             }
             if(entitys.size() == 0){
-                outputObject.setreturnMessage("请选择支出项目");
+                outputObject.setreturnMessage("请选择账户");
                 return;
             }
             Map<String, Object> accountHead = new HashMap<>();
             ErpOrderNum erpOrderNum = new ErpOrderNum();
-            String orderNum = erpOrderNum.getAccountOrderNumBySubType(userId, ErpConstants.AccountTheadSubType.EXPENDITURE_ORDER.getNum());
+            String orderNum = erpOrderNum.getAccountOrderNumBySubType(userId, ErpConstants.AccountTheadSubType.RECEIVABLES_ORDER.getNum());
             accountHead.put("id", useId);
-            accountHead.put("type", ErpConstants.AccountTheadSubType.EXPENDITURE_ORDER.getNum());//支出单
+            accountHead.put("type", ErpConstants.AccountTheadSubType.RECEIVABLES_ORDER.getNum());//收款单
             accountHead.put("billNo", orderNum);
             accountHead.put("totalPrice", allPrice);
             accountHead.put("userId", userId);
             accountHead.put("organId", params.get("organId"));
             accountHead.put("operTime", params.get("operTime"));
-            accountHead.put("accountId", params.get("accountId"));
             accountHead.put("handsPersonId", params.get("handsPersonId"));
             accountHead.put("remark", params.get("remark"));
             accountHead.put("changeAmount", params.get("changeAmount"));
             accountHead.put("deleteFlag", 0);
-            expenditureDao.insertExpenditure(accountHead);
-            expenditureDao.insertExpenditureItem(entitys);
+            receivablesDao.insertReceivables(accountHead);
+            receivablesDao.insertReceivablesItem(entitys);
         }else{
             outputObject.setreturnMessage("数据格式错误");
         }
     }
 
     /**
-     * 查询支出单用于数据回显
+     * 查询收款单用于数据回显
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @Override
-    public void queryExpenditureToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryReceivablesToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
-        Map<String, Object> bean = expenditureDao.queryExpenditureToEditById(params);
+        Map<String, Object> bean = receivablesDao.queryReceivablesToEditById(params);
         if(bean != null && !bean.isEmpty()){
-        	List<Map<String, Object>> beans = expenditureDao.queryExpenditureItemsToEditById(params);
+        	List<Map<String, Object>> beans = receivablesDao.queryReceivablesItemsToEditById(params);
         	bean.put("items", beans);
         	//获取经手人员
-        	List<Map<String, Object>> userInfo = expenditureDao.queryUserInfoById(bean);
+        	List<Map<String, Object>> userInfo = receivablesDao.queryUserInfoById(bean);
         	bean.put("userInfo", userInfo);
         	outputObject.setBean(bean);
         	outputObject.settotal(1);
@@ -141,7 +140,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     }
 
     /**
-     * 编辑支出单信息
+     * 编辑收款单信息
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -149,7 +148,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     @SuppressWarnings("unchecked")
 	@Override
     @Transactional(value="transactionManager")
-    public void editExpenditureById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editReceivablesById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         String initemStr = params.get("initemStr").toString();
         if(ToolUtil.isJson(initemStr)) {
@@ -157,7 +156,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
         	String userId = inputObject.getLogParams().get("id").toString();
             //处理数据
             JSONArray jArray = JSONArray.fromObject(initemStr);
-            //支出单中间转换对象，财务子表存储对象
+            //收款单中间转换对象，财务子表存储对象
             Map<String, Object> bean;
             List<Map<String, Object>> entitys = new ArrayList<>();//财务子表实体集合信息
             BigDecimal allPrice = new BigDecimal("0");//主单总价
@@ -169,7 +168,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
                 itemAllPrice = new BigDecimal(bean.get("initemMoney").toString());
                 entity.put("id", ToolUtil.getSurFaceId());
                 entity.put("headerId", useId);
-                entity.put("inOutItemId", bean.get("initemId"));
+                entity.put("accountId", bean.get("accountId"));
                 entity.put("eachAmount", bean.get("initemMoney"));
                 entity.put("remark", bean.get("remark"));
                 entity.put("userId", userId);
@@ -179,7 +178,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
                 allPrice = allPrice.add(itemAllPrice);
             }
             if(entitys.size() == 0){
-                outputObject.setreturnMessage("请选择支出项目");
+                outputObject.setreturnMessage("请选择账户");
                 return;
             }
             Map<String, Object> accountHead = new HashMap<>();
@@ -188,50 +187,49 @@ public class ExpenditureServiceImpl implements ExpenditureService {
             accountHead.put("totalPrice", allPrice);
             accountHead.put("organId", params.get("organId"));
             accountHead.put("operTime", params.get("operTime"));
-            accountHead.put("accountId", params.get("accountId"));
             accountHead.put("handsPersonId", params.get("handsPersonId"));
             accountHead.put("remark", params.get("remark"));
             accountHead.put("changeAmount", params.get("changeAmount"));
-            expenditureDao.editExpenditureById(accountHead);
+            receivablesDao.editReceivablesById(accountHead);
             //删除之前的绑定信息
-            expenditureDao.deleteExpenditureItemById(params);
-            expenditureDao.insertExpenditureItem(entitys);
+            receivablesDao.deleteReceivablesItemById(params);
+            receivablesDao.insertReceivablesItem(entitys);
         }else{
             outputObject.setreturnMessage("数据格式错误");
         }
     }
 
     /**
-     * 删除支出单信息
+     * 删除收款单信息
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @Override
     @Transactional(value="transactionManager")
-    public void deleteExpenditureById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteReceivablesById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         params.put("deleteFlag", 1);
-        expenditureDao.editExpenditureByDeleteFlag(params);
-        expenditureDao.editExpenditureItemsByDeleteFlag(params);
+        receivablesDao.editReceivablesByDeleteFlag(params);
+        receivablesDao.editReceivablesItemsByDeleteFlag(params);
     }
 
     /**
-     * 查看支出单详情
+     * 查看收款单详情
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @Override
-    public void queryExpenditureByDetail(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryReceivablesByDetail(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         params.put("userId", inputObject.getLogParams().get("id"));
         //获取财务主表信息
-        Map<String, Object> bean = expenditureDao.queryExpenditureDetailById(params);
+        Map<String, Object> bean = receivablesDao.queryReceivablesDetailById(params);
         if(bean != null && !bean.isEmpty()){
             //获取子表信息
-            List<Map<String, Object>> beans = expenditureDao.queryExpenditureItemsDetailById(bean);
+            List<Map<String, Object>> beans = receivablesDao.queryReceivablesItemsDetailById(bean);
             bean.put("items", beans);
             outputObject.setBean(bean);
             outputObject.settotal(1);

@@ -16,178 +16,53 @@ layui.config({
         var $ = layui.$,
             laydate = layui.laydate;
         var rowNum = 1; //表格的序号
-        var initemHtml = "";//收支项目
-        
-        var beanTemplate = $("#beanTemplate").html();
+        var accountHtml = "";//账户
+
         var usetableTemplate = $("#usetableTemplate").html();
         var selOption = getFileContent('tpl/template/select-option.tpl');
         var handsPersonList = new Array();//经手人员
 
-        //加载单据数据
-        var orderObject = [];
-        showGrid({
-            id: "showForm",
-            url: reqBasePath + "expenditure003",
-            params: {rowId: parent.rowId},
-            pagination: false,
-            template: beanTemplate,
-            ajaxSendAfter:function(json){
-                //单据时间
-                laydate.render({
-                    elem: '#operTime',
-                    type: 'datetime',
-                    trigger: 'click'
-                });
-                orderObject = json;
-                initAccountHtml();
-                
-                var userNames = "";
-                handsPersonList = json.bean.userInfo;
-                $.each(handsPersonList, function (i, item) {
-                	userNames += item.name + ',';
-                });
-                //人员选择
-                $('#handsPersonId').tagEditor({
-			        initialTags: userNames.split(','),
-			        placeholder: '请选择经手人员',
-			        beforeTagDelete: function(field, editor, tags, val) {
-			        	var inArray = -1;
-				    	$.each(handsPersonList, function(i, item) {
-				    		if(val === item.name) {
-				    			inArray = i;
-				    			return false;
-				    		}
-				    	});
-				    	if(inArray != -1) { //如果该元素在集合中存在
-				    		handsPersonList.splice(inArray, 1);
-				    	}
-			        }
-			    });
-            }
+        //单据时间
+        laydate.render({
+            elem: '#operTime',
+            type: 'datetime',
+            value: getFormatDate(),
+            trigger: 'click'
         });
+
+        initSupplierHtml();
+
+        //初始化付款单位
+        function initSupplierHtml() {
+            AjaxPostUtil.request({url: reqBasePath + "supplier010", params: {}, type: 'json', callback: function(json) {
+                    if(json.returnCode == 0) {
+                        //加载付款单位数据
+                        $("#organId").html(getDataUseHandlebars(selOption, json));
+                        //初始化账户
+                        initAccountHtml();
+                    } else {
+                        winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
+                    }
+                }});
+        }
 
         //初始化账户
         function initAccountHtml() {
             AjaxPostUtil.request({url: reqBasePath + "account009", params: {}, type: 'json', callback: function(json) {
                 if(json.returnCode == 0) {
                     //加载账户数据
-                    $("#accountId").html(getDataUseHandlebars(selOption, json));
-                    //初始化往来单位
-                    initSupplierHtml();
+                    accountHtml = getDataUseHandlebars(selOption, json);
+                    //渲染
+                    form.render();
+                    //初始化一行数据
+                    addRow();
                 } else {
                     winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
                 }
             }});
         }
 
-        //初始化往来单位
-        function initSupplierHtml() {
-            AjaxPostUtil.request({url: reqBasePath + "supplier010", params: {}, type: 'json', callback: function(json) {
-                if(json.returnCode == 0) {
-                    //加载往来单位数据
-                    $("#organId").html(getDataUseHandlebars(selOption, json));
-                    //初始化支出项目
-                    initItemHtml();
-                } else {
-                    winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
-                }
-            }});
-        }
-
-        //初始化支出项目
-        function initItemHtml() {
-            AjaxPostUtil.request({url: reqBasePath + "inoutitem007", params: {}, type: 'json', callback: function(json) {
-                if(json.returnCode == 0) {
-                    //加载支出项目数据
-                    initemHtml = getDataUseHandlebars(selOption, json);
-                    //渲染数据到页面
-                    initDataToShow();
-                } else {
-                    winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
-                }
-            }});
-        }
-
-        //渲染数据到页面
-        function initDataToShow(){
-            $("#organId").val(orderObject.bean.organId);//来往单位
-            $("#accountId").val(orderObject.bean.accountId);//账户
-
-            //渲染列表项
-            $.each(orderObject.bean.items, function(i, item){
-                addRow();
-                $("#initemId" + (rowNum - 1)).val(item.initemId);//支出项目回显
-                $("#initemMoney" + (rowNum - 1)).val(item.initemMoney.toFixed(2));//金额回显
-                $("#remark" + (rowNum - 1)).val(item.remark);//备注回显
-                //设置标识
-                $("tr[trcusid='tr" + (rowNum - 1) + "']").attr("thisid", item.id);
-            });
-            //渲染
-            form.render();
-        }
-
-        form.on('submit(formEditBean)', function(data) {
-            //表单验证
-            if(winui.verifyForm(data.elem)) {
-                var rowTr = $("#useTable tr");
-                if(rowTr.length == 0) {
-                    winui.window.msg('请选择收入项目.', {icon: 2, time: 2000});
-                    return false;
-                }
-                var tableData = new Array();
-                var noError = false; //循环遍历表格数据时，是否有其他错误信息
-                $.each(rowTr, function(i, item) {
-                    //获取行编号
-                    var rowNum = $(item).attr("trcusid").replace("tr", "");
-                    if(inTableDataArrayByAssetarId($("#initemId" + rowNum).val(), tableData)) {
-                        $("#initemId" + rowNum).addClass("layui-form-danger");
-                        $("#initemId" + rowNum).focus();
-                        winui.window.msg('一张单中不允许出现相同收支项目信息.', {icon: 2, time: 2000});
-                        noError = true;
-                        return false;
-                    }
-                    var row = {
-                        initemId: $("#initemId" + rowNum).val(),
-                        initemMoney: $("#initemMoney" +rowNum).val(),
-                        remark: $("#remark" + rowNum).val()
-                    };
-                    tableData.push(row);
-                });
-                if(noError) {
-                    return false;
-                }
-                
-                var handsPersonId = "";
-				$.each(handsPersonList, function (i, item) {
-                    handsPersonId = item.id;
-                });
-                if(isNull(handsPersonId)){
-                	winui.window.msg('请选择经手人.', {icon: 2, time: 2000});
-                    return false;
-                }
-
-                var params = {
-                    rowId: parent.rowId,
-                    organId: $("#organId").val(),
-                    handsPersonId: handsPersonId,
-                    operTime: $("#operTime").val(),
-                    accountId: $("#accountId").val(),
-                    remark: $("#remark").val(),
-                    changeAmount: $("#changeAmount").val(),
-                    initemStr: JSON.stringify(tableData)
-                };
-                AjaxPostUtil.request({url: reqBasePath + "expenditure004", params: params, type: 'json', callback: function(json) {
-                    if(json.returnCode == 0) {
-                        parent.layer.close(index);
-                        parent.refreshCode = '0';
-                    } else {
-                        winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
-                    }
-                }});
-            }
-            return false;
-        });
-
+        //数量变化
         $("body").on("input", ".rkMoney", function() {
             //计算价格
             calculatedTotalPrice();
@@ -212,11 +87,72 @@ layui.config({
             $("#allPrice").html(allPrice.toFixed(2));
         }
 
-        //判断选中的收支项目是否也在数组中
-        function inTableDataArrayByAssetarId(initemId, array) {
+        form.on('submit(formAddBean)', function(data) {
+            //表单验证
+            if(winui.verifyForm(data.elem)) {
+                //获取数据
+                var rowTr = $("#useTable tr");
+                if(rowTr.length == 0) {
+                    winui.window.msg('请选择账户名称.', {icon: 2, time: 2000});
+                    return false;
+                }
+                var tableData = new Array();
+                var noError = false; //循环遍历表格数据时，是否有其他错误信息
+                $.each(rowTr, function(i, item) {
+                    //获取行编号
+                    var rowNum = $(item).attr("trcusid").replace("tr", "");
+                    if(inTableDataArrayByAssetarId($("#accountId" + rowNum).val(), tableData)) {
+                        $("#accountId" + rowNum).addClass("layui-form-danger");
+                        $("#accountId" + rowNum).focus();
+                        winui.window.msg('一张单中不允许出现相同账户信息.', {icon: 2, time: 2000});
+                        noError = true;
+                        return false;
+                    }
+                    var row = {
+                        accountId: $("#accountId" + rowNum).val(),
+                        initemMoney: $("#initemMoney" +rowNum).val(),
+                        remark: $("#remark" + rowNum).val()
+                    };
+                    tableData.push(row);
+                });
+                if(noError) {
+                    return false;
+                }
+                
+                var handsPersonId = "";
+				$.each(handsPersonList, function (i, item) {
+                    handsPersonId = item.id;
+                });
+                if(isNull(handsPersonId)){
+                	winui.window.msg('请选择经手人.', {icon: 2, time: 2000});
+                    return false;
+                }
+
+                var params = {
+                    organId: $("#organId").val(),
+                    handsPersonId: handsPersonId,
+                    operTime: $("#operTime").val(),
+                    remark: $("#remark").val(),
+                    changeAmount: $("#changeAmount").val(),
+                    initemStr: JSON.stringify(tableData)
+                };
+                AjaxPostUtil.request({url: reqBasePath + "receivables002", params: params, type: 'json', callback: function(json) {
+                    if(json.returnCode == 0) {
+                        parent.layer.close(index);
+                        parent.refreshCode = '0';
+                    } else {
+                        winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
+                    }
+                }});
+            }
+            return false;
+        });
+
+        //判断选中的账户是否也在数组中
+        function inTableDataArrayByAssetarId(accountId, array) {
             var isIn = false;
             $.each(array, function(i, item) {
-                if(item.initemId === initemId) {
+                if(item.accountId === accountId) {
                     isIn = true;
                     return false;
                 }
@@ -224,7 +160,24 @@ layui.config({
             return isIn;
         }
         
-        //人员选择
+        $('#handsPersonId').tagEditor({
+	        initialTags: [],
+	        placeholder: '请选择经手人员',
+	        beforeTagDelete: function(field, editor, tags, val) {
+	        	var inArray = -1;
+		    	$.each(handsPersonList, function(i, item) {
+		    		if(val === item.name) {
+		    			inArray = i;
+		    			return false;
+		    		}
+		    	});
+		    	if(inArray != -1) { //如果该元素在集合中存在
+		    		handsPersonList.splice(inArray, 1);
+		    	}
+	        }
+	    });
+	    
+	    //人员选择
 		$("body").on("click", "#toHandsPersonSelPeople", function(e){
 			userReturnList = [].concat(handsPersonList);
 			_openNewWindows({
@@ -265,13 +218,13 @@ layui.config({
             var par = {
                 id: "row" + rowNum.toString(), //checkbox的id
                 trId: "tr" + rowNum.toString(), //行的id
-                initemId: "initemId" + rowNum.toString(), //收入项目id
+                accountId: "accountId" + rowNum.toString(), //账户id
                 initemMoney: "initemMoney"  + rowNum.toString(), //金额id
                 remark: "remark" + rowNum.toString() //备注id
             };
             $("#useTable").append(getDataUseHandlebars(usetableTemplate, par));
-            //赋值给收支项目
-            $("#" + "initemId" + rowNum.toString()).html(initemHtml);
+            //赋值给账户
+            $("#" + "accountId" + rowNum.toString()).html(accountHtml);
             form.render('select');
             form.render('checkbox');
             rowNum++;

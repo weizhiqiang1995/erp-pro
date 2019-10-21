@@ -112,7 +112,6 @@ layui.config({
         function initDataToShow(){
             $("#organId").val(orderObject.bean.organId);//来往单位
             $("#accountId").val(orderObject.bean.accountId);//账户
-            $("#payType").val(orderObject.bean.payType);//收款类型
 
             //渲染列表项
             $.each(orderObject.bean.items, function(i, item){
@@ -150,7 +149,6 @@ layui.config({
                     var row = {
                         initemId: $("#initemId" + rowNum).val(),
                         initemMoney: $("#initemMoney" +rowNum).val(),
-                        rkNum: $("#rkNum" + rowNum).val(),
                         remark: $("#remark" + rowNum).val()
                     };
                     tableData.push(row);
