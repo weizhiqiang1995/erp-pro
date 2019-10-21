@@ -72,7 +72,7 @@ layui.config({
                 if(json.returnCode == 0) {
                     //加载账户数据
                     accountHtml = getDataUseHandlebars(selOption, json);
-                    //初始化往来单位
+                    //初始化付款单位
                     initSupplierHtml();
                 } else {
                     winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
@@ -80,11 +80,11 @@ layui.config({
             }});
         }
 
-        //初始化往来单位
+        //初始化付款单位
         function initSupplierHtml() {
-            AjaxPostUtil.request({url: reqBasePath + "supplier010", params: {}, type: 'json', callback: function(json) {
+            AjaxPostUtil.request({url: reqBasePath + "customer009", params: {}, type: 'json', callback: function(json) {
                 if(json.returnCode == 0) {
-                    //加载往来单位数据
+                    //加载付款单位数据
                     $("#organId").html(getDataUseHandlebars(selOption, json));
                     //渲染数据到页面
                     initDataToShow();

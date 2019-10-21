@@ -45,18 +45,18 @@ layui.config({
             }});
         }
 
-        //初始化往来单位
+        //初始化往来单位-供应商
         function initSupplierHtml() {
-            AjaxPostUtil.request({url: reqBasePath + "supplier010", params: {}, type: 'json', callback: function(json) {
-                    if(json.returnCode == 0) {
-                        //加载往来单位数据
-                        $("#organId").html(getDataUseHandlebars(selOption, json));
-                        //初始化支出项目
-                        initItemHtml();
-                    } else {
-                        winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
-                    }
-                }});
+            AjaxPostUtil.request({url: reqBasePath + "supplier009", params: {}, type: 'json', callback: function(json) {
+                if(json.returnCode == 0) {
+                    //加载往来单位数据
+                    $("#organId").html(getDataUseHandlebars(selOption, json));
+                    //初始化支出项目
+                    initItemHtml();
+                } else {
+                    winui.window.msg(json.returnMessage, {icon: 2, time: 2000});
+                }
+            }});
         }
 
         //初始化支出项目

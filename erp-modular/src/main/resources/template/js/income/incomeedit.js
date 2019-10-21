@@ -80,9 +80,9 @@ layui.config({
             }});
         }
 
-        //初始化往来单位
+        //初始化往来单位-客户
         function initSupplierHtml() {
-            AjaxPostUtil.request({url: reqBasePath + "supplier010", params: {}, type: 'json', callback: function(json) {
+            AjaxPostUtil.request({url: reqBasePath + "customer009", params: {}, type: 'json', callback: function(json) {
                 if(json.returnCode == 0) {
                     //加载往来单位数据
                     $("#organId").html(getDataUseHandlebars(selOption, json));
