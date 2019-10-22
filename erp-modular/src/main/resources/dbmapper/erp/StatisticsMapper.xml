@@ -87,5 +87,66 @@
 		</if>
         ORDER BY b.oper_time DESC
     </select>
+    
+    <select id="queryInComimgDetails" parameterType="java.util.Map" resultType="java.util.Map">
+    	SELECT
+			b.id,
+			b.`name` materialName,
+			b.model,
+			IFNULL(c.`name`, b.unit_name) unitName,
+			IFNULL(SUM(m.oper_number * (CASE m.sub_type 
+									WHEN 12 THEN (CASE m.m_type WHEN 1 THEN 0 ELSE 1 END)
+									WHEN 13 THEN (CASE m.m_type WHEN 1 THEN 1 ELSE 0 END)
+									ELSE CASE m.type WHEN 2 THEN 1 ELSE 0 END
+								END)), 0) currentTock,
+			FORMAT(IFNULL(SUM(m.total_price * (CASE m.sub_type 
+									WHEN 12 THEN (CASE m.m_type WHEN 1 THEN 0 ELSE 1 END)
+									WHEN 13 THEN (CASE m.m_type WHEN 1 THEN 1 ELSE 0 END)
+									ELSE CASE m.type WHEN 2 THEN 1 ELSE 0 END
+								END)), 0), 2) currentTockMoney,
+			IFNULL(SUM(m.oper_number * (CASE m.sub_type 
+									WHEN 2 THEN 1
+									WHEN 3 THEN 1
+									ELSE 0 
+								END)), 0) returnCurrentTock,
+			FORMAT(IFNULL(SUM(m.total_price * (CASE m.sub_type 
+									WHEN 2 THEN 1
+									WHEN 3 THEN 1
+									ELSE 0 
+								END)), 0), 2) returnCurrentTockMoney
+		FROM
+			erp_material_norms a
+			LEFT JOIN erp_unit c ON a.unit_id = c.id
+			LEFT JOIN (
+					SELECT 
+						q.m_unit_id,
+						p.total_price,
+						q.oper_number,
+						p.sub_type,
+						p.type,
+						q.m_type
+					FROM 
+						erp_depothead p,
+						erp_depotitem q
+					WHERE
+						q.header_id = p.id
+					AND q.delete_flag = '0'
+					AND p.delete_flag = '0'
+					AND (p.type = '2' OR (p.type = '3' AND p.sub_type IN('12', '13')))
+					AND p.tenant_id = #{userId}
+					AND p.sub_type != '10'
+					AND DATE_FORMAT(p.oper_time, '%Y-%m') = #{operTime}
+					) m ON m.m_unit_id = a.id,
+			erp_material b
+		WHERE a.meterial_id = b.id
+		<if test="materialName != '' and materialName != null">
+            AND b.material_name LIKE '%${materialName}%'
+        </if>
+		AND a.delete_flag = '0'
+		AND b.delete_flag = '0'
+		AND b.tenant_id = #{userId}
+		GROUP BY a.id
+		ORDER BY b.`name`
+    </select>
 
 </mapper>

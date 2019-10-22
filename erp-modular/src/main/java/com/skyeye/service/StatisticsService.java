@@ -9,4 +9,6 @@ public interface StatisticsService {
 
 	public void queryOutgoingDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void queryInComimgDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }

@@ -38,5 +38,17 @@ public class StatisticsController {
     public void queryOutgoingDetails(InputObject inputObject, OutputObject outputObject) throws Exception{
     	statisticsService.queryOutgoingDetails(inputObject, outputObject);
     }
+    
+    /**
+     * 进货统计
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/StatisticsController/queryInComimgDetails")
+    @ResponseBody
+    public void queryInComimgDetails(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	statisticsService.queryInComimgDetails(inputObject, outputObject);
+    }
 	
 }

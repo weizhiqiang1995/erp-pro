@@ -78,6 +78,7 @@ layui.config({
     //详情
 	function details(data){
 		rowId = data.id;
+		var url = "";
 		if(data.subType == 1){//采购入库
 			url = "../../tpl/purchaseput/purchaseputdetails.html";
 		}else if(data.subType == 4){//其他入库
@@ -96,6 +97,8 @@ layui.config({
 			url = "../../tpl/retailreturns/retailreturnsdetails.html";
 		}else if(data.subType == 12){//拆分单
 			url = "../../tpl/splitlist/splitlistdetails.html";
+		}else if(data.subType == 13){//组装单
+			url = "../../tpl/assemblysheet/assemblysheetdetails.html";
 		}
 		_openNewWindows({
 			url: url, 
