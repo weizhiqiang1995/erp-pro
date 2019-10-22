@@ -216,5 +216,33 @@
 		AND b.id = a.organ_id
 		AND b.type = '2'
     </select>
+    
+    <select id="querySupplierReconciliationDetails" parameterType="java.util.Map" resultType="java.util.Map">
+    	SELECT
+			a.id,
+			a.default_number defaultNumber,
+			CASE a.sub_type WHEN 1 THEN '采购入库' WHEN 2 THEN '销售退货' WHEN 3 THEN '零售退货' WHEN 4 THEN '其他入库' WHEN 5 THEN '销售出库' 
+									WHEN 6 THEN '采购退货' WHEN 7 THEN '调拨' WHEN 8 THEN '零售出库' WHEN 9 THEN '其他出库' ELSE '' END subTypeName,
+			b.supplier supplierName,
+			FORMAT(a.total_price, 2) totalPrice,
+			FORMAT(IFNULL(a.change_amount, 0), 2) changeAmount,
+			CONVERT(a.oper_time, CHAR) operTime,
+			a.link_number linkNumber,
+			a.status,
+			a.sub_type subType
+		FROM
+			erp_depothead a,
+			erp_supplier b
+		WHERE
+			a.delete_flag = '0'
+		AND a.tenant_id = #{userId}
+		AND DATE_FORMAT(a.oper_time, '%Y-%m') = #{operTime}
+		<if test="customerId != '' and customerId != null">
+            AND b.id = #{customerId}
+        </if>
+		AND a.sub_type NOT IN(10, 11)
+		AND b.id = a.organ_id
+		AND b.type = '1'
+    </select>
 
 </mapper>

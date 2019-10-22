@@ -15,4 +15,6 @@ public interface StatisticsService {
 
 	public void queryCustomerReconciliationDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void querySupplierReconciliationDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }

@@ -108,5 +108,23 @@ public class StatisticsServiceImpl implements StatisticsService{
         outputObject.setBeans(beans);
         outputObject.settotal(total);
 	}
+
+	/**
+     * 供应商对账
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+	@Override
+	public void querySupplierReconciliationDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String, Object> params = inputObject.getParams();
+        params.put("userId", inputObject.getLogParams().get("id"));
+        List<Map<String, Object>> beans = statisticsDao.querySupplierReconciliationDetails(params,
+                new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
+        PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
+        int total = beansPageList.getPaginator().getTotalCount();
+        outputObject.setBeans(beans);
+        outputObject.settotal(total);
+	}
 	
 }

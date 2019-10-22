@@ -74,5 +74,17 @@ public class StatisticsController {
     public void queryCustomerReconciliationDetails(InputObject inputObject, OutputObject outputObject) throws Exception{
     	statisticsService.queryCustomerReconciliationDetails(inputObject, outputObject);
     }
+    
+    /**
+     * 供应商对账
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/StatisticsController/querySupplierReconciliationDetails")
+    @ResponseBody
+    public void querySupplierReconciliationDetails(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	statisticsService.querySupplierReconciliationDetails(inputObject, outputObject);
+    }
 	
 }
