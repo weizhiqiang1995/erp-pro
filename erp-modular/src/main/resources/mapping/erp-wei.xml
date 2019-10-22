@@ -661,6 +661,12 @@
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>
+	<url id="statistics004" path="/post/StatisticsController/querySalesDetails" val="销售统计" allUse="2">
+		<property id="materialName" name="materialName" ref="" var="产品名称" />
+		<property id="operTime" name="operTime" ref="required" var="单据时间"/>
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
 	<!-- 统计结束 -->
 	
 </controller>

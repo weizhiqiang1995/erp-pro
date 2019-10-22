@@ -42,7 +42,7 @@ layui.config({
 	        id: 'messageTable',
 	        elem: '#messageTable',
 	        method: 'post',
-	        url: reqBasePath + 'statistics003',
+	        url: reqBasePath + 'statistics004',
 	        where: {materialName: $("#materialName").val(), operTime: operTime},
 	        even: true,  //隔行变色
 	        page: true,
@@ -53,8 +53,8 @@ layui.config({
 	            { field: 'materialName', title: '产品名称', align: 'left', width: 250},
 			    { field: 'model', title: '型号', align: 'left', width: 100},
 	            { field: 'unitName', title: '单位', align: 'left', width: 80},
-	            { field: 'currentTock', title: '进货数量', align: 'left', width: 100},
-	            { field: 'currentTockMoney', title: '进货金额', align: 'left', width: 120},
+	            { field: 'currentTock', title: '销售数量', align: 'left', width: 100},
+	            { field: 'currentTockMoney', title: '销售金额', align: 'left', width: 120},
 	            { field: 'returnCurrentTock', title: '退货数量', align: 'left', width: 100},
 	            { field: 'returnCurrentTockMoney', title: '退货金额', align: 'left', width: 120 }
 	        ]]
