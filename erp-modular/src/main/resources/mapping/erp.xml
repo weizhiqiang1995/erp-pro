@@ -441,4 +441,40 @@
 	</url>
 	<!-- 收款单管理结束 -->
 	
+	<!-- 付款单管理开始 -->
+	<url id="payment001" path="/post/PayMentController/queryPayMentByList" val="查询付款单列表信息" allUse="2">
+		<property id="billNo" name="billNo" ref="" var="单据编号" />
+		<property id="startTime" name="startTime" ref="" var="开始日期" />
+		<property id="endTime" name="endTime" ref="" var="结束日期" />
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+	</url>
+	<url id="payment002" path="/post/PayMentController/insertPayMent" val="添加付款单" allUse="2">
+		<property id="organId" name="organId" ref="required" var="单位Id"></property>
+		<property id="operTime" name="operTime" ref="required" var="单据日期"></property>
+		<property id="handsPersonId" name="handsPersonId" ref="required" var="经手人Id"></property>
+		<property id="remark" name="remark" ref="" var="备注"></property>
+		<property id="changeAmount" name="changeAmount" ref="required,double" var="优惠金额"></property>
+		<property id="initemStr" name="initemStr" ref="required" var="账户列表" />
+	</url>
+	<url id="payment003" path="/post/PayMentController/queryPayMentToEditById" val="查询付款单用于数据回显" allUse="2">
+		<property id="rowId" name="id" ref="required" var="付款单Id"></property>
+	</url>
+	<url id="payment004" path="/post/PayMentController/editPayMentById" val="编辑付款单信息" allUse="2">
+		<property id="rowId" name="id" ref="required" var="付款单Id"></property>
+		<property id="organId" name="organId" ref="required" var="单位Id"></property>
+		<property id="operTime" name="operTime" ref="required" var="单据日期"></property>
+		<property id="handsPersonId" name="handsPersonId" ref="required" var="经手人Id"></property>
+		<property id="remark" name="remark" ref="" var="备注"></property>
+		<property id="changeAmount" name="changeAmount" ref="required,double" var="优惠金额"></property>
+		<property id="initemStr" name="initemStr" ref="required" var="账户列表" />
+	</url>
+	<url id="payment005" path="/post/PayMentController/deletePayMentById" val="删除付款单信息" allUse="2">
+		<property id="rowId" name="id" ref="required" var="付款单Id"></property>
+	</url>
+	<url id="payment006" path="/post/PayMentController/queryPayMentByDetail" val="查询付款单详情" allUse="2">
+		<property id="rowId" name="id" ref="required" var="付款单Id"></property>
+	</url>
+	<!-- 付款单管理结束 -->
+	
 </controller>
