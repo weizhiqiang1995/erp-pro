@@ -24,7 +24,13 @@
 
 #### 功能介绍
 
-- 系统功能：包含菜单、用户、角色、权限(具体到每一个按钮)、日志、公司、部门、职位等管理
+- 用户管理：用户是系统操作者，该功能主要完成系统用户配置
+- 部门管理：配置系统组织机构（公司、部门、小组），树结构展现支持数据权限
+- 岗位管理：配置系统用户所属担任职务
+- 菜单管理：配置系统菜单，操作权限，按钮权限标识等
+- 角色管理：角色菜单权限分配、设置角色按机构进行数据范围权限划分
+- 操作日志：系统正常操作日志记录和查询；系统异常信息日志记录和查询
+- 聊天：用户可以像QQ一样与系统内容人员进行聊天
 - 基础设置：包含背景图片设置、锁屏图片设置等
 - 仓库管理：管理用户所拥有的仓库
 - 计量单位：产品规格单位管理
@@ -113,7 +119,7 @@ public void 方法名(InputObject inputObject, OutputObject outputObject) throws
 |![](https://images.gitee.com/uploads/images/2019/1015/091741_4030a2f0_1541735.png "")|![](https://s2.ax1x.com/2019/10/15/K9meR1.png "")|
 |![输入图片说明](https://images.gitee.com/uploads/images/2019/1022/165203_457e90a8_1541735.png "在这里输入图片标题")|![输入图片说明](https://images.gitee.com/uploads/images/2019/1022/165318_c88d74e3_1541735.png "在这里输入图片标题")|
 |![输入图片说明](https://images.gitee.com/uploads/images/2019/1022/165355_a7090ee3_1541735.png "在这里输入图片标题")|![输入图片说明](https://images.gitee.com/uploads/images/2019/1022/165505_0f5c5162_1541735.png "在这里输入图片标题")|
-|![输入图片说明](https://images.gitee.com/uploads/images/2019/1022/165537_fbb78be8_1541735.png "在这里输入图片标题")|![输入图片说明](https://s2.ax1x.com/2019/10/22/K8tRyt.png "在这里输入图片标题")|
+|![输入图片说明](https://images.gitee.com/uploads/images/2019/1022/165537_fbb78be8_1541735.png "在这里输入图片标题")|![输入图片说明](https://images.gitee.com/uploads/images/2019/1023/152325_95480f53_1541735.png "在这里输入图片标题")|
 
 #### 环境搭建
 ##### 开发工具:
