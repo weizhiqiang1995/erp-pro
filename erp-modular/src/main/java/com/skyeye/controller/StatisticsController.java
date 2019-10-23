@@ -98,5 +98,17 @@ public class StatisticsController {
     public void queryInComimgAllDetails(InputObject inputObject, OutputObject outputObject) throws Exception{
     	statisticsService.queryInComimgAllDetails(inputObject, outputObject);
     }
+    
+    /**
+     * 出库汇总
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/StatisticsController/querySalesAllDetails")
+    @ResponseBody
+    public void querySalesAllDetails(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	statisticsService.querySalesAllDetails(inputObject, outputObject);
+    }
 	
 }

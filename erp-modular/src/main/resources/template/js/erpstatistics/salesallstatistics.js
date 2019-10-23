@@ -42,7 +42,7 @@ layui.config({
 	        id: 'messageTable',
 	        elem: '#messageTable',
 	        method: 'post',
-	        url: reqBasePath + 'statistics007',
+	        url: reqBasePath + 'statistics008',
 	        where: {materialName: $("#materialName").val(), operTime: operTime},
 	        even: true,  //隔行变色
 	        page: true,
@@ -55,8 +55,8 @@ layui.config({
 			    { field: 'firstTypeName', title: '一级类型', align: 'left', width: 100},
 			    { field: 'secondTypeName', title: '二级类型', align: 'left', width: 100},
 	            { field: 'unitName', title: '单位', align: 'left', width: 80},
-	            { field: 'currentTock', title: '入库数量', align: 'left', width: 100},
-	            { field: 'currentTockMoney', title: '入库金额', align: 'left', width: 120}
+	            { field: 'currentTock', title: '出库数量', align: 'left', width: 100},
+	            { field: 'currentTockMoney', title: '出库金额', align: 'left', width: 120}
 	        ]]
 	    });
 	    form.render();
@@ -99,5 +99,5 @@ layui.config({
     	}
     }
 
-    exports('incomingallstatistics', {});
+    exports('incomingstatistics', {});
 });
