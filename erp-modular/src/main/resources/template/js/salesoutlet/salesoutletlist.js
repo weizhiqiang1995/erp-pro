@@ -15,6 +15,7 @@ layui.config({
         form = layui.form,
         laydate = layui.laydate,
         table = layui.table;
+    authBtn('1571813632546');
         
     laydate.render({
 		elem: '#operTime', //指定元素
@@ -46,7 +47,7 @@ layui.config({
 		        }
 		        return str;
 		    }},
-            { field: 'supplierName', title: '供应商', align: 'left', width: 150},
+            { field: 'supplierName', title: '客户', align: 'left', width: 150},
             { field: 'materialNames', title: '关联产品', align: 'left', width: 300},
             { field: 'totalPrice', title: '合计金额', align: 'left', width: 120},
             { field: 'taxMoney', title: '含税合计', align: 'left', width: 120 },

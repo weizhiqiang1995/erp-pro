@@ -15,7 +15,7 @@ layui.config({
         form = layui.form,
         laydate = layui.laydate,
         table = layui.table;
-    authBtn('1571638020191');
+    authBtn('1571811233499');
 
     laydate.render({
         elem: '#billTime', //指定元素

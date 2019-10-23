@@ -29,17 +29,17 @@
 <div class="winui-toolbar">
     <div class="winui-tool">
         <button id="reloadTable" class="winui-toolbtn"><i class="fa fa-refresh" aria-hidden="true"></i>刷新数据</button>
-        <button id="addBean" class="winui-toolbtn" auth="1571638020191"><i class="fa fa-plus" aria-hidden="true"></i>新增</button>
+        <button id="addBean" class="winui-toolbtn" auth="1571811377375"><i class="fa fa-plus" aria-hidden="true"></i>新增</button>
     </div>
 </div>
 <div style="margin:auto 10px;">
     <table id="messageTable" lay-filter="messageTable"></table>
 
     <script type="text/html" id="tableBar">
-        {{# if(auth('1571638030608')){ }}
+        {{# if(auth('1571811388314')){ }}
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         {{# } }}
-        {{# if(auth('1571638039187')){ }}
+        {{# if(auth('1571811397208')){ }}
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
         {{# } }}
     </script>

@@ -368,14 +368,14 @@
 	<!-- 收入单管理结束 -->
 	
 	<!-- 支出单管理开始 -->
-	<url id="expenditure001" path="/post/ExpenditureController/queryExpenditureByList" val="查询支出单列表信息" allUse="2">
+	<url id="expenditure001" path="/post/ExpenditureController/queryExpenditureByList" val="查询支出单列表信息" allUse="1">
 		<property id="billNo" name="billNo" ref="" var="单据编号" />
 		<property id="startTime" name="startTime" ref="" var="开始日期" />
 		<property id="endTime" name="endTime" ref="" var="结束日期" />
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>
-	<url id="expenditure002" path="/post/ExpenditureController/insertExpenditure" val="添加支出单" allUse="2">
+	<url id="expenditure002" path="/post/ExpenditureController/insertExpenditure" val="添加支出单" allUse="1">
 		<property id="organId" name="organId" ref="required" var="单位Id"></property>
 		<property id="operTime" name="operTime" ref="required" var="单据日期"></property>
 		<property id="accountId" name="accountId" ref="required" var="账户Id"></property>
@@ -387,7 +387,7 @@
 	<url id="expenditure003" path="/post/ExpenditureController/queryExpenditureToEditById" val="查询支出单用于数据回显" allUse="2">
 		<property id="rowId" name="id" ref="required" var="支出单Id"></property>
 	</url>
-	<url id="expenditure004" path="/post/ExpenditureController/editExpenditureById" val="编辑支出单信息" allUse="2">
+	<url id="expenditure004" path="/post/ExpenditureController/editExpenditureById" val="编辑支出单信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="支出单Id"></property>
 		<property id="organId" name="organId" ref="required" var="单位Id"></property>
 		<property id="operTime" name="operTime" ref="required" var="单据日期"></property>
@@ -397,7 +397,7 @@
 		<property id="changeAmount" name="changeAmount" ref="required,double" var="实收金额"></property>
 		<property id="initemStr" name="initemStr" ref="required" var="收入项目列表" />
 	</url>
-	<url id="expenditure005" path="/post/ExpenditureController/deleteExpenditureById" val="删除支出单信息" allUse="2">
+	<url id="expenditure005" path="/post/ExpenditureController/deleteExpenditureById" val="删除支出单信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="支出单Id"></property>
 	</url>
 	<url id="expenditure006" path="/post/ExpenditureController/queryExpenditureByDetail" val="查询支出单详情" allUse="2">
@@ -406,14 +406,14 @@
 	<!-- 支出单管理结束 -->
 	
 	<!-- 收款单管理开始 -->
-	<url id="receivables001" path="/post/ReceivablesController/queryReceivablesByList" val="查询收款单列表信息" allUse="2">
+	<url id="receivables001" path="/post/ReceivablesController/queryReceivablesByList" val="查询收款单列表信息" allUse="1">
 		<property id="billNo" name="billNo" ref="" var="单据编号" />
 		<property id="startTime" name="startTime" ref="" var="开始日期" />
 		<property id="endTime" name="endTime" ref="" var="结束日期" />
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>
-	<url id="receivables002" path="/post/ReceivablesController/insertReceivables" val="添加收款单" allUse="2">
+	<url id="receivables002" path="/post/ReceivablesController/insertReceivables" val="添加收款单" allUse="1">
 		<property id="organId" name="organId" ref="required" var="单位Id"></property>
 		<property id="operTime" name="operTime" ref="required" var="单据日期"></property>
 		<property id="handsPersonId" name="handsPersonId" ref="required" var="经手人Id"></property>
@@ -424,7 +424,7 @@
 	<url id="receivables003" path="/post/ReceivablesController/queryReceivablesToEditById" val="查询收款单用于数据回显" allUse="2">
 		<property id="rowId" name="id" ref="required" var="收款单Id"></property>
 	</url>
-	<url id="receivables004" path="/post/ReceivablesController/editReceivablesById" val="编辑收款单信息" allUse="2">
+	<url id="receivables004" path="/post/ReceivablesController/editReceivablesById" val="编辑收款单信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="收款单Id"></property>
 		<property id="organId" name="organId" ref="required" var="单位Id"></property>
 		<property id="operTime" name="operTime" ref="required" var="单据日期"></property>
@@ -433,7 +433,7 @@
 		<property id="changeAmount" name="changeAmount" ref="required,double" var="优惠金额"></property>
 		<property id="initemStr" name="initemStr" ref="required" var="账户列表" />
 	</url>
-	<url id="receivables005" path="/post/ReceivablesController/deleteReceivablesById" val="删除收款单信息" allUse="2">
+	<url id="receivables005" path="/post/ReceivablesController/deleteReceivablesById" val="删除收款单信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="收款单Id"></property>
 	</url>
 	<url id="receivables006" path="/post/ReceivablesController/queryReceivablesByDetail" val="查询收款单详情" allUse="2">
@@ -442,14 +442,14 @@
 	<!-- 收款单管理结束 -->
 	
 	<!-- 付款单管理开始 -->
-	<url id="payment001" path="/post/PayMentController/queryPayMentByList" val="查询付款单列表信息" allUse="2">
+	<url id="payment001" path="/post/PayMentController/queryPayMentByList" val="查询付款单列表信息" allUse="1">
 		<property id="billNo" name="billNo" ref="" var="单据编号" />
 		<property id="startTime" name="startTime" ref="" var="开始日期" />
 		<property id="endTime" name="endTime" ref="" var="结束日期" />
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>
-	<url id="payment002" path="/post/PayMentController/insertPayMent" val="添加付款单" allUse="2">
+	<url id="payment002" path="/post/PayMentController/insertPayMent" val="添加付款单" allUse="1">
 		<property id="organId" name="organId" ref="required" var="单位Id"></property>
 		<property id="operTime" name="operTime" ref="required" var="单据日期"></property>
 		<property id="handsPersonId" name="handsPersonId" ref="required" var="经手人Id"></property>
@@ -460,7 +460,7 @@
 	<url id="payment003" path="/post/PayMentController/queryPayMentToEditById" val="查询付款单用于数据回显" allUse="2">
 		<property id="rowId" name="id" ref="required" var="付款单Id"></property>
 	</url>
-	<url id="payment004" path="/post/PayMentController/editPayMentById" val="编辑付款单信息" allUse="2">
+	<url id="payment004" path="/post/PayMentController/editPayMentById" val="编辑付款单信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="付款单Id"></property>
 		<property id="organId" name="organId" ref="required" var="单位Id"></property>
 		<property id="operTime" name="operTime" ref="required" var="单据日期"></property>
@@ -469,7 +469,7 @@
 		<property id="changeAmount" name="changeAmount" ref="required,double" var="优惠金额"></property>
 		<property id="initemStr" name="initemStr" ref="required" var="账户列表" />
 	</url>
-	<url id="payment005" path="/post/PayMentController/deletePayMentById" val="删除付款单信息" allUse="2">
+	<url id="payment005" path="/post/PayMentController/deletePayMentById" val="删除付款单信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="付款单Id"></property>
 	</url>
 	<url id="payment006" path="/post/PayMentController/queryPayMentByDetail" val="查询付款单详情" allUse="2">
@@ -478,14 +478,14 @@
 	<!-- 付款单管理结束 -->
 	
 	<!-- 转账单管理开始 -->
-	<url id="transfer001" path="/post/TransferController/queryTransferByList" val="查询转账单列表信息" allUse="2">
+	<url id="transfer001" path="/post/TransferController/queryTransferByList" val="查询转账单列表信息" allUse="1">
 		<property id="billNo" name="billNo" ref="" var="单据编号" />
 		<property id="startTime" name="startTime" ref="" var="开始日期" />
 		<property id="endTime" name="endTime" ref="" var="结束日期" />
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>
-	<url id="transfer002" path="/post/TransferController/insertTransfer" val="添加转账单" allUse="2">
+	<url id="transfer002" path="/post/TransferController/insertTransfer" val="添加转账单" allUse="1">
 		<property id="operTime" name="operTime" ref="required" var="单据日期"></property>
 		<property id="accountId" name="accountId" ref="required" var="付款账户"></property>
 		<property id="handsPersonId" name="handsPersonId" ref="required" var="经手人Id"></property>
@@ -496,7 +496,7 @@
 	<url id="transfer003" path="/post/TransferController/queryTransferToEditById" val="查询转账单用于数据回显" allUse="2">
 		<property id="rowId" name="id" ref="required" var="转账单Id"></property>
 	</url>
-	<url id="transfer004" path="/post/TransferController/editTransferById" val="编辑转账单信息" allUse="2">
+	<url id="transfer004" path="/post/TransferController/editTransferById" val="编辑转账单信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="转账单Id"></property>
 		<property id="operTime" name="operTime" ref="required" var="单据日期"></property>
 		<property id="accountId" name="accountId" ref="required" var="付款账户"></property>
@@ -505,7 +505,7 @@
 		<property id="changeAmount" name="changeAmount" ref="required,double" var="优惠金额"></property>
 		<property id="initemStr" name="initemStr" ref="required" var="账户列表" />
 	</url>
-	<url id="transfer005" path="/post/TransferController/deleteTransferById" val="删除转账单信息" allUse="2">
+	<url id="transfer005" path="/post/TransferController/deleteTransferById" val="删除转账单信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="转账单Id"></property>
 	</url>
 	<url id="transfer006" path="/post/TransferController/queryTransferByDetail" val="查询转账单详情" allUse="2">
@@ -514,14 +514,14 @@
 	<!-- 转账单管理结束 -->
 	
 	<!-- 收预付款管理开始 -->
-	<url id="advancecharge001" path="/post/AdvanceChargeController/queryAdvanceChargeByList" val="查询收预付款列表信息" allUse="2">
+	<url id="advancecharge001" path="/post/AdvanceChargeController/queryAdvanceChargeByList" val="查询收预付款列表信息" allUse="1">
 		<property id="billNo" name="billNo" ref="" var="单据编号" />
 		<property id="startTime" name="startTime" ref="" var="开始日期" />
 		<property id="endTime" name="endTime" ref="" var="结束日期" />
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	</url>
-	<url id="advancecharge002" path="/post/AdvanceChargeController/insertAdvanceCharge" val="添加收预付款" allUse="2">
+	<url id="advancecharge002" path="/post/AdvanceChargeController/insertAdvanceCharge" val="添加收预付款" allUse="1">
 		<property id="organId" name="organId" ref="required" var="单位Id"></property>
 		<property id="operTime" name="operTime" ref="required" var="单据日期"></property>
 		<property id="handsPersonId" name="handsPersonId" ref="required" var="经手人Id"></property>
@@ -532,7 +532,7 @@
 	<url id="advancecharge003" path="/post/AdvanceChargeController/queryAdvanceChargeToEditById" val="查询收预付款用于数据回显" allUse="2">
 		<property id="rowId" name="id" ref="required" var="收预付款Id"></property>
 	</url>
-	<url id="advancecharge004" path="/post/AdvanceChargeController/editAdvanceChargeById" val="编辑收预付款信息" allUse="2">
+	<url id="advancecharge004" path="/post/AdvanceChargeController/editAdvanceChargeById" val="编辑收预付款信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="收预付款Id"></property>
 		<property id="organId" name="organId" ref="required" var="单位Id"></property>
 		<property id="operTime" name="operTime" ref="required" var="单据日期"></property>
@@ -541,7 +541,7 @@
 		<property id="changeAmount" name="changeAmount" ref="required,double" var="优惠金额"></property>
 		<property id="initemStr" name="initemStr" ref="required" var="账户列表" />
 	</url>
-	<url id="advancecharge005" path="/post/AdvanceChargeController/deleteAdvanceChargeById" val="删除收预付款信息" allUse="2">
+	<url id="advancecharge005" path="/post/AdvanceChargeController/deleteAdvanceChargeById" val="删除收预付款信息" allUse="1">
 		<property id="rowId" name="id" ref="required" var="收预付款Id"></property>
 	</url>
 	<url id="advancecharge006" path="/post/AdvanceChargeController/queryAdvanceChargeByDetail" val="查询收预付款详情" allUse="2">

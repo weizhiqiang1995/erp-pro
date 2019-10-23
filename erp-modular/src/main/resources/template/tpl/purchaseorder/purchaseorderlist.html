@@ -33,7 +33,7 @@
 	<div class="winui-toolbar">
 	    <div class="winui-tool">
 	        <button id="reloadTable" class="winui-toolbtn"><i class="fa fa-refresh" aria-hidden="true"></i>刷新数据</button>
-	        <button id="addBean" class="winui-toolbtn"><i class="fa fa-plus" aria-hidden="true"></i>新增</button>
+	        <button id="addBean" class="winui-toolbtn" auth="1571812723211"><i class="fa fa-plus" aria-hidden="true"></i>新增</button>
 	    </div>
 	</div>
 	<div style="margin:auto 10px;">
@@ -41,13 +41,23 @@
 	
 	    <script type="text/html" id="tableBar">
         	{{# if(d.status == 0 || d.status == 3){ }}
-       			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-        		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
-				<a class="layui-btn layui-btn-xs" lay-event="subExamine">提交审核</a>
+				{{# if(auth('1571812744641')){ }}
+       				<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+				{{# } }}
+				{{# if(auth('1571812733324')){ }}
+        			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+				{{# } }}
+				{{# if(auth('1571812753921')){ }}
+					<a class="layui-btn layui-btn-xs" lay-event="subExamine">提交审核</a>
+				{{# } }}
         	{{# } else if(d.status == 1) { }}
-				<a class="layui-btn layui-btn-xs" lay-event="examine">审核</a>
+				{{# if(auth('1571812766821')){ }}
+					<a class="layui-btn layui-btn-xs" lay-event="examine">审核</a>
+				{{# } }}
 			{{# } else if(d.status == 2 || d.status == 4) { }}
-				<a class="layui-btn layui-btn-xs" lay-event="turnPurchase">转采购入库</a>
+				{{# if(auth('1571812784641')){ }}
+					<a class="layui-btn layui-btn-xs" lay-event="turnPurchase">转采购入库</a>
+				{{# } }}
 			{{# } }}
     	</script>
 	</div>

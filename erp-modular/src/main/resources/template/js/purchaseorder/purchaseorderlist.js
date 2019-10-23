@@ -15,6 +15,7 @@ layui.config({
         form = layui.form,
         laydate = layui.laydate,
         table = layui.table;
+    auth('1571812723211');
         
     laydate.render({
 		elem: '#operTime', //指定元素

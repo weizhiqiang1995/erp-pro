@@ -33,14 +33,14 @@
 	<div class="winui-toolbar">
 	    <div class="winui-tool">
 	        <button id="reloadTable" class="winui-toolbtn"><i class="fa fa-refresh" aria-hidden="true"></i>刷新数据</button>
-	        <button id="addBean" class="winui-toolbtn"><i class="fa fa-plus" aria-hidden="true"></i>新增</button>
+	        <button id="addBean" class="winui-toolbtn" auth="1571813191033"><i class="fa fa-plus" aria-hidden="true"></i>新增</button>
 	    </div>
 	</div>
 	<div style="margin:auto 10px;">
 	    <table id="messageTable" lay-filter="messageTable"></table>
 	
 	    <script type="text/html" id="tableBar">
-        	{{# if(2 == 2){ }}
+        	{{# if(auth('1571813199945')){ }}
        			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         	{{# } }}
         	{{# if(d.enabled == 2 && auth('1569133240001')){ }}
