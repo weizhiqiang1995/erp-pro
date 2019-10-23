@@ -17,4 +17,6 @@ public interface StatisticsService {
 
 	public void querySupplierReconciliationDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void queryInComimgAllDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }

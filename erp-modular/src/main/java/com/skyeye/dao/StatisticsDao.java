@@ -19,4 +19,6 @@ public interface StatisticsDao {
 
 	public List<Map<String, Object>> querySupplierReconciliationDetails(Map<String, Object> params, PageBounds pageBounds) throws Exception;
 
+	public List<Map<String, Object>> queryInComimgAllDetails(Map<String, Object> params, PageBounds pageBounds) throws Exception;
+
 }

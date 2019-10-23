@@ -86,5 +86,17 @@ public class StatisticsController {
     public void querySupplierReconciliationDetails(InputObject inputObject, OutputObject outputObject) throws Exception{
     	statisticsService.querySupplierReconciliationDetails(inputObject, outputObject);
     }
+    
+    /**
+     * 入库汇总
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/StatisticsController/queryInComimgAllDetails")
+    @ResponseBody
+    public void queryInComimgAllDetails(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	statisticsService.queryInComimgAllDetails(inputObject, outputObject);
+    }
 	
 }
