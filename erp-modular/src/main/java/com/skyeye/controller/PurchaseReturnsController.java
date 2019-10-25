@@ -68,4 +68,16 @@ public class PurchaseReturnsController {
     	purchaseReturnsService.editPurchaseReturnsMationById(inputObject, outputObject);
     }
     
+    /**
+     * 导出Excel
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/PurchaseReturnsController/queryMationToExcel")
+    @ResponseBody
+    public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	purchaseReturnsService.queryMationToExcel(inputObject, outputObject);
+    }
+    
 }
