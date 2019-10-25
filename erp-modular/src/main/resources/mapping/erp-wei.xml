@@ -323,6 +323,12 @@
 		<property id="otherMoneyList" name="otherMoneyList" ref="required" var="采购金额json" />
 		<property id="rowId" name="id" ref="required" var="采购入库id" />
 	</url>
+	<url id="purchaseput005" path="/post/PurchasePutController/queryMationToExcel" val="导出Excel" allUse="1">
+		<property id="defaultNumber" name="defaultNumber" ref="" var="票据单号" />
+		<property id="material" name="material" ref="" var="产品信息：名称或者型号" />
+		<property id="startTime" name="startTime" ref="" var="单据开始时间"/>
+		<property id="endTime" name="endTime" ref="" var="单据结束时间"/>
+	</url>
 	
 	
 	<url id="purchasereturns001" path="/post/PurchaseReturnsController/queryPurchaseReturnsToList" val="获取采购退货列表信息" allUse="1">

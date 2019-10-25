@@ -230,7 +230,7 @@ public class OtherWareHousServiceImpl implements OtherWareHousService{
         List<Map<String, Object>> beans = otherWareHousDao.queryMationToExcel(params);
         String[] key = new String[]{"defaultNumber", "supplierName", "materialNames", "totalPrice", "operPersonName", "operTime"};
         String[] column = new String[]{"单据编号", "供应商", "关联产品", "合计金额", "操作人", "单据日期"};
-        String[] dataType = new String[]{"", "data", "data", "data", "data", "data", "data"};
+        String[] dataType = new String[]{"", "data", "data", "data", "data", "data"};
         //其他入库单信息导出
         ExcelUtil.createWorkBook("其他入库单", "其他入库单详细", beans, key, column, dataType, inputObject.getResponse()); 
 	}
