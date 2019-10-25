@@ -67,5 +67,17 @@ public class OtherOutLetsController {
     public void editOtherOutLetsMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
     	otherOutLetsService.editOtherOutLetsMationById(inputObject, outputObject);
     }
+    
+    /**
+     * 导出Excel
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/OtherOutLetsController/queryMationToExcel")
+    @ResponseBody
+    public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	otherOutLetsService.queryMationToExcel(inputObject, outputObject);
+    }
 	
 }

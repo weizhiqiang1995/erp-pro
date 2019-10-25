@@ -14,6 +14,7 @@ import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.ExcelUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.OtherOutLetsDao;
 import com.skyeye.erp.util.ErpConstants;
@@ -213,6 +214,25 @@ public class OtherOutLetsServiceImpl implements OtherOutLetsService{
 		}else{
 			outputObject.setreturnMessage("数据格式错误");
 		}
+	}
+
+	/**
+     * 导出Excel
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+	@SuppressWarnings("static-access")
+	@Override
+	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String, Object> params = inputObject.getParams();
+        params.put("userId", inputObject.getLogParams().get("id"));
+        List<Map<String, Object>> beans = otherOutLetsDao.queryMationToExcel(params);
+        String[] key = new String[]{"defaultNumber", "supplierName", "materialNames", "totalPrice", "operPersonName", "operTime"};
+        String[] column = new String[]{"单据编号", "客户", "关联产品", "合计金额", "操作人", "单据日期"};
+        String[] dataType = new String[]{"", "data", "data", "data", "data", "data", "data"};
+        //其他出库单信息导出
+        ExcelUtil.createWorkBook("其他出库单", "其他出库单详细", beans, key, column, dataType, inputObject.getResponse()); 
 	}
 	
 }

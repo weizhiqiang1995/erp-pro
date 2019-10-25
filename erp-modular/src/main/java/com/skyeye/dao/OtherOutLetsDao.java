@@ -23,4 +23,6 @@ public interface OtherOutLetsDao {
 
 	public int deleteOtherOutLetsNormsMationById(Map<String, Object> map) throws Exception;
 
+	public List<Map<String, Object>> queryMationToExcel(Map<String, Object> params) throws Exception;
+
 }
