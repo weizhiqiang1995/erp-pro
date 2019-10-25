@@ -26,5 +26,5 @@ public class ErpCommonController {
     public void queryDepotHeadDetailsMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
     	erpCommonService.queryDepotHeadDetailsMationById(inputObject, outputObject);
     }
-
+    
 }

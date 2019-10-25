@@ -23,4 +23,6 @@ public interface PurchaseOrderService {
 
 	public void insertPurchaseOrderToTurnPut(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }

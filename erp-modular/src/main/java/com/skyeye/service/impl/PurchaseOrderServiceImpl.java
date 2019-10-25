@@ -14,6 +14,7 @@ import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.ExcelUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.PurchaseOrderDao;
 import com.skyeye.erp.util.ErpConstants;
@@ -440,6 +441,24 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService{
 		}else{
 			outputObject.setreturnMessage("该数据不存在.");
 		}
+	}
+
+	/**
+     * 导出Excel
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+	@SuppressWarnings("static-access")
+	@Override
+	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String, Object> params = inputObject.getParams();
+        params.put("userId", inputObject.getLogParams().get("id"));
+        List<Map<String, Object>> beans = purchaseOrderDao.queryMationToExcel(params);
+        String[] key = new String[]{"defaultNumber", "supplierName", "materialNames", "status", "totalPrice", "operPersonName", "operTime"};
+        String[] column = new String[]{"单据编号", "供应商", "关联产品", "状态", "合计金额", "操作人", "单据日期"};
+        String[] dataType = new String[]{"", "data", "data", "data", "data", "data", "data"};
+        ExcelUtil.createWorkBook("采购订单", "采购订单详细", beans, key, column, dataType, inputObject.getResponse()); //考勤信息导出
 	}
 	
 }
