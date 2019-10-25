@@ -11,11 +11,12 @@ layui.config({
     window: 'js/winui.window'
 }).define(['window', 'table', 'jquery', 'winui', 'form', 'laydate'], function (exports) {
     winui.renderColor();
-    authBtn('1570958309701');
     var $ = layui.$,
         form = layui.form,
         laydate = layui.laydate,
         table = layui.table;
+    authBtn('1570958309701');//添加
+    authBtn('1571987485364');//导出
         
     laydate.render({
 		elem: '#operTime', //指定元素
@@ -139,7 +140,7 @@ layui.config({
 
     $("body").on("click", "#formSearch", function () {
         refreshTable();
-    })
+    });
     
     //刷新
     function loadTable(){
@@ -164,6 +165,22 @@ layui.config({
     	}
         table.reload("messageTable", {page: {curr: 1}, where:{defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime}})
     }
+    
+    //导出excel
+    $("body").on("click", "#downloadExcel", function () {
+    	if(isNull($("#operTime").val())){//一定要记得，当createTime为空时
+    		startTime = "";
+    		endTime = "";
+    	}else {
+    		startTime = $("#operTime").val().split('~')[0].trim() + ' 00:00:00';
+    		endTime = $("#operTime").val().split('~')[1].trim() + ' 23:59:59';
+    	}
+    	postDownLoadFile({
+			url : reqBasePath + 'otherwarehous005?userToken=' + getCookie('userToken') + '&loginPCIp=' + returnCitySN["cip"],
+			params: {defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime},
+			method : 'post'
+		});
+    });
 
     exports('otherwarehouslist', {});
 });

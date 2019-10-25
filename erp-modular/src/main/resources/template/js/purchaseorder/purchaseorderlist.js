@@ -208,7 +208,7 @@ layui.config({
 
     $("body").on("click", "#formSearch", function () {
         refreshTable();
-    })
+    });
     
     //刷新
     function loadTable(){
@@ -248,7 +248,7 @@ layui.config({
 			params: {defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime},
 			method : 'post'
 		});
-    })
+    });
 
     exports('purchaseorderlist', {});
 });

@@ -67,5 +67,17 @@ public class OtherWareHousController {
     public void editOtherWareHousMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
     	otherWareHousService.editOtherWareHousMationById(inputObject, outputObject);
     }
+    
+    /**
+     * 导出Excel
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/OtherWareHousController/queryMationToExcel")
+    @ResponseBody
+    public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	otherWareHousService.queryMationToExcel(inputObject, outputObject);
+    }
 	
 }

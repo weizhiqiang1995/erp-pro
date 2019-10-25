@@ -13,4 +13,6 @@ public interface OtherWareHousService {
 
 	public void editOtherWareHousMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }
