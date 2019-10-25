@@ -23,4 +23,6 @@ public interface SalesOrderService {
 
 	public void insertSalesOrderToTurnPut(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }

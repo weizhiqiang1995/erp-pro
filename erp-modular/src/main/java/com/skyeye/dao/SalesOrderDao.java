@@ -43,4 +43,6 @@ public interface SalesOrderDao {
 
 	public int editSalesOrderStateToTurnById(Map<String, Object> map) throws Exception;
 
+	public List<Map<String, Object>> queryMationToExcel(Map<String, Object> params) throws Exception;
+
 }

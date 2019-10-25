@@ -128,4 +128,16 @@ public class SalesOrderController {
     	salesOrderService.insertSalesOrderToTurnPut(inputObject, outputObject);
     }
     
+    /**
+     * 导出Excel
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SalesOrderController/queryMationToExcel")
+    @ResponseBody
+    public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	salesOrderService.queryMationToExcel(inputObject, outputObject);
+    }
+    
 }

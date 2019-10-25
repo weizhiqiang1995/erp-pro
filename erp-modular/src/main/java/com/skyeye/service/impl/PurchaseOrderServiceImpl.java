@@ -458,7 +458,8 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService{
         String[] key = new String[]{"defaultNumber", "supplierName", "materialNames", "status", "totalPrice", "operPersonName", "operTime"};
         String[] column = new String[]{"单据编号", "供应商", "关联产品", "状态", "合计金额", "操作人", "单据日期"};
         String[] dataType = new String[]{"", "data", "data", "data", "data", "data", "data"};
-        ExcelUtil.createWorkBook("采购订单", "采购订单详细", beans, key, column, dataType, inputObject.getResponse()); //采购单信息导出
+        //采购单信息导出
+        ExcelUtil.createWorkBook("采购订单", "采购订单详细", beans, key, column, dataType, inputObject.getResponse());
 	}
 	
 }

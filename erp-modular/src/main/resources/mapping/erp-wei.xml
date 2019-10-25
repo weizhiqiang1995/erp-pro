@@ -436,6 +436,12 @@
 		<property id="rowId" name="id" ref="required" var="销售单id" />
 		<property id="salesMan" name="salesMan" ref="" var="销售人员" />
 	</url>
+	<url id="salesorder010" path="/post/SalesOrderController/queryMationToExcel" val="导出Excel" allUse="1">
+		<property id="defaultNumber" name="defaultNumber" ref="" var="票据单号" />
+		<property id="material" name="material" ref="" var="产品信息：名称或者型号" />
+		<property id="startTime" name="startTime" ref="" var="单据开始时间"/>
+		<property id="endTime" name="endTime" ref="" var="单据结束时间"/>
+	</url>
 	
 	
 	<url id="salesoutlet001" path="/post/SalesOutLetController/querySalesOutLetToList" val="获取销售出库列表信息" allUse="1">

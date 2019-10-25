@@ -15,7 +15,8 @@ layui.config({
         form = layui.form,
         laydate = layui.laydate,
         table = layui.table;
-    authBtn('1571813326930');
+    authBtn('1571813326930');//新增
+    authBtn('1571991191343');//导出
         
     laydate.render({
 		elem: '#operTime', //指定元素
@@ -50,7 +51,7 @@ layui.config({
 	        	}else if(d.status == '3'){
 	        		return "<span class='state-down'>拒绝通过</span>";
 	        	}else if(d.status == '4'){
-	        		return "<span class='state-new'>已转采购</span>";
+	        		return "<span class='state-new'>已转销售</span>";
 	        	}else{
 	        		return "参数错误";
 	        	}
@@ -207,7 +208,7 @@ layui.config({
 
     $("body").on("click", "#formSearch", function () {
         refreshTable();
-    })
+    });
     
     //刷新
     function loadTable(){
@@ -232,6 +233,22 @@ layui.config({
     	}
         table.reload("messageTable", {page: {curr: 1}, where:{defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime}})
     }
+    
+    //导出excel
+    $("body").on("click", "#downloadExcel", function () {
+    	if(isNull($("#operTime").val())){//一定要记得，当createTime为空时
+    		startTime = "";
+    		endTime = "";
+    	}else {
+    		startTime = $("#operTime").val().split('~')[0].trim() + ' 00:00:00';
+    		endTime = $("#operTime").val().split('~')[1].trim() + ' 23:59:59';
+    	}
+    	postDownLoadFile({
+			url : reqBasePath + 'salesorder010?userToken=' + getCookie('userToken') + '&loginPCIp=' + returnCitySN["cip"],
+			params: {defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime},
+			method : 'post'
+		});
+    });
 
     exports('salesorderlist', {});
 });
