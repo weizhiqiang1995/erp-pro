@@ -13,4 +13,6 @@ public interface RetailReturnsService {
 
 	public void editRetailReturnsMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }

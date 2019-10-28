@@ -15,7 +15,8 @@ layui.config({
         form = layui.form,
         laydate = layui.laydate,
         table = layui.table;
-    authBtn('1571814098548');
+    authBtn('1571814098548');//新增
+    authBtn('1572242758657');//导出
         
     laydate.render({
 		elem: '#operTime', //指定元素
@@ -41,7 +42,7 @@ layui.config({
             { field: 'supplierName', title: '会员', align: 'left', width: 150},
             { field: 'materialNames', title: '产品信息', align: 'left', width: 300},
             { field: 'totalPrice', title: '合计金额', align: 'left', width: 120},
-            { field: 'changeAmount', title: '收款', align: 'left', width: 120 },
+            { field: 'changeAmount', title: '退款', align: 'left', width: 120 },
             { field: 'operPersonName', title: '操作人', align: 'left', width: 100},
             { field: 'operTime', title: '单据日期', align: 'center', width: 140 },
             { title: '操作', fixed: 'right', align: 'center', width: 200, toolbar: '#tableBar'}
@@ -137,7 +138,7 @@ layui.config({
 
     $("body").on("click", "#formSearch", function () {
         refreshTable();
-    })
+    });
     
     //刷新
     function loadTable(){
@@ -162,6 +163,22 @@ layui.config({
     	}
         table.reload("messageTable", {page: {curr: 1}, where:{defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime}})
     }
+    
+    //导出excel
+    $("body").on("click", "#downloadExcel", function () {
+    	if(isNull($("#operTime").val())){//一定要记得，当createTime为空时
+    		startTime = "";
+    		endTime = "";
+    	}else {
+    		startTime = $("#operTime").val().split('~')[0].trim() + ' 00:00:00';
+    		endTime = $("#operTime").val().split('~')[1].trim() + ' 23:59:59';
+    	}
+    	postDownLoadFile({
+			url : reqBasePath + 'retailreturns005?userToken=' + getCookie('userToken') + '&loginPCIp=' + returnCitySN["cip"],
+			params: {defaultNumber: $("#defaultNumber").val(), material: $("#material").val(), startTime: startTime, endTime: endTime},
+			method : 'post'
+		});
+    });
 
     exports('retailreturnslist', {});
 });
