@@ -82,7 +82,7 @@ layui.config({
 	            { field: 'supplierName', title: '客户名称', align: 'left', width: 120},
 	            { field: 'totalPrice', title: '合计金额', align: 'left', width: 100},
 	            { field: 'changeAmount', title: '实际支付', align: 'left', width: 120},
-	            { field: 'operTime', title: '退货数量', align: 'center', width: 150}
+	            { field: 'operTime', title: '单据日期', align: 'center', width: 150}
 	        ]]
 	    });
 	    table.on('tool(messageTable)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
