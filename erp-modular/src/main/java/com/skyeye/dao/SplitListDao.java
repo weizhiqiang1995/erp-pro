@@ -23,4 +23,6 @@ public interface SplitListDao {
 
 	public int editSplitListMationById(Map<String, Object> depothead) throws Exception;
 
+	public List<Map<String, Object>> queryMationToExcel(Map<String, Object> params) throws Exception;
+
 }

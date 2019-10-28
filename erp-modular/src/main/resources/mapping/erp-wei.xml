@@ -644,6 +644,12 @@
 		<property id="depotheadStr" name="depotheadStr" ref="required" var="产品列表" />
 		<property id="rowId" name="id" ref="required" var="拆分单id" />
 	</url>
+	<url id="splitlist005" path="/post/SplitListController/queryMationToExcel" val="导出Excel" allUse="1">
+		<property id="defaultNumber" name="defaultNumber" ref="" var="票据单号" />
+		<property id="material" name="material" ref="" var="产品信息：名称或者型号" />
+		<property id="startTime" name="startTime" ref="" var="单据开始时间"/>
+		<property id="endTime" name="endTime" ref="" var="单据结束时间"/>
+	</url>
 	<!-- 拆分单结束 -->
 	
 	<!-- 组装单开始 -->
