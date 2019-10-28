@@ -68,4 +68,16 @@ public class SalesReturnsController {
     	salesReturnsService.editSalesReturnsMationById(inputObject, outputObject);
     }
     
+    /**
+     * 导出Excel
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SalesReturnsController/queryMationToExcel")
+    @ResponseBody
+    public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	salesReturnsService.queryMationToExcel(inputObject, outputObject);
+    }
+    
 }

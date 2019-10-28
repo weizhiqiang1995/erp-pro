@@ -149,7 +149,7 @@ layui.config({
 
     $("body").on("click", "#formSearch", function () {
         refreshTable();
-    })
+    });
     
     //刷新
     function loadTable(){
