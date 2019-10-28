@@ -23,4 +23,6 @@ public interface RetailOutLetDao {
 
 	public int editRetailOutLetMationById(Map<String, Object> depothead) throws Exception;
 
+	public List<Map<String, Object>> queryMationToExcel(Map<String, Object> params) throws Exception;
+
 }
