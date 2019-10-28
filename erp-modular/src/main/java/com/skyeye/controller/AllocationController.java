@@ -68,4 +68,16 @@ public class AllocationController {
     	allocationService.editAllocationMationById(inputObject, outputObject);
     }
     
+    /**
+     * 导出Excel
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/AllocationController/queryMationToExcel")
+    @ResponseBody
+    public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	allocationService.queryMationToExcel(inputObject, outputObject);
+    }
+    
 }
