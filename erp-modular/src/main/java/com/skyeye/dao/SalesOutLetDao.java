@@ -25,4 +25,6 @@ public interface SalesOutLetDao {
 
 	public List<Map<String, Object>> querySalesManUserInfoById(Map<String, Object> bean) throws Exception;
 
+	public List<Map<String, Object>> queryMationToExcel(Map<String, Object> params) throws Exception;
+
 }

@@ -13,4 +13,6 @@ public interface SalesOutLetService {
 
 	public void editSalesOutLetMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }

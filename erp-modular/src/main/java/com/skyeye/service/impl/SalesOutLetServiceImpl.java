@@ -14,6 +14,7 @@ import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.ExcelUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.SalesOutLetDao;
 import com.skyeye.erp.util.ErpConstants;
@@ -262,6 +263,40 @@ public class SalesOutLetServiceImpl implements SalesOutLetService{
 		}else{
 			outputObject.setreturnMessage("数据格式错误");
 		}
+	}
+
+	/**
+     * 导出Excel
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+	@SuppressWarnings("static-access")
+	@Override
+	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String, Object> params = inputObject.getParams();
+        params.put("userId", inputObject.getLogParams().get("id"));
+        List<Map<String, Object>> beans = salesOutLetDao.queryMationToExcel(params);
+        String defaultNumber, linkNumber, status;
+        for(Map<String, Object> bean : beans){
+        	defaultNumber = bean.get("defaultNumber").toString();
+        	linkNumber = bean.get("linkNumber").toString();
+        	status = bean.get("status").toString();
+        	if(!ToolUtil.isBlank(linkNumber)){
+        		defaultNumber += "[转]";
+        		if("2".equals(status)){
+        			defaultNumber += "[正常]";
+        		}else{
+        			defaultNumber += "[预警]";
+        		}
+        	}
+        	bean.put("defaultNumber", defaultNumber);
+        }
+        String[] key = new String[]{"defaultNumber", "supplierName", "materialNames", "totalPrice", "taxMoney", "discountLastMoney", "changeAmount", "operPersonName", "operTime"};
+        String[] column = new String[]{"单据编号", "客户", "关联产品", "合计金额", "含税合计", "优惠后金额", "收款", "操作人", "单据日期"};
+        String[] dataType = new String[]{"", "data", "data", "data", "data", "data", "data", "data", "data"};
+        //采购销售出库信息导出
+        ExcelUtil.createWorkBook("销售出库单", "销售出库单详细", beans, key, column, dataType, inputObject.getResponse()); 
 	}
 	
 }
