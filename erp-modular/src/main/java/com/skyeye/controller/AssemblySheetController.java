@@ -68,4 +68,16 @@ public class AssemblySheetController {
     	assemblySheetService.editAssemblySheetMationById(inputObject, outputObject);
     }
     
+    /**
+     * 导出Excel
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/AssemblySheetController/queryMationToExcel")
+    @ResponseBody
+    public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	assemblySheetService.queryMationToExcel(inputObject, outputObject);
+    }
+    
 }
