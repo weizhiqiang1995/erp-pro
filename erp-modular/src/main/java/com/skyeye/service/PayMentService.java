@@ -21,5 +21,7 @@ public interface PayMentService {
     public void deletePayMentById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
     public void queryPayMentByDetail(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception;
     
 }
