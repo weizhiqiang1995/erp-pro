@@ -21,5 +21,7 @@ public interface ReceivablesService {
     public void deleteReceivablesById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
     public void queryReceivablesByDetail(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception;
     
 }
