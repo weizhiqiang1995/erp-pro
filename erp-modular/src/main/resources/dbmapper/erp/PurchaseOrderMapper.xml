@@ -133,7 +133,7 @@
 									WHEN 11 THEN 0 
 									WHEN 12 THEN (CASE b.m_type WHEN 1 THEN -1 ELSE 1 END)
 									WHEN 13 THEN (CASE b.m_type WHEN 1 THEN 1 ELSE -1 END)
-									WHEN 14 THEN (CASE WHEN a.depot_id = a.depot_id THEN -1 ELSE 1 END)
+									WHEN 14 THEN (CASE WHEN a.depot_id = b.depot_id THEN -1 ELSE 1 END)
 									ELSE CASE c.type WHEN 2 THEN 1 ELSE -1 END
 								END)), 0) currentTock,
 			a.oper_number operNum,
@@ -234,7 +234,7 @@
 									WHEN 11 THEN 0 
 									WHEN 12 THEN (CASE b.m_type WHEN 1 THEN -1 ELSE 1 END)
 									WHEN 13 THEN (CASE b.m_type WHEN 1 THEN 1 ELSE -1 END)
-									WHEN 14 THEN (CASE WHEN a.depot_id = a.depot_id THEN -1 ELSE 1 END)
+									WHEN 14 THEN (CASE WHEN a.depot_id = b.depot_id THEN -1 ELSE 1 END)
 									ELSE CASE c.type WHEN 2 THEN 1 ELSE -1 END
 								END)), 0) AS currentTock,
 			a.oper_number - IFNULL((
