@@ -229,7 +229,14 @@
 			a.depot_id depotId,
 			a.material_id materialId,
 			a.m_unit_id mUnitId,
-			SUM(b.oper_number * (CASE c.type WHEN 2 THEN 1 ELSE -1 END)) AS currentTock,
+			IFNULL(SUM(b.oper_number * (CASE c.sub_type 
+									WHEN 10 THEN 0 
+									WHEN 11 THEN 0 
+									WHEN 12 THEN (CASE b.m_type WHEN 1 THEN -1 ELSE 1 END)
+									WHEN 13 THEN (CASE b.m_type WHEN 1 THEN 1 ELSE -1 END)
+									WHEN 14 THEN (CASE WHEN a.depot_id = a.depot_id THEN -1 ELSE 1 END)
+									ELSE CASE c.type WHEN 2 THEN 1 ELSE -1 END
+								END)), 0) AS currentTock,
 			a.oper_number - IFNULL((
 				SELECT
 					SUM(m.oper_number)
@@ -255,21 +262,7 @@
 			a.remark
 		FROM
 			erp_depotitem a
-			LEFT JOIN (
-				SELECT
-					q.header_id,
-					q.oper_number,
-					q.m_unit_id,
-					q.depot_id
-				FROM
-					erp_depothead p,
-					erp_depotitem q
-				WHERE
-					p.id = q.header_id
-				AND p.sub_type != '10'
-				AND p.sub_type != '11'
-				AND p.tenant_id = #{userId}
-			) AS b ON b.header_id != a.header_id AND b.depot_id = a.depot_id AND b.m_unit_id = a.m_unit_id
+			LEFT JOIN erp_depotitem b ON (b.depot_id = a.depot_id OR b.another_depot_id = a.depot_id) AND b.m_unit_id = a.m_unit_id AND b.header_id != a.header_id
 			LEFT JOIN erp_depothead c ON c.id = b.header_id
 		WHERE
 			a.header_id = #{id}
