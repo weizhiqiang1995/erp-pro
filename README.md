@@ -8,7 +8,9 @@
 
 > 系统新增传统风格界面，layui左菜单右内容风格。
 
-> 体验地址： [http://skyeye.vipgz1.idcfengye.com](http://skyeye.vipgz1.idcfengye.com)；账号/密码：root/123456
+> 体验地址1： [http://skyeye.vipgz1.idcfengye.com](http://skyeye.vipgz1.idcfengye.com)；账号/密码：root/123456 
+
+> 体验地址2： [http://skyeyeerp.fzlin.net](http://skyeyeerp.fzlin.net)；账号/密码：root/123456 感谢`疯子林`提供的服务器
 
 #### 启动方式
 直接运行com.SkyeyeErpApplication即可，启动完成后，访问`http://localhost:8086`即可。 初始化账号密码：root/123456
