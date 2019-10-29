@@ -20,4 +20,6 @@ public interface IncomeService {
     public void deleteIncomeById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
     public void queryIncomeByDetail(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception;
 }
