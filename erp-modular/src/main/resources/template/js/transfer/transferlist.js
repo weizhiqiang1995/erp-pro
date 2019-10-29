@@ -15,7 +15,8 @@ layui.config({
         form = layui.form,
         laydate = layui.laydate,
         table = layui.table;
-    authBtn('1571811233499');
+    authBtn('1571811233499');//新增
+    authBtn('1572316754669');//导出
 
     laydate.render({
         elem: '#billTime', //指定元素
@@ -41,7 +42,6 @@ layui.config({
             { field: 'totalPrice', title: '合计金额', align: 'left', width: 120},
             { field: 'hansPersonName', title: '经手人', align: 'left', width: 100},
             { field: 'billTime', title: '单据日期', align: 'center', width: 140 },
-            { field: 'remark', title: '备注', align: 'center', width: 140 },
             { title: '操作', fixed: 'right', align: 'center', width: 200, toolbar: '#tableBar'}
         ]]
     });
@@ -141,7 +141,7 @@ layui.config({
 
     $("body").on("click", "#formSearch", function () {
         refreshTable();
-    })
+    });
 
     //刷新
     function loadTable(){
@@ -152,7 +152,7 @@ layui.config({
             startTime = $("#billTime").val().split('~')[0].trim() + ' 00:00:00';
             endTime = $("#billTime").val().split('~')[1].trim() + ' 23:59:59';
         }
-        table.reload("messageTable", {where:{billNo: $("#billNo").val(), material: $("#material").val(), startTime: startTime, endTime: endTime}});
+        table.reload("messageTable", {where:{billNo: $("#billNo").val(), startTime: startTime, endTime: endTime}});
     }
 
     //搜索
@@ -164,8 +164,24 @@ layui.config({
             startTime = $("#billTime").val().split('~')[0].trim() + ' 00:00:00';
             endTime = $("#billTime").val().split('~')[1].trim() + ' 23:59:59';
         }
-        table.reload("messageTable", {page: {curr: 1}, where:{billNo: $("#billNo").val(), material: $("#material").val(), startTime: startTime, endTime: endTime}})
+        table.reload("messageTable", {page: {curr: 1}, where:{billNo: $("#billNo").val(), startTime: startTime, endTime: endTime}})
     }
-
+	
+    //导出excel
+    $("body").on("click", "#downloadExcel", function () {
+    	if(isNull($("#billTime").val())){//一定要记得，当createTime为空时
+    		startTime = "";
+    		endTime = "";
+    	}else {
+    		startTime = $("#billTime").val().split('~')[0].trim() + ' 00:00:00';
+    		endTime = $("#billTime").val().split('~')[1].trim() + ' 23:59:59';
+    	}
+    	postDownLoadFile({
+			url : reqBasePath + 'transfer007?userToken=' + getCookie('userToken') + '&loginPCIp=' + returnCitySN["cip"],
+			params: {billNo: $("#billNo").val(), startTime: startTime, endTime: endTime},
+			method : 'post'
+		});
+    });
+    
     exports('transferlist', {});
 });

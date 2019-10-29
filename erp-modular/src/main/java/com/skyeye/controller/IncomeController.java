@@ -90,4 +90,17 @@ public class IncomeController {
     public void queryIncomeByDetail(InputObject inputObject, OutputObject outputObject) throws Exception{
         incomeService.queryIncomeByDetail(inputObject, outputObject);
     }
+    
+    /**
+     * 导出Excel
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/IncomeController/queryMationToExcel")
+    @ResponseBody
+    public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	incomeService.queryMationToExcel(inputObject, outputObject);
+    }
+    
 }

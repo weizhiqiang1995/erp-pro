@@ -30,6 +30,7 @@
     <div class="winui-tool">
         <button id="reloadTable" class="winui-toolbtn"><i class="fa fa-refresh" aria-hidden="true"></i>刷新数据</button>
         <button id="addBean" class="winui-toolbtn" auth="1571811039781"><i class="fa fa-plus" aria-hidden="true"></i>新增</button>
+        <button id="downloadExcel" class="winui-toolbtn" auth="1572315820815"><i class="fa fa-download" aria-hidden="true"></i>导出Excel</button>
     </div>
 </div>
 <div style="margin:auto 10px;">
@@ -37,10 +38,10 @@
 
     <script type="text/html" id="tableBar">
         {{# if(auth('1571811059551')){ }}
-        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         {{# } }}
         {{# if(auth('1571811080052')){ }}
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+        	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
         {{# } }}
     </script>
 </div>

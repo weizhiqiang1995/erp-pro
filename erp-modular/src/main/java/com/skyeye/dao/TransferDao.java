@@ -35,5 +35,7 @@ public interface TransferDao {
     public int deleteTransferItemById(Map<String, Object> params) throws Exception;
 
 	public List<Map<String, Object>> queryUserInfoById(Map<String, Object> bean) throws Exception;
+
+	public List<Map<String, Object>> queryMationToExcel(Map<String, Object> params) throws Exception;
 	
 }

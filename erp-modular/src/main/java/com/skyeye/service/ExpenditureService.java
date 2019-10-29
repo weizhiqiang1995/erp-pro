@@ -21,5 +21,7 @@ public interface ExpenditureService {
     public void deleteExpenditureById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
     public void queryExpenditureByDetail(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception;
     
 }

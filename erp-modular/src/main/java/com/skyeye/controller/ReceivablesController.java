@@ -91,4 +91,17 @@ public class ReceivablesController {
     public void queryReceivablesByDetail(InputObject inputObject, OutputObject outputObject) throws Exception{
         receivablesService.queryReceivablesByDetail(inputObject, outputObject);
     }
+    
+    /**
+     * 导出Excel
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/ReceivablesController/queryMationToExcel")
+    @ResponseBody
+    public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	receivablesService.queryMationToExcel(inputObject, outputObject);
+    }
+    
 }

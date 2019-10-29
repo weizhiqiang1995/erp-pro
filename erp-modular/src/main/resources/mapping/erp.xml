@@ -365,6 +365,11 @@
 	<url id="income006" path="/post/IncomeController/queryIncomeByDetail" val="查询收入单详情" allUse="2">
 		<property id="rowId" name="id" ref="required" var="收入单Id"></property>
 	</url>
+	<url id="income007" path="/post/IncomeController/queryMationToExcel" val="导出Excel" allUse="1">
+		<property id="billNo" name="billNo" ref="" var="单据编号" />
+		<property id="startTime" name="startTime" ref="" var="开始日期" />
+		<property id="endTime" name="endTime" ref="" var="结束日期" />
+	</url>
 	<!-- 收入单管理结束 -->
 	
 	<!-- 支出单管理开始 -->
@@ -403,6 +408,11 @@
 	<url id="expenditure006" path="/post/ExpenditureController/queryExpenditureByDetail" val="查询支出单详情" allUse="2">
 		<property id="rowId" name="id" ref="required" var="支出单Id"></property>
 	</url>
+	<url id="expenditure007" path="/post/ExpenditureController/queryMationToExcel" val="导出Excel" allUse="1">
+		<property id="billNo" name="billNo" ref="" var="单据编号" />
+		<property id="startTime" name="startTime" ref="" var="开始日期" />
+		<property id="endTime" name="endTime" ref="" var="结束日期" />
+	</url>
 	<!-- 支出单管理结束 -->
 	
 	<!-- 收款单管理开始 -->
@@ -438,6 +448,11 @@
 	</url>
 	<url id="receivables006" path="/post/ReceivablesController/queryReceivablesByDetail" val="查询收款单详情" allUse="2">
 		<property id="rowId" name="id" ref="required" var="收款单Id"></property>
+	</url>
+	<url id="receivables007" path="/post/ReceivablesController/queryMationToExcel" val="导出Excel" allUse="1">
+		<property id="billNo" name="billNo" ref="" var="单据编号" />
+		<property id="startTime" name="startTime" ref="" var="开始日期" />
+		<property id="endTime" name="endTime" ref="" var="结束日期" />
 	</url>
 	<!-- 收款单管理结束 -->
 	
@@ -475,6 +490,11 @@
 	<url id="payment006" path="/post/PayMentController/queryPayMentByDetail" val="查询付款单详情" allUse="2">
 		<property id="rowId" name="id" ref="required" var="付款单Id"></property>
 	</url>
+	<url id="payment007" path="/post/PayMentController/queryMationToExcel" val="导出Excel" allUse="1">
+		<property id="billNo" name="billNo" ref="" var="单据编号" />
+		<property id="startTime" name="startTime" ref="" var="开始日期" />
+		<property id="endTime" name="endTime" ref="" var="结束日期" />
+	</url>
 	<!-- 付款单管理结束 -->
 	
 	<!-- 转账单管理开始 -->
@@ -510,6 +530,11 @@
 	</url>
 	<url id="transfer006" path="/post/TransferController/queryTransferByDetail" val="查询转账单详情" allUse="2">
 		<property id="rowId" name="id" ref="required" var="转账单Id"></property>
+	</url>
+	<url id="transfer007" path="/post/TransferController/queryMationToExcel" val="导出Excel" allUse="1">
+		<property id="billNo" name="billNo" ref="" var="单据编号" />
+		<property id="startTime" name="startTime" ref="" var="开始日期" />
+		<property id="endTime" name="endTime" ref="" var="结束日期" />
 	</url>
 	<!-- 转账单管理结束 -->
 	
