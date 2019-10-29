@@ -91,4 +91,17 @@ public class AdvanceChargeController {
     public void queryAdvanceChargeByDetail(InputObject inputObject, OutputObject outputObject) throws Exception{
         advanceChargeService.queryAdvanceChargeByDetail(inputObject, outputObject);
     }
+    
+    /**
+     * 导出Excel
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/AdvanceChargeController/queryMationToExcel")
+    @ResponseBody
+    public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	advanceChargeService.queryMationToExcel(inputObject, outputObject);
+    }
+    
 }

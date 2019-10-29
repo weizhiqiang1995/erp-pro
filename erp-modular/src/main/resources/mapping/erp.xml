@@ -572,6 +572,11 @@
 	<url id="advancecharge006" path="/post/AdvanceChargeController/queryAdvanceChargeByDetail" val="查询收预付款详情" allUse="2">
 		<property id="rowId" name="id" ref="required" var="收预付款Id"></property>
 	</url>
+	<url id="advancecharge007" path="/post/AdvanceChargeController/queryMationToExcel" val="导出Excel" allUse="1">
+		<property id="billNo" name="billNo" ref="" var="单据编号" />
+		<property id="startTime" name="startTime" ref="" var="开始日期" />
+		<property id="endTime" name="endTime" ref="" var="结束日期" />
+	</url>
 	<!-- 收预付款管理结束 -->
 	
 </controller>

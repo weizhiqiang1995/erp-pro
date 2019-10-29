@@ -21,5 +21,7 @@ public interface AdvanceChargeService {
     public void deleteAdvanceChargeById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
     public void queryAdvanceChargeByDetail(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception;
     
 }
