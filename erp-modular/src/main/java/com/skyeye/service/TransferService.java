@@ -21,5 +21,7 @@ public interface TransferService {
     public void deleteTransferById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
     public void queryTransferByDetail(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception;
     
 }

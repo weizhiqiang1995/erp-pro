@@ -153,7 +153,7 @@ layui.config({
             startTime = $("#billTime").val().split('~')[0].trim() + ' 00:00:00';
             endTime = $("#billTime").val().split('~')[1].trim() + ' 23:59:59';
         }
-        table.reload("messageTable", {where:{billNo: $("#billNo").val(), material: $("#material").val(), startTime: startTime, endTime: endTime}});
+        table.reload("messageTable", {where:{billNo: $("#billNo").val(), startTime: startTime, endTime: endTime}});
     }
 
     //搜索
@@ -165,7 +165,7 @@ layui.config({
             startTime = $("#billTime").val().split('~')[0].trim() + ' 00:00:00';
             endTime = $("#billTime").val().split('~')[1].trim() + ' 23:59:59';
         }
-        table.reload("messageTable", {page: {curr: 1}, where:{billNo: $("#billNo").val(), material: $("#material").val(), startTime: startTime, endTime: endTime}})
+        table.reload("messageTable", {page: {curr: 1}, where:{billNo: $("#billNo").val(), startTime: startTime, endTime: endTime}})
     }
     
     //导出excel

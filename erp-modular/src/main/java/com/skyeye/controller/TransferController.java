@@ -91,4 +91,17 @@ public class TransferController {
     public void queryTransferByDetail(InputObject inputObject, OutputObject outputObject) throws Exception{
         transferService.queryTransferByDetail(inputObject, outputObject);
     }
+    
+    /**
+     * 导出Excel
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/TransferController/queryMationToExcel")
+    @ResponseBody
+    public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	transferService.queryMationToExcel(inputObject, outputObject);
+    }
+    
 }

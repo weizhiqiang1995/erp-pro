@@ -14,6 +14,7 @@ import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.ExcelUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.TransferDao;
 import com.skyeye.erp.util.ErpConstants;
@@ -237,4 +238,23 @@ public class TransferServiceImpl implements TransferService {
             outputObject.setreturnMessage("该数据已不存在.");
         }
     }
+
+    /**
+     * 导出Excel
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+	@SuppressWarnings("static-access")
+	@Override
+	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String, Object> params = inputObject.getParams();
+        params.put("userId", inputObject.getLogParams().get("id"));
+        List<Map<String, Object>> beans = transferDao.queryMationToExcel(params);
+        String[] key = new String[]{"billNo", "totalPrice", "hansPersonName", "billTime"};
+        String[] column = new String[]{"单据编号", "合计金额", "经手人", "单据日期"};
+        String[] dataType = new String[]{"", "data", "data", "data"};
+        //转账单信息导出
+        ExcelUtil.createWorkBook("转账单", "转账单详细", beans, key, column, dataType, inputObject.getResponse());
+	}
 }
