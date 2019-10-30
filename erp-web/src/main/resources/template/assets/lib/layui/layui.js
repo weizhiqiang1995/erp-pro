@@ -1451,5 +1451,25 @@ function exitFullScreen(){
 	}
 }
 
+/**
+ * 判断str在strs中是否存在，strs的数据格式为'folder-item,select'
+ * @param strs
+ * @param str
+ */
+function judgeStrInStrs(strs, str){
+	if(!isNull(strs) && !isNull(str)){
+        var ss = strs.split(',');
+        var strIndex = -1;
+        layui.$.each(ss, function(i, item){
+            if(str === item){
+                strIndex = i;
+                return false;
+            }
+        });
+        return strIndex;
+    }
+    return 0;
+}
+
 
 

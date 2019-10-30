@@ -8,20 +8,15 @@ layui.define(["jquery"], function(exports) {
 			o.prototype = {
 				init: function(t, n) {
 					this.ele = t, this.defaults = {
-						menu: [{
-							text: "菜单一",
-							callback: function() {}
-						}, {
-							text: "菜单二",
-							callback: function() {}
-						}],
+						menu: [],
 						target: function(t) {},
 						width: 100,
 						itemHeight: 28,
 						bgColor: "#fff",
 						color: "#333",
 						fontSize: 14,
-						hoverBgColor: "#f5f5f5"
+						hoverBgColor: "#f5f5f5",
+						rightClass: "",
 					}, this.opts = e.extend(!0, {}, this.defaults, n), this.random = (new Date).getTime() + parseInt(1e3 * Math.random()), this.eventBind()
 				},
 				renderMenu: function() {
@@ -32,8 +27,13 @@ layui.define(["jquery"], function(exports) {
 							i = '<ul class="ul-context-menu" id="uiContextMenu_' + this.random + '">';
 						e.each(this.opts.menu, function(t, n) {
 							if(n.text != '--'){
+								var iconStr = '';
 								if(isNull(n.icon))
-									n.icon = "fa";
+									iconStr = '<i class="' + 'fa' + '"></i>';
+								else
+									iconStr = '<i class="' + n.icon + '"></i>';
+								if(!isNull(n.img))
+									iconStr = '<img src="' + n.img + '"/>';
 								i += '<li class="';
 								if(!isNull(n.children)){
 									i += 'ui-context-mouse-menu-item';
@@ -42,7 +42,7 @@ layui.define(["jquery"], function(exports) {
 								}
 								var id = _getRandomString(32);
 								n.id = id;
-								i += '" id="' + id + '"><a href="javascript:void(0);"><i class="' + n.icon + '"></i><span>' + n.text + '</span>';
+								i += '" id="' + id + '"><a href="javascript:void(0);">' + iconStr + '<span>' + n.text + '</span>';
 								if(!isNull(n.children)){
 									i += '<i class="fa fa-caret-right menu-right"></i>';
 								}
@@ -50,11 +50,22 @@ layui.define(["jquery"], function(exports) {
 								if(!isNull(n.children)){
 									i += '<ul class="child-context-menu" style="left: ' + n.width + '">';
 									e.each(n.children, function(index, item) {
-										var id = _getRandomString(32);
-										item.id = id;
-										i += '<li class="ui-context-menu-item';
-										i += '" id="' + id + '"><a href="javascript:void(0);"><i class="' + item.icon + '"></i><span>' + item.text + '</span>';
-										i += '</a></li>';
+										if(item.text != '--'){
+											var id = _getRandomString(32);
+											var iconChildStr = '';
+											if(isNull(item.icon))
+												iconChildStr = '<i class="' + 'fa' + '"></i>';
+											else
+												iconChildStr = '<i class="' + item.icon + '"></i>';
+											if(!isNull(item.img))
+												iconChildStr = '<img src="' + item.img + '"/>';
+											item.id = id;
+											i += '<li class="ui-context-menu-item';
+											i += '" id="' + id + '"><a href="javascript:void(0);">' + iconChildStr + '<span>' + item.text + '</span>';
+											i += '</a></li>';
+										}else{
+											i += '<li class="context-menu-line"></li>'
+										}
 									});
 									i += '</ul>';
 								}
@@ -147,7 +158,9 @@ layui.define(["jquery"], function(exports) {
 					n.opts.menu[e].callback && "function" == typeof n.opts.menu[e].callback && n.opts.menu[e].callback()
 				},
 				setPosition: function(t) {
-					if($(t.target).attr('class') === 'winui-desktop'){
+					var n = this.opts;
+					if($(t.target).attr('class') === 'right-center-is-content'
+						|| (judgeStrInStrs(n.rightClass, $(t.target).attr('class')) != -1 && !isNull(n.rightClass))){
 						$(".child-context-menu").hide();
 						var winHeight = $(window).height();
 						var winWidth = $(window).width();
@@ -163,7 +176,7 @@ layui.define(["jquery"], function(exports) {
 							top = t.clientY + 2;
 						}
 						if(winWidth - tWidth < thisWidth){
-							left = t.clientX - thisHeight;
+							left = t.clientX - thisWidth;
 						}else{
 							left = t.clientX + 2;
 						}

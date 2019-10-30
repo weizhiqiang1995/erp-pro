@@ -771,4 +771,35 @@
 	</url>
 	<!-- 统计结束 -->
 	
+	<!-- 租户开始 -->
+	<url id="erptenant001" path="/post/ErpTenantController/insertErpTenantGroupMation" val="新增租户组" allUse="1">
+		<property id="groupName" name="groupName" ref="required" var="组名" />
+	</url>
+	<url id="erptenant002" path="/post/ErpTenantController/selectAllErpTenantGroupMation" val="遍历所有的租户组" allUse="2">
+	</url>
+	<url id="erptenant003" path="/post/ErpTenantController/insertErpTenantGroupUserByGroupId" val="给租户组新增租户" allUse="1">
+		<property id="rowId" name="groupId" ref="required" var="组id" />
+		<property id="userId" name="userId" ref="required" var="租户id" />
+	</url>
+	<url id="erptenant004" path="/post/ErpTenantController/editErpTenantGroupNameByGroupId" val="编辑租户组名" allUse="1">
+		<property id="rowId" name="groupId" ref="required" var="组id" />
+		<property id="groupName" name="groupName" ref="required" var="组名" />
+	</url>
+	<url id="erptenant005" path="/post/ErpTenantController/deleteErpTenantGroupByGroupId" val="删除租户组" allUse="1">
+		<property id="rowId" name="groupId" ref="required" var="组id" />
+	</url>
+	<url id="erptenant006" path="/post/ErpTenantController/deleteErpTenantGroupUserByGroupIdAndUserId" val="移除租户组中的某个租户" allUse="1">
+		<property id="rowId" name="id" ref="required" var="组id" />
+	</url>
+	<url id="erptenant007" path="/post/ErpTenantController/selectUserInfoOnErpTenantGroup" val="展示租户组的租户信息" allUse="1">
+		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
+		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
+		<property id="groupId" name="groupId" ref="" var="组id" />
+		<property id="userName" name="userName" ref="" var="租户姓名" />
+	</url>
+	<url id="erptenant008" path="/post/ErpTenantController/deleteAllErpTenantGroupUserByGroupId" val="一键移除指定租户组下的所有租户" allUse="1">
+		<property id="rowId" name="groupId" ref="required" var="组id" />
+	</url>
+	<!-- 租户结束 -->
+	
 </controller>
