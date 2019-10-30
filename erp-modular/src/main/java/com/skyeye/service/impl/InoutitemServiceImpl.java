@@ -34,7 +34,7 @@ public class InoutitemServiceImpl implements InoutitemService {
     @Override
     public void queryInoutitemByList(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = inoutitemDao.queryInoutitemByList(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
@@ -53,7 +53,7 @@ public class InoutitemServiceImpl implements InoutitemService {
     @Transactional(value="transactionManager")
     public void insertInoutitem(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> inoutitemName = inoutitemDao.queryInoutitemByName(params);
         if(inoutitemName != null){
             outputObject.setreturnMessage("名称已存在！");
@@ -74,7 +74,7 @@ public class InoutitemServiceImpl implements InoutitemService {
     @Override
     public void queryInoutitemById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> bean = inoutitemDao.queryInoutitemById(params);
         if(bean == null){
             outputObject.setreturnMessage("未查询到该信息！");
@@ -94,7 +94,7 @@ public class InoutitemServiceImpl implements InoutitemService {
     @Transactional(value="transactionManager")
     public void deleteInoutitemById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         params.put("deleteFlag", 1);
         inoutitemDao.editInoutitemByDeleteFlag(params);
     }
@@ -109,7 +109,7 @@ public class InoutitemServiceImpl implements InoutitemService {
     @Transactional(value="transactionManager")
     public void editInoutitemById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> bean = inoutitemDao.queryInoutitemByIdAndName(params);
         if(bean != null){
             outputObject.setreturnMessage("名称已存在！");
@@ -127,7 +127,7 @@ public class InoutitemServiceImpl implements InoutitemService {
     @Override
     public void queryInoutitemByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> bean = inoutitemDao.queryInoutitemByIdAndInfo(params);
         if(bean == null){
             outputObject.setreturnMessage("未查询到信息！");
@@ -146,7 +146,7 @@ public class InoutitemServiceImpl implements InoutitemService {
 	@Override
 	public void queryInoutitemISExpenditureToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = inoutitemDao.queryInoutitemISExpenditureToSelect(params);
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
@@ -161,7 +161,7 @@ public class InoutitemServiceImpl implements InoutitemService {
     @Override
     public void queryInoutitemISExpenditureIncomeToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = inoutitemDao.queryInoutitemISExpenditureIncomeToSelect(params);
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());

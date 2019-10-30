@@ -34,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void queryCustomerByList(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = customerDao.queryCustomerByList(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
@@ -53,7 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional(value="transactionManager")
     public void insertCustomer(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         //验证某租户下客户信息是否存在
         Map<String, Object> bean = customerDao.queryCustomerByUserIdAndCustomer(params);
         if(bean != null){
@@ -77,7 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void queryCustomerById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> bean = customerDao.queryCustomerById(params);
         if(bean == null){
             outputObject.setreturnMessage("未查询到客户信息！");
@@ -97,7 +97,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional(value="transactionManager")
     public void deleteCustomerById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         params.put("deleteFlag", 1);
         customerDao.editCustomerByDeleteFlag(params);
     }
@@ -112,7 +112,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional(value="transactionManager")
     public void editCustomerById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> customerName = customerDao.queryCustomerByIdAndName(params);
         if(customerName != null){
             outputObject.setreturnMessage("客户名称已存在！");
@@ -132,7 +132,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional(value="transactionManager")
     public void editCustomerByEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         params.put("enabled", 1);
         Map<String, Object> bean = customerDao.queryCustomerByEnabled(params);
         if (bean != null){
@@ -152,7 +152,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional(value="transactionManager")
     public void editCustomerByNotEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         params.put("enabled", 2);
         Map<String, Object> bean = customerDao.queryCustomerByEnabled(params);
         if (bean != null){
@@ -171,7 +171,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void queryCustomerByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> bean = customerDao.queryCustomerByIdAndInfo(params);
         if(bean == null){
             outputObject.setreturnMessage("未查询到信息！");
@@ -190,7 +190,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void queryCustomerListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = customerDao.queryCustomerListToSelect(params);
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());

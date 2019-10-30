@@ -20,7 +20,7 @@
 			LEFT JOIN erp_depotitem c ON c.header_id = a.id
 		WHERE
 			a.sub_type = '14'
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 		AND a.delete_flag = '0'
         <if test="material != '' and material != null">
             AND c.material_name LIKE '%${material}%'
@@ -61,7 +61,7 @@
         (id, `type`, sub_type, default_number, number, oper_person_id, oper_person_name, create_time, oper_time, organ_id, account_id, total_price,
         	pay_type, remark, status, tenant_id, delete_flag)
         VALUES(#{id}, #{type}, #{subType}, #{defaultNumber}, #{number}, #{operPersonId}, #{operPersonName}, #{createTime}, #{operTime}, #{organId}, #{accountId}, #{totalPrice},
-        		'1', #{remark}, #{status}, #{userId}, #{deleteFlag})
+        		'1', #{remark}, #{status}, #{tenantId}, #{deleteFlag})
     </insert>
     
     <insert id="insertAllocationChildMation" parameterType="java.util.Map">
@@ -71,7 +71,7 @@
 	     values
 		<foreach collection="list" item="item" index="index" separator="," >  
 			(#{item.id}, #{item.headerId}, #{item.materialId}, #{item.materialName}, #{item.materialModel}, #{item.mUnitId}, #{item.operNumber}, #{item.baseNumber}, #{item.estimatePurchasePrice}, #{item.allPrice}, #{item.remark}, #{item.depotId},
-				#{item.mType}, #{item.userId}, #{item.deleteFlag}, #{item.anotherDepotId})  
+				#{item.mType}, #{item.tenantId}, #{item.deleteFlag}, #{item.anotherDepotId})  
 		</foreach>  
 	</insert>
 	
@@ -91,7 +91,7 @@
 		FROM
 			erp_depothead a
 		WHERE a.id = #{id}
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 		AND a.delete_flag = '0'
 		AND a.sub_type = '14'
     </select>
@@ -156,7 +156,7 @@
 	        give_change = #{giveChange},
 		</set>
 		WHERE id = #{id}
-		AND tenant_id = #{userId}
+		AND tenant_id = #{tenantId}
 		AND sub_type = '14'
 	</update>
 	
@@ -178,7 +178,7 @@
 			LEFT JOIN erp_depotitem c ON c.header_id = a.id
 		WHERE
 			a.sub_type = '14'
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 		AND a.delete_flag = '0'
         <if test="material != '' and material != null">
             AND c.material_name LIKE '%${material}%'

@@ -15,7 +15,7 @@
             erp_accounthead a
         WHERE
             a.delete_flag = '0'
-        AND a.tenant_id = #{userId}
+        AND a.tenant_id = #{tenantId}
         AND a.type = '5'
         <if test="billNo != '' and billNo != null">
             AND a.bill_no LIKE '%${billNo}%'
@@ -30,7 +30,7 @@
         INSERT INTO erp_accounthead(
             id, type, hands_person_id, change_amount, total_price, account_id, bill_no, bill_time, remark, tenant_id, delete_flag
         ) VALUES 
-        (#{id}, #{type}, #{handsPersonId}, #{changeAmount}, #{totalPrice}, #{accountId}, #{billNo}, #{operTime}, #{remark}, #{userId}, #{deleteFlag})
+        (#{id}, #{type}, #{handsPersonId}, #{changeAmount}, #{totalPrice}, #{accountId}, #{billNo}, #{operTime}, #{remark}, #{tenantId}, #{deleteFlag})
     </insert>
 
     <insert id="insertTransferItem" parameterType="java.util.Map">
@@ -38,7 +38,7 @@
             id, header_id, account_id, each_amount, remark, tenant_id, delete_flag
         ) VALUES
         <foreach collection="list" item="item" index="index" separator="," >
-        (#{item.id}, #{item.headerId}, #{item.accountId}, #{item.eachAmount}, #{item.remark}, #{item.userId}, #{item.deleteFlag})
+        (#{item.id}, #{item.headerId}, #{item.accountId}, #{item.eachAmount}, #{item.remark}, #{item.tenantId}, #{item.deleteFlag})
         </foreach>
     </insert>
 
@@ -86,7 +86,7 @@
         </set>
         WHERE
             id = #{id}
-        AND tenant_id = #{userId}
+        AND tenant_id = #{tenantId}
     </update>
 
     <delete id="deleteTransferItemById" parameterType="java.util.Map">
@@ -104,7 +104,7 @@
         </set>
         WHERE
             id = #{id}
-        AND tenant_id = #{userId}
+        AND tenant_id = #{tenantId}
     </update>
 
     <update id="editTransferItemsByDeleteFlag" parameterType="java.util.Map">
@@ -114,7 +114,7 @@
         </set>
         WHERE
             header_id = #{id}
-        AND tenant_id = #{userId}
+        AND tenant_id = #{tenantId}
     </update>
 
     <select id="queryTransferDetailById" parameterType="java.util.Map" resultType="java.util.Map">
@@ -133,7 +133,7 @@
 	        LEFT JOIN erp_account c ON c.id = a.account_id
         WHERE
             a.delete_flag = '0'
-        AND a.tenant_id = #{userId}
+        AND a.tenant_id = #{tenantId}
         AND a.id = #{id}
         AND a.type = '5'
         ORDER BY a.bill_time DESC
@@ -177,7 +177,7 @@
             erp_accounthead a
         WHERE
             a.delete_flag = '0'
-        AND a.tenant_id = #{userId}
+        AND a.tenant_id = #{tenantId}
         AND a.type = '5'
         <if test="billNo != '' and billNo != null">
             AND a.bill_no LIKE '%${billNo}%'

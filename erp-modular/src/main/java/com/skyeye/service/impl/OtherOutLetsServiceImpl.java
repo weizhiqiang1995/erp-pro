@@ -38,7 +38,7 @@ public class OtherOutLetsServiceImpl implements OtherOutLetsService{
 	@Override
 	public void queryOtherOutLetsToList(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = otherOutLetsDao.queryOtherOutLetsToList(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
@@ -61,7 +61,7 @@ public class OtherOutLetsServiceImpl implements OtherOutLetsService{
 		String depotheadStr = map.get("depotheadStr").toString();
 		if(ToolUtil.isJson(depotheadStr)){
 			String useId = ToolUtil.getSurFaceId();//单据主表id
-			String userId = inputObject.getLogParams().get("id").toString();
+			String tenantId = inputObject.getLogParams().get("tenantId").toString();
 			//处理数据
 			JSONArray jArray = JSONArray.fromObject(depotheadStr);
 			//产品中间转换对象，单据子表存储对象
@@ -85,7 +85,7 @@ public class OtherOutLetsServiceImpl implements OtherOutLetsService{
 					entity.put("remark", bean.get("remark"));//备注
 					entity.put("depotId", bean.get("depotId"));//仓库
 					entity.put("mType", 0);//商品类型  0.普通  1.组合件  2.普通子件
-					entity.put("userId", userId);
+					entity.put("tenantId", tenantId);
 					entity.put("deleteFlag", 0);//删除标记，0未删除，1删除
 					entitys.add(entity);
 					//计算主单总价
@@ -102,10 +102,10 @@ public class OtherOutLetsServiceImpl implements OtherOutLetsService{
 			depothead.put("type", 1);//类型(1.出库/2.入库3.其他)
 			depothead.put("subType", ErpConstants.DepoTheadSubType.OUT_IS_OTHERS.getNum());//其他出库
 			ErpOrderNum erpOrderNum = new ErpOrderNum();
-			String orderNum = erpOrderNum.getOrderNumBySubType(userId, ErpConstants.DepoTheadSubType.OUT_IS_OTHERS.getNum());
+			String orderNum = erpOrderNum.getOrderNumBySubType(tenantId, ErpConstants.DepoTheadSubType.OUT_IS_OTHERS.getNum());
 			depothead.put("defaultNumber", orderNum);//初始票据号
 			depothead.put("number", orderNum);//票据号
-			depothead.put("operPersonId", userId);//操作员id
+			depothead.put("operPersonId", inputObject.getLogParams().get("id"));//操作员id
 			depothead.put("operPersonName", inputObject.getLogParams().get("userName"));//操作员名字
 			depothead.put("createTime", ToolUtil.getTimeAndToString());//创建时间
 			depothead.put("operTime", map.get("operTime"));//出入库时间即单据日期
@@ -115,7 +115,7 @@ public class OtherOutLetsServiceImpl implements OtherOutLetsService{
 			depothead.put("payType", map.get("payType"));//付款类型
 			depothead.put("totalPrice", allPrice);//合计金额
 			depothead.put("status", "2");//状态，0未审核、1.审核中、2.审核通过、3.审核拒绝、4.已转采购|销售
-			depothead.put("userId", userId);
+			depothead.put("tenantId", tenantId);
 			depothead.put("deleteFlag", 0);//删除标记，0未删除，1删除
 			otherOutLetsDao.insertOtherOutLetsMation(depothead);
 			otherOutLetsDao.insertOtherOutLetsChildMation(entitys);
@@ -133,7 +133,7 @@ public class OtherOutLetsServiceImpl implements OtherOutLetsService{
 	@Override
 	public void queryOtherOutLetsToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("userId", inputObject.getLogParams().get("id"));
+		map.put("tenantId", inputObject.getLogParams().get("tenantId"));
 		//获取其他出库单主单信息
 		Map<String, Object> bean = otherOutLetsDao.queryOtherOutLetsToEditById(map);
 		if(bean != null && !bean.isEmpty()){
@@ -159,7 +159,7 @@ public class OtherOutLetsServiceImpl implements OtherOutLetsService{
 		String depotheadStr = map.get("depotheadStr").toString();
 		if(ToolUtil.isJson(depotheadStr)){
 			String useId = map.get("id").toString();//单据主表id
-			String userId = inputObject.getLogParams().get("id").toString();
+			String tenantId = inputObject.getLogParams().get("tenantId").toString();
 			//处理数据
 			JSONArray jArray = JSONArray.fromObject(depotheadStr);
 			//产品中间转换对象，单据子表存储对象
@@ -183,7 +183,7 @@ public class OtherOutLetsServiceImpl implements OtherOutLetsService{
 					entity.put("remark", bean.get("remark"));//备注
 					entity.put("depotId", bean.get("depotId"));//仓库
 					entity.put("mType", 0);//商品类型  0.普通  1.组合件  2.普通子件
-					entity.put("userId", userId);
+					entity.put("tenantId", tenantId);
 					entity.put("deleteFlag", 0);//删除标记，0未删除，1删除
 					entitys.add(entity);
 					//计算主单总价
@@ -203,7 +203,7 @@ public class OtherOutLetsServiceImpl implements OtherOutLetsService{
 			depothead.put("remark", map.get("remark"));//备注
 			depothead.put("payType", map.get("payType"));//付款类型
 			depothead.put("totalPrice", allPrice);//合计金额
-			depothead.put("userId", userId);
+			depothead.put("tenantId", tenantId);
 			
 			//编辑其他出库单
 			otherOutLetsDao.editOtherOutLetsMationById(depothead);
@@ -226,7 +226,7 @@ public class OtherOutLetsServiceImpl implements OtherOutLetsService{
 	@Override
 	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = otherOutLetsDao.queryMationToExcel(params);
         String[] key = new String[]{"defaultNumber", "supplierName", "materialNames", "totalPrice", "operPersonName", "operTime"};
         String[] column = new String[]{"单据编号", "客户", "关联产品", "合计金额", "操作人", "单据日期"};

@@ -34,7 +34,7 @@ public class MaterialUnitServiceImpl implements MaterialUnitService{
 	@Override
 	public void queryMaterialUnitList(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = materialUnitDao.queryMaterialUnitList(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
@@ -54,10 +54,10 @@ public class MaterialUnitServiceImpl implements MaterialUnitService{
 	@Transactional(value="transactionManager")
 	public void insertMaterialUnitMation(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("userId", inputObject.getLogParams().get("id"));
+		map.put("tenantId", inputObject.getLogParams().get("tenantId"));
 		Map<String, Object> nameBean = materialUnitDao.queryUnitGroupMationByName(map);
 		if(nameBean == null || nameBean.isEmpty()){
-			String userId = inputObject.getLogParams().get("id").toString();
+			String tenantId = inputObject.getLogParams().get("tenantId").toString();
 			String groupId = ToolUtil.getSurFaceId();//计量单位组id
 			String unitNameStr = map.get("unitNameStr").toString();
 			//处理数据
@@ -70,7 +70,7 @@ public class MaterialUnitServiceImpl implements MaterialUnitService{
 				entity.put("groupId", groupId);
 				entity.put("unitName", entity.containsKey("unitName") ? entity.get("unitName") : "未知");
 				entity.put("unitNum", entity.containsKey("unitNum") ? entity.get("unitNum") : "1");
-				entity.put("userId", userId);
+				entity.put("tenantId", tenantId);
 				entity.put("baseUnit", 2);//默认不是基础单位
 				entity.put("deleteFlag", 0);//默认未删除
 				entitys.add(entity);
@@ -81,14 +81,14 @@ public class MaterialUnitServiceImpl implements MaterialUnitService{
 			entity.put("groupId", groupId);
 			entity.put("unitName", map.get("unitName"));
 			entity.put("unitNum", 1);
-			entity.put("userId", userId);
+			entity.put("tenantId", tenantId);
 			entity.put("baseUnit", 1);//默认基础单位
 			entity.put("deleteFlag", 0);//默认未删除
 			entitys.add(entity);
 			//组信息
 			Map<String, Object> bean = new HashMap<>();
 			bean.put("id", groupId);
-			bean.put("userId", userId);
+			bean.put("tenantId", tenantId);
 			bean.put("name", map.get("groupName"));
 			bean.put("deleteFlag", 0);//默认未删除
 			materialUnitDao.insertMaterialUnitGroupMation(bean);
@@ -108,7 +108,7 @@ public class MaterialUnitServiceImpl implements MaterialUnitService{
 	@Transactional(value="transactionManager")
 	public void deleteMaterialUnitMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("userId", inputObject.getLogParams().get("id"));
+		map.put("tenantId", inputObject.getLogParams().get("tenantId"));
 		materialUnitDao.deleteMaterialUnitGroupMationById(map);
 		materialUnitDao.deleteMaterialUnitMationByGroupId(map);
 	}
@@ -122,7 +122,7 @@ public class MaterialUnitServiceImpl implements MaterialUnitService{
 	@Override
 	public void queryMaterialUnitMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("userId", inputObject.getLogParams().get("id"));
+		map.put("tenantId", inputObject.getLogParams().get("tenantId"));
 		Map<String, Object> bean = materialUnitDao.queryMaterialUnitGroupMationToEditById(map);
 		if(bean == null || bean.isEmpty()){
 			outputObject.setreturnMessage("该数据不存在");
@@ -144,10 +144,10 @@ public class MaterialUnitServiceImpl implements MaterialUnitService{
 	@Transactional(value="transactionManager")
 	public void editMaterialUnitMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("userId", inputObject.getLogParams().get("id"));
+		map.put("tenantId", inputObject.getLogParams().get("tenantId"));
 		Map<String, Object> nameBean = materialUnitDao.queryUnitGroupMationByNameAndId(map);
 		if(nameBean == null || nameBean.isEmpty()){
-			String userId = inputObject.getLogParams().get("id").toString();
+			String tenantId = inputObject.getLogParams().get("tenantId").toString();
 			String groupId = map.get("id").toString();//计量单位组id
 			String unitNameStr = map.get("unitNameStr").toString();
 			//处理数据
@@ -173,7 +173,7 @@ public class MaterialUnitServiceImpl implements MaterialUnitService{
 							entity.put("groupId", groupId);
 							entity.put("unitName", entity.containsKey("unitName") ? entity.get("unitName") : "未知");
 							entity.put("unitNum", entity.containsKey("unitNum") ? entity.get("unitNum") : "1");
-							entity.put("userId", userId);
+							entity.put("tenantId", tenantId);
 							entity.put("baseUnit", 2);//默认不是基础单位
 							entity.put("deleteFlag", 0);//默认未删除
 							materialUnitDao.insertUnitMation(entity);
@@ -208,7 +208,7 @@ public class MaterialUnitServiceImpl implements MaterialUnitService{
 					entity.put("groupId", groupId);
 					entity.put("unitName", entity.containsKey("unitName") ? entity.get("unitName") : "未知");
 					entity.put("unitNum", entity.containsKey("unitNum") ? entity.get("unitNum") : "1");
-					entity.put("userId", userId);
+					entity.put("tenantId", tenantId);
 					entity.put("baseUnit", 2);//默认不是基础单位
 					entity.put("deleteFlag", 0);//默认未删除
 					materialUnitDao.insertUnitMation(entity);
@@ -220,7 +220,7 @@ public class MaterialUnitServiceImpl implements MaterialUnitService{
 			Map<String, Object> bean = new HashMap<>();
 			bean.put("id", groupId);
 			bean.put("name", map.get("groupName"));
-			bean.put("userId", userId);
+			bean.put("tenantId", tenantId);
 			materialUnitDao.editMaterialUnitGroupMationById(bean);
 		}else{
 			outputObject.setreturnMessage("该组名已存在，请更换");

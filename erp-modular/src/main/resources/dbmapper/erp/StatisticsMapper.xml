@@ -25,7 +25,7 @@
 			LEFT JOIN erp_depot d ON a.depot_id = d.id,
 			erp_depothead b
 			LEFT JOIN erp_supplier c ON b.organ_id = c.id
-		WHERE a.tenant_id = #{userId}
+		WHERE a.tenant_id = #{tenantId}
 		AND a.delete_flag = '0'
 		AND a.header_id = b.id
 		AND b.type = '2'
@@ -68,7 +68,7 @@
 			LEFT JOIN erp_depot d ON a.depot_id = d.id,
 			erp_depothead b
 			LEFT JOIN erp_supplier c ON b.organ_id = c.id
-		WHERE a.tenant_id = #{userId}
+		WHERE a.tenant_id = #{tenantId}
 		AND a.delete_flag = '0'
 		AND a.header_id = b.id
 		AND b.type = '1'
@@ -125,7 +125,7 @@
 					AND q.delete_flag = '0'
 					AND p.delete_flag = '0'
 					AND p.type = '2'
-					AND p.tenant_id = #{userId}
+					AND p.tenant_id = #{tenantId}
 					AND p.sub_type != '10'
 					AND DATE_FORMAT(p.oper_time, '%Y-%m') = #{operTime}
 					) m ON m.m_unit_id = a.id,
@@ -136,7 +136,7 @@
         </if>
 		AND a.delete_flag = '0'
 		AND b.delete_flag = '0'
-		AND b.tenant_id = #{userId}
+		AND b.tenant_id = #{tenantId}
 		GROUP BY a.id
 		ORDER BY b.`name`
     </select>
@@ -176,7 +176,7 @@
 					AND q.delete_flag = '0'
 					AND p.delete_flag = '0'
 					AND p.type = '1'
-					AND p.tenant_id = #{userId}
+					AND p.tenant_id = #{tenantId}
 					AND p.sub_type != '11'
 					AND DATE_FORMAT(p.oper_time, '%Y-%m') = #{operTime}
 					) m ON m.m_unit_id = a.id,
@@ -184,7 +184,7 @@
 		WHERE a.meterial_id = b.id
 		AND a.delete_flag = '0'
 		AND b.delete_flag = '0'
-		AND b.tenant_id = #{userId}
+		AND b.tenant_id = #{tenantId}
 		GROUP BY a.id
 		ORDER BY b.`name`
     </select>
@@ -207,7 +207,7 @@
 			erp_supplier b
 		WHERE
 			a.delete_flag = '0'
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 		AND DATE_FORMAT(a.oper_time, '%Y-%m') = #{operTime}
 		<if test="customerId != '' and customerId != null">
             AND b.id = #{customerId}
@@ -235,7 +235,7 @@
 			erp_supplier b
 		WHERE
 			a.delete_flag = '0'
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 		AND DATE_FORMAT(a.oper_time, '%Y-%m') = #{operTime}
 		<if test="customerId != '' and customerId != null">
             AND b.id = #{customerId}
@@ -282,7 +282,7 @@
 					AND q.delete_flag = '0'
 					AND p.delete_flag = '0'
 					AND (p.type = '2' OR (p.type = '3' AND p.sub_type IN(12, 13)))
-					AND p.tenant_id = #{userId}
+					AND p.tenant_id = #{tenantId}
 					AND p.sub_type != '10'
 					AND DATE_FORMAT(p.oper_time, '%Y-%m') = #{operTime}
 					) m ON m.m_unit_id = a.id,
@@ -295,7 +295,7 @@
         </if>
 		AND a.delete_flag = '0'
 		AND b.delete_flag = '0'
-		AND b.tenant_id = #{userId}
+		AND b.tenant_id = #{tenantId}
 		GROUP BY a.id
 		ORDER BY b.`name`
     </select>
@@ -337,7 +337,7 @@
 					AND q.delete_flag = '0'
 					AND p.delete_flag = '0'
 					AND (p.type = '1' OR (p.type = '3' AND p.sub_type IN(12, 13)))
-					AND p.tenant_id = #{userId}
+					AND p.tenant_id = #{tenantId}
 					AND p.sub_type != '11'
 					AND DATE_FORMAT(p.oper_time, '%Y-%m') = #{operTime}
 					) m ON m.m_unit_id = a.id,
@@ -350,7 +350,7 @@
         </if>
 		AND a.delete_flag = '0'
 		AND b.delete_flag = '0'
-		AND b.tenant_id = #{userId}
+		AND b.tenant_id = #{tenantId}
 		GROUP BY a.id
 		ORDER BY b.`name`
     </select>

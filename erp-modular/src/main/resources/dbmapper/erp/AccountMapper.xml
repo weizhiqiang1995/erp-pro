@@ -16,7 +16,7 @@
             LEFT JOIN erp_depothead b ON a.id = b.account_id AND b.sub_type NOT IN(10, 11) AND b.delete_flag = '0'
         WHERE
             a.delete_flag = 0
-        AND a.tenant_id = #{userId}
+        AND a.tenant_id = #{tenantId}
         <if test="accountName != '' and accountName != null">
             AND a.name LIKE '%${accountName}%'
         </if>
@@ -37,7 +37,7 @@
             erp_account a
         WHERE
             a.delete_flag = 0
-        AND a.tenant_id = #{userId}
+        AND a.tenant_id = #{tenantId}
         AND a.name = #{accountName}
         ORDER BY a.create_time DESC LIMIT 0,1
     </select>
@@ -45,7 +45,7 @@
     <insert id="insertAccount" parameterType="java.util.Map">
         INSERT INTO erp_account(
             id, name, serial_no, initial_amount, current_amount, remark, is_default, tenant_id, delete_flag, create_time
-        ) values (#{id}, #{accountName}, #{serialNo}, #{initialAmount}, #{currentAmount}, #{remark}, #{isDefault}, #{userId}, #{deleteFlag}, #{createTime})
+        ) values (#{id}, #{accountName}, #{serialNo}, #{initialAmount}, #{currentAmount}, #{remark}, #{isDefault}, #{tenantId}, #{deleteFlag}, #{createTime})
     </insert>
 
     <select id="queryAccountById" parameterType="java.util.Map" resultType="java.util.Map">
@@ -62,7 +62,7 @@
           erp_account a
         WHERE
             a.delete_flag = 0
-        AND a.tenant_id = #{userId}
+        AND a.tenant_id = #{tenantId}
         AND a.id = #{id}
         ORDER BY a.create_time DESC LIMIT 0,1
     </select>
@@ -74,7 +74,7 @@
         </set>
         WHERE
             id = #{id}
-        AND tenant_id = #{userId}
+        AND tenant_id = #{tenantId}
     </update>
 
     <select id="queryAccountByIdAndName" parameterType="java.util.Map" resultType="java.util.Map">
@@ -84,7 +84,7 @@
           erp_account a
         WHERE
             a.delete_flag = 0
-        AND a.tenant_id = #{userId}
+        AND a.tenant_id = #{tenantId}
         AND a.id != #{id}
         AND a.name = #{accountName}
         ORDER BY a.create_time DESC LIMIT 0,1
@@ -102,7 +102,7 @@
         </set>
         WHERE
             id = #{id}
-        AND tenant_id = #{userId}
+        AND tenant_id = #{tenantId}
     </update>
 
     <select id="queryAccountByIdAndIsDeafault" parameterType="java.util.Map" resultType="java.util.Map">
@@ -113,7 +113,7 @@
         WHERE
             a.delete_flag = 0
         AND a.is_default = 1
-        AND a.tenant_id = #{userId}
+        AND a.tenant_id = #{tenantId}
         AND a.id = #{id}
         ORDER BY a.create_time DESC LIMIT 0,1
     </select>
@@ -124,7 +124,7 @@
             is_default = #{isDefault}
         </set>
         WHERE
-            tenant_id = #{userId}
+            tenant_id = #{tenantId}
     </update>
 
     <update id="editAccountByIdAndIsDefault" parameterType="java.util.Map">
@@ -134,7 +134,7 @@
         </set>
         WHERE
             id = #{id}
-        AND tenant_id = #{userId}
+        AND tenant_id = #{tenantId}
     </update>
 
     <select id="queryAccountByIdAndInfo" parameterType="java.util.Map" resultType="java.util.Map">
@@ -151,7 +151,7 @@
           erp_account a
         WHERE
             a.delete_flag = 0
-        AND a.tenant_id = #{userId}
+        AND a.tenant_id = #{tenantId}
         AND a.id = #{id}
         ORDER BY a.create_time DESC LIMIT 0,1
     </select>
@@ -177,7 +177,7 @@
             LEFT JOIN erp_supplier c ON d.organ_id = c.id
         WHERE
             d.account_id = #{id}
-        AND d.tenant_id = #{userId}
+        AND d.tenant_id = #{tenantId}
         AND d.delete_flag = 0
     	AND d.type IN(1, 2)
         AND d.sub_type NOT IN(10, 11)
@@ -190,7 +190,7 @@
 		FROM
 			erp_account a
 		WHERE
-			a.tenant_id = #{userId}
+			a.tenant_id = #{tenantId}
 		AND a.delete_flag = '0'
 		ORDER BY a.is_default ASC
     </select>

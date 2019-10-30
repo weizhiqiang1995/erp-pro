@@ -10,7 +10,7 @@
 		FROM
 			erp_unit_group a
 			LEFT JOIN erp_unit b ON b.group_id = a.id AND b.delete_flag = '0'
-		WHERE a.tenant_id = #{userId}
+		WHERE a.tenant_id = #{tenantId}
 		<if test="groupName != '' and groupName != null">
         	AND a.`name` LIKE '%${groupName}%'
         </if>
@@ -25,13 +25,13 @@
 			erp_unit_group a
 		WHERE
 			a.`name` = #{groupName}
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
     </select>
     
     <insert id="insertMaterialUnitGroupMation" parameterType="java.util.Map">
         INSERT into erp_unit_group
         (id, `name`, tenant_id, delete_flag)
-        VALUES(#{id}, #{name}, #{userId}, #{deleteFlag})
+        VALUES(#{id}, #{name}, #{tenantId}, #{deleteFlag})
     </insert>
     
     <insert id="insertMaterialUnitMation" parameterType="java.util.Map">
@@ -39,7 +39,7 @@
 	     (id, `name`, number, group_id, tenant_id, base_unit, delete_flag)
 	     values
 		<foreach collection="list" item="item" index="index" separator="," >  
-			(#{item.id}, #{item.unitName}, #{item.unitNum}, #{item.groupId}, #{item.userId}, #{item.baseUnit}, #{item.deleteFlag})  
+			(#{item.id}, #{item.unitName}, #{item.unitNum}, #{item.groupId}, #{item.tenantId}, #{item.baseUnit}, #{item.deleteFlag})  
 		</foreach>  
 	</insert>
 	
@@ -49,7 +49,7 @@
             delete_flag = '1'
         </set>
         WHERE
-            tenant_id = #{userId}
+            tenant_id = #{tenantId}
         AND id = #{id}
     </update>
     
@@ -59,7 +59,7 @@
             delete_flag = '1'
         </set>
         WHERE
-            tenant_id = #{userId}
+            tenant_id = #{tenantId}
         AND group_id = #{id}
     </update>
     
@@ -69,7 +69,7 @@
 			a.`name` groupName
 		FROM
 			erp_unit_group a
-		WHERE a.tenant_id = #{userId}
+		WHERE a.tenant_id = #{tenantId}
 		AND a.id = #{id}
 		AND a.delete_flag = '0'
     </select>
@@ -82,7 +82,7 @@
 			a.base_unit baseUnit
 		FROM
 			erp_unit a
-		WHERE a.tenant_id = #{userId}
+		WHERE a.tenant_id = #{tenantId}
 		AND a.group_id = #{id}
 		AND a.delete_flag = '0'
 		ORDER BY a.number ASC
@@ -96,7 +96,7 @@
 		WHERE
 			a.`name` = #{groupName}
 		AND a.id != #{id}
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
     </select>
     
     <update id="editMaterialUnitGroupMationById" parameterType="java.util.Map">
@@ -107,7 +107,7 @@
 	        </if>
         </set>
         WHERE
-            tenant_id = #{userId}
+            tenant_id = #{tenantId}
         AND id = #{id}
         AND delete_flag = '0'
     </update>
@@ -128,7 +128,7 @@
     <insert id="insertUnitMation" parameterType="java.util.Map">
 	     INSERT INTO erp_unit
 	     (id, `name`, number, group_id, tenant_id, base_unit, delete_flag)
-	     VALUES(#{id}, #{unitName}, #{unitNum}, #{groupId}, #{userId}, #{baseUnit}, #{deleteFlag})  
+	     VALUES(#{id}, #{unitName}, #{unitNum}, #{groupId}, #{tenantId}, #{baseUnit}, #{deleteFlag})  
 	</insert>
 	
 	<update id="deleteUnitMationById" parameterType="java.util.Map">

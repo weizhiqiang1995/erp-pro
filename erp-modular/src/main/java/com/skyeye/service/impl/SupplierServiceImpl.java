@@ -34,7 +34,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public void querySupplierByList(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = supplierDao.querySupplierByList(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
@@ -53,7 +53,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Transactional(value="transactionManager")
     public void insertSupplier(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         //查询某一租户下是否存在相同供应商的信息
         Map<String, Object> bean = supplierDao.querySupplierByUserIdAndSupplier(params);
         if(bean != null){
@@ -78,7 +78,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public void querySupplierById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> bean = supplierDao.querySupplierById(params);
         if (bean == null){
             outputObject.setreturnMessage("未查询到供应商信息！");
@@ -98,7 +98,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Transactional(value="transactionManager")
     public void deleteSupplierById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         params.put("deleteFlag", 1);
         supplierDao.editSupplierByDeleteFlag(params);
     }
@@ -113,7 +113,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Transactional(value="transactionManager")
     public void editSupplierById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> supplierName = supplierDao.querySupplierByIdAndName(params);
         if(supplierName != null){
             outputObject.setreturnMessage("供应商名称已存在！");
@@ -132,7 +132,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Transactional(value="transactionManager")
     public void editSupplierByEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         params.put("enabled", 1);
         Map<String, Object> bean = supplierDao.querySupplierByEnabled(params);
         if (bean != null){
@@ -152,7 +152,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Transactional(value="transactionManager")
     public void editSupplierByNotEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         params.put("enabled", 2);
         Map<String, Object> bean = supplierDao.querySupplierByEnabled(params);
         if (bean != null){
@@ -171,7 +171,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public void querySupplierByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> bean = supplierDao.querySupplierByIdAndInfo(params);
         if(bean == null){
             outputObject.setreturnMessage("未查询到信息！");
@@ -190,7 +190,7 @@ public class SupplierServiceImpl implements SupplierService {
 	@Override
 	public void querySupplierListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = supplierDao.querySupplierListToSelect(params);
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
@@ -205,7 +205,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public void querySupplierListToSelectAll(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = supplierDao.querySupplierListToSelectAll(params);
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());

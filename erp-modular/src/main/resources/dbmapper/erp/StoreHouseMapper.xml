@@ -18,6 +18,7 @@
             erp_depot d
         WHERE
             d.delete_flag = 0
+        AND d.tenant_id = #{tenantId}
         <if test="name != '' and name != null">
             AND d.name LIKE '%${name}%'
         </if>
@@ -31,7 +32,7 @@
         FROM
             erp_depot d
         WHERE
-            d.tenant_id = #{userId}
+            d.tenant_id = #{tenantId}
         AND d.name = #{name}
         AND d.delete_flag = 0
         ORDER BY d.create_time DESC LIMIT 0,1
@@ -57,7 +58,7 @@
             #{truckage},
             #{remark},
 	        #{principal},
-	        #{userId},
+	        #{tenantId},
 	        #{isDefault},
 	        #{createTime}
         )
@@ -79,7 +80,7 @@
             erp_depot d
         WHERE
             d.id = #{id}
-        AND d.tenant_id = #{userId}
+        AND d.tenant_id = #{tenantId}
         ORDER BY d.create_time DESC LIMIT 0,1
     </select>
 
@@ -96,7 +97,7 @@
         </set>
         WHERE
             id = #{id}
-        AND tenant_id = #{userId}
+        AND tenant_id = #{tenantId}
         AND delete_flag = 0
     </update>
 
@@ -107,7 +108,7 @@
         </set>
         WHERE
             id = #{id}
-        AND tenant_id = #{userId}
+        AND tenant_id = #{tenantId}
     </update>
 
     <update id="editStoreHouseByDefault" parameterType="java.util.Map">
@@ -117,7 +118,7 @@
         </set>
         WHERE
             id = #{id}
-        AND tenant_id = #{userId}
+        AND tenant_id = #{tenantId}
         AND delete_flag = 0
     </update>
 
@@ -127,7 +128,7 @@
             is_default = #{isDefault}
         </set>
         WHERE
-            tenant_id = #{userId}
+            tenant_id = #{tenantId}
         AND delete_flag = 0
     </update>
 
@@ -138,7 +139,7 @@
             erp_depot d
         WHERE
             d.id != #{id}
-        AND d.tenant_id = #{userId}
+        AND d.tenant_id = #{tenantId}
         AND d.name = #{name}
         AND d.delete_flag = 0
         ORDER BY d.create_time DESC LIMIT 0,1
@@ -151,7 +152,7 @@
             erp_depot d
         WHERE
             d.id = #{id}
-        AND d.tenant_id = #{userId}
+        AND d.tenant_id = #{tenantId}
         AND d.is_default = 1
         AND d.delete_flag = 0
         ORDER BY d.create_time DESC LIMIT 0,1
@@ -164,7 +165,7 @@
 		FROM
 			erp_depot a
 		WHERE
-			a.tenant_id = #{userId}
+			a.tenant_id = #{tenantId}
 		AND a.delete_flag = '0'
 		ORDER BY a.is_default ASC
     </select>
@@ -185,7 +186,7 @@
             erp_depot d
         WHERE
             d.id = #{id}
-        AND d.tenant_id = #{userId}
+        AND d.tenant_id = #{tenantId}
         ORDER BY d.create_time DESC LIMIT 0,1
     </select>
     

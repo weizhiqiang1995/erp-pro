@@ -43,7 +43,7 @@ public class TransferServiceImpl implements TransferService {
     @Override
     public void queryTransferByList(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = transferDao.queryTransferByList(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>) beans;
@@ -67,7 +67,7 @@ public class TransferServiceImpl implements TransferService {
         if(ToolUtil.isJson(initemStr)) {
             //财务主表ID
             String useId = ToolUtil.getSurFaceId();
-            String userId = inputObject.getLogParams().get("id").toString();
+            String tenantId = inputObject.getLogParams().get("tenantId").toString();
             //处理数据
             JSONArray jArray = JSONArray.fromObject(initemStr);
             //转账单中间转换对象，财务子表存储对象
@@ -85,7 +85,7 @@ public class TransferServiceImpl implements TransferService {
                 entity.put("accountId", bean.get("accountId"));
                 entity.put("eachAmount", bean.get("initemMoney"));
                 entity.put("remark", bean.get("remark"));
-                entity.put("userId", userId);
+                entity.put("tenantId", tenantId);
                 entity.put("deleteFlag", 0);
                 entitys.add(entity);
                 //计算总金额
@@ -97,12 +97,12 @@ public class TransferServiceImpl implements TransferService {
             }
             Map<String, Object> accountHead = new HashMap<>();
             ErpOrderNum erpOrderNum = new ErpOrderNum();
-            String orderNum = erpOrderNum.getAccountOrderNumBySubType(userId, ErpConstants.AccountTheadSubType.TRANSFER_ORDER.getNum());
+            String orderNum = erpOrderNum.getAccountOrderNumBySubType(tenantId, ErpConstants.AccountTheadSubType.TRANSFER_ORDER.getNum());
             accountHead.put("id", useId);
             accountHead.put("type", ErpConstants.AccountTheadSubType.TRANSFER_ORDER.getNum());//转账单
             accountHead.put("billNo", orderNum);
             accountHead.put("totalPrice", allPrice);
-            accountHead.put("userId", userId);
+            accountHead.put("tenantId", tenantId);
             accountHead.put("accountId", params.get("accountId"));
             accountHead.put("operTime", params.get("operTime"));
             accountHead.put("handsPersonId", params.get("handsPersonId"));
@@ -125,7 +125,7 @@ public class TransferServiceImpl implements TransferService {
     @Override
     public void queryTransferToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> bean = transferDao.queryTransferToEditById(params);
         if(bean != null && !bean.isEmpty()){
         	List<Map<String, Object>> beans = transferDao.queryTransferItemsToEditById(params);
@@ -154,7 +154,7 @@ public class TransferServiceImpl implements TransferService {
         String initemStr = params.get("initemStr").toString();
         if(ToolUtil.isJson(initemStr)) {
         	String useId = params.get("id").toString();
-        	String userId = inputObject.getLogParams().get("id").toString();
+        	String tenantId = inputObject.getLogParams().get("tenantId").toString();
             //处理数据
             JSONArray jArray = JSONArray.fromObject(initemStr);
             //转账单中间转换对象，财务子表存储对象
@@ -172,7 +172,7 @@ public class TransferServiceImpl implements TransferService {
                 entity.put("accountId", bean.get("accountId"));
                 entity.put("eachAmount", bean.get("initemMoney"));
                 entity.put("remark", bean.get("remark"));
-                entity.put("userId", userId);
+                entity.put("tenantId", tenantId);
                 entity.put("deleteFlag", "0");
                 entitys.add(entity);
                 //计算总金额
@@ -184,7 +184,7 @@ public class TransferServiceImpl implements TransferService {
             }
             Map<String, Object> accountHead = new HashMap<>();
             accountHead.put("id", useId);
-            accountHead.put("userId", userId);
+            accountHead.put("tenantId", tenantId);
             accountHead.put("totalPrice", allPrice);
             accountHead.put("accountId", params.get("accountId"));
             accountHead.put("operTime", params.get("operTime"));
@@ -210,7 +210,7 @@ public class TransferServiceImpl implements TransferService {
     @Transactional(value="transactionManager")
     public void deleteTransferById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         params.put("deleteFlag", 1);
         transferDao.editTransferByDeleteFlag(params);
         transferDao.editTransferItemsByDeleteFlag(params);
@@ -225,7 +225,7 @@ public class TransferServiceImpl implements TransferService {
     @Override
     public void queryTransferByDetail(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         //获取财务主表信息
         Map<String, Object> bean = transferDao.queryTransferDetailById(params);
         if(bean != null && !bean.isEmpty()){
@@ -249,7 +249,7 @@ public class TransferServiceImpl implements TransferService {
 	@Override
 	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = transferDao.queryMationToExcel(params);
         String[] key = new String[]{"billNo", "totalPrice", "hansPersonName", "billTime"};
         String[] column = new String[]{"单据编号", "合计金额", "经手人", "单据日期"};

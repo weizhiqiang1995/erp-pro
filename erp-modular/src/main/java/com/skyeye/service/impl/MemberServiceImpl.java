@@ -34,7 +34,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void queryMemberByList(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = memberDao.queryMemberByList(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
@@ -53,7 +53,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional(value="transactionManager")
     public void insertMember(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         //验证某一租户下会员信息是否存
         Map<String, Object> bean = memberDao.queryMemberByUserIdAndMember(params);
         if(bean != null){
@@ -78,7 +78,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void queryMemberById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> bean = memberDao.queryMemberById(params);
         if (bean == null){
             outputObject.setreturnMessage("未查询到该会员信息！");
@@ -98,7 +98,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional(value="transactionManager")
     public void deleteMemberById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         params.put("deleteFlag", 1);
         memberDao.editMemberByDeleteFlag(params);
     }
@@ -113,7 +113,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional(value="transactionManager")
     public void editMemberById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> memberName = memberDao.queryMemberByIdAndName(params);
         if(memberName != null){
             outputObject.setreturnMessage("会员名称已存在！");
@@ -132,7 +132,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional(value="transactionManager")
     public void editMemberByEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         params.put("enabled", 1);
         Map<String, Object> bean = memberDao.queryMemberByEnabled(params);
         if (bean != null){
@@ -152,7 +152,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional(value="transactionManager")
     public void editMemberByNotEnabled(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         params.put("enabled", 2);
         Map<String, Object> bean = memberDao.queryMemberByEnabled(params);
         if (bean != null){
@@ -171,7 +171,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void queryMemberByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> bean = memberDao.queryMemberByIdAndInfo(params);
         if(bean == null){
             outputObject.setreturnMessage("未查询到信息！");
@@ -190,7 +190,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void queryMemberListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = memberDao.queryMemberListToSelect(params);
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
