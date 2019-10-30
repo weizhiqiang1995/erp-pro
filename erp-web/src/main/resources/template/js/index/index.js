@@ -61,6 +61,15 @@ layui.config({
     	}, 10);
     	AjaxPostUtil.request({url:reqBasePath + "login002", params:{}, type:'json', callback:function(json){
    			if(json.returnCode == 0){
+   				winui.window.open({
+		            id: '公告',
+		            type: 1,
+		            title: '公告',
+		            content: '<p style="padding:20px;">您的支持是对我们最大的动力！！！！！！^_^</p>'
+		            			+'<img src="1.png" style="width: 350px;float: left;margin-left: 10px;"/>'
+		            			+'<img src="2.png" style="width: 350px;float: right;margin-right: 10px;"/>',
+		            area: ['800px', '600px']
+		        });
    				$("#userPhoto").attr("src", fileBasePath + json.bean.userPhoto);
    				$("#userName").html(json.bean.userCode + '(' + json.bean.userName + ')');
    				userId = json.bean.id;
