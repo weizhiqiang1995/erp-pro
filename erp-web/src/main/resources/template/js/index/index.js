@@ -156,6 +156,8 @@ layui.config({
 			hoverBgColor: "#99CC66", // hover背景颜色
 			target: function(ele) { // 当前元素
 			},
+			rightClass: 'desktop-item-page section fixed-page fp-section active fp-table,desktop-item-page section fp-section fp-table active' + 
+						',desktop-item-page section fixed-page fp-section fp-table active',
 			menu: [{ // 菜单项
 					text: "新建",
 					icon: "fa fa-plus-square",
@@ -347,7 +349,7 @@ layui.config({
 				            id: '关于我们',
 				            type: 1,
 				            title: '<i class="fa fa-fw title-icon fa-info-circle" style="background-color: #0491fe;color: #ecf3f8;"></i><font class="win-title-class">关于我们</font>',
-				            content: '<p style="padding:20px;">万鹏信息系统有限公司<br/><br/>官方网站：http://www.gzwpinfo.com/<br/><br/>版权：<br/><br/>作者：万鹏信息系统有限公司<br/><br/>版本：1.0.0</p>',
+				            content: '<p style="padding:20px;">skyeye<br/><br/>官方网站：https://gitee.com/doc_wei01_admin/skyeye<br/><br/>版权：<br/><br/>作者：卫志强<br/><br/>版本：2.1.0</p>',
 				            loadBgColor: '#0491fe',
 				            loadIcon: 'fa fa-info-circle',
 				            loadIconColor: '#ecf3f8',

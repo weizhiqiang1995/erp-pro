@@ -33,7 +33,7 @@
 			LEFT JOIN erp_supplier b ON a.organ_id = b.id
 			LEFT JOIN erp_account c ON a.account_id = c.id
 		WHERE a.id = #{id}
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 		AND a.delete_flag = '0'
     </select>
     
@@ -75,7 +75,7 @@
 		FROM
 			erp_depothead a
 		WHERE
-			a.tenant_id = #{userId}
+			a.tenant_id = #{tenantId}
 		AND a.sub_type = #{subType}
 	</select>
 	
@@ -97,7 +97,7 @@
 		FROM
 			erp_accounthead a
 		WHERE
-			a.tenant_id = #{userId}
+			a.tenant_id = #{tenantId}
 		AND a.type = #{type}
 	</select>
     

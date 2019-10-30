@@ -160,6 +160,7 @@ layui.define(["jquery"], function(exports) {
 				setPosition: function(t) {
 					var n = this.opts;
 					if($(t.target).attr('class') === 'right-center-is-content'
+						|| $(t.target).attr('class') === 'winui-desktop'
 						|| (judgeStrInStrs(n.rightClass, $(t.target).attr('class')) != -1 && !isNull(n.rightClass))){
 						$(".child-context-menu").hide();
 						var winHeight = $(window).height();

@@ -26,7 +26,7 @@
             erp_supplier s
         WHERE
             s.delete_flag = 0
-        AND s.tenant_id = #{userId}
+        AND s.tenant_id = #{tenantId}
         AND s.type = 2
         <if test="customerName != '' and customerName != null">
             AND s.supplier LIKE '%${customerName}%'
@@ -60,7 +60,7 @@
         FROM
             erp_supplier s
         WHERE
-            s.tenant_id = #{userId}
+            s.tenant_id = #{tenantId}
         AND s.supplier = #{customerName}
         AND s.delete_flag = 0
         AND s.type = 2
@@ -115,7 +115,7 @@
             #{isystem},
             #{customerType},
             #{enabled},
-            #{userId},
+            #{tenantId},
             #{deleteFlag},
             #{createTime}
         )
@@ -147,7 +147,7 @@
         FROM
             erp_supplier s
         WHERE
-            s.tenant_id = #{userId}
+            s.tenant_id = #{tenantId}
         AND s.id = #{id}
         AND s.type = 2
         ORDER BY s.id DESC LIMIT 0,1
@@ -159,7 +159,7 @@
             delete_flag = #{deleteFlag},
         </set>
         WHERE
-            tenant_id = #{userId}
+            tenant_id = #{tenantId}
         AND id = #{id}
     </update>
 
@@ -185,7 +185,7 @@
             tax_rate = #{taxRate}
         </set>
         WHERE
-            tenant_id = #{userId}
+            tenant_id = #{tenantId}
         AND id = #{id}
         AND delete_flag = 0
     </update>
@@ -196,7 +196,7 @@
             enabled = #{enabled}
         </set>
         WHERE
-            tenant_id = #{userId}
+            tenant_id = #{tenantId}
         AND id = #{id}
         AND delete_flag = 0
     </update>
@@ -207,7 +207,7 @@
             enabled = #{enabled}
         </set>
         WHERE
-            tenant_id = #{userId}
+            tenant_id = #{tenantId}
         AND id = #{id}
         AND delete_flag = 0
     </update>
@@ -218,7 +218,7 @@
         FROM
             erp_supplier s
         WHERE
-            s.tenant_id = #{userId}
+            s.tenant_id = #{tenantId}
         AND s.id != #{id}
         AND s.type = 2
         AND s.supplier = #{customerName}
@@ -232,7 +232,7 @@
         FROM
             erp_supplier s
         WHERE
-            s.tenant_id = #{userId}
+            s.tenant_id = #{tenantId}
         AND s.id = #{id}
         AND s.type = 2
         AND s.enabled = #{enabled}
@@ -266,7 +266,7 @@
         FROM
             erp_supplier s
         WHERE
-            s.tenant_id = #{userId}
+            s.tenant_id = #{tenantId}
         AND s.id = #{id}
         AND s.type = 2
         ORDER BY s.id DESC LIMIT 0,1
@@ -279,7 +279,7 @@
 		FROM
 			erp_supplier a
 		WHERE
-			a.tenant_id = #{userId}
+			a.tenant_id = #{tenantId}
 		AND a.delete_flag = '0'
 		AND a.type = '2'
     </select>

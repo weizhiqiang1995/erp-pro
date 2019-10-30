@@ -12,7 +12,7 @@
         FROM
             erp_inoutitem m
         WHERE
-            m.tenant_id = #{userId}
+            m.tenant_id = #{tenantId}
         AND m.delete_flag = 0
         <if test="inoutitemName != '' and inoutitemName != null">
             AND m.name LIKE '%${inoutitemName}%'
@@ -32,7 +32,7 @@
         FROM
             erp_inoutitem m
         WHERE
-            m.tenant_id = #{userId}
+            m.tenant_id = #{tenantId}
         AND m.delete_flag = 0
         AND m.name = #{inoutitemName}
         ORDER BY m.create_time DESC LIMIT 0,1
@@ -42,7 +42,7 @@
         INSERT INTO erp_inoutitem(
             id, name, type, remark, tenant_id, delete_flag, create_time
         ) VALUES (
-            #{id}, #{inoutitemName}, #{inoutitemType}, #{remark}, #{userId}, #{deleteFlag}, #{createTime}
+            #{id}, #{inoutitemName}, #{inoutitemType}, #{remark}, #{tenantId}, #{deleteFlag}, #{createTime}
         )
     </insert>
 
@@ -56,7 +56,7 @@
         FROM
             erp_inoutitem m
         WHERE
-            m.tenant_id = #{userId}
+            m.tenant_id = #{tenantId}
         AND m.delete_flag = 0
         AND m.id = #{id}
         ORDER BY m.create_time DESC LIMIT 0,1
@@ -70,7 +70,7 @@
         </set>
         WHERE
             id = #{id}
-        AND tenant_id = #{userId}
+        AND tenant_id = #{tenantId}
     </update>
 
     <select id="queryInoutitemByIdAndName" parameterType="java.util.Map" resultType="java.util.Map">
@@ -79,7 +79,7 @@
         FROM
             erp_inoutitem m
         WHERE
-            m.tenant_id = #{userId}
+            m.tenant_id = #{tenantId}
         AND m.delete_flag = 0
         AND m.name = #{inoutitemName}
         AND m.id != #{id}
@@ -96,7 +96,7 @@
         </set>
         WHERE
             id = #{id}
-        AND tenant_id = #{userId}
+        AND tenant_id = #{tenantId}
         AND delete_flag = 0
     </update>
 
@@ -110,7 +110,7 @@
         FROM
             erp_inoutitem m
         WHERE
-            m.tenant_id = #{userId}
+            m.tenant_id = #{tenantId}
         AND m.delete_flag = 0
         AND m.id = #{id}
         ORDER BY m.create_time DESC LIMIT 0,1
@@ -123,7 +123,7 @@
 		FROM
 			erp_inoutitem a
 		WHERE
-			a.tenant_id = #{userId}
+			a.tenant_id = #{tenantId}
 		AND a.type = '2'
     </select>
 
@@ -134,7 +134,7 @@
 		FROM
 			erp_inoutitem a
 		WHERE
-			a.tenant_id = #{userId}
+			a.tenant_id = #{tenantId}
 		AND a.type = '1'
     </select>
     

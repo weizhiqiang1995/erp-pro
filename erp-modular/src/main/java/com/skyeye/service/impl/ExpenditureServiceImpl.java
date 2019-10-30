@@ -43,7 +43,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     @Override
     public void queryExpenditureByList(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = expenditureDao.queryExpenditureByList(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>) beans;
@@ -67,7 +67,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
         if(ToolUtil.isJson(initemStr)) {
             //财务主表ID
             String useId = ToolUtil.getSurFaceId();
-            String userId = inputObject.getLogParams().get("id").toString();
+            String tenantId = inputObject.getLogParams().get("tenantId").toString();
             //处理数据
             JSONArray jArray = JSONArray.fromObject(initemStr);
             //支出单中间转换对象，财务子表存储对象
@@ -85,7 +85,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
                 entity.put("inOutItemId", bean.get("initemId"));
                 entity.put("eachAmount", bean.get("initemMoney"));
                 entity.put("remark", bean.get("remark"));
-                entity.put("userId", userId);
+                entity.put("tenantId", tenantId);
                 entity.put("deleteFlag", 0);
                 entitys.add(entity);
                 //计算总金额
@@ -97,12 +97,12 @@ public class ExpenditureServiceImpl implements ExpenditureService {
             }
             Map<String, Object> accountHead = new HashMap<>();
             ErpOrderNum erpOrderNum = new ErpOrderNum();
-            String orderNum = erpOrderNum.getAccountOrderNumBySubType(userId, ErpConstants.AccountTheadSubType.EXPENDITURE_ORDER.getNum());
+            String orderNum = erpOrderNum.getAccountOrderNumBySubType(tenantId, ErpConstants.AccountTheadSubType.EXPENDITURE_ORDER.getNum());
             accountHead.put("id", useId);
             accountHead.put("type", ErpConstants.AccountTheadSubType.EXPENDITURE_ORDER.getNum());//支出单
             accountHead.put("billNo", orderNum);
             accountHead.put("totalPrice", allPrice);
-            accountHead.put("userId", userId);
+            accountHead.put("tenantId", tenantId);
             accountHead.put("organId", params.get("organId"));
             accountHead.put("operTime", params.get("operTime"));
             accountHead.put("accountId", params.get("accountId"));
@@ -126,7 +126,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     @Override
     public void queryExpenditureToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> bean = expenditureDao.queryExpenditureToEditById(params);
         if(bean != null && !bean.isEmpty()){
         	List<Map<String, Object>> beans = expenditureDao.queryExpenditureItemsToEditById(params);
@@ -155,7 +155,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
         String initemStr = params.get("initemStr").toString();
         if(ToolUtil.isJson(initemStr)) {
         	String useId = params.get("id").toString();
-        	String userId = inputObject.getLogParams().get("id").toString();
+        	String tenantId = inputObject.getLogParams().get("tenantId").toString();
             //处理数据
             JSONArray jArray = JSONArray.fromObject(initemStr);
             //支出单中间转换对象，财务子表存储对象
@@ -173,7 +173,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
                 entity.put("inOutItemId", bean.get("initemId"));
                 entity.put("eachAmount", bean.get("initemMoney"));
                 entity.put("remark", bean.get("remark"));
-                entity.put("userId", userId);
+                entity.put("tenantId", tenantId);
                 entity.put("deleteFlag", "0");
                 entitys.add(entity);
                 //计算总金额
@@ -185,7 +185,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
             }
             Map<String, Object> accountHead = new HashMap<>();
             accountHead.put("id", useId);
-            accountHead.put("userId", userId);
+            accountHead.put("tenantId", tenantId);
             accountHead.put("totalPrice", allPrice);
             accountHead.put("organId", params.get("organId"));
             accountHead.put("operTime", params.get("operTime"));
@@ -212,7 +212,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     @Transactional(value="transactionManager")
     public void deleteExpenditureById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         params.put("deleteFlag", 1);
         expenditureDao.editExpenditureByDeleteFlag(params);
         expenditureDao.editExpenditureItemsByDeleteFlag(params);
@@ -227,7 +227,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     @Override
     public void queryExpenditureByDetail(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         //获取财务主表信息
         Map<String, Object> bean = expenditureDao.queryExpenditureDetailById(params);
         if(bean != null && !bean.isEmpty()){
@@ -251,7 +251,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
 	@Override
 	public void queryMationToExcel(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = expenditureDao.queryMationToExcel(params);
         String[] key = new String[]{"billNo", "supplierName", "totalPrice", "hansPersonName", "billTime"};
         String[] column = new String[]{"单据编号", "往来单位", "合计金额", "经手人", "单据日期"};

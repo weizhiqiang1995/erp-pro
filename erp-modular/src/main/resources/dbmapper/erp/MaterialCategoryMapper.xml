@@ -20,7 +20,7 @@
 	        <if test="parentId != '' and parentId != null">
 				AND a.parent_id = #{parentId}
 			</if>
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 		ORDER BY a.sort ASC
     </select>
     
@@ -31,7 +31,7 @@
 			erp_material_category a
 		WHERE a.`name` = #{name}
 		AND a.status != '3'
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 	</select>
 	
 	<select id="queryMaterialCategoryMationByNameAndId" parameterType="java.util.Map" resultType="java.util.Map">
@@ -57,7 +57,7 @@
 			erp_material_category a
 		WHERE
 			a.parent_id = #{parentId}
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 	</select>
 	
 	<update id="deleteMaterialCategoryById" parameterType="java.util.Map">
@@ -66,7 +66,7 @@
 			`status` = '3'
 		</set>
 		WHERE id = #{id}
-		AND tenant_id = #{userId}
+		AND tenant_id = #{tenantId}
 	</update>
 	
 	<update id="deleteMaterialCategoryByParentId" parameterType="java.util.Map">
@@ -75,7 +75,7 @@
 			`status` = '3'
 		</set>
 		WHERE parent_id = #{id}
-		AND tenant_id = #{userId}
+		AND tenant_id = #{tenantId}
 	</update>
 	
 	<update id="updateUpMaterialCategoryById" parameterType="java.util.Map">
@@ -84,7 +84,7 @@
 			`status` = '1'
 		</set>
 		WHERE id = #{id}
-		AND tenant_id = #{userId}
+		AND tenant_id = #{tenantId}
 	</update>
 	
 	<select id="queryMaterialCategoryStateById" parameterType="java.util.Map" resultType="java.util.Map">
@@ -102,7 +102,7 @@
 			`status` = '2'
 		</set>
 		WHERE id = #{id}
-		AND tenant_id = #{userId}
+		AND tenant_id = #{tenantId}
 	</update>
 	
 	<select id="selectMaterialCategoryById" parameterType="java.util.Map" resultType="java.util.Map">
@@ -116,7 +116,7 @@
 			LEFT JOIN erp_material_category b ON a.parent_id = b.id
 		WHERE 
 			a.id = #{id}
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 	</select>
 	
 	<update id="editMaterialCategoryMationById" parameterType="java.util.Map">
@@ -126,7 +126,7 @@
 			remark = #{remark}
 		</set>
 		WHERE id = #{id}
-		AND tenant_id = #{userId}
+		AND tenant_id = #{tenantId}
 	</update>
 	
 	<select id="queryMaterialCategoryUpMationById" parameterType="java.util.Map" resultType="java.util.Map">
@@ -142,7 +142,7 @@
 		AND a.parent_id = b.parent_id
 		AND a.sort > b.sort
 		AND b.status != '3'
-		AND b.tenant_id = #{userId}
+		AND b.tenant_id = #{tenantId}
 		ORDER BY
 			b.sort DESC
 		LIMIT 1
@@ -154,7 +154,7 @@
 			sort = #{upOrderBy},
 		</set>
 		WHERE id = #{id}
-		AND tenant_id = #{userId}
+		AND tenant_id = #{tenantId}
 	</update>
 
 	<select id="queryMaterialCategoryDownMationById" parameterType="java.util.Map" resultType="java.util.Map">
@@ -170,7 +170,7 @@
 		AND a.parent_id = b.parent_id
 		AND b.sort > a.sort
 		AND b.status != '3'
-		AND b.tenant_id = #{userId}
+		AND b.tenant_id = #{tenantId}
 		ORDER BY
 			b.sort ASC
 		LIMIT 1
@@ -185,7 +185,7 @@
 		WHERE 
 			a.status = '1'
 		AND a.parent_id = '0'
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 		ORDER BY a.sort ASC
 	</select>
 	
@@ -198,7 +198,7 @@
 		WHERE 
 			a.status != '3'
 		AND a.parent_id = '0'
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 		ORDER BY a.sort ASC
 	</select>
 	
@@ -211,7 +211,7 @@
 		WHERE 
 			a.status = '1'
 		AND a.parent_id = #{parentId}
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 		ORDER BY a.sort ASC
 	</select>
 	

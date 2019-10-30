@@ -31,7 +31,7 @@ public class ErpCommonServiceImpl implements ErpCommonService{
 	@Override
 	public void queryDepotHeadDetailsMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("userId", inputObject.getLogParams().get("id"));
+		map.put("tenantId", inputObject.getLogParams().get("tenantId"));
 		//获取主表信息
 		Map<String, Object> bean = erpCommonDao.queryDepotHeadDetailsMationById(map);
 		if(bean != null && !bean.isEmpty()){

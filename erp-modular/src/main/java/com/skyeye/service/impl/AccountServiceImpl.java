@@ -35,7 +35,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void queryAccountByList(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = accountDao.queryAccountByList(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>) beans;
@@ -54,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
     @Transactional(value="transactionManager")
     public void insertAccount(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> bean = accountDao.queryAccountByName(params);
         if(bean != null){
             outputObject.setreturnMessage("账户名称已存在！");
@@ -80,7 +80,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void queryAccountById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> bean = accountDao.queryAccountById(params);
         if(bean == null){
             outputObject.setreturnMessage("未查询到信息！");
@@ -100,7 +100,7 @@ public class AccountServiceImpl implements AccountService {
     @Transactional(value="transactionManager")
     public void deleteAccountById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         params.put("deleteFlag", 1);
         accountDao.editAccountByDeleteFlag(params);
     }
@@ -115,7 +115,7 @@ public class AccountServiceImpl implements AccountService {
     @Transactional(value="transactionManager")
     public void editAccountById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> bean = accountDao.queryAccountByIdAndName(params);
         if(bean != null){
             outputObject.setreturnMessage("账户名称已存在！");
@@ -139,7 +139,7 @@ public class AccountServiceImpl implements AccountService {
     @Transactional(value="transactionManager")
     public void editAccountByIdAndIsDefault(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> bean = accountDao.queryAccountByIdAndIsDeafault(params);
         if(bean != null){
             outputObject.setreturnMessage("状态以改变，请勿重复操作！");
@@ -160,7 +160,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void queryAccountByIdAndInfo(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id").toString());
+        params.put("tenantId", inputObject.getLogParams().get("tenantId").toString());
         Map<String, Object> bean = accountDao.queryAccountByIdAndInfo(params);
         if(bean == null){
             outputObject.setreturnMessage("未查询到信息！");
@@ -179,7 +179,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void queryAccountStreamById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = accountDao.queryAccountStreamById(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>) beans;
@@ -197,7 +197,7 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public void queryAccountListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = accountDao.queryAccountListToSelect(params);
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());

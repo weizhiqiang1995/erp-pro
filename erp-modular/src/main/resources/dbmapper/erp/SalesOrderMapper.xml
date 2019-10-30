@@ -18,7 +18,7 @@
 			LEFT JOIN erp_depotitem c ON c.header_id = a.id
 		WHERE
 			a.sub_type = '11'
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 		AND a.delete_flag = '0'
         <if test="material != '' and material != null">
             AND c.material_name LIKE '%${material}%'
@@ -59,7 +59,7 @@
         (id, `type`, sub_type, default_number, number, oper_person_id, oper_person_name, create_time, oper_time, organ_id, account_id, total_price,
         	pay_type, remark, status, tenant_id, delete_flag)
         VALUES(#{id}, #{type}, #{subType}, #{defaultNumber}, #{number}, #{operPersonId}, #{operPersonName}, #{createTime}, #{operTime}, #{organId}, #{accountId}, #{totalPrice},
-        		#{payType}, #{remark}, #{status}, #{userId}, #{deleteFlag})
+        		#{payType}, #{remark}, #{status}, #{tenantId}, #{deleteFlag})
     </insert>
     
     <insert id="insertSalesOrderChildMation" parameterType="java.util.Map">
@@ -69,7 +69,7 @@
 	     values
 		<foreach collection="list" item="item" index="index" separator="," >  
 			(#{item.id}, #{item.headerId}, #{item.materialId}, #{item.materialName}, #{item.materialModel}, #{item.mUnitId}, #{item.operNumber}, #{item.baseNumber}, #{item.estimatePurchasePrice}, #{item.allPrice}, #{item.remark}, #{item.depotId},
-				#{item.mType}, #{item.userId}, #{item.deleteFlag})  
+				#{item.mType}, #{item.tenantId}, #{item.deleteFlag})  
 		</foreach>  
 	</insert>
 	
@@ -81,7 +81,7 @@
 			erp_depothead a
 		WHERE
 			a.id = #{id}
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 		AND a.delete_flag = '0'
 		AND a.sub_type = '11' <!-- 限制销售单 -->
 	</select>
@@ -118,7 +118,7 @@
 			a.id = #{id}
 		AND (a.`status` = '0' OR a.`status` = '3')
 		AND a.delete_flag = '0'
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 		AND a.sub_type = '11'
 	</select>
 	
@@ -169,7 +169,7 @@
 	        </if>
 		</set>
 		WHERE id = #{id}
-		AND tenant_id = #{userId}
+		AND tenant_id = #{tenantId}
 		AND sub_type = '11'
 	</update>
 	
@@ -179,7 +179,7 @@
             `status` = '1'
 		</set>
 		WHERE id = #{id}
-		AND tenant_id = #{userId}
+		AND tenant_id = #{tenantId}
 		AND sub_type = '11'
 	</update>
 	
@@ -190,7 +190,7 @@
             status_content = #{content}
 		</set>
 		WHERE id = #{id}
-		AND tenant_id = #{userId}
+		AND tenant_id = #{tenantId}
 		AND sub_type = '11'
 	</update>
 	
@@ -219,7 +219,7 @@
 			a.id = #{id}
 		AND (a.`status` = '2' OR a.`status` = '4')
 		AND a.delete_flag = '0'
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 		AND a.sub_type = '11'
 	</select>
 	
@@ -247,7 +247,7 @@
 					k.id = m.header_id
 				AND k.link_number = #{defaultNumber}
 				AND k.id != a.id
-				AND k.tenant_id = #{userId}
+				AND k.tenant_id = #{tenantId}
 				AND m.m_unit_id = a.m_unit_id
 				AND k.delete_flag = '0'
 				GROUP BY
@@ -276,7 +276,7 @@
         	pay_type, remark, status, tenant_id, delete_flag,
         	discount, discount_money, discount_last_money, other_money, other_money_list, change_amount, link_number, salesman)
         VALUES(#{id}, #{type}, #{subType}, #{defaultNumber}, #{number}, #{operPersonId}, #{operPersonName}, #{createTime}, #{operTime}, #{organId}, #{accountId}, #{totalPrice},
-        		#{payType}, #{remark}, #{status}, #{userId}, #{deleteFlag},
+        		#{payType}, #{remark}, #{status}, #{tenantId}, #{deleteFlag},
         		#{discount}, #{discountMoney}, #{discountLastMoney}, #{otherMoney}, #{otherMoneyList}, #{changeAmount}, #{linkNumber}, #{salesMan})
     </insert>
     
@@ -288,7 +288,7 @@
 	     values
 		<foreach collection="list" item="item" index="index" separator="," >  
 			(#{item.id}, #{item.headerId}, #{item.materialId}, #{item.materialName}, #{item.materialModel}, #{item.mUnitId}, #{item.operNumber}, #{item.baseNumber}, #{item.estimatePurchasePrice}, #{item.allPrice}, #{item.remark}, #{item.depotId},
-				#{item.mType}, #{item.userId}, #{item.deleteFlag},
+				#{item.mType}, #{item.tenantId}, #{item.deleteFlag},
 				#{item.taxUnitPrice}, #{item.taxRate}, #{item.taxMoney}, #{item.taxLastMoney})  
 		</foreach>  
 	</insert>
@@ -305,7 +305,7 @@
 					c.id = d.header_id
 				AND c.link_number = a.default_number
 				AND c.id != #{cgddId}
-				AND c.tenant_id = #{userId}
+				AND c.tenant_id = #{tenantId}
 				AND d.m_unit_id = #{mUnitId}
 				AND c.delete_flag = '0'
 				GROUP BY
@@ -317,7 +317,7 @@
 		WHERE
 			a.id = #{cgddId}
 		AND a.id = b.header_id
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 		AND b.m_unit_id = #{mUnitId}
 		AND a.delete_flag = '0'
 	</select>
@@ -328,7 +328,7 @@
             `status` = '4'
 		</set>
 		WHERE id = #{id}
-		AND tenant_id = #{userId}
+		AND tenant_id = #{tenantId}
 		AND sub_type = '11'
 	</update>
 	
@@ -349,7 +349,7 @@
 			LEFT JOIN erp_depotitem c ON c.header_id = a.id
 		WHERE
 			a.sub_type = '11'
-		AND a.tenant_id = #{userId}
+		AND a.tenant_id = #{tenantId}
 		AND a.delete_flag = '0'
         <if test="material != '' and material != null">
             AND c.material_name LIKE '%${material}%'

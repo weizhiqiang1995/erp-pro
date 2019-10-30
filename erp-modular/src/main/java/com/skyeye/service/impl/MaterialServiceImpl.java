@@ -34,7 +34,7 @@ public class MaterialServiceImpl implements MaterialService{
 	@Override
 	public void queryMaterialListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = materialDao.queryMaterialListByUserId(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
@@ -52,7 +52,7 @@ public class MaterialServiceImpl implements MaterialService{
 	@Override
 	public void queryMaterialUnitListToSelectByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = materialDao.queryMaterialUnitListToSelectByUserId(params);
         for(Map<String, Object> bean : beans){
         	bean.put("unitList", materialDao.queryMaterialUnitById(bean));
@@ -74,7 +74,7 @@ public class MaterialServiceImpl implements MaterialService{
 		Map<String, Object> map = inputObject.getParams();
 		String materialNormsStr = map.get("materialNormsStr").toString();
 		if(ToolUtil.isJson(materialNormsStr)){
-			map.put("tenantId", inputObject.getLogParams().get("id"));//租户id
+			map.put("tenantId", inputObject.getLogParams().get("tenantId"));//租户id
 			Map<String, Object> inSql = materialDao.queryMaterialByNameAndModel(map);
 			if(inSql != null && !inSql.isEmpty()){
 				outputObject.setreturnMessage("同种型号的产品已经存在.");
@@ -175,7 +175,7 @@ public class MaterialServiceImpl implements MaterialService{
 			material.put("firstInUnit", firstInUnit);//首选入库单位
 			material.put("firstOutUnit", firstOutUnit);//首选出库单位
 			material.put("enabled", 1);//默认状态  启用 0-禁用  1-启用
-			material.put("tenantId", inputObject.getLogParams().get("id"));//租户id
+			material.put("tenantId", inputObject.getLogParams().get("tenantId"));//租户id
 			material.put("deleteFlag", 0);//默认状态  删除标记，0未删除，1删除
 			material.put("createTime", ToolUtil.getTimeAndToString());//创建时间
 			materialDao.insertMaterialMation(material);
@@ -194,7 +194,7 @@ public class MaterialServiceImpl implements MaterialService{
 	@Transactional(value="transactionManager")
 	public void editMaterialEnabledToDisablesById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("userId", inputObject.getLogParams().get("id"));
+		map.put("tenantId", inputObject.getLogParams().get("tenantId"));
 		Map<String, Object> bean = materialDao.queryMaterialEnabledByIdAndUserId(map);
 		if(bean != null && !bean.isEmpty()){
 			if("1".equals(bean.get("enabled").toString())){//启用状态下可以禁用
@@ -216,7 +216,7 @@ public class MaterialServiceImpl implements MaterialService{
 	@Transactional(value="transactionManager")
 	public void editMaterialEnabledToEnablesById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("userId", inputObject.getLogParams().get("id"));
+		map.put("tenantId", inputObject.getLogParams().get("tenantId"));
 		Map<String, Object> bean = materialDao.queryMaterialEnabledByIdAndUserId(map);
 		if(bean != null && !bean.isEmpty()){
 			if("0".equals(bean.get("enabled").toString())){//禁用状态下可以启用
@@ -238,7 +238,7 @@ public class MaterialServiceImpl implements MaterialService{
 	@Transactional(value="transactionManager")
 	public void deleteMaterialMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("userId", inputObject.getLogParams().get("id"));
+		map.put("tenantId", inputObject.getLogParams().get("tenantId"));
 		Map<String, Object> bean = materialDao.queryMaterialDeleteFlagByIdAndUserId(map);
 		if(bean != null && !bean.isEmpty()){//未删除状态下可以删除
 			//删除产品
@@ -259,7 +259,7 @@ public class MaterialServiceImpl implements MaterialService{
 	@Override
 	public void queryMaterialMationDetailsById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("userId", inputObject.getLogParams().get("id"));
+		map.put("tenantId", inputObject.getLogParams().get("tenantId"));
 		//获取产品信息
 		Map<String, Object> bean = materialDao.queryMaterialMationDetailsById(map);
 		if(bean != null && !bean.isEmpty()){
@@ -282,7 +282,7 @@ public class MaterialServiceImpl implements MaterialService{
 	@Override
 	public void queryMaterialMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		map.put("userId", inputObject.getLogParams().get("id"));
+		map.put("tenantId", inputObject.getLogParams().get("tenantId"));
 		//获取产品信息
 		Map<String, Object> bean = materialDao.queryMaterialMationToEditById(map);
 		if(bean != null && !bean.isEmpty()){
@@ -309,7 +309,7 @@ public class MaterialServiceImpl implements MaterialService{
 		Map<String, Object> map = inputObject.getParams();
 		String materialNormsStr = map.get("materialNormsStr").toString();
 		if(ToolUtil.isJson(materialNormsStr)){
-			map.put("userId", inputObject.getLogParams().get("id"));//租户id
+			map.put("tenantId", inputObject.getLogParams().get("tenantId"));//租户id
 			Map<String, Object> inSql = materialDao.queryMaterialByNameAndModelAndId(map);
 			if(inSql != null && !inSql.isEmpty()){
 				outputObject.setreturnMessage("同种型号的产品已经存在.");
@@ -455,7 +455,7 @@ public class MaterialServiceImpl implements MaterialService{
 			material.put("unitGroupId", unitGroupId);//计量单位组id  当unit=2时，必填
 			material.put("firstInUnit", firstInUnit);//首选入库单位
 			material.put("firstOutUnit", firstOutUnit);//首选出库单位
-			material.put("userId", inputObject.getLogParams().get("id"));//租户id
+			material.put("tenantId", inputObject.getLogParams().get("tenantId"));//租户id
 			materialDao.editMaterialMationById(material);
 		} else {
 			outputObject.setreturnMessage("数据格式错误");
@@ -471,7 +471,7 @@ public class MaterialServiceImpl implements MaterialService{
 	@Override
 	public void queryMaterialListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = materialDao.queryMaterialListToSelect(params);
         List<Map<String, Object>> unitList;
         for(Map<String, Object> bean : beans){
@@ -494,7 +494,7 @@ public class MaterialServiceImpl implements MaterialService{
 	@Override
 	public void queryMaterialTockByNormsIdAndDepotId(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         Map<String, Object> bean = materialDao.queryMaterialTockByNormsIdAndDepotId(params);
         outputObject.setBean(bean);
 	}
@@ -508,7 +508,7 @@ public class MaterialServiceImpl implements MaterialService{
 	@Override
 	public void queryMaterialDepotItemByNormsId(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = materialDao.queryMaterialDepotItemByNormsId(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;

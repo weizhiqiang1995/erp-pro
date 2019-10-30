@@ -17,7 +17,7 @@
         	LEFT JOIN erp_supplier s ON a.organ_id = s.id
         WHERE
             a.delete_flag = '0'
-        AND a.tenant_id = #{userId}
+        AND a.tenant_id = #{tenantId}
         AND a.type = '1'
         <if test="billNo != '' and billNo != null">
             AND a.bill_no LIKE '%${billNo}%'
@@ -32,7 +32,7 @@
         INSERT INTO erp_accounthead(
             id, type, organ_id, hands_person_id, change_amount, total_price, account_id, bill_no, bill_time, remark, tenant_id, delete_flag
         ) VALUES 
-        (#{id}, #{type}, #{organId}, #{handsPersonId}, #{changeAmount}, #{totalPrice}, #{accountId}, #{billNo}, #{operTime}, #{remark}, #{userId}, #{deleteFlag})
+        (#{id}, #{type}, #{organId}, #{handsPersonId}, #{changeAmount}, #{totalPrice}, #{accountId}, #{billNo}, #{operTime}, #{remark}, #{tenantId}, #{deleteFlag})
     </insert>
 
     <insert id="insertExpenditureItem" parameterType="java.util.Map">
@@ -40,7 +40,7 @@
             id, header_id, in_out_item_id, each_amount, remark, tenant_id, delete_flag
         ) VALUES
         <foreach collection="list" item="item" index="index" separator="," >
-        (#{item.id}, #{item.headerId}, #{item.inOutItemId}, #{item.eachAmount}, #{item.remark}, #{item.userId}, #{item.deleteFlag})
+        (#{item.id}, #{item.headerId}, #{item.inOutItemId}, #{item.eachAmount}, #{item.remark}, #{item.tenantId}, #{item.deleteFlag})
         </foreach>
     </insert>
 
@@ -90,7 +90,7 @@
         </set>
         WHERE
             id = #{id}
-        AND tenant_id = #{userId}
+        AND tenant_id = #{tenantId}
     </update>
 
     <delete id="deleteExpenditureItemById" parameterType="java.util.Map">
@@ -108,7 +108,7 @@
         </set>
         WHERE
             id = #{id}
-        AND tenant_id = #{userId}
+        AND tenant_id = #{tenantId}
     </update>
 
     <update id="editExpenditureItemsByDeleteFlag" parameterType="java.util.Map">
@@ -118,7 +118,7 @@
         </set>
         WHERE
             header_id = #{id}
-        AND tenant_id = #{userId}
+        AND tenant_id = #{tenantId}
     </update>
 
     <select id="queryExpenditureDetailById" parameterType="java.util.Map" resultType="java.util.Map">
@@ -139,7 +139,7 @@
 	        LEFT JOIN sys_eve_user_staff b ON INSTR(CONCAT(',', a.hands_person_id, ','), CONCAT(',', b.user_id, ','))
         WHERE
             a.delete_flag = '0'
-        AND a.tenant_id = #{userId}
+        AND a.tenant_id = #{tenantId}
         AND a.id = #{id}
         AND a.type = '1'
         ORDER BY a.bill_time DESC
@@ -185,7 +185,7 @@
         	LEFT JOIN erp_supplier s ON a.organ_id = s.id
         WHERE
             a.delete_flag = '0'
-        AND a.tenant_id = #{userId}
+        AND a.tenant_id = #{tenantId}
         AND a.type = '1'
         <if test="billNo != '' and billNo != null">
             AND a.bill_no LIKE '%${billNo}%'

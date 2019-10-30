@@ -28,7 +28,7 @@ public class StatisticsServiceImpl implements StatisticsService{
 	@Override
 	public void queryWarehousingDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = statisticsDao.queryWarehousingDetails(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
@@ -46,7 +46,7 @@ public class StatisticsServiceImpl implements StatisticsService{
 	@Override
 	public void queryOutgoingDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = statisticsDao.queryOutgoingDetails(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
@@ -64,7 +64,7 @@ public class StatisticsServiceImpl implements StatisticsService{
 	@Override
 	public void queryInComimgDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = statisticsDao.queryInComimgDetails(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
@@ -82,7 +82,7 @@ public class StatisticsServiceImpl implements StatisticsService{
 	@Override
 	public void querySalesDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = statisticsDao.querySalesDetails(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
@@ -100,7 +100,7 @@ public class StatisticsServiceImpl implements StatisticsService{
 	@Override
 	public void queryCustomerReconciliationDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = statisticsDao.queryCustomerReconciliationDetails(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
@@ -118,7 +118,7 @@ public class StatisticsServiceImpl implements StatisticsService{
 	@Override
 	public void querySupplierReconciliationDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = statisticsDao.querySupplierReconciliationDetails(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
@@ -136,7 +136,7 @@ public class StatisticsServiceImpl implements StatisticsService{
 	@Override
 	public void queryInComimgAllDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = statisticsDao.queryInComimgAllDetails(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
@@ -154,7 +154,7 @@ public class StatisticsServiceImpl implements StatisticsService{
 	@Override
 	public void querySalesAllDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-        params.put("userId", inputObject.getLogParams().get("id"));
+        params.put("tenantId", inputObject.getLogParams().get("tenantId"));
         List<Map<String, Object>> beans = statisticsDao.querySalesAllDetails(params,
                 new PageBounds(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString())));
         PageList<Map<String, Object>> beansPageList = (PageList<Map<String, Object>>)beans;
