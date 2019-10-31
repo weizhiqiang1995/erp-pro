@@ -60,7 +60,7 @@ public class SupplierServiceImpl implements SupplierService {
             outputObject.setreturnMessage("该供应商信息已存在！");
             return;
         }
-        params.put("supplierId", ToolUtil.getSurFaceId());
+        params.put("id", ToolUtil.getSurFaceId());
         params.put("createTime", ToolUtil.getTimeAndToString());
         params.put("supplierType", 1);
         params.put("enabled", 1);

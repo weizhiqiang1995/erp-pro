@@ -60,7 +60,7 @@ public class MemberServiceImpl implements MemberService {
             outputObject.setreturnMessage("该会员信息已存在！");
             return;
         }
-        params.put("memberId", ToolUtil.getSurFaceId());
+        params.put("id", ToolUtil.getSurFaceId());
         params.put("createTime", ToolUtil.getTimeAndToString());
         params.put("memberType", 3);
         params.put("enabled", 1);

@@ -68,6 +68,7 @@
 
     <insert id="insertSupplier" parameterType="java.util.Map">
         INSERT INTO erp_supplier(
+            id,
             contacts,
             phonenum,
             email,
@@ -84,7 +85,6 @@
             bank_name,
             account_number,
             tax_rate,
-            id,
             supplier,
             isystem,
             type,
@@ -93,6 +93,7 @@
             delete_flag,
             create_time
         ) VALUES (
+            #{id},
             #{contacts},
             #{phonenum},
             #{email},
@@ -109,7 +110,6 @@
             #{bankName},
             #{accountNumber},
             #{taxRate},
-            #{supplierId},
             #{supplierName},
             #{isystem},
             #{supplierType},

@@ -11,6 +11,7 @@ import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.CustomerDao;
 import com.skyeye.service.CustomerService;
 
@@ -60,7 +61,8 @@ public class CustomerServiceImpl implements CustomerService {
             outputObject.setreturnMessage("该客户信息已存在！");
             return;
         }
-
+        params.put("id", ToolUtil.getSurFaceId());
+        params.put("createTime", ToolUtil.getTimeAndToString());
         params.put("customerType", 2);
         params.put("enabled", 1);
         params.put("isystem", 1);

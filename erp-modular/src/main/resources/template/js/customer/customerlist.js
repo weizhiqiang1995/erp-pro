@@ -27,21 +27,21 @@ layui.config({
         limit: 8,
         cols: [[
             { title: '序号', type: 'numbers'},
-            { field: 'customerName', title: '客户名称', align: 'left',width: 200,templet: function(d){
+            { field: 'customerName', title: '客户名称', align: 'left',width: 140,templet: function(d){
                 return '<a lay-event="select" class="notice-title-click">' + d.customerName + '</a>';
             }},
-            { field: 'contacts', title: '联系人', align: 'left',width: 150},
-            { field: 'phonenum', title: '联系电话', align: 'center',width: 150},
-            { field: 'email', title: '电子邮箱', align: 'center',width: 150},
+            { field: 'contacts', title: '联系人', align: 'left',width: 100},
+            { field: 'phonenum', title: '联系电话', align: 'center',width: 100},
+            { field: 'email', title: '电子邮箱', align: 'center',width: 120},
             { field: 'telephone', title: '手机号码', align: 'center',width: 150},
-            { field: 'fax', title: '传真', align: 'left',width: 150},
-            { field: 'advanceIn', title: '预收款', align: 'left',width: 150},
+            { field: 'fax', title: '传真', align: 'left',width: 100},
+            { field: 'advanceIn', title: '预收款', align: 'left',width: 100},
             { field: 'beginNeedGet', title: '期初应收', align: 'left',width: 100},
             { field: 'beginNeedPay', title: '期初应付', align: 'left',width: 100},
             { field: 'allNeedGet', title: '累计应收', align: 'left',width: 100},
             { field: 'allNeedPay', title: '累计应付', align: 'left',width: 100},
             { field: 'taxRate', title: '税率(%)', align: 'left',width: 100},
-            { field: 'enabled', title: '状态', align: 'center',width: 100, templet: function(d){
+            { field: 'enabled', title: '状态', align: 'center',width: 80, templet: function(d){
                 if(d.enabled == '1'){
                     return "<span class='state-up'>启用</span>";
                 }else if(d.enabled == '2'){
@@ -50,7 +50,7 @@ layui.config({
                     return "<span class='state-error'>参数错误</span>";
                 }
             }},
-            { field: 'createTime', title: '创建时间', align: 'center', width: 180 },
+            { field: 'createTime', title: '创建时间', align: 'center', width: 140 },
             { title: '操作', fixed: 'right', align: 'center', width: 300, toolbar: '#tableBar'}
         ]]
     });
