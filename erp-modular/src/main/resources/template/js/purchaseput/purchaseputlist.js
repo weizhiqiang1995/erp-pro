@@ -85,7 +85,7 @@ layui.config({
     //删除
     function deletemember(data){
         layer.confirm('确认要删除信息吗？', { icon: 3, title: '删除操作' }, function (index) {
-            AjaxPostUtil.request({url:reqBasePath + "member004", params: {rowId: data.id}, type:'json', callback:function(json){
+            AjaxPostUtil.request({url:reqBasePath + "delcommon001", params: {rowId: data.id}, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("删除成功。", {icon: 1,time: 2000});
                     loadTable();

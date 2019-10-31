@@ -100,5 +100,22 @@
 			a.tenant_id = #{tenantId}
 		AND a.type = #{type}
 	</select>
+	
+	<delete id="deleteDepotHeadDetailsMationById" parameterType="java.util.Map">
+		DELETE
+		FROM
+			erp_depothead
+		WHERE
+			id = #{id}
+		AND sub_type NOT IN(10, 11)
+	</delete>
+	
+	<delete id="deleteDepotHeadDetailsNormsMationById" parameterType="java.util.Map">
+		DELETE
+		FROM
+			erp_depotitem
+		WHERE
+			header_id = #{id}
+	</delete>
     
 </mapper>

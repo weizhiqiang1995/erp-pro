@@ -8,6 +8,41 @@
 	<url id="erpcommon001" path="/post/ErpCommonController/queryDepotHeadDetailsMationById" val="获取单据详情信息" allUse="2">
 		<property id="rowId" name="id" ref="required" var="单据主表id"></property>
 	</url>
+		<!-- 以下为单据删除接口，共用一个接口开始 -->
+			<url id="delcommon001" path="/post/ErpCommonController/deleteDepotHeadDetailsMationById" val="删除采购入库单据" allUse="1">
+				<property id="rowId" name="id" ref="required" var="单据主表id"></property>
+			</url>
+			<url id="delcommon002" path="/post/ErpCommonController/deleteDepotHeadDetailsMationById" val="删除采购退货单据" allUse="1">
+				<property id="rowId" name="id" ref="required" var="单据主表id"></property>
+			</url>
+			<url id="delcommon003" path="/post/ErpCommonController/deleteDepotHeadDetailsMationById" val="删除零售出库单据" allUse="1">
+				<property id="rowId" name="id" ref="required" var="单据主表id"></property>
+			</url>
+			<url id="delcommon004" path="/post/ErpCommonController/deleteDepotHeadDetailsMationById" val="删除零售退货单据" allUse="1">
+				<property id="rowId" name="id" ref="required" var="单据主表id"></property>
+			</url>
+			<url id="delcommon005" path="/post/ErpCommonController/deleteDepotHeadDetailsMationById" val="删除销售出库单据" allUse="1">
+				<property id="rowId" name="id" ref="required" var="单据主表id"></property>
+			</url>
+			<url id="delcommon006" path="/post/ErpCommonController/deleteDepotHeadDetailsMationById" val="删除销售退货单据" allUse="1">
+				<property id="rowId" name="id" ref="required" var="单据主表id"></property>
+			</url>
+			<url id="delcommon007" path="/post/ErpCommonController/deleteDepotHeadDetailsMationById" val="删除其他入库单据" allUse="1">
+				<property id="rowId" name="id" ref="required" var="单据主表id"></property>
+			</url>
+			<url id="delcommon008" path="/post/ErpCommonController/deleteDepotHeadDetailsMationById" val="删除其他出库单据" allUse="1">
+				<property id="rowId" name="id" ref="required" var="单据主表id"></property>
+			</url>
+			<url id="delcommon009" path="/post/ErpCommonController/deleteDepotHeadDetailsMationById" val="删除拆分单单据" allUse="1">
+				<property id="rowId" name="id" ref="required" var="单据主表id"></property>
+			</url>
+			<url id="delcommon010" path="/post/ErpCommonController/deleteDepotHeadDetailsMationById" val="删除组装单单据" allUse="1">
+				<property id="rowId" name="id" ref="required" var="单据主表id"></property>
+			</url>
+			<url id="delcommon011" path="/post/ErpCommonController/deleteDepotHeadDetailsMationById" val="删除调拨单单据" allUse="1">
+				<property id="rowId" name="id" ref="required" var="单据主表id"></property>
+			</url>
+		<!-- 以下为单据删除接口，共用一个接口结束 -->
 	<!-- erp公共部分结束 -->
 	
 	<!-- 产品类型开始 -->

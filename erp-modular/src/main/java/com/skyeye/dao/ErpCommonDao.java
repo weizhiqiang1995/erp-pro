@@ -15,4 +15,8 @@ public interface ErpCommonDao {
 
 	public Map<String, Object> getAccountOrderNumBySubType(Map<String, Object> bean) throws Exception;
 
+	public int deleteDepotHeadDetailsMationById(Map<String, Object> map) throws Exception;
+
+	public int deleteDepotHeadDetailsNormsMationById(Map<String, Object> map) throws Exception;
+
 }

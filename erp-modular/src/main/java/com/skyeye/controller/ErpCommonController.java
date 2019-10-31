@@ -27,4 +27,16 @@ public class ErpCommonController {
     	erpCommonService.queryDepotHeadDetailsMationById(inputObject, outputObject);
     }
     
+    /**
+     * 删除单据信息（不包括采购单和销售单）
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/ErpCommonController/deleteDepotHeadDetailsMationById")
+    @ResponseBody
+    public void deleteDepotHeadDetailsMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
+    	erpCommonService.deleteDepotHeadDetailsMationById(inputObject, outputObject);
+    }
+    
 }

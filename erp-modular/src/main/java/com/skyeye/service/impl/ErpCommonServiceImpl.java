@@ -59,4 +59,22 @@ public class ErpCommonServiceImpl implements ErpCommonService{
 		}
 	}
 
+	/**
+     * 删除单据信息（不包括采购单和销售单）
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+	@Override
+	public void deleteDepotHeadDetailsMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+		Map<String, Object> map = inputObject.getParams();
+		map.put("tenantId", inputObject.getLogParams().get("tenantId"));
+		//删除删除单据信息
+		int count = erpCommonDao.deleteDepotHeadDetailsMationById(map);
+		if(count > 0){
+			//删除删除单据关联产品信息
+			erpCommonDao.deleteDepotHeadDetailsNormsMationById(map);
+		}
+	}
+
 }

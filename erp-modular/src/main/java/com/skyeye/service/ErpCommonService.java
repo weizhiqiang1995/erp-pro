@@ -7,4 +7,6 @@ public interface ErpCommonService {
 
 	public void queryDepotHeadDetailsMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
+	public void deleteDepotHeadDetailsMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }
