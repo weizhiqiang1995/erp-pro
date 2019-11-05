@@ -321,7 +321,7 @@ layui.config({
 					text: "清除缓存",
 					icon: "fa fa-trash-o",
 					callback: function() {
-						winui.window.msg('缓存清楚成功，请刷新页面', { shift: 1 });
+						winui.window.msg('缓存清除成功，请刷新页面', { shift: 1 });
 						localStorage.clear();
 						sessionStorage.clear();
 					}
@@ -364,7 +364,7 @@ layui.config({
 				            id: '关于我们',
 				            type: 1,
 				            title: '<i class="fa fa-fw title-icon fa-info-circle" style="background-color: #0491fe;color: #ecf3f8;"></i><font class="win-title-class">关于我们</font>',
-				            content: '<p style="padding:20px;">skyeye<br/><br/>官方网站：https://gitee.com/doc_wei01_admin/skyeye<br/><br/>版权：<br/><br/>作者：卫志强<br/><br/>版本：2.1.0</p>',
+				            content: '<p style="padding:20px;">skyeye<br/><br/>官方网站：https://gitee.com/doc_wei01/erp-pro<br/><br/>版权：<br/><br/>作者：卫志强<br/><br/>版本：2.1.0</p>',
 				            loadBgColor: '#0491fe',
 				            loadIcon: 'fa fa-info-circle',
 				            loadIconColor: '#ecf3f8',

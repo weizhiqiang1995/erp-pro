@@ -1195,10 +1195,20 @@ var postDownLoadFile = function(options) {
  */
 function auth(urlNum){
 	var authList = JSON.parse(localStorage.getItem("authpoints"));
-	for(var i = 0; i < authList.length; i++){
-		if(authList[i].menuNum === urlNum){
-			return true;
+	if(!isNull(authList)){
+		for(var i = 0; i < authList.length; i++){
+			if(authList[i].menuNum === urlNum){
+				return true;
+			}
 		}
+	}else{
+		winui.window.msg('登录超时，即将返回登录页面.', {icon: 2,time: 2000}, function(){
+			var win = window;
+			while (win != win.top){
+				win = win.top;
+			}
+			win.location.href = reqBasePath + "/tpl/index/login.html";
+		});
 	}
 	return false;
 }
