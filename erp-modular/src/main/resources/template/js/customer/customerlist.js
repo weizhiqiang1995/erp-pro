@@ -3,7 +3,7 @@ layui.config({
     base: basePath,
     version: skyeyeVersion
 }).extend({  //指定js别名
-    window: 'js/winui.window',
+    window: 'js/winui.window'
 }).define(['window', 'table', 'jquery', 'winui', 'form'], function (exports) {
     winui.renderColor();
     authBtn('1569133160398');
@@ -51,23 +51,25 @@ layui.config({
                 }
             }},
             { field: 'createTime', title: '创建时间', align: 'center', width: 140 },
-            { title: '操作', fixed: 'right', align: 'center', width: 300, toolbar: '#tableBar'}
+            { title: '操作', fixed: 'right', align: 'center', width: 250, toolbar: '#tableBar'}
         ]]
     });
 
     table.on('tool(messageTable)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
         var data = obj.data; //获得当前行数据
         var layEvent = obj.event; //获得 lay-event 对应的值
-        if (layEvent === 'edit') { //编辑
+        if (layEvent == 'edit') { //编辑
             editcustomer(data);
-        }else if (layEvent === 'delete') { //删除
+        }else if (layEvent == 'delete') { //删除
             deletecustomer(data);
-        }else if (layEvent === 'enabled') { //设置状态
+        }else if (layEvent == 'enabled') { //启用
             editEnabled(data);
-        }else if(layEvent == 'unenabled'){
+        }else if(layEvent == 'unenabled'){ //禁用
             editNotEnabled(data)
-        }else if(layEvent == 'select'){
+        }else if(layEvent == 'select'){ //详情
             selectCustomer(data)
+        }else if(layEvent == 'excDocuments'){ //来往单据
+            excDocuments(data)
         }
     });
 
@@ -80,13 +82,25 @@ layui.config({
         }
         return false;
     });
+    
+    //来往单据
+    function excDocuments(data){
+        rowId = data.id;
+        _openNewWindows({
+            url: "../../tpl/customer/customeredit.html",
+            title: "来往单据",
+            pageId: "customerexcdocuments",
+            area: ['90vw', '90vh'],
+            callBack: function(refreshCode){
+            }});
+    }
 
     //编辑
     function editcustomer(data){
         rowId = data.id;
         _openNewWindows({
             url: "../../tpl/customer/customeredit.html",
-            title: "编辑客户",
+            title: "编辑",
             pageId: "customeredit",
             area: ['90vw', '90vh'],
             callBack: function(refreshCode){
@@ -102,10 +116,7 @@ layui.config({
     //删除客户
     function deletecustomer(data){
         layer.confirm('确认要删除该客户信息吗？', { icon: 3, title: '删除客户' }, function (index) {
-            var params = {
-                rowId: data.id,
-            };
-            AjaxPostUtil.request({url:reqBasePath + "customer004", params:params, type:'json', callback:function(json){
+            AjaxPostUtil.request({url:reqBasePath + "customer004", params: {rowId: data.id}, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("删除成功。", {icon: 1,time: 2000});
                     loadTable();
@@ -119,10 +130,7 @@ layui.config({
     //设置启用状态
     function editEnabled(data){
         layer.confirm('确认要更改该客户为启用状态吗？', { icon: 3, title: '设置客户状态' }, function (index) {
-            var params = {
-                rowId: data.id,
-            };
-            AjaxPostUtil.request({url:reqBasePath + "customer006", params:params, type:'json', callback:function(json){
+            AjaxPostUtil.request({url:reqBasePath + "customer006", params: {rowId: data.id}, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("设置成功。", {icon: 1,time: 2000});
                     loadTable();
@@ -132,13 +140,11 @@ layui.config({
             }});
         });
     }
+    
     //设置禁用状态
     function editNotEnabled(data){
-        layer.confirm('确认要更改该客户为禁用状态吗？', { icon: 3, title: '设置客户态' }, function (index) {
-            var params = {
-                rowId: data.id,
-            };
-            AjaxPostUtil.request({url:reqBasePath + "customer007", params:params, type:'json', callback:function(json){
+        layer.confirm('确认要更改该客户为禁用状态吗？', { icon: 3, title: '设置客户状态' }, function (index) {
+            AjaxPostUtil.request({url:reqBasePath + "customer007", params: {rowId: data.id}, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("设置成功。", {icon: 1,time: 2000});
                     loadTable();
@@ -148,28 +154,25 @@ layui.config({
             }});
         });
     }
+    
+    //详情
     function selectCustomer(data){
         rowId = data.id;
         _openNewWindows({
             url: "../../tpl/customer/customerinfo.html",
-            title: "查看会员详情",
+            title: "详情",
             pageId: "customerinfo",
             area: ['90vw', '90vh'],
             callBack: function(refreshCode){
-                if (refreshCode == '0') {
-                    winui.window.msg("操作成功", {icon: 1,time: 2000});
-                    loadTable();
-                } else if (refreshCode == '-9999') {
-                    winui.window.msg("操作失败", {icon: 2,time: 2000});
-                }
             }
         });
     }
+    
     //添加客户
     $("body").on("click", "#addBean", function(){
         _openNewWindows({
             url: "../../tpl/customer/customeradd.html",
-            title: "新增客户",
+            title: "新增",
             pageId: "customeradd",
             area: ['90vw', '90vh'],
             callBack: function(refreshCode){

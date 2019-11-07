@@ -45,7 +45,7 @@
 <div class="winui-toolbar">
     <div class="winui-tool">
         <button id="reloadTable" class="winui-toolbtn"><i class="fa fa-refresh" aria-hidden="true"></i>刷新数据</button>
-        <button id="addBean" class="winui-toolbtn" auth="1569133160398"><i class="fa fa-plus" aria-hidden="true"></i>新增客户</button>
+        <button id="addBean" class="winui-toolbtn" auth="1569133160398"><i class="fa fa-plus" aria-hidden="true"></i>新增</button>
     </div>
 </div>
 <div style="margin:auto 10px;">
@@ -53,17 +53,18 @@
 
     <script type="text/html" id="tableBar">
         {{# if(d.enabled == 2 && auth('1569133183801')){ }}
-        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         {{# } }}
         {{# if(d.enabled == 2 && auth('1569133170572')){ }}
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+        	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
         {{# } }}
         {{# if(d.enabled == 1 && auth('1569133203641')){ }}
-        <a class="layui-btn layui-btn-xs" lay-event="unenabled">禁用</a>
+        	<a class="layui-btn layui-btn-xs" lay-event="unenabled">禁用</a>
         {{# } }}
         {{# if(d.enabled == 2 && auth('1569133194236')){ }}
-        <a class="layui-btn layui-btn-xs" lay-event="enabled">启用</a>
+        	<a class="layui-btn layui-btn-xs" lay-event="enabled">启用</a>
         {{# } }}
+			<a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="excDocuments">来往单据</a>
     </script>
 </div>
 <script src="../../assets/lib/layui/layui.js"></script>
