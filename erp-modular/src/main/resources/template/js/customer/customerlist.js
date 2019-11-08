@@ -30,10 +30,10 @@ layui.config({
             { field: 'customerName', title: '客户名称', align: 'left',width: 140,templet: function(d){
                 return '<a lay-event="select" class="notice-title-click">' + d.customerName + '</a>';
             }},
-            { field: 'contacts', title: '联系人', align: 'left',width: 100},
+            { field: 'contacts', title: '联系人', align: 'left',width: 80},
             { field: 'phonenum', title: '联系电话', align: 'center',width: 100},
-            { field: 'email', title: '电子邮箱', align: 'center',width: 120},
-            { field: 'telephone', title: '手机号码', align: 'center',width: 150},
+            { field: 'email', title: '电子邮箱', align: 'left',width: 120},
+            { field: 'telephone', title: '手机号码', align: 'center',width: 100},
             { field: 'fax', title: '传真', align: 'left',width: 100},
             { field: 'advanceIn', title: '预收款', align: 'left',width: 100},
             { field: 'beginNeedGet', title: '期初应收', align: 'left',width: 100},
@@ -51,7 +51,7 @@ layui.config({
                 }
             }},
             { field: 'createTime', title: '创建时间', align: 'center', width: 140 },
-            { title: '操作', fixed: 'right', align: 'center', width: 250, toolbar: '#tableBar'}
+            { title: '操作', fixed: 'right', align: 'center', width: 150, toolbar: '#tableBar'}
         ]]
     });
 
@@ -68,8 +68,6 @@ layui.config({
             editNotEnabled(data)
         }else if(layEvent == 'select'){ //详情
             selectCustomer(data)
-        }else if(layEvent == 'excDocuments'){ //来往单据
-            excDocuments(data)
         }
     });
 
@@ -83,18 +81,6 @@ layui.config({
         return false;
     });
     
-    //来往单据
-    function excDocuments(data){
-        rowId = data.id;
-        _openNewWindows({
-            url: "../../tpl/customer/customeredit.html",
-            title: "来往单据",
-            pageId: "customerexcdocuments",
-            area: ['90vw', '90vh'],
-            callBack: function(refreshCode){
-            }});
-    }
-
     //编辑
     function editcustomer(data){
         rowId = data.id;
@@ -115,7 +101,7 @@ layui.config({
 
     //删除客户
     function deletecustomer(data){
-        layer.confirm('确认要删除该客户信息吗？', { icon: 3, title: '删除客户' }, function (index) {
+        layer.confirm('确认要删除该客户信息吗？', { icon: 3, title: '删除操作' }, function (index) {
             AjaxPostUtil.request({url:reqBasePath + "customer004", params: {rowId: data.id}, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("删除成功。", {icon: 1,time: 2000});
@@ -129,7 +115,7 @@ layui.config({
 
     //设置启用状态
     function editEnabled(data){
-        layer.confirm('确认要更改该客户为启用状态吗？', { icon: 3, title: '设置客户状态' }, function (index) {
+        layer.confirm('确认要更改该客户为启用状态吗？', { icon: 3, title: '状态变更' }, function (index) {
             AjaxPostUtil.request({url:reqBasePath + "customer006", params: {rowId: data.id}, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("设置成功。", {icon: 1,time: 2000});
@@ -143,7 +129,7 @@ layui.config({
     
     //设置禁用状态
     function editNotEnabled(data){
-        layer.confirm('确认要更改该客户为禁用状态吗？', { icon: 3, title: '设置客户状态' }, function (index) {
+        layer.confirm('确认要更改该客户为禁用状态吗？', { icon: 3, title: '状态变更' }, function (index) {
             AjaxPostUtil.request({url:reqBasePath + "customer007", params: {rowId: data.id}, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("设置成功。", {icon: 1,time: 2000});

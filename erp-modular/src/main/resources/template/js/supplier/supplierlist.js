@@ -1,15 +1,19 @@
 var rowId = "";
+
 layui.config({
     base: basePath,
     version: skyeyeVersion
 }).extend({  //指定js别名
-    window: 'js/winui.window',
+    window: 'js/winui.window'
 }).define(['window', 'table', 'jquery', 'winui', 'form'], function (exports) {
     winui.renderColor();
+    
     authBtn('1569132999722');
+    
     var $ = layui.$,
         form = layui.form,
         table = layui.table;
+        
     //表格渲染
     table.render({
         id: 'messageTable',
@@ -33,7 +37,7 @@ layui.config({
             { field: 'contacts', title: '联系人', align: 'left', width: 100},
             { field: 'phonenum', title: '联系电话', align: 'center', width: 100},
             { field: 'email', title: '电子邮箱', align: 'left', width: 120},
-            { field: 'telephone', title: '手机号码', align: 'center', width: 120},
+            { field: 'telephone', title: '手机号码', align: 'center', width: 100},
             { field: 'fax', title: '传真', align: 'left', width: 100},
             { field: 'advanceIn', title: '预收款', align: 'left',width: 100},
             { field: 'beginNeedGet', title: '期初应收', align: 'left', width: 100},
@@ -51,7 +55,7 @@ layui.config({
                     }
                 }},
             { field: 'createTime', title: '创建时间', align: 'center', width: 140 },
-            { title: '操作', fixed: 'right', align: 'center', width: 300, toolbar: '#tableBar'}
+            { title: '操作', fixed: 'right', align: 'center', width: 150, toolbar: '#tableBar'}
         ]]
     });
 
@@ -62,11 +66,11 @@ layui.config({
             editSupplier(data);
         }else if (layEvent === 'delete') { //删除
             deleteSupplier(data);
-        }else if (layEvent === 'enabled') { //设置状态
+        }else if (layEvent === 'enabled') { //启用
             editEnabled(data);
-        }else if(layEvent == 'unenabled'){
+        }else if(layEvent == 'unenabled'){ //禁用
             editNotEnabled(data)
-        }else if(layEvent == 'select'){
+        }else if(layEvent == 'select'){ //详情
             selectSupplier(data)
         }
     });
@@ -86,7 +90,7 @@ layui.config({
         rowId = data.id;
         _openNewWindows({
             url: "../../tpl/supplier/supplieredit.html",
-            title: "编辑供应商",
+            title: "编辑",
             pageId: "supplieredit",
             area: ['90vw', '90vh'],
             callBack: function(refreshCode){
@@ -101,11 +105,8 @@ layui.config({
 
     //删除供应商
     function deleteSupplier(data){
-        layer.confirm('确认要删除该供应商信息吗？', { icon: 3, title: '删除供应商' }, function (index) {
-            var params = {
-                rowId: data.id,
-            };
-            AjaxPostUtil.request({url:reqBasePath + "supplier004", params:params, type:'json', callback:function(json){
+        layer.confirm('确认要删除该供应商信息吗？', { icon: 3, title: '删除操作' }, function (index) {
+            AjaxPostUtil.request({url:reqBasePath + "supplier004", params: {rowId: data.id}, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("删除成功。", {icon: 1,time: 2000});
                     loadTable();
@@ -118,11 +119,8 @@ layui.config({
 
     //设置启用状态
     function editEnabled(data){
-        layer.confirm('确认要更改该供应商为启用状态吗？', { icon: 3, title: '设置供应商状态' }, function (index) {
-            var params = {
-                rowId: data.id,
-            };
-            AjaxPostUtil.request({url:reqBasePath + "supplier006", params:params, type:'json', callback:function(json){
+        layer.confirm('确认要更改该供应商为启用状态吗？', { icon: 3, title: '状态变更' }, function (index) {
+            AjaxPostUtil.request({url:reqBasePath + "supplier006", params: {rowId: data.id}, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("设置成功。", {icon: 1,time: 2000});
                     loadTable();
@@ -132,13 +130,11 @@ layui.config({
             }});
         });
     }
+    
     //设置禁用状态
     function editNotEnabled(data){
-        layer.confirm('确认要更改该供应商为禁用状态吗？', { icon: 3, title: '设置供应商状态' }, function (index) {
-            var params = {
-                rowId: data.id,
-            };
-            AjaxPostUtil.request({url:reqBasePath + "supplier007", params:params, type:'json', callback:function(json){
+        layer.confirm('确认要更改该供应商为禁用状态吗？', { icon: 3, title: '状态变更' }, function (index) {
+            AjaxPostUtil.request({url:reqBasePath + "supplier007", params: {rowId: data.id}, type:'json', callback:function(json){
                 if(json.returnCode == 0){
                     winui.window.msg("设置成功。", {icon: 1,time: 2000});
                     loadTable();
@@ -149,20 +145,15 @@ layui.config({
         });
     }
 
+    //详情
     function selectSupplier(data){
         rowId = data.id;
         _openNewWindows({
             url: "../../tpl/supplier/supplierinfo.html",
-            title: "查看供应商详情",
+            title: "详情",
             pageId: "supplierinfo",
             area: ['90vw', '90vh'],
             callBack: function(refreshCode){
-                if (refreshCode == '0') {
-                    winui.window.msg("操作成功", {icon: 1,time: 2000});
-                    loadTable();
-                } else if (refreshCode == '-9999') {
-                    winui.window.msg("操作失败", {icon: 2,time: 2000});
-                }
             }
         });
     }
