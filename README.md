@@ -1,32 +1,18 @@
 # erp_pro
 
-> win10风格的一套系统，前端采用layui作为前端框架，后端采用SpringBoot作为服务框架，采用自封装的xml对所有请求进行参数校验，以保证接口安全性。`项目长期更新`，觉得不错的点下star吧
-
+> 基于SpringBoot 2.X框架，为中小企业打造开源好用的多租户ERP软件，专注进销存+财务功能。主要模块有零售管理、采购管理、销售管理、仓库管理、财务管理、报表查询、系统管理等。支持预付款、收入支出、仓库调拨、组装拆卸、订单等特色功能。拥有库存状况、出入库统计等报表。对权限进行精确划分，同时支持多系统集成方案，可与OA，CRM，知识库等多个系统进行集成使用。`项目长期更新，觉得不错的点下star吧`
 
 #### 介绍
 基于SpringBoot框架和SaaS模式，立志为中小企业提供开源好用的多租户ERP软件，目前专注进销存+财务功能。主要模块有零售管理、采购管理、销售管理、仓库管理、财务管理、报表查询、系统管理等。支持预付款、收入支出、仓库调拨、组装拆卸、订单等特色功能。拥有库存状况、出入库统计等报表。同时对角色和权限进行了细致全面控制，精确到每个按钮和菜单。
 
-> QQ群号：(群一：[696070023](http://shang.qq.com/wpa/qunwpa?idkey=e9aace2bf3e05f37ed5f0377c3827c6683d970ac0bcc61b601f70dc861053229))(群二：[836039567](https://shang.qq.com/wpa/qunwpa?idkey=7bb6f29b27f772aadca9c7c4e384f7833c64e9c3c947b5e946c7b303d1fe174a))
-
-> 系统新增传统风格界面，layui左菜单右内容风格。
-
-> 体验地址1： [http://skyeye.vipgz1.idcfengye.com](http://skyeye.vipgz1.idcfengye.com)；账号/密码：root/123456 
-
-> 体验地址2： [http://skyeyeerp.fzlin.net](http://skyeyeerp.fzlin.net)；账号/密码：root/123456 感谢`疯子林`提供的服务器
+- QQ群号：(群一：[696070023](http://shang.qq.com/wpa/qunwpa?idkey=e9aace2bf3e05f37ed5f0377c3827c6683d970ac0bcc61b601f70dc861053229))(群二：[836039567](https://shang.qq.com/wpa/qunwpa?idkey=7bb6f29b27f772aadca9c7c4e384f7833c64e9c3c947b5e946c7b303d1fe174a))；有问题请提Issues，优先回答Issues问题
+- 开发环境对应的文档以及安装包地址：链接：https://pan.baidu.com/s/1msVBhDcf_I_VN63YCcS-kA 提取码：w8sr；不要告诉我你没有云盘
+- 体验地址1： [http://skyeye.vipgz1.idcfengye.com](http://skyeye.vipgz1.idcfengye.com)；账号/密码：root/123456 
+- 体验地址2： [http://skyeyeerp.fzlin.net](http://skyeyeerp.fzlin.net)；账号/密码：root/123456 感谢`疯子林`提供的服务器
+- 如有定制需求，可入群或将需求发送至邮箱`598748873@qq.com`。
 
 #### 启动方式
 直接运行com.SkyeyeErpApplication即可，启动完成后，访问`http://localhost:8086`即可。 初始化账号密码：root/123456
-
-#### 软件架构
-
-- Spring Boot 2.X
-- Layui 
-- MySql 5.5.28
-- JDK 1.8
-- Redis 3.2集群（不要问我单机的能不能行）
-
-#### 声明
-如有定制需求，可入群或将需求发送至邮箱`598748873@qq.com`。
 
 #### 功能介绍
 
@@ -51,21 +37,24 @@
 - 报表管理：包含入库/出库明细、入库/出库汇总、库存状况、客户/供应商/会员对账等报表
 - 财务管理：收入单、支出单、收付款单、转账单等
 - 租户群管理：系统可建立多个租户群体，各自管理各自的数据
+- 代码生成器：用户可自行提供模板，一键生成主要代码
 
 #### 技术选型
 
 ##### 后端技术:
 
-技术|名称
----|---
-[SpringBoot](http://spring.io/projects/spring-boot)|核心框架
+技术|名称|版本
+---|---|---
+[SpringBoot](http://spring.io/projects/spring-boot)|核心框架|2.0.3
 [MyBatis](http://www.mybatis.org/mybatis-3/zh/index.html)|ORM框架
-[Druid](https://github.com/alibaba/druid)|数据库连接池
-[Maven](http://maven.apache.org/)|项目构建管理
-[redis](https://redis.io/)|key-value存储系统
-[webSocket](http://www.runoob.com/html/html5-websocket.html)|浏览器与服务器全双工(full-duplex)通信
-[quartz 2.2.2](http://www.quartz-scheduler.org/)|定时任务
-[ActiveMQ](http://activemq.apache.org/replicated-leveldb-store.html)|消息队列
+[Druid](https://github.com/alibaba/druid)|数据库连接池|
+[Maven](http://maven.apache.org/)|项目构建管理|
+[redis](https://redis.io/)|key-value存储系统|3.2集群（不要问我单机的能不能行）
+[webSocket](http://www.runoob.com/html/html5-websocket.html)|浏览器与服务器全双工(full-duplex)通信|
+[quartz 2.2.2](http://www.quartz-scheduler.org/)|定时任务|
+[ActiveMQ](http://activemq.apache.org/replicated-leveldb-store.html)|消息队列|
+[Java]()|Java|1.8
+[MySQL]()|数据库|5.5.28
 
 ##### 前端技术：
 
@@ -74,7 +63,7 @@
 [jQuery](http://jquery.com/)|函式库
 [zTree](http://www.treejs.cn/v3/)|树插件
 [layui](https://www.layui.com/)|模块化前端UI
-[winui](https://gitee.com/doc_wei01_admin/skyeye)|win10风格UI
+[winui](https://gitee.com/doc_wei01/skyeye)|win10风格UI(自己做的前端架构)
 [handlebars](http://www.ghostchina.com/introducing-the-handlebars-js-templating-engine/)|js模板引擎
 [webSocket](http://www.runoob.com/html/html5-websocket.html)|浏览器与服务器全双工(full-duplex)通信
 
@@ -128,36 +117,10 @@ public void 方法名(InputObject inputObject, OutputObject outputObject) throws
 |![输入图片说明](https://images.gitee.com/uploads/images/2019/1022/165355_a7090ee3_1541735.png "在这里输入图片标题")|![输入图片说明](https://images.gitee.com/uploads/images/2019/1022/165505_0f5c5162_1541735.png "在这里输入图片标题")|
 |![输入图片说明](https://images.gitee.com/uploads/images/2019/1022/165537_fbb78be8_1541735.png "在这里输入图片标题")|![输入图片说明](https://images.gitee.com/uploads/images/2019/1023/152325_95480f53_1541735.png "在这里输入图片标题")|
 
-#### 环境搭建
-##### 开发工具:
-
-- MySql: 数据库</br>
-- Tomcat: 应用服务器</br>
-- SVN|Git: 版本管理</br>
-- Nginx: 反向代理服务器</br>
-- Varnish: HTTP加速器</br>
-- IntelliJ IDEA|Eclipse: 开发IDE</br>
-- Navicat for MySQL: 数据库客户端</br>
-- Redis Manager：redis视图工具</br>
-
-#### 资源下载
-
-- [JDK8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-- [Maven](http://maven.apache.org/download.cgi)
-- [Redis](https://redis.io/download)
-- [Nginx](http://nginx.org/en/download.html)
-
-#### 在线文档
-
-- [JDK8中文文档](https://blog.fondme.cn/apidoc/jdk-1.8-youdao/)
-- [Spring4.x文档](http://spring.oschina.mopaas.com/)
-- [Mybatis3官网](http://www.mybatis.org/mybatis-3/zh/index.html)
-- [Nginx中文文档](http://tool.oschina.net/apidocs/apidoc?api=nginx-zh)
-- [Git官网中文文档](https://git-scm.com/book/zh/v2)
-
 #### 项目交流：
 
-QQ群号：[696070023](http://shang.qq.com/wpa/qunwpa?idkey=e9aace2bf3e05f37ed5f0377c3827c6683d970ac0bcc61b601f70dc861053229)
+QQ群号：(群一：[696070023](http://shang.qq.com/wpa/qunwpa?idkey=e9aace2bf3e05f37ed5f0377c3827c6683d970ac0bcc61b601f70dc861053229))
+(群二：[836039567](https://shang.qq.com/wpa/qunwpa?idkey=7bb6f29b27f772aadca9c7c4e384f7833c64e9c3c947b5e946c7b303d1fe174a))
 
 > 需要了解的请加微信或者进群：wzq_598748873，备注：码云-公司（姓名）。
 
