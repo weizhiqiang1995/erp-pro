@@ -422,11 +422,11 @@
 			b.default_number defaultNumber,
 			a.oper_number operNumber,
 			b.type,
-			a.unit_price unitPrice,
+			FORMAT(a.unit_price, 2) unitPrice,
 			b.link_number linkNumber,
 			b.status,
 			b.sub_type subType,
-			CONVERT(IFNULL(a.tax_last_money, a.all_price), decimal(24, 2)) taxLastMoney,
+			FORMAT(IFNULL(a.tax_last_money, a.all_price), 2) taxLastMoney,
 			CONVERT (b.oper_time, CHAR) operTime,
 			a.m_type mType,
 			CASE b.sub_type WHEN 1 THEN '采购入库' WHEN 2 THEN '销售退货' WHEN 3 THEN '零售退货' WHEN 4 THEN '其他入库' WHEN 5 THEN '销售出库' 
