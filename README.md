@@ -14,6 +14,7 @@
 - 如发现体验地址密码错误的，请联系我`QQ:598748873`或者`微信:wzq_598748873`
 - 如有定制需求，可入群或将需求发送至邮箱`598748873@qq.com`。
 - [OA地址](https://gitee.com/doc_wei01/skyeye)
+- [掘金文档地址](https://juejin.im/post/5db28c1e51882560613501cf)
 
 #### 启动方式
 直接运行com.SkyeyeErpApplication即可，启动完成后，访问`http://localhost:8086`即可。 初始化账号密码：root/123456
