@@ -13,6 +13,7 @@
 - 体验地址1： [http://skyeye.vipgz1.idcfengye.com](http://skyeye.vipgz1.idcfengye.com?2)；账号/密码：root/123456 
 - 体验地址2： [http://skyeyeoa.fzlin.net](http://skyeyeoa.fzlin.net)；账号/密码：root/123456 感谢`疯子林`提供的服务器
 - 如发现体验地址密码错误的，请联系我`QQ:598748873`或者`微信:wzq_598748873`
+- 经常有一些二货不知道发行版怎么下，不会下还说不能运行，这里把发行版链接给出来：[发行版](https://gitee.com/doc_wei01/erp-pro/releases)
 - 如有定制需求，可入群或将需求发送至邮箱`598748873@qq.com`。
 - [OA地址](https://gitee.com/doc_wei01/skyeye)
 - [掘金文档地址](https://juejin.im/post/5db28c1e51882560613501cf)
