@@ -10,9 +10,6 @@
 - 代码是没问题的，请下载`发行版`，环境版本请参照下面云盘提供的版本进行对应的修改
 - QQ群号：(群一：[696070023](http://shang.qq.com/wpa/qunwpa?idkey=e9aace2bf3e05f37ed5f0377c3827c6683d970ac0bcc61b601f70dc861053229))(群二：[836039567](https://shang.qq.com/wpa/qunwpa?idkey=7bb6f29b27f772aadca9c7c4e384f7833c64e9c3c947b5e946c7b303d1fe174a))；有问题请提Issues，优先回答Issues问题
 - 开发环境对应的文档以及安装包地址：链接：https://pan.baidu.com/s/1msVBhDcf_I_VN63YCcS-kA 提取码：w8sr；不要告诉我你没有云盘
-- 体验地址1： [http://skyeye.vipgz1.idcfengye.com](http://skyeye.vipgz1.idcfengye.com?2)；账号/密码：root/123456 (开源主已不足以养活自己，关闭一个，请使用第二个)
-- 体验地址2： [http://skyeyeoa.fzlin.net](http://skyeyeoa.fzlin.net)；账号/密码：root/123456 感谢`疯子林`提供的服务器
-- 如发现体验地址密码错误的，请联系我`QQ:598748873`或者`微信:wzq_598748873`
 - 经常有一些二货不知道发行版怎么下，不会下还说不能运行，这里把发行版链接给出来：[发行版](https://gitee.com/doc_wei01/erp-pro/releases)
 - 如有定制需求，可入群或将需求发送至邮箱`598748873@qq.com`。
 - [OA地址](https://gitee.com/doc_wei01/skyeye)
