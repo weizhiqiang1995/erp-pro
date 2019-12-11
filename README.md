@@ -5,8 +5,6 @@
 #### 介绍
 基于SpringBoot框架和SaaS模式，立志为中小企业提供开源好用的多租户ERP软件，目前专注进销存+财务功能。主要模块有零售管理、采购管理、销售管理、仓库管理、财务管理、报表查询、系统管理等。支持预付款、收入支出、仓库调拨、组装拆卸、订单等特色功能。拥有库存状况、出入库统计等报表。同时对角色和权限进行了细致全面控制，精确到每个按钮和菜单。
 
-> 另：作者最近在找工作，有可以内推免面试的推荐一下呗^_^，[简历](https://gitee.com/doc_wei01/skyeye/blob/master/%E7%AE%80%E5%8E%86.md)
-
 - 代码是没问题的，请下载`发行版`，环境版本请参照下面云盘提供的版本进行对应的修改
 - QQ群号：(群一：[696070023](http://shang.qq.com/wpa/qunwpa?idkey=e9aace2bf3e05f37ed5f0377c3827c6683d970ac0bcc61b601f70dc861053229))(群二：[836039567](https://shang.qq.com/wpa/qunwpa?idkey=7bb6f29b27f772aadca9c7c4e384f7833c64e9c3c947b5e946c7b303d1fe174a))；有问题请提Issues，优先回答Issues问题
 - 开发环境对应的文档以及安装包地址：链接：https://pan.baidu.com/s/1msVBhDcf_I_VN63YCcS-kA 提取码：w8sr；不要告诉我你没有云盘
@@ -14,6 +12,8 @@
 - 如有定制需求，可入群或将需求发送至邮箱`598748873@qq.com`。
 - [OA地址](https://gitee.com/doc_wei01/skyeye)
 - [掘金文档地址](https://juejin.im/post/5db28c1e51882560613501cf)
+
+> 开源版只包含基础功能，全套商业版售价是四万(价格会随着功能的增加而增加)，负责bug维护，现在本人正在找工作，体验地址关了，需要体验的，请联系作者远程查看
 
 #### 启动方式
 直接运行com.SkyeyeErpApplication即可，启动完成后，访问`http://localhost:8086`即可。 初始化账号密码：root/123456
