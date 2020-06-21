@@ -7,6 +7,7 @@
 
 > 开源版架构不支持高并发，容易出现问题，私用出现问题概不负责。商业版包含所有功能，个人软件，无发票。
 
+- 开源版只限学习，商业化联系作者，私自商业化将承担法律责任
 - [面试专题](https://gitee.com/doc_wei01/skyeye/blob/master/Java%E5%AD%A6%E4%B9%A0%E7%9B%AE%E5%BD%95.md)
 - Skyeye的近期工作清单，有别的需求可以联系我添加。https://docs.qq.com/doc/DQlRxcVRMWWVjbU1i?_from=1&disableReturnList=1
 - 项目交流群：(群一：[696070023](http://shang.qq.com/wpa/qunwpa?idkey=e9aace2bf3e05f37ed5f0377c3827c6683d970ac0bcc61b601f70dc861053229))(群二：[836039567](https://shang.qq.com/wpa/qunwpa?idkey=7bb6f29b27f772aadca9c7c4e384f7833c64e9c3c947b5e946c7b303d1fe174a))(群三：[887391486](https://shang.qq.com/wpa/qunwpa?idkey=a65f2e0292eb1048bb13abb7adca302bd83e3465974861ec1f04c2f7fffc4d99))；有问题请提Issues，优先回答Issues问题
@@ -58,6 +59,8 @@ BOM表|为自产商品打造结构清单，清晰了解成本价等|生产计划
 其他入库管理|整改完成|库存盘点|对现有仓库的库存进行盘点
 待审核入库单|仓库管理员可以对自己仓库的入库单进行审核入库|零售出库|整改完成
 零售退货|整改完成|拆分单|整改完成
+调拨单|整改完成|仓库管理|整改完成
+商品管理|整改完成
 
 #### 技术选型
 
