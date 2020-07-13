@@ -8,6 +8,7 @@
 > 开源版架构不支持高并发，容易出现问题，私用出现问题概不负责。商业版包含所有功能，个人软件，无发票。体验地址服务器因为一些原因没再续费关了，需要体验的，请联系作者远程查看
 
 - 开源版只限学习，商业化联系作者，私自商业化将承担法律责任
+- erp+生产演示视频：https://www.bilibili.com/video/BV1yA411e7mm/
 - 集成apollo配置中心，不会的菜比就别用这项目了，不想理你们这些菜比
 - [面试专题](https://gitee.com/doc_wei01/skyeye/blob/master/Java%E5%AD%A6%E4%B9%A0%E7%9B%AE%E5%BD%95.md)
 - Skyeye的近期工作清单，有别的需求可以联系我添加。https://docs.qq.com/doc/DQlRxcVRMWWVjbU1i?_from=1&disableReturnList=1
