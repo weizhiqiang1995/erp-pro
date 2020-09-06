@@ -8020,6 +8020,293 @@ select option{
 	color: darkgray;
 }
 
+/*************************传统风格界面样式start*****************************/
+.tradition-left{
+	width: 220px;
+	height: 100%;
+	float: left;
+}
+
+.tradition-left .tradition-left-top{
+	width: 220px;
+	height: 50px;
+	background-color: #20222A !important;
+	text-align: center;
+	overflow: hidden;
+    font-weight: 300;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.tradition-left .tradition-left-top span{
+	line-height: 50px;
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 16px;
+}
+
+.tradition-left .tradition-left-center{
+    margin-top: 50px;
+    width: 100%;
+    height: calc(100% - 50px);
+    background-color: RGB(56, 66, 86);
+}
+
+.tradition-left .tradition-left-center .layui-nav-item a img{
+	width: 18px;
+	height: 18px;
+}
+
+.tradition-left .tradition-left-bottom{
+	width: 100%;
+    height: 70px;
+    background-color: RGB(56, 66, 86);
+}
+
+.tradition-left .tradition-left-bottom .other-item{
+    width: 23%;
+    margin: 0px 1%;
+	float: left;
+	height: 100%;
+	text-align: center;
+	cursor: pointer;
+}
+
+.tradition-left .tradition-left-bottom .other-item .other-item-img{
+	width: 45px;
+	height: 45px;
+	margin: 0px calc(50% - 22px);
+	float: left;
+}
+
+.tradition-left .tradition-left-bottom .other-item .other-item-img i{
+	margin-top: 15px;
+    font-size: 19px;
+    color: whitesmoke;
+}
+
+.tradition-left .tradition-left-bottom .other-item .other-item-title{
+	width: 100%;
+	float: left;
+	color: whitesmoke;
+}
+
+.tradition-left .tradition-left-bottom .other-item .other-item-title font{
+    font-size: 12px;
+}
+
+.tradition-right{
+	width: calc(100% - 220px);
+	height: 100%;
+	float: left;
+}
+
+.tradition-right .tradition-right-top{
+	border-bottom: 1px solid #f6f6f6;
+	height: 50px;
+}
+
+.tradition-right .tradition-right-top .layui-nav .layui-nav-item a{
+	color: black;
+}
+
+.tradition-right .tradition-right-top .layui-nav .layui-nav-item .layui-input-search{
+	height: 50px;
+    border: 0px;
+}
+
+.tradition-right .tradition-right-top .layui-nav .layui-nav-item .layui-input-search:HOVER{
+	border-color: white !important;
+}
+
+.tradition-right .tradition-right-top .layui-nav .layui-nav-item .layui-input-search:FOCUS {
+	border-color: white !important;
+	outline: 0;
+	box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0) !important;
+}
+
+.tradition-right .tradition-right-top .layui-nav li .layui-nav-child dd a i{
+	margin-right: 7px;
+}
+
+.tradition-right .tradition-right-top .desktop-menu-box{
+	color: black;
+	margin-left: 60px;
+	width: calc(100% - 530px);
+	height: 50px;
+	overflow-x: auto;
+	overflow-y: hidden;
+    padding: 0 5px;
+}
+
+.tradition-right .tradition-right-top .desktop-menu-box ul .select{
+	background-color: rgb(242, 242, 242);
+}
+
+.tradition-right .tradition-right-top .desktop-menu-box::-webkit-scrollbar{
+	width: 10px;
+    height: 2px;
+}
+
+.tradition-right .tradition-right-top .desktop-menu-box ul{
+	height: 100%;
+}
+
+.tradition-right .tradition-right-top .desktop-menu-box ul li{
+	height: 50px;
+    line-height: 50px;
+	margin: 0px;
+    float: left;
+}
+
+.tradition-right .tradition-right-top .desktop-menu-box ul li:HOVER{
+	background-color: rgb(242, 242, 242);
+	cursor: pointer;
+}
+
+.tradition-right .tradition-right-top .desktop-menu-box ul li a i{
+	margin-right: 5px;
+}
+
+.tradition-right .tradition-right-center{
+	border-bottom: 1px solid #f6f6f6;
+	height: 40px;
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs{
+	
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .m-icon{
+	height: 40px;
+    width: 40px;
+    float: left;
+    text-align: center;
+    line-height: 45px;
+    cursor: pointer;
+    border-left: 1px solid #f6f6f6;
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .m-icon:HOVER{
+	background-color: RGB(246, 246, 246);
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .m-icon i{
+	font-size: 20px;
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .m-icon .layui-nav{
+	padding: 0px;
+    height: 100%;
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .m-icon .layui-nav .layui-nav-item a{
+	width: 40px;
+	height: 40px;
+	padding: 0px;
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .m-icon .layui-nav .layui-nav-item a .layui-nav-more{
+	left: 15px;
+    top: 40%;
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .m-icon .layui-nav .layui-nav-item .layui-nav-child{
+    width: 125px;
+    top: 40px;
+    left: auto;
+    right: 0;
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .m-icon .layui-nav .layui-nav-item .layui-nav-child dd a{
+	width: 100%;
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .layui-tab-title li{
+    min-width: 30px;
+    padding: 0 10px;
+    border-right: 1px solid #f6f6f6;
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .layui-tab-title li:HOVER{
+	color: white;
+	background-color: rgb(130, 182, 122);
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .layui-tab-title li span{
+	margin-left: 8px;
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .layui-tab-title li .close-i{
+	margin-left: 5px;
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .layui-tab-title .layui-this{
+	color: white;
+    background-color: rgb(130, 182, 122);
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .layui-tab-title li img{
+	width: 18px;
+	height: 18px;
+    margin-right: 5px;
+}
+
+.tradition-right .tradition-right-bottom{
+	width: 100%;
+	height: calc(100% - 93px);
+}
+
+.tradition-right .tradition-right-bottom .layui-tab-item{
+	height: 100%;
+}
+
+.tradition-right .tradition-right-bottom .layui-tab-item iframe{
+	height: 100%;
+	width: 100%;
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .rightmenu{
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12);
+    border: 1px solid #d2d2d2;
+    z-index: 100;
+    border-radius: 2px;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .rightmenu li{
+	height: 36px;
+    line-height: 36px;
+    padding: 0px 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .rightmenu li:HOVER{
+	background-color: rgb(242, 242, 242);
+}
+
+.tradition-right .tradition-right-center .layadmin-pagetabs .layui-tab-title li:nth-child(1) .layui-tab-close{
+	display: none;
+}
+
+.tradition-username{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    float: left;
+    width: 80px;
+}
+
+/*************************传统风格界面样式end*****************************/
+
 @-webkit-keyframes cloud_three {
 	0% {
 	left:0
@@ -8043,5 +8330,4 @@ select option{
 }
 
 /*******************************************自定义样式end********************************************/
-
 
