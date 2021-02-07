@@ -4,13 +4,21 @@
 
 - erp+生产演示视频：https://www.bilibili.com/video/BV1yA411e7mm/
 - 需要进微信群需要支付五元费用(加我拉你进群，wzq_598748873)，为了防止发广告的等，望谅解。
-- 需要搭建的环境以及版本在下方
 - `穷人靠变异，富人靠科技，商业价格贵，伸手党勿扰`
 - 工作清单以及商业版价格表：https://docs.qq.com/doc/DQlRxcVRMWWVjbU1i?_from=1&disableReturnList=1
 - [OA地址](https://gitee.com/doc_wei01/skyeye)
 - 不会搭建环境的，可以出钱让作者帮忙搭建，一次100，先付。
-- 环境搭建资料以及项目介绍操作文档（30一份）获取：进群后找群主
+- 项目相关文档（30一份）获取：进群后找群主
 - 开源版只限学习，禁止商用
+
+#### 环境搭建
+
+> 该项目是maven工程，如果遇到jar包没下载下来的问题，请更换镜像地址.
+
+- 1.搭建apollo配置中心，将`docs/配置中心参数.md`复制到配置中心
+- 2.搭建redis（3.2）集群
+- 3.MySQL 5.5.X
+- 4.最后修改配置中心参数，启动`SkyeyeErpApplication.java`项目
 
 #### 功能介绍
 
