@@ -1,6 +1,7 @@
-/**
- * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved.
- */
+/*******************************************************************************
+ * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/erp-pro
+ ******************************************************************************/
+
 package com.skyeye.controller;
 
 import com.skyeye.common.object.InputObject;
@@ -12,9 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @Author 卫志强
- * @Description 收入单
- * @Date 2019/10/20 10:22
+ * 
+ * @ClassName: IncomeController
+ * @Description: 收入单控制类
+ * @author: skyeye云系列--卫志强
+ * @date: 2021/7/2 21:35
+ *   
+ * @Copyright: 2021 https://gitee.com/doc_wei01/erp-pro Inc. All rights reserved.
+ * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Controller
 public class IncomeController {
