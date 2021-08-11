@@ -8,10 +8,10 @@
 - `穷人靠变异，富人靠科技，商业价格贵，伸手党勿扰`
 - 工作清单以及商业版价格表：https://docs.qq.com/doc/DQlRxcVRMWWVjbU1i?_from=1&disableReturnList=1
 - 商业版由于是个人软件，所以没有体验地址，需要体验的，可提供企业名，联系人，联系方式给作者，通过向日葵远程查看
-- [OA地址](https://gitee.com/doc_wei01/skyeye)
 - 不会搭建环境的，可以出钱让作者帮忙搭建，一次100，先付。
-- 项目相关文档（30一份）获取：进群后找群主
+- [项目文档](https://gitee.com/doc_wei01/erp-pro/blob/master/%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3.md)
 - 开源版只限学习，禁止商用，如有私自商用造成严重后果，与作者无关
+- [OA地址](https://gitee.com/doc_wei01/skyeye)
 - [MIT协议的高性能报表软件](https://gitee.com/doc_wei01/skyeye-report)
 
 #### 环境搭建
