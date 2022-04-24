@@ -2,6 +2,7 @@
 
 > 基于SpringBoot 2.X框架，为中小企业打造开源好用的ERP软件。主要模块有零售管理、采购管理、销售管理、仓库管理、财务管理、报表查询、系统管理等。支持预付款、收入支出、仓库调拨、组装拆卸、订单，生产等特色功能。拥有库存状况、出入库统计等报表。对权限进行精确划分，同时支持多系统集成方案，可与OA，CRM，知识库等多个系统进行集成使用。同时对角色和权限进行了细致全面控制，精确到每个按钮和菜单。集成apollo配置中心。
 
+- [2022-04-24 云办公系统 skyeye v3.7.11 发布](https://mp.weixin.qq.com/s/ohbDoUxNzQY9sGt0kwhhSA)
 - [云办公系统 skyeye v3.7.10 发布](https://mp.weixin.qq.com/s/DWoT4gR0GThRUxbKWd2ieg)
 - [云办公系统 skyeye v3.7.9 发布，招聘模块](https://mp.weixin.qq.com/s/NtAfOMv6npHkeDZtP20RWw)
 - [云办公系统 skyeye v3.7.8 发布，ERP，CRM，工作流等服务拆分](https://mp.weixin.qq.com/s/ijMsoaXEL2aDvK9upcUMLw)
