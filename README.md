@@ -4,30 +4,16 @@
 
 `该项目企业版有体验地址，需要的加微信(账号独立，不免费)`
 
-> `企业版618活动`
-- 活动时间：2022.6.1~2022.6.18
-- 活动价格：咨询作者
-- 活动内容：全部模块源代码，无后续更新，无bug修复
-
-> 近期更新资讯
-- [2022-06-06 云办公系统 skyeye v3.7.15 报表模块更新，新增体验地址](https://mp.weixin.qq.com/s/y46WM-Pj44fdc_HRAHmd5g)
-- [云办公系统 skyeye v3.7.14 CRM，ERP更新](https://mp.weixin.qq.com/s/MsJ1HmFnlfFHRzh5nDfN3A)
-- [云办公系统 skyeye v3.7.13 3D编辑器](https://mp.weixin.qq.com/s/3FeoBZ1XvHlyBQPDLD6TMA)
-- [云办公系统 skyeye v3.7.12 大版本更新](https://mp.weixin.qq.com/s/nhadQJDPgdVwSVcdAklTIw)
-
-> 更多历史更新资讯 [点我](https://gitee.com/doc_wei01/skyeye/blob/company_server/HISTORY_UPDATE.md) 。 更多更新资讯以及相关资料关注微信公众号【Skyeye云办公】获取
-
-- [老版本 企业版erp+生产演示视频](https://www.bilibili.com/video/BV1yA411e7mm/)
+- [历史更新资讯](https://gitee.com/doc_wei01/skyeye/blob/company_server/HISTORY_UPDATE.md)
 - [项目功能结构](https://docs.qq.com/mind/DYXp0eHhvQ0d3ZmpW)
 - [企业版信息](https://docs.qq.com/doc/DQlRxcVRMWWVjbU1i?_from=1&disableReturnList=1)
-- 不会搭建环境的，可以出钱让作者帮忙搭建，一次100，先付。
 - [开源版项目文档](https://gitee.com/doc_wei01/erp-pro/blob/master/%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3.md)
-- [OA地址](https://gitee.com/doc_wei01/skyeye)
 
 ### 联系作者
 
-- 企业版请加微信：wzq_598748873
-- 非企业版请进QQ群：1016439713，进群后请自行修改备注：职业-地域-昵称，群内只回答开源版问题
+| 作者微信/或者搜索 wzq_598748873 | QQ交流群/或者搜索 1016439713 | 更新资讯公众号 | 企业版设计思路知识星球 |
+| ------ | ---- | ---- | ---- |
+| ![      ](https://gitee.com/doc_wei01/skyeye/blob/company_server/web/src/main/resources/template/tpl/common/%E5%BE%AE%E4%BF%A1.jpg) | ![     ](https://gitee.com/doc_wei01/skyeye/blob/company_server/web/src/main/resources/template/tpl/common/skyeye%E7%B3%BB%E5%88%97QQ%E7%BE%A4%E8%81%8A%E4%BA%8C%E7%BB%B4%E7%A0%81.png)|![输入图片说明](https://images.gitee.com/uploads/images/2021/0320/091531_8c3ba4d8_1541735.jpeg "qrcode_for_gh_e7f97ff1beda_430.jpg")| ![输入图片说明](https://gitee.com/doc_wei01/skyeye/blob/company_server/web/src/main/resources/template/tpl/common/%E7%9F%A5%E8%AF%86%E6%98%9F%E7%90%83.png) |
 
 #### 环境搭建
 
@@ -89,44 +75,6 @@ BOM表|为自产商品打造结构清单，清晰了解成本价等|生产计划
 [handlebars](http://www.ghostchina.com/introducing-the-handlebars-js-templating-engine/)|js模板引擎
 [webSocket](http://www.runoob.com/html/html5-websocket.html)|浏览器与服务器全双工(full-duplex)通信
 
-#### 代码描述
-##### 前后台接口映射
-
-```
-<url id="前端请求id" path="后台接口" val="备注" allUse="是否需要登录">
-	<property id="前端请求key" name="后台接收key" ref="限制条件（参考项目内文档）" var="key含义"/>
-</url>
-```
-
-##### 后台代码编写规范
-
-###### 控制层
-
-```
-@RequestMapping("后台接口")
-public void 方法名(InputObject inputObject, OutputObject outputObject) throws Exception{
-	服务层接口对象.方法名(inputObject, outputObject);
-}
-```
-
-###### 服务层
-
-```
-@Override
-public void 方法名(InputObject inputObject, OutputObject outputObject) throws Exception {
-	Map<String, Object> map = inputObject.getParams();//接收参数
-	Map<String, Object> user = inputObject.getLogParams();//获取当前登录用户信息
-	/**
-	 * 业务逻辑
-	 */
-	outputObject.setBean(bean);//返回单个实体Bean
-	outputObject.setBeans(beans);//返回集合
-	outputObject.settotal(total);//返回数量
-	outputObject.setreturnMessage("信息");//返回前端的错误信息
-	outputObject.setreturnMessage("信息", 错误码);//返回前端的错误信息，同时抛出异常（不常用）
-}
-```
-
 #### 效果图
 
 |效果图|效果图|
@@ -139,9 +87,3 @@ public void 方法名(InputObject inputObject, OutputObject outputObject) throws
 |![输入图片说明](https://images.gitee.com/uploads/images/2019/1022/165355_a7090ee3_1541735.png "在这里输入图片标题")|![输入图片说明](https://images.gitee.com/uploads/images/2019/1022/165505_0f5c5162_1541735.png "在这里输入图片标题")|
 |![输入图片说明](https://images.gitee.com/uploads/images/2019/1022/165537_fbb78be8_1541735.png "在这里输入图片标题")|![输入图片说明](https://images.gitee.com/uploads/images/2019/1023/152325_95480f53_1541735.png "在这里输入图片标题")|
 
-
-### 捐助
-如果您觉得我们的开源软件对你有所帮助，请扫下方二维码打赏我们一杯咖啡。关注下方公众号，第一时间获取最新资讯以及文档资料。
-| 支付宝 | 微信 | 更新资讯公众号 |
-| ------ | ---- | ---- |
-| ![      ](https://images.gitee.com/uploads/images/2019/1016/094014_96f92c56_1541735.png "微信截图_20191016093832.png") | ![     ](https://images.gitee.com/uploads/images/2019/1016/094025_65ba24f0_1541735.png "微信截图_20191016093850.png")|![输入图片说明](https://images.gitee.com/uploads/images/2021/0320/091531_8c3ba4d8_1541735.jpeg "qrcode_for_gh_e7f97ff1beda_430.jpg")|
