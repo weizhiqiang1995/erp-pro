@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.skyeye</groupId>
+		<artifactId>skyeye-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>com.skyeye</groupId>
+	<artifactId>skyeye-promote</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>skyeye-web</module>
+		<module>skyeye-common</module>
+		<module>skyeye-entity</module>
+		<module>skyeye-quartz</module>
+		<module>skyeye-mq</module>
+		<module>skyeye-solr</module>
+		<module>skyeye-userauth</module>
+		<module>skyeye-threed</module>
+		<module>skyeye-rmprogram</module>
+		<module>skyeye-message</module>
+		<module>skyeye-knowlg</module>
+		<module>skyeye-forum</module>
+		<module>skyeye-disk-cloud</module>
+		<module>skyeye-note</module>
+		<module>skyeye-light-app</module>
+		<module>skyeye-code-doc</module>
+		<module>skyeye-survey</module>
+		<module>skyeye-jobdiary</module>
+		<module>skyeye-email</module>
+		<module>skyeye-mail</module>
+		<module>skyeye-schedule</module>
+		<module>skyeye-planpro</module>
+		<module>skyeye-workplan</module>
+		<module>skyeye-user-phone</module>
+		<module>skyeye-gateway</module>
+    	<module>skyeye-ehr</module>
+        <module>skyeye-wages</module>
+        <module>skyeye-organization</module>
+        <module>skyeye-api</module>
+    </modules>
+
+	<dependencies>
+
+		<!-- solr客户 -->
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+		</dependency>
+
+	</dependencies>
+
+</project>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyeye.dao.ApiMationDao">
+
+	<select id="queryApiMationToEditById" resultType="java.util.Map">
+        SELECT
+			a.request_body requestBody,
+			a.reponse_body reponseBody
+        FROM
+            api_mation a
+        WHERE a.request_url = #{urlId}
+    </select>
+
+	<update id="editApiMationById" parameterType="java.util.Map">
+		UPDATE api_mation
+		<set>
+			request_body = #{requestBody},
+			reponse_body = #{reponseBody},
+			last_update_id = #{userId},
+			last_update_time = #{currentTime}
+		</set>
+		WHERE request_url = #{urlId}
+	</update>
+
+	<insert id="insertApiMation" parameterType="java.util.Map">
+		INSERT INTO api_mation
+			(id, request_url, request_body, reponse_body, app_id,  create_id, create_time, last_update_id, last_update_time)
+		VALUES
+			(#{id}, #{urlId}, #{requestBody}, #{reponseBody}, #{appId}, #{userId}, #{currentTime}, #{userId}, #{currentTime})
+	</insert>
+
+</mapper>
