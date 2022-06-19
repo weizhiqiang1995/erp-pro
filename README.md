@@ -10,7 +10,7 @@
 
 - [2022-06-18 云办公系统 skyeye v3.7.16 部分企业版开源](https://mp.weixin.qq.com/s/3-0FZTkcv7xmi9bwpPftcQ)
 - [历史更新资讯](https://gitee.com/doc_wei01/skyeye/blob/company_server/HISTORY_UPDATE.md)
-- [项目功能结构](https://docs.qq.com/mind/DYXp0eHhvQ0d3ZmpW)
+- [项目功能结构](https://docs.qq.com/flowchart/DYUFQQnlCUm9Ua2FI)
 - [企业版信息](https://docs.qq.com/doc/DQlRxcVRMWWVjbU1i?_from=1&disableReturnList=1)
 - [开源版项目文档](https://gitee.com/doc_wei01/erp-pro/blob/master/%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3.md)
 
