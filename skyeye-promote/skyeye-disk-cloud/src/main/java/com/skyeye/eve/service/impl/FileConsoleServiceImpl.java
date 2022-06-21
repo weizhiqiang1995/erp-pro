@@ -11,8 +11,10 @@ import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConne
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.cache.redis.RedisCache;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.constans.DiskCloudConstants;
+import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.object.PutObject;
@@ -27,6 +29,7 @@ import com.skyeye.jedis.JedisClientService;
 import nl.siegmann.epublib.domain.Book;
 import nl.siegmann.epublib.domain.Resource;
 import nl.siegmann.epublib.epub.EpubReader;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -65,10 +69,13 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     @Autowired
     public JedisClientService jedisClient;
 
+    @Autowired
+    private RedisCache redisCache;
+
     /**
      * 文件上传时保存文件的路径
      */
-    private static final Integer FILE_PATH_TYPE = 24;
+    private static final Integer FILE_PATH_TYPE = Constants.FileUploadPath.FILE_CONSOLE.getType()[0];
 
     @Value("${IMAGES_PATH}")
     private String tPath;
@@ -77,26 +84,6 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     private String sysPort;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FileConsoleServiceImpl.class);
-
-    public static enum FOLDER_TYPE {
-        ENTERPRISE_NETWORK_DISK("1", "企业网盘"),
-        PRIVATE_NETWORK_DISK("2", "私人网盘");
-        private String folderType;
-        private String name;
-
-        FOLDER_TYPE(String folderType, String name) {
-            this.folderType = folderType;
-            this.name = name;
-        }
-
-        public String getFolderType() {
-            return folderType;
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
 
     /**
      * 删除指定文件夹或文件的父目录在redis中的缓存信息
@@ -142,45 +129,41 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         // 父目录id
         String parentId = map.get("parentId").toString();
         if (ToolUtil.isBlank(parentId) || "0".equals(parentId)) {
-            // 加载一级目录
-            List<Map<String, Object>> beans;
-            if (ToolUtil.isBlank(jedisClient.get(DiskCloudConstants.SYS_FILE_MATION_FOLDER_LIST_MATION))) {
-                beans = DiskCloudConstants.getFileConsoleISDefaultFolder();
-                jedisClient.set(DiskCloudConstants.SYS_FILE_MATION_FOLDER_LIST_MATION, JSONUtil.toJsonStr(beans));
-            } else {
-                beans = JSONUtil.toList(jedisClient.get(DiskCloudConstants.SYS_FILE_MATION_FOLDER_LIST_MATION), null);
-            }
+            String cacheKey = DiskCloudConstants.getSysFileMationFolderListMation(StringUtils.EMPTY, StringUtils.EMPTY);
+            // 加载一级目录，缓存30天
+            List<Map<String, Object>> beans = redisCache.getList(cacheKey, key ->
+                DiskCloudConstants.getFileConsoleISDefaultFolder(), RedisConstants.THIRTY_DAY_SECONDS);
             outputObject.setBeans(beans);
         } else {
             // 加载子目录
             String userId = inputObject.getLogParams().get("id").toString();
             map.put("folderType", this.getFolderType(parentId));
-            List<Map<String, Object>> beans;
-            String key = DiskCloudConstants.getSysFileMationFolderListMation(parentId, userId);
-            if (ToolUtil.isBlank(jedisClient.get(key))) {
+            String cacheKey = DiskCloudConstants.getSysFileMationFolderListMation(parentId, userId);
+            List<Map<String, Object>> beans = redisCache.getList(cacheKey, key ->{
                 map.put("userId", userId);
-                beans = fileConsoleDao.queryFileFolderByUserIdAndParentId(map);
-                jedisClient.set(key, JSONUtil.toJsonStr(beans));
-            } else {
-                beans = JSONUtil.toList(jedisClient.get(key), null);
-            }
+                return fileConsoleDao.queryFileFolderByUserIdAndParentId(map);
+            }, RedisConstants.THIRTY_DAY_SECONDS);
             outputObject.setBeans(beans);
         }
     }
 
     private String getFolderType(String folderId) throws Exception {
-        if ("3".equals(folderId)) {//企业网盘
-            return FOLDER_TYPE.ENTERPRISE_NETWORK_DISK.getFolderType();//企业网盘
+        if ("3".equals(folderId)) {
+            // 企业网盘
+            return DiskCloudConstants.FOLDER_TYPE.ENTERPRISE_NETWORK_DISK.getFolderType();
         } else {
-            Map<String, Object> parentFolder = fileConsoleDao.queryFolderParentByFolderId(folderId);
+            Map<String, Object> parentFolder = fileConsoleDao.queryFolderMationById(folderId);
             if (parentFolder != null && !parentFolder.isEmpty()) {
                 if (parentFolder.get("parentId").toString().indexOf("3,") == 0) {
-                    return FOLDER_TYPE.ENTERPRISE_NETWORK_DISK.getFolderType();//企业网盘
+                    // 企业网盘
+                    return DiskCloudConstants.FOLDER_TYPE.ENTERPRISE_NETWORK_DISK.getFolderType();
                 } else {
-                    return FOLDER_TYPE.PRIVATE_NETWORK_DISK.getFolderType();//私人
+                    // 私人
+                    return DiskCloudConstants.FOLDER_TYPE.PRIVATE_NETWORK_DISK.getFolderType();
                 }
             } else {
-                return FOLDER_TYPE.PRIVATE_NETWORK_DISK.getFolderType();//私人
+                // 私人
+                return DiskCloudConstants.FOLDER_TYPE.PRIVATE_NETWORK_DISK.getFolderType();
             }
         }
     }
@@ -198,13 +181,14 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String parentId = map.get("parentId").toString();
-        jedisClient.delKeys(DiskCloudConstants.SYS_FILE_MATION_FOLDER_LIST_MATION + parentId + "*");//删除父目录的redis的key
-        if ("1".equals(parentId) || "2".equals(parentId) || "3".equals(parentId)) {//收藏夹   我的文档   企业网盘
+        if ("1".equals(parentId) || "2".equals(parentId) || "3".equals(parentId)) {
+            // 收藏夹   我的文档   企业网盘
             map.put("parentId", parentId + ",");
         } else {
-            Map<String, Object> folderParent = fileConsoleDao.queryFolderParentByFolderId(parentId);//根据当前所属目录查询该目录的父id
-            if (folderParent != null && !folderParent.isEmpty()) {
-                map.put("parentId", folderParent.get("parentId").toString() + parentId + ",");
+            // 根据当前所属目录查询该目录的父id
+            Map<String, Object> folder = fileConsoleDao.queryFolderMationById(parentId);
+            if (!ObjectUtils.isEmpty(folder)) {
+                map.put("parentId", folder.get("parentId").toString() + parentId + ",");
             } else {
                 outputObject.setreturnMessage("错误的文件目录编码！");
                 return;
@@ -215,6 +199,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         map.put("createTime", DateUtil.getTimeAndToString());
         map.put("logoPath", DiskCloudConstants.SYS_FILE_CONSOLE_IS_FOLDER_LOGO_PATH);
         fileConsoleDao.insertFileFolderByUserId(map);
+        // 删除父目录的redis的key
+        jedisClient.delKeys(DiskCloudConstants.SYS_FILE_MATION_FOLDER_LIST_MATION + parentId + "*");
         outputObject.setBean(map);
     }
 
@@ -281,50 +267,44 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         Map<String, Object> map = inputObject.getParams();
         //获取要删除的文件
         String fileList = map.get("fileList").toString();
-        if (ToolUtil.isJson(fileList)) {
-            List<Map<String, Object>> array = JSONUtil.toList(fileList, null);
-            if (array.size() == 0) {
-                outputObject.setreturnMessage("请选择要删除的数据");
-                return;
-            }
-            //获取当前登录人id
-            String userId = inputObject.getLogParams().get("id").toString();
-            //定义文件id和文件类型参数
-            String id, fileType;
-            //文件访问基础路径
-            String basePath = tPath.replace("images", "");
-            //目录下的子文件
-            List<Map<String, Object>> files;
-            for (int i = 0; i < array.size(); i++) {
-                //获取id和fileType
-                id = array.get(i).get("rowId").toString();
-                fileType = array.get(i).get("fileType").toString();
-                Map<String, Object> createUser = fileConsoleDao.queryThisFileCreaterByFileId(id);//获取文件创建人
-                //如果当前登陆人是文件创建人则执行删除操作
-                if (createUser != null && !createUser.isEmpty() && userId.equals(createUser.get("createId").toString())) {
-                    //删除父目录在redis的缓存信息
-                    deleteParentFolderRedis(id);
-                    if ("folder".equals(fileType)) {//操作目录表
-                        fileConsoleDao.deleteFileFolderById(id);//删除自身目录
-                        files = fileConsoleDao.queryFilesByFolderId(id);
-                        for (Map<String, Object> file : files) {
-                            //删除文件
-                            deleteFileByMation(basePath + file.get("fileAddress").toString(), basePath + file.get("fileThumbnail").toString(), file.get("fileType").toString());
-                        }
-                        fileConsoleDao.deleteFilesByFolderId(id);//删除子文件
-                        fileConsoleDao.deleteFolderChildByFolderId(id);//删除子文件夹
-                    } else {//操作文件表
-                        Map<String, Object> fileMation = fileConsoleDao.queryFilePaperPathById(id);
-                        if (fileMation != null && !fileMation.isEmpty()) {
-                            //删除文件
-                            deleteFileByMation(basePath + fileMation.get("fileAddress").toString(), basePath + fileMation.get("fileThumbnail").toString(), fileMation.get("fileType").toString());
-                            fileConsoleDao.deleteFilePaperById(id);
-                        }
+        List<Map<String, Object>> array = JSONUtil.toList(fileList, null);
+        if (ObjectUtils.isEmpty(array)) {
+            outputObject.setreturnMessage("请选择要删除的数据");
+            return;
+        }
+        //获取当前登录人id
+        String userId = inputObject.getLogParams().get("id").toString();
+        //文件访问基础路径
+        String basePath = tPath.replace("images", "");
+        for (int i = 0; i < array.size(); i++) {
+            //获取id和fileType
+            String id = array.get(i).get("rowId").toString();
+            String fileType = array.get(i).get("fileType").toString();
+            Map<String, Object> createUser = fileConsoleDao.queryThisFileCreaterByFileId(id);//获取文件创建人
+            //如果当前登陆人是文件创建人则执行删除操作
+            if (createUser != null && !createUser.isEmpty() && userId.equals(createUser.get("createId").toString())) {
+                //删除父目录在redis的缓存信息
+                deleteParentFolderRedis(id);
+                if ("folder".equals(fileType)) {
+                    // 删除自身目录
+                    fileConsoleDao.deleteFileFolderById(id);
+                    // 目录下的子文件
+                    List<Map<String, Object>> files = fileConsoleDao.queryFilesByFolderId(id);
+                    for (Map<String, Object> file : files) {
+                        //删除文件
+                        deleteFileByMation(basePath + file.get("fileAddress").toString(), basePath + file.get("fileThumbnail").toString(), file.get("fileType").toString());
+                    }
+                    fileConsoleDao.deleteFilesByFolderId(id);//删除子文件
+                    fileConsoleDao.deleteFolderChildByFolderId(id);//删除子文件夹
+                } else {//操作文件表
+                    Map<String, Object> fileMation = fileConsoleDao.queryFilePaperPathById(id);
+                    if (fileMation != null && !fileMation.isEmpty()) {
+                        //删除文件
+                        deleteFileByMation(basePath + fileMation.get("fileAddress").toString(), basePath + fileMation.get("fileThumbnail").toString(), fileMation.get("fileType").toString());
+                        fileConsoleDao.deleteFilePaperById(id);
                     }
                 }
             }
-        } else {
-            outputObject.setreturnMessage("数据格式错误");
         }
     }
 
@@ -411,14 +391,15 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     private String getThisFolderChildParentId(String folderId) throws Exception {
-        jedisClient.delKeys(DiskCloudConstants.SYS_FILE_MATION_FOLDER_LIST_MATION + folderId + "*");//删除父目录的redis的key
+        // 删除父目录的redis的key
+        jedisClient.delKeys(DiskCloudConstants.SYS_FILE_MATION_FOLDER_LIST_MATION + folderId + "*");
         if ("1".equals(folderId) || "2".equals(folderId) || "3".equals(folderId)) {
             // 收藏夹   我的文档   企业网盘
             folderId = String.format(Locale.ROOT, "%s", folderId);
         } else {
-            Map<String, Object> folderParent = fileConsoleDao.queryFolderParentByFolderId(folderId);//根据当前所属目录查询该目录的父id
-            if (folderParent != null && !folderParent.isEmpty()) {
-                folderId = String.format(Locale.ROOT, "%s%s", folderParent.get("parentId").toString(), folderId);
+            Map<String, Object> folder = fileConsoleDao.queryFolderMationById(folderId);//根据当前所属目录查询该目录的父id
+            if (!ObjectUtils.isEmpty(folder)) {
+                folderId = String.format(Locale.ROOT, "%s%s", folder.get("parentId").toString(), folderId);
             } else {
                 throw new CustomException("该文件夹不存在.");
             }
@@ -617,7 +598,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
         Map<String, Object> bean = fileConsoleDao.queryAllFileSizeByUserId(map);
-        if (bean != null && !bean.isEmpty()) {
+        if (!ObjectUtils.isEmpty(bean)) {
             String size = BytesUtil.sizeFormatNum2String(Long.parseLong(bean.get("fileSize").toString()));
             map.put("size", size);
         } else {
@@ -641,7 +622,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
         Map<String, Object> bean = fileConsoleDao.queryFileCatalogByUserIdAndId(map);
-        if (bean != null && !bean.isEmpty()) {
+        if (!ObjectUtils.isEmpty(bean)) {
             //删除父目录在redis的缓存信息
             deleteParentFolderRedis(map.get("id").toString());
 
@@ -1825,7 +1806,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                 Map<String, Object> object = array.get(i);
                 bean.put("id", object.get("rowId"));
                 if ("folder".equals(object.get("rowType").toString())) {//文件夹
-                    Map<String, Object> parentId = fileConsoleDao.queryThisFolderParentIdByRowId(bean);
+                    Map<String, Object> parentId = fileConsoleDao.queryFolderMationById(bean.get("id").toString());
                     String oldParentId = parentId.get("parentId").toString();
                     jedisClient.delKeys(DiskCloudConstants.SYS_FILE_MATION_FOLDER_LIST_MATION + oldParentId.split(",")[oldParentId.split(",").length - 1] + "*");//删除父目录的redis的key
                     folderBeans.add(bean);

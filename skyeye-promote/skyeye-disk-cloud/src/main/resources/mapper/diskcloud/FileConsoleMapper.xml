@@ -104,10 +104,12 @@
 	</update>
 	
 	<insert id="insertUploadFileByUserId" parameterType="java.util.Map">
-		insert into file_catelog_papers
-			(id, file_name, file_thumbnail, file_address, file_type, file_size, file_size_type, parent_id, chunk, chunk_size, file_md5, create_id, create_time, update_time)
+		INSERT INTO file_catelog_papers
+		(id, file_name, file_thumbnail, file_address, file_type, file_size, file_size_type, parent_id, chunk, chunk_size, file_md5,
+		 create_id, create_time, update_time)
 		VALUES
-			(#{id}, #{name}, #{fileThumbnail}, #{fileAddress}, #{fileType}, #{size}, #{fileSizeType}, #{folderId}, #{chunk}, #{chunkSize}, #{md5}, #{createId}, #{createTime}, #{createTime})
+		(#{id}, #{name}, #{fileThumbnail}, #{fileAddress}, #{fileType}, #{size}, #{fileSizeType}, #{folderId}, #{chunk}, #{chunkSize}, #{md5},
+		 #{createId}, #{createTime}, #{createTime})
 	</insert>
 	
 	<update id="editFilePaperNameById" parameterType="java.util.Map">
@@ -188,14 +190,14 @@
 			a.id = #{id}
 	</select>
 	
-	<select id="queryFolderParentByFolderId" resultType="java.util.Map">
+	<select id="queryFolderMationById" resultType="java.util.Map">
 		SELECT
 			a.parent_id parentId
 		FROM
 			file_catalog a
 		WHERE a.id = #{folderId}
 	</select>
-	
+
 	<select id="queryFilesByFolderId" resultType="java.util.Map">
 		SELECT
 			a.file_address fileAddress,
@@ -770,15 +772,6 @@
         FROM
             file_catelog_papers a
         WHERE a.id = #{id}
-    </select>
-    
-    <select id="queryThisFolderParentIdByRowId" parameterType="java.util.Map" resultType="java.util.Map">
-        SELECT
-            a.parent_id parentId
-        FROM
-            file_catalog a
-        WHERE
-            a.id = #{id}
     </select>
     
     <select id="queryAllNumFile" parameterType="java.util.Map" resultType="java.util.Map">

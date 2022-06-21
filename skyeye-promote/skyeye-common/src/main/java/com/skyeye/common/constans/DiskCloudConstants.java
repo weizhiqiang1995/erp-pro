@@ -4,6 +4,8 @@
 
 package com.skyeye.common.constans;
 
+import com.skyeye.common.util.ToolUtil;
+
 import java.util.*;
 
 /**
@@ -16,7 +18,9 @@ import java.util.*;
  */
 public class DiskCloudConstants {
 
-    // 文件管理---目录logo图片
+    /**
+     * 文件管理---目录logo图片
+     */
     public static final String SYS_FILE_CONSOLE_IS_FOLDER_LOGO_PATH = "../../assets/images/folder-show.png";
 
     public static enum FileMation {
@@ -76,7 +80,7 @@ public class DiskCloudConstants {
         private int type;
         private String defaultLogoIcon;
 
-        FileMation(String fileExt, int type, String defaultLogoIcon){
+        FileMation(String fileExt, int type, String defaultLogoIcon) {
             this.fileExt = fileExt;
             this.type = type;
             this.defaultLogoIcon = defaultLogoIcon;
@@ -101,12 +105,12 @@ public class DiskCloudConstants {
          * 判断是否是文件系统允许的文件后缀类型
          *
          * @param fileExt 文件后缀
-         * @param type 文件类型
+         * @param type    文件类型
          * @return false:系统不允许的文件类型；true:系统允许的文件类型
          */
         public static Boolean judgeIsAllowedFileType(String fileExt, int type) {
             FileMation item = Arrays.stream(FileMation.values())
-                    .filter(bean -> fileExt.equalsIgnoreCase(bean.getFileExt()) && type == bean.getType()).findFirst().orElse(null);
+                .filter(bean -> fileExt.equalsIgnoreCase(bean.getFileExt()) && type == bean.getType()).findFirst().orElse(null);
             if (item == null) {
                 return false;
             }
@@ -133,7 +137,11 @@ public class DiskCloudConstants {
 
     // 文件管理目录集合
     public static final String SYS_FILE_MATION_FOLDER_LIST_MATION = "sys_file_mation_folder_list_mation_";
+
     public static String getSysFileMationFolderListMation(String folderId, String userId) {
+        if (ToolUtil.isBlank(folderId) && ToolUtil.isBlank(userId)) {
+            return SYS_FILE_MATION_FOLDER_LIST_MATION;
+        }
         return SYS_FILE_MATION_FOLDER_LIST_MATION + folderId + "_" + userId;
     }
 
@@ -144,28 +152,50 @@ public class DiskCloudConstants {
      */
     public static final List<Map<String, Object>> getFileConsoleISDefaultFolder() {
         List<Map<String, Object>> beans = new ArrayList<>();
-        Map<String, Object> favorites = new HashMap<>();
-        favorites.put("id", "1");
-        favorites.put("name", "收藏夹");
-        favorites.put("pId", "0");
-        favorites.put("isParent", 1);// 是否是文件夹 0否1是
-        favorites.put("icon", "../../assets/images/my-favorites-icon.png");// 图标
-        beans.add(favorites);
-        Map<String, Object> documents = new HashMap<>();
-        documents.put("id", "2");
-        documents.put("name", "我的文档");
-        documents.put("pId", "0");
-        documents.put("isParent", 1);// 是否是文件夹 0否1是
-        documents.put("icon", "../../assets/images/my-folder-icon.png");// 图标
-        beans.add(documents);
-        Map<String, Object> skyDrive = new HashMap<>();
-        skyDrive.put("id", "3");
-        skyDrive.put("name", "企业网盘");
-        skyDrive.put("pId", "0");
-        skyDrive.put("isParent", 1);// 是否是文件夹 0否1是
-        skyDrive.put("icon", "../../assets/images/skydrive-icon.png");// 图标
-        beans.add(skyDrive);
+        beans.add(fileConsoleNode("1", "收藏夹", "0", 1, "../../assets/images/my-favorites-icon.png"));
+        beans.add(fileConsoleNode("2", "我的文档", "0", 1, "../../assets/images/my-folder-icon.png"));
+        beans.add(fileConsoleNode("3", "企业网盘", "0", 1, "../../assets/images/skydrive-icon.png"));
         return beans;
+    }
+
+    /**
+     * 构造文件树节点对象
+     *
+     * @param nodeId   节点id
+     * @param nodeName 节点名称
+     * @param pId      父id
+     * @param isParent 是否是文件夹 0否1是
+     * @param icon     图标
+     * @return
+     */
+    public static Map<String, Object> fileConsoleNode(String nodeId, String nodeName, String pId, Integer isParent, String icon) {
+        Map<String, Object> node = new HashMap<>();
+        node.put("id", nodeId);
+        node.put("name", nodeName);
+        node.put("pId", pId);
+        node.put("isParent", isParent);
+        node.put("icon", icon);
+        return node;
+    }
+
+    public static enum FOLDER_TYPE {
+        ENTERPRISE_NETWORK_DISK("1", "企业网盘"),
+        PRIVATE_NETWORK_DISK("2", "私人网盘");
+        private String folderType;
+        private String name;
+
+        FOLDER_TYPE(String folderType, String name) {
+            this.folderType = folderType;
+            this.name = name;
+        }
+
+        public String getFolderType() {
+            return folderType;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 
 }

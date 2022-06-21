@@ -16,9 +16,6 @@
 		<property id="folderId" name="folderId" ref="required" var="目录id" />
 		<property id="orderBy" name="orderBy" ref="" var="排序方式" />
 	</url>
-	<url id="fileconsole004" path="/post/FileConsoleController/deleteFileFolderById" val="删除目录以及目录下的所有文件" allUse="2">
-		<property id="fileList" name="fileList" ref="required" var="要删除的目录id集合,包含rowId,fileType" />
-	</url>
 	<url id="fileconsole005" path="/post/FileConsoleController/editFileFolderById" val="编辑目录名称" allUse="2">
 		<property id="rowId" name="id" ref="required" var="目录id" />
 		<property id="catalogName" name="catalogName" ref="required" var="目录名称" />
