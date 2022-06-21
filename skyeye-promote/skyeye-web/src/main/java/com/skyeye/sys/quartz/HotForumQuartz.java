@@ -149,7 +149,7 @@ public class HotForumQuartz {
      */
     public static ArrayList<String> pastDay(String time) throws ParseException {
         ArrayList<String> pastDaysList = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat(DateUtil.YYYY_MM_DD);
         Date date = sdf.parse(time);
         for (int i = 6; i >= 0; i--) {
             Calendar calendar = Calendar.getInstance();
