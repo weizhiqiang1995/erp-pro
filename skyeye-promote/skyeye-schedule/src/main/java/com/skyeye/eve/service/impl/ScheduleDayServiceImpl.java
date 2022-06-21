@@ -14,6 +14,7 @@ import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.object.PutObject;
+import com.skyeye.common.util.DateAfterSpacePointTime;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ExcelUtil;
 import com.skyeye.common.util.ToolUtil;
@@ -73,36 +74,16 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     public void insertScheduleDayMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
-        //获取提醒时间类型	1.日程开始时 2.5分钟前 3.15分钟前 4.30分钟前 5.1小时前 6.2小时前 7.1天前 8.2天前 9.一周前
         int remindTimeType = Integer.parseInt(map.get("remindType").toString());
-        String remindTime = null;
-        if (remindTimeType == 1) {//日程开始时
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 0, remindTimeType);
-        } else if (remindTimeType == 2) {//5分钟前
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 5, remindTimeType);
-        } else if (remindTimeType == 3) {//15分钟前
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 15, remindTimeType);
-        } else if (remindTimeType == 4) {//30分钟前
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 30, remindTimeType);
-        } else if (remindTimeType == 5) {//1小时前
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 1, remindTimeType);
-        } else if (remindTimeType == 6) {//2小时前
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 2, remindTimeType);
-        } else if (remindTimeType == 7) {//1天前
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 1, remindTimeType);
-        } else if (remindTimeType == 8) {//2天前
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 2, remindTimeType);
-        } else if (remindTimeType == 9) {//1周前
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 7, remindTimeType);
-        } else {
-            outputObject.setreturnMessage("传值错误。");
-            return;
-        }
+        String scheduleStartTime = map.get("scheduleStartTime").toString();
+        String remindTime = DateAfterSpacePointTime.getSpecifiedTime(remindTimeType, scheduleStartTime, DateUtil.YYYY_MM_DD_HH_MM_SS, DateAfterSpacePointTime.AroundType.BEFORE);
+
         if (!ToolUtil.isBlank(remindTime)) {
-            if (DateUtil.compare(remindTime, DateUtil.getTimeAndToString())) {//日程提醒时间早于当前时间
+            if (DateUtil.compare(remindTime, DateUtil.getTimeAndToString())) {
+                // 日程提醒时间早于当前时间
                 outputObject.setreturnMessage("日程提醒时间不能早于当前时间");
             } else {
-                if (DateUtil.compare(map.get("scheduleEndTime").toString(), map.get("scheduleStartTime").toString())) {//结束时间早于开始时间
+                if (DateUtil.compare(map.get("scheduleEndTime").toString(), scheduleStartTime)) {//结束时间早于开始时间
                     outputObject.setreturnMessage("日程结束时间不能早于开始时间");
                 } else {
                     String id = ToolUtil.getSurFaceId();
@@ -183,42 +164,24 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     public void editScheduleDayMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = scheduleDayDao.queryScheduleDayMationById(map);
-        //获取提醒时间类型	1.日程开始时 2.5分钟前 3.15分钟前 4.30分钟前 5.1小时前 6.2小时前 7.1天前 8.2天前 9.一周前
         int remindTimeType = Integer.parseInt(bean.get("remindType").toString());
-        String remindTime = null;
-        if (remindTimeType == 1) {//日程开始时
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 0, remindTimeType);
-        } else if (remindTimeType == 2) {//5分钟前
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 5, remindTimeType);
-        } else if (remindTimeType == 3) {//15分钟前
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 15, remindTimeType);
-        } else if (remindTimeType == 4) {//30分钟前
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 30, remindTimeType);
-        } else if (remindTimeType == 5) {//1小时前
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 1, remindTimeType);
-        } else if (remindTimeType == 6) {//2小时前
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 2, remindTimeType);
-        } else if (remindTimeType == 7) {//1天前
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 1, remindTimeType);
-        } else if (remindTimeType == 8) {//2天前
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 2, remindTimeType);
-        } else if (remindTimeType == 9) {//1周前
-            remindTime = DateUtil.getSpecifiedDayMation(map.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 7, remindTimeType);
-        } else {
-            outputObject.setreturnMessage("传值错误。");
-            return;
-        }
+        String scheduleStartTime = map.get("scheduleStartTime").toString();
+        String remindTime = DateAfterSpacePointTime.getSpecifiedTime(remindTimeType, scheduleStartTime, DateUtil.YYYY_MM_DD_HH_MM_SS, DateAfterSpacePointTime.AroundType.BEFORE);
         if (!ToolUtil.isBlank(remindTime)) {
-            if (DateUtil.compare(remindTime, DateUtil.getTimeAndToString())) {//日程提醒时间早于当前时间,提醒时间则变为当前时间+2分钟
-                long minute = DateUtil.getDistanceMinute(remindTime, map.get("scheduleStartTime").toString());//获取当前时间和开始时间相差几分钟
+            if (DateUtil.compare(remindTime, DateUtil.getTimeAndToString())) {
+                // 日程提醒时间早于当前时间,提醒时间则变为当前时间+2分钟
+                long minute = DateUtil.getDistanceMinute(remindTime, scheduleStartTime);//获取当前时间和开始时间相差几分钟
                 if (minute >= 2) {
-                    remindTime = DateUtil.getSpecifiedDayMation(DateUtil.getTimeAndToString(), "yyyy-MM-dd HH:mm:ss", 1, 2, remindTimeType);//两分钟后
+                    // 两分钟后
+                    remindTime = DateAfterSpacePointTime.getSpecifiedTime(remindTimeType, DateUtil.getTimeAndToString(), DateUtil.YYYY_MM_DD_HH_MM_SS, DateAfterSpacePointTime.AroundType.AFTER, 2);
                 } else if (minute < 2 && minute > 0) {
-                    remindTime = DateUtil.getSpecifiedDayMation(DateUtil.getTimeAndToString(), "yyyy-MM-dd HH:mm:ss", 1, (int) minute, remindTimeType);//minute分钟后
+                    // minute分钟后
+                    remindTime = DateAfterSpacePointTime.getSpecifiedTime(remindTimeType, DateUtil.getTimeAndToString(), DateUtil.YYYY_MM_DD_HH_MM_SS, DateAfterSpacePointTime.AroundType.AFTER, (int) minute);
                 } else {
-                    remindTime = map.get("scheduleStartTime").toString();//日程开始时
+                    remindTime = scheduleStartTime;//日程开始时
                 }
-            } else if (DateUtil.compare(map.get("scheduleEndTime").toString(), map.get("scheduleStartTime").toString())) {//结束时间早于开始时间
+            } else if (DateUtil.compare(map.get("scheduleEndTime").toString(), scheduleStartTime)) {
+                // 结束时间早于开始时间
                 outputObject.setreturnMessage("日程结束时间不能早于开始时间");
                 return;
             }
@@ -429,36 +392,16 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     public void addHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = scheduleDayDao.queryHolidayScheduleDayMationById(map);
-        //获取提醒时间类型	1.日程开始时 2.5分钟前 3.15分钟前 4.30分钟前 5.1小时前 6.2小时前 7.1天前 8.2天前 9.一周前
         int remindTimeType = Integer.parseInt(map.get("remindType").toString());
-        String remindTime = null;
-        if (remindTimeType == 1) {//日程开始时
-            remindTime = DateUtil.getSpecifiedDayMation(bean.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 0, remindTimeType);
-        } else if (remindTimeType == 2) {//5分钟前
-            remindTime = DateUtil.getSpecifiedDayMation(bean.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 5, remindTimeType);
-        } else if (remindTimeType == 3) {//15分钟前
-            remindTime = DateUtil.getSpecifiedDayMation(bean.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 15, remindTimeType);
-        } else if (remindTimeType == 4) {//30分钟前
-            remindTime = DateUtil.getSpecifiedDayMation(bean.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 30, remindTimeType);
-        } else if (remindTimeType == 5) {//1小时前
-            remindTime = DateUtil.getSpecifiedDayMation(bean.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 1, remindTimeType);
-        } else if (remindTimeType == 6) {//2小时前
-            remindTime = DateUtil.getSpecifiedDayMation(bean.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 2, remindTimeType);
-        } else if (remindTimeType == 7) {//1天前
-            remindTime = DateUtil.getSpecifiedDayMation(bean.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 1, remindTimeType);
-        } else if (remindTimeType == 8) {//2天前
-            remindTime = DateUtil.getSpecifiedDayMation(bean.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 2, remindTimeType);
-        } else if (remindTimeType == 9) {//1周前
-            remindTime = DateUtil.getSpecifiedDayMation(bean.get("scheduleStartTime").toString(), "yyyy-MM-dd HH:mm:ss", 0, 7, remindTimeType);
-        } else {
-            outputObject.setreturnMessage("传值错误。");
-            return;
-        }
+        String scheduleStartTime = map.get("scheduleStartTime").toString();
+        String remindTime = DateAfterSpacePointTime.getSpecifiedTime(remindTimeType, scheduleStartTime, DateUtil.YYYY_MM_DD_HH_MM_SS, DateAfterSpacePointTime.AroundType.BEFORE);
         if (!ToolUtil.isBlank(remindTime)) {
-            if (DateUtil.compare(remindTime, DateUtil.getTimeAndToString())) {//日程提醒时间早于当前时间
+            if (DateUtil.compare(remindTime, DateUtil.getTimeAndToString())) {
+                // 日程提醒时间早于当前时间
                 outputObject.setreturnMessage("日程提醒时间不能早于当前时间");
             } else {
-                if (DateUtil.compare(bean.get("scheduleEndTime").toString(), bean.get("scheduleStartTime").toString())) {//结束时间早于开始时间
+                if (DateUtil.compare(bean.get("scheduleEndTime").toString(), scheduleStartTime)) {
+                    // 结束时间早于开始时间
                     outputObject.setreturnMessage("日程结束时间不能早于开始时间");
                 } else {
                     map.put("remindTime", remindTime);

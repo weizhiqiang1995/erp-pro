@@ -8,6 +8,7 @@ import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.skyeye.common.client.ExecuteFeignClient;
 import com.skyeye.common.constans.QuartzConstants;
+import com.skyeye.common.util.DateAfterSpacePointTime;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.entity.quartz.SysQuartzRunHistory;
@@ -65,7 +66,8 @@ public class ShopStoreIntercourseQuartz {
                 return;
             }
             // 得到昨天的时间
-            String yesterdayTime = DateUtil.getSpecifiedDayMation(DateUtil.getTimeAndToString(), "yyyy-MM-dd", 0, 1, 7);
+            String yesterdayTime = DateAfterSpacePointTime.getSpecifiedTime(
+                DateAfterSpacePointTime.ONE_DAY.getType(), DateUtil.getTimeAndToString(), DateUtil.YYYY_MM_DD, DateAfterSpacePointTime.AroundType.BEFORE);
             log.info("yesterdayTime is {}.", yesterdayTime);
             // 判断昨天的数据是否已经统计过并入库,如果已经统计过，则不会进行下一次的统计
             List<Map<String, Object>> yesterdayData = ExecuteFeignClient.get(() -> shopStoreService.queryStoreIntercourseListByDay(yesterdayTime)).getRows();

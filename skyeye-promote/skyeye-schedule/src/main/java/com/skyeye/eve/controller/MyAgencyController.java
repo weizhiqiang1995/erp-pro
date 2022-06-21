@@ -13,32 +13,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MyAgencyController {
-	
-	@Autowired
-	private MyAgencyService myAgencyService;
 
-	/**
-	 * 获取我的代办列表
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/MyAgencyController/queryMyAgencyList")
-	public void queryMyAgencyList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		myAgencyService.queryMyAgencyList(inputObject, outputObject);
-	}
+    @Autowired
+    private MyAgencyService myAgencyService;
 
-	/**
-	 * 取消代办提醒
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/MyAgencyController/deleteMyAgencyList")
-	public void deleteMyAgencyList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		myAgencyService.deleteMyAgencyList(inputObject, outputObject);
-	}
-	
+    /**
+     * 获取我的代办列表
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/MyAgencyController/queryMyAgencyList")
+    public void queryMyAgencyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        myAgencyService.queryMyAgencyList(inputObject, outputObject);
+    }
+
+    /**
+     * 取消代办提醒
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/MyAgencyController/deleteMyAgencyList")
+    public void deleteMyAgencyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        myAgencyService.deleteMyAgencyList(inputObject, outputObject);
+    }
+
 }

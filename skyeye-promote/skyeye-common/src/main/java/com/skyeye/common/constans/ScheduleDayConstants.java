@@ -2,7 +2,7 @@
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
 
-package com.skyeye.eve.constants;
+package com.skyeye.common.constans;
 
 /**
  * @ClassName: ScheduleDayConstants
@@ -17,7 +17,7 @@ public class ScheduleDayConstants {
     /**
      * 日程关联其他模块id的类型
      */
-    public interface ScheduleDayObjectType{
+    public interface ScheduleDayObjectType {
         /**
          * 任务计划
          */
@@ -27,6 +27,6 @@ public class ScheduleDayConstants {
          * 项目任务
          */
         int OBJECT_TYPE_IS_PRO_TASK = 2;
-    };
+    }
 
 }
