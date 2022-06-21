@@ -20,6 +20,7 @@
 	</url>
 	<url id="syseveschedule005" path="/post/ScheduleDayController/editScheduleDayMationById" val="修改日程日期信息" allUse="2">
 		<property id="rowId" name="id" ref="required" var="日程id"/>
+		<property id="scheduleTitle" name="scheduleTitle" ref="required" var="日程标题"/>
 		<property id="scheduleStartTime" name="scheduleStartTime" ref="required" var="开始日期"/>
 		<property id="scheduleEndTime" name="scheduleEndTime" ref="required" var="结束日期"/>
 	</url>
