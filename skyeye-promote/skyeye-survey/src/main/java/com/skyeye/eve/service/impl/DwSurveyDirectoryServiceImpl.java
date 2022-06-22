@@ -13,6 +13,7 @@ import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.object.PutObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.IPSeeker;
 import com.skyeye.common.util.ToolUtil;
@@ -99,9 +100,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         if (surveyMation != null && !surveyMation.isEmpty()) {
             List<Map<String, Object>> questions = dwSurveyDirectoryDao.queryQuestionListByBelongId(map);//获取问卷中的题
             List<Map<String, Object>> questionLeftList = new ArrayList<>();
-            Map<String, Object> questionItem;
             for (Map<String, Object> question : questions) {
-                questionItem = new HashMap<>();
+                Map<String, Object> questionItem = new HashMap<>();
                 questionItem.put("id", question.get("id"));
                 questionItem.put("quTitle", question.get("quTitle"));
                 questionItem.put("quType", question.get("quType"));
@@ -256,10 +256,9 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         List<Map<String, Object>> quLogics = new ArrayList<>();
         if (array.size() > 0) {
             List<Map<String, Object>> editquLogics = new ArrayList<>();
-            Map<String, Object> bean;
             for (int i = 0; i < array.size(); i++) {
                 Map<String, Object> object = array.get(i);
-                bean = new HashMap<>();
+                Map<String, Object> bean = new HashMap<>();
                 bean.put("cgQuItemId", object.get("cgQuItemId"));
                 bean.put("skQuId", object.get("skQuId"));
                 bean.put("logicType", object.get("logicType"));
@@ -273,9 +272,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
                 if (ToolUtil.isBlank(object.get("quLogicId").toString())) {
                     bean.put("ckQuId", quId);
                     bean.put("visibility", object.get("visibility"));
-                    bean.put("createId", userId);
-                    bean.put("createTime", DateUtil.getTimeAndToString());
-                    bean.put("id", ToolUtil.getSurFaceId());
+                    DataCommonUtil.setCommonData(bean, userId);
                     quLogics.add(bean);
                 } else {
                     bean.put("id", object.get("quLogicId"));
@@ -341,19 +338,16 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         if (score.size() > 0) {
             List<Map<String, Object>> quScore = new ArrayList<>();
             List<Map<String, Object>> editquScore = new ArrayList<>();
-            Map<String, Object> user = inputObject.getLogParams();
-            Map<String, Object> bean;
+            String userId = inputObject.getLogParams().get("id").toString();
             for (int i = 0; i < score.size(); i++) {
                 Map<String, Object> object = score.get(i);
-                bean = new HashMap<>();
+                Map<String, Object> bean = new HashMap<>();
                 bean.put("orderById", object.get("key"));
                 bean.put("optionName", object.get("optionValue"));
                 if (ToolUtil.isBlank(object.get("optionId").toString())) {
                     bean.put("quId", quId);
                     bean.put("visibility", 1);
-                    bean.put("id", ToolUtil.getSurFaceId());
-                    bean.put("createId", user.get("id"));
-                    bean.put("createTime", DateUtil.getTimeAndToString());
+                    DataCommonUtil.setCommonData(bean, userId);
                     quScore.add(bean);
                 } else {
                     bean.put("id", object.get("optionId"));
@@ -394,19 +388,16 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         if (orderqu.size() > 0) {
             List<Map<String, Object>> quOrderqu = new ArrayList<>();
             List<Map<String, Object>> editquOrderqu = new ArrayList<>();
-            Map<String, Object> user = inputObject.getLogParams();
-            Map<String, Object> bean;
+            String userId = inputObject.getLogParams().get("id").toString();
             for (int i = 0; i < orderqu.size(); i++) {
                 Map<String, Object> object = orderqu.get(i);
-                bean = new HashMap<>();
+                Map<String, Object> bean = new HashMap<>();
                 bean.put("orderById", object.get("key"));
                 bean.put("optionName", object.get("optionValue"));
                 if (ToolUtil.isBlank(object.get("optionId").toString())) {
                     bean.put("quId", quId);
                     bean.put("visibility", 1);
-                    bean.put("id", ToolUtil.getSurFaceId());
-                    bean.put("createId", user.get("id"));
-                    bean.put("createTime", DateUtil.getTimeAndToString());
+                    DataCommonUtil.setCommonData(bean, userId);
                     quOrderqu.add(bean);
                 } else {
                     bean.put("id", object.get("optionId"));
@@ -467,11 +458,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         if (radio.size() > 0) {
             List<Map<String, Object>> quRadio = new ArrayList<>();
             List<Map<String, Object>> editquRadio = new ArrayList<>();
-            Map<String, Object> user = inputObject.getLogParams();
-            Map<String, Object> bean;
+            String userId = inputObject.getLogParams().get("id").toString();
             for (int i = 0; i < radio.size(); i++) {
                 Map<String, Object> object = radio.get(i);
-                bean = new HashMap<>();
+                Map<String, Object> bean = new HashMap<>();
                 bean.put("orderById", object.get("key"));
                 bean.put("optionName", object.get("optionValue"));
                 bean.put("isNote", object.get("isNote"));
@@ -484,9 +474,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
                 if (ToolUtil.isBlank(object.get("optionId").toString())) {
                     bean.put("quId", quId);
                     bean.put("visibility", 1);
-                    bean.put("id", ToolUtil.getSurFaceId());
-                    bean.put("createId", user.get("id"));
-                    bean.put("createTime", DateUtil.getTimeAndToString());
+                    DataCommonUtil.setCommonData(bean, userId);
                     quRadio.add(bean);
                 } else {
                     bean.put("id", object.get("optionId"));
@@ -527,11 +515,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         if (checkbox.size() > 0) {
             List<Map<String, Object>> quCheckbox = new ArrayList<>();
             List<Map<String, Object>> editquCheckbox = new ArrayList<>();
-            Map<String, Object> user = inputObject.getLogParams();
-            Map<String, Object> bean;
+            String userId = inputObject.getLogParams().get("id").toString();
             for (int i = 0; i < checkbox.size(); i++) {
                 Map<String, Object> object = checkbox.get(i);
-                bean = new HashMap<>();
+                Map<String, Object> bean = new HashMap<>();
                 bean.put("orderById", object.get("key"));
                 bean.put("optionName", object.get("optionValue"));
                 bean.put("isNote", object.get("isNote"));
@@ -544,9 +531,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
                 if (ToolUtil.isBlank(object.get("optionId").toString())) {
                     bean.put("quId", quId);
                     bean.put("visibility", 1);
-                    bean.put("id", ToolUtil.getSurFaceId());
-                    bean.put("createId", user.get("id"));
-                    bean.put("createTime", DateUtil.getTimeAndToString());
+                    DataCommonUtil.setCommonData(bean, userId);
                     quCheckbox.add(bean);
                 } else {
                     bean.put("id", object.get("optionId"));
@@ -587,7 +572,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         if (multiFillblank.size() > 0) {
             List<Map<String, Object>> quMultiFillblank = new ArrayList<>();
             List<Map<String, Object>> editquMultiFillblank = new ArrayList<>();
-            Map<String, Object> user = inputObject.getLogParams();
+            String userId = inputObject.getLogParams().get("id").toString();
             for (int i = 0; i < multiFillblank.size(); i++) {
                 Map<String, Object> object = multiFillblank.get(i);
                 Map<String, Object> bean = new HashMap<>();
@@ -596,9 +581,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
                 if (ToolUtil.isBlank(object.get("optionId").toString())) {
                     bean.put("quId", quId);
                     bean.put("visibility", 1);
-                    bean.put("id", ToolUtil.getSurFaceId());
-                    bean.put("createId", user.get("id"));
-                    bean.put("createTime", DateUtil.getTimeAndToString());
+                    DataCommonUtil.setCommonData(bean, userId);
                     quMultiFillblank.add(bean);
                 } else {
                     bean.put("id", object.get("optionId"));
@@ -658,25 +641,22 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         } else {
             map.put("quType", quType);
         }
+        String userId = inputObject.getLogParams().get("id").toString();
         //添加问题并返回问题id
         String quId = compileQuestion(map);
         List<Map<String, Object>> column = JSONUtil.toList(map.get("column").toString(), null);//获取模板绑定信息
         if (column.size() > 0) {
             List<Map<String, Object>> quColumn = new ArrayList<>();
             List<Map<String, Object>> editquColumn = new ArrayList<>();
-            Map<String, Object> user = inputObject.getLogParams();
-            Map<String, Object> bean;
             for (int i = 0; i < column.size(); i++) {
                 Map<String, Object> object = column.get(i);
-                bean = new HashMap<>();
+                Map<String, Object> bean = new HashMap<>();
                 bean.put("orderById", object.get("key"));
                 bean.put("optionName", object.get("optionValue"));
                 if (ToolUtil.isBlank(object.get("optionId").toString())) {
                     bean.put("quId", quId);
                     bean.put("visibility", 1);
-                    bean.put("id", ToolUtil.getSurFaceId());
-                    bean.put("createId", user.get("id"));
-                    bean.put("createTime", DateUtil.getTimeAndToString());
+                    DataCommonUtil.setCommonData(bean, userId);
                     quColumn.add(bean);
                 } else {
                     bean.put("id", object.get("optionId"));
@@ -697,19 +677,15 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         if (row.size() > 0) {
             List<Map<String, Object>> quRow = new ArrayList<>();
             List<Map<String, Object>> editquRow = new ArrayList<>();
-            Map<String, Object> user = inputObject.getLogParams();
-            Map<String, Object> bean;
             for (int i = 0; i < row.size(); i++) {
                 Map<String, Object> object = row.get(i);
-                bean = new HashMap<>();
+                Map<String, Object> bean = new HashMap<>();
                 bean.put("orderById", object.get("key"));
                 bean.put("optionName", object.get("optionValue"));
                 if (ToolUtil.isBlank(object.get("optionId").toString())) {
                     bean.put("quId", quId);
                     bean.put("visibility", 1);
-                    bean.put("id", ToolUtil.getSurFaceId());
-                    bean.put("createId", user.get("id"));
-                    bean.put("createTime", DateUtil.getTimeAndToString());
+                    DataCommonUtil.setCommonData(bean, userId);
                     quRow.add(bean);
                 } else {
                     bean.put("id", object.get("optionId"));
@@ -1234,31 +1210,19 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         String quType = QuType.getActionName(Integer.parseInt(question.get("quType").toString()));//获取题目类型
         if (quType.equals(QuType.RADIO.getActionName()) || quType.equals(QuType.COMPRADIO.getActionName())) {
             List<Map<String, Object>> questionRadios = dwSurveyDirectoryDao.queryQuestionRadioListByCopyId(question);//获取多行填空题
-            for (Map<String, Object> questionRadio : questionRadios) {
-                questionRadio.put("id", ToolUtil.getSurFaceId());
-                questionRadio.put("createTime", DateUtil.getTimeAndToString());
-                questionRadio.put("quId", question.get("id"));
-            }
+            setBaseMation(question, questionRadios);
             if (!questionRadios.isEmpty()) {
                 dwSurveyDirectoryDao.addQuestionRadioMationCopyList(questionRadios);
             }
         } else if (quType.equals(QuType.CHECKBOX.getActionName()) || quType.equals(QuType.COMPCHECKBOX.getActionName())) {
             List<Map<String, Object>> questionCheckBoxs = dwSurveyDirectoryDao.queryQuestionCheckBoxListByCopyId(question);//获取多选题
-            for (Map<String, Object> questionCheckBox : questionCheckBoxs) {
-                questionCheckBox.put("id", ToolUtil.getSurFaceId());
-                questionCheckBox.put("createTime", DateUtil.getTimeAndToString());
-                questionCheckBox.put("quId", question.get("id"));
-            }
+            setBaseMation(question, questionCheckBoxs);
             if (!questionCheckBoxs.isEmpty()) {
                 dwSurveyDirectoryDao.addQuestionCheckBoxMationCopyList(questionCheckBoxs);
             }
         } else if (quType.equals(QuType.MULTIFILLBLANK.getActionName())) {
             List<Map<String, Object>> questionMultiFillBlanks = dwSurveyDirectoryDao.queryQuestionMultiFillBlankListByCopyId(question);//获取多行填空题
-            for (Map<String, Object> questionMultiFillBlank : questionMultiFillBlanks) {
-                questionMultiFillBlank.put("id", ToolUtil.getSurFaceId());
-                questionMultiFillBlank.put("createTime", DateUtil.getTimeAndToString());
-                questionMultiFillBlank.put("quId", question.get("id"));
-            }
+            setBaseMation(question, questionMultiFillBlanks);
             if (!questionMultiFillBlanks.isEmpty()) {
                 dwSurveyDirectoryDao.addQuestionMultiFillBlankMationCopyList(questionMultiFillBlanks);
             }
@@ -1267,50 +1231,38 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
             || quType.equals(QuType.CHENFBK.getActionName()) || quType.equals(QuType.COMPCHENRADIO.getActionName())) {// 矩阵单选，矩阵多选，矩阵填空题，复合矩阵单选
             List<Map<String, Object>> questionChenRows = dwSurveyDirectoryDao.queryQuestionChenRowListByCopyId(question);//获取行选项
             List<Map<String, Object>> questionChenColumns = dwSurveyDirectoryDao.queryQuestionChenColumnListByCopyId(question);//获取列选项
-            for (Map<String, Object> questionChenRow : questionChenRows) {
-                questionChenRow.put("id", ToolUtil.getSurFaceId());
-                questionChenRow.put("createTime", DateUtil.getTimeAndToString());
-                questionChenRow.put("quId", question.get("id"));
-            }
+            setBaseMation(question, questionChenRows);
             if (!questionChenRows.isEmpty()) {
                 dwSurveyDirectoryDao.addQuestionChenRowMationCopyList(questionChenRows);
             }
-            for (Map<String, Object> questionChenColumn : questionChenColumns) {
-                questionChenColumn.put("id", ToolUtil.getSurFaceId());
-                questionChenColumn.put("createTime", DateUtil.getTimeAndToString());
-                questionChenColumn.put("quId", question.get("id"));
-            }
+            setBaseMation(question, questionChenColumns);
             if (!questionChenColumns.isEmpty()) {
                 dwSurveyDirectoryDao.addQuestionChenColumnMationCopyList(questionChenColumns);
             }
             if (quType.equals(QuType.COMPCHENRADIO.getActionName())) {//如果是复合矩阵单选题， 则还有题选项
                 List<Map<String, Object>> questionChenOptions = dwSurveyDirectoryDao.queryQuestionChenOptionListByCopyId(question);//获取选项
-                for (Map<String, Object> questionChenOption : questionChenOptions) {
-                    questionChenOption.put("id", ToolUtil.getSurFaceId());
-                    questionChenOption.put("createTime", DateUtil.getTimeAndToString());
-                    questionChenOption.put("quId", question.get("id"));
-                }
+                setBaseMation(question, questionChenOptions);
             }
         } else if (quType.equals(QuType.SCORE.getActionName())) {
             List<Map<String, Object>> questionScores = dwSurveyDirectoryDao.queryQuestionScoreListByCopyId(question);//获取评分题
-            for (Map<String, Object> questionScore : questionScores) {
-                questionScore.put("id", ToolUtil.getSurFaceId());
-                questionScore.put("createTime", DateUtil.getTimeAndToString());
-                questionScore.put("quId", question.get("id"));
-            }
+            setBaseMation(question, questionScores);
             if (!questionScores.isEmpty()) {
                 dwSurveyDirectoryDao.addQuestionScoreMationCopyList(questionScores);
             }
         } else if (quType.equals(QuType.ORDERQU.getActionName())) {
             List<Map<String, Object>> questionOrderBys = dwSurveyDirectoryDao.queryQuestionOrderByListByCopyId(question);//获取排序题
-            for (Map<String, Object> questionOrderBy : questionOrderBys) {
-                questionOrderBy.put("id", ToolUtil.getSurFaceId());
-                questionOrderBy.put("createTime", DateUtil.getTimeAndToString());
-                questionOrderBy.put("quId", question.get("id"));
-            }
+            setBaseMation(question, questionOrderBys);
             if (!questionOrderBys.isEmpty()) {
                 dwSurveyDirectoryDao.addQuestionOrderByMationCopyList(questionOrderBys);
             }
+        }
+    }
+
+    private void setBaseMation(Map<String, Object> question, List<Map<String, Object>> list) {
+        for (Map<String, Object> bean : list) {
+            bean.put("id", ToolUtil.getSurFaceId());
+            bean.put("createTime", DateUtil.getTimeAndToString());
+            bean.put("quId", question.get("id"));
         }
     }
 
@@ -1668,14 +1620,9 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         List<Map<String, Object>> beans = new ArrayList<>();
         int answerQuCount = 0;
         if (yesnoMaps != null) {
-            Map<String, Object> bean;
             for (String key : yesnoMaps.keySet()) {
                 answerQuCount++;
-                bean = new HashMap<>();
-                bean.put("id", ToolUtil.getSurFaceId());
-                bean.put("surveyId", surveyId);
-                bean.put("surveyAnswerId", surveyAnswerId);
-                bean.put("quId", key);
+                Map<String, Object> bean = setCommonMation(surveyId, surveyAnswerId, key);
                 bean.put("yesnoAnswer", yesnoMaps.get(key).toString());
                 beans.add(bean);
             }
@@ -1684,6 +1631,15 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
             dwSurveyDirectoryDao.saveAnYesnoMaps(beans);
         }
         return answerQuCount;
+    }
+
+    private Map<String, Object> setCommonMation(String surveyId, String surveyAnswerId, String key) {
+        Map<String, Object> bean = new HashMap<>();
+        bean.put("id", ToolUtil.getSurFaceId());
+        bean.put("surveyId", surveyId);
+        bean.put("surveyAnswerId", surveyAnswerId);
+        bean.put("quId", key);
+        return bean;
     }
 
     /**
@@ -1700,14 +1656,9 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         int answerQuCount = 0;
         List<Map<String, Object>> beans = new ArrayList<>();
         if (radioMaps != null) {
-            Map<String, Object> bean;
             for (String key : radioMaps.keySet()) {
                 answerQuCount++;
-                bean = new HashMap<>();
-                bean.put("id", ToolUtil.getSurFaceId());
-                bean.put("surveyId", surveyId);
-                bean.put("surveyAnswerId", surveyAnswerId);
-                bean.put("quId", key);
+                Map<String, Object> bean = setCommonMation(surveyId, surveyAnswerId, key);
                 bean.put("quItemId", radioMaps.get(key).toString());
                 beans.add(bean);
             }
@@ -1732,17 +1683,13 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         int answerQuCount = 0;
         List<Map<String, Object>> beans = new ArrayList<>();
         if (dfillMaps != null) {
-            Map<String, Object> map, bean;
+            Map<String, Object> map;
             for (String key : dfillMaps.keySet()) {
                 map = (Map<String, Object>) dfillMaps.get(key);
                 if (map != null && map.size() > 0) {
                     for (String keyMap : map.keySet()) {
                         answerQuCount++;
-                        bean = new HashMap<>();
-                        bean.put("id", ToolUtil.getSurFaceId());
-                        bean.put("surveyId", surveyId);
-                        bean.put("surveyAnswerId", surveyAnswerId);
-                        bean.put("quId", key);
+                        Map<String, Object> bean = setCommonMation(surveyId, surveyAnswerId, key);
                         bean.put("quItemId", keyMap);
                         bean.put("answerValue", !map.containsKey(keyMap) ? "" : map.get(keyMap).toString());
                         beans.add(bean);
@@ -1769,16 +1716,12 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         int answerQuCount = 0;
         List<Map<String, Object>> beans = new ArrayList<>();
         if (scoreMaps != null) {
-            Map<String, Object> mapRows, bean;
+            Map<String, Object> mapRows;
             for (String key : scoreMaps.keySet()) {
                 mapRows = (Map<String, Object>) scoreMaps.get(key);
                 for (String keyRow : mapRows.keySet()) {
                     answerQuCount++;
-                    bean = new HashMap<>();
-                    bean.put("id", ToolUtil.getSurFaceId());
-                    bean.put("surveyId", surveyId);
-                    bean.put("surveyAnswerId", surveyAnswerId);
-                    bean.put("quId", key);
+                    Map<String, Object> bean = setCommonMation(surveyId, surveyAnswerId, key);
                     bean.put("rowId", keyRow);
                     bean.put("scoreValue", mapRows.get(keyRow).toString());
                     beans.add(bean);
@@ -1804,18 +1747,14 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         int answerQuCount = 0;
         List<Map<String, Object>> beans = new ArrayList<>();
         if (chenCheckboxMaps != null) {
-            Map<String, Object> mapRows, mapRow, bean;
+            Map<String, Object> mapRows, mapRow;
             for (String key : chenCheckboxMaps.keySet()) {
                 mapRows = (Map<String, Object>) chenCheckboxMaps.get(key);
                 for (String keyRow : mapRows.keySet()) {
                     mapRow = (Map<String, Object>) mapRows.get(keyRow);
                     for (String keyCol : mapRow.keySet()) {
                         answerQuCount++;
-                        bean = new HashMap<>();
-                        bean.put("id", ToolUtil.getSurFaceId());
-                        bean.put("surveyId", surveyId);
-                        bean.put("surveyAnswerId", surveyAnswerId);
-                        bean.put("quId", key);
+                        Map<String, Object> bean = setCommonMation(surveyId, surveyAnswerId, key);
                         bean.put("rowId", keyRow);
                         bean.put("colId", keyCol);
                         beans.add(bean);
@@ -1842,15 +1781,11 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         int answerQuCount = 0;
         List<Map<String, Object>> beans = new ArrayList<>();
         if (compRadioMaps != null) {
-            Map<String, Object> tempAnRadio, bean;
+            Map<String, Object> tempAnRadio;
             for (String key : compRadioMaps.keySet()) {
                 answerQuCount++;
                 tempAnRadio = (Map<String, Object>) compRadioMaps.get(key);
-                bean = new HashMap<>();
-                bean.put("id", ToolUtil.getSurFaceId());
-                bean.put("surveyId", surveyId);
-                bean.put("surveyAnswerId", surveyAnswerId);
-                bean.put("quId", key);
+                Map<String, Object> bean = setCommonMation(surveyId, surveyAnswerId, key);
                 bean.put("quItemId", tempAnRadio.get("quItemId"));
                 bean.put("otherText", tempAnRadio.get("otherText"));
                 beans.add(bean);
@@ -1875,18 +1810,14 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         int answerQuCount = 0;
         List<Map<String, Object>> beans = new ArrayList<>();
         if (compChenRadioMaps != null) {
-            Map<String, Object> mapRows, mapRow, bean;
+            Map<String, Object> mapRows, mapRow;
             for (String key : compChenRadioMaps.keySet()) {
                 mapRows = (Map<String, Object>) compChenRadioMaps.get(key);
                 for (String keyRow : mapRows.keySet()) {
                     mapRow = (Map<String, Object>) mapRows.get(keyRow);
                     for (String keyCol : mapRow.keySet()) {
                         answerQuCount++;
-                        bean = new HashMap<>();
-                        bean.put("id", ToolUtil.getSurFaceId());
-                        bean.put("surveyId", surveyId);
-                        bean.put("surveyAnswerId", surveyAnswerId);
-                        bean.put("quId", key);
+                        Map<String, Object> bean = setCommonMation(surveyId, surveyAnswerId, key);
                         bean.put("rowId", keyRow);
                         bean.put("colId", keyCol);
                         bean.put("optionId", mapRow.get(keyCol).toString());
@@ -1915,18 +1846,14 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         int answerQuCount = 0;
         List<Map<String, Object>> beans = new ArrayList<>();
         if (chenScoreMaps != null) {
-            Map<String, Object> mapRows, mapRow, bean;
+            Map<String, Object> mapRows, mapRow;
             for (String key : chenScoreMaps.keySet()) {
                 mapRows = (Map<String, Object>) chenScoreMaps.get(key);
                 for (String keyRow : mapRows.keySet()) {
                     mapRow = (Map<String, Object>) mapRows.get(keyRow);
                     for (String keyCol : mapRow.keySet()) {
                         answerQuCount++;
-                        bean = new HashMap<>();
-                        bean.put("id", ToolUtil.getSurFaceId());
-                        bean.put("surveyId", surveyId);
-                        bean.put("surveyAnswerId", surveyAnswerId);
-                        bean.put("quId", key);
+                        Map<String, Object> bean = setCommonMation(surveyId, surveyAnswerId, key);
                         bean.put("rowId", keyRow);
                         bean.put("colId", keyCol);
                         bean.put("answerValue", mapRow.get(keyCol).toString());
@@ -1954,16 +1881,12 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         int answerQuCount = 0;
         List<Map<String, Object>> beans = new ArrayList<>();
         if (checkboxMaps != null) {
-            Map<String, Object> map, bean;
+            Map<String, Object> map;
             for (String key : checkboxMaps.keySet()) {
                 map = (Map<String, Object>) checkboxMaps.get(key);
                 for (String keyMap : map.keySet()) {
                     answerQuCount++;
-                    bean = new HashMap<>();
-                    bean.put("id", ToolUtil.getSurFaceId());
-                    bean.put("surveyId", surveyId);
-                    bean.put("surveyAnswerId", surveyAnswerId);
-                    bean.put("quId", key);
+                    Map<String, Object> bean = setCommonMation(surveyId, surveyAnswerId, key);
                     bean.put("quItemId", map.get(keyMap).toString());
                     beans.add(bean);
                 }
@@ -1988,14 +1911,9 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         int answerQuCount = 0;
         List<Map<String, Object>> beans = new ArrayList<>();
         if (fillMaps != null) {
-            Map<String, Object> bean;
             for (String key : fillMaps.keySet()) {
                 answerQuCount++;
-                bean = new HashMap<>();
-                bean.put("id", ToolUtil.getSurFaceId());
-                bean.put("surveyId", surveyId);
-                bean.put("surveyAnswerId", surveyAnswerId);
-                bean.put("quId", key);
+                Map<String, Object> bean = setCommonMation(surveyId, surveyAnswerId, key);
                 bean.put("answerValue", fillMaps.get(key).toString());
                 beans.add(bean);
             }
@@ -2019,14 +1937,9 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         int answerQuCount = 0;
         List<Map<String, Object>> beans = new ArrayList<>();
         if (anAnswerMaps != null) {
-            Map<String, Object> bean;
             for (String key : anAnswerMaps.keySet()) {
                 answerQuCount++;
-                bean = new HashMap<>();
-                bean.put("id", ToolUtil.getSurFaceId());
-                bean.put("surveyId", surveyId);
-                bean.put("surveyAnswerId", surveyAnswerId);
-                bean.put("quId", key);
+                Map<String, Object> bean = setCommonMation(surveyId, surveyAnswerId, key);
                 bean.put("answerValue", anAnswerMaps.get(key).toString());
                 beans.add(bean);
             }
@@ -2050,17 +1963,13 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         int answerQuCount = 0;
         List<Map<String, Object>> beans = new ArrayList<>();
         if (compCheckboxMaps != null) {
-            Map<String, Object> map, tempAnCheckbox, bean;
+            Map<String, Object> map, tempAnCheckbox;
             for (String key : compCheckboxMaps.keySet()) {
                 map = (Map<String, Object>) compCheckboxMaps.get(key);
                 for (String keyMap : map.keySet()) {
                     answerQuCount++;
                     tempAnCheckbox = (Map<String, Object>) map.get(keyMap);
-                    bean = new HashMap<>();
-                    bean.put("id", ToolUtil.getSurFaceId());
-                    bean.put("surveyId", surveyId);
-                    bean.put("surveyAnswerId", surveyAnswerId);
-                    bean.put("quId", key);
+                    Map<String, Object> bean = setCommonMation(surveyId, surveyAnswerId, key);
                     bean.put("quItemId", tempAnCheckbox.get("quItemId"));
                     bean.put("otherText", tempAnCheckbox.get("otherText"));
                     beans.add(bean);
@@ -2086,14 +1995,9 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         int answerQuCount = 0;
         List<Map<String, Object>> beans = new ArrayList<>();
         if (enumMaps != null) {
-            Map<String, Object> bean;
             for (String key : enumMaps.keySet()) {
                 answerQuCount++;
-                bean = new HashMap<>();
-                bean.put("id", ToolUtil.getSurFaceId());
-                bean.put("surveyId", surveyId);
-                bean.put("surveyAnswerId", surveyAnswerId);
-                bean.put("quId", key);
+                Map<String, Object> bean = setCommonMation(surveyId, surveyAnswerId, key);
                 bean.put("quItemNum", Integer.parseInt(key.split("_")[1]));
                 bean.put("answerValue", enumMaps.get(key).toString());
                 beans.add(bean);
@@ -2118,16 +2022,12 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         int answerQuCount = 0;
         List<Map<String, Object>> beans = new ArrayList<>();
         if (quOrderMaps != null) {
-            Map<String, Object> mapRows, bean;
+            Map<String, Object> mapRows;
             for (String key : quOrderMaps.keySet()) {
                 mapRows = (Map<String, Object>) quOrderMaps.get(key);
                 for (String keyRow : mapRows.keySet()) {
                     answerQuCount++;
-                    bean = new HashMap<>();
-                    bean.put("id", ToolUtil.getSurFaceId());
-                    bean.put("surveyId", surveyId);
-                    bean.put("surveyAnswerId", surveyAnswerId);
-                    bean.put("quId", key);
+                    Map<String, Object> bean = setCommonMation(surveyId, surveyAnswerId, key);
                     bean.put("rowId", keyRow);
                     bean.put("orderNumValue", mapRows.get(keyRow).toString());
                     beans.add(bean);
@@ -2153,16 +2053,12 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         int answerQuCount = 0;
         List<Map<String, Object>> beans = new ArrayList<>();
         if (chenRadioMaps != null) {
-            Map<String, Object> mapRows, bean;
+            Map<String, Object> mapRows;
             for (String key : chenRadioMaps.keySet()) {
                 mapRows = (Map<String, Object>) chenRadioMaps.get(key);
                 for (String keyRow : mapRows.keySet()) {
                     answerQuCount++;
-                    bean = new HashMap<>();
-                    bean.put("id", ToolUtil.getSurFaceId());
-                    bean.put("surveyId", surveyId);
-                    bean.put("surveyAnswerId", surveyAnswerId);
-                    bean.put("quId", key);
+                    Map<String, Object> bean = setCommonMation(surveyId, surveyAnswerId, key);
                     bean.put("rowId", keyRow);
                     bean.put("colId", mapRows.get(keyRow).toString());
                     beans.add(bean);
@@ -2188,18 +2084,14 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         int answerQuCount = 0;
         List<Map<String, Object>> beans = new ArrayList<>();
         if (chenFbkMaps != null) {
-            Map<String, Object> mapRows, mapRow, bean;
+            Map<String, Object> mapRows, mapRow;
             for (String key : chenFbkMaps.keySet()) {
                 mapRows = (Map<String, Object>) chenFbkMaps.get(key);
                 for (String keyRow : mapRows.keySet()) {
                     mapRow = (Map<String, Object>) mapRows.get(keyRow);
                     for (String keyCol : mapRow.keySet()) {
                         answerQuCount++;
-                        bean = new HashMap<>();
-                        bean.put("id", ToolUtil.getSurFaceId());
-                        bean.put("surveyId", surveyId);
-                        bean.put("surveyAnswerId", surveyAnswerId);
-                        bean.put("quId", key);
+                        Map<String, Object> bean = setCommonMation(surveyId, surveyAnswerId, key);
                         bean.put("rowId", keyRow);
                         bean.put("colId", keyCol);
                         bean.put("answerValue", mapRow.get(keyCol).toString());
