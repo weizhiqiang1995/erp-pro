@@ -4,9 +4,9 @@
 	
 	<insert id="insertFileFolderByUserId" parameterType="java.util.Map">
 		INSERT INTO note_folder
-			(id, name, state, parent_id, create_id, create_time, last_update_id, last_update_time)
+		(id, name, state, parent_id, create_id, create_time, last_update_id, last_update_time)
 		VALUES
-			(#{id}, #{catalogName}, #{state}, #{parentId}, #{createId}, #{createTime}, #{createId}, #{createTime})
+		(#{id}, #{catalogName}, #{state}, #{parentId}, #{createId}, #{createTime}, #{createId}, #{createTime})
 	</insert>
 	
 	<select id="queryFileFolderByUserIdAndParentId" parameterType="java.util.Map" resultType="java.util.Map">
@@ -40,26 +40,11 @@
         ORDER BY a.name ASC
     </select>
 	
-	<select id="queryFolderParentByFolderId" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.parent_id parentId
-		FROM
-			note_folder a
-		WHERE a.id = #{parentId}
-	</select>
-	
-	<select id="quertFolderParentById" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.parent_id parentId
-		FROM
-			note_folder a
-		WHERE a.id = #{id}
-	</select>
-	
 	<select id="queryFolderMationById" resultType="java.util.Map">
 		SELECT
 			a.id,
-			a.`name` title
+			a.`name` title,
+			a.parent_id parentId
 		FROM
 			note_folder a
 		WHERE a.id = #{folderId}

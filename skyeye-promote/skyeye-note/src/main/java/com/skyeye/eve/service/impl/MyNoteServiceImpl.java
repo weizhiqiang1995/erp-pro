@@ -11,6 +11,7 @@ import com.skyeye.common.constans.MqConstants;
 import com.skyeye.common.constans.NoteConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.MyNoteDao;
@@ -90,8 +91,8 @@ public class MyNoteServiceImpl implements MyNoteService {
     @Transactional(value = "transactionManager")
     public void insertFileMyNoteByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        String key = NoteConstants.getSysFileMyNoteListMation(map.get("parentId").toString(), user.get("id").toString());
+        String userId = inputObject.getLogParams().get("id").toString();
+        String key = NoteConstants.getSysFileMyNoteListMation(map.get("parentId").toString(), userId);
         jedisClient.delKeys(key);//删除父文件夹的redis的key
         String parentId = setParentId(map.get("parentId").toString());
         if ("0".equals(parentId)) {
@@ -99,10 +100,8 @@ public class MyNoteServiceImpl implements MyNoteService {
             return;
         }
         map.put("parentId", parentId);
-        map.put("id", ToolUtil.getSurFaceId());
         map.put("state", 1);
-        map.put("createId", user.get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
+        DataCommonUtil.setCommonData(map, userId);
         myNoteDao.insertFileFolderByUserId(map);
         map.put("logoPath", NoteConstants.SYS_FILE_CONSOLE_IS_FOLDER_LOGO_PATH);
         outputObject.setBean(map);
@@ -121,9 +120,10 @@ public class MyNoteServiceImpl implements MyNoteService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
+        String id = map.get("id").toString();
         if ("folder".equals(map.get("fileType").toString())) {//操作文件夹表
-            Map<String, Object> fileParent = myNoteDao.quertFolderParentById(map);
-            String[] str = fileParent.get("parentId").toString().split(",");
+            Map<String, Object> folder = myNoteDao.queryFolderMationById(id);
+            String[] str = folder.get("parentId").toString().split(",");
             String key = NoteConstants.getSysFileMyNoteListMation(str[str.length - 1], user.get("id").toString());
             myNoteDao.deleteFileFolderById(map);//删除自身文件夹
             myNoteDao.deleteFolderChildByFolderId(map);//删除子文件夹
@@ -147,9 +147,10 @@ public class MyNoteServiceImpl implements MyNoteService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
+        String id = map.get("id").toString();
         if ("folder".equals(map.get("fileType").toString())) {//操作文件夹表
-            Map<String, Object> fileParent = myNoteDao.quertFolderParentById(map);//获取文件或者文件夹父id
-            String[] str = fileParent.get("parentId").toString().split(",");
+            Map<String, Object> folder = myNoteDao.queryFolderMationById(id);
+            String[] str = folder.get("parentId").toString().split(",");
             String key = NoteConstants.getSysFileMyNoteListMation(str[str.length - 1], user.get("id").toString());
             jedisClient.delKeys(key);//删除父文件夹的redis的key
             myNoteDao.editFileFolderById(map);
@@ -299,21 +300,20 @@ public class MyNoteServiceImpl implements MyNoteService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String newParentId = "";
-        String key = NoteConstants.getSysFileMyNoteListMation(map.get("targetId").toString(), user.get("id").toString());
+        String targetId = map.get("targetId").toString();
+        String key = NoteConstants.getSysFileMyNoteListMation(targetId, user.get("id").toString());
         jedisClient.delKeys(key);//删除父文件夹的redis的key
-        if (map.get("targetId").toString().equals("2")) {
+        if (targetId.equals("2")) {
             newParentId = "2" + ",";
         } else {
-            map.put("id", map.get("targetId"));//目标文件夹的id
-            Map<String, Object> endFileParent = myNoteDao.quertFolderParentById(map);//获取目标文件夹的父id
-            newParentId = endFileParent.get("parentId").toString() + map.get("targetId").toString() + ",";//拖拽文件夹新的父id
+            Map<String, Object> folder = myNoteDao.queryFolderMationById(targetId);//获取目标文件夹的父id
+            newParentId = folder.get("parentId").toString() + targetId + ",";//拖拽文件夹新的父id
         }
         String arrId = map.get("arrId").toString();
         String[] arr = arrId.split(",");//拖拽文件夹的id数组
         List<Map<String, Object>> folderBeans = new ArrayList<>();
-        Map<String, Object> bean;
         for (int i = 0; i < arr.length; i++) {
-            bean = new HashMap<>();
+            Map<String, Object> bean = new HashMap<>();
             bean.put("id", arr[i]);
             folderBeans.add(bean);
         }
@@ -378,11 +378,9 @@ public class MyNoteServiceImpl implements MyNoteService {
         if ("2".equals(id)) {
             return id + ",";
         } else {
-            Map<String, Object> map = new HashMap<>();
-            map.put("parentId", id);
-            Map<String, Object> folderParent = myNoteDao.queryFolderParentByFolderId(map);// 查询该文件夹的父id
-            if (folderParent != null && !folderParent.isEmpty()) {
-                return folderParent.get("parentId").toString() + id + ",";
+            Map<String, Object> folder = myNoteDao.queryFolderMationById(id);
+            if (!CollectionUtils.isEmpty(folder)) {
+                return folder.get("parentId").toString() + id + ",";
             } else {
                 return "0";
             }
