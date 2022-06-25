@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -48,7 +49,7 @@ public class AnnualLeaveStatisticsQuartz {
     @Autowired
     private SysQuartzRunHistoryService sysQuartzRunHistoryService;
 
-    private static enum YearLimits{
+    private static enum YearLimits {
         ONE_YEAR(0, 1, "1"), // 1年以下
         ONE_THREE_YEAR(1, 3, "2"), // 1年 ~ 3年
         THREE_FIVE_YEAR(3, 5, "3"), // 3年 ~ 5年
@@ -87,14 +88,14 @@ public class AnnualLeaveStatisticsQuartz {
     public void annualLeaveStatistics() throws Exception {
         String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         LOGGER.info("annualLeaveStatistics start.");
-        try{
+        try {
             // 1.获取年假信息
             List<Map<String, Object>> yearHolidaysMation = getSystemYearHolidaysMation();
             // 2.获取所有在职状态的员工列表, 见习，试用，退休，离职员工不计入计算
             List<Map<String, Object>> userStaff = sysEveUserStaffDao.queryAllSysUserStaffListByState(Arrays.asList(new Integer[]{1}));
             // 获取当前年月日
             String nowDate = DateUtil.getYmdTimeAndToString();
-            for(Map<String, Object> staff : userStaff) {
+            for (Map<String, Object> staff : userStaff) {
                 String staffId = staff.get("id").toString();
                 // 员工当前剩余年假
                 String annualLeave = staff.get("annualLeave").toString();
@@ -104,7 +105,7 @@ public class AnnualLeaveStatisticsQuartz {
                 int differDays = DateUtil.getDistanceDay(workTime, nowDate);
                 String differYear = getDifferYear(differDays);
                 Map<String, Object> yearMation = getConcertWithYearMation(Integer.parseInt(differYear), yearHolidaysMation);
-                if(yearMation != null && !yearMation.isEmpty()){
+                if (!ObjectUtils.isEmpty(yearMation)) {
                     String yearHour = yearMation.get("yearHour").toString();
                     // 获取每个季度应该相加的年假小时
                     String quarterYearHour = CalculationUtil.divide(yearHour, "4", 2);
@@ -114,7 +115,7 @@ public class AnnualLeaveStatisticsQuartz {
                     sysEveUserStaffDao.editSysUserStaffAnnualLeaveById(staffId, annualLeave, DateUtil.getTimeAndToString());
                 }
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_ERROR.getState());
             LOGGER.warn("AnnualLeaveStatisticsQuartz error.", e);
         }
@@ -124,16 +125,17 @@ public class AnnualLeaveStatisticsQuartz {
 
     /**
      * 筛选已工作年份应该获取的年假信息
-     * @param differYear 已工作年份
+     *
+     * @param differYear         已工作年份
      * @param yearHolidaysMation 年假信息
      * @return
      */
-    private Map<String, Object> getConcertWithYearMation(int differYear, List<Map<String, Object>> yearHolidaysMation){
-        for (YearLimits q : YearLimits.values()){
-            if(q.getMin() <= differYear && differYear < q.getMax()){
+    private Map<String, Object> getConcertWithYearMation(int differYear, List<Map<String, Object>> yearHolidaysMation) {
+        for (YearLimits q : YearLimits.values()) {
+            if (q.getMin() <= differYear && differYear < q.getMax()) {
                 List<Map<String, Object>> fillterMation = yearHolidaysMation.stream()
-                        .filter(bean -> bean.get("yearType").toString().equals(q.getYearType()))
-                        .collect(Collectors.toList());
+                    .filter(bean -> bean.get("yearType").toString().equals(q.getYearType()))
+                    .collect(Collectors.toList());
                 if (fillterMation == null || fillterMation.isEmpty()) {
                     return null;
                 }
@@ -152,7 +154,7 @@ public class AnnualLeaveStatisticsQuartz {
      */
     private String getDifferYear(int differDays) throws IllegalAccessException {
         String year = CalculationUtil.divide(String.valueOf(differDays), "365", 2);
-        if(ToolUtil.isBlank(year)){
+        if (ToolUtil.isBlank(year)) {
             return "0";
         }
         return year.split("\\.")[0];

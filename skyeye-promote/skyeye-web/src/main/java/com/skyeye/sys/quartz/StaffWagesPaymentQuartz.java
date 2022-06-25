@@ -60,19 +60,19 @@ public class StaffWagesPaymentQuartz {
     public void staffWagesPayment() throws Exception {
         String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         LOGGER.info("staff wagesPayment month is start");
-        try{
+        try {
             // 获取上个月的年月
             String lastMonthDate = DateUtil.getLastMonthDate();
-            while (true){
+            while (true) {
                 // 获取一条未发放的员工薪资信息
                 Map<String, Object> staffWages = wagesPaymentHistoryDao.queryWaitPaymentStaffHistory(lastMonthDate, getStaffIdsFromRedis());
                 // 如果已经没有要发放薪资的员工，则停止统计
-                if(staffWages == null){
+                if (staffWages == null) {
                     break;
                 }
                 String staffId = staffWages.get("staffId").toString();
                 // 判断该员工的薪资发放是否在处理中，如果在处理中，则进行下一条
-                if(isInWagesPaymentRedisMation(staffId)){
+                if (isInWagesPaymentRedisMation(staffId)) {
                     continue;
                 }
                 try {
@@ -80,7 +80,7 @@ public class StaffWagesPaymentQuartz {
                     addStaffIdInWagesPaymentRedisMation(staffId);
                     // 开始发放
                     paymentStaffWages(staffWages, lastMonthDate);
-                } catch (Exception e){
+                } catch (Exception e) {
                     LOGGER.warn("deal with staff failed, staffId is {}", staffId, e);
                     break;
                 } finally {
@@ -89,7 +89,7 @@ public class StaffWagesPaymentQuartz {
                 }
             }
             deleteWagesPaymentRedisMation();
-        } catch (Exception e){
+        } catch (Exception e) {
             sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_ERROR.getState());
             LOGGER.warn("StaffWagesPaymentQuartz error.", e);
         }
@@ -100,14 +100,12 @@ public class StaffWagesPaymentQuartz {
     /**
      * 薪资发放
      *
-     * @param staffWages 员工薪资信息
+     * @param staffWages    员工薪资信息
      * @param lastMonthDate 上个月的年月
      */
     private void paymentStaffWages(Map<String, Object> staffWages, String lastMonthDate) throws Exception {
         String staffId = staffWages.get("staffId").toString();
         // 这里处理薪资发放的信息
-
-
 
 
         wagesPaymentHistoryDao.editToPaymentByStaffAndPayMonth(staffId, lastMonthDate);
@@ -118,7 +116,7 @@ public class StaffWagesPaymentQuartz {
      *
      * @param staffIds 员工ids
      */
-    private void setToRedis(List<String> staffIds){
+    private void setToRedis(List<String> staffIds) {
         // 默认存储时间为六个小时
         jedisClient.set(IN_WAGES_PAYMENT_STAFF_REDIS_KEY, JSONUtil.toJsonStr(staffIds), 60 * 60 * 6);
     }
@@ -128,7 +126,7 @@ public class StaffWagesPaymentQuartz {
      *
      * @param staffId 员工id
      */
-    private void removeStaffIdInWagesPaymentRedisMation(String staffId){
+    private void removeStaffIdInWagesPaymentRedisMation(String staffId) {
         List<String> staffIds = getStaffIdsFromRedis();
         staffIds = staffIds.stream().filter(str -> !staffId.equals(str)).collect(Collectors.toList());
         setToRedis(staffIds);
@@ -139,7 +137,7 @@ public class StaffWagesPaymentQuartz {
      *
      * @param staffId 员工id
      */
-    private void addStaffIdInWagesPaymentRedisMation(String staffId){
+    private void addStaffIdInWagesPaymentRedisMation(String staffId) {
         List<String> staffIds = getStaffIdsFromRedis();
         staffIds.add(staffId);
         setToRedis(staffIds);
@@ -151,18 +149,18 @@ public class StaffWagesPaymentQuartz {
      * @param staffId 员工id
      * @return true：处理中，false：未在处理
      */
-    private boolean isInWagesPaymentRedisMation(String staffId){
+    private boolean isInWagesPaymentRedisMation(String staffId) {
         List<String> staffIds = getStaffIdsFromRedis();
         return staffIds.contains(staffId);
     }
 
-    private void deleteWagesPaymentRedisMation(){
+    private void deleteWagesPaymentRedisMation() {
         jedisClient.del(IN_WAGES_PAYMENT_STAFF_REDIS_KEY);
     }
 
-    private List<String> getStaffIdsFromRedis(){
+    private List<String> getStaffIdsFromRedis() {
         List<String> staffIds = new ArrayList<>();
-        if(jedisClient.exists(IN_WAGES_PAYMENT_STAFF_REDIS_KEY)){
+        if (jedisClient.exists(IN_WAGES_PAYMENT_STAFF_REDIS_KEY)) {
             staffIds = JSONUtil.toList(JSONUtil.parseArray(jedisClient.get(IN_WAGES_PAYMENT_STAFF_REDIS_KEY)), null);
         }
         return staffIds;

@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 /**
  * @ClassName: CalcStaffWaitPayWages
  * @Description: 定时统计员工待结算其他奖金的数据
- *                  1. 加班结算
+ * 1. 加班结算
  * @author: skyeye云系列--卫志强
  * @date: 2021/9/2 15:11
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
@@ -69,9 +69,9 @@ public class CalcStaffWaitPayWages {
     public void handler() throws Exception {
         String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         log.info("定时统计员工待结算薪资的数据定时任务开始执行");
-        try{
+        try {
             calcWaitWages();
-        } catch (Exception e){
+        } catch (Exception e) {
             sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_ERROR.getState());
             log.warn("CalcStaffWaitPayWages error.", e);
         }
@@ -87,7 +87,7 @@ public class CalcStaffWaitPayWages {
             ExecuteFeignClient.get(() -> checkWorkService.queryCheckWorkOvertimeWaitSettlement()).getRows();
         log.info("overTimeWaitSettlementList size is: {}", overTimeWaitSettlementList.size());
         Map<String, List<Map<String, Object>>> overTimeWaitSettlementByStaffId = overTimeWaitSettlementList.stream()
-                .collect(Collectors.groupingBy(map -> map.get("staffId").toString() + map.get("overtimeMonth").toString()));
+            .collect(Collectors.groupingBy(map -> map.get("staffId").toString() + map.get("overtimeMonth").toString()));
         for (Map.Entry<String, List<Map<String, Object>>> entry : overTimeWaitSettlementByStaffId.entrySet()) {
             List<Map<String, Object>> overTimeList = entry.getValue();
             // 员工薪资
@@ -104,19 +104,19 @@ public class CalcStaffWaitPayWages {
 
     private String getAllOverTimeMoneyThisMonth(List<Map<String, Object>> overTimeList, String hourWages) throws Exception {
         String allOverTimeHourThisMonth = "0";
-        for(Map<String, Object> bean: overTimeList) {
+        for (Map<String, Object> bean : overTimeList) {
             // 加班工时
             String overtimeHour = bean.get("overtimeHour").toString();
             // 结算类型
             int overtimeSettlementType = Integer.parseInt(bean.get("overtimeSettlementType").toString());
             String money = "0";
-            if(overtimeSettlementType == 1){
+            if (overtimeSettlementType == 1) {
                 // 单倍薪资结算
                 money = CalculationUtil.multiply(2, overtimeHour, hourWages, "1");
-            } else if(overtimeSettlementType == 2){
+            } else if (overtimeSettlementType == 2) {
                 // 1.5倍薪资结算
                 money = CalculationUtil.multiply(2, overtimeHour, hourWages, "1.5");
-            } else if(overtimeSettlementType == 3){
+            } else if (overtimeSettlementType == 3) {
                 // 双倍薪资结算
                 money = CalculationUtil.multiply(2, overtimeHour, hourWages, "2");
             }
@@ -134,35 +134,35 @@ public class CalcStaffWaitPayWages {
      * 获取员工每小时的工资
      *
      * @param pointMonthCheckWorkTimeCache 指定年月的考勤信息的缓存
-     * @param actWages 员工信息
-     * @param overtimeMonth 加班年月，格式为：yyyy-MM
-     * @param staffId 员工id
+     * @param actWages                     员工信息
+     * @param overtimeMonth                加班年月，格式为：yyyy-MM
+     * @param staffId                      员工id
      * @return hourWages
      * @throws Exception
      */
     private String getStaffHourWages(Map<String, List<Map<String, Object>>> pointMonthCheckWorkTimeCache, String actWages,
-                                   String overtimeMonth, String staffId) throws Exception {
+                                     String overtimeMonth, String staffId) throws Exception {
         // 考勤日期
         List<Map<String, Object>> workTime = getPointMonthCheckWorkTime(pointMonthCheckWorkTimeCache, overtimeMonth);
         // 1.获取该员工拥有的考勤班次id集合
         List<Map<String, Object>> staffTimeIdMation = sysEveUserStaffDao
-                .queryStaffCheckWorkTimeRelationByStaffId(staffId);
+            .queryStaffCheckWorkTimeRelationByStaffId(staffId);
         List<String> userTimeIds = staffTimeIdMation.stream()
-                .map(p -> p.get("timeId").toString()).collect(Collectors.toList());
+            .map(p -> p.get("timeId").toString()).collect(Collectors.toList());
         List<Map<String, Object>> staffWorkTime = workTime.stream()
-                .filter(bean -> userTimeIds.contains(bean.get("timeId").toString()))
-                .collect(Collectors.toList());
+            .filter(bean -> userTimeIds.contains(bean.get("timeId").toString()))
+            .collect(Collectors.toList());
         Map<String, String> staffModelFieldMap = new HashMap<>();
         // 2.获取应出勤的班次以及小时
         wagesStaffMationService.setLastMonthBe(staffWorkTime, staffModelFieldMap, overtimeMonth);
         // 获取每小时的工资
         String hourWages = CalculationUtil.divide(actWages,
-                staffModelFieldMap.get(WagesConstant.DEFAULT_WAGES_FIELD_TYPE.LAST_MONTH_BE_HOUR.getKey()), 2);
+            staffModelFieldMap.get(WagesConstant.DEFAULT_WAGES_FIELD_TYPE.LAST_MONTH_BE_HOUR.getKey()), 2);
         return hourWages;
     }
 
     private List<Map<String, Object>> getPointMonthCheckWorkTime(Map<String, List<Map<String, Object>>> cache, String pointMonthDate) throws Exception {
-        if(cache.containsKey(pointMonthDate)){
+        if (cache.containsKey(pointMonthDate)) {
             return cache.get(pointMonthDate);
         }
         // 所有的考勤班次信息

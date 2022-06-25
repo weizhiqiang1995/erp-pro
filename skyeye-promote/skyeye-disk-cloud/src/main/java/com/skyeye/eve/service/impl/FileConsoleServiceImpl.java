@@ -556,7 +556,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     public void editUploadOfficeFileById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         int status = Integer.parseInt(map.get("status").toString());
-        //当我们关闭编辑窗口后，十秒钟左右onlyoffice会将它存储的我们的编辑后的文件，，此时status = 2
+        // 当我们关闭编辑窗口后，十秒钟左右onlyoffice会将它存储的我们的编辑后的文件，，此时status = 2
         if (status == 2 || status == 3) {//MustSave, Corrupted
             map.put("key", map.get("key").toString().split("-")[0]);
             URL url = new URL(map.get("url").toString());//新文件地址
