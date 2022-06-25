@@ -11,39 +11,39 @@ import java.io.Serializable;
 
 @Data
 public class SysQuartz implements Serializable {
-	
-	private static final long serialVersionUID = 412493760737681267L;
 
-	private String id;
+    private static final long serialVersionUID = 412493760737681267L;
 
-	// 任务的唯一性
-	private String name;
+    private String id;
 
-	private String groups;
+    // 任务的唯一性
+    private String name;
 
-	private Integer status;
+    private String groups;
 
-	@ApiModelProperty("时间点")
-	private String cron;
+    private Integer status;
 
-	private String remark;
-	
-	private String quartzIp;
-	
-	private String quartzPort;
+    @ApiModelProperty("时间点")
+    private String cron;
 
-	/**
-	 * 定时任务类型  1.用户设定  2.系统任务
-	 */
-	private String quartzType;
+    private String remark;
 
-	/**
-	 * 定时任务的key，可有可无，但是不能重复
-	 */
-	private String quartzKey;
-	
-	private String createId;
-	
-	private String createTime;
+    private String quartzIp;
+
+    private String quartzPort;
+
+    /**
+     * 定时任务类型  1.用户设定  2.系统任务
+     */
+    private String quartzType;
+
+    /**
+     * 定时任务的key，可有可无，但是不能重复
+     */
+    private String quartzKey;
+
+    private String createId;
+
+    private String createTime;
 
 }

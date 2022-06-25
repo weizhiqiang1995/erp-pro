@@ -24,122 +24,122 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class SysEveWinBgPicServiceImpl implements SysEveWinBgPicService{
-	
-	@Autowired
-	private SysEveWinBgPicDao sysEveWinBgPicDao;
-	
-	@Autowired
-	public JedisClientService jedisClient;
-	
-	@Value("${IMAGES_PATH}")
-	private String tPath;
+public class SysEveWinBgPicServiceImpl implements SysEveWinBgPicService {
 
-	/**
-	 * 获取win系统桌面图片列表
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void querySysEveWinBgPicList(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-		List<Map<String, Object>> beans = sysEveWinBgPicDao.querySysEveWinBgPicList(map);
-		outputObject.setBeans(beans);
-		outputObject.settotal(pages.getTotal());
-	}
+    @Autowired
+    private SysEveWinBgPicDao sysEveWinBgPicDao;
 
-	/**
-	 * 添加win系统桌面图片信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	@Transactional(value="transactionManager")
-	public void insertSysEveWinBgPicMation(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> user = inputObject.getLogParams();
-		map.put("id", ToolUtil.getSurFaceId());
-		map.put("createId", user.get("id"));
-		map.put("createTime", DateUtil.getTimeAndToString());
-		sysEveWinBgPicDao.insertSysEveWinBgPicMation(map);
-		jedisClient.del(Constants.getSysWinBgPicRedisKey());
-	}
+    @Autowired
+    public JedisClientService jedisClient;
 
-	/**
-	 * 删除win系统桌面图片信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	@Transactional(value="transactionManager")
-	public void deleteSysEveWinBgPicMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> bean = sysEveWinBgPicDao.querySysEveMationById(map);
-		String basePath = tPath + bean.get("picUrl").toString().replace("/images/", "");
-		FileUtil.deleteFile(basePath);
-		sysEveWinBgPicDao.deleteSysEveWinBgPicMationById(map);
-		jedisClient.del(Constants.getSysWinBgPicRedisKey());
-	}
+    @Value("${IMAGES_PATH}")
+    private String tPath;
 
-	/**
-	 * 用户自定义上传添加win系统桌面图片信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	@Transactional(value="transactionManager")
-	public void insertSysEveWinBgPicMationByCustom(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> user = inputObject.getLogParams();
-		map.put("id", ToolUtil.getSurFaceId());
-		map.put("createId", user.get("id"));
-		map.put("createTime", DateUtil.getTimeAndToString());
-		sysEveWinBgPicDao.insertSysEveWinBgPicMationByCustom(map);
-	}
+    /**
+     * 获取win系统桌面图片列表
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void querySysEveWinBgPicList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
+        List<Map<String, Object>> beans = sysEveWinBgPicDao.querySysEveWinBgPicList(map);
+        outputObject.setBeans(beans);
+        outputObject.settotal(pages.getTotal());
+    }
 
-	/**
-	 * 获取win系统桌面图片列表用户自定义
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void querySysEveWinBgPicCustomList(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> user = inputObject.getLogParams();
-		map.put("createId", user.get("id"));
-		List<Map<String, Object>> beans = sysEveWinBgPicDao.querySysEveWinBgPicCustomList(map);
-		if(beans != null && !beans.isEmpty()){
-			outputObject.setBeans(beans);
-			outputObject.settotal(beans.size());
-		}
-	}
+    /**
+     * 添加win系统桌面图片信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    @Transactional(value = "transactionManager")
+    public void insertSysEveWinBgPicMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> user = inputObject.getLogParams();
+        map.put("id", ToolUtil.getSurFaceId());
+        map.put("createId", user.get("id"));
+        map.put("createTime", DateUtil.getTimeAndToString());
+        sysEveWinBgPicDao.insertSysEveWinBgPicMation(map);
+        jedisClient.del(Constants.getSysWinBgPicRedisKey());
+    }
 
-	/**
-	 * 删除win系统桌面图片信息用户自定义
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	@Transactional(value="transactionManager")
-	public void deleteSysEveWinBgPicMationCustomById(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> bean = sysEveWinBgPicDao.querySysEveMationById(map);
-		String basePath = tPath + bean.get("picUrl").toString().replace("/images/", "");
-		FileUtil.deleteFile(basePath);
-		sysEveWinBgPicDao.deleteSysEveWinBgPicMationById(map);
-	}
-	
+    /**
+     * 删除win系统桌面图片信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    @Transactional(value = "transactionManager")
+    public void deleteSysEveWinBgPicMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> bean = sysEveWinBgPicDao.querySysEveMationById(map);
+        String basePath = tPath + bean.get("picUrl").toString().replace("/images/", "");
+        FileUtil.deleteFile(basePath);
+        sysEveWinBgPicDao.deleteSysEveWinBgPicMationById(map);
+        jedisClient.del(Constants.getSysWinBgPicRedisKey());
+    }
+
+    /**
+     * 用户自定义上传添加win系统桌面图片信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    @Transactional(value = "transactionManager")
+    public void insertSysEveWinBgPicMationByCustom(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> user = inputObject.getLogParams();
+        map.put("id", ToolUtil.getSurFaceId());
+        map.put("createId", user.get("id"));
+        map.put("createTime", DateUtil.getTimeAndToString());
+        sysEveWinBgPicDao.insertSysEveWinBgPicMationByCustom(map);
+    }
+
+    /**
+     * 获取win系统桌面图片列表用户自定义
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void querySysEveWinBgPicCustomList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> user = inputObject.getLogParams();
+        map.put("createId", user.get("id"));
+        List<Map<String, Object>> beans = sysEveWinBgPicDao.querySysEveWinBgPicCustomList(map);
+        if (beans != null && !beans.isEmpty()) {
+            outputObject.setBeans(beans);
+            outputObject.settotal(beans.size());
+        }
+    }
+
+    /**
+     * 删除win系统桌面图片信息用户自定义
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    @Transactional(value = "transactionManager")
+    public void deleteSysEveWinBgPicMationCustomById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> bean = sysEveWinBgPicDao.querySysEveMationById(map);
+        String basePath = tPath + bean.get("picUrl").toString().replace("/images/", "");
+        FileUtil.deleteFile(basePath);
+        sysEveWinBgPicDao.deleteSysEveWinBgPicMationById(map);
+    }
+
 }

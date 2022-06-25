@@ -9,8 +9,8 @@ import com.skyeye.common.object.OutputObject;
 
 public interface ApiMationService {
 
-	void selectApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void selectApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	void editApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

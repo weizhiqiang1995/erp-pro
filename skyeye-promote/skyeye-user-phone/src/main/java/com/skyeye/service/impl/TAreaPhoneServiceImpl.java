@@ -19,34 +19,34 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class TAreaPhoneServiceImpl implements TAreaPhoneService{
-	
-	@Autowired
-	private TAreaPhoneDao tAreaPhoneDao;
-	
-	@Autowired
+public class TAreaPhoneServiceImpl implements TAreaPhoneService {
+
+    @Autowired
+    private TAreaPhoneDao tAreaPhoneDao;
+
+    @Autowired
     private JedisClientService jedisClient;
 
-	/**
-	 * 手机端查询省市区数据
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void queryTAreaPhoneList(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
+    /**
+     * 手机端查询省市区数据
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void queryTAreaPhoneList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = null;
-		if (ToolUtil.isBlank(jedisClient.get(PhoneConstants.SYS_ALL_T_AREA_LIST))) {
-			beans = tAreaPhoneDao.queryTAreaPhoneList(map);
-			beans = ToolUtil.listToTree(beans, "codeId", "parentCodeId", "children");
-			jedisClient.set(PhoneConstants.SYS_ALL_T_AREA_LIST, JSONUtil.toJsonStr(beans));
-		} else {
-			beans = JSONUtil.toList(jedisClient.get(PhoneConstants.SYS_ALL_T_AREA_LIST), null);
-		}
+        if (ToolUtil.isBlank(jedisClient.get(PhoneConstants.SYS_ALL_T_AREA_LIST))) {
+            beans = tAreaPhoneDao.queryTAreaPhoneList(map);
+            beans = ToolUtil.listToTree(beans, "codeId", "parentCodeId", "children");
+            jedisClient.set(PhoneConstants.SYS_ALL_T_AREA_LIST, JSONUtil.toJsonStr(beans));
+        } else {
+            beans = JSONUtil.toList(jedisClient.get(PhoneConstants.SYS_ALL_T_AREA_LIST), null);
+        }
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
-	}
-	
+    }
+
 }

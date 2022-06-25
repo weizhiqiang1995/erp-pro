@@ -24,7 +24,7 @@ import java.util.Map;
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-@FeignClient(value = "${webroot.skyeye-flowable}", configuration= ClientConfiguration.class)
+@FeignClient(value = "${webroot.skyeye-flowable}", configuration = ClientConfiguration.class)
 public interface CheckWorkService {
 
     /**
@@ -46,24 +46,24 @@ public interface CheckWorkService {
     /**
      * 获取所有昨天没有打卡的用户
      *
-     * @param timeId 班次id
+     * @param timeId        班次id
      * @param yesterdayTime 日期信息,格式为：yyyy-MM-dd
      * @return 所有的考勤班次的信息以及工作日信息等
      */
     @GetMapping("/queryNotCheckMember")
     String queryNotCheckMember(@RequestParam("timeId") String timeId,
-        @RequestParam("yesterdayTime") String yesterdayTime);
+                               @RequestParam("yesterdayTime") String yesterdayTime);
 
     /**
      * 获取所有昨天没有打下班卡的用户
      *
-     * @param timeId 班次id
+     * @param timeId        班次id
      * @param yesterdayTime 日期信息,格式为：yyyy-MM-dd
      * @return 所有的考勤班次的信息以及工作日信息等
      */
     @GetMapping("/queryNotCheckEndWorkId")
     String queryNotCheckEndWorkId(@RequestParam("timeId") String timeId,
-        @RequestParam("yesterdayTime") String yesterdayTime);
+                                  @RequestParam("yesterdayTime") String yesterdayTime);
 
     /**
      * 填充下班卡信息
@@ -75,7 +75,6 @@ public interface CheckWorkService {
 
     /**
      * 获取所有待结算的加班数据
-     *
      */
     @GetMapping("/queryCheckWorkOvertimeWaitSettlement")
     String queryCheckWorkOvertimeWaitSettlement();

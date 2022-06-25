@@ -8,14 +8,14 @@ import com.skyeye.common.object.OutputObject;
 
 public interface ForumReportService {
 
-	public void insertForumReportMation(InputObject inputObject, OutputObject outputObject) throws Exception;
-	
-	public void queryReportNoCheckList(InputObject inputObject, OutputObject outputObject) throws Exception;
-	
-	public void editReportCheckMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
-	
-	public void queryReportCheckedList(InputObject inputObject, OutputObject outputObject) throws Exception;
-	
-	public void queryForumReportMationToDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void insertForumReportMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+    public void queryReportNoCheckList(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+    public void editReportCheckMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+    public void queryReportCheckedList(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+    public void queryForumReportMationToDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

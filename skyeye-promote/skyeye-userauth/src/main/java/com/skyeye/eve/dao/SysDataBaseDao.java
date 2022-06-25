@@ -9,8 +9,8 @@ import java.util.Map;
 
 public interface SysDataBaseDao {
 
-	public List<Map<String, Object>> querySysDataBaseSelectList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> querySysDataBaseSelectList(Map<String, Object> map) throws Exception;
 
-	public List<Map<String, Object>> querySysDataBaseDescSelectList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> querySysDataBaseDescSelectList(Map<String, Object> map) throws Exception;
 
 }

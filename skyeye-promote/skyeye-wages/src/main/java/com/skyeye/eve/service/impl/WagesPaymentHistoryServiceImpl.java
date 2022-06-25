@@ -17,12 +17,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @ClassName: WagesPaymentHistoryServiceImpl
  * @Description: 薪资发放历史管理服务类
  * @author: skyeye云系列--卫志强
  * @date: 2021/8/7 23:34
- *
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
@@ -32,15 +30,17 @@ public class WagesPaymentHistoryServiceImpl implements WagesPaymentHistoryServic
     @Autowired
     private WagesPaymentHistoryDao wagesPaymentHistoryDao;
 
-    public static enum STATE{
+    public static enum STATE {
         START_WAIT_GRANT(1, "待发放"),
         START_GRANT(2, "已发放");
         private int state;
         private String name;
-        STATE(int state, String name){
+
+        STATE(int state, String name) {
             this.state = state;
             this.name = name;
         }
+
         public int getState() {
             return state;
         }

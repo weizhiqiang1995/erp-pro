@@ -25,7 +25,7 @@ public class WagesPaymentHistoryController {
      * @throws Exception
      */
     @RequestMapping("/post/WagesPaymentHistoryController/queryAllGrantWagesPaymentHistoryList")
-    public void queryAllGrantWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void queryAllGrantWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) throws Exception {
         wagesPaymentHistoryService.queryAllGrantWagesPaymentHistoryList(inputObject, outputObject);
     }
 
@@ -37,7 +37,7 @@ public class WagesPaymentHistoryController {
      * @throws Exception
      */
     @RequestMapping("/post/WagesPaymentHistoryController/queryMyWagesPaymentHistoryList")
-    public void queryMyWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void queryMyWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) throws Exception {
         wagesPaymentHistoryService.queryMyWagesPaymentHistoryList(inputObject, outputObject);
     }
 
@@ -49,7 +49,7 @@ public class WagesPaymentHistoryController {
      * @throws Exception
      */
     @RequestMapping("/post/WagesPaymentHistoryController/queryAllNotGrantWagesPaymentHistoryList")
-    public void queryAllNotGrantWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void queryAllNotGrantWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) throws Exception {
         wagesPaymentHistoryService.queryAllNotGrantWagesPaymentHistoryList(inputObject, outputObject);
     }
 

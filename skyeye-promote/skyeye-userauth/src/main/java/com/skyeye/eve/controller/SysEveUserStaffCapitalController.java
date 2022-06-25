@@ -35,7 +35,7 @@ public class SysEveUserStaffCapitalController {
      */
     @RequestMapping("/post/SysEveUserStaffCapitalController/queryStaffCapitalWaitPayMonthList")
     @ResponseBody
-    public void queryStaffCapitalWaitPayMonthList(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void queryStaffCapitalWaitPayMonthList(InputObject inputObject, OutputObject outputObject) throws Exception {
         sysEveUserStaffCapitalService.queryStaffCapitalWaitPayMonthList(inputObject, outputObject);
     }
 

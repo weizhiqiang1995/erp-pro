@@ -20,39 +20,39 @@ import com.skyeye.service.JobMateMationService;
 @Controller
 @Api(value = "任务管理", tags = "任务管理", modelName = "任务模块")
 public class JobMateMationController {
-	
-	@Autowired
-	private JobMateMationService jobMateMationService;
 
-	/**
-	 * 根据大类获取任务信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/JobMateMationController/queryJobMateMationByBigTypeList")
-	@ResponseBody
-	public void queryJobMateMationByBigTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
-		jobMateMationService.queryJobMateMationByBigTypeList(inputObject, outputObject);
-	}
+    @Autowired
+    private JobMateMationService jobMateMationService;
 
-	/**
-	 * 其他模块同步生产消息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@ApiOperation(id = "sendMQProducer", value = "其他模块同步生产消息", method = "POST", allUse = "2")
-	@ApiImplicitParams({
-		@ApiImplicitParam(id = "jsonStr", name = "jsonStr", value = "消费者消费的json字符串", required = "required"),
-		@ApiImplicitParam(id = "userId", name = "userId", value = "用户id", required = "required")})
-	@RequestMapping("/post/JobMateMationController/sendMQProducer")
-	@ResponseBody
-	public void sendMQProducer(InputObject inputObject, OutputObject outputObject) throws Exception {
-		jobMateMationService.sendMQProducer(inputObject, outputObject);
-	}
+    /**
+     * 根据大类获取任务信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/JobMateMationController/queryJobMateMationByBigTypeList")
+    @ResponseBody
+    public void queryJobMateMationByBigTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        jobMateMationService.queryJobMateMationByBigTypeList(inputObject, outputObject);
+    }
+
+    /**
+     * 其他模块同步生产消息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @ApiOperation(id = "sendMQProducer", value = "其他模块同步生产消息", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "jsonStr", name = "jsonStr", value = "消费者消费的json字符串", required = "required"),
+        @ApiImplicitParam(id = "userId", name = "userId", value = "用户id", required = "required")})
+    @RequestMapping("/post/JobMateMationController/sendMQProducer")
+    @ResponseBody
+    public void sendMQProducer(InputObject inputObject, OutputObject outputObject) throws Exception {
+        jobMateMationService.sendMQProducer(inputObject, outputObject);
+    }
 
 
 }

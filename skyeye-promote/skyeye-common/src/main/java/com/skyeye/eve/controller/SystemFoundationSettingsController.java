@@ -19,12 +19,10 @@ import com.skyeye.eve.service.SystemFoundationSettingsService;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
  * @ClassName: SystemFoundationSettingsController
  * @Description: 系统基础设置控制类
  * @author: skyeye云系列--卫志强
  * @date: 2021/6/6 22:39
- *
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
@@ -32,32 +30,32 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "系统基础设置", tags = "系统基础设置", modelName = "系统公共模块")
 public class SystemFoundationSettingsController {
 
-	@Autowired
-	private SystemFoundationSettingsService systemFoundationSettingsService;
+    @Autowired
+    private SystemFoundationSettingsService systemFoundationSettingsService;
 
-	/**
-	 * 获取系统基础设置
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@ApiOperation(id = "sysfdsettings001", value = "获取系统基础设置", method = "GET", allUse = "2")
-	@RequestMapping("/post/SystemFoundationSettingsController/querySystemFoundationSettingsList")
-	public void querySystemFoundationSettingsList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		systemFoundationSettingsService.querySystemFoundationSettingsList(inputObject, outputObject);
-	}
+    /**
+     * 获取系统基础设置
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @ApiOperation(id = "sysfdsettings001", value = "获取系统基础设置", method = "GET", allUse = "2")
+    @RequestMapping("/post/SystemFoundationSettingsController/querySystemFoundationSettingsList")
+    public void querySystemFoundationSettingsList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        systemFoundationSettingsService.querySystemFoundationSettingsList(inputObject, outputObject);
+    }
 
-	/**
-	 * 编辑系统基础设置
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SystemFoundationSettingsController/editSystemFoundationSettings")
-	public void editSystemFoundationSettings(InputObject inputObject, OutputObject outputObject) throws Exception{
-		systemFoundationSettingsService.editSystemFoundationSettings(inputObject, outputObject);
-	}
+    /**
+     * 编辑系统基础设置
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SystemFoundationSettingsController/editSystemFoundationSettings")
+    public void editSystemFoundationSettings(InputObject inputObject, OutputObject outputObject) throws Exception {
+        systemFoundationSettingsService.editSystemFoundationSettings(inputObject, outputObject);
+    }
 
 }

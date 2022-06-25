@@ -19,70 +19,70 @@ import java.util.Map;
 
 @Service
 public class StickyNotesServiceImpl implements StickyNotesService {
-	
-	@Autowired
-	private StickyNotesDao stickyNotesDao;
 
-	/**
-	 * 新增便签
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	@Transactional(value="transactionManager")
-	public void insertStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		map.put("id", ToolUtil.getSurFaceId());
-		map.put("createId", inputObject.getLogParams().get("id"));
-		map.put("createTime", DateUtil.getTimeAndToString());
-		stickyNotesDao.insertStickyNotesMation(map);
-		outputObject.setBean(map);
-	}
+    @Autowired
+    private StickyNotesDao stickyNotesDao;
 
-	/**
-	 * 查询便签
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void selectStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		map.put("createId", inputObject.getLogParams().get("id"));
-		List<Map<String, Object>> beans = stickyNotesDao.selectStickyNotesMation(map);
-		outputObject.setBeans(beans);
-		outputObject.settotal(beans.size());
-	}
+    /**
+     * 新增便签
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    @Transactional(value = "transactionManager")
+    public void insertStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        map.put("id", ToolUtil.getSurFaceId());
+        map.put("createId", inputObject.getLogParams().get("id"));
+        map.put("createTime", DateUtil.getTimeAndToString());
+        stickyNotesDao.insertStickyNotesMation(map);
+        outputObject.setBean(map);
+    }
 
-	/**
-	 * 编辑便签
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	@Transactional(value="transactionManager")
-	public void editStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		stickyNotesDao.editStickyNotesMation(map);
-	}
+    /**
+     * 查询便签
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void selectStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        map.put("createId", inputObject.getLogParams().get("id"));
+        List<Map<String, Object>> beans = stickyNotesDao.selectStickyNotesMation(map);
+        outputObject.setBeans(beans);
+        outputObject.settotal(beans.size());
+    }
 
-	/**
-	 * 删除便签
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	@Transactional(value="transactionManager")
-	public void deleteStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		stickyNotesDao.deleteStickyNotesMation(map);
-	}
+    /**
+     * 编辑便签
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    @Transactional(value = "transactionManager")
+    public void editStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        stickyNotesDao.editStickyNotesMation(map);
+    }
+
+    /**
+     * 删除便签
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    @Transactional(value = "transactionManager")
+    public void deleteStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        stickyNotesDao.deleteStickyNotesMation(map);
+    }
 
 }

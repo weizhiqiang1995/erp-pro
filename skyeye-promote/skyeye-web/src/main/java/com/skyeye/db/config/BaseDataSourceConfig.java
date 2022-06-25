@@ -38,161 +38,161 @@ import java.util.Properties;
 
 @Configuration
 @MapperScan(basePackages = {
-		"com.skyeye.eve.dao",
-		"com.skyeye.dao",
-		"com.skyeye.school.dao",
-		"com.skyeye.activiti.mapper"}, sqlSessionFactoryRef = "baseSqlSessionFactory")
+    "com.skyeye.eve.dao",
+    "com.skyeye.dao",
+    "com.skyeye.school.dao",
+    "com.skyeye.activiti.mapper"}, sqlSessionFactoryRef = "baseSqlSessionFactory")
 public class BaseDataSourceConfig {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(BaseDataSourceConfig.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BaseDataSourceConfig.class);
 
-	protected static Properties databaseTypeMappings = getDefaultDatabaseTypeMappings();
+    protected static Properties databaseTypeMappings = getDefaultDatabaseTypeMappings();
 
-	public static Properties getDefaultDatabaseTypeMappings() {
-		Properties databaseTypeMappings = new Properties();
-		databaseTypeMappings.setProperty("H2", "h2");
-		databaseTypeMappings.setProperty("HSQL Database Engine", "hsql");
-		databaseTypeMappings.setProperty("MySQL", "mysql");
-		databaseTypeMappings.setProperty("Oracle", "oracle");
-		databaseTypeMappings.setProperty("PostgreSQL", "postgres");
-		databaseTypeMappings.setProperty("Microsoft SQL Server", "mssql");
-		databaseTypeMappings.setProperty("db2", "db2");
-		databaseTypeMappings.setProperty("DB2", "db2");
-		databaseTypeMappings.setProperty("DB2/NT", "db2");
-		databaseTypeMappings.setProperty("DB2/NT64", "db2");
-		databaseTypeMappings.setProperty("DB2 UDP", "db2");
-		databaseTypeMappings.setProperty("DB2/LINUX", "db2");
-		databaseTypeMappings.setProperty("DB2/LINUX390", "db2");
-		databaseTypeMappings.setProperty("DB2/LINUXX8664", "db2");
-		databaseTypeMappings.setProperty("DB2/LINUXZ64", "db2");
-		databaseTypeMappings.setProperty("DB2/LINUXPPC64", "db2");
-		databaseTypeMappings.setProperty("DB2/400 SQL", "db2");
-		databaseTypeMappings.setProperty("DB2/6000", "db2");
-		databaseTypeMappings.setProperty("DB2 UDB iSeries", "db2");
-		databaseTypeMappings.setProperty("DB2/AIX64", "db2");
-		databaseTypeMappings.setProperty("DB2/HPUX", "db2");
-		databaseTypeMappings.setProperty("DB2/HP64", "db2");
-		databaseTypeMappings.setProperty("DB2/SUN", "db2");
-		databaseTypeMappings.setProperty("DB2/SUN64", "db2");
-		databaseTypeMappings.setProperty("DB2/PTX", "db2");
-		databaseTypeMappings.setProperty("DB2/2", "db2");
-		databaseTypeMappings.setProperty("DB2 UDB AS400", "db2");
-		databaseTypeMappings.setProperty("DM DBMS", "dm");
-		return databaseTypeMappings;
-	}
+    public static Properties getDefaultDatabaseTypeMappings() {
+        Properties databaseTypeMappings = new Properties();
+        databaseTypeMappings.setProperty("H2", "h2");
+        databaseTypeMappings.setProperty("HSQL Database Engine", "hsql");
+        databaseTypeMappings.setProperty("MySQL", "mysql");
+        databaseTypeMappings.setProperty("Oracle", "oracle");
+        databaseTypeMappings.setProperty("PostgreSQL", "postgres");
+        databaseTypeMappings.setProperty("Microsoft SQL Server", "mssql");
+        databaseTypeMappings.setProperty("db2", "db2");
+        databaseTypeMappings.setProperty("DB2", "db2");
+        databaseTypeMappings.setProperty("DB2/NT", "db2");
+        databaseTypeMappings.setProperty("DB2/NT64", "db2");
+        databaseTypeMappings.setProperty("DB2 UDP", "db2");
+        databaseTypeMappings.setProperty("DB2/LINUX", "db2");
+        databaseTypeMappings.setProperty("DB2/LINUX390", "db2");
+        databaseTypeMappings.setProperty("DB2/LINUXX8664", "db2");
+        databaseTypeMappings.setProperty("DB2/LINUXZ64", "db2");
+        databaseTypeMappings.setProperty("DB2/LINUXPPC64", "db2");
+        databaseTypeMappings.setProperty("DB2/400 SQL", "db2");
+        databaseTypeMappings.setProperty("DB2/6000", "db2");
+        databaseTypeMappings.setProperty("DB2 UDB iSeries", "db2");
+        databaseTypeMappings.setProperty("DB2/AIX64", "db2");
+        databaseTypeMappings.setProperty("DB2/HPUX", "db2");
+        databaseTypeMappings.setProperty("DB2/HP64", "db2");
+        databaseTypeMappings.setProperty("DB2/SUN", "db2");
+        databaseTypeMappings.setProperty("DB2/SUN64", "db2");
+        databaseTypeMappings.setProperty("DB2/PTX", "db2");
+        databaseTypeMappings.setProperty("DB2/2", "db2");
+        databaseTypeMappings.setProperty("DB2 UDB AS400", "db2");
+        databaseTypeMappings.setProperty("DM DBMS", "dm");
+        return databaseTypeMappings;
+    }
 
-	@Autowired
-	protected ResourceLoader resourceLoader;
+    @Autowired
+    protected ResourceLoader resourceLoader;
 
-	/**
-	 * Primary 必须加此注解，不然报错，下一个类则不需要添加，表示这个数据源是默认数据源
-	 * ConfigurationProperties(prefix)值必须是application.properteis中对应属性的前缀
-	 *
-	 * @return
-	 */
-	@Bean(name="baseDataSource")
-	@Primary
-	@ConfigurationProperties(prefix = "spring.datasource")
-	public DataSource baseDataSource(){
-		return DataSourceBuilder.create().build();
-	}
+    /**
+     * Primary 必须加此注解，不然报错，下一个类则不需要添加，表示这个数据源是默认数据源
+     * ConfigurationProperties(prefix)值必须是application.properteis中对应属性的前缀
+     *
+     * @return
+     */
+    @Bean(name = "baseDataSource")
+    @Primary
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource baseDataSource() {
+        return DataSourceBuilder.create().build();
+    }
 
-	/**
-	 * a、SqlSessionFactory 一旦被创建就应该在应用的运行期间一直存在，没有任何理由对它进行清除或重建。
-	 * b、使用 SqlSessionFactory 的最佳实践是在应用运行期间不要重复创建多次，多次重建 SqlSessionFactory 被视为一种代码“坏味道（bad smell）”。
-	 * c、因此 SqlSessionFactory 的最佳作用域是应用作用域。有很多方法可以做到，最简单的就是使用单例模式或者静态单例模式。
-	 *
-	 * @param dataSource
-	 * @return
-	 * @throws Exception
-	 */
-	@Primary
+    /**
+     * a、SqlSessionFactory 一旦被创建就应该在应用的运行期间一直存在，没有任何理由对它进行清除或重建。
+     * b、使用 SqlSessionFactory 的最佳实践是在应用运行期间不要重复创建多次，多次重建 SqlSessionFactory 被视为一种代码“坏味道（bad smell）”。
+     * c、因此 SqlSessionFactory 的最佳作用域是应用作用域。有很多方法可以做到，最简单的就是使用单例模式或者静态单例模式。
+     *
+     * @param dataSource
+     * @return
+     * @throws Exception
+     */
+    @Primary
     @Bean(name = "baseSqlSessionFactory")
-	public SqlSessionFactory baseSqlSessionFactory(@Qualifier("baseDataSource") DataSource dataSource) throws Exception {
-		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+    public SqlSessionFactory baseSqlSessionFactory(@Qualifier("baseDataSource") DataSource dataSource) throws Exception {
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 
-		sqlSessionFactoryBean.setDataSource(dataSource);
-		String databaseType = this.initDatabaseType(dataSource);
-		if (databaseType == null) {
-			throw new CustomException("couldn't deduct database type");
-		} else {
-			try {
-				// 添加XML目录
-				sqlSessionFactoryBean.setMapperLocations(resolveMapperLocations());
-				sqlSessionFactoryBean.afterPropertiesSet();
-				return sqlSessionFactoryBean.getObject();
-			} catch (Exception var5) {
-				throw new CustomException("Could not create sqlSessionFactory", var5);
-			}
-		}
-	}
+        sqlSessionFactoryBean.setDataSource(dataSource);
+        String databaseType = this.initDatabaseType(dataSource);
+        if (databaseType == null) {
+            throw new CustomException("couldn't deduct database type");
+        } else {
+            try {
+                // 添加XML目录
+                sqlSessionFactoryBean.setMapperLocations(resolveMapperLocations());
+                sqlSessionFactoryBean.afterPropertiesSet();
+                return sqlSessionFactoryBean.getObject();
+            } catch (Exception var5) {
+                throw new CustomException("Could not create sqlSessionFactory", var5);
+            }
+        }
+    }
 
-	public Resource[] resolveMapperLocations() {
-		ResourcePatternResolver resourceResolver = new PathMatchingResourcePatternResolver();
-		List<String> mapperLocations = new ArrayList<>();
-		mapperLocations.add("classpath*:mapper/**/*.xml");
-		List<Resource> resources = new ArrayList();
-		if (!CollectionUtils.isEmpty(mapperLocations)) {
-			for (String mapperLocation : mapperLocations) {
-				try {
-					Resource[] mappers = resourceResolver.getResources(mapperLocation);
-					resources.addAll(Arrays.asList(mappers));
-				} catch (IOException e) {
-					LOGGER.error("Get myBatis resources happened exception", e);
-				}
-			}
-		}
-		return resources.toArray(new Resource[resources.size()]);
-	}
+    public Resource[] resolveMapperLocations() {
+        ResourcePatternResolver resourceResolver = new PathMatchingResourcePatternResolver();
+        List<String> mapperLocations = new ArrayList<>();
+        mapperLocations.add("classpath*:mapper/**/*.xml");
+        List<Resource> resources = new ArrayList();
+        if (!CollectionUtils.isEmpty(mapperLocations)) {
+            for (String mapperLocation : mapperLocations) {
+                try {
+                    Resource[] mappers = resourceResolver.getResources(mapperLocation);
+                    resources.addAll(Arrays.asList(mappers));
+                } catch (IOException e) {
+                    LOGGER.error("Get myBatis resources happened exception", e);
+                }
+            }
+        }
+        return resources.toArray(new Resource[resources.size()]);
+    }
 
-	@Primary
-	@Bean(name = "transactionManager")
-	public PlatformTransactionManager transactionManager(@Qualifier("baseDataSource") DataSource dataSourceOne) {
-		return new DataSourceTransactionManager(dataSourceOne);
-	}
-	
-	@Primary
-	@Bean(name = "sqlSessionTemplate")
-	public SqlSessionTemplate sqlSessionTemplate(@Qualifier("baseSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
-		// 使用上面配置的Factory
-		return new SqlSessionTemplate(sqlSessionFactory);
-	}
+    @Primary
+    @Bean(name = "transactionManager")
+    public PlatformTransactionManager transactionManager(@Qualifier("baseDataSource") DataSource dataSourceOne) {
+        return new DataSourceTransactionManager(dataSourceOne);
+    }
 
-	/**
-	 * 初始化
-	 *
-	 * @param dataSource
-	 * @return
-	 */
-	protected String initDatabaseType(@Qualifier("baseDataSource") DataSource dataSource) {
-		String databaseType = null;
-		Connection connection = null;
+    @Primary
+    @Bean(name = "sqlSessionTemplate")
+    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("baseSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+        // 使用上面配置的Factory
+        return new SqlSessionTemplate(sqlSessionFactory);
+    }
 
-		try {
-			connection = dataSource.getConnection();
-			DatabaseMetaData databaseMetaData = connection.getMetaData();
-			String databaseProductName = databaseMetaData.getDatabaseProductName();
-			LOGGER.info("database product name: '{}'", databaseProductName);
-			databaseType = databaseTypeMappings.getProperty(databaseProductName);
-			if (databaseType == null) {
-				throw new CustomException("couldn't deduct database type from database product name '" + databaseProductName + "'");
-			}
+    /**
+     * 初始化
+     *
+     * @param dataSource
+     * @return
+     */
+    protected String initDatabaseType(@Qualifier("baseDataSource") DataSource dataSource) {
+        String databaseType = null;
+        Connection connection = null;
 
-			LOGGER.info("using database type: {}", databaseType);
-		} catch (SQLException var14) {
-			LOGGER.error("Exception while initializing Database connection", var14);
-		} finally {
-			try {
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException var13) {
-				LOGGER.error("Exception while closing the Database connection", var13);
-			}
+        try {
+            connection = dataSource.getConnection();
+            DatabaseMetaData databaseMetaData = connection.getMetaData();
+            String databaseProductName = databaseMetaData.getDatabaseProductName();
+            LOGGER.info("database product name: '{}'", databaseProductName);
+            databaseType = databaseTypeMappings.getProperty(databaseProductName);
+            if (databaseType == null) {
+                throw new CustomException("couldn't deduct database type from database product name '" + databaseProductName + "'");
+            }
 
-		}
-		databaseType = ("dm".equals(databaseType)) ? "oracle" : databaseType;
-		return databaseType;
-	}
+            LOGGER.info("using database type: {}", databaseType);
+        } catch (SQLException var14) {
+            LOGGER.error("Exception while initializing Database connection", var14);
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException var13) {
+                LOGGER.error("Exception while closing the Database connection", var13);
+            }
+
+        }
+        databaseType = ("dm".equals(databaseType)) ? "oracle" : databaseType;
+        return databaseType;
+    }
 
 }

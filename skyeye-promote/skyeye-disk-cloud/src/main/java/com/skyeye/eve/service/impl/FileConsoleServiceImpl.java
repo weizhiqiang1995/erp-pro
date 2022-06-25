@@ -139,7 +139,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
             String userId = inputObject.getLogParams().get("id").toString();
             map.put("folderType", this.getFolderType(parentId));
             String cacheKey = DiskCloudConstants.getSysFileMationFolderListMation(parentId, userId);
-            List<Map<String, Object>> beans = redisCache.getList(cacheKey, key ->{
+            List<Map<String, Object>> beans = redisCache.getList(cacheKey, key -> {
                 map.put("userId", userId);
                 return fileConsoleDao.queryFileFolderByUserIdAndParentId(map);
             }, RedisConstants.THIRTY_DAY_SECONDS);

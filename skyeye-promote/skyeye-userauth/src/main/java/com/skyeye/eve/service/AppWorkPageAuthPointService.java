@@ -8,14 +8,14 @@ import com.skyeye.common.object.OutputObject;
 
 public interface AppWorkPageAuthPointService {
 
-	public void queryAppWorkPageAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryAppWorkPageAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void insertAppWorkPageAuthPointMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void insertAppWorkPageAuthPointMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryAppWorkPageAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryAppWorkPageAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void editAppWorkPageAuthPointMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void editAppWorkPageAuthPointMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void deleteAppWorkPageAuthPointMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void deleteAppWorkPageAuthPointMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

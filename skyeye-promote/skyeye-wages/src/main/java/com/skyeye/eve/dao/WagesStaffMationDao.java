@@ -10,12 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @ClassName: WagesStaffMationDao
  * @Description: 员工信息设定管理数据层
  * @author: skyeye云系列--卫志强
  * @date: 2021/8/7 23:18
- *
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
@@ -35,7 +33,7 @@ public interface WagesStaffMationDao {
      * 获取一条还未计算上个月薪资的员工信息(不包含本月刚入职的新员工)
      *
      * @param lastMonthDate 上个月的年月
-     * @param staffId 不包含的员工id
+     * @param staffId       不包含的员工id
      * @return
      * @throws Exception
      */
@@ -44,7 +42,7 @@ public interface WagesStaffMationDao {
     /**
      * 获取上个月指定员工的所有考勤记录信息
      *
-     * @param staffId 员工id
+     * @param staffId       员工id
      * @param lastMonthDate 上个月的年月
      * @return
      * @throws Exception
@@ -54,7 +52,7 @@ public interface WagesStaffMationDao {
     /**
      * 获取上个月指定员工的所有审批通过请假记录信息
      *
-     * @param staffId 员工id
+     * @param staffId       员工id
      * @param lastMonthDate 上个月的年月
      * @return
      * @throws Exception
@@ -64,7 +62,7 @@ public interface WagesStaffMationDao {
     /**
      * 获取上个月指定员工的所有审批通过销假记录信息
      *
-     * @param staffId 员工id
+     * @param staffId       员工id
      * @param lastMonthDate 上个月的年月
      * @return
      * @throws Exception
@@ -82,7 +80,7 @@ public interface WagesStaffMationDao {
     /**
      * 获取员工薪资条信息
      *
-     * @param staffId 员工id
+     * @param staffId  员工id
      * @param payMonth 月份
      * @return
      * @throws Exception

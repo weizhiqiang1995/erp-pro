@@ -27,7 +27,7 @@ public class SysQuartzController {
      */
     @RequestMapping("/post/SysQuartzController/querySystemQuartzList")
     @ResponseBody
-    public void querySystemQuartzList(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void querySystemQuartzList(InputObject inputObject, OutputObject outputObject) throws Exception {
         sysQuartzService.querySystemQuartzList(inputObject, outputObject);
     }
 
@@ -40,7 +40,7 @@ public class SysQuartzController {
      */
     @RequestMapping("/post/SysQuartzController/queryMyTaskQuartzList")
     @ResponseBody
-    public void queryMyTaskQuartzList(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void queryMyTaskQuartzList(InputObject inputObject, OutputObject outputObject) throws Exception {
         sysQuartzService.queryMyTaskQuartzList(inputObject, outputObject);
     }
 
@@ -53,7 +53,7 @@ public class SysQuartzController {
      */
     @RequestMapping("/post/SysQuartzController/runSystemQuartz")
     @ResponseBody
-    public void runSystemQuartz(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void runSystemQuartz(InputObject inputObject, OutputObject outputObject) throws Exception {
         sysQuartzService.runSystemQuartz(inputObject, outputObject);
     }
 

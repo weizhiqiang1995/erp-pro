@@ -29,6 +29,7 @@ public interface WagesModelService {
 
     /**
      * 根据模板id获取要素字段
+     *
      * @param modeId 模板id
      * @return
      * @throws Exception

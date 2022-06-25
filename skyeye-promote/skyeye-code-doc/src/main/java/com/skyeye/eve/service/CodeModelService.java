@@ -8,14 +8,14 @@ import com.skyeye.common.object.OutputObject;
 
 public interface CodeModelService {
 
-	public void queryCodeModelList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryCodeModelList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void insertCodeModelMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void insertCodeModelMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void deleteCodeModelById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void deleteCodeModelById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryCodeModelMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryCodeModelMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void editCodeModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void editCodeModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

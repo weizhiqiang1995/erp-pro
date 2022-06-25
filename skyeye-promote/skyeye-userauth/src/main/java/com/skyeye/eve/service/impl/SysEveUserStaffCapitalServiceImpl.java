@@ -48,9 +48,9 @@ public class SysEveUserStaffCapitalServiceImpl implements SysEveUserStaffCapital
      */
     @Override
     public void addMonthMoney2StaffCapital(String staffId, String companyId, String departmentId, String monthTime, int type, String money) throws Exception {
-        synchronized(staffId){
+        synchronized (staffId) {
             Map<String, Object> staffCapital = sysEveUserStaffCapitalDao.queryStaffCapitalMation(staffId, monthTime);
-            if(staffCapital == null || staffCapital.isEmpty()){
+            if (staffCapital == null || staffCapital.isEmpty()) {
                 staffCapital = setStaffCapitalMation(staffId, companyId, departmentId, monthTime, type, money);
                 sysEveUserStaffCapitalDao.insertStaffCapitalMation(staffCapital);
             } else {
@@ -62,7 +62,7 @@ public class SysEveUserStaffCapitalServiceImpl implements SysEveUserStaffCapital
         }
     }
 
-    private Map<String, Object> setStaffCapitalMation(String staffId, String companyId, String departmentId, String monthTime, int type, String money){
+    private Map<String, Object> setStaffCapitalMation(String staffId, String companyId, String departmentId, String monthTime, int type, String money) {
         Map<String, Object> staffCapital = new HashMap<>();
         staffCapital.put("id", ToolUtil.getSurFaceId());
         staffCapital.put("staffId", staffId);

@@ -8,6 +8,6 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysWorkLogService {
 
-	public void querySysWorkLogList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void querySysWorkLogList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

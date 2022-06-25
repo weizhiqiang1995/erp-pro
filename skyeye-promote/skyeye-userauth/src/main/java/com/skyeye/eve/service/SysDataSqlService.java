@@ -8,12 +8,12 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysDataSqlService {
 
-	public void querySysDataSqlBackupsList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void querySysDataSqlBackupsList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryAllTableMationList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryAllTableMationList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void insertTableBackUps(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void insertTableBackUps(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void insertTableReduction(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void insertTableReduction(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

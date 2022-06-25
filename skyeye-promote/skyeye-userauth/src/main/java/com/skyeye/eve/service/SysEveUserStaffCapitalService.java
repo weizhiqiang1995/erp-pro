@@ -20,12 +20,12 @@ public interface SysEveUserStaffCapitalService {
     /**
      * 新增员工待结算资金池信息
      *
-     * @param staffId 员工id
-     * @param companyId 企业id
+     * @param staffId      员工id
+     * @param companyId    企业id
      * @param departmentId 部门id
-     * @param monthTime 指定年月，格式为：yyyy-MM
-     * @param type 该资金来源类型
-     * @param money 金额
+     * @param monthTime    指定年月，格式为：yyyy-MM
+     * @param type         该资金来源类型
+     * @param money        金额
      * @throws Exception
      */
     void addMonthMoney2StaffCapital(String staffId, String companyId, String departmentId, String monthTime, int type, String money) throws Exception;

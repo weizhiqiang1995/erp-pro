@@ -10,12 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @ClassName: RmProGramConstants
  * @Description: 小程序设计系统常量类
  * @author: skyeye云系列--卫志强
  * @date: 2021/7/4 22:08
- *
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
@@ -58,14 +56,13 @@ public class RmProGramConstants {
         private String filePath;
 
         /**
-         *
          * @param id
          * @param fileName 文件名称
          * @param fileType 文件类型
          * @param parentId 文件所属父id
          * @param filePath 文件路径
          */
-        Entity(String id, String fileName, String fileType, String parentId, String filePath){
+        Entity(String id, String fileName, String fileType, String parentId, String filePath) {
             this.id = id;
             this.fileName = fileName;
             this.fileType = fileType;
@@ -73,10 +70,10 @@ public class RmProGramConstants {
             this.filePath = filePath;
         }
 
-        public static List<Map<String, Object>> getList(){
+        public static List<Map<String, Object>> getList() {
             List<Map<String, Object>> beans = new ArrayList<>();
             Map<String, Object> bean;
-            for (Entity q : Entity.values()){
+            for (Entity q : Entity.values()) {
                 bean = new HashMap<>();
                 bean.put("id", q.getId());
                 bean.put("fileName", q.getFileName());

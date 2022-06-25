@@ -21,114 +21,113 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class SysEveIconServiceImpl implements SysEveIconService{
-	
-	@Autowired
-	private SysEveIconDao sysEveIconDao;
+public class SysEveIconServiceImpl implements SysEveIconService {
 
-	/**
-	 * 获取ICON列表
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void querySysIconList(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-		List<Map<String, Object>> beans = sysEveIconDao.querySysIconList(map);
-		outputObject.setBeans(beans);
-		outputObject.settotal(pages.getTotal());
-	}
+    @Autowired
+    private SysEveIconDao sysEveIconDao;
 
-	/**
-	 * 添加ICON信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	@Transactional(value="transactionManager")
-	public void insertSysIconMation(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> bean = sysEveIconDao.checkSysIconMation(map);
-		if (CollectionUtils.isEmpty(bean)) {
-			Map<String, Object> user = inputObject.getLogParams();
-			map.put("id", ToolUtil.getSurFaceId());
-			map.put("createId", user.get("id"));
-			map.put("createTime", DateUtil.getTimeAndToString());
-			sysEveIconDao.insertSysIconMation(map);
-		} else {
-			outputObject.setreturnMessage("该ICON属性已存在，不可进行二次保存");
-		}
-	}
+    /**
+     * 获取ICON列表
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void querySysIconList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
+        List<Map<String, Object>> beans = sysEveIconDao.querySysIconList(map);
+        outputObject.setBeans(beans);
+        outputObject.settotal(pages.getTotal());
+    }
 
-	/**
-	 * 删除ICON信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	@Transactional(value="transactionManager")
-	public void deleteSysIconMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		sysEveIconDao.deleteSysIconMationById(map);
-	}
+    /**
+     * 添加ICON信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    @Transactional(value = "transactionManager")
+    public void insertSysIconMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> bean = sysEveIconDao.checkSysIconMation(map);
+        if (CollectionUtils.isEmpty(bean)) {
+            Map<String, Object> user = inputObject.getLogParams();
+            map.put("id", ToolUtil.getSurFaceId());
+            map.put("createId", user.get("id"));
+            map.put("createTime", DateUtil.getTimeAndToString());
+            sysEveIconDao.insertSysIconMation(map);
+        } else {
+            outputObject.setreturnMessage("该ICON属性已存在，不可进行二次保存");
+        }
+    }
 
-	/**
-	 * 编辑ICON信息时进行回显
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void querySysIconMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> bean = sysEveIconDao.querySysIconMationToEditById(map);
-		outputObject.setBean(bean);
-		outputObject.settotal(1);
-	}
+    /**
+     * 删除ICON信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    @Transactional(value = "transactionManager")
+    public void deleteSysIconMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        sysEveIconDao.deleteSysIconMationById(map);
+    }
 
-	/**
-	 * 编辑ICON信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	@Transactional(value="transactionManager")
-	public void editSysIconMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> bean = sysEveIconDao.checkSysIconMation(map);
-		if (CollectionUtils.isEmpty(bean)) {
-			sysEveIconDao.editSysIconMationById(map);
-		} else {
-			outputObject.setreturnMessage("该ICON属性已存在，不可进行二次保存");
-		}
-	}
+    /**
+     * 编辑ICON信息时进行回显
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void querySysIconMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> bean = sysEveIconDao.querySysIconMationToEditById(map);
+        outputObject.setBean(bean);
+        outputObject.settotal(1);
+    }
 
-	/**
-	 * 获取ICON列表供menu菜单使用
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void querySysIconListToMenu(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-		List<Map<String, Object>> beans = sysEveIconDao.querySysIconListToMenu(map);
-		outputObject.setBeans(beans);
-		outputObject.settotal(pages.getTotal());
-	}
-	
-	
-	
+    /**
+     * 编辑ICON信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    @Transactional(value = "transactionManager")
+    public void editSysIconMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> bean = sysEveIconDao.checkSysIconMation(map);
+        if (CollectionUtils.isEmpty(bean)) {
+            sysEveIconDao.editSysIconMationById(map);
+        } else {
+            outputObject.setreturnMessage("该ICON属性已存在，不可进行二次保存");
+        }
+    }
+
+    /**
+     * 获取ICON列表供menu菜单使用
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void querySysIconListToMenu(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
+        List<Map<String, Object>> beans = sysEveIconDao.querySysIconListToMenu(map);
+        outputObject.setBeans(beans);
+        outputObject.settotal(pages.getTotal());
+    }
+
+
 }

@@ -14,56 +14,60 @@ import com.skyeye.eve.service.MainPageService;
 
 @Controller
 public class MainPageController {
-	
-	@Autowired
-	private MainPageService mainPageService;
-	
-	/**
+
+    @Autowired
+    private MainPageService mainPageService;
+
+    /**
      * 获取本月考勤天数，我的文件数，我的论坛帖数，我的知识库文档数
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @RequestMapping("/post/MainPageController/queryFourNumListByUserId")
     @ResponseBody
-    public void queryFourNumListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception{
-    	mainPageService.queryFourNumListByUserId(inputObject, outputObject);
+    public void queryFourNumListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+        mainPageService.queryFourNumListByUserId(inputObject, outputObject);
     }
-    
+
     /**
      * 获取公告类型以及前八条内容
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @RequestMapping("/post/MainPageController/queryNoticeContentListByUserId")
     @ResponseBody
-    public void queryNoticeContentListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception{
-    	mainPageService.queryNoticeContentListByUserId(inputObject, outputObject);
+    public void queryNoticeContentListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+        mainPageService.queryNoticeContentListByUserId(inputObject, outputObject);
     }
-    
+
     /**
      * 获取前八条热门论坛帖
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @RequestMapping("/post/MainPageController/queryHotForumList")
     @ResponseBody
-    public void queryHotForumList(InputObject inputObject, OutputObject outputObject) throws Exception{
-    	mainPageService.queryHotForumList(inputObject, outputObject);
+    public void queryHotForumList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        mainPageService.queryHotForumList(inputObject, outputObject);
     }
-    
+
     /**
      * 获取近期八条已审核的知识库
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @RequestMapping("/post/MainPageController/queryKnowledgeEightList")
     @ResponseBody
-    public void queryKnowledgeEightList(InputObject inputObject, OutputObject outputObject) throws Exception{
-    	mainPageService.queryKnowledgeEightList(inputObject, outputObject);
+    public void queryKnowledgeEightList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        mainPageService.queryKnowledgeEightList(inputObject, outputObject);
     }
-	
+
 }

@@ -8,6 +8,6 @@ import java.util.Map;
 
 public interface CommonDao {
 
-	public int insertCodeModelHistory(List<Map<String, Object>> inBeans) throws Exception;
+    public int insertCodeModelHistory(List<Map<String, Object>> inBeans) throws Exception;
 
 }

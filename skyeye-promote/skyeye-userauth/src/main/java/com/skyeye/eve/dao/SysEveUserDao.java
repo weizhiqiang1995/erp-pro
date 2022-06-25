@@ -11,73 +11,74 @@ import java.util.Map;
 
 public interface SysEveUserDao {
 
-	public List<Map<String, Object>> querySysUserList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> querySysUserList(Map<String, Object> map) throws Exception;
 
-	public Map<String, Object> querySysUserLockStateById(Map<String, Object> map) throws Exception;
+    public Map<String, Object> querySysUserLockStateById(Map<String, Object> map) throws Exception;
 
-	public int editSysUserLockStateToLockById(Map<String, Object> map) throws Exception;
+    public int editSysUserLockStateToLockById(Map<String, Object> map) throws Exception;
 
-	public int editSysUserLockStateToUnLockById(Map<String, Object> map) throws Exception;
+    public int editSysUserLockStateToUnLockById(Map<String, Object> map) throws Exception;
 
-	/**
-	 * 重置密码
-	 * @param map
-	 * @return
-	 * @throws Exception
-	 */
-	public int editSysUserPasswordMationById(Map<String, Object> map) throws Exception;
+    /**
+     * 重置密码
+     *
+     * @param map
+     * @return
+     * @throws Exception
+     */
+    public int editSysUserPasswordMationById(Map<String, Object> map) throws Exception;
 
-	public Map<String, Object> queryMationByUserCode(Map<String, Object> map) throws Exception;
+    public Map<String, Object> queryMationByUserCode(Map<String, Object> map) throws Exception;
 
-	public List<Map<String, Object>> queryRoleList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryRoleList(Map<String, Object> map) throws Exception;
 
-	public Map<String, Object> queryBindRoleMationByUserId(Map<String, Object> map) throws Exception;
+    public Map<String, Object> queryBindRoleMationByUserId(Map<String, Object> map) throws Exception;
 
-	public int editRoleIdsByUserId(Map<String, Object> map) throws Exception;
+    public int editRoleIdsByUserId(Map<String, Object> map) throws Exception;
 
-	public List<Map<String, Object>> queryDeskTopsMenuByUserId(Map<String, Object> userMation) throws Exception;
+    public List<Map<String, Object>> queryDeskTopsMenuByUserId(Map<String, Object> userMation) throws Exception;
 
-	public int editUserInstallThemeColor(Map<String, Object> map) throws Exception;
+    public int editUserInstallThemeColor(Map<String, Object> map) throws Exception;
 
-	public int editUserInstallWinBgPic(Map<String, Object> map) throws Exception;
+    public int editUserInstallWinBgPic(Map<String, Object> map) throws Exception;
 
-	public int editUserInstallWinLockBgPic(Map<String, Object> map) throws Exception;
+    public int editUserInstallWinLockBgPic(Map<String, Object> map) throws Exception;
 
-	public int editUserInstallWinStartMenuSize(Map<String, Object> map) throws Exception;
+    public int editUserInstallWinStartMenuSize(Map<String, Object> map) throws Exception;
 
-	public int editUserInstallWinTaskPosition(Map<String, Object> map) throws Exception;
+    public int editUserInstallWinTaskPosition(Map<String, Object> map) throws Exception;
 
-	public Map<String, Object> querySysUserCodeByMation(Map<String, Object> map) throws Exception;
+    public Map<String, Object> querySysUserCodeByMation(Map<String, Object> map) throws Exception;
 
-	public int insertSysUserMation(Map<String, Object> map) throws Exception;
+    public int insertSysUserMation(Map<String, Object> map) throws Exception;
 
-	public int insertSysUserInstallMation(Map<String, Object> map) throws Exception;
+    public int insertSysUserInstallMation(Map<String, Object> map) throws Exception;
 
-	public int editUserPassword(Map<String, Object> bean) throws Exception;
+    public int editUserPassword(Map<String, Object> bean) throws Exception;
 
-	public int editUserInstallVagueBgSrc(Map<String, Object> map) throws Exception;
+    public int editUserInstallVagueBgSrc(Map<String, Object> map) throws Exception;
 
-	public int editUserInstallLoadMenuIconById(Map<String, Object> map) throws Exception;
-	
-	Map<String, Object> queryUserDetailsMationByUserId(@Param("userId") String userId) throws Exception;
+    public int editUserInstallLoadMenuIconById(Map<String, Object> map) throws Exception;
 
-	public int editUserDetailsMationByUserId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryUserDetailsMationByUserId(@Param("userId") String userId) throws Exception;
 
-	public List<Map<String, Object>> querySysUserListByUserName(Map<String, Object> map) throws Exception;
+    public int editUserDetailsMationByUserId(Map<String, Object> map) throws Exception;
 
-	int editSysUserStaffBindUserId(Map<String, Object> map) throws Exception;
-	
-	public List<Map<String, Object>> querySysDeskTopByUserId(Map<String, Object> user) throws Exception;
+    public List<Map<String, Object>> querySysUserListByUserName(Map<String, Object> map) throws Exception;
 
-	public Map<String, Object> queryUserSchoolMationByUserId(@Param("userId") String userId);
+    int editSysUserStaffBindUserId(Map<String, Object> map) throws Exception;
 
-	/**
-	 * 修改用户状态
-	 *
-	 * @param userId 用户id
-	 * @param lockState 锁定状态
-	 * @return
-	 */
-	int editSysUserLock(@Param("userId") String userId, @Param("lockState") Integer lockState);
-	
+    public List<Map<String, Object>> querySysDeskTopByUserId(Map<String, Object> user) throws Exception;
+
+    public Map<String, Object> queryUserSchoolMationByUserId(@Param("userId") String userId);
+
+    /**
+     * 修改用户状态
+     *
+     * @param userId    用户id
+     * @param lockState 锁定状态
+     * @return
+     */
+    int editSysUserLock(@Param("userId") String userId, @Param("lockState") Integer lockState);
+
 }

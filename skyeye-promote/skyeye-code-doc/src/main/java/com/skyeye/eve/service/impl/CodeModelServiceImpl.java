@@ -21,109 +21,107 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @ClassName: CodeModelServiceImpl
  * @Description: 模板信息管理服务层
  * @author: skyeye云系列--卫志强
  * @date: 2021/8/7 23:37
- *
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
-public class CodeModelServiceImpl implements CodeModelService{
-	
-	@Autowired
-	private CodeModelDao codeModelDao;
+public class CodeModelServiceImpl implements CodeModelService {
 
-	/**
-	 * 获取模板列表
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void queryCodeModelList(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-		List<Map<String, Object>> beans = codeModelDao.queryCodeModelList(map);
-		outputObject.setBeans(beans);
-		outputObject.settotal(pages.getTotal());
-	}
+    @Autowired
+    private CodeModelDao codeModelDao;
 
-	/**
-	 * 新增模板列表
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	@Transactional(value="transactionManager")
-	public void insertCodeModelMation(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> bean = codeModelDao.queryCodeModelMationByName(map);
-		if(bean == null){
-			Map<String, Object> user = inputObject.getLogParams();
-			map.put("id", ToolUtil.getSurFaceId());
-			map.put("createId", user.get("id"));
-			map.put("createTime", DateUtil.getTimeAndToString());
-			codeModelDao.insertCodeModelMation(map);
-		}else{
-			outputObject.setreturnMessage("该模板已存在，请更换。");
-		}
-	}
+    /**
+     * 获取模板列表
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void queryCodeModelList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
+        List<Map<String, Object>> beans = codeModelDao.queryCodeModelList(map);
+        outputObject.setBeans(beans);
+        outputObject.settotal(pages.getTotal());
+    }
 
-	/**
-	 * 删除模板信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	@Transactional(value="transactionManager")
-	public void deleteCodeModelById(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		codeModelDao.deleteCodeModelById(map);
-	}
+    /**
+     * 新增模板列表
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    @Transactional(value = "transactionManager")
+    public void insertCodeModelMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> bean = codeModelDao.queryCodeModelMationByName(map);
+        if (bean == null) {
+            Map<String, Object> user = inputObject.getLogParams();
+            map.put("id", ToolUtil.getSurFaceId());
+            map.put("createId", user.get("id"));
+            map.put("createTime", DateUtil.getTimeAndToString());
+            codeModelDao.insertCodeModelMation(map);
+        } else {
+            outputObject.setreturnMessage("该模板已存在，请更换。");
+        }
+    }
 
-	/**
-	 * 编辑模板信息时进行回显
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void queryCodeModelMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> bean = codeModelDao.queryCodeModelMationToEditById(map);
-		outputObject.setBean(bean);
-		outputObject.settotal(1);
-	}
+    /**
+     * 删除模板信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    @Transactional(value = "transactionManager")
+    public void deleteCodeModelById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        codeModelDao.deleteCodeModelById(map);
+    }
 
-	/**
-	 * 编辑模板信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	@Transactional(value="transactionManager")
-	public void editCodeModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> bean = codeModelDao.queryCodeModelMationByIdAndName(map);
-		if (CollectionUtils.isEmpty(bean)) {
-			Map<String, Object> user = inputObject.getLogParams();
-			map.put("lastUpdateId", user.get("id"));
-			map.put("lastUpdateTime", DateUtil.getTimeAndToString());
-			codeModelDao.editCodeModelMationById(map);
-		} else {
-			outputObject.setreturnMessage("该模板已存在，请更换。");
-		}
-	}
-	
+    /**
+     * 编辑模板信息时进行回显
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void queryCodeModelMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> bean = codeModelDao.queryCodeModelMationToEditById(map);
+        outputObject.setBean(bean);
+        outputObject.settotal(1);
+    }
+
+    /**
+     * 编辑模板信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    @Transactional(value = "transactionManager")
+    public void editCodeModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> bean = codeModelDao.queryCodeModelMationByIdAndName(map);
+        if (CollectionUtils.isEmpty(bean)) {
+            Map<String, Object> user = inputObject.getLogParams();
+            map.put("lastUpdateId", user.get("id"));
+            map.put("lastUpdateTime", DateUtil.getTimeAndToString());
+            codeModelDao.editCodeModelMationById(map);
+        } else {
+            outputObject.setreturnMessage("该模板已存在，请更换。");
+        }
+    }
+
 }

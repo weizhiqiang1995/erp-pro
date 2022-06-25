@@ -4,7 +4,7 @@
 package com.skyeye.mq.job;
 
 public interface JobMateService {
-	
-	public void call(String data) throws Exception;
-	
+
+    public void call(String data) throws Exception;
+
 }

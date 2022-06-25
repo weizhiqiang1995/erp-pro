@@ -8,8 +8,8 @@ import com.skyeye.common.object.OutputObject;
 
 public interface MyAgencyService {
 
-	public void queryMyAgencyList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryMyAgencyList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void deleteMyAgencyList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void deleteMyAgencyList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

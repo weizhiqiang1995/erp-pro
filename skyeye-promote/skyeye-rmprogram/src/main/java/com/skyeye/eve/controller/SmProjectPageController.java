@@ -13,92 +13,92 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SmProjectPageController {
-	
-	@Autowired
-	private SmProjectPageService smProjectPageService;
 
-	/**
-	 * 根据项目获取项目内部的页面
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SmProjectPageController/queryProPageMationByProIdList")
-	public void queryProPageMationByProIdList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		smProjectPageService.queryProPageMationByProIdList(inputObject, outputObject);
-	}
+    @Autowired
+    private SmProjectPageService smProjectPageService;
 
-	/**
-	 * 添加项目内部的页面
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SmProjectPageController/insertProPageMationByProId")
-	public void insertProPageMationByProId(InputObject inputObject, OutputObject outputObject) throws Exception{
-		smProjectPageService.insertProPageMationByProId(inputObject, outputObject);
-	}
+    /**
+     * 根据项目获取项目内部的页面
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SmProjectPageController/queryProPageMationByProIdList")
+    public void queryProPageMationByProIdList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        smProjectPageService.queryProPageMationByProIdList(inputObject, outputObject);
+    }
 
-	/**
-	 * 小程序页面展示顺序上移
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SmProjectPageController/editSmProjectPageSortTopById")
-	public void editSmProjectPageSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		smProjectPageService.editSmProjectPageSortTopById(inputObject, outputObject);
-	}
+    /**
+     * 添加项目内部的页面
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SmProjectPageController/insertProPageMationByProId")
+    public void insertProPageMationByProId(InputObject inputObject, OutputObject outputObject) throws Exception {
+        smProjectPageService.insertProPageMationByProId(inputObject, outputObject);
+    }
 
-	/**
-	 * 小程序页面展示顺序下移
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SmProjectPageController/editSmProjectPageSortLowerById")
-	public void editSmProjectPageSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		smProjectPageService.editSmProjectPageSortLowerById(inputObject, outputObject);
-	}
+    /**
+     * 小程序页面展示顺序上移
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SmProjectPageController/editSmProjectPageSortTopById")
+    public void editSmProjectPageSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        smProjectPageService.editSmProjectPageSortTopById(inputObject, outputObject);
+    }
 
-	/**
-	 * 编辑小程序页面信息时进行回显
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SmProjectPageController/querySmProjectPageMationToEditById")
-	public void querySmProjectPageMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		smProjectPageService.querySmProjectPageMationToEditById(inputObject, outputObject);
-	}
+    /**
+     * 小程序页面展示顺序下移
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SmProjectPageController/editSmProjectPageSortLowerById")
+    public void editSmProjectPageSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        smProjectPageService.editSmProjectPageSortLowerById(inputObject, outputObject);
+    }
 
-	/**
-	 * 编辑小程序页面信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SmProjectPageController/editSmProjectPageMationById")
-	public void editSmProjectPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		smProjectPageService.editSmProjectPageMationById(inputObject, outputObject);
-	}
+    /**
+     * 编辑小程序页面信息时进行回显
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SmProjectPageController/querySmProjectPageMationToEditById")
+    public void querySmProjectPageMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        smProjectPageService.querySmProjectPageMationToEditById(inputObject, outputObject);
+    }
 
-	/**
-	 * 删除小程序页面信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SmProjectPageController/deleteSmProjectPageMationById")
-	public void deleteSmProjectPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		smProjectPageService.deleteSmProjectPageMationById(inputObject, outputObject);
-	}
-	
+    /**
+     * 编辑小程序页面信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SmProjectPageController/editSmProjectPageMationById")
+    public void editSmProjectPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        smProjectPageService.editSmProjectPageMationById(inputObject, outputObject);
+    }
+
+    /**
+     * 删除小程序页面信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SmProjectPageController/deleteSmProjectPageMationById")
+    public void deleteSmProjectPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        smProjectPageService.deleteSmProjectPageMationById(inputObject, outputObject);
+    }
+
 }

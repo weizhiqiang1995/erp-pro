@@ -15,33 +15,33 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ApiMationController {
 
-	@Autowired
-	private ApiMationService apiMationService;
+    @Autowired
+    private ApiMationService apiMationService;
 
-	/**
-	 * 通过id查找对应的api接口信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/ApiMationController/selectApiMationById")
-	@ResponseBody
-	public void selectApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
-		apiMationService.selectApiMationById(inputObject, outputObject);
-	}
+    /**
+     * 通过id查找对应的api接口信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/ApiMationController/selectApiMationById")
+    @ResponseBody
+    public void selectApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        apiMationService.selectApiMationById(inputObject, outputObject);
+    }
 
-	/**
-	 * 编辑api接口信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/ApiMationController/editApiMationById")
-	@ResponseBody
-	public void editApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
-		apiMationService.editApiMationById(inputObject, outputObject);
-	}
+    /**
+     * 编辑api接口信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/ApiMationController/editApiMationById")
+    @ResponseBody
+    public void editApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        apiMationService.editApiMationById(inputObject, outputObject);
+    }
 
 }

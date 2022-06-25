@@ -16,85 +16,83 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
  * @ClassName: PlanProjectController
  * @Description: 业务流程规划管理控制类
  * @author: skyeye云系列--卫志强
  * @date: 2022/5/2 0:35
- *
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @RestController
 @Api(value = "业务流程规划", tags = "业务流程规划", modelName = "业务流程规划")
 public class PlanProjectController {
-	
-	@Autowired
-	private PlanProjectService planProjectService;
 
-	/**
-	 * 获取业务流程规划列表
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@ApiOperation(id = "planproject001", value = "获取业务流程规划列表", method = "POST", allUse = "1")
-	@ApiImplicitParams({
-		@ApiImplicitParam(id = "limit", name = "limit", value = "分页参数,每页多少条数据", required = "required,num"),
-		@ApiImplicitParam(id = "page", name = "page", value = "分页参数,第几页", required = "required,num"),
-		@ApiImplicitParam(id = "projectName", name = "projectName", value = "业务流程规划名称")})
-	@RequestMapping("/post/PlanProjectController/queryPlanProjectList")
-	public void queryPlanProjectList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		planProjectService.queryPlanProjectList(inputObject, outputObject);
-	}
+    @Autowired
+    private PlanProjectService planProjectService;
 
-	/**
-	 * 新增业务流程规划
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/PlanProjectController/insertPlanProjectMation")
-	public void insertPlanProjectMation(InputObject inputObject, OutputObject outputObject) throws Exception{
-		planProjectService.insertPlanProjectMation(inputObject, outputObject);
-	}
+    /**
+     * 获取业务流程规划列表
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @ApiOperation(id = "planproject001", value = "获取业务流程规划列表", method = "POST", allUse = "1")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "limit", name = "limit", value = "分页参数,每页多少条数据", required = "required,num"),
+        @ApiImplicitParam(id = "page", name = "page", value = "分页参数,第几页", required = "required,num"),
+        @ApiImplicitParam(id = "projectName", name = "projectName", value = "业务流程规划名称")})
+    @RequestMapping("/post/PlanProjectController/queryPlanProjectList")
+    public void queryPlanProjectList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        planProjectService.queryPlanProjectList(inputObject, outputObject);
+    }
 
-	/**
-	 * 删除业务流程规划
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/PlanProjectController/deletePlanProjectMationById")
-	public void deletePlanProjectMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		planProjectService.deletePlanProjectMationById(inputObject, outputObject);
-	}
+    /**
+     * 新增业务流程规划
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/PlanProjectController/insertPlanProjectMation")
+    public void insertPlanProjectMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        planProjectService.insertPlanProjectMation(inputObject, outputObject);
+    }
 
-	/**
-	 * 编辑业务流程规划时进行回显
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/PlanProjectController/queryPlanProjectMationToEditById")
-	public void queryPlanProjectMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		planProjectService.queryPlanProjectMationToEditById(inputObject, outputObject);
-	}
+    /**
+     * 删除业务流程规划
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/PlanProjectController/deletePlanProjectMationById")
+    public void deletePlanProjectMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        planProjectService.deletePlanProjectMationById(inputObject, outputObject);
+    }
 
-	/**
-	 * 编辑业务流程规划
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/PlanProjectController/editPlanProjectMationById")
-	public void editPlanProjectMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		planProjectService.editPlanProjectMationById(inputObject, outputObject);
-	}
-	
+    /**
+     * 编辑业务流程规划时进行回显
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/PlanProjectController/queryPlanProjectMationToEditById")
+    public void queryPlanProjectMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        planProjectService.queryPlanProjectMationToEditById(inputObject, outputObject);
+    }
+
+    /**
+     * 编辑业务流程规划
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/PlanProjectController/editPlanProjectMationById")
+    public void editPlanProjectMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        planProjectService.editPlanProjectMationById(inputObject, outputObject);
+    }
+
 }

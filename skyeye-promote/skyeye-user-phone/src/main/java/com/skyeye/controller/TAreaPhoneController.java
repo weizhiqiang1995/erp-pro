@@ -13,20 +13,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TAreaPhoneController {
-	
-	@Autowired
-	private TAreaPhoneService tAreaPhoneService;
 
-	/**
-	 * 手机端查询省市区数据
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/TAreaPhoneController/queryTAreaPhoneList")
-	public void queryTAreaPhoneList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		tAreaPhoneService.queryTAreaPhoneList(inputObject, outputObject);
-	}
-	
+    @Autowired
+    private TAreaPhoneService tAreaPhoneService;
+
+    /**
+     * 手机端查询省市区数据
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/TAreaPhoneController/queryTAreaPhoneList")
+    public void queryTAreaPhoneList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        tAreaPhoneService.queryTAreaPhoneList(inputObject, outputObject);
+    }
+
 }

@@ -9,15 +9,15 @@ import com.skyeye.common.object.OutputObject;
 
 public interface CommonService {
 
-	void uploadFile(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void uploadFile(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	void uploadFileBase64(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void uploadFileBase64(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	void downloadFileByJsonData(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void downloadFileByJsonData(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	void querySysWinMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
-	
-	void queryAllSysUserIsIncumbency(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysWinMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+    void queryAllSysUserIsIncumbency(InputObject inputObject, OutputObject outputObject) throws Exception;
 
     void queryFilePathByFileType(InputObject inputObject, OutputObject outputObject) throws Exception;
 }

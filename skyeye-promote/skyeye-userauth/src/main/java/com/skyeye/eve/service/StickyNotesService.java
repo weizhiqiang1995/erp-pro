@@ -8,12 +8,12 @@ import com.skyeye.common.object.OutputObject;
 
 public interface StickyNotesService {
 
-	public void insertStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void insertStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void selectStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void selectStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void editStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void editStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void deleteStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void deleteStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

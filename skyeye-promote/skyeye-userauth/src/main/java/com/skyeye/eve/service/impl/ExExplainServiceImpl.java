@@ -22,103 +22,103 @@ import java.util.Map;
 
 @Service
 public class ExExplainServiceImpl implements ExExplainService {
-	
-	@Autowired
-	private ExExplainDao exExplainDao;
-	
-	@Autowired
-	public JedisClientService jedisClient;
 
-	/**
-	 * 添加使用说明信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	@Transactional(value="transactionManager")
-	public void insertExExplainMation(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> bean = exExplainDao.queryExExplainMation(map);
-		if(bean == null){
-			Integer type = Integer.parseInt(map.get("type").toString());
-			Map<String, Object> user = inputObject.getLogParams();
-			String id = ToolUtil.getSurFaceId();
-			map.put("id", id);
-			map.put("createId", user.get("id"));
-			map.put("createTime", DateUtil.getTimeAndToString());
-			exExplainDao.insertExExplainMation(map);
-			jedisClient.del(Constants.getSysExplainExexplainRedisKey(type));
-			bean = new HashMap<>();
-			bean.put("id", id);
-			outputObject.setBean(bean);
-		}else{
-			outputObject.setreturnMessage("该代码生成器说明已存在，不可进行二次保存");
-		}
-	}
+    @Autowired
+    private ExExplainDao exExplainDao;
 
-	/**
-	 * 编辑使用说明信息时进行回显
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void queryExExplainMation(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> bean = exExplainDao.queryExExplainMation(map);
-		outputObject.setBean(bean);
-		outputObject.settotal(1);
-	}
+    @Autowired
+    public JedisClientService jedisClient;
 
-	/**
-	 * 编辑使用说明信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	@Transactional(value="transactionManager")
-	public void editExExplainMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> bean = exExplainDao.queryExExplainMation(map);
-		if(bean == null){
-			outputObject.setreturnMessage("该代码生成器说明不存在，不可进行编辑");
-		}else{
-			Integer type = Integer.parseInt(map.get("type").toString());
-			jedisClient.del(Constants.getSysExplainExexplainRedisKey(type));
-			exExplainDao.editExExplainMationById(map);
-		}
-	}
+    /**
+     * 添加使用说明信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    @Transactional(value = "transactionManager")
+    public void insertExExplainMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> bean = exExplainDao.queryExExplainMation(map);
+        if (bean == null) {
+            Integer type = Integer.parseInt(map.get("type").toString());
+            Map<String, Object> user = inputObject.getLogParams();
+            String id = ToolUtil.getSurFaceId();
+            map.put("id", id);
+            map.put("createId", user.get("id"));
+            map.put("createTime", DateUtil.getTimeAndToString());
+            exExplainDao.insertExExplainMation(map);
+            jedisClient.del(Constants.getSysExplainExexplainRedisKey(type));
+            bean = new HashMap<>();
+            bean.put("id", id);
+            outputObject.setBean(bean);
+        } else {
+            outputObject.setreturnMessage("该代码生成器说明已存在，不可进行二次保存");
+        }
+    }
 
-	/**
-	 * 获取使用说明信息供展示
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void queryExExplainMationToShow(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Integer type = Integer.parseInt(map.get("type").toString());
-		String key = Constants.getSysExplainExexplainRedisKey(type);
-		if (jedisClient.exists(key)) {
-			map = JSONUtil.toBean(jedisClient.get(key), null);
-		} else {
-			Map<String, Object> bean = exExplainDao.queryExExplainMation(map);
-			if (bean == null) {
-				map.put("title", "标题");
-				map.put("content", "等待发布说明。");
-			} else {
-				jedisClient.set(key, JSONUtil.toJsonStr(bean));
-				map = bean;
-			}
-		}
-		outputObject.setBean(map);
-	}
-	
+    /**
+     * 编辑使用说明信息时进行回显
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void queryExExplainMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> bean = exExplainDao.queryExExplainMation(map);
+        outputObject.setBean(bean);
+        outputObject.settotal(1);
+    }
+
+    /**
+     * 编辑使用说明信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    @Transactional(value = "transactionManager")
+    public void editExExplainMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> bean = exExplainDao.queryExExplainMation(map);
+        if (bean == null) {
+            outputObject.setreturnMessage("该代码生成器说明不存在，不可进行编辑");
+        } else {
+            Integer type = Integer.parseInt(map.get("type").toString());
+            jedisClient.del(Constants.getSysExplainExexplainRedisKey(type));
+            exExplainDao.editExExplainMationById(map);
+        }
+    }
+
+    /**
+     * 获取使用说明信息供展示
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void queryExExplainMationToShow(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Integer type = Integer.parseInt(map.get("type").toString());
+        String key = Constants.getSysExplainExexplainRedisKey(type);
+        if (jedisClient.exists(key)) {
+            map = JSONUtil.toBean(jedisClient.get(key), null);
+        } else {
+            Map<String, Object> bean = exExplainDao.queryExExplainMation(map);
+            if (bean == null) {
+                map.put("title", "标题");
+                map.put("content", "等待发布说明。");
+            } else {
+                jedisClient.set(key, JSONUtil.toJsonStr(bean));
+                map = bean;
+            }
+        }
+        outputObject.setBean(map);
+    }
+
 }

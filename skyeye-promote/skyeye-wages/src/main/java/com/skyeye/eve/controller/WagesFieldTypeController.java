@@ -25,7 +25,7 @@ public class WagesFieldTypeController {
      * @throws Exception
      */
     @RequestMapping("/post/WagesFieldTypeController/queryWagesFieldTypeList")
-    public void queryWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void queryWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
         wagesFieldTypeService.queryWagesFieldTypeList(inputObject, outputObject);
     }
 
@@ -37,7 +37,7 @@ public class WagesFieldTypeController {
      * @throws Exception
      */
     @RequestMapping("/post/WagesFieldTypeController/insertWagesFieldTypeMation")
-    public void insertWagesFieldTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void insertWagesFieldTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         wagesFieldTypeService.insertWagesFieldTypeMation(inputObject, outputObject);
     }
 
@@ -49,7 +49,7 @@ public class WagesFieldTypeController {
      * @throws Exception
      */
     @RequestMapping("/post/WagesFieldTypeController/queryWagesFieldTypeMationToEditById")
-    public void queryWagesFieldTypeMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void queryWagesFieldTypeMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
         wagesFieldTypeService.queryWagesFieldTypeMationToEditById(inputObject, outputObject);
     }
 
@@ -61,7 +61,7 @@ public class WagesFieldTypeController {
      * @throws Exception
      */
     @RequestMapping("/post/WagesFieldTypeController/editWagesFieldTypeMationById")
-    public void editWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void editWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         wagesFieldTypeService.editWagesFieldTypeMationById(inputObject, outputObject);
     }
 
@@ -73,7 +73,7 @@ public class WagesFieldTypeController {
      * @throws Exception
      */
     @RequestMapping("/post/WagesFieldTypeController/deleteWagesFieldTypeMationById")
-    public void deleteWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void deleteWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         wagesFieldTypeService.deleteWagesFieldTypeMationById(inputObject, outputObject);
     }
 
@@ -85,7 +85,7 @@ public class WagesFieldTypeController {
      * @throws Exception
      */
     @RequestMapping("/post/WagesFieldTypeController/enableWagesFieldTypeMationById")
-    public void enableWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void enableWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         wagesFieldTypeService.enableWagesFieldTypeMationById(inputObject, outputObject);
     }
 
@@ -97,7 +97,7 @@ public class WagesFieldTypeController {
      * @throws Exception
      */
     @RequestMapping("/post/WagesFieldTypeController/disableWagesFieldTypeMationById")
-    public void disableWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void disableWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         wagesFieldTypeService.disableWagesFieldTypeMationById(inputObject, outputObject);
     }
 
@@ -109,7 +109,7 @@ public class WagesFieldTypeController {
      * @throws Exception
      */
     @RequestMapping("/post/WagesFieldTypeController/queryEnableWagesFieldTypeList")
-    public void queryEnableWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void queryEnableWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
         wagesFieldTypeService.queryEnableWagesFieldTypeList(inputObject, outputObject);
     }
 
@@ -121,7 +121,7 @@ public class WagesFieldTypeController {
      * @throws Exception
      */
     @RequestMapping("/post/WagesFieldTypeController/querySysWagesFieldTypeList")
-    public void querySysWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void querySysWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
         wagesFieldTypeService.querySysWagesFieldTypeList(inputObject, outputObject);
     }
 

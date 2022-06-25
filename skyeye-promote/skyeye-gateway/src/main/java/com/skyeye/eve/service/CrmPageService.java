@@ -8,14 +8,14 @@ import com.skyeye.common.object.OutputObject;
 
 public interface CrmPageService {
 
-	public void queryInsertNumByYear(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryInsertNumByYear(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryCustomNumByOtherType(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryCustomNumByOtherType(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryCustomDocumentaryType(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryCustomDocumentaryType(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryNewContractNum(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryNewContractNum(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryNewDocumentaryNum(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryNewDocumentaryNum(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

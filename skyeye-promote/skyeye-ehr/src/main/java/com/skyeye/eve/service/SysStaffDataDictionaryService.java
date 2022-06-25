@@ -9,7 +9,7 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysStaffDataDictionaryService {
 
-	public void querySysStaffDataDictionaryList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void querySysStaffDataDictionaryList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
     public void insertSysStaffDataDictionaryMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 

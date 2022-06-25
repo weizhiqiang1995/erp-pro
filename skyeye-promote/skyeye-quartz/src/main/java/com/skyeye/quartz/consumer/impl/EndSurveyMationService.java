@@ -25,7 +25,7 @@ public class EndSurveyMationService implements TaskMateService {
         map.put("id", sysQuartz.getName());
         // 获取问卷信息
         Map<String, Object> surveyMation = sysQuartzDao.querySurveyMationById(map);
-        if("1".equals(surveyMation.get("surveyState").toString())){
+        if ("1".equals(surveyMation.get("surveyState").toString())) {
             // 执行中
             map.put("realEndTime", DateUtil.getTimeAndToString());
             sysQuartzDao.editSurveyStateToEndNumZdById(map);

@@ -35,7 +35,7 @@ public class SysQuartzRunHistoryController {
      */
     @RequestMapping("/post/SysQuartzRunHistoryController/querySysQuartzRunHistoryByQuartzId")
     @ResponseBody
-    public void querySysQuartzRunHistoryByQuartzId(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void querySysQuartzRunHistoryByQuartzId(InputObject inputObject, OutputObject outputObject) throws Exception {
         sysQuartzRunHistoryService.querySysQuartzRunHistoryByQuartzId(inputObject, outputObject);
     }
 

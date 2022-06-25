@@ -19,71 +19,69 @@ import com.skyeye.eve.service.ExExplainService;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 
  * @ClassName: ExExplainController
  * @Description: 部分功能的使用说明管理控制类
  * @author: skyeye云系列--卫志强
  * @date: 2022/5/15 18:46
- *   
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @RestController
 @Api(value = "功能使用说明", tags = "功能使用说明", modelName = "基础模块")
 public class ExExplainController {
-	
-	@Autowired
-	private ExExplainService exExplainService;
 
-	/**
-	 * 添加使用说明信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/ExExplainController/insertExExplainMation")
-	public void insertExExplainMation(InputObject inputObject, OutputObject outputObject) throws Exception{
-		exExplainService.insertExExplainMation(inputObject, outputObject);
-	}
+    @Autowired
+    private ExExplainService exExplainService;
 
-	/**
-	 * 编辑使用说明信息时进行回显
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/ExExplainController/queryExExplainMation")
-	public void queryExExplainMation(InputObject inputObject, OutputObject outputObject) throws Exception{
-		exExplainService.queryExExplainMation(inputObject, outputObject);
-	}
+    /**
+     * 添加使用说明信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/ExExplainController/insertExExplainMation")
+    public void insertExExplainMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        exExplainService.insertExExplainMation(inputObject, outputObject);
+    }
 
-	/**
-	 * 编辑使用说明信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/ExExplainController/editExExplainMationById")
-	public void editExExplainMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		exExplainService.editExExplainMationById(inputObject, outputObject);
-	}
+    /**
+     * 编辑使用说明信息时进行回显
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/ExExplainController/queryExExplainMation")
+    public void queryExExplainMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        exExplainService.queryExExplainMation(inputObject, outputObject);
+    }
 
-	/**
-	 * 获取使用说明信息供展示
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@ApiOperation(id = "queryExExplainMationToShow", value = "获取使用说明信息供展示", method = "GET", allUse = "2")
-	@ApiImplicitParams({
-		@ApiImplicitParam(id = "type", name = "type", value = "说明介绍类型", required = "required,num")})
-	@RequestMapping("/post/ExExplainController/queryExExplainMationToShow")
-	public void queryExExplainMationToShow(InputObject inputObject, OutputObject outputObject) throws Exception{
-		exExplainService.queryExExplainMationToShow(inputObject, outputObject);
-	}
-	
+    /**
+     * 编辑使用说明信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/ExExplainController/editExExplainMationById")
+    public void editExExplainMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        exExplainService.editExExplainMationById(inputObject, outputObject);
+    }
+
+    /**
+     * 获取使用说明信息供展示
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @ApiOperation(id = "queryExExplainMationToShow", value = "获取使用说明信息供展示", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "type", name = "type", value = "说明介绍类型", required = "required,num")})
+    @RequestMapping("/post/ExExplainController/queryExExplainMationToShow")
+    public void queryExExplainMationToShow(InputObject inputObject, OutputObject outputObject) throws Exception {
+        exExplainService.queryExExplainMationToShow(inputObject, outputObject);
+    }
+
 }

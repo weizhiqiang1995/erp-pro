@@ -11,19 +11,19 @@ import java.util.Map;
 
 public interface JobMateMationDao {
 
-	public List<Map<String, Object>> queryJobMateMationByBigTypeList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryJobMateMationByBigTypeList(Map<String, Object> map) throws Exception;
 
-	public int insertJobMation(Map<String, Object> parentJob) throws Exception;
+    public int insertJobMation(Map<String, Object> parentJob) throws Exception;
 
-	public Map<String, Object> queryJobMationByJobId(@Param("jobId") String jobId) throws Exception;
+    public Map<String, Object> queryJobMationByJobId(@Param("jobId") String jobId) throws Exception;
 
-	public int editJobMationByJobId(@Param("jobId") String jobId, @Param("status") String status,
-			@Param("responseBody") String responseBody, @Param("complateTime") String complateTime) throws Exception;
+    public int editJobMationByJobId(@Param("jobId") String jobId, @Param("status") String status,
+                                    @Param("responseBody") String responseBody, @Param("complateTime") String complateTime) throws Exception;
 
-	public List<Map<String, Object>> queryNoComChildJobMationByJobId(@Param("jobId") String jobId) throws Exception;
+    public List<Map<String, Object>> queryNoComChildJobMationByJobId(@Param("jobId") String jobId) throws Exception;
 
-	public List<Map<String, Object>> queryFailChildJobMationByJobId(@Param("jobId") String jobId) throws Exception;
+    public List<Map<String, Object>> queryFailChildJobMationByJobId(@Param("jobId") String jobId) throws Exception;
 
-	public int editJobRequestBodyMation(Map<String, Object> parentJob) throws Exception;
+    public int editJobRequestBodyMation(Map<String, Object> parentJob) throws Exception;
 
 }

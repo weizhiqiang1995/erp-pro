@@ -12,5 +12,5 @@ public interface CompanyJobScoreFieldDao {
     public int deleteCompanyJobScoreFieldByJobScoreId(@Param("jobScoreId") String jobScoreId) throws Exception;
 
     public List<Map<String, Object>> queryCompanyJobScoreFieldByJobScoreId(@Param("jobScoreId") String jobScoreId) throws Exception;
-    
+
 }

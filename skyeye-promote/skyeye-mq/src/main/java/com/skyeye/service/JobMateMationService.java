@@ -9,12 +9,12 @@ import com.skyeye.common.object.OutputObject;
 
 public interface JobMateMationService {
 
-	void queryJobMateMationByBigTypeList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryJobMateMationByBigTypeList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	void sendMQProducer(String jsonStr, String userId) throws Exception;
-	
-	void comMQJobMation(String jobId, String status, String responseBody) throws Exception;
+    void sendMQProducer(String jsonStr, String userId) throws Exception;
 
-	void sendMQProducer(InputObject inputObject, OutputObject outputObject) throws Exception;
-	
+    void comMQJobMation(String jobId, String status, String responseBody) throws Exception;
+
+    void sendMQProducer(InputObject inputObject, OutputObject outputObject) throws Exception;
+
 }

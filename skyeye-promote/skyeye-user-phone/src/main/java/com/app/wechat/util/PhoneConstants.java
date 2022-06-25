@@ -6,6 +6,6 @@ package com.app.wechat.util;
 
 public class PhoneConstants {
 
-	public static String SYS_ALL_T_AREA_LIST = "sys_all_t_area_list";
+    public static String SYS_ALL_T_AREA_LIST = "sys_all_t_area_list";
 
 }

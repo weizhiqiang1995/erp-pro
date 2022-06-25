@@ -25,8 +25,8 @@ public interface SysQuartzRunHistoryDao {
     /**
      * 修改定时任务完成信息
      *
-     * @param id 启动历史表id
-     * @param state 状态
+     * @param id      启动历史表id
+     * @param state   状态
      * @param endTime 完成时间
      * @throws Exception
      */

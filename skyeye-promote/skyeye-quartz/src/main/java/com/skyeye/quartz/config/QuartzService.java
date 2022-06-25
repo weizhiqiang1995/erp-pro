@@ -25,7 +25,7 @@ import java.util.Date;
 @Slf4j
 @Service
 public class QuartzService {
-	
+
     @Autowired
     private SysQuartzDao sysQuartzDao;
 
@@ -44,11 +44,11 @@ public class QuartzService {
     /**
      * 启动定时任务
      *
-     * @param name 任务唯一值
-     * @param title 标题
+     * @param name        任务唯一值
+     * @param title       标题
      * @param delayedTime 启动时间
-     * @param userId 创建人id
-     * @param groupId 组id
+     * @param userId      创建人id
+     * @param groupId     组id
      * @throws Exception
      */
     public void startUpTaskQuartz(String name, String title, String delayedTime, String userId, String groupId) throws Exception {
@@ -69,7 +69,7 @@ public class QuartzService {
     /**
      * 停止并删除定时任务
      *
-     * @param name 任务唯一值
+     * @param name    任务唯一值
      * @param groupId 组id
      */
     public void stopAndDeleteTaskQuartz(String name, String groupId) throws SchedulerException {
@@ -101,7 +101,7 @@ public class QuartzService {
             //表达式调度构建器
             CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(sysQuartz.getCron());
             //按新的cronExpression表达式构建一个新的trigger
-            trigger = TriggerBuilder.newTrigger().withIdentity(sysQuartz.getName(),sysQuartz.getGroups()).withSchedule(scheduleBuilder).build();
+            trigger = TriggerBuilder.newTrigger().withIdentity(sysQuartz.getName(), sysQuartz.getGroups()).withSchedule(scheduleBuilder).build();
             scheduler.scheduleJob(jobDetail, trigger);
         } else {
             LOGGER.info("update quartz task, id is: {}, corn is: {}", sysQuartz.getId(), sysQuartz.getCron());
@@ -115,7 +115,7 @@ public class QuartzService {
             scheduler.rescheduleJob(triggerKey, trigger);
         }
     }
-    
+
     /**
      * 启动任务
      *
@@ -133,7 +133,7 @@ public class QuartzService {
             //表达式调度构建器
             CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(sysQuartz.getCron());
             //按新的cronExpression表达式构建一个新的trigger
-            trigger = TriggerBuilder.newTrigger().withIdentity(sysQuartz.getName(),sysQuartz.getGroups()).withSchedule(scheduleBuilder).build();
+            trigger = TriggerBuilder.newTrigger().withIdentity(sysQuartz.getName(), sysQuartz.getGroups()).withSchedule(scheduleBuilder).build();
             scheduler.scheduleJob(jobDetail, trigger);
         } else {
             // Trigger已存在，那么更新相应的定时设置
@@ -152,7 +152,7 @@ public class QuartzService {
      * @param sysQuartz
      * @throws SchedulerException
      */
-    public void delete(SysQuartz sysQuartz) throws SchedulerException{
+    public void delete(SysQuartz sysQuartz) throws SchedulerException {
         Scheduler scheduler = schedulerFactoryBean.getScheduler();
         JobKey jobKey = JobKey.jobKey(sysQuartz.getName(), sysQuartz.getGroups());
         scheduler.deleteJob(jobKey);
@@ -164,14 +164,14 @@ public class QuartzService {
      * @param cron
      * @return
      */
-    public boolean checkCron(String cron){
+    public boolean checkCron(String cron) {
         CronTriggerImpl trigger = new CronTriggerImpl();
         try {
             trigger.setCronExpression(cron);
             Date date = trigger.computeFirstFireTime(null);
             return date != null && date.after(new Date());
         } catch (Exception e) {
-            log.error("[TaskUtils.isValidExpression]:failed. throw ex:" , e);
+            log.error("[TaskUtils.isValidExpression]:failed. throw ex:", e);
         }
         return false;
     }

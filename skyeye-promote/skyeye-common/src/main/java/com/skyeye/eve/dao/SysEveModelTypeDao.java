@@ -19,64 +19,65 @@ import java.util.Map;
  */
 public interface SysEveModelTypeDao {
 
-	/**
-	 * 分页+typeName模糊查询系统模板分类列表
-	 *
-	 * @param map
-	 * @return
-	 */
-	List<Map<String, Object>> querySysEveModelTypeList(Map<String, Object> map);
+    /**
+     * 分页+typeName模糊查询系统模板分类列表
+     *
+     * @param map
+     * @return
+     */
+    List<Map<String, Object>> querySysEveModelTypeList(Map<String, Object> map);
 
-	/**
-	 * 新增系统模板分类
-	 *
-	 * @param map
-	 */
-	void insertSysEveModelType(Map<String, Object> map);
+    /**
+     * 新增系统模板分类
+     *
+     * @param map
+     */
+    void insertSysEveModelType(Map<String, Object> map);
 
-	/**
-	 * 根据id查询系统模板分类详情
-	 *
-	 * @param id 唯一标识
-	 * @return 详情信息
-	 */
-	Map<String, Object> querySysEveModelTypeById(@Param("id") String id);
+    /**
+     * 根据id查询系统模板分类详情
+     *
+     * @param id 唯一标识
+     * @return 详情信息
+     */
+    Map<String, Object> querySysEveModelTypeById(@Param("id") String id);
 
-	/**
-	 * 根据parentId+typeName查询系统模板分类的id
-	 * @param map
-	 * @return 唯一标识id
-	 */
-	String querySysEveModelTypeByParentIdAndTypeName(Map<String, Object> map);
+    /**
+     * 根据parentId+typeName查询系统模板分类的id
+     *
+     * @param map
+     * @return 唯一标识id
+     */
+    String querySysEveModelTypeByParentIdAndTypeName(Map<String, Object> map);
 
-	/**
-	 * 根据parentId查询系统模板分类列表
-	 *
-	 * @param parentId 父节点id
-	 * @return 系统模板分类列表
-	 */
-	List<Map<String, Object>> querySysEveModelTypeByParentId(@Param("parentId") String parentId);
+    /**
+     * 根据parentId查询系统模板分类列表
+     *
+     * @param parentId 父节点id
+     * @return 系统模板分类列表
+     */
+    List<Map<String, Object>> querySysEveModelTypeByParentId(@Param("parentId") String parentId);
 
-	/**
-	 * 根据id更新系统模板分类
-	 *
-	 * @param map
-	 * @throws Exception
-	 */
-	void updateSysEveModelTypeById(Map<String, Object> map);
+    /**
+     * 根据id更新系统模板分类
+     *
+     * @param map
+     * @throws Exception
+     */
+    void updateSysEveModelTypeById(Map<String, Object> map);
 
-	/**
-	 * 根据id删除系统模板分类
-	 *
-	 * @param id 唯一标识
-	 */
-	void delSysEveModelTypeById(@Param("id") String id);
+    /**
+     * 根据id删除系统模板分类
+     *
+     * @param id 唯一标识
+     */
+    void delSysEveModelTypeById(@Param("id") String id);
 
-	/**
-	 * 根据parentid删除系统模板分类
-	 *
-	 * @param parentId 父节点id
-	 */
-	void delSysEveModelTypeByParentId(@Param("parentId") String parentId);
+    /**
+     * 根据parentid删除系统模板分类
+     *
+     * @param parentId 父节点id
+     */
+    void delSysEveModelTypeByParentId(@Param("parentId") String parentId);
 
 }

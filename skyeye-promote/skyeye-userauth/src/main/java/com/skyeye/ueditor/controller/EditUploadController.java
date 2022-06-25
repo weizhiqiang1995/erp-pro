@@ -17,37 +17,37 @@ import java.util.Map;
 
 @Controller
 public class EditUploadController {
-	
-	@Autowired
-	private EditUploadService editUploadService;
-	
-	/**
-	 * 上传富文本图片
-	 *
-	 * @throws Exception
-	 */
-	@RequestMapping("/upload/editUploadController/uploadContentPic")
-	@ResponseBody
-	public Map<String,Object> uploadContentPic(HttpServletRequest req) throws Exception{
-		return editUploadService.uploadContentPic(req);
-	}
-	
-	/**
-	 * 回显富文本图片
-	 *
-	 * @throws Exception
-	 */
-	@RequestMapping("/upload/editUploadController/downloadContentPic")
-	@ResponseBody
-	public String downloadContentPic(HttpServletRequest req, @RequestParam("callback") String callback) throws Exception{
-		return callback + "(" + JSONObject.toJSONString(editUploadService.downloadContentPic(req)) + ")";
-	}
-	
-	@RequestMapping("/upload/editUploadController/ueeditorConif")
-	@ResponseBody
-	public String ueeditorConif(HttpServletRequest request, @RequestParam("callback") String callback,
-								@RequestParam("fileBasePath") String fileBasePath) throws Exception{
-		return callback + "(" + PublicMsg.getUeditorConfig(fileBasePath) + ")";
-	}
-	
+
+    @Autowired
+    private EditUploadService editUploadService;
+
+    /**
+     * 上传富文本图片
+     *
+     * @throws Exception
+     */
+    @RequestMapping("/upload/editUploadController/uploadContentPic")
+    @ResponseBody
+    public Map<String, Object> uploadContentPic(HttpServletRequest req) throws Exception {
+        return editUploadService.uploadContentPic(req);
+    }
+
+    /**
+     * 回显富文本图片
+     *
+     * @throws Exception
+     */
+    @RequestMapping("/upload/editUploadController/downloadContentPic")
+    @ResponseBody
+    public String downloadContentPic(HttpServletRequest req, @RequestParam("callback") String callback) throws Exception {
+        return callback + "(" + JSONObject.toJSONString(editUploadService.downloadContentPic(req)) + ")";
+    }
+
+    @RequestMapping("/upload/editUploadController/ueeditorConif")
+    @ResponseBody
+    public String ueeditorConif(HttpServletRequest request, @RequestParam("callback") String callback,
+                                @RequestParam("fileBasePath") String fileBasePath) throws Exception {
+        return callback + "(" + PublicMsg.getUeditorConfig(fileBasePath) + ")";
+    }
+
 }

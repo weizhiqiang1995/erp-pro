@@ -8,12 +8,12 @@ import java.util.Map;
 
 public interface StickyNotesDao {
 
-	public int insertStickyNotesMation(Map<String, Object> map) throws Exception;
+    public int insertStickyNotesMation(Map<String, Object> map) throws Exception;
 
-	public List<Map<String, Object>> selectStickyNotesMation(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> selectStickyNotesMation(Map<String, Object> map) throws Exception;
 
-	public int editStickyNotesMation(Map<String, Object> map) throws Exception;
+    public int editStickyNotesMation(Map<String, Object> map) throws Exception;
 
-	public int deleteStickyNotesMation(Map<String, Object> map) throws Exception;
+    public int deleteStickyNotesMation(Map<String, Object> map) throws Exception;
 
 }

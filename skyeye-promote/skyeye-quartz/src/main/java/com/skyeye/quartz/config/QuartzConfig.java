@@ -15,24 +15,23 @@ public class QuartzConfig {
     @Autowired
     private JobFactory jobFactory;
 
-    @Bean(name="SchedulerFactory")
-    public SchedulerFactoryBean schedulerFactoryBean()  {
+    @Bean(name = "SchedulerFactory")
+    public SchedulerFactoryBean schedulerFactoryBean() {
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
         factory.setJobFactory(jobFactory);
         factory.setAutoStartup(true);
         return factory;
     }
 
-   /**
-    * 
-        * @Title: scheduler
-        * @Description: 通过SchedulerFactoryBean获取Scheduler的实例
-        * @param @return    参数
-        * @return Scheduler    返回类型
-        * @throws
-    */
-    @Bean(name="scheduler")
-    public Scheduler scheduler()  {
+    /**
+     * @param @return 参数
+     * @return Scheduler    返回类型
+     * @throws
+     * @Title: scheduler
+     * @Description: 通过SchedulerFactoryBean获取Scheduler的实例
+     */
+    @Bean(name = "scheduler")
+    public Scheduler scheduler() {
         return schedulerFactoryBean().getScheduler();
     }
 

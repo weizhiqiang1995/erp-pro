@@ -9,24 +9,24 @@ import java.util.Map;
 
 public interface RmPropertyDao {
 
-	public List<Map<String, Object>> queryRmPropertyList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryRmPropertyList(Map<String, Object> map) throws Exception;
 
-	public int insertRmPropertyMation(Map<String, Object> map) throws Exception;
+    public int insertRmPropertyMation(Map<String, Object> map) throws Exception;
 
-	public Map<String, Object> queryRmPropertyMationByName(Map<String, Object> map) throws Exception;
+    public Map<String, Object> queryRmPropertyMationByName(Map<String, Object> map) throws Exception;
 
-	public int deleteRmPropertyMationById(Map<String, Object> map) throws Exception;
+    public int deleteRmPropertyMationById(Map<String, Object> map) throws Exception;
 
-	public Map<String, Object> queryRmPropertyMationToEditById(Map<String, Object> map) throws Exception;
+    public Map<String, Object> queryRmPropertyMationToEditById(Map<String, Object> map) throws Exception;
 
-	public Map<String, Object> queryRmPropertyMationByNameAndId(Map<String, Object> map) throws Exception;
+    public Map<String, Object> queryRmPropertyMationByNameAndId(Map<String, Object> map) throws Exception;
 
-	public int editRmPropertyMationById(Map<String, Object> map) throws Exception;
+    public int editRmPropertyMationById(Map<String, Object> map) throws Exception;
 
-	public List<Map<String, Object>> queryRmPropertyListToShow(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryRmPropertyListToShow(Map<String, Object> map) throws Exception;
 
-	public Map<String, Object> queryRmPropertyValueNumById(Map<String, Object> map) throws Exception;
+    public Map<String, Object> queryRmPropertyValueNumById(Map<String, Object> map) throws Exception;
 
-	public Map<String, Object> queryUseRmPropertyNumById(Map<String, Object> map) throws Exception;
+    public Map<String, Object> queryUseRmPropertyNumById(Map<String, Object> map) throws Exception;
 
 }

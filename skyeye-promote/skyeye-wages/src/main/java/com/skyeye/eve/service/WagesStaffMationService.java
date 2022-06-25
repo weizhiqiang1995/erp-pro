@@ -25,9 +25,9 @@ public interface WagesStaffMationService {
     /**
      * 设置应出勤的班次以及小时
      *
-     * @param staffWorkTime 员工对应的考勤班次
+     * @param staffWorkTime      员工对应的考勤班次
      * @param staffModelFieldMap 员工拥有的所有薪资要素字段以及对应的值
-     * @param lastMonthDate 指定年月，格式为yyyy-MM
+     * @param lastMonthDate      指定年月，格式为yyyy-MM
      * @throws Exception
      */
     void setLastMonthBe(List<Map<String, Object>> staffWorkTime, Map<String, String> staffModelFieldMap, String lastMonthDate) throws Exception;

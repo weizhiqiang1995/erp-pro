@@ -8,24 +8,24 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysEvePicTypeService {
 
-	public void querySysPicTypeList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void querySysPicTypeList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void insertSysPicTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void insertSysPicTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void deleteSysPicTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void deleteSysPicTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void updateUpSysPicTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void updateUpSysPicTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void updateDownSysPicTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void updateDownSysPicTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void selectSysPicTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void selectSysPicTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void editSysPicTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void editSysPicTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void editSysPicTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void editSysPicTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void editSysPicTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void editSysPicTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void querySysPicTypeUpStateList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void querySysPicTypeUpStateList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

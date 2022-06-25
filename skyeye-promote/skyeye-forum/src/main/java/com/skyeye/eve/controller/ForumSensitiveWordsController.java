@@ -17,68 +17,68 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ForumSensitiveWordsController {
 
-	@Autowired
-	private ForumSensitiveWordsService forumSensitiveWordsService;
+    @Autowired
+    private ForumSensitiveWordsService forumSensitiveWordsService;
 
-	/**
-	 * 获取论坛敏感词列表
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/ForumSensitiveWordsController/queryForumSensitiveWordsList")
-	public void queryForumSensitiveWordsList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		forumSensitiveWordsService.queryForumSensitiveWordsList(inputObject, outputObject);
-	}
+    /**
+     * 获取论坛敏感词列表
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/ForumSensitiveWordsController/queryForumSensitiveWordsList")
+    public void queryForumSensitiveWordsList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        forumSensitiveWordsService.queryForumSensitiveWordsList(inputObject, outputObject);
+    }
 
 
-	/**
-	 * 添加论坛敏感词
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/ForumSensitiveWordsController/insertForumSensitiveWordsMation")
-	public void insertForumSensitiveWordsMation(InputObject inputObject, OutputObject outputObject) throws Exception{
-		forumSensitiveWordsService.insertForumSensitiveWordsMation(inputObject, outputObject);
-	}
+    /**
+     * 添加论坛敏感词
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/ForumSensitiveWordsController/insertForumSensitiveWordsMation")
+    public void insertForumSensitiveWordsMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        forumSensitiveWordsService.insertForumSensitiveWordsMation(inputObject, outputObject);
+    }
 
-	/**
-	 * 删除论坛敏感词
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/ForumSensitiveWordsController/deleteForumSensitiveWordsById")
-	public void deleteForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		forumSensitiveWordsService.deleteForumSensitiveWordsById(inputObject, outputObject);
-	}
+    /**
+     * 删除论坛敏感词
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/ForumSensitiveWordsController/deleteForumSensitiveWordsById")
+    public void deleteForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        forumSensitiveWordsService.deleteForumSensitiveWordsById(inputObject, outputObject);
+    }
 
-	/**
-	 * 通过id查找对应的论坛敏感词信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/ForumSensitiveWordsController/selectForumSensitiveWordsById")
-	public void selectForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		forumSensitiveWordsService.selectForumSensitiveWordsById(inputObject, outputObject);
-	}
+    /**
+     * 通过id查找对应的论坛敏感词信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/ForumSensitiveWordsController/selectForumSensitiveWordsById")
+    public void selectForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        forumSensitiveWordsService.selectForumSensitiveWordsById(inputObject, outputObject);
+    }
 
-	/**
-	 * 通过id编辑对应的论坛敏感词信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/ForumSensitiveWordsController/editForumSensitiveWordsMationById")
-	public void editForumSensitiveWordsMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		forumSensitiveWordsService.editForumSensitiveWordsMationById(inputObject, outputObject);
-	}
+    /**
+     * 通过id编辑对应的论坛敏感词信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/ForumSensitiveWordsController/editForumSensitiveWordsMationById")
+    public void editForumSensitiveWordsMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        forumSensitiveWordsService.editForumSensitiveWordsMationById(inputObject, outputObject);
+    }
 
 }

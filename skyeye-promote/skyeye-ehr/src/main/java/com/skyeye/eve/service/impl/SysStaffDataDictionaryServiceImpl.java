@@ -20,12 +20,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @ClassName: SysStaffDataDictionaryServiceImpl
  * @Description: 员工基础信息相关的数据字典管理服务类
  * @author: skyeye云系列--卫志强
  * @date: 2021/7/6 22:38
- *
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
@@ -35,20 +33,22 @@ public class SysStaffDataDictionaryServiceImpl implements SysStaffDataDictionary
     @Autowired
     private SysStaffDataDictionaryDao sysStaffDataDictionaryDao;
 
-    public static enum state{
+    public static enum state {
         START_UP(1, "启动"),
         START_DOWN(2, "禁用"),
         START_DELETE(3, "删除");
         private int state;
         private String name;
-        state(int state, String name){
+
+        state(int state, String name) {
             this.state = state;
             this.name = name;
         }
+
         public int getState() {
             return state;
         }
-        
+
         public String getName() {
             return name;
         }
@@ -56,6 +56,7 @@ public class SysStaffDataDictionaryServiceImpl implements SysStaffDataDictionary
 
     /**
      * 查询员工基础信息相关的数据字典列表
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -71,28 +72,30 @@ public class SysStaffDataDictionaryServiceImpl implements SysStaffDataDictionary
 
     /**
      * 新增员工基础信息相关的数据字典
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void insertSysStaffDataDictionaryMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         Map<String, Object> bean = sysStaffDataDictionaryDao.querySysStaffDataDictionaryByName(params);
-        if(bean == null || bean.isEmpty()){
+        if (bean == null || bean.isEmpty()) {
             params.put("id", ToolUtil.getSurFaceId());
             params.put("state", state.START_UP.getState());
             params.put("createId", inputObject.getLogParams().get("id"));
             params.put("createTime", DateUtil.getTimeAndToString());
             sysStaffDataDictionaryDao.insertSysStaffDataDictionaryMation(params);
-        }else{
+        } else {
             outputObject.setreturnMessage("该数据字典已存在.");
         }
     }
 
     /**
      * 修改员工基础信息相关的数据字典时数据回显
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -101,9 +104,9 @@ public class SysStaffDataDictionaryServiceImpl implements SysStaffDataDictionary
     public void querySysStaffDataDictionaryMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         Map<String, Object> bean = sysStaffDataDictionaryDao.querySysStaffDataDictionaryById(params.get("id").toString());
-        if(bean == null || bean.isEmpty()){
+        if (bean == null || bean.isEmpty()) {
             outputObject.setreturnMessage("该数据字典信息不存在.");
-        }else{
+        } else {
             outputObject.setBean(bean);
             outputObject.settotal(1);
         }
@@ -111,41 +114,43 @@ public class SysStaffDataDictionaryServiceImpl implements SysStaffDataDictionary
 
     /**
      * 修改员工基础信息相关的数据字典
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void editSysStaffDataDictionaryMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         Map<String, Object> bean = sysStaffDataDictionaryDao.querySysStaffDataDictionaryByNameAndId(params);
-        if(bean == null || bean.isEmpty()){
+        if (bean == null || bean.isEmpty()) {
             params.put("lastUpdateId", inputObject.getLogParams().get("id"));
             params.put("lastUpdateTime", DateUtil.getTimeAndToString());
             sysStaffDataDictionaryDao.editSysStaffDataDictionaryMationById(params);
-        }else{
+        } else {
             outputObject.setreturnMessage("该数据字典已存在.");
         }
     }
 
     /**
      * 禁用员工基础信息相关的数据字典
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void downSysStaffDataDictionaryMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         String id = params.get("id").toString();
         Map<String, Object> bean = sysStaffDataDictionaryDao.querySysStaffDataDictionaryStateById(id);
-        if(bean == null || bean.isEmpty()){
+        if (bean == null || bean.isEmpty()) {
             outputObject.setreturnMessage("该数据字典信息不存在");
-        }else{
+        } else {
             int nowState = Integer.parseInt(bean.get("state").toString());
-            if(nowState == state.START_UP.getState()){
+            if (nowState == state.START_UP.getState()) {
                 // 启用状态可以禁用
                 sysStaffDataDictionaryDao.editSysStaffDataDictionaryStateById(id, state.START_DOWN.getState());
             }
@@ -154,21 +159,22 @@ public class SysStaffDataDictionaryServiceImpl implements SysStaffDataDictionary
 
     /**
      * 启用员工基础信息相关的数据字典
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void upSysStaffDataDictionaryMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         String id = params.get("id").toString();
         Map<String, Object> bean = sysStaffDataDictionaryDao.querySysStaffDataDictionaryStateById(id);
-        if(bean == null || bean.isEmpty()){
+        if (bean == null || bean.isEmpty()) {
             outputObject.setreturnMessage("该数据字典信息不存在");
-        }else{
+        } else {
             int nowState = Integer.parseInt(bean.get("state").toString());
-            if(nowState == state.START_DOWN.getState()){
+            if (nowState == state.START_DOWN.getState()) {
                 // 禁用状态可以启用
                 sysStaffDataDictionaryDao.editSysStaffDataDictionaryStateById(id, state.START_UP.getState());
             }
@@ -177,21 +183,22 @@ public class SysStaffDataDictionaryServiceImpl implements SysStaffDataDictionary
 
     /**
      * 删除员工基础信息相关的数据字典
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void deleteSysStaffDataDictionaryMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         String id = params.get("id").toString();
         Map<String, Object> bean = sysStaffDataDictionaryDao.querySysStaffDataDictionaryStateById(id);
-        if(bean == null || bean.isEmpty()){
+        if (bean == null || bean.isEmpty()) {
             outputObject.setreturnMessage("该数据字典信息不存在");
-        }else{
+        } else {
             int nowState = Integer.parseInt(bean.get("state").toString());
-            if(nowState == state.START_UP.getState() || nowState == state.START_DOWN.getState()){
+            if (nowState == state.START_UP.getState() || nowState == state.START_DOWN.getState()) {
                 // 启用,禁用状态可以删除
                 sysStaffDataDictionaryDao.editSysStaffDataDictionaryStateById(id, state.START_DELETE.getState());
             }
@@ -200,13 +207,14 @@ public class SysStaffDataDictionaryServiceImpl implements SysStaffDataDictionary
 
     /**
      * 获取所有启用员工基础信息相关的数据字典
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @Override
     public void querySysStaffDataDictionaryUpMation(InputObject inputObject, OutputObject outputObject) throws Exception {
-    	Map<String, Object> params = inputObject.getParams();
+        Map<String, Object> params = inputObject.getParams();
         List<Map<String, Object>> beans = sysStaffDataDictionaryDao.querySysStaffDataDictionaryUpMation(params);
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());

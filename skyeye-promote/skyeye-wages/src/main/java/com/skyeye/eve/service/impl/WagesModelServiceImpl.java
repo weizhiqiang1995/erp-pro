@@ -40,16 +40,18 @@ public class WagesModelServiceImpl implements WagesModelService {
     @Autowired
     private WagesModelFieldDao wagesModelFieldDao;
 
-    public static enum STATE{
+    public static enum STATE {
         START_UP(1, "启用"),
         START_DOWN(2, "禁用"),
         START_DELETE(3, "删除");
         private int state;
         private String name;
-        STATE(int state, String name){
+
+        STATE(int state, String name) {
             this.state = state;
             this.name = name;
         }
+
         public int getState() {
             return state;
         }
@@ -83,12 +85,12 @@ public class WagesModelServiceImpl implements WagesModelService {
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void insertWagesModelMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String title = map.get("title").toString();
         Map<String, Object> mation = wagesModelDao.queryWagesModelMationByTitleAndNotId(title, null);
-        if(mation != null && !mation.isEmpty()){
+        if (mation != null && !mation.isEmpty()) {
             outputObject.setreturnMessage("The same title exists, please replace it.");
             return;
         }
@@ -113,14 +115,14 @@ public class WagesModelServiceImpl implements WagesModelService {
      */
     private void wagesModelApplicableObjects(String str, String id) throws Exception {
         wagesModelApplicableObjectsDao.deleteWagesModelApplicableObjectsByModelId(id);
-        if(ToolUtil.isBlank(str)){
+        if (ToolUtil.isBlank(str)) {
             return;
         }
         List<Map<String, Object>> applicableObjects = JSONUtil.toList(JSONUtil.parseArray(str), null);
         applicableObjects.stream().forEach(bean -> {
             bean.put("modelId", id);
         });
-        if(applicableObjects.isEmpty()){
+        if (applicableObjects.isEmpty()) {
             return;
         }
         wagesModelApplicableObjectsDao.insertWagesModelApplicableObjects(applicableObjects);
@@ -134,7 +136,7 @@ public class WagesModelServiceImpl implements WagesModelService {
      */
     private void wagesModelField(String str, String id) throws Exception {
         wagesModelFieldDao.deleteWagesModelFieldByModelId(id);
-        if(ToolUtil.isBlank(str)){
+        if (ToolUtil.isBlank(str)) {
             return;
         }
         List<Map<String, Object>> field = JSONUtil.toList(JSONUtil.parseArray(str), null);
@@ -142,7 +144,7 @@ public class WagesModelServiceImpl implements WagesModelService {
             bean.put("id", ToolUtil.getSurFaceId());
             bean.put("modelId", id);
         });
-        if(field.isEmpty()){
+        if (field.isEmpty()) {
             return;
         }
         wagesModelFieldDao.insertWagesModelField(field);
@@ -160,7 +162,7 @@ public class WagesModelServiceImpl implements WagesModelService {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = wagesModelDao.queryWagesModelMationById(id);
-        if(bean == null || bean.isEmpty()){
+        if (bean == null || bean.isEmpty()) {
             outputObject.setreturnMessage("The data does not exist.");
             return;
         }
@@ -181,10 +183,10 @@ public class WagesModelServiceImpl implements WagesModelService {
         List<Map<String, Object>> applicableObjects = wagesModelApplicableObjectsDao.queryWagesModelApplicableObjectsByModelId(id);
         // 根据objectType分组
         Map<String, List<Map<String, Object>>> groupByType = applicableObjects.stream()
-                .collect(Collectors.groupingBy(this::customKey));
+            .collect(Collectors.groupingBy(this::customKey));
         groupByType.forEach((key, value) -> {
             List<String> ids = value.stream().map(p -> p.get("objectId").toString()).collect(Collectors.toList());
-            if("1".equals(key)){
+            if ("1".equals(key)) {
                 // 员工
                 try {
                     List<Map<String, Object>> userStaff = wagesModelDao.queryStaffNameListByStaffIdList(ids);
@@ -192,7 +194,7 @@ public class WagesModelServiceImpl implements WagesModelService {
                 } catch (Exception e) {
                     LOGGER.info("get securityFundId {}'s userStaff failed.{}", e);
                 }
-            }else if("2".equals(key)){
+            } else if ("2".equals(key)) {
                 // 部门
                 try {
                     List<Map<String, Object>> departMent = wagesModelDao.queryDepartMentNameListByDepartMentIdList(ids);
@@ -200,7 +202,7 @@ public class WagesModelServiceImpl implements WagesModelService {
                 } catch (Exception e) {
                     LOGGER.info("get securityFundId {}'s userStaff failed.{}", e);
                 }
-            }else if("3".equals(key)){
+            } else if ("3".equals(key)) {
                 // 企业
                 try {
                     List<Map<String, Object>> company = wagesModelDao.queryCompanyNameListByCompanyIdList(ids);
@@ -212,7 +214,7 @@ public class WagesModelServiceImpl implements WagesModelService {
         });
     }
 
-    private String customKey(Map<String,Object> map){
+    private String customKey(Map<String, Object> map) {
         return map.get("objectType").toString();
     }
 
@@ -224,12 +226,12 @@ public class WagesModelServiceImpl implements WagesModelService {
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void editWagesModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> mation = wagesModelDao.queryWagesModelMationByTitleAndNotId(map.get("title").toString(), id);
-        if(mation != null && !mation.isEmpty()){
+        if (mation != null && !mation.isEmpty()) {
             outputObject.setreturnMessage("The same title exists, please replace it.");
             return;
         }
@@ -250,7 +252,7 @@ public class WagesModelServiceImpl implements WagesModelService {
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void deleteWagesModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         wagesModelDao.editWagesModelMationStateMationById(map.get("id").toString(), STATE.START_DELETE.getState());
@@ -264,7 +266,7 @@ public class WagesModelServiceImpl implements WagesModelService {
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void enableWagesModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         wagesModelDao.editWagesModelMationStateMationById(map.get("id").toString(), STATE.START_UP.getState());
@@ -278,7 +280,7 @@ public class WagesModelServiceImpl implements WagesModelService {
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void disableWagesModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         wagesModelDao.editWagesModelMationStateMationById(map.get("id").toString(), STATE.START_DOWN.getState());
@@ -296,7 +298,7 @@ public class WagesModelServiceImpl implements WagesModelService {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = wagesModelDao.queryWagesModelMationById(id);
-        if(bean == null || bean.isEmpty()){
+        if (bean == null || bean.isEmpty()) {
             outputObject.setreturnMessage("The data does not exist.");
             return;
         }
@@ -308,6 +310,7 @@ public class WagesModelServiceImpl implements WagesModelService {
 
     /**
      * 根据模板id获取要素字段
+     *
      * @param modeId 模板id
      * @return
      * @throws Exception
@@ -316,7 +319,7 @@ public class WagesModelServiceImpl implements WagesModelService {
     public List<Map<String, Object>> getWagesModelFieldsByModelId(String modeId) throws Exception {
         List<Map<String, Object>> fields = wagesModelFieldDao.queryWagesModelFieldByModelId(modeId);
         fields.forEach(bean -> {
-            if(ToolUtil.isBlank(bean.get("nameCn").toString())){
+            if (ToolUtil.isBlank(bean.get("nameCn").toString())) {
                 // 如果为空，则默认为系统提供的薪资字段
                 bean.put("nameCn", WagesConstant.DEFAULT_WAGES_FIELD_TYPE.getNameByKey(bean.get("fieldKey").toString()));
             }

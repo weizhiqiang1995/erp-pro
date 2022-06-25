@@ -11,7 +11,7 @@ import java.util.Map;
 
 public interface SysStaffDataDictionaryDao {
 
-	public List<Map<String, Object>> querySysStaffDataDictionaryList(Map<String, Object> params) throws Exception;
+    public List<Map<String, Object>> querySysStaffDataDictionaryList(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> querySysStaffDataDictionaryByName(Map<String, Object> params) throws Exception;
 

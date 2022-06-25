@@ -8,16 +8,16 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysEveModelService {
 
-	public void querySysEveModelList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void querySysEveModelList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void insertSysEveModelMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void insertSysEveModelMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void deleteSysEveModelById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void deleteSysEveModelById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void selectSysEveModelById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void selectSysEveModelById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void selectSysEveModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void selectSysEveModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void editSysEveModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void editSysEveModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	}
+}

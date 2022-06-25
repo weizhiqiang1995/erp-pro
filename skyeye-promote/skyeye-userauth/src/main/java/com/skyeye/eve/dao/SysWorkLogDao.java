@@ -8,8 +8,8 @@ import java.util.Map;
 
 public interface SysWorkLogDao {
 
-	public List<Map<String, Object>> querySysWorkLogList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> querySysWorkLogList(Map<String, Object> map) throws Exception;
 
-	public int querySysWorkLogListCount(Map<String, Object> map) throws Exception;
+    public int querySysWorkLogListCount(Map<String, Object> map) throws Exception;
 
 }

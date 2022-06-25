@@ -13,68 +13,68 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SysTAreaController {
-	
-	@Autowired
-	private SysTAreaService sysTAreaService;
 
-	/**
-	 * 获取行政区划信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SysTAreaController/querySysTAreaList")
-	public void querySysTAreaList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		sysTAreaService.querySysTAreaList(inputObject, outputObject);
-	}
+    @Autowired
+    private SysTAreaService sysTAreaService;
 
-	/**
-	 * 获取一级省行政区划信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SysTAreaController/querySysTAreaProvinceList")
-	public void querySysTAreaProvinceList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		sysTAreaService.querySysTAreaProvinceList(inputObject, outputObject);
-	}
+    /**
+     * 获取行政区划信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SysTAreaController/querySysTAreaList")
+    public void querySysTAreaList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        sysTAreaService.querySysTAreaList(inputObject, outputObject);
+    }
 
-	/**
-	 * 获取二级市行政区划信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SysTAreaController/querySysTAreaCityList")
-	public void querySysTAreaCityList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		sysTAreaService.querySysTAreaCityList(inputObject, outputObject);
-	}
+    /**
+     * 获取一级省行政区划信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SysTAreaController/querySysTAreaProvinceList")
+    public void querySysTAreaProvinceList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        sysTAreaService.querySysTAreaProvinceList(inputObject, outputObject);
+    }
 
-	/**
-	 * 获取三级县行政区划信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SysTAreaController/querySysTAreaChildAreaList")
-	public void querySysTAreaChildAreaList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		sysTAreaService.querySysTAreaChildAreaList(inputObject, outputObject);
-	}
+    /**
+     * 获取二级市行政区划信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SysTAreaController/querySysTAreaCityList")
+    public void querySysTAreaCityList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        sysTAreaService.querySysTAreaCityList(inputObject, outputObject);
+    }
 
-	/**
-	 * 获取四级镇行政区划信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SysTAreaController/querySysTAreaTownShipList")
-	public void querySysTAreaTownShipList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		sysTAreaService.querySysTAreaTownShipList(inputObject, outputObject);
-	}
-	
+    /**
+     * 获取三级县行政区划信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SysTAreaController/querySysTAreaChildAreaList")
+    public void querySysTAreaChildAreaList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        sysTAreaService.querySysTAreaChildAreaList(inputObject, outputObject);
+    }
+
+    /**
+     * 获取四级镇行政区划信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SysTAreaController/querySysTAreaTownShipList")
+    public void querySysTAreaTownShipList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        sysTAreaService.querySysTAreaTownShipList(inputObject, outputObject);
+    }
+
 }

@@ -15,73 +15,73 @@ import com.skyeye.eve.service.CodeModelService;
 
 @Controller
 public class CodeModelController {
-	
-	@Autowired
-	private CodeModelService codeModelService;
 
-	/**
-	 * 获取模板列表
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/CodeModelController/queryCodeModelList")
-	@ResponseBody
-	public void queryCodeModelList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		codeModelService.queryCodeModelList(inputObject, outputObject);
-	}
+    @Autowired
+    private CodeModelService codeModelService;
 
-	/**
-	 * 新增模板列表
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/CodeModelController/insertCodeModelMation")
-	@ResponseBody
-	public void insertCodeModelMation(InputObject inputObject, OutputObject outputObject) throws Exception{
-		codeModelService.insertCodeModelMation(inputObject, outputObject);
-	}
+    /**
+     * 获取模板列表
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/CodeModelController/queryCodeModelList")
+    @ResponseBody
+    public void queryCodeModelList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        codeModelService.queryCodeModelList(inputObject, outputObject);
+    }
 
-	/**
-	 * 删除模板信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/CodeModelController/deleteCodeModelById")
-	@ResponseBody
-	public void deleteCodeModelById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		codeModelService.deleteCodeModelById(inputObject, outputObject);
-	}
+    /**
+     * 新增模板列表
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/CodeModelController/insertCodeModelMation")
+    @ResponseBody
+    public void insertCodeModelMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        codeModelService.insertCodeModelMation(inputObject, outputObject);
+    }
 
-	/**
-	 * 编辑模板信息时进行回显
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/CodeModelController/queryCodeModelMationToEditById")
-	@ResponseBody
-	public void queryCodeModelMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		codeModelService.queryCodeModelMationToEditById(inputObject, outputObject);
-	}
+    /**
+     * 删除模板信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/CodeModelController/deleteCodeModelById")
+    @ResponseBody
+    public void deleteCodeModelById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        codeModelService.deleteCodeModelById(inputObject, outputObject);
+    }
 
-	/**
-	 * 编辑模板信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/CodeModelController/editCodeModelMationById")
-	@ResponseBody
-	public void editCodeModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		codeModelService.editCodeModelMationById(inputObject, outputObject);
-	}
-	
+    /**
+     * 编辑模板信息时进行回显
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/CodeModelController/queryCodeModelMationToEditById")
+    @ResponseBody
+    public void queryCodeModelMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        codeModelService.queryCodeModelMationToEditById(inputObject, outputObject);
+    }
+
+    /**
+     * 编辑模板信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/CodeModelController/editCodeModelMationById")
+    @ResponseBody
+    public void editCodeModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        codeModelService.editCodeModelMationById(inputObject, outputObject);
+    }
+
 }

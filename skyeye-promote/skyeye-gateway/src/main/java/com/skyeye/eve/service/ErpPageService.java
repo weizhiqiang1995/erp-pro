@@ -8,12 +8,12 @@ import com.skyeye.common.object.OutputObject;
 
 public interface ErpPageService {
 
-	public void queryFourTypeMoneyList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryFourTypeMoneyList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void querySixMonthPurchaseMoneyList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void querySixMonthPurchaseMoneyList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void querySixMonthSealsMoneyList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void querySixMonthSealsMoneyList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryTwelveMonthProfitMoneyList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryTwelveMonthProfitMoneyList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

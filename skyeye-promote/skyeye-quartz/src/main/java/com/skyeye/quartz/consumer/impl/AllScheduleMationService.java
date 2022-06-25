@@ -39,11 +39,11 @@ public class AllScheduleMationService implements TaskMateService {
         List<Map<String, Object>> users = sysQuartzDao.queryAllUserAndEmailISNotNull(bean);
         List<Map<String, Object>> userJson = new ArrayList<>();
         Map<String, Object> uJson = null;
-        for(Map<String, Object> user : users){
+        for (Map<String, Object> user : users) {
             //发送消息
             String content = "尊敬的" + user.get("userName").toString() + ",您好：<br/>《" + bean.get("title").toString() + "》放假时间为：" + bean.get("startTime").toString() + " ~ "
-                    + bean.get("endTime").toString() + "<br/>请注意安排好您的工作时间，祝您出行愉快。";
-            if(!ToolUtil.isBlank(bean.get("remarks").toString())){
+                + bean.get("endTime").toString() + "<br/>请注意安排好您的工作时间，祝您出行愉快。";
+            if (!ToolUtil.isBlank(bean.get("remarks").toString())) {
                 content += "<br>备注信息：" + bean.get("remarks").toString();
             }
             uJson = new HashMap<>();
@@ -51,7 +51,7 @@ public class AllScheduleMationService implements TaskMateService {
             uJson.put("userId", user.get("userId"));
             userJson.add(uJson);
             //发送邮件
-            if(!ToolUtil.isBlank(user.get("email").toString()) && user.containsKey("email")){
+            if (!ToolUtil.isBlank(user.get("email").toString()) && user.containsKey("email")) {
                 Map<String, Object> emailNotice = new HashMap<>();
                 emailNotice.put("title", "日程提醒");
                 emailNotice.put("content", content);
@@ -60,11 +60,11 @@ public class AllScheduleMationService implements TaskMateService {
                 jobMateMationService.sendMQProducer(JSONUtil.toJsonStr(emailNotice), sysQuartz.getCreateId());
             }
         }
-        if(!userJson.isEmpty()){
+        if (!userJson.isEmpty()) {
             //调用消息系统添加通知
             List<Map<String, Object>> notices = new ArrayList<>();
             Map<String, Object> notice = null;
-            for(int i = 0; i < userJson.size(); i++){
+            for (int i = 0; i < userJson.size(); i++) {
                 Map<String, Object> userJsonObject = userJson.get(i);
                 notice = new HashMap<>();
                 notice.put("id", ToolUtil.getSurFaceId());
@@ -78,7 +78,7 @@ public class AllScheduleMationService implements TaskMateService {
                 notice.put("createTime", DateUtil.getTimeAndToString());
                 notices.add(notice);
             }
-            if(!notices.isEmpty()){
+            if (!notices.isEmpty()) {
                 sysQuartzDao.insertNoticeListMation(notices);
             }
         }

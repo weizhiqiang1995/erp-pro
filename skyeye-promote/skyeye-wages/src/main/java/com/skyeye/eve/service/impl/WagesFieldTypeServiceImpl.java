@@ -31,16 +31,18 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
     /**
      * 计薪资字段状态
      */
-    public static enum STATE{
+    public static enum STATE {
         START_UP(1, "启用"),
         START_DOWN(2, "禁用"),
         START_DELETE(3, "删除");
         private int state;
         private String name;
-        STATE(int state, String name){
+
+        STATE(int state, String name) {
             this.state = state;
             this.name = name;
         }
+
         public int getState() {
             return state;
         }
@@ -74,7 +76,7 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void insertWagesFieldTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String key = map.get("key").toString();
@@ -83,22 +85,22 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
 
         // 和系统默认的key做比较
         Optional<Map<String, Object>> defaultKey = WagesConstant.DEFAULT_WAGES_FIELD_TYPE.getList().stream()
-                .filter(item -> key.equals(item.get("key").toString())).findFirst();
+            .filter(item -> key.equals(item.get("key").toString())).findFirst();
         // 操作的key在默认定义的key中是否包含
-        if(defaultKey != null && defaultKey.isPresent()) {
+        if (defaultKey != null && defaultKey.isPresent()) {
             outputObject.setreturnMessage("this ['key'] is Already exists simple default key.");
             return;
         }
-        if(fields != null && !fields.isEmpty()){
+        if (fields != null && !fields.isEmpty()) {
             // 获取未删除的薪资字段
             List<Map<String, Object>> noDeleteFields = fields.stream()
-                    .filter(field -> STATE.START_DELETE.getState() != Integer.parseInt(field.get("state").toString()))
-                    .collect(Collectors.toList());
-            if(noDeleteFields != null && !noDeleteFields.isEmpty()){
+                .filter(field -> STATE.START_DELETE.getState() != Integer.parseInt(field.get("state").toString()))
+                .collect(Collectors.toList());
+            if (noDeleteFields != null && !noDeleteFields.isEmpty()) {
                 outputObject.setreturnMessage("this ['key'] is Already exists.");
                 return;
             }
-        }else{
+        } else {
             // 为每个员工加上该薪资字段
             insertWagesFieldTypeKeyToStaff(key);
         }
@@ -131,10 +133,10 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
     public void queryWagesFieldTypeMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = wagesFieldTypeDao.queryWagesFieldTypeMationById(map.get("id").toString());
-        if(bean != null && !bean.isEmpty()){
+        if (bean != null && !bean.isEmpty()) {
             outputObject.setBean(bean);
             outputObject.settotal(1);
-        }else{
+        } else {
             outputObject.setreturnMessage("this data is non-existent.");
         }
     }
@@ -147,15 +149,15 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void editWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = wagesFieldTypeDao.queryWagesFieldTypeMationById(map.get("id").toString());
-        if(bean != null && !bean.isEmpty()){
+        if (bean != null && !bean.isEmpty()) {
             map.put("lastUpdateId", inputObject.getLogParams().get("id"));
             map.put("lastUpdateTime", DateUtil.getTimeAndToString());
             wagesFieldTypeDao.editWagesFieldTypeMationById(map);
-        }else{
+        } else {
             outputObject.setreturnMessage("this data is non-existent.");
         }
     }
@@ -168,7 +170,7 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void deleteWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         wagesFieldTypeDao.editWagesFieldTypeStateMationById(map.get("id").toString(), STATE.START_DELETE.getState());
@@ -182,7 +184,7 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void enableWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         wagesFieldTypeDao.editWagesFieldTypeStateMationById(map.get("id").toString(), STATE.START_UP.getState());
@@ -196,7 +198,7 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void disableWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         wagesFieldTypeDao.editWagesFieldTypeStateMationById(map.get("id").toString(), STATE.START_DOWN.getState());

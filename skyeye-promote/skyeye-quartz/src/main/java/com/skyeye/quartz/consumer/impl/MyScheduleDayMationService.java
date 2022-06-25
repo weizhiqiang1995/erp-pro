@@ -36,7 +36,7 @@ public class MyScheduleDayMationService implements TaskMateService {
         bean = sysQuartzDao.queryMationByScheduleId(bean);
         //发送消息
         String content = "尊敬的" + bean.get("userName").toString() + ",您好：<br/>您于" + bean.get("createTime").toString() + "设定的日程《" + bean.get("title").toString() + "》即将于" + bean.get("startTime").toString() + "开始，请做好准备哦。";
-        if(!ToolUtil.isBlank(bean.get("remarks").toString())){
+        if (!ToolUtil.isBlank(bean.get("remarks").toString())) {
             content += "<br>备注信息：" + bean.get("remarks").toString();
         }
 
@@ -54,7 +54,7 @@ public class MyScheduleDayMationService implements TaskMateService {
         sysQuartzDao.insertNoticeMation(notice);
 
         //发送邮件
-        if(!ToolUtil.isBlank(bean.get("email").toString()) && bean.containsKey("email")){
+        if (!ToolUtil.isBlank(bean.get("email").toString()) && bean.containsKey("email")) {
             Map<String, Object> emailNotice = new HashMap<>();
             emailNotice.put("title", "日程提醒");
             emailNotice.put("content", content);

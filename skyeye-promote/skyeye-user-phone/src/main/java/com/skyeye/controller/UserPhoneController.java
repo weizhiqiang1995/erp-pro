@@ -13,92 +13,92 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserPhoneController {
-	
-	@Autowired
-	private UserPhoneService userPhoneService;
 
-	/**
-	 * 手机端用户登录
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/UserPhoneController/queryPhoneToLogin")
-	public void queryPhoneToLogin(InputObject inputObject, OutputObject outputObject) throws Exception{
-		userPhoneService.queryPhoneToLogin(inputObject, outputObject);
-	}
+    @Autowired
+    private UserPhoneService userPhoneService;
 
-	/**
-	 * 手机端从session中获取用户信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/UserPhoneController/queryPhoneUserMation")
-	public void queryPhoneUserMation(InputObject inputObject, OutputObject outputObject) throws Exception{
-		userPhoneService.queryPhoneUserMation(inputObject, outputObject);
-	}
+    /**
+     * 手机端用户登录
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/UserPhoneController/queryPhoneToLogin")
+    public void queryPhoneToLogin(InputObject inputObject, OutputObject outputObject) throws Exception {
+        userPhoneService.queryPhoneToLogin(inputObject, outputObject);
+    }
 
-	/**
-	 * 手机端从session中获取菜单权限信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/UserPhoneController/queryPhoneUserMenuAuth")
-	public void queryPhoneUserMenuAuth(InputObject inputObject, OutputObject outputObject) throws Exception{
-		userPhoneService.queryPhoneUserMenuAuth(inputObject, outputObject);
-	}
+    /**
+     * 手机端从session中获取用户信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/UserPhoneController/queryPhoneUserMation")
+    public void queryPhoneUserMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        userPhoneService.queryPhoneUserMation(inputObject, outputObject);
+    }
 
-	/**
-	 * 手机端注销登录
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/UserPhoneController/queryPhoneToExit")
-	public void queryPhoneToExit(InputObject inputObject, OutputObject outputObject) throws Exception{
-		userPhoneService.queryPhoneToExit(inputObject, outputObject);
-	}
+    /**
+     * 手机端从session中获取菜单权限信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/UserPhoneController/queryPhoneUserMenuAuth")
+    public void queryPhoneUserMenuAuth(InputObject inputObject, OutputObject outputObject) throws Exception {
+        userPhoneService.queryPhoneUserMenuAuth(inputObject, outputObject);
+    }
 
-	/**
-	 * 根据openId获取用户信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/UserPhoneController/queryUserMationByOpenId")
-	public void queryUserMationByOpenId(InputObject inputObject, OutputObject outputObject) throws Exception{
-		userPhoneService.queryUserMationByOpenId(inputObject, outputObject);
-	}
+    /**
+     * 手机端注销登录
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/UserPhoneController/queryPhoneToExit")
+    public void queryPhoneToExit(InputObject inputObject, OutputObject outputObject) throws Exception {
+        userPhoneService.queryPhoneToExit(inputObject, outputObject);
+    }
 
-	/**
-	 * openId绑定用户信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/UserPhoneController/insertUserMationByOpenId")
-	public void insertUserMationByOpenId(InputObject inputObject, OutputObject outputObject) throws Exception{
-		userPhoneService.insertUserMationByOpenId(inputObject, outputObject);
-	}
+    /**
+     * 根据openId获取用户信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/UserPhoneController/queryUserMationByOpenId")
+    public void queryUserMationByOpenId(InputObject inputObject, OutputObject outputObject) throws Exception {
+        userPhoneService.queryUserMationByOpenId(inputObject, outputObject);
+    }
 
-	/**
-	 * 人员选择获取所有公司和人
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/UserPhoneController/queryAllPeopleToTree")
-	public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) throws Exception{
-		userPhoneService.queryAllPeopleToTree(inputObject, outputObject);
-	}
-	
+    /**
+     * openId绑定用户信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/UserPhoneController/insertUserMationByOpenId")
+    public void insertUserMationByOpenId(InputObject inputObject, OutputObject outputObject) throws Exception {
+        userPhoneService.insertUserMationByOpenId(inputObject, outputObject);
+    }
+
+    /**
+     * 人员选择获取所有公司和人
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/UserPhoneController/queryAllPeopleToTree")
+    public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) throws Exception {
+        userPhoneService.queryAllPeopleToTree(inputObject, outputObject);
+    }
+
 }

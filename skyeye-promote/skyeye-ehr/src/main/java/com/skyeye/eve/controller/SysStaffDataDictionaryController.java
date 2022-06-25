@@ -21,6 +21,7 @@ public class SysStaffDataDictionaryController {
 
     /**
      * 查询员工基础信息相关的数据字典列表
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -33,6 +34,7 @@ public class SysStaffDataDictionaryController {
 
     /**
      * 新增员工基础信息相关的数据字典
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -45,6 +47,7 @@ public class SysStaffDataDictionaryController {
 
     /**
      * 修改员工基础信息相关的数据字典时数据回显
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -57,6 +60,7 @@ public class SysStaffDataDictionaryController {
 
     /**
      * 修改员工基础信息相关的数据字典
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -69,6 +73,7 @@ public class SysStaffDataDictionaryController {
 
     /**
      * 禁用员工基础信息相关的数据字典
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -81,6 +86,7 @@ public class SysStaffDataDictionaryController {
 
     /**
      * 启用员工基础信息相关的数据字典
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -93,6 +99,7 @@ public class SysStaffDataDictionaryController {
 
     /**
      * 删除员工基础信息相关的数据字典
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -105,6 +112,7 @@ public class SysStaffDataDictionaryController {
 
     /**
      * 获取所有启用员工基础信息相关的数据字典
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception

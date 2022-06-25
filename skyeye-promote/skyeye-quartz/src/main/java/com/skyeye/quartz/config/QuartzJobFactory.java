@@ -17,12 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- *
  * @ClassName: QuartzJobFactory
  * @Description: 定时任务分发工厂类
  * @author: skyeye云系列--卫志强
  * @date: 2021/7/4 22:04
- *
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
@@ -30,51 +28,51 @@ import org.springframework.stereotype.Component;
 @DisallowConcurrentExecution
 public class QuartzJobFactory implements Job {
 
-	@Autowired
-	private QuartzService quartzService;
+    @Autowired
+    private QuartzService quartzService;
 
-	@Autowired
-	private SysQuartzDao sysQuartzDao;
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(QuartzJobFactory.class);
-	
-	/**
-	 * 任务监听
-	 */
-	@Override
-	public void execute(JobExecutionContext context){
-		JobDataMap jobDataMap = context.getMergedJobDataMap();
-		Object o = jobDataMap.get("scheduleJob");
-		if(o instanceof SysQuartz){
-			SysQuartz sysQuartz = (SysQuartz)o;
-			try {
-				handleJob(sysQuartz);
-			} catch (SchedulerException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+    @Autowired
+    private SysQuartzDao sysQuartzDao;
 
-	/**
-	 * 任务分配
-	 *
-	 * @param sysQuartz
-	 * @throws SchedulerException
-	 */
-	private void handleJob(SysQuartz sysQuartz) throws SchedulerException {
-		try {
-			LOGGER.info("start quartz, mation is: {}", JSONUtil.toJsonStr(sysQuartz));
-			String taskType = sysQuartz.getGroups();
-			TaskMateService taskMateService = SpringUtils.getBean(QuartzConstants.QuartzMateMationJobType.getServiceNameByTaskType(taskType));
-			taskMateService.call(sysQuartz);
-			LOGGER.info("end quartz, mation is: {}", JSONUtil.toJsonStr(sysQuartz));
-		} catch (Exception e) {
-			LOGGER.warn("execute task failed, taskId is: {}", sysQuartz.getId(), e);
-			e.printStackTrace();
-		} finally {
-			quartzService.delete(sysQuartz);
-			sysQuartzDao.deleteByPrimaryKey(sysQuartz.getId());
-		}
-	}
+    private static final Logger LOGGER = LoggerFactory.getLogger(QuartzJobFactory.class);
+
+    /**
+     * 任务监听
+     */
+    @Override
+    public void execute(JobExecutionContext context) {
+        JobDataMap jobDataMap = context.getMergedJobDataMap();
+        Object o = jobDataMap.get("scheduleJob");
+        if (o instanceof SysQuartz) {
+            SysQuartz sysQuartz = (SysQuartz) o;
+            try {
+                handleJob(sysQuartz);
+            } catch (SchedulerException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 任务分配
+     *
+     * @param sysQuartz
+     * @throws SchedulerException
+     */
+    private void handleJob(SysQuartz sysQuartz) throws SchedulerException {
+        try {
+            LOGGER.info("start quartz, mation is: {}", JSONUtil.toJsonStr(sysQuartz));
+            String taskType = sysQuartz.getGroups();
+            TaskMateService taskMateService = SpringUtils.getBean(QuartzConstants.QuartzMateMationJobType.getServiceNameByTaskType(taskType));
+            taskMateService.call(sysQuartz);
+            LOGGER.info("end quartz, mation is: {}", JSONUtil.toJsonStr(sysQuartz));
+        } catch (Exception e) {
+            LOGGER.warn("execute task failed, taskId is: {}", sysQuartz.getId(), e);
+            e.printStackTrace();
+        } finally {
+            quartzService.delete(sysQuartz);
+            sysQuartzDao.deleteByPrimaryKey(sysQuartz.getId());
+        }
+    }
 
 }

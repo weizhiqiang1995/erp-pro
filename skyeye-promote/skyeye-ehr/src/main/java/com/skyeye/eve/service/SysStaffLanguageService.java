@@ -8,27 +8,25 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 
 /**
- *
  * @ClassName: SysStaffLanguageService
  * @Description: 员工语言能力管理服务接口类
  * @author: skyeye云系列--卫志强
  * @date: 2021/7/6 22:41
- *
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 public interface SysStaffLanguageService {
 
-	public void queryAllSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryAllSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void insertSysStaffLanguageMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void insertSysStaffLanguageMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void querySysStaffLanguageMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void querySysStaffLanguageMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void editSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void editSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void deleteSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void deleteSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryPointStaffSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryPointStaffSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

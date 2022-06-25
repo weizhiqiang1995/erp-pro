@@ -10,21 +10,21 @@ import java.util.List;
 import java.util.Map;
 
 public interface UserPhoneDao {
-	
-	public Map<String, Object> queryMationByUserCode(Map<String, Object> map) throws Exception;
-	
-	public Map<String, Object> queryUserMationByOpenId(String openId) throws Exception;
 
-	public int insertWxUserMation(Map<String, Object> map) throws Exception;
+    public Map<String, Object> queryMationByUserCode(Map<String, Object> map) throws Exception;
 
-	public Map<String, Object> queryUserMationByUserCode(@Param("userCode") String userCode) throws Exception;
+    public Map<String, Object> queryUserMationByOpenId(String openId) throws Exception;
 
-	public Map<String, Object> queryUserBindMationByUserId(@Param("userId") String userId) throws Exception;
+    public int insertWxUserMation(Map<String, Object> map) throws Exception;
 
-	public int updateBindUserMation(Map<String, Object> map) throws Exception;
+    public Map<String, Object> queryUserMationByUserCode(@Param("userCode") String userCode) throws Exception;
 
-	public Map<String, Object> queryUserMationByOPenId(String openId) throws Exception;
+    public Map<String, Object> queryUserBindMationByUserId(@Param("userId") String userId) throws Exception;
 
-	public List<Map<String, Object>> queryAllPeopleToTree(Map<String, Object> map) throws Exception;
-	
+    public int updateBindUserMation(Map<String, Object> map) throws Exception;
+
+    public Map<String, Object> queryUserMationByOPenId(String openId) throws Exception;
+
+    public List<Map<String, Object>> queryAllPeopleToTree(Map<String, Object> map) throws Exception;
+
 }

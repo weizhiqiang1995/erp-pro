@@ -8,13 +8,13 @@ import com.skyeye.common.object.OutputObject;
 
 public interface ForumSensitiveWordsService {
 
-	public void queryForumSensitiveWordsList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryForumSensitiveWordsList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void insertForumSensitiveWordsMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void insertForumSensitiveWordsMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void deleteForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void deleteForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void selectForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void selectForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void editForumSensitiveWordsMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void editForumSensitiveWordsMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 }

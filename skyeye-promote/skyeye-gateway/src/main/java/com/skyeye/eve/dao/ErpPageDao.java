@@ -8,18 +8,18 @@ import java.util.Map;
 
 public interface ErpPageDao {
 
-	public String queryThisMonthSales() throws Exception;
+    public String queryThisMonthSales() throws Exception;
 
-	public String queryThisMonthRetail() throws Exception;
+    public String queryThisMonthRetail() throws Exception;
 
-	public String queryThisMonthPurchase() throws Exception;
+    public String queryThisMonthPurchase() throws Exception;
 
-	public String queryThisMonthProfit() throws Exception;
+    public String queryThisMonthProfit() throws Exception;
 
-	public List<Map<String, Object>> querySixMonthPurchaseMoneyList() throws Exception;
+    public List<Map<String, Object>> querySixMonthPurchaseMoneyList() throws Exception;
 
-	public List<Map<String, Object>> querySixMonthSealsMoneyList() throws Exception;
+    public List<Map<String, Object>> querySixMonthSealsMoneyList() throws Exception;
 
-	public List<Map<String, Object>> queryTwelveMonthProfitMoneyList() throws Exception;
+    public List<Map<String, Object>> queryTwelveMonthProfitMoneyList() throws Exception;
 
 }

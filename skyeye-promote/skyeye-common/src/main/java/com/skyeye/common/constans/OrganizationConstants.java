@@ -28,14 +28,14 @@ public class OrganizationConstants {
         private String title;
         private Integer type;
 
-        OvertimeSettlementType(String title, Integer type){
+        OvertimeSettlementType(String title, Integer type) {
             this.title = title;
             this.type = type;
         }
 
         public static String getTitleByType(int type) {
             OvertimeSettlementType overtimeSettlementType = Arrays.stream(OvertimeSettlementType.values())
-                    .filter(bean -> bean.getType() == type).findFirst().orElse(null);
+                .filter(bean -> bean.getType() == type).findFirst().orElse(null);
             if (overtimeSettlementType == null) {
                 return "";
             } else {
@@ -51,5 +51,5 @@ public class OrganizationConstants {
             return type;
         }
     }
-    
+
 }

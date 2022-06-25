@@ -45,7 +45,7 @@ public class SysAuthorityController {
         @ApiImplicitParam(id = "token", name = "token", value = "用户token", required = "required")})
     @RequestMapping("/post/roleAuth/getRoleHasMenuListByRoleIds")
     @ResponseBody
-    public void getRoleHasMenuListByRoleIds(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void getRoleHasMenuListByRoleIds(InputObject inputObject, OutputObject outputObject) throws Exception {
         sysAuthorityService.getRoleHasMenuListByRoleIds(inputObject, outputObject);
     }
 
@@ -62,7 +62,7 @@ public class SysAuthorityController {
         @ApiImplicitParam(id = "token", name = "token", value = "用户token", required = "required")})
     @RequestMapping("/post/roleAuth/getRoleHasMenuPointListByRoleIds")
     @ResponseBody
-    public void getRoleHasMenuPointListByRoleIds(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void getRoleHasMenuPointListByRoleIds(InputObject inputObject, OutputObject outputObject) throws Exception {
         sysAuthorityService.getRoleHasMenuPointListByRoleIds(inputObject, outputObject);
     }
 

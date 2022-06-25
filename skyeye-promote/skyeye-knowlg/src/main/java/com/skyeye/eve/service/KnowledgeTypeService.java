@@ -7,20 +7,20 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 
 public interface KnowledgeTypeService {
-	
-	public void queryKnowledgeTypeList(InputObject inputObject, OutputObject outputObject) throws Exception;
-	
-	public void insertKnowledgeTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void deleteKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryKnowledgeTypeList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void updateUpKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void insertKnowledgeTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void updateDownKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void deleteKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void selectKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void updateUpKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void editKnowledgeTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void updateDownKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryUpKnowledgeTypeTreeMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void selectKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+    public void editKnowledgeTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+
+    public void queryUpKnowledgeTypeTreeMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 }

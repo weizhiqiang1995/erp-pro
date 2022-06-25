@@ -41,20 +41,20 @@ public class MySysWorkMationService implements TaskMateService {
         LOGGER.info("start task name is: {}", sysQuartz.getName());
         map.put("id", sysQuartz.getName());
         Map<String, Object> planMation = sysQuartzDao.queryWorkPlanMationToQuartzById(map);
-        if(planMation != null){
+        if (planMation != null) {
             //计划类型 1.个人计划  2.部门计划  3.公司计划
             String planType = planMation.get("planType").toString();
             //是否邮件通知
             String whetherMail = planMation.get("whetherMail").toString();
             //是否内部通告通知
             String whetherNotice = planMation.get("whetherNotice").toString();
-            if("1".equals(planType)){//个人计划单独处理
+            if ("1".equals(planType)) {//个人计划单独处理
                 //获取计划接收人的信息
                 Map<String, Object> userMation = sysQuartzDao.queryUserMationByWorkPlanId(map);
                 //发送的消息内容
                 String content = "尊敬的" + userMation.get("userName").toString() + ",您好：<br/>您收到一条新的工作计划信息《" + planMation.get("title").toString() + "》，请登录系统查看";
-                if("1".equals(whetherMail)){//邮件通知
-                    if(!ToolUtil.isBlank(userMation.get("email").toString()) && userMation.containsKey("email")){
+                if ("1".equals(whetherMail)) {//邮件通知
+                    if (!ToolUtil.isBlank(userMation.get("email").toString()) && userMation.containsKey("email")) {
                         Map<String, Object> emailNotice = new HashMap<>();
                         emailNotice.put("title", "计划提醒");
                         emailNotice.put("content", content);
@@ -63,7 +63,7 @@ public class MySysWorkMationService implements TaskMateService {
                         jobMateMationService.sendMQProducer(JSONUtil.toJsonStr(emailNotice), sysQuartz.getCreateId());
                     }
                 }
-                if("1".equals(whetherNotice)){//内部通告通知
+                if ("1".equals(whetherNotice)) {//内部通告通知
                     //调用消息系统添加通知
                     Map<String, Object> notice = new HashMap<>();
                     notice.put("id", ToolUtil.getSurFaceId());
@@ -78,17 +78,17 @@ public class MySysWorkMationService implements TaskMateService {
                     sysQuartzDao.insertNoticeMation(notice);
                 }
                 sysQuartzDao.updateNotifyStateByPlanId(map);
-            }else if("2".equals(planType) || "3".equals(planType)){//部门计划和公司计划统一处理
+            } else if ("2".equals(planType) || "3".equals(planType)) {//部门计划和公司计划统一处理
                 //获取计划接收人的信息
                 List<Map<String, Object>> userMations = sysQuartzDao.queryUserMationsByWorkPlanId(map);
                 //内部消息通知对象
                 List<Map<String, Object>> userJson = new ArrayList<>();
                 Map<String, Object> uJson = null;
-                for(Map<String, Object> userMation : userMations){
+                for (Map<String, Object> userMation : userMations) {
                     //发送的消息内容
                     String content = "尊敬的" + userMation.get("userName").toString() + ",您好：<br/>您收到一条新的工作计划信息《" + planMation.get("title").toString() + "》，请登录系统查看";
-                    if("1".equals(whetherMail)){//邮件通知
-                        if(!ToolUtil.isBlank(userMation.get("email").toString()) && userMation.containsKey("email")){
+                    if ("1".equals(whetherMail)) {//邮件通知
+                        if (!ToolUtil.isBlank(userMation.get("email").toString()) && userMation.containsKey("email")) {
                             Map<String, Object> emailNotice = new HashMap<>();
                             emailNotice.put("title", "计划提醒");
                             emailNotice.put("content", content);
@@ -97,7 +97,7 @@ public class MySysWorkMationService implements TaskMateService {
                             jobMateMationService.sendMQProducer(JSONUtil.toJsonStr(emailNotice), sysQuartz.getCreateId());
                         }
                     }
-                    if("1".equals(whetherNotice)){//内部通告通知
+                    if ("1".equals(whetherNotice)) {//内部通告通知
                         uJson = new HashMap<>();
                         uJson.put("content", content);
                         uJson.put("userId", userMation.get("userId"));
@@ -106,11 +106,11 @@ public class MySysWorkMationService implements TaskMateService {
                 }
 
                 //内部通告通知
-                if(!userJson.isEmpty()){
+                if (!userJson.isEmpty()) {
                     //调用消息系统添加通知
                     List<Map<String, Object>> notices = new ArrayList<>();
                     Map<String, Object> notice = null;
-                    for(int i = 0; i < userJson.size(); i++){
+                    for (int i = 0; i < userJson.size(); i++) {
                         Map<String, Object> userJsonObject = userJson.get(i);
                         notice = new HashMap<>();
                         notice.put("id", ToolUtil.getSurFaceId());
@@ -124,7 +124,7 @@ public class MySysWorkMationService implements TaskMateService {
                         notice.put("createTime", DateUtil.getTimeAndToString());
                         notices.add(notice);
                     }
-                    if(!notices.isEmpty())
+                    if (!notices.isEmpty())
                         sysQuartzDao.insertNoticeListMation(notices);
                 }
                 sysQuartzDao.updateNotifyStateByPlanId(map);

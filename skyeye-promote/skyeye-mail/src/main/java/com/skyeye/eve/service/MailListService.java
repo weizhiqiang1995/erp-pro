@@ -9,16 +9,16 @@ import com.skyeye.common.object.OutputObject;
 
 public interface MailListService {
 
-	public void queryMailMationList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryMailMationList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void insertMailMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void insertMailMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void deleteMailMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void deleteMailMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryMailMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryMailMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void editMailMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void editMailMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryMailMationDetailsById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryMailMationDetailsById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

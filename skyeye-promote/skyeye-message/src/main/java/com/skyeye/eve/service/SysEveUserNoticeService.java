@@ -9,18 +9,18 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysEveUserNoticeService {
 
-	public void getNoticeListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void getNoticeListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void getAllNoticeListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void getAllNoticeListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void editNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void editNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void deleteNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void deleteNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void editNoticeMationByIds(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void editNoticeMationByIds(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void deleteNoticeMationByIds(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void deleteNoticeMationByIds(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

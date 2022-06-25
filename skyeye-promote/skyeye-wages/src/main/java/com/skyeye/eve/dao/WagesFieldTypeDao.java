@@ -32,7 +32,7 @@ public interface WagesFieldTypeDao {
     /**
      * 获取所有的薪资要素字段，包括启用，禁用，以及删除的要素字段key；相同的key，该SQL语句会根据key进行分组
      *
-     * @return List<Map<String, Object>>
+     * @return List<Map < String, Object>>
      * @throws Exception
      */
     public List<Map<String, Object>> queryAllWagesFieldTypeList() throws Exception;

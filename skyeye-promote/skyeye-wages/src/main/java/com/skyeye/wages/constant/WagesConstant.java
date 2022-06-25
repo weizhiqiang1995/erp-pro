@@ -33,22 +33,21 @@ public class WagesConstant {
         private String desc;
 
         /**
-         *
          * @param cnName
-         * @param key 薪资字段key
-         * @param desc 描述
+         * @param key    薪资字段key
+         * @param desc   描述
          */
-        DEFAULT_WAGES_FIELD_TYPE(String cnName, String enName, String key, String desc){
+        DEFAULT_WAGES_FIELD_TYPE(String cnName, String enName, String key, String desc) {
             this.cnName = cnName;
             this.enName = enName;
             this.key = key;
             this.desc = desc;
         }
 
-        public static List<Map<String, Object>> getList(){
+        public static List<Map<String, Object>> getList() {
             List<Map<String, Object>> beans = new ArrayList<>();
             Map<String, Object> bean;
-            for (DEFAULT_WAGES_FIELD_TYPE q : DEFAULT_WAGES_FIELD_TYPE.values()){
+            for (DEFAULT_WAGES_FIELD_TYPE q : DEFAULT_WAGES_FIELD_TYPE.values()) {
                 bean = new HashMap<>();
                 bean.put("nameCn", q.getCnName());
                 bean.put("nameEn", q.getEnName());
@@ -59,9 +58,9 @@ public class WagesConstant {
             return beans;
         }
 
-        public static String getNameByKey(String key){
-            for (DEFAULT_WAGES_FIELD_TYPE q : DEFAULT_WAGES_FIELD_TYPE.values()){
-                if(key.equals(q.getKey())){
+        public static String getNameByKey(String key) {
+            for (DEFAULT_WAGES_FIELD_TYPE q : DEFAULT_WAGES_FIELD_TYPE.values()) {
+                if (key.equals(q.getKey())) {
                     return q.getCnName();
                 }
             }

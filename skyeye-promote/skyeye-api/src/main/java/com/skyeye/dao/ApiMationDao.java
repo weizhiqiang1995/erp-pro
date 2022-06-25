@@ -18,9 +18,9 @@ import java.util.Map;
  */
 public interface ApiMationDao {
 
-	Map<String, Object> queryApiMationToEditById(@Param("urlId") String urlId);
+    Map<String, Object> queryApiMationToEditById(@Param("urlId") String urlId);
 
-	int editApiMationById(Map<String, Object> map);
+    int editApiMationById(Map<String, Object> map);
 
-	int insertApiMation(Map<String, Object> map);
+    int insertApiMation(Map<String, Object> map);
 }

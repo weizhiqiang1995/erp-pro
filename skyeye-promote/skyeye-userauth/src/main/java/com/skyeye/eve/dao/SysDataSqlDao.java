@@ -9,14 +9,14 @@ import java.util.Map;
 
 public interface SysDataSqlDao {
 
-	public List<Map<String, Object>> querySysDataSqlBackupsList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> querySysDataSqlBackupsList(Map<String, Object> map) throws Exception;
 
-	public List<Map<String, Object>> queryAllTableMationList(Map<String, Object> map) throws Exception;
-	
-	public Map<String, Object> queryDataSqlVersion(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryAllTableMationList(Map<String, Object> map) throws Exception;
 
-	public int insertTableBackUps(Map<String, Object> map) throws Exception;
+    public Map<String, Object> queryDataSqlVersion(Map<String, Object> map) throws Exception;
 
-	public Map<String, Object> queryDataSqlVersionById(Map<String, Object> map) throws Exception;
+    public int insertTableBackUps(Map<String, Object> map) throws Exception;
+
+    public Map<String, Object> queryDataSqlVersionById(Map<String, Object> map) throws Exception;
 
 }

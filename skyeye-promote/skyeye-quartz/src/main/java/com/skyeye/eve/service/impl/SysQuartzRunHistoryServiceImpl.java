@@ -73,9 +73,9 @@ public class SysQuartzRunHistoryServiceImpl implements SysQuartzRunHistoryServic
         String quartzCreateIdKey = String.format(Locale.ROOT, "%s-userId", quartzId);
         String userId = jedisClient.get(quartzCreateIdKey);
         sysQuartzRunHistory.setStartUserId(userId);
-        if(ToolUtil.isBlank(userId)){
+        if (ToolUtil.isBlank(userId)) {
             sysQuartzRunHistory.setStartType(SysQuartzRunHistory.StartType.AUTO_START.getType());
-        }else{
+        } else {
             sysQuartzRunHistory.setStartType(SysQuartzRunHistory.StartType.MANUAL_START.getType());
         }
         sysQuartzRunHistory.setState(SysQuartzRunHistory.State.START_RUNING.getState());
@@ -86,7 +86,7 @@ public class SysQuartzRunHistoryServiceImpl implements SysQuartzRunHistoryServic
     /**
      * 结束定时任务
      *
-     * @param id 定时任务执行历史id
+     * @param id    定时任务执行历史id
      * @param state 完成状态
      * @throws Exception
      */

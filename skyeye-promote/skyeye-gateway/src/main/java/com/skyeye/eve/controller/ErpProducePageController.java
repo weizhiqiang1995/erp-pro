@@ -15,60 +15,60 @@ import com.skyeye.eve.service.ErpProducePageService;
 
 @Controller
 public class ErpProducePageController {
-	
-	@Autowired
-	private ErpProducePageService erpProducePageService;
 
-	/**
-	 * 统计当前部门月度领料图
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
+    @Autowired
+    private ErpProducePageService erpProducePageService;
+
+    /**
+     * 统计当前部门月度领料图
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
     @RequestMapping("/post/ErpProducePageController/queryDepartmentPickMaterial")
     @ResponseBody
-    public void queryDepartmentPickMaterial(InputObject inputObject, OutputObject outputObject) throws Exception{
-    	erpProducePageService.queryDepartmentPickMaterial(inputObject, outputObject);
+    public void queryDepartmentPickMaterial(InputObject inputObject, OutputObject outputObject) throws Exception {
+        erpProducePageService.queryDepartmentPickMaterial(inputObject, outputObject);
     }
 
-	/**
-	 * 统计当前部门月度补料图
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/ErpProducePageController/queryDepartmentPatchMaterial")
+    /**
+     * 统计当前部门月度补料图
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/ErpProducePageController/queryDepartmentPatchMaterial")
     @ResponseBody
-    public void queryDepartmentPatchMaterial(InputObject inputObject, OutputObject outputObject) throws Exception{
-    	erpProducePageService.queryDepartmentPatchMaterial(inputObject, outputObject);
+    public void queryDepartmentPatchMaterial(InputObject inputObject, OutputObject outputObject) throws Exception {
+        erpProducePageService.queryDepartmentPatchMaterial(inputObject, outputObject);
     }
 
-	/**
-	 * 统计当前部门月度退料图
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/ErpProducePageController/queryDepartmentReturnMaterial")
+    /**
+     * 统计当前部门月度退料图
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/ErpProducePageController/queryDepartmentReturnMaterial")
     @ResponseBody
-    public void queryDepartmentReturnMaterial(InputObject inputObject, OutputObject outputObject) throws Exception{
-    	erpProducePageService.queryDepartmentReturnMaterial(inputObject, outputObject);
+    public void queryDepartmentReturnMaterial(InputObject inputObject, OutputObject outputObject) throws Exception {
+        erpProducePageService.queryDepartmentReturnMaterial(inputObject, outputObject);
     }
 
-	/**
-	 * 统计当前部门月度新建加工单图
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/ErpProducePageController/queryDepartmentMachin")
+    /**
+     * 统计当前部门月度新建加工单图
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/ErpProducePageController/queryDepartmentMachin")
     @ResponseBody
-    public void queryDepartmentMachin(InputObject inputObject, OutputObject outputObject) throws Exception{
-    	erpProducePageService.queryDepartmentMachin(inputObject, outputObject);
+    public void queryDepartmentMachin(InputObject inputObject, OutputObject outputObject) throws Exception {
+        erpProducePageService.queryDepartmentMachin(inputObject, outputObject);
     }
-	
+
 }

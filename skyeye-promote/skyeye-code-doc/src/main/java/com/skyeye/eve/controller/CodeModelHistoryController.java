@@ -16,44 +16,44 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CodeModelHistoryController {
-	
-	@Autowired
-	private CodeModelHistoryService codeModelHistoryService;
 
-	/**
-	 * 获取模板生成历史列表
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/CodeModelHistoryController/queryCodeModelHistoryList")
-	public void queryCodeModelHistoryList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		codeModelHistoryService.queryCodeModelHistoryList(inputObject, outputObject);
-	}
+    @Autowired
+    private CodeModelHistoryService codeModelHistoryService;
 
-	/**
-	 * 重新生成文件
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/CodeModelHistoryController/insertCodeModelHistoryCreate")
-	public void insertCodeModelHistoryCreate(InputObject inputObject, OutputObject outputObject) throws Exception{
-		codeModelHistoryService.insertCodeModelHistoryCreate(inputObject, outputObject);
-	}
+    /**
+     * 获取模板生成历史列表
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/CodeModelHistoryController/queryCodeModelHistoryList")
+    public void queryCodeModelHistoryList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        codeModelHistoryService.queryCodeModelHistoryList(inputObject, outputObject);
+    }
 
-	/**
-	 * 下载文件
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/CodeModelHistoryController/downloadCodeModelHistory")
-	public void downloadCodeModelHistory(InputObject inputObject, OutputObject outputObject) throws Exception{
-		codeModelHistoryService.downloadCodeModelHistory(inputObject, outputObject);
-	}
-	
+    /**
+     * 重新生成文件
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/CodeModelHistoryController/insertCodeModelHistoryCreate")
+    public void insertCodeModelHistoryCreate(InputObject inputObject, OutputObject outputObject) throws Exception {
+        codeModelHistoryService.insertCodeModelHistoryCreate(inputObject, outputObject);
+    }
+
+    /**
+     * 下载文件
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/CodeModelHistoryController/downloadCodeModelHistory")
+    public void downloadCodeModelHistory(InputObject inputObject, OutputObject outputObject) throws Exception {
+        codeModelHistoryService.downloadCodeModelHistory(inputObject, outputObject);
+    }
+
 }

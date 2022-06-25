@@ -9,7 +9,7 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysStaffLanguageLevelService {
 
-	public void querySysStaffLanguageLevelList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void querySysStaffLanguageLevelList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
     public void insertSysStaffLanguageLevelMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 

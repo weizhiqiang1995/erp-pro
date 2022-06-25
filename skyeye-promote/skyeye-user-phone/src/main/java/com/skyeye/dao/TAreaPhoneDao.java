@@ -8,6 +8,6 @@ import java.util.Map;
 
 public interface TAreaPhoneDao {
 
-	public List<Map<String, Object>> queryTAreaPhoneList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryTAreaPhoneList(Map<String, Object> map) throws Exception;
 
 }

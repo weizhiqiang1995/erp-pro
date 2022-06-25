@@ -14,47 +14,47 @@ import java.io.Serializable;
 @SolrDocument(solrCoreName = "custom_core")
 public class Forum implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Field
-	private String id;
-	@Field
-	private String forumContent;
-	@Field
-	private String type;
-	@Field
-	private String state;
-	@Field
-	private String reportState;
-	@Field
-	private String tagId;
-	@Field
-	private String forumTitle;
-	@Field
-	private String forumDesc;
-	@Field
-	private String anonymous;
-	@Field
-	private String createId;
-	@Field
-	private String createTime;
+    @Field
+    private String id;
+    @Field
+    private String forumContent;
+    @Field
+    private String type;
+    @Field
+    private String state;
+    @Field
+    private String reportState;
+    @Field
+    private String tagId;
+    @Field
+    private String forumTitle;
+    @Field
+    private String forumDesc;
+    @Field
+    private String anonymous;
+    @Field
+    private String createId;
+    @Field
+    private String createTime;
 
-	public Forum() {
-	}
+    public Forum() {
+    }
 
-	public Forum(String id, String forumContent, String type, String state, String reportState, String tagId,
-			String forumTitle, String forumDesc, String anonymous, String createId, String createTime) {
-		this.id = id;
-		this.forumContent = forumContent;
-		this.type = type;
-		this.state = state;
-		this.reportState = reportState;
-		this.tagId = tagId;
-		this.forumTitle = forumTitle;
-		this.forumDesc = forumDesc;
-		this.anonymous = anonymous;
-		this.createId = createId;
-		this.createTime = createTime;
-	}
+    public Forum(String id, String forumContent, String type, String state, String reportState, String tagId,
+                 String forumTitle, String forumDesc, String anonymous, String createId, String createTime) {
+        this.id = id;
+        this.forumContent = forumContent;
+        this.type = type;
+        this.state = state;
+        this.reportState = reportState;
+        this.tagId = tagId;
+        this.forumTitle = forumTitle;
+        this.forumDesc = forumDesc;
+        this.anonymous = anonymous;
+        this.createId = createId;
+        this.createTime = createTime;
+    }
 
 }

@@ -8,12 +8,12 @@ import com.skyeye.common.object.OutputObject;
 
 public interface ErpProducePageService {
 
-	public void queryDepartmentPickMaterial(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryDepartmentPickMaterial(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryDepartmentPatchMaterial(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryDepartmentPatchMaterial(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryDepartmentReturnMaterial(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryDepartmentReturnMaterial(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryDepartmentMachin(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryDepartmentMachin(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

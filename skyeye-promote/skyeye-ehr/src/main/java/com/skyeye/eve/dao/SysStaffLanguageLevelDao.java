@@ -11,7 +11,7 @@ import java.util.Map;
 
 public interface SysStaffLanguageLevelDao {
 
-	public List<Map<String, Object>> querySysStaffLanguageLevelList(Map<String, Object> params) throws Exception;
+    public List<Map<String, Object>> querySysStaffLanguageLevelList(Map<String, Object> params) throws Exception;
 
     public Map<String, Object> querySysStaffLanguageLevelByName(Map<String, Object> params) throws Exception;
 

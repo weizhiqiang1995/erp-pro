@@ -8,12 +8,12 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SealServicePhoneService {
 
-	public void queryNumberInEveryState(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryNumberInEveryState(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void insertSealSeServiceWaitToSignonMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void insertSealSeServiceWaitToSignonMation(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryFeedBackList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryFeedBackList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
-	public void queryAllPartsList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryAllPartsList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

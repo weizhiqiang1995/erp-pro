@@ -8,25 +8,25 @@ import java.util.Map;
 
 public interface CompanyJobDao {
 
-	public List<Map<String, Object>> queryCompanyJobList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryCompanyJobList(Map<String, Object> map) throws Exception;
 
-	public int insertCompanyJobMation(Map<String, Object> map) throws Exception;
+    public int insertCompanyJobMation(Map<String, Object> map) throws Exception;
 
-	public Map<String, Object> queryCompanyJobMationByName(Map<String, Object> map) throws Exception;
+    public Map<String, Object> queryCompanyJobMationByName(Map<String, Object> map) throws Exception;
 
-	public int deleteCompanyJobMationById(Map<String, Object> map) throws Exception;
+    public int deleteCompanyJobMationById(Map<String, Object> map) throws Exception;
 
-	public Map<String, Object> queryCompanyJobMationToEditById(Map<String, Object> map) throws Exception;
+    public Map<String, Object> queryCompanyJobMationToEditById(Map<String, Object> map) throws Exception;
 
-	public Map<String, Object> queryCompanyJobMationByNameAndId(Map<String, Object> map) throws Exception;
+    public Map<String, Object> queryCompanyJobMationByNameAndId(Map<String, Object> map) throws Exception;
 
-	public int editCompanyJobMationById(Map<String, Object> map) throws Exception;
+    public int editCompanyJobMationById(Map<String, Object> map) throws Exception;
 
-	public List<Map<String, Object>> queryCompanyJobListTreeByDepartmentId(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryCompanyJobListTreeByDepartmentId(Map<String, Object> map) throws Exception;
 
-	public List<Map<String, Object>> queryCompanyJobListByToSelect(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryCompanyJobListByToSelect(Map<String, Object> map) throws Exception;
 
-	public List<Map<String, Object>> queryCompanyJobSimpleListByToSelect(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryCompanyJobSimpleListByToSelect(Map<String, Object> map) throws Exception;
 
-	public List<Map<String, Object>> queryCompanyJobOrganization(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryCompanyJobOrganization(Map<String, Object> map) throws Exception;
 }

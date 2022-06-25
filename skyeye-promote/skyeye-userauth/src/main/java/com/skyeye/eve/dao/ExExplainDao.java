@@ -8,10 +8,10 @@ import java.util.Map;
 
 public interface ExExplainDao {
 
-	public int insertExExplainMation(Map<String, Object> map) throws Exception;
+    public int insertExExplainMation(Map<String, Object> map) throws Exception;
 
-	public Map<String, Object> queryExExplainMation(Map<String, Object> map) throws Exception;
+    public Map<String, Object> queryExExplainMation(Map<String, Object> map) throws Exception;
 
-	public int editExExplainMationById(Map<String, Object> map) throws Exception;
+    public int editExExplainMationById(Map<String, Object> map) throws Exception;
 
 }

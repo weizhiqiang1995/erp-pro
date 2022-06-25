@@ -16,56 +16,56 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class StickyNotesController {
-	
-	@Autowired
-	private StickyNotesService stickyNotesService;
 
-	/**
-	 * 新增便签
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/StickyNotesController/insertStickyNotesMation")
-	public void insertStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception{
-		stickyNotesService.insertStickyNotesMation(inputObject, outputObject);
-	}
+    @Autowired
+    private StickyNotesService stickyNotesService;
 
-	/**
-	 * 查询便签
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/StickyNotesController/selectStickyNotesMation")
-	public void selectStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception{
-		stickyNotesService.selectStickyNotesMation(inputObject, outputObject);
-	}
+    /**
+     * 新增便签
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/StickyNotesController/insertStickyNotesMation")
+    public void insertStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        stickyNotesService.insertStickyNotesMation(inputObject, outputObject);
+    }
 
-	/**
-	 * 编辑便签
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/StickyNotesController/editStickyNotesMation")
-	public void editStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception{
-		stickyNotesService.editStickyNotesMation(inputObject, outputObject);
-	}
+    /**
+     * 查询便签
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/StickyNotesController/selectStickyNotesMation")
+    public void selectStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        stickyNotesService.selectStickyNotesMation(inputObject, outputObject);
+    }
 
-	/**
-	 * 删除便签
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/StickyNotesController/deleteStickyNotesMation")
-	public void deleteStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception{
-		stickyNotesService.deleteStickyNotesMation(inputObject, outputObject);
-	}
+    /**
+     * 编辑便签
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/StickyNotesController/editStickyNotesMation")
+    public void editStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        stickyNotesService.editStickyNotesMation(inputObject, outputObject);
+    }
+
+    /**
+     * 删除便签
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/StickyNotesController/deleteStickyNotesMation")
+    public void deleteStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        stickyNotesService.deleteStickyNotesMation(inputObject, outputObject);
+    }
 
 }

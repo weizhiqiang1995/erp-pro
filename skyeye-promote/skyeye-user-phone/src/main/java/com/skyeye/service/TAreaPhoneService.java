@@ -8,6 +8,6 @@ import com.skyeye.common.object.OutputObject;
 
 public interface TAreaPhoneService {
 
-	public void queryTAreaPhoneList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    public void queryTAreaPhoneList(InputObject inputObject, OutputObject outputObject) throws Exception;
 
 }

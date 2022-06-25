@@ -68,7 +68,7 @@ public class MailGroupServiceImpl implements MailGroupService {
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void insertMailMationType(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -93,7 +93,7 @@ public class MailGroupServiceImpl implements MailGroupService {
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void deleteMailMationTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -129,7 +129,7 @@ public class MailGroupServiceImpl implements MailGroupService {
      * @throws Exception
      */
     @Override
-    @Transactional(value="transactionManager")
+    @Transactional(value = "transactionManager")
     public void editMailMationTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -162,5 +162,5 @@ public class MailGroupServiceImpl implements MailGroupService {
             outputObject.settotal(beans.size());
         }
     }
-    
+
 }

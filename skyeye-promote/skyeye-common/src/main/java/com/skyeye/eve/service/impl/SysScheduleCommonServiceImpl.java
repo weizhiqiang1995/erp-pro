@@ -39,7 +39,7 @@ public class SysScheduleCommonServiceImpl implements SysScheduleCommonService {
     @Override
     public boolean judgeISHoliday(String day) throws Exception {
         List<Map<String, Object>> holiday = sysScheduleCommonDao.queryWhetherIsHolidayByDate(day);
-        if(holiday == null || holiday.isEmpty()){
+        if (holiday == null || holiday.isEmpty()) {
             return false;
         }
         return true;

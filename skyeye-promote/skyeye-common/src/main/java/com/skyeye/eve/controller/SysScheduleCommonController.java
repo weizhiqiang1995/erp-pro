@@ -43,7 +43,7 @@ public class SysScheduleCommonController {
         @ApiImplicitParam(id = "day", name = "day", value = "日期，格式为yyyy-mm-dd", required = "required")})
     @RequestMapping("/post/SysScheduleCommonController/judgeISHoliday")
     @ResponseBody
-    public void judgeISHoliday(InputObject inputObject, OutputObject outputObject) throws Exception{
+    public void judgeISHoliday(InputObject inputObject, OutputObject outputObject) throws Exception {
         sysScheduleCommonService.judgeISHoliday(inputObject, outputObject);
     }
 

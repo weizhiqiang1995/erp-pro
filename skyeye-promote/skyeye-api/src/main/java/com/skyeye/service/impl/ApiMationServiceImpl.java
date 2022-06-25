@@ -28,51 +28,51 @@ import java.util.Map;
 @Service
 public class ApiMationServiceImpl implements ApiMationService {
 
-	@Autowired
-	private ApiMationDao apiMationDao;
+    @Autowired
+    private ApiMationDao apiMationDao;
 
-	@Value("${skyeye.appid}")
-	private String appId;
+    @Value("${skyeye.appid}")
+    private String appId;
 
-	/**
-	 * 通过id查找对应的api接口信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void selectApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		String urlId = map.get("urlId").toString();
-		Map<String, Object> bean = apiMationDao.queryApiMationToEditById(urlId);
-		outputObject.setBean(bean);
-		outputObject.settotal(1);
-	}
+    /**
+     * 通过id查找对应的api接口信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void selectApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        String urlId = map.get("urlId").toString();
+        Map<String, Object> bean = apiMationDao.queryApiMationToEditById(urlId);
+        outputObject.setBean(bean);
+        outputObject.settotal(1);
+    }
 
-	/**
-	 * 编辑api接口信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	@Transactional(value = "transactionManager")
-	public void editApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		String urlId = map.get("urlId").toString();
-		Map<String, Object> bean = apiMationDao.queryApiMationToEditById(urlId);
-		map.put("userId", inputObject.getLogParams().get("id"));
-		map.put("currentTime", DateUtil.getTimeAndToString());
-		if (bean != null && !bean.isEmpty()) {
-			apiMationDao.editApiMationById(map);
-		} else {
-			map.put("id", ToolUtil.getSurFaceId());
-			map.put("appId", appId);
-			apiMationDao.insertApiMation(map);
-		}
-	}
+    /**
+     * 编辑api接口信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    @Transactional(value = "transactionManager")
+    public void editApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        String urlId = map.get("urlId").toString();
+        Map<String, Object> bean = apiMationDao.queryApiMationToEditById(urlId);
+        map.put("userId", inputObject.getLogParams().get("id"));
+        map.put("currentTime", DateUtil.getTimeAndToString());
+        if (bean != null && !bean.isEmpty()) {
+            apiMationDao.editApiMationById(map);
+        } else {
+            map.put("id", ToolUtil.getSurFaceId());
+            map.put("appId", appId);
+            apiMationDao.insertApiMation(map);
+        }
+    }
 
 }
 

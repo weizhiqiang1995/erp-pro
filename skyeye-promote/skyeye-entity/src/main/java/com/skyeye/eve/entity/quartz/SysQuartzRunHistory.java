@@ -41,16 +41,18 @@ public class SysQuartzRunHistory implements Serializable {
     @ApiModelProperty("如果start_type=2，则需要记录启动人")
     private String startUserId;
 
-    public static enum State{
+    public static enum State {
         START_RUNING(1, "执行中"),
         START_SUCCESS(2, "执行成功"),
         START_ERROR(3, "执行失败");
         private int state;
         private String name;
-        State(int state, String name){
+
+        State(int state, String name) {
             this.state = state;
             this.name = name;
         }
+
         public int getState() {
             return state;
         }
@@ -60,15 +62,17 @@ public class SysQuartzRunHistory implements Serializable {
         }
     }
 
-    public static enum StartType{
+    public static enum StartType {
         AUTO_START(1, "自动启动"),
         MANUAL_START(2, "人工启动");
         private int type;
         private String name;
-        StartType(int type, String name){
+
+        StartType(int type, String name) {
             this.type = type;
             this.name = name;
         }
+
         public int getType() {
             return type;
         }

@@ -19,161 +19,159 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @ClassName: SysEveUserNoticeServiceImpl
  * @Description: 用户消息管理服务类
  * @author: skyeye云系列--卫志强
  * @date: 2021/8/7 19:12
- *
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
-public class SysEveUserNoticeServiceImpl implements SysEveUserNoticeService{
-	
-	@Autowired
-	private SysEveUserNoticeDao sysEveUserNoticeDao;
+public class SysEveUserNoticeServiceImpl implements SysEveUserNoticeService {
 
-	/**
-	 * 根据用户id获取用户的消息只查询8条
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void getNoticeListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> user = inputObject.getLogParams();
-		map.put("userId", user.get("id"));
-		List<Map<String, Object>> beans = sysEveUserNoticeDao.getNoticeListByUserId(map);
-		if (!beans.isEmpty()) {
-			outputObject.setBeans(beans);
-			outputObject.settotal(beans.size());
-		}
-	}
+    @Autowired
+    private SysEveUserNoticeDao sysEveUserNoticeDao;
 
-	/**
-	 * 根据用户id获取用户的消息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void getAllNoticeListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> user = inputObject.getLogParams();
-		map.put("userId", user.get("id"));
-		Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-		List<Map<String, Object>> beans = sysEveUserNoticeDao.getAllNoticeListByUserId(map);
-		outputObject.setBeans(beans);
-		outputObject.settotal(pages.getTotal());
-	}
+    /**
+     * 根据用户id获取用户的消息只查询8条
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void getNoticeListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> user = inputObject.getLogParams();
+        map.put("userId", user.get("id"));
+        List<Map<String, Object>> beans = sysEveUserNoticeDao.getNoticeListByUserId(map);
+        if (!beans.isEmpty()) {
+            outputObject.setBeans(beans);
+            outputObject.settotal(beans.size());
+        }
+    }
 
-	/**
-	 * 用户阅读消息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void editNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> user = inputObject.getLogParams();
-		map.put("userId", user.get("id"));
-		Map<String, Object> notice = sysEveUserNoticeDao.queryNoticeMationById(map);
-		if (!CollectionUtils.isEmpty(notice)) {
-			if ("1".equals(notice.get("state").toString())) {//未读状态下的消息
-				map.put("readTime", DateUtil.getTimeAndToString());
-				sysEveUserNoticeDao.editNoticeMationById(map);
-			}
-		} else {
-			outputObject.setreturnMessage("您不具备该消息的操作权限。");
-		}
-	}
+    /**
+     * 根据用户id获取用户的消息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void getAllNoticeListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> user = inputObject.getLogParams();
+        map.put("userId", user.get("id"));
+        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
+        List<Map<String, Object>> beans = sysEveUserNoticeDao.getAllNoticeListByUserId(map);
+        outputObject.setBeans(beans);
+        outputObject.settotal(pages.getTotal());
+    }
 
-	/**
-	 * 用户删除消息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void deleteNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> user = inputObject.getLogParams();
-		map.put("userId", user.get("id"));
-		Map<String, Object> notice = sysEveUserNoticeDao.queryNoticeMationById(map);
-		if (!CollectionUtils.isEmpty(notice)) {
-			map.put("delTime", DateUtil.getTimeAndToString());
-			sysEveUserNoticeDao.deleteNoticeMationById(map);
-		} else {
-			outputObject.setreturnMessage("您不具备该消息的操作权限。");
-		}
-	}
+    /**
+     * 用户阅读消息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void editNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> user = inputObject.getLogParams();
+        map.put("userId", user.get("id"));
+        Map<String, Object> notice = sysEveUserNoticeDao.queryNoticeMationById(map);
+        if (!CollectionUtils.isEmpty(notice)) {
+            if ("1".equals(notice.get("state").toString())) {//未读状态下的消息
+                map.put("readTime", DateUtil.getTimeAndToString());
+                sysEveUserNoticeDao.editNoticeMationById(map);
+            }
+        } else {
+            outputObject.setreturnMessage("您不具备该消息的操作权限。");
+        }
+    }
 
-	/**
-	 * 用户批量阅读消息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void editNoticeMationByIds(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> user = inputObject.getLogParams();
-		map.put("userId", user.get("id"));
-		List<Map<String, Object>> notices = sysEveUserNoticeDao.queryNoticeNoReadMationByIds(map);//获取未读的消息信息
-		String editIds = "";
-		for(Map<String, Object> notice: notices){
-			editIds = notice.get("id").toString() + ",";
-		}
-		map.put("editIds", editIds);
-		map.put("readTime", DateUtil.getTimeAndToString());
-		sysEveUserNoticeDao.editNoticeMationByIds(map);
-	}
+    /**
+     * 用户删除消息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void deleteNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> user = inputObject.getLogParams();
+        map.put("userId", user.get("id"));
+        Map<String, Object> notice = sysEveUserNoticeDao.queryNoticeMationById(map);
+        if (!CollectionUtils.isEmpty(notice)) {
+            map.put("delTime", DateUtil.getTimeAndToString());
+            sysEveUserNoticeDao.deleteNoticeMationById(map);
+        } else {
+            outputObject.setreturnMessage("您不具备该消息的操作权限。");
+        }
+    }
 
-	/**
-	 * 用户批量删除消息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void deleteNoticeMationByIds(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> user = inputObject.getLogParams();
-		map.put("userId", user.get("id"));
-		List<Map<String, Object>> notices = sysEveUserNoticeDao.queryNoticeNoDelMationByIds(map);//获取未删除的消息信息
-		String editIds = "";
-		for(Map<String, Object> notice: notices){
-			editIds = notice.get("id").toString() + ",";
-		}
-		map.put("editIds", editIds);
-		map.put("delTime", DateUtil.getTimeAndToString());
-		sysEveUserNoticeDao.deleteNoticeMationByIds(map);
-	}
+    /**
+     * 用户批量阅读消息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void editNoticeMationByIds(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> user = inputObject.getLogParams();
+        map.put("userId", user.get("id"));
+        List<Map<String, Object>> notices = sysEveUserNoticeDao.queryNoticeNoReadMationByIds(map);//获取未读的消息信息
+        String editIds = "";
+        for (Map<String, Object> notice : notices) {
+            editIds = notice.get("id").toString() + ",";
+        }
+        map.put("editIds", editIds);
+        map.put("readTime", DateUtil.getTimeAndToString());
+        sysEveUserNoticeDao.editNoticeMationByIds(map);
+    }
 
-	/**
-	 * 获取消息详情
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@Override
-	public void queryNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> map = inputObject.getParams();
-		Map<String, Object> user = inputObject.getLogParams();
-		map.put("userId", user.get("id"));
-		Map<String, Object> bean = sysEveUserNoticeDao.queryNoticeDetailsMationById(map);
-		outputObject.setBean(bean);
-		outputObject.settotal(1);
-	}
+    /**
+     * 用户批量删除消息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void deleteNoticeMationByIds(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> user = inputObject.getLogParams();
+        map.put("userId", user.get("id"));
+        List<Map<String, Object>> notices = sysEveUserNoticeDao.queryNoticeNoDelMationByIds(map);//获取未删除的消息信息
+        String editIds = "";
+        for (Map<String, Object> notice : notices) {
+            editIds = notice.get("id").toString() + ",";
+        }
+        map.put("editIds", editIds);
+        map.put("delTime", DateUtil.getTimeAndToString());
+        sysEveUserNoticeDao.deleteNoticeMationByIds(map);
+    }
+
+    /**
+     * 获取消息详情
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @Override
+    public void queryNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        Map<String, Object> map = inputObject.getParams();
+        Map<String, Object> user = inputObject.getLogParams();
+        map.put("userId", user.get("id"));
+        Map<String, Object> bean = sysEveUserNoticeDao.queryNoticeDetailsMationById(map);
+        outputObject.setBean(bean);
+        outputObject.settotal(1);
+    }
 
 }

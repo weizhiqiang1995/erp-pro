@@ -5,12 +5,10 @@
 package com.skyeye.common.constans;
 
 /**
- *
  * @ClassName: QuartzConstants
  * @Description: 定时任务常量类
  * @author: skyeye云系列--卫志强
  * @date: 2021/7/4 22:01
- *
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
@@ -28,25 +26,25 @@ public class QuartzConstants {
         private String serviceName;
         private String remarkPrefix;
 
-        QuartzMateMationJobType(String taskType, String title, String serviceName, String remarkPrefix){
+        QuartzMateMationJobType(String taskType, String title, String serviceName, String remarkPrefix) {
             this.taskType = taskType;
             this.title = title;
             this.serviceName = serviceName;
             this.remarkPrefix = remarkPrefix;
         }
 
-        public static String getServiceNameByTaskType(String taskType){
-            for (QuartzMateMationJobType bean : QuartzMateMationJobType.values()){
-                if(bean.getTaskType().equals(taskType)){
+        public static String getServiceNameByTaskType(String taskType) {
+            for (QuartzMateMationJobType bean : QuartzMateMationJobType.values()) {
+                if (bean.getTaskType().equals(taskType)) {
                     return bean.getServiceName();
                 }
             }
             return "";
         }
 
-        public static String getRemarkPrefixByTaskType(String taskType, String title){
-            for (QuartzMateMationJobType bean : QuartzMateMationJobType.values()){
-                if(bean.getTaskType().equals(taskType)){
+        public static String getRemarkPrefixByTaskType(String taskType, String title) {
+            for (QuartzMateMationJobType bean : QuartzMateMationJobType.values()) {
+                if (bean.getTaskType().equals(taskType)) {
                     return String.format("%s【%s】", bean.getRemarkPrefix(), title);
                 }
             }

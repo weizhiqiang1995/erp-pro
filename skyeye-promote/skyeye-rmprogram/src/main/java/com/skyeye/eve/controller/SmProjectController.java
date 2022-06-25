@@ -13,92 +13,92 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SmProjectController {
-	
-	@Autowired
-	private SmProjectService smProjectService;
 
-	/**
-	 * 获取小程序列表
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SmProjectController/querySmProjectList")
-	public void querySmProjectList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		smProjectService.querySmProjectList(inputObject, outputObject);
-	}
+    @Autowired
+    private SmProjectService smProjectService;
 
-	/**
-	 * 新增小程序
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SmProjectController/insertSmProjectMation")
-	public void insertSmProjectMation(InputObject inputObject, OutputObject outputObject) throws Exception{
-		smProjectService.insertSmProjectMation(inputObject, outputObject);
-	}
+    /**
+     * 获取小程序列表
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SmProjectController/querySmProjectList")
+    public void querySmProjectList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        smProjectService.querySmProjectList(inputObject, outputObject);
+    }
 
-	/**
-	 * 删除小程序
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SmProjectController/deleteSmProjectById")
-	public void deleteSmProjectById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		smProjectService.deleteSmProjectById(inputObject, outputObject);
-	}
+    /**
+     * 新增小程序
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SmProjectController/insertSmProjectMation")
+    public void insertSmProjectMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+        smProjectService.insertSmProjectMation(inputObject, outputObject);
+    }
 
-	/**
-	 * 编辑小程序信息时进行回显
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SmProjectController/querySmProjectMationToEditById")
-	public void querySmProjectMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		smProjectService.querySmProjectMationToEditById(inputObject, outputObject);
-	}
+    /**
+     * 删除小程序
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SmProjectController/deleteSmProjectById")
+    public void deleteSmProjectById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        smProjectService.deleteSmProjectById(inputObject, outputObject);
+    }
 
-	/**
-	 * 编辑小程序信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SmProjectController/editSmProjectMationById")
-	public void editSmProjectMationById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		smProjectService.editSmProjectMationById(inputObject, outputObject);
-	}
+    /**
+     * 编辑小程序信息时进行回显
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SmProjectController/querySmProjectMationToEditById")
+    public void querySmProjectMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        smProjectService.querySmProjectMationToEditById(inputObject, outputObject);
+    }
 
-	/**
-	 * 获取小程序组信息供展示
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SmProjectController/queryGroupMationList")
-	public void queryGroupMationList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		smProjectService.queryGroupMationList(inputObject, outputObject);
-	}
+    /**
+     * 编辑小程序信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SmProjectController/editSmProjectMationById")
+    public void editSmProjectMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+        smProjectService.editSmProjectMationById(inputObject, outputObject);
+    }
 
-	/**
-	 * 根据分组获取小程序组件信息
-	 *
-	 * @param inputObject
-	 * @param outputObject
-	 * @throws Exception
-	 */
-	@RequestMapping("/post/SmProjectController/queryGroupMemberMationList")
-	public void queryGroupMemberMationList(InputObject inputObject, OutputObject outputObject) throws Exception{
-		smProjectService.queryGroupMemberMationList(inputObject, outputObject);
-	}
-	
+    /**
+     * 获取小程序组信息供展示
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SmProjectController/queryGroupMationList")
+    public void queryGroupMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        smProjectService.queryGroupMationList(inputObject, outputObject);
+    }
+
+    /**
+     * 根据分组获取小程序组件信息
+     *
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping("/post/SmProjectController/queryGroupMemberMationList")
+    public void queryGroupMemberMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+        smProjectService.queryGroupMemberMationList(inputObject, outputObject);
+    }
+
 }

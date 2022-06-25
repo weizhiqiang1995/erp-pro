@@ -14,5 +14,5 @@ public interface WagesModelApplicableObjectsDao {
     public List<Map<String, Object>> queryWagesModelApplicableObjectsByModelId(@Param("modelId") String modelId) throws Exception;
 
     public List<Map<String, Object>> queryAllEanbleWagesModelApplicableObjects(@Param("lastMonthDate") String lastMonthDate) throws Exception;
-    
+
 }

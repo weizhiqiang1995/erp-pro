@@ -21,6 +21,7 @@ public class SysStaffLanguageLevelController {
 
     /**
      * 查询语种等级列表
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -33,6 +34,7 @@ public class SysStaffLanguageLevelController {
 
     /**
      * 新增语种等级
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -45,6 +47,7 @@ public class SysStaffLanguageLevelController {
 
     /**
      * 修改语种等级时数据回显
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -57,6 +60,7 @@ public class SysStaffLanguageLevelController {
 
     /**
      * 修改语种等级
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -69,6 +73,7 @@ public class SysStaffLanguageLevelController {
 
     /**
      * 禁用语种等级
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -81,6 +86,7 @@ public class SysStaffLanguageLevelController {
 
     /**
      * 启用语种等级
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -93,6 +99,7 @@ public class SysStaffLanguageLevelController {
 
     /**
      * 删除语种等级
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception
@@ -105,6 +112,7 @@ public class SysStaffLanguageLevelController {
 
     /**
      * 获取所有启用语种等级
+     *
      * @param inputObject
      * @param outputObject
      * @throws Exception

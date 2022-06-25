@@ -10,18 +10,18 @@ import java.util.Map;
 
 public interface SealServicePhoneDao {
 
-	public List<Map<String, Object>> queryNumberInEveryStateIsMine(@Param("userId") String userId) throws Exception;
+    public List<Map<String, Object>> queryNumberInEveryStateIsMine(@Param("userId") String userId) throws Exception;
 
-	public List<Map<String, Object>> queryNumberInEveryStateIsAll() throws Exception;
+    public List<Map<String, Object>> queryNumberInEveryStateIsAll() throws Exception;
 
-	public Map<String, Object> querySealSeServiceState(@Param("id") String string) throws Exception;
+    public Map<String, Object> querySealSeServiceState(@Param("id") String string) throws Exception;
 
-	public int insertSealSeServiceWaitToSignonMation(Map<String, Object> map) throws Exception;
+    public int insertSealSeServiceWaitToSignonMation(Map<String, Object> map) throws Exception;
 
-	public int editSealSeServiceWaitToSignonMation(Map<String, Object> map) throws Exception;
+    public int editSealSeServiceWaitToSignonMation(Map<String, Object> map) throws Exception;
 
-	public List<Map<String, Object>> queryFeedBackList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryFeedBackList(Map<String, Object> map) throws Exception;
 
-	public List<Map<String, Object>> queryAllPartsList(Map<String, Object> params) throws Exception;
+    public List<Map<String, Object>> queryAllPartsList(Map<String, Object> params) throws Exception;
 
 }
