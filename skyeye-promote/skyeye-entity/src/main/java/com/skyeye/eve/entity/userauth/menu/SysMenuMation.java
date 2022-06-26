@@ -6,7 +6,7 @@ package com.skyeye.eve.entity.userauth.menu;
 
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
-import com.skyeye.eve.entity.common.ChooseIconMation;
+import com.skyeye.common.entity.CommonIconOrImgInfo;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -21,7 +21,7 @@ import java.io.Serializable;
  */
 @Data
 @ApiModel("菜单管理实体类")
-public class SysMenuMation extends ChooseIconMation implements Serializable {
+public class SysMenuMation extends CommonIconOrImgInfo implements Serializable {
 
     @ApiModelProperty(value = "菜单名称", required = "required")
     private String menuName;

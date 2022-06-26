@@ -8,15 +8,15 @@
 - [项目功能结构](https://docs.qq.com/flowchart/DYUFQQnlCUm9Ua2FI)
 - [企业版信息](https://docs.qq.com/doc/DQlRxcVRMWWVjbU1i?_from=1&disableReturnList=1)
 - [开源版项目文档](https://gitee.com/doc_wei01/skyeye/blob/master/%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3.md)
-- `企业版功能`以及`设计思路`获取方式：扫码进入知识星球
+- `企业版部署包`以及`设计思路`获取方式：扫码进入知识星球
 - 作者本人承诺，知识星球人数达到1000人，即开放所有功能模块源代码(仅供星球内部成员使用)
 
 
 ### 联系作者
 
-| 作者微信/或者搜索 wzq_598748873 | QQ交流群/或者搜索 1016439713 | 更新资讯公众号 | 企业版设计思路知识星球 |
-| ------ | ---- | ---- | ---- |
-| ![      ](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/%E5%BE%AE%E4%BF%A1.jpg) | ![     ](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/skyeye%E7%B3%BB%E5%88%97QQ%E7%BE%A4%E8%81%8A%E4%BA%8C%E7%BB%B4%E7%A0%81.png)|![输入图片说明](https://images.gitee.com/uploads/images/2021/0320/091531_8c3ba4d8_1541735.jpeg "qrcode_for_gh_e7f97ff1beda_430.jpg")| ![输入图片说明](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/%E7%9F%A5%E8%AF%86%E6%98%9F%E7%90%83.png) |
+| 作者微信/或者搜索 wzq_598748873 | QQ交流群/或者搜索 1016439713 | 更新资讯公众号 | 企业版设计思路知识星球 | 扫码进微信群畅聊(禁止发广告)                                                                                                                                                |
+| ------ | ---- | ---- | ---- |----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/%E5%BE%AE%E4%BF%A1.jpg) | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/skyeye%E7%B3%BB%E5%88%97QQ%E7%BE%A4%E8%81%8A%E4%BA%8C%E7%BB%B4%E7%A0%81.png)|![](https://images.gitee.com/uploads/images/2021/0320/091531_8c3ba4d8_1541735.jpeg "qrcode_for_gh_e7f97ff1beda_430.jpg")| ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/%E7%9F%A5%E8%AF%86%E6%98%9F%E7%90%83.png) | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220626095834.jpg) |
 
 #### 环境搭建
 
