@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveMenuDao;
@@ -78,9 +79,7 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
                 map.put("orderNum", 0);
             }
         }
-        map.put("id", ToolUtil.getSurFaceId());
-        map.put("createTime", DateUtil.getTimeAndToString());
-        map.put("createId", user.get("id"));
+        DataCommonUtil.setCommonData(map, user.get("id").toString());
         sysEveMenuDao.insertSysMenuMation(map);
     }
 
