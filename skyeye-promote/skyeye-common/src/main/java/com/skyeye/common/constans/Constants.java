@@ -26,11 +26,6 @@ public class Constants {
         ".scss", ".ico", "/upload", "/actuator", "/service", "/talkwebsocket", "/phonetalkwebsocket"};
 
     /**
-     * 百分号
-     */
-    public static final String PERCENT_SIGN = "%";
-
-    /**
      * 中文
      */
     public static String LANGUAGE_ZH = "zh";
@@ -65,12 +60,6 @@ public class Constants {
     public static String getSysExplainExexplainRedisKey(Integer type) {
         return REDIS_CODEMODEL_EXPLAIN_EXEXPLAIN + "_" + type;
     }
-
-    /**
-     * 可以设置长些，防止读到运行此次系统检查时的cpu占用率，就不准了
-     */
-    public static final int PERCENT = 100;
-    public static final int FAULTLENGTH = 10;
 
     // win系统桌面图片列表的redis的key
     public static final String SYS_WIN_BG_PIC_REDIS_KEY = "sys_win_bg_pic_redis_key";

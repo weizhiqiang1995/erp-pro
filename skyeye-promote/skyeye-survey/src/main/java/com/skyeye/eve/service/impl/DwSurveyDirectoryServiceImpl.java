@@ -7,19 +7,20 @@ package com.skyeye.eve.service.impl;
 import cn.hutool.json.JSONUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.skyeye.common.constans.CheckType;
-import com.skyeye.common.constans.QuType;
 import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.object.PutObject;
-import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.IPSeeker;
 import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.question.CheckType;
+import com.skyeye.common.util.question.QuType;
+import com.skyeye.common.util.question.QuestionUtil;
 import com.skyeye.eve.dao.DwSurveyDirectoryDao;
 import com.skyeye.eve.service.DwSurveyDirectoryService;
 import com.skyeye.quartz.config.QuartzService;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -250,45 +251,17 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     public List<Map<String, Object>> setLogics(String quId, String logicStr, String userId) throws Exception {
-        //设置问题逻辑
-        List<Map<String, Object>> array = JSONUtil.toList(logicStr, null);
-        //返回前台的逻辑对象
-        List<Map<String, Object>> quLogics = new ArrayList<>();
-        if (array.size() > 0) {
-            List<Map<String, Object>> editquLogics = new ArrayList<>();
-            for (int i = 0; i < array.size(); i++) {
-                Map<String, Object> object = array.get(i);
-                Map<String, Object> bean = new HashMap<>();
-                bean.put("cgQuItemId", object.get("cgQuItemId"));
-                bean.put("skQuId", object.get("skQuId"));
-                bean.put("logicType", object.get("logicType"));
-                bean.put("title", object.get("key"));
-                if (object.containsKey("geLe")) {
-                    bean.put("geLe", object.get("geLe"));
-                }
-                if (object.containsKey("scoreNum")) {
-                    bean.put("scoreNum", object.get("scoreNum"));
-                }
-                if (ToolUtil.isBlank(object.get("quLogicId").toString())) {
-                    bean.put("ckQuId", quId);
-                    bean.put("visibility", object.get("visibility"));
-                    DataCommonUtil.setCommonData(bean, userId);
-                    quLogics.add(bean);
-                } else {
-                    bean.put("id", object.get("quLogicId"));
-                    editquLogics.add(bean);
-                }
-            }
-            if (!quLogics.isEmpty()) {
-                dwSurveyDirectoryDao.addQuestionLogicsMationList(quLogics);
-            }
-            if (!editquLogics.isEmpty()) {
-                dwSurveyDirectoryDao.editQuestionLogicsMationList(editquLogics);
-            }
-            quLogics.addAll(editquLogics);
-            return quLogics;
+        List<Map<String, Object>> insertList = new ArrayList<>();
+        List<Map<String, Object>> editList = new ArrayList<>();
+        QuestionUtil.setLogics(quId, logicStr, userId, insertList, editList);
+        if (!insertList.isEmpty()) {
+            dwSurveyDirectoryDao.addQuestionLogicsMationList(insertList);
         }
-        return quLogics;
+        if (!editList.isEmpty()) {
+            dwSurveyDirectoryDao.editQuestionLogicsMationList(editList);
+        }
+        insertList.addAll(editList);
+        return insertList;
     }
 
     /**
@@ -331,37 +304,24 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     public void addQuScoreMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.SCORE.getIndex());
-        //添加问题并返回问题id
+        // 添加问题并返回问题id
         String quId = compileQuestion(map);
 
-        List<Map<String, Object>> score = JSONUtil.toList(map.get("scoreTd").toString(), null);//获取模板绑定信息
+        // 获取模板绑定信息
+        List<Map<String, Object>> score = JSONUtil.toList(map.get("scoreTd").toString(), null);
         if (score.size() > 0) {
-            List<Map<String, Object>> quScore = new ArrayList<>();
-            List<Map<String, Object>> editquScore = new ArrayList<>();
+            List<Map<String, Object>> insertList = new ArrayList<>();
+            List<Map<String, Object>> editList = new ArrayList<>();
             String userId = inputObject.getLogParams().get("id").toString();
-            for (int i = 0; i < score.size(); i++) {
-                Map<String, Object> object = score.get(i);
-                Map<String, Object> bean = new HashMap<>();
-                bean.put("orderById", object.get("key"));
-                bean.put("optionName", object.get("optionValue"));
-                if (ToolUtil.isBlank(object.get("optionId").toString())) {
-                    bean.put("quId", quId);
-                    bean.put("visibility", 1);
-                    DataCommonUtil.setCommonData(bean, userId);
-                    quScore.add(bean);
-                } else {
-                    bean.put("id", object.get("optionId"));
-                    editquScore.add(bean);
-                }
+            QuestionUtil.setQuestionOptionMation(quId, score, insertList, editList, userId, -1);
+            if (!insertList.isEmpty()) {
+                dwSurveyDirectoryDao.addQuestionScoreMationList(insertList);
             }
-            if (!quScore.isEmpty()) {
-                dwSurveyDirectoryDao.addQuestionScoreMationList(quScore);
+            if (!editList.isEmpty()) {
+                dwSurveyDirectoryDao.editQuestionScoreMationList(editList);
             }
-            if (!editquScore.isEmpty()) {
-                dwSurveyDirectoryDao.editQuestionScoreMationList(editquScore);
-            }
-            quScore.addAll(editquScore);
-            map.put("quItems", quScore);
+            insertList.addAll(editList);
+            map.put("quItems", insertList);
         }
 
         //设置问题逻辑
@@ -386,32 +346,19 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
 
         List<Map<String, Object>> orderqu = JSONUtil.toList(map.get("orderquTd").toString(), null);//获取模板绑定信息
         if (orderqu.size() > 0) {
-            List<Map<String, Object>> quOrderqu = new ArrayList<>();
-            List<Map<String, Object>> editquOrderqu = new ArrayList<>();
+            List<Map<String, Object>> insertList = new ArrayList<>();
+            List<Map<String, Object>> editList = new ArrayList<>();
             String userId = inputObject.getLogParams().get("id").toString();
-            for (int i = 0; i < orderqu.size(); i++) {
-                Map<String, Object> object = orderqu.get(i);
-                Map<String, Object> bean = new HashMap<>();
-                bean.put("orderById", object.get("key"));
-                bean.put("optionName", object.get("optionValue"));
-                if (ToolUtil.isBlank(object.get("optionId").toString())) {
-                    bean.put("quId", quId);
-                    bean.put("visibility", 1);
-                    DataCommonUtil.setCommonData(bean, userId);
-                    quOrderqu.add(bean);
-                } else {
-                    bean.put("id", object.get("optionId"));
-                    editquOrderqu.add(bean);
-                }
+            QuestionUtil.setQuestionOptionMation(quId, orderqu, insertList, editList, userId, -1);
+
+            if (!insertList.isEmpty()) {
+                dwSurveyDirectoryDao.addQuestionOrderquMationList(insertList);
             }
-            if (!quOrderqu.isEmpty()) {
-                dwSurveyDirectoryDao.addQuestionOrderquMationList(quOrderqu);
+            if (!editList.isEmpty()) {
+                dwSurveyDirectoryDao.editQuestionOrderquMationList(editList);
             }
-            if (!editquOrderqu.isEmpty()) {
-                dwSurveyDirectoryDao.editQuestionOrderquMationList(editquOrderqu);
-            }
-            quOrderqu.addAll(editquOrderqu);
-            map.put("quItems", quOrderqu);
+            insertList.addAll(editList);
+            map.put("quItems", insertList);
         }
 
         //设置问题逻辑
@@ -455,40 +402,20 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         String quId = compileQuestion(map);
 
         List<Map<String, Object>> radio = JSONUtil.toList(map.get("radioTd").toString(), null);//获取模板绑定信息
-        if (radio.size() > 0) {
-            List<Map<String, Object>> quRadio = new ArrayList<>();
-            List<Map<String, Object>> editquRadio = new ArrayList<>();
+        if (CollectionUtils.isNotEmpty(radio)) {
+            List<Map<String, Object>> insertList = new ArrayList<>();
+            List<Map<String, Object>> editList = new ArrayList<>();
             String userId = inputObject.getLogParams().get("id").toString();
-            for (int i = 0; i < radio.size(); i++) {
-                Map<String, Object> object = radio.get(i);
-                Map<String, Object> bean = new HashMap<>();
-                bean.put("orderById", object.get("key"));
-                bean.put("optionName", object.get("optionValue"));
-                bean.put("isNote", object.get("isNote"));
-                if (!ToolUtil.isNumeric(object.get("checkType").toString())) {
-                    bean.put("checkType", CheckType.valueOf(object.get("checkType").toString()).getIndex());
-                } else {
-                    bean.put("checkType", object.get("checkType").toString());
-                }
-                bean.put("isRequiredFill", object.get("isRequiredFill"));
-                if (ToolUtil.isBlank(object.get("optionId").toString())) {
-                    bean.put("quId", quId);
-                    bean.put("visibility", 1);
-                    DataCommonUtil.setCommonData(bean, userId);
-                    quRadio.add(bean);
-                } else {
-                    bean.put("id", object.get("optionId"));
-                    editquRadio.add(bean);
-                }
+            QuestionUtil.setQuestionOptionMation(quId, radio, insertList, editList, userId, QuType.RADIO.getIndex());
+
+            if (!insertList.isEmpty()) {
+                dwSurveyDirectoryDao.addQuestionRadioMationList(insertList);
             }
-            if (!quRadio.isEmpty()) {
-                dwSurveyDirectoryDao.addQuestionRadioMationList(quRadio);
+            if (!editList.isEmpty()) {
+                dwSurveyDirectoryDao.editQuestionRadioMationList(editList);
             }
-            if (!editquRadio.isEmpty()) {
-                dwSurveyDirectoryDao.editQuestionRadioMationList(editquRadio);
-            }
-            quRadio.addAll(editquRadio);
-            map.put("quItems", quRadio);
+            insertList.addAll(editList);
+            map.put("quItems", insertList);
         }
 
         //设置问题逻辑
@@ -508,47 +435,27 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     public void addQuCheckBoxMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.CHECKBOX.getIndex());
-        //添加问题并返回问题id
+        // 添加问题并返回问题id
         String quId = compileQuestion(map);
 
         List<Map<String, Object>> checkbox = JSONUtil.toList(map.get("checkboxTd").toString(), null);//获取模板绑定信息
         if (checkbox.size() > 0) {
-            List<Map<String, Object>> quCheckbox = new ArrayList<>();
-            List<Map<String, Object>> editquCheckbox = new ArrayList<>();
+            List<Map<String, Object>> insertList = new ArrayList<>();
+            List<Map<String, Object>> editList = new ArrayList<>();
             String userId = inputObject.getLogParams().get("id").toString();
-            for (int i = 0; i < checkbox.size(); i++) {
-                Map<String, Object> object = checkbox.get(i);
-                Map<String, Object> bean = new HashMap<>();
-                bean.put("orderById", object.get("key"));
-                bean.put("optionName", object.get("optionValue"));
-                bean.put("isNote", object.get("isNote"));
-                if (!ToolUtil.isNumeric(object.get("checkType").toString())) {
-                    bean.put("checkType", CheckType.valueOf(object.get("checkType").toString()).getIndex());
-                } else {
-                    bean.put("checkType", object.get("checkType").toString());
-                }
-                bean.put("isRequiredFill", object.get("isRequiredFill"));
-                if (ToolUtil.isBlank(object.get("optionId").toString())) {
-                    bean.put("quId", quId);
-                    bean.put("visibility", 1);
-                    DataCommonUtil.setCommonData(bean, userId);
-                    quCheckbox.add(bean);
-                } else {
-                    bean.put("id", object.get("optionId"));
-                    editquCheckbox.add(bean);
-                }
+            QuestionUtil.setQuestionOptionMation(quId, checkbox, insertList, editList, userId, QuType.CHECKBOX.getIndex());
+
+            if (!insertList.isEmpty()) {
+                dwSurveyDirectoryDao.addQuestionCheckBoxMationList(insertList);
             }
-            if (!quCheckbox.isEmpty()) {
-                dwSurveyDirectoryDao.addQuestionCheckBoxMationList(quCheckbox);
+            if (!editList.isEmpty()) {
+                dwSurveyDirectoryDao.editQuestionCheckBoxMationList(editList);
             }
-            if (!editquCheckbox.isEmpty()) {
-                dwSurveyDirectoryDao.editQuestionCheckBoxMationList(editquCheckbox);
-            }
-            quCheckbox.addAll(editquCheckbox);
-            map.put("quItems", quCheckbox);
+            insertList.addAll(editList);
+            map.put("quItems", insertList);
         }
 
-        //设置问题逻辑
+        // 设置问题逻辑
         map.put("quLogics", setLogics(quId, map.get("logic").toString(), inputObject.getLogParams().get("id").toString()));
         outputObject.setBean(map);
     }
@@ -570,32 +477,19 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
 
         List<Map<String, Object>> multiFillblank = JSONUtil.toList(map.get("multiFillblankTd").toString(), null);//获取模板绑定信息
         if (multiFillblank.size() > 0) {
-            List<Map<String, Object>> quMultiFillblank = new ArrayList<>();
-            List<Map<String, Object>> editquMultiFillblank = new ArrayList<>();
+            List<Map<String, Object>> insertList = new ArrayList<>();
+            List<Map<String, Object>> editList = new ArrayList<>();
             String userId = inputObject.getLogParams().get("id").toString();
-            for (int i = 0; i < multiFillblank.size(); i++) {
-                Map<String, Object> object = multiFillblank.get(i);
-                Map<String, Object> bean = new HashMap<>();
-                bean.put("orderById", object.get("key"));
-                bean.put("optionName", object.get("optionValue"));
-                if (ToolUtil.isBlank(object.get("optionId").toString())) {
-                    bean.put("quId", quId);
-                    bean.put("visibility", 1);
-                    DataCommonUtil.setCommonData(bean, userId);
-                    quMultiFillblank.add(bean);
-                } else {
-                    bean.put("id", object.get("optionId"));
-                    editquMultiFillblank.add(bean);
-                }
+            QuestionUtil.setQuestionOptionMation(quId, multiFillblank, insertList, editList, userId, -1);
+
+            if (!insertList.isEmpty()) {
+                dwSurveyDirectoryDao.addQuestionMultiFillblankMationList(insertList);
             }
-            if (!quMultiFillblank.isEmpty()) {
-                dwSurveyDirectoryDao.addQuestionMultiFillblankMationList(quMultiFillblank);
+            if (!editList.isEmpty()) {
+                dwSurveyDirectoryDao.editQuestionMultiFillblankMationList(editList);
             }
-            if (!editquMultiFillblank.isEmpty()) {
-                dwSurveyDirectoryDao.editQuestionMultiFillblankMationList(editquMultiFillblank);
-            }
-            quMultiFillblank.addAll(editquMultiFillblank);
-            map.put("quItems", quMultiFillblank);
+            insertList.addAll(editList);
+            map.put("quItems", insertList);
         }
 
         //设置问题逻辑
@@ -646,64 +540,38 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
         String quId = compileQuestion(map);
         List<Map<String, Object>> column = JSONUtil.toList(map.get("column").toString(), null);//获取模板绑定信息
         if (column.size() > 0) {
-            List<Map<String, Object>> quColumn = new ArrayList<>();
-            List<Map<String, Object>> editquColumn = new ArrayList<>();
-            for (int i = 0; i < column.size(); i++) {
-                Map<String, Object> object = column.get(i);
-                Map<String, Object> bean = new HashMap<>();
-                bean.put("orderById", object.get("key"));
-                bean.put("optionName", object.get("optionValue"));
-                if (ToolUtil.isBlank(object.get("optionId").toString())) {
-                    bean.put("quId", quId);
-                    bean.put("visibility", 1);
-                    DataCommonUtil.setCommonData(bean, userId);
-                    quColumn.add(bean);
-                } else {
-                    bean.put("id", object.get("optionId"));
-                    editquColumn.add(bean);
-                }
+            List<Map<String, Object>> insertList = new ArrayList<>();
+            List<Map<String, Object>> editList = new ArrayList<>();
+            QuestionUtil.setQuestionOptionMation(quId, column, insertList, editList, userId, -1);
+
+            if (!insertList.isEmpty()) {
+                dwSurveyDirectoryDao.addQuestionColumnMationList(insertList);
             }
-            if (!quColumn.isEmpty()) {
-                dwSurveyDirectoryDao.addQuestionColumnMationList(quColumn);
+            if (!editList.isEmpty()) {
+                dwSurveyDirectoryDao.editQuestionColumnMationList(editList);
             }
-            if (!editquColumn.isEmpty()) {
-                dwSurveyDirectoryDao.editQuestionColumnMationList(editquColumn);
-            }
-            quColumn.addAll(editquColumn);
-            map.put("quColumnItems", quColumn);
+            insertList.addAll(editList);
+            map.put("quColumnItems", insertList);
         }
 
         List<Map<String, Object>> row = JSONUtil.toList(map.get("row").toString(), null);//获取模板绑定信息
         if (row.size() > 0) {
-            List<Map<String, Object>> quRow = new ArrayList<>();
-            List<Map<String, Object>> editquRow = new ArrayList<>();
-            for (int i = 0; i < row.size(); i++) {
-                Map<String, Object> object = row.get(i);
-                Map<String, Object> bean = new HashMap<>();
-                bean.put("orderById", object.get("key"));
-                bean.put("optionName", object.get("optionValue"));
-                if (ToolUtil.isBlank(object.get("optionId").toString())) {
-                    bean.put("quId", quId);
-                    bean.put("visibility", 1);
-                    DataCommonUtil.setCommonData(bean, userId);
-                    quRow.add(bean);
-                } else {
-                    bean.put("id", object.get("optionId"));
-                    editquRow.add(bean);
-                }
+            List<Map<String, Object>> insertList = new ArrayList<>();
+            List<Map<String, Object>> editList = new ArrayList<>();
+            QuestionUtil.setQuestionOptionMation(quId, row, insertList, editList, userId, -1);
+
+            if (!insertList.isEmpty()) {
+                dwSurveyDirectoryDao.addQuestionRowMationList(insertList);
             }
-            if (!quRow.isEmpty()) {
-                dwSurveyDirectoryDao.addQuestionRowMationList(quRow);
+            if (!editList.isEmpty()) {
+                dwSurveyDirectoryDao.editQuestionRowMationList(editList);
             }
-            if (!editquRow.isEmpty()) {
-                dwSurveyDirectoryDao.editQuestionRowMationList(editquRow);
-            }
-            quRow.addAll(editquRow);
-            map.put("quRowItems", quRow);
+            insertList.addAll(editList);
+            map.put("quRowItems", insertList);
         }
 
-        //设置问题逻辑
-        map.put("quLogics", setLogics(quId, map.get("logic").toString(), inputObject.getLogParams().get("id").toString()));
+        // 设置问题逻辑
+        map.put("quLogics", setLogics(quId, map.get("logic").toString(), userId));
         outputObject.setBean(map);
     }
 

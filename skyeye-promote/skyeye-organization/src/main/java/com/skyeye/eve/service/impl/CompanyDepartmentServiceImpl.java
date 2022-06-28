@@ -92,9 +92,11 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
     public void deleteCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyDepartmentDao.queryCompanyDepartmentUserMationById(map);
-        if (Integer.parseInt(bean.get("childsNum").toString()) == 0) {//判断是否有员工
+        if (Integer.parseInt(bean.get("childsNum").toString()) == 0) {
+            // 判断是否有员工
             bean = companyDepartmentDao.queryCompanyJobNumMationById(map);
-            if (Integer.parseInt(bean.get("companyJobNum").toString()) == 0) {//判断是否有职位
+            if (Integer.parseInt(bean.get("companyJobNum").toString()) == 0) {
+                // 判断是否有职位
                 companyDepartmentDao.deleteCompanyDepartmentMationById(map);
             } else {
                 outputObject.setreturnMessage("该部门下存在职位，无法直接删除。");

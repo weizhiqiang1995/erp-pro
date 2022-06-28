@@ -223,8 +223,6 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     @Transactional(value = "transactionManager")
     public void deleteScheduleDayMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
-        // 删除缓存中的日程信息
-        Map<String, Object> user = inputObject.getLogParams();
         // 删除日程信息
         scheduleDayDao.deleteScheduleDayMationById(map);
         // 删除定时任务
