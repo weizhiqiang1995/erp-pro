@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @ClassName: WagesPaymentHistoryDao
+ * @ClassName: WagesPaymentHistoryDaow
  * @Description: 薪资发放历史管理数据层
  * @author: skyeye云系列--卫志强
  * @date: 2021/8/7 23:35
@@ -19,11 +19,11 @@ import java.util.Map;
  */
 public interface WagesPaymentHistoryDao {
 
-    public List<Map<String, Object>> queryAllWagesPaymentHistoryList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryAllWagesPaymentHistoryList(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryMyWagesPaymentHistoryList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryMyWagesPaymentHistoryList(Map<String, Object> map);
 
-    public void insertWagesPaymentHistoryMation(Map<String, Object> map) throws Exception;
+    public void insertWagesPaymentHistoryMation(Map<String, Object> map);
 
     /**
      * 随机获取一条未发放的员工薪资信息
@@ -33,7 +33,7 @@ public interface WagesPaymentHistoryDao {
      * @return
      * @throws Exception
      */
-    public Map<String, Object> queryWaitPaymentStaffHistory(@Param("lastMonthDate") String lastMonthDate, @Param("list") List<String> staffId) throws Exception;
+    public Map<String, Object> queryWaitPaymentStaffHistory(@Param("lastMonthDate") String lastMonthDate, @Param("list") List<String> staffId);
 
     /**
      * 根据员工id以及薪资年月修改薪资状态为已发放
@@ -42,6 +42,6 @@ public interface WagesPaymentHistoryDao {
      * @param payMonth 薪资年月
      * @throws Exception
      */
-    public void editToPaymentByStaffAndPayMonth(@Param("staffId") String staffId, @Param("payMonth") String payMonth) throws Exception;
+    public void editToPaymentByStaffAndPayMonth(@Param("staffId") String staffId, @Param("payMonth") String payMonth);
 
 }

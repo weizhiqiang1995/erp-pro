@@ -11,17 +11,17 @@ import java.util.Map;
 
 public interface WagesModelTypeDao {
 
-    public List<Map<String, Object>> queryWagesModelTypeList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryWagesModelTypeList(Map<String, Object> map);
 
-    public Map<String, Object> queryWagesModelTypeByNameAndNotId(@Param("nameCn") String nameCn, @Param("notId") String id) throws Exception;
+    public Map<String, Object> queryWagesModelTypeByNameAndNotId(@Param("nameCn") String nameCn, @Param("notId") String id);
 
-    public int insertWagesModelTypeMation(Map<String, Object> map) throws Exception;
+    public int insertWagesModelTypeMation(Map<String, Object> map);
 
-    public Map<String, Object> queryWagesModelTypeMationToEditById(@Param("id") String id) throws Exception;
+    public Map<String, Object> queryWagesModelTypeMationToEditById(@Param("id") String id);
 
-    public int editWagesModelTypeMationById(Map<String, Object> map) throws Exception;
+    public int editWagesModelTypeMationById(Map<String, Object> map);
 
-    public int editWagesModelTypeStateMationById(@Param("id") String id, @Param("state") int state) throws Exception;
+    public int editWagesModelTypeStateMationById(@Param("id") String id, @Param("state") int state);
 
-    public List<Map<String, Object>> queryEnableWagesModelTypeList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryEnableWagesModelTypeList(Map<String, Object> map);
 }

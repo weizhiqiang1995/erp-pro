@@ -11,21 +11,21 @@ import java.util.Map;
 
 public interface WagesSocialSecurityFundDao {
 
-    public List<Map<String, Object>> queryWagesSocialSecurityFundList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryWagesSocialSecurityFundList(Map<String, Object> map);
 
-    public Map<String, Object> queryWagesSocialSecurityFundMationByTitleAndNotId(@Param("title") String title, @Param("notId") String notId) throws Exception;
+    Map<String, Object> queryWagesSocialSecurityFundMationByTitleAndNotId(@Param("title") String title, @Param("notId") String notId);
 
-    public int insertWagesSocialSecurityFundMation(Map<String, Object> map) throws Exception;
+    int insertWagesSocialSecurityFundMation(Map<String, Object> map);
 
-    public Map<String, Object> queryWagesSocialSecurityFundMationById(@Param("id") String id) throws Exception;
+    Map<String, Object> queryWagesSocialSecurityFundMationById(@Param("id") String id);
 
-    public List<Map<String, Object>> queryStaffNameListByStaffIdList(@Param("list") List<String> staffIds) throws Exception;
+    List<Map<String, Object>> queryStaffNameListByStaffIdList(@Param("list") List<String> staffIds);
 
-    public List<Map<String, Object>> queryDepartMentNameListByDepartMentIdList(@Param("list") List<String> departMentIds) throws Exception;
+    List<Map<String, Object>> queryDepartMentNameListByDepartMentIdList(@Param("list") List<String> departMentIds);
 
-    public List<Map<String, Object>> queryCompanyNameListByCompanyIdList(@Param("list") List<String> companyIds) throws Exception;
+    List<Map<String, Object>> queryCompanyNameListByCompanyIdList(@Param("list") List<String> companyIds);
 
-    public int editWagesSocialSecurityFundMationById(Map<String, Object> map) throws Exception;
+    int editWagesSocialSecurityFundMationById(Map<String, Object> map);
 
-    public int editWagesSocialSecurityFundStateMationById(@Param("id") String id, @Param("state") int state) throws Exception;
+    int editWagesSocialSecurityFundStateMationById(@Param("id") String id, @Param("state") int state);
 }

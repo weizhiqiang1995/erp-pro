@@ -19,15 +19,15 @@ import java.util.Map;
  */
 public interface WagesStaffMationDao {
 
-    public List<Map<String, Object>> queryWagesStaffWaitAllocatedMationList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryWagesStaffWaitAllocatedMationList(Map<String, Object> map);
 
-    public Map<String, Object> querySysUserStaffMationById(@Param("staffId") String staffId) throws Exception;
+    public Map<String, Object> querySysUserStaffMationById(@Param("staffId") String staffId);
 
-    public void saveStaffWagesModelFieldMation(@Param("list") List<Map<String, Object>> wagesModelFieldMation) throws Exception;
+    public void saveStaffWagesModelFieldMation(@Param("list") List<Map<String, Object>> wagesModelFieldMation);
 
-    public void editStaffDesignWagesByStaffId(@Param("staffId") String staffId, @Param("state") int state, @Param("actMoney") String actMoney) throws Exception;
+    public void editStaffDesignWagesByStaffId(@Param("staffId") String staffId, @Param("state") int state, @Param("actMoney") String actMoney);
 
-    public List<Map<String, Object>> queryWagesStaffDesignMationList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryWagesStaffDesignMationList(Map<String, Object> map);
 
     /**
      * 获取一条还未计算上个月薪资的员工信息(不包含本月刚入职的新员工)
@@ -37,7 +37,7 @@ public interface WagesStaffMationDao {
      * @return
      * @throws Exception
      */
-    public Map<String, Object> queryNoWagesLastMonthByLastMonthDate(@Param("lastMonthDate") String lastMonthDate, @Param("list") List<String> staffId) throws Exception;
+    public Map<String, Object> queryNoWagesLastMonthByLastMonthDate(@Param("lastMonthDate") String lastMonthDate, @Param("list") List<String> staffId);
 
     /**
      * 获取上个月指定员工的所有考勤记录信息
@@ -47,7 +47,7 @@ public interface WagesStaffMationDao {
      * @return
      * @throws Exception
      */
-    public List<Map<String, Object>> queryLastMonthCheckWork(@Param("staffId") String staffId, @Param("lastMonthDate") String lastMonthDate) throws Exception;
+    public List<Map<String, Object>> queryLastMonthCheckWork(@Param("staffId") String staffId, @Param("lastMonthDate") String lastMonthDate);
 
     /**
      * 获取上个月指定员工的所有审批通过请假记录信息
@@ -57,7 +57,7 @@ public interface WagesStaffMationDao {
      * @return
      * @throws Exception
      */
-    public List<Map<String, Object>> queryLastMonthLeaveTime(@Param("staffId") String staffId, @Param("lastMonthDate") String lastMonthDate) throws Exception;
+    public List<Map<String, Object>> queryLastMonthLeaveTime(@Param("staffId") String staffId, @Param("lastMonthDate") String lastMonthDate);
 
     /**
      * 获取上个月指定员工的所有审批通过销假记录信息
@@ -67,7 +67,7 @@ public interface WagesStaffMationDao {
      * @return
      * @throws Exception
      */
-    public List<Map<String, Object>> queryLastMonthCancleLeaveTime(@Param("staffId") String staffId, @Param("lastMonthDate") String lastMonthDate) throws Exception;
+    public List<Map<String, Object>> queryLastMonthCancleLeaveTime(@Param("staffId") String staffId, @Param("lastMonthDate") String lastMonthDate);
 
     /**
      * 将指定员工月度清零的薪资字段设置为0
@@ -75,7 +75,7 @@ public interface WagesStaffMationDao {
      * @param staffId 员工id
      * @throws Exception
      */
-    public void editStaffMonthlyClearingWagesByStaffId(@Param("staffId") String staffId) throws Exception;
+    public void editStaffMonthlyClearingWagesByStaffId(@Param("staffId") String staffId);
 
     /**
      * 获取员工薪资条信息
@@ -85,6 +85,6 @@ public interface WagesStaffMationDao {
      * @return
      * @throws Exception
      */
-    public Map<String, Object> queryWagesStaffPaymentDetail(@Param("staffId") String staffId, @Param("payMonth") String payMonth) throws Exception;
+    public Map<String, Object> queryWagesStaffPaymentDetail(@Param("staffId") String staffId, @Param("payMonth") String payMonth);
 
 }

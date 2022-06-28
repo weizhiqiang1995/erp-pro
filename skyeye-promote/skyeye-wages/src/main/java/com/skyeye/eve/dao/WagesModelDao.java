@@ -11,23 +11,23 @@ import java.util.Map;
 
 public interface WagesModelDao {
 
-    public List<Map<String, Object>> queryWagesModelList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryWagesModelList(Map<String, Object> map);
 
-    public int editWagesModelMationStateMationById(@Param("id") String id, @Param("state") int state) throws Exception;
+    public int editWagesModelMationStateMationById(@Param("id") String id, @Param("state") int state);
 
-    public Map<String, Object> queryWagesModelMationByTitleAndNotId(@Param("title") String title, @Param("notId") String notId) throws Exception;
+    public Map<String, Object> queryWagesModelMationByTitleAndNotId(@Param("title") String title, @Param("notId") String notId);
 
-    public int insertWagesModelMation(Map<String, Object> map) throws Exception;
+    public int insertWagesModelMation(Map<String, Object> map);
 
-    public Map<String, Object> queryWagesModelMationById(@Param("id") String id) throws Exception;
+    public Map<String, Object> queryWagesModelMationById(@Param("id") String id);
 
-    public List<Map<String, Object>> queryStaffNameListByStaffIdList(@Param("list") List<String> staffIds) throws Exception;
+    public List<Map<String, Object>> queryStaffNameListByStaffIdList(@Param("list") List<String> staffIds);
 
-    public List<Map<String, Object>> queryDepartMentNameListByDepartMentIdList(@Param("list") List<String> departMentIds) throws Exception;
+    public List<Map<String, Object>> queryDepartMentNameListByDepartMentIdList(@Param("list") List<String> departMentIds);
 
-    public List<Map<String, Object>> queryCompanyNameListByCompanyIdList(@Param("list") List<String> companyIds) throws Exception;
+    public List<Map<String, Object>> queryCompanyNameListByCompanyIdList(@Param("list") List<String> companyIds);
 
-    public int editWagesModelMationById(Map<String, Object> map) throws Exception;
+    public int editWagesModelMationById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryWagesModelListByApplicableObjectIds(@Param("list") List<String> wagesApplicableObjectIds) throws Exception;
+    public List<Map<String, Object>> queryWagesModelListByApplicableObjectIds(@Param("list") List<String> wagesApplicableObjectIds);
 }

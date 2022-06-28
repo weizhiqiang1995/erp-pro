@@ -11,23 +11,23 @@ import java.util.Map;
 
 public interface WagesFieldTypeDao {
 
-    public List<Map<String, Object>> queryWagesFieldTypeList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryWagesFieldTypeList(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryWagesFieldTypeListByKey(@Param("key") String key) throws Exception;
+    public List<Map<String, Object>> queryWagesFieldTypeListByKey(@Param("key") String key);
 
-    public int insertWagesFieldTypeMation(Map<String, Object> key) throws Exception;
+    public int insertWagesFieldTypeMation(Map<String, Object> key);
 
-    public int insertWagesFieldTypeKeyToStaff(@Param("list") List<Map<String, Object>> staff) throws Exception;
+    public int insertWagesFieldTypeKeyToStaff(@Param("list") List<Map<String, Object>> staff);
 
-    public Map<String, Object> queryWagesFieldTypeMationById(@Param("id") String id) throws Exception;
+    public Map<String, Object> queryWagesFieldTypeMationById(@Param("id") String id);
 
-    public int editWagesFieldTypeMationById(Map<String, Object> map) throws Exception;
+    public int editWagesFieldTypeMationById(Map<String, Object> map);
 
-    public int editWagesFieldTypeStateMationById(@Param("id") String id, @Param("state") int state) throws Exception;
+    public int editWagesFieldTypeStateMationById(@Param("id") String id, @Param("state") int state);
 
-    public List<Map<String, Object>> queryEnableWagesFieldTypeList(Map<String, Object> map) throws Exception;
+    public List<Map<String, Object>> queryEnableWagesFieldTypeList(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryAllStaffMationList() throws Exception;
+    public List<Map<String, Object>> queryAllStaffMationList();
 
     /**
      * 获取所有的薪资要素字段，包括启用，禁用，以及删除的要素字段key；相同的key，该SQL语句会根据key进行分组
@@ -35,5 +35,5 @@ public interface WagesFieldTypeDao {
      * @return List<Map < String, Object>>
      * @throws Exception
      */
-    public List<Map<String, Object>> queryAllWagesFieldTypeList() throws Exception;
+    public List<Map<String, Object>> queryAllWagesFieldTypeList();
 }
