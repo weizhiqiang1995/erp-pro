@@ -6,8 +6,8 @@ package com.skyeye.service.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.skyeye.common.constans.ApiConstants;
-import com.skyeye.common.constans.Constants;
 import com.skyeye.common.constans.RedisConstants;
+import com.skyeye.common.constans.RequestConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.ObjectConstant;
 import com.skyeye.common.object.OutputObject;
@@ -42,7 +42,7 @@ public class ApiServiceImpl implements ApiService {
         String appId = inputObject.getParams().get("appId").toString();
         List<Map<String, Object>> beans = new ArrayList<>();
         // xml方式
-        String xmlCacheKey = String.format(Locale.ROOT, "%s:%s:%s", appId, env, Constants.SYS_EVE_MAIN_XML_REQMAPPING_KEY);
+        String xmlCacheKey = String.format(Locale.ROOT, "%s:%s:%s", appId, env, RequestConstants.SYS_EVE_MAIN_XML_REQMAPPING_KEY);
         List<String> xmlApiIds = JSONArray.fromObject(jedisClientService.get(xmlCacheKey));
         // 注解方式
         String annoCacheKey = String.format(Locale.ROOT, "%s:%s:%s", appId, env, ApiConstants.SYS_EVE_MAIN_ANNO_REQMAPPING_KEY);

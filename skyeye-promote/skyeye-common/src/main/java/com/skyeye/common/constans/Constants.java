@@ -19,13 +19,6 @@ import java.util.*;
 public class Constants {
 
     /**
-     * 过滤器过滤内容请求项
-     */
-    public static final String[] FILTER_FILE_CATALOG_OPTION = {"/images", "/static", ".json", ".css", ".js", ".gif",
-        ".jpg", ".eot", ".svg", ".ttf", ".woff", ".woff2", ".mp4", ".rmvb", ".avi", "3gp", ".html", ".less", ".otf",
-        ".scss", ".ico", "/upload", "/actuator", "/service", "/talkwebsocket", "/phonetalkwebsocket"};
-
-    /**
      * 中文
      */
     public static String LANGUAGE_ZH = "zh";
@@ -34,11 +27,6 @@ public class Constants {
      * 英文
      */
     public static String LANGUAGE_CN = "cn";
-
-    /**
-     * 过滤器过滤请求类型项
-     */
-    public static final String[] FILTER_FILE_REQUEST_OPTION = {"/post", "/service", "/upload"};
 
     /**
      * 菜单类型
@@ -171,9 +159,6 @@ public class Constants {
     public static String getSysEnclosureFileModuleByMd5(String md5) {
         return SYS_ENCLOSURE_FILE_MODULE_MD5 + md5;
     }
-
-    // 系统读取请求xml配置文件的key
-    public static final String SYS_EVE_MAIN_XML_REQMAPPING_KEY = "sys_eve_main_xml_reqmapping_key";
 
     /**
      * 文件上传路径
