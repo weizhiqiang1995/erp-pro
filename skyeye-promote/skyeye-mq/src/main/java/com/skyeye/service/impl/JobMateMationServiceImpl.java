@@ -13,6 +13,8 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.dao.JobMateMationDao;
+import com.skyeye.eve.entity.mq.JobMateQueryDO;
+import com.skyeye.exception.CustomException;
 import com.skyeye.service.JobMateMationService;
 import com.skyeye.websocket.TalkWebSocket;
 import org.slf4j.Logger;
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.jms.Queue;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
@@ -62,11 +65,11 @@ public class JobMateMationServiceImpl implements JobMateMationService {
      * @throws Exception
      */
     @Override
-    public void queryJobMateMationByBigTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
-        Map<String, Object> map = inputObject.getParams();
-        map.put("userId", inputObject.getLogParams().get("id"));
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = jobMateMationDao.queryJobMateMationByBigTypeList(map);
+    public void queryJobMateMationByBigTypeList(InputObject inputObject, OutputObject outputObject) {
+        JobMateQueryDO jobMateQuery = inputObject.getParams(JobMateQueryDO.class);
+        jobMateQuery.setUserId(inputObject.getLogParams().get("id").toString());
+        Page pages = PageHelper.startPage(jobMateQuery.getPage(), jobMateQuery.getLimit());
+        List<Map<String, Object>> beans = jobMateMationDao.queryJobMateMationByBigTypeList(jobMateQuery);
         beans.forEach(bean -> bean.put("jobTypeName", MqConstants.JobMateMationJobType.getTypeNameByJobType(bean.get("jobType").toString())));
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
@@ -80,7 +83,7 @@ public class JobMateMationServiceImpl implements JobMateMationService {
      * @throws Exception
      */
     @Override
-    public void sendMQProducer(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void sendMQProducer(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String jsonStr = map.get("jsonStr").toString();
         String userId = map.get("userId").toString();
@@ -91,10 +94,16 @@ public class JobMateMationServiceImpl implements JobMateMationService {
      * 开始生产消息
      */
     @Override
-    @Transactional(value = "transactionManager")
-    public void sendMQProducer(String jsonStr, String userId) throws Exception {
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
+    public void sendMQProducer(String jsonStr, String userId) {
         // 父任务
-        Map<String, Object> parentJob = resetParentJobMation(jsonStr, userId);
+        Map<String, Object> parentJob;
+        try {
+            parentJob = resetParentJobMation(jsonStr, userId);
+        } catch (UnknownHostException e) {
+            LOGGER.warn("sendMQProducer failed, reason is {}.", e);
+            throw new CustomException(e);
+        }
         jobMateMationDao.insertJobMation(parentJob);
         LOGGER.info("create job mation is {}", JSONUtil.toJsonStr(parentJob));
         // 重置请求体中的任务id
@@ -144,7 +153,7 @@ public class JobMateMationServiceImpl implements JobMateMationService {
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void comMQJobMation(String jobId, String status, String responseBody) throws Exception {
+    public void comMQJobMation(String jobId, String status, String responseBody) {
         Map<String, Object> jobMation = jobMateMationDao.queryJobMationByJobId(jobId);
         // 类型  1.父任务2.子任务
         String type = jobMation.get("type").toString();
@@ -183,7 +192,7 @@ public class JobMateMationServiceImpl implements JobMateMationService {
      * @param status
      * @throws Exception
      */
-    private void sendJobResultMseeage(String jobId, String status) throws Exception {
+    private void sendJobResultMseeage(String jobId, String status) {
         Map<String, Object> jobMation = jobMateMationDao.queryJobMationByJobId(jobId);
         String userId = jobMation.get("createId").toString();
         LOGGER.info("job is success, jobId is {}", jobId);
@@ -195,7 +204,12 @@ public class JobMateMationServiceImpl implements JobMateMationService {
             int bigType = MqConstants.JobMateMationJobType.getBigTypeByJobType(jobType);
             boolean sendMsgToPage = MqConstants.JobMateMationJobType.getSendMsgToPageByJobType(jobType);
             if (sendMsgToPage) {
-                talkWebSocket.sendMessageTo(JSONUtil.toJsonStr(getMsg(status, bigType, jobType)), userId);
+                try {
+                    talkWebSocket.sendMessageTo(JSONUtil.toJsonStr(getMsg(status, bigType, jobType)), userId);
+                } catch (IOException e) {
+                    LOGGER.warn("sendJobResultMseeage failed, reason is {}.", e);
+                    throw new CustomException(e);
+                }
             }
         }
     }

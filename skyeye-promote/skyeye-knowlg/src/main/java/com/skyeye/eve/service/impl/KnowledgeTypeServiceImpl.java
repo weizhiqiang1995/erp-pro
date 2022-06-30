@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -68,7 +67,7 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      * @throws Exception
      */
     @Override
-    public void queryKnowledgeTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryKnowledgeTypeList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = knowledgeTypeDao.queryKnowledgeTypeList(map);
         if (!beans.isEmpty()) {
@@ -85,8 +84,8 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
-    public void insertKnowledgeTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
+    public void insertKnowledgeTypeMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 查询是否已经存在该知识库类型名称
         Map<String, Object> bean = knowledgeTypeDao.queryKnowledgeTypeMationByName(map.get("name").toString(), map.get("parentId").toString(), "");
@@ -111,7 +110,7 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void deleteKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = knowledgeTypeDao.queryKnowledgeTypeStateById(map);
         int nowState = Integer.parseInt(bean.get("state").toString());
@@ -134,7 +133,7 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void updateUpKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateUpKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = knowledgeTypeDao.queryKnowledgeTypeStateById(map);
         int nowState = Integer.parseInt(bean.get("state").toString());
@@ -158,7 +157,7 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void updateDownKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateDownKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = knowledgeTypeDao.queryKnowledgeTypeStateById(map);
         int nowState = Integer.parseInt(bean.get("state").toString());
@@ -181,7 +180,7 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      * @throws Exception
      */
     @Override
-    public void selectKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = knowledgeTypeDao.selectKnowledgeTypeById(map);
         outputObject.setBean(bean);
@@ -197,7 +196,7 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void editKnowledgeTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editKnowledgeTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 查询这条知识库类型的状态
         Map<String, Object> bean = knowledgeTypeDao.queryKnowledgeTypeStateById(map);
@@ -226,7 +225,7 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      * @throws Exception
      */
     @Override
-    public void queryUpKnowledgeTypeTreeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUpKnowledgeTypeTreeMation(InputObject inputObject, OutputObject outputObject) {
         List<Map<String, Object>> beans;
         String key = KnowlgConstants.sysSecondKnowledgeTypeUpStateList();
         if (ToolUtil.isBlank(jedisClient.get(key))) {

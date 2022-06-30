@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.skyeye.dao.JobMateMationDao">
 	
-	<select id="queryJobMateMationByBigTypeList" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryJobMateMationByBigTypeList" resultType="java.util.Map">
 		SELECT
 			a.job_id jobId,
 			a.title,

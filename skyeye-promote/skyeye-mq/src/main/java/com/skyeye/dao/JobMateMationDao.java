@@ -4,6 +4,7 @@
 
 package com.skyeye.dao;
 
+import com.skyeye.eve.entity.mq.JobMateQueryDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -11,19 +12,19 @@ import java.util.Map;
 
 public interface JobMateMationDao {
 
-    public List<Map<String, Object>> queryJobMateMationByBigTypeList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryJobMateMationByBigTypeList(JobMateQueryDO jobMateQuery);
 
-    public int insertJobMation(Map<String, Object> parentJob) throws Exception;
+    int insertJobMation(Map<String, Object> parentJob);
 
-    public Map<String, Object> queryJobMationByJobId(@Param("jobId") String jobId) throws Exception;
+    Map<String, Object> queryJobMationByJobId(@Param("jobId") String jobId);
 
-    public int editJobMationByJobId(@Param("jobId") String jobId, @Param("status") String status,
-                                    @Param("responseBody") String responseBody, @Param("complateTime") String complateTime) throws Exception;
+    int editJobMationByJobId(@Param("jobId") String jobId, @Param("status") String status,
+                             @Param("responseBody") String responseBody, @Param("complateTime") String complateTime);
 
-    public List<Map<String, Object>> queryNoComChildJobMationByJobId(@Param("jobId") String jobId) throws Exception;
+    List<Map<String, Object>> queryNoComChildJobMationByJobId(@Param("jobId") String jobId);
 
-    public List<Map<String, Object>> queryFailChildJobMationByJobId(@Param("jobId") String jobId) throws Exception;
+    List<Map<String, Object>> queryFailChildJobMationByJobId(@Param("jobId") String jobId);
 
-    public int editJobRequestBodyMation(Map<String, Object> parentJob) throws Exception;
+    int editJobRequestBodyMation(Map<String, Object> parentJob);
 
 }

@@ -17,7 +17,7 @@ public interface KnowledgeTypeDao {
      * @return
      * @throws Exception
      */
-    public List<Map<String, Object>> queryKnowledgeTypeList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryKnowledgeTypeList(Map<String, Object> map);
 
     /**
      * 根据名称&&ID查询该数据
@@ -28,20 +28,20 @@ public interface KnowledgeTypeDao {
      * @return
      * @throws Exception
      */
-    public Map<String, Object> queryKnowledgeTypeMationByName(@Param("name") String name, @Param("parentId") String parentId, @Param("thisId") String thisId) throws Exception;
+    Map<String, Object> queryKnowledgeTypeMationByName(@Param("name") String name, @Param("parentId") String parentId, @Param("thisId") String thisId);
 
-    public int insertKnowledgeTypeMation(Map<String, Object> map) throws Exception;
+    int insertKnowledgeTypeMation(Map<String, Object> map);
 
-    public int editKnowledgeTypeStateById(@Param("id") String id,
-                                          @Param("state") int state,
-                                          @Param("lastUpdateId") String lastUpdateId,
-                                          @Param("lastUpdateTime") String lastUpdateTime) throws Exception;
+    int editKnowledgeTypeStateById(@Param("id") String id,
+                                   @Param("state") int state,
+                                   @Param("lastUpdateId") String lastUpdateId,
+                                   @Param("lastUpdateTime") String lastUpdateTime);
 
-    public Map<String, Object> selectKnowledgeTypeById(Map<String, Object> map) throws Exception;
+    Map<String, Object> selectKnowledgeTypeById(Map<String, Object> map);
 
-    public int editKnowledgeTypeMationById(Map<String, Object> map) throws Exception;
+    int editKnowledgeTypeMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryKnowledgeTypeStateById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryKnowledgeTypeStateById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryUpKnowledgeTypeTreeMation() throws Exception;
+    List<Map<String, Object>> queryUpKnowledgeTypeTreeMation();
 }

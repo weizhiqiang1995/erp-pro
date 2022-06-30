@@ -45,7 +45,7 @@ public class KnowledgeTypeController {
         @ApiImplicitParam(id = "state", name = "state", value = "上线状态", required = "num"),
         @ApiImplicitParam(id = "notId", name = "notId", value = "不包含在查询列表中的数据")})
     @RequestMapping("/post/KnowledgeTypeController/queryKnowledgeTypeList")
-    public void queryKnowledgeTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryKnowledgeTypeList(InputObject inputObject, OutputObject outputObject) {
         knowledgeTypeService.queryKnowledgeTypeList(inputObject, outputObject);
     }
 
@@ -55,12 +55,11 @@ public class KnowledgeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgetype002", value = "新增知识库类型", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = KnowledgeTypeVO.class)
     @RequestMapping("/post/KnowledgeTypeController/insertKnowledgeTypeMation")
-    public void insertKnowledgeTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertKnowledgeTypeMation(InputObject inputObject, OutputObject outputObject) {
         knowledgeTypeService.insertKnowledgeTypeMation(inputObject, outputObject);
     }
 
@@ -75,7 +74,7 @@ public class KnowledgeTypeController {
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "知识库类型id", required = "required")})
     @RequestMapping("/post/KnowledgeTypeController/deleteKnowledgeTypeById")
-    public void deleteKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) {
         knowledgeTypeService.deleteKnowledgeTypeById(inputObject, outputObject);
     }
 
@@ -90,7 +89,7 @@ public class KnowledgeTypeController {
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "知识库类型id", required = "required")})
     @RequestMapping("/post/KnowledgeTypeController/updateUpKnowledgeTypeById")
-    public void updateUpKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateUpKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) {
         knowledgeTypeService.updateUpKnowledgeTypeById(inputObject, outputObject);
     }
 
@@ -105,7 +104,7 @@ public class KnowledgeTypeController {
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "知识库类型id", required = "required")})
     @RequestMapping("/post/KnowledgeTypeController/updateDownKnowledgeTypeById")
-    public void updateDownKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateDownKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) {
         knowledgeTypeService.updateDownKnowledgeTypeById(inputObject, outputObject);
     }
 
@@ -120,7 +119,7 @@ public class KnowledgeTypeController {
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "知识库类型id", required = "required")})
     @RequestMapping("/post/KnowledgeTypeController/selectKnowledgeTypeById")
-    public void selectKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) {
         knowledgeTypeService.selectKnowledgeTypeById(inputObject, outputObject);
     }
 
@@ -136,7 +135,7 @@ public class KnowledgeTypeController {
         @ApiImplicitParam(id = "rowId", name = "id", value = "知识库类型id", required = "required"),
         @ApiImplicitParam(id = "name", name = "name", value = "知识库类型名称", required = "required")})
     @RequestMapping("/post/KnowledgeTypeController/editKnowledgeTypeMationById")
-    public void editKnowledgeTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editKnowledgeTypeMationById(InputObject inputObject, OutputObject outputObject) {
         knowledgeTypeService.editKnowledgeTypeMationById(inputObject, outputObject);
     }
 
@@ -149,7 +148,7 @@ public class KnowledgeTypeController {
      */
     @ApiOperation(id = "knowledgetype008", value = "获取已经上线的知识库类型，数据为tree格式", method = "GET", allUse = "2")
     @RequestMapping("/post/KnowledgeTypeController/queryUpKnowledgeTypeTreeMation")
-    public void queryUpKnowledgeTypeTreeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUpKnowledgeTypeTreeMation(InputObject inputObject, OutputObject outputObject) {
         knowledgeTypeService.queryUpKnowledgeTypeTreeMation(inputObject, outputObject);
     }
 
