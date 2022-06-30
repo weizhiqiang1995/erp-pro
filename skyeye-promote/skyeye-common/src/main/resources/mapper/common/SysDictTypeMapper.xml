@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyeye.eve.dao.SysDictTypeDao">
+
+    <select id="queryDictTypeList" resultType="com.skyeye.eve.eitity.dict.SysDictTypeMation">
+        SELECT
+            s.id,
+            s.dict_name dictName,
+            s.dict_code dictCode,
+            s.dict_type dictType,
+            s.status,
+            s.remark,
+            CONCAT_WS('_', b.job_number, b.user_name) createName,
+            CONVERT(s.create_time, char) createTime,
+            CONCAT_WS('_', c.job_number, c.user_name) lastUpdateName,
+            CONVERT(s.last_update_time, char) lastUpdateTime
+        FROM
+            sys_dict_type s
+            LEFT JOIN sys_eve_user_staff b ON s.create_id = b.user_id
+            LEFT JOIN sys_eve_user_staff c ON s.last_update_id = c.user_id
+        WHERE 1=1
+        <if test="dictName != '' and dictName != null">
+            AND s.dict_name LIKE '%${dictName}%'
+        </if>
+        <if test="dictCode != '' and dictCode != null">
+            AND s.dict_code LIKE '%${dictCode}%'
+        </if>
+        ORDER BY s.create_time DESC
+    </select>
+
+</mapper>
