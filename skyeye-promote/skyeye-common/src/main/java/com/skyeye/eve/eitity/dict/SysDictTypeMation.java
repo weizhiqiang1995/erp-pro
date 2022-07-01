@@ -5,6 +5,7 @@
 package com.skyeye.eve.eitity.dict;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
@@ -26,7 +27,7 @@ import java.io.Serializable;
 @ApiModel("数据字典类型实体类")
 public class SysDictTypeMation extends CommonOperatorUserInfo implements Serializable {
 
-    @TableField("id")
+    @TableId("id")
     private String id;
 
     @TableField("dict_name")

@@ -4,6 +4,7 @@
 
 package com.skyeye.db.config;
 
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.skyeye.exception.CustomException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -109,18 +110,18 @@ public class BaseDataSourceConfig {
     @Primary
     @Bean(name = "baseSqlSessionFactory")
     public SqlSessionFactory baseSqlSessionFactory(@Qualifier("baseDataSource") DataSource dataSource) throws Exception {
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        MybatisSqlSessionFactoryBean mybatisSqlSessionFactoryBean = new MybatisSqlSessionFactoryBean();
 
-        sqlSessionFactoryBean.setDataSource(dataSource);
+        mybatisSqlSessionFactoryBean.setDataSource(dataSource);
         String databaseType = this.initDatabaseType(dataSource);
         if (databaseType == null) {
             throw new CustomException("couldn't deduct database type");
         } else {
             try {
                 // 添加XML目录
-                sqlSessionFactoryBean.setMapperLocations(resolveMapperLocations());
-                sqlSessionFactoryBean.afterPropertiesSet();
-                return sqlSessionFactoryBean.getObject();
+                mybatisSqlSessionFactoryBean.setMapperLocations(resolveMapperLocations());
+                mybatisSqlSessionFactoryBean.afterPropertiesSet();
+                return mybatisSqlSessionFactoryBean.getObject();
             } catch (Exception var5) {
                 throw new CustomException("Could not create sqlSessionFactory", var5);
             }
