@@ -35,7 +35,6 @@ public class PlanProjectController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "planproject001", value = "获取业务流程规划列表", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -43,7 +42,7 @@ public class PlanProjectController {
         @ApiImplicitParam(id = "page", name = "page", value = "分页参数,第几页", required = "required,num"),
         @ApiImplicitParam(id = "projectName", name = "projectName", value = "业务流程规划名称")})
     @RequestMapping("/post/PlanProjectController/queryPlanProjectList")
-    public void queryPlanProjectList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPlanProjectList(InputObject inputObject, OutputObject outputObject) {
         planProjectService.queryPlanProjectList(inputObject, outputObject);
     }
 
@@ -52,10 +51,9 @@ public class PlanProjectController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/PlanProjectController/insertPlanProjectMation")
-    public void insertPlanProjectMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertPlanProjectMation(InputObject inputObject, OutputObject outputObject) {
         planProjectService.insertPlanProjectMation(inputObject, outputObject);
     }
 
@@ -64,10 +62,9 @@ public class PlanProjectController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/PlanProjectController/deletePlanProjectMationById")
-    public void deletePlanProjectMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deletePlanProjectMationById(InputObject inputObject, OutputObject outputObject) {
         planProjectService.deletePlanProjectMationById(inputObject, outputObject);
     }
 
@@ -76,10 +73,9 @@ public class PlanProjectController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/PlanProjectController/queryPlanProjectMationToEditById")
-    public void queryPlanProjectMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPlanProjectMationToEditById(InputObject inputObject, OutputObject outputObject) {
         planProjectService.queryPlanProjectMationToEditById(inputObject, outputObject);
     }
 
@@ -88,10 +84,9 @@ public class PlanProjectController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/PlanProjectController/editPlanProjectMationById")
-    public void editPlanProjectMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editPlanProjectMationById(InputObject inputObject, OutputObject outputObject) {
         planProjectService.editPlanProjectMationById(inputObject, outputObject);
     }
 

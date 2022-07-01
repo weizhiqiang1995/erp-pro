@@ -9,28 +9,28 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysNoticeTypeService {
 
-    public void querySysNoticeTypeList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysNoticeTypeList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysNoticeTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysNoticeTypeMation(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteSysNoticeTypeById(InputObject inputObject, OutputObject outputObject);
 
-    public void updateUpSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void updateUpSysNoticeTypeById(InputObject inputObject, OutputObject outputObject);
 
-    public void updateDownSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void updateDownSysNoticeTypeById(InputObject inputObject, OutputObject outputObject);
 
-    public void selectSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void selectSysNoticeTypeById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysNoticeTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysNoticeTypeMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysNoticeTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysNoticeTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysNoticeTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysNoticeTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryFirstSysNoticeTypeUpStateList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryFirstSysNoticeTypeUpStateList(InputObject inputObject, OutputObject outputObject);
 
-    public void queryAllFirstSysNoticeTypeStateList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryAllFirstSysNoticeTypeStateList(InputObject inputObject, OutputObject outputObject);
 
-    public void querySecondSysNoticeTypeUpStateList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySecondSysNoticeTypeUpStateList(InputObject inputObject, OutputObject outputObject);
 
 }

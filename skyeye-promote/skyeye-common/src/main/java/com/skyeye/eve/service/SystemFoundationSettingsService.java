@@ -24,25 +24,22 @@ public interface SystemFoundationSettingsService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
-    public void querySystemFoundationSettingsList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySystemFoundationSettingsList(InputObject inputObject, OutputObject outputObject);
 
     /**
      * 修改系统配置信息
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
-    public void editSystemFoundationSettings(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSystemFoundationSettings(InputObject inputObject, OutputObject outputObject);
 
     /**
      * 获取系统配置信息
      *
      * @return 系统配置信息
-     * @throws Exception
      */
-    public Map<String, Object> getSystemFoundationSettings() throws Exception;
+    Map<String, Object> getSystemFoundationSettings();
 
 }

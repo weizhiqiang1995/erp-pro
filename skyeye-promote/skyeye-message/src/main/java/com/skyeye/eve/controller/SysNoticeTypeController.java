@@ -22,10 +22,9 @@ public class SysNoticeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysNoticeTypeController/querySysNoticeTypeList")
-    public void querySysNoticeTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysNoticeTypeList(InputObject inputObject, OutputObject outputObject) {
         sysNoticeTypeService.querySysNoticeTypeList(inputObject, outputObject);
     }
 
@@ -35,10 +34,9 @@ public class SysNoticeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysNoticeTypeController/insertSysNoticeTypeMation")
-    public void insertSysNoticeTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysNoticeTypeMation(InputObject inputObject, OutputObject outputObject) {
         sysNoticeTypeService.insertSysNoticeTypeMation(inputObject, outputObject);
     }
 
@@ -47,10 +45,9 @@ public class SysNoticeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysNoticeTypeController/deleteSysNoticeTypeById")
-    public void deleteSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
         sysNoticeTypeService.deleteSysNoticeTypeById(inputObject, outputObject);
     }
 
@@ -59,10 +56,9 @@ public class SysNoticeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysNoticeTypeController/updateUpSysNoticeTypeById")
-    public void updateUpSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateUpSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
         sysNoticeTypeService.updateUpSysNoticeTypeById(inputObject, outputObject);
     }
 
@@ -71,10 +67,9 @@ public class SysNoticeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysNoticeTypeController/updateDownSysNoticeTypeById")
-    public void updateDownSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateDownSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
         sysNoticeTypeService.updateDownSysNoticeTypeById(inputObject, outputObject);
     }
 
@@ -83,10 +78,9 @@ public class SysNoticeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysNoticeTypeController/selectSysNoticeTypeById")
-    public void selectSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
         sysNoticeTypeService.selectSysNoticeTypeById(inputObject, outputObject);
     }
 
@@ -95,10 +89,9 @@ public class SysNoticeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysNoticeTypeController/editSysNoticeTypeMationById")
-    public void editSysNoticeTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysNoticeTypeMationById(InputObject inputObject, OutputObject outputObject) {
         sysNoticeTypeService.editSysNoticeTypeMationById(inputObject, outputObject);
     }
 
@@ -107,10 +100,9 @@ public class SysNoticeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysNoticeTypeController/editSysNoticeTypeMationOrderNumUpById")
-    public void editSysWinTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysWinTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) {
         sysNoticeTypeService.editSysNoticeTypeMationOrderNumUpById(inputObject, outputObject);
     }
 
@@ -119,10 +111,9 @@ public class SysNoticeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysNoticeTypeController/editSysNoticeTypeMationOrderNumDownById")
-    public void editSysWinTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysWinTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) {
         sysNoticeTypeService.editSysNoticeTypeMationOrderNumDownById(inputObject, outputObject);
     }
 
@@ -131,10 +122,9 @@ public class SysNoticeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysNoticeTypeController/queryFirstSysNoticeTypeUpStateList")
-    public void queryFirstSysNoticeTypeUpStateList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFirstSysNoticeTypeUpStateList(InputObject inputObject, OutputObject outputObject) {
         sysNoticeTypeService.queryFirstSysNoticeTypeUpStateList(inputObject, outputObject);
     }
 
@@ -143,10 +133,9 @@ public class SysNoticeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysNoticeTypeController/queryAllFirstSysNoticeTypeStateList")
-    public void queryAllFirstSysNoticeTypeStateList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllFirstSysNoticeTypeStateList(InputObject inputObject, OutputObject outputObject) {
         sysNoticeTypeService.queryAllFirstSysNoticeTypeStateList(inputObject, outputObject);
     }
 
@@ -155,10 +144,9 @@ public class SysNoticeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysNoticeTypeController/querySecondSysNoticeTypeUpStateList")
-    public void querySecondSysNoticeTypeUpStateList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySecondSysNoticeTypeUpStateList(InputObject inputObject, OutputObject outputObject) {
         sysNoticeTypeService.querySecondSysNoticeTypeUpStateList(inputObject, outputObject);
     }
 }

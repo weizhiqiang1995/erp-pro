@@ -30,10 +30,9 @@ public class PlanProjectServiceImpl implements PlanProjectService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryPlanProjectList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPlanProjectList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = planProjectDao.queryPlanProjectList(map);
@@ -46,11 +45,10 @@ public class PlanProjectServiceImpl implements PlanProjectService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void insertPlanProjectMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertPlanProjectMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = planProjectDao.judgePlanProjectName(map);
         if (bean == null) {
@@ -69,11 +67,10 @@ public class PlanProjectServiceImpl implements PlanProjectService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void deletePlanProjectMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deletePlanProjectMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         planProjectDao.deletePlanProjectMationById(map);
     }
@@ -83,10 +80,9 @@ public class PlanProjectServiceImpl implements PlanProjectService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryPlanProjectMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPlanProjectMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = planProjectDao.queryPlanProjectMationToEditById(map);
         outputObject.setBean(bean);
@@ -98,11 +94,10 @@ public class PlanProjectServiceImpl implements PlanProjectService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void editPlanProjectMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editPlanProjectMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = planProjectDao.judgePlanProjectName(map);
         if (bean == null) {

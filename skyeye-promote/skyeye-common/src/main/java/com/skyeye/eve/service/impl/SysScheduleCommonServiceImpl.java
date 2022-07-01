@@ -34,10 +34,9 @@ public class SysScheduleCommonServiceImpl implements SysScheduleCommonService {
      *
      * @param day 日期，格式为yyyy-mm-dd
      * @return true：是节假日；false：不是节假日
-     * @throws Exception
      */
     @Override
-    public boolean judgeISHoliday(String day) throws Exception {
+    public boolean judgeISHoliday(String day) {
         List<Map<String, Object>> holiday = sysScheduleCommonDao.queryWhetherIsHolidayByDate(day);
         if (holiday == null || holiday.isEmpty()) {
             return false;
@@ -50,10 +49,9 @@ public class SysScheduleCommonServiceImpl implements SysScheduleCommonService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void judgeISHoliday(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void judgeISHoliday(InputObject inputObject, OutputObject outputObject) {
         String day = inputObject.getParams().get("day").toString();
         Map<String, Object> result = new HashMap<>();
         result.put("result", this.judgeISHoliday(day));

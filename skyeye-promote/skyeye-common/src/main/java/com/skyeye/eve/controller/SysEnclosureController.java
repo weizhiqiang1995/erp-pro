@@ -7,16 +7,14 @@ package com.skyeye.eve.controller;
 import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.SysEnclosureService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class SysEnclosureController {
 
     @Autowired
@@ -27,11 +25,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/querySysEnclosureListByUserId")
-    @ResponseBody
-    public void querySysEnclosureListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEnclosureListByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.querySysEnclosureListByUserId(inputObject, outputObject);
     }
 
@@ -40,11 +36,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/insertSysEnclosureMationByUserId")
-    @ResponseBody
-    public void insertSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.insertSysEnclosureMationByUserId(inputObject, outputObject);
     }
 
@@ -53,11 +47,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/querySysEnclosureFirstTypeListByUserId")
-    @ResponseBody
-    public void querySysEnclosureFirstTypeListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEnclosureFirstTypeListByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.querySysEnclosureFirstTypeListByUserId(inputObject, outputObject);
     }
 
@@ -66,11 +58,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/queryThisFolderChilsByFolderId")
-    @ResponseBody
-    public void queryThisFolderChilsByFolderId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryThisFolderChilsByFolderId(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.queryThisFolderChilsByFolderId(inputObject, outputObject);
     }
 
@@ -79,11 +69,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/querySysEnclosureMationByUserIdToEdit")
-    @ResponseBody
-    public void querySysEnclosureMationByUserIdToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEnclosureMationByUserIdToEdit(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.querySysEnclosureMationByUserIdToEdit(inputObject, outputObject);
     }
 
@@ -92,11 +80,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/editSysEnclosureMationByUserId")
-    @ResponseBody
-    public void editSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.editSysEnclosureMationByUserId(inputObject, outputObject);
     }
 
@@ -105,11 +91,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/insertUploadFileByUserId")
-    @ResponseBody
-    public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.insertUploadFileByUserId(inputObject, outputObject);
     }
 
@@ -118,11 +102,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/insertUploadFileChunksByUserId")
-    @ResponseBody
-    public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.insertUploadFileChunksByUserId(inputObject, outputObject);
     }
 
@@ -131,11 +113,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/queryUploadFileChunksByChunkMd5")
-    @ResponseBody
-    public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.queryUploadFileChunksByChunkMd5(inputObject, outputObject);
     }
 
@@ -144,11 +124,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/querySysEnclosureListToTreeByUserId")
-    @ResponseBody
-    public void querySysEnclosureListToTreeByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEnclosureListToTreeByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.querySysEnclosureListToTreeByUserId(inputObject, outputObject);
     }
 
@@ -157,11 +135,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/queryAllPeopleToTree")
-    @ResponseBody
-    public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.queryAllPeopleToTree(inputObject, outputObject);
     }
 
@@ -170,11 +146,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/queryCompanyPeopleToTreeByUserBelongCompany")
-    @ResponseBody
-    public void queryCompanyPeopleToTreeByUserBelongCompany(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyPeopleToTreeByUserBelongCompany(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.queryCompanyPeopleToTreeByUserBelongCompany(inputObject, outputObject);
     }
 
@@ -183,11 +157,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/queryDepartmentPeopleToTreeByUserBelongDepartment")
-    @ResponseBody
-    public void queryDepartmentPeopleToTreeByUserBelongDepartment(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDepartmentPeopleToTreeByUserBelongDepartment(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.queryDepartmentPeopleToTreeByUserBelongDepartment(inputObject, outputObject);
     }
 
@@ -196,11 +168,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/queryJobPeopleToTreeByUserBelongJob")
-    @ResponseBody
-    public void queryJobPeopleToTreeByUserBelongJob(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryJobPeopleToTreeByUserBelongJob(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.queryJobPeopleToTreeByUserBelongJob(inputObject, outputObject);
     }
 
@@ -209,11 +179,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/querySimpleDepPeopleToTreeByUserBelongSimpleDep")
-    @ResponseBody
-    public void querySimpleDepPeopleToTreeByUserBelongSimpleDep(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySimpleDepPeopleToTreeByUserBelongSimpleDep(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.querySimpleDepPeopleToTreeByUserBelongSimpleDep(inputObject, outputObject);
     }
 
@@ -222,11 +190,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/queryTalkGroupUserListByUserId")
-    @ResponseBody
-    public void queryTalkGroupUserListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryTalkGroupUserListByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.queryTalkGroupUserListByUserId(inputObject, outputObject);
     }
 
@@ -235,11 +201,9 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEnclosureController/insertUploadFileToDataByUserId")
-    @ResponseBody
-    public void insertUploadFileToDataByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertUploadFileToDataByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.insertUploadFileToDataByUserId(inputObject, outputObject);
     }
 
@@ -248,14 +212,12 @@ public class SysEnclosureController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "queryEnclosureInfoByIds", value = "根据ids(逗号隔开)获取多个附件信息", method = "POST", allUse = "0")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "enclosureInfoIds", name = "enclosureInfoIds", value = "附件id(多个用逗号隔开)")})
     @RequestMapping("/post/SysEnclosureController/queryEnclosureInfo")
-    @ResponseBody
-    public void queryEnclosureInfo(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryEnclosureInfo(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.queryEnclosureInfo(inputObject, outputObject);
     }
 

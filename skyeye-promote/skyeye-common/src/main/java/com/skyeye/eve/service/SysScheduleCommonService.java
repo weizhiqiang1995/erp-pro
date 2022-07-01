@@ -22,9 +22,8 @@ public interface SysScheduleCommonService {
      *
      * @param day 日期，格式为yyyy-mm-dd
      * @return true：是节假日；false：不是节假日
-     * @throws Exception
      */
-    boolean judgeISHoliday(String day) throws Exception;
+    boolean judgeISHoliday(String day);
 
-    void judgeISHoliday(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void judgeISHoliday(InputObject inputObject, OutputObject outputObject);
 }

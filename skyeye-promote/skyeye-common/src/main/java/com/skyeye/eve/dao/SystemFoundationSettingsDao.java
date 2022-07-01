@@ -16,10 +16,10 @@ import java.util.Map;
  */
 public interface SystemFoundationSettingsDao {
 
-    public Map<String, Object> querySystemFoundationSettingsList() throws Exception;
+    Map<String, Object> querySystemFoundationSettingsList();
 
-    public int insertSystemFoundationSettings(Map<String, Object> map) throws Exception;
+    int insertSystemFoundationSettings(Map<String, Object> map);
 
-    public int editSystemFoundationSettings(Map<String, Object> map) throws Exception;
+    int editSystemFoundationSettings(Map<String, Object> map);
 
 }

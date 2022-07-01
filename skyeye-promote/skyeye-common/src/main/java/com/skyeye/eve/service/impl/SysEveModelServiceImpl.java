@@ -47,10 +47,9 @@ public class SysEveModelServiceImpl implements SysEveModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysEveModelList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveModelList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
@@ -64,11 +63,10 @@ public class SysEveModelServiceImpl implements SysEveModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void insertSysEveModelMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysEveModelMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         Map<String, Object> bean = sysEveModelDao.querySysEveModelMationByNameAndType(map);
@@ -86,11 +84,10 @@ public class SysEveModelServiceImpl implements SysEveModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void deleteSysEveModelById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysEveModelById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = sysEveModelDao.selectSysEveModelMationById(id);
@@ -105,10 +102,9 @@ public class SysEveModelServiceImpl implements SysEveModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void selectSysEveModelById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectSysEveModelById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = sysEveModelDao.selectSysEveModelMationById(id);
@@ -121,11 +117,10 @@ public class SysEveModelServiceImpl implements SysEveModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void editSysEveModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysEveModelMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         Map<String, Object> bean = sysEveModelDao.querySysEveModelMationByNameAndType(map);
@@ -142,10 +137,9 @@ public class SysEveModelServiceImpl implements SysEveModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void selectSysEveModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectSysEveModelMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = sysEveModelDao.selectSysEveModelMationById(id);

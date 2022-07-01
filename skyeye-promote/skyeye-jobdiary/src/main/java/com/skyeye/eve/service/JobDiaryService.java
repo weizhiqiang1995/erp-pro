@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,52 +9,52 @@ import com.skyeye.common.object.OutputObject;
 
 public interface JobDiaryService {
 
-    public void insertDayJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertDayJobDiary(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysEveUserStaff(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysEveUserStaff(InputObject inputObject, OutputObject outputObject);
 
-    public void queryJobDiaryDayReceived(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryJobDiaryDayReceived(InputObject inputObject, OutputObject outputObject);
 
-    public void queryJobDiaryDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryJobDiaryDetails(InputObject inputObject, OutputObject outputObject);
 
-    public void queryJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject);
 
-    public void selectMysendDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void selectMysendDetails(InputObject inputObject, OutputObject outputObject);
 
-    public void editMyReceivedJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editMyReceivedJobDiary(InputObject inputObject, OutputObject outputObject);
 
-    public void insertWeekJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertWeekJobDiary(InputObject inputObject, OutputObject outputObject);
 
-    public void selectMysendWeekDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void selectMysendWeekDetails(InputObject inputObject, OutputObject outputObject);
 
-    public void queryWeekJobDiaryDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryWeekJobDiaryDetails(InputObject inputObject, OutputObject outputObject);
 
-    public void insertMonthJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertMonthJobDiary(InputObject inputObject, OutputObject outputObject);
 
-    public void selectMysendMonthDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void selectMysendMonthDetails(InputObject inputObject, OutputObject outputObject);
 
-    public void queryMonthJobDiaryDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryMonthJobDiaryDetails(InputObject inputObject, OutputObject outputObject);
 
-    public void editJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject);
 
-    public void queryJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject);
 
-    public void editDayJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editDayJobDiary(InputObject inputObject, OutputObject outputObject);
 
-    public void queryWeekJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryWeekJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject);
 
-    public void editWeekDayJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editWeekDayJobDiary(InputObject inputObject, OutputObject outputObject);
 
-    public void queryMonthJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryMonthJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject);
 
-    public void editMonthDayJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editMonthDayJobDiary(InputObject inputObject, OutputObject outputObject);
 
-    public void queryJobDiaryDayNumber(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryJobDiaryDayNumber(InputObject inputObject, OutputObject outputObject);
 
-    public void queryJobDiaryListToTimeTree(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryJobDiaryListToTimeTree(InputObject inputObject, OutputObject outputObject);
 
-    public void editReceivedJobDiaryToAlreadyRead(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editReceivedJobDiaryToAlreadyRead(InputObject inputObject, OutputObject outputObject);
 
 }

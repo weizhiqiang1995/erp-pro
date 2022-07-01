@@ -48,10 +48,9 @@ public class SystemFoundationSettingsServiceImpl implements SystemFoundationSett
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySystemFoundationSettingsList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySystemFoundationSettingsList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> bean = this.getSystemFoundationSettings();
         outputObject.setBean(bean);
         outputObject.settotal(1);
@@ -62,11 +61,10 @@ public class SystemFoundationSettingsServiceImpl implements SystemFoundationSett
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void editSystemFoundationSettings(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSystemFoundationSettings(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         systemFoundationSettingsDao.editSystemFoundationSettings(map);
     }
@@ -75,10 +73,9 @@ public class SystemFoundationSettingsServiceImpl implements SystemFoundationSett
      * 获取系统配置信息
      *
      * @return 系统配置信息
-     * @throws Exception
      */
     @Override
-    public Map<String, Object> getSystemFoundationSettings() throws Exception {
+    public Map<String, Object> getSystemFoundationSettings() {
         Map<String, Object> map = systemFoundationSettingsDao.querySystemFoundationSettingsList();
         if (map == null || map.isEmpty()) {
             map = getBaseSettings();

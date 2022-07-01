@@ -15,6 +15,7 @@ import com.skyeye.eve.service.SysNoticeTypeService;
 import com.skyeye.jedis.JedisClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -43,10 +44,9 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysNoticeTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysNoticeTypeList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysNoticeTypeDao.querySysNoticeTypeList(map);
         if (!beans.isEmpty()) {
@@ -60,10 +60,10 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void insertSysNoticeTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    @Transactional(value = "transactionManager")
+    public void insertSysNoticeTypeMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeMationByName(map);//查询是否已经存在该公告类型名称
         if (!CollectionUtils.isEmpty(bean)) {
@@ -87,10 +87,10 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void deleteSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    @Transactional(value = "transactionManager")
+    public void deleteSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeStateById(map);
         if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {//新建或者下线可以删除
@@ -105,10 +105,10 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void updateUpSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    @Transactional(value = "transactionManager")
+    public void updateUpSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeStateById(map);
         if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {//新建或者下线可以上线
@@ -125,10 +125,10 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void updateDownSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    @Transactional(value = "transactionManager")
+    public void updateDownSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeStateById(map);
         if ("2".equals(bean.get("state").toString())) {//上线状态可以下线
@@ -145,10 +145,9 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void selectSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.selectSysNoticeTypeById(map);
         outputObject.setBean(bean);
@@ -160,10 +159,10 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void editSysNoticeTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    @Transactional(value = "transactionManager")
+    public void editSysNoticeTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeStateById(map);    //查询这条公告类型的状态
         if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {//新建或者下线可以编辑
@@ -183,10 +182,10 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void editSysNoticeTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    @Transactional(value = "transactionManager")
+    public void editSysNoticeTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeUpMationById(map);//获取当前数据的同级分类下的上一条数据
         if (CollectionUtils.isEmpty(bean)) {
@@ -207,10 +206,10 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void editSysNoticeTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    @Transactional(value = "transactionManager")
+    public void editSysNoticeTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeDownMationById(map);//获取当前数据的同级分类下的下一条数据
         if (CollectionUtils.isEmpty(bean)) {
@@ -231,12 +230,11 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryFirstSysNoticeTypeUpStateList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFirstSysNoticeTypeUpStateList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = new ArrayList<>();
+        List<Map<String, Object>> beans;
         if (ToolUtil.isBlank(jedisClient.get(MessageConstants.sysSecondNoticeTypeUpStateList("")))) {    //若缓存中无值
             beans = sysNoticeTypeDao.queryFirstSysNoticeTypeUpStateList(map);    //从数据库中查询
             jedisClient.set(MessageConstants.sysSecondNoticeTypeUpStateList(""), JSONUtil.toJsonStr(beans));    //将从数据库中查来的内容存到缓存中
@@ -254,10 +252,9 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySecondSysNoticeTypeUpStateList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySecondSysNoticeTypeUpStateList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = new ArrayList<>();
         if (ToolUtil.isBlank(jedisClient.get(MessageConstants.sysSecondNoticeTypeUpStateList(map.get("parentId").toString())))) {//若缓存中无值
@@ -277,10 +274,9 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAllFirstSysNoticeTypeStateList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllFirstSysNoticeTypeStateList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans;
         beans = sysNoticeTypeDao.queryAllFirstSysNoticeTypeStateList(map);

@@ -5,17 +5,12 @@
 package com.skyeye.eve.controller;
 
 import com.skyeye.annotation.api.Api;
-import com.skyeye.annotation.api.ApiImplicitParam;
-import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.SystemFoundationSettingsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -38,11 +33,10 @@ public class SystemFoundationSettingsController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "sysfdsettings001", value = "获取系统基础设置", method = "GET", allUse = "2")
     @RequestMapping("/post/SystemFoundationSettingsController/querySystemFoundationSettingsList")
-    public void querySystemFoundationSettingsList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySystemFoundationSettingsList(InputObject inputObject, OutputObject outputObject) {
         systemFoundationSettingsService.querySystemFoundationSettingsList(inputObject, outputObject);
     }
 
@@ -51,10 +45,9 @@ public class SystemFoundationSettingsController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SystemFoundationSettingsController/editSystemFoundationSettings")
-    public void editSystemFoundationSettings(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSystemFoundationSettings(InputObject inputObject, OutputObject outputObject) {
         systemFoundationSettingsService.editSystemFoundationSettings(inputObject, outputObject);
     }
 

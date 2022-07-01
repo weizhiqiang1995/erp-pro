@@ -9,16 +9,16 @@ import java.util.Map;
 
 public interface PlanProjectDao {
 
-    List<Map<String, Object>> queryPlanProjectList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryPlanProjectList(Map<String, Object> map);
 
-    int insertPlanProjectMation(Map<String, Object> map) throws Exception;
+    int insertPlanProjectMation(Map<String, Object> map);
 
-    Map<String, Object> judgePlanProjectName(Map<String, Object> map) throws Exception;
+    Map<String, Object> judgePlanProjectName(Map<String, Object> map);
 
-    int deletePlanProjectMationById(Map<String, Object> map) throws Exception;
+    int deletePlanProjectMationById(Map<String, Object> map);
 
-    Map<String, Object> queryPlanProjectMationToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryPlanProjectMationToEditById(Map<String, Object> map);
 
-    int editPlanProjectMationById(Map<String, Object> map) throws Exception;
+    int editPlanProjectMationById(Map<String, Object> map);
 
 }

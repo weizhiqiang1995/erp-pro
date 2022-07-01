@@ -19,16 +19,16 @@ import java.util.Map;
  */
 public interface SysEveModelDao {
 
-    public List<Map<String, Object>> querySysEveModelList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysEveModelList(Map<String, Object> map);
 
-    public Map<String, Object> querySysEveModelMationByNameAndType(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysEveModelMationByNameAndType(Map<String, Object> map);
 
-    public int insertSysEveModelMation(Map<String, Object> map) throws Exception;
+    int insertSysEveModelMation(Map<String, Object> map);
 
-    public int deleteSysEveModelById(@Param("id") String id) throws Exception;
+    int deleteSysEveModelById(@Param("id") String id);
 
-    public Map<String, Object> selectSysEveModelMationById(@Param("id") String id) throws Exception;
+    Map<String, Object> selectSysEveModelMationById(@Param("id") String id);
 
-    public int editSysEveModelMationById(Map<String, Object> map) throws Exception;
+    int editSysEveModelMationById(Map<String, Object> map);
 
 }

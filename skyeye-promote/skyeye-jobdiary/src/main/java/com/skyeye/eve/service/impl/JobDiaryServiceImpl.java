@@ -44,10 +44,9 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryJobDiaryDayReceived(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryJobDiaryDayReceived(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("receivedId", user.get("id"));
@@ -62,11 +61,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void insertDayJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertDayJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
         Map<String, Object> user = inputObject.getLogParams();
@@ -97,10 +95,9 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysEveUserStaff(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveUserStaff(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -115,11 +112,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void queryJobDiaryDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryJobDiaryDetails(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> state = jobDiaryDao.queryJobDiaryState(map);
         if ("1".equals(state.get("state").toString())) {
@@ -139,10 +135,9 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("createId", user.get("id"));
@@ -166,11 +161,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void deleteJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> createtime = jobDiaryDao.queryCreateTime(map);
         // 计算当前时间和创建时间的时间差，返回分钟
@@ -193,10 +187,9 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void selectMysendDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectMysendDetails(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = jobDiaryDao.selectMysendDetails(map);
         if (!ToolUtil.isBlank(bean.get("enclosureInfo").toString())) {
@@ -211,11 +204,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void editMyReceivedJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editMyReceivedJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> diaryType = jobDiaryDao.queryDiaryType(map);
         if ("1".equals(diaryType.get("diaryType").toString())) {
@@ -232,11 +224,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void insertWeekJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWeekJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
         Map<String, Object> user = inputObject.getLogParams();
@@ -267,10 +258,9 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void selectMysendWeekDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectMysendWeekDetails(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = jobDiaryDao.selectMysendWeekDetails(map);
         if (!ToolUtil.isBlank(bean.get("enclosureInfo").toString())) {
@@ -285,11 +275,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void queryWeekJobDiaryDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWeekJobDiaryDetails(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> state = jobDiaryDao.queryWeekJobDiaryState(map);
         if ("1".equals(state.get("state").toString())) {
@@ -309,11 +298,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void insertMonthJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertMonthJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
         Map<String, Object> user = inputObject.getLogParams();
@@ -344,10 +332,9 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void selectMysendMonthDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectMysendMonthDetails(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = jobDiaryDao.selectMysendMonthDetails(map);
         if (!ToolUtil.isBlank(bean.get("enclosureInfo").toString())) {
@@ -362,11 +349,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void queryMonthJobDiaryDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMonthJobDiaryDetails(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> state = jobDiaryDao.queryMonthJobDiaryState(map);
         if ("1".equals(state.get("state").toString())) {
@@ -386,11 +372,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void editJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> createtime = jobDiaryDao.queryJobDiaryType(map);
         if ("1".equals(createtime.get("diaryType").toString())) {
@@ -407,10 +392,9 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = jobDiaryDao.queryJobDiaryDayMysendToEdit(map);
         if (!ToolUtil.isBlank(bean.get("enclosureInfo").toString())) {
@@ -426,11 +410,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void editDayJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editDayJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("state", "1");
         jobDiaryDao.editDayJobDiary(map);
@@ -458,10 +441,9 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWeekJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWeekJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = jobDiaryDao.queryWeekJobDiaryDayMysendToEdit(map);
         if (!ToolUtil.isBlank(bean.get("enclosureInfo").toString())) {
@@ -477,11 +459,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void editWeekDayJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editWeekDayJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("state", "1");
         jobDiaryDao.editWeekDayJobDiary(map);
@@ -509,10 +490,9 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMonthJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMonthJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = jobDiaryDao.queryMonthJobDiaryDayMysendToEdit(map);
         if (!ToolUtil.isBlank(bean.get("enclosureInfo").toString())) {
@@ -528,11 +508,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void editMonthDayJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editMonthDayJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("state", "1");
         jobDiaryDao.editMonthDayJobDiary(map);
@@ -560,10 +539,9 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryJobDiaryDayNumber(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryJobDiaryDayNumber(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         List<Map<String, Object>> beans = jobDiaryDao.queryJobDiaryDayNumber(map);
@@ -576,10 +554,9 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryJobDiaryListToTimeTree(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryJobDiaryListToTimeTree(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("receivedId", user.get("id"));
@@ -601,11 +578,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void editReceivedJobDiaryToAlreadyRead(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editReceivedJobDiaryToAlreadyRead(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("readTime", DateUtil.getTimeAndToString());
         map.put("userId", inputObject.getLogParams().get("id"));

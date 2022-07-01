@@ -15,6 +15,7 @@ import com.skyeye.common.util.FileUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.service.SysEnclosureService;
+import com.skyeye.exception.CustomException;
 import com.skyeye.jedis.JedisClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,9 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.nio.channels.FileChannel;
 import java.util.*;
 
@@ -47,10 +46,9 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysEnclosureListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEnclosureListByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String parentId = map.get("parentId").toString();
         List<Map<String, Object>> beans = new ArrayList<>();
@@ -73,11 +71,10 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void insertSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -107,10 +104,9 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysEnclosureFirstTypeListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEnclosureFirstTypeListByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -124,10 +120,9 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryThisFolderChilsByFolderId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryThisFolderChilsByFolderId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -150,10 +145,9 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysEnclosureMationByUserIdToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEnclosureMationByUserIdToEdit(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -166,11 +160,10 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void editSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String fileType = map.get("fileType").toString();
         if ("folder".equals(fileType)) {//编辑的附件数据为文件夹
@@ -185,11 +178,10 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(PutObject.getRequest().getSession().getServletContext());
@@ -216,7 +208,11 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
                     String newFileName = String.valueOf(System.currentTimeMillis()) + "." + fileExtName;
                     String path = basePath + "\\" + newFileName;
                     // 上传
-                    file.transferTo(new File(path));
+                    try {
+                        file.transferTo(new File(path));
+                    } catch (IOException e) {
+                        throw new CustomException(e);
+                    }
                     //初始化文件对象内容
                     trueFileName = "/images/upload/enclosurefile/" + userId + "/" + newFileName;
                     map.put("fileType", fileExtName);//文件类型
@@ -245,16 +241,15 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager")
-    public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String userId = user.get("id").toString();
         List<Map<String, Object>> beans = JSONUtil.toList(jedisClient.get(Constants.getSysEnclosureFileModuleByMd5(map.get("md5").toString())).toString(), null);
-        List<File> fileList = new ArrayList<File>();
+        List<File> fileList = new ArrayList<>();
         File f;
         for (Map<String, Object> bean : beans) {
             f = new File(tPath.replace("images", "") + bean.get("fileAddress").toString());
@@ -264,13 +259,13 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
         String fileExtName = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();//文件后缀
         String newFileName = String.valueOf(System.currentTimeMillis()) + "." + fileExtName;//新文件名
         String path = tPath + "\\upload\\enclosurefile" + "\\" + userId + "\\" + newFileName;//文件路径
-        File outputFile = new File(path);
-        //创建文件
-        outputFile.createNewFile();
-        //输出流
-        FileChannel outChnnel = new FileOutputStream(outputFile).getChannel();
-        //合并
+        FileChannel outChnnel = null;
         try {
+            File outputFile = new File(path);
+            //创建文件
+            outputFile.createNewFile();
+            //输出流
+            outChnnel = new FileOutputStream(outputFile).getChannel();
             FileChannel inChannel;
             for (File file : fileList) {
                 inChannel = new FileInputStream(file).getChannel();
@@ -279,9 +274,17 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
                 //删除分片
                 file.delete();
             }
+        } catch (FileNotFoundException e) {
+            throw new CustomException(e);
+        } catch (IOException e) {
+            throw new CustomException(e);
         } finally {
             if (outChnnel != null) {
-                outChnnel.close();
+                try {
+                    outChnnel.close();
+                } catch (IOException e) {
+                    throw new CustomException(e);
+                }
             }
         }
         jedisClient.del(Constants.getSysEnclosureFileModuleByMd5(map.get("md5").toString()));
@@ -302,10 +305,9 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String md5 = map.get("md5").toString();
         String chunk = map.get("chunk").toString();
@@ -345,10 +347,9 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysEnclosureListToTreeByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEnclosureListToTreeByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -367,10 +368,9 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map = compareSelUserListByParams(map, inputObject);
         List<Map<String, Object>> beans = sysEnclosureDao.queryAllPeopleToTree(map);
@@ -382,10 +382,9 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyPeopleToTreeByUserBelongCompany(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyPeopleToTreeByUserBelongCompany(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map = compareSelUserListByParams(map, inputObject);
         Map<String, Object> user = inputObject.getLogParams();
@@ -401,10 +400,9 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryDepartmentPeopleToTreeByUserBelongDepartment(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDepartmentPeopleToTreeByUserBelongDepartment(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map = compareSelUserListByParams(map, inputObject);
         Map<String, Object> user = inputObject.getLogParams();
@@ -420,10 +418,9 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryJobPeopleToTreeByUserBelongJob(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryJobPeopleToTreeByUserBelongJob(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map = compareSelUserListByParams(map, inputObject);
         Map<String, Object> user = inputObject.getLogParams();
@@ -439,10 +436,9 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySimpleDepPeopleToTreeByUserBelongSimpleDep(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySimpleDepPeopleToTreeByUserBelongSimpleDep(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map = compareSelUserListByParams(map, inputObject);
         Map<String, Object> user = inputObject.getLogParams();
@@ -458,10 +454,9 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryTalkGroupUserListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryTalkGroupUserListByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map = compareSelUserListByParams(map, inputObject);
         Map<String, Object> user = inputObject.getLogParams();
@@ -476,9 +471,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      * @param map
      * @param inputObject
      * @return
-     * @throws Exception
      */
-    public Map<String, Object> compareSelUserListByParams(Map<String, Object> map, InputObject inputObject) throws Exception {
+    public Map<String, Object> compareSelUserListByParams(Map<String, Object> map, InputObject inputObject) {
         //人员列表中是否包含自己--1.包含；其他参数不包含
         String chooseOrNotMy = map.get("chooseOrNotMy").toString();
         if (!"1".equals(chooseOrNotMy)) {
@@ -498,10 +492,9 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void insertUploadFileToDataByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertUploadFileToDataByUserId(InputObject inputObject, OutputObject outputObject) {
         // 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(PutObject.getRequest().getSession().getServletContext());
         // 检查form中是否有enctype="multipart/form-data"
@@ -527,7 +520,11 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
                     String newFileName = String.valueOf(System.currentTimeMillis()) + "." + fileExtName;
                     String path = basePath + "\\" + newFileName;
                     // 上传
-                    file.transferTo(new File(path));
+                    try {
+                        file.transferTo(new File(path));
+                    } catch (IOException e) {
+                        throw new CustomException(e);
+                    }
                     newFileName = "/images/upload/enclosurefile/" + userId + "/" + newFileName;
                     if (ToolUtil.isBlank(trueFileName)) {
                         trueFileName = newFileName;
@@ -558,10 +555,9 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryEnclosureInfo(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryEnclosureInfo(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String enclosureInfoIds = map.get("enclosureInfoIds").toString();
         List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(enclosureInfoIds);

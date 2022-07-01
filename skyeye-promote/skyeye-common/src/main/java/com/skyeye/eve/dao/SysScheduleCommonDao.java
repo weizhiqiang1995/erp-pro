@@ -24,8 +24,7 @@ public interface SysScheduleCommonDao {
      *
      * @param day 指定天，格式为yyyy-mm-dd
      * @return
-     * @throws Exception
      */
-    List<Map<String, Object>> queryWhetherIsHolidayByDate(@Param("day") String day) throws Exception;
+    List<Map<String, Object>> queryWhetherIsHolidayByDate(@Param("day") String day);
 
 }

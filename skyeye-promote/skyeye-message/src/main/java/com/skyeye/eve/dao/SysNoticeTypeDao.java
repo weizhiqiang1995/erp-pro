@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.dao;
 
 import java.util.List;
@@ -8,40 +9,40 @@ import java.util.Map;
 
 public interface SysNoticeTypeDao {
 
-    public List<Map<String, Object>> querySysNoticeTypeList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysNoticeTypeList(Map<String, Object> map);
 
-    public Map<String, Object> querySysNoticeTypeMationByName(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysNoticeTypeMationByName(Map<String, Object> map);
 
-    public Map<String, Object> querySysNoticeTypeMationByNameAndId(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysNoticeTypeMationByNameAndId(Map<String, Object> map);
 
-    public int insertSysNoticeTypeMation(Map<String, Object> map) throws Exception;
+    int insertSysNoticeTypeMation(Map<String, Object> map);
 
-    public Map<String, Object> querySysNoticeTypeBySimpleLevel(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysNoticeTypeBySimpleLevel(Map<String, Object> map);
 
-    public int deleteSysNoticeTypeById(Map<String, Object> map) throws Exception;
+    int deleteSysNoticeTypeById(Map<String, Object> map);
 
-    public int updateUpSysNoticeTypeById(Map<String, Object> map) throws Exception;
+    int updateUpSysNoticeTypeById(Map<String, Object> map);
 
-    public int updateDownSysNoticeTypeById(Map<String, Object> map) throws Exception;
+    int updateDownSysNoticeTypeById(Map<String, Object> map);
 
-    public Map<String, Object> selectSysNoticeTypeById(Map<String, Object> map) throws Exception;
+    Map<String, Object> selectSysNoticeTypeById(Map<String, Object> map);
 
-    public int editSysNoticeTypeMationById(Map<String, Object> map) throws Exception;
+    int editSysNoticeTypeMationById(Map<String, Object> map);
 
-    public Map<String, Object> querySysNoticeTypeUpMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysNoticeTypeUpMationById(Map<String, Object> map);
 
-    public int editSysNoticeTypeMationOrderNumUpById(Map<String, Object> map) throws Exception;
+    int editSysNoticeTypeMationOrderNumUpById(Map<String, Object> map);
 
-    public Map<String, Object> querySysNoticeTypeDownMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysNoticeTypeDownMationById(Map<String, Object> map);
 
-    public Map<String, Object> querySysNoticeTypeStateById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysNoticeTypeStateById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryFirstSysNoticeTypeUpStateList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryFirstSysNoticeTypeUpStateList(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryAllFirstSysNoticeTypeStateList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryAllFirstSysNoticeTypeStateList(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySecondSysNoticeTypeUpStateList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySecondSysNoticeTypeUpStateList(Map<String, Object> map);
 
-    public Map<String, Object> querySysNoticeTypeById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysNoticeTypeById(Map<String, Object> map);
 
 }

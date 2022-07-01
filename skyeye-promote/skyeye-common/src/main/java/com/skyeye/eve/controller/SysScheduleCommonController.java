@@ -13,7 +13,6 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.SysScheduleCommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -36,14 +35,12 @@ public class SysScheduleCommonController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "judgeISHoliday", value = "判断指定日期是否是节假日", method = "GET", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "day", name = "day", value = "日期，格式为yyyy-mm-dd", required = "required")})
     @RequestMapping("/post/SysScheduleCommonController/judgeISHoliday")
-    @ResponseBody
-    public void judgeISHoliday(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void judgeISHoliday(InputObject inputObject, OutputObject outputObject) {
         sysScheduleCommonService.judgeISHoliday(inputObject, outputObject);
     }
 
