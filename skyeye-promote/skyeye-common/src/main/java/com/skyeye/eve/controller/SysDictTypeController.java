@@ -46,17 +46,17 @@ public class SysDictTypeController {
     }
 
     /**
-     * 新增数据字典类型
+     * 新增/编辑数据字典类型
      *
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
-    @ApiOperation(id = "insertDictTypeMation", value = "新增数据字典类型", method = "POST", allUse = "2")
+    @ApiOperation(id = "writeDictTypeMation", value = "新增/编辑数据字典类型", method = "POST", allUse = "2")
     @ApiImplicitParams(classBean = SysDictTypeMation.class)
-    @RequestMapping("/post/SysDictTypeController/insertDictTypeMation")
-    public void insertDictTypeMation(InputObject inputObject, OutputObject outputObject) {
-        sysDictTypeService.insertDictTypeMation(inputObject, outputObject);
+    @RequestMapping("/post/SysDictTypeController/writeDictTypeMation")
+    public void writeDictTypeMation(InputObject inputObject, OutputObject outputObject) {
+        sysDictTypeService.writeDictTypeMation(inputObject, outputObject);
     }
 
 }

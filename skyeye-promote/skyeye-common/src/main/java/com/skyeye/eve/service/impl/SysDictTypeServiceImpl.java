@@ -7,6 +7,7 @@ package com.skyeye.eve.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.entity.CommonOperatorUserInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -16,6 +17,7 @@ import com.skyeye.eve.dao.SysDictTypeDao;
 import com.skyeye.eve.eitity.dict.SysDictTypeMation;
 import com.skyeye.eve.eitity.dict.SysDictTypeQueryDO;
 import com.skyeye.eve.service.SysDictTypeService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -54,24 +56,33 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     }
 
     /**
-     * 新增数据字典类型
+     * 新增/编辑数据字典类型
      *
      * @param inputObject
      * @param outputObject
      * @throws Exception
      */
     @Override
-    public void insertDictTypeMation(InputObject inputObject, OutputObject outputObject) {
+    public void writeDictTypeMation(InputObject inputObject, OutputObject outputObject) {
         SysDictTypeMation sysDictTypeMation = inputObject.getParams(SysDictTypeMation.class);
+        // 1.根据dictName和dictCode进行校验
         QueryWrapper<SysDictTypeMation> queryWrapper = new QueryWrapper<>();
         queryWrapper.and(wrapper ->
             wrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysDictTypeMation.class, "dictName"), sysDictTypeMation.getDictName())
                 .or().eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysDictTypeMation.class, "dictCode"), sysDictTypeMation.getDictCode()));
+        if (StringUtils.isNotEmpty(sysDictTypeMation.getId())) {
+            queryWrapper.ne(CommonConstants.ID, sysDictTypeMation.getId());
+        }
         SysDictTypeMation checkDictTypeMation = sysDictTypeDao.selectOne(queryWrapper);
         if (ObjectUtils.isEmpty(checkDictTypeMation)) {
             String userId = inputObject.getLogParams().get("id").toString();
-            DataCommonUtil.setCommonDataByGenericity(sysDictTypeMation, userId);
-            sysDictTypeDao.insert(sysDictTypeMation);
+            if (StringUtils.isNotEmpty(sysDictTypeMation.getId())) {
+                DataCommonUtil.setCommonLastUpdateDataByGenericity(sysDictTypeMation, userId);
+                sysDictTypeDao.updateById(sysDictTypeMation);
+            } else {
+                DataCommonUtil.setCommonDataByGenericity(sysDictTypeMation, userId);
+                sysDictTypeDao.insert(sysDictTypeMation);
+            }
         } else {
             outputObject.setreturnMessage("this data is non-existent.");
         }

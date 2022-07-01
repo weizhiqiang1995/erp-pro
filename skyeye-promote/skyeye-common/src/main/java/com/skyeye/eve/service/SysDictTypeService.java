@@ -19,5 +19,5 @@ public interface SysDictTypeService {
 
     void queryDictTypeList(InputObject inputObject, OutputObject outputObject);
 
-    void insertDictTypeMation(InputObject inputObject, OutputObject outputObject);
+    void writeDictTypeMation(InputObject inputObject, OutputObject outputObject);
 }

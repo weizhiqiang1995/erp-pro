@@ -28,6 +28,7 @@ import java.io.Serializable;
 public class SysDictTypeMation extends CommonOperatorUserInfo implements Serializable {
 
     @TableId("id")
+    @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")
     private String id;
 
     @TableField("dict_name")
