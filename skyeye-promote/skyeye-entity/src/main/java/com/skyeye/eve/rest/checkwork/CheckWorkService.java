@@ -5,7 +5,7 @@
 package com.skyeye.eve.rest.checkwork;
 
 import com.skyeye.common.client.ClientConfiguration;
-import com.skyeye.eve.entity.checkwork.CheckWorkMation;
+import com.skyeye.eve.entity.checkwork.CheckWorkMationRest;
 import com.skyeye.eve.entity.checkwork.DayWorkMationParams;
 import com.skyeye.eve.entity.checkwork.UserOtherDayMationParams;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -71,7 +71,7 @@ public interface CheckWorkService {
      * @param checkWorkMation 入参信息
      */
     @PostMapping("/editCheckWorkBySystem")
-    String editCheckWorkBySystem(CheckWorkMation checkWorkMation);
+    String editCheckWorkBySystem(CheckWorkMationRest checkWorkMation);
 
     /**
      * 获取所有待结算的加班数据

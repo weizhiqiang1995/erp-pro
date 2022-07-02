@@ -2,30 +2,31 @@
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
 
-package com.skyeye.eve.entity.knowlg;
+package com.skyeye.eve.eitity.dict;
 
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
+import com.skyeye.common.entity.CommonPageInfo;
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * @ClassName: KnowledgeTypeVO
- * @Description: 知识库类型实体类
+ * @ClassName: SysDictTypeQueryDO
+ * @Description: 数据字典查询条件实体类
  * @author: skyeye云系列--卫志强
- * @date: 2022/3/21 10:43
- * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
+ * @date: 2022/6/30 22:41
+ * @Copyright: 2022 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Data
-@ApiModel("知识库类型实体类")
-public class KnowledgeTypeVO implements Serializable {
+@ApiModel("数据字典查询条件实体类")
+public class SysDictDataQueryDO extends CommonPageInfo implements Serializable {
 
-    @ApiModelProperty(value = "知识库类型名称", required = "required")
-    private String name;
+    @ApiModelProperty(value = "字典名称")
+    private String dictName;
 
-    @ApiModelProperty(value = "所属类型ID")
-    private String parentId;
+    @ApiModelProperty(value = "字典分类id")
+    private String dictTypeId;
 
 }

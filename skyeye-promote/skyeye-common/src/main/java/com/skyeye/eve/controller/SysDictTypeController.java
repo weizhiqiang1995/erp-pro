@@ -86,4 +86,18 @@ public class SysDictTypeController {
         sysDictTypeService.deleteDictTypeMationById(inputObject, outputObject);
     }
 
+    /**
+     * 根据状态获取数据字典类型列表
+     *
+     * @param inputObject
+     * @param outputObject
+     */
+    @ApiOperation(id = "queryDictTypeListByStatus", value = "根据状态获取数据字典类型列表", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "status", name = "status", value = "状态（0正常 1停用）", required = "num")})
+    @RequestMapping("/post/SysDictTypeController/queryDictTypeListByStatus")
+    public void queryDictTypeListByStatus(InputObject inputObject, OutputObject outputObject) {
+        sysDictTypeService.queryDictTypeListByStatus(inputObject, outputObject);
+    }
+
 }

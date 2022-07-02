@@ -20,7 +20,7 @@ import java.io.Serializable;
  */
 @Data
 @ApiModel("知识库实体类")
-public class KnowledgeContentVO implements Serializable {
+public class KnowledgeContentMation implements Serializable {
 
     @ApiModelProperty(value = "知识库标题", required = "required")
     private String title;

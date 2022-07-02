@@ -8,7 +8,7 @@ import com.skyeye.annotation.api.Api;
 import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
-import com.skyeye.eve.entity.knowlg.KnowledgeTypeVO;
+import com.skyeye.eve.entity.knowlg.KnowledgeTypeMation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -57,7 +57,7 @@ public class KnowledgeTypeController {
      * @param outputObject
      */
     @ApiOperation(id = "knowledgetype002", value = "新增知识库类型", method = "POST", allUse = "1")
-    @ApiImplicitParams(classBean = KnowledgeTypeVO.class)
+    @ApiImplicitParams(classBean = KnowledgeTypeMation.class)
     @RequestMapping("/post/KnowledgeTypeController/insertKnowledgeTypeMation")
     public void insertKnowledgeTypeMation(InputObject inputObject, OutputObject outputObject) {
         knowledgeTypeService.insertKnowledgeTypeMation(inputObject, outputObject);

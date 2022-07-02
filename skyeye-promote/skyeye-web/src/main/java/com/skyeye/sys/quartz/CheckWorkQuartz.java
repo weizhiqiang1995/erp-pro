@@ -10,7 +10,7 @@ import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.util.DateAfterSpacePointTime;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
-import com.skyeye.eve.entity.checkwork.CheckWorkMation;
+import com.skyeye.eve.entity.checkwork.CheckWorkMationRest;
 import com.skyeye.eve.entity.quartz.SysQuartzRunHistory;
 import com.skyeye.eve.rest.checkwork.CheckWorkLeaveService;
 import com.skyeye.eve.rest.checkwork.CheckWorkService;
@@ -164,7 +164,7 @@ public class CheckWorkQuartz {
             ExecuteFeignClient.get(() -> checkWorkService.queryNotCheckEndWorkId(timeId, yesterdayTime)).getRows();
         if (!beans.isEmpty()) {
             for (Map<String, Object> b : beans) {
-                CheckWorkMation checkWorkMation = new CheckWorkMation();
+                CheckWorkMationRest checkWorkMation = new CheckWorkMationRest();
                 checkWorkMation.setId(b.get("id").toString());
                 checkWorkMation.setState("5");
                 checkWorkMation.setClockOutState("3");

@@ -8,12 +8,9 @@ import com.skyeye.annotation.api.Api;
 import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
-import com.skyeye.eve.entity.knowlg.KnowledgeContentVO;
-import com.skyeye.eve.entity.knowlg.KnowledgeTypeVO;
+import com.skyeye.eve.entity.knowlg.KnowledgeContentMation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -63,7 +60,7 @@ public class KnowledgeContentController {
      * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent002", value = "添加知识库", method = "POST", allUse = "1")
-    @ApiImplicitParams(classBean = KnowledgeContentVO.class)
+    @ApiImplicitParams(classBean = KnowledgeContentMation.class)
     @RequestMapping("/post/KnowledgeContentController/insertKnowledgeContentMation")
     public void insertKnowledgeContentMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         knowledgeContentService.insertKnowledgeContentMation(inputObject, outputObject);
@@ -92,7 +89,7 @@ public class KnowledgeContentController {
      * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent004", value = "编辑知识库信息", method = "POST", allUse = "1")
-    @ApiImplicitParams(classBean = KnowledgeContentVO.class, value = {
+    @ApiImplicitParams(classBean = KnowledgeContentMation.class, value = {
         @ApiImplicitParam(id = "rowId", name = "id", value = "知识库id", required = "required")})
     @RequestMapping("/post/KnowledgeContentController/editKnowledgeContentById")
     public void editKnowledgeContentById(InputObject inputObject, OutputObject outputObject) throws Exception {

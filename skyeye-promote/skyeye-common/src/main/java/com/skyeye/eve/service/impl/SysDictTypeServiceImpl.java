@@ -4,6 +4,7 @@
 
 package com.skyeye.eve.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -25,7 +26,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: SysDictTypeServiceImpl
@@ -79,13 +82,14 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
         SysDictTypeMation checkDictTypeMation = sysDictTypeDao.selectOne(queryWrapper);
         if (ObjectUtils.isEmpty(checkDictTypeMation)) {
             String userId = inputObject.getLogParams().get("id").toString();
+            // 2.新增/编辑数据
             if (StringUtils.isNotEmpty(sysDictTypeMation.getId())) {
-                LOGGER.info("update data, id is {}", sysDictTypeMation.getId());
+                LOGGER.info("update dictType data, id is {}", sysDictTypeMation.getId());
                 DataCommonUtil.setCommonLastUpdateDataByGenericity(sysDictTypeMation, userId);
                 sysDictTypeDao.updateById(sysDictTypeMation);
             } else {
                 DataCommonUtil.setCommonDataByGenericity(sysDictTypeMation, userId);
-                LOGGER.info("insert data, id is {}", sysDictTypeMation.getId());
+                LOGGER.info("insert dictType data, id is {}", sysDictTypeMation.getId());
                 sysDictTypeDao.insert(sysDictTypeMation);
             }
         } else {
@@ -117,8 +121,32 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteDictTypeMationById(InputObject inputObject, OutputObject outputObject) {
         String id = inputObject.getParams().get("id").toString();
-        LOGGER.info("delete data, id is {}", id);
+        LOGGER.info("delete dictType data, id is {}", id);
         sysDictTypeDao.deleteById(id);
+    }
+
+    /**
+     * 根据状态获取数据字典类型列表
+     *
+     * @param inputObject
+     * @param outputObject
+     */
+    @Override
+    public void queryDictTypeListByStatus(InputObject inputObject, OutputObject outputObject) {
+        String status = inputObject.getParams().get("status").toString();
+        QueryWrapper<SysDictTypeMation> queryWrapper = new QueryWrapper<>();
+        if (StringUtils.isNotEmpty(status)) {
+            queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysDictTypeMation.class, "status"), status);
+        }
+        List<SysDictTypeMation> dictTypeList = sysDictTypeDao.selectList(queryWrapper);
+        List<Map<String, Object>> result = new ArrayList<>();
+        for (SysDictTypeMation bean : dictTypeList) {
+            Map<String, Object> map = JSONObject.parseObject(JSONObject.toJSONString(bean), Map.class);
+            map.put("name", map.get("dictName"));
+            result.add(map);
+        }
+        outputObject.setBeans(result);
+        outputObject.settotal(result.size());
     }
 
 }
