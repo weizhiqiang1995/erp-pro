@@ -49,7 +49,7 @@ public class RmTypeServiceImpl implements RmTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertRmTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmTypeDao.queryRmTypeByName(map);
@@ -78,7 +78,7 @@ public class RmTypeServiceImpl implements RmTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteRmTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmTypeDao.queryRmTypeGroupNumById(map);
@@ -116,7 +116,7 @@ public class RmTypeServiceImpl implements RmTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editRmTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmTypeDao.queryRmTypeMationByIdAndName(map);
@@ -135,7 +135,7 @@ public class RmTypeServiceImpl implements RmTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editRmTypeSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = rmTypeDao.queryRmTypeISTopByThisId(map);//根据排序获取这条数据的上一条数据
@@ -157,7 +157,7 @@ public class RmTypeServiceImpl implements RmTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editRmTypeSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = rmTypeDao.queryRmTypeISLowerByThisId(map);//根据排序获取这条数据的下一条数据

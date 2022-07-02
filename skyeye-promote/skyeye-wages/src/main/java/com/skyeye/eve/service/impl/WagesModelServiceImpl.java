@@ -85,7 +85,7 @@ public class WagesModelServiceImpl implements WagesModelService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertWagesModelMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String title = map.get("title").toString();
@@ -226,7 +226,7 @@ public class WagesModelServiceImpl implements WagesModelService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editWagesModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
@@ -252,7 +252,7 @@ public class WagesModelServiceImpl implements WagesModelService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteWagesModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         wagesModelDao.editWagesModelMationStateMationById(map.get("id").toString(), STATE.START_DELETE.getState());
@@ -266,7 +266,7 @@ public class WagesModelServiceImpl implements WagesModelService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void enableWagesModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         wagesModelDao.editWagesModelMationStateMationById(map.get("id").toString(), STATE.START_UP.getState());
@@ -280,7 +280,7 @@ public class WagesModelServiceImpl implements WagesModelService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void disableWagesModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         wagesModelDao.editWagesModelMationStateMationById(map.get("id").toString(), STATE.START_DOWN.getState());

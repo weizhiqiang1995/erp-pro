@@ -63,7 +63,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertDayJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -114,7 +114,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void queryJobDiaryDetails(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> state = jobDiaryDao.queryJobDiaryState(map);
@@ -163,7 +163,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> createtime = jobDiaryDao.queryCreateTime(map);
@@ -206,7 +206,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editMyReceivedJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> diaryType = jobDiaryDao.queryDiaryType(map);
@@ -226,7 +226,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertWeekJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -277,7 +277,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void queryWeekJobDiaryDetails(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> state = jobDiaryDao.queryWeekJobDiaryState(map);
@@ -300,7 +300,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertMonthJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -351,7 +351,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void queryMonthJobDiaryDetails(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> state = jobDiaryDao.queryMonthJobDiaryState(map);
@@ -374,7 +374,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> createtime = jobDiaryDao.queryJobDiaryType(map);
@@ -412,7 +412,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editDayJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("state", "1");
@@ -461,7 +461,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editWeekDayJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("state", "1");
@@ -510,7 +510,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editMonthDayJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("state", "1");
@@ -580,7 +580,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editReceivedJobDiaryToAlreadyRead(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("readTime", DateUtil.getTimeAndToString());

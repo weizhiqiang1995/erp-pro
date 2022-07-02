@@ -78,7 +78,7 @@ public class SysStaffDataDictionaryServiceImpl implements SysStaffDataDictionary
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysStaffDataDictionaryMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         Map<String, Object> bean = sysStaffDataDictionaryDao.querySysStaffDataDictionaryByName(params);
@@ -120,7 +120,7 @@ public class SysStaffDataDictionaryServiceImpl implements SysStaffDataDictionary
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysStaffDataDictionaryMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         Map<String, Object> bean = sysStaffDataDictionaryDao.querySysStaffDataDictionaryByNameAndId(params);
@@ -141,7 +141,7 @@ public class SysStaffDataDictionaryServiceImpl implements SysStaffDataDictionary
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void downSysStaffDataDictionaryMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         String id = params.get("id").toString();
@@ -165,7 +165,7 @@ public class SysStaffDataDictionaryServiceImpl implements SysStaffDataDictionary
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void upSysStaffDataDictionaryMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         String id = params.get("id").toString();
@@ -189,7 +189,7 @@ public class SysStaffDataDictionaryServiceImpl implements SysStaffDataDictionary
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysStaffDataDictionaryMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         String id = params.get("id").toString();

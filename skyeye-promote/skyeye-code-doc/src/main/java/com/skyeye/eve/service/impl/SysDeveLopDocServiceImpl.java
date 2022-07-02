@@ -58,7 +58,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysDeveLopType(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopByName(map);
@@ -102,7 +102,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysDeveLopTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopByNameAndId(map);
@@ -121,7 +121,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysDeveLopTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopTypeContentNumById(map);
@@ -157,7 +157,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysDeveLopTypeStateISupById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopTypeStateById(map);
@@ -181,7 +181,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysDeveLopTypeStateISdownById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopTypeStateById(map);
@@ -205,7 +205,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysDeveLopTypeOrderByISupById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopTypeOrderByISupById(map);
@@ -232,7 +232,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysDeveLopTypeOrderByISdownById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopTypeOrderByISdownById(map);
@@ -275,7 +275,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void addSysDeveLopDoc(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopDocByNameAndParentId(map);
@@ -319,7 +319,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysDeveLopDocById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopDocByNameAndId(map);
@@ -338,7 +338,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysDeveLopDocById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         sysDeveLopDocDao.deleteSysDeveLopDocById(map);
@@ -352,7 +352,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysDeveLopDocStateISupById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopDocStateById(map);
@@ -373,7 +373,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysDeveLopDocStateISdownById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopDocStateById(map);
@@ -394,7 +394,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysDeveLopDocOrderByISupById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopDocOrderByISupById(map);
@@ -417,7 +417,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysDeveLopDocOrderByISdownById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopDocOrderByISdownById(map);

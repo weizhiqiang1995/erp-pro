@@ -78,7 +78,7 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysStaffLanguageLevelMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         Map<String, Object> bean = sysStaffLanguageLevelDao.querySysStaffLanguageLevelByName(params);
@@ -120,7 +120,7 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         Map<String, Object> bean = sysStaffLanguageLevelDao.querySysStaffLanguageLevelByNameAndId(params);
@@ -141,7 +141,7 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void downSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         String id = params.get("id").toString();
@@ -165,7 +165,7 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void upSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         String id = params.get("id").toString();
@@ -189,7 +189,7 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> params = inputObject.getParams();
         String id = params.get("id").toString();

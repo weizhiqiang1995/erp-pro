@@ -105,7 +105,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysUserLockStateToLockById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveUserDao.querySysUserLockStateById(map);
@@ -127,7 +127,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysUserLockStateToUnLockById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveUserDao.querySysUserLockStateById(map);
@@ -149,7 +149,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysUserMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> userCode = sysEveUserDao.querySysUserCodeByMation(map);
@@ -229,7 +229,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysUserPasswordMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         int pwdNum = (int) (Math.random() * 100);
@@ -405,7 +405,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editRoleIdsByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         sysEveUserDao.editRoleIdsByUserId(map);
@@ -445,7 +445,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editUserInstallThemeColor(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -464,7 +464,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editUserInstallWinBgPic(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -483,7 +483,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editUserInstallWinLockBgPic(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -502,7 +502,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editUserInstallWinStartMenuSize(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -521,7 +521,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editUserInstallWinTaskPosition(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -540,7 +540,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editUserPassword(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -574,7 +574,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editUserInstallVagueBgSrc(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -594,7 +594,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editUserInstallLoadMenuIconById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -649,7 +649,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();

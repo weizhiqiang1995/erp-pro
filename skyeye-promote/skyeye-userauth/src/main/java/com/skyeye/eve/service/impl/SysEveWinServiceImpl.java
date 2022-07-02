@@ -63,7 +63,7 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertWinMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinDao.queryWinMationByNameOrUrl(map);
@@ -100,7 +100,7 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editWinMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinDao.queryWinMationByNameOrUrlAndId(map);
@@ -119,7 +119,7 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteWinMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinDao.queryChildMationById(map);
@@ -138,7 +138,7 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editAuthorizationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinDao.querySysEveWinNum(map);
@@ -162,7 +162,7 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editCancleAuthorizationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         sysEveWinDao.editCancleAuthorizationById(map);
@@ -192,7 +192,7 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertWinMationImportantSynchronization(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinDao.queryWinMationSynchronizationById(map);//判断是否有权限

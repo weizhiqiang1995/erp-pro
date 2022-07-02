@@ -65,7 +65,7 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
      * @see com.skyeye.eve.service.SysStaffRewardPunishService#insertSysStaffRewardPunishMation(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysStaffRewardPunishMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -113,7 +113,7 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
      * @see com.skyeye.eve.service.SysStaffRewardPunishService#editSysStaffRewardPunishMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysStaffRewardPunishMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
@@ -138,7 +138,7 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
      * @see com.skyeye.eve.service.SysStaffRewardPunishService#deleteSysStaffRewardPunishMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysStaffRewardPunishMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();

@@ -63,7 +63,7 @@ public class ForumSensitiveWordsServiceImpl implements ForumSensitiveWordsServic
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertForumSensitiveWordsMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumSensitiveWordsDao.queryForumSensitiveWordsMationByName(map);
@@ -87,7 +87,7 @@ public class ForumSensitiveWordsServiceImpl implements ForumSensitiveWordsServic
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         forumSensitiveWordsDao.deleteForumSensitiveWordsById(map);
@@ -117,7 +117,7 @@ public class ForumSensitiveWordsServiceImpl implements ForumSensitiveWordsServic
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editForumSensitiveWordsMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumSensitiveWordsDao.queryForumSensitiveWordsMationByName(map);

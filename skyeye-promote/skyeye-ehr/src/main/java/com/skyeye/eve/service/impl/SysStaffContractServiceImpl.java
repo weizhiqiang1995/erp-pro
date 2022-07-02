@@ -86,7 +86,7 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
      * @see com.skyeye.eve.service.SysStaffContractService#insertSysStaffContractMation(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysStaffContractMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -131,7 +131,7 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
      * @see com.skyeye.eve.service.SysStaffContractService#editSysStaffContractMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysStaffContractMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
@@ -159,7 +159,7 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
      * @see com.skyeye.eve.service.SysStaffContractService#deleteSysStaffContractMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysStaffContractMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
@@ -201,7 +201,7 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
      * @see com.skyeye.eve.service.SysStaffContractService#signSysStaffContractById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void signSysStaffContractById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();

@@ -49,7 +49,7 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void querySysWinFirstTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysEveWinTypeDao.querySysWinFirstTypeList(map);
@@ -67,7 +67,7 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysWinTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinTypeDao.querySysWinTypeByNameANDLevel(map);
@@ -108,7 +108,7 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysWinTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinTypeDao.querySysWinTypeByNameANDLevelAndId(map);
@@ -149,7 +149,7 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysWinTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         sysEveWinTypeDao.deleteSysWinTypeMationById(map);
@@ -164,7 +164,7 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysWinTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinTypeDao.querySysWinTypeUpMationById(map);//获取当前数据的同级分类下的上一条数据
@@ -187,7 +187,7 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysWinTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinTypeDao.querySysWinTypeDownMationById(map);//获取当前数据的同级分类下的下一条数据
@@ -210,7 +210,7 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysWinTypeMationStateUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinTypeDao.querySysWinTypeStateById(map);
@@ -229,7 +229,7 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysWinTypeMationStateDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinTypeDao.querySysWinTypeStateById(map);

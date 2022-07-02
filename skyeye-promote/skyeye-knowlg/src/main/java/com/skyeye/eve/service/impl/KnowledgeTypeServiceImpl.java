@@ -109,7 +109,7 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = knowledgeTypeDao.queryKnowledgeTypeStateById(map);
@@ -132,7 +132,7 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void updateUpKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = knowledgeTypeDao.queryKnowledgeTypeStateById(map);
@@ -156,7 +156,7 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void updateDownKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = knowledgeTypeDao.queryKnowledgeTypeStateById(map);
@@ -195,7 +195,7 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editKnowledgeTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 查询这条知识库类型的状态

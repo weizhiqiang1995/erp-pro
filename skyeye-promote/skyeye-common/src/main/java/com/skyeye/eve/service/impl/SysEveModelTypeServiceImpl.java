@@ -97,7 +97,7 @@ public class SysEveModelTypeServiceImpl implements SysEveModelTypeService {
     }
 
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void delSysEveModelTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> inputParams = inputObject.getParams();
         String id = inputParams.get("id").toString();

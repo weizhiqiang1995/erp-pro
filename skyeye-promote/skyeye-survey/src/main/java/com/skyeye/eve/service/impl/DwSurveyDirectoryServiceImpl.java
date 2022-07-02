@@ -73,7 +73,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertDwSurveyDirectoryMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -198,7 +198,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editDwSurveyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         dwSurveyDirectoryDao.editDwSurveyMationById(map);//编辑问卷信息
@@ -272,7 +272,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void addQuFillblankMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.FILLBLANK.getIndex());
@@ -300,7 +300,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void addQuScoreMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.SCORE.getIndex());
@@ -337,7 +337,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void addQuOrderquMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.ORDERQU.getIndex());
@@ -374,7 +374,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void addQuPagetagMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.PAGETAG.getIndex());
@@ -394,7 +394,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void addQuRadioMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.RADIO.getIndex());
@@ -431,7 +431,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void addQuCheckBoxMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.CHECKBOX.getIndex());
@@ -468,7 +468,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void addQuMultiFillblankMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.MULTIFILLBLANK.getIndex());
@@ -505,7 +505,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void addQuParagraphMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.PARAGRAPH.getIndex());
@@ -525,7 +525,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void addQuChenMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         int quType = QuType.getIndex(map.get("quType").toString());
@@ -583,7 +583,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteQuestionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> question = dwSurveyDirectoryDao.queryQuestionMationById(map);
@@ -615,7 +615,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteQuestionChenColumnMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> option = dwSurveyDirectoryDao.queryQuestionChenColumnById(map);
@@ -636,7 +636,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteQuestionChenRowMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> option = dwSurveyDirectoryDao.queryQuestionChenRowById(map);
@@ -657,7 +657,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteQuestionRadioOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> option = dwSurveyDirectoryDao.queryQuestionRadioOptionById(map);
@@ -678,7 +678,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteQuestionChedkBoxOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> option = dwSurveyDirectoryDao.queryQuestionChedkBoxOptionById(map);
@@ -699,7 +699,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteQuestionScoreOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> option = dwSurveyDirectoryDao.queryQuestionScoreOptionById(map);
@@ -720,7 +720,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteQuestionOrderOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> option = dwSurveyDirectoryDao.queryQuestionOrderOptionById(map);
@@ -741,7 +741,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteQuestionMultiFillblankOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> option = dwSurveyDirectoryDao.queryQuestionMultiFillblankOptionById(map);
@@ -762,7 +762,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSurveyStateToReleaseById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> surveyMation = dwSurveyDirectoryDao.querySurveyMationById(map);//获取问卷信息
@@ -829,7 +829,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSurveyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         dwSurveyDirectoryDao.deleteSurveyMationById(map);//删除问卷
@@ -1044,7 +1044,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSurveyMationCopyById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -1158,7 +1158,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertAnswerSurveyMationByIp(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> data = JSONUtil.toBean(map.get("jsonData").toString(), null);
@@ -1982,7 +1982,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void updateSurveyMationEndById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> surveyMation = dwSurveyDirectoryDao.querySurveyMationById(map);//获取问卷信息

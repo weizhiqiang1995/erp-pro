@@ -140,7 +140,7 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void saveStaffWagesModelFieldMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String staffId = map.get("staffId").toString();

@@ -65,7 +65,7 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
      * @see com.skyeye.eve.service.SysStaffFamilyService#insertSysStaffFamilyMation(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysStaffFamilyMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -110,7 +110,7 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
      * @see com.skyeye.eve.service.SysStaffFamilyService#editSysStaffFamilyMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysStaffFamilyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
@@ -132,7 +132,7 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
      * @see com.skyeye.eve.service.SysStaffFamilyService#deleteSysStaffFamilyMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysStaffFamilyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();

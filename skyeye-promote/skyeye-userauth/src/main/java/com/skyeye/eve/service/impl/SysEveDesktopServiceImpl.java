@@ -74,7 +74,7 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysDesktopMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveDesktopDao.checkSysDesktopMation(map);
@@ -101,7 +101,7 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysDesktopById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
@@ -128,7 +128,7 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void updateUpSysDesktopById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
@@ -150,7 +150,7 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void updateDownSysDesktopById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
@@ -187,7 +187,7 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysDesktopMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveDesktopDao.querySysDesktopStateById(map);
@@ -215,7 +215,7 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysDesktopMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveDesktopDao.querySysDesktopUpMationById(map);//获取当前数据的同级分类下的上一条数据
@@ -238,7 +238,7 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysDesktopMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveDesktopDao.querySysDesktopDownMationById(map);//获取当前数据的同级分类下的下一条数据
@@ -281,7 +281,7 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void removeAllSysEveMenuByDesktopId(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("desktopId", "winfixedpage00000000");

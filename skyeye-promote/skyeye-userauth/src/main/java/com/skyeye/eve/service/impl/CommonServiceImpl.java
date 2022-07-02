@@ -173,7 +173,7 @@ public class CommonServiceImpl implements CommonService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void downloadFileByJsonData(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonData").toString(), null);

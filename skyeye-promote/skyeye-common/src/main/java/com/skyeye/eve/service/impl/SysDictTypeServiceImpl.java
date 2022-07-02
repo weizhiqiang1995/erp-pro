@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.CommonConstants;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.entity.CommonOperatorUserInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -20,6 +21,7 @@ import com.skyeye.eve.service.SysDictTypeService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
@@ -44,7 +46,6 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     public void queryDictTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -60,9 +61,9 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void writeDictTypeMation(InputObject inputObject, OutputObject outputObject) {
         SysDictTypeMation sysDictTypeMation = inputObject.getParams(SysDictTypeMation.class);
         // 1.根据dictName和dictCode进行校验
@@ -86,6 +87,33 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
         } else {
             outputObject.setreturnMessage("this data is non-existent.");
         }
+    }
+
+    /**
+     * 根据ID获取数据字典类型信息
+     *
+     * @param inputObject
+     * @param outputObject
+     */
+    @Override
+    public void queryDictTypeMationById(InputObject inputObject, OutputObject outputObject) {
+        String id = inputObject.getParams().get("id").toString();
+        SysDictTypeMation sysDictTypeMation = sysDictTypeDao.selectById(id);
+        outputObject.setBean(sysDictTypeMation);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
+    }
+
+    /**
+     * 根据ID删除数据字典类型
+     *
+     * @param inputObject
+     * @param outputObject
+     */
+    @Override
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
+    public void deleteDictTypeMationById(InputObject inputObject, OutputObject outputObject) {
+        String id = inputObject.getParams().get("id").toString();
+        sysDictTypeDao.deleteById(id);
     }
 
 

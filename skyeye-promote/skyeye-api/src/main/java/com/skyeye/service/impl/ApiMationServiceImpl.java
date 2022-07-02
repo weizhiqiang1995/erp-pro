@@ -58,7 +58,7 @@ public class ApiMationServiceImpl implements ApiMationService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String urlId = map.get("urlId").toString();

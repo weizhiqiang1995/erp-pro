@@ -55,7 +55,7 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertPlanProjectFlowMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = planProjectFlowDao.queryPlanProjectFlowMationByName(map);
@@ -78,7 +78,7 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deletePlanProjectFlowMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = planProjectFlowDao.queryChildNumMationById(map);
@@ -113,7 +113,7 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editPlanProjectFlowMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = planProjectFlowDao.queryPlanProjectFlowMationByNameAndId(map);
@@ -146,7 +146,7 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editPlanProjectFlowJsonContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         planProjectFlowDao.editPlanProjectFlowJsonContentMationById(map);

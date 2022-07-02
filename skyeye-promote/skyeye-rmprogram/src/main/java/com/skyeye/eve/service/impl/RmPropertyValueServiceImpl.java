@@ -49,7 +49,7 @@ public class RmPropertyValueServiceImpl implements RmPropertyValueService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertRmPropertyValueMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmPropertyValueDao.queryRmPropertyValueMationByName(map);
@@ -72,7 +72,7 @@ public class RmPropertyValueServiceImpl implements RmPropertyValueService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteRmPropertyValueMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         rmPropertyValueDao.deleteRmPropertyValueMationById(map);
@@ -101,7 +101,7 @@ public class RmPropertyValueServiceImpl implements RmPropertyValueService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editRmPropertyValueMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmPropertyValueDao.queryRmPropertyValueMationByNameAndId(map);

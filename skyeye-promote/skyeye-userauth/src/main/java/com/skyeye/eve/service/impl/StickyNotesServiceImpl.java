@@ -31,7 +31,7 @@ public class StickyNotesServiceImpl implements StickyNotesService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -65,7 +65,7 @@ public class StickyNotesServiceImpl implements StickyNotesService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         stickyNotesDao.editStickyNotesMation(map);
@@ -79,7 +79,7 @@ public class StickyNotesServiceImpl implements StickyNotesService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         stickyNotesDao.deleteStickyNotesMation(map);

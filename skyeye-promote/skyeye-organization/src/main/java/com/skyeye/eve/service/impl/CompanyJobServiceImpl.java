@@ -67,7 +67,7 @@ public class CompanyJobServiceImpl implements CompanyJobService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertCompanyJobMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyJobDao.queryCompanyJobMationByName(map);
@@ -90,7 +90,7 @@ public class CompanyJobServiceImpl implements CompanyJobService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteCompanyJobMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         // 1.删除职位信息
@@ -122,7 +122,7 @@ public class CompanyJobServiceImpl implements CompanyJobService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editCompanyJobMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyJobDao.queryCompanyJobMationByNameAndId(map);

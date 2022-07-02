@@ -63,7 +63,7 @@ public class SystemFoundationSettingsServiceImpl implements SystemFoundationSett
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSystemFoundationSettings(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         systemFoundationSettingsDao.editSystemFoundationSettings(map);

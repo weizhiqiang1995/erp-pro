@@ -66,7 +66,7 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertCompanyDepartmentMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyDepartmentDao.queryCompanyDepartmentMationByName(map);
@@ -88,7 +88,7 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyDepartmentDao.queryCompanyDepartmentUserMationById(map);
@@ -130,7 +130,7 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyDepartmentDao.queryCompanyDepartmentMationByNameAndId(map);

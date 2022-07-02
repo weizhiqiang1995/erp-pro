@@ -65,7 +65,7 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
      * @see com.skyeye.eve.service.SysStaffJobResumeService#insertSysStaffJobResumeMation(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysStaffJobResumeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -110,7 +110,7 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
      * @see com.skyeye.eve.service.SysStaffJobResumeService#editSysStaffJobResumeMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysStaffJobResumeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
@@ -132,7 +132,7 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
      * @see com.skyeye.eve.service.SysStaffJobResumeService#deleteSysStaffJobResumeMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysStaffJobResumeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();

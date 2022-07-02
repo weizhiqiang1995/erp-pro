@@ -64,7 +64,7 @@ public class SysEvePicTypeServiceImpl implements SysEvePicTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysPicTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEvePicTypeDao.querySysPicTypeMationByName(map);
@@ -91,7 +91,7 @@ public class SysEvePicTypeServiceImpl implements SysEvePicTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysPicTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEvePicTypeDao.querySysPicTypeStateById(map);
@@ -111,7 +111,7 @@ public class SysEvePicTypeServiceImpl implements SysEvePicTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void updateUpSysPicTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEvePicTypeDao.querySysPicTypeStateById(map);
@@ -131,7 +131,7 @@ public class SysEvePicTypeServiceImpl implements SysEvePicTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void updateDownSysPicTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEvePicTypeDao.querySysPicTypeStateById(map);
@@ -166,7 +166,7 @@ public class SysEvePicTypeServiceImpl implements SysEvePicTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysPicTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEvePicTypeDao.querySysPicTypeStateById(map);
@@ -190,7 +190,7 @@ public class SysEvePicTypeServiceImpl implements SysEvePicTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysPicTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEvePicTypeDao.querySysPicTypeUpMationById(map);//获取当前数据的同级分类下的上一条数据
@@ -214,7 +214,7 @@ public class SysEvePicTypeServiceImpl implements SysEvePicTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysPicTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEvePicTypeDao.querySysPicTypeDownMationById(map);//获取当前数据的同级分类下的下一条数据

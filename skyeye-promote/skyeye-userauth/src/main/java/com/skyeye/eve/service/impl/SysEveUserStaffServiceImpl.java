@@ -117,7 +117,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysUserStaffMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String userIdCard = map.get("userIdCard").toString();
@@ -286,7 +286,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysUserStaffById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String staffId = map.get("id").toString();
@@ -347,7 +347,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysUserStaffState(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("state", State.QUIT.getState());
@@ -374,7 +374,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editTurnTeacher(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String staffId = map.get("staffId").toString();

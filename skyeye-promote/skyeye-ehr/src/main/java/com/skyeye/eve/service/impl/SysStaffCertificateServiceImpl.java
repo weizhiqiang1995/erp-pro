@@ -65,7 +65,7 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
      * @see com.skyeye.eve.service.SysStaffCertificateService#insertSysStaffCertificateMation(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysStaffCertificateMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -110,7 +110,7 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
      * @see com.skyeye.eve.service.SysStaffCertificateService#editSysStaffCertificateMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysStaffCertificateMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
@@ -132,7 +132,7 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
      * @see com.skyeye.eve.service.SysStaffCertificateService#deleteSysStaffCertificateMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysStaffCertificateMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();

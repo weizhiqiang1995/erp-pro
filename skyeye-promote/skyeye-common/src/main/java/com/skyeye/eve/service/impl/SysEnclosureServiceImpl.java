@@ -73,7 +73,7 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -162,7 +162,7 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String fileType = map.get("fileType").toString();
@@ -180,7 +180,7 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
@@ -243,7 +243,7 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();

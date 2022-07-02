@@ -77,7 +77,7 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertKnowledgeContentMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -111,7 +111,7 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editKnowledgeContentById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("createTime", DateUtil.getTimeAndToString());
@@ -126,7 +126,7 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteKnowledgeContentById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         knowledgeContentDao.deleteKnowledgeContentById(map);
@@ -367,7 +367,7 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editKnowledgeContentToCheck(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("examineId", inputObject.getLogParams().get("id"));

@@ -63,7 +63,7 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertCodeModelGroupMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = codeModelGroupDao.queryCodeModelGroupMationByName(map);
@@ -87,7 +87,7 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteCodeModelGroupById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = codeModelGroupDao.queryCodeModelNumById(map);
@@ -125,7 +125,7 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editCodeModelGroupMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = codeModelGroupDao.queryCodeModelGroupMationByIdAndName(map);

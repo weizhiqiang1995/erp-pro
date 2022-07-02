@@ -58,7 +58,7 @@ public class CodeModelServiceImpl implements CodeModelService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertCodeModelMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = codeModelDao.queryCodeModelMationByName(map);
@@ -81,7 +81,7 @@ public class CodeModelServiceImpl implements CodeModelService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteCodeModelById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         codeModelDao.deleteCodeModelById(map);
@@ -110,7 +110,7 @@ public class CodeModelServiceImpl implements CodeModelService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editCodeModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = codeModelDao.queryCodeModelMationByIdAndName(map);

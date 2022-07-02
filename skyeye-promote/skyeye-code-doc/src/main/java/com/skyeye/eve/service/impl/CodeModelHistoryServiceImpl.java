@@ -67,7 +67,7 @@ public class CodeModelHistoryServiceImpl implements CodeModelHistoryService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertCodeModelHistoryCreate(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String basePath = tPath + Constants.FileUploadPath.CODE_GENERATOR.getSavePath();

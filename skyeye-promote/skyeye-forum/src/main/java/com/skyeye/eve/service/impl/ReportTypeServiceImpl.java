@@ -64,7 +64,7 @@ public class ReportTypeServiceImpl implements ReportTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertReportTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = reportTypeDao.queryReportTypeMationByTypeName(map);
@@ -113,7 +113,7 @@ public class ReportTypeServiceImpl implements ReportTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editReportTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> beans = reportTypeDao.queryReportTypeMationStateById(map);
@@ -137,7 +137,7 @@ public class ReportTypeServiceImpl implements ReportTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editReportTypeSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = reportTypeDao.queryReportTypeISTopByThisId(map);//根据同一级排序获取这条数据的上一条数据
@@ -160,7 +160,7 @@ public class ReportTypeServiceImpl implements ReportTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editReportTypeSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = reportTypeDao.queryReportTypeISLowerByThisId(map);//根据同一级排序获取这条数据的下一条数据
@@ -183,7 +183,7 @@ public class ReportTypeServiceImpl implements ReportTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteReportTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = reportTypeDao.queryReportTypeMationStateById(map);
@@ -202,7 +202,7 @@ public class ReportTypeServiceImpl implements ReportTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editReportTypeUpTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = reportTypeDao.queryReportTypeMationStateById(map);
@@ -222,7 +222,7 @@ public class ReportTypeServiceImpl implements ReportTypeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editReportTypeDownTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = reportTypeDao.queryReportTypeMationStateById(map);

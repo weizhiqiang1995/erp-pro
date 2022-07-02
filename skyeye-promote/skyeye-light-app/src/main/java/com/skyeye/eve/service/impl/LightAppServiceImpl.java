@@ -72,7 +72,7 @@ public class LightAppServiceImpl implements LightAppService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertLightAppMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = lightAppDao.queryLightAppMationByName(map);
@@ -111,7 +111,7 @@ public class LightAppServiceImpl implements LightAppService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editLightAppMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> beans = lightAppDao.queryLightAppStateById(map);
@@ -136,7 +136,7 @@ public class LightAppServiceImpl implements LightAppService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteLightAppById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = lightAppDao.queryLightAppStateById(map);
@@ -155,7 +155,7 @@ public class LightAppServiceImpl implements LightAppService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editLightAppUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = lightAppDao.queryLightAppStateById(map);
@@ -176,7 +176,7 @@ public class LightAppServiceImpl implements LightAppService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editLightAppDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = lightAppDao.queryLightAppStateById(map);
@@ -221,7 +221,7 @@ public class LightAppServiceImpl implements LightAppService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertLightAppToWin(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = lightAppDao.queryLightAppMationToAddWinById(map);

@@ -65,7 +65,7 @@ public class ForumTagServiceImpl implements ForumTagService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertForumTagMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagMationByName(map);
@@ -92,7 +92,7 @@ public class ForumTagServiceImpl implements ForumTagService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteForumTagById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagStateById(map);
@@ -112,7 +112,7 @@ public class ForumTagServiceImpl implements ForumTagService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void updateUpForumTagById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagStateById(map);
@@ -132,7 +132,7 @@ public class ForumTagServiceImpl implements ForumTagService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void updateDownForumTagById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagStateById(map);
@@ -167,7 +167,7 @@ public class ForumTagServiceImpl implements ForumTagService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editForumTagMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagStateById(map);
@@ -191,7 +191,7 @@ public class ForumTagServiceImpl implements ForumTagService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editForumTagMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagUpMationById(map);//获取当前数据的同级分类下的上一条数据
@@ -215,7 +215,7 @@ public class ForumTagServiceImpl implements ForumTagService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editForumTagMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagDownMationById(map);//获取当前数据的同级分类下的下一条数据

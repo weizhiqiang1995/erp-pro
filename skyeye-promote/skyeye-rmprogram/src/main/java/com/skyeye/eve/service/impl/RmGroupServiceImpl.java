@@ -49,7 +49,7 @@ public class RmGroupServiceImpl implements RmGroupService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertRmGroupMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmGroupDao.queryRmGroupByName(map);
@@ -78,7 +78,7 @@ public class RmGroupServiceImpl implements RmGroupService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteRmGroupById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmGroupDao.queryRmGroupMemberNumById(map);
@@ -116,7 +116,7 @@ public class RmGroupServiceImpl implements RmGroupService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editRmGroupMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmGroupDao.queryRmGroupMationByIdAndName(map);
@@ -135,7 +135,7 @@ public class RmGroupServiceImpl implements RmGroupService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editRmGroupSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = rmGroupDao.queryRmGroupISTopByThisId(map);//根据排序获取这条数据的上一条数据
@@ -157,7 +157,7 @@ public class RmGroupServiceImpl implements RmGroupService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editRmGroupSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = rmGroupDao.queryRmGroupISLowerByThisId(map);//根据排序获取这条数据的下一条数据

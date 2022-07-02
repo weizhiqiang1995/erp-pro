@@ -70,7 +70,7 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertScheduleDayMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -160,7 +160,7 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editScheduleDayMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = scheduleDayDao.queryScheduleDayMationById(map);
@@ -220,7 +220,7 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteScheduleDayMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         // 删除日程信息
@@ -276,7 +276,7 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void exploreScheduleTemplate(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -350,7 +350,7 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteHolidayScheduleById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         // 删除节假日信息
@@ -367,7 +367,7 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteHolidayScheduleByThisYear(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = scheduleDayDao.queryHolidayScheduleByThisYear(map);//获取本年度节假日
@@ -386,7 +386,7 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void addHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = scheduleDayDao.queryHolidayScheduleDayMationById(map);
@@ -422,7 +422,7 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         // 修改节假日信息

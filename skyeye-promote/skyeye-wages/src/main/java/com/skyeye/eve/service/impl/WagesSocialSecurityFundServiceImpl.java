@@ -87,7 +87,7 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertWagesSocialSecurityFundMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> mation = wagesSocialSecurityFundDao.queryWagesSocialSecurityFundMationByTitleAndNotId(map.get("title").toString(), null);
@@ -202,7 +202,7 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();

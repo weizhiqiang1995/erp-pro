@@ -72,7 +72,7 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysNoticeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -178,7 +178,7 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysNoticeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeDao.querySysNoticeStateById(map);
@@ -200,7 +200,7 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void updateUpSysNoticeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeDao.querySysNoticeMationById(map);    //查询state、timeSend、whetherEmail、title的值
@@ -237,7 +237,7 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void updateDownSysNoticeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeDao.querySysNoticeStateById(map);
@@ -273,7 +273,7 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeDao.querySysNoticeStateById(map);
@@ -326,7 +326,7 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysNoticeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeDao.querySysNoticeUpMationById(map);//获取当前数据的同级分类下的上一条数据
@@ -349,7 +349,7 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysNoticeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeDao.querySysNoticeDownMationById(map);//获取当前数据的同级分类下的下一条数据
@@ -372,7 +372,7 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysNoticeTimeUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeDao.querySysNoticeStateAndTimeSend(map);

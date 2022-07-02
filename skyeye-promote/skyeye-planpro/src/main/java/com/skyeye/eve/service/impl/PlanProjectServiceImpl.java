@@ -47,7 +47,7 @@ public class PlanProjectServiceImpl implements PlanProjectService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertPlanProjectMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = planProjectDao.judgePlanProjectName(map);
@@ -69,7 +69,7 @@ public class PlanProjectServiceImpl implements PlanProjectService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deletePlanProjectMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         planProjectDao.deletePlanProjectMationById(map);
@@ -96,7 +96,7 @@ public class PlanProjectServiceImpl implements PlanProjectService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editPlanProjectMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = planProjectDao.judgePlanProjectName(map);

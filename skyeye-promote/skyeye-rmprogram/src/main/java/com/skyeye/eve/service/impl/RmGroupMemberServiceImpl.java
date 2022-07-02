@@ -66,7 +66,7 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertRmGroupMemberMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -90,7 +90,7 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editRmGroupMemberSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = rmGroupMemberDao.queryRmGroupMemberISTopByThisId(map);//根据排序获取这条数据的上一条数据
@@ -112,7 +112,7 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editRmGroupMemberSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = rmGroupMemberDao.queryRmGroupMemberISLowerByThisId(map);//根据排序获取这条数据的下一条数据
@@ -134,7 +134,7 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteRmGroupMemberById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmGroupMemberDao.queryUseRmGroupMemberNumById(map);
@@ -181,7 +181,7 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editRmGroupMemberMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> item = rmGroupMemberDao.queryRmGroupMemberMationById(map);
@@ -201,7 +201,7 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();

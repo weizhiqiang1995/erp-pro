@@ -53,7 +53,7 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertProPageMationByProId(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -114,7 +114,7 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSmProjectPageSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = smProjectPageDao.querySmProjectPageISTopByThisId(map);//根据排序获取这条数据的上一条数据
@@ -136,7 +136,7 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSmProjectPageSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = smProjectPageDao.querySmProjectPageISLowerByThisId(map);//根据排序获取这条数据的上一条数据
@@ -173,7 +173,7 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSmProjectPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         smProjectPageDao.editSmProjectPageMationById(map);
@@ -187,7 +187,7 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSmProjectPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         smProjectPageDao.deleteSmProjectPageMationById(map);//删除页面

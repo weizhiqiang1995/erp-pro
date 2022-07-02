@@ -37,7 +37,7 @@ public class ExExplainServiceImpl implements ExExplainService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertExExplainMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = exExplainDao.queryExExplainMation(map);
@@ -81,7 +81,7 @@ public class ExExplainServiceImpl implements ExExplainService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editExExplainMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = exExplainDao.queryExExplainMation(map);

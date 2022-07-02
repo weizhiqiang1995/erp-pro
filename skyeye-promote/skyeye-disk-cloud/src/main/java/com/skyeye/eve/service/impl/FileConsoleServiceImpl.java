@@ -176,7 +176,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertFileFolderByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -262,7 +262,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteFileFolderById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         //获取要删除的文件
@@ -316,7 +316,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editFileFolderById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
@@ -337,7 +337,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         // 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
@@ -416,7 +416,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String userId = inputObject.getLogParams().get("id").toString();
@@ -512,7 +512,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = fileConsoleDao.queryUploadFileChunksByChunkMd5(map);
@@ -552,7 +552,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editUploadOfficeFileById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         int status = Integer.parseInt(map.get("status").toString());
@@ -616,7 +616,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertFileCatalogToRecycleById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -695,7 +695,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertFileToShareById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> mation = fileConsoleDao.queryFileMationByIdAndUserId(map);
@@ -747,7 +747,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteShareFileById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -849,7 +849,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertShareFileListToSave(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonStr").toString(), null);//获取数据信息
@@ -1133,7 +1133,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertWordFileToService(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         createNewFileOrFolder("docx", inputObject.getLogParams().get("id").toString(), map.get("folderId").toString());
@@ -1147,7 +1147,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertExcelFileToService(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         createNewFileOrFolder("xlsx", inputObject.getLogParams().get("id").toString(), map.get("folderId").toString());
@@ -1161,7 +1161,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertPPTFileToService(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         createNewFileOrFolder("ppt", inputObject.getLogParams().get("id").toString(), map.get("folderId").toString());
@@ -1175,7 +1175,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertTXTFileToService(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         createNewFileOrFolder("txt", inputObject.getLogParams().get("id").toString(), map.get("folderId").toString());
@@ -1189,7 +1189,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertHtmlFileToService(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         createNewFileOrFolder("html", inputObject.getLogParams().get("id").toString(), map.get("folderId").toString());
@@ -1203,7 +1203,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertDuplicateCopyToService(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonStr").toString(), null);//获取数据信息
@@ -1376,7 +1376,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertFileMationToPackageToFolder(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonStr").toString(), null);//获取数据信息
@@ -1473,7 +1473,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertFileMationPackageToFolder(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> file = fileConsoleDao.queryFilePackageMationById(map);
@@ -1638,7 +1638,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertPasteCopyToService(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonStr").toString(), null);//获取数据信息
@@ -1790,7 +1790,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertPasteCutToService(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonStr").toString(), null);//获取数据信息

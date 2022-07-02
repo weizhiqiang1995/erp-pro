@@ -58,7 +58,7 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertAppWorkPageAuthPointMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = appWorkPageAuthPointDao.queryAppWorkPageAuthPointMationByAuthName(map);
@@ -96,7 +96,7 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editAppWorkPageAuthPointMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = appWorkPageAuthPointDao.queryAppWorkPageAuthPointMationByAuthNameAndId(map);
@@ -115,7 +115,7 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteAppWorkPageAuthPointMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         appWorkPageAuthPointDao.deleteAppWorkPageAuthPointMationById(map);

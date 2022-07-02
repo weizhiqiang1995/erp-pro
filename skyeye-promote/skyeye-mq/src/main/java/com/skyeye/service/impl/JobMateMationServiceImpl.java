@@ -152,7 +152,7 @@ public class JobMateMationServiceImpl implements JobMateMationService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void comMQJobMation(String jobId, String status, String responseBody) {
         Map<String, Object> jobMation = jobMateMationDao.queryJobMationByJobId(jobId);
         // 类型  1.父任务2.子任务

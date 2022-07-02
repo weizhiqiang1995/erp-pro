@@ -62,7 +62,7 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysNoticeTypeMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeMationByName(map);//查询是否已经存在该公告类型名称
@@ -89,7 +89,7 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeStateById(map);
@@ -107,7 +107,7 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void updateUpSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeStateById(map);
@@ -127,7 +127,7 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void updateDownSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeStateById(map);
@@ -161,7 +161,7 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysNoticeTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeStateById(map);    //查询这条公告类型的状态
@@ -184,7 +184,7 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysNoticeTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeUpMationById(map);//获取当前数据的同级分类下的上一条数据
@@ -208,7 +208,7 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
      * @param outputObject
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysNoticeTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeDownMationById(map);//获取当前数据的同级分类下的下一条数据

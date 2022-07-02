@@ -84,7 +84,7 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertCompanyJobScoreMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         // 根据判断该名称是否存在
@@ -155,7 +155,7 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
@@ -179,7 +179,7 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         companyJobScoreDao.editCompanyJobScoreStateMationById(map.get("id").toString(), STATE.START_DELETE.getState());
@@ -193,7 +193,7 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void enableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         companyJobScoreDao.editCompanyJobScoreStateMationById(map.get("id").toString(), STATE.START_UP.getState());
@@ -207,7 +207,7 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void disableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         companyJobScoreDao.editCompanyJobScoreStateMationById(map.get("id").toString(), STATE.START_DOWN.getState());

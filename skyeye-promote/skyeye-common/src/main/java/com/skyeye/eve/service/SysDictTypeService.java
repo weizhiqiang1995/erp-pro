@@ -20,4 +20,8 @@ public interface SysDictTypeService {
     void queryDictTypeList(InputObject inputObject, OutputObject outputObject);
 
     void writeDictTypeMation(InputObject inputObject, OutputObject outputObject);
+
+    void queryDictTypeMationById(InputObject inputObject, OutputObject outputObject);
+
+    void deleteDictTypeMationById(InputObject inputObject, OutputObject outputObject);
 }

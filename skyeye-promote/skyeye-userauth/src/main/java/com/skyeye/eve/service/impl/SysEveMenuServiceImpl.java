@@ -51,7 +51,7 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysMenuMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
@@ -123,7 +123,7 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysMenuMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         if (Constants.SYS_MENU_TYPE_IS_IFRAME.equals(map.get("menuType").toString())) {//iframe
@@ -165,7 +165,7 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysMenuMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> menuBean = sysEveMenuDao.queryUseThisMenuRoleById(map);
@@ -228,7 +228,7 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysEveMenuSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = sysEveMenuDao.querySysEveMenuISTopByThisId(map);//根据同一级排序获取这条数据的上一条数据
@@ -257,7 +257,7 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysEveMenuSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = sysEveMenuDao.querySysEveMenuISLowerByThisId(map);//根据同一级排序获取这条数据的下一条数据

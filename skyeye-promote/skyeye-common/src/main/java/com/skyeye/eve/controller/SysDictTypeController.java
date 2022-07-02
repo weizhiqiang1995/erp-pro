@@ -5,6 +5,7 @@
 package com.skyeye.eve.controller;
 
 import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
@@ -36,9 +37,8 @@ public class SysDictTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
-    @ApiOperation(id = "queryDictTypeList", value = "获取数据字典类型列表", method = "POST", allUse = "2")
+    @ApiOperation(id = "queryDictTypeList", value = "获取数据字典类型列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysDictTypeQueryDO.class)
     @RequestMapping("/post/SysDictTypeController/queryDictTypeList")
     public void queryDictTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -50,13 +50,40 @@ public class SysDictTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
-    @ApiOperation(id = "writeDictTypeMation", value = "新增/编辑数据字典类型", method = "POST", allUse = "2")
+    @ApiOperation(id = "writeDictTypeMation", value = "新增/编辑数据字典类型", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysDictTypeMation.class)
     @RequestMapping("/post/SysDictTypeController/writeDictTypeMation")
     public void writeDictTypeMation(InputObject inputObject, OutputObject outputObject) {
         sysDictTypeService.writeDictTypeMation(inputObject, outputObject);
+    }
+
+    /**
+     * 根据ID获取数据字典类型信息
+     *
+     * @param inputObject
+     * @param outputObject
+     */
+    @ApiOperation(id = "queryDictTypeMationById", value = "根据ID获取数据字典类型信息", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
+    @RequestMapping("/post/SysDictTypeController/queryDictTypeMationById")
+    public void queryDictTypeMationById(InputObject inputObject, OutputObject outputObject) {
+        sysDictTypeService.queryDictTypeMationById(inputObject, outputObject);
+    }
+
+    /**
+     * 根据ID删除数据字典类型
+     *
+     * @param inputObject
+     * @param outputObject
+     */
+    @ApiOperation(id = "deleteDictTypeMationById", value = "根据ID删除数据字典类型", method = "DELETE", allUse = "1")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
+    @RequestMapping("/post/SysDictTypeController/deleteDictTypeMationById")
+    public void deleteDictTypeMationById(InputObject inputObject, OutputObject outputObject) {
+        sysDictTypeService.deleteDictTypeMationById(inputObject, outputObject);
     }
 
 }

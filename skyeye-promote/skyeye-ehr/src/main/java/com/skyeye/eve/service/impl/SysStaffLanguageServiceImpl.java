@@ -65,7 +65,7 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
      * @see com.skyeye.eve.service.SysStaffLanguageService#insertSysStaffLanguageMation(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysStaffLanguageMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -110,7 +110,7 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
      * @see com.skyeye.eve.service.SysStaffLanguageService#editSysStaffLanguageMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
@@ -132,7 +132,7 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
      * @see com.skyeye.eve.service.SysStaffLanguageService#deleteSysStaffLanguageMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();

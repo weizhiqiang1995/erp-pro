@@ -59,7 +59,7 @@ public class SmProjectPageModeServiceImpl implements SmProjectPageModeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editProPageModeMationByPageIdList(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         smProjectPageModeDao.deletePageModelMationListByPageId(map);//根据页面id删除之前的页面和模块的绑定信息
@@ -114,7 +114,7 @@ public class SmProjectPageModeServiceImpl implements SmProjectPageModeService {
      * @throws Exception
      */
     @Override
-    @Transactional(value = "transactionManager")
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void queryPageToExportH5ByPageId(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         ///获取页面信息
