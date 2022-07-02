@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service.impl;
 
 import cn.hutool.json.JSONUtil;
@@ -59,7 +60,6 @@ public class MainPageServiceImpl implements MainPageService {
      * @param outputObject
      * @throws Exception
      */
-    @SuppressWarnings("unchecked")
     @Override
     public void queryNoticeContentListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
         String userId = inputObject.getLogParams().get("id").toString();

@@ -9,7 +9,6 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.CommonNumConstants;
-import com.skyeye.common.entity.CommonOperatorUserInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
@@ -19,13 +18,14 @@ import com.skyeye.eve.eitity.dict.SysDictTypeMation;
 import com.skyeye.eve.eitity.dict.SysDictTypeQueryDO;
 import com.skyeye.eve.service.SysDictTypeService;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @ClassName: SysDictTypeServiceImpl
@@ -37,6 +37,8 @@ import java.util.Map;
  */
 @Service
 public class SysDictTypeServiceImpl implements SysDictTypeService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SysDictTypeServiceImpl.class);
 
     @Autowired
     private SysDictTypeDao sysDictTypeDao;
@@ -78,10 +80,12 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
         if (ObjectUtils.isEmpty(checkDictTypeMation)) {
             String userId = inputObject.getLogParams().get("id").toString();
             if (StringUtils.isNotEmpty(sysDictTypeMation.getId())) {
+                LOGGER.info("update data, id is {}", sysDictTypeMation.getId());
                 DataCommonUtil.setCommonLastUpdateDataByGenericity(sysDictTypeMation, userId);
                 sysDictTypeDao.updateById(sysDictTypeMation);
             } else {
                 DataCommonUtil.setCommonDataByGenericity(sysDictTypeMation, userId);
+                LOGGER.info("insert data, id is {}", sysDictTypeMation.getId());
                 sysDictTypeDao.insert(sysDictTypeMation);
             }
         } else {
@@ -113,8 +117,8 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteDictTypeMationById(InputObject inputObject, OutputObject outputObject) {
         String id = inputObject.getParams().get("id").toString();
+        LOGGER.info("delete data, id is {}", id);
         sysDictTypeDao.deleteById(id);
     }
-
 
 }
