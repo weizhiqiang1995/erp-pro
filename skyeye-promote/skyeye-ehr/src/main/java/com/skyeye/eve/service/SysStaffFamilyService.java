@@ -1,3 +1,7 @@
+/*******************************************************************************
+ * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
+ ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -5,16 +9,16 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysStaffFamilyService {
 
-    public void queryAllSysStaffFamilyList(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void queryAllSysStaffFamilyList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysStaffFamilyMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void insertSysStaffFamilyMation(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysStaffFamilyMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void querySysStaffFamilyMationToEdit(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysStaffFamilyMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void editSysStaffFamilyMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSysStaffFamilyMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void deleteSysStaffFamilyMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryPointStaffSysStaffFamilyList(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void queryPointStaffSysStaffFamilyList(InputObject inputObject, OutputObject outputObject);
 
 }

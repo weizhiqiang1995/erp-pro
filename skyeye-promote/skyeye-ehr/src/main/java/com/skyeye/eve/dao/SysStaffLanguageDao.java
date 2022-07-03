@@ -11,16 +11,16 @@ import java.util.Map;
 
 public interface SysStaffLanguageDao {
 
-    public List<Map<String, Object>> queryAllSysStaffLanguageList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> queryAllSysStaffLanguageList(Map<String, Object> params);
 
-    public int insertSysStaffLanguageMation(Map<String, Object> map) throws Exception;
+    int insertSysStaffLanguageMation(Map<String, Object> map);
 
-    public Map<String, Object> querySysStaffLanguageMationToEdit(@Param("id") String id) throws Exception;
+    Map<String, Object> querySysStaffLanguageMationToEdit(@Param("id") String id);
 
-    public int editSysStaffLanguageMationById(Map<String, Object> map) throws Exception;
+    int editSysStaffLanguageMationById(Map<String, Object> map);
 
-    public int deleteSysStaffLanguageMationById(@Param("id") String id) throws Exception;
+    int deleteSysStaffLanguageMationById(@Param("id") String id);
 
-    public List<Map<String, Object>> queryPointStaffSysStaffLanguageList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> queryPointStaffSysStaffLanguageList(Map<String, Object> params);
 
 }

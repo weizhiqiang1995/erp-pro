@@ -13,13 +13,12 @@
 			DATE_FORMAT(a.validity_time, '%Y-%m-%d') validityTime,
 			DATE_FORMAT(a.create_time, '%Y-%m-%d') createTime,
 			a.enclosure,
+			a.type_id typeId,
 			b.user_name userName,
 			b.job_number jobNumber,
-			b.state,
-			d.`name` certificateTypeName
+			b.state
 		FROM
-			sys_staff_certificate a
-			LEFT JOIN sys_staff_data_dictionary d ON a.type_id = d.id,
+			sys_staff_certificate a,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
         <if test="userName != '' and userName != null">
@@ -63,11 +62,9 @@
 			a.type_id typeId,
 			b.user_name userName,
 			b.job_number jobNumber,
-			b.state,
-			d.`name` certificateTypeName
+			b.state
 		FROM
-			sys_staff_certificate a
-			LEFT JOIN sys_staff_data_dictionary d ON a.type_id = d.id,
+			sys_staff_certificate a,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
         AND a.id = #{id}
@@ -108,13 +105,12 @@
 			DATE_FORMAT(a.validity_time, '%Y-%m-%d') validityTime,
 			DATE_FORMAT(a.create_time, '%Y-%m-%d') createTime,
 			a.enclosure,
+			a.type_id typeId,
 			b.user_name userName,
 			b.job_number jobNumber,
-			b.state,
-			d.`name` certificateTypeName
+			b.state
 		FROM
-			sys_staff_certificate a
-			LEFT JOIN sys_staff_data_dictionary d ON a.type_id = d.id,
+			sys_staff_certificate a,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
         AND b.id = #{staffId}

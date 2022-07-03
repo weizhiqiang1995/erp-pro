@@ -12,6 +12,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffEducationDao;
+import com.skyeye.eve.service.SysDictDataService;
 import com.skyeye.eve.service.SysStaffEducationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,36 +38,36 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
     @Autowired
     private SysEnclosureDao sysEnclosureDao;
 
+    @Autowired
+    private SysDictDataService sysDictDataService;
+
     /**
-     * Title: queryAllSysStaffEducationList
-     * Description: 查询所有教育背景列表
+     * 查询所有教育背景列表
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffEducationService#queryAllSysStaffEducationList(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void queryAllSysStaffEducationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysStaffEducationList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffEducationDao.queryAllSysStaffEducationList(params);
+        sysDictDataService.getDcitDataNameByIdList(beans, "educationId", "educationName");
+        sysDictDataService.getDcitDataNameByIdList(beans, "learningModalityId", "learningModalityName");
+        sysDictDataService.getDcitDataNameByIdList(beans, "schoolNature", "schoolNatureName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
 
     /**
-     * Title: insertSysStaffEducationMation
-     * Description: 员工教育背景信息录入
+     * 员工教育背景信息录入
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffEducationService#insertSysStaffEducationMation(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysStaffEducationMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysStaffEducationMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
         map.put("createTime", DateUtil.getTimeAndToString());
@@ -74,20 +75,20 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
     }
 
     /**
-     * Title: querySysStaffEducationMationToEdit
-     * Description: 编辑员工教育背景信息时回显
+     * 编辑员工教育背景信息时回显
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffEducationService#querySysStaffEducationMationToEdit(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void querySysStaffEducationMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffEducationMationToEdit(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffEducationDao.querySysStaffEducationMationToEdit(id);
         if (certificate != null && !certificate.isEmpty()) {
+            sysDictDataService.getDcitDataNameByIdBean(certificate, "educationId", "educationName");
+            sysDictDataService.getDcitDataNameByIdBean(certificate, "learningModalityId", "learningModalityName");
+            sysDictDataService.getDcitDataNameByIdBean(certificate, "schoolNature", "schoolNatureName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
                 List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
@@ -101,17 +102,14 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
     }
 
     /**
-     * Title: editSysStaffEducationMationById
-     * Description: 编辑员工教育背景信息
+     * 编辑员工教育背景信息
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffEducationService#editSysStaffEducationMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysStaffEducationMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysStaffEducationMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffEducationDao.querySysStaffEducationMationToEdit(id);
@@ -123,36 +121,33 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
     }
 
     /**
-     * Title: deleteSysStaffEducationMationById
-     * Description: 删除员工教育背景信息
+     * 删除员工教育背景信息
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffEducationService#deleteSysStaffEducationMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysStaffEducationMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysStaffEducationMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         sysStaffEducationDao.deleteSysStaffEducationMationById(id);
     }
 
     /**
-     * Title: queryPointStaffSysStaffEducationList
-     * Description: 查询指定员工的教育背景列表
+     * 查询指定员工的教育背景列表
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffEducationService#queryPointStaffSysStaffEducationList(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void queryPointStaffSysStaffEducationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPointStaffSysStaffEducationList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffEducationDao.queryPointStaffSysStaffEducationList(params);
+        sysDictDataService.getDcitDataNameByIdList(beans, "educationId", "educationName");
+        sysDictDataService.getDcitDataNameByIdList(beans, "learningModalityId", "learningModalityName");
+        sysDictDataService.getDcitDataNameByIdList(beans, "schoolNature", "schoolNatureName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

@@ -12,6 +12,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffCertificateDao;
+import com.skyeye.eve.service.SysDictDataService;
 import com.skyeye.eve.service.SysStaffCertificateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,36 +38,34 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
     @Autowired
     private SysEnclosureDao sysEnclosureDao;
 
+    @Autowired
+    private SysDictDataService sysDictDataService;
+
     /**
-     * Title: queryAllSysStaffCertificateList
-     * Description: 查询所有证书列表
+     * 查询所有证书列表
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffCertificateService#queryAllSysStaffCertificateList(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void queryAllSysStaffCertificateList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysStaffCertificateList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffCertificateDao.queryAllSysStaffCertificateList(params);
+        sysDictDataService.getDcitDataNameByIdList(beans, "typeId", "certificateTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
 
     /**
-     * Title: insertSysStaffCertificateMation
-     * Description: 员工证书信息录入
+     * 员工证书信息录入
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffCertificateService#insertSysStaffCertificateMation(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysStaffCertificateMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysStaffCertificateMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
         map.put("createTime", DateUtil.getTimeAndToString());
@@ -74,20 +73,18 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
     }
 
     /**
-     * Title: querySysStaffCertificateMationToEdit
-     * Description: 编辑员工证书信息时回显
+     * 编辑员工证书信息时回显
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffCertificateService#querySysStaffCertificateMationToEdit(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void querySysStaffCertificateMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffCertificateMationToEdit(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffCertificateDao.querySysStaffCertificateMationToEdit(id);
         if (certificate != null && !certificate.isEmpty()) {
+            sysDictDataService.getDcitDataNameByIdBean(certificate, "typeId", "certificateTypeName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
                 List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
@@ -101,17 +98,14 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
     }
 
     /**
-     * Title: editSysStaffCertificateMationById
-     * Description: 编辑员工证书信息
+     * 编辑员工证书信息
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffCertificateService#editSysStaffCertificateMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysStaffCertificateMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysStaffCertificateMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffCertificateDao.querySysStaffCertificateMationToEdit(id);
@@ -123,36 +117,32 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
     }
 
     /**
-     * Title: deleteSysStaffCertificateMationById
-     * Description: 删除员工证书信息
+     * 删除员工证书信息
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffCertificateService#deleteSysStaffCertificateMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysStaffCertificateMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysStaffCertificateMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         sysStaffCertificateDao.deleteSysStaffCertificateMationById(id);
     }
 
     /**
-     * Title: queryPointStaffSysStaffCertificateList
-     * Description: 查询指定员工的证书列表
+     * 查询指定员工的证书列表
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffCertificateService#queryPointStaffSysStaffCertificateList(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void queryPointStaffSysStaffCertificateList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPointStaffSysStaffCertificateList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffCertificateDao.queryPointStaffSysStaffCertificateList(params);
+        sysDictDataService.getDcitDataNameByIdList(beans, "typeId", "certificateTypeName");
+
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

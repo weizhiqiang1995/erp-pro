@@ -19,18 +19,18 @@ import java.util.Map;
  */
 public interface SysStaffContractDao {
 
-    public List<Map<String, Object>> queryAllSysStaffContractList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> queryAllSysStaffContractList(Map<String, Object> params);
 
-    public int insertSysStaffContractMation(Map<String, Object> map) throws Exception;
+    int insertSysStaffContractMation(Map<String, Object> map);
 
-    public Map<String, Object> querySysStaffContractMationToEdit(@Param("id") String id) throws Exception;
+    Map<String, Object> querySysStaffContractMationToEdit(@Param("id") String id);
 
-    public int editSysStaffContractMationById(Map<String, Object> map) throws Exception;
+    int editSysStaffContractMationById(Map<String, Object> map);
 
-    public int deleteSysStaffContractMationById(@Param("id") String id) throws Exception;
+    int deleteSysStaffContractMationById(@Param("id") String id);
 
-    public List<Map<String, Object>> queryPointStaffSysStaffContractList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> queryPointStaffSysStaffContractList(Map<String, Object> params);
 
-    public int editSysStaffContractStateById(@Param("id") String id, @Param("state") int state) throws Exception;
+    int editSysStaffContractStateById(@Param("id") String id, @Param("state") int state);
 
 }

@@ -17,16 +17,16 @@ import com.skyeye.common.object.OutputObject;
  */
 public interface SysStaffRewardPunishService {
 
-    public void queryAllSysStaffRewardPunishList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryAllSysStaffRewardPunishList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysStaffRewardPunishMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysStaffRewardPunishMation(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysStaffRewardPunishMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysStaffRewardPunishMationToEdit(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysStaffRewardPunishMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysStaffRewardPunishMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSysStaffRewardPunishMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteSysStaffRewardPunishMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryPointStaffSysStaffRewardPunishList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryPointStaffSysStaffRewardPunishList(InputObject inputObject, OutputObject outputObject);
 
 }

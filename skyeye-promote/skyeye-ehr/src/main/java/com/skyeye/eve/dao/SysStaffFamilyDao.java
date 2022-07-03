@@ -19,16 +19,16 @@ import java.util.Map;
  */
 public interface SysStaffFamilyDao {
 
-    public List<Map<String, Object>> queryAllSysStaffFamilyList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> queryAllSysStaffFamilyList(Map<String, Object> params);
 
-    public int insertSysStaffFamilyMation(Map<String, Object> map) throws Exception;
+    int insertSysStaffFamilyMation(Map<String, Object> map);
 
-    public Map<String, Object> querySysStaffFamilyMationToEdit(@Param("id") String id) throws Exception;
+    Map<String, Object> querySysStaffFamilyMationToEdit(@Param("id") String id);
 
-    public int editSysStaffFamilyMationById(Map<String, Object> map) throws Exception;
+    int editSysStaffFamilyMationById(Map<String, Object> map);
 
-    public int deleteSysStaffFamilyMationById(@Param("id") String id) throws Exception;
+    int deleteSysStaffFamilyMationById(@Param("id") String id);
 
-    public List<Map<String, Object>> queryPointStaffSysStaffFamilyList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> queryPointStaffSysStaffFamilyList(Map<String, Object> params);
 
 }

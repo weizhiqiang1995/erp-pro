@@ -11,6 +11,7 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysStaffLanguageLevelDao;
+import com.skyeye.eve.service.SysDictDataService;
 import com.skyeye.eve.service.SysStaffLanguageLevelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,9 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
 
     @Autowired
     private SysStaffLanguageLevelDao sysStaffLanguageLevelDao;
+
+    @Autowired
+    private SysDictDataService sysDictDataService;
 
     public static enum state {
         START_UP(1, "启动"),
@@ -66,6 +70,7 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffLanguageLevelDao.querySysStaffLanguageLevelList(params);
+        sysDictDataService.getDcitDataNameByIdList(beans, "typeId", "typeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

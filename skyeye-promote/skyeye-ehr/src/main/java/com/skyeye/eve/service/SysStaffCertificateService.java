@@ -1,3 +1,7 @@
+/*******************************************************************************
+ * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
+ ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -5,16 +9,16 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysStaffCertificateService {
 
-    public void queryAllSysStaffCertificateList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryAllSysStaffCertificateList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysStaffCertificateMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysStaffCertificateMation(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysStaffCertificateMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysStaffCertificateMationToEdit(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysStaffCertificateMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysStaffCertificateMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSysStaffCertificateMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteSysStaffCertificateMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryPointStaffSysStaffCertificateList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryPointStaffSysStaffCertificateList(InputObject inputObject, OutputObject outputObject);
 
 }

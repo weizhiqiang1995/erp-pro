@@ -17,16 +17,16 @@ import com.skyeye.common.object.OutputObject;
  */
 public interface SysStaffLanguageService {
 
-    public void queryAllSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryAllSysStaffLanguageList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysStaffLanguageMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysStaffLanguageMation(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysStaffLanguageMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysStaffLanguageMationToEdit(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryPointStaffSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryPointStaffSysStaffLanguageList(InputObject inputObject, OutputObject outputObject);
 
 }

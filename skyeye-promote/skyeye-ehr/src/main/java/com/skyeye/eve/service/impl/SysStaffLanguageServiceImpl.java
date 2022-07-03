@@ -12,6 +12,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffLanguageDao;
+import com.skyeye.eve.service.SysDictDataService;
 import com.skyeye.eve.service.SysStaffLanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,36 +38,34 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
     @Autowired
     private SysEnclosureDao sysEnclosureDao;
 
+    @Autowired
+    private SysDictDataService sysDictDataService;
+
     /**
-     * Title: queryAllSysStaffLanguageList
-     * Description: 查询所有语言能力列表
+     * 查询所有语言能力列表
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffLanguageService#queryAllSysStaffLanguageList(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void queryAllSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffLanguageDao.queryAllSysStaffLanguageList(params);
+        sysDictDataService.getDcitDataNameByIdList(beans, "languageId", "languageTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
 
     /**
-     * Title: insertSysStaffLanguageMation
-     * Description: 员工语言能力信息录入
+     * 员工语言能力信息录入
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffLanguageService#insertSysStaffLanguageMation(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysStaffLanguageMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysStaffLanguageMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
         map.put("createTime", DateUtil.getTimeAndToString());
@@ -74,20 +73,18 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
     }
 
     /**
-     * Title: querySysStaffLanguageMationToEdit
-     * Description: 编辑员工语言能力信息时回显
+     * 编辑员工语言能力信息时回显
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffLanguageService#querySysStaffLanguageMationToEdit(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void querySysStaffLanguageMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffLanguageMationToEdit(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffLanguageDao.querySysStaffLanguageMationToEdit(id);
         if (certificate != null && !certificate.isEmpty()) {
+            sysDictDataService.getDcitDataNameByIdBean(certificate, "languageId", "languageTypeName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
                 List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
@@ -101,17 +98,14 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
     }
 
     /**
-     * Title: editSysStaffLanguageMationById
-     * Description: 编辑员工语言能力信息
+     * 编辑员工语言能力信息
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffLanguageService#editSysStaffLanguageMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffLanguageDao.querySysStaffLanguageMationToEdit(id);
@@ -123,36 +117,31 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
     }
 
     /**
-     * Title: deleteSysStaffLanguageMationById
-     * Description: 删除员工语言能力信息
+     * 删除员工语言能力信息
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffLanguageService#deleteSysStaffLanguageMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         sysStaffLanguageDao.deleteSysStaffLanguageMationById(id);
     }
 
     /**
-     * Title: queryPointStaffSysStaffLanguageList
-     * Description: 查询指定员工的语言能力列表
+     * 查询指定员工的语言能力列表
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffLanguageService#queryPointStaffSysStaffLanguageList(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void queryPointStaffSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPointStaffSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffLanguageDao.queryPointStaffSysStaffLanguageList(params);
+        sysDictDataService.getDcitDataNameByIdList(beans, "languageId", "languageTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

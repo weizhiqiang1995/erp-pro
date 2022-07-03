@@ -13,13 +13,12 @@
 			DATE_FORMAT(a.create_time, '%Y-%m-%d') createTime,
 			a.award_unit awardUnit,
 			a.enclosure,
+			a.type_id typeId,
 			b.user_name userName,
 			b.job_number jobNumber,
-			b.state,
-			d.`name` rewardPunishTypeName
+			b.state
 		FROM
-			sys_staff_reward_punish a
-			LEFT JOIN sys_staff_data_dictionary d ON a.type_id = d.id,
+			sys_staff_reward_punish a,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
         <if test="name != '' and name != null">
@@ -62,11 +61,9 @@
 			b.user_name userName,
 			b.job_number jobNumber,
 			b.state,
-			a.type_id typeId,
-			d.`name` rewardPunishTypeName
+			a.type_id typeId
 		FROM
 			sys_staff_reward_punish a
-			LEFT JOIN sys_staff_data_dictionary d ON a.type_id = d.id
 			LEFT JOIN sys_eve_user_staff c ON a.staff_id = c.id,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
@@ -109,13 +106,12 @@
 			DATE_FORMAT(a.create_time, '%Y-%m-%d') createTime,
 			a.award_unit awardUnit,
 			a.enclosure,
+			a.type_id typeId,
 			b.user_name userName,
 			b.job_number jobNumber,
-			b.state,
-			d.`name` rewardPunishTypeName
+			b.state
 		FROM
-			sys_staff_reward_punish a
-			LEFT JOIN sys_staff_data_dictionary d ON a.type_id = d.id,
+			sys_staff_reward_punish a,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
         AND b.id = #{staffId}

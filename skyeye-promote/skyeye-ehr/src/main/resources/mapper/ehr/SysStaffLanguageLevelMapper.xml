@@ -7,15 +7,13 @@
             a.id,
             a.`name`,
             a.state,
-            bu.user_name createName,
             a.type_id typeId,
-            b.`name` typeName,
+            bu.user_name createName,
             DATE_FORMAT(CONVERT(a.create_time, CHAR),'%Y-%m-%d') createTime,
             cu.user_name lastUpdateName,
             DATE_FORMAT(CONVERT(a.last_update_time, CHAR),'%Y-%m-%d') lastUpdateTime
         FROM
             sys_staff_language_level a
-            LEFT JOIN sys_staff_data_dictionary b ON a.type_id = b.id
             LEFT JOIN sys_eve_user_staff bu ON a.create_id = bu.user_id
             LEFT JOIN sys_eve_user_staff cu ON a.last_update_id = cu.user_id
         WHERE a.state != '3'

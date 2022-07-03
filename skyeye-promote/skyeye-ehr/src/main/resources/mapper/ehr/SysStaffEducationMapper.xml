@@ -11,17 +11,14 @@
 			a.major major,
 			DATE_FORMAT(a.create_time, '%Y-%m-%d') createTime,
 			a.enclosure,
+			a.education_id educationId,
+			a.learning_modality_id learningModalityId,
+			a.school_nature schoolNature,
 			b.user_name userName,
 			b.job_number jobNumber,
-			b.state,
-			d.`name` educationName,
-			c.`name` learningModalityName,
-			e.`name` schoolNatureName
+			b.state
 		FROM
-			sys_staff_education a
-			LEFT JOIN sys_staff_data_dictionary d ON a.education_id = d.id
-			LEFT JOIN sys_staff_data_dictionary c ON a.learning_modality_id = c.id
-			LEFT JOIN sys_staff_data_dictionary e ON a.school_nature = e.id,
+			sys_staff_education a,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
         <if test="graductionSchool != '' and graductionSchool != null">
@@ -57,20 +54,14 @@
 			a.major major,
 			DATE_FORMAT(a.create_time, '%Y-%m-%d') createTime,
 			a.enclosure,
+			a.education_id educationId,
+			a.learning_modality_id learningModalityId,
+			a.school_nature schoolNature,
 			b.user_name userName,
 			b.job_number jobNumber,
-			b.state,
-			a.education_id educationId,
-			d.`name` educationName,
-			a.learning_modality_id learningModalityId,
-			c.`name` learningModalityName,
-			a.school_nature schoolNature,
-			e.`name` schoolNatureName
+			b.state
 		FROM
-			sys_staff_education a
-			LEFT JOIN sys_staff_data_dictionary d ON a.education_id = d.id
-			LEFT JOIN sys_staff_data_dictionary c ON a.learning_modality_id = c.id
-			LEFT JOIN sys_staff_data_dictionary e ON a.school_nature = e.id,
+			sys_staff_education a,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
         AND a.id = #{id}
@@ -109,17 +100,14 @@
 			a.major major,
 			DATE_FORMAT(a.create_time, '%Y-%m-%d') createTime,
 			a.enclosure,
+			a.education_id educationId,
+			a.learning_modality_id learningModalityId,
+			a.school_nature schoolNature,
 			b.user_name userName,
 			b.job_number jobNumber,
-			b.state,
-			d.`name` educationName,
-			c.`name` learningModalityName,
-			e.`name` schoolNatureName
+			b.state
 		FROM
-			sys_staff_education a
-			LEFT JOIN sys_staff_data_dictionary d ON a.education_id = d.id
-			LEFT JOIN sys_staff_data_dictionary c ON a.learning_modality_id = c.id
-			LEFT JOIN sys_staff_data_dictionary e ON a.school_nature = e.id,
+			sys_staff_education a,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
         AND b.id = #{staffId}

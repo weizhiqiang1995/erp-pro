@@ -12,6 +12,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffRewardPunishDao;
+import com.skyeye.eve.service.SysDictDataService;
 import com.skyeye.eve.service.SysStaffRewardPunishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,36 +38,34 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
     @Autowired
     private SysEnclosureDao sysEnclosureDao;
 
+    @Autowired
+    private SysDictDataService sysDictDataService;
+
     /**
-     * Title: queryAllSysStaffRewardPunishList
-     * Description: 查询所有奖惩列表
+     * 查询所有奖惩列表
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffRewardPunishService#queryAllSysStaffRewardPunishList(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void queryAllSysStaffRewardPunishList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysStaffRewardPunishList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffRewardPunishDao.queryAllSysStaffRewardPunishList(params);
+        sysDictDataService.getDcitDataNameByIdList(beans, "typeId", "rewardPunishTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
 
     /**
-     * Title: insertSysStaffRewardPunishMation
-     * Description: 员工奖惩信息录入
+     * 员工奖惩信息录入
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffRewardPunishService#insertSysStaffRewardPunishMation(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysStaffRewardPunishMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysStaffRewardPunishMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
         map.put("createTime", DateUtil.getTimeAndToString());
@@ -77,20 +76,18 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
     }
 
     /**
-     * Title: querySysStaffRewardPunishMationToEdit
-     * Description: 编辑员工奖惩信息时回显
+     * 编辑员工奖惩信息时回显
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffRewardPunishService#querySysStaffRewardPunishMationToEdit(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void querySysStaffRewardPunishMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffRewardPunishMationToEdit(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffRewardPunishDao.querySysStaffRewardPunishMationToEdit(id);
         if (certificate != null && !certificate.isEmpty()) {
+            sysDictDataService.getDcitDataNameByIdBean(certificate, "typeId", "rewardPunishTypeName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
                 List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
@@ -104,17 +101,14 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
     }
 
     /**
-     * Title: editSysStaffRewardPunishMationById
-     * Description: 编辑员工奖惩信息
+     * 编辑员工奖惩信息
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffRewardPunishService#editSysStaffRewardPunishMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysStaffRewardPunishMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysStaffRewardPunishMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffRewardPunishDao.querySysStaffRewardPunishMationToEdit(id);
@@ -129,36 +123,31 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
     }
 
     /**
-     * Title: deleteSysStaffRewardPunishMationById
-     * Description: 删除员工奖惩信息
+     * 删除员工奖惩信息
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffRewardPunishService#deleteSysStaffRewardPunishMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysStaffRewardPunishMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysStaffRewardPunishMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         sysStaffRewardPunishDao.deleteSysStaffRewardPunishMationById(id);
     }
 
     /**
-     * Title: queryPointStaffSysStaffRewardPunishList
-     * Description: 查询指定员工的奖惩列表
+     * 查询指定员工的奖惩列表
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffRewardPunishService#queryPointStaffSysStaffRewardPunishList(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void queryPointStaffSysStaffRewardPunishList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPointStaffSysStaffRewardPunishList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffRewardPunishDao.queryPointStaffSysStaffRewardPunishList(params);
+        sysDictDataService.getDcitDataNameByIdList(beans, "typeId", "rewardPunishTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

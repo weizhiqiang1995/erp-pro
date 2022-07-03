@@ -12,6 +12,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffFamilyDao;
+import com.skyeye.eve.service.SysDictDataService;
 import com.skyeye.eve.service.SysStaffFamilyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,36 +38,36 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
     @Autowired
     private SysEnclosureDao sysEnclosureDao;
 
+    @Autowired
+    private SysDictDataService sysDictDataService;
+
     /**
-     * Title: queryAllSysStaffFamilyList
-     * Description: 查询所有家庭情况列表
+     * 查询所有家庭情况列表
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffFamilyService#queryAllSysStaffFamilyList(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void queryAllSysStaffFamilyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysStaffFamilyList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffFamilyDao.queryAllSysStaffFamilyList(params);
+        sysDictDataService.getDcitDataNameByIdList(beans, "relationshipId", "relationshipName");
+        sysDictDataService.getDcitDataNameByIdList(beans, "cardType", "cardTypeName");
+        sysDictDataService.getDcitDataNameByIdList(beans, "politicId", "politicName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
 
     /**
-     * Title: insertSysStaffFamilyMation
-     * Description: 员工家庭情况信息录入
+     * 员工家庭情况信息录入
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffFamilyService#insertSysStaffFamilyMation(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysStaffFamilyMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysStaffFamilyMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
         map.put("createTime", DateUtil.getTimeAndToString());
@@ -74,20 +75,20 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
     }
 
     /**
-     * Title: querySysStaffFamilyMationToEdit
-     * Description: 编辑员工家庭情况信息时回显
+     * 编辑员工家庭情况信息时回显
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffFamilyService#querySysStaffFamilyMationToEdit(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void querySysStaffFamilyMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffFamilyMationToEdit(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffFamilyDao.querySysStaffFamilyMationToEdit(id);
         if (certificate != null && !certificate.isEmpty()) {
+            sysDictDataService.getDcitDataNameByIdBean(certificate, "relationshipId", "relationshipName");
+            sysDictDataService.getDcitDataNameByIdBean(certificate, "cardType", "cardTypeName");
+            sysDictDataService.getDcitDataNameByIdBean(certificate, "politicId", "politicName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
                 List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
@@ -101,17 +102,14 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
     }
 
     /**
-     * Title: editSysStaffFamilyMationById
-     * Description: 编辑员工家庭情况信息
+     * 编辑员工家庭情况信息
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffFamilyService#editSysStaffFamilyMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysStaffFamilyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysStaffFamilyMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffFamilyDao.querySysStaffFamilyMationToEdit(id);
@@ -123,36 +121,33 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
     }
 
     /**
-     * Title: deleteSysStaffFamilyMationById
-     * Description: 删除员工家庭情况信息
+     * 删除员工家庭情况信息
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffFamilyService#deleteSysStaffFamilyMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysStaffFamilyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysStaffFamilyMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         sysStaffFamilyDao.deleteSysStaffFamilyMationById(id);
     }
 
     /**
-     * Title: queryPointStaffSysStaffFamilyList
-     * Description: 查询指定员工的家庭情况列表
+     * 查询指定员工的家庭情况列表
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffFamilyService#queryPointStaffSysStaffFamilyList(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void queryPointStaffSysStaffFamilyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPointStaffSysStaffFamilyList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffFamilyDao.queryPointStaffSysStaffFamilyList(params);
+        sysDictDataService.getDcitDataNameByIdList(beans, "relationshipId", "relationshipName");
+        sysDictDataService.getDcitDataNameByIdList(beans, "cardType", "cardTypeName");
+        sysDictDataService.getDcitDataNameByIdList(beans, "politicId", "politicName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

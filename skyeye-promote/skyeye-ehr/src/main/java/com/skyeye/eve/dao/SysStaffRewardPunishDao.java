@@ -19,16 +19,16 @@ import java.util.Map;
  */
 public interface SysStaffRewardPunishDao {
 
-    public List<Map<String, Object>> queryAllSysStaffRewardPunishList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> queryAllSysStaffRewardPunishList(Map<String, Object> params);
 
-    public int insertSysStaffRewardPunishMation(Map<String, Object> map) throws Exception;
+    int insertSysStaffRewardPunishMation(Map<String, Object> map);
 
-    public Map<String, Object> querySysStaffRewardPunishMationToEdit(@Param("id") String id) throws Exception;
+    Map<String, Object> querySysStaffRewardPunishMationToEdit(@Param("id") String id);
 
-    public int editSysStaffRewardPunishMationById(Map<String, Object> map) throws Exception;
+    int editSysStaffRewardPunishMationById(Map<String, Object> map);
 
-    public int deleteSysStaffRewardPunishMationById(@Param("id") String id) throws Exception;
+    int deleteSysStaffRewardPunishMationById(@Param("id") String id);
 
-    public List<Map<String, Object>> queryPointStaffSysStaffRewardPunishList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> queryPointStaffSysStaffRewardPunishList(Map<String, Object> params);
 
 }

@@ -12,6 +12,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffContractDao;
+import com.skyeye.eve.service.SysDictDataService;
 import com.skyeye.eve.service.SysStaffContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,9 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
     @Autowired
     private SysEnclosureDao sysEnclosureDao;
 
+    @Autowired
+    private SysDictDataService sysDictDataService;
+
     public static enum state {
         START_SIGNED(1, "待签约"),
         START_EXECUTION(2, "执行中"),
@@ -59,35 +63,31 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
     }
 
     /**
-     * Title: queryAllSysStaffContractList
-     * Description: 查询所有合同列表
+     * 查询所有合同列表
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffContractService#queryAllSysStaffContractList(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void queryAllSysStaffContractList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysStaffContractList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffContractDao.queryAllSysStaffContractList(params);
+        sysDictDataService.getDcitDataNameByIdList(beans, "typeId", "typeName");
+        sysDictDataService.getDcitDataNameByIdList(beans, "moldId", "moldName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
 
     /**
-     * Title: insertSysStaffContractMation
-     * Description: 员工合同信息录入
+     * 员工合同信息录入
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffContractService#insertSysStaffContractMation(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysStaffContractMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysStaffContractMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
         map.put("createTime", DateUtil.getTimeAndToString());
@@ -95,16 +95,13 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
     }
 
     /**
-     * Title: querySysStaffContractMationToEdit
-     * Description: 编辑员工合同信息时回显
+     * 编辑员工合同信息时回显
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffContractService#querySysStaffContractMationToEdit(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void querySysStaffContractMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffContractMationToEdit(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffContractDao.querySysStaffContractMationToEdit(id);
@@ -122,17 +119,14 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
     }
 
     /**
-     * Title: editSysStaffContractMationById
-     * Description: 编辑员工合同信息
+     * 编辑员工合同信息
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffContractService#editSysStaffContractMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysStaffContractMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysStaffContractMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffContractDao.querySysStaffContractMationToEdit(id);
@@ -150,17 +144,14 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
     }
 
     /**
-     * Title: deleteSysStaffContractMationById
-     * Description: 删除员工合同信息
+     * 删除员工合同信息
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffContractService#deleteSysStaffContractMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysStaffContractMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysStaffContractMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffContractDao.querySysStaffContractMationToEdit(id);
@@ -174,35 +165,31 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
     }
 
     /**
-     * Title: queryPointStaffSysStaffContractList
-     * Description: 查询指定员工的合同列表
+     * 查询指定员工的合同列表
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffContractService#queryPointStaffSysStaffContractList(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void queryPointStaffSysStaffContractList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPointStaffSysStaffContractList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffContractDao.queryPointStaffSysStaffContractList(params);
+        sysDictDataService.getDcitDataNameByIdList(beans, "typeId", "typeName");
+        sysDictDataService.getDcitDataNameByIdList(beans, "moldId", "moldName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
 
     /**
-     * Title: signSysStaffContractById
-     * Description: 员工合同签约
+     * 员工合同签约
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffContractService#signSysStaffContractById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void signSysStaffContractById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void signSysStaffContractById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffContractDao.querySysStaffContractMationToEdit(id);

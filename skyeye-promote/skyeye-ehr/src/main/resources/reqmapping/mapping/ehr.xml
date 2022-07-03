@@ -4,39 +4,6 @@
 		- allUse  是否需要登录才能使用   1是   0否  2需要登陆才能访问，但无需授权    默认为否
 	 -->
 	
-	<!-- 员工基础信息相关的数据字典管理开始 -->
-	<url id="sysstaffdatadictionary001" path="/post/SysStaffDataDictionaryController/querySysStaffDataDictionaryList" val="查询员工基础信息相关的数据字典列表" allUse="1" groupName="员工基础信息相关的数据字典">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="typeName" name="typeName" ref="" var="员工基础信息相关的数据字典名称"></property>
-		<property id="state" name="state" ref="num" var="员工基础信息相关的数据字典状态"></property>
-		<property id="typeId" name="typeId" ref="" var="数据字典类型"></property>
-	</url>
-	<url id="sysstaffdatadictionary002" path="/post/SysStaffDataDictionaryController/insertSysStaffDataDictionaryMation" val="新增员工基础信息相关的数据字典" allUse="1" groupName="员工基础信息相关的数据字典">
-		<property id="typeName" name="typeName" ref="required" var="员工基础信息相关的数据字典名称"></property>
-		<property id="typeId" name="typeId" ref="required" var="数据字典类型"></property>
-	</url>
-	<url id="sysstaffdatadictionary003" path="/post/SysStaffDataDictionaryController/querySysStaffDataDictionaryMationToEditById" val="修改员工基础信息相关的数据字典时数据回显" allUse="2" groupName="员工基础信息相关的数据字典">
-		<property id="rowId" name="id" ref="required" var="员工基础信息相关的数据字典id"></property>
-	</url>
-	<url id="sysstaffdatadictionary004" path="/post/SysStaffDataDictionaryController/editSysStaffDataDictionaryMationById" val="修改员工基础信息相关的数据字典" allUse="1" groupName="员工基础信息相关的数据字典">
-		<property id="typeName" name="typeName" ref="required" var="员工基础信息相关的数据字典名称"></property>
-		<property id="rowId" name="id" ref="required" var="员工基础信息相关的数据字典id"></property>
-	</url>
-	<url id="sysstaffdatadictionary005" path="/post/SysStaffDataDictionaryController/downSysStaffDataDictionaryMationById" val="禁用员工基础信息相关的数据字典" allUse="1" groupName="员工基础信息相关的数据字典">
-		<property id="rowId" name="id" ref="required" var="员工基础信息相关的数据字典id"></property>
-	</url>
-	<url id="sysstaffdatadictionary006" path="/post/SysStaffDataDictionaryController/upSysStaffDataDictionaryMationById" val="启用员工基础信息相关的数据字典" allUse="1" groupName="员工基础信息相关的数据字典">
-		<property id="rowId" name="id" ref="required" var="员工基础信息相关的数据字典id"></property>
-	</url>
-	<url id="sysstaffdatadictionary007" path="/post/SysStaffDataDictionaryController/deleteSysStaffDataDictionaryMationById" val="删除员工基础信息相关的数据字典" allUse="1" groupName="员工基础信息相关的数据字典">
-		<property id="rowId" name="id" ref="required" var="员工基础信息相关的数据字典id"></property>
-	</url>
-	<url id="sysstaffdatadictionary008" path="/post/SysStaffDataDictionaryController/querySysStaffDataDictionaryUpMation" val="获取所有启用员工基础信息相关的数据字典" allUse="2" groupName="员工基础信息相关的数据字典">
-		<property id="typeId" name="typeId" ref="required" var="数据字典类型"></property>
-	</url>
-	<!-- 员工基础信息相关的数据字典管理结束 -->
-	
 	<!-- 语种等级管理开始 -->
 	<url id="sysstafflanguagelevel001" path="/post/SysStaffLanguageLevelController/querySysStaffLanguageLevelList" val="查询语种等级列表" allUse="1" groupName="语种等级">
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />

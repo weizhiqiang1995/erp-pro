@@ -19,16 +19,16 @@ import java.util.Map;
  */
 public interface SysStaffCertificateDao {
 
-    public List<Map<String, Object>> queryAllSysStaffCertificateList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> queryAllSysStaffCertificateList(Map<String, Object> params);
 
-    public int insertSysStaffCertificateMation(Map<String, Object> map) throws Exception;
+    int insertSysStaffCertificateMation(Map<String, Object> map);
 
-    public Map<String, Object> querySysStaffCertificateMationToEdit(@Param("id") String id) throws Exception;
+    Map<String, Object> querySysStaffCertificateMationToEdit(@Param("id") String id);
 
-    public int editSysStaffCertificateMationById(Map<String, Object> map) throws Exception;
+    int editSysStaffCertificateMationById(Map<String, Object> map);
 
-    public int deleteSysStaffCertificateMationById(@Param("id") String id) throws Exception;
+    int deleteSysStaffCertificateMationById(@Param("id") String id);
 
-    public List<Map<String, Object>> queryPointStaffSysStaffCertificateList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> queryPointStaffSysStaffCertificateList(Map<String, Object> params);
 
 }

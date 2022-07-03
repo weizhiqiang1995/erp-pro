@@ -19,16 +19,16 @@ import java.util.Map;
  */
 public interface SysStaffEducationDao {
 
-    public List<Map<String, Object>> queryAllSysStaffEducationList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> queryAllSysStaffEducationList(Map<String, Object> params);
 
-    public int insertSysStaffEducationMation(Map<String, Object> map) throws Exception;
+    int insertSysStaffEducationMation(Map<String, Object> map);
 
-    public Map<String, Object> querySysStaffEducationMationToEdit(@Param("id") String id) throws Exception;
+    Map<String, Object> querySysStaffEducationMationToEdit(@Param("id") String id);
 
-    public int editSysStaffEducationMationById(Map<String, Object> map) throws Exception;
+    int editSysStaffEducationMationById(Map<String, Object> map);
 
-    public int deleteSysStaffEducationMationById(@Param("id") String id) throws Exception;
+    int deleteSysStaffEducationMationById(@Param("id") String id);
 
-    public List<Map<String, Object>> queryPointStaffSysStaffEducationList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> queryPointStaffSysStaffEducationList(Map<String, Object> params);
 
 }

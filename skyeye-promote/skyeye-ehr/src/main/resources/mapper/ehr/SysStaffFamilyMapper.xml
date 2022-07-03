@@ -11,18 +11,15 @@
 			DATE_FORMAT(a.create_time, '%Y-%m-%d') createTime,
 			a.work_unit workUnit,
 			a.job,
+			a.relationship_id relationshipId,
+			a.card_type cardType,
+			a.politic_id politicId,
 			a.emergency_contact emergencyContact,
 			b.user_name userName,
 			b.job_number jobNumber,
-			b.state,
-			d.`name` relationshipName,
-			e.`name` cardTypeName,
-			f.`name` politicName
+			b.state
 		FROM
-			sys_staff_family a
-			LEFT JOIN sys_staff_data_dictionary d ON a.relationship_id = d.id
-			LEFT JOIN sys_staff_data_dictionary e ON a.card_type = e.id
-			LEFT JOIN sys_staff_data_dictionary f ON a.politic_id = f.id,
+			sys_staff_family a,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
         <if test="userName != '' and userName != null">
@@ -62,20 +59,14 @@
 			a.work_unit workUnit,
 			a.job,
 			a.emergency_contact emergencyContact,
+			a.relationship_id relationshipId,
+			a.card_type cardType,
+			a.politic_id politicId,
 			b.user_name userName,
 			b.job_number jobNumber,
-			b.state,
-			a.relationship_id relationshipId,
-			d.`name` relationshipName,
-			a.card_type cardType,
-			e.`name` cardTypeName,
-			a.politic_id politicId,
-			f.`name` politicName
+			b.state
 		FROM
-			sys_staff_family a
-			LEFT JOIN sys_staff_data_dictionary d ON a.relationship_id = d.id
-			LEFT JOIN sys_staff_data_dictionary e ON a.card_type = e.id
-			LEFT JOIN sys_staff_data_dictionary f ON a.politic_id = f.id,
+			sys_staff_family a,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
         AND a.id = #{id}
@@ -115,17 +106,14 @@
 			a.work_unit workUnit,
 			a.job,
 			a.emergency_contact emergencyContact,
+			a.relationship_id relationshipId,
+			a.card_type cardType,
+			a.politic_id politicId,
 			b.user_name userName,
 			b.job_number jobNumber,
-			b.state,
-			d.`name` relationshipName,
-			e.`name` cardTypeName,
-			f.`name` politicName
+			b.state
 		FROM
-			sys_staff_family a
-			LEFT JOIN sys_staff_data_dictionary d ON a.relationship_id = d.id
-			LEFT JOIN sys_staff_data_dictionary e ON a.card_type = e.id
-			LEFT JOIN sys_staff_data_dictionary f ON a.politic_id = f.id,
+			sys_staff_family a,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
         AND b.id = #{staffId}
