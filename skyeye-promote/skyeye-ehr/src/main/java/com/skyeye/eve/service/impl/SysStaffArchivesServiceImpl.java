@@ -12,6 +12,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffArchivesDao;
+import com.skyeye.eve.service.SysDictDataService;
 import com.skyeye.eve.service.SysStaffArchivesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,9 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
     @Autowired
     private SysEnclosureDao sysEnclosureDao;
 
+    @Autowired
+    private SysDictDataService sysDictDataService;
+
     /**
      * 查询所有档案列表
      *
@@ -49,6 +53,7 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffArchivesDao.queryAllSysStaffArchivesList(params);
+        sysDictDataService.getDcitDataNameByIdList(beans, "educationId", "educationName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -65,6 +70,7 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffArchivesDao.querySysLeaveStaffArchivesList(params);
+        sysDictDataService.getDcitDataNameByIdList(beans, "educationId", "educationName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -81,6 +87,7 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffArchivesDao.querySysStaffNotInArchivesList(params);
+        sysDictDataService.getDcitDataNameByIdList(beans, "educationId", "educationName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -136,6 +143,7 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
         String id = map.get("id").toString();
         Map<String, Object> archivesMation = sysStaffArchivesDao.querySysStaffArchivesMationToEdit(id);
         if (archivesMation != null && !archivesMation.isEmpty()) {
+            sysDictDataService.getDcitDataNameByIdBean(archivesMation, "educationId", "educationName");
             // 附件
             if (archivesMation.containsKey("enclosure") && !ToolUtil.isBlank(archivesMation.get("enclosure").toString())) {
                 List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(archivesMation.get("enclosure").toString());

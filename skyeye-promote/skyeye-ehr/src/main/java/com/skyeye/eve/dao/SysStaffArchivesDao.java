@@ -19,20 +19,20 @@ import java.util.Map;
  */
 public interface SysStaffArchivesDao {
 
-    public List<Map<String, Object>> queryAllSysStaffArchivesList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> queryAllSysStaffArchivesList(Map<String, Object> params);
 
-    public List<Map<String, Object>> querySysLeaveStaffArchivesList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> querySysLeaveStaffArchivesList(Map<String, Object> params);
 
-    public List<Map<String, Object>> querySysStaffNotInArchivesList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> querySysStaffNotInArchivesList(Map<String, Object> params);
 
-    public List<Map<String, Object>> querySysStaffNoArchivesList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> querySysStaffNoArchivesList(Map<String, Object> params);
 
-    public Map<String, Object> querySysStaffArchivesMationByStaffId(@Param("staffId") String staffId) throws Exception;
+    Map<String, Object> querySysStaffArchivesMationByStaffId(@Param("staffId") String staffId);
 
-    public int insertSysStaffArchivesMation(Map<String, Object> map) throws Exception;
+    int insertSysStaffArchivesMation(Map<String, Object> map);
 
-    public Map<String, Object> querySysStaffArchivesMationToEdit(@Param("id") String id) throws Exception;
+    Map<String, Object> querySysStaffArchivesMationToEdit(@Param("id") String id);
 
-    public int editSysStaffArchivesMationById(Map<String, Object> map) throws Exception;
+    int editSysStaffArchivesMationById(Map<String, Object> map);
 
 }

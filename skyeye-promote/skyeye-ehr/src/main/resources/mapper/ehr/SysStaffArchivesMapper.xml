@@ -13,16 +13,15 @@
 			DATE_FORMAT(a.create_time, '%Y-%m-%d') createTime,
 			a.remark,
 			a.enclosure,
+			a.education_id educationId,
 			a.whether_archives whetherArchives,
 			b.user_name userName,
 			b.job_number jobNumber,
 			b.state,
-			c.company_name companyName,
-			d.`name` educationName
+			c.company_name companyName
 		FROM
 			sys_staff_archives a
-			LEFT JOIN company_mation c ON a.management_unit = c.id
-			LEFT JOIN sys_staff_data_dictionary d ON a.education_id = d.id,
+			LEFT JOIN company_mation c ON a.management_unit = c.id,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
         <if test="userName != '' and userName != null">
@@ -54,16 +53,15 @@
 			DATE_FORMAT(a.create_time, '%Y-%m-%d') createTime,
 			a.remark,
 			a.enclosure,
+			a.education_id educationId,
 			a.whether_archives whetherArchives,
 			b.user_name userName,
 			b.job_number jobNumber,
 			b.state,
-			c.company_name companyName,
-			d.`name` educationName
+			c.company_name companyName
 		FROM
 			sys_staff_archives a
-			LEFT JOIN company_mation c ON a.management_unit = c.id
-			LEFT JOIN sys_staff_data_dictionary d ON a.education_id = d.id,
+			LEFT JOIN company_mation c ON a.management_unit = c.id,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
 		AND b.state IN(2, 5)
@@ -94,16 +92,15 @@
 			DATE_FORMAT(a.create_time, '%Y-%m-%d') createTime,
 			a.remark,
 			a.enclosure,
+			a.education_id educationId,
 			a.whether_archives whetherArchives,
 			b.user_name userName,
 			b.job_number jobNumber,
 			b.state,
-			c.company_name companyName,
-			d.`name` educationName
+			c.company_name companyName
 		FROM
 			sys_staff_archives a
-			LEFT JOIN company_mation c ON a.management_unit = c.id
-			LEFT JOIN sys_staff_data_dictionary d ON a.education_id = d.id,
+			LEFT JOIN company_mation c ON a.management_unit = c.id,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
 		AND a.whether_archives = 2
@@ -167,17 +164,16 @@
 			DATE_FORMAT(a.create_time, '%Y-%m-%d') createTime,
 			a.remark,
 			a.enclosure,
+			a.education_id educationId,
 			a.whether_archives whetherArchives,
 			b.user_name userName,
 			b.job_number jobNumber,
 			b.state,
 			c.company_name companyName,
-			a.management_unit managementUnit,
-			d.`name` educationName
+			a.management_unit managementUnit
 		FROM
 			sys_staff_archives a
-			LEFT JOIN company_mation c ON a.management_unit = c.id
-			LEFT JOIN sys_staff_data_dictionary d ON a.education_id = d.id,
+			LEFT JOIN company_mation c ON a.management_unit = c.id,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
         AND a.staff_id = #{staffId}
@@ -203,18 +199,17 @@
 			DATE_FORMAT(a.create_time, '%Y-%m-%d') createTime,
 			a.remark,
 			a.enclosure,
+			a.education_id educationId,
 			a.whether_archives whetherArchives,
 			b.user_name userName,
 			b.job_number jobNumber,
 			b.state,
 			a.management_unit managementUnit,
 			c.company_name companyName,
-			a.education_id educationId,
-			d.`name` educationName
+			a.education_id educationId
 		FROM
 			sys_staff_archives a
-			LEFT JOIN company_mation c ON a.management_unit = c.id
-			LEFT JOIN sys_staff_data_dictionary d ON a.education_id = d.id,
+			LEFT JOIN company_mation c ON a.management_unit = c.id,
 			sys_eve_user_staff b
 		WHERE a.staff_id = b.id
         AND a.id = #{id}

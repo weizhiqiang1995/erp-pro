@@ -10,8 +10,8 @@ import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.eve.eitity.dict.SysDictDataMation;
-import com.skyeye.eve.eitity.dict.SysDictDataQueryDO;
+import com.skyeye.eve.entity.dict.SysDictDataMation;
+import com.skyeye.eve.entity.dict.SysDictDataQueryDO;
 import com.skyeye.eve.service.SysDictDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -92,12 +92,12 @@ public class SysDictDataController {
      * @param inputObject
      * @param outputObject
      */
-    @ApiOperation(id = "queryDictDataListByDictTypeCpde", value = "根据所属类型Code获取数据字典列表", method = "GET", allUse = "2")
+    @ApiOperation(id = "queryDictDataListByDictTypeCode", value = "根据所属类型Code获取数据字典列表", method = "GET", allUse = "2")
     @ApiImplicitParams({
-        @ApiImplicitParam(id = "dictTypeCpde", name = "dictTypeCpde", value = "所属类型Code", required = "required")})
-    @RequestMapping("/post/SysDictDataController/queryDictDataListByDictTypeCpde")
-    public void queryDictDataListByDictTypeCpde(InputObject inputObject, OutputObject outputObject) {
-        sysDictDataService.queryDictDataListByDictTypeCpde(inputObject, outputObject);
+        @ApiImplicitParam(id = "dictTypeCode", name = "dictTypeCode", value = "所属类型Code", required = "required")})
+    @RequestMapping("/post/SysDictDataController/queryDictDataListByDictTypeCode")
+    public void queryDictDataListByDictTypeCode(InputObject inputObject, OutputObject outputObject) {
+        sysDictDataService.queryDictDataListByDictTypeCode(inputObject, outputObject);
     }
 
 }

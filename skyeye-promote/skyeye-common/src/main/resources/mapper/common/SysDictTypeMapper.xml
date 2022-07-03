@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.skyeye.eve.dao.SysDictTypeDao">
 
-    <select id="queryDictTypeList" resultType="com.skyeye.eve.eitity.dict.SysDictTypeMation">
+    <select id="queryDictTypeList" resultType="com.skyeye.eve.entity.dict.SysDictTypeMation">
         SELECT
             s.id,
             s.dict_name dictName,

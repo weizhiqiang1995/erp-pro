@@ -4,11 +4,10 @@
 
 package com.skyeye.eve.dao;
 
-import com.skyeye.eve.eitity.dict.SysDictTypeMation;
-import com.skyeye.eve.eitity.dict.SysDictTypeQueryDO;
+import com.skyeye.eve.entity.dict.SysDictTypeMation;
+import com.skyeye.eve.entity.dict.SysDictTypeQueryDO;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @ClassName: SysDictTypeDao
