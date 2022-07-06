@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,50 +9,50 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysDeveLopDocService {
 
-    public void querySysDeveLopTypeList(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void querySysDeveLopTypeList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysDeveLopType(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void insertSysDeveLopType(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysDeveLopTypeByIdToEdit(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void querySysDeveLopTypeByIdToEdit(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysDeveLopTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void editSysDeveLopTypeById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSysDeveLopTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void deleteSysDeveLopTypeById(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysDeveLopTypeByFirstType(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void querySysDeveLopTypeByFirstType(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysDeveLopTypeStateISupById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void editSysDeveLopTypeStateISupById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysDeveLopTypeStateISdownById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void editSysDeveLopTypeStateISdownById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysDeveLopTypeOrderByISupById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void editSysDeveLopTypeOrderByISupById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysDeveLopTypeOrderByISdownById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void editSysDeveLopTypeOrderByISdownById(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysDeveLopDocList(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void querySysDeveLopDocList(InputObject inputObject, OutputObject outputObject);
 
-    public void addSysDeveLopDoc(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void addSysDeveLopDoc(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysDeveLopDocByIdToEdit(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void querySysDeveLopDocByIdToEdit(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysDeveLopDocById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void editSysDeveLopDocById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSysDeveLopDocById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void deleteSysDeveLopDocById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysDeveLopDocStateISupById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void editSysDeveLopDocStateISupById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysDeveLopDocStateISdownById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void editSysDeveLopDocStateISdownById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysDeveLopDocOrderByISupById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void editSysDeveLopDocOrderByISupById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysDeveLopDocOrderByISdownById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void editSysDeveLopDocOrderByISdownById(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysDeveLopFirstTypeToShow(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void querySysDeveLopFirstTypeToShow(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysDeveLopSecondTypeToShow(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void querySysDeveLopSecondTypeToShow(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysDeveLopDocToShow(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void querySysDeveLopDocToShow(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysDeveLopDocContentToShow(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void querySysDeveLopDocContentToShow(InputObject inputObject, OutputObject outputObject);
 
 }

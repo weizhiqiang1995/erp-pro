@@ -4,81 +4,83 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.codedoc.develop.SysDeveLopDocQueryDo;
+
 import java.util.List;
 import java.util.Map;
 
 public interface SysDeveLopDocDao {
 
-    public List<Map<String, Object>> querySysDeveLopTypeList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysDeveLopTypeList(Map<String, Object> map);
 
-    public Map<String, Object> querySysDeveLopByName(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysDeveLopByName(Map<String, Object> map);
 
-    public Map<String, Object> queryMaxSysDeveLopBySimpleParentId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryMaxSysDeveLopBySimpleParentId(Map<String, Object> map);
 
-    public int insertSysDeveLopType(Map<String, Object> map) throws Exception;
+    int insertSysDeveLopType(Map<String, Object> map);
 
-    public Map<String, Object> querySysDeveLopTypeByIdToEdit(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysDeveLopTypeByIdToEdit(Map<String, Object> map);
 
-    public int editSysDeveLopTypeById(Map<String, Object> map) throws Exception;
+    int editSysDeveLopTypeById(Map<String, Object> map);
 
-    public int deleteSysDeveLopTypeById(Map<String, Object> map) throws Exception;
+    int deleteSysDeveLopTypeById(Map<String, Object> map);
 
-    public Map<String, Object> querySysDeveLopTypeContentNumById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysDeveLopTypeContentNumById(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySysDeveLopTypeByFirstType(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysDeveLopTypeByFirstType(Map<String, Object> map);
 
-    public Map<String, Object> querySysDeveLopByNameAndId(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysDeveLopByNameAndId(Map<String, Object> map);
 
-    public Map<String, Object> querySysDeveLopTypeStateById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysDeveLopTypeStateById(Map<String, Object> map);
 
-    public int editSysDeveLopTypeStateISupById(Map<String, Object> map) throws Exception;
+    int editSysDeveLopTypeStateISupById(Map<String, Object> map);
 
-    public int editSysDeveLopTypeStateISdownById(Map<String, Object> map) throws Exception;
+    int editSysDeveLopTypeStateISdownById(Map<String, Object> map);
 
-    public Map<String, Object> querySysDeveLopTypeOrderByISupById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysDeveLopTypeOrderByISupById(Map<String, Object> map);
 
-    public int editSysDeveLopTypeOrderByISupById(Map<String, Object> map) throws Exception;
+    int editSysDeveLopTypeOrderByISupById(Map<String, Object> map);
 
-    public Map<String, Object> querySysDeveLopTypeOrderByISdownById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysDeveLopTypeOrderByISdownById(Map<String, Object> map);
 
-    public int editSysDeveLopTypeOrderByISdownById(Map<String, Object> bean) throws Exception;
+    int editSysDeveLopTypeOrderByISdownById(Map<String, Object> bean);
 
-    public List<Map<String, Object>> querySysDeveLopDocList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysDeveLopDocList(SysDeveLopDocQueryDo sysDeveLopDocQuery);
 
-    public Map<String, Object> querySysDeveLopDocByNameAndParentId(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysDeveLopDocByNameAndParentId(Map<String, Object> map);
 
-    public Map<String, Object> queryMaxSysDeveLopDocBySimpleParentId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryMaxSysDeveLopDocBySimpleParentId(Map<String, Object> map);
 
-    public int insertSysDeveLopDoc(Map<String, Object> map) throws Exception;
+    int insertSysDeveLopDoc(Map<String, Object> map);
 
-    public Map<String, Object> querySysDeveLopDocByIdToEdit(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysDeveLopDocByIdToEdit(Map<String, Object> map);
 
-    public Map<String, Object> querySysDeveLopDocByNameAndId(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysDeveLopDocByNameAndId(Map<String, Object> map);
 
-    public int editSysDeveLopDocById(Map<String, Object> map) throws Exception;
+    int editSysDeveLopDocById(Map<String, Object> map);
 
-    public int deleteSysDeveLopDocById(Map<String, Object> map) throws Exception;
+    int deleteSysDeveLopDocById(Map<String, Object> map);
 
-    public Map<String, Object> querySysDeveLopDocStateById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysDeveLopDocStateById(Map<String, Object> map);
 
-    public int editSysDeveLopDocStateISupById(Map<String, Object> map) throws Exception;
+    int editSysDeveLopDocStateISupById(Map<String, Object> map);
 
-    public int editSysDeveLopDocStateISdownById(Map<String, Object> map) throws Exception;
+    int editSysDeveLopDocStateISdownById(Map<String, Object> map);
 
-    public Map<String, Object> querySysDeveLopDocOrderByISupById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysDeveLopDocOrderByISupById(Map<String, Object> map);
 
-    public int editSysDeveLopDocOrderByISupById(Map<String, Object> map) throws Exception;
+    int editSysDeveLopDocOrderByISupById(Map<String, Object> map);
 
-    public Map<String, Object> querySysDeveLopDocOrderByISdownById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysDeveLopDocOrderByISdownById(Map<String, Object> map);
 
-    public int editSysDeveLopDocOrderByISdownById(Map<String, Object> map) throws Exception;
+    int editSysDeveLopDocOrderByISdownById(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySysDeveLopFirstTypeToShow(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysDeveLopFirstTypeToShow(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySysDeveLopSecondTypeToShow(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysDeveLopSecondTypeToShow(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySysDeveLopDocToShow(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysDeveLopDocToShow(Map<String, Object> map);
 
-    public Map<String, Object> querySysDeveLopDocContentToShow(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysDeveLopDocContentToShow(Map<String, Object> map);
 
 }

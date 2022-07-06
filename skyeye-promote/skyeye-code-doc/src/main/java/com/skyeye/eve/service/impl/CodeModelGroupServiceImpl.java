@@ -11,6 +11,7 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.CodeModelGroupDao;
+import com.skyeye.eve.entity.codedoc.group.CodeModelGroupQueryDo;
 import com.skyeye.eve.service.CodeModelGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,13 +45,12 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCodeModelGroupList(InputObject inputObject, OutputObject outputObject) throws Exception {
-        Map<String, Object> map = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = codeModelGroupDao.queryCodeModelGroupList(map);
+    public void queryCodeModelGroupList(InputObject inputObject, OutputObject outputObject) {
+        CodeModelGroupQueryDo codeModelGroupQuery = inputObject.getParams(CodeModelGroupQueryDo.class);
+        Page pages = PageHelper.startPage(codeModelGroupQuery.getPage(), codeModelGroupQuery.getLimit());
+        List<Map<String, Object>> beans = codeModelGroupDao.queryCodeModelGroupList(codeModelGroupQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -60,11 +60,10 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertCodeModelGroupMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertCodeModelGroupMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = codeModelGroupDao.queryCodeModelGroupMationByName(map);
         if (bean == null) {
@@ -84,11 +83,10 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteCodeModelGroupById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteCodeModelGroupById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = codeModelGroupDao.queryCodeModelNumById(map);
         if (bean == null) {
@@ -107,10 +105,9 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCodeModelGroupMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCodeModelGroupMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = codeModelGroupDao.queryCodeModelGroupMationToEditById(map);
         outputObject.setBean(bean);
@@ -122,11 +119,10 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editCodeModelGroupMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCodeModelGroupMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = codeModelGroupDao.queryCodeModelGroupMationByIdAndName(map);
         if (CollectionUtils.isEmpty(bean)) {
@@ -144,10 +140,9 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryTableParameterByTableName(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryTableParameterByTableName(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("dbName", dbName);
         List<Map<String, Object>> beans = codeModelGroupDao.queryTableParameterByTableName(map);
@@ -184,10 +179,9 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryTableMationByTableName(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryTableMationByTableName(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = new HashMap<>();
         String tableName = ToolUtil.replaceUnderLineAndUpperCase(map.get("tableName").toString());
@@ -216,10 +210,9 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCodeModelListByGroupId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCodeModelListByGroupId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = codeModelGroupDao.queryCodeModelListByGroupId(map);
         if (beans != null) {

@@ -20,7 +20,7 @@ import java.io.Serializable;
  */
 @Data
 @ApiModel("其他模块同步到日程的实体类")
-public class OtherModuleScheduleMationVO implements Serializable {
+public class OtherModuleScheduleMation implements Serializable {
 
     @ApiModelProperty(value = "标题", required = "required")
     private String title;

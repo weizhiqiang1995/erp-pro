@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,14 +9,14 @@ import com.skyeye.common.object.OutputObject;
 
 public interface CodeModelService {
 
-    public void queryCodeModelList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryCodeModelList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertCodeModelMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertCodeModelMation(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteCodeModelById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteCodeModelById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryCodeModelMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryCodeModelMationToEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editCodeModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editCodeModelMationById(InputObject inputObject, OutputObject outputObject);
 
 }

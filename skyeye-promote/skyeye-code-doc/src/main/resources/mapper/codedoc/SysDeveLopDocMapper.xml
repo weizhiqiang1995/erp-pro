@@ -191,7 +191,7 @@
 		WHERE id = #{id}
 	</update>
 	
-	<select id="querySysDeveLopDocList" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="querySysDeveLopDocList" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.title,

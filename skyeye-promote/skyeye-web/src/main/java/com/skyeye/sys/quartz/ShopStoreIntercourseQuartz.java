@@ -13,7 +13,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.entity.quartz.SysQuartzRunHistory;
 import com.skyeye.eve.entity.shop.store.ShopStoreIntercourseMation;
-import com.skyeye.eve.entity.shop.store.ShopStoreIntercourseVO;
+import com.skyeye.eve.entity.shop.store.ShopStoreIntercourseMationRest;
 import com.skyeye.eve.rest.shop.store.ShopStoreService;
 import com.skyeye.eve.service.SysQuartzRunHistoryService;
 import com.skyeye.jedis.util.RedisLock;
@@ -87,7 +87,7 @@ public class ShopStoreIntercourseQuartz {
                 }
             });
             log.info("解析数据为 {}.", JSON.toJSONString(shopStoreIntercourse));
-            ShopStoreIntercourseVO shopStoreIntercourseVO = new ShopStoreIntercourseVO();
+            ShopStoreIntercourseMationRest shopStoreIntercourseVO = new ShopStoreIntercourseMationRest();
             shopStoreIntercourseVO.setShopStoreIntercourseMationList(shopStoreIntercourse);
             shopStoreService.insertStoreIntercourse(shopStoreIntercourseVO);
             log.info("保存数据完成");

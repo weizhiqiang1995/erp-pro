@@ -4,6 +4,8 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.codedoc.group.CodeModelGroupQueryDo;
+
 import java.util.List;
 import java.util.Map;
 
@@ -17,26 +19,26 @@ import java.util.Map;
  */
 public interface CodeModelGroupDao {
 
-    public List<Map<String, Object>> queryCodeModelGroupList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryCodeModelGroupList(CodeModelGroupQueryDo codeModelGroupQuery);
 
-    public Map<String, Object> queryCodeModelGroupMationByName(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryCodeModelGroupMationByName(Map<String, Object> map);
 
-    public int insertCodeModelGroupMation(Map<String, Object> map) throws Exception;
+    int insertCodeModelGroupMation(Map<String, Object> map);
 
-    public Map<String, Object> queryCodeModelNumById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryCodeModelNumById(Map<String, Object> map);
 
-    public int deleteCodeModelGroupById(Map<String, Object> map) throws Exception;
+    int deleteCodeModelGroupById(Map<String, Object> map);
 
-    public Map<String, Object> queryCodeModelGroupMationToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryCodeModelGroupMationToEditById(Map<String, Object> map);
 
-    public Map<String, Object> queryCodeModelGroupMationByIdAndName(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryCodeModelGroupMationByIdAndName(Map<String, Object> map);
 
-    public int editCodeModelGroupMationById(Map<String, Object> map) throws Exception;
+    int editCodeModelGroupMationById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryTableParameterByTableName(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryTableParameterByTableName(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryCodeModelListByGroupId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryCodeModelListByGroupId(Map<String, Object> map);
 
-    public Map<String, Object> queryTableBzByTableName(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryTableBzByTableName(Map<String, Object> map);
 
 }

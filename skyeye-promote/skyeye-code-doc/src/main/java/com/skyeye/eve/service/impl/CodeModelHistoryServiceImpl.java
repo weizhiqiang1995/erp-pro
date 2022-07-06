@@ -12,6 +12,7 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.object.PutObject;
 import com.skyeye.common.util.FileUtil;
 import com.skyeye.eve.dao.CodeModelHistoryDao;
+import com.skyeye.eve.entity.codedoc.history.CodeModelHistoryQueryDo;
 import com.skyeye.eve.service.CodeModelHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,13 +40,12 @@ public class CodeModelHistoryServiceImpl implements CodeModelHistoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCodeModelHistoryList(InputObject inputObject, OutputObject outputObject) throws Exception {
-        Map<String, Object> map = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = codeModelHistoryDao.queryCodeModelHistoryList(map);
+    public void queryCodeModelHistoryList(InputObject inputObject, OutputObject outputObject) {
+        CodeModelHistoryQueryDo codeModelHistoryQuery = inputObject.getParams(CodeModelHistoryQueryDo.class);
+        Page pages = PageHelper.startPage(codeModelHistoryQuery.getPage(), codeModelHistoryQuery.getLimit());
+        List<Map<String, Object>> beans = codeModelHistoryDao.queryCodeModelHistoryList(codeModelHistoryQuery);
         String basePath = tPath + Constants.FileUploadPath.CODE_GENERATOR.getSavePath();
         for (Map<String, Object> bean : beans) {
             File file = new File(basePath + "/" + bean.get("filePath").toString());
@@ -64,11 +64,10 @@ public class CodeModelHistoryServiceImpl implements CodeModelHistoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertCodeModelHistoryCreate(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertCodeModelHistoryCreate(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String basePath = tPath + Constants.FileUploadPath.CODE_GENERATOR.getSavePath();
         FileUtil.createDirs(basePath);
@@ -77,8 +76,9 @@ public class CodeModelHistoryServiceImpl implements CodeModelHistoryService {
         if (zipFile.exists()) {
             outputObject.setreturnMessage("该文件已存在，生成失败。");
         } else {
-            ZipOutputStream out = new ZipOutputStream(new FileOutputStream(strZipPath));
+            ZipOutputStream out = null;
             try {
+                out = new ZipOutputStream(new FileOutputStream(strZipPath));
                 byte[] buffer = new byte[1024];
                 List<Map<String, Object>> beans = codeModelHistoryDao.queryCodeModelHistoryListByFilePath(map);
                 for (Map<String, Object> bean : beans) {
@@ -92,9 +92,15 @@ public class CodeModelHistoryServiceImpl implements CodeModelHistoryService {
                     }
                     out.closeEntry();
                 }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             } finally {
                 if (out != null) {
-                    out.close();
+                    try {
+                        out.close();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         }
@@ -105,17 +111,17 @@ public class CodeModelHistoryServiceImpl implements CodeModelHistoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void downloadCodeModelHistory(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void downloadCodeModelHistory(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String basePath = tPath + Constants.FileUploadPath.CODE_GENERATOR.getSavePath();
         String strZipPath = basePath + "/" + map.get("filePath").toString();
-        //获取输入流
-        InputStream bis = new BufferedInputStream(new FileInputStream(new File(strZipPath)));
+        InputStream bis = null;
         BufferedOutputStream out = null;
         try {
+            // 获取输入流
+            bis = new BufferedInputStream(new FileInputStream(new File(strZipPath)));
             PutObject.getResponse().setHeader("REQUESTMATION", "DOWNLOAD");
             // 转码，免得文件名中文乱码
             String filename = URLEncoder.encode(map.get("filePath").toString(), "UTF-8");
@@ -129,12 +135,22 @@ public class CodeModelHistoryServiceImpl implements CodeModelHistoryService {
                 out.write(len);
                 out.flush();
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         } finally {
             if (bis != null) {
-                bis.close();
+                try {
+                    bis.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
             if (out != null) {
-                out.close();
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }

@@ -6,8 +6,8 @@ package com.skyeye.eve.rest.checkwork;
 
 import com.skyeye.common.client.ClientConfiguration;
 import com.skyeye.eve.entity.checkwork.CheckWorkMationRest;
-import com.skyeye.eve.entity.checkwork.DayWorkMationParams;
-import com.skyeye.eve.entity.checkwork.UserOtherDayMationParams;
+import com.skyeye.eve.entity.checkwork.DayWorkMationRest;
+import com.skyeye.eve.entity.checkwork.UserOtherDayMationRest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,18 +30,18 @@ public interface CheckWorkService {
     /**
      * 获取节假日信息
      *
-     * @param dayWorkMationParams 入参信息
+     * @param dayWorkMationRest 入参信息
      */
     @PostMapping("/queryDayWorkMation")
-    String queryDayWorkMation(DayWorkMationParams dayWorkMationParams);
+    String queryDayWorkMation(DayWorkMationRest dayWorkMationRest);
 
     /**
      * 获取用户指定班次在指定月份的其他日期信息[审核通过的](例如：请假，出差，加班等)
      *
-     * @param userOtherDayMationParams 入参信息
+     * @param userOtherDayMationRest 入参信息
      */
     @PostMapping("/getUserOtherDayMation")
-    String getUserOtherDayMation(UserOtherDayMationParams userOtherDayMationParams);
+    String getUserOtherDayMation(UserOtherDayMationRest userOtherDayMationRest);
 
     /**
      * 获取所有昨天没有打卡的用户

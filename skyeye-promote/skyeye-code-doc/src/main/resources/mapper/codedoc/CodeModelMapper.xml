@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.skyeye.eve.dao.CodeModelDao">
 	
-	<select id="queryCodeModelList" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryCodeModelList" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.model_name modelName,

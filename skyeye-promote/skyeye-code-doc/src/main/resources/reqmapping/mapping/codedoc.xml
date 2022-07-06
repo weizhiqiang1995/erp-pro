@@ -5,12 +5,6 @@
 	 -->
 	
 	<!-- 代码生成器系列开始 -->
-	<url id="codemodel001" path="/post/CodeModelGroupController/queryCodeModelGroupList" val="获取模板分组列表" allUse="1">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="groupName" name="groupName" ref="" var="分组名称"/>
-		<property id="groupNum" name="groupNum" ref="" var="分组编号"/>
-	</url>
 	<url id="codemodel002" path="/post/CodeModelGroupController/insertCodeModelGroupMation" val="新增模板分组列表" allUse="1">
 		<property id="groupDesc" name="groupDesc" ref="" var="分组简介"/>
 		<property id="groupName" name="groupName" ref="required" var="分组名称"/>
@@ -25,11 +19,6 @@
 		<property id="groupDesc" name="groupDesc" ref="" var="分组简介"/>
 		<property id="groupName" name="groupName" ref="required" var="分组名称"/>
 		<property id="rowId" name="id" ref="required" var="分组id"/>
-	</url>
-	<url id="codemodel006" path="/post/CodeModelController/queryCodeModelList" val="获取模板列表" allUse="1">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="groupId" name="groupId" ref="required" var="分组id"/>
 	</url>
 	<url id="codemodel007" path="/post/CodeModelController/insertCodeModelMation" val="新增模板列表" allUse="1">
 		<property id="modelName" name="modelName" ref="required" var="模板别名"/>
@@ -63,11 +52,6 @@
 	</url>
 	<url id="codemodel014" path="/post/CommonController/downloadFileByJsonData" val="代码生成器生成下载文件" allUse="2">
 		<property id="jsonData" name="jsonData" ref="required" var="json数据"/>
-	</url>
-	<url id="codemodel015" path="/post/CodeModelHistoryController/queryCodeModelHistoryList" val="获取模板生成历史列表" allUse="1">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="groupId" name="groupId" ref="required" var="分组id"/>
 	</url>
 	<url id="codemodel016" path="/post/CodeModelHistoryController/insertCodeModelHistoryCreate" val="重新生成文件" allUse="1">
 		<property id="filePath" name="filePath" ref="required" var="文件路径名"/>
@@ -110,12 +94,6 @@
 	</url>
 	<url id="sysdevelopdoc010" path="/post/SysDeveLopDocController/editSysDeveLopTypeOrderByISdownById" val="开发文档目录下移" allUse="1">
 		<property id="rowId" name="id" ref="required" var="id"/>
-	</url>
-	<url id="sysdevelopdoc011" path="/post/SysDeveLopDocController/querySysDeveLopDocList" val="获取开发文档信息" allUse="1">
-		<property id="parentId" name="parentId" ref="required" var="二级目录id"/>
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-	    <property id="title" name="title" ref="" var="文档标题"/>
 	</url>
 	<url id="sysdevelopdoc012" path="/post/SysDeveLopDocController/addSysDeveLopDoc" val="新增开发文档信息" allUse="1">
 		<property id="parentId" name="parentId" ref="required" var="二级目录id"/>

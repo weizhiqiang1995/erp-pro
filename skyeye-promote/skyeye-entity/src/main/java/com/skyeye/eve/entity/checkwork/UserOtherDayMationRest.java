@@ -10,27 +10,26 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 /**
- * @ClassName: DayWorkMationParams
- * @Description:
+ * @ClassName: UserOtherDayMationParams
+ * @Description: 获取用户指定班次在指定月份的其他日期信息[审核通过的](例如 ： 请假 ， 出差 ， 加班等)的实体类
  * @author: skyeye云系列--卫志强
- * @date: 2022/3/26 20:45
+ * @date: 2022/3/26 21:00
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Data
-@ApiModel("判断节假日信息的实体类")
-public class DayWorkMationParams implements Serializable {
+@ApiModel("获取用户指定班次在指定月份的其他日期信息[审核通过的](例如：请假，出差，加班等)的实体类")
+public class UserOtherDayMationRest implements Serializable {
 
-    @ApiModelProperty(value = "月份里面的天", required = "required")
-    private List<Map<String, Object>> beans;
-
-    @ApiModelProperty(value = "月份", required = "required")
-    private List<String> months;
+    @ApiModelProperty(value = "用户id", required = "required")
+    private String userId;
 
     @ApiModelProperty(value = "考勤班次id", required = "required")
     private String timeId;
+
+    @ApiModelProperty(value = "月份", required = "required")
+    private List<String> months;
 
 }

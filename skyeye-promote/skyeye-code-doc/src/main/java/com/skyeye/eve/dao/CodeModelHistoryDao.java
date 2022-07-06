@@ -4,13 +4,15 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.codedoc.history.CodeModelHistoryQueryDo;
+
 import java.util.List;
 import java.util.Map;
 
 public interface CodeModelHistoryDao {
 
-    public List<Map<String, Object>> queryCodeModelHistoryList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryCodeModelHistoryList(CodeModelHistoryQueryDo codeModelHistoryQuery);
 
-    public List<Map<String, Object>> queryCodeModelHistoryListByFilePath(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryCodeModelHistoryListByFilePath(Map<String, Object> map);
 
 }

@@ -19,9 +19,9 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ExcelUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.ScheduleDayDao;
-import com.skyeye.eve.entity.checkwork.DayWorkMationParams;
-import com.skyeye.eve.entity.checkwork.UserOtherDayMationParams;
-import com.skyeye.eve.entity.schedule.OtherModuleScheduleMationVO;
+import com.skyeye.eve.entity.checkwork.DayWorkMationRest;
+import com.skyeye.eve.entity.checkwork.UserOtherDayMationRest;
+import com.skyeye.eve.entity.schedule.OtherModuleScheduleMation;
 import com.skyeye.eve.rest.checkwork.CheckWorkService;
 import com.skyeye.eve.service.ScheduleDayService;
 import com.skyeye.jedis.JedisClientService;
@@ -119,13 +119,13 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
         List<String> months = DateUtil.getPointMonthAfterMonthList(yearMonth, 2);
         // 1.获取当前登录人指定月份的日程信息
         List<Map<String, Object>> beans = scheduleDayDao.queryScheduleDayMationByUserId(userId, months);
-        DayWorkMationParams dayWorkMationParams = new DayWorkMationParams();
+        DayWorkMationRest dayWorkMationParams = new DayWorkMationRest();
         dayWorkMationParams.setBeans(beans);
         dayWorkMationParams.setMonths(months);
         dayWorkMationParams.setTimeId(timeId);
         beans = ExecuteFeignClient.get(() -> checkWorkService.queryDayWorkMation(dayWorkMationParams)).getRows();
         // 2.获取用户指定班次在指定月份的其他日期信息[审核通过的](例如：请假，出差，加班等)
-        UserOtherDayMationParams userOtherDayMationParams = new UserOtherDayMationParams();
+        UserOtherDayMationRest userOtherDayMationParams = new UserOtherDayMationRest();
         userOtherDayMationParams.setTimeId(timeId);
         userOtherDayMationParams.setUserId(userId);
         userOtherDayMationParams.setMonths(months);
@@ -529,8 +529,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     @Override
     public void insertScheduleMationByOtherModule(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
-        OtherModuleScheduleMationVO scheduleMation = JSONUtil.toBean(JSON.toJSONString(map),
-            OtherModuleScheduleMationVO.class);
+        OtherModuleScheduleMation scheduleMation = JSONUtil.toBean(JSON.toJSONString(map),
+            OtherModuleScheduleMation.class);
         this.synchronizationSchedule(scheduleMation.getTitle(), scheduleMation.getContent(), scheduleMation.getStartTime(),
             scheduleMation.getEndTime(), scheduleMation.getUserId(), scheduleMation.getObjectId(), scheduleMation.getObjectType());
     }

@@ -11,6 +11,7 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.CodeModelDao;
+import com.skyeye.eve.entity.codedoc.model.CodeModelQueryDo;
 import com.skyeye.eve.service.CodeModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,13 +40,12 @@ public class CodeModelServiceImpl implements CodeModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCodeModelList(InputObject inputObject, OutputObject outputObject) throws Exception {
-        Map<String, Object> map = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = codeModelDao.queryCodeModelList(map);
+    public void queryCodeModelList(InputObject inputObject, OutputObject outputObject) {
+        CodeModelQueryDo codeModelQuery = inputObject.getParams(CodeModelQueryDo.class);
+        Page pages = PageHelper.startPage(codeModelQuery.getPage(), codeModelQuery.getLimit());
+        List<Map<String, Object>> beans = codeModelDao.queryCodeModelList(codeModelQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -55,11 +55,10 @@ public class CodeModelServiceImpl implements CodeModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertCodeModelMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertCodeModelMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = codeModelDao.queryCodeModelMationByName(map);
         if (bean == null) {
@@ -78,11 +77,10 @@ public class CodeModelServiceImpl implements CodeModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteCodeModelById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteCodeModelById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         codeModelDao.deleteCodeModelById(map);
     }
@@ -92,10 +90,9 @@ public class CodeModelServiceImpl implements CodeModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCodeModelMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCodeModelMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = codeModelDao.queryCodeModelMationToEditById(map);
         outputObject.setBean(bean);
@@ -107,11 +104,10 @@ public class CodeModelServiceImpl implements CodeModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editCodeModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCodeModelMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = codeModelDao.queryCodeModelMationByIdAndName(map);
         if (CollectionUtils.isEmpty(bean)) {

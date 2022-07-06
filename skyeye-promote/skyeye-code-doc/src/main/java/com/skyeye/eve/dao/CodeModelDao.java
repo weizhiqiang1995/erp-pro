@@ -4,6 +4,8 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.codedoc.model.CodeModelQueryDo;
+
 import java.util.List;
 import java.util.Map;
 
@@ -17,18 +19,18 @@ import java.util.Map;
  */
 public interface CodeModelDao {
 
-    public List<Map<String, Object>> queryCodeModelList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryCodeModelList(CodeModelQueryDo codeModelQuery);
 
-    public Map<String, Object> queryCodeModelMationByName(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryCodeModelMationByName(Map<String, Object> map);
 
-    public int insertCodeModelMation(Map<String, Object> map) throws Exception;
+    int insertCodeModelMation(Map<String, Object> map);
 
-    public int deleteCodeModelById(Map<String, Object> map) throws Exception;
+    int deleteCodeModelById(Map<String, Object> map);
 
-    public Map<String, Object> queryCodeModelMationToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryCodeModelMationToEditById(Map<String, Object> map);
 
-    public Map<String, Object> queryCodeModelMationByIdAndName(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryCodeModelMationByIdAndName(Map<String, Object> map);
 
-    public int editCodeModelMationById(Map<String, Object> map) throws Exception;
+    int editCodeModelMationById(Map<String, Object> map);
 
 }

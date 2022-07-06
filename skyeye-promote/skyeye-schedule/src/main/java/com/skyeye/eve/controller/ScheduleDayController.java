@@ -10,7 +10,7 @@ import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.eve.entity.schedule.OtherModuleScheduleMationVO;
+import com.skyeye.eve.entity.schedule.OtherModuleScheduleMation;
 import com.skyeye.eve.service.ScheduleDayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -251,7 +251,7 @@ public class ScheduleDayController {
      * @throws Exception
      */
     @ApiOperation(id = "insertScheduleMationByOtherModule", value = "其他模块同步到日程", method = "POST", allUse = "2")
-    @ApiImplicitParams(classBean = OtherModuleScheduleMationVO.class)
+    @ApiImplicitParams(classBean = OtherModuleScheduleMation.class)
     @RequestMapping("/post/ScheduleDayController/insertScheduleMationByOtherModule")
     public void insertScheduleMationByOtherModule(InputObject inputObject, OutputObject outputObject) throws Exception {
         scheduleDayService.insertScheduleMationByOtherModule(inputObject, outputObject);

@@ -5,7 +5,7 @@
 package com.skyeye.eve.rest.shop.store;
 
 import com.skyeye.common.client.ClientConfiguration;
-import com.skyeye.eve.entity.shop.store.ShopStoreIntercourseVO;
+import com.skyeye.eve.entity.shop.store.ShopStoreIntercourseMationRest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,9 +43,9 @@ public interface ShopStoreService {
     /**
      * 新增支出/收入往来的数据
      *
-     * @param shopStoreIntercourse 支出/收入往来的数据
+     * @param shopStoreIntercourseMationRest 支出/收入往来的数据
      */
     @PostMapping("/insertStoreIntercourse")
-    String insertStoreIntercourse(ShopStoreIntercourseVO shopStoreIntercourse);
+    String insertStoreIntercourse(ShopStoreIntercourseMationRest shopStoreIntercourseMationRest);
 
 }
