@@ -159,6 +159,8 @@ public class SysWorkPlanController {
      * @param inputObject
      * @param outputObject
      */
+    @ApiOperation(id = "sysworkplan013", value = "获取我的任务计划列表", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = SysWorkPlanQueryDo.class)
     @RequestMapping("/post/SysWorkPlanController/queryMySysWorkPlanListByUserId")
     public void queryMySysWorkPlanListByUserId(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.queryMySysWorkPlanListByUserId(inputObject, outputObject);
@@ -181,6 +183,8 @@ public class SysWorkPlanController {
      * @param inputObject
      * @param outputObject
      */
+    @ApiOperation(id = "sysworkplan015", value = "获取我创建的任务计划列表", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = SysWorkPlanQueryDo.class)
     @RequestMapping("/post/SysWorkPlanController/queryMyCreateSysWorkPlanList")
     public void queryMyCreateSysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.queryMyCreateSysWorkPlanList(inputObject, outputObject);
@@ -192,6 +196,8 @@ public class SysWorkPlanController {
      * @param inputObject
      * @param outputObject
      */
+    @ApiOperation(id = "sysworkplan016", value = "获取所有任务计划列表", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = SysWorkPlanQueryDo.class)
     @RequestMapping("/post/SysWorkPlanController/queryAllSysWorkPlanList")
     public void queryAllSysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.queryAllSysWorkPlanList(inputObject, outputObject);
@@ -203,6 +209,8 @@ public class SysWorkPlanController {
      * @param inputObject
      * @param outputObject
      */
+    @ApiOperation(id = "sysworkplan017", value = "获取我的下属的任务计划列表", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = SysWorkPlanQueryDo.class)
     @RequestMapping("/post/SysWorkPlanController/queryMyBranchSysWorkPlanList")
     public void queryMyBranchSysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.queryMyBranchSysWorkPlanList(inputObject, outputObject);

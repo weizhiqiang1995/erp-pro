@@ -21,8 +21,8 @@
 			LEFT JOIN sys_eve_user_staff b ON a.create_id = b.user_id,
 			sys_work_plan_executor c
 		WHERE a.id = c.plan_id
-		AND a.plan_type = #{checkPlan}
-		AND a.plan_cycle = #{nowCheckTypeNum}
+		AND a.plan_type = #{planType}
+		AND a.plan_cycle = #{planCycle}
 		AND (c.user_id = #{userId} OR a.create_id = #{userId})
 		<if test="title != '' and title != null">
 			AND a.title LIKE '%${title}%'
@@ -122,6 +122,7 @@
 			a.content,
 			a.plan_cycle planCycle,
 			a.plan_type planType,
+			IFNULL(a.enclosure_info) enclosureInfo,
 			a.assignment_type assignmentType,
 			DATE_FORMAT(a.start_time, '%Y-%m-%d') startTime,
 			DATE_FORMAT(a.end_time, '%Y-%m-%d') endTime,
@@ -145,19 +146,6 @@
 		WHERE
 			a.plan_id = #{id}
 		AND a.user_id = b.user_id
-	</select>
-	
-	<select id="querySysWorkPlanEnclosuresToEditById" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.file_name `name`,
-			a.file_address fileAddress
-		FROM
-			sys_enclosure a,
-			sys_work_plan b
-		WHERE
-			INSTR(CONCAT(',', b.enclosure_info, ','), CONCAT(',', a.id, ','))
-		AND b.id = #{id}
 	</select>
 	
 	<update id="editSysWorkPlanISPeople" parameterType="java.util.Map">
@@ -191,6 +179,7 @@
 			a.content,
 			a.plan_cycle planCycle,
 			a.plan_type planType,
+			IFNULL(a.enclosure_info) enclosureInfo,
 			DATE_FORMAT(a.create_time, '%Y-%m-%d') createTime,
 			CASE a.whether_mail WHEN '1' THEN '是' WHEN '2' THEN '否' ELSE '否' END whetherMail,
 			CASE a.whether_notice WHEN '1' THEN '是' WHEN '2' THEN '否' ELSE '否' END whetherNotice,
@@ -231,7 +220,7 @@
 		</foreach>  
 	</insert>
 
-	<select id="queryMySysWorkPlanListByUserId" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryMySysWorkPlanListByUserId" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.title,
@@ -304,7 +293,7 @@
 		AND user_id = #{userId}
 	</update>
 
-	<select id="queryMyCreateSysWorkPlanList" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryMyCreateSysWorkPlanList" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.title,
@@ -348,7 +337,7 @@
 		ORDER BY a.start_time DESC
 	</select>
 
-	<select id="queryAllSysWorkPlanList" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryAllSysWorkPlanList" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.title,

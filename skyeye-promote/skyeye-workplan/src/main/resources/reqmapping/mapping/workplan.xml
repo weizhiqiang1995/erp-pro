@@ -100,52 +100,10 @@
 	    <property id="whetherTime" name="whetherTime" ref="required,num" var="是否定时通知  1.是  2.否"/>
 	    <property id="notifyTime" name="notifyTime" ref="" var="定时通知时间"/>
 	</url>
-	<url id="sysworkplan013" path="/post/SysWorkPlanController/queryMySysWorkPlanListByUserId" val="获取我的任务计划列表" allUse="1">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="title" name="title" ref="" var="计划标题"/>
-		<property id="userName" name="userName" ref="" var="计划下达人"/>
-		<property id="state" name="state" ref="num" var="执行状态"/>
-		<property id="planType" name="planType" ref="num" var="计划类型  1.个人计划  2.部门计划  3.公司计划"/>
-		<property id="planCycle" name="planCycle" ref="num" var="计划周期类型  1.日计划  2.周计划  3.月计划  4.季度计划  5.半年计划  6.年计划"/>
-		<property id="startTime" name="startTime" ref="date" var="开始时间"/>
-		<property id="endTime" name="endTime" ref="date" var="结束时间"/>
-	</url>
 	<url id="sysworkplan014" path="/post/SysWorkPlanController/subEditWorkPlanStateById" val="计划状态变更" allUse="1">
 		<property id="rowId" name="id" ref="required" var="计划id" />
 		<property id="state" name="state" ref="required,num" var="状态"/>
 		<property id="remark" name="remark" ref="" var="备注"/>
-	</url>
-	<url id="sysworkplan015" path="/post/SysWorkPlanController/queryMyCreateSysWorkPlanList" val="获取我创建的任务计划列表" allUse="1">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="title" name="title" ref="" var="计划标题"/>
-		<property id="planType" name="planType" ref="num" var="计划类型  1.个人计划  2.部门计划  3.公司计划"/>
-		<property id="planCycle" name="planCycle" ref="num" var="计划周期类型  1.日计划  2.周计划  3.月计划  4.季度计划  5.半年计划  6.年计划"/>
-		<property id="startTime" name="startTime" ref="date" var="开始时间"/>
-		<property id="endTime" name="endTime" ref="date" var="结束时间"/>
-	</url>
-	<url id="sysworkplan016" path="/post/SysWorkPlanController/queryAllSysWorkPlanList" val="获取所有任务计划列表" allUse="1">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="title" name="title" ref="" var="计划标题"/>
-		<property id="userName" name="userName" ref="" var="计划下达人"/>
-		<property id="planType" name="planType" ref="num" var="计划类型  1.个人计划  2.部门计划  3.公司计划"/>
-		<property id="planCycle" name="planCycle" ref="num" var="计划周期类型  1.日计划  2.周计划  3.月计划  4.季度计划  5.半年计划  6.年计划"/>
-		<property id="startTime" name="startTime" ref="date" var="开始时间"/>
-		<property id="endTime" name="endTime" ref="date" var="结束时间"/>
-	</url>
-	<url id="sysworkplan017" path="/post/SysWorkPlanController/queryMyBranchSysWorkPlanList" val="获取我的下属的任务计划列表" allUse="1">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="title" name="title" ref="" var="计划标题"/>
-		<property id="userName" name="userName" ref="" var="计划下达人"/>
-		<property id="executorName" name="executorName" ref="" var="计划执行人"/>
-		<property id="state" name="state" ref="num" var="执行状态"/>
-		<property id="planType" name="planType" ref="num" var="计划类型  1.个人计划  2.部门计划  3.公司计划"/>
-		<property id="planCycle" name="planCycle" ref="num" var="计划周期类型  1.日计划  2.周计划  3.月计划  4.季度计划  5.半年计划  6.年计划"/>
-		<property id="startTime" name="startTime" ref="date" var="开始时间"/>
-		<property id="endTime" name="endTime" ref="date" var="结束时间"/>
 	</url>
 	<!-- 工作计划模块结束 -->
 

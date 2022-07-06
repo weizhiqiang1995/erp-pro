@@ -49,8 +49,6 @@ public interface SysWorkPlanDao {
 
     List<Map<String, Object>> querySysWorkPlanExecutorsToEditById(Map<String, Object> map);
 
-    List<Map<String, Object>> querySysWorkPlanEnclosuresToEditById(Map<String, Object> map);
-
     int editSysWorkPlanISPeople(Map<String, Object> map);
 
     int editSysWorkPlanTimingSend(Map<String, Object> map);
@@ -61,17 +59,17 @@ public interface SysWorkPlanDao {
 
     int insertNoticeListMation(List<Map<String, Object>> notices);
 
-    List<Map<String, Object>> queryMySysWorkPlanListByUserId(Map<String, Object> map);
+    List<Map<String, Object>> queryMySysWorkPlanListByUserId(SysWorkPlanQueryDo sysWorkPlanQuery);
 
     Map<String, Object> queryMySysWorkPlanMationByUserId(@Param("planId") String planId, @Param("userId") String userId);
 
     void subEditWorkPlanStateById(Map<String, Object> map);
 
-    List<Map<String, Object>> queryMyCreateSysWorkPlanList(Map<String, Object> map);
+    List<Map<String, Object>> queryMyCreateSysWorkPlanList(SysWorkPlanQueryDo sysWorkPlanQuery);
 
-    List<Map<String, Object>> queryAllSysWorkPlanList(Map<String, Object> map);
+    List<Map<String, Object>> queryAllSysWorkPlanList(SysWorkPlanQueryDo sysWorkPlanQuery);
 
     List<Map<String, Object>> queryMyChildJobUserListByUserId(@Param("userId") String userId);
 
-    List<Map<String, Object>> queryMyBranchSysWorkPlanList(Map<String, Object> map);
+    List<Map<String, Object>> queryMyBranchSysWorkPlanList(SysWorkPlanQueryDo myBranchSysWorkPlanQuery);
 }

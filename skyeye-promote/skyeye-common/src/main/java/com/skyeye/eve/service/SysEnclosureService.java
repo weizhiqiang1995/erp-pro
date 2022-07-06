@@ -7,6 +7,9 @@ package com.skyeye.eve.service;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 
+import java.util.List;
+import java.util.Map;
+
 public interface SysEnclosureService {
 
     void querySysEnclosureListByUserId(InputObject inputObject, OutputObject outputObject);
@@ -44,5 +47,13 @@ public interface SysEnclosureService {
     void insertUploadFileToDataByUserId(InputObject inputObject, OutputObject outputObject);
 
     void queryEnclosureInfo(InputObject inputObject, OutputObject outputObject);
+
+    /**
+     * 根据ids(逗号隔开)获取多个附件信息
+     *
+     * @param enclosureInfoIds ids(逗号隔开)
+     * @return
+     */
+    List<Map<String, Object>> queryEnclosureInfoListByIds(String enclosureInfoIds);
 
 }

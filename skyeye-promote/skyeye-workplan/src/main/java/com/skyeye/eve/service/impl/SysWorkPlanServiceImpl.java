@@ -19,6 +19,7 @@ import com.skyeye.eve.dao.ScheduleDayDao;
 import com.skyeye.eve.dao.SysWorkPlanDao;
 import com.skyeye.eve.entity.workplan.SysWorkPlanQueryDo;
 import com.skyeye.eve.service.ScheduleDayService;
+import com.skyeye.eve.service.SysEnclosureService;
 import com.skyeye.eve.service.SysWorkPlanService;
 import com.skyeye.quartz.config.QuartzService;
 import com.skyeye.service.JobMateMationService;
@@ -58,6 +59,9 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     @Autowired
     private JobMateMationService jobMateMationService;
 
+    @Autowired
+    private SysEnclosureService sysEnclosureService;
+
     private static final String MESSAGE_TITLE = "计划提醒";
 
     /**
@@ -94,8 +98,6 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     @Override
     public void querySysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
         SysWorkPlanQueryDo sysWorkPlanQuery = inputObject.getParams(SysWorkPlanQueryDo.class);
-        // 转化计划周期类型为数字
-        sysWorkPlanQuery.setNowCheckTypeNum(WorkPlanConstants.SysWorkPlan.getClockInState(sysWorkPlanQuery.getNowCheckType()));
         sysWorkPlanQuery.setUserId(inputObject.getLogParams().get("id").toString());
         Page pages = PageHelper.startPage(sysWorkPlanQuery.getPage(), sysWorkPlanQuery.getLimit());
         List<Map<String, Object>> beans = sysWorkPlanDao.querySysWorkPlanList(sysWorkPlanQuery);
@@ -495,13 +497,13 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     @Override
     public void querySysWorkPlanToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        //获取计划信息
+        // 获取计划信息
         Map<String, Object> bean = sysWorkPlanDao.querySysWorkPlanToEditById(map);
         bean.put("planCycle", WorkPlanConstants.SysWorkPlan.getClockInName(bean.get("planCycle").toString()));
-        //获取计划执行人信息
+        // 获取计划执行人信息
         List<Map<String, Object>> executors = sysWorkPlanDao.querySysWorkPlanExecutorsToEditById(map);
-        //获取附件信息
-        List<Map<String, Object>> enclosures = sysWorkPlanDao.querySysWorkPlanEnclosuresToEditById(map);
+        // 获取附件信息
+        List<Map<String, Object>> enclosures = sysEnclosureService.queryEnclosureInfoListByIds(bean.get("enclosureInfo").toString());
         bean.put("executors", executors);
         bean.put("enclosures", enclosures);
         outputObject.setBean(bean);
@@ -667,7 +669,7 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
             //获取计划执行人信息
             List<Map<String, Object>> executors = sysWorkPlanDao.querySysWorkPlanExecutorsToEditById(map);
             //获取附件信息
-            List<Map<String, Object>> enclosures = sysWorkPlanDao.querySysWorkPlanEnclosuresToEditById(map);
+            List<Map<String, Object>> enclosures = sysEnclosureService.queryEnclosureInfoListByIds(bean.get("enclosureInfo").toString());
             bean.put("executors", executors);
             bean.put("enclosures", enclosures);
             outputObject.setBean(bean);
@@ -685,10 +687,10 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      */
     @Override
     public void queryMySysWorkPlanListByUserId(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        map.put("userId", inputObject.getLogParams().get("id"));
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = sysWorkPlanDao.queryMySysWorkPlanListByUserId(map);
+        SysWorkPlanQueryDo sysWorkPlanQuery = inputObject.getParams(SysWorkPlanQueryDo.class);
+        sysWorkPlanQuery.setUserId(inputObject.getLogParams().get("id").toString());
+        Page pages = PageHelper.startPage(sysWorkPlanQuery.getPage(), sysWorkPlanQuery.getLimit());
+        List<Map<String, Object>> beans = sysWorkPlanDao.queryMySysWorkPlanListByUserId(sysWorkPlanQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -722,10 +724,10 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      */
     @Override
     public void queryMyCreateSysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        map.put("userId", inputObject.getLogParams().get("id"));
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = sysWorkPlanDao.queryMyCreateSysWorkPlanList(map);
+        SysWorkPlanQueryDo sysWorkPlanQuery = inputObject.getParams(SysWorkPlanQueryDo.class);
+        sysWorkPlanQuery.setUserId(inputObject.getLogParams().get("id").toString());
+        Page pages = PageHelper.startPage(sysWorkPlanQuery.getPage(), sysWorkPlanQuery.getLimit());
+        List<Map<String, Object>> beans = sysWorkPlanDao.queryMyCreateSysWorkPlanList(sysWorkPlanQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -738,9 +740,9 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      */
     @Override
     public void queryAllSysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = sysWorkPlanDao.queryAllSysWorkPlanList(map);
+        SysWorkPlanQueryDo sysWorkPlanQuery = inputObject.getParams(SysWorkPlanQueryDo.class);
+        Page pages = PageHelper.startPage(sysWorkPlanQuery.getPage(), sysWorkPlanQuery.getLimit());
+        List<Map<String, Object>> beans = sysWorkPlanDao.queryAllSysWorkPlanList(sysWorkPlanQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -753,15 +755,15 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      */
     @Override
     public void queryMyBranchSysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
+        SysWorkPlanQueryDo sysWorkPlanQuery = inputObject.getParams(SysWorkPlanQueryDo.class);
         String userId = inputObject.getLogParams().get("id").toString();
         // 获取我的下属职位员工
         List<Map<String, Object>> jobChildUser = sysWorkPlanDao.queryMyChildJobUserListByUserId(userId);
         if (jobChildUser != null && !jobChildUser.isEmpty()) {
             List<String> jodUserId = jobChildUser.stream().map(p -> p.get("user_id").toString()).collect(Collectors.toList());
-            map.put("list", jodUserId);
-            Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-            List<Map<String, Object>> beans = sysWorkPlanDao.queryMyBranchSysWorkPlanList(map);
+            sysWorkPlanQuery.setList(jodUserId);
+            Page pages = PageHelper.startPage(sysWorkPlanQuery.getPage(), sysWorkPlanQuery.getLimit());
+            List<Map<String, Object>> beans = sysWorkPlanDao.queryMyBranchSysWorkPlanList(sysWorkPlanQuery);
             outputObject.setBeans(beans);
             outputObject.settotal(pages.getTotal());
         }

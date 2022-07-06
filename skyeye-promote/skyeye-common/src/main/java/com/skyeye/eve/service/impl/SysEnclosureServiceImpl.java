@@ -554,9 +554,15 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     public void queryEnclosureInfo(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String enclosureInfoIds = map.get("enclosureInfoIds").toString();
-        List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(enclosureInfoIds);
+        List<Map<String, Object>> beans = queryEnclosureInfoListByIds(enclosureInfoIds);
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
+    }
+
+    @Override
+    public List<Map<String, Object>> queryEnclosureInfoListByIds(String enclosureInfoIds) {
+        List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(enclosureInfoIds);
+        return beans;
     }
 
 }
