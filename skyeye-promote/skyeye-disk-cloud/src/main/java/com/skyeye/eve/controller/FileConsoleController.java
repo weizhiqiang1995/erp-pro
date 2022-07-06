@@ -10,14 +10,24 @@ import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.diskcloud.filerecycle.FileRecycleQueryDo;
+import com.skyeye.eve.entity.diskcloud.fileshare.FileShareQueryDo;
 import com.skyeye.eve.service.FileConsoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @ClassName: SysWorkPlanController
+ * @Description: 文件管理--云盘
+ * @author: skyeye云系列--卫志强
+ * @date: 2022/6/30 22:26
+ * @Copyright: 2022 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
+ * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
+ */
 @RestController
-@Api(value = "文件管理", tags = "文件管理", modelName = "文件模块")
+@Api(value = "文件管理--云盘", tags = "文件管理--云盘", modelName = "文件模块")
 public class FileConsoleController {
 
     @Autowired
@@ -28,10 +38,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/queryFileFolderByUserId")
-    public void queryFileFolderByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFileFolderByUserId(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.queryFileFolderByUserId(inputObject, outputObject);
     }
 
@@ -40,10 +49,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertFileFolderByUserId")
-    public void insertFileFolderByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertFileFolderByUserId(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertFileFolderByUserId(inputObject, outputObject);
     }
 
@@ -52,10 +60,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/queryFilesListByFolderId")
-    public void queryFilesListByFolderId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFilesListByFolderId(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.queryFilesListByFolderId(inputObject, outputObject);
     }
 
@@ -64,13 +71,12 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "fileconsole004", value = "删除目录以及目录下的所有文件", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "fileList", name = "fileList", value = "要删除的目录id集合,包含rowId,fileType", required = "required,json")})
     @RequestMapping("/post/FileConsoleController/deleteFileFolderById")
-    public void deleteFileFolderById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteFileFolderById(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.deleteFileFolderById(inputObject, outputObject);
     }
 
@@ -79,10 +85,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/editFileFolderById")
-    public void editFileFolderById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editFileFolderById(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.editFileFolderById(inputObject, outputObject);
     }
 
@@ -91,10 +96,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertUploadFileByUserId")
-    public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertUploadFileByUserId(inputObject, outputObject);
     }
 
@@ -103,10 +107,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertUploadFileChunksByUserId")
-    public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertUploadFileChunksByUserId(inputObject, outputObject);
     }
 
@@ -115,10 +118,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/queryUploadFileChunksByChunkMd5")
-    public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.queryUploadFileChunksByChunkMd5(inputObject, outputObject);
     }
 
@@ -127,10 +129,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/queryUploadFilePathById")
-    public void queryUploadFilePathById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUploadFilePathById(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.queryUploadFilePathById(inputObject, outputObject);
     }
 
@@ -139,10 +140,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping(value = "/post/FileConsoleController/editUploadOfficeFileById", method = RequestMethod.POST)
-    public void editUploadOfficeFileById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUploadOfficeFileById(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.editUploadOfficeFileById(inputObject, outputObject);
     }
 
@@ -151,10 +151,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/queryAllFileSizeByUserId")
-    public void queryAllFileSizeByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllFileSizeByUserId(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.queryAllFileSizeByUserId(inputObject, outputObject);
     }
 
@@ -163,10 +162,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertFileCatalogToRecycleById")
-    public void insertFileCatalogToRecycleById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertFileCatalogToRecycleById(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertFileCatalogToRecycleById(inputObject, outputObject);
     }
 
@@ -175,10 +173,11 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
+    @ApiOperation(id = "fileconsole014", value = "我的回收站", method = "POST", allUse = "2")
+    @ApiImplicitParams(classBean = FileRecycleQueryDo.class)
     @RequestMapping("/post/FileConsoleController/queryFileRecycleBinByUserId")
-    public void queryFileRecycleBinByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFileRecycleBinByUserId(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.queryFileRecycleBinByUserId(inputObject, outputObject);
     }
 
@@ -187,10 +186,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/deleteFileRecycleBinById")
-    public void deleteFileRecycleBinById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteFileRecycleBinById(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.deleteFileRecycleBinById(inputObject, outputObject);
     }
 
@@ -199,10 +197,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertFileToShareById")
-    public void insertFileToShareById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertFileToShareById(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertFileToShareById(inputObject, outputObject);
     }
 
@@ -211,10 +208,11 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
+    @ApiOperation(id = "fileconsole017", value = "我的文件分享列表", method = "POST", allUse = "2")
+    @ApiImplicitParams(classBean = FileShareQueryDo.class)
     @RequestMapping("/post/FileConsoleController/queryShareFileListByUserId")
-    public void queryShareFileListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryShareFileListByUserId(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.queryShareFileListByUserId(inputObject, outputObject);
     }
 
@@ -223,10 +221,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/deleteShareFileById")
-    public void deleteShareFileById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteShareFileById(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.deleteShareFileById(inputObject, outputObject);
     }
 
@@ -235,10 +232,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/queryShareFileMationById")
-    public void queryShareFileMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryShareFileMationById(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.queryShareFileMationById(inputObject, outputObject);
     }
 
@@ -247,10 +243,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/queryShareFileMationCheckById")
-    public void queryShareFileMationCheckById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryShareFileMationCheckById(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.queryShareFileMationCheckById(inputObject, outputObject);
     }
 
@@ -259,10 +254,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/queryShareFileBaseMationById")
-    public void queryShareFileBaseMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryShareFileBaseMationById(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.queryShareFileBaseMationById(inputObject, outputObject);
     }
 
@@ -271,10 +265,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/queryShareFileListByParentId")
-    public void queryShareFileListByParentId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryShareFileListByParentId(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.queryShareFileListByParentId(inputObject, outputObject);
     }
 
@@ -283,10 +276,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertShareFileListToSave")
-    public void insertShareFileListToSave(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertShareFileListToSave(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertShareFileListToSave(inputObject, outputObject);
     }
 
@@ -295,10 +287,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/queryFileToShowById")
-    public void queryFileToShowById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFileToShowById(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.queryFileToShowById(inputObject, outputObject);
     }
 
@@ -307,10 +298,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertWordFileToService")
-    public void insertWordFileToService(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWordFileToService(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertWordFileToService(inputObject, outputObject);
     }
 
@@ -319,10 +309,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertExcelFileToService")
-    public void insertExcelFileToService(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertExcelFileToService(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertExcelFileToService(inputObject, outputObject);
     }
 
@@ -331,10 +320,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertPPTFileToService")
-    public void insertPPTFileToService(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertPPTFileToService(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertPPTFileToService(inputObject, outputObject);
     }
 
@@ -343,10 +331,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertTXTFileToService")
-    public void insertTXTFileToService(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertTXTFileToService(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertTXTFileToService(inputObject, outputObject);
     }
 
@@ -355,10 +342,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertHtmlFileToService")
-    public void insertHtmlFileToService(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertHtmlFileToService(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertHtmlFileToService(inputObject, outputObject);
     }
 
@@ -367,10 +353,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertDuplicateCopyToService")
-    public void insertDuplicateCopyToService(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertDuplicateCopyToService(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertDuplicateCopyToService(inputObject, outputObject);
     }
 
@@ -379,10 +364,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/queryFileMationById")
-    public void queryFileMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFileMationById(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.queryFileMationById(inputObject, outputObject);
     }
 
@@ -391,10 +375,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertFileMationToPackageToFolder")
-    public void insertFileMationToPackageToFolder(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertFileMationToPackageToFolder(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertFileMationToPackageToFolder(inputObject, outputObject);
     }
 
@@ -403,10 +386,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertFileMationPackageToFolder")
-    public void insertFileMationPackageToFolder(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertFileMationPackageToFolder(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertFileMationPackageToFolder(inputObject, outputObject);
     }
 
@@ -415,10 +397,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertPasteCopyToService")
-    public void insertPasteCopyToService(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertPasteCopyToService(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertPasteCopyToService(inputObject, outputObject);
     }
 
@@ -427,10 +408,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertPasteCutToService")
-    public void insertPasteCutToService(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertPasteCutToService(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertPasteCutToService(inputObject, outputObject);
     }
 
@@ -439,10 +419,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/queryOfficeUpdateTimeToKey")
-    public void queryOfficeUpdateTimeToKey(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryOfficeUpdateTimeToKey(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.queryOfficeUpdateTimeToKey(inputObject, outputObject);
     }
 
@@ -451,10 +430,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/queryFileNumStatistics")
-    public void queryFileNumStatistics(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFileNumStatistics(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.queryFileNumStatistics(inputObject, outputObject);
     }
 
@@ -463,10 +441,9 @@ public class FileConsoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/FileConsoleController/insertFileMationToPackageDownload")
-    public void insertFileMationToPackageDownload(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertFileMationToPackageDownload(InputObject inputObject, OutputObject outputObject) {
         fileConsoleService.insertFileMationToPackageDownload(inputObject, outputObject);
     }
 

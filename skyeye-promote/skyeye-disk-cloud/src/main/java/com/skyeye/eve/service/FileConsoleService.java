@@ -8,78 +8,78 @@ import com.skyeye.common.object.OutputObject;
 
 public interface FileConsoleService {
 
-    public void queryFileFolderByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryFileFolderByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void insertFileFolderByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertFileFolderByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryFilesListByFolderId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryFilesListByFolderId(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteFileFolderById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteFileFolderById(InputObject inputObject, OutputObject outputObject);
 
-    public void editFileFolderById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editFileFolderById(InputObject inputObject, OutputObject outputObject);
 
-    public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject);
 
-    public void queryUploadFilePathById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryUploadFilePathById(InputObject inputObject, OutputObject outputObject);
 
-    public void editUploadOfficeFileById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editUploadOfficeFileById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryAllFileSizeByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryAllFileSizeByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void insertFileCatalogToRecycleById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertFileCatalogToRecycleById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryFileRecycleBinByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryFileRecycleBinByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteFileRecycleBinById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteFileRecycleBinById(InputObject inputObject, OutputObject outputObject);
 
-    public void insertFileToShareById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertFileToShareById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryShareFileListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryShareFileListByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteShareFileById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteShareFileById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryShareFileMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryShareFileMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryShareFileMationCheckById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryShareFileMationCheckById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryShareFileBaseMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryShareFileBaseMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryShareFileListByParentId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryShareFileListByParentId(InputObject inputObject, OutputObject outputObject);
 
-    public void insertShareFileListToSave(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertShareFileListToSave(InputObject inputObject, OutputObject outputObject);
 
-    public void queryFileToShowById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryFileToShowById(InputObject inputObject, OutputObject outputObject);
 
-    public void insertWordFileToService(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertWordFileToService(InputObject inputObject, OutputObject outputObject);
 
-    public void insertExcelFileToService(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertExcelFileToService(InputObject inputObject, OutputObject outputObject);
 
-    public void insertPPTFileToService(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertPPTFileToService(InputObject inputObject, OutputObject outputObject);
 
-    public void insertTXTFileToService(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertTXTFileToService(InputObject inputObject, OutputObject outputObject);
 
-    public void insertHtmlFileToService(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertHtmlFileToService(InputObject inputObject, OutputObject outputObject);
 
-    public void insertDuplicateCopyToService(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertDuplicateCopyToService(InputObject inputObject, OutputObject outputObject);
 
-    public void queryFileMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryFileMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void insertFileMationToPackageToFolder(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertFileMationToPackageToFolder(InputObject inputObject, OutputObject outputObject);
 
-    public void insertFileMationPackageToFolder(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertFileMationPackageToFolder(InputObject inputObject, OutputObject outputObject);
 
-    public void insertPasteCopyToService(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertPasteCopyToService(InputObject inputObject, OutputObject outputObject);
 
-    public void insertPasteCutToService(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertPasteCutToService(InputObject inputObject, OutputObject outputObject);
 
-    public void queryOfficeUpdateTimeToKey(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryOfficeUpdateTimeToKey(InputObject inputObject, OutputObject outputObject);
 
-    public void queryFileNumStatistics(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryFileNumStatistics(InputObject inputObject, OutputObject outputObject);
 
-    public void insertFileMationToPackageDownload(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertFileMationToPackageDownload(InputObject inputObject, OutputObject outputObject);
 
 }

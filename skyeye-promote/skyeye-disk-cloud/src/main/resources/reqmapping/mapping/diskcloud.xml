@@ -50,21 +50,12 @@
 	<url id="fileconsole013" path="/post/FileConsoleController/insertFileCatalogToRecycleById" val="加入回收站" allUse="2">
 		<property id="rowId" name="id" ref="required" var="文件或文件夹id" />
 	</url>
-	<url id="fileconsole014" path="/post/FileConsoleController/queryFileRecycleBinByUserId" val="我的回收站" allUse="2">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-	</url>
 	<url id="fileconsole015" path="/post/FileConsoleController/deleteFileRecycleBinById" val="回收站内容还原" allUse="2">
 		<property id="rowId" name="id" ref="required" var="文件或文件夹id" />
 	</url>
 	<url id="fileconsole016" path="/post/FileConsoleController/insertFileToShareById" val="文件分享" allUse="2">
 		<property id="rowId" name="id" ref="required" var="文件或文件夹id" />
 		<property id="shareType" name="shareType" ref="required,num" var="分享类型" />
-	</url>
-	<url id="fileconsole017" path="/post/FileConsoleController/queryShareFileListByUserId" val="文件分享列表" allUse="2">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-	    <property id="reqBasePath" name="reqBasePath" ref="required" var="基础路径"/>
 	</url>
 	<url id="fileconsole018" path="/post/FileConsoleController/deleteShareFileById" val="删除文件分享外链" allUse="2">
 		<property id="rowId" name="id" ref="required" var="文件分享的id" />

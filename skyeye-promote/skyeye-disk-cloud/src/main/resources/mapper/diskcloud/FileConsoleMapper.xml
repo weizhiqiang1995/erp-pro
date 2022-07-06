@@ -272,7 +272,7 @@
 			(#{id}, #{fileId}, #{fileType}, #{fileName}, #{createId}, #{createTime})
 	</insert>
 	
-	<select id="queryFileRecycleBinByUserId" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryFileRecycleBinByUserId" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.recycle_name recycleName,
@@ -376,7 +376,7 @@
 			(#{id}, #{fileId}, #{fileType}, #{fileName}, #{shareCode}, #{shareUrl}, #{shareType}, #{sharePassword}, #{state}, #{createId}, #{createTime})
 	</insert>
 	
-	<select id="queryShareFileListByUserId" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryShareFileListByUserId" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.share_name shareName,

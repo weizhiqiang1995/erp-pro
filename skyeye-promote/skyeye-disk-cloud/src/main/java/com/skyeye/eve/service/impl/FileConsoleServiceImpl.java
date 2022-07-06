@@ -23,6 +23,8 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.FileUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.FileConsoleDao;
+import com.skyeye.eve.entity.diskcloud.filerecycle.FileRecycleQueryDo;
+import com.skyeye.eve.entity.diskcloud.fileshare.FileShareQueryDo;
 import com.skyeye.eve.service.FileConsoleService;
 import com.skyeye.exception.CustomException;
 import com.skyeye.jedis.JedisClientService;
@@ -89,9 +91,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * 删除指定文件夹或文件的父目录在redis中的缓存信息
      *
      * @param id
-     * @throws Exception
      */
-    public void deleteParentFolderRedis(String id) throws Exception {
+    public void deleteParentFolderRedis(String id) {
         //获取文件或者文件夹父id
         Map<String, Object> fileParent = fileConsoleDao.quertWinFileOrFolderParentById(id);
         if (fileParent != null && !fileParent.isEmpty()) {
@@ -121,10 +122,9 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryFileFolderByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFileFolderByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 父目录id
         String parentId = map.get("parentId").toString();
@@ -147,7 +147,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         }
     }
 
-    private String getFolderType(String folderId) throws Exception {
+    private String getFolderType(String folderId) {
         if ("3".equals(folderId)) {
             // 企业网盘
             return DiskCloudConstants.FOLDER_TYPE.ENTERPRISE_NETWORK_DISK.getFolderType();
@@ -173,11 +173,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertFileFolderByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertFileFolderByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String parentId = map.get("parentId").toString();
@@ -209,10 +208,9 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryFilesListByFolderId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFilesListByFolderId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -259,11 +257,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteFileFolderById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteFileFolderById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         //获取要删除的文件
         String fileList = map.get("fileList").toString();
@@ -313,11 +310,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editFileFolderById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editFileFolderById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         //删除父目录在redis的缓存信息
@@ -334,11 +330,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(PutObject.getRequest().getSession().getServletContext());
@@ -365,7 +360,11 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                     String newFileName = String.valueOf(System.currentTimeMillis()) + "." + fileExtName;
                     String path = basePath + "/" + newFileName;
                     // 上传
-                    file.transferTo(new File(path));
+                    try {
+                        file.transferTo(new File(path));
+                    } catch (IOException e) {
+                        throw new CustomException(e);
+                    }
                     //初始化文件对象内容
                     trueFileName = Constants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + "/" + userId + "/" + newFileName;
                     map.put("fileType", fileExtName);//文件类型
@@ -388,9 +387,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param folderId 文件夹id
      * @return 当前文件夹子文件的parentId
-     * @throws Exception
      */
-    private String getThisFolderChildParentId(String folderId) throws Exception {
+    private String getThisFolderChildParentId(String folderId) {
         // 删除父目录的redis的key
         jedisClient.delKeys(DiskCloudConstants.SYS_FILE_MATION_FOLDER_LIST_MATION + folderId + "*");
         if ("1".equals(folderId) || "2".equals(folderId) || "3".equals(folderId)) {
@@ -413,15 +411,14 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String userId = inputObject.getLogParams().get("id").toString();
         List<Map<String, Object>> beans = fileConsoleDao.queryUploadFileChunksByMd5(map);
-        List<File> fileList = new ArrayList<File>();
+        List<File> fileList = new ArrayList<>();
         File f;
         for (Map<String, Object> bean : beans) {
             f = new File(tPath.replace("images", "") + bean.get("fileAddress").toString());
@@ -432,13 +429,14 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         String newFileName = String.valueOf(System.currentTimeMillis()) + "." + fileExtName;//新文件名
         String basePath = tPath + Constants.FileUploadPath.getSavePath(FILE_PATH_TYPE);
         String path = basePath + "/" + userId + "/" + newFileName;//文件路径
-        File outputFile = new File(path);
-        //创建文件
-        outputFile.createNewFile();
-        //输出流
-        FileChannel outChnnel = new FileOutputStream(outputFile).getChannel();
-        //合并
+        FileChannel outChnnel = null;
         try {
+            File outputFile = new File(path);
+            // 创建文件
+            outputFile.createNewFile();
+            // 输出流
+            outChnnel = new FileOutputStream(outputFile).getChannel();
+            // 合并
             FileChannel inChannel;
             for (File file : fileList) {
                 inChannel = new FileInputStream(file).getChannel();
@@ -447,6 +445,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                 //删除分片
                 file.delete();
             }
+        } catch (Exception ee) {
+            throw new CustomException(ee);
         } finally {
             FileUtil.close(outChnnel);
         }
@@ -465,15 +465,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileExtName, 1)) {//图片
             map.put("fileThumbnail", trueFileName);//文件缩略图地址
         } else if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileExtName, 6)) {//电子书
-            EpubReader epubReader = new EpubReader();
-            Book book = epubReader.readEpub(new FileInputStream(path));
-            Resource resource = book.getResources().getByHref("Images/cover.jpg");
-            byte[] p = resource.getData();
             String picName = String.valueOf(System.currentTimeMillis()) + ".jpg";
             String newFilename = basePath + "/" + userId + "/" + picName;
-            FileImageOutputStream imgout = new FileImageOutputStream(new File(newFilename));
-            imgout.write(p, 0, p.length);
-            imgout.close();
+            writeAndReadQpubFileThumbnail(path, newFilename);
+
             map.put("fileThumbnail", Constants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId + "/" + picName);//文件缩略图地址
         } else if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileExtName, 2)) {
             // office文件缩略图地址
@@ -507,11 +502,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = fileConsoleDao.queryUploadFileChunksByChunkMd5(map);
         if (bean != null && !bean.isEmpty()) {
@@ -533,10 +527,9 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryUploadFilePathById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUploadFilePathById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = fileConsoleDao.queryUploadFilePathById(map);
         outputObject.setBean(bean);
@@ -547,39 +540,43 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editUploadOfficeFileById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUploadOfficeFileById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         int status = Integer.parseInt(map.get("status").toString());
         // 当我们关闭编辑窗口后，十秒钟左右onlyoffice会将它存储的我们的编辑后的文件，，此时status = 2
         if (status == 2 || status == 3) {//MustSave, Corrupted
             map.put("key", map.get("key").toString().split("-")[0]);
-            URL url = new URL(map.get("url").toString());//新文件地址
-            java.net.HttpURLConnection connection = (java.net.HttpURLConnection) url.openConnection();
-            InputStream stream = connection.getInputStream();
-            if (stream == null) {
-                outputObject.setreturnMessage("Stream is null");
-                return;
-            }
-            // 从请求中获取要覆盖的文件参数定义"path"
-            Map<String, Object> fileMation = fileConsoleDao.queryUploadFilePathByKey(map);
-            String fileAddress = tPath.replace("images", "") + fileMation.get("fileAddress").toString();
-            File savedFile = new File(fileAddress);
-            try (FileOutputStream out = new FileOutputStream(savedFile)) {
-                int read;
-                final byte[] bytes = new byte[1024];
-                while ((read = stream.read(bytes)) != -1) {
-                    out.write(bytes, 0, read);
+            try {
+                // 新文件地址
+                URL url = new URL(map.get("url").toString());
+                java.net.HttpURLConnection connection = (java.net.HttpURLConnection) url.openConnection();
+                InputStream stream = connection.getInputStream();
+                if (stream == null) {
+                    outputObject.setreturnMessage("Stream is null");
+                    return;
                 }
-                out.flush();
+                // 从请求中获取要覆盖的文件参数定义"path"
+                Map<String, Object> fileMation = fileConsoleDao.queryUploadFilePathByKey(map);
+                String fileAddress = tPath.replace("images", "") + fileMation.get("fileAddress").toString();
+                File savedFile = new File(fileAddress);
+                try (FileOutputStream out = new FileOutputStream(savedFile)) {
+                    int read;
+                    final byte[] bytes = new byte[1024];
+                    while ((read = stream.read(bytes)) != -1) {
+                        out.write(bytes, 0, read);
+                    }
+                    out.flush();
+                }
+                map.put("updateTime", DateUtil.getTimeAndToString());
+                fileConsoleDao.editFileUpdateTimeByKey(map);
+                connection.disconnect();
+                outputObject.setErroCode(1);
+            } catch (Exception e) {
+                throw new CustomException(e);
             }
-            map.put("updateTime", DateUtil.getTimeAndToString());
-            fileConsoleDao.editFileUpdateTimeByKey(map);
-            connection.disconnect();
-            outputObject.setErroCode(1);
         }
     }
 
@@ -588,10 +585,9 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAllFileSizeByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllFileSizeByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -611,11 +607,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertFileCatalogToRecycleById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertFileCatalogToRecycleById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -642,15 +637,13 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryFileRecycleBinByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = fileConsoleDao.queryFileRecycleBinByUserId(map);
+    public void queryFileRecycleBinByUserId(InputObject inputObject, OutputObject outputObject) {
+        FileRecycleQueryDo fileRecycleQuery = inputObject.getParams(FileRecycleQueryDo.class);
+        fileRecycleQuery.setUserId(inputObject.getLogParams().get("id").toString());
+        Page pages = PageHelper.startPage(fileRecycleQuery.getPage(), fileRecycleQuery.getLimit());
+        List<Map<String, Object>> beans = fileConsoleDao.queryFileRecycleBinByUserId(fileRecycleQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -660,10 +653,9 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void deleteFileRecycleBinById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteFileRecycleBinById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         Map<String, Object> mation = fileConsoleDao.queryFileRecycleBinById(map);
@@ -690,11 +682,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertFileToShareById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertFileToShareById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> mation = fileConsoleDao.queryFileMationByIdAndUserId(map);
         if (!CollectionUtils.isEmpty(mation)) {
@@ -724,15 +715,13 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryShareFileListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = fileConsoleDao.queryShareFileListByUserId(map);
+    public void queryShareFileListByUserId(InputObject inputObject, OutputObject outputObject) {
+        FileShareQueryDo fileShareQuery = inputObject.getParams(FileShareQueryDo.class);
+        fileShareQuery.setUserId(inputObject.getLogParams().get("id").toString());
+        Page pages = PageHelper.startPage(fileShareQuery.getPage(), fileShareQuery.getLimit());
+        List<Map<String, Object>> beans = fileConsoleDao.queryShareFileListByUserId(fileShareQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -742,11 +731,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteShareFileById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteShareFileById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -758,10 +746,9 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryShareFileMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryShareFileMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = fileConsoleDao.queryShareFileMationById(map);
         if (bean != null && !bean.isEmpty()) {
@@ -784,10 +771,9 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryShareFileMationCheckById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryShareFileMationCheckById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = fileConsoleDao.queryShareFileMationCheckById(map);
         if (bean != null && !bean.isEmpty()) {
@@ -804,10 +790,9 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryShareFileBaseMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryShareFileBaseMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> baseMation = fileConsoleDao.queryShareFileBaseMationById(map);
         outputObject.setBean(baseMation);
@@ -818,10 +803,9 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryShareFileListByParentId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryShareFileListByParentId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans;
         if ("-1".equals(map.get("folderId").toString())) {//加载初始目录
@@ -844,11 +828,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertShareFileListToSave(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertShareFileListToSave(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonStr").toString(), null);//获取数据信息
         Map<String, Object> user = inputObject.getLogParams();
@@ -986,10 +969,9 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryFileToShowById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFileToShowById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = fileConsoleDao.queryFileToShowById(map);
         String fileType = bean.get("fileType").toString();//文件类型
@@ -1040,9 +1022,11 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         }
 
         /*将文件写入输出流,显示在界面上,实现预览效果*/
-        FileInputStream fis = new FileInputStream(filePath);
-        OutputStream os = PutObject.getResponse().getOutputStream();
+        FileInputStream fis = null;
+        OutputStream os = null;
         try {
+            fis = new FileInputStream(filePath);
+            os = PutObject.getResponse().getOutputStream();
             int count = 0;
             byte[] buffer = new byte[1024 * 1024];
             while ((count = fis.read(buffer)) != -1) {
@@ -1070,9 +1054,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @param fileExtName 文件后缀
      * @param userId      用户id
      * @param folderId    所属文件夹id
-     * @throws Exception
      */
-    public void createNewFileOrFolder(String fileExtName, String userId, String folderId) throws Exception {
+    public void createNewFileOrFolder(String fileExtName, String userId, String folderId) {
         String newFileName = String.valueOf(System.currentTimeMillis()) + "." + fileExtName;//新文件名
         String basePath = tPath + Constants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/" + userId;
         FileUtil.createDirs(basePath);
@@ -1107,7 +1090,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      * @param path        文件地址
      * @throws Exception
      */
-    private void createFile(String fileExtName, String path) throws Exception {
+    private void createFile(String fileExtName, String path) {
         if (DiskCloudConstants.FileMation.OFFICE_IS_DOCX.getFileExt().equalsIgnoreCase(fileExtName)) {
             FileUtil.createNewDocxFile(path);
         } else if (DiskCloudConstants.FileMation.OFFICE_IS_XLSX.getFileExt().equalsIgnoreCase(fileExtName)) {
@@ -1125,11 +1108,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertWordFileToService(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWordFileToService(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         createNewFileOrFolder("docx", inputObject.getLogParams().get("id").toString(), map.get("folderId").toString());
     }
@@ -1139,11 +1121,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertExcelFileToService(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertExcelFileToService(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         createNewFileOrFolder("xlsx", inputObject.getLogParams().get("id").toString(), map.get("folderId").toString());
     }
@@ -1153,11 +1134,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertPPTFileToService(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertPPTFileToService(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         createNewFileOrFolder("ppt", inputObject.getLogParams().get("id").toString(), map.get("folderId").toString());
     }
@@ -1167,11 +1147,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertTXTFileToService(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertTXTFileToService(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         createNewFileOrFolder("txt", inputObject.getLogParams().get("id").toString(), map.get("folderId").toString());
     }
@@ -1181,11 +1160,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertHtmlFileToService(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertHtmlFileToService(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         createNewFileOrFolder("html", inputObject.getLogParams().get("id").toString(), map.get("folderId").toString());
     }
@@ -1195,11 +1173,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertDuplicateCopyToService(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertDuplicateCopyToService(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonStr").toString(), null);//获取数据信息
         Map<String, Object> user = inputObject.getLogParams();
@@ -1349,10 +1326,9 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryFileMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFileMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = fileConsoleDao.queryFileMationById(map);
         if (!"文件夹".equals(bean.get("fileType").toString())) {
@@ -1368,11 +1344,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertFileMationToPackageToFolder(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertFileMationToPackageToFolder(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonStr").toString(), null);//获取数据信息
         if (array.size() > 0) {
@@ -1423,9 +1398,12 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                     outputObject.setreturnMessage("该文件已存在，生成失败。");
                     return;
                 } else {
-                    ZipOutputStream out = new ZipOutputStream(new FileOutputStream(strZipPath));
+                    ZipOutputStream out = null;
                     try {
+                        out = new ZipOutputStream(new FileOutputStream(strZipPath));
                         ToolUtil.recursionZip(out, dowlLoadFile, "", tPath.replace("images", ""), 2);
+                    } catch (Exception ee) {
+                        throw new CustomException(ee);
                     } finally {
                         FileUtil.close(out);
                     }
@@ -1463,11 +1441,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertFileMationPackageToFolder(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertFileMationPackageToFolder(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> file = fileConsoleDao.queryFilePackageMationById(map);
         String fileType = file.get("fileType").toString();
@@ -1479,17 +1456,18 @@ public class FileConsoleServiceImpl implements FileConsoleService {
             String parentId = file.get("parentId").toString();//压缩包父id
             String zipfile = tPath.replace("images", "") + file.get("fileAddress").toString();//压缩包文件
             if (new File(zipfile).exists()) {
-                // 设置,默认是UTF-8
-                Charset charset = Charset.forName("GBK");
-                ZipFile zip = new ZipFile(zipfile, charset);
-                ZipEntry entry = null;
+                ZipEntry entry;
+                ZipFile zip = null;
                 // 封装解压后的路径
                 BufferedOutputStream bos = null;
                 // 封装待解压文件路径
                 BufferedInputStream bis = null;
                 List<Map<String, Object>> beans = new ArrayList<>();
-                Map<String, Object> bean;
                 try {
+                    // 设置,默认是UTF-8
+                    Charset charset = Charset.forName("GBK");
+                    zip = new ZipFile(zipfile, charset);
+                    Map<String, Object> bean;
                     Enumeration<ZipEntry> enums = (Enumeration<ZipEntry>) zip.entries();
                     String fileName = "";//文件名称
                     String fileZipPath = "";//文件路径--作为文件父id
@@ -1539,8 +1517,11 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                             bos.close();
                         }
                     }
+                } catch (Exception ee) {
+                    throw new CustomException(ee);
                 } finally {
                     FileUtil.close(bis);
+                    FileUtil.close(bos);
                     FileUtil.close(zip);
                 }
                 String folderId = parentId.substring(0, parentId.lastIndexOf(",")).split(",")[0];
@@ -1571,16 +1552,11 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                     if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileExtName, 1)) {//图片
                         item.put("fileThumbnail", item.get("fileAddress").toString());//文件缩略图地址
                     } else if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileExtName, 6)) {//电子书
-                        EpubReader epubReader = new EpubReader();
-                        Book book = epubReader.readEpub(new FileInputStream(tPath.replace("images", "") + item.get("fileAddress").toString()));
-                        Resource resource = book.getResources().getByHref("Images/cover.jpg");
-                        byte[] p = resource.getData();
                         String picName = String.valueOf(System.currentTimeMillis()) + ".jpg";
                         String newFilename = basePath + picName;
-                        FileImageOutputStream imgout = new FileImageOutputStream(new File(newFilename));
-                        imgout.write(p, 0, p.length);
-                        imgout.close();
-                        item.put("fileThumbnail", visitPath + "/" + picName);//文件缩略图地址
+                        writeAndReadQpubFileThumbnail(tPath.replace("images", "") + item.get("fileAddress").toString(), newFilename);
+                        // 文件缩略图地址
+                        item.put("fileThumbnail", visitPath + "/" + picName);
                     } else if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileExtName, 2)) {
                         //office文件缩略图地址
                         item.put("fileThumbnail", DiskCloudConstants.FileMation.getIconByFileExt(fileExtName));
@@ -1624,11 +1600,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertPasteCopyToService(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertPasteCopyToService(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonStr").toString(), null);//获取数据信息
         Map<String, Object> user = inputObject.getLogParams();
@@ -1776,11 +1751,10 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertPasteCutToService(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertPasteCutToService(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonStr").toString(), null);//获取数据信息
         Map<String, Object> user = inputObject.getLogParams();
@@ -1873,10 +1847,9 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryOfficeUpdateTimeToKey(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryOfficeUpdateTimeToKey(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = fileConsoleDao.queryOfficeUpdateTimeToKey(map);
         outputObject.setBean(bean);
@@ -1887,10 +1860,9 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryFileNumStatistics(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFileNumStatistics(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         //文件总数量和总存储
         Map<String, Object> allNum = fileConsoleDao.queryAllNumFile(map);
@@ -1933,10 +1905,9 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void insertFileMationToPackageDownload(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertFileMationToPackageDownload(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonStr").toString(), null);//获取数据信息
         if (array.size() > 0) {
@@ -1988,9 +1959,12 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                     outputObject.setreturnMessage("该文件已存在，生成失败。");
                     return;
                 } else {
-                    ZipOutputStream out = new ZipOutputStream(new FileOutputStream(strZipPath));
+                    ZipOutputStream out = null;
                     try {
+                        out = new ZipOutputStream(new FileOutputStream(strZipPath));
                         ToolUtil.recursionZip(out, dowlLoadFile, "", tPath.replace("images", ""), 2);
+                    } catch (Exception ee) {
+                        throw new CustomException(ee);
                     } finally {
                         FileUtil.close(out);
                     }
@@ -2006,6 +1980,28 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         } else {
             outputObject.setreturnMessage("未找到要打包的文件.");
             return;
+        }
+    }
+
+    /**
+     * 获取并写入epub电子书的缩略图
+     *
+     * @param epubFilePath     epub电子书文件地址
+     * @param thumbnailPicPath 缩略图图片地址
+     */
+    private void writeAndReadQpubFileThumbnail(String epubFilePath, String thumbnailPicPath) {
+        FileImageOutputStream imgout = null;
+        try {
+            EpubReader epubReader = new EpubReader();
+            Book book = epubReader.readEpub(new FileInputStream(epubFilePath));
+            Resource resource = book.getResources().getByHref("Images/cover.jpg");
+            byte[] p = resource.getData();
+            imgout = new FileImageOutputStream(new File(thumbnailPicPath));
+            imgout.write(p, 0, p.length);
+        } catch (IOException e) {
+            throw new CustomException(e);
+        } finally {
+            FileUtil.close(imgout);
         }
     }
 
