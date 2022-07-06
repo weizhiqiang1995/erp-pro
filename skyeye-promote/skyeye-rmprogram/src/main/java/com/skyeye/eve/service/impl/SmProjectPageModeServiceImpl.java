@@ -161,9 +161,7 @@ public class SmProjectPageModeServiceImpl implements SmProjectPageModeService {
             map.put("fileName", page.get("name").toString() + ".zip");
             outputObject.setBean(map);
         } finally {
-            if (out != null) {
-                out.close();
-            }
+            FileUtil.close(out);
         }
     }
 

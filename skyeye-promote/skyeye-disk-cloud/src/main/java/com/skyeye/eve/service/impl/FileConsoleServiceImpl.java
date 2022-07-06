@@ -448,9 +448,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                 file.delete();
             }
         } finally {
-            if (outChnnel != null) {
-                outChnnel.close();
-            }
+            FileUtil.close(outChnnel);
         }
         fileConsoleDao.deleteUploadFileChunksByMd5(map);
         //初始化文件对象内容
@@ -1020,7 +1018,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                         PutObject.getResponse().setContentType("application/pdf");
                     } catch (Exception e) {
                         LOGGER.warn("connection failed, message is {}", e);
-                    } finally { //发生exception时, connection不会自动切断, 程序会一直挂着
+                    } finally {
+                        // 发生exception时, connection不会自动切断, 程序会一直挂着
                         try {
                             if (connection != null) {
                                 connection.disconnect();
@@ -1060,12 +1059,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         } catch (IOException e) {
             LOGGER.warn("write failed, message is {}", e);
         } finally {
-            if (os != null) {
-                os.close();
-            }
-            if (fis != null) {
-                fis.close();
-            }
+            FileUtil.close(os);
+            FileUtil.close(fis);
         }
     }
 
@@ -1432,9 +1427,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                     try {
                         ToolUtil.recursionZip(out, dowlLoadFile, "", tPath.replace("images", ""), 2);
                     } finally {
-                        if (out != null) {
-                            out.close();
-                        }
+                        FileUtil.close(out);
                     }
                 }
                 String fileExtName = "zip";
@@ -1547,12 +1540,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                         }
                     }
                 } finally {
-                    if (bis != null) {
-                        bis.close();
-                    }
-                    if (zip != null) {
-                        zip.close();
-                    }
+                    FileUtil.close(bis);
+                    FileUtil.close(zip);
                 }
                 String folderId = parentId.substring(0, parentId.lastIndexOf(",")).split(",")[0];
                 jedisClient.delKeys(DiskCloudConstants.SYS_FILE_MATION_FOLDER_LIST_MATION + folderId + "*");//删除父目录的redis的key
@@ -2003,9 +1992,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                     try {
                         ToolUtil.recursionZip(out, dowlLoadFile, "", tPath.replace("images", ""), 2);
                     } finally {
-                        if (out != null) {
-                            out.close();
-                        }
+                        FileUtil.close(out);
                     }
                 }
                 trueFileName = Constants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + "temporaryfile/" + userId + "/" + fileName + ".zip";

@@ -279,13 +279,7 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
         } catch (IOException e) {
             throw new CustomException(e);
         } finally {
-            if (outChnnel != null) {
-                try {
-                    outChnnel.close();
-                } catch (IOException e) {
-                    throw new CustomException(e);
-                }
-            }
+            FileUtil.close(outChnnel);
         }
         jedisClient.del(Constants.getSysEnclosureFileModuleByMd5(map.get("md5").toString()));
         //初始化文件对象内容

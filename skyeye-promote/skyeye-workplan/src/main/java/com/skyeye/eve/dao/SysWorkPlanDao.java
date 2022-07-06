@@ -4,6 +4,7 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.workplan.SysWorkPlanQueryDo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,23 +20,23 @@ import java.util.Map;
  */
 public interface SysWorkPlanDao {
 
-    public List<Map<String, Object>> querySysWorkPlanList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysWorkPlanList(SysWorkPlanQueryDo sysWorkPlanQuery);
 
-    public int insertSysWorkPlanISPeople(Map<String, Object> map) throws Exception;
+    int insertSysWorkPlanISPeople(Map<String, Object> map);
 
-    public int insertSysWorkPlanExecutorISPeople(Map<String, Object> map) throws Exception;
+    int insertSysWorkPlanExecutorISPeople(Map<String, Object> map);
 
-    public int insertSysWorkPlanExecutors(List<Map<String, Object>> executors) throws Exception;
+    int insertSysWorkPlanExecutors(List<Map<String, Object>> executors);
 
-    public List<Map<String, Object>> queryUserMationByUserIds(@Param("carryPeople") String carryPeople) throws Exception;
+    List<Map<String, Object>> queryUserMationByUserIds(@Param("carryPeople") String carryPeople);
 
-    public Map<String, Object> queryPlanMationByUserIdAndPlanId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryPlanMationByUserIdAndPlanId(Map<String, Object> map);
 
-    public int updateWhetherTimeById(Map<String, Object> map) throws Exception;
+    int updateWhetherTimeById(Map<String, Object> map);
 
-    public int deleteSysWorkPlanById(Map<String, Object> map) throws Exception;
+    int deleteSysWorkPlanById(Map<String, Object> map);
 
-    public Map<String, Object> querySysWorkPlanToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysWorkPlanToEditById(Map<String, Object> map);
 
     /**
      * 删除该计划与用户的绑定信息
@@ -44,33 +45,33 @@ public interface SysWorkPlanDao {
      * @return
      * @throws Exception
      */
-    public int deleteSysWorkPlanUserById(@Param("planId") String planId) throws Exception;
+    int deleteSysWorkPlanUserById(@Param("planId") String planId);
 
-    public List<Map<String, Object>> querySysWorkPlanExecutorsToEditById(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysWorkPlanExecutorsToEditById(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySysWorkPlanEnclosuresToEditById(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysWorkPlanEnclosuresToEditById(Map<String, Object> map);
 
-    public int editSysWorkPlanISPeople(Map<String, Object> map) throws Exception;
+    int editSysWorkPlanISPeople(Map<String, Object> map);
 
-    public int editSysWorkPlanTimingSend(Map<String, Object> map) throws Exception;
+    int editSysWorkPlanTimingSend(Map<String, Object> map);
 
-    public Map<String, Object> querySysWorkPlanDetailsById(@Param("id") String id, @Param("executorId") String executorId) throws Exception;
+    Map<String, Object> querySysWorkPlanDetailsById(@Param("id") String id, @Param("executorId") String executorId);
 
-    public int insertNoticeMation(Map<String, Object> notice) throws Exception;
+    int insertNoticeMation(Map<String, Object> notice);
 
-    public int insertNoticeListMation(List<Map<String, Object>> notices) throws Exception;
+    int insertNoticeListMation(List<Map<String, Object>> notices);
 
-    public List<Map<String, Object>> queryMySysWorkPlanListByUserId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryMySysWorkPlanListByUserId(Map<String, Object> map);
 
-    public Map<String, Object> queryMySysWorkPlanMationByUserId(@Param("planId") String planId, @Param("userId") String userId) throws Exception;
+    Map<String, Object> queryMySysWorkPlanMationByUserId(@Param("planId") String planId, @Param("userId") String userId);
 
-    public void subEditWorkPlanStateById(Map<String, Object> map) throws Exception;
+    void subEditWorkPlanStateById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryMyCreateSysWorkPlanList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryMyCreateSysWorkPlanList(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryAllSysWorkPlanList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryAllSysWorkPlanList(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryMyChildJobUserListByUserId(@Param("userId") String userId) throws Exception;
+    List<Map<String, Object>> queryMyChildJobUserListByUserId(@Param("userId") String userId);
 
-    public List<Map<String, Object>> queryMyBranchSysWorkPlanList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryMyBranchSysWorkPlanList(Map<String, Object> map);
 }

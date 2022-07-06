@@ -12,6 +12,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.FileUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveModelDao;
+import com.skyeye.eve.entity.sysmodel.SysEveModelQueryDo;
 import com.skyeye.eve.service.SysEveModelService;
 import com.skyeye.jedis.JedisClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,10 +51,10 @@ public class SysEveModelServiceImpl implements SysEveModelService {
      */
     @Override
     public void querySysEveModelList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        map.put("userId", inputObject.getLogParams().get("id"));
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = sysEveModelDao.querySysEveModelList(map);
+        SysEveModelQueryDo sysEveModelQuery = inputObject.getParams(SysEveModelQueryDo.class);
+        sysEveModelQuery.setUserId(inputObject.getLogParams().get("id").toString());
+        Page pages = PageHelper.startPage(sysEveModelQuery.getPage(), sysEveModelQuery.getLimit());
+        List<Map<String, Object>> beans = sysEveModelDao.querySysEveModelList(sysEveModelQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

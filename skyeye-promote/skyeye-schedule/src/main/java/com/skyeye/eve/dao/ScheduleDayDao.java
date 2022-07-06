@@ -26,62 +26,60 @@ public interface ScheduleDayDao {
      * @return
      * @throws Exception
      */
-    public int insertScheduleDayMation(Map<String, Object> map) throws Exception;
+    int insertScheduleDayMation(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryScheduleDayMationByUserId(@Param("userId") String userId, @Param("list") List<String> months) throws Exception;
+    List<Map<String, Object>> queryScheduleDayMationByUserId(@Param("userId") String userId, @Param("list") List<String> months);
 
-    public List<Map<String, Object>> queryScheduleDayMationTodayByUserId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryScheduleDayMationTodayByUserId(Map<String, Object> map);
 
-    public Map<String, Object> queryScheduleDayMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryScheduleDayMationById(Map<String, Object> map);
 
-    public int editScheduleDayMationById(Map<String, Object> map) throws Exception;
+    int editScheduleDayMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryScheduleDayDetailsMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryScheduleDayDetailsMationById(Map<String, Object> map);
 
-    public int deleteScheduleDayMationById(Map<String, Object> map) throws Exception;
+    int deleteScheduleDayMationById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryHolidayScheduleList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryHolidayScheduleList(Map<String, Object> map);
 
-    public int exploreScheduleTemplate(List<Map<String, Object>> beans) throws Exception;
+    int exploreScheduleTemplate(List<Map<String, Object>> beans);
 
-    public int deleteHolidayScheduleById(Map<String, Object> map) throws Exception;
+    int deleteHolidayScheduleById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryHolidayScheduleByThisYear(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryHolidayScheduleByThisYear(Map<String, Object> map);
 
-    public int deleteHolidayScheduleByThisYear(Map<String, Object> map) throws Exception;
+    int deleteHolidayScheduleByThisYear(Map<String, Object> map);
 
-    public int addHolidayScheduleRemind(Map<String, Object> map) throws Exception;
+    int addHolidayScheduleRemind(Map<String, Object> map);
 
-    public Map<String, Object> queryHolidayScheduleDayMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryHolidayScheduleDayMationById(Map<String, Object> map);
 
-    public int deleteHolidayScheduleRemind(Map<String, Object> map) throws Exception;
+    int deleteHolidayScheduleRemind(Map<String, Object> map);
 
-    public Map<String, Object> queryScheduleByIdToEdit(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryScheduleByIdToEdit(Map<String, Object> map);
 
-    public int editScheduleById(Map<String, Object> map) throws Exception;
+    int editScheduleById(Map<String, Object> map);
 
-    public int addSchedule(Map<String, Object> map) throws Exception;
+    int addSchedule(Map<String, Object> map);
 
-    public Map<String, Object> queryIsnullThistime(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryIsnullThistime(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryHolidayScheduleListBySys(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryHolidayScheduleListBySys(Map<String, Object> map);
 
     /**
      * 根据关联id删除日程
      *
      * @param objectId 关联id
      * @return
-     * @throws Exception
      */
-    public int deleteScheduleDayMationByPlanId(@Param("objectId") String objectId) throws Exception;
+    int deleteScheduleDayMationByPlanId(@Param("objectId") String objectId);
 
     /**
      * 分页获取我的日程信息
      *
      * @param map 查询条件
      * @return
-     * @throws Exception
      */
-    public List<Map<String, Object>> queryMyScheduleList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryMyScheduleList(Map<String, Object> map);
 
 }

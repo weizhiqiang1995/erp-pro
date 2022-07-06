@@ -95,13 +95,7 @@ public class CodeModelHistoryServiceImpl implements CodeModelHistoryService {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             } finally {
-                if (out != null) {
-                    try {
-                        out.close();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
+                FileUtil.close(out);
             }
         }
     }
@@ -138,20 +132,8 @@ public class CodeModelHistoryServiceImpl implements CodeModelHistoryService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
-            if (bis != null) {
-                try {
-                    bis.close();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            if (out != null) {
-                try {
-                    out.close();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+            FileUtil.close(bis);
+            FileUtil.close(out);
         }
     }
 

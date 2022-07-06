@@ -9,43 +9,43 @@ import com.skyeye.common.object.OutputObject;
 
 public interface ScheduleDayService {
 
-    public void insertScheduleDayMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void insertScheduleDayMation(InputObject inputObject, OutputObject outputObject);
 
-    public void queryScheduleDayMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void queryScheduleDayMationByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryScheduleDayMationTodayByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void queryScheduleDayMationTodayByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void editScheduleDayMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void editScheduleDayMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryScheduleDayMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void queryScheduleDayMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteScheduleDayMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void deleteScheduleDayMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryHolidayScheduleList(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void queryHolidayScheduleList(InputObject inputObject, OutputObject outputObject);
 
-    public void downloadScheduleTemplate(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void downloadScheduleTemplate(InputObject inputObject, OutputObject outputObject);
 
-    public void exploreScheduleTemplate(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void exploreScheduleTemplate(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteHolidayScheduleById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void deleteHolidayScheduleById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteHolidayScheduleByThisYear(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void deleteHolidayScheduleByThisYear(InputObject inputObject, OutputObject outputObject);
 
-    public void addHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void addHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void deleteHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject);
 
-    public void queryScheduleByIdToEdit(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void queryScheduleByIdToEdit(InputObject inputObject, OutputObject outputObject);
 
-    public void editScheduleById(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void editScheduleById(InputObject inputObject, OutputObject outputObject);
 
-    public void addSchedule(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void addSchedule(InputObject inputObject, OutputObject outputObject);
 
-    public void queryHolidayScheduleListBySys(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void queryHolidayScheduleListBySys(InputObject inputObject, OutputObject outputObject);
 
-    public void queryMyScheduleList(InputObject inputObject, OutputObject outputObject) throws Exception;
+   void queryMyScheduleList(InputObject inputObject, OutputObject outputObject);
 
-    void insertScheduleMationByOtherModule(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertScheduleMationByOtherModule(InputObject inputObject, OutputObject outputObject);
 
     /**
      * 将其他模块同步到日程
@@ -58,7 +58,6 @@ public interface ScheduleDayService {
      * @param userId     执行人
      * @param objectId   关联id
      * @param objectType object类型：1.任务计划id，2.项目任务id
-     * @throws Exception
      */
-    public String synchronizationSchedule(String title, String content, String startTime, String endTime, String userId, String objectId, int objectType) throws Exception;
+   String synchronizationSchedule(String title, String content, String startTime, String endTime, String userId, String objectId, int objectType);
 }

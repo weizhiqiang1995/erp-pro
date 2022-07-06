@@ -5,15 +5,6 @@
 	 -->
 	
 	<!-- 工作计划模块开始 -->
-	<url id="sysworkplan001" path="/post/SysWorkPlanController/querySysWorkPlanList" val="获取计划列表" allUse="1">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-	    <property id="checkPlan" name="checkPlan" ref="required,num" var="当前选择的计划分类，个人计划，部门计划，公司计划"/>
-	    <property id="nowCheckType" name="nowCheckType" ref="required" var="计划类型，日计划，周计划等"/>
-	    <property id="title" name="title" ref="" var="计划标题"/>
-	    <property id="startTime" name="startTime" ref="required,date" var="开始时间"/>
-	    <property id="endTime" name="endTime" ref="required,date" var="结束时间"/>
-	</url>
 	<url id="sysworkplan002" path="/post/SysWorkPlanController/insertSysWorkPlanISPeople" val="新增个人计划" allUse="1">
 		<property id="title" name="title" ref="required" var="计划标题" />
 	    <property id="content" name="content" ref="required" var="计划内容"/>

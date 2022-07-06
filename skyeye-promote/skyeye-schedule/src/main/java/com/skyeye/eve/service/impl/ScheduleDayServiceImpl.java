@@ -24,6 +24,7 @@ import com.skyeye.eve.entity.checkwork.UserOtherDayMationRest;
 import com.skyeye.eve.entity.schedule.OtherModuleScheduleMation;
 import com.skyeye.eve.rest.checkwork.CheckWorkService;
 import com.skyeye.eve.service.ScheduleDayService;
+import com.skyeye.exception.CustomException;
 import com.skyeye.jedis.JedisClientService;
 import com.skyeye.quartz.config.QuartzService;
 import org.slf4j.Logger;
@@ -35,6 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -67,11 +69,10 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertScheduleDayMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertScheduleDayMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         int remindTimeType = Integer.parseInt(map.get("remindType").toString());
@@ -108,10 +109,9 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryScheduleDayMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryScheduleDayMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String userId = inputObject.getLogParams().get("id").toString();
         String yearMonth = map.get("yearMonth").toString();
@@ -138,10 +138,9 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryScheduleDayMationTodayByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryScheduleDayMationTodayByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -157,11 +156,10 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editScheduleDayMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editScheduleDayMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = scheduleDayDao.queryScheduleDayMationById(map);
         int remindTimeType = Integer.parseInt(bean.get("remindType").toString());
@@ -202,10 +200,9 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryScheduleDayMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryScheduleDayMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = scheduleDayDao.queryScheduleDayDetailsMationById(map);
         outputObject.setBean(bean);
@@ -217,11 +214,10 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteScheduleDayMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteScheduleDayMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 删除日程信息
         scheduleDayDao.deleteScheduleDayMationById(map);
@@ -234,10 +230,9 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryHolidayScheduleList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryHolidayScheduleList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = scheduleDayDao.queryHolidayScheduleList(map);
@@ -258,10 +253,9 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void downloadScheduleTemplate(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void downloadScheduleTemplate(InputObject inputObject, OutputObject outputObject) {
         String[] key = new String[9];
         String[] column = new String[]{"标题", "开始日期", "结束日期"};
         String[] dataType = new String[]{"", "data", "data"};
@@ -273,11 +267,10 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void exploreScheduleTemplate(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void exploreScheduleTemplate(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         // 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
@@ -299,7 +292,11 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
             while (iter.hasNext()) {
                 // 一次遍历所有文件
                 file = multiRequest.getFile(iter.next().toString());
-                list = ExcelUtil.readExcelContent(file.getInputStream());
+                try {
+                    list = ExcelUtil.readExcelContent(file.getInputStream());
+                } catch (IOException e) {
+                    throw new CustomException(e);
+                }
                 beans = new ArrayList<>();
                 uploadNum = 0;
                 for (int i = 0, j = list.size(); i < j; i++) {
@@ -347,11 +344,10 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteHolidayScheduleById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteHolidayScheduleById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 删除节假日信息
         scheduleDayDao.deleteHolidayScheduleById(map);
@@ -364,11 +360,10 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteHolidayScheduleByThisYear(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteHolidayScheduleByThisYear(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = scheduleDayDao.queryHolidayScheduleByThisYear(map);//获取本年度节假日
         for (Map<String, Object> bean : beans) {
@@ -383,11 +378,10 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void addHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = scheduleDayDao.queryHolidayScheduleDayMationById(map);
         int remindTimeType = Integer.parseInt(map.get("remindType").toString());
@@ -419,11 +413,10 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 修改节假日信息
         scheduleDayDao.deleteHolidayScheduleRemind(map);
@@ -436,10 +429,9 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryScheduleByIdToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryScheduleByIdToEdit(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = scheduleDayDao.queryScheduleByIdToEdit(map);
         outputObject.setBean(bean);
@@ -451,10 +443,9 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void editScheduleById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editScheduleById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         scheduleDayDao.editScheduleById(map);
     }
@@ -464,10 +455,9 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void addSchedule(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addSchedule(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> m = scheduleDayDao.queryIsnullThistime(map);
         if (m != null && !m.isEmpty()) {
@@ -493,10 +483,9 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryHolidayScheduleListBySys(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryHolidayScheduleListBySys(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = scheduleDayDao.queryHolidayScheduleListBySys(map);
         outputObject.setBeans(beans);
@@ -507,10 +496,9 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMyScheduleList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyScheduleList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
@@ -524,10 +512,9 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void insertScheduleMationByOtherModule(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertScheduleMationByOtherModule(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         OtherModuleScheduleMation scheduleMation = JSONUtil.toBean(JSON.toJSONString(map),
             OtherModuleScheduleMation.class);
@@ -546,10 +533,9 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      * @param userId     执行人
      * @param objectId   关联id
      * @param objectType object类型：1.任务计划id，2.项目任务id
-     * @throws Exception
      */
     @Override
-    public String synchronizationSchedule(String title, String content, String startTime, String endTime, String userId, String objectId, int objectType) throws Exception {
+    public String synchronizationSchedule(String title, String content, String startTime, String endTime, String userId, String objectId, int objectType) {
         Map<String, Object> map = new HashMap<>();
         String scheduleId = ToolUtil.getSurFaceId();
         map.put("id", scheduleId);

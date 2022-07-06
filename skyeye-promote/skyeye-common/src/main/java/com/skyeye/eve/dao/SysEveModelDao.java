@@ -4,6 +4,7 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.sysmodel.SysEveModelQueryDo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.Map;
  */
 public interface SysEveModelDao {
 
-    List<Map<String, Object>> querySysEveModelList(Map<String, Object> map);
+    List<Map<String, Object>> querySysEveModelList(SysEveModelQueryDo sysEveModelQuery);
 
     Map<String, Object> querySysEveModelMationByNameAndType(Map<String, Object> map);
 

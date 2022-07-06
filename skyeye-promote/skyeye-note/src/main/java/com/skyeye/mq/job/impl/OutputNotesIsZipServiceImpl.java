@@ -126,9 +126,7 @@ public class OutputNotesIsZipServiceImpl implements JobMateService {
             for (Map<String, Object> bean : files) {
                 FileUtil.deleteFile(tPath.replace("images", "") + bean.get("fileAddress").toString());
             }
-            if (out != null) {
-                out.close();
-            }
+            FileUtil.close(out);
         }
         return "/images/upload/notes/filezip/" + userId + "/" + fileName + ".zip";
     }

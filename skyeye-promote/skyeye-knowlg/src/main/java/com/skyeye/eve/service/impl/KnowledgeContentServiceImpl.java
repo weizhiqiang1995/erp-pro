@@ -10,6 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.KnowlgConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.object.PutObject;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.FileUtil;
 import com.skyeye.common.util.ToolUtil;
@@ -158,13 +159,13 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         // 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(inputObject.getRequest().getSession().getServletContext());
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(PutObject.getRequest().getSession().getServletContext());
         // 检查form中是否有enctype="multipart/form-data"
-        if (multipartResolver.isMultipart(inputObject.getRequest())) {
+        if (multipartResolver.isMultipart(PutObject.getRequest())) {
             Map<String, Object> user = inputObject.getLogParams();
             String userId = user.get("id").toString();
             // 将request变成多部分request
-            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) inputObject.getRequest();
+            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) PutObject.getRequest();
             // 获取multiRequest 中所有的文件名
             Iterator iter = multiRequest.getFileNames();
             String basePath = tPath + "\\upload\\wordfolder\\" + userId;
@@ -247,9 +248,7 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
                 file.delete();
             }
         } finally {
-            if (outChnnel != null) {
-                outChnnel.close();
-            }
+            FileUtil.close(outChnnel);
         }
         jedisClient.del(KnowlgConstants.getSysWordFileModuleByMd5(map.get("md5").toString()));
         try {

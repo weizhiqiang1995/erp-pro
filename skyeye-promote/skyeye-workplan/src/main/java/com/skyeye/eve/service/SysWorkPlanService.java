@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,35 +9,35 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysWorkPlanService {
 
-    public void querySysWorkPlanList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysWorkPlanList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysWorkPlanISPeople(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysWorkPlanISPeople(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysWorkPlanISDepartMent(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysWorkPlanISDepartMent(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysWorkPlanISCompany(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysWorkPlanISCompany(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSysWorkPlanTimingById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteSysWorkPlanTimingById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSysWorkPlanById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteSysWorkPlanById(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysWorkPlanToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysWorkPlanToEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysWorkPlanISPeople(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysWorkPlanISPeople(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysWorkPlanISDepartMentOrCompany(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysWorkPlanISDepartMentOrCompany(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysWorkPlanTimingSend(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysWorkPlanTimingSend(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysWorkPlanDetailsById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysWorkPlanDetailsById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryMySysWorkPlanListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryMySysWorkPlanListByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void subEditWorkPlanStateById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void subEditWorkPlanStateById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryMyCreateSysWorkPlanList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryMyCreateSysWorkPlanList(InputObject inputObject, OutputObject outputObject);
 
-    public void queryAllSysWorkPlanList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryAllSysWorkPlanList(InputObject inputObject, OutputObject outputObject);
 
-    public void queryMyBranchSysWorkPlanList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryMyBranchSysWorkPlanList(InputObject inputObject, OutputObject outputObject);
 }

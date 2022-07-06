@@ -9,14 +9,15 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.MqConstants;
 import com.skyeye.common.constans.QuartzConstants;
+import com.skyeye.common.constans.ScheduleDayConstants;
 import com.skyeye.common.constans.WorkPlanConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
-import com.skyeye.common.constans.ScheduleDayConstants;
 import com.skyeye.eve.dao.ScheduleDayDao;
 import com.skyeye.eve.dao.SysWorkPlanDao;
+import com.skyeye.eve.entity.workplan.SysWorkPlanQueryDo;
 import com.skyeye.eve.service.ScheduleDayService;
 import com.skyeye.eve.service.SysWorkPlanService;
 import com.skyeye.quartz.config.QuartzService;
@@ -89,16 +90,15 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysWorkPlanList(InputObject inputObject, OutputObject outputObject) throws Exception {
-        Map<String, Object> map = inputObject.getParams();
-        //转化计划周期类型为数字
-        map.put("nowCheckType", WorkPlanConstants.SysWorkPlan.getClockInState(map.get("nowCheckType").toString()));
-        map.put("userId", inputObject.getLogParams().get("id"));
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = sysWorkPlanDao.querySysWorkPlanList(map);
+    public void querySysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
+        SysWorkPlanQueryDo sysWorkPlanQuery = inputObject.getParams(SysWorkPlanQueryDo.class);
+        // 转化计划周期类型为数字
+        sysWorkPlanQuery.setNowCheckTypeNum(WorkPlanConstants.SysWorkPlan.getClockInState(sysWorkPlanQuery.getNowCheckType()));
+        sysWorkPlanQuery.setUserId(inputObject.getLogParams().get("id").toString());
+        Page pages = PageHelper.startPage(sysWorkPlanQuery.getPage(), sysWorkPlanQuery.getLimit());
+        List<Map<String, Object>> beans = sysWorkPlanDao.querySysWorkPlanList(sysWorkPlanQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -108,11 +108,10 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysWorkPlanISPeople(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysWorkPlanISPeople(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String userId = user.get("id").toString();
@@ -211,7 +210,7 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
         return executors;
     }
 
-    private void sendMessageToStaff(Map<String, Object> map, String userId, String carryPeople) throws Exception {
+    private void sendMessageToStaff(Map<String, Object> map, String userId, String carryPeople) {
         map.put("notifyTime", null);
         // 是否邮件通知
         String whetherMail = map.get("whetherMail").toString();
@@ -251,9 +250,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      * @param email    邮箱
      * @param content  内容
      * @param createId 创建人
-     * @throws Exception
      */
-    private void sendEmailToStaff(String email, String content, String createId) throws Exception {
+    private void sendEmailToStaff(String email, String content, String createId) {
         Map<String, Object> emailNotice = new HashMap<>();
         emailNotice.put("title", MESSAGE_TITLE);
         emailNotice.put("content", content);
@@ -266,9 +264,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      * 内部消息通知通用方法
      *
      * @param userJson 内部消息通知对象
-     * @throws Exception
      */
-    private void sendInsideNotice(List<Map<String, Object>> userJson) throws Exception {
+    private void sendInsideNotice(List<Map<String, Object>> userJson) {
         // 调用消息系统添加通知
         List<Map<String, Object>> notices = new ArrayList<>();
         Map<String, Object> notice = null;
@@ -296,11 +293,10 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysWorkPlanISDepartMent(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysWorkPlanISDepartMent(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String userId = user.get("id").toString();
@@ -353,9 +349,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param map    日程的通知信息
      * @param planId 计划id
-     * @throws Exception
      */
-    private void editWorkPlanExecutors(Map<String, Object> map, String planId) throws Exception {
+    private void editWorkPlanExecutors(Map<String, Object> map, String planId) {
         // 获取计划执行者
         List<Map<String, Object>> executors = getTypeISTeamExecutor(map.get("carryPeople").toString().split(","), planId);
         if (!executors.isEmpty()) {
@@ -378,11 +373,10 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysWorkPlanISCompany(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysWorkPlanISCompany(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String userId = user.get("id").toString();
@@ -435,11 +429,10 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysWorkPlanTimingById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysWorkPlanTimingById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -470,11 +463,10 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysWorkPlanById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysWorkPlanById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String planId = map.get("id").toString();
         Map<String, Object> user = inputObject.getLogParams();
@@ -499,10 +491,9 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysWorkPlanToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysWorkPlanToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         //获取计划信息
         Map<String, Object> bean = sysWorkPlanDao.querySysWorkPlanToEditById(map);
@@ -522,11 +513,10 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysWorkPlanISPeople(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysWorkPlanISPeople(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String userId = user.get("id").toString();
@@ -583,11 +573,10 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysWorkPlanISDepartMentOrCompany(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysWorkPlanISDepartMentOrCompany(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String userId = user.get("id").toString();
@@ -642,11 +631,10 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysWorkPlanTimingSend(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysWorkPlanTimingSend(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -668,10 +656,9 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysWorkPlanDetailsById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysWorkPlanDetailsById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         //获取计划信息
         Map<String, Object> bean = sysWorkPlanDao.querySysWorkPlanDetailsById(map.get("id").toString(), map.get("executorId").toString());
@@ -695,10 +682,9 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMySysWorkPlanListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMySysWorkPlanListByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
@@ -712,10 +698,9 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void subEditWorkPlanStateById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void subEditWorkPlanStateById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String userId = inputObject.getLogParams().get("id").toString();
         Map<String, Object> executorMation = sysWorkPlanDao.queryMySysWorkPlanMationByUserId(map.get("id").toString(), userId);
@@ -734,10 +719,9 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMyCreateSysWorkPlanList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyCreateSysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
@@ -751,10 +735,9 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAllSysWorkPlanList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysWorkPlanDao.queryAllSysWorkPlanList(map);
@@ -767,10 +750,9 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMyBranchSysWorkPlanList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyBranchSysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String userId = inputObject.getLogParams().get("id").toString();
         // 获取我的下属职位员工

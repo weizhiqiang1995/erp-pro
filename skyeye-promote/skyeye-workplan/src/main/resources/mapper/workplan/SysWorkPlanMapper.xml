@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.skyeye.eve.dao.SysWorkPlanDao">
 	
-	<select id="querySysWorkPlanList" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="querySysWorkPlanList" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.title,
@@ -22,7 +22,7 @@
 			sys_work_plan_executor c
 		WHERE a.id = c.plan_id
 		AND a.plan_type = #{checkPlan}
-		AND a.plan_cycle = #{nowCheckType}
+		AND a.plan_cycle = #{nowCheckTypeNum}
 		AND (c.user_id = #{userId} OR a.create_id = #{userId})
 		<if test="title != '' and title != null">
 			AND a.title LIKE '%${title}%'

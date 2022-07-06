@@ -4,14 +4,27 @@
 
 package com.skyeye.eve.controller;
 
+import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParams;
+import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.workplan.SysWorkPlanQueryDo;
 import com.skyeye.eve.service.SysWorkPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @ClassName: SysWorkPlanController
+ * @Description: 工作计划管理
+ * @author: skyeye云系列--卫志强
+ * @date: 2022/6/30 22:26
+ * @Copyright: 2022 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
+ * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
+ */
 @RestController
+@Api(value = "工作计划管理", tags = "工作计划管理", modelName = "工作计划模块")
 public class SysWorkPlanController {
 
     @Autowired
@@ -22,10 +35,11 @@ public class SysWorkPlanController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
+    @ApiOperation(id = "sysworkplan001", value = "获取计划列表", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = SysWorkPlanQueryDo.class)
     @RequestMapping("/post/SysWorkPlanController/querySysWorkPlanList")
-    public void querySysWorkPlanList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.querySysWorkPlanList(inputObject, outputObject);
     }
 
@@ -34,10 +48,9 @@ public class SysWorkPlanController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysWorkPlanController/insertSysWorkPlanISPeople")
-    public void insertSysWorkPlanISPeople(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysWorkPlanISPeople(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.insertSysWorkPlanISPeople(inputObject, outputObject);
     }
 
@@ -46,10 +59,9 @@ public class SysWorkPlanController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysWorkPlanController/insertSysWorkPlanISDepartMent")
-    public void insertSysWorkPlanISDepartMent(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysWorkPlanISDepartMent(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.insertSysWorkPlanISDepartMent(inputObject, outputObject);
     }
 
@@ -58,10 +70,9 @@ public class SysWorkPlanController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysWorkPlanController/insertSysWorkPlanISCompany")
-    public void insertSysWorkPlanISCompany(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysWorkPlanISCompany(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.insertSysWorkPlanISCompany(inputObject, outputObject);
     }
 
@@ -70,10 +81,9 @@ public class SysWorkPlanController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysWorkPlanController/deleteSysWorkPlanTimingById")
-    public void deleteSysWorkPlanTimingById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysWorkPlanTimingById(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.deleteSysWorkPlanTimingById(inputObject, outputObject);
     }
 
@@ -82,10 +92,9 @@ public class SysWorkPlanController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysWorkPlanController/deleteSysWorkPlanById")
-    public void deleteSysWorkPlanById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysWorkPlanById(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.deleteSysWorkPlanById(inputObject, outputObject);
     }
 
@@ -94,10 +103,9 @@ public class SysWorkPlanController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysWorkPlanController/querySysWorkPlanToEditById")
-    public void querySysWorkPlanToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysWorkPlanToEditById(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.querySysWorkPlanToEditById(inputObject, outputObject);
     }
 
@@ -106,10 +114,9 @@ public class SysWorkPlanController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysWorkPlanController/editSysWorkPlanISPeople")
-    public void editSysWorkPlanISPeople(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysWorkPlanISPeople(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.editSysWorkPlanISPeople(inputObject, outputObject);
     }
 
@@ -118,10 +125,9 @@ public class SysWorkPlanController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysWorkPlanController/editSysWorkPlanISDepartMentOrCompany")
-    public void editSysWorkPlanISDepartMentOrCompany(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysWorkPlanISDepartMentOrCompany(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.editSysWorkPlanISDepartMentOrCompany(inputObject, outputObject);
     }
 
@@ -130,10 +136,9 @@ public class SysWorkPlanController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysWorkPlanController/editSysWorkPlanTimingSend")
-    public void editSysWorkPlanTimingSend(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysWorkPlanTimingSend(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.editSysWorkPlanTimingSend(inputObject, outputObject);
     }
 
@@ -142,10 +147,9 @@ public class SysWorkPlanController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysWorkPlanController/querySysWorkPlanDetailsById")
-    public void querySysWorkPlanDetailsById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysWorkPlanDetailsById(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.querySysWorkPlanDetailsById(inputObject, outputObject);
     }
 
@@ -154,10 +158,9 @@ public class SysWorkPlanController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysWorkPlanController/queryMySysWorkPlanListByUserId")
-    public void queryMySysWorkPlanListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMySysWorkPlanListByUserId(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.queryMySysWorkPlanListByUserId(inputObject, outputObject);
     }
 
@@ -166,10 +169,9 @@ public class SysWorkPlanController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysWorkPlanController/subEditWorkPlanStateById")
-    public void subEditWorkPlanStateById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void subEditWorkPlanStateById(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.subEditWorkPlanStateById(inputObject, outputObject);
     }
 
@@ -178,10 +180,9 @@ public class SysWorkPlanController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysWorkPlanController/queryMyCreateSysWorkPlanList")
-    public void queryMyCreateSysWorkPlanList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyCreateSysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.queryMyCreateSysWorkPlanList(inputObject, outputObject);
     }
 
@@ -190,10 +191,9 @@ public class SysWorkPlanController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysWorkPlanController/queryAllSysWorkPlanList")
-    public void queryAllSysWorkPlanList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.queryAllSysWorkPlanList(inputObject, outputObject);
     }
 
@@ -202,10 +202,9 @@ public class SysWorkPlanController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysWorkPlanController/queryMyBranchSysWorkPlanList")
-    public void queryMyBranchSysWorkPlanList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyBranchSysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
         sysWorkPlanService.queryMyBranchSysWorkPlanList(inputObject, outputObject);
     }
 
