@@ -4,6 +4,7 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.schedule.ScheduleDayQueryDo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -24,7 +25,6 @@ public interface ScheduleDayDao {
      *
      * @param map 日程对象
      * @return
-     * @throws Exception
      */
     int insertScheduleDayMation(Map<String, Object> map);
 
@@ -75,11 +75,11 @@ public interface ScheduleDayDao {
     int deleteScheduleDayMationByPlanId(@Param("objectId") String objectId);
 
     /**
-     * 分页获取我的日程信息
+     * 获取我的日程信息
      *
-     * @param map 查询条件
+     * @param scheduleDayQuery 查询条件
      * @return
      */
-    List<Map<String, Object>> queryMyScheduleList(Map<String, Object> map);
+    List<Map<String, Object>> queryMyScheduleList(ScheduleDayQueryDo scheduleDayQuery);
 
 }

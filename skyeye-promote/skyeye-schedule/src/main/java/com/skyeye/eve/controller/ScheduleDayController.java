@@ -11,6 +11,7 @@ import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.entity.schedule.OtherModuleScheduleMation;
+import com.skyeye.eve.entity.schedule.ScheduleDayQueryDo;
 import com.skyeye.eve.service.ScheduleDayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,10 +29,9 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ScheduleDayController/insertScheduleDayMation")
-    public void insertScheduleDayMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertScheduleDayMation(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.insertScheduleDayMation(inputObject, outputObject);
     }
 
@@ -40,14 +40,13 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "syseveschedule002", value = "获取当前用户的日程信息", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "yearMonth", name = "yearMonth", value = "指定年月：YYYY-MM", required = "required"),
         @ApiImplicitParam(id = "checkWorkId", name = "checkWorkId", value = "班次id", required = "required")})
     @RequestMapping("/post/ScheduleDayController/queryScheduleDayMationByUserId")
-    public void queryScheduleDayMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryScheduleDayMationByUserId(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.queryScheduleDayMationByUserId(inputObject, outputObject);
     }
 
@@ -56,10 +55,9 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ScheduleDayController/queryScheduleDayMationTodayByUserId")
-    public void queryScheduleDayMationTodayByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryScheduleDayMationTodayByUserId(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.queryScheduleDayMationTodayByUserId(inputObject, outputObject);
     }
 
@@ -68,10 +66,9 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ScheduleDayController/editScheduleDayMationById")
-    public void editScheduleDayMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editScheduleDayMationById(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.editScheduleDayMationById(inputObject, outputObject);
     }
 
@@ -80,10 +77,9 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ScheduleDayController/queryScheduleDayMationById")
-    public void queryScheduleDayMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryScheduleDayMationById(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.queryScheduleDayMationById(inputObject, outputObject);
     }
 
@@ -92,10 +88,9 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ScheduleDayController/deleteScheduleDayMationById")
-    public void deleteScheduleDayMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteScheduleDayMationById(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.deleteScheduleDayMationById(inputObject, outputObject);
     }
 
@@ -104,10 +99,9 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ScheduleDayController/queryHolidayScheduleList")
-    public void queryHolidayScheduleList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryHolidayScheduleList(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.queryHolidayScheduleList(inputObject, outputObject);
     }
 
@@ -116,10 +110,9 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ScheduleDayController/downloadScheduleTemplate")
-    public void downloadScheduleTemplate(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void downloadScheduleTemplate(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.downloadScheduleTemplate(inputObject, outputObject);
     }
 
@@ -128,10 +121,9 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ScheduleDayController/exploreScheduleTemplate")
-    public void exploreScheduleTemplate(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void exploreScheduleTemplate(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.exploreScheduleTemplate(inputObject, outputObject);
     }
 
@@ -140,10 +132,9 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ScheduleDayController/deleteHolidayScheduleById")
-    public void deleteHolidayScheduleById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteHolidayScheduleById(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.deleteHolidayScheduleById(inputObject, outputObject);
     }
 
@@ -152,10 +143,9 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ScheduleDayController/deleteHolidayScheduleByThisYear")
-    public void deleteHolidayScheduleByThisYear(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteHolidayScheduleByThisYear(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.deleteHolidayScheduleByThisYear(inputObject, outputObject);
     }
 
@@ -164,10 +154,9 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ScheduleDayController/addHolidayScheduleRemind")
-    public void addHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.addHolidayScheduleRemind(inputObject, outputObject);
     }
 
@@ -176,10 +165,9 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ScheduleDayController/deleteHolidayScheduleRemind")
-    public void deleteHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.deleteHolidayScheduleRemind(inputObject, outputObject);
     }
 
@@ -188,10 +176,9 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ScheduleDayController/queryScheduleByIdToEdit")
-    public void queryScheduleByIdToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryScheduleByIdToEdit(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.queryScheduleByIdToEdit(inputObject, outputObject);
     }
 
@@ -200,10 +187,9 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ScheduleDayController/editScheduleById")
-    public void editScheduleById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editScheduleById(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.editScheduleById(inputObject, outputObject);
     }
 
@@ -212,10 +198,9 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ScheduleDayController/addSchedule")
-    public void addSchedule(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addSchedule(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.addSchedule(inputObject, outputObject);
     }
 
@@ -224,10 +209,9 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ScheduleDayController/queryHolidayScheduleListBySys")
-    public void queryHolidayScheduleListBySys(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryHolidayScheduleListBySys(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.queryHolidayScheduleListBySys(inputObject, outputObject);
     }
 
@@ -236,10 +220,11 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
+    @ApiOperation(id = "syseveschedule019", value = "获取我的日程", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = ScheduleDayQueryDo.class)
     @RequestMapping("/post/ScheduleDayController/queryMyScheduleList")
-    public void queryMyScheduleList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyScheduleList(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.queryMyScheduleList(inputObject, outputObject);
     }
 
@@ -248,12 +233,11 @@ public class ScheduleDayController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "insertScheduleMationByOtherModule", value = "其他模块同步到日程", method = "POST", allUse = "2")
     @ApiImplicitParams(classBean = OtherModuleScheduleMation.class)
     @RequestMapping("/post/ScheduleDayController/insertScheduleMationByOtherModule")
-    public void insertScheduleMationByOtherModule(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertScheduleMationByOtherModule(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.insertScheduleMationByOtherModule(inputObject, outputObject);
     }
 

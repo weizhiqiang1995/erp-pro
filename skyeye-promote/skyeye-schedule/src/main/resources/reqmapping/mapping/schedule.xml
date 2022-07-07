@@ -67,10 +67,6 @@
 	</url>
 	<url id="syseveschedule018" path="/post/ScheduleDayController/queryHolidayScheduleListBySys" val="获取所有节假日" allUse="2">
 	</url>
-	<url id="syseveschedule019" path="/post/ScheduleDayController/queryMyScheduleList" val="获取我的日程" allUse="1">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-	</url>
 	<!-- 日程管理结束 -->
 	
 	<!-- 我的代办开始 -->

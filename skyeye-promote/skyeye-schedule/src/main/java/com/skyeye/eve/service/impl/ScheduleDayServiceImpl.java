@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.client.ExecuteFeignClient;
 import com.skyeye.common.constans.CheckWorkConstants;
 import com.skyeye.common.constans.QuartzConstants;
+import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.object.PutObject;
@@ -22,6 +23,7 @@ import com.skyeye.eve.dao.ScheduleDayDao;
 import com.skyeye.eve.entity.checkwork.DayWorkMationRest;
 import com.skyeye.eve.entity.checkwork.UserOtherDayMationRest;
 import com.skyeye.eve.entity.schedule.OtherModuleScheduleMation;
+import com.skyeye.eve.entity.schedule.ScheduleDayQueryDo;
 import com.skyeye.eve.rest.checkwork.CheckWorkService;
 import com.skyeye.eve.service.ScheduleDayService;
 import com.skyeye.exception.CustomException;
@@ -499,10 +501,10 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      */
     @Override
     public void queryMyScheduleList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        map.put("userId", inputObject.getLogParams().get("id"));
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = scheduleDayDao.queryMyScheduleList(map);
+        ScheduleDayQueryDo scheduleDayQuery = inputObject.getParams(ScheduleDayQueryDo.class);
+        scheduleDayQuery.setUserId(inputObject.getLogParams().get("id").toString());
+        Page pages = PageHelper.startPage(scheduleDayQuery.getPage(), scheduleDayQuery.getLimit());
+        List<Map<String, Object>> beans = scheduleDayDao.queryMyScheduleList(scheduleDayQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
