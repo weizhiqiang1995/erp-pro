@@ -52,7 +52,7 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffRewardPunishDao.queryAllSysStaffRewardPunishList(params);
-        sysDictDataService.getDcitDataNameByIdList(beans, "typeId", "rewardPunishTypeName");
+        sysDictDataService.getDictDataNameByIdList(beans, "typeId", "rewardPunishTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -87,7 +87,7 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffRewardPunishDao.querySysStaffRewardPunishMationToEdit(id);
         if (certificate != null && !certificate.isEmpty()) {
-            sysDictDataService.getDcitDataNameByIdBean(certificate, "typeId", "rewardPunishTypeName");
+            sysDictDataService.getDictDataNameByIdBean(certificate, "typeId", "rewardPunishTypeName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
                 List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
@@ -147,7 +147,7 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffRewardPunishDao.queryPointStaffSysStaffRewardPunishList(params);
-        sysDictDataService.getDcitDataNameByIdList(beans, "typeId", "rewardPunishTypeName");
+        sysDictDataService.getDictDataNameByIdList(beans, "typeId", "rewardPunishTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

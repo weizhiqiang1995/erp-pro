@@ -52,7 +52,7 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffLanguageDao.queryAllSysStaffLanguageList(params);
-        sysDictDataService.getDcitDataNameByIdList(beans, "languageId", "languageTypeName");
+        sysDictDataService.getDictDataNameByIdList(beans, "languageId", "languageTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -84,7 +84,7 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffLanguageDao.querySysStaffLanguageMationToEdit(id);
         if (certificate != null && !certificate.isEmpty()) {
-            sysDictDataService.getDcitDataNameByIdBean(certificate, "languageId", "languageTypeName");
+            sysDictDataService.getDictDataNameByIdBean(certificate, "languageId", "languageTypeName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
                 List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
@@ -141,7 +141,7 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffLanguageDao.queryPointStaffSysStaffLanguageList(params);
-        sysDictDataService.getDcitDataNameByIdList(beans, "languageId", "languageTypeName");
+        sysDictDataService.getDictDataNameByIdList(beans, "languageId", "languageTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

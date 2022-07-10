@@ -70,7 +70,7 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffLanguageLevelDao.querySysStaffLanguageLevelList(params);
-        sysDictDataService.getDcitDataNameByIdList(beans, "typeId", "typeName");
+        sysDictDataService.getDictDataNameByIdList(beans, "typeId", "typeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

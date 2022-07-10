@@ -73,8 +73,8 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffContractDao.queryAllSysStaffContractList(params);
-        sysDictDataService.getDcitDataNameByIdList(beans, "typeId", "typeName");
-        sysDictDataService.getDcitDataNameByIdList(beans, "moldId", "moldName");
+        sysDictDataService.getDictDataNameByIdList(beans, "typeId", "typeName");
+        sysDictDataService.getDictDataNameByIdList(beans, "moldId", "moldName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -175,8 +175,8 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffContractDao.queryPointStaffSysStaffContractList(params);
-        sysDictDataService.getDcitDataNameByIdList(beans, "typeId", "typeName");
-        sysDictDataService.getDcitDataNameByIdList(beans, "moldId", "moldName");
+        sysDictDataService.getDictDataNameByIdList(beans, "typeId", "typeName");
+        sysDictDataService.getDictDataNameByIdList(beans, "moldId", "moldName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

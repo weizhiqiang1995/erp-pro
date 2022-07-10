@@ -52,9 +52,9 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffFamilyDao.queryAllSysStaffFamilyList(params);
-        sysDictDataService.getDcitDataNameByIdList(beans, "relationshipId", "relationshipName");
-        sysDictDataService.getDcitDataNameByIdList(beans, "cardType", "cardTypeName");
-        sysDictDataService.getDcitDataNameByIdList(beans, "politicId", "politicName");
+        sysDictDataService.getDictDataNameByIdList(beans, "relationshipId", "relationshipName");
+        sysDictDataService.getDictDataNameByIdList(beans, "cardType", "cardTypeName");
+        sysDictDataService.getDictDataNameByIdList(beans, "politicId", "politicName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -86,9 +86,9 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffFamilyDao.querySysStaffFamilyMationToEdit(id);
         if (certificate != null && !certificate.isEmpty()) {
-            sysDictDataService.getDcitDataNameByIdBean(certificate, "relationshipId", "relationshipName");
-            sysDictDataService.getDcitDataNameByIdBean(certificate, "cardType", "cardTypeName");
-            sysDictDataService.getDcitDataNameByIdBean(certificate, "politicId", "politicName");
+            sysDictDataService.getDictDataNameByIdBean(certificate, "relationshipId", "relationshipName");
+            sysDictDataService.getDictDataNameByIdBean(certificate, "cardType", "cardTypeName");
+            sysDictDataService.getDictDataNameByIdBean(certificate, "politicId", "politicName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
                 List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
@@ -145,9 +145,9 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffFamilyDao.queryPointStaffSysStaffFamilyList(params);
-        sysDictDataService.getDcitDataNameByIdList(beans, "relationshipId", "relationshipName");
-        sysDictDataService.getDcitDataNameByIdList(beans, "cardType", "cardTypeName");
-        sysDictDataService.getDcitDataNameByIdList(beans, "politicId", "politicName");
+        sysDictDataService.getDictDataNameByIdList(beans, "relationshipId", "relationshipName");
+        sysDictDataService.getDictDataNameByIdList(beans, "cardType", "cardTypeName");
+        sysDictDataService.getDictDataNameByIdList(beans, "politicId", "politicName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

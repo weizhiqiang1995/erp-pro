@@ -52,7 +52,7 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffCertificateDao.queryAllSysStaffCertificateList(params);
-        sysDictDataService.getDcitDataNameByIdList(beans, "typeId", "certificateTypeName");
+        sysDictDataService.getDictDataNameByIdList(beans, "typeId", "certificateTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -84,7 +84,7 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffCertificateDao.querySysStaffCertificateMationToEdit(id);
         if (certificate != null && !certificate.isEmpty()) {
-            sysDictDataService.getDcitDataNameByIdBean(certificate, "typeId", "certificateTypeName");
+            sysDictDataService.getDictDataNameByIdBean(certificate, "typeId", "certificateTypeName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
                 List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
@@ -141,7 +141,7 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffCertificateDao.queryPointStaffSysStaffCertificateList(params);
-        sysDictDataService.getDcitDataNameByIdList(beans, "typeId", "certificateTypeName");
+        sysDictDataService.getDictDataNameByIdList(beans, "typeId", "certificateTypeName");
 
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());

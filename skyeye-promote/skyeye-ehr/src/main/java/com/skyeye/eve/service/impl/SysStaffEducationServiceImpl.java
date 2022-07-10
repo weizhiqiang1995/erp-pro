@@ -52,9 +52,9 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffEducationDao.queryAllSysStaffEducationList(params);
-        sysDictDataService.getDcitDataNameByIdList(beans, "educationId", "educationName");
-        sysDictDataService.getDcitDataNameByIdList(beans, "learningModalityId", "learningModalityName");
-        sysDictDataService.getDcitDataNameByIdList(beans, "schoolNature", "schoolNatureName");
+        sysDictDataService.getDictDataNameByIdList(beans, "educationId", "educationName");
+        sysDictDataService.getDictDataNameByIdList(beans, "learningModalityId", "learningModalityName");
+        sysDictDataService.getDictDataNameByIdList(beans, "schoolNature", "schoolNatureName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -86,9 +86,9 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffEducationDao.querySysStaffEducationMationToEdit(id);
         if (certificate != null && !certificate.isEmpty()) {
-            sysDictDataService.getDcitDataNameByIdBean(certificate, "educationId", "educationName");
-            sysDictDataService.getDcitDataNameByIdBean(certificate, "learningModalityId", "learningModalityName");
-            sysDictDataService.getDcitDataNameByIdBean(certificate, "schoolNature", "schoolNatureName");
+            sysDictDataService.getDictDataNameByIdBean(certificate, "educationId", "educationName");
+            sysDictDataService.getDictDataNameByIdBean(certificate, "learningModalityId", "learningModalityName");
+            sysDictDataService.getDictDataNameByIdBean(certificate, "schoolNature", "schoolNatureName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
                 List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
@@ -145,9 +145,9 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffEducationDao.queryPointStaffSysStaffEducationList(params);
-        sysDictDataService.getDcitDataNameByIdList(beans, "educationId", "educationName");
-        sysDictDataService.getDcitDataNameByIdList(beans, "learningModalityId", "learningModalityName");
-        sysDictDataService.getDcitDataNameByIdList(beans, "schoolNature", "schoolNatureName");
+        sysDictDataService.getDictDataNameByIdList(beans, "educationId", "educationName");
+        sysDictDataService.getDictDataNameByIdList(beans, "learningModalityId", "learningModalityName");
+        sysDictDataService.getDictDataNameByIdList(beans, "schoolNature", "schoolNatureName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
