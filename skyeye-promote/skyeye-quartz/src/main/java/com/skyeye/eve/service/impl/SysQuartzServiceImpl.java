@@ -44,10 +44,9 @@ public class SysQuartzServiceImpl implements SysQuartzService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySystemQuartzList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySystemQuartzList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysQuartzDao.querySystemQuartzList(map);
@@ -60,10 +59,9 @@ public class SysQuartzServiceImpl implements SysQuartzService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMyTaskQuartzList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyTaskQuartzList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
@@ -77,10 +75,9 @@ public class SysQuartzServiceImpl implements SysQuartzService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void runSystemQuartz(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void runSystemQuartz(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         // 获取任务信息

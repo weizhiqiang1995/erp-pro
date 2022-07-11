@@ -4,16 +4,14 @@
 
 package com.skyeye.eve.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.SysStaffLanguageLevelService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class SysStaffLanguageLevelController {
 
     @Autowired
@@ -24,11 +22,9 @@ public class SysStaffLanguageLevelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysStaffLanguageLevelController/querySysStaffLanguageLevelList")
-    @ResponseBody
-    public void querySysStaffLanguageLevelList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffLanguageLevelList(InputObject inputObject, OutputObject outputObject) {
         sysStaffLanguageLevelService.querySysStaffLanguageLevelList(inputObject, outputObject);
     }
 
@@ -37,11 +33,9 @@ public class SysStaffLanguageLevelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysStaffLanguageLevelController/insertSysStaffLanguageLevelMation")
-    @ResponseBody
-    public void insertSysStaffLanguageLevelMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysStaffLanguageLevelMation(InputObject inputObject, OutputObject outputObject) {
         sysStaffLanguageLevelService.insertSysStaffLanguageLevelMation(inputObject, outputObject);
     }
 
@@ -50,11 +44,9 @@ public class SysStaffLanguageLevelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysStaffLanguageLevelController/querySysStaffLanguageLevelMationToEditById")
-    @ResponseBody
-    public void querySysStaffLanguageLevelMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffLanguageLevelMationToEditById(InputObject inputObject, OutputObject outputObject) {
         sysStaffLanguageLevelService.querySysStaffLanguageLevelMationToEditById(inputObject, outputObject);
     }
 
@@ -63,11 +55,9 @@ public class SysStaffLanguageLevelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysStaffLanguageLevelController/editSysStaffLanguageLevelMationById")
-    @ResponseBody
-    public void editSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) {
         sysStaffLanguageLevelService.editSysStaffLanguageLevelMationById(inputObject, outputObject);
     }
 
@@ -76,11 +66,9 @@ public class SysStaffLanguageLevelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysStaffLanguageLevelController/downSysStaffLanguageLevelMationById")
-    @ResponseBody
-    public void downSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void downSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) {
         sysStaffLanguageLevelService.downSysStaffLanguageLevelMationById(inputObject, outputObject);
     }
 
@@ -89,11 +77,9 @@ public class SysStaffLanguageLevelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysStaffLanguageLevelController/upSysStaffLanguageLevelMationById")
-    @ResponseBody
-    public void upSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void upSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) {
         sysStaffLanguageLevelService.upSysStaffLanguageLevelMationById(inputObject, outputObject);
     }
 
@@ -102,11 +88,9 @@ public class SysStaffLanguageLevelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysStaffLanguageLevelController/deleteSysStaffLanguageLevelMationById")
-    @ResponseBody
-    public void deleteSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) {
         sysStaffLanguageLevelService.deleteSysStaffLanguageLevelMationById(inputObject, outputObject);
     }
 
@@ -115,11 +99,9 @@ public class SysStaffLanguageLevelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysStaffLanguageLevelController/querySysStaffLanguageLevelUpMation")
-    @ResponseBody
-    public void querySysStaffLanguageLevelUpMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffLanguageLevelUpMation(InputObject inputObject, OutputObject outputObject) {
         sysStaffLanguageLevelService.querySysStaffLanguageLevelUpMation(inputObject, outputObject);
     }
 

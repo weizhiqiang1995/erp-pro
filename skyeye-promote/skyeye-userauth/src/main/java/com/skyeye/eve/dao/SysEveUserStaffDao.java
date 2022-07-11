@@ -19,21 +19,21 @@ import java.util.Map;
  */
 public interface SysEveUserStaffDao {
 
-    public List<Map<String, Object>> querySysUserStaffList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysUserStaffList(Map<String, Object> map);
 
-    public Map<String, Object> querySysUserStaffMationByIdCard(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysUserStaffMationByIdCard(Map<String, Object> map);
 
-    int insertSysUserStaffMation(Map<String, Object> map) throws Exception;
+    int insertSysUserStaffMation(Map<String, Object> map);
 
-    Map<String, Object> querySysUserStaffById(@Param("staffId") String staffId) throws Exception;
+    Map<String, Object> querySysUserStaffById(@Param("staffId") String staffId);
 
-    public int editSysUserStaffById(Map<String, Object> map) throws Exception;
+    int editSysUserStaffById(Map<String, Object> map);
 
-    public Map<String, Object> querySysUserStaffByIdToDetails(@Param("staffId") String staffId) throws Exception;
+    Map<String, Object> querySysUserStaffByIdToDetails(@Param("staffId") String staffId);
 
-    Map<String, Object> querySysUserStaffDetailsByUserId(@Param("userId") String userId) throws Exception;
+    Map<String, Object> querySysUserStaffDetailsByUserId(@Param("userId") String userId);
 
-    public int editSysUserStaffState(Map<String, Object> map) throws Exception;
+    int editSysUserStaffState(Map<String, Object> map);
 
     /**
      * 获取所有在职的，拥有账号的员工
@@ -44,38 +44,37 @@ public interface SysEveUserStaffDao {
      */
     List<Map<String, Object>> queryAllSysUserIsIncumbency(Map<String, Object> map);
 
-    public Map<String, Object> querySysUserStaffMationByIdCardAndId(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysUserStaffMationByIdCardAndId(Map<String, Object> map);
 
-    public int editStaffTypeById(@Param("staffId") String staffId) throws Exception;
+    int editStaffTypeById(@Param("staffId") String staffId);
 
-    public int insertSchoolStaffMation(Map<String, Object> schoolStaff) throws Exception;
+    int insertSchoolStaffMation(Map<String, Object> schoolStaff);
 
-    List<Map<String, Object>> queryUserNameList(@Param("userIds") String userIds) throws Exception;
+    List<Map<String, Object>> queryUserNameList(@Param("userIds") String userIds);
 
-    public List<Map<String, Object>> queryStaffNameListByIdList(@Param("list") List<String> userIds) throws Exception;
+    List<Map<String, Object>> queryStaffNameListByIdList(@Param("list") List<String> userIds);
 
-    public List<Map<String, Object>> querySysUserStaffListToTable(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysUserStaffListToTable(Map<String, Object> map);
 
-    public int insertStaffCheckWorkTimeRelation(List<Map<String, Object>> staffTimeMation) throws Exception;
+    int insertStaffCheckWorkTimeRelation(List<Map<String, Object>> staffTimeMation);
 
-    public List<Map<String, Object>> queryStaffCheckWorkTimeRelationByStaffId(@Param("staffId") String staffId) throws Exception;
+    List<Map<String, Object>> queryStaffCheckWorkTimeRelationByStaffId(@Param("staffId") String staffId);
 
-    public int deleteStaffCheckWorkTimeRelationByStaffId(@Param("staffId") String staffId) throws Exception;
+    int deleteStaffCheckWorkTimeRelationByStaffId(@Param("staffId") String staffId);
 
-    public List<Map<String, Object>> queryStaffCheckWorkTimeRelationNameByStaffId(@Param("staffId") String staffId) throws Exception;
+    List<Map<String, Object>> queryStaffCheckWorkTimeRelationNameByStaffId(@Param("staffId") String staffId);
 
-    public List<Map<String, Object>> queryCheckTimeMationByTimeIds(@Param("list") List<String> timeIds) throws Exception;
+    List<Map<String, Object>> queryCheckTimeMationByTimeIds(@Param("list") List<String> timeIds);
 
-    public List<Map<String, Object>> queryCheckTimeDaysMationByTimeIds(@Param("list") List<String> timeIds) throws Exception;
+    List<Map<String, Object>> queryCheckTimeDaysMationByTimeIds(@Param("list") List<String> timeIds);
 
     /**
      * 根据状态获取对应状态的员工
      *
      * @param state 状态 1在职  2离职  3.见习  4.试用  5.退休
      * @return
-     * @throws Exception
      */
-    List<Map<String, Object>> queryAllSysUserStaffListByState(@Param("list") List<Integer> state) throws Exception;
+    List<Map<String, Object>> queryAllSysUserStaffListByState(@Param("list") List<Integer> state);
 
     /**
      * 修改员工的年假信息
@@ -83,10 +82,9 @@ public interface SysEveUserStaffDao {
      * @param staffId               员工id
      * @param quarterYearHour       年假,精确到6位
      * @param annualLeaveStatisTime 员工剩余年假数据刷新日期
-     * @throws Exception
      */
     void editSysUserStaffAnnualLeaveById(@Param("staffId") String staffId,
-                                         @Param("quarterYearHour") String quarterYearHour, @Param("annualLeaveStatisTime") String annualLeaveStatisTime) throws Exception;
+                                         @Param("quarterYearHour") String quarterYearHour, @Param("annualLeaveStatisTime") String annualLeaveStatisTime);
 
     /**
      * 修改员工的补休池剩余补休信息
@@ -94,10 +92,9 @@ public interface SysEveUserStaffDao {
      * @param staffId           员工id
      * @param holidayNumber     当前员工剩余补休天数
      * @param holidayStatisTime 刷新时间
-     * @throws Exception
      */
-    public void updateSysUserStaffHolidayNumberById(@Param("staffId") String staffId,
-                                                    @Param("holidayNumber") String holidayNumber, @Param("holidayStatisTime") String holidayStatisTime) throws Exception;
+    void updateSysUserStaffHolidayNumberById(@Param("staffId") String staffId,
+                                             @Param("holidayNumber") String holidayNumber, @Param("holidayStatisTime") String holidayStatisTime);
 
     /**
      * 修改员工的补休池已休补休信息
@@ -105,9 +102,8 @@ public interface SysEveUserStaffDao {
      * @param staffId                  员工id
      * @param retiredHolidayNumber     当前员工已休补休天数
      * @param retiredHolidayStatisTime 刷新时间
-     * @throws Exception
      */
-    public void updateSysUserStaffRetiredHolidayNumberById(@Param("staffId") String staffId,
-                                                           @Param("retiredHolidayNumber") String retiredHolidayNumber, @Param("retiredHolidayStatisTime") String retiredHolidayStatisTime) throws Exception;
+    void updateSysUserStaffRetiredHolidayNumberById(@Param("staffId") String staffId,
+                                                    @Param("retiredHolidayNumber") String retiredHolidayNumber, @Param("retiredHolidayStatisTime") String retiredHolidayStatisTime);
 
 }

@@ -38,16 +38,13 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
     private SysEnclosureDao sysEnclosureDao;
 
     /**
-     * Title: queryAllSysStaffJobResumeList
-     * Description: 查询所有工作履历列表
+     * 查询所有工作履历列表
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffJobResumeService#queryAllSysStaffJobResumeList(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void queryAllSysStaffJobResumeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysStaffJobResumeList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffJobResumeDao.queryAllSysStaffJobResumeList(params);
@@ -56,17 +53,14 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
     }
 
     /**
-     * Title: insertSysStaffJobResumeMation
-     * Description: 员工工作履历信息录入
+     * 员工工作履历信息录入
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffJobResumeService#insertSysStaffJobResumeMation(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysStaffJobResumeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysStaffJobResumeMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
         map.put("createTime", DateUtil.getTimeAndToString());
@@ -74,16 +68,13 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
     }
 
     /**
-     * Title: querySysStaffJobResumeMationToEdit
-     * Description: 编辑员工工作履历信息时回显
+     * 编辑员工工作履历信息时回显
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffJobResumeService#querySysStaffJobResumeMationToEdit(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void querySysStaffJobResumeMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffJobResumeMationToEdit(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffJobResumeDao.querySysStaffJobResumeMationToEdit(id);
@@ -101,17 +92,14 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
     }
 
     /**
-     * Title: editSysStaffJobResumeMationById
-     * Description: 编辑员工工作履历信息
+     * 编辑员工工作履历信息
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffJobResumeService#editSysStaffJobResumeMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysStaffJobResumeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysStaffJobResumeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffJobResumeDao.querySysStaffJobResumeMationToEdit(id);
@@ -123,33 +111,27 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
     }
 
     /**
-     * Title: deleteSysStaffJobResumeMationById
-     * Description: 删除员工工作履历信息
+     * 删除员工工作履历信息
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffJobResumeService#deleteSysStaffJobResumeMationById(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysStaffJobResumeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysStaffJobResumeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         sysStaffJobResumeDao.deleteSysStaffJobResumeMationById(id);
     }
 
     /**
-     * Title: queryPointStaffSysStaffJobResumeList
-     * Description: 查询指定员工的工作履历列表
+     * 查询指定员工的工作履历列表
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @see com.skyeye.eve.service.SysStaffJobResumeService#queryPointStaffSysStaffJobResumeList(com.skyeye.common.object.InputObject, com.skyeye.common.object.OutputObject)
      */
     @Override
-    public void queryPointStaffSysStaffJobResumeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPointStaffSysStaffJobResumeList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffJobResumeDao.queryPointStaffSysStaffJobResumeList(params);

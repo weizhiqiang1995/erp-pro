@@ -17,10 +17,10 @@ import com.skyeye.common.object.OutputObject;
  */
 public interface SysQuartzRunHistoryService {
 
-    void querySysQuartzRunHistoryByQuartzId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysQuartzRunHistoryByQuartzId(InputObject inputObject, OutputObject outputObject);
 
-    String startSysQuartzRun(String quartzId) throws Exception;
+    String startSysQuartzRun(String quartzId);
 
-    void endSysQuartzRun(String id, Integer state) throws Exception;
+    void endSysQuartzRun(String id, Integer state);
 
 }

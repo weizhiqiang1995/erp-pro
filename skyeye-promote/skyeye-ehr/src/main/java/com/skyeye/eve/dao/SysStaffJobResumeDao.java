@@ -11,16 +11,16 @@ import java.util.Map;
 
 public interface SysStaffJobResumeDao {
 
-    public List<Map<String, Object>> queryAllSysStaffJobResumeList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> queryAllSysStaffJobResumeList(Map<String, Object> params);
 
-    public int insertSysStaffJobResumeMation(Map<String, Object> map) throws Exception;
+    int insertSysStaffJobResumeMation(Map<String, Object> map);
 
-    public Map<String, Object> querySysStaffJobResumeMationToEdit(@Param("id") String id) throws Exception;
+    Map<String, Object> querySysStaffJobResumeMationToEdit(@Param("id") String id);
 
-    public int editSysStaffJobResumeMationById(Map<String, Object> map) throws Exception;
+    int editSysStaffJobResumeMationById(Map<String, Object> map);
 
-    public int deleteSysStaffJobResumeMationById(@Param("id") String id) throws Exception;
+    int deleteSysStaffJobResumeMationById(@Param("id") String id);
 
-    public List<Map<String, Object>> queryPointStaffSysStaffJobResumeList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> queryPointStaffSysStaffJobResumeList(Map<String, Object> params);
 
 }

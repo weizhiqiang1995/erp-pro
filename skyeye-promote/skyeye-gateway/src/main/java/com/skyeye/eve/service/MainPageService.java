@@ -9,12 +9,12 @@ import com.skyeye.common.object.OutputObject;
 
 public interface MainPageService {
 
-    public void queryFourNumListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryFourNumListByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryNoticeContentListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryNoticeContentListByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryHotForumList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryHotForumList(InputObject inputObject, OutputObject outputObject);
 
-    public void queryKnowledgeEightList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryKnowledgeEightList(InputObject inputObject, OutputObject outputObject);
 
 }

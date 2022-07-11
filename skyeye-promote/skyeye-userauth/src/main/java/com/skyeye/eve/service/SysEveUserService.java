@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -10,19 +11,19 @@ import java.util.Map;
 
 public interface SysEveUserService {
 
-    public void querySysUserList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysUserList(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysUserLockStateToLockById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysUserLockStateToLockById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysUserLockStateToUnLockById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysUserLockStateToUnLockById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysUserPasswordMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysUserPasswordMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryUserToLogin(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryUserToLogin(InputObject inputObject, OutputObject outputObject);
 
-    public void queryUserMationBySession(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryUserMationBySession(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteUserMationBySession(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteUserMationBySession(InputObject inputObject, OutputObject outputObject);
 
     /**
      * 退出登录
@@ -31,43 +32,43 @@ public interface SysEveUserService {
      */
     void removeLogin(String userId);
 
-    public void queryRoleAndBindRoleByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryRoleAndBindRoleByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void editRoleIdsByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editRoleIdsByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryDeskTopMenuBySession(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryDeskTopMenuBySession(InputObject inputObject, OutputObject outputObject);
 
-    public void queryAllMenuBySession(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryAllMenuBySession(InputObject inputObject, OutputObject outputObject);
 
-    public void editUserInstallThemeColor(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editUserInstallThemeColor(InputObject inputObject, OutputObject outputObject);
 
-    public void editUserInstallWinBgPic(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editUserInstallWinBgPic(InputObject inputObject, OutputObject outputObject);
 
-    public void editUserInstallWinLockBgPic(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editUserInstallWinLockBgPic(InputObject inputObject, OutputObject outputObject);
 
-    public void editUserInstallWinStartMenuSize(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editUserInstallWinStartMenuSize(InputObject inputObject, OutputObject outputObject);
 
-    public void editUserInstallWinTaskPosition(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editUserInstallWinTaskPosition(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysUserMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysUserMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editUserPassword(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editUserPassword(InputObject inputObject, OutputObject outputObject);
 
-    public void editUserInstallVagueBgSrc(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editUserInstallVagueBgSrc(InputObject inputObject, OutputObject outputObject);
 
-    public void editUserInstallLoadMenuIconById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editUserInstallLoadMenuIconById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryUserLockByLockPwd(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryUserLockByLockPwd(InputObject inputObject, OutputObject outputObject);
 
-    public void queryUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void editUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysUserListByUserName(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysUserListByUserName(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysDeskTopByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysDeskTopByUserId(InputObject inputObject, OutputObject outputObject);
 
-    void queryUserMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryUserMationByUserId(InputObject inputObject, OutputObject outputObject);
 
     /**
      * 根据用户id获取用户信息

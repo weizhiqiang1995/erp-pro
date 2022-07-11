@@ -9,8 +9,8 @@ import java.util.Map;
 
 public interface EditUploadDao {
 
-    public int insertFileImgMation(Map<String, Object> bean) throws Exception;
+    int insertFileImgMation(Map<String, Object> bean);
 
-    public List<Map<String, Object>> queryFileImgMation(Map<String, Object> bean) throws Exception;
+    List<Map<String, Object>> queryFileImgMation(Map<String, Object> bean);
 
 }

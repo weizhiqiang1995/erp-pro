@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.skyeye.eve.dao.SysStaffLanguageDao">
 
-    <select id="queryAllSysStaffLanguageList" parameterType="java.util.Map" resultType="java.util.Map">
+    <select id="queryAllSysStaffLanguageList" resultType="java.util.Map">
         SELECT
 			a.id,
 			DATE_FORMAT(a.get_time,'%Y-%m-%d') getTime,

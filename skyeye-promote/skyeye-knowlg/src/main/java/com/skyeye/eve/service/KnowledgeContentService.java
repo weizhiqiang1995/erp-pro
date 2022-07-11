@@ -17,35 +17,35 @@ import com.skyeye.common.object.OutputObject;
  */
 public interface KnowledgeContentService {
 
-    void queryKnowledgeContentList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryKnowledgeContentList(InputObject inputObject, OutputObject outputObject);
 
-    void insertKnowledgeContentMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertKnowledgeContentMation(InputObject inputObject, OutputObject outputObject);
 
-    void selectKnowledgeContentById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void selectKnowledgeContentById(InputObject inputObject, OutputObject outputObject);
 
-    void editKnowledgeContentById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editKnowledgeContentById(InputObject inputObject, OutputObject outputObject);
 
-    void deleteKnowledgeContentById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteKnowledgeContentById(InputObject inputObject, OutputObject outputObject);
 
-    void queryKnowledgeContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryKnowledgeContentMationById(InputObject inputObject, OutputObject outputObject);
 
-    void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject);
 
-    void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject);
 
-    void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject);
 
-    void queryUnCheckedKnowledgeContentList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryUnCheckedKnowledgeContentList(InputObject inputObject, OutputObject outputObject);
 
-    void editKnowledgeContentToCheck(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editKnowledgeContentToCheck(InputObject inputObject, OutputObject outputObject);
 
-    void queryKnowledgeContentByIdToCheck(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryKnowledgeContentByIdToCheck(InputObject inputObject, OutputObject outputObject);
 
-    void queryCheckedKnowledgeContentList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryCheckedKnowledgeContentList(InputObject inputObject, OutputObject outputObject);
 
-    void queryUncheckedKnowledgeContent(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryUncheckedKnowledgeContent(InputObject inputObject, OutputObject outputObject);
 
-    void queryCheckedKnowledgeContent(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryCheckedKnowledgeContent(InputObject inputObject, OutputObject outputObject);
 
-    void queryAllPassKnowledgeContentList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryAllPassKnowledgeContentList(InputObject inputObject, OutputObject outputObject);
 }

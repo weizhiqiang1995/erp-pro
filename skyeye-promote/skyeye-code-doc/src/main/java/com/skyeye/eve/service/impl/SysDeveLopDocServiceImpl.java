@@ -19,6 +19,7 @@ import com.skyeye.jedis.JedisClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +61,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     public void insertSysDeveLopType(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopByName(map);
-        if (bean == null || bean.isEmpty()) {
+        if (CollectionUtils.isEmpty(bean)) {
             Map<String, Object> user = inputObject.getLogParams();
             Map<String, Object> item = sysDeveLopDocDao.queryMaxSysDeveLopBySimpleParentId(map);//获取同级下的排位序号最大的数据
             if (item == null) {
@@ -102,7 +103,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     public void editSysDeveLopTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopByNameAndId(map);
-        if (bean == null || bean.isEmpty()) {
+        if (CollectionUtils.isEmpty(bean)) {
             sysDeveLopDocDao.editSysDeveLopTypeById(map);
         } else {
             outputObject.setreturnMessage("该目录已存在，请更换。");
@@ -267,7 +268,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     public void addSysDeveLopDoc(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopDocByNameAndParentId(map);
-        if (bean == null || bean.isEmpty()) {
+        if (CollectionUtils.isEmpty(bean)) {
             Map<String, Object> user = inputObject.getLogParams();
             Map<String, Object> item = sysDeveLopDocDao.queryMaxSysDeveLopDocBySimpleParentId(map);//获取同级下的排位序号最大的数据
             if (item == null) {
@@ -309,7 +310,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     public void editSysDeveLopDocById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopDocByNameAndId(map);
-        if (bean == null || bean.isEmpty()) {
+        if (CollectionUtils.isEmpty(bean)) {
             sysDeveLopDocDao.editSysDeveLopDocById(map);
         } else {
             outputObject.setreturnMessage("该文档标题已存在，请更换。");

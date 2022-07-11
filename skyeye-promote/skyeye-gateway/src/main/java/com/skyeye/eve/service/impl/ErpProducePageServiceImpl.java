@@ -4,16 +4,15 @@
 
 package com.skyeye.eve.service.impl;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.dao.ErpProducePageDao;
 import com.skyeye.eve.service.ErpProducePageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ErpProducePageServiceImpl implements ErpProducePageService {
@@ -26,10 +25,9 @@ public class ErpProducePageServiceImpl implements ErpProducePageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryDepartmentPickMaterial(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDepartmentPickMaterial(InputObject inputObject, OutputObject outputObject) {
         String year = inputObject.getParams().get("year").toString();
         Map<String, Object> user = inputObject.getLogParams();
         String departmentId = user.get("departmentId").toString();
@@ -47,10 +45,9 @@ public class ErpProducePageServiceImpl implements ErpProducePageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryDepartmentPatchMaterial(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDepartmentPatchMaterial(InputObject inputObject, OutputObject outputObject) {
         String year = inputObject.getParams().get("year").toString();
         Map<String, Object> user = inputObject.getLogParams();
         String departmentId = user.get("departmentId").toString();
@@ -68,10 +65,9 @@ public class ErpProducePageServiceImpl implements ErpProducePageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryDepartmentReturnMaterial(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDepartmentReturnMaterial(InputObject inputObject, OutputObject outputObject) {
         String year = inputObject.getParams().get("year").toString();
         Map<String, Object> user = inputObject.getLogParams();
         String departmentId = user.get("departmentId").toString();
@@ -89,10 +85,9 @@ public class ErpProducePageServiceImpl implements ErpProducePageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryDepartmentMachin(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDepartmentMachin(InputObject inputObject, OutputObject outputObject) {
         String year = inputObject.getParams().get("year").toString();
         Map<String, Object> user = inputObject.getLogParams();
         String departmentId = user.get("departmentId").toString();

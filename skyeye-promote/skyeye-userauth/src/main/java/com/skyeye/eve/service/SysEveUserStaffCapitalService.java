@@ -26,9 +26,8 @@ public interface SysEveUserStaffCapitalService {
      * @param monthTime    指定年月，格式为：yyyy-MM
      * @param type         该资金来源类型
      * @param money        金额
-     * @throws Exception
      */
-    void addMonthMoney2StaffCapital(String staffId, String companyId, String departmentId, String monthTime, int type, String money) throws Exception;
+    void addMonthMoney2StaffCapital(String staffId, String companyId, String departmentId, String monthTime, int type, String money);
 
-    void queryStaffCapitalWaitPayMonthList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryStaffCapitalWaitPayMonthList(InputObject inputObject, OutputObject outputObject);
 }

@@ -9,19 +9,19 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysStaffLanguageLevelService {
 
-    public void querySysStaffLanguageLevelList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysStaffLanguageLevelList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysStaffLanguageLevelMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysStaffLanguageLevelMation(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysStaffLanguageLevelMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysStaffLanguageLevelMationToEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void downSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void downSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void upSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void upSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysStaffLanguageLevelUpMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysStaffLanguageLevelUpMation(InputObject inputObject, OutputObject outputObject);
 }

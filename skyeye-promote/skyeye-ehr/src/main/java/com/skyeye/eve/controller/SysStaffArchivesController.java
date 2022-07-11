@@ -8,9 +8,8 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.SysStaffArchivesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @ClassName: SysStaffArchivesController
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-@Controller
+@RestController
 public class SysStaffArchivesController {
 
     @Autowired
@@ -31,11 +30,9 @@ public class SysStaffArchivesController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysStaffArchivesController/queryAllSysStaffArchivesList")
-    @ResponseBody
-    public void queryAllSysStaffArchivesList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysStaffArchivesList(InputObject inputObject, OutputObject outputObject) {
         sysStaffArchivesService.queryAllSysStaffArchivesList(inputObject, outputObject);
     }
 
@@ -44,11 +41,9 @@ public class SysStaffArchivesController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysStaffArchivesController/querySysLeaveStaffArchivesList")
-    @ResponseBody
-    public void querySysLeaveStaffArchivesList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysLeaveStaffArchivesList(InputObject inputObject, OutputObject outputObject) {
         sysStaffArchivesService.querySysLeaveStaffArchivesList(inputObject, outputObject);
     }
 
@@ -57,11 +52,9 @@ public class SysStaffArchivesController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysStaffArchivesController/querySysStaffNotInArchivesList")
-    @ResponseBody
-    public void querySysStaffNotInArchivesList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffNotInArchivesList(InputObject inputObject, OutputObject outputObject) {
         sysStaffArchivesService.querySysStaffNotInArchivesList(inputObject, outputObject);
     }
 
@@ -70,11 +63,9 @@ public class SysStaffArchivesController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysStaffArchivesController/querySysStaffNoArchivesList")
-    @ResponseBody
-    public void querySysStaffNoArchivesList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffNoArchivesList(InputObject inputObject, OutputObject outputObject) {
         sysStaffArchivesService.querySysStaffNoArchivesList(inputObject, outputObject);
     }
 
@@ -83,11 +74,9 @@ public class SysStaffArchivesController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysStaffArchivesController/insertSysStaffArchivesMation")
-    @ResponseBody
-    public void insertSysStaffArchivesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysStaffArchivesMation(InputObject inputObject, OutputObject outputObject) {
         sysStaffArchivesService.insertSysStaffArchivesMation(inputObject, outputObject);
     }
 
@@ -96,11 +85,9 @@ public class SysStaffArchivesController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysStaffArchivesController/querySysStaffArchivesMationToEdit")
-    @ResponseBody
-    public void querySysStaffArchivesMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffArchivesMationToEdit(InputObject inputObject, OutputObject outputObject) {
         sysStaffArchivesService.querySysStaffArchivesMationToEdit(inputObject, outputObject);
     }
 
@@ -109,11 +96,9 @@ public class SysStaffArchivesController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysStaffArchivesController/editSysStaffArchivesMationById")
-    @ResponseBody
-    public void editSysStaffArchivesMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysStaffArchivesMationById(InputObject inputObject, OutputObject outputObject) {
         sysStaffArchivesService.editSysStaffArchivesMationById(inputObject, outputObject);
     }
 

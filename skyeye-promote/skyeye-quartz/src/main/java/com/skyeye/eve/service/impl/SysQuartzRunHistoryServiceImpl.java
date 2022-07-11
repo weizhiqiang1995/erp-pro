@@ -43,10 +43,9 @@ public class SysQuartzRunHistoryServiceImpl implements SysQuartzRunHistoryServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysQuartzRunHistoryByQuartzId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysQuartzRunHistoryByQuartzId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
@@ -60,10 +59,9 @@ public class SysQuartzRunHistoryServiceImpl implements SysQuartzRunHistoryServic
      *
      * @param quartzId 定时任务的id
      * @return
-     * @throws Exception
      */
     @Override
-    public String startSysQuartzRun(String quartzId) throws Exception {
+    public String startSysQuartzRun(String quartzId) {
         SysQuartzRunHistory sysQuartzRunHistory = new SysQuartzRunHistory();
         String historyId = ToolUtil.getSurFaceId();
         sysQuartzRunHistory.setId(historyId);
@@ -88,10 +86,9 @@ public class SysQuartzRunHistoryServiceImpl implements SysQuartzRunHistoryServic
      *
      * @param id    定时任务执行历史id
      * @param state 完成状态
-     * @throws Exception
      */
     @Override
-    public void endSysQuartzRun(String id, Integer state) throws Exception {
+    public void endSysQuartzRun(String id, Integer state) {
         sysQuartzRunHistoryDao.updateSysQuartzRunHistoryComplateState(id, state, DateUtil.getTimeAndToString());
         SysQuartzRunHistory sysQuartzRunHistory = sysQuartzRunHistoryDao.querySysQuartzRunHistoryById(id);
         String quartzCreateIdKey = String.format(Locale.ROOT, "%s-userId", sysQuartzRunHistory.getQuartzId());

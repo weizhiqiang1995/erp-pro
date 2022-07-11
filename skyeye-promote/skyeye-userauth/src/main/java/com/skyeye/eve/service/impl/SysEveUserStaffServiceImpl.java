@@ -98,10 +98,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysUserStaffList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserStaffList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveUserStaffDao.querySysUserStaffList(map);
@@ -114,11 +113,10 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysUserStaffMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysUserStaffMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String userIdCard = map.get("userIdCard").toString();
         Map<String, Object> bean = null;
@@ -137,10 +135,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      * 新增员工信息
      *
      * @param map
-     * @throws Exception
      */
     @Override
-    public void insertNewUserMation(Map<String, Object> map) throws Exception {
+    public void insertNewUserMation(Map<String, Object> map) {
         String staffId;
         staffId = ToolUtil.getSurFaceId();
         map.put("id", staffId);
@@ -158,7 +155,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param staffId
      */
-    private void createUserStaffWagesFieldType(String staffId) throws Exception {
+    private void createUserStaffWagesFieldType(String staffId) {
         List<Map<String, Object>> fieldType = wagesFieldTypeDao.queryAllWagesFieldTypeList();
         if (fieldType != null && !fieldType.isEmpty()) {
             fieldType.stream().forEach(bean -> {
@@ -173,9 +170,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param map
      * @param staffId
-     * @throws Exception
      */
-    private void createUserStaffCheckWorkTime(Map<String, Object> map, String staffId) throws Exception {
+    private void createUserStaffCheckWorkTime(Map<String, Object> map, String staffId) {
         // 逗号隔开的多班次考勤
         String str = map.containsKey("checkTimeStr") ? map.get("checkTimeStr").toString() : "";
         if (!ToolUtil.isBlank(str)) {
@@ -201,7 +197,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         }
     }
 
-    private boolean judgeRepeatShift(List<String> timeIds) throws Exception {
+    private boolean judgeRepeatShift(List<String> timeIds) {
         // 1.获取班次的上下班打卡时间
         List<Map<String, Object>> timeMation = sysEveUserStaffDao.queryCheckTimeMationByTimeIds(timeIds);
         // 2.获取班次的工作日
@@ -216,7 +212,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         return judgeRepeatWorking(timeMation);
     }
 
-    private boolean judgeRepeatWorking(List<Map<String, Object>> timeMation) throws Exception {
+    private boolean judgeRepeatWorking(List<Map<String, Object>> timeMation) {
         if (timeMation.size() > 1) {
             for (int i = 0; i < timeMation.size(); i++) {
                 for (int j = (i + 1); j < timeMation.size(); j++) {
@@ -258,10 +254,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysUserStaffById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserStaffById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String staffId = map.get("id").toString();
         Map<String, Object> bean = sysEveUserStaffDao.querySysUserStaffById(staffId);
@@ -283,11 +278,10 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysUserStaffById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysUserStaffById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String staffId = map.get("id").toString();
         String userIdCard = map.get("userIdCard").toString();
@@ -319,10 +313,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysUserStaffByIdToDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserStaffByIdToDetails(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String staffId = map.get("id").toString();
         Map<String, Object> bean = sysEveUserStaffDao.querySysUserStaffByIdToDetails(staffId);
@@ -344,11 +337,10 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysUserStaffState(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysUserStaffState(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("state", State.QUIT.getState());
         sysEveUserStaffDao.editSysUserStaffState(map);
@@ -371,11 +363,10 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editTurnTeacher(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editTurnTeacher(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String staffId = map.get("staffId").toString();
 
@@ -405,10 +396,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysUserStaffListToTable(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserStaffListToTable(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveUserStaffDao.querySysUserStaffListToTable(map);
@@ -421,10 +411,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysUserStaffListByIds(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserStaffListByIds(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<String> idsList = Arrays.asList(map.get("ids").toString().split(","));
         List<Map<String, Object>> beans = new ArrayList<>();
@@ -442,10 +431,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysUserStaffLogin(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserStaffLogin(InputObject inputObject, OutputObject outputObject) {
         String staffId = inputObject.getLogParams().get("staffId").toString();
         Map<String, Object> bean = sysEveUserStaffDao.querySysUserStaffByIdToDetails(staffId);
         outputObject.setBean(bean);
@@ -457,10 +445,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryUserNameList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUserNameList(InputObject inputObject, OutputObject outputObject) {
         String userIds = inputObject.getParams().get("userIds").toString();
         List<Map<String, Object>> beans = sysEveUserStaffDao.queryUserNameList(userIds);
         outputObject.setBeans(beans);
@@ -472,10 +459,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysUserStaffDetailsByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserStaffDetailsByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String userId = map.get("userId").toString();
         Map<String, Object> bean = sysEveUserStaffDao.querySysUserStaffDetailsByUserId(userId);
@@ -488,10 +474,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void editSysUserStaffAnnualLeaveById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysUserStaffAnnualLeaveById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String staffId = map.get("staffId").toString();
         String quarterYearHour = map.get("quarterYearHour").toString();
@@ -504,10 +489,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void updateSysUserStaffHolidayNumberById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateSysUserStaffHolidayNumberById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String staffId = map.get("staffId").toString();
         String holidayNumber = map.get("holidayNumber").toString();
@@ -520,10 +504,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void updateSysUserStaffRetiredHolidayNumberById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateSysUserStaffRetiredHolidayNumberById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String staffId = map.get("staffId").toString();
         String retiredHolidayNumber = map.get("retiredHolidayNumber").toString();
@@ -536,10 +519,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryStaffCheckWorkTimeRelationNameByStaffId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryStaffCheckWorkTimeRelationNameByStaffId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String staffId = map.get("staffId").toString();
         // 员工考勤时间段信息

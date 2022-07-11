@@ -20,12 +20,12 @@ import java.util.Map;
 public interface SysEveUserStaffCapitalDao {
 
     Map<String, Object> queryStaffCapitalMation(@Param("staffId") String staffId,
-                                                @Param("monthTime") String monthTime) throws Exception;
+                                                @Param("monthTime") String monthTime);
 
-    void insertStaffCapitalMation(Map<String, Object> bean) throws Exception;
+    void insertStaffCapitalMation(Map<String, Object> bean);
 
-    void editStaffCapitalMoneyMation(Map<String, Object> bean) throws Exception;
+    void editStaffCapitalMoneyMation(Map<String, Object> bean);
 
-    List<Map<String, Object>> queryStaffCapitalWaitPayMonthList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryStaffCapitalWaitPayMonthList(Map<String, Object> map);
 
 }

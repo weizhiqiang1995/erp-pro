@@ -1,107 +1,92 @@
+/*******************************************************************************
+ * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
+ ******************************************************************************/
+
 package com.skyeye.eve.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
+import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParams;
+import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.ehr.language.SysStaffLanguageQueryDo;
 import com.skyeye.eve.service.SysStaffLanguageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@Api(value = "员工语言能力信息", tags = "员工语言能力信息", modelName = "EHR模块")
 public class SysStaffLanguageController {
 
     @Autowired
     private SysStaffLanguageService sysStaffLanguageService;
 
     /**
+     * 查询所有语言能力列表
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: queryAllSysStaffLanguageList
-     * @Description: 查询所有语言能力列表
-     * @return: void
      */
+    @ApiOperation(id = "sysstafflanguage001", value = "查询所有语言能力列表", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = SysStaffLanguageQueryDo.class)
     @RequestMapping("/post/SysStaffLanguageController/queryAllSysStaffLanguageList")
-    @ResponseBody
-    public void queryAllSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) {
         sysStaffLanguageService.queryAllSysStaffLanguageList(inputObject, outputObject);
     }
 
     /**
+     * 员工语言能力信息录入
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: insertSysStaffLanguageMation
-     * @Description: 员工语言能力信息录入
-     * @return: void
      */
     @RequestMapping("/post/SysStaffLanguageController/insertSysStaffLanguageMation")
-    @ResponseBody
-    public void insertSysStaffLanguageMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysStaffLanguageMation(InputObject inputObject, OutputObject outputObject) {
         sysStaffLanguageService.insertSysStaffLanguageMation(inputObject, outputObject);
     }
 
     /**
+     * 编辑员工语言能力信息时回显
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: querySysStaffLanguageMationToEdit
-     * @Description: 编辑员工语言能力信息时回显
-     * @return: void
      */
     @RequestMapping("/post/SysStaffLanguageController/querySysStaffLanguageMationToEdit")
-    @ResponseBody
-    public void querySysStaffLanguageMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffLanguageMationToEdit(InputObject inputObject, OutputObject outputObject) {
         sysStaffLanguageService.querySysStaffLanguageMationToEdit(inputObject, outputObject);
     }
 
     /**
+     * 编辑员工语言能力信息
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: editSysStaffLanguageMationById
-     * @Description: 编辑员工语言能力信息
-     * @return: void
      */
     @RequestMapping("/post/SysStaffLanguageController/editSysStaffLanguageMationById")
-    @ResponseBody
-    public void editSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) {
         sysStaffLanguageService.editSysStaffLanguageMationById(inputObject, outputObject);
     }
 
     /**
+     * 删除员工语言能力信息
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: deleteSysStaffLanguageMationById
-     * @Description: 删除员工语言能力信息
-     * @return: void
      */
     @RequestMapping("/post/SysStaffLanguageController/deleteSysStaffLanguageMationById")
-    @ResponseBody
-    public void deleteSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) {
         sysStaffLanguageService.deleteSysStaffLanguageMationById(inputObject, outputObject);
     }
 
     /**
+     * 查询指定员工的语言能力列表
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: queryPointStaffSysStaffLanguageList
-     * @Description: 查询指定员工的语言能力列表
-     * @return: void
      */
     @RequestMapping("/post/SysStaffLanguageController/queryPointStaffSysStaffLanguageList")
-    @ResponseBody
-    public void queryPointStaffSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPointStaffSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) {
         sysStaffLanguageService.queryPointStaffSysStaffLanguageList(inputObject, outputObject);
     }
 

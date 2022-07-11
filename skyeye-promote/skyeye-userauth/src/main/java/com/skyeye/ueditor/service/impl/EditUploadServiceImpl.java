@@ -46,7 +46,7 @@ public class EditUploadServiceImpl implements EditUploadService {
      * 上传富文本图片
      */
     @Override
-    public Map<String, Object> uploadContentPic(HttpServletRequest req) throws Exception {
+    public Map<String, Object> uploadContentPic(HttpServletRequest req) {
         Map<String, Object> rs = new HashMap<>();
         MultipartHttpServletRequest mReq = null;
         MultipartFile file = null;
@@ -88,8 +88,8 @@ public class EditUploadServiceImpl implements EditUploadService {
             bean.put("createTime", DateUtil.getTimeAndToString());
             bean.put("createType", "2");
             editUploadDao.insertFileImgMation(bean);
-        } catch (Exception e) {
-            LOGGER.warn("uploadContentPic failed {}.", e);
+        } catch (Exception ee) {
+            LOGGER.warn("uploadContentPic failed {}.", ee);
             rs.put("state", "文件上传失败!"); //在此处写上错误提示信息，这样当错误的时候就会显示此信息
             rs.put("url", "");
             rs.put("title", "");
@@ -102,7 +102,7 @@ public class EditUploadServiceImpl implements EditUploadService {
      * 回显富文本图片
      */
     @Override
-    public Map<String, Object> downloadContentPic(HttpServletRequest req) throws Exception {
+    public Map<String, Object> downloadContentPic(HttpServletRequest req) {
         Map<String, Object> rs = new HashMap<>();
         rs.put("state", "SUCCESS");// UEDITOR的规则:不为SUCCESS则显示state的内容
         Map<String, Object> bean = new HashMap<>();

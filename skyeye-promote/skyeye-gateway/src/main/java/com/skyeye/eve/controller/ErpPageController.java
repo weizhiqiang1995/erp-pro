@@ -1,18 +1,17 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
-package com.skyeye.eve.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+package com.skyeye.eve.controller;
 
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.ErpPageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class ErpPageController {
 
     @Autowired
@@ -23,11 +22,9 @@ public class ErpPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ErpPageController/queryFourTypeMoneyList")
-    @ResponseBody
-    public void queryFourTypeMoneyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFourTypeMoneyList(InputObject inputObject, OutputObject outputObject) {
         erpPageService.queryFourTypeMoneyList(inputObject, outputObject);
     }
 
@@ -36,11 +33,9 @@ public class ErpPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ErpPageController/querySixMonthPurchaseMoneyList")
-    @ResponseBody
-    public void querySixMonthPurchaseMoneyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySixMonthPurchaseMoneyList(InputObject inputObject, OutputObject outputObject) {
         erpPageService.querySixMonthPurchaseMoneyList(inputObject, outputObject);
     }
 
@@ -49,11 +44,9 @@ public class ErpPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ErpPageController/querySixMonthSealsMoneyList")
-    @ResponseBody
-    public void querySixMonthSealsMoneyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySixMonthSealsMoneyList(InputObject inputObject, OutputObject outputObject) {
         erpPageService.querySixMonthSealsMoneyList(inputObject, outputObject);
     }
 
@@ -62,11 +55,9 @@ public class ErpPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ErpPageController/queryTwelveMonthProfitMoneyList")
-    @ResponseBody
-    public void queryTwelveMonthProfitMoneyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryTwelveMonthProfitMoneyList(InputObject inputObject, OutputObject outputObject) {
         erpPageService.queryTwelveMonthProfitMoneyList(inputObject, outputObject);
     }
 

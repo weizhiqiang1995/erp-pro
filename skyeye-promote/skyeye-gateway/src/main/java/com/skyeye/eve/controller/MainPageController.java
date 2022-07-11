@@ -1,18 +1,17 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
-package com.skyeye.eve.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+package com.skyeye.eve.controller;
 
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.MainPageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class MainPageController {
 
     @Autowired
@@ -23,11 +22,9 @@ public class MainPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MainPageController/queryFourNumListByUserId")
-    @ResponseBody
-    public void queryFourNumListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFourNumListByUserId(InputObject inputObject, OutputObject outputObject) {
         mainPageService.queryFourNumListByUserId(inputObject, outputObject);
     }
 
@@ -36,11 +33,9 @@ public class MainPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MainPageController/queryNoticeContentListByUserId")
-    @ResponseBody
-    public void queryNoticeContentListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryNoticeContentListByUserId(InputObject inputObject, OutputObject outputObject) {
         mainPageService.queryNoticeContentListByUserId(inputObject, outputObject);
     }
 
@@ -49,11 +44,9 @@ public class MainPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MainPageController/queryHotForumList")
-    @ResponseBody
-    public void queryHotForumList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryHotForumList(InputObject inputObject, OutputObject outputObject) {
         mainPageService.queryHotForumList(inputObject, outputObject);
     }
 
@@ -62,11 +55,9 @@ public class MainPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MainPageController/queryKnowledgeEightList")
-    @ResponseBody
-    public void queryKnowledgeEightList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryKnowledgeEightList(InputObject inputObject, OutputObject outputObject) {
         mainPageService.queryKnowledgeEightList(inputObject, outputObject);
     }
 

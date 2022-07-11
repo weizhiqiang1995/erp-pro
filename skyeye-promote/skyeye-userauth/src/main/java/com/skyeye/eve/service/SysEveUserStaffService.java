@@ -11,38 +11,38 @@ import java.util.Map;
 
 public interface SysEveUserStaffService {
 
-    public void querySysUserStaffList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysUserStaffList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysUserStaffMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysUserStaffMation(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysUserStaffById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysUserStaffById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysUserStaffById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysUserStaffById(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysUserStaffByIdToDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysUserStaffByIdToDetails(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysUserStaffState(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysUserStaffState(InputObject inputObject, OutputObject outputObject);
 
-    public void editTurnTeacher(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editTurnTeacher(InputObject inputObject, OutputObject outputObject);
 
-    public void insertNewUserMation(Map<String, Object> map) throws Exception;
+    void insertNewUserMation(Map<String, Object> map);
 
-    public void querySysUserStaffListToTable(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysUserStaffListToTable(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysUserStaffListByIds(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysUserStaffListByIds(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysUserStaffLogin(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysUserStaffLogin(InputObject inputObject, OutputObject outputObject);
 
-    void queryUserNameList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryUserNameList(InputObject inputObject, OutputObject outputObject);
 
-    void querySysUserStaffDetailsByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysUserStaffDetailsByUserId(InputObject inputObject, OutputObject outputObject);
 
-    void editSysUserStaffAnnualLeaveById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysUserStaffAnnualLeaveById(InputObject inputObject, OutputObject outputObject);
 
-    void updateSysUserStaffHolidayNumberById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void updateSysUserStaffHolidayNumberById(InputObject inputObject, OutputObject outputObject);
 
-    void updateSysUserStaffRetiredHolidayNumberById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void updateSysUserStaffRetiredHolidayNumberById(InputObject inputObject, OutputObject outputObject);
 
-    void queryStaffCheckWorkTimeRelationNameByStaffId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryStaffCheckWorkTimeRelationNameByStaffId(InputObject inputObject, OutputObject outputObject);
 
 }

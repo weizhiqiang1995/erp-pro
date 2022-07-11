@@ -11,21 +11,21 @@ import java.util.Map;
 
 public interface SysStaffLanguageLevelDao {
 
-    public List<Map<String, Object>> querySysStaffLanguageLevelList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> querySysStaffLanguageLevelList(Map<String, Object> params);
 
-    public Map<String, Object> querySysStaffLanguageLevelByName(Map<String, Object> params) throws Exception;
+    Map<String, Object> querySysStaffLanguageLevelByName(Map<String, Object> params);
 
-    public int insertSysStaffLanguageLevelMation(Map<String, Object> params) throws Exception;
+    int insertSysStaffLanguageLevelMation(Map<String, Object> params);
 
-    public Map<String, Object> querySysStaffLanguageLevelById(@Param("id") String id) throws Exception;
+    Map<String, Object> querySysStaffLanguageLevelById(@Param("id") String id);
 
-    public Map<String, Object> querySysStaffLanguageLevelByNameAndId(Map<String, Object> params) throws Exception;
+    Map<String, Object> querySysStaffLanguageLevelByNameAndId(Map<String, Object> params);
 
-    public int editSysStaffLanguageLevelMationById(Map<String, Object> params) throws Exception;
+    int editSysStaffLanguageLevelMationById(Map<String, Object> params);
 
-    public Map<String, Object> querySysStaffLanguageLevelStateById(String id) throws Exception;
+    Map<String, Object> querySysStaffLanguageLevelStateById(String id);
 
-    public void editSysStaffLanguageLevelStateById(@Param("id") String id, @Param("state") int state) throws Exception;
+    void editSysStaffLanguageLevelStateById(@Param("id") String id, @Param("state") int state);
 
-    public List<Map<String, Object>> querySysStaffLanguageLevelUpMation(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> querySysStaffLanguageLevelUpMation(Map<String, Object> params);
 }

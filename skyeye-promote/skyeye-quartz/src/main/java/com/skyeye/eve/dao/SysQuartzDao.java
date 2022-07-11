@@ -20,48 +20,48 @@ import java.util.Map;
  */
 public interface SysQuartzDao {
 
-    public int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(String id);
 
-    public int insert(SysQuartz record);
+    int insert(SysQuartz record);
 
-    public List<SysQuartz> selectAll(Map<String, Object> map);
+    List<SysQuartz> selectAll(Map<String, Object> map);
 
-    public int deleteByName(String name);
+    int deleteByName(String name);
 
-    public int updateByName(SysQuartz record);
+    int updateByName(SysQuartz record);
 
     // 问卷管理
-    public Map<String, Object> querySurveyMationById(Map<String, Object> map);
+    Map<String, Object> querySurveyMationById(Map<String, Object> map);
 
-    public int editSurveyStateToEndNumZdById(Map<String, Object> map);
+    int editSurveyStateToEndNumZdById(Map<String, Object> map);
 
     // 日程
-    public Map<String, Object> queryMationByScheduleId(Map<String, Object> bean) throws Exception;
+    Map<String, Object> queryMationByScheduleId(Map<String, Object> bean);
 
-    public int insertNoticeMation(Map<String, Object> notice) throws Exception;
+    int insertNoticeMation(Map<String, Object> notice);
 
-    public int editMationByScheduleId(Map<String, Object> bean) throws Exception;
+    int editMationByScheduleId(Map<String, Object> bean);
 
-    public Map<String, Object> queryScheduleMationByScheduleId(Map<String, Object> bean) throws Exception;
+    Map<String, Object> queryScheduleMationByScheduleId(Map<String, Object> bean);
 
-    public List<Map<String, Object>> queryAllUserAndEmailISNotNull(Map<String, Object> bean) throws Exception;
+    List<Map<String, Object>> queryAllUserAndEmailISNotNull(Map<String, Object> bean);
 
-    public int insertNoticeListMation(List<Map<String, Object>> notices) throws Exception;
+    int insertNoticeListMation(List<Map<String, Object>> notices);
 
     // 工作计划
-    public Map<String, Object> queryWorkPlanMationToQuartzById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryWorkPlanMationToQuartzById(Map<String, Object> map);
 
-    public Map<String, Object> queryUserMationByWorkPlanId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryUserMationByWorkPlanId(Map<String, Object> map);
 
-    public int updateNotifyStateByPlanId(Map<String, Object> map) throws Exception;
+    int updateNotifyStateByPlanId(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryUserMationsByWorkPlanId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryUserMationsByWorkPlanId(Map<String, Object> map);
 
-    public void editNoticeStateById(@Param("noticeId") String noticeId, @Param("state") String state) throws Exception;
+    void editNoticeStateById(@Param("noticeId") String noticeId, @Param("state") String state);
 
-    public List<Map<String, Object>> querySystemQuartzList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySystemQuartzList(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryMyTaskQuartzList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryMyTaskQuartzList(Map<String, Object> map);
 
     /**
      * 根据定时任务id以及类型查到任务信息
@@ -69,7 +69,6 @@ public interface SysQuartzDao {
      * @param quartzId 定时任务id
      * @param type     类型
      * @return
-     * @throws Exception
      */
-    public Map<String, Object> querySystemQuartzByIdAndType(@Param("quartzId") String quartzId, @Param("type") int type) throws Exception;
+    Map<String, Object> querySystemQuartzByIdAndType(@Param("quartzId") String quartzId, @Param("type") int type);
 }

@@ -20,7 +20,7 @@ import java.util.Map;
  */
 public interface SysQuartzRunHistoryDao {
 
-    void insertSysQuartzRunHistoryMation(SysQuartzRunHistory sysQuartzRunHistory) throws Exception;
+    void insertSysQuartzRunHistoryMation(SysQuartzRunHistory sysQuartzRunHistory);
 
     /**
      * 修改定时任务完成信息
@@ -28,12 +28,11 @@ public interface SysQuartzRunHistoryDao {
      * @param id      启动历史表id
      * @param state   状态
      * @param endTime 完成时间
-     * @throws Exception
      */
-    void updateSysQuartzRunHistoryComplateState(@Param("id") String id, @Param("state") Integer state, @Param("endTime") String endTime) throws Exception;
+    void updateSysQuartzRunHistoryComplateState(@Param("id") String id, @Param("state") Integer state, @Param("endTime") String endTime);
 
-    List<Map<String, Object>> querySysQuartzRunHistoryByQuartzId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysQuartzRunHistoryByQuartzId(Map<String, Object> map);
 
-    SysQuartzRunHistory querySysQuartzRunHistoryById(@Param("id") String id) throws Exception;
+    SysQuartzRunHistory querySysQuartzRunHistoryById(@Param("id") String id);
 
 }

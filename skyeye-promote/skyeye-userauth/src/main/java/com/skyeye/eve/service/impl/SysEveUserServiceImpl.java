@@ -86,10 +86,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysUserList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveUserDao.querySysUserList(map);
@@ -102,11 +101,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysUserLockStateToLockById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysUserLockStateToLockById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveUserDao.querySysUserLockStateById(map);
         int userLock = Integer.parseInt(bean.get("userLock").toString());
@@ -124,11 +122,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysUserLockStateToUnLockById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysUserLockStateToUnLockById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveUserDao.querySysUserLockStateById(map);
         int userLock = Integer.parseInt(bean.get("userLock").toString());
@@ -146,11 +143,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysUserMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysUserMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> userCode = sysEveUserDao.querySysUserCodeByMation(map);
         if (userCode == null) {
@@ -193,7 +189,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         }
     }
 
-    private String getCalcPaswword(String password, int pwdNum) throws Exception {
+    private String getCalcPaswword(String password, int pwdNum) {
         for (int i = 0; i < pwdNum; i++) {
             password = ToolUtil.MD5(password);
         }
@@ -205,9 +201,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param userId   用户id
      * @param createId 创建人id
-     * @throws Exception
      */
-    private void setUserBaseInstall(String userId, String createId) throws Exception {
+    private void setUserBaseInstall(String userId, String createId) {
         Map<String, Object> bean = new HashMap<>();
         bean.put("id", ToolUtil.getSurFaceId());
         bean.put("userId", userId);
@@ -226,11 +221,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysUserPasswordMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysUserPasswordMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         int pwdNum = (int) (Math.random() * 100);
         String password = map.get("password").toString();
@@ -244,10 +238,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryUserToLogin(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUserToLogin(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> userMation = sysEveUserDao.queryMationByUserCode(map);
         if (userMation == null) {
@@ -287,9 +280,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      * @param userMation
      * @param userId
      * @return
-     * @throws Exception
      */
-    private List<Map<String, Object>> getMenuAndAuthToRedis(Map<String, Object> userMation, String userId) throws Exception {
+    private List<Map<String, Object>> getMenuAndAuthToRedis(Map<String, Object> userMation, String userId) {
         LOGGER.info("get menu and auth mation.");
         String roleIds = userMation.get("roleId").toString();
         // 桌面菜单列表
@@ -335,10 +327,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryUserMationBySession(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUserMationBySession(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> userMation = inputObject.getLogParams();
         if (userMation == null) {
             outputObject.setreturnMessage("登录超时，请重新登录。");
@@ -352,10 +343,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void deleteUserMationBySession(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteUserMationBySession(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String userId = inputObject.getLogParams().get("id").toString();
         this.removeLogin(userId);
@@ -380,10 +370,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryRoleAndBindRoleByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRoleAndBindRoleByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> roles = sysEveUserDao.queryRoleList(map);//获取角色列表
         Map<String, Object> userRole = sysEveUserDao.queryBindRoleMationByUserId(map);//获取用户绑定的角色ID串
@@ -402,11 +391,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editRoleIdsByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRoleIdsByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         sysEveUserDao.editRoleIdsByUserId(map);
     }
@@ -416,10 +404,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryDeskTopMenuBySession(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDeskTopMenuBySession(InputObject inputObject, OutputObject outputObject) {
         List<Map<String, Object>> deskTops = inputObject.getLogDeskTopMenuParams();
         outputObject.setBeans(deskTops);
     }
@@ -429,10 +416,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAllMenuBySession(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllMenuBySession(InputObject inputObject, OutputObject outputObject) {
         List<Map<String, Object>> deskTops = inputObject.getLogAllMenuParams();
         outputObject.setBeans(deskTops);
     }
@@ -442,11 +428,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editUserInstallThemeColor(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserInstallThemeColor(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -461,11 +446,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editUserInstallWinBgPic(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserInstallWinBgPic(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -480,11 +464,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editUserInstallWinLockBgPic(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserInstallWinLockBgPic(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -499,11 +482,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editUserInstallWinStartMenuSize(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserInstallWinStartMenuSize(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -518,11 +500,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editUserInstallWinTaskPosition(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserInstallWinTaskPosition(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -537,11 +518,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editUserPassword(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserPassword(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userCode", user.get("userCode"));
@@ -571,11 +551,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editUserInstallVagueBgSrc(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserInstallVagueBgSrc(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -591,11 +570,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editUserInstallLoadMenuIconById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserInstallLoadMenuIconById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -610,10 +588,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryUserLockByLockPwd(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUserLockByLockPwd(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         int pwdNum = Integer.parseInt(user.get("pwdNum").toString());
@@ -631,10 +608,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> user = inputObject.getLogParams();
         Map<String, Object> bean = sysEveUserDao.queryUserDetailsMationByUserId(user.get("id").toString());
         outputObject.setBean(bean);
@@ -646,11 +622,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -663,10 +638,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysUserListByUserName(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserListByUserName(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveUserDao.querySysUserListByUserName(map);
@@ -679,10 +653,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysDeskTopByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysDeskTopByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("id", user.get("id"));
@@ -691,7 +664,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     }
 
     @Override
-    public void queryUserMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUserMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String userId = map.get("userId").toString();
         outputObject.setBean(getUserMationByUserId(userId));

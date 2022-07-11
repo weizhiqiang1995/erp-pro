@@ -7,15 +7,14 @@ package com.skyeye.ueditor.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.skyeye.ueditor.service.EditUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-@Controller
+@RestController
 public class EditUploadController {
 
     @Autowired
@@ -24,29 +23,29 @@ public class EditUploadController {
     /**
      * 上传富文本图片
      *
-     * @throws Exception
+     * @param req
+     * @return
      */
     @RequestMapping("/upload/editUploadController/uploadContentPic")
-    @ResponseBody
-    public Map<String, Object> uploadContentPic(HttpServletRequest req) throws Exception {
+    public Map<String, Object> uploadContentPic(HttpServletRequest req) {
         return editUploadService.uploadContentPic(req);
     }
 
     /**
      * 回显富文本图片
      *
-     * @throws Exception
+     * @param req
+     * @param callback
+     * @return
      */
     @RequestMapping("/upload/editUploadController/downloadContentPic")
-    @ResponseBody
-    public String downloadContentPic(HttpServletRequest req, @RequestParam("callback") String callback) throws Exception {
+    public String downloadContentPic(HttpServletRequest req, @RequestParam("callback") String callback) {
         return callback + "(" + JSONObject.toJSONString(editUploadService.downloadContentPic(req)) + ")";
     }
 
     @RequestMapping("/upload/editUploadController/ueeditorConif")
-    @ResponseBody
     public String ueeditorConif(HttpServletRequest request, @RequestParam("callback") String callback,
-                                @RequestParam("fileBasePath") String fileBasePath) throws Exception {
+                                @RequestParam("fileBasePath") String fileBasePath) {
         return callback + "(" + PublicMsg.getUeditorConfig(fileBasePath) + ")";
     }
 

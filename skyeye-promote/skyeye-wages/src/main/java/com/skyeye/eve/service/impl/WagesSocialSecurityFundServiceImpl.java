@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -138,7 +139,7 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = wagesSocialSecurityFundDao.queryWagesSocialSecurityFundMationById(id);
-        if (bean == null || bean.isEmpty()) {
+        if (CollectionUtils.isEmpty(bean)) {
             outputObject.setreturnMessage("The data does not exist.");
             return;
         }
@@ -269,7 +270,7 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = wagesSocialSecurityFundDao.queryWagesSocialSecurityFundMationById(id);
-        if (bean == null || bean.isEmpty()) {
+        if (CollectionUtils.isEmpty(bean)) {
             outputObject.setreturnMessage("The data does not exist.");
             return;
         }

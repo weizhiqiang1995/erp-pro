@@ -1,107 +1,92 @@
+/*******************************************************************************
+ * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
+ ******************************************************************************/
+
 package com.skyeye.eve.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
+import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParams;
+import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
 import com.skyeye.eve.service.SysStaffCertificateService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@Api(value = "员工证书", tags = "员工证书", modelName = "EHR模块")
+@RestController
 public class SysStaffCertificateController {
 
     @Autowired
     private SysStaffCertificateService sysStaffCertificateService;
 
     /**
+     * 查询所有证书列表
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: queryAllSysStaffCertificateList
-     * @Description: 查询所有证书列表
-     * @return: void
      */
     @RequestMapping("/post/SysStaffCertificateController/queryAllSysStaffCertificateList")
-    @ResponseBody
-    public void queryAllSysStaffCertificateList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysStaffCertificateList(InputObject inputObject, OutputObject outputObject) {
         sysStaffCertificateService.queryAllSysStaffCertificateList(inputObject, outputObject);
     }
 
     /**
+     * 员工证书信息录入
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: insertSysStaffCertificateMation
-     * @Description: 员工证书信息录入
-     * @return: void
      */
     @RequestMapping("/post/SysStaffCertificateController/insertSysStaffCertificateMation")
-    @ResponseBody
-    public void insertSysStaffCertificateMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysStaffCertificateMation(InputObject inputObject, OutputObject outputObject) {
         sysStaffCertificateService.insertSysStaffCertificateMation(inputObject, outputObject);
     }
 
     /**
+     * 编辑员工证书信息时回显
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: querySysStaffCertificateMationToEdit
-     * @Description: 编辑员工证书信息时回显
-     * @return: void
      */
     @RequestMapping("/post/SysStaffCertificateController/querySysStaffCertificateMationToEdit")
-    @ResponseBody
-    public void querySysStaffCertificateMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffCertificateMationToEdit(InputObject inputObject, OutputObject outputObject) {
         sysStaffCertificateService.querySysStaffCertificateMationToEdit(inputObject, outputObject);
     }
 
     /**
+     * 编辑员工证书信息
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: editSysStaffCertificateMationById
-     * @Description: 编辑员工证书信息
-     * @return: void
      */
     @RequestMapping("/post/SysStaffCertificateController/editSysStaffCertificateMationById")
-    @ResponseBody
-    public void editSysStaffCertificateMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysStaffCertificateMationById(InputObject inputObject, OutputObject outputObject) {
         sysStaffCertificateService.editSysStaffCertificateMationById(inputObject, outputObject);
     }
 
     /**
+     * 删除员工证书信息
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: deleteSysStaffCertificateMationById
-     * @Description: 删除员工证书信息
-     * @return: void
      */
     @RequestMapping("/post/SysStaffCertificateController/deleteSysStaffCertificateMationById")
-    @ResponseBody
-    public void deleteSysStaffCertificateMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysStaffCertificateMationById(InputObject inputObject, OutputObject outputObject) {
         sysStaffCertificateService.deleteSysStaffCertificateMationById(inputObject, outputObject);
     }
 
     /**
+     * 查询指定员工的证书列表
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: queryPointStaffSysStaffCertificateList
-     * @Description: 查询指定员工的证书列表
-     * @return: void
      */
+    @ApiOperation(id = "sysstaffcertificate006", value = "查询指定员工的证书列表", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = PointStaffQueryDo.class)
     @RequestMapping("/post/SysStaffCertificateController/queryPointStaffSysStaffCertificateList")
-    @ResponseBody
-    public void queryPointStaffSysStaffCertificateList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPointStaffSysStaffCertificateList(InputObject inputObject, OutputObject outputObject) {
         sysStaffCertificateService.queryPointStaffSysStaffCertificateList(inputObject, outputObject);
     }
 

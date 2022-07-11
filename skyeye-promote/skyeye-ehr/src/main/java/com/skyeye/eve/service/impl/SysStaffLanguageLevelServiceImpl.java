@@ -16,6 +16,7 @@ import com.skyeye.eve.service.SysStaffLanguageLevelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -63,10 +64,9 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysStaffLanguageLevelList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffLanguageLevelList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffLanguageLevelDao.querySysStaffLanguageLevelList(params);
@@ -80,14 +80,13 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysStaffLanguageLevelMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysStaffLanguageLevelMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Map<String, Object> bean = sysStaffLanguageLevelDao.querySysStaffLanguageLevelByName(params);
-        if (bean == null || bean.isEmpty()) {
+        if (CollectionUtils.isEmpty(bean)) {
             params.put("id", ToolUtil.getSurFaceId());
             params.put("state", state.START_UP.getState());
             params.put("createId", inputObject.getLogParams().get("id"));
@@ -103,13 +102,12 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysStaffLanguageLevelMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffLanguageLevelMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Map<String, Object> bean = sysStaffLanguageLevelDao.querySysStaffLanguageLevelById(params.get("id").toString());
-        if (bean == null || bean.isEmpty()) {
+        if (CollectionUtils.isEmpty(bean)) {
             outputObject.setreturnMessage("该语种等级信息不存在.");
         } else {
             outputObject.setBean(bean);
@@ -122,14 +120,13 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Map<String, Object> bean = sysStaffLanguageLevelDao.querySysStaffLanguageLevelByNameAndId(params);
-        if (bean == null || bean.isEmpty()) {
+        if (CollectionUtils.isEmpty(bean)) {
             params.put("lastUpdateId", inputObject.getLogParams().get("id"));
             params.put("lastUpdateTime", DateUtil.getTimeAndToString());
             sysStaffLanguageLevelDao.editSysStaffLanguageLevelMationById(params);
@@ -143,15 +140,14 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void downSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void downSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         String id = params.get("id").toString();
         Map<String, Object> bean = sysStaffLanguageLevelDao.querySysStaffLanguageLevelStateById(id);
-        if (bean == null || bean.isEmpty()) {
+        if (CollectionUtils.isEmpty(bean)) {
             outputObject.setreturnMessage("该语种等级信息不存在");
         } else {
             int nowState = Integer.parseInt(bean.get("state").toString());
@@ -167,15 +163,14 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void upSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void upSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         String id = params.get("id").toString();
         Map<String, Object> bean = sysStaffLanguageLevelDao.querySysStaffLanguageLevelStateById(id);
-        if (bean == null || bean.isEmpty()) {
+        if (CollectionUtils.isEmpty(bean)) {
             outputObject.setreturnMessage("该语种等级信息不存在");
         } else {
             int nowState = Integer.parseInt(bean.get("state").toString());
@@ -191,15 +186,14 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         String id = params.get("id").toString();
         Map<String, Object> bean = sysStaffLanguageLevelDao.querySysStaffLanguageLevelStateById(id);
-        if (bean == null || bean.isEmpty()) {
+        if (CollectionUtils.isEmpty(bean)) {
             outputObject.setreturnMessage("该语种等级信息不存在");
         } else {
             int nowState = Integer.parseInt(bean.get("state").toString());
@@ -215,10 +209,9 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysStaffLanguageLevelUpMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffLanguageLevelUpMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         List<Map<String, Object>> beans = sysStaffLanguageLevelDao.querySysStaffLanguageLevelUpMation(params);
         outputObject.setBeans(beans);

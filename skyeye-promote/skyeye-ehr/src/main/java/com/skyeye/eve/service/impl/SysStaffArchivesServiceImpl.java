@@ -46,10 +46,9 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAllSysStaffArchivesList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysStaffArchivesList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffArchivesDao.queryAllSysStaffArchivesList(params);
@@ -63,10 +62,9 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysLeaveStaffArchivesList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysLeaveStaffArchivesList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffArchivesDao.querySysLeaveStaffArchivesList(params);
@@ -80,10 +78,9 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysStaffNotInArchivesList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffNotInArchivesList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffArchivesDao.querySysStaffNotInArchivesList(params);
@@ -97,10 +94,9 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysStaffNoArchivesList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffNoArchivesList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffArchivesDao.querySysStaffNoArchivesList(params);
@@ -113,11 +109,10 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysStaffArchivesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysStaffArchivesMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String staffId = map.get("staffId").toString();
         Map<String, Object> archivesMation = sysStaffArchivesDao.querySysStaffArchivesMationByStaffId(staffId);
@@ -135,10 +130,9 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysStaffArchivesMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffArchivesMationToEdit(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> archivesMation = sysStaffArchivesDao.querySysStaffArchivesMationToEdit(id);
@@ -161,11 +155,10 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysStaffArchivesMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysStaffArchivesMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> archivesMation = sysStaffArchivesDao.querySysStaffArchivesMationToEdit(id);

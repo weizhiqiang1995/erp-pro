@@ -6,13 +6,13 @@ package com.skyeye.eve.service.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.skyeye.common.constans.ForumConstants;
+import com.skyeye.common.constans.MessageConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.MainPageDao;
 import com.skyeye.eve.service.MainPageService;
 import com.skyeye.jedis.JedisClientService;
-import com.skyeye.common.constans.MessageConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,10 +32,9 @@ public class MainPageServiceImpl implements MainPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryFourNumListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFourNumListByUserId(InputObject inputObject, OutputObject outputObject) {
         String userId = inputObject.getLogParams().get("id").toString();
         // 1.获取本月考勤天数
         String checkOnWorkNum = mainPageDao.queryCheckOnWorkNumByUserId(userId);
@@ -58,10 +57,9 @@ public class MainPageServiceImpl implements MainPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryNoticeContentListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryNoticeContentListByUserId(InputObject inputObject, OutputObject outputObject) {
         String userId = inputObject.getLogParams().get("id").toString();
         List<Map<String, Object>> beans = new ArrayList<>();
         if (ToolUtil.isBlank(jedisClient.get(MessageConstants.sysSecondNoticeTypeUpStateList("")))) {
@@ -87,10 +85,9 @@ public class MainPageServiceImpl implements MainPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryHotForumList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryHotForumList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         List<Map<String, Object>> beans = mainPageDao.queryHotForumList(map);
@@ -129,10 +126,9 @@ public class MainPageServiceImpl implements MainPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryKnowledgeEightList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryKnowledgeEightList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = mainPageDao.queryKnowledgeContentPhoneList(map);
         outputObject.setBeans(beans);

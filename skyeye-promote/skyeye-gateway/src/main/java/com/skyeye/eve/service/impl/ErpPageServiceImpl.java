@@ -1,19 +1,19 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service.impl;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.dao.ErpPageDao;
 import com.skyeye.eve.service.ErpPageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ErpPageServiceImpl implements ErpPageService {
@@ -26,10 +26,9 @@ public class ErpPageServiceImpl implements ErpPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryFourTypeMoneyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFourTypeMoneyList(InputObject inputObject, OutputObject outputObject) {
         // 1.获取本月累计销售，当前月已审核通过的销售订单金额
         String salesMoney = erpPageDao.queryThisMonthSales();
         // 2.获取本月累计零售，当前月已审核通过的零售订单金额
@@ -51,10 +50,9 @@ public class ErpPageServiceImpl implements ErpPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySixMonthPurchaseMoneyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySixMonthPurchaseMoneyList(InputObject inputObject, OutputObject outputObject) {
         List<Map<String, Object>> beans = erpPageDao.querySixMonthPurchaseMoneyList();
         outputObject.setBeans(beans);
     }
@@ -64,10 +62,9 @@ public class ErpPageServiceImpl implements ErpPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySixMonthSealsMoneyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySixMonthSealsMoneyList(InputObject inputObject, OutputObject outputObject) {
         List<Map<String, Object>> beans = erpPageDao.querySixMonthSealsMoneyList();
         outputObject.setBeans(beans);
     }
@@ -77,10 +74,9 @@ public class ErpPageServiceImpl implements ErpPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryTwelveMonthProfitMoneyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryTwelveMonthProfitMoneyList(InputObject inputObject, OutputObject outputObject) {
         List<Map<String, Object>> beans = erpPageDao.queryTwelveMonthProfitMoneyList();
         outputObject.setBeans(beans);
     }

@@ -16,6 +16,7 @@ import com.skyeye.common.util.FileUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.KnowledgeContentDao;
 import com.skyeye.eve.service.KnowledgeContentService;
+import com.skyeye.exception.CustomException;
 import com.skyeye.jedis.JedisClientService;
 import com.skyeye.knowlg.util.Html2Text;
 import com.skyeye.knowlg.util.Word2Html;
@@ -30,6 +31,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.*;
 
@@ -58,10 +60,9 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryKnowledgeContentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryKnowledgeContentList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
@@ -75,11 +76,10 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertKnowledgeContentMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertKnowledgeContentMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
         map.put("state", "1");
@@ -94,10 +94,9 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void selectKnowledgeContentById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectKnowledgeContentById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = knowledgeContentDao.selectKnowledgeContentById(map);
         outputObject.setBean(bean);
@@ -109,11 +108,10 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editKnowledgeContentById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editKnowledgeContentById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("createTime", DateUtil.getTimeAndToString());
         knowledgeContentDao.editKnowledgeContentById(map);
@@ -124,11 +122,10 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteKnowledgeContentById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteKnowledgeContentById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         knowledgeContentDao.deleteKnowledgeContentById(map);
     }
@@ -138,10 +135,9 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryKnowledgeContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryKnowledgeContentMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = knowledgeContentDao.queryKnowledgeContentMationById(map);
         outputObject.setBean(bean);
@@ -153,10 +149,9 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(PutObject.getRequest().getSession().getServletContext());
@@ -186,7 +181,11 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
                     String newFileName = String.valueOf(System.currentTimeMillis()) + "." + fileExtName;
                     String path = basePath + "\\" + newFileName;
                     // 上传
-                    file.transferTo(new File(path));
+                    try {
+                        file.transferTo(new File(path));
+                    } catch (IOException ee) {
+                        throw new CustomException(ee);
+                    }
                     //初始化文件对象内容
                     trueFileName = "/images/upload/wordfolder/" + userId + "/" + newFileName;
                     map.put("fileType", fileExtName);//文件类型
@@ -214,10 +213,9 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String userId = user.get("id").toString();
@@ -233,12 +231,13 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
         String newFileName = String.valueOf(System.currentTimeMillis()) + "." + fileExtName;//新文件名
         String path = tPath + "\\upload\\wordfolder" + "\\" + userId + "\\" + newFileName;//文件路径
         File outputFile = new File(path);
-        //创建文件
-        outputFile.createNewFile();
-        //输出流
-        FileChannel outChnnel = new FileOutputStream(outputFile).getChannel();
-        //合并
+        FileChannel outChnnel = null;
         try {
+            //创建文件
+            outputFile.createNewFile();
+            //输出流
+            outChnnel = new FileOutputStream(outputFile).getChannel();
+            //合并
             FileChannel inChannel;
             for (File file : fileList) {
                 inChannel = new FileInputStream(file).getChannel();
@@ -247,6 +246,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
                 //删除分片
                 file.delete();
             }
+        } catch (Exception ee) {
+            throw new CustomException(ee);
         } finally {
             FileUtil.close(outChnnel);
         }
@@ -264,6 +265,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
                     insertMation(contentId, fileName, content, userId);
                 }
             }
+        } catch (Exception ee) {
+            throw new CustomException(ee);
         } finally {
             FileUtil.deleteFile(path);
         }
@@ -289,10 +292,9 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String md5 = map.get("md5").toString();
         String chunk = map.get("chunk").toString();
@@ -332,10 +334,9 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryUnCheckedKnowledgeContentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUnCheckedKnowledgeContentList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = knowledgeContentDao.queryUnCheckedKnowledgeContentList(map);
@@ -348,10 +349,9 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryKnowledgeContentByIdToCheck(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryKnowledgeContentByIdToCheck(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = knowledgeContentDao.queryKnowledgeContentByIdToCheck(map);
         outputObject.setBean(bean);
@@ -363,11 +363,10 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editKnowledgeContentToCheck(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editKnowledgeContentToCheck(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("examineId", inputObject.getLogParams().get("id"));
         map.put("examineTime", DateUtil.getTimeAndToString());
@@ -379,10 +378,9 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCheckedKnowledgeContentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCheckedKnowledgeContentList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = knowledgeContentDao.queryCheckedKnowledgeContentList(map);
@@ -395,10 +393,9 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryUncheckedKnowledgeContent(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUncheckedKnowledgeContent(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = knowledgeContentDao.queryUncheckedKnowledgeContent(map);
         outputObject.setBean(bean);
@@ -410,10 +407,9 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCheckedKnowledgeContent(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCheckedKnowledgeContent(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = knowledgeContentDao.queryCheckedKnowledgeContent(map);
         outputObject.setBean(bean);
@@ -425,10 +421,9 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAllPassKnowledgeContentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllPassKnowledgeContentList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = knowledgeContentDao.queryAllPassKnowledgeContentList(map);

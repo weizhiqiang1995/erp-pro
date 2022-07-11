@@ -12,6 +12,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffLanguageDao;
+import com.skyeye.eve.entity.ehr.language.SysStaffLanguageQueryDo;
 import com.skyeye.eve.service.SysDictDataService;
 import com.skyeye.eve.service.SysStaffLanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +50,9 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
      */
     @Override
     public void queryAllSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> params = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
-        List<Map<String, Object>> beans = sysStaffLanguageDao.queryAllSysStaffLanguageList(params);
+        SysStaffLanguageQueryDo sysStaffLanguageQuery = inputObject.getParams(SysStaffLanguageQueryDo.class);
+        Page pages = PageHelper.startPage(sysStaffLanguageQuery.getPage(), sysStaffLanguageQuery.getLimit());
+        List<Map<String, Object>> beans = sysStaffLanguageDao.queryAllSysStaffLanguageList(sysStaffLanguageQuery);
         sysDictDataService.getDictDataNameByIdList(beans, "languageId", "languageTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());

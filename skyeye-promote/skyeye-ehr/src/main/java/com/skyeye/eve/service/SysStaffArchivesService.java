@@ -1,3 +1,7 @@
+/*******************************************************************************
+ * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
+ ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -5,18 +9,18 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysStaffArchivesService {
 
-    public void queryAllSysStaffArchivesList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryAllSysStaffArchivesList(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysLeaveStaffArchivesList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysLeaveStaffArchivesList(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysStaffNotInArchivesList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysStaffNotInArchivesList(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysStaffNoArchivesList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysStaffNoArchivesList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysStaffArchivesMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysStaffArchivesMation(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysStaffArchivesMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysStaffArchivesMationToEdit(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysStaffArchivesMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysStaffArchivesMationById(InputObject inputObject, OutputObject outputObject);
 
 }

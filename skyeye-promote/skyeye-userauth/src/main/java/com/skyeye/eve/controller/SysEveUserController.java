@@ -8,14 +8,13 @@ import com.skyeye.annotation.api.Api;
 import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
-import com.skyeye.eve.entity.userauth.user.SysUserMation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.userauth.user.SysUserMation;
 import com.skyeye.eve.service.SysEveUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @ClassName: SysEveUserController
@@ -25,7 +24,7 @@ import com.skyeye.eve.service.SysEveUserService;
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-@Controller
+@RestController
 @Api(value = "用户管理", tags = "用户管理", modelName = "基础模块")
 public class SysEveUserController {
 
@@ -37,7 +36,6 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "sys001", value = "获取用户列表", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -50,8 +48,7 @@ public class SysEveUserController {
         @ApiImplicitParam(id = "departmentName", name = "departmentName", value = "部门"),
         @ApiImplicitParam(id = "jobName", name = "jobName", value = "职位")})
     @RequestMapping("/post/SysEveUserController/querySysUserList")
-    @ResponseBody
-    public void querySysUserList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserList(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.querySysUserList(inputObject, outputObject);
     }
 
@@ -60,14 +57,12 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "sys002", value = "锁定账号", method = "PUT", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "账号ID", required = "required")})
     @RequestMapping("/post/SysEveUserController/editSysUserLockStateToLockById")
-    @ResponseBody
-    public void editSysUserLockStateToLockById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysUserLockStateToLockById(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.editSysUserLockStateToLockById(inputObject, outputObject);
     }
 
@@ -76,14 +71,12 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "sys003", value = "解锁账号", method = "PUT", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "账号ID", required = "required")})
     @RequestMapping("/post/SysEveUserController/editSysUserLockStateToUnLockById")
-    @ResponseBody
-    public void editSysUserLockStateToUnLockById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysUserLockStateToUnLockById(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.editSysUserLockStateToUnLockById(inputObject, outputObject);
     }
 
@@ -92,13 +85,11 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "sysAdd005", value = "创建账号", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysUserMation.class)
     @RequestMapping("/post/SysEveUserController/insertSysUserMationById")
-    @ResponseBody
-    public void insertSysUserMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysUserMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.insertSysUserMationById(inputObject, outputObject);
     }
 
@@ -107,15 +98,13 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "sys005", value = "重置密码", method = "POST", allUse = "1")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "账号ID", required = "required"),
         @ApiImplicitParam(id = "password", name = "password", value = "密码", required = "required")})
     @RequestMapping("/post/SysEveUserController/editSysUserPasswordMationById")
-    @ResponseBody
-    public void editSysUserPasswordMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysUserPasswordMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.editSysUserPasswordMationById(inputObject, outputObject);
     }
 
@@ -124,11 +113,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/queryUserToLogin")
-    @ResponseBody
-    public void queryUserToLogin(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUserToLogin(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.queryUserToLogin(inputObject, outputObject);
     }
 
@@ -137,11 +124,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/queryUserMationBySession")
-    @ResponseBody
-    public void queryUserMationBySession(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUserMationBySession(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.queryUserMationBySession(inputObject, outputObject);
     }
 
@@ -150,12 +135,10 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "login003", value = "退出", method = "POST", allUse = "2")
     @RequestMapping("/post/SysEveUserController/deleteUserMationBySession")
-    @ResponseBody
-    public void deleteUserMationBySession(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteUserMationBySession(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.deleteUserMationBySession(inputObject, outputObject);
     }
 
@@ -164,11 +147,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/queryRoleAndBindRoleByUserId")
-    @ResponseBody
-    public void queryRoleAndBindRoleByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRoleAndBindRoleByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.queryRoleAndBindRoleByUserId(inputObject, outputObject);
     }
 
@@ -177,15 +158,13 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "sys020", value = "编辑用户绑定的角色", method = "POST", allUse = "1")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "账号ID", required = "required"),
         @ApiImplicitParam(id = "roleIds", name = "roleIds", value = "角色ID串，逗号隔开", required = "required")})
     @RequestMapping("/post/SysEveUserController/editRoleIdsByUserId")
-    @ResponseBody
-    public void editRoleIdsByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRoleIdsByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.editRoleIdsByUserId(inputObject, outputObject);
     }
 
@@ -194,12 +173,10 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "login004", value = "获取桌面菜单列表", method = "GET", allUse = "2")
     @RequestMapping("/post/SysEveUserController/queryDeskTopMenuBySession")
-    @ResponseBody
-    public void queryDeskTopMenuBySession(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDeskTopMenuBySession(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.queryDeskTopMenuBySession(inputObject, outputObject);
     }
 
@@ -208,11 +185,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/queryAllMenuBySession")
-    @ResponseBody
-    public void queryAllMenuBySession(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllMenuBySession(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.queryAllMenuBySession(inputObject, outputObject);
     }
 
@@ -221,11 +196,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/editUserInstallThemeColor")
-    @ResponseBody
-    public void editUserInstallThemeColor(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserInstallThemeColor(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.editUserInstallThemeColor(inputObject, outputObject);
     }
 
@@ -234,11 +207,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/editUserInstallWinBgPic")
-    @ResponseBody
-    public void editUserInstallWinBgPic(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserInstallWinBgPic(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.editUserInstallWinBgPic(inputObject, outputObject);
     }
 
@@ -247,11 +218,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/editUserInstallWinLockBgPic")
-    @ResponseBody
-    public void editUserInstallWinLockBgPic(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserInstallWinLockBgPic(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.editUserInstallWinLockBgPic(inputObject, outputObject);
     }
 
@@ -260,11 +229,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/editUserInstallWinStartMenuSize")
-    @ResponseBody
-    public void editUserInstallWinStartMenuSize(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserInstallWinStartMenuSize(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.editUserInstallWinStartMenuSize(inputObject, outputObject);
     }
 
@@ -273,11 +240,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/editUserInstallWinTaskPosition")
-    @ResponseBody
-    public void editUserInstallWinTaskPosition(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserInstallWinTaskPosition(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.editUserInstallWinTaskPosition(inputObject, outputObject);
     }
 
@@ -286,11 +251,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/editUserPassword")
-    @ResponseBody
-    public void editUserPassword(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserPassword(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.editUserPassword(inputObject, outputObject);
     }
 
@@ -299,11 +262,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/editUserInstallVagueBgSrc")
-    @ResponseBody
-    public void editUserInstallVagueBgSrc(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserInstallVagueBgSrc(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.editUserInstallVagueBgSrc(inputObject, outputObject);
     }
 
@@ -312,11 +273,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/editUserInstallLoadMenuIconById")
-    @ResponseBody
-    public void editUserInstallLoadMenuIconById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserInstallLoadMenuIconById(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.editUserInstallLoadMenuIconById(inputObject, outputObject);
     }
 
@@ -325,11 +284,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/queryUserLockByLockPwd")
-    @ResponseBody
-    public void queryUserLockByLockPwd(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUserLockByLockPwd(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.queryUserLockByLockPwd(inputObject, outputObject);
     }
 
@@ -338,11 +295,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/queryUserDetailsMationByUserId")
-    @ResponseBody
-    public void queryUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.queryUserDetailsMationByUserId(inputObject, outputObject);
     }
 
@@ -351,11 +306,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/editUserDetailsMationByUserId")
-    @ResponseBody
-    public void editUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.editUserDetailsMationByUserId(inputObject, outputObject);
     }
 
@@ -364,11 +317,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/querySysUserListByUserName")
-    @ResponseBody
-    public void querySysUserListByUserName(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserListByUserName(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.querySysUserListByUserName(inputObject, outputObject);
     }
 
@@ -377,11 +328,9 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserController/querySysDeskTopByUserId")
-    @ResponseBody
-    public void querySysDeskTopByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysDeskTopByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.querySysDeskTopByUserId(inputObject, outputObject);
     }
 
@@ -390,14 +339,12 @@ public class SysEveUserController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "queryUserMationByUserId", value = "根据用户id获取用户信息", method = "GET", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "userId", name = "userId", value = "用户id(账号ID)", required = "required")})
     @RequestMapping("/post/SysEveUserController/queryUserMationByUserId")
-    @ResponseBody
-    public void queryUserMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUserMationByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.queryUserMationByUserId(inputObject, outputObject);
     }
 

@@ -138,11 +138,6 @@
 	<url id="sysstaffcertificate005" path="/post/SysStaffCertificateController/deleteSysStaffCertificateMationById" val="删除员工证书信息" allUse="1" method="DELETE" groupName="员工证书">
 		<property id="rowId" name="id" ref="required" var="证书id"></property>
 	</url>
-	<url id="sysstaffcertificate006" path="/post/SysStaffCertificateController/queryPointStaffSysStaffCertificateList" val="查询指定员工的证书列表" allUse="1" groupName="员工证书">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="staffId" name="staffId" ref="required" var="员工id"></property>
-	</url>
 	<!-- 员工证书管理开始 -->
 	
 	<!-- 员工教育背景管理开始 -->
@@ -325,13 +320,6 @@
 	<!-- 员工工作履历信息管理开始 -->
 	
 	<!-- 员工语言能力信息管理开始 -->
-	<url id="sysstafflanguage001" path="/post/SysStaffLanguageController/queryAllSysStaffLanguageList" val="查询所有语言能力信息列表" allUse="1" groupName="员工语言能力信息">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="userName" name="userName" ref="" var="员工姓名"></property>
-		<property id="jobNumber" name="jobNumber" ref="" var="员工工号"></property>
-		<property id="state" name="state" ref="" var="员工状态"></property>
-	</url>
 	<url id="sysstafflanguage002" path="/post/SysStaffLanguageController/insertSysStaffLanguageMation" val="员工语言能力信息录入" allUse="1" groupName="员工语言能力信息">
 		<property id="staffId" name="staffId" ref="required" var="员工id"></property>
 		<property id="languageId" name="languageId" ref="required" var="语种类型"></property>

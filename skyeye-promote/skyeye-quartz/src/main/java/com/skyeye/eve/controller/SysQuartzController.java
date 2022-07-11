@@ -8,11 +8,10 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.SysQuartzService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class SysQuartzController {
 
     @Autowired
@@ -23,11 +22,9 @@ public class SysQuartzController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysQuartzController/querySystemQuartzList")
-    @ResponseBody
-    public void querySystemQuartzList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySystemQuartzList(InputObject inputObject, OutputObject outputObject) {
         sysQuartzService.querySystemQuartzList(inputObject, outputObject);
     }
 
@@ -36,11 +33,9 @@ public class SysQuartzController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysQuartzController/queryMyTaskQuartzList")
-    @ResponseBody
-    public void queryMyTaskQuartzList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyTaskQuartzList(InputObject inputObject, OutputObject outputObject) {
         sysQuartzService.queryMyTaskQuartzList(inputObject, outputObject);
     }
 
@@ -49,11 +44,9 @@ public class SysQuartzController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysQuartzController/runSystemQuartz")
-    @ResponseBody
-    public void runSystemQuartz(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void runSystemQuartz(InputObject inputObject, OutputObject outputObject) {
         sysQuartzService.runSystemQuartz(inputObject, outputObject);
     }
 

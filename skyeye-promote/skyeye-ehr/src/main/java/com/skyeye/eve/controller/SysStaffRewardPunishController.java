@@ -1,107 +1,85 @@
-package com.skyeye.eve.controller;
+/*******************************************************************************
+ * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
+ ******************************************************************************/
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+package com.skyeye.eve.controller;
 
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.SysStaffRewardPunishService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class SysStaffRewardPunishController {
 
     @Autowired
     private SysStaffRewardPunishService sysStaffRewardPunishService;
 
     /**
+     * 查询所有奖惩列表
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: queryAllSysStaffRewardPunishList
-     * @Description: 查询所有奖惩列表
-     * @return: void
      */
     @RequestMapping("/post/SysStaffRewardPunishController/queryAllSysStaffRewardPunishList")
-    @ResponseBody
-    public void queryAllSysStaffRewardPunishList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysStaffRewardPunishList(InputObject inputObject, OutputObject outputObject) {
         sysStaffRewardPunishService.queryAllSysStaffRewardPunishList(inputObject, outputObject);
     }
 
     /**
+     * 员工奖惩信息录入
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: insertSysStaffRewardPunishMation
-     * @Description: 员工奖惩信息录入
-     * @return: void
      */
     @RequestMapping("/post/SysStaffRewardPunishController/insertSysStaffRewardPunishMation")
-    @ResponseBody
-    public void insertSysStaffRewardPunishMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysStaffRewardPunishMation(InputObject inputObject, OutputObject outputObject) {
         sysStaffRewardPunishService.insertSysStaffRewardPunishMation(inputObject, outputObject);
     }
 
     /**
+     * 编辑员工奖惩信息时回显
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: querySysStaffRewardPunishMationToEdit
-     * @Description: 编辑员工奖惩信息时回显
-     * @return: void
      */
     @RequestMapping("/post/SysStaffRewardPunishController/querySysStaffRewardPunishMationToEdit")
-    @ResponseBody
-    public void querySysStaffRewardPunishMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffRewardPunishMationToEdit(InputObject inputObject, OutputObject outputObject) {
         sysStaffRewardPunishService.querySysStaffRewardPunishMationToEdit(inputObject, outputObject);
     }
 
     /**
+     * 编辑员工奖惩信息
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: editSysStaffRewardPunishMationById
-     * @Description: 编辑员工奖惩信息
-     * @return: void
      */
     @RequestMapping("/post/SysStaffRewardPunishController/editSysStaffRewardPunishMationById")
-    @ResponseBody
-    public void editSysStaffRewardPunishMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysStaffRewardPunishMationById(InputObject inputObject, OutputObject outputObject) {
         sysStaffRewardPunishService.editSysStaffRewardPunishMationById(inputObject, outputObject);
     }
 
     /**
+     * 删除员工奖惩信息
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: deleteSysStaffRewardPunishMationById
-     * @Description: 删除员工奖惩信息
-     * @return: void
      */
     @RequestMapping("/post/SysStaffRewardPunishController/deleteSysStaffRewardPunishMationById")
-    @ResponseBody
-    public void deleteSysStaffRewardPunishMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysStaffRewardPunishMationById(InputObject inputObject, OutputObject outputObject) {
         sysStaffRewardPunishService.deleteSysStaffRewardPunishMationById(inputObject, outputObject);
     }
 
     /**
+     * 查询指定员工的奖惩列表
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: queryPointStaffSysStaffRewardPunishList
-     * @Description: 查询指定员工的奖惩列表
-     * @return: void
      */
     @RequestMapping("/post/SysStaffRewardPunishController/queryPointStaffSysStaffRewardPunishList")
-    @ResponseBody
-    public void queryPointStaffSysStaffRewardPunishList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPointStaffSysStaffRewardPunishList(InputObject inputObject, OutputObject outputObject) {
         sysStaffRewardPunishService.queryPointStaffSysStaffRewardPunishList(inputObject, outputObject);
     }
 

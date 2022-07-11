@@ -39,10 +39,9 @@ public class ApiMationServiceImpl implements ApiMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void selectApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectApiMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String urlId = map.get("urlId").toString();
         Map<String, Object> bean = apiMationDao.queryApiMationToEditById(urlId);
@@ -55,11 +54,10 @@ public class ApiMationServiceImpl implements ApiMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editApiMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String urlId = map.get("urlId").toString();
         Map<String, Object> bean = apiMationDao.queryApiMationToEditById(urlId);

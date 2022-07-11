@@ -1,122 +1,96 @@
-package com.skyeye.eve.controller;
+/*******************************************************************************
+ * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
+ ******************************************************************************/
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+package com.skyeye.eve.controller;
 
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.SysStaffContractService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class SysStaffContractController {
 
     @Autowired
     private SysStaffContractService sysStaffContractService;
 
     /**
+     * 查询所有合同列表
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: queryAllSysStaffContractList
-     * @Description: 查询所有合同列表
-     * @return: void
      */
     @RequestMapping("/post/SysStaffContractController/queryAllSysStaffContractList")
-    @ResponseBody
-    public void queryAllSysStaffContractList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysStaffContractList(InputObject inputObject, OutputObject outputObject) {
         sysStaffContractService.queryAllSysStaffContractList(inputObject, outputObject);
     }
 
     /**
+     * 员工合同信息录入
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: insertSysStaffContractMation
-     * @Description: 员工合同信息录入
-     * @return: void
      */
     @RequestMapping("/post/SysStaffContractController/insertSysStaffContractMation")
-    @ResponseBody
-    public void insertSysStaffContractMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysStaffContractMation(InputObject inputObject, OutputObject outputObject) {
         sysStaffContractService.insertSysStaffContractMation(inputObject, outputObject);
     }
 
     /**
+     * 编辑员工合同信息时回显
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: querySysStaffContractMationToEdit
-     * @Description: 编辑员工合同信息时回显
-     * @return: void
      */
     @RequestMapping("/post/SysStaffContractController/querySysStaffContractMationToEdit")
-    @ResponseBody
-    public void querySysStaffContractMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysStaffContractMationToEdit(InputObject inputObject, OutputObject outputObject) {
         sysStaffContractService.querySysStaffContractMationToEdit(inputObject, outputObject);
     }
 
     /**
+     * 编辑员工合同信息
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: editSysStaffContractMationById
-     * @Description: 编辑员工合同信息
-     * @return: void
      */
     @RequestMapping("/post/SysStaffContractController/editSysStaffContractMationById")
-    @ResponseBody
-    public void editSysStaffContractMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysStaffContractMationById(InputObject inputObject, OutputObject outputObject) {
         sysStaffContractService.editSysStaffContractMationById(inputObject, outputObject);
     }
 
     /**
+     * 删除员工合同信息
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: deleteSysStaffContractMationById
-     * @Description: 删除员工合同信息
-     * @return: void
      */
     @RequestMapping("/post/SysStaffContractController/deleteSysStaffContractMationById")
-    @ResponseBody
-    public void deleteSysStaffContractMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysStaffContractMationById(InputObject inputObject, OutputObject outputObject) {
         sysStaffContractService.deleteSysStaffContractMationById(inputObject, outputObject);
     }
 
     /**
+     * 查询指定员工的合同列表
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: queryPointStaffSysStaffContractList
-     * @Description: 查询指定员工的合同列表
-     * @return: void
      */
     @RequestMapping("/post/SysStaffContractController/queryPointStaffSysStaffContractList")
-    @ResponseBody
-    public void queryPointStaffSysStaffContractList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPointStaffSysStaffContractList(InputObject inputObject, OutputObject outputObject) {
         sysStaffContractService.queryPointStaffSysStaffContractList(inputObject, outputObject);
     }
 
     /**
+     * 员工合同签约
+     *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
-     * @throws
-     * @Title: signSysStaffContractById
-     * @Description: 员工合同签约
-     * @return: void
      */
     @RequestMapping("/post/SysStaffContractController/signSysStaffContractById")
-    @ResponseBody
-    public void signSysStaffContractById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void signSysStaffContractById(InputObject inputObject, OutputObject outputObject) {
         sysStaffContractService.signSysStaffContractById(inputObject, outputObject);
     }
 

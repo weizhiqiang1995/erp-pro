@@ -1,3 +1,7 @@
+/*******************************************************************************
+ * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
+ ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -5,16 +9,16 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysStaffJobResumeService {
 
-    public void queryAllSysStaffJobResumeList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryAllSysStaffJobResumeList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysStaffJobResumeMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysStaffJobResumeMation(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysStaffJobResumeMationToEdit(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysStaffJobResumeMationToEdit(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysStaffJobResumeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysStaffJobResumeMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSysStaffJobResumeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteSysStaffJobResumeMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryPointStaffSysStaffJobResumeList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryPointStaffSysStaffJobResumeList(InputObject inputObject, OutputObject outputObject);
 
 }

@@ -138,7 +138,7 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = companyJobScoreDao.queryCompanyJobScoreMationById(id);
-        if (bean == null || bean.isEmpty()) {
+        if (CollectionUtils.isEmpty(bean)) {
             outputObject.setreturnMessage("The data does not exist.");
             return;
         }
@@ -240,7 +240,7 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = companyJobScoreDao.queryCompanyJobScoreMationById(id);
-        if (bean == null || bean.isEmpty()) {
+        if (CollectionUtils.isEmpty(bean)) {
             outputObject.setreturnMessage("The data does not exist.");
             return;
         }

@@ -4,6 +4,7 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.ehr.language.SysStaffLanguageQueryDo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.Map;
 
 public interface SysStaffLanguageDao {
 
-    List<Map<String, Object>> queryAllSysStaffLanguageList(Map<String, Object> params);
+    List<Map<String, Object>> queryAllSysStaffLanguageList(SysStaffLanguageQueryDo sysStaffLanguageQuery);
 
     int insertSysStaffLanguageMation(Map<String, Object> map);
 

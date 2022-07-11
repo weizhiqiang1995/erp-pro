@@ -4,16 +4,14 @@
 
 package com.skyeye.eve.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.ErpProducePageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class ErpProducePageController {
 
     @Autowired
@@ -24,11 +22,9 @@ public class ErpProducePageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ErpProducePageController/queryDepartmentPickMaterial")
-    @ResponseBody
-    public void queryDepartmentPickMaterial(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDepartmentPickMaterial(InputObject inputObject, OutputObject outputObject) {
         erpProducePageService.queryDepartmentPickMaterial(inputObject, outputObject);
     }
 
@@ -37,11 +33,9 @@ public class ErpProducePageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ErpProducePageController/queryDepartmentPatchMaterial")
-    @ResponseBody
-    public void queryDepartmentPatchMaterial(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDepartmentPatchMaterial(InputObject inputObject, OutputObject outputObject) {
         erpProducePageService.queryDepartmentPatchMaterial(inputObject, outputObject);
     }
 
@@ -50,11 +44,9 @@ public class ErpProducePageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ErpProducePageController/queryDepartmentReturnMaterial")
-    @ResponseBody
-    public void queryDepartmentReturnMaterial(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDepartmentReturnMaterial(InputObject inputObject, OutputObject outputObject) {
         erpProducePageService.queryDepartmentReturnMaterial(inputObject, outputObject);
     }
 
@@ -63,11 +55,9 @@ public class ErpProducePageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ErpProducePageController/queryDepartmentMachin")
-    @ResponseBody
-    public void queryDepartmentMachin(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDepartmentMachin(InputObject inputObject, OutputObject outputObject) {
         erpProducePageService.queryDepartmentMachin(inputObject, outputObject);
     }
 

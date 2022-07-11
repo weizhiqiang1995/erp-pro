@@ -44,10 +44,9 @@ public class SysEveUserStaffCapitalServiceImpl implements SysEveUserStaffCapital
      * @param monthTime    指定年月，格式为：yyyy-MM
      * @param type         该资金来源类型
      * @param money        金额
-     * @throws Exception
      */
     @Override
-    public void addMonthMoney2StaffCapital(String staffId, String companyId, String departmentId, String monthTime, int type, String money) throws Exception {
+    public void addMonthMoney2StaffCapital(String staffId, String companyId, String departmentId, String monthTime, int type, String money) {
         synchronized (staffId) {
             Map<String, Object> staffCapital = sysEveUserStaffCapitalDao.queryStaffCapitalMation(staffId, monthTime);
             if (staffCapital == null || staffCapital.isEmpty()) {
@@ -82,10 +81,9 @@ public class SysEveUserStaffCapitalServiceImpl implements SysEveUserStaffCapital
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryStaffCapitalWaitPayMonthList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryStaffCapitalWaitPayMonthList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveUserStaffCapitalDao.queryStaffCapitalWaitPayMonthList(map);

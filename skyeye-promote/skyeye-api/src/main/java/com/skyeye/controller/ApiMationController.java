@@ -8,11 +8,10 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.service.ApiMationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class ApiMationController {
 
     @Autowired
@@ -23,11 +22,9 @@ public class ApiMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ApiMationController/selectApiMationById")
-    @ResponseBody
-    public void selectApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectApiMationById(InputObject inputObject, OutputObject outputObject) {
         apiMationService.selectApiMationById(inputObject, outputObject);
     }
 
@@ -36,11 +33,9 @@ public class ApiMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ApiMationController/editApiMationById")
-    @ResponseBody
-    public void editApiMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editApiMationById(InputObject inputObject, OutputObject outputObject) {
         apiMationService.editApiMationById(inputObject, outputObject);
     }
 

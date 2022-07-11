@@ -36,7 +36,6 @@ public class SysEveUserStaffController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "staff001", value = "查看所有员工列表", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -49,7 +48,7 @@ public class SysEveUserStaffController {
         @ApiImplicitParam(id = "departmentName", name = "departmentName", value = "部门"),
         @ApiImplicitParam(id = "jobName", name = "jobName", value = "职位")})
     @RequestMapping("/post/SysEveUserStaffController/querySysUserStaffList")
-    public void querySysUserStaffList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserStaffList(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.querySysUserStaffList(inputObject, outputObject);
     }
 
@@ -58,12 +57,11 @@ public class SysEveUserStaffController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "staff002", value = "新增员工信息", method = "POST", allUse = "2")
     @ApiImplicitParams(classBean = SysUserStaffMation.class)
     @RequestMapping("/post/SysEveUserStaffController/insertSysUserStaffMation")
-    public void insertSysUserStaffMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysUserStaffMation(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.insertSysUserStaffMation(inputObject, outputObject);
     }
 
@@ -72,13 +70,12 @@ public class SysEveUserStaffController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "staff003", value = "通过id查询一条员工信息回显编辑", method = "GET", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "员工id", required = "required")})
     @RequestMapping("/post/SysEveUserStaffController/querySysUserStaffById")
-    public void querySysUserStaffById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserStaffById(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.querySysUserStaffById(inputObject, outputObject);
     }
 
@@ -87,13 +84,12 @@ public class SysEveUserStaffController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "staff004", value = "编辑员工信息", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysUserStaffMation.class, value = {
         @ApiImplicitParam(id = "rowId", name = "id", value = "员工id", required = "required")})
     @RequestMapping("/post/SysEveUserStaffController/editSysUserStaffById")
-    public void editSysUserStaffById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysUserStaffById(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.editSysUserStaffById(inputObject, outputObject);
     }
 
@@ -102,13 +98,12 @@ public class SysEveUserStaffController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "staff005", value = "通过id查询一条员工信息展示详情", method = "GET", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "员工id", required = "required")})
     @RequestMapping("/post/SysEveUserStaffController/querySysUserStaffByIdToDetails")
-    public void querySysUserStaffByIdToDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserStaffByIdToDetails(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.querySysUserStaffByIdToDetails(inputObject, outputObject);
     }
 
@@ -117,7 +112,6 @@ public class SysEveUserStaffController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "staff006", value = "员工离职", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -125,7 +119,7 @@ public class SysEveUserStaffController {
         @ApiImplicitParam(id = "quitTime", name = "quitTime", value = "离职时间"),
         @ApiImplicitParam(id = "quitReason", name = "quitReason", value = "离职原因")})
     @RequestMapping("/post/SysEveUserStaffController/editSysUserStaffState")
-    public void editSysUserStaffState(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysUserStaffState(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.editSysUserStaffState(inputObject, outputObject);
     }
 
@@ -134,10 +128,9 @@ public class SysEveUserStaffController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserStaffController/editTurnTeacher")
-    public void editTurnTeacher(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editTurnTeacher(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.editTurnTeacher(inputObject, outputObject);
     }
 
@@ -146,7 +139,6 @@ public class SysEveUserStaffController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "staff008", value = "查看所有员工列表展示为表格供其他选择", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -159,7 +151,7 @@ public class SysEveUserStaffController {
         @ApiImplicitParam(id = "departmentName", name = "departmentName", value = "部门"),
         @ApiImplicitParam(id = "jobName", name = "jobName", value = "职位")})
     @RequestMapping("/post/SysEveUserStaffController/querySysUserStaffListToTable")
-    public void querySysUserStaffListToTable(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserStaffListToTable(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.querySysUserStaffListToTable(inputObject, outputObject);
     }
 
@@ -168,10 +160,9 @@ public class SysEveUserStaffController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserStaffController/querySysUserStaffListByIds")
-    public void querySysUserStaffListByIds(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserStaffListByIds(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.querySysUserStaffListByIds(inputObject, outputObject);
     }
 
@@ -180,11 +171,10 @@ public class SysEveUserStaffController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "staff010", value = "获取当前登录员工的信息", method = "GET", allUse = "2")
     @RequestMapping("/post/SysEveUserStaffController/querySysUserStaffLogin")
-    public void querySysUserStaffLogin(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserStaffLogin(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.querySysUserStaffLogin(inputObject, outputObject);
     }
 
@@ -193,13 +183,12 @@ public class SysEveUserStaffController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "queryUserNameList", value = "根据用户ids获取用户信息集合", method = "POST", allUse = "0")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "userIds", name = "userIds", value = "用户id")})
     @RequestMapping("/post/SysEveUserStaffController/queryUserNameList")
-    public void queryUserNameList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUserNameList(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.queryUserNameList(inputObject, outputObject);
     }
 
@@ -208,13 +197,12 @@ public class SysEveUserStaffController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "querySysUserStaffDetailsByUserId", value = "通过用户id查询一条员工信息", method = "GET", allUse = "0")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "userId", name = "userId", value = "用户id", required = "required")})
     @RequestMapping("/post/SysEveUserStaffController/querySysUserStaffDetailsByUserId")
-    public void querySysUserStaffDetailsByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysUserStaffDetailsByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.querySysUserStaffDetailsByUserId(inputObject, outputObject);
     }
 
@@ -223,7 +211,6 @@ public class SysEveUserStaffController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "editSysUserStaffAnnualLeaveById", value = "修改员工剩余年假信息", method = "POST", allUse = "0")
     @ApiImplicitParams({
@@ -231,7 +218,7 @@ public class SysEveUserStaffController {
         @ApiImplicitParam(id = "quarterYearHour", name = "quarterYearHour", value = "年假,精确到6位", required = "required"),
         @ApiImplicitParam(id = "annualLeaveStatisTime", name = "annualLeaveStatisTime", value = "员工剩余年假数据刷新日期", required = "required")})
     @RequestMapping("/post/SysEveUserStaffController/editSysUserStaffAnnualLeaveById")
-    public void editSysUserStaffAnnualLeaveById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysUserStaffAnnualLeaveById(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.editSysUserStaffAnnualLeaveById(inputObject, outputObject);
     }
 
@@ -240,7 +227,6 @@ public class SysEveUserStaffController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "updateSysUserStaffHolidayNumberById", value = "修改员工的补休池剩余补休信息", method = "POST", allUse = "0")
     @ApiImplicitParams({
@@ -248,7 +234,7 @@ public class SysEveUserStaffController {
         @ApiImplicitParam(id = "holidayNumber", name = "holidayNumber", value = "当前员工剩余补休天数", required = "required"),
         @ApiImplicitParam(id = "holidayStatisTime", name = "holidayStatisTime", value = "员工剩余补休数据刷新日期", required = "required")})
     @RequestMapping("/post/SysEveUserStaffController/updateSysUserStaffHolidayNumberById")
-    public void updateSysUserStaffHolidayNumberById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateSysUserStaffHolidayNumberById(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.updateSysUserStaffHolidayNumberById(inputObject, outputObject);
     }
 
@@ -257,7 +243,6 @@ public class SysEveUserStaffController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "updateSysUserStaffRetiredHolidayNumberById", value = "修改员工的补休池已休补休信息", method = "POST", allUse = "0")
     @ApiImplicitParams({
@@ -265,7 +250,7 @@ public class SysEveUserStaffController {
         @ApiImplicitParam(id = "retiredHolidayNumber", name = "retiredHolidayNumber", value = "当前员工已休补休天数", required = "required"),
         @ApiImplicitParam(id = "retiredHolidayStatisTime", name = "retiredHolidayStatisTime", value = "员工已休补休数据刷新日期", required = "required")})
     @RequestMapping("/post/SysEveUserStaffController/updateSysUserStaffRetiredHolidayNumberById")
-    public void updateSysUserStaffRetiredHolidayNumberById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateSysUserStaffRetiredHolidayNumberById(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.updateSysUserStaffRetiredHolidayNumberById(inputObject, outputObject);
     }
 
@@ -274,13 +259,12 @@ public class SysEveUserStaffController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "queryStaffCheckWorkTimeRelationNameByStaffId", value = "根据员工id获取该员工的考勤时间段", method = "GET", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "staffId", name = "staffId", value = "员工id", required = "required")})
     @RequestMapping("/post/SysEveUserStaffController/queryStaffCheckWorkTimeRelationNameByStaffId")
-    public void queryStaffCheckWorkTimeRelationNameByStaffId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryStaffCheckWorkTimeRelationNameByStaffId(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.queryStaffCheckWorkTimeRelationNameByStaffId(inputObject, outputObject);
     }
 

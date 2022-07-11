@@ -8,13 +8,12 @@ import com.skyeye.annotation.api.Api;
 import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
-import com.skyeye.eve.entity.knowlg.KnowledgeContentMation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.knowlg.KnowledgeContentMation;
 import com.skyeye.eve.service.KnowledgeContentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -37,7 +36,6 @@ public class KnowledgeContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent001", value = "获取知识库列表", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -47,7 +45,7 @@ public class KnowledgeContentController {
         @ApiImplicitParam(id = "state", name = "state", value = "上线状态"),
         @ApiImplicitParam(id = "typeId", name = "typeId", value = "所属类型")})
     @RequestMapping("/post/KnowledgeContentController/queryKnowledgeContentList")
-    public void queryKnowledgeContentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryKnowledgeContentList(InputObject inputObject, OutputObject outputObject) {
         knowledgeContentService.queryKnowledgeContentList(inputObject, outputObject);
     }
 
@@ -57,12 +55,11 @@ public class KnowledgeContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent002", value = "添加知识库", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = KnowledgeContentMation.class)
     @RequestMapping("/post/KnowledgeContentController/insertKnowledgeContentMation")
-    public void insertKnowledgeContentMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertKnowledgeContentMation(InputObject inputObject, OutputObject outputObject) {
         knowledgeContentService.insertKnowledgeContentMation(inputObject, outputObject);
     }
 
@@ -71,13 +68,12 @@ public class KnowledgeContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent003", value = "通过id查找对应的知识库信息用以编辑", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "知识库id", required = "required")})
     @RequestMapping("/post/KnowledgeContentController/selectKnowledgeContentById")
-    public void selectKnowledgeContentById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectKnowledgeContentById(InputObject inputObject, OutputObject outputObject) {
         knowledgeContentService.selectKnowledgeContentById(inputObject, outputObject);
     }
 
@@ -86,13 +82,12 @@ public class KnowledgeContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent004", value = "编辑知识库信息", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = KnowledgeContentMation.class, value = {
         @ApiImplicitParam(id = "rowId", name = "id", value = "知识库id", required = "required")})
     @RequestMapping("/post/KnowledgeContentController/editKnowledgeContentById")
-    public void editKnowledgeContentById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editKnowledgeContentById(InputObject inputObject, OutputObject outputObject) {
         knowledgeContentService.editKnowledgeContentById(inputObject, outputObject);
     }
 
@@ -101,13 +96,12 @@ public class KnowledgeContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent005", value = "删除知识库", method = "POST", allUse = "1")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "知识库id", required = "required")})
     @RequestMapping("/post/KnowledgeContentController/deleteKnowledgeContentById")
-    public void deleteKnowledgeContentById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteKnowledgeContentById(InputObject inputObject, OutputObject outputObject) {
         knowledgeContentService.deleteKnowledgeContentById(inputObject, outputObject);
     }
 
@@ -116,13 +110,12 @@ public class KnowledgeContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent006", value = "知识库详情", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "知识库id", required = "required")})
     @RequestMapping("/post/KnowledgeContentController/queryKnowledgeContentMationById")
-    public void queryKnowledgeContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryKnowledgeContentMationById(InputObject inputObject, OutputObject outputObject) {
         knowledgeContentService.queryKnowledgeContentMationById(inputObject, outputObject);
     }
 
@@ -131,7 +124,6 @@ public class KnowledgeContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent007", value = "上传文件", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -141,7 +133,7 @@ public class KnowledgeContentController {
         @ApiImplicitParam(id = "chunk", name = "chunk", value = "分块上传，块下标", required = "required"),
         @ApiImplicitParam(id = "chunkSize", name = "chunkSize", value = "分块上传时，块的大小，用于最后合并", required = "required")})
     @RequestMapping("/post/KnowledgeContentController/insertUploadFileByUserId")
-    public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) {
         knowledgeContentService.insertUploadFileByUserId(inputObject, outputObject);
     }
 
@@ -150,7 +142,6 @@ public class KnowledgeContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent008", value = "上传文件合并块", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -158,7 +149,7 @@ public class KnowledgeContentController {
         @ApiImplicitParam(id = "size", name = "size", value = "文件大小", required = "required,num"),
         @ApiImplicitParam(id = "md5", name = "md5", value = "文件唯一标示", required = "required")})
     @RequestMapping("/post/KnowledgeContentController/insertUploadFileChunksByUserId")
-    public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) {
         knowledgeContentService.insertUploadFileChunksByUserId(inputObject, outputObject);
     }
 
@@ -167,7 +158,6 @@ public class KnowledgeContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent009", value = "文件分块上传检测是否上传", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -175,7 +165,7 @@ public class KnowledgeContentController {
         @ApiImplicitParam(id = "chunk", name = "chunk", value = "分块上传，块下标", required = "required"),
         @ApiImplicitParam(id = "chunkSize", name = "chunkSize", value = "分块上传时，块的大小，用于最后合并", required = "required")})
     @RequestMapping("/post/KnowledgeContentController/queryUploadFileChunksByChunkMd5")
-    public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) {
         knowledgeContentService.queryUploadFileChunksByChunkMd5(inputObject, outputObject);
     }
 
@@ -184,7 +174,6 @@ public class KnowledgeContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent010", value = "获取待审核的知识库列表", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -196,7 +185,7 @@ public class KnowledgeContentController {
         @ApiImplicitParam(id = "startTime", name = "startTime", value = "提交开始时间"),
         @ApiImplicitParam(id = "endTime", name = "endTime", value = "提交结束时间")})
     @RequestMapping("/post/KnowledgeContentController/queryUnCheckedKnowledgeContentList")
-    public void queryUnCheckedKnowledgeContentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUnCheckedKnowledgeContentList(InputObject inputObject, OutputObject outputObject) {
         knowledgeContentService.queryUnCheckedKnowledgeContentList(inputObject, outputObject);
     }
 
@@ -205,13 +194,12 @@ public class KnowledgeContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent011", value = "获取知识库信息用于回显审核", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "知识库id", required = "required")})
     @RequestMapping("/post/KnowledgeContentController/queryKnowledgeContentByIdToCheck")
-    public void queryKnowledgeContentByIdToCheck(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryKnowledgeContentByIdToCheck(InputObject inputObject, OutputObject outputObject) {
         knowledgeContentService.queryKnowledgeContentByIdToCheck(inputObject, outputObject);
     }
 
@@ -220,7 +208,6 @@ public class KnowledgeContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent012", value = "获取知识库信息用于回显审核", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -228,7 +215,7 @@ public class KnowledgeContentController {
         @ApiImplicitParam(id = "examineState", name = "examineState", value = "审核状态", required = "required"),
         @ApiImplicitParam(id = "examineNopassReason", name = "examineNopassReason", value = "审核不通过原因")})
     @RequestMapping("/post/KnowledgeContentController/editKnowledgeContentToCheck")
-    public void editKnowledgeContentToCheck(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editKnowledgeContentToCheck(InputObject inputObject, OutputObject outputObject) {
         knowledgeContentService.editKnowledgeContentToCheck(inputObject, outputObject);
     }
 
@@ -237,7 +224,6 @@ public class KnowledgeContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent013", value = "获取已经审核的知识库列表", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -252,7 +238,7 @@ public class KnowledgeContentController {
         @ApiImplicitParam(id = "examineStartTime", name = "examineStartTime", value = "审核开始时间"),
         @ApiImplicitParam(id = "examineEndTime", name = "examineEndTime", value = "审核结束时间")})
     @RequestMapping("/post/KnowledgeContentController/queryCheckedKnowledgeContentList")
-    public void queryCheckedKnowledgeContentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCheckedKnowledgeContentList(InputObject inputObject, OutputObject outputObject) {
         knowledgeContentService.queryCheckedKnowledgeContentList(inputObject, outputObject);
     }
 
@@ -261,13 +247,12 @@ public class KnowledgeContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent014", value = "未审核知识库详情", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "知识库id", required = "required")})
     @RequestMapping("/post/KnowledgeContentController/queryUncheckedKnowledgeContent")
-    public void queryUncheckedKnowledgeContent(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUncheckedKnowledgeContent(InputObject inputObject, OutputObject outputObject) {
         knowledgeContentService.queryUncheckedKnowledgeContent(inputObject, outputObject);
     }
 
@@ -276,13 +261,12 @@ public class KnowledgeContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent015", value = "已审核的知识库详情", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "知识库id", required = "required")})
     @RequestMapping("/post/KnowledgeContentController/queryCheckedKnowledgeContent")
-    public void queryCheckedKnowledgeContent(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCheckedKnowledgeContent(InputObject inputObject, OutputObject outputObject) {
         knowledgeContentService.queryCheckedKnowledgeContent(inputObject, outputObject);
     }
 
@@ -291,7 +275,6 @@ public class KnowledgeContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgecontent016", value = "获取企业知识库列表(已审核通过)", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -301,7 +284,7 @@ public class KnowledgeContentController {
         @ApiImplicitParam(id = "label", name = "label", value = "标签"),
         @ApiImplicitParam(id = "typeId", name = "typeId", value = "所属类型")})
     @RequestMapping("/post/KnowledgeContentController/queryAllPassKnowledgeContentList")
-    public void queryAllPassKnowledgeContentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllPassKnowledgeContentList(InputObject inputObject, OutputObject outputObject) {
         knowledgeContentService.queryAllPassKnowledgeContentList(inputObject, outputObject);
     }
 

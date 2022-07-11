@@ -1,29 +1,30 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.dao;
+
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
-
 public interface MainPageDao {
 
-    public String queryCheckOnWorkNumByUserId(@Param("userId") String userId) throws Exception;
+    String queryCheckOnWorkNumByUserId(@Param("userId") String userId);
 
-    public String queryDiskCloudFileNumByUserId(@Param("userId") String userId) throws Exception;
+    String queryDiskCloudFileNumByUserId(@Param("userId") String userId);
 
-    public String queryForumNumByUserId(@Param("userId") String userId) throws Exception;
+    String queryForumNumByUserId(@Param("userId") String userId);
 
-    public String queryKnowledgeNumByUserId(@Param("userId") String userId) throws Exception;
+    String queryKnowledgeNumByUserId(@Param("userId") String userId);
 
-    public List<Map<String, Object>> queryFirstSysNoticeTypeUpStateList() throws Exception;
+    List<Map<String, Object>> queryFirstSysNoticeTypeUpStateList();
 
-    public List<Map<String, Object>> queryNoticeContentListByUserIdAndTypeId(@Param("userId") String userId, @Param("typeId") String typeId) throws Exception;
+    List<Map<String, Object>> queryNoticeContentListByUserIdAndTypeId(@Param("userId") String userId, @Param("typeId") String typeId);
 
-    public List<Map<String, Object>> queryHotForumList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryHotForumList(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryKnowledgeContentPhoneList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryKnowledgeContentPhoneList(Map<String, Object> map);
 
 }
