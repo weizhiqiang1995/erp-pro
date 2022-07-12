@@ -4,14 +4,19 @@
 
 package com.skyeye.eve.controller;
 
+import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParams;
+import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
 import com.skyeye.eve.service.SysStaffJobResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Api(value = "员工工作履历信息", tags = "员工工作履历信息", modelName = "EHR模块")
 public class SysStaffJobResumeController {
 
     @Autowired
@@ -78,6 +83,8 @@ public class SysStaffJobResumeController {
      * @param inputObject
      * @param outputObject
      */
+    @ApiOperation(id = "sysstaffjobresume006", value = "查询指定员工的工作履历列表", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = PointStaffQueryDo.class)
     @RequestMapping("/post/SysStaffJobResumeController/queryPointStaffSysStaffJobResumeList")
     public void queryPointStaffSysStaffJobResumeList(InputObject inputObject, OutputObject outputObject) {
         sysStaffJobResumeService.queryPointStaffSysStaffJobResumeList(inputObject, outputObject);

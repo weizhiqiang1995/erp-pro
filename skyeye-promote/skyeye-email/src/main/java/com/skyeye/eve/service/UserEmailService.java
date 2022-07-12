@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,40 +9,40 @@ import com.skyeye.common.object.OutputObject;
 
 public interface UserEmailService {
 
-    public void queryEmailListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryEmailListByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void insertEmailListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertEmailListByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void insertEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryInboxEmailListByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryInboxEmailListByEmailId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryEmailMationByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryEmailMationByEmailId(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSendedEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSendedEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void querySendedEmailListByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySendedEmailListByEmailId(InputObject inputObject, OutputObject outputObject);
 
-    public void insertDelsteEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertDelsteEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryDeleteEmailListByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryDeleteEmailListByEmailId(InputObject inputObject, OutputObject outputObject);
 
-    public void insertDraftsEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertDraftsEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryDraftsEmailListByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryDraftsEmailListByEmailId(InputObject inputObject, OutputObject outputObject);
 
-    public void insertToSendEmailMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertToSendEmailMationByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void insertToDraftsEmailMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertToDraftsEmailMationByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryDraftsEmailMationToEditByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryDraftsEmailMationToEditByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void editToDraftsEmailMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editToDraftsEmailMationByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void insertToSendEmailMationByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertToSendEmailMationByEmailId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryForwardEmailMationToEditByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryForwardEmailMationToEditByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void insertForwardToSendEmailMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertForwardToSendEmailMationByUserId(InputObject inputObject, OutputObject outputObject);
 
 }

@@ -4,6 +4,7 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -21,6 +22,6 @@ public interface SysStaffJobResumeDao {
 
     int deleteSysStaffJobResumeMationById(@Param("id") String id);
 
-    List<Map<String, Object>> queryPointStaffSysStaffJobResumeList(Map<String, Object> params);
+    List<Map<String, Object>> queryPointStaffSysStaffJobResumeList(PointStaffQueryDo pointStaffQuery);
 
 }

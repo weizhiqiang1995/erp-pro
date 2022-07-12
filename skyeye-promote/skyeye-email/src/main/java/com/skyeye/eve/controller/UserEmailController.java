@@ -4,6 +4,10 @@
 
 package com.skyeye.eve.controller;
 
+import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParams;
+import com.skyeye.annotation.api.ApiOperation;
+import com.skyeye.eve.entity.email.common.EmailQueryDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +19,7 @@ import com.skyeye.eve.service.UserEmailService;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Api(value = "邮件管理", tags = "邮件管理", modelName = "邮件模块")
 public class UserEmailController {
 
     @Autowired
@@ -25,10 +30,9 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserEmailController/queryEmailListByUserId")
-    public void queryEmailListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryEmailListByUserId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.queryEmailListByUserId(inputObject, outputObject);
     }
 
@@ -37,10 +41,9 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserEmailController/insertEmailListByUserId")
-    public void insertEmailListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertEmailListByUserId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.insertEmailListByUserId(inputObject, outputObject);
     }
 
@@ -49,10 +52,9 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserEmailController/insertEmailListFromServiceByUserId")
-    public void insertEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.insertEmailListFromServiceByUserId(inputObject, outputObject);
     }
 
@@ -61,10 +63,11 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
+    @ApiOperation(id = "useremail004", value = "根据绑定邮箱id获取收件箱内容", method = "POST", allUse = "2")
+    @ApiImplicitParams(classBean = EmailQueryDo.class)
     @RequestMapping("/post/UserEmailController/queryInboxEmailListByEmailId")
-    public void queryInboxEmailListByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryInboxEmailListByEmailId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.queryInboxEmailListByEmailId(inputObject, outputObject);
     }
 
@@ -73,10 +76,9 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserEmailController/queryEmailMationByEmailId")
-    public void queryEmailMationByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryEmailMationByEmailId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.queryEmailMationByEmailId(inputObject, outputObject);
     }
 
@@ -85,10 +87,9 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserEmailController/insertSendedEmailListFromServiceByUserId")
-    public void insertSendedEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSendedEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.insertSendedEmailListFromServiceByUserId(inputObject, outputObject);
     }
 
@@ -97,10 +98,11 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
+    @ApiOperation(id = "useremail007", value = "根据绑定邮箱id获取已发送邮件", method = "POST", allUse = "2")
+    @ApiImplicitParams(classBean = EmailQueryDo.class)
     @RequestMapping("/post/UserEmailController/querySendedEmailListByEmailId")
-    public void querySendedEmailListByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySendedEmailListByEmailId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.querySendedEmailListByEmailId(inputObject, outputObject);
     }
 
@@ -109,10 +111,9 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserEmailController/insertDelsteEmailListFromServiceByUserId")
-    public void insertDelsteEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertDelsteEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.insertDelsteEmailListFromServiceByUserId(inputObject, outputObject);
     }
 
@@ -121,10 +122,11 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
+    @ApiOperation(id = "useremail009", value = "根据绑定邮箱id获取已删除邮件", method = "POST", allUse = "2")
+    @ApiImplicitParams(classBean = EmailQueryDo.class)
     @RequestMapping("/post/UserEmailController/queryDeleteEmailListByEmailId")
-    public void queryDeleteEmailListByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDeleteEmailListByEmailId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.queryDeleteEmailListByEmailId(inputObject, outputObject);
     }
 
@@ -133,10 +135,9 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserEmailController/insertDraftsEmailListFromServiceByUserId")
-    public void insertDraftsEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertDraftsEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.insertDraftsEmailListFromServiceByUserId(inputObject, outputObject);
     }
 
@@ -145,10 +146,11 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
+    @ApiOperation(id = "useremail011", value = "根据绑定邮箱id获取草稿箱邮件", method = "POST", allUse = "2")
+    @ApiImplicitParams(classBean = EmailQueryDo.class)
     @RequestMapping("/post/UserEmailController/queryDraftsEmailListByEmailId")
-    public void queryDraftsEmailListByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDraftsEmailListByEmailId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.queryDraftsEmailListByEmailId(inputObject, outputObject);
     }
 
@@ -157,10 +159,9 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserEmailController/insertToSendEmailMationByUserId")
-    public void insertToSendEmailMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertToSendEmailMationByUserId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.insertToSendEmailMationByUserId(inputObject, outputObject);
     }
 
@@ -169,10 +170,9 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserEmailController/insertToDraftsEmailMationByUserId")
-    public void insertToDraftsEmailMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertToDraftsEmailMationByUserId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.insertToDraftsEmailMationByUserId(inputObject, outputObject);
     }
 
@@ -181,10 +181,9 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserEmailController/queryDraftsEmailMationToEditByUserId")
-    public void queryDraftsEmailMationToEditByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDraftsEmailMationToEditByUserId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.queryDraftsEmailMationToEditByUserId(inputObject, outputObject);
     }
 
@@ -193,10 +192,9 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserEmailController/editToDraftsEmailMationByUserId")
-    public void editToDraftsEmailMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editToDraftsEmailMationByUserId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.editToDraftsEmailMationByUserId(inputObject, outputObject);
     }
 
@@ -205,10 +203,9 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserEmailController/insertToSendEmailMationByEmailId")
-    public void insertToSendEmailMationByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertToSendEmailMationByEmailId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.insertToSendEmailMationByEmailId(inputObject, outputObject);
     }
 
@@ -217,10 +214,9 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserEmailController/queryForwardEmailMationToEditByUserId")
-    public void queryForwardEmailMationToEditByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForwardEmailMationToEditByUserId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.queryForwardEmailMationToEditByUserId(inputObject, outputObject);
     }
 
@@ -229,10 +225,9 @@ public class UserEmailController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserEmailController/insertForwardToSendEmailMationByUserId")
-    public void insertForwardToSendEmailMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertForwardToSendEmailMationByUserId(InputObject inputObject, OutputObject outputObject) {
         userEmailService.insertForwardToSendEmailMationByUserId(inputObject, outputObject);
     }
 

@@ -14,6 +14,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.MailUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.UserEmailDao;
+import com.skyeye.eve.entity.email.common.EmailQueryDo;
 import com.skyeye.eve.service.SystemFoundationSettingsService;
 import com.skyeye.eve.service.UserEmailService;
 import com.skyeye.service.JobMateMationService;
@@ -55,10 +56,9 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryEmailListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryEmailListByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -72,11 +72,10 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertEmailListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertEmailListByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -111,11 +110,10 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String userId = user.get("id").toString();
@@ -139,15 +137,14 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryInboxEmailListByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception {
-        Map<String, Object> map = inputObject.getParams();
+    public void queryInboxEmailListByEmailId(InputObject inputObject, OutputObject outputObject) {
+        EmailQueryDo emailQuery = inputObject.getParams(EmailQueryDo.class);
         Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = userEmailDao.queryInboxEmailListByEmailId(map);
+        emailQuery.setUserId(user.get("id").toString());
+        Page pages = PageHelper.startPage(emailQuery.getPage(), emailQuery.getLimit());
+        List<Map<String, Object>> beans = userEmailDao.queryInboxEmailListByEmailId(emailQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -157,10 +154,9 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryEmailMationByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryEmailMationByEmailId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -179,10 +175,9 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void insertSendedEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSendedEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String userId = user.get("id").toString();
@@ -206,15 +201,14 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySendedEmailListByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception {
-        Map<String, Object> map = inputObject.getParams();
+    public void querySendedEmailListByEmailId(InputObject inputObject, OutputObject outputObject) {
+        EmailQueryDo emailQuery = inputObject.getParams(EmailQueryDo.class);
         Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = userEmailDao.querySendedEmailListByEmailId(map);
+        emailQuery.setUserId(user.get("id").toString());
+        Page pages = PageHelper.startPage(emailQuery.getPage(), emailQuery.getLimit());
+        List<Map<String, Object>> beans = userEmailDao.querySendedEmailListByEmailId(emailQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -224,11 +218,10 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertDelsteEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertDelsteEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String userId = user.get("id").toString();
@@ -252,15 +245,14 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryDeleteEmailListByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception {
-        Map<String, Object> map = inputObject.getParams();
+    public void queryDeleteEmailListByEmailId(InputObject inputObject, OutputObject outputObject) {
+        EmailQueryDo emailQuery = inputObject.getParams(EmailQueryDo.class);
         Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = userEmailDao.queryDeleteEmailListByEmailId(map);
+        emailQuery.setUserId(user.get("id").toString());
+        Page pages = PageHelper.startPage(emailQuery.getPage(), emailQuery.getLimit());
+        List<Map<String, Object>> beans = userEmailDao.queryDeleteEmailListByEmailId(emailQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -270,11 +262,10 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertDraftsEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertDraftsEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String userId = user.get("id").toString();
@@ -298,15 +289,14 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryDraftsEmailListByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception {
-        Map<String, Object> map = inputObject.getParams();
+    public void queryDraftsEmailListByEmailId(InputObject inputObject, OutputObject outputObject) {
+        EmailQueryDo emailQuery = inputObject.getParams(EmailQueryDo.class);
         Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = userEmailDao.queryDraftsEmailListByEmailId(map);
+        emailQuery.setUserId(user.get("id").toString());
+        Page pages = PageHelper.startPage(emailQuery.getPage(), emailQuery.getLimit());
+        List<Map<String, Object>> beans = userEmailDao.queryDraftsEmailListByEmailId(emailQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -316,11 +306,10 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertToSendEmailMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertToSendEmailMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         //接收人邮箱校验
         String[] toPeopleEmails = map.get("toPeople").toString().split(",");
@@ -421,11 +410,10 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertToDraftsEmailMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertToDraftsEmailMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         //接收人邮箱校验
         String[] toPeopleEmails = map.get("toPeople").toString().split(",");
@@ -526,10 +514,9 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryDraftsEmailMationToEditByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDraftsEmailMationToEditByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = userEmailDao.queryDraftsEmailMationToEditByUserId(map);//获取邮件基础信息
         if (bean != null && !bean.isEmpty()) {
@@ -552,11 +539,10 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editToDraftsEmailMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editToDraftsEmailMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         //接收人邮箱校验
         String[] toPeopleEmails = map.get("toPeople").toString().split(",");
@@ -672,11 +658,10 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertToSendEmailMationByEmailId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertToSendEmailMationByEmailId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         //接收人邮箱校验
         String[] toPeopleEmails = map.get("toPeople").toString().split(",");
@@ -793,10 +778,9 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryForwardEmailMationToEditByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForwardEmailMationToEditByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = userEmailDao.queryForwardEmailMationToEditByUserId(map);//获取邮件基础信息
         if (bean != null && !bean.isEmpty()) {
@@ -819,11 +803,10 @@ public class UserEmailServiceImpl implements UserEmailService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertForwardToSendEmailMationByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertForwardToSendEmailMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         //接收人邮箱校验
         String[] toPeopleEmails = map.get("toPeople").toString().split(",");

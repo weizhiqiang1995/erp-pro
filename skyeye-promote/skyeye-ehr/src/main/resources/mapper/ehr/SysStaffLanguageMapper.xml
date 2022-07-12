@@ -79,7 +79,7 @@
 			id = #{id}
 	</delete>
 	
-	<select id="queryPointStaffSysStaffLanguageList" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryPointStaffSysStaffLanguageList" resultType="java.util.Map">
         SELECT
 			a.id,
 			DATE_FORMAT(a.get_time,'%Y-%m-%d') getTime,

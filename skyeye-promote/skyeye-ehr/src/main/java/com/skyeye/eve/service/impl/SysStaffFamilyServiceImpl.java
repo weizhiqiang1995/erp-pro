@@ -12,6 +12,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffFamilyDao;
+import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
 import com.skyeye.eve.service.SysDictDataService;
 import com.skyeye.eve.service.SysStaffFamilyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,9 +143,9 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
      */
     @Override
     public void queryPointStaffSysStaffFamilyList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> params = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
-        List<Map<String, Object>> beans = sysStaffFamilyDao.queryPointStaffSysStaffFamilyList(params);
+        PointStaffQueryDo pointStaffQuery = inputObject.getParams(PointStaffQueryDo.class);
+        Page pages = PageHelper.startPage(pointStaffQuery.getPage(), pointStaffQuery.getLimit());
+        List<Map<String, Object>> beans = sysStaffFamilyDao.queryPointStaffSysStaffFamilyList(pointStaffQuery);
         sysDictDataService.getDictDataNameByIdList(beans, "relationshipId", "relationshipName");
         sysDictDataService.getDictDataNameByIdList(beans, "cardType", "cardTypeName");
         sysDictDataService.getDictDataNameByIdList(beans, "politicId", "politicName");

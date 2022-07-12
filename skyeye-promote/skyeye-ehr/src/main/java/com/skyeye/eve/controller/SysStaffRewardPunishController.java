@@ -4,14 +4,19 @@
 
 package com.skyeye.eve.controller;
 
+import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParams;
+import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
 import com.skyeye.eve.service.SysStaffRewardPunishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Api(value = "员工奖惩信息", tags = "员工奖惩信息", modelName = "EHR模块")
 public class SysStaffRewardPunishController {
 
     @Autowired
@@ -78,6 +83,8 @@ public class SysStaffRewardPunishController {
      * @param inputObject
      * @param outputObject
      */
+    @ApiOperation(id = "sysstaffrewardpunish006", value = "查询指定员工的奖惩列表", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = PointStaffQueryDo.class)
     @RequestMapping("/post/SysStaffRewardPunishController/queryPointStaffSysStaffRewardPunishList")
     public void queryPointStaffSysStaffRewardPunishList(InputObject inputObject, OutputObject outputObject) {
         sysStaffRewardPunishService.queryPointStaffSysStaffRewardPunishList(inputObject, outputObject);

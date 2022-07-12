@@ -9,6 +9,7 @@ import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
 import com.skyeye.eve.entity.ehr.language.SysStaffLanguageQueryDo;
 import com.skyeye.eve.service.SysStaffLanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,8 @@ public class SysStaffLanguageController {
      * @param inputObject
      * @param outputObject
      */
+    @ApiOperation(id = "sysstafflanguage006", value = "查询指定员工的语言能力列表", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = PointStaffQueryDo.class)
     @RequestMapping("/post/SysStaffLanguageController/queryPointStaffSysStaffLanguageList")
     public void queryPointStaffSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) {
         sysStaffLanguageService.queryPointStaffSysStaffLanguageList(inputObject, outputObject);

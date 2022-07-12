@@ -12,6 +12,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffJobResumeDao;
+import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
 import com.skyeye.eve.service.SysStaffJobResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -132,9 +133,9 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
      */
     @Override
     public void queryPointStaffSysStaffJobResumeList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> params = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
-        List<Map<String, Object>> beans = sysStaffJobResumeDao.queryPointStaffSysStaffJobResumeList(params);
+        PointStaffQueryDo pointStaffQuery = inputObject.getParams(PointStaffQueryDo.class);
+        Page pages = PageHelper.startPage(pointStaffQuery.getPage(), pointStaffQuery.getLimit());
+        List<Map<String, Object>> beans = sysStaffJobResumeDao.queryPointStaffSysStaffJobResumeList(pointStaffQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

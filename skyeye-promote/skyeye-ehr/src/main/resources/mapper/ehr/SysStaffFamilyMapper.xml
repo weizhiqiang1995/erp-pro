@@ -96,7 +96,7 @@
 			id = #{id}
 	</delete>
 	
-	<select id="queryPointStaffSysStaffFamilyList" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryPointStaffSysStaffFamilyList" resultType="java.util.Map">
         SELECT
 			a.id,
 			a.`name`,

@@ -4,14 +4,19 @@
 
 package com.skyeye.eve.controller;
 
+import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParams;
+import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
 import com.skyeye.eve.service.SysStaffFamilyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Api(value = "员工家庭成员信息", tags = "员工家庭成员信息", modelName = "EHR模块")
 public class SysStaffFamilyController {
 
     @Autowired
@@ -78,6 +83,8 @@ public class SysStaffFamilyController {
      * @param inputObject
      * @param outputObject
      */
+    @ApiOperation(id = "sysstafffamily006", value = "查询指定员工的家庭情况列表", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = PointStaffQueryDo.class)
     @RequestMapping("/post/SysStaffFamilyController/queryPointStaffSysStaffFamilyList")
     public void queryPointStaffSysStaffFamilyList(InputObject inputObject, OutputObject outputObject) {
         sysStaffFamilyService.queryPointStaffSysStaffFamilyList(inputObject, outputObject);

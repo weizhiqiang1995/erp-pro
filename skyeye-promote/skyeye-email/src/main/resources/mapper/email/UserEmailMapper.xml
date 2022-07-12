@@ -65,7 +65,7 @@
 		</foreach>  
 	</insert>
 	
-	<select id="queryInboxEmailListByEmailId" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryInboxEmailListByEmailId" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.title,
@@ -119,7 +119,7 @@
 			a.parent_id = #{id}
 	</select>
 	
-	<select id="querySendedEmailListByEmailId" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="querySendedEmailListByEmailId" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.title,
@@ -137,7 +137,7 @@
 		ORDER BY a.send_date DESC
 	</select>
 	
-	<select id="queryDeleteEmailListByEmailId" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryDeleteEmailListByEmailId" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.title,
@@ -157,7 +157,7 @@
 		ORDER BY a.send_date DESC
 	</select>
 	
-	<select id="queryDraftsEmailListByEmailId" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryDraftsEmailListByEmailId" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.title,

@@ -89,7 +89,7 @@
 		WHERE id = #{id}
 	</delete>
 	
-	<select id="queryPointStaffSysStaffContractList" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryPointStaffSysStaffContractList" resultType="java.util.Map">
         SELECT
 			a.id,
 			a.contract_number contractNumber,

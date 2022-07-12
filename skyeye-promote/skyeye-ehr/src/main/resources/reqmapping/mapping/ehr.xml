@@ -177,11 +177,6 @@
 	<url id="sysstaffeducation005" path="/post/SysStaffEducationController/deleteSysStaffEducationMationById" val="删除员工教育背景信息" allUse="1" method="DELETE" groupName="员工教育背景">
 		<property id="rowId" name="id" ref="required" var="教育背景id"></property>
 	</url>
-	<url id="sysstaffeducation006" path="/post/SysStaffEducationController/queryPointStaffSysStaffEducationList" val="查询指定员工的教育背景列表" allUse="1" groupName="员工教育背景">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="staffId" name="staffId" ref="required" var="员工id"></property>
-	</url>
 	<!-- 员工教育背景管理开始 -->
 	
 	<!-- 员工奖惩信息管理开始 -->
@@ -221,11 +216,6 @@
 	</url>
 	<url id="sysstaffrewardpunish005" path="/post/SysStaffRewardPunishController/deleteSysStaffRewardPunishMationById" val="删除员工奖惩信息信息" allUse="1" method="DELETE" groupName="员工奖惩信息">
 		<property id="rowId" name="id" ref="required" var="奖惩信息id"></property>
-	</url>
-	<url id="sysstaffrewardpunish006" path="/post/SysStaffRewardPunishController/queryPointStaffSysStaffRewardPunishList" val="查询指定员工的奖惩列表" allUse="1" groupName="员工奖惩信息">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="staffId" name="staffId" ref="required" var="员工id"></property>
 	</url>
 	<!-- 员工奖惩信息管理开始 -->
 	
@@ -269,11 +259,6 @@
 	<url id="sysstafffamily005" path="/post/SysStaffFamilyController/deleteSysStaffFamilyMationById" val="删除员工家庭成员信息信息" allUse="1" method="DELETE" groupName="员工家庭成员信息">
 		<property id="rowId" name="id" ref="required" var="家庭成员信息id"></property>
 	</url>
-	<url id="sysstafffamily006" path="/post/SysStaffFamilyController/queryPointStaffSysStaffFamilyList" val="查询指定员工的家庭成员列表" allUse="1" groupName="员工家庭成员信息">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="staffId" name="staffId" ref="required" var="员工id"></property>
-	</url>
 	<!-- 员工家庭成员信息管理开始 -->
 	
 	<!-- 员工工作履历信息管理开始 -->
@@ -312,11 +297,6 @@
 	<url id="sysstaffjobresume005" path="/post/SysStaffJobResumeController/deleteSysStaffJobResumeMationById" val="删除员工工作履历信息信息" allUse="1" method="DELETE" groupName="员工工作履历信息">
 		<property id="rowId" name="id" ref="required" var="工作履历信息id"></property>
 	</url>
-	<url id="sysstaffjobresume006" path="/post/SysStaffJobResumeController/queryPointStaffSysStaffJobResumeList" val="查询指定员工的工作履历列表" allUse="1" groupName="员工工作履历信息">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="staffId" name="staffId" ref="required" var="员工id"></property>
-	</url>
 	<!-- 员工工作履历信息管理开始 -->
 	
 	<!-- 员工语言能力信息管理开始 -->
@@ -339,11 +319,6 @@
 	</url>
 	<url id="sysstafflanguage005" path="/post/SysStaffLanguageController/deleteSysStaffLanguageMationById" val="删除员工语言能力信息信息" allUse="1" method="DELETE" groupName="员工语言能力信息">
 		<property id="rowId" name="id" ref="required" var="语言能力信息id"></property>
-	</url>
-	<url id="sysstafflanguage006" path="/post/SysStaffLanguageController/queryPointStaffSysStaffLanguageList" val="查询指定员工的语言能力列表" allUse="1" groupName="员工语言能力信息">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="staffId" name="staffId" ref="required" var="员工id"></property>
 	</url>
 	<!-- 员工语言能力信息管理开始 -->
 	
@@ -380,14 +355,6 @@
 		<property id="companyId" name="companyId" ref="required" var="签属企业"></property>
 	</url>
 	<url id="sysstaffcontract005" path="/post/SysStaffContractController/deleteSysStaffContractMationById" val="删除员工合同信息信息" allUse="1" method="DELETE" groupName="员工合同信息">
-		<property id="rowId" name="id" ref="required" var="合同信息id"></property>
-	</url>
-	<url id="sysstaffcontract006" path="/post/SysStaffContractController/queryPointStaffSysStaffContractList" val="查询指定员工的合同列表" allUse="1" groupName="员工合同信息">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="staffId" name="staffId" ref="required" var="员工id"></property>
-	</url>
-	<url id="sysstaffcontract007" path="/post/SysStaffContractController/signSysStaffContractById" val="员工合同签约" allUse="1" method="GET" groupName="员工合同信息">
 		<property id="rowId" name="id" ref="required" var="合同信息id"></property>
 	</url>
 	<!-- 员工合同信息管理开始 -->

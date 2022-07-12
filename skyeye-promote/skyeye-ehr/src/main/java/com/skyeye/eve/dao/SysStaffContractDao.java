@@ -4,6 +4,7 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public interface SysStaffContractDao {
 
     int deleteSysStaffContractMationById(@Param("id") String id);
 
-    List<Map<String, Object>> queryPointStaffSysStaffContractList(Map<String, Object> params);
+    List<Map<String, Object>> queryPointStaffSysStaffContractList(PointStaffQueryDo pointStaffQuery);
 
     int editSysStaffContractStateById(@Param("id") String id, @Param("state") int state);
 

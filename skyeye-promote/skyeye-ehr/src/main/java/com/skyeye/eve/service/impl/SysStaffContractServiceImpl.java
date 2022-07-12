@@ -12,6 +12,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffContractDao;
+import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
 import com.skyeye.eve.service.SysDictDataService;
 import com.skyeye.eve.service.SysStaffContractService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -172,9 +173,9 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
      */
     @Override
     public void queryPointStaffSysStaffContractList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> params = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
-        List<Map<String, Object>> beans = sysStaffContractDao.queryPointStaffSysStaffContractList(params);
+        PointStaffQueryDo pointStaffQuery = inputObject.getParams(PointStaffQueryDo.class);
+        Page pages = PageHelper.startPage(pointStaffQuery.getPage(), pointStaffQuery.getLimit());
+        List<Map<String, Object>> beans = sysStaffContractDao.queryPointStaffSysStaffContractList(pointStaffQuery);
         sysDictDataService.getDictDataNameByIdList(beans, "typeId", "typeName");
         sysDictDataService.getDictDataNameByIdList(beans, "moldId", "moldName");
         outputObject.setBeans(beans);

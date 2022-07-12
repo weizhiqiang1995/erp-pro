@@ -12,6 +12,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffLanguageDao;
+import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
 import com.skyeye.eve.entity.ehr.language.SysStaffLanguageQueryDo;
 import com.skyeye.eve.service.SysDictDataService;
 import com.skyeye.eve.service.SysStaffLanguageService;
@@ -139,9 +140,9 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
      */
     @Override
     public void queryPointStaffSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> params = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
-        List<Map<String, Object>> beans = sysStaffLanguageDao.queryPointStaffSysStaffLanguageList(params);
+        PointStaffQueryDo pointStaffQuery = inputObject.getParams(PointStaffQueryDo.class);
+        Page pages = PageHelper.startPage(pointStaffQuery.getPage(), pointStaffQuery.getLimit());
+        List<Map<String, Object>> beans = sysStaffLanguageDao.queryPointStaffSysStaffLanguageList(pointStaffQuery);
         sysDictDataService.getDictDataNameByIdList(beans, "languageId", "languageTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());

@@ -14,37 +14,17 @@
 	<url id="useremail003" path="/post/UserEmailController/insertEmailListFromServiceByUserId" val="从服务器上获取收件箱里的邮件" allUse="2">
 		<property id="emailId" name="id" ref="required" var="用户绑定的邮箱id" />
 	</url>
-	<url id="useremail004" path="/post/UserEmailController/queryInboxEmailListByEmailId" val="根据绑定邮箱id获取收件箱内容" allUse="2">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-	    <property id="emailId" name="emailId" ref="required" var="用户绑定的邮箱id" />
-	</url>
 	<url id="useremail005" path="/post/UserEmailController/queryEmailMationByEmailId" val="获取邮件内容" allUse="2">
 		<property id="rowId" name="id" ref="required" var="邮件id" />
 	</url>
 	<url id="useremail006" path="/post/UserEmailController/insertSendedEmailListFromServiceByUserId" val="从服务器上获取已发送邮件" allUse="2">
 		<property id="emailId" name="id" ref="required" var="用户绑定的邮箱id" />
 	</url>
-	<url id="useremail007" path="/post/UserEmailController/querySendedEmailListByEmailId" val="根据绑定邮箱id获取已发送邮件" allUse="2">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-	    <property id="emailId" name="emailId" ref="required" var="用户绑定的邮箱id" />
-	</url>
 	<url id="useremail008" path="/post/UserEmailController/insertDelsteEmailListFromServiceByUserId" val="从服务器上获取已删除邮件" allUse="2">
 		<property id="emailId" name="id" ref="required" var="用户绑定的邮箱id" />
 	</url>
-	<url id="useremail009" path="/post/UserEmailController/queryDeleteEmailListByEmailId" val="根据绑定邮箱id获取已删除邮件" allUse="2">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-	    <property id="emailId" name="emailId" ref="required" var="用户绑定的邮箱id" />
-	</url>
 	<url id="useremail010" path="/post/UserEmailController/insertDraftsEmailListFromServiceByUserId" val="从服务器上获取草稿箱邮件" allUse="2">
 		<property id="emailId" name="id" ref="required" var="用户绑定的邮箱id" />
-	</url>
-	<url id="useremail011" path="/post/UserEmailController/queryDraftsEmailListByEmailId" val="根据绑定邮箱id获取草稿箱邮件" allUse="2">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-	    <property id="emailId" name="emailId" ref="required" var="用户绑定的邮箱id" />
 	</url>
 	<url id="useremail012" path="/post/UserEmailController/insertToSendEmailMationByUserId" val="发送邮件" allUse="2">
 		<property id="typeName" name="typeName" ref="required" var="邮件主题" />

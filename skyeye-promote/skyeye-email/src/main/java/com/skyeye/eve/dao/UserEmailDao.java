@@ -4,6 +4,8 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.email.common.EmailQueryDo;
+
 import java.util.List;
 import java.util.Map;
 
@@ -17,56 +19,56 @@ import java.util.Map;
  */
 public interface UserEmailDao {
 
-    public List<Map<String, Object>> queryEmailListByUserId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryEmailListByUserId(Map<String, Object> map);
 
-    public Map<String, Object> queryEmailISInByEmailAddressAndUserId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryEmailISInByEmailAddressAndUserId(Map<String, Object> map);
 
-    public int insertEmailListByUserId(Map<String, Object> map) throws Exception;
+    int insertEmailListByUserId(Map<String, Object> map);
 
-    public Map<String, Object> queryEmailCheckByUserId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryEmailCheckByUserId(Map<String, Object> map);
 
-    public Map<String, Object> queryEmailMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryEmailMationById(Map<String, Object> map);
 
-    public int insertEmailEnclosureListToServer(List<Map<String, Object>> beans) throws Exception;
+    int insertEmailEnclosureListToServer(List<Map<String, Object>> beans);
 
-    public List<Map<String, Object>> queryInboxEmailListByEmailId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryInboxEmailListByEmailId(EmailQueryDo emailQuery);
 
-    public Map<String, Object> queryEmailMationByEmailId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryEmailMationByEmailId(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryEnclosureBeansMationByEmailId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryEnclosureBeansMationByEmailId(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySendedEmailListByEmailId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySendedEmailListByEmailId(EmailQueryDo emailQuery);
 
-    public List<Map<String, Object>> queryDeleteEmailListByEmailId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryDeleteEmailListByEmailId(EmailQueryDo emailQuery);
 
-    public List<Map<String, Object>> queryDraftsEmailListByEmailId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryDraftsEmailListByEmailId(EmailQueryDo emailQuery);
 
-    public List<Map<String, Object>> queryMyEnclusureListByUserIdAndIds(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryMyEnclusureListByUserIdAndIds(Map<String, Object> map);
 
-    public int insertToSendEmailMationByUserId(Map<String, Object> sendEmail) throws Exception;
+    int insertToSendEmailMationByUserId(Map<String, Object> sendEmail);
 
-    public Map<String, Object> queryDraftsEmailMationToEditByUserId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryDraftsEmailMationToEditByUserId(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryDraftsEmailToPeopleMationToEditByUserId(Map<String, Object> bean) throws Exception;
+    List<Map<String, Object>> queryDraftsEmailToPeopleMationToEditByUserId(Map<String, Object> bean);
 
-    public List<Map<String, Object>> queryDraftsEmailToCcMationToEditByUserId(Map<String, Object> bean) throws Exception;
+    List<Map<String, Object>> queryDraftsEmailToCcMationToEditByUserId(Map<String, Object> bean);
 
-    public List<Map<String, Object>> queryDraftsEmailToBccMationToEditByUserId(Map<String, Object> bean) throws Exception;
+    List<Map<String, Object>> queryDraftsEmailToBccMationToEditByUserId(Map<String, Object> bean);
 
-    public List<Map<String, Object>> queryDraftsEmailEnclosureMationToEditByUserId(Map<String, Object> bean) throws Exception;
+    List<Map<String, Object>> queryDraftsEmailEnclosureMationToEditByUserId(Map<String, Object> bean);
 
-    public int deleteEmailEnclosureListByEmailId(Map<String, Object> map) throws Exception;
+    int deleteEmailEnclosureListByEmailId(Map<String, Object> map);
 
-    public int editToSendEmailMationByUserId(Map<String, Object> sendEmail) throws Exception;
+    int editToSendEmailMationByUserId(Map<String, Object> sendEmail);
 
-    public Map<String, Object> queryForwardEmailMationToEditByUserId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryForwardEmailMationToEditByUserId(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryForwardEmailFromPeopleMationToEditByUserId(Map<String, Object> bean) throws Exception;
+    List<Map<String, Object>> queryForwardEmailFromPeopleMationToEditByUserId(Map<String, Object> bean);
 
-    public List<Map<String, Object>> queryForwardEmailToCcMationToEditByUserId(Map<String, Object> bean) throws Exception;
+    List<Map<String, Object>> queryForwardEmailToCcMationToEditByUserId(Map<String, Object> bean);
 
-    public List<Map<String, Object>> queryForwardEmailToBccMationToEditByUserId(Map<String, Object> bean) throws Exception;
+    List<Map<String, Object>> queryForwardEmailToBccMationToEditByUserId(Map<String, Object> bean);
 
-    public List<Map<String, Object>> queryForwardEmailEnclosureMationToEditByUserId(Map<String, Object> bean) throws Exception;
+    List<Map<String, Object>> queryForwardEmailEnclosureMationToEditByUserId(Map<String, Object> bean);
 
 }

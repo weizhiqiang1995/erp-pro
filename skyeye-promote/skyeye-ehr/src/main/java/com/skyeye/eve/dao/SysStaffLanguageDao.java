@@ -4,6 +4,7 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
 import com.skyeye.eve.entity.ehr.language.SysStaffLanguageQueryDo;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,6 +23,6 @@ public interface SysStaffLanguageDao {
 
     int deleteSysStaffLanguageMationById(@Param("id") String id);
 
-    List<Map<String, Object>> queryPointStaffSysStaffLanguageList(Map<String, Object> params);
+    List<Map<String, Object>> queryPointStaffSysStaffLanguageList(PointStaffQueryDo pointStaffQuery);
 
 }
