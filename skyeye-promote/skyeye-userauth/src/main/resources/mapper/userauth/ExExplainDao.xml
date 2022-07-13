@@ -6,7 +6,7 @@
 		SELECT
 			a.id,
 			a.title,
-			a.content,
+			IFNULL(a.content, '') content,
 		    a.type
 		FROM
 			ex_explain a

@@ -16,6 +16,7 @@ import com.skyeye.jedis.JedisClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.util.HtmlUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -67,6 +68,7 @@ public class ExExplainServiceImpl implements ExExplainService {
     public void queryExExplainMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = exExplainDao.queryExExplainMation(map);
+        bean.put("content", HtmlUtils.htmlUnescape(bean.get("content").toString()));
         outputObject.setBean(bean);
         outputObject.settotal(1);
     }
@@ -110,6 +112,7 @@ public class ExExplainServiceImpl implements ExExplainService {
                 map.put("title", "标题");
                 map.put("content", "等待发布说明。");
             } else {
+                bean.put("content", HtmlUtils.htmlUnescape(bean.get("content").toString()));
                 jedisClient.set(key, JSONUtil.toJsonStr(bean));
                 map = bean;
             }
