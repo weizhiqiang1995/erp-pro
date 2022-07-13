@@ -24,7 +24,6 @@ public interface WagesModelFieldDao {
      * @param staffId    员工id
      * @param jobScoreId 职位定级id
      * @return 薪资要素字段信息，该员工的薪资信息以及对应的薪资描述薪资
-     * @throws Exception
      */
     public List<Map<String, Object>> queryWagesModelFieldByModelIdsAndStaffId(@Param("list") List<String> modelIds,
                                                                               @Param("staffId") String staffId,

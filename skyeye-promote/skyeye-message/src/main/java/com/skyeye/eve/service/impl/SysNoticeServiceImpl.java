@@ -53,10 +53,9 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysNoticeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysNoticeList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysNoticeDao.querySysNoticeList(map);
@@ -69,11 +68,10 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysNoticeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysNoticeMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         Map<String, Object> bean = sysNoticeDao.querySysNoticeMationByName(map);
@@ -127,9 +125,8 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      *
      * @param id       公告id
      * @param userInfo 接收人信息，json串
-     * @throws Exception
      */
-    private void setNotice2PointUser(String id, String userInfo) throws Exception {
+    private void setNotice2PointUser(String id, String userInfo) {
         List<Map<String, Object>> userInfoList = JSONUtil.toList(userInfo, null);
         List<Map<String, Object>> beans = new ArrayList<>();
         for (int i = 0; i < userInfoList.size(); i++) {
@@ -151,9 +148,8 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      * 设置所有人为该公告的接收人
      *
      * @param id 公告id
-     * @throws Exception
      */
-    private void setNotice2AllUser(String id) throws Exception {
+    private void setNotice2AllUser(String id) {
         List<Map<String, Object>> userInfoList = sysNoticeDao.queryAllUserList();
         List<Map<String, Object>> beans = new ArrayList<>();
         for (Map<String, Object> it : userInfoList) {
@@ -175,11 +171,10 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysNoticeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysNoticeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeDao.querySysNoticeStateById(map);
         if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {
@@ -197,13 +192,13 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void updateUpSysNoticeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateUpSysNoticeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = sysNoticeDao.querySysNoticeMationById(map);    //查询state、timeSend、whetherEmail、title的值
+        //查询state、timeSend、whetherEmail、title的值
+        Map<String, Object> bean = sysNoticeDao.querySysNoticeMationById(map);
         if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {
             // 新建或者下线可以上线
             if ("2".equals(bean.get("timeSend").toString())) {
@@ -234,11 +229,10 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void updateDownSysNoticeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateDownSysNoticeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeDao.querySysNoticeStateById(map);
         if ("2".equals(bean.get("state").toString())) {//上线状态可以下线
@@ -253,10 +247,9 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void selectSysNoticeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectSysNoticeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeDao.selectSysNoticeById(map);
         List<Map<String, Object>> bs = sysNoticeDao.queryReceivedSysNoticeUserInfoById(map);
@@ -270,11 +263,10 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysNoticeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeDao.querySysNoticeStateById(map);
         if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {//新建或者下线可以编辑
@@ -323,11 +315,10 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysNoticeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysNoticeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeDao.querySysNoticeUpMationById(map);//获取当前数据的同级分类下的上一条数据
         if (CollectionUtils.isEmpty(bean)) {
@@ -346,11 +337,10 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysNoticeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysNoticeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeDao.querySysNoticeDownMationById(map);//获取当前数据的同级分类下的下一条数据
         if (CollectionUtils.isEmpty(bean)) {
@@ -369,11 +359,10 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysNoticeTimeUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysNoticeTimeUpById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeDao.querySysNoticeStateAndTimeSend(map);
         if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {
@@ -402,10 +391,9 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysNoticeDetailsById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysNoticeDetailsById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeDao.querySysNoticeDetailsById(map);
         outputObject.setBean(bean);
@@ -417,10 +405,9 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryUserReceivedSysNotice(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUserReceivedSysNotice(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
@@ -434,10 +421,9 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryReceivedSysNoticeDetailsById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryReceivedSysNoticeDetailsById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         Map<String, Object> bean = sysNoticeDao.queryReceivedSysNoticeDetailsById(map);

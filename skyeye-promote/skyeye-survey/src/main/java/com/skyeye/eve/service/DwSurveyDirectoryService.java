@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,64 +9,64 @@ import com.skyeye.common.object.OutputObject;
 
 public interface DwSurveyDirectoryService {
 
-    public void queryDwSurveyDirectoryList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryDwSurveyDirectoryList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertDwSurveyDirectoryMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertDwSurveyDirectoryMation(InputObject inputObject, OutputObject outputObject);
 
-    public void queryDwSurveyDirectoryMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryDwSurveyDirectoryMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryDwSurveyMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryDwSurveyMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editDwSurveyMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editDwSurveyMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void addQuFillblankMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void addQuFillblankMation(InputObject inputObject, OutputObject outputObject);
 
-    public void addQuScoreMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void addQuScoreMation(InputObject inputObject, OutputObject outputObject);
 
-    public void addQuOrderquMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void addQuOrderquMation(InputObject inputObject, OutputObject outputObject);
 
-    public void addQuPagetagMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void addQuPagetagMation(InputObject inputObject, OutputObject outputObject);
 
-    public void addQuRadioMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void addQuRadioMation(InputObject inputObject, OutputObject outputObject);
 
-    public void addQuCheckBoxMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void addQuCheckBoxMation(InputObject inputObject, OutputObject outputObject);
 
-    public void addQuMultiFillblankMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void addQuMultiFillblankMation(InputObject inputObject, OutputObject outputObject);
 
-    public void addQuParagraphMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void addQuParagraphMation(InputObject inputObject, OutputObject outputObject);
 
-    public void addQuChenMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void addQuChenMation(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteQuestionMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteQuestionMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteQuestionChenColumnMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteQuestionChenColumnMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteQuestionChenRowMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteQuestionChenRowMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteQuestionRadioOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteQuestionRadioOptionMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteQuestionChedkBoxOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteQuestionChedkBoxOptionMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteQuestionScoreOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteQuestionScoreOptionMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteQuestionOrderOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteQuestionOrderOptionMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteQuestionMultiFillblankOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteQuestionMultiFillblankOptionMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSurveyStateToReleaseById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSurveyStateToReleaseById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryDwSurveyDirectoryMationByIdToHTML(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryDwSurveyDirectoryMationByIdToHTML(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSurveyMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteSurveyMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void querySurveyFxMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySurveyFxMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSurveyMationCopyById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSurveyMationCopyById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryAnswerSurveyMationByIp(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryAnswerSurveyMationByIp(InputObject inputObject, OutputObject outputObject);
 
-    public void insertAnswerSurveyMationByIp(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertAnswerSurveyMationByIp(InputObject inputObject, OutputObject outputObject);
 
-    public void updateSurveyMationEndById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void updateSurveyMationEndById(InputObject inputObject, OutputObject outputObject);
 
 }

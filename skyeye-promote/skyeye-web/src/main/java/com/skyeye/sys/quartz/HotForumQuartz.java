@@ -47,10 +47,9 @@ public class HotForumQuartz {
     /**
      * 定时器计算每日热门贴
      *
-     * @throws Exception
      */
     @Scheduled(cron = "0 0 2 * * ?") //每天凌晨两点执行一次
-    public void editHotForumMation() throws Exception {
+    public void editHotForumMation() {
         String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         try {
             String yestoday = DateAfterSpacePointTime.getSpecifiedTime(

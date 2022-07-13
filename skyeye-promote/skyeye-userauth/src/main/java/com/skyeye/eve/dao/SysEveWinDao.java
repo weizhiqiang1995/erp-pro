@@ -17,40 +17,40 @@ import java.util.Map;
  */
 public interface SysEveWinDao {
 
-    public List<Map<String, Object>> queryWinMationList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryWinMationList(Map<String, Object> map);
 
-    public Map<String, Object> queryWinMationByNameOrUrl(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryWinMationByNameOrUrl(Map<String, Object> map);
 
-    public int insertWinMation(Map<String, Object> map) throws Exception;
+    int insertWinMation(Map<String, Object> map);
 
-    public Map<String, Object> queryWinMationToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryWinMationToEditById(Map<String, Object> map);
 
-    public Map<String, Object> queryWinMationByNameOrUrlAndId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryWinMationByNameOrUrlAndId(Map<String, Object> map);
 
-    public int editWinMationById(Map<String, Object> map) throws Exception;
+    int editWinMationById(Map<String, Object> map);
 
-    public int deleteWinMationById(Map<String, Object> map) throws Exception;
+    int deleteWinMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryChildMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryChildMationById(Map<String, Object> map);
 
-    public Map<String, Object> querySysEveWinNum(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysEveWinNum(Map<String, Object> map);
 
-    public int insertAuthorizationById(Map<String, Object> map) throws Exception;
+    int insertAuthorizationById(Map<String, Object> map);
 
-    public int editCancleAuthorizationById(Map<String, Object> map) throws Exception;
+    int editCancleAuthorizationById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryWinMationListToShow(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryWinMationListToShow(Map<String, Object> map);
 
-    public Map<String, Object> queryWinMationSynchronizationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryWinMationSynchronizationById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryWinMationImportantSynchronizationData(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryWinMationImportantSynchronizationData(Map<String, Object> map);
 
-    public int insertWinMationImportantSynchronization(List<Map<String, Object>> rows) throws Exception;
+    int insertWinMationImportantSynchronization(List<Map<String, Object>> rows);
 
-    public List<Map<String, Object>> queryWinMationSynchronizationByWinId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryWinMationSynchronizationByWinId(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryWinMationImportantSynchronizationPointData(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryWinMationImportantSynchronizationPointData(Map<String, Object> map);
 
-    public void insertWinMationImportantSynchronizationPoint(List<Map<String, Object>> rows) throws Exception;
+    void insertWinMationImportantSynchronizationPoint(List<Map<String, Object>> rows);
 
 }

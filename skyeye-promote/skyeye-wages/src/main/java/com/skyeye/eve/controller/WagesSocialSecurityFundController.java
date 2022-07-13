@@ -22,10 +22,9 @@ public class WagesSocialSecurityFundController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesSocialSecurityFundController/queryWagesSocialSecurityFundList")
-    public void queryWagesSocialSecurityFundList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesSocialSecurityFundList(InputObject inputObject, OutputObject outputObject) {
         wagesSocialSecurityFundService.queryWagesSocialSecurityFundList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class WagesSocialSecurityFundController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesSocialSecurityFundController/insertWagesSocialSecurityFundMation")
-    public void insertWagesSocialSecurityFundMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWagesSocialSecurityFundMation(InputObject inputObject, OutputObject outputObject) {
         wagesSocialSecurityFundService.insertWagesSocialSecurityFundMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class WagesSocialSecurityFundController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesSocialSecurityFundController/queryWagesSocialSecurityFundMationToEditById")
-    public void queryWagesSocialSecurityFundMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesSocialSecurityFundMationToEditById(InputObject inputObject, OutputObject outputObject) {
         wagesSocialSecurityFundService.queryWagesSocialSecurityFundMationToEditById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class WagesSocialSecurityFundController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesSocialSecurityFundController/editWagesSocialSecurityFundMationById")
-    public void editWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
         wagesSocialSecurityFundService.editWagesSocialSecurityFundMationById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class WagesSocialSecurityFundController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesSocialSecurityFundController/deleteWagesSocialSecurityFundMationById")
-    public void deleteWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
         wagesSocialSecurityFundService.deleteWagesSocialSecurityFundMationById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class WagesSocialSecurityFundController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesSocialSecurityFundController/enableWagesSocialSecurityFundMationById")
-    public void enableWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void enableWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
         wagesSocialSecurityFundService.enableWagesSocialSecurityFundMationById(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class WagesSocialSecurityFundController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesSocialSecurityFundController/disableWagesSocialSecurityFundMationById")
-    public void disableWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void disableWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
         wagesSocialSecurityFundService.disableWagesSocialSecurityFundMationById(inputObject, outputObject);
     }
 
@@ -106,10 +99,9 @@ public class WagesSocialSecurityFundController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesSocialSecurityFundController/queryWagesSocialSecurityFundMationById")
-    public void queryWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
         wagesSocialSecurityFundService.queryWagesSocialSecurityFundMationById(inputObject, outputObject);
     }
 

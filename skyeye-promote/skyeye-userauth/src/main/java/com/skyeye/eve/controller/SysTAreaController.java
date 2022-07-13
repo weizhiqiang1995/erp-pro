@@ -22,10 +22,9 @@ public class SysTAreaController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysTAreaController/querySysTAreaList")
-    public void querySysTAreaList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysTAreaList(InputObject inputObject, OutputObject outputObject) {
         sysTAreaService.querySysTAreaList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class SysTAreaController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysTAreaController/querySysTAreaProvinceList")
-    public void querySysTAreaProvinceList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysTAreaProvinceList(InputObject inputObject, OutputObject outputObject) {
         sysTAreaService.querySysTAreaProvinceList(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class SysTAreaController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysTAreaController/querySysTAreaCityList")
-    public void querySysTAreaCityList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysTAreaCityList(InputObject inputObject, OutputObject outputObject) {
         sysTAreaService.querySysTAreaCityList(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class SysTAreaController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysTAreaController/querySysTAreaChildAreaList")
-    public void querySysTAreaChildAreaList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysTAreaChildAreaList(InputObject inputObject, OutputObject outputObject) {
         sysTAreaService.querySysTAreaChildAreaList(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class SysTAreaController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysTAreaController/querySysTAreaTownShipList")
-    public void querySysTAreaTownShipList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysTAreaTownShipList(InputObject inputObject, OutputObject outputObject) {
         sysTAreaService.querySysTAreaTownShipList(inputObject, outputObject);
     }
 

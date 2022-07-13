@@ -37,10 +37,9 @@ public class SysEveUserNoticeServiceImpl implements SysEveUserNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void getNoticeListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void getNoticeListByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -56,10 +55,9 @@ public class SysEveUserNoticeServiceImpl implements SysEveUserNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void getAllNoticeListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void getAllNoticeListByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -74,10 +72,9 @@ public class SysEveUserNoticeServiceImpl implements SysEveUserNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void editNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editNoticeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -97,10 +94,9 @@ public class SysEveUserNoticeServiceImpl implements SysEveUserNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void deleteNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteNoticeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -118,10 +114,9 @@ public class SysEveUserNoticeServiceImpl implements SysEveUserNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void editNoticeMationByIds(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editNoticeMationByIds(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -140,10 +135,9 @@ public class SysEveUserNoticeServiceImpl implements SysEveUserNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void deleteNoticeMationByIds(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteNoticeMationByIds(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -162,10 +156,9 @@ public class SysEveUserNoticeServiceImpl implements SysEveUserNoticeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryNoticeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));

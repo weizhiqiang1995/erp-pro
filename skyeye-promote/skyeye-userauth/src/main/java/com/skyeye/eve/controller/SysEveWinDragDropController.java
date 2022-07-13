@@ -22,10 +22,9 @@ public class SysEveWinDragDropController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinDragDropController/insertWinCustomMenuBox")
-    public void insertWinCustomMenuBox(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWinCustomMenuBox(InputObject inputObject, OutputObject outputObject) {
         sysEveWinDragDropService.insertWinCustomMenuBox(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class SysEveWinDragDropController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinDragDropController/insertWinCustomMenu")
-    public void insertWinCustomMenu(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWinCustomMenu(InputObject inputObject, OutputObject outputObject) {
         sysEveWinDragDropService.insertWinCustomMenu(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class SysEveWinDragDropController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinDragDropController/deleteWinMenuOrBoxById")
-    public void deleteWinMenuOrBoxById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteWinMenuOrBoxById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinDragDropService.deleteWinMenuOrBoxById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class SysEveWinDragDropController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinDragDropController/editMenuParentIdById")
-    public void editMenuParentIdById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editMenuParentIdById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinDragDropService.editMenuParentIdById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class SysEveWinDragDropController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinDragDropController/queryMenuMationTypeById")
-    public void queryMenuMationTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMenuMationTypeById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinDragDropService.queryMenuMationTypeById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class SysEveWinDragDropController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinDragDropController/queryCustomMenuBoxMationEditById")
-    public void queryCustomMenuBoxMationEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCustomMenuBoxMationEditById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinDragDropService.queryCustomMenuBoxMationEditById(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class SysEveWinDragDropController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinDragDropController/editCustomMenuBoxMationById")
-    public void editCustomMenuBoxMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCustomMenuBoxMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinDragDropService.editCustomMenuBoxMationById(inputObject, outputObject);
     }
 
@@ -106,10 +99,9 @@ public class SysEveWinDragDropController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinDragDropController/queryCustomMenuMationEditById")
-    public void queryCustomMenuMationEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCustomMenuMationEditById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinDragDropService.queryCustomMenuMationEditById(inputObject, outputObject);
     }
 
@@ -118,10 +110,9 @@ public class SysEveWinDragDropController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinDragDropController/editCustomMenuMationById")
-    public void editCustomMenuMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCustomMenuMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinDragDropService.editCustomMenuMationById(inputObject, outputObject);
     }
 
@@ -130,10 +121,9 @@ public class SysEveWinDragDropController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinDragDropController/editCustomMenuToDeskTopById")
-    public void editCustomMenuToDeskTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCustomMenuToDeskTopById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinDragDropService.editCustomMenuToDeskTopById(inputObject, outputObject);
     }
 

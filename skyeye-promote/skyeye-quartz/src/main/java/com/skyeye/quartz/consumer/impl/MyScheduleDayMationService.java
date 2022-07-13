@@ -30,7 +30,7 @@ public class MyScheduleDayMationService implements TaskMateService {
     private JobMateMationService jobMateMationService;
 
     @Override
-    public void call(SysQuartz sysQuartz) throws Exception {
+    public void call(SysQuartz sysQuartz) {
         Map<String, Object> bean = new HashMap<>();
         bean.put("id", sysQuartz.getName());
         bean = sysQuartzDao.queryMationByScheduleId(bean);

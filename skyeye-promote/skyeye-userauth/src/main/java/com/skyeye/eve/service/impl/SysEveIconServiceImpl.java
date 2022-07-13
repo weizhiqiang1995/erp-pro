@@ -31,10 +31,9 @@ public class SysEveIconServiceImpl implements SysEveIconService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysIconList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysIconList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveIconDao.querySysIconList(map);
@@ -47,11 +46,10 @@ public class SysEveIconServiceImpl implements SysEveIconService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysIconMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysIconMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveIconDao.checkSysIconMation(map);
         if (CollectionUtils.isEmpty(bean)) {
@@ -70,11 +68,10 @@ public class SysEveIconServiceImpl implements SysEveIconService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysIconMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysIconMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         sysEveIconDao.deleteSysIconMationById(map);
     }
@@ -84,10 +81,9 @@ public class SysEveIconServiceImpl implements SysEveIconService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysIconMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysIconMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveIconDao.querySysIconMationToEditById(map);
         outputObject.setBean(bean);
@@ -99,11 +95,10 @@ public class SysEveIconServiceImpl implements SysEveIconService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysIconMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysIconMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveIconDao.checkSysIconMation(map);
         if (CollectionUtils.isEmpty(bean)) {
@@ -118,10 +113,9 @@ public class SysEveIconServiceImpl implements SysEveIconService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysIconListToMenu(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysIconListToMenu(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveIconDao.querySysIconListToMenu(map);

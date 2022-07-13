@@ -22,10 +22,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/queryAppWorkPageList")
-    public void queryLightAppList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryLightAppList(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.queryAppWorkPageList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/insertAppWorkPageMation")
-    public void insertAppWorkPageMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertAppWorkPageMation(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.insertAppWorkPageMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/queryAppWorkPageListById")
-    public void queryAppWorkPageListById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAppWorkPageListById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.queryAppWorkPageListById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/insertAppWorkPageMationById")
-    public void insertAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.insertAppWorkPageMationById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/queryAppWorkPageMationById")
-    public void queryAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.queryAppWorkPageMationById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkPageMationById")
-    public void editAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.editAppWorkPageMationById(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/deleteAppWorkPageMationById")
-    public void deleteAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.deleteAppWorkPageMationById(inputObject, outputObject);
     }
 
@@ -106,10 +99,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkPageSortTopById")
-    public void editAppWorkPageSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkPageSortTopById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.editAppWorkPageSortTopById(inputObject, outputObject);
     }
 
@@ -118,10 +110,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkPageSortLowerById")
-    public void editAppWorkPageSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkPageSortLowerById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.editAppWorkPageSortLowerById(inputObject, outputObject);
     }
 
@@ -130,10 +121,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkPageUpById")
-    public void editAppWorkPageUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkPageUpById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.editAppWorkPageUpById(inputObject, outputObject);
     }
 
@@ -142,10 +132,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkPageDownById")
-    public void editAppWorkPageDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkPageDownById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.editAppWorkPageDownById(inputObject, outputObject);
     }
 
@@ -154,10 +143,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkPageTitleById")
-    public void editAppWorkPageTitleById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkPageTitleById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.editAppWorkPageTitleById(inputObject, outputObject);
     }
 
@@ -166,10 +154,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/deleteAppWorkPageById")
-    public void deleteAppWorkPageById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteAppWorkPageById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.deleteAppWorkPageById(inputObject, outputObject);
     }
 
@@ -178,10 +165,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkUpById")
-    public void editAppWorkUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkUpById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.editAppWorkUpById(inputObject, outputObject);
     }
 
@@ -190,10 +176,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkDownById")
-    public void editAppWorkDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkDownById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.editAppWorkDownById(inputObject, outputObject);
     }
 
@@ -202,10 +187,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkSortTopById")
-    public void editAppWorkSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkSortTopById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.editAppWorkSortTopById(inputObject, outputObject);
     }
 
@@ -214,10 +198,9 @@ public class AppWorkPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkSortLowerById")
-    public void editAppWorkSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkSortLowerById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.editAppWorkSortLowerById(inputObject, outputObject);
     }
 

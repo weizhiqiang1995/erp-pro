@@ -22,10 +22,9 @@ public class SysEveMenuAuthPointController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveMenuAuthPointController/querySysEveMenuAuthPointListByMenuId")
-    public void querySysEveMenuAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveMenuAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuAuthPointService.querySysEveMenuAuthPointListByMenuId(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class SysEveMenuAuthPointController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveMenuAuthPointController/insertSysEveMenuAuthPointMation")
-    public void insertSysEveMenuAuthPointMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysEveMenuAuthPointMation(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuAuthPointService.insertSysEveMenuAuthPointMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class SysEveMenuAuthPointController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveMenuAuthPointController/querySysEveMenuAuthPointMationToEditById")
-    public void querySysEveMenuAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveMenuAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuAuthPointService.querySysEveMenuAuthPointMationToEditById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class SysEveMenuAuthPointController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveMenuAuthPointController/editSysEveMenuAuthPointMationById")
-    public void editSysEveMenuAuthPointMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysEveMenuAuthPointMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuAuthPointService.editSysEveMenuAuthPointMationById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class SysEveMenuAuthPointController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveMenuAuthPointController/deleteSysEveMenuAuthPointMationById")
-    public void deleteSysEveMenuAuthPointMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysEveMenuAuthPointMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuAuthPointService.deleteSysEveMenuAuthPointMationById(inputObject, outputObject);
     }
 

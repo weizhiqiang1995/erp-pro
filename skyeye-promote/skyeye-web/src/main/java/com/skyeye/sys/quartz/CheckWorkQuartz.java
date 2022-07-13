@@ -62,10 +62,9 @@ public class CheckWorkQuartz {
     /**
      * 定时器填充打卡信息,每天凌晨一点执行一次
      *
-     * @throws Exception
      */
     @Scheduled(cron = "0 0 1 * * ?")
-    public void editCheckWorkMation() throws Exception {
+    public void editCheckWorkMation() {
         String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         log.info("填充打卡信息定时任务执行");
         try {
@@ -139,9 +138,8 @@ public class CheckWorkQuartz {
      * 获取所有的考勤班次信息
      *
      * @return
-     * @throws Exception
      */
-    private List<Map<String, Object>> getAllCheckWorkTime() throws Exception {
+    private List<Map<String, Object>> getAllCheckWorkTime() {
         List<Map<String, Object>> workTime =
             ExecuteFeignClient.get(() -> checkWorkTimeService.queryAllStaffCheckWorkTime()).getRows();
         for (Map<String, Object> bean : workTime) {
@@ -157,9 +155,8 @@ public class CheckWorkQuartz {
      *
      * @param yesterdayTime
      * @param timeId
-     * @throws Exception
      */
-    private void handleNotCheckWorkEndMember(String yesterdayTime, String timeId) throws Exception {
+    private void handleNotCheckWorkEndMember(String yesterdayTime, String timeId) {
         List<Map<String, Object>> beans =
             ExecuteFeignClient.get(() -> checkWorkService.queryNotCheckEndWorkId(timeId, yesterdayTime)).getRows();
         if (!beans.isEmpty()) {
@@ -180,9 +177,8 @@ public class CheckWorkQuartz {
      *
      * @param yesterdayTime 昨天的日期,格式为：yyyy-MM-dd
      * @param timeId        班次id
-     * @throws Exception
      */
-    private void handleNotCheckWorkMember(String yesterdayTime, String timeId) throws Exception {
+    private void handleNotCheckWorkMember(String yesterdayTime, String timeId) {
         // 获取所有昨天没有打卡的用户
         List<Map<String, Object>> beans =
             ExecuteFeignClient.get(() -> checkWorkService.queryNotCheckMember(timeId, yesterdayTime)).getRows();

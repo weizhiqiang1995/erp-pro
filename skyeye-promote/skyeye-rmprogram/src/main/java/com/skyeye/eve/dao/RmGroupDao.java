@@ -9,30 +9,30 @@ import java.util.Map;
 
 public interface RmGroupDao {
 
-    public List<Map<String, Object>> queryRmGroupList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryRmGroupList(Map<String, Object> map);
 
-    public Map<String, Object> queryRmGroupByName(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryRmGroupByName(Map<String, Object> map);
 
-    public Map<String, Object> queryRmGroupISTop(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryRmGroupISTop(Map<String, Object> map);
 
-    public int insertRmGroupMation(Map<String, Object> map) throws Exception;
+    int insertRmGroupMation(Map<String, Object> map);
 
-    public Map<String, Object> queryRmGroupMemberNumById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryRmGroupMemberNumById(Map<String, Object> map);
 
-    public int deleteRmGroupById(Map<String, Object> map) throws Exception;
+    int deleteRmGroupById(Map<String, Object> map);
 
-    public Map<String, Object> queryRmGroupMationToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryRmGroupMationToEditById(Map<String, Object> map);
 
-    public Map<String, Object> queryRmGroupMationByIdAndName(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryRmGroupMationByIdAndName(Map<String, Object> map);
 
-    public int editRmGroupMationById(Map<String, Object> map) throws Exception;
+    int editRmGroupMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryRmGroupISTopByThisId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryRmGroupISTopByThisId(Map<String, Object> map);
 
-    public int editRmGroupSortTopById(Map<String, Object> topBean) throws Exception;
+    int editRmGroupSortTopById(Map<String, Object> topBean);
 
-    public Map<String, Object> queryRmGroupISLowerByThisId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryRmGroupISLowerByThisId(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryRmGroupAllList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryRmGroupAllList(Map<String, Object> map);
 
 }

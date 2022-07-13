@@ -9,30 +9,30 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysNoticeService {
 
-    public void querySysNoticeList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysNoticeList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysNoticeMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysNoticeMation(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSysNoticeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteSysNoticeById(InputObject inputObject, OutputObject outputObject);
 
-    public void updateUpSysNoticeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void updateUpSysNoticeById(InputObject inputObject, OutputObject outputObject);
 
-    public void updateDownSysNoticeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void updateDownSysNoticeById(InputObject inputObject, OutputObject outputObject);
 
-    public void selectSysNoticeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void selectSysNoticeById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysNoticeMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysNoticeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysNoticeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysNoticeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysNoticeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysNoticeTimeUpById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysNoticeTimeUpById(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysNoticeDetailsById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysNoticeDetailsById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryUserReceivedSysNotice(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryUserReceivedSysNotice(InputObject inputObject, OutputObject outputObject);
 
-    public void queryReceivedSysNoticeDetailsById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryReceivedSysNoticeDetailsById(InputObject inputObject, OutputObject outputObject);
 
 }

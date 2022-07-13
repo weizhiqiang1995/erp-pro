@@ -9,230 +9,230 @@ import java.util.Map;
 
 public interface DwSurveyDirectoryDao {
 
-    public List<Map<String, Object>> queryDwSurveyDirectoryList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryDwSurveyDirectoryList(Map<String, Object> map);
 
-    public int insertDwSurveyDirectoryMation(Map<String, Object> map) throws Exception;
+    int insertDwSurveyDirectoryMation(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryQuestionListByBelongId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryQuestionListByBelongId(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryQuestionLogicListByQuestionId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionLogicListByQuestionId(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryQuestionChenRowListByQuestionId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionChenRowListByQuestionId(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryQuestionChenColumnListByQuestionId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionChenColumnListByQuestionId(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryQuestionMultiFillBlankListByQuestionId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionMultiFillBlankListByQuestionId(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryQuestionRadioListByQuestionId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionRadioListByQuestionId(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryQuestionCheckBoxListByQuestionId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionCheckBoxListByQuestionId(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryQuestionChenOptionListByQuestionId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionChenOptionListByQuestionId(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryQuestionScoreListByQuestionId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionScoreListByQuestionId(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryQuestionOrderByListByQuestionId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionOrderByListByQuestionId(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryChildQuestionListByBelongId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryChildQuestionListByBelongId(Map<String, Object> question);
 
-    public Map<String, Object> querySurveyMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySurveyMationById(Map<String, Object> map);
 
-    public int editDwSurveyMationById(Map<String, Object> map) throws Exception;
+    int editDwSurveyMationById(Map<String, Object> map);
 
-    public int addQuestionMation(Map<String, Object> map) throws Exception;
+    int addQuestionMation(Map<String, Object> map);
 
-    public int addQuestionLogicsMationList(List<Map<String, Object>> quLogics) throws Exception;
+    int addQuestionLogicsMationList(List<Map<String, Object>> quLogics);
 
-    public int addQuestionScoreMationList(List<Map<String, Object>> quScore) throws Exception;
+    int addQuestionScoreMationList(List<Map<String, Object>> quScore);
 
-    public int addQuestionOrderquMationList(List<Map<String, Object>> quOrderqu) throws Exception;
+    int addQuestionOrderquMationList(List<Map<String, Object>> quOrderqu);
 
-    public int addQuestionRadioMationList(List<Map<String, Object>> quRadio) throws Exception;
+    int addQuestionRadioMationList(List<Map<String, Object>> quRadio);
 
-    public int addQuestionCheckBoxMationList(List<Map<String, Object>> quCheckBox) throws Exception;
+    int addQuestionCheckBoxMationList(List<Map<String, Object>> quCheckBox);
 
-    public int addQuestionMultiFillblankMationList(List<Map<String, Object>> quMultiFillblank) throws Exception;
+    int addQuestionMultiFillblankMationList(List<Map<String, Object>> quMultiFillblank);
 
-    public int addQuestionColumnMationList(List<Map<String, Object>> quColumn) throws Exception;
+    int addQuestionColumnMationList(List<Map<String, Object>> quColumn);
 
-    public int addQuestionRowMationList(List<Map<String, Object>> quRow) throws Exception;
+    int addQuestionRowMationList(List<Map<String, Object>> quRow);
 
-    public Map<String, Object> queryQuestionMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryQuestionMationById(Map<String, Object> map);
 
-    public int deleteLogicQuestionMationById(Map<String, Object> map) throws Exception;
+    int deleteLogicQuestionMationById(Map<String, Object> map);
 
-    public int deleteQuestionMationById(Map<String, Object> map) throws Exception;
+    int deleteQuestionMationById(Map<String, Object> map);
 
-    public int deleteQuestionOptionMationByQuId(Map<String, Object> map) throws Exception;
+    int deleteQuestionOptionMationByQuId(Map<String, Object> map);
 
-    public int updateQuestionOrderByIdByQuId(Map<String, Object> question) throws Exception;
+    int updateQuestionOrderByIdByQuId(Map<String, Object> question);
 
-    public Map<String, Object> queryQuestionChenColumnById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryQuestionChenColumnById(Map<String, Object> map);
 
-    public int deleteLogicQuestionChenColumnMationById(Map<String, Object> map) throws Exception;
+    int deleteLogicQuestionChenColumnMationById(Map<String, Object> map);
 
-    public int deleteQuestionChenColumnMationById(Map<String, Object> map) throws Exception;
+    int deleteQuestionChenColumnMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryQuestionChenRowById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryQuestionChenRowById(Map<String, Object> map);
 
-    public int deleteQuestionChenRowMationById(Map<String, Object> map) throws Exception;
+    int deleteQuestionChenRowMationById(Map<String, Object> map);
 
-    public int deleteLogicQuestionChenRowMationById(Map<String, Object> map) throws Exception;
+    int deleteLogicQuestionChenRowMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryQuestionRadioOptionById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryQuestionRadioOptionById(Map<String, Object> map);
 
-    public int deleteQuestionRadioOptionMationById(Map<String, Object> map) throws Exception;
+    int deleteQuestionRadioOptionMationById(Map<String, Object> map);
 
-    public int deleteLogicQuestionRadioOptionMationById(Map<String, Object> map) throws Exception;
+    int deleteLogicQuestionRadioOptionMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryQuestionChedkBoxOptionById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryQuestionChedkBoxOptionById(Map<String, Object> map);
 
-    public int deleteQuestionChedkBoxOptionMationById(Map<String, Object> map) throws Exception;
+    int deleteQuestionChedkBoxOptionMationById(Map<String, Object> map);
 
-    public int deleteLogicQuestionChedkBoxOptionMationById(Map<String, Object> map) throws Exception;
+    int deleteLogicQuestionChedkBoxOptionMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryQuestionScoreOptionById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryQuestionScoreOptionById(Map<String, Object> map);
 
-    public int deleteQuestionScoreOptionMationById(Map<String, Object> map) throws Exception;
+    int deleteQuestionScoreOptionMationById(Map<String, Object> map);
 
-    public int deleteLogicQuestionScoreOptionMationById(Map<String, Object> map) throws Exception;
+    int deleteLogicQuestionScoreOptionMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryQuestionOrderOptionById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryQuestionOrderOptionById(Map<String, Object> map);
 
-    public int deleteQuestionOrderOptionMationById(Map<String, Object> map) throws Exception;
+    int deleteQuestionOrderOptionMationById(Map<String, Object> map);
 
-    public int deleteLogicQuestionOrderOptionMationById(Map<String, Object> map) throws Exception;
+    int deleteLogicQuestionOrderOptionMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryQuestionMultiFillblankOptionById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryQuestionMultiFillblankOptionById(Map<String, Object> map);
 
-    public int deleteQuestionMultiFillblankOptionMationById(Map<String, Object> map) throws Exception;
+    int deleteQuestionMultiFillblankOptionMationById(Map<String, Object> map);
 
-    public int deleteLogicQuestionMultiFillblankOptionMationById(Map<String, Object> map) throws Exception;
+    int deleteLogicQuestionMultiFillblankOptionMationById(Map<String, Object> map);
 
-    public int editQuestionMationById(Map<String, Object> map) throws Exception;
+    int editQuestionMationById(Map<String, Object> map);
 
-    public int editQuestionLogicsMationList(List<Map<String, Object>> editquLogics) throws Exception;
+    int editQuestionLogicsMationList(List<Map<String, Object>> editquLogics);
 
-    public int editQuestionScoreMationList(List<Map<String, Object>> editquScore) throws Exception;
+    int editQuestionScoreMationList(List<Map<String, Object>> editquScore);
 
-    public int editQuestionOrderquMationList(List<Map<String, Object>> editquOrderqu) throws Exception;
+    int editQuestionOrderquMationList(List<Map<String, Object>> editquOrderqu);
 
-    public int editQuestionRadioMationList(List<Map<String, Object>> editquRadio) throws Exception;
+    int editQuestionRadioMationList(List<Map<String, Object>> editquRadio);
 
-    public int editQuestionCheckBoxMationList(List<Map<String, Object>> editquCheckbox) throws Exception;
+    int editQuestionCheckBoxMationList(List<Map<String, Object>> editquCheckbox);
 
-    public int editQuestionMultiFillblankMationList(List<Map<String, Object>> editquMultiFillblank) throws Exception;
+    int editQuestionMultiFillblankMationList(List<Map<String, Object>> editquMultiFillblank);
 
-    public int editQuestionColumnMationList(List<Map<String, Object>> editquColumn) throws Exception;
+    int editQuestionColumnMationList(List<Map<String, Object>> editquColumn);
 
-    public int editQuestionRowMationList(List<Map<String, Object>> editquRow) throws Exception;
+    int editQuestionRowMationList(List<Map<String, Object>> editquRow);
 
-    public int deleteSurveyMationById(Map<String, Object> map) throws Exception;
+    int deleteSurveyMationById(Map<String, Object> map);
 
-    public int editSurveyStateToReleaseById(Map<String, Object> map) throws Exception;
+    int editSurveyStateToReleaseById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryRadioGroupStat(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryRadioGroupStat(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryCheckBoxGroupStat(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryCheckBoxGroupStat(Map<String, Object> question);
 
-    public Map<String, Object> queryFillBlankGroupStat(Map<String, Object> question) throws Exception;
+    Map<String, Object> queryFillBlankGroupStat(Map<String, Object> question);
 
-    public Map<String, Object> queryAnswerGroupStat(Map<String, Object> question) throws Exception;
+    Map<String, Object> queryAnswerGroupStat(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryMultiFillBlankGroupStat(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryMultiFillBlankGroupStat(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryEnumQuGroupStat(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryEnumQuGroupStat(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryChenRadioGroupStat(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryChenRadioGroupStat(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryChenFbkGroupStat(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryChenFbkGroupStat(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryChenCheckBoxGroupStat(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryChenCheckBoxGroupStat(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryChenScoreGroupStat(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryChenScoreGroupStat(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryScoreGroupStat(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryScoreGroupStat(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryOrderQuGroupStat(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryOrderQuGroupStat(Map<String, Object> question);
 
-    public int insertSurveyMationCopyById(Map<String, Object> map) throws Exception;
+    int insertSurveyMationCopyById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryQuestionMationCopyById(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryQuestionMationCopyById(Map<String, Object> map);
 
-    public int addQuestionMationCopyBySurveyId(List<Map<String, Object>> questions) throws Exception;
+    int addQuestionMationCopyBySurveyId(List<Map<String, Object>> questions);
 
-    public List<Map<String, Object>> queryQuestionRadioListByCopyId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionRadioListByCopyId(Map<String, Object> question);
 
-    public int addQuestionRadioMationCopyList(List<Map<String, Object>> questionRadio) throws Exception;
+    int addQuestionRadioMationCopyList(List<Map<String, Object>> questionRadio);
 
-    public List<Map<String, Object>> queryQuestionCheckBoxListByCopyId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionCheckBoxListByCopyId(Map<String, Object> question);
 
-    public int addQuestionCheckBoxMationCopyList(List<Map<String, Object>> questionCheckBoxs) throws Exception;
+    int addQuestionCheckBoxMationCopyList(List<Map<String, Object>> questionCheckBoxs);
 
-    public List<Map<String, Object>> queryQuestionMultiFillBlankListByCopyId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionMultiFillBlankListByCopyId(Map<String, Object> question);
 
-    public int addQuestionMultiFillBlankMationCopyList(List<Map<String, Object>> questionMultiFillBlanks) throws Exception;
+    int addQuestionMultiFillBlankMationCopyList(List<Map<String, Object>> questionMultiFillBlanks);
 
-    public List<Map<String, Object>> queryQuestionChenRowListByCopyId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionChenRowListByCopyId(Map<String, Object> question);
 
-    public int addQuestionChenRowMationCopyList(List<Map<String, Object>> questionChenRows) throws Exception;
+    int addQuestionChenRowMationCopyList(List<Map<String, Object>> questionChenRows);
 
-    public List<Map<String, Object>> queryQuestionChenColumnListByCopyId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionChenColumnListByCopyId(Map<String, Object> question);
 
-    public int addQuestionChenColumnMationCopyList(List<Map<String, Object>> questionChenColumns) throws Exception;
+    int addQuestionChenColumnMationCopyList(List<Map<String, Object>> questionChenColumns);
 
-    public List<Map<String, Object>> queryQuestionChenOptionListByCopyId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionChenOptionListByCopyId(Map<String, Object> question);
 
-    public List<Map<String, Object>> queryQuestionScoreListByCopyId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionScoreListByCopyId(Map<String, Object> question);
 
-    public int addQuestionScoreMationCopyList(List<Map<String, Object>> questionScores) throws Exception;
+    int addQuestionScoreMationCopyList(List<Map<String, Object>> questionScores);
 
-    public List<Map<String, Object>> queryQuestionOrderByListByCopyId(Map<String, Object> question) throws Exception;
+    List<Map<String, Object>> queryQuestionOrderByListByCopyId(Map<String, Object> question);
 
-    public int addQuestionOrderByMationCopyList(List<Map<String, Object>> questionOrderBys) throws Exception;
+    int addQuestionOrderByMationCopyList(List<Map<String, Object>> questionOrderBys);
 
-    public int editSurveyAnswerNumById(Map<String, Object> surveyMation) throws Exception;
+    int editSurveyAnswerNumById(Map<String, Object> surveyMation);
 
-    public int saveAnYesnoMaps(List<Map<String, Object>> beans) throws Exception;
+    int saveAnYesnoMaps(List<Map<String, Object>> beans);
 
-    public int saveAnRadioMaps(List<Map<String, Object>> beans) throws Exception;
+    int saveAnRadioMaps(List<Map<String, Object>> beans);
 
-    public int saveAnMultiFillMaps(List<Map<String, Object>> beans) throws Exception;
+    int saveAnMultiFillMaps(List<Map<String, Object>> beans);
 
-    public int saveScoreMaps(List<Map<String, Object>> beans) throws Exception;
+    int saveScoreMaps(List<Map<String, Object>> beans);
 
-    public int saveChenCheckboxMaps(List<Map<String, Object>> beans) throws Exception;
+    int saveChenCheckboxMaps(List<Map<String, Object>> beans);
 
-    public int saveCompAnRadioMaps(List<Map<String, Object>> beans) throws Exception;
+    int saveCompAnRadioMaps(List<Map<String, Object>> beans);
 
-    public int saveCompChehRadioMaps(List<Map<String, Object>> beans) throws Exception;
+    int saveCompChehRadioMaps(List<Map<String, Object>> beans);
 
-    public int saveChenScoreMaps(List<Map<String, Object>> beans) throws Exception;
+    int saveChenScoreMaps(List<Map<String, Object>> beans);
 
-    public int saveAnCheckboxMaps(List<Map<String, Object>> beans) throws Exception;
+    int saveAnCheckboxMaps(List<Map<String, Object>> beans);
 
-    public int saveAnFillMaps(List<Map<String, Object>> beans) throws Exception;
+    int saveAnFillMaps(List<Map<String, Object>> beans);
 
-    public int saveAnAnswerMaps(List<Map<String, Object>> beans) throws Exception;
+    int saveAnAnswerMaps(List<Map<String, Object>> beans);
 
-    public int saveCompAnCheckboxMaps(List<Map<String, Object>> beans) throws Exception;
+    int saveCompAnCheckboxMaps(List<Map<String, Object>> beans);
 
-    public int saveEnumMaps(List<Map<String, Object>> beans) throws Exception;
+    int saveEnumMaps(List<Map<String, Object>> beans);
 
-    public int saveQuOrderMaps(List<Map<String, Object>> beans) throws Exception;
+    int saveQuOrderMaps(List<Map<String, Object>> beans);
 
-    public int saveChenRadioMaps(List<Map<String, Object>> beans) throws Exception;
+    int saveChenRadioMaps(List<Map<String, Object>> beans);
 
-    public int saveChenFbkMaps(List<Map<String, Object>> beans) throws Exception;
+    int saveChenFbkMaps(List<Map<String, Object>> beans);
 
-    public int insertSurveyAnswer(Map<String, Object> surveyAnswer) throws Exception;
+    int insertSurveyAnswer(Map<String, Object> surveyAnswer);
 
-    public Map<String, Object> querySurveyAnswerMationByIp(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySurveyAnswerMationByIp(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySurveyAnswerMationOverFiveMinByIp(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySurveyAnswerMationOverFiveMinByIp(Map<String, Object> map);
 
-    public int editSurveyStateToEndNumById(Map<String, Object> surveyMation) throws Exception;
+    int editSurveyStateToEndNumById(Map<String, Object> surveyMation);
 
-    public int updateSurveyMationEndById(Map<String, Object> map) throws Exception;
+    int updateSurveyMationEndById(Map<String, Object> map);
 
 }

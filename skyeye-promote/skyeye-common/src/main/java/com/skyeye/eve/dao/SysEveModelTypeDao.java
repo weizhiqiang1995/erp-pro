@@ -62,7 +62,6 @@ public interface SysEveModelTypeDao {
      * 根据id更新系统模板分类
      *
      * @param map
-     * @throws Exception
      */
     void updateSysEveModelTypeById(Map<String, Object> map);
 

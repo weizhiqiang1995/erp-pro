@@ -54,7 +54,7 @@ public class MailAccessDraftsServiceImpl implements JobMateService {
     private SystemFoundationSettingsService systemFoundationSettingsService;
 
     @Override
-    public void call(String data) throws Exception {
+    public void call(String data) {
         Map<String, Object> map = JSONUtil.toBean(data, null);
         String jobId = map.get("jobMateId").toString();
         try {
@@ -75,7 +75,8 @@ public class MailAccessDraftsServiceImpl implements JobMateService {
             numberFormat.setMaximumFractionDigits(0);
 
             Folder folder = ToolUtil.getFolderByServer(host, username, password, storeType, "Drafts");
-            if (!folder.exists()) {//如果文件夹不存在，则创建
+            if (!folder.exists()) {
+                // 如果文件夹不存在，则创建
                 folder.create(Folder.HOLDS_MESSAGES);
             }
             folder.open(Folder.READ_ONLY);
@@ -94,8 +95,10 @@ public class MailAccessDraftsServiceImpl implements JobMateService {
 
             //遍历邮件数据
             for (int i = 0; i < message.length; i++) {
-                if (!message[i].getFolder().isOpen()) //判断是否open
-                    message[i].getFolder().open(Folder.READ_ONLY); //如果close，就重新open
+                if (!message[i].getFolder().isOpen()) {
+                    // 判断是否open,如果close，就重新open
+                    message[i].getFolder().open(Folder.READ_ONLY);
+                }
                 re = new ShowMail((MimeMessage) message[i]);
                 //如果该邮件在本地数据库中不存在并且messageId不为空
                 //发送人为当前邮箱
@@ -110,19 +113,23 @@ public class MailAccessDraftsServiceImpl implements JobMateService {
                     beans.add(bean);
                 }
                 if (beans.size() >= 20) {//每20条数据保存一次
-                    if (!beans.isEmpty())
+                    if (!beans.isEmpty()) {
                         mqUserEmailDao.insertEmailListToServer(beans);
-                    if (!enclosureBeans.isEmpty())
+                    }
+                    if (!enclosureBeans.isEmpty()) {
                         mqUserEmailDao.insertEmailEnclosureListToServer(enclosureBeans);
+                    }
                     beans.clear();
                     enclosureBeans.clear();
                     emailHasMail = mqUserEmailDao.queryDraftsEmailListByEmailFromAddress(map);
                 }
             }
-            if (!beans.isEmpty())
+            if (!beans.isEmpty()) {
                 mqUserEmailDao.insertEmailListToServer(beans);
-            if (!enclosureBeans.isEmpty())
+            }
+            if (!enclosureBeans.isEmpty()) {
                 mqUserEmailDao.insertEmailEnclosureListToServer(enclosureBeans);
+            }
             // 任务完成
             jobMateMationService.comMQJobMation(jobId, MqConstants.JOB_TYPE_IS_SUCCESS, "");
         } catch (Exception e) {

@@ -53,9 +53,8 @@ public class MailAccessDeleteServiceImpl implements JobMateService {
     @Autowired
     private SystemFoundationSettingsService systemFoundationSettingsService;
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void call(String data) throws Exception {
+    public void call(String data) {
         Map<String, Object> map = JSONUtil.toBean(data, null);
         String jobId = map.get("jobMateId").toString();
         try {
@@ -90,8 +89,10 @@ public class MailAccessDeleteServiceImpl implements JobMateService {
 
             //遍历邮件数据
             for (int i = 0; i < message.length; i++) {
-                if (!message[i].getFolder().isOpen()) //判断是否open
-                    message[i].getFolder().open(Folder.READ_ONLY); //如果close，就重新open
+                if (!message[i].getFolder().isOpen()) {
+                    // 判断是否open,如果close，就重新open
+                    message[i].getFolder().open(Folder.READ_ONLY);
+                }
                 re = new ShowMail((MimeMessage) message[i]);
                 //如果该邮件在本地数据库中不存在并且messageId不为空
                 //收件人或者抄送人或者暗送人是当前账号

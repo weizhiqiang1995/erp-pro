@@ -22,10 +22,9 @@ public class TAreaPhoneController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/TAreaPhoneController/queryTAreaPhoneList")
-    public void queryTAreaPhoneList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryTAreaPhoneList(InputObject inputObject, OutputObject outputObject) {
         tAreaPhoneService.queryTAreaPhoneList(inputObject, outputObject);
     }
 

@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,24 +9,24 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysEveWinService {
 
-    public void queryWinMationList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryWinMationList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertWinMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertWinMation(InputObject inputObject, OutputObject outputObject);
 
-    public void queryWinMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryWinMationToEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editWinMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editWinMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteWinMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteWinMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editAuthorizationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editAuthorizationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editCancleAuthorizationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editCancleAuthorizationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryWinMationListToShow(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryWinMationListToShow(InputObject inputObject, OutputObject outputObject);
 
-    public void insertWinMationImportantSynchronization(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertWinMationImportantSynchronization(InputObject inputObject, OutputObject outputObject);
 
-    public void queryWinMationImportantSynchronizationData(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryWinMationImportantSynchronizationData(InputObject inputObject, OutputObject outputObject);
 
 }

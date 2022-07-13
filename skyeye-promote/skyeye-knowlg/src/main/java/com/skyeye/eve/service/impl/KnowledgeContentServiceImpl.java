@@ -273,7 +273,7 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
         outputObject.setBean(map);
     }
 
-    private void insertMation(String contentId, String fileName, String content, String userId) throws Exception {
+    private void insertMation(String contentId, String fileName, String content, String userId) {
         Map<String, Object> bean = new HashMap<>();
         bean.put("id", contentId);
         bean.put("state", "1");

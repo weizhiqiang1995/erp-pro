@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,24 +9,24 @@ import com.skyeye.common.object.OutputObject;
 
 public interface ForumTagService {
 
-    public void queryForumTagList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryForumTagList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertForumTagMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertForumTagMation(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteForumTagById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteForumTagById(InputObject inputObject, OutputObject outputObject);
 
-    public void updateUpForumTagById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void updateUpForumTagById(InputObject inputObject, OutputObject outputObject);
 
-    public void updateDownForumTagById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void updateDownForumTagById(InputObject inputObject, OutputObject outputObject);
 
-    public void selectForumTagById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void selectForumTagById(InputObject inputObject, OutputObject outputObject);
 
-    public void editForumTagMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editForumTagMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editForumTagMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editForumTagMationOrderNumUpById(InputObject inputObject, OutputObject outputObject);
 
-    public void editForumTagMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editForumTagMationOrderNumDownById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryForumTagUpStateList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryForumTagUpStateList(InputObject inputObject, OutputObject outputObject);
 
 }

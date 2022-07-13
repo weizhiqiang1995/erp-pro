@@ -19,40 +19,40 @@ import java.util.Map;
  */
 public interface SysEveRoleDao {
 
-    public List<Map<String, Object>> querySysRoleList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysRoleList(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySysRoleBandMenuList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysRoleBandMenuList(Map<String, Object> map);
 
-    public Map<String, Object> querySysRoleNameByName(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysRoleNameByName(Map<String, Object> map);
 
-    public int insertSysRoleMation(Map<String, Object> map) throws Exception;
+    int insertSysRoleMation(Map<String, Object> map);
 
-    public int insertSysRoleMenuMation(List<Map<String, Object>> beans) throws Exception;
+    int insertSysRoleMenuMation(List<Map<String, Object>> beans);
 
-    public Map<String, Object> querySysRoleMationByRoleId(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysRoleMationByRoleId(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySysRoleMenuIdByRoleId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysRoleMenuIdByRoleId(Map<String, Object> map);
 
-    public Map<String, Object> queryRoleNameByIdAndName(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryRoleNameByIdAndName(Map<String, Object> map);
 
-    public int editSysRoleMationById(Map<String, Object> map) throws Exception;
+    int editSysRoleMationById(Map<String, Object> map);
 
-    int deleteRoleMenuByRoleId(@Param("roleId") String roleId) throws Exception;
+    int deleteRoleMenuByRoleId(@Param("roleId") String roleId);
 
-    public Map<String, Object> queryUserRoleByRoleId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryUserRoleByRoleId(Map<String, Object> map);
 
-    public int deleteRoleByRoleId(Map<String, Object> map) throws Exception;
+    int deleteRoleByRoleId(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySysRoleBandAppMenuList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysRoleBandAppMenuList(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySysRoleAppMenuIdByRoleId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysRoleAppMenuIdByRoleId(Map<String, Object> map);
 
-    public int deleteRoleAppMenuByRoleId(Map<String, Object> map) throws Exception;
+    int deleteRoleAppMenuByRoleId(Map<String, Object> map);
 
-    public int insertSysRoleAppMenuMation(List<Map<String, Object>> beans) throws Exception;
+    int insertSysRoleAppMenuMation(List<Map<String, Object>> beans);
 
-    public int deleteRoleAppPointByRoleId(Map<String, Object> map) throws Exception;
+    int deleteRoleAppPointByRoleId(Map<String, Object> map);
 
-    public int insertSysRoleAppPointMation(List<Map<String, Object>> beans) throws Exception;
+    int insertSysRoleAppPointMation(List<Map<String, Object>> beans);
 
 }

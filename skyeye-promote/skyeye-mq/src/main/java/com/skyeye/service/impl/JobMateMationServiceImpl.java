@@ -62,7 +62,6 @@ public class JobMateMationServiceImpl implements JobMateMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     public void queryJobMateMationByBigTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -80,7 +79,6 @@ public class JobMateMationServiceImpl implements JobMateMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     public void sendMQProducer(InputObject inputObject, OutputObject outputObject) {
@@ -149,7 +147,6 @@ public class JobMateMationServiceImpl implements JobMateMationService {
      * @param jobId
      * @param status
      * @param responseBody
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -190,7 +187,6 @@ public class JobMateMationServiceImpl implements JobMateMationService {
      *
      * @param jobId
      * @param status
-     * @throws Exception
      */
     private void sendJobResultMseeage(String jobId, String status) {
         Map<String, Object> jobMation = jobMateMationDao.queryJobMationByJobId(jobId);

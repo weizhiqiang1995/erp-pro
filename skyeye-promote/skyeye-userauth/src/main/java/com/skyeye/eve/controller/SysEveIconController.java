@@ -22,10 +22,9 @@ public class SysEveIconController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveIconController/querySysIconList")
-    public void querySysIconList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysIconList(InputObject inputObject, OutputObject outputObject) {
         sysEveIconService.querySysIconList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class SysEveIconController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveIconController/insertSysIconMation")
-    public void insertSysIconMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysIconMation(InputObject inputObject, OutputObject outputObject) {
         sysEveIconService.insertSysIconMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class SysEveIconController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveIconController/deleteSysIconMationById")
-    public void deleteSysIconMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysIconMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveIconService.deleteSysIconMationById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class SysEveIconController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveIconController/querySysIconMationToEditById")
-    public void querySysIconMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysIconMationToEditById(InputObject inputObject, OutputObject outputObject) {
         sysEveIconService.querySysIconMationToEditById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class SysEveIconController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveIconController/editSysIconMationById")
-    public void editSysIconMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysIconMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveIconService.editSysIconMationById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class SysEveIconController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveIconController/querySysIconListToMenu")
-    public void querySysIconListToMenu(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysIconListToMenu(InputObject inputObject, OutputObject outputObject) {
         sysEveIconService.querySysIconListToMenu(inputObject, outputObject);
     }
 

@@ -50,7 +50,6 @@ public class QuartzService {
      * @param delayedTime 启动时间
      * @param userId      创建人id
      * @param groupId     组id
-     * @throws Exception
      */
     public void startUpTaskQuartz(String name, String title, String delayedTime, String userId, String groupId) {
         SysQuartz sysQuartz = new SysQuartz();
@@ -128,27 +127,31 @@ public class QuartzService {
      * @param sysQuartz
      * @throws SchedulerException
      */
-    public void startJob(SysQuartz sysQuartz) throws SchedulerException {
-        Scheduler scheduler = schedulerFactoryBean.getScheduler();
-        TriggerKey triggerKey = TriggerKey.triggerKey(sysQuartz.getName(), sysQuartz.getGroups());
-        CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
-        //不存在，创建一个
-        if (null == trigger) {
-            JobDetail jobDetail = JobBuilder.newJob(QuartzJobFactory.class).withIdentity(sysQuartz.getName(), sysQuartz.getGroups()).build();
-            jobDetail.getJobDataMap().put("scheduleJob", sysQuartz);
-            //表达式调度构建器
-            CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(sysQuartz.getCron());
-            //按新的cronExpression表达式构建一个新的trigger
-            trigger = TriggerBuilder.newTrigger().withIdentity(sysQuartz.getName(), sysQuartz.getGroups()).withSchedule(scheduleBuilder).build();
-            scheduler.scheduleJob(jobDetail, trigger);
-        } else {
-            // Trigger已存在，那么更新相应的定时设置
-            //表达式调度构建器
-            CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(sysQuartz.getCron());
-            //按新的cronExpression表达式重新构建trigger
-            trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
-            //按新的trigger重新设置job执行
-            scheduler.rescheduleJob(triggerKey, trigger);
+    public void startJob(SysQuartz sysQuartz) {
+        try {
+            Scheduler scheduler = schedulerFactoryBean.getScheduler();
+            TriggerKey triggerKey = TriggerKey.triggerKey(sysQuartz.getName(), sysQuartz.getGroups());
+            CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
+            //不存在，创建一个
+            if (null == trigger) {
+                JobDetail jobDetail = JobBuilder.newJob(QuartzJobFactory.class).withIdentity(sysQuartz.getName(), sysQuartz.getGroups()).build();
+                jobDetail.getJobDataMap().put("scheduleJob", sysQuartz);
+                //表达式调度构建器
+                CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(sysQuartz.getCron());
+                //按新的cronExpression表达式构建一个新的trigger
+                trigger = TriggerBuilder.newTrigger().withIdentity(sysQuartz.getName(), sysQuartz.getGroups()).withSchedule(scheduleBuilder).build();
+                scheduler.scheduleJob(jobDetail, trigger);
+            } else {
+                // Trigger已存在，那么更新相应的定时设置
+                //表达式调度构建器
+                CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(sysQuartz.getCron());
+                //按新的cronExpression表达式重新构建trigger
+                trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
+                //按新的trigger重新设置job执行
+                scheduler.rescheduleJob(triggerKey, trigger);
+            }
+        } catch (SchedulerException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -156,7 +159,6 @@ public class QuartzService {
      * 删除任务
      *
      * @param sysQuartz
-     * @throws SchedulerException
      */
     public void delete(SysQuartz sysQuartz) {
         Scheduler scheduler = schedulerFactoryBean.getScheduler();

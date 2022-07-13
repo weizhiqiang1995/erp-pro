@@ -26,10 +26,9 @@ public class CrmPageServiceImpl implements CrmPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryInsertNumByYear(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryInsertNumByYear(InputObject inputObject, OutputObject outputObject) {
         String year = inputObject.getParams().get("year").toString();
         List<Map<String, Object>> beans = crmPageDao.queryInsertNumByYear(year);
         outputObject.setBeans(beans);
@@ -40,10 +39,9 @@ public class CrmPageServiceImpl implements CrmPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCustomNumByOtherType(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCustomNumByOtherType(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = new HashMap<>();
         // 1.根据客户分类统计客户数量
         List<Map<String, Object>> numType = crmPageDao.queryCustomNumByType();
@@ -65,10 +63,9 @@ public class CrmPageServiceImpl implements CrmPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCustomDocumentaryType(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCustomDocumentaryType(InputObject inputObject, OutputObject outputObject) {
         String year = inputObject.getParams().get("year").toString();
         List<Map<String, Object>> beans = crmPageDao.queryCustomDocumentaryType(year);
         outputObject.setBeans(beans);
@@ -79,10 +76,9 @@ public class CrmPageServiceImpl implements CrmPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryNewContractNum(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryNewContractNum(InputObject inputObject, OutputObject outputObject) {
         String year = inputObject.getParams().get("year").toString();
         List<Map<String, Object>> beans = crmPageDao.queryNewContractNum(year);
         outputObject.setBeans(beans);
@@ -93,10 +89,9 @@ public class CrmPageServiceImpl implements CrmPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryNewDocumentaryNum(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryNewDocumentaryNum(InputObject inputObject, OutputObject outputObject) {
         String year = inputObject.getParams().get("year").toString();
         List<Map<String, Object>> beans = crmPageDao.queryNewDocumentaryNum(year);
         outputObject.setBeans(beans);

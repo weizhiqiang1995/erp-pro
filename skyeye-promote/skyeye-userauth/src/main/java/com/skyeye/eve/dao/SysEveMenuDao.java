@@ -17,40 +17,40 @@ import java.util.Map;
  */
 public interface SysEveMenuDao {
 
-    public List<Map<String, Object>> querySysMenuList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysMenuList(Map<String, Object> map);
 
-    public int insertSysMenuMation(Map<String, Object> map) throws Exception;
+    int insertSysMenuMation(Map<String, Object> map);
 
-    public Map<String, Object> querySysMenuMationToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysMenuMationToEditById(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySysMenuMationBySimpleLevel(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysMenuMationBySimpleLevel(Map<String, Object> map);
 
-    public int editSysMenuMationById(Map<String, Object> map) throws Exception;
+    int editSysMenuMationById(Map<String, Object> map);
 
-    public int deleteSysMenuChildMationById(Map<String, Object> map) throws Exception;
+    int deleteSysMenuChildMationById(Map<String, Object> map);
 
-    public int deleteSysMenuMationById(Map<String, Object> map) throws Exception;
+    int deleteSysMenuMationById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryTreeSysMenuMationBySimpleLevel(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryTreeSysMenuMationBySimpleLevel(Map<String, Object> map);
 
-    public Map<String, Object> queryUseThisMenuRoleById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryUseThisMenuRoleById(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySysMenuLevelList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysMenuLevelList(Map<String, Object> map);
 
-    public Map<String, Object> querySysMenuAfterOrderBumByParentId(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysMenuAfterOrderBumByParentId(Map<String, Object> map);
 
-    public Map<String, Object> queryOldParentIdById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryOldParentIdById(Map<String, Object> map);
 
-    public Map<String, Object> querySysEveMenuISTopByThisId(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysEveMenuISTopByThisId(Map<String, Object> map);
 
-    public int editSysEveMenuSortTopById(Map<String, Object> map) throws Exception;
+    int editSysEveMenuSortTopById(Map<String, Object> map);
 
-    public Map<String, Object> querySysEveMenuISLowerByThisId(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysEveMenuISLowerByThisId(Map<String, Object> map);
 
-    public int editSysEveMenuSortLowerById(Map<String, Object> map) throws Exception;
+    int editSysEveMenuSortLowerById(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySysWinMationListBySysId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysWinMationListBySysId(Map<String, Object> map);
 
-    public Map<String, Object> querySysEveMenuBySysId(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysEveMenuBySysId(Map<String, Object> map);
 
 }

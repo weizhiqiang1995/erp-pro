@@ -35,10 +35,9 @@ public class CompanyChatServiceImpl implements CompanyChatService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void getList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void getList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String userId = user.get("id").toString();
@@ -97,11 +96,10 @@ public class CompanyChatServiceImpl implements CompanyChatService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editUserSignByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserSignByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));

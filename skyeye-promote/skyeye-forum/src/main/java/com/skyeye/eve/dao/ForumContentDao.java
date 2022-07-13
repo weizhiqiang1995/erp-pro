@@ -17,56 +17,56 @@ import java.util.Map;
  */
 public interface ForumContentDao {
 
-    public List<Map<String, Object>> queryMyForumContentList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryMyForumContentList(Map<String, Object> map);
 
-    public int insertForumContentMation(Map<String, Object> map) throws Exception;
+    int insertForumContentMation(Map<String, Object> map);
 
-    public int deleteForumContentById(Map<String, Object> map) throws Exception;
+    int deleteForumContentById(Map<String, Object> map);
 
-    public Map<String, Object> queryForumContentMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryForumContentMationById(Map<String, Object> map);
 
-    public int editForumContentMationById(Map<String, Object> map) throws Exception;
+    int editForumContentMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryForumContentMationToDetails(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryForumContentMationToDetails(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryNewForumContentList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryNewForumContentList(Map<String, Object> map);
 
-    public int insertForumCommentMation(Map<String, Object> map) throws Exception;
+    int insertForumCommentMation(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryForumCommentList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryForumCommentList(Map<String, Object> map);
 
-    public int insertForumReplyMation(Map<String, Object> map) throws Exception;
+    int insertForumReplyMation(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryForumReplyList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryForumReplyList(Map<String, Object> map);
 
-    public Map<String, Object> selectForumCommentNumById(Map<String, Object> map) throws Exception;
+    Map<String, Object> selectForumCommentNumById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryNewCommentList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryNewCommentList(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryForumListByTagId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryForumListByTagId(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryHotTagList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryHotTagList(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryActiveUsersList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryActiveUsersList(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryHotForumList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryHotForumList(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryAllHotForumList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryAllHotForumList(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryAllForumList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryAllForumList(Map<String, Object> map);
 
-    public List<Map<String, Object>> selectForumTagById(Map<String, Object> bean) throws Exception;
+    List<Map<String, Object>> selectForumTagById(Map<String, Object> bean);
 
-    public List<Map<String, Object>> queryMyCommentList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryMyCommentList(Map<String, Object> map);
 
-    public int deleteCommentById(Map<String, Object> map) throws Exception;
+    int deleteCommentById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryMyNoticeList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryMyNoticeList(Map<String, Object> map);
 
-    public int deleteNoticeById(Map<String, Object> map) throws Exception;
+    int deleteNoticeById(Map<String, Object> map);
 
-    public int insertForumHotByList(List<Map<String, Object>> list) throws Exception;
+    int insertForumHotByList(List<Map<String, Object>> list);
 
-    public int insertForumStatisticsDayByList(List<Map<String, Object>> list) throws Exception;
+    int insertForumStatisticsDayByList(List<Map<String, Object>> list);
 
 }

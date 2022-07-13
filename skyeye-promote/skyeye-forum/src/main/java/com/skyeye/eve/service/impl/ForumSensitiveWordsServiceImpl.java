@@ -44,10 +44,9 @@ public class ForumSensitiveWordsServiceImpl implements ForumSensitiveWordsServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryForumSensitiveWordsList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumSensitiveWordsList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = forumSensitiveWordsDao.queryForumSensitiveWordsList(map);
@@ -60,11 +59,10 @@ public class ForumSensitiveWordsServiceImpl implements ForumSensitiveWordsServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertForumSensitiveWordsMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertForumSensitiveWordsMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumSensitiveWordsDao.queryForumSensitiveWordsMationByName(map);
         if (!CollectionUtils.isEmpty(bean)) {
@@ -84,11 +82,10 @@ public class ForumSensitiveWordsServiceImpl implements ForumSensitiveWordsServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         forumSensitiveWordsDao.deleteForumSensitiveWordsById(map);
         jedisClient.del(ForumConstants.forumSensitiveWordsAll());
@@ -99,10 +96,9 @@ public class ForumSensitiveWordsServiceImpl implements ForumSensitiveWordsServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void selectForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumSensitiveWordsDao.selectForumSensitiveWordsById(map);
         outputObject.setBean(bean);
@@ -114,11 +110,10 @@ public class ForumSensitiveWordsServiceImpl implements ForumSensitiveWordsServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editForumSensitiveWordsMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editForumSensitiveWordsMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumSensitiveWordsDao.queryForumSensitiveWordsMationByName(map);
         if (!CollectionUtils.isEmpty(bean)) {

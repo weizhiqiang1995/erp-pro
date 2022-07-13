@@ -22,10 +22,9 @@ public class CompanyJobScoreController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyJobScoreController/queryCompanyJobScoreList")
-    public void queryCompanyJobScoreList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyJobScoreList(InputObject inputObject, OutputObject outputObject) {
         companyJobScoreService.queryCompanyJobScoreList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class CompanyJobScoreController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyJobScoreController/insertCompanyJobScoreMation")
-    public void insertCompanyJobScoreMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertCompanyJobScoreMation(InputObject inputObject, OutputObject outputObject) {
         companyJobScoreService.insertCompanyJobScoreMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class CompanyJobScoreController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyJobScoreController/queryCompanyJobScoreMationToEditById")
-    public void queryCompanyJobScoreMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyJobScoreMationToEditById(InputObject inputObject, OutputObject outputObject) {
         companyJobScoreService.queryCompanyJobScoreMationToEditById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class CompanyJobScoreController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyJobScoreController/editCompanyJobScoreMationById")
-    public void editCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
         companyJobScoreService.editCompanyJobScoreMationById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class CompanyJobScoreController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyJobScoreController/deleteCompanyJobScoreMationById")
-    public void deleteCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
         companyJobScoreService.deleteCompanyJobScoreMationById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class CompanyJobScoreController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyJobScoreController/enableCompanyJobScoreMationById")
-    public void enableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void enableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
         companyJobScoreService.enableCompanyJobScoreMationById(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class CompanyJobScoreController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyJobScoreController/disableCompanyJobScoreMationById")
-    public void disableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void disableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
         companyJobScoreService.disableCompanyJobScoreMationById(inputObject, outputObject);
     }
 
@@ -106,10 +99,9 @@ public class CompanyJobScoreController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyJobScoreController/queryEnableCompanyJobScoreList")
-    public void queryEnableCompanyJobScoreList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryEnableCompanyJobScoreList(InputObject inputObject, OutputObject outputObject) {
         companyJobScoreService.queryEnableCompanyJobScoreList(inputObject, outputObject);
     }
 
@@ -118,10 +110,9 @@ public class CompanyJobScoreController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyJobScoreController/queryCompanyJobScoreDetailMationById")
-    public void queryCompanyJobScoreDetailMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyJobScoreDetailMationById(InputObject inputObject, OutputObject outputObject) {
         companyJobScoreService.queryCompanyJobScoreDetailMationById(inputObject, outputObject);
     }
 

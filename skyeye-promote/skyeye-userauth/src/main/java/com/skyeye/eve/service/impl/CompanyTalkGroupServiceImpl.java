@@ -47,11 +47,10 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertGroupMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertGroupMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String[] invites = map.get("userIds").toString().split(",");
         if (invites.length > 0) {
@@ -102,10 +101,9 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryGroupInvitationMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryGroupInvitationMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -120,11 +118,10 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAgreeInGroupInvitationMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAgreeInGroupInvitationMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         Map<String, Object> bean = companyTalkGroupDao.queryGroupInvitationMationById(map);
@@ -168,11 +165,10 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editRefuseInGroupInvitationMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRefuseInGroupInvitationMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         Map<String, Object> bean = companyTalkGroupDao.queryGroupInvitationMationById(map);
@@ -193,10 +189,9 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryGroupMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryGroupMationList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -211,11 +206,10 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertGroupMationToTalk(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertGroupMationToTalk(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -251,10 +245,9 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryGroupMemberByGroupId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryGroupMemberByGroupId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = new ArrayList<>();
         String groupId = map.get("id").toString();
@@ -275,10 +268,9 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryChatLogByType(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryChatLogByType(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         if ("friend".equals(map.get("chatType").toString())) {//个人对个人
             Map<String, Object> user = inputObject.getLogParams();
@@ -304,11 +296,10 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editUserToExitGroup(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserToExitGroup(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> groupMation = companyTalkGroupDao.queryGroupCreateIdById(map);
         if (!CollectionUtils.isEmpty(groupMation)) {
@@ -331,11 +322,10 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editCreateToExitGroup(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCreateToExitGroup(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> groupMation = companyTalkGroupDao.queryGroupCreateIdById(map);
         if (!CollectionUtils.isEmpty(groupMation)) {

@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public interface EmailSendModelDao {
 
-    List<Map<String, Object>> queryEmailSendModelList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryEmailSendModelList(Map<String, Object> map);
 
     void insertEmailSendModel(Map<String, Object> map);
 

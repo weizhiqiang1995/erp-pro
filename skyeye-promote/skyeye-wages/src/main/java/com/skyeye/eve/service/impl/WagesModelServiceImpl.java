@@ -67,10 +67,9 @@ public class WagesModelServiceImpl implements WagesModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWagesModelList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesModelList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = wagesModelDao.queryWagesModelList(map);
@@ -83,11 +82,10 @@ public class WagesModelServiceImpl implements WagesModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertWagesModelMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWagesModelMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String title = map.get("title").toString();
         Map<String, Object> mation = wagesModelDao.queryWagesModelMationByTitleAndNotId(title, null);
@@ -114,7 +112,7 @@ public class WagesModelServiceImpl implements WagesModelService {
      * @param str
      * @param id
      */
-    private void wagesModelApplicableObjects(String str, String id) throws Exception {
+    private void wagesModelApplicableObjects(String str, String id) {
         wagesModelApplicableObjectsDao.deleteWagesModelApplicableObjectsByModelId(id);
         if (ToolUtil.isBlank(str)) {
             return;
@@ -135,7 +133,7 @@ public class WagesModelServiceImpl implements WagesModelService {
      * @param str
      * @param id
      */
-    private void wagesModelField(String str, String id) throws Exception {
+    private void wagesModelField(String str, String id) {
         wagesModelFieldDao.deleteWagesModelFieldByModelId(id);
         if (ToolUtil.isBlank(str)) {
             return;
@@ -156,10 +154,9 @@ public class WagesModelServiceImpl implements WagesModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWagesModelMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesModelMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = wagesModelDao.queryWagesModelMationById(id);
@@ -178,9 +175,8 @@ public class WagesModelServiceImpl implements WagesModelService {
      *
      * @param bean
      * @param id
-     * @throws Exception
      */
-    private void getWagesModelApplicableObjects(Map<String, Object> bean, String id) throws Exception {
+    private void getWagesModelApplicableObjects(Map<String, Object> bean, String id) {
         List<Map<String, Object>> applicableObjects = wagesModelApplicableObjectsDao.queryWagesModelApplicableObjectsByModelId(id);
         // 根据objectType分组
         Map<String, List<Map<String, Object>>> groupByType = applicableObjects.stream()
@@ -224,11 +220,10 @@ public class WagesModelServiceImpl implements WagesModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editWagesModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editWagesModelMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> mation = wagesModelDao.queryWagesModelMationByTitleAndNotId(map.get("title").toString(), id);
@@ -250,11 +245,10 @@ public class WagesModelServiceImpl implements WagesModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteWagesModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteWagesModelMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         wagesModelDao.editWagesModelMationStateMationById(map.get("id").toString(), STATE.START_DELETE.getState());
     }
@@ -264,11 +258,10 @@ public class WagesModelServiceImpl implements WagesModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void enableWagesModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void enableWagesModelMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         wagesModelDao.editWagesModelMationStateMationById(map.get("id").toString(), STATE.START_UP.getState());
     }
@@ -278,11 +271,10 @@ public class WagesModelServiceImpl implements WagesModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void disableWagesModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void disableWagesModelMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         wagesModelDao.editWagesModelMationStateMationById(map.get("id").toString(), STATE.START_DOWN.getState());
     }
@@ -292,10 +284,9 @@ public class WagesModelServiceImpl implements WagesModelService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWagesModelDetailMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesModelDetailMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = wagesModelDao.queryWagesModelMationById(id);
@@ -314,10 +305,9 @@ public class WagesModelServiceImpl implements WagesModelService {
      *
      * @param modeId 模板id
      * @return
-     * @throws Exception
      */
     @Override
-    public List<Map<String, Object>> getWagesModelFieldsByModelId(String modeId) throws Exception {
+    public List<Map<String, Object>> getWagesModelFieldsByModelId(String modeId) {
         List<Map<String, Object>> fields = wagesModelFieldDao.queryWagesModelFieldByModelId(modeId);
         fields.forEach(bean -> {
             if (ToolUtil.isBlank(bean.get("nameCn").toString())) {

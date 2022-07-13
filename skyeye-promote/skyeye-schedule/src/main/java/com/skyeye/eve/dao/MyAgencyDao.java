@@ -9,8 +9,8 @@ import java.util.Map;
 
 public interface MyAgencyDao {
 
-    public List<Map<String, Object>> queryMyAgencyList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryMyAgencyList(Map<String, Object> map);
 
-    public int deleteMyAgencyList(Map<String, Object> map) throws Exception;
+    int deleteMyAgencyList(Map<String, Object> map);
 
 }

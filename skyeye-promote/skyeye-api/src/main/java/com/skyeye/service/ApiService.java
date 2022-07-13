@@ -9,11 +9,11 @@ import com.skyeye.common.object.OutputObject;
 
 public interface ApiService {
 
-    void queryAllSysEveReqMapping(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryAllSysEveReqMapping(InputObject inputObject, OutputObject outputObject);
 
-    void queryApiDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryApiDetails(InputObject inputObject, OutputObject outputObject);
 
-    void queryLimitRestrictions(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryLimitRestrictions(InputObject inputObject, OutputObject outputObject);
 
-    void queryApiMicroservices(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryApiMicroservices(InputObject inputObject, OutputObject outputObject);
 }

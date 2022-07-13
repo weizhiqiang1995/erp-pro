@@ -4,14 +4,11 @@
 
 package com.skyeye.eve.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.ForumSensitiveWordsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,10 +22,9 @@ public class ForumSensitiveWordsController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumSensitiveWordsController/queryForumSensitiveWordsList")
-    public void queryForumSensitiveWordsList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumSensitiveWordsList(InputObject inputObject, OutputObject outputObject) {
         forumSensitiveWordsService.queryForumSensitiveWordsList(inputObject, outputObject);
     }
 
@@ -38,10 +34,9 @@ public class ForumSensitiveWordsController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumSensitiveWordsController/insertForumSensitiveWordsMation")
-    public void insertForumSensitiveWordsMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertForumSensitiveWordsMation(InputObject inputObject, OutputObject outputObject) {
         forumSensitiveWordsService.insertForumSensitiveWordsMation(inputObject, outputObject);
     }
 
@@ -50,10 +45,9 @@ public class ForumSensitiveWordsController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumSensitiveWordsController/deleteForumSensitiveWordsById")
-    public void deleteForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) {
         forumSensitiveWordsService.deleteForumSensitiveWordsById(inputObject, outputObject);
     }
 
@@ -62,10 +56,9 @@ public class ForumSensitiveWordsController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumSensitiveWordsController/selectForumSensitiveWordsById")
-    public void selectForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) {
         forumSensitiveWordsService.selectForumSensitiveWordsById(inputObject, outputObject);
     }
 
@@ -74,10 +67,9 @@ public class ForumSensitiveWordsController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumSensitiveWordsController/editForumSensitiveWordsMationById")
-    public void editForumSensitiveWordsMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editForumSensitiveWordsMationById(InputObject inputObject, OutputObject outputObject) {
         forumSensitiveWordsService.editForumSensitiveWordsMationById(inputObject, outputObject);
     }
 

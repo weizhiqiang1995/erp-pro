@@ -22,10 +22,9 @@ public class SysDataSqlController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysDataSqlController/querySysDataSqlBackupsList")
-    public void querySysDataSqlBackupsList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysDataSqlBackupsList(InputObject inputObject, OutputObject outputObject) {
         sysDataSqlService.querySysDataSqlBackupsList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class SysDataSqlController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysDataSqlController/queryAllTableMationList")
-    public void queryAllTableMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllTableMationList(InputObject inputObject, OutputObject outputObject) {
         sysDataSqlService.queryAllTableMationList(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class SysDataSqlController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysDataSqlController/insertTableBackUps")
-    public void insertTableBackUps(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertTableBackUps(InputObject inputObject, OutputObject outputObject) {
         sysDataSqlService.insertTableBackUps(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class SysDataSqlController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysDataSqlController/insertTableReduction")
-    public void insertTableReduction(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertTableReduction(InputObject inputObject, OutputObject outputObject) {
         sysDataSqlService.insertTableReduction(inputObject, outputObject);
     }
 

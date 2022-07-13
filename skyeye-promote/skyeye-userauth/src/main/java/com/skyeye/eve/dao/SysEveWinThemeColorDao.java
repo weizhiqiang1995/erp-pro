@@ -9,20 +9,20 @@ import java.util.Map;
 
 public interface SysEveWinThemeColorDao {
 
-    public List<Map<String, Object>> querySysEveWinThemeColorList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysEveWinThemeColorList(Map<String, Object> map);
 
-    public int insertSysEveWinThemeColorMation(Map<String, Object> map) throws Exception;
+    int insertSysEveWinThemeColorMation(Map<String, Object> map);
 
-    public Map<String, Object> querySysEveWinThemeColorMationByName(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysEveWinThemeColorMationByName(Map<String, Object> map);
 
-    public int deleteSysEveWinThemeColorMationById(Map<String, Object> map) throws Exception;
+    int deleteSysEveWinThemeColorMationById(Map<String, Object> map);
 
-    public Map<String, Object> querySysEveWinThemeColorMationToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysEveWinThemeColorMationToEditById(Map<String, Object> map);
 
-    public Map<String, Object> querySysEveWinThemeColorMationByNameAndId(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysEveWinThemeColorMationByNameAndId(Map<String, Object> map);
 
-    public int editSysEveWinThemeColorMationById(Map<String, Object> map) throws Exception;
+    int editSysEveWinThemeColorMationById(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySysEveWinThemeColorListToShow(Map<String, Object> map);
+    List<Map<String, Object>> querySysEveWinThemeColorListToShow(Map<String, Object> map);
 
 }

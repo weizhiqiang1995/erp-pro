@@ -54,10 +54,9 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryDwSurveyDirectoryList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDwSurveyDirectoryList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = dwSurveyDirectoryDao.queryDwSurveyDirectoryList(map);
@@ -70,11 +69,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertDwSurveyDirectoryMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertDwSurveyDirectoryMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -92,10 +90,9 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryDwSurveyDirectoryMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDwSurveyDirectoryMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> surveyMation = dwSurveyDirectoryDao.querySurveyMationById(map);//获取问卷信息
         if (surveyMation != null && !surveyMation.isEmpty()) {
@@ -123,9 +120,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param question
      * @return
-     * @throws Exception
      */
-    public Map<String, Object> getQuestionOptionListMation(Map<String, Object> question) throws Exception {
+    public Map<String, Object> getQuestionOptionListMation(Map<String, Object> question) {
         String quType = QuType.getActionName(Integer.parseInt(question.get("quType").toString()));//获取题目类型
         if (quType.equals(QuType.RADIO.getActionName()) || quType.equals(QuType.COMPRADIO.getActionName())) {
             List<Map<String, Object>> questionRadio = dwSurveyDirectoryDao.queryQuestionRadioListByQuestionId(question);//获取多行填空题
@@ -176,10 +172,9 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryDwSurveyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDwSurveyMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> surveyMation = dwSurveyDirectoryDao.querySurveyMationById(map);//获取问卷信息
         if (surveyMation != null && !surveyMation.isEmpty()) {
@@ -195,11 +190,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editDwSurveyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editDwSurveyMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         dwSurveyDirectoryDao.editDwSurveyMationById(map);//编辑问卷信息
     }
@@ -222,9 +216,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * quId:问题id------非必填
      *
      * @return
-     * @throws Exception
      */
-    public String compileQuestion(Map<String, Object> question) throws Exception {
+    public String compileQuestion(Map<String, Object> question) {
         String quId = "";
         //判断题目id是否为空，为空则新增，不为空则修改
         if (ToolUtil.isBlank(question.get("quId").toString())) {
@@ -248,9 +241,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @param logicStr
      * @param userId
      * @return
-     * @throws Exception
      */
-    public List<Map<String, Object>> setLogics(String quId, String logicStr, String userId) throws Exception {
+    public List<Map<String, Object>> setLogics(String quId, String logicStr, String userId) {
         List<Map<String, Object>> insertList = new ArrayList<>();
         List<Map<String, Object>> editList = new ArrayList<>();
         QuestionUtil.setLogics(quId, logicStr, userId, insertList, editList);
@@ -269,11 +261,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void addQuFillblankMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuFillblankMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.FILLBLANK.getIndex());
         String checkType = map.get("checkType").toString();
@@ -297,11 +288,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void addQuScoreMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuScoreMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.SCORE.getIndex());
         // 添加问题并返回问题id
@@ -334,11 +324,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void addQuOrderquMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuOrderquMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.ORDERQU.getIndex());
         //添加问题并返回问题id
@@ -371,11 +360,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void addQuPagetagMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuPagetagMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.PAGETAG.getIndex());
         //添加问题并返回问题id
@@ -391,11 +379,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void addQuRadioMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuRadioMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.RADIO.getIndex());
         //添加问题并返回问题id
@@ -428,11 +415,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void addQuCheckBoxMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuCheckBoxMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.CHECKBOX.getIndex());
         // 添加问题并返回问题id
@@ -465,11 +451,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void addQuMultiFillblankMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuMultiFillblankMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.MULTIFILLBLANK.getIndex());
         //添加问题并返回问题id
@@ -502,11 +487,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void addQuParagraphMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuParagraphMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("quType", QuType.PARAGRAPH.getIndex());
         //添加问题并返回问题id
@@ -522,11 +506,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void addQuChenMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuChenMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         int quType = QuType.getIndex(map.get("quType").toString());
         if (-1 == quType) {
@@ -580,11 +563,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteQuestionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteQuestionMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> question = dwSurveyDirectoryDao.queryQuestionMationById(map);
         if (question != null) {
@@ -612,11 +594,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteQuestionChenColumnMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteQuestionChenColumnMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> option = dwSurveyDirectoryDao.queryQuestionChenColumnById(map);
         if (option != null) {
@@ -633,11 +614,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteQuestionChenRowMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteQuestionChenRowMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> option = dwSurveyDirectoryDao.queryQuestionChenRowById(map);
         if (option != null) {
@@ -654,11 +634,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteQuestionRadioOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteQuestionRadioOptionMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> option = dwSurveyDirectoryDao.queryQuestionRadioOptionById(map);
         if (option != null) {
@@ -675,11 +654,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteQuestionChedkBoxOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteQuestionChedkBoxOptionMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> option = dwSurveyDirectoryDao.queryQuestionChedkBoxOptionById(map);
         if (option != null) {
@@ -696,11 +674,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteQuestionScoreOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteQuestionScoreOptionMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> option = dwSurveyDirectoryDao.queryQuestionScoreOptionById(map);
         if (option != null) {
@@ -717,11 +694,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteQuestionOrderOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteQuestionOrderOptionMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> option = dwSurveyDirectoryDao.queryQuestionOrderOptionById(map);
         if (option != null) {
@@ -738,11 +714,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteQuestionMultiFillblankOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteQuestionMultiFillblankOptionMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> option = dwSurveyDirectoryDao.queryQuestionMultiFillblankOptionById(map);
         if (option != null) {
@@ -759,11 +734,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSurveyStateToReleaseById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSurveyStateToReleaseById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> surveyMation = dwSurveyDirectoryDao.querySurveyMationById(map);//获取问卷信息
         if (surveyMation != null && !surveyMation.isEmpty()) {
@@ -793,10 +767,9 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryDwSurveyDirectoryMationByIdToHTML(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDwSurveyDirectoryMationByIdToHTML(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> surveyMation = dwSurveyDirectoryDao.querySurveyMationById(map);//获取问卷信息
         if (surveyMation != null && !surveyMation.isEmpty()) {
@@ -826,11 +799,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSurveyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSurveyMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         dwSurveyDirectoryDao.deleteSurveyMationById(map);//删除问卷
     }
@@ -840,10 +812,9 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySurveyFxMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySurveyFxMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> surveyMation = dwSurveyDirectoryDao.querySurveyMationById(map);//获取问卷信息
         if (surveyMation != null && !surveyMation.isEmpty()) {
@@ -866,9 +837,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param question
      * @return
-     * @throws Exception
      */
-    public Map<String, Object> getQuestionOptionReportListMation(Map<String, Object> question) throws Exception {
+    public Map<String, Object> getQuestionOptionReportListMation(Map<String, Object> question) {
         String quType = QuType.getActionName(Integer.parseInt(question.get("quType").toString()));//获取题目类型
         if (quType.equals(QuType.RADIO.getActionName()) || quType.equals(QuType.COMPRADIO.getActionName())) {//单选  复合单选
             List<Map<String, Object>> beans = dwSurveyDirectoryDao.queryRadioGroupStat(question);
@@ -1041,11 +1011,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSurveyMationCopyById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSurveyMationCopyById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String surveyId = ToolUtil.getSurFaceId();
@@ -1072,9 +1041,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * 复制题目选项
      *
      * @param question
-     * @throws Exception
      */
-    public void copyQuestionOptionListMation(Map<String, Object> question) throws Exception {
+    public void copyQuestionOptionListMation(Map<String, Object> question) {
         String quType = QuType.getActionName(Integer.parseInt(question.get("quType").toString()));//获取题目类型
         if (quType.equals(QuType.RADIO.getActionName()) || quType.equals(QuType.COMPRADIO.getActionName())) {
             List<Map<String, Object>> questionRadios = dwSurveyDirectoryDao.queryQuestionRadioListByCopyId(question);//获取多行填空题
@@ -1139,10 +1107,9 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAnswerSurveyMationByIp(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAnswerSurveyMationByIp(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         if (judgeWhetherExaming(map, PutObject.getRequest(), outputObject)) {
             Map<String, Object> surveyMation = dwSurveyDirectoryDao.querySurveyMationById(map);//获取问卷信息
@@ -1155,11 +1122,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertAnswerSurveyMationByIp(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertAnswerSurveyMationByIp(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> data = JSONUtil.toBean(map.get("jsonData").toString(), null);
         map.put("id", data.get("surveyId"));
@@ -1189,9 +1155,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @param request
      * @param outputObject
      * @return
-     * @throws Exception
      */
-    public boolean judgeWhetherExaming(Map<String, Object> map, HttpServletRequest request, OutputObject outputObject) throws Exception {
+    public boolean judgeWhetherExaming(Map<String, Object> map, HttpServletRequest request, OutputObject outputObject) {
         //获取问卷信息
         Map<String, Object> surveyMation = dwSurveyDirectoryDao.querySurveyMationById(map);
         //问卷是否存在
@@ -1245,9 +1210,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @param request
      * @param params
      * @return
-     * @throws Exception
      */
-    public Map<String, Map<String, Object>> buildSaveSurveyMap(HttpServletRequest request, Map<String, Object> params) throws Exception {
+    public Map<String, Map<String, Object>> buildSaveSurveyMap(HttpServletRequest request, Map<String, Object> params) {
         Map<String, Map<String, Object>> quMaps = new HashMap<String, Map<String, Object>>();
         Map<String, Object> yesnoMaps = WebUtils.getParametersStartingWith(request, "qu_" + QuType.YESNO.getIndex() + "_");// 是非
         quMaps.put("yesnoMaps", yesnoMaps);
@@ -1388,9 +1352,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param surveyAnswer
      * @param quMaps       参数
-     * @throws Exception
      */
-    public void saveAnswer(Map<String, Object> surveyAnswer, Map<String, Map<String, Object>> quMaps) throws Exception {
+    public void saveAnswer(Map<String, Object> surveyAnswer, Map<String, Map<String, Object>> quMaps) {
         Map<String, Object> surveyMation = dwSurveyDirectoryDao.querySurveyMationById(surveyAnswer);//获取问卷信息
         surveyMation.put("answerNum", Integer.parseInt(surveyMation.get("answerNum").toString()) + 1);
         dwSurveyDirectoryDao.editSurveyAnswerNumById(surveyMation);//修改回答数量
@@ -1480,9 +1443,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @param surveyAnswer
      * @param yesnoMaps
      * @return
-     * @throws Exception
      */
-    public int saveAnYesnoMaps(Map<String, Object> surveyAnswer, Map<String, Object> yesnoMaps) throws Exception {
+    public int saveAnYesnoMaps(Map<String, Object> surveyAnswer, Map<String, Object> yesnoMaps) {
         String surveyId = surveyAnswer.get("id").toString();
         String surveyAnswerId = surveyAnswer.get("answerId").toString();
         List<Map<String, Object>> beans = new ArrayList<>();
@@ -1516,9 +1478,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @param surveyAnswer
      * @param radioMaps
      * @return
-     * @throws Exception
      */
-    private int saveAnRadioMaps(Map<String, Object> surveyAnswer, Map<String, Object> radioMaps) throws Exception {
+    private int saveAnRadioMaps(Map<String, Object> surveyAnswer, Map<String, Object> radioMaps) {
         String surveyId = surveyAnswer.get("id").toString();
         String surveyAnswerId = surveyAnswer.get("answerId").toString();
         int answerQuCount = 0;
@@ -1543,9 +1504,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @param surveyAnswer
      * @param dfillMaps
      * @return
-     * @throws Exception
      */
-    private int saveAnMultiFillMaps(Map<String, Object> surveyAnswer, Map<String, Object> dfillMaps) throws Exception {
+    private int saveAnMultiFillMaps(Map<String, Object> surveyAnswer, Map<String, Object> dfillMaps) {
         String surveyId = surveyAnswer.get("id").toString();
         String surveyAnswerId = surveyAnswer.get("answerId").toString();
         int answerQuCount = 0;
@@ -1576,9 +1536,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param surveyAnswer
      * @param scoreMaps
-     * @throws Exception
      */
-    private int saveScoreMaps(Map<String, Object> surveyAnswer, Map<String, Object> scoreMaps) throws Exception {
+    private int saveScoreMaps(Map<String, Object> surveyAnswer, Map<String, Object> scoreMaps) {
         String surveyId = surveyAnswer.get("id").toString();
         String surveyAnswerId = surveyAnswer.get("answerId").toString();
         int answerQuCount = 0;
@@ -1607,9 +1566,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param surveyAnswer
      * @param chenCheckboxMaps
-     * @throws Exception
      */
-    private int saveChenCheckboxMaps(Map<String, Object> surveyAnswer, Map<String, Object> chenCheckboxMaps) throws Exception {
+    private int saveChenCheckboxMaps(Map<String, Object> surveyAnswer, Map<String, Object> chenCheckboxMaps) {
         String surveyId = surveyAnswer.get("id").toString();
         String surveyAnswerId = surveyAnswer.get("answerId").toString();
         int answerQuCount = 0;
@@ -1641,9 +1599,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param surveyAnswer
      * @param compRadioMaps
-     * @throws Exception
      */
-    private int saveCompAnRadioMaps(Map<String, Object> surveyAnswer, Map<String, Object> compRadioMaps) throws Exception {
+    private int saveCompAnRadioMaps(Map<String, Object> surveyAnswer, Map<String, Object> compRadioMaps) {
         String surveyId = surveyAnswer.get("id").toString();
         String surveyAnswerId = surveyAnswer.get("answerId").toString();
         int answerQuCount = 0;
@@ -1670,9 +1627,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param surveyAnswer
      * @param compChenRadioMaps
-     * @throws Exception
      */
-    private int saveCompChehRadioMaps(Map<String, Object> surveyAnswer, Map<String, Object> compChenRadioMaps) throws Exception {
+    private int saveCompChehRadioMaps(Map<String, Object> surveyAnswer, Map<String, Object> compChenRadioMaps) {
         String surveyId = surveyAnswer.get("id").toString();
         String surveyAnswerId = surveyAnswer.get("answerId").toString();
         int answerQuCount = 0;
@@ -1706,9 +1662,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      * @param surveyAnswer
      * @param chenScoreMaps
      * @return
-     * @throws Exception
      */
-    private int saveChenScoreMaps(Map<String, Object> surveyAnswer, Map<String, Object> chenScoreMaps) throws Exception {
+    private int saveChenScoreMaps(Map<String, Object> surveyAnswer, Map<String, Object> chenScoreMaps) {
         String surveyId = surveyAnswer.get("id").toString();
         String surveyAnswerId = surveyAnswer.get("answerId").toString();
         int answerQuCount = 0;
@@ -1741,9 +1696,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param surveyAnswer
      * @param checkboxMaps
-     * @throws Exception
      */
-    private int saveAnCheckboxMaps(Map<String, Object> surveyAnswer, Map<String, Object> checkboxMaps) throws Exception {
+    private int saveAnCheckboxMaps(Map<String, Object> surveyAnswer, Map<String, Object> checkboxMaps) {
         String surveyId = surveyAnswer.get("id").toString();
         String surveyAnswerId = surveyAnswer.get("answerId").toString();
         int answerQuCount = 0;
@@ -1771,9 +1725,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param surveyAnswer
      * @param fillMaps
-     * @throws Exception
      */
-    private int saveAnFillMaps(Map<String, Object> surveyAnswer, Map<String, Object> fillMaps) throws Exception {
+    private int saveAnFillMaps(Map<String, Object> surveyAnswer, Map<String, Object> fillMaps) {
         String surveyId = surveyAnswer.get("id").toString();
         String surveyAnswerId = surveyAnswer.get("answerId").toString();
         int answerQuCount = 0;
@@ -1797,9 +1750,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param surveyAnswer
      * @param anAnswerMaps
-     * @throws Exception
      */
-    private int saveAnAnswerMaps(Map<String, Object> surveyAnswer, Map<String, Object> anAnswerMaps) throws Exception {
+    private int saveAnAnswerMaps(Map<String, Object> surveyAnswer, Map<String, Object> anAnswerMaps) {
         String surveyId = surveyAnswer.get("id").toString();
         String surveyAnswerId = surveyAnswer.get("answerId").toString();
         int answerQuCount = 0;
@@ -1823,9 +1775,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param surveyAnswer
      * @param compCheckboxMaps
-     * @throws Exception
      */
-    private int saveCompAnCheckboxMaps(Map<String, Object> surveyAnswer, Map<String, Object> compCheckboxMaps) throws Exception {
+    private int saveCompAnCheckboxMaps(Map<String, Object> surveyAnswer, Map<String, Object> compCheckboxMaps) {
         String surveyId = surveyAnswer.get("id").toString();
         String surveyAnswerId = surveyAnswer.get("answerId").toString();
         int answerQuCount = 0;
@@ -1855,9 +1806,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param surveyAnswer
      * @param enumMaps
-     * @throws Exception
      */
-    private int saveEnumMaps(Map<String, Object> surveyAnswer, Map<String, Object> enumMaps) throws Exception {
+    private int saveEnumMaps(Map<String, Object> surveyAnswer, Map<String, Object> enumMaps) {
         String surveyId = surveyAnswer.get("id").toString();
         String surveyAnswerId = surveyAnswer.get("answerId").toString();
         int answerQuCount = 0;
@@ -1882,9 +1832,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param surveyAnswer
      * @param quOrderMaps
-     * @throws Exception
      */
-    private int saveQuOrderMaps(Map<String, Object> surveyAnswer, Map<String, Object> quOrderMaps) throws Exception {
+    private int saveQuOrderMaps(Map<String, Object> surveyAnswer, Map<String, Object> quOrderMaps) {
         String surveyId = surveyAnswer.get("id").toString();
         String surveyAnswerId = surveyAnswer.get("answerId").toString();
         int answerQuCount = 0;
@@ -1913,9 +1862,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param surveyAnswer
      * @param chenRadioMaps
-     * @throws Exception
      */
-    private int saveChenRadioMaps(Map<String, Object> surveyAnswer, Map<String, Object> chenRadioMaps) throws Exception {
+    private int saveChenRadioMaps(Map<String, Object> surveyAnswer, Map<String, Object> chenRadioMaps) {
         String surveyId = surveyAnswer.get("id").toString();
         String surveyAnswerId = surveyAnswer.get("answerId").toString();
         int answerQuCount = 0;
@@ -1944,9 +1892,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param surveyAnswer
      * @param chenFbkMaps
-     * @throws Exception
      */
-    private int saveChenFbkMaps(Map<String, Object> surveyAnswer, Map<String, Object> chenFbkMaps) throws Exception {
+    private int saveChenFbkMaps(Map<String, Object> surveyAnswer, Map<String, Object> chenFbkMaps) {
         String surveyId = surveyAnswer.get("id").toString();
         String surveyAnswerId = surveyAnswer.get("answerId").toString();
         int answerQuCount = 0;
@@ -1979,11 +1926,10 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void updateSurveyMationEndById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateSurveyMationEndById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> surveyMation = dwSurveyDirectoryDao.querySurveyMationById(map);//获取问卷信息
         if (surveyMation != null && !surveyMation.isEmpty()) {

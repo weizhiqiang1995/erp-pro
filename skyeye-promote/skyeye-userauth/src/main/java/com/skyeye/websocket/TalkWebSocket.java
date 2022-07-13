@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.websocket;
 
 import cn.hutool.json.JSONObject;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Component;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,23 +70,19 @@ public class TalkWebSocket {
         this.userId = userId;
         this.session = session;
         LOGGER.info("有新连接加入！ 当前在线人数: {}", onlineNumber);
-        try {
-            // 先给所有人发送通知，说我上线了
-            Map<String, Object> map1 = new HashMap<>();
-            map1.put("messageType", SocketConstants.MessageType.First.getType());
-            map1.put("userId", userId);
-            sendMessageAll(JSONUtil.toJsonStr(map1), userId);
+        // 先给所有人发送通知，说我上线了
+        Map<String, Object> map1 = new HashMap<>();
+        map1.put("messageType", SocketConstants.MessageType.First.getType());
+        map1.put("userId", userId);
+        sendMessageAll(JSONUtil.toJsonStr(map1), userId);
 
-            // 把自己的信息加入到map当中去
-            clients.put(userId, this);
-            // 给自己发一条消息：告诉自己现在都有谁在线
-            Map<String, Object> map2 = new HashMap<>();
-            map2.put("messageType", SocketConstants.MessageType.Third.getType());
-            map2.put("onlineUsers", clients.keySet());
-            sendMessageTo(JSONUtil.toJsonStr(map2), userId);
-        } catch (IOException e) {
-            LOGGER.warn("{}上线的时候通知所有人发生了错误", userId);
-        }
+        // 把自己的信息加入到map当中去
+        clients.put(userId, this);
+        // 给自己发一条消息：告诉自己现在都有谁在线
+        Map<String, Object> map2 = new HashMap<>();
+        map2.put("messageType", SocketConstants.MessageType.Third.getType());
+        map2.put("onlineUsers", clients.keySet());
+        sendMessageTo(JSONUtil.toJsonStr(map2), userId);
     }
 
     @OnError
@@ -102,15 +98,11 @@ public class TalkWebSocket {
         if (!ToolUtil.isBlank(userId) && clients.containsKey(userId)) {
             onlineNumber--;
             clients.remove(userId);
-            try {
-                Map<String, Object> map1 = new HashMap<>();
-                map1.put("messageType", 2);
-                map1.put("onlineUsers", clients.keySet());
-                map1.put("userId", userId);
-                sendMessageAll(JSONUtil.toJsonStr(map1), userId);
-            } catch (IOException e) {
-                LOGGER.warn(userId + "下线的时候通知所有人发生了错误");
-            }
+            Map<String, Object> map1 = new HashMap<>();
+            map1.put("messageType", 2);
+            map1.put("onlineUsers", clients.keySet());
+            map1.put("userId", userId);
+            sendMessageAll(JSONUtil.toJsonStr(map1), userId);
             LOGGER.info("有连接关闭！ 当前在线人数" + onlineNumber);
         }
     }
@@ -184,13 +176,11 @@ public class TalkWebSocket {
 
     /**
      * @param map
-     * @throws Exception
-     * @throws
      * @Title: sendMessageToThisGroupMember
      * @Description: 发送消息给当前群的所有人
      * @return: void
      */
-    private void sendMessageToThisGroupMember(Map<String, Object> map) throws Exception {
+    private void sendMessageToThisGroupMember(Map<String, Object> map) {
         CompanyTalkGroupDao companyTalkGroupDao = SpringUtils.getBean(CompanyTalkGroupDao.class);
         List<Map<String, Object>> members = companyTalkGroupDao.queryGroupMemberByGroupIdAndNotThisUser(map);
         if (members.size() > 0) {
@@ -206,9 +196,8 @@ public class TalkWebSocket {
      *
      * @param message
      * @param userId
-     * @throws IOException
      */
-    public void sendMessageTo(String message, String userId) throws IOException {
+    public void sendMessageTo(String message, String userId) {
         TalkWebSocket item = clients.get(userId);
         if (item != null) {
             item.session.getAsyncRemote().sendText(message);
@@ -220,9 +209,8 @@ public class TalkWebSocket {
      *
      * @param message
      * @param FromUserName
-     * @throws IOException
      */
-    public void sendMessageAll(String message, String FromUserName) throws IOException {
+    public void sendMessageAll(String message, String FromUserName) {
         for (TalkWebSocket item : clients.values()) {
             item.session.getAsyncRemote().sendText(message);
         }

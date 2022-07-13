@@ -30,10 +30,9 @@ public class SmProjectServiceImpl implements SmProjectService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySmProjectList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySmProjectList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("createId", user.get("id"));
@@ -48,11 +47,10 @@ public class SmProjectServiceImpl implements SmProjectService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSmProjectMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSmProjectMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("createId", user.get("id"));
@@ -71,11 +69,10 @@ public class SmProjectServiceImpl implements SmProjectService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSmProjectById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSmProjectById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = smProjectDao.querySmProjectPageNumById(map);//获取小程序页面数量
         Map<String, Object> item = smProjectDao.querySmProjectPageModelNumById(map);//获取小程序组件数量
@@ -100,10 +97,9 @@ public class SmProjectServiceImpl implements SmProjectService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySmProjectMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySmProjectMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = smProjectDao.querySmProjectMationToEditById(map);
         outputObject.setBean(bean);
@@ -115,11 +111,10 @@ public class SmProjectServiceImpl implements SmProjectService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSmProjectMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSmProjectMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("createId", user.get("id"));
@@ -136,10 +131,9 @@ public class SmProjectServiceImpl implements SmProjectService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryGroupMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryGroupMationList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = smProjectDao.queryGroupTypeMationList(map);
         if (beans != null && !beans.isEmpty()) {
@@ -156,10 +150,9 @@ public class SmProjectServiceImpl implements SmProjectService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryGroupMemberMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryGroupMemberMationList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = smProjectDao.queryGroupMemberMationList(map);
         if (beans != null && !beans.isEmpty()) {

@@ -44,10 +44,9 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWinMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWinMationList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveWinDao.queryWinMationList(map);
@@ -60,11 +59,10 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertWinMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWinMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinDao.queryWinMationByNameOrUrl(map);
         if (bean != null && !bean.isEmpty()) {
@@ -83,10 +81,9 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWinMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWinMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinDao.queryWinMationToEditById(map);
         outputObject.setBean(bean);
@@ -97,11 +94,10 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editWinMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editWinMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinDao.queryWinMationByNameOrUrlAndId(map);
         if (bean != null && !bean.isEmpty()) {
@@ -116,11 +112,10 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteWinMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteWinMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinDao.queryChildMationById(map);
         if (Integer.parseInt(bean.get("menuNum").toString()) > 0 || Integer.parseInt(bean.get("useNum").toString()) > 0) {
@@ -135,11 +130,10 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAuthorizationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAuthorizationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinDao.querySysEveWinNum(map);
         if (bean != null && !bean.isEmpty()) {
@@ -159,11 +153,10 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editCancleAuthorizationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCancleAuthorizationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         sysEveWinDao.editCancleAuthorizationById(map);
     }
@@ -173,10 +166,9 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWinMationListToShow(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWinMationListToShow(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveWinDao.queryWinMationListToShow(map);
@@ -189,11 +181,10 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertWinMationImportantSynchronization(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWinMationImportantSynchronization(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinDao.queryWinMationSynchronizationById(map);//判断是否有权限
         if (bean == null) {
@@ -240,10 +231,9 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWinMationImportantSynchronizationData(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWinMationImportantSynchronizationData(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> menuBeans = sysEveWinDao.queryWinMationImportantSynchronizationData(map);
         List<Map<String, Object>> pointBeans = sysEveWinDao.queryWinMationImportantSynchronizationPointData(map);

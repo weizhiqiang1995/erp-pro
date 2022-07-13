@@ -25,10 +25,9 @@ public class MyNoteController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MyNoteController/queryFileMyNoteByUserId")
-    public void queryFileMyNoteByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFileMyNoteByUserId(InputObject inputObject, OutputObject outputObject) {
         myNoteService.queryFileMyNoteByUserId(inputObject, outputObject);
     }
 
@@ -37,10 +36,9 @@ public class MyNoteController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MyNoteController/insertFileMyNoteByUserId")
-    public void insertFileMyNoteByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertFileMyNoteByUserId(InputObject inputObject, OutputObject outputObject) {
         myNoteService.insertFileMyNoteByUserId(inputObject, outputObject);
     }
 
@@ -49,10 +47,9 @@ public class MyNoteController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MyNoteController/deleteFileFolderById")
-    public void deleteFileFolderById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteFileFolderById(InputObject inputObject, OutputObject outputObject) {
         myNoteService.deleteFileFolderById(inputObject, outputObject);
     }
 
@@ -61,10 +58,9 @@ public class MyNoteController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MyNoteController/editFileFolderById")
-    public void editFileFolderById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editFileFolderById(InputObject inputObject, OutputObject outputObject) {
         myNoteService.editFileFolderById(inputObject, outputObject);
     }
 
@@ -73,10 +69,9 @@ public class MyNoteController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MyNoteController/queryMyNoteListNewByUserId")
-    public void queryMyNoteListNewByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyNoteListNewByUserId(InputObject inputObject, OutputObject outputObject) {
         myNoteService.queryMyNoteListNewByUserId(inputObject, outputObject);
     }
 
@@ -85,10 +80,9 @@ public class MyNoteController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MyNoteController/insertMyNoteContentByUserId")
-    public void insertMyNoteContentByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertMyNoteContentByUserId(InputObject inputObject, OutputObject outputObject) {
         myNoteService.insertMyNoteContentByUserId(inputObject, outputObject);
     }
 
@@ -97,10 +91,9 @@ public class MyNoteController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MyNoteController/queryFileAndContentListByFolderId")
-    public void queryFileAndContentListByFolderId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFileAndContentListByFolderId(InputObject inputObject, OutputObject outputObject) {
         myNoteService.queryFileAndContentListByFolderId(inputObject, outputObject);
     }
 
@@ -109,10 +102,9 @@ public class MyNoteController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MyNoteController/queryMyNoteContentMationById")
-    public void queryMyNoteContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyNoteContentMationById(InputObject inputObject, OutputObject outputObject) {
         myNoteService.queryMyNoteContentMationById(inputObject, outputObject);
     }
 
@@ -121,10 +113,9 @@ public class MyNoteController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MyNoteController/editMyNoteContentById")
-    public void editMyNoteContentById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editMyNoteContentById(InputObject inputObject, OutputObject outputObject) {
         myNoteService.editMyNoteContentById(inputObject, outputObject);
     }
 
@@ -133,10 +124,9 @@ public class MyNoteController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MyNoteController/editFileToDragById")
-    public void editFileToDragById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editFileToDragById(InputObject inputObject, OutputObject outputObject) {
         myNoteService.editFileToDragById(inputObject, outputObject);
     }
 
@@ -145,10 +135,9 @@ public class MyNoteController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MyNoteController/editNoteToMoveById")
-    public void editNoteToMoveById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editNoteToMoveById(InputObject inputObject, OutputObject outputObject) {
         myNoteService.editNoteToMoveById(inputObject, outputObject);
     }
 
@@ -157,10 +146,9 @@ public class MyNoteController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MyNoteController/queryTreeToMoveByUserId")
-    public void queryTreeToMoveByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryTreeToMoveByUserId(InputObject inputObject, OutputObject outputObject) {
         myNoteService.queryTreeToMoveByUserId(inputObject, outputObject);
     }
 
@@ -169,10 +157,9 @@ public class MyNoteController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MyNoteController/queryShareNoteById")
-    public void queryShareNoteById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryShareNoteById(InputObject inputObject, OutputObject outputObject) {
         myNoteService.queryShareNoteById(inputObject, outputObject);
     }
 
@@ -181,10 +168,9 @@ public class MyNoteController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MyNoteController/outputNoteIsZipJob")
-    public void outputNoteIsZipJob(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void outputNoteIsZipJob(InputObject inputObject, OutputObject outputObject) {
         myNoteService.outputNoteIsZipJob(inputObject, outputObject);
     }
 

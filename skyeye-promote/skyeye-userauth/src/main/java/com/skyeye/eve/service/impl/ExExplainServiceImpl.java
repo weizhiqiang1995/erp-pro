@@ -34,11 +34,10 @@ public class ExExplainServiceImpl implements ExExplainService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertExExplainMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertExExplainMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = exExplainDao.queryExExplainMation(map);
         if (bean == null) {
@@ -63,10 +62,9 @@ public class ExExplainServiceImpl implements ExExplainService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryExExplainMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryExExplainMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = exExplainDao.queryExExplainMation(map);
         outputObject.setBean(bean);
@@ -78,11 +76,10 @@ public class ExExplainServiceImpl implements ExExplainService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editExExplainMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editExExplainMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = exExplainDao.queryExExplainMation(map);
         if (bean == null) {
@@ -99,10 +96,9 @@ public class ExExplainServiceImpl implements ExExplainService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryExExplainMationToShow(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryExExplainMationToShow(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Integer type = Integer.parseInt(map.get("type").toString());
         String key = Constants.getSysExplainExexplainRedisKey(type);

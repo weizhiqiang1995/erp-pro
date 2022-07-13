@@ -57,10 +57,9 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = wagesFieldTypeDao.queryWagesFieldTypeList(map);
@@ -73,11 +72,10 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertWagesFieldTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWagesFieldTypeMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String key = map.get("key").toString();
         // 根据key获取字段是这个key的所有数据，包括删除的
@@ -114,7 +112,7 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
         wagesFieldTypeDao.insertWagesFieldTypeMation(map);
     }
 
-    private void insertWagesFieldTypeKeyToStaff(String key) throws Exception {
+    private void insertWagesFieldTypeKeyToStaff(String key) {
         List<Map<String, Object>> staff = wagesFieldTypeDao.queryAllStaffMationList();
         staff.stream().forEach(bean -> {
             bean.put("key", key);
@@ -127,10 +125,9 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWagesFieldTypeMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesFieldTypeMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = wagesFieldTypeDao.queryWagesFieldTypeMationById(map.get("id").toString());
         if (bean != null && !bean.isEmpty()) {
@@ -146,11 +143,10 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = wagesFieldTypeDao.queryWagesFieldTypeMationById(map.get("id").toString());
         if (bean != null && !bean.isEmpty()) {
@@ -167,11 +163,10 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         wagesFieldTypeDao.editWagesFieldTypeStateMationById(map.get("id").toString(), STATE.START_DELETE.getState());
     }
@@ -181,11 +176,10 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void enableWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void enableWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         wagesFieldTypeDao.editWagesFieldTypeStateMationById(map.get("id").toString(), STATE.START_UP.getState());
     }
@@ -195,11 +189,10 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void disableWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void disableWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         wagesFieldTypeDao.editWagesFieldTypeStateMationById(map.get("id").toString(), STATE.START_DOWN.getState());
     }
@@ -209,10 +202,9 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryEnableWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryEnableWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = wagesFieldTypeDao.queryEnableWagesFieldTypeList(map);
@@ -221,7 +213,7 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
     }
 
     @Override
-    public void querySysWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) {
         List<Map<String, Object>> beans = WagesConstant.DEFAULT_WAGES_FIELD_TYPE.getList();
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());

@@ -22,10 +22,9 @@ public class SysWorkLogController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysWorkLogController/querySysWorkLogList")
-    public void querySysWorkLogList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysWorkLogList(InputObject inputObject, OutputObject outputObject) {
         sysWorkLogService.querySysWorkLogList(inputObject, outputObject);
     }
 }

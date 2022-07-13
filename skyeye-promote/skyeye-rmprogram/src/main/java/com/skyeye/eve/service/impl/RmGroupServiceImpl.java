@@ -30,10 +30,9 @@ public class RmGroupServiceImpl implements RmGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryRmGroupList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmGroupList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = rmGroupDao.queryRmGroupList(map);
@@ -46,11 +45,10 @@ public class RmGroupServiceImpl implements RmGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertRmGroupMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertRmGroupMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmGroupDao.queryRmGroupByName(map);
         if (bean == null) {
@@ -75,11 +73,10 @@ public class RmGroupServiceImpl implements RmGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteRmGroupById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteRmGroupById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmGroupDao.queryRmGroupMemberNumById(map);
         if (bean == null) {
@@ -98,10 +95,9 @@ public class RmGroupServiceImpl implements RmGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryRmGroupMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmGroupMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmGroupDao.queryRmGroupMationToEditById(map);
         outputObject.setBean(bean);
@@ -113,11 +109,10 @@ public class RmGroupServiceImpl implements RmGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editRmGroupMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmGroupMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmGroupDao.queryRmGroupMationByIdAndName(map);
         if (bean == null) {
@@ -132,11 +127,10 @@ public class RmGroupServiceImpl implements RmGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editRmGroupSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmGroupSortTopById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = rmGroupDao.queryRmGroupISTopByThisId(map);//根据排序获取这条数据的上一条数据
         if (topBean == null) {
@@ -154,11 +148,10 @@ public class RmGroupServiceImpl implements RmGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editRmGroupSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmGroupSortLowerById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = rmGroupDao.queryRmGroupISLowerByThisId(map);//根据排序获取这条数据的下一条数据
         if (topBean == null) {
@@ -176,10 +169,9 @@ public class RmGroupServiceImpl implements RmGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryRmGroupAllList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmGroupAllList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = rmGroupDao.queryRmGroupAllList(map);
         if (beans != null && !beans.isEmpty()) {

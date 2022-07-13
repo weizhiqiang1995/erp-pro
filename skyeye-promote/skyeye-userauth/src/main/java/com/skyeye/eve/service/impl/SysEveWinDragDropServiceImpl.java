@@ -39,11 +39,10 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertWinCustomMenuBox(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWinCustomMenuBox(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -73,11 +72,10 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertWinCustomMenu(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWinCustomMenu(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -104,11 +102,10 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteWinMenuOrBoxById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteWinMenuOrBoxById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -185,11 +182,10 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editMenuParentIdById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editMenuParentIdById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -214,10 +210,9 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMenuMationTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMenuMationTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinDragDropDao.queryMenuMationTypeById(map);
         outputObject.setBean(bean);
@@ -228,10 +223,9 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCustomMenuBoxMationEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCustomMenuBoxMationEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -244,11 +238,10 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editCustomMenuBoxMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCustomMenuBoxMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -263,10 +256,9 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCustomMenuMationEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCustomMenuMationEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -279,11 +271,10 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editCustomMenuMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCustomMenuMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -298,11 +289,10 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editCustomMenuToDeskTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCustomMenuToDeskTopById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));

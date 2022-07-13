@@ -11,20 +11,20 @@ import java.util.Map;
 
 public interface UserPhoneDao {
 
-    public Map<String, Object> queryMationByUserCode(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryMationByUserCode(Map<String, Object> map);
 
-    public Map<String, Object> queryUserMationByOpenId(String openId) throws Exception;
+    Map<String, Object> queryUserMationByOpenId(String openId);
 
-    public int insertWxUserMation(Map<String, Object> map) throws Exception;
+    int insertWxUserMation(Map<String, Object> map);
 
-    public Map<String, Object> queryUserMationByUserCode(@Param("userCode") String userCode) throws Exception;
+    Map<String, Object> queryUserMationByUserCode(@Param("userCode") String userCode);
 
-    public Map<String, Object> queryUserBindMationByUserId(@Param("userId") String userId) throws Exception;
+    Map<String, Object> queryUserBindMationByUserId(@Param("userId") String userId);
 
-    public int updateBindUserMation(Map<String, Object> map) throws Exception;
+    int updateBindUserMation(Map<String, Object> map);
 
-    public Map<String, Object> queryUserMationByOPenId(String openId) throws Exception;
+    Map<String, Object> queryUserMationByOPenId(String openId);
 
-    public List<Map<String, Object>> queryAllPeopleToTree(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryAllPeopleToTree(Map<String, Object> map);
 
 }

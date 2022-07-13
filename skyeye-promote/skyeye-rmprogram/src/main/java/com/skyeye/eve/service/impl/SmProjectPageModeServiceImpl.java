@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,10 +40,9 @@ public class SmProjectPageModeServiceImpl implements SmProjectPageModeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryProPageModeMationByPageIdList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryProPageModeMationByPageIdList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = smProjectPageModeDao.queryProPageModeMationByPageIdList(map);
         if (beans != null && !beans.isEmpty()) {
@@ -56,11 +56,10 @@ public class SmProjectPageModeServiceImpl implements SmProjectPageModeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editProPageModeMationByPageIdList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editProPageModeMationByPageIdList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         smProjectPageModeDao.deletePageModelMationListByPageId(map);//根据页面id删除之前的页面和模块的绑定信息
         List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonData").toString(), null);//获取模板绑定信息
@@ -88,10 +87,9 @@ public class SmProjectPageModeServiceImpl implements SmProjectPageModeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryPropertyListByMemberId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPropertyListByMemberId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = smProjectPageModeDao.queryPropertyListByMemberId(map);
         if (beans != null && !beans.isEmpty()) {
@@ -111,11 +109,10 @@ public class SmProjectPageModeServiceImpl implements SmProjectPageModeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void queryPageToExportH5ByPageId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPageToExportH5ByPageId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         ///获取页面信息
         Map<String, Object> page = smProjectPageModeDao.queryProPageMationByPageId(map);
@@ -154,12 +151,15 @@ public class SmProjectPageModeServiceImpl implements SmProjectPageModeService {
 
         //开始打包
         String strZipPath = folderPath + map.get("pageId").toString() + ".zip";
-        ZipOutputStream out = new ZipOutputStream(new FileOutputStream(strZipPath));
+        ZipOutputStream out = null;
         try {
+            out = new ZipOutputStream(new FileOutputStream(strZipPath));
             ToolUtil.recursionZip(out, folderNew, "", tPath.replace("images", ""), 1);
             map.put("url", "/images/smprodown/" + inputObject.getLogParams().get("id").toString() + "/" + map.get("pageId").toString() + ".zip");
             map.put("fileName", page.get("name").toString() + ".zip");
             outputObject.setBean(map);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
         } finally {
             FileUtil.close(out);
         }

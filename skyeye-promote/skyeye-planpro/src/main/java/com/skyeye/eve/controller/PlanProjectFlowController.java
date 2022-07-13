@@ -22,10 +22,9 @@ public class PlanProjectFlowController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/PlanProjectFlowController/queryPlanProjectFlowList")
-    public void queryPlanProjectFlowList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPlanProjectFlowList(InputObject inputObject, OutputObject outputObject) {
         planProjectFlowService.queryPlanProjectFlowList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class PlanProjectFlowController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/PlanProjectFlowController/insertPlanProjectFlowMation")
-    public void insertPlanProjectFlowMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertPlanProjectFlowMation(InputObject inputObject, OutputObject outputObject) {
         planProjectFlowService.insertPlanProjectFlowMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class PlanProjectFlowController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/PlanProjectFlowController/deletePlanProjectFlowMationById")
-    public void deletePlanProjectFlowMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deletePlanProjectFlowMationById(InputObject inputObject, OutputObject outputObject) {
         planProjectFlowService.deletePlanProjectFlowMationById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class PlanProjectFlowController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/PlanProjectFlowController/queryPlanProjectFlowMationToEditById")
-    public void queryPlanProjectFlowMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPlanProjectFlowMationToEditById(InputObject inputObject, OutputObject outputObject) {
         planProjectFlowService.queryPlanProjectFlowMationToEditById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class PlanProjectFlowController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/PlanProjectFlowController/editPlanProjectFlowMationById")
-    public void editPlanProjectFlowMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editPlanProjectFlowMationById(InputObject inputObject, OutputObject outputObject) {
         planProjectFlowService.editPlanProjectFlowMationById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class PlanProjectFlowController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/PlanProjectFlowController/queryPlanProjectFlowJsonContentMationById")
-    public void queryPlanProjectFlowJsonContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPlanProjectFlowJsonContentMationById(InputObject inputObject, OutputObject outputObject) {
         planProjectFlowService.queryPlanProjectFlowJsonContentMationById(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class PlanProjectFlowController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/PlanProjectFlowController/editPlanProjectFlowJsonContentMationById")
-    public void editPlanProjectFlowJsonContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editPlanProjectFlowJsonContentMationById(InputObject inputObject, OutputObject outputObject) {
         planProjectFlowService.editPlanProjectFlowJsonContentMationById(inputObject, outputObject);
     }
 

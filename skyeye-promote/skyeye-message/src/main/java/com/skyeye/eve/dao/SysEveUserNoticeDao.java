@@ -17,24 +17,24 @@ import java.util.Map;
  */
 public interface SysEveUserNoticeDao {
 
-    public List<Map<String, Object>> getNoticeListByUserId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> getNoticeListByUserId(Map<String, Object> map);
 
-    public List<Map<String, Object>> getAllNoticeListByUserId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> getAllNoticeListByUserId(Map<String, Object> map);
 
-    public Map<String, Object> queryNoticeMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryNoticeMationById(Map<String, Object> map);
 
-    public int editNoticeMationById(Map<String, Object> map) throws Exception;
+    int editNoticeMationById(Map<String, Object> map);
 
-    public int deleteNoticeMationById(Map<String, Object> map) throws Exception;
+    int deleteNoticeMationById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryNoticeNoReadMationByIds(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryNoticeNoReadMationByIds(Map<String, Object> map);
 
-    public int editNoticeMationByIds(Map<String, Object> map) throws Exception;
+    int editNoticeMationByIds(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryNoticeNoDelMationByIds(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryNoticeNoDelMationByIds(Map<String, Object> map);
 
-    public int deleteNoticeMationByIds(Map<String, Object> map) throws Exception;
+    int deleteNoticeMationByIds(Map<String, Object> map);
 
-    public Map<String, Object> queryNoticeDetailsMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryNoticeDetailsMationById(Map<String, Object> map);
 
 }

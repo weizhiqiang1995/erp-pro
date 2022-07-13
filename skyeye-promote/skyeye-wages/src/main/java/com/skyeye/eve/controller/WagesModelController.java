@@ -22,10 +22,9 @@ public class WagesModelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesModelController/queryWagesModelList")
-    public void queryWagesModelList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesModelList(InputObject inputObject, OutputObject outputObject) {
         wagesModelService.queryWagesModelList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class WagesModelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesModelController/insertWagesModelMation")
-    public void insertWagesModelMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWagesModelMation(InputObject inputObject, OutputObject outputObject) {
         wagesModelService.insertWagesModelMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class WagesModelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesModelController/queryWagesModelMationToEditById")
-    public void queryWagesModelMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesModelMationToEditById(InputObject inputObject, OutputObject outputObject) {
         wagesModelService.queryWagesModelMationToEditById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class WagesModelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesModelController/editWagesModelMationById")
-    public void editWagesModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editWagesModelMationById(InputObject inputObject, OutputObject outputObject) {
         wagesModelService.editWagesModelMationById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class WagesModelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesModelController/deleteWagesModelMationById")
-    public void deleteWagesModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteWagesModelMationById(InputObject inputObject, OutputObject outputObject) {
         wagesModelService.deleteWagesModelMationById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class WagesModelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesModelController/enableWagesModelMationById")
-    public void enableWagesModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void enableWagesModelMationById(InputObject inputObject, OutputObject outputObject) {
         wagesModelService.enableWagesModelMationById(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class WagesModelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesModelController/disableWagesModelMationById")
-    public void disableWagesModelMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void disableWagesModelMationById(InputObject inputObject, OutputObject outputObject) {
         wagesModelService.disableWagesModelMationById(inputObject, outputObject);
     }
 
@@ -106,10 +99,9 @@ public class WagesModelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesModelController/queryWagesModelDetailMationById")
-    public void queryWagesModelDetailMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesModelDetailMationById(InputObject inputObject, OutputObject outputObject) {
         wagesModelService.queryWagesModelDetailMationById(inputObject, outputObject);
     }
 

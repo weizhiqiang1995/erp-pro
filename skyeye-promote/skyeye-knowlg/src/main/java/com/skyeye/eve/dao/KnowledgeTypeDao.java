@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.dao;
 
 import org.apache.ibatis.annotations.Param;
@@ -15,7 +16,6 @@ public interface KnowledgeTypeDao {
      *
      * @param map
      * @return
-     * @throws Exception
      */
     List<Map<String, Object>> queryKnowledgeTypeList(Map<String, Object> map);
 
@@ -26,7 +26,6 @@ public interface KnowledgeTypeDao {
      * @param parentId 所属父id
      * @param thisId   当前id
      * @return
-     * @throws Exception
      */
     Map<String, Object> queryKnowledgeTypeMationByName(@Param("name") String name, @Param("parentId") String parentId, @Param("thisId") String thisId);
 

@@ -28,10 +28,9 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryPlanProjectFlowList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPlanProjectFlowList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = planProjectFlowDao.queryPlanProjectFlowList(map);
         if (!beans.isEmpty()) {
@@ -52,11 +51,10 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertPlanProjectFlowMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertPlanProjectFlowMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = planProjectFlowDao.queryPlanProjectFlowMationByName(map);
         if (bean == null) {
@@ -75,11 +73,10 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deletePlanProjectFlowMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deletePlanProjectFlowMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = planProjectFlowDao.queryChildNumMationById(map);
         if (Integer.parseInt(bean.get("childNum").toString()) == 0) {//判断是否有子项
@@ -95,10 +92,9 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryPlanProjectFlowMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPlanProjectFlowMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = planProjectFlowDao.queryPlanProjectFlowMationToEditById(map);
         outputObject.setBean(bean);
@@ -110,11 +106,10 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editPlanProjectFlowMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editPlanProjectFlowMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = planProjectFlowDao.queryPlanProjectFlowMationByNameAndId(map);
         if (bean == null) {
@@ -129,10 +124,9 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryPlanProjectFlowJsonContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPlanProjectFlowJsonContentMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = planProjectFlowDao.queryPlanProjectFlowJsonContentMationById(map);
         outputObject.setBean(bean);
@@ -143,11 +137,10 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editPlanProjectFlowJsonContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editPlanProjectFlowJsonContentMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         planProjectFlowDao.editPlanProjectFlowJsonContentMationById(map);
     }

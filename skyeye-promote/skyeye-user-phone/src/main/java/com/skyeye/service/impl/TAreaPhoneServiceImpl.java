@@ -32,10 +32,9 @@ public class TAreaPhoneServiceImpl implements TAreaPhoneService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryTAreaPhoneList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryTAreaPhoneList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = null;
         if (ToolUtil.isBlank(jedisClient.get(PhoneConstants.SYS_ALL_T_AREA_LIST))) {

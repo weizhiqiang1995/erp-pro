@@ -4,14 +4,11 @@
 
 package com.skyeye.eve.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.RmPropertyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,10 +22,9 @@ public class RmPropertyController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmPropertyController/queryRmPropertyList")
-    public void queryRmPropertyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmPropertyList(InputObject inputObject, OutputObject outputObject) {
         rmPropertyService.queryRmPropertyList(inputObject, outputObject);
     }
 
@@ -37,10 +33,9 @@ public class RmPropertyController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmPropertyController/insertRmPropertyMation")
-    public void insertRmPropertyMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertRmPropertyMation(InputObject inputObject, OutputObject outputObject) {
         rmPropertyService.insertRmPropertyMation(inputObject, outputObject);
     }
 
@@ -49,10 +44,9 @@ public class RmPropertyController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmPropertyController/deleteRmPropertyMationById")
-    public void deleteRmPropertyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteRmPropertyMationById(InputObject inputObject, OutputObject outputObject) {
         rmPropertyService.deleteRmPropertyMationById(inputObject, outputObject);
     }
 
@@ -61,10 +55,9 @@ public class RmPropertyController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmPropertyController/queryRmPropertyMationToEditById")
-    public void queryRmPropertyMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmPropertyMationToEditById(InputObject inputObject, OutputObject outputObject) {
         rmPropertyService.queryRmPropertyMationToEditById(inputObject, outputObject);
     }
 
@@ -73,10 +66,9 @@ public class RmPropertyController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmPropertyController/editRmPropertyMationById")
-    public void editRmPropertyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmPropertyMationById(InputObject inputObject, OutputObject outputObject) {
         rmPropertyService.editRmPropertyMationById(inputObject, outputObject);
     }
 
@@ -85,10 +77,9 @@ public class RmPropertyController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmPropertyController/queryRmPropertyListToShow")
-    public void queryRmPropertyListToShow(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmPropertyListToShow(InputObject inputObject, OutputObject outputObject) {
         rmPropertyService.queryRmPropertyListToShow(inputObject, outputObject);
     }
 

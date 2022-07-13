@@ -28,12 +28,11 @@ public class JobMateMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "jobmatemation001", value = "根据大类获取任务信息", method = "POST", allUse = "2")
     @ApiImplicitParams(classBean = JobMateQueryDO.class)
     @RequestMapping("/post/JobMateMationController/queryJobMateMationByBigTypeList")
-    public void queryJobMateMationByBigTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryJobMateMationByBigTypeList(InputObject inputObject, OutputObject outputObject) {
         jobMateMationService.queryJobMateMationByBigTypeList(inputObject, outputObject);
     }
 
@@ -42,14 +41,13 @@ public class JobMateMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "sendMQProducer", value = "其他模块同步生产消息", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "jsonStr", name = "jsonStr", value = "消费者消费的json字符串", required = "required"),
         @ApiImplicitParam(id = "userId", name = "userId", value = "用户id", required = "required")})
     @RequestMapping("/post/JobMateMationController/sendMQProducer")
-    public void sendMQProducer(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void sendMQProducer(InputObject inputObject, OutputObject outputObject) {
         jobMateMationService.sendMQProducer(inputObject, outputObject);
     }
 

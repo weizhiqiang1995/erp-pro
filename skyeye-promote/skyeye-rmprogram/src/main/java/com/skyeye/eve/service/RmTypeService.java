@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,20 +9,20 @@ import com.skyeye.common.object.OutputObject;
 
 public interface RmTypeService {
 
-    public void queryRmTypeList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryRmTypeList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertRmTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertRmTypeMation(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteRmTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteRmTypeById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryRmTypeMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryRmTypeMationToEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editRmTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editRmTypeMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editRmTypeSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editRmTypeSortTopById(InputObject inputObject, OutputObject outputObject);
 
-    public void editRmTypeSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editRmTypeSortLowerById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryRmTypeAllList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryRmTypeAllList(InputObject inputObject, OutputObject outputObject);
 
 }

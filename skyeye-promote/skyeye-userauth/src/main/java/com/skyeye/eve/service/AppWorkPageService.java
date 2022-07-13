@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,38 +9,38 @@ import com.skyeye.common.object.OutputObject;
 
 public interface AppWorkPageService {
 
-    public void queryAppWorkPageList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryAppWorkPageList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertAppWorkPageMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertAppWorkPageMation(InputObject inputObject, OutputObject outputObject);
 
-    public void queryAppWorkPageListById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryAppWorkPageListById(InputObject inputObject, OutputObject outputObject);
 
-    public void insertAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertAppWorkPageMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryAppWorkPageMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editAppWorkPageMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteAppWorkPageMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editAppWorkPageSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editAppWorkPageSortTopById(InputObject inputObject, OutputObject outputObject);
 
-    public void editAppWorkPageSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editAppWorkPageSortLowerById(InputObject inputObject, OutputObject outputObject);
 
-    public void editAppWorkPageUpById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editAppWorkPageUpById(InputObject inputObject, OutputObject outputObject);
 
-    public void editAppWorkPageDownById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editAppWorkPageDownById(InputObject inputObject, OutputObject outputObject);
 
-    public void editAppWorkPageTitleById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editAppWorkPageTitleById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteAppWorkPageById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteAppWorkPageById(InputObject inputObject, OutputObject outputObject);
 
-    public void editAppWorkUpById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editAppWorkUpById(InputObject inputObject, OutputObject outputObject);
 
-    public void editAppWorkDownById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editAppWorkDownById(InputObject inputObject, OutputObject outputObject);
 
-    public void editAppWorkSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editAppWorkSortTopById(InputObject inputObject, OutputObject outputObject);
 
-    public void editAppWorkSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editAppWorkSortLowerById(InputObject inputObject, OutputObject outputObject);
 
 }

@@ -22,10 +22,9 @@ public class AppWorkPageAuthPointController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageAuthPointController/queryAppWorkPageAuthPointListByMenuId")
-    public void queryAppWorkPageAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAppWorkPageAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) {
         appWorkPageAuthPointService.queryAppWorkPageAuthPointListByMenuId(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class AppWorkPageAuthPointController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageAuthPointController/insertAppWorkPageAuthPointMation")
-    public void insertAppWorkPageAuthPointMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertAppWorkPageAuthPointMation(InputObject inputObject, OutputObject outputObject) {
         appWorkPageAuthPointService.insertAppWorkPageAuthPointMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class AppWorkPageAuthPointController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageAuthPointController/queryAppWorkPageAuthPointMationToEditById")
-    public void queryAppWorkPageAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAppWorkPageAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageAuthPointService.queryAppWorkPageAuthPointMationToEditById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class AppWorkPageAuthPointController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageAuthPointController/editAppWorkPageAuthPointMationById")
-    public void editAppWorkPageAuthPointMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkPageAuthPointMationById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageAuthPointService.editAppWorkPageAuthPointMationById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class AppWorkPageAuthPointController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/AppWorkPageAuthPointController/deleteAppWorkPageAuthPointMationById")
-    public void deleteAppWorkPageAuthPointMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteAppWorkPageAuthPointMationById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageAuthPointService.deleteAppWorkPageAuthPointMationById(inputObject, outputObject);
     }
 

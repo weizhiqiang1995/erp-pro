@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,21 +9,21 @@ import com.skyeye.common.object.OutputObject;
 
 public interface CompanyJobScoreService {
 
-    public void queryCompanyJobScoreList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryCompanyJobScoreList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertCompanyJobScoreMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertCompanyJobScoreMation(InputObject inputObject, OutputObject outputObject);
 
-    public void queryCompanyJobScoreMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryCompanyJobScoreMationToEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void enableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void enableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void disableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void disableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryEnableCompanyJobScoreList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryEnableCompanyJobScoreList(InputObject inputObject, OutputObject outputObject);
 
-    public void queryCompanyJobScoreDetailMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryCompanyJobScoreDetailMationById(InputObject inputObject, OutputObject outputObject);
 }

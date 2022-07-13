@@ -4,14 +4,11 @@
 
 package com.skyeye.eve.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.LightAppTypeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,10 +22,9 @@ public class LightAppTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppTypeController/queryLightAppTypeList")
-    public void queryLightAppTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryLightAppTypeList(InputObject inputObject, OutputObject outputObject) {
         lightAppTypeService.queryLightAppTypeList(inputObject, outputObject);
     }
 
@@ -37,10 +33,9 @@ public class LightAppTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppTypeController/insertLightAppTypeMation")
-    public void insertLightAppTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertLightAppTypeMation(InputObject inputObject, OutputObject outputObject) {
         lightAppTypeService.insertLightAppTypeMation(inputObject, outputObject);
     }
 
@@ -49,10 +44,9 @@ public class LightAppTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppTypeController/queryLightAppTypeMationToEditById")
-    public void queryLightAppTypeMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryLightAppTypeMationToEditById(InputObject inputObject, OutputObject outputObject) {
         lightAppTypeService.queryLightAppTypeMationToEditById(inputObject, outputObject);
     }
 
@@ -61,10 +55,9 @@ public class LightAppTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppTypeController/editLightAppTypeMationById")
-    public void editLightAppTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editLightAppTypeMationById(InputObject inputObject, OutputObject outputObject) {
         lightAppTypeService.editLightAppTypeMationById(inputObject, outputObject);
     }
 
@@ -73,10 +66,9 @@ public class LightAppTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppTypeController/editLightAppTypeSortTopById")
-    public void editLightAppTypeSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editLightAppTypeSortTopById(InputObject inputObject, OutputObject outputObject) {
         lightAppTypeService.editLightAppTypeSortTopById(inputObject, outputObject);
     }
 
@@ -85,10 +77,9 @@ public class LightAppTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppTypeController/editLightAppTypeSortLowerById")
-    public void editLightAppTypeSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editLightAppTypeSortLowerById(InputObject inputObject, OutputObject outputObject) {
         lightAppTypeService.editLightAppTypeSortLowerById(inputObject, outputObject);
     }
 
@@ -97,10 +88,9 @@ public class LightAppTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppTypeController/deleteLightAppTypeById")
-    public void deleteLightAppTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteLightAppTypeById(InputObject inputObject, OutputObject outputObject) {
         lightAppTypeService.deleteLightAppTypeById(inputObject, outputObject);
     }
 
@@ -109,10 +99,9 @@ public class LightAppTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppTypeController/editLightAppTypeUpTypeById")
-    public void editLightAppTypeUpTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editLightAppTypeUpTypeById(InputObject inputObject, OutputObject outputObject) {
         lightAppTypeService.editLightAppTypeUpTypeById(inputObject, outputObject);
     }
 
@@ -121,10 +110,9 @@ public class LightAppTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppTypeController/editLightAppTypeDownTypeById")
-    public void editLightAppTypeDownTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editLightAppTypeDownTypeById(InputObject inputObject, OutputObject outputObject) {
         lightAppTypeService.editLightAppTypeDownTypeById(inputObject, outputObject);
     }
 
@@ -133,10 +121,9 @@ public class LightAppTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppTypeController/queryLightAppTypeUpList")
-    public void queryLightAppTypeUpList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryLightAppTypeUpList(InputObject inputObject, OutputObject outputObject) {
         lightAppTypeService.queryLightAppTypeUpList(inputObject, outputObject);
     }
 

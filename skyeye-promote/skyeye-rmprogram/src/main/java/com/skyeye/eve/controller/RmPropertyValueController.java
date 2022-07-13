@@ -22,10 +22,9 @@ public class RmPropertyValueController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmPropertyValueController/queryRmPropertyValueList")
-    public void queryRmPropertyValueList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmPropertyValueList(InputObject inputObject, OutputObject outputObject) {
         rmPropertyValueService.queryRmPropertyValueList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class RmPropertyValueController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmPropertyValueController/insertRmPropertyValueMation")
-    public void insertRmPropertyValueMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertRmPropertyValueMation(InputObject inputObject, OutputObject outputObject) {
         rmPropertyValueService.insertRmPropertyValueMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class RmPropertyValueController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmPropertyValueController/deleteRmPropertyValueMationById")
-    public void deleteRmPropertyValueMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteRmPropertyValueMationById(InputObject inputObject, OutputObject outputObject) {
         rmPropertyValueService.deleteRmPropertyValueMationById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class RmPropertyValueController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmPropertyValueController/queryRmPropertyValueMationToEditById")
-    public void queryRmPropertyValueMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmPropertyValueMationToEditById(InputObject inputObject, OutputObject outputObject) {
         rmPropertyValueService.queryRmPropertyValueMationToEditById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class RmPropertyValueController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmPropertyValueController/editRmPropertyValueMationById")
-    public void editRmPropertyValueMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmPropertyValueMationById(InputObject inputObject, OutputObject outputObject) {
         rmPropertyValueService.editRmPropertyValueMationById(inputObject, outputObject);
     }
 

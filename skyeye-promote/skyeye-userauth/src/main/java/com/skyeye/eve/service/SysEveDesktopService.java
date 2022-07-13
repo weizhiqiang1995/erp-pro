@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,26 +9,26 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysEveDesktopService {
 
-    public void querySysDesktopList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysDesktopList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysDesktopMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysDesktopMation(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSysDesktopById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteSysDesktopById(InputObject inputObject, OutputObject outputObject);
 
-    public void updateUpSysDesktopById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void updateUpSysDesktopById(InputObject inputObject, OutputObject outputObject);
 
-    public void updateDownSysDesktopById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void updateDownSysDesktopById(InputObject inputObject, OutputObject outputObject);
 
-    public void selectSysDesktopById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void selectSysDesktopById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysDesktopMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysDesktopMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysDesktopMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysDesktopMationOrderNumUpById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysDesktopMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysDesktopMationOrderNumDownById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryAllSysDesktopList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryAllSysDesktopList(InputObject inputObject, OutputObject outputObject);
 
-    public void removeAllSysEveMenuByDesktopId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void removeAllSysEveMenuByDesktopId(InputObject inputObject, OutputObject outputObject);
 
 }

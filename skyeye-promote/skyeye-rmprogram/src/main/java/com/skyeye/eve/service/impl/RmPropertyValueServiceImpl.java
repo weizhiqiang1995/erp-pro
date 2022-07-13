@@ -30,10 +30,9 @@ public class RmPropertyValueServiceImpl implements RmPropertyValueService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryRmPropertyValueList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmPropertyValueList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = rmPropertyValueDao.queryRmPropertyValueList(map);
@@ -46,11 +45,10 @@ public class RmPropertyValueServiceImpl implements RmPropertyValueService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertRmPropertyValueMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertRmPropertyValueMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmPropertyValueDao.queryRmPropertyValueMationByName(map);
         if (bean == null) {
@@ -69,11 +67,10 @@ public class RmPropertyValueServiceImpl implements RmPropertyValueService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteRmPropertyValueMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteRmPropertyValueMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         rmPropertyValueDao.deleteRmPropertyValueMationById(map);
     }
@@ -83,10 +80,9 @@ public class RmPropertyValueServiceImpl implements RmPropertyValueService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryRmPropertyValueMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmPropertyValueMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmPropertyValueDao.queryRmPropertyValueMationToEditById(map);
         outputObject.setBean(bean);
@@ -98,11 +94,10 @@ public class RmPropertyValueServiceImpl implements RmPropertyValueService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editRmPropertyValueMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmPropertyValueMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmPropertyValueDao.queryRmPropertyValueMationByNameAndId(map);
         if (bean == null) {

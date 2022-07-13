@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,18 +9,18 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SmProjectService {
 
-    public void querySmProjectList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySmProjectList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSmProjectMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSmProjectMation(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSmProjectById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteSmProjectById(InputObject inputObject, OutputObject outputObject);
 
-    public void querySmProjectMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySmProjectMationToEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSmProjectMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSmProjectMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryGroupMationList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryGroupMationList(InputObject inputObject, OutputObject outputObject);
 
-    public void queryGroupMemberMationList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryGroupMemberMationList(InputObject inputObject, OutputObject outputObject);
 
 }

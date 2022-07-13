@@ -17,18 +17,18 @@ import java.util.Map;
  */
 public interface SysEveWinBgPicDao {
 
-    public List<Map<String, Object>> querySysEveWinBgPicList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysEveWinBgPicList(Map<String, Object> map);
 
-    public int insertSysEveWinBgPicMation(Map<String, Object> map) throws Exception;
+    int insertSysEveWinBgPicMation(Map<String, Object> map);
 
-    public int deleteSysEveWinBgPicMationById(Map<String, Object> map) throws Exception;
+    int deleteSysEveWinBgPicMationById(Map<String, Object> map);
 
-    public Map<String, Object> querySysEveMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysEveMationById(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySysEveWinBgPicListToShow(Map<String, Object> map);
+    List<Map<String, Object>> querySysEveWinBgPicListToShow(Map<String, Object> map);
 
-    public int insertSysEveWinBgPicMationByCustom(Map<String, Object> map) throws Exception;
+    int insertSysEveWinBgPicMationByCustom(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySysEveWinBgPicCustomList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysEveWinBgPicCustomList(Map<String, Object> map);
 
 }

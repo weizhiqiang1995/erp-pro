@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,24 +9,24 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysEveWinDragDropService {
 
-    public void insertWinCustomMenuBox(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertWinCustomMenuBox(InputObject inputObject, OutputObject outputObject);
 
-    public void insertWinCustomMenu(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertWinCustomMenu(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteWinMenuOrBoxById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteWinMenuOrBoxById(InputObject inputObject, OutputObject outputObject);
 
-    public void editMenuParentIdById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editMenuParentIdById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryMenuMationTypeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryMenuMationTypeById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryCustomMenuBoxMationEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryCustomMenuBoxMationEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editCustomMenuBoxMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editCustomMenuBoxMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryCustomMenuMationEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryCustomMenuMationEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editCustomMenuMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editCustomMenuMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editCustomMenuToDeskTopById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editCustomMenuToDeskTopById(InputObject inputObject, OutputObject outputObject);
 
 }

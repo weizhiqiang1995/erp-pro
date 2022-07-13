@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,22 +9,22 @@ import com.skyeye.common.object.OutputObject;
 
 public interface LightAppService {
 
-    public void queryLightAppList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryLightAppList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertLightAppMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertLightAppMation(InputObject inputObject, OutputObject outputObject);
 
-    public void queryLightAppMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryLightAppMationToEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editLightAppMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editLightAppMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteLightAppById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteLightAppById(InputObject inputObject, OutputObject outputObject);
 
-    public void editLightAppUpById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editLightAppUpById(InputObject inputObject, OutputObject outputObject);
 
-    public void editLightAppDownById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editLightAppDownById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryLightAppUpList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryLightAppUpList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertLightAppToWin(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertLightAppToWin(InputObject inputObject, OutputObject outputObject);
 
 }

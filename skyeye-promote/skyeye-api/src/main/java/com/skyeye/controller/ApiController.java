@@ -27,13 +27,12 @@ public class ApiController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "queryAllSysEveReqMapping", value = "获取接口列表", method = "GET", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "appId", name = "appId", value = "微服务的APPID", required = "required")})
     @RequestMapping("/post/ApiController/queryAllSysEveReqMapping")
-    public void queryAllSysEveReqMapping(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysEveReqMapping(InputObject inputObject, OutputObject outputObject) {
         apiService.queryAllSysEveReqMapping(inputObject, outputObject);
     }
 
@@ -42,14 +41,13 @@ public class ApiController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "queryApiDetails", value = "获取接口详情", method = "GET", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "appId", name = "appId", value = "微服务的APPID", required = "required"),
         @ApiImplicitParam(id = "rowId", name = "id", value = "接口id", required = "required")})
     @RequestMapping("/post/ApiController/queryApiDetails")
-    public void queryApiDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryApiDetails(InputObject inputObject, OutputObject outputObject) {
         apiService.queryApiDetails(inputObject, outputObject);
     }
 
@@ -58,11 +56,10 @@ public class ApiController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "queryLimitRestrictions", value = "获取限制条件", method = "GET", allUse = "2")
     @RequestMapping("/post/ApiController/queryLimitRestrictions")
-    public void queryLimitRestrictions(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryLimitRestrictions(InputObject inputObject, OutputObject outputObject) {
         apiService.queryLimitRestrictions(inputObject, outputObject);
     }
 
@@ -71,11 +68,10 @@ public class ApiController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "queryApiMicroservices", value = "获取所有微服务列表", method = "GET", allUse = "2")
     @RequestMapping("/post/ApiController/queryApiMicroservices")
-    public void queryApiMicroservices(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryApiMicroservices(InputObject inputObject, OutputObject outputObject) {
         apiService.queryApiMicroservices(inputObject, outputObject);
     }
 

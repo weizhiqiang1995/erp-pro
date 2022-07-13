@@ -40,10 +40,9 @@ public class SysEveWinBgPicServiceImpl implements SysEveWinBgPicService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysEveWinBgPicList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveWinBgPicList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveWinBgPicDao.querySysEveWinBgPicList(map);
@@ -56,11 +55,10 @@ public class SysEveWinBgPicServiceImpl implements SysEveWinBgPicService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysEveWinBgPicMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysEveWinBgPicMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -75,11 +73,10 @@ public class SysEveWinBgPicServiceImpl implements SysEveWinBgPicService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysEveWinBgPicMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysEveWinBgPicMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinBgPicDao.querySysEveMationById(map);
         String basePath = tPath + bean.get("picUrl").toString().replace("/images/", "");
@@ -93,11 +90,10 @@ public class SysEveWinBgPicServiceImpl implements SysEveWinBgPicService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysEveWinBgPicMationByCustom(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysEveWinBgPicMationByCustom(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -111,10 +107,9 @@ public class SysEveWinBgPicServiceImpl implements SysEveWinBgPicService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysEveWinBgPicCustomList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveWinBgPicCustomList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("createId", user.get("id"));
@@ -130,11 +125,10 @@ public class SysEveWinBgPicServiceImpl implements SysEveWinBgPicService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysEveWinBgPicMationCustomById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysEveWinBgPicMationCustomById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinBgPicDao.querySysEveMationById(map);
         String basePath = tPath + bean.get("picUrl").toString().replace("/images/", "");

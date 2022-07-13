@@ -34,10 +34,9 @@ public class SealServicePhoneServiceImpl implements SealServicePhoneService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryNumberInEveryState(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryNumberInEveryState(InputObject inputObject, OutputObject outputObject) {
         String userId = inputObject.getLogParams().get("id").toString();
         List<Map<String, Object>> beans = new ArrayList<>();
         //获取我的待接单、待签到、待完工、待评价四种状态的数量
@@ -59,10 +58,9 @@ public class SealServicePhoneServiceImpl implements SealServicePhoneService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void insertSealSeServiceWaitToSignonMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSealSeServiceWaitToSignonMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sealServicePhoneDao.querySealSeServiceState(map.get("serviceId").toString());
         if (bean != null && !bean.isEmpty()) {
@@ -85,10 +83,9 @@ public class SealServicePhoneServiceImpl implements SealServicePhoneService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryFeedBackList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFeedBackList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sealServicePhoneDao.queryFeedBackList(map);
         for (Map<String, Object> item : beans) {
@@ -103,10 +100,9 @@ public class SealServicePhoneServiceImpl implements SealServicePhoneService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAllPartsList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllPartsList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sealServicePhoneDao.queryAllPartsList(params);

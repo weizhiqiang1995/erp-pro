@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,14 +9,14 @@ import com.skyeye.common.object.OutputObject;
 
 public interface ForumReportService {
 
-    public void insertForumReportMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertForumReportMation(InputObject inputObject, OutputObject outputObject);
 
-    public void queryReportNoCheckList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryReportNoCheckList(InputObject inputObject, OutputObject outputObject);
 
-    public void editReportCheckMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editReportCheckMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryReportCheckedList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryReportCheckedList(InputObject inputObject, OutputObject outputObject);
 
-    public void queryForumReportMationToDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryForumReportMationToDetails(InputObject inputObject, OutputObject outputObject);
 
 }

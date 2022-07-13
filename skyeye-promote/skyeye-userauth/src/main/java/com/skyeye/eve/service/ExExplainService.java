@@ -9,12 +9,12 @@ import com.skyeye.common.object.OutputObject;
 
 public interface ExExplainService {
 
-    public void insertExExplainMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertExExplainMation(InputObject inputObject, OutputObject outputObject);
 
-    public void queryExExplainMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryExExplainMation(InputObject inputObject, OutputObject outputObject);
 
-    public void editExExplainMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editExExplainMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryExExplainMationToShow(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryExExplainMationToShow(InputObject inputObject, OutputObject outputObject);
 
 }

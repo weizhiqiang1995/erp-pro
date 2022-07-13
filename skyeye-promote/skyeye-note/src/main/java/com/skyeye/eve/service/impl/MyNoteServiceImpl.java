@@ -50,10 +50,9 @@ public class MyNoteServiceImpl implements MyNoteService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryFileMyNoteByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFileMyNoteByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         if (ToolUtil.isBlank(map.get("parentId").toString()) || "0".equals(map.get("parentId").toString())) {
             // 加载一级文件夹
@@ -85,11 +84,10 @@ public class MyNoteServiceImpl implements MyNoteService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertFileMyNoteByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertFileMyNoteByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String userId = inputObject.getLogParams().get("id").toString();
         String key = NoteConstants.getSysFileMyNoteListMation(map.get("parentId").toString(), userId);
@@ -112,11 +110,10 @@ public class MyNoteServiceImpl implements MyNoteService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteFileFolderById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteFileFolderById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -139,11 +136,10 @@ public class MyNoteServiceImpl implements MyNoteService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editFileFolderById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editFileFolderById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -164,10 +160,9 @@ public class MyNoteServiceImpl implements MyNoteService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMyNoteListNewByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyNoteListNewByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -182,11 +177,10 @@ public class MyNoteServiceImpl implements MyNoteService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertMyNoteContentByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertMyNoteContentByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String parentId = setParentId(map.get("parentId").toString());
@@ -240,10 +234,9 @@ public class MyNoteServiceImpl implements MyNoteService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryFileAndContentListByFolderId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFileAndContentListByFolderId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -257,10 +250,9 @@ public class MyNoteServiceImpl implements MyNoteService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMyNoteContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyNoteContentMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = myNoteDao.queryMyNoteContentMationById(map);
         outputObject.setBean(bean);
@@ -271,11 +263,10 @@ public class MyNoteServiceImpl implements MyNoteService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editMyNoteContentById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editMyNoteContentById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String desc = map.get("desc").toString();
         if (desc.length() > 100) {
@@ -292,11 +283,10 @@ public class MyNoteServiceImpl implements MyNoteService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editFileToDragById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editFileToDragById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String newParentId = "";
@@ -372,9 +362,8 @@ public class MyNoteServiceImpl implements MyNoteService {
      *
      * @param id
      * @return
-     * @throws Exception
      */
-    private String setParentId(String id) throws Exception {
+    private String setParentId(String id) {
         if ("2".equals(id)) {
             return id + ",";
         } else {
@@ -392,11 +381,10 @@ public class MyNoteServiceImpl implements MyNoteService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editNoteToMoveById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editNoteToMoveById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 要移动的笔记id
         String rowId = map.get("moveId").toString();
@@ -415,10 +403,9 @@ public class MyNoteServiceImpl implements MyNoteService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryTreeToMoveByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryTreeToMoveByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         if (ToolUtil.isBlank(map.get("parentId").toString()) || "0".equals(map.get("parentId").toString())) {//加载一级文件夹
             List<Map<String, Object>> beans = new ArrayList<>();
@@ -443,10 +430,9 @@ public class MyNoteServiceImpl implements MyNoteService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryShareNoteById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryShareNoteById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = myNoteDao.queryShareNoteById(map.get("id").toString());
         if (bean == null) {
@@ -461,10 +447,9 @@ public class MyNoteServiceImpl implements MyNoteService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void outputNoteIsZipJob(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void outputNoteIsZipJob(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String rowId = map.get("id").toString();
         // 类型1.文件夹2.笔记

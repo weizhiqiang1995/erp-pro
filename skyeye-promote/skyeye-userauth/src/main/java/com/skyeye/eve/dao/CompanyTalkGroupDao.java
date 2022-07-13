@@ -17,50 +17,50 @@ import java.util.Map;
  */
 public interface CompanyTalkGroupDao {
 
-    public int insertGroupMation(Map<String, Object> map) throws Exception;
+    int insertGroupMation(Map<String, Object> map);
 
-    public int insertGroupInviteMation(List<Map<String, Object>> beans) throws Exception;
+    int insertGroupInviteMation(List<Map<String, Object>> beans);
 
-    public int insertMakeGroupUserMation(Map<String, Object> map) throws Exception;
+    int insertMakeGroupUserMation(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryGroupInvitationMation(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryGroupInvitationMation(Map<String, Object> map);
 
-    public Map<String, Object> queryGroupInvitationMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryGroupInvitationMationById(Map<String, Object> map);
 
-    public int editAgreeInGroupInvitationMation(Map<String, Object> map) throws Exception;
+    int editAgreeInGroupInvitationMation(Map<String, Object> map);
 
-    public int editRefuseInGroupInvitationMation(Map<String, Object> map) throws Exception;
+    int editRefuseInGroupInvitationMation(Map<String, Object> map);
 
-    public Map<String, Object> queryGroupMationByGroupId(Map<String, Object> bean) throws Exception;
+    Map<String, Object> queryGroupMationByGroupId(Map<String, Object> bean);
 
-    public List<Map<String, Object>> queryGroupMationList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryGroupMationList(Map<String, Object> map);
 
-    public Map<String, Object> queryInGroupByUserAndGroupId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryInGroupByUserAndGroupId(Map<String, Object> map);
 
-    public Map<String, Object> queryInGroupInviteByUserAndGroupId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryInGroupInviteByUserAndGroupId(Map<String, Object> map);
 
-    public int insertInGroupInviteByUserAndGroupId(Map<String, Object> map) throws Exception;
+    int insertInGroupInviteByUserAndGroupId(Map<String, Object> map);
 
-    public Map<String, Object> queryCreateGroupUserByGroupId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryCreateGroupUserByGroupId(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryGroupMemberByGroupId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryGroupMemberByGroupId(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryGroupMemberByGroupIdAndNotThisUser(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryGroupMemberByGroupIdAndNotThisUser(Map<String, Object> map);
 
-    public int insertPersonToPersonMessage(Map<String, Object> map) throws Exception;
+    int insertPersonToPersonMessage(Map<String, Object> map);
 
-    public int insertPersonToGroupMessage(Map<String, Object> map) throws Exception;
+    int insertPersonToGroupMessage(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryChatLogByPerToPer(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryChatLogByPerToPer(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryChatLogByPerToGroup(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryChatLogByPerToGroup(Map<String, Object> map);
 
-    public Map<String, Object> queryGroupCreateIdById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryGroupCreateIdById(Map<String, Object> map);
 
-    public int deleteUserToExitGroup(Map<String, Object> map) throws Exception;
+    int deleteUserToExitGroup(Map<String, Object> map);
 
-    public int editCreateToExitGroup(Map<String, Object> map) throws Exception;
+    int editCreateToExitGroup(Map<String, Object> map);
 
-    public Map<String, Object> queryGroupStateById(Map<String, Object> map1) throws Exception;
+    Map<String, Object> queryGroupStateById(Map<String, Object> map1);
 
 }

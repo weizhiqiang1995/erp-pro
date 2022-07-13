@@ -25,10 +25,9 @@ public class CrmPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CrmPageController/queryInsertNumByYear")
-    public void queryInsertNumByYear(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryInsertNumByYear(InputObject inputObject, OutputObject outputObject) {
         crmPageService.queryInsertNumByYear(inputObject, outputObject);
     }
 
@@ -37,10 +36,9 @@ public class CrmPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CrmPageController/queryCustomNumByOtherType")
-    public void queryCustomNumByOtherType(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCustomNumByOtherType(InputObject inputObject, OutputObject outputObject) {
         crmPageService.queryCustomNumByOtherType(inputObject, outputObject);
     }
 
@@ -49,10 +47,9 @@ public class CrmPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CrmPageController/queryCustomDocumentaryType")
-    public void queryCustomDocumentaryType(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCustomDocumentaryType(InputObject inputObject, OutputObject outputObject) {
         crmPageService.queryCustomDocumentaryType(inputObject, outputObject);
     }
 
@@ -61,10 +58,9 @@ public class CrmPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CrmPageController/queryNewContractNum")
-    public void queryNewContractNum(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryNewContractNum(InputObject inputObject, OutputObject outputObject) {
         crmPageService.queryNewContractNum(inputObject, outputObject);
     }
 
@@ -73,10 +69,9 @@ public class CrmPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CrmPageController/queryNewDocumentaryNum")
-    public void queryNewDocumentaryNum(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryNewDocumentaryNum(InputObject inputObject, OutputObject outputObject) {
         crmPageService.queryNewDocumentaryNum(inputObject, outputObject);
     }
 

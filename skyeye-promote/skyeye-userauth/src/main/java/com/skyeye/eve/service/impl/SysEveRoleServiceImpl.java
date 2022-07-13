@@ -46,10 +46,9 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysRoleList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysRoleList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveRoleDao.querySysRoleList(map);
@@ -62,10 +61,9 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysRoleBandMenuList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysRoleBandMenuList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysEveRoleDao.querySysRoleBandMenuList(map);
         String[] str;
@@ -91,11 +89,10 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysRoleMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysRoleMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         Map<String, Object> roleName = sysEveRoleDao.querySysRoleNameByName(map);
@@ -116,10 +113,9 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysRoleMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysRoleMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> roleMation = sysEveRoleDao.querySysRoleMationByRoleId(map);
         List<Map<String, Object>> roleMenuId = sysEveRoleDao.querySysRoleMenuIdByRoleId(map);
@@ -133,11 +129,10 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysRoleMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysRoleMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> roleName = sysEveRoleDao.queryRoleNameByIdAndName(map);
         if (roleName == null) {
@@ -155,10 +150,9 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void editSysRolePCAuth(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysRolePCAuth(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         Map<String, Object> roleName = sysEveRoleDao.queryRoleNameByIdAndName(map);
@@ -172,7 +166,7 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
         }
     }
 
-    private void saveRoleMenuMation(Map<String, Object> map, String roleId, String createId, String createTime) throws Exception {
+    private void saveRoleMenuMation(Map<String, Object> map, String roleId, String createId, String createTime) {
         List<String> menuIds = (List<String>) map.get("menuIds");
         // 删除角色菜单关联表信息
         sysEveRoleDao.deleteRoleMenuByRoleId(roleId);
@@ -196,11 +190,10 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysRoleMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysRoleMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String roleId = map.get("id").toString();
         // 判断当前是否有用户在使用该角色
@@ -231,10 +224,9 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysRoleBandAppMenuList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysRoleBandAppMenuList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysEveRoleDao.querySysRoleBandAppMenuList(map);
         for (Map<String, Object> bean : beans) {
@@ -249,10 +241,9 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysRoleToAppMenuEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysRoleToAppMenuEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> roleMation = sysEveRoleDao.querySysRoleMationByRoleId(map);
         List<Map<String, Object>> roleMenuId = sysEveRoleDao.querySysRoleAppMenuIdByRoleId(map);
@@ -266,11 +257,10 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysRoleAppMenuById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysRoleAppMenuById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = new ArrayList<>();
         List<Map<String, Object>> beanp = new ArrayList<>();

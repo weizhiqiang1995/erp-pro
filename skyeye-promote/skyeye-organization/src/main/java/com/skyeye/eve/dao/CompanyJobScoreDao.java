@@ -11,19 +11,19 @@ import java.util.Map;
 
 public interface CompanyJobScoreDao {
 
-    public List<Map<String, Object>> queryCompanyJobScoreList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryCompanyJobScoreList(Map<String, Object> map);
 
-    public Map<String, Object> queryCompanyJobScoreByNameAndNotId(@Param("nameCn") String nameCn, @Param("jobId") String jobId, @Param("notId") String id) throws Exception;
+    Map<String, Object> queryCompanyJobScoreByNameAndNotId(@Param("nameCn") String nameCn, @Param("jobId") String jobId, @Param("notId") String id);
 
-    public int insertCompanyJobScoreMation(Map<String, Object> map) throws Exception;
+    int insertCompanyJobScoreMation(Map<String, Object> map);
 
-    public Map<String, Object> queryCompanyJobScoreMationById(@Param("id") String id) throws Exception;
+    Map<String, Object> queryCompanyJobScoreMationById(@Param("id") String id);
 
-    public int editCompanyJobScoreMationById(Map<String, Object> map) throws Exception;
+    int editCompanyJobScoreMationById(Map<String, Object> map);
 
-    public int editCompanyJobScoreStateMationById(@Param("id") String id, @Param("state") int state) throws Exception;
+    int editCompanyJobScoreStateMationById(@Param("id") String id, @Param("state") int state);
 
-    public int editCompanyJobScoreStateMationByJobId(@Param("jobId") String jobId, @Param("state") int state) throws Exception;
+    int editCompanyJobScoreStateMationByJobId(@Param("jobId") String jobId, @Param("state") int state);
 
-    public List<Map<String, Object>> queryEnableCompanyJobScoreList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryEnableCompanyJobScoreList(Map<String, Object> map);
 }

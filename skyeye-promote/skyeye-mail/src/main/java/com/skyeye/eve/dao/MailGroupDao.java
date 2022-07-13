@@ -17,20 +17,20 @@ import java.util.Map;
  */
 public interface MailGroupDao {
 
-    public List<Map<String, Object>> queryMailMationTypeList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryMailMationTypeList(Map<String, Object> map);
 
-    public Map<String, Object> queryMailMationTypeByName(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryMailMationTypeByName(Map<String, Object> map);
 
-    public int insertMailMationType(Map<String, Object> map) throws Exception;
+    int insertMailMationType(Map<String, Object> map);
 
-    public Map<String, Object> queryMailMationTypeByIdAndUserId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryMailMationTypeByIdAndUserId(Map<String, Object> map);
 
-    public int deleteMailMationTypeById(Map<String, Object> map) throws Exception;
+    int deleteMailMationTypeById(Map<String, Object> map);
 
-    public Map<String, Object> queryMailMationTypeToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryMailMationTypeToEditById(Map<String, Object> map);
 
-    public int editMailMationTypeById(Map<String, Object> map) throws Exception;
+    int editMailMationTypeById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryMailMationTypeListToSelect(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryMailMationTypeListToSelect(Map<String, Object> map);
 
 }

@@ -38,10 +38,9 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAppWorkPageAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAppWorkPageAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = appWorkPageAuthPointDao.queryAppWorkPageAuthPointListByMenuId(map);
@@ -55,11 +54,10 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertAppWorkPageAuthPointMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertAppWorkPageAuthPointMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = appWorkPageAuthPointDao.queryAppWorkPageAuthPointMationByAuthName(map);
         if (bean == null) {
@@ -79,10 +77,9 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAppWorkPageAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAppWorkPageAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = appWorkPageAuthPointDao.queryAppWorkPageAuthPointMationToEditById(map);
         outputObject.setBean(bean);
@@ -93,11 +90,10 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkPageAuthPointMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkPageAuthPointMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = appWorkPageAuthPointDao.queryAppWorkPageAuthPointMationByAuthNameAndId(map);
         if (bean == null) {
@@ -112,11 +108,10 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteAppWorkPageAuthPointMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteAppWorkPageAuthPointMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         appWorkPageAuthPointDao.deleteAppWorkPageAuthPointMationById(map);
     }

@@ -69,10 +69,9 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWagesSocialSecurityFundList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesSocialSecurityFundList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = wagesSocialSecurityFundDao.queryWagesSocialSecurityFundList(map);
@@ -85,11 +84,10 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertWagesSocialSecurityFundMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWagesSocialSecurityFundMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> mation = wagesSocialSecurityFundDao.queryWagesSocialSecurityFundMationByTitleAndNotId(map.get("title").toString(), null);
         if (mation != null && !mation.isEmpty()) {
@@ -112,7 +110,7 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
      * @param str
      * @param id
      */
-    private void wagesSocialSecurityFundApplicableObjects(String str, String id) throws Exception {
+    private void wagesSocialSecurityFundApplicableObjects(String str, String id) {
         wagesSocialSecurityFundApplicableObjectsDao.deleteWagesSocialSecurityFundApplicableObjectsBySecurityFundId(id);
         if (ToolUtil.isBlank(str)) {
             return;
@@ -132,10 +130,9 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWagesSocialSecurityFundMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesSocialSecurityFundMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = wagesSocialSecurityFundDao.queryWagesSocialSecurityFundMationById(id);
@@ -154,9 +151,8 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
      *
      * @param bean
      * @param id
-     * @throws Exception
      */
-    private void getWagesSocialSecurityFundApplicableObjects(Map<String, Object> bean, String id) throws Exception {
+    private void getWagesSocialSecurityFundApplicableObjects(Map<String, Object> bean, String id) {
         List<Map<String, Object>> applicableObjects = wagesSocialSecurityFundApplicableObjectsDao.queryWagesSocialSecurityFundApplicableObjectsBySecurityFundId(id);
         // 根据objectType分组
         Map<String, List<Map<String, Object>>> groupByType = applicableObjects.stream()
@@ -200,11 +196,10 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> mation = wagesSocialSecurityFundDao.queryWagesSocialSecurityFundMationByTitleAndNotId(map.get("title").toString(), id);
@@ -224,10 +219,9 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void deleteWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         wagesSocialSecurityFundDao.editWagesSocialSecurityFundStateMationById(map.get("id").toString(), STATE.START_DELETE.getState());
     }
@@ -237,10 +231,9 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void enableWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void enableWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         wagesSocialSecurityFundDao.editWagesSocialSecurityFundStateMationById(map.get("id").toString(), STATE.START_UP.getState());
     }
@@ -250,10 +243,9 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void disableWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void disableWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         wagesSocialSecurityFundDao.editWagesSocialSecurityFundStateMationById(map.get("id").toString(), STATE.START_DOWN.getState());
     }
@@ -263,10 +255,9 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = wagesSocialSecurityFundDao.queryWagesSocialSecurityFundMationById(id);

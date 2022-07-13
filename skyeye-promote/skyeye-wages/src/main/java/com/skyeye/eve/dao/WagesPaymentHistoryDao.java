@@ -19,11 +19,11 @@ import java.util.Map;
  */
 public interface WagesPaymentHistoryDao {
 
-    public List<Map<String, Object>> queryAllWagesPaymentHistoryList(Map<String, Object> map);
+    List<Map<String, Object>> queryAllWagesPaymentHistoryList(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryMyWagesPaymentHistoryList(Map<String, Object> map);
+    List<Map<String, Object>> queryMyWagesPaymentHistoryList(Map<String, Object> map);
 
-    public void insertWagesPaymentHistoryMation(Map<String, Object> map);
+    void insertWagesPaymentHistoryMation(Map<String, Object> map);
 
     /**
      * 随机获取一条未发放的员工薪资信息
@@ -31,17 +31,15 @@ public interface WagesPaymentHistoryDao {
      * @param lastMonthDate 上个月的年月
      * @param staffId       不包含的员工id
      * @return
-     * @throws Exception
      */
-    public Map<String, Object> queryWaitPaymentStaffHistory(@Param("lastMonthDate") String lastMonthDate, @Param("list") List<String> staffId);
+    Map<String, Object> queryWaitPaymentStaffHistory(@Param("lastMonthDate") String lastMonthDate, @Param("list") List<String> staffId);
 
     /**
      * 根据员工id以及薪资年月修改薪资状态为已发放
      *
      * @param staffId  员工id
      * @param payMonth 薪资年月
-     * @throws Exception
      */
-    public void editToPaymentByStaffAndPayMonth(@Param("staffId") String staffId, @Param("payMonth") String payMonth);
+    void editToPaymentByStaffAndPayMonth(@Param("staffId") String staffId, @Param("payMonth") String payMonth);
 
 }

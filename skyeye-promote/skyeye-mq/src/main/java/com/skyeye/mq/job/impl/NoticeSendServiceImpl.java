@@ -30,9 +30,8 @@ public class NoticeSendServiceImpl implements JobMateService {
     @Autowired
     private JobMateMationService jobMateMationService;
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void call(String data) throws Exception {
+    public void call(String data) {
         Map<String, Object> map = JSONUtil.toBean(data, null);
         String jobId = map.get("jobMateId").toString();
         try {

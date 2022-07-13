@@ -29,10 +29,9 @@ public class SysDataBaseServiceImpl implements SysDataBaseService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysDataBaseSelectList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysDataBaseSelectList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("dbName", dbName);
         List<Map<String, Object>> beans = sysDataBaseDao.querySysDataBaseSelectList(map);
@@ -47,10 +46,9 @@ public class SysDataBaseServiceImpl implements SysDataBaseService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysDataBaseDescSelectList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysDataBaseDescSelectList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("dbName", dbName);
         List<Map<String, Object>> beans = sysDataBaseDao.querySysDataBaseDescSelectList(map);

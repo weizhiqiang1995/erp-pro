@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.dao;
 
 import java.util.List;
@@ -8,50 +9,50 @@ import java.util.Map;
 
 public interface SysEveWinDragDropDao {
 
-    public List<Map<String, Object>> queryMenuBoxNameInByName(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryMenuBoxNameInByName(Map<String, Object> map);
 
-    public Map<String, Object> queryWinCustomMenuBoxNumByUserId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryWinCustomMenuBoxNumByUserId(Map<String, Object> map);
 
-    public int insertWinCustomMenuBox(Map<String, Object> map) throws Exception;
+    int insertWinCustomMenuBox(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryMenuNameInByName(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryMenuNameInByName(Map<String, Object> map);
 
-    public int insertWinCustomMenu(Map<String, Object> map) throws Exception;
+    int insertWinCustomMenu(Map<String, Object> map);
 
-    public Map<String, Object> queryMenuMationFromSysById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryMenuMationFromSysById(Map<String, Object> map);
 
-    public int deleteCustomMenuById(Map<String, Object> map) throws Exception;
+    int deleteCustomMenuById(Map<String, Object> map);
 
-    public int deleteCustomBoxMenuById(Map<String, Object> map) throws Exception;
+    int deleteCustomBoxMenuById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryChildsMenuById(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryChildsMenuById(Map<String, Object> map);
 
-    public int deleteCustomMenuByIds(Map<String, Object> map) throws Exception;
+    int deleteCustomMenuByIds(Map<String, Object> map);
 
-    public int deleteUserSysMenuByIds(List<Map<String, Object>> removeChild) throws Exception;
+    int deleteUserSysMenuByIds(List<Map<String, Object>> removeChild);
 
-    public int deleteSysBoxMenuById(Map<String, Object> map) throws Exception;
+    int deleteSysBoxMenuById(Map<String, Object> map);
 
-    public int delMenuParentIdById(Map<String, Object> map) throws Exception;
+    int delMenuParentIdById(Map<String, Object> map);
 
-    public int insertMenuParentId(Map<String, Object> map) throws Exception;
+    int insertMenuParentId(Map<String, Object> map);
 
-    public int deleteCustomMenuParentByIds(Map<String, Object> map) throws Exception;
+    int deleteCustomMenuParentByIds(Map<String, Object> map);
 
-    public Map<String, Object> queryMenuMationTypeById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryMenuMationTypeById(Map<String, Object> map);
 
-    public Map<String, Object> queryCustomMenuBoxMationEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryCustomMenuBoxMationEditById(Map<String, Object> map);
 
-    public int editCustomMenuBoxMationById(Map<String, Object> map) throws Exception;
+    int editCustomMenuBoxMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryCustomMenuMationEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryCustomMenuMationEditById(Map<String, Object> map);
 
-    public int editCustomMenuMationById(Map<String, Object> map) throws Exception;
+    int editCustomMenuMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryCustomMenuToDeskTopById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryCustomMenuToDeskTopById(Map<String, Object> map);
 
-    public int editCustomMenuToDeskTopById(Map<String, Object> map) throws Exception;
+    int editCustomMenuToDeskTopById(Map<String, Object> map);
 
-    public Map<String, Object> queryMenuToDeskTopById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryMenuToDeskTopById(Map<String, Object> map);
 
 }

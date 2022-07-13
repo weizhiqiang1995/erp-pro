@@ -22,10 +22,9 @@ public class SmProjectController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectController/querySmProjectList")
-    public void querySmProjectList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySmProjectList(InputObject inputObject, OutputObject outputObject) {
         smProjectService.querySmProjectList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class SmProjectController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectController/insertSmProjectMation")
-    public void insertSmProjectMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSmProjectMation(InputObject inputObject, OutputObject outputObject) {
         smProjectService.insertSmProjectMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class SmProjectController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectController/deleteSmProjectById")
-    public void deleteSmProjectById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSmProjectById(InputObject inputObject, OutputObject outputObject) {
         smProjectService.deleteSmProjectById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class SmProjectController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectController/querySmProjectMationToEditById")
-    public void querySmProjectMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySmProjectMationToEditById(InputObject inputObject, OutputObject outputObject) {
         smProjectService.querySmProjectMationToEditById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class SmProjectController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectController/editSmProjectMationById")
-    public void editSmProjectMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSmProjectMationById(InputObject inputObject, OutputObject outputObject) {
         smProjectService.editSmProjectMationById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class SmProjectController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectController/queryGroupMationList")
-    public void queryGroupMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryGroupMationList(InputObject inputObject, OutputObject outputObject) {
         smProjectService.queryGroupMationList(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class SmProjectController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectController/queryGroupMemberMationList")
-    public void queryGroupMemberMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryGroupMemberMationList(InputObject inputObject, OutputObject outputObject) {
         smProjectService.queryGroupMemberMationList(inputObject, outputObject);
     }
 

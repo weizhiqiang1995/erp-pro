@@ -32,7 +32,7 @@ public class SysEveModelTypeServiceImpl implements SysEveModelTypeService {
     private SysEveModelTypeDao sysEveModelTypeDao;
 
     @Override
-    public void querySysEveModelTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveModelTypeList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> inputParams = inputObject.getParams();
         List<Map<String, Object>> beans = sysEveModelTypeDao.querySysEveModelTypeList(inputParams);
         if (!beans.isEmpty()) {
@@ -42,7 +42,7 @@ public class SysEveModelTypeServiceImpl implements SysEveModelTypeService {
     }
 
     @Override
-    public void insertSysEveModelType(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysEveModelType(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> inputParams = inputObject.getParams();
         if (checkParentIdExists(inputParams, outputObject)) {
             return;
@@ -54,7 +54,7 @@ public class SysEveModelTypeServiceImpl implements SysEveModelTypeService {
     }
 
     @Override
-    public void querySysEveModelTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveModelTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> inputParams = inputObject.getParams();
         Map<String, Object> sysEveModelTypeBean = sysEveModelTypeDao.querySysEveModelTypeById(inputParams.get("id").toString());
         outputObject.setBean(sysEveModelTypeBean);
@@ -62,7 +62,7 @@ public class SysEveModelTypeServiceImpl implements SysEveModelTypeService {
     }
 
     @Override
-    public void querySysEveModelTypeByParentId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveModelTypeByParentId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> inputParams = inputObject.getParams();
         List<Map<String, Object>> sysEveModelTypeList = sysEveModelTypeDao.querySysEveModelTypeByParentId(inputParams.get("parentId").toString());
         outputObject.setBeans(sysEveModelTypeList);
@@ -70,7 +70,7 @@ public class SysEveModelTypeServiceImpl implements SysEveModelTypeService {
     }
 
     @Override
-    public void updateSysEveModelTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateSysEveModelTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> inputParams = inputObject.getParams();
         if (checkParentIdExists(inputParams, outputObject)) {
             return;
@@ -98,7 +98,7 @@ public class SysEveModelTypeServiceImpl implements SysEveModelTypeService {
 
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void delSysEveModelTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void delSysEveModelTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> inputParams = inputObject.getParams();
         String id = inputParams.get("id").toString();
         // 根据Id删除该节点id被作为parentId使用的其他页面分类数据

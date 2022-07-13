@@ -30,10 +30,9 @@ public class MailGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MailGroupController/queryMailMationTypeList")
-    public void queryMailMationTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMailMationTypeList(InputObject inputObject, OutputObject outputObject) {
         mailGroupService.queryMailMationTypeList(inputObject, outputObject);
     }
 
@@ -42,10 +41,9 @@ public class MailGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MailGroupController/insertMailMationType")
-    public void insertMailMationType(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertMailMationType(InputObject inputObject, OutputObject outputObject) {
         mailGroupService.insertMailMationType(inputObject, outputObject);
     }
 
@@ -54,10 +52,9 @@ public class MailGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MailGroupController/deleteMailMationTypeById")
-    public void deleteMailMationTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteMailMationTypeById(InputObject inputObject, OutputObject outputObject) {
         mailGroupService.deleteMailMationTypeById(inputObject, outputObject);
     }
 
@@ -66,10 +63,9 @@ public class MailGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MailGroupController/queryMailMationTypeToEditById")
-    public void queryMailMationTypeToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMailMationTypeToEditById(InputObject inputObject, OutputObject outputObject) {
         mailGroupService.queryMailMationTypeToEditById(inputObject, outputObject);
     }
 
@@ -78,10 +74,9 @@ public class MailGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MailGroupController/editMailMationTypeById")
-    public void editMailMationTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editMailMationTypeById(InputObject inputObject, OutputObject outputObject) {
         mailGroupService.editMailMationTypeById(inputObject, outputObject);
     }
 
@@ -90,10 +85,9 @@ public class MailGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MailGroupController/queryMailMationTypeListToSelect")
-    public void queryMailMationTypeListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMailMationTypeListToSelect(InputObject inputObject, OutputObject outputObject) {
         mailGroupService.queryMailMationTypeListToSelect(inputObject, outputObject);
     }
 

@@ -22,10 +22,9 @@ public class SysEveWinLockBgPicController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinLockBgPicController/querySysEveWinLockBgPicList")
-    public void querySysEveWinLockBgPicList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveWinLockBgPicList(InputObject inputObject, OutputObject outputObject) {
         sysEveWinLockBgPicService.querySysEveWinLockBgPicList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class SysEveWinLockBgPicController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinLockBgPicController/insertSysEveWinLockBgPicMation")
-    public void insertSysEveWinLockBgPicMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysEveWinLockBgPicMation(InputObject inputObject, OutputObject outputObject) {
         sysEveWinLockBgPicService.insertSysEveWinLockBgPicMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class SysEveWinLockBgPicController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinLockBgPicController/deleteSysEveWinLockBgPicMationById")
-    public void deleteSysEveWinLockBgPicMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysEveWinLockBgPicMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinLockBgPicService.deleteSysEveWinLockBgPicMationById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class SysEveWinLockBgPicController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinLockBgPicController/insertSysEveWinBgPicMationByCustom")
-    public void insertSysEveWinBgPicMationByCustom(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysEveWinBgPicMationByCustom(InputObject inputObject, OutputObject outputObject) {
         sysEveWinLockBgPicService.insertSysEveWinBgPicMationByCustom(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class SysEveWinLockBgPicController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinLockBgPicController/querySysEveWinBgPicCustomList")
-    public void querySysEveWinBgPicCustomList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveWinBgPicCustomList(InputObject inputObject, OutputObject outputObject) {
         sysEveWinLockBgPicService.querySysEveWinBgPicCustomList(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class SysEveWinLockBgPicController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinLockBgPicController/deleteSysEveWinBgPicMationCustomById")
-    public void deleteSysEveWinBgPicMationCustomById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysEveWinBgPicMationCustomById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinLockBgPicService.deleteSysEveWinBgPicMationCustomById(inputObject, outputObject);
     }
 

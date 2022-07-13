@@ -17,36 +17,36 @@ import java.util.Map;
  */
 public interface AppWorkPageDao {
 
-    public List<Map<String, Object>> queryAppWorkPageList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryAppWorkPageList(Map<String, Object> map);
 
-    public int insertAppWorkPageMation(Map<String, Object> map) throws Exception;
+    int insertAppWorkPageMation(Map<String, Object> map);
 
-    public Map<String, Object> queryAppWorkPageAfterOrderBum(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryAppWorkPageAfterOrderBum(Map<String, Object> map);
 
-    public Map<String, Object> queryAppWorkPageTAfterOrderBum(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryAppWorkPageTAfterOrderBum(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryAppWorkPageListById(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryAppWorkPageListById(Map<String, Object> map);
 
-    public Map<String, Object> queryAppWorkPageMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryAppWorkPageMationById(Map<String, Object> map);
 
-    public int editAppWorkPageMationById(Map<String, Object> map) throws Exception;
+    int editAppWorkPageMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryAppWorkPageStateById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryAppWorkPageStateById(Map<String, Object> map);
 
-    public Map<String, Object> queryAppWorkPageISTopByThisId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryAppWorkPageISTopByThisId(Map<String, Object> map);
 
-    public int editAppWorkPageSortById(Map<String, Object> map) throws Exception;
+    int editAppWorkPageSortById(Map<String, Object> map);
 
-    public Map<String, Object> queryAppWorkPageISLowerByThisId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryAppWorkPageISLowerByThisId(Map<String, Object> map);
 
-    public int editAppWorkPageStateById(Map<String, Object> map) throws Exception;
+    int editAppWorkPageStateById(Map<String, Object> map);
 
-    public int editAppWorkPageTitleById(Map<String, Object> map) throws Exception;
+    int editAppWorkPageTitleById(Map<String, Object> map);
 
-    public Map<String, Object> queryAppWorkISTopByThisId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryAppWorkISTopByThisId(Map<String, Object> map);
 
-    public Map<String, Object> queryAppWorkISLowerByThisId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryAppWorkISLowerByThisId(Map<String, Object> map);
 
-    public Map<String, Object> queryAppWorkPageExistById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryAppWorkPageExistById(Map<String, Object> map);
 
 }

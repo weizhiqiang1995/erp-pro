@@ -55,10 +55,9 @@ public class WagesPaymentHistoryServiceImpl implements WagesPaymentHistoryServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAllGrantWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllGrantWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("state", STATE.START_GRANT.getState());
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
@@ -72,10 +71,9 @@ public class WagesPaymentHistoryServiceImpl implements WagesPaymentHistoryServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMyWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("staffId", inputObject.getLogParams().get("staffId"));
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
@@ -89,10 +87,9 @@ public class WagesPaymentHistoryServiceImpl implements WagesPaymentHistoryServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAllNotGrantWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllNotGrantWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("state", STATE.START_WAIT_GRANT.getState());
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));

@@ -82,10 +82,9 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWagesStaffWaitAllocatedMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesStaffWaitAllocatedMationList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = wagesStaffMationDao.queryWagesStaffWaitAllocatedMationList(map);
@@ -98,10 +97,9 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryStaffWagesModelFieldMationListByStaffId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryStaffWagesModelFieldMationListByStaffId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String staffId = map.get("staffId").toString();
         Map<String, Object> staffMation = wagesStaffMationDao.querySysUserStaffMationById(staffId);
@@ -137,11 +135,10 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void saveStaffWagesModelFieldMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void saveStaffWagesModelFieldMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String staffId = map.get("staffId").toString();
         String fieldStr = map.get("fieldStr").toString();
@@ -157,10 +154,9 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWagesStaffDesignMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesStaffDesignMationList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = wagesStaffMationDao.queryWagesStaffDesignMationList(map);
@@ -173,10 +169,9 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWagesStaffPaymentDetail(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesStaffPaymentDetail(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String staffId = map.get("staffId").toString();
         String payMonth = map.get("payMonth").toString();
@@ -192,10 +187,9 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
      * @param staffWorkTime      员工对应的考勤班次
      * @param staffModelFieldMap 员工拥有的所有薪资要素字段以及对应的值
      * @param lastMonthDate      指定年月，格式为yyyy-MM
-     * @throws Exception
      */
     @Override
-    public void setLastMonthBe(List<Map<String, Object>> staffWorkTime, Map<String, String> staffModelFieldMap, String lastMonthDate) throws Exception {
+    public void setLastMonthBe(List<Map<String, Object>> staffWorkTime, Map<String, String> staffModelFieldMap, String lastMonthDate) {
         List<String> lastMonthDays = DateUtil.getMonthFullDay(Integer.parseInt(lastMonthDate.split("-")[0]), Integer.parseInt(lastMonthDate.split("-")[1]));
         int lastMonthBeNum = 0;
         String lastMonthBeHour = "0";

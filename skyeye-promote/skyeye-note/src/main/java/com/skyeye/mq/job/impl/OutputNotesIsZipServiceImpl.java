@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.mq.job.impl;
 
 import cn.hutool.json.JSONUtil;
@@ -8,6 +9,7 @@ import com.skyeye.common.constans.MqConstants;
 import com.skyeye.common.util.FileUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.MyNoteDao;
+import com.skyeye.exception.CustomException;
 import com.skyeye.mq.job.JobMateService;
 import com.skyeye.service.JobMateMationService;
 import com.youbenzi.md2.export.FileFactory;
@@ -17,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -56,7 +59,7 @@ public class OutputNotesIsZipServiceImpl implements JobMateService {
     private MyNoteDao myNoteDao;
 
     @Override
-    public void call(String data) throws Exception {
+    public void call(String data) {
         Map<String, Object> map = JSONUtil.toBean(data, null);
         String jobId = map.get("jobMateId").toString();
         Map<String, Object> mation = new HashMap<>();
@@ -91,9 +94,8 @@ public class OutputNotesIsZipServiceImpl implements JobMateService {
      * @param parentId
      * @param userId
      * @return
-     * @throws Exception
      */
-    private String outputFolder(String parentId, String userId) throws Exception {
+    private String outputFolder(String parentId, String userId) {
         // 1.获取该目录下的所有目录
         List<Map<String, Object>> beans = myNoteDao.queryAllFolderListByFolderId(parentId);
         // 2.获取所有目录下的所有文件
@@ -118,9 +120,12 @@ public class OutputNotesIsZipServiceImpl implements JobMateService {
         // 打包--压缩包文件名
         String fileName = String.valueOf(System.currentTimeMillis());
         String strZipPath = basePath + fileName + ".zip";
-        ZipOutputStream out = new ZipOutputStream(new FileOutputStream(strZipPath));
+        ZipOutputStream out = null;
         try {
+            out = new ZipOutputStream(new FileOutputStream(strZipPath));
             ToolUtil.recursionZip(out, beans, "", tPath.replace("images", ""), 2);
+        } catch (Exception ee) {
+            throw new CustomException(ee);
         } finally {
             // 删除临时文件
             for (Map<String, Object> bean : files) {
@@ -139,9 +144,8 @@ public class OutputNotesIsZipServiceImpl implements JobMateService {
      * @param type     类型
      * @param userId   用户id
      * @return
-     * @throws Exception
      */
-    private String outPutFileContent(String basePath, String content, int type, String userId) throws Exception {
+    private String outPutFileContent(String basePath, String content, int type, String userId) {
         String fileName = String.valueOf(System.currentTimeMillis());
         if (ToolUtil.isBlank(content)) {
             content = "暂无内容";
@@ -175,9 +179,8 @@ public class OutputNotesIsZipServiceImpl implements JobMateService {
      * @param fileId 文件id
      * @param userId 用户id
      * @return
-     * @throws Exception
      */
-    private String outPutFileContent(String fileId, String userId) throws Exception {
+    private String outPutFileContent(String fileId, String userId) {
         Map<String, Object> mation = myNoteDao.queryShareNoteById(fileId);
         mation.put("fileName", mation.get("title"));
         mation.put("fileType", mation.get("type"));

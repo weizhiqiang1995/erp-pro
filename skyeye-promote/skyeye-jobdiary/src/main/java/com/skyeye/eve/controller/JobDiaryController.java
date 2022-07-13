@@ -22,10 +22,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/queryJobDiaryDayReceived")
-    public void queryJobDiaryDayReceived(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryJobDiaryDayReceived(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.queryJobDiaryDayReceived(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/insertDayJobDiary")
-    public void insertDayJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertDayJobDiary(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.insertDayJobDiary(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/querySysEveUserStaff")
-    public void querySysEveUserStaff(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveUserStaff(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.querySysEveUserStaff(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/queryJobDiaryDetails")
-    public void queryJobDiaryDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryJobDiaryDetails(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.queryJobDiaryDetails(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/queryJobDiaryDayMysend")
-    public void queryJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.queryJobDiaryDayMysend(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/deleteJobDiaryDayMysend")
-    public void deleteJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.deleteJobDiaryDayMysend(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/selectMysendDetails")
-    public void selectMysendDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectMysendDetails(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.selectMysendDetails(inputObject, outputObject);
     }
 
@@ -106,10 +99,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/editMyReceivedJobDiary")
-    public void editMyReceivedJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editMyReceivedJobDiary(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.editMyReceivedJobDiary(inputObject, outputObject);
     }
 
@@ -118,10 +110,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/insertWeekJobDiary")
-    public void insertWeekJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWeekJobDiary(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.insertWeekJobDiary(inputObject, outputObject);
     }
 
@@ -130,10 +121,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/selectMysendWeekDetails")
-    public void selectMysendWeekDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectMysendWeekDetails(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.selectMysendWeekDetails(inputObject, outputObject);
     }
 
@@ -142,10 +132,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/queryWeekJobDiaryDetails")
-    public void queryWeekJobDiaryDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWeekJobDiaryDetails(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.queryWeekJobDiaryDetails(inputObject, outputObject);
     }
 
@@ -154,10 +143,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/insertMonthJobDiary")
-    public void insertMonthJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertMonthJobDiary(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.insertMonthJobDiary(inputObject, outputObject);
     }
 
@@ -166,10 +154,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/selectMysendMonthDetails")
-    public void selectMysendMonthDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectMysendMonthDetails(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.selectMysendMonthDetails(inputObject, outputObject);
     }
 
@@ -178,10 +165,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/queryMonthJobDiaryDetails")
-    public void queryMonthJobDiaryDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMonthJobDiaryDetails(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.queryMonthJobDiaryDetails(inputObject, outputObject);
     }
 
@@ -190,10 +176,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/editJobDiaryDayMysend")
-    public void editJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.editJobDiaryDayMysend(inputObject, outputObject);
     }
 
@@ -202,10 +187,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/queryJobDiaryDayMysendToEdit")
-    public void queryJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.queryJobDiaryDayMysendToEdit(inputObject, outputObject);
     }
 
@@ -214,10 +198,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/editDayJobDiary")
-    public void editDayJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editDayJobDiary(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.editDayJobDiary(inputObject, outputObject);
     }
 
@@ -226,10 +209,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/queryWeekJobDiaryDayMysendToEdit")
-    public void queryWeekJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWeekJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.queryWeekJobDiaryDayMysendToEdit(inputObject, outputObject);
     }
 
@@ -238,10 +220,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/editWeekDayJobDiary")
-    public void editWeekDayJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editWeekDayJobDiary(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.editWeekDayJobDiary(inputObject, outputObject);
     }
 
@@ -250,10 +231,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/queryMonthJobDiaryDayMysendToEdit")
-    public void queryMonthJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMonthJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.queryMonthJobDiaryDayMysendToEdit(inputObject, outputObject);
     }
 
@@ -262,10 +242,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/editMonthDayJobDiary")
-    public void editMonthDayJobDiary(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editMonthDayJobDiary(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.editMonthDayJobDiary(inputObject, outputObject);
     }
 
@@ -274,10 +253,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/queryJobDiaryDayNumber")
-    public void queryJobDiaryDayNumber(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryJobDiaryDayNumber(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.queryJobDiaryDayNumber(inputObject, outputObject);
     }
 
@@ -286,10 +264,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/queryJobDiaryListToTimeTree")
-    public void queryJobDiaryListToTimeTree(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryJobDiaryListToTimeTree(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.queryJobDiaryListToTimeTree(inputObject, outputObject);
     }
 
@@ -298,10 +275,9 @@ public class JobDiaryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/JobDiaryController/editReceivedJobDiaryToAlreadyRead")
-    public void editReceivedJobDiaryToAlreadyRead(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editReceivedJobDiaryToAlreadyRead(InputObject inputObject, OutputObject outputObject) {
         jobDiaryService.editReceivedJobDiaryToAlreadyRead(inputObject, outputObject);
     }
 

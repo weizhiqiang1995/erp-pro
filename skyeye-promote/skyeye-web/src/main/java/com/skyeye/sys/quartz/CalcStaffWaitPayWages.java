@@ -63,10 +63,9 @@ public class CalcStaffWaitPayWages {
     /**
      * 定时统计员工待结算其他奖金的数据 凌晨一点半执行
      *
-     * @throws Exception
      */
     @Scheduled(cron = "0 30 1 * * ?")
-    public void handler() throws Exception {
+    public void handler() {
         String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         log.info("定时统计员工待结算薪资的数据定时任务开始执行");
         try {
@@ -79,7 +78,7 @@ public class CalcStaffWaitPayWages {
         sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_SUCCESS.getState());
     }
 
-    private void calcWaitWages() throws Exception {
+    private void calcWaitWages() {
         // 指定年月的考勤信息的缓存
         Map<String, List<Map<String, Object>>> pointMonthCheckWorkTimeCache = new HashMap<>();
         // 获取所有待结算的加班信息
@@ -102,7 +101,7 @@ public class CalcStaffWaitPayWages {
         }
     }
 
-    private String getAllOverTimeMoneyThisMonth(List<Map<String, Object>> overTimeList, String hourWages) throws Exception {
+    private String getAllOverTimeMoneyThisMonth(List<Map<String, Object>> overTimeList, String hourWages) {
         String allOverTimeHourThisMonth = "0";
         for (Map<String, Object> bean : overTimeList) {
             // 加班工时
@@ -138,10 +137,9 @@ public class CalcStaffWaitPayWages {
      * @param overtimeMonth                加班年月，格式为：yyyy-MM
      * @param staffId                      员工id
      * @return hourWages
-     * @throws Exception
      */
     private String getStaffHourWages(Map<String, List<Map<String, Object>>> pointMonthCheckWorkTimeCache, String actWages,
-                                     String overtimeMonth, String staffId) throws Exception {
+                                     String overtimeMonth, String staffId) {
         // 考勤日期
         List<Map<String, Object>> workTime = getPointMonthCheckWorkTime(pointMonthCheckWorkTimeCache, overtimeMonth);
         // 1.获取该员工拥有的考勤班次id集合
@@ -161,7 +159,7 @@ public class CalcStaffWaitPayWages {
         return hourWages;
     }
 
-    private List<Map<String, Object>> getPointMonthCheckWorkTime(Map<String, List<Map<String, Object>>> cache, String pointMonthDate) throws Exception {
+    private List<Map<String, Object>> getPointMonthCheckWorkTime(Map<String, List<Map<String, Object>>> cache, String pointMonthDate) {
         if (cache.containsKey(pointMonthDate)) {
             return cache.get(pointMonthDate);
         }

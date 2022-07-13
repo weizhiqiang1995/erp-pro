@@ -25,10 +25,9 @@ public class RmGroupMemberController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupMemberController/queryRmGroupMemberList")
-    public void queryRmGroupMemberList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmGroupMemberList(InputObject inputObject, OutputObject outputObject) {
         rmGroupMemberService.queryRmGroupMemberList(inputObject, outputObject);
     }
 
@@ -37,10 +36,9 @@ public class RmGroupMemberController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupMemberController/insertRmGroupMemberMation")
-    public void insertRmGroupMemberMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertRmGroupMemberMation(InputObject inputObject, OutputObject outputObject) {
         rmGroupMemberService.insertRmGroupMemberMation(inputObject, outputObject);
     }
 
@@ -49,10 +47,9 @@ public class RmGroupMemberController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupMemberController/editRmGroupMemberSortTopById")
-    public void editRmGroupMemberSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmGroupMemberSortTopById(InputObject inputObject, OutputObject outputObject) {
         rmGroupMemberService.editRmGroupMemberSortTopById(inputObject, outputObject);
     }
 
@@ -61,10 +58,9 @@ public class RmGroupMemberController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupMemberController/editRmGroupMemberSortLowerById")
-    public void editRmGroupMemberSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmGroupMemberSortLowerById(InputObject inputObject, OutputObject outputObject) {
         rmGroupMemberService.editRmGroupMemberSortLowerById(inputObject, outputObject);
     }
 
@@ -73,10 +69,9 @@ public class RmGroupMemberController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupMemberController/deleteRmGroupMemberById")
-    public void deleteRmGroupMemberById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteRmGroupMemberById(InputObject inputObject, OutputObject outputObject) {
         rmGroupMemberService.deleteRmGroupMemberById(inputObject, outputObject);
     }
 
@@ -85,10 +80,9 @@ public class RmGroupMemberController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupMemberController/queryRmGroupMemberMationToEditById")
-    public void queryRmGroupMemberMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmGroupMemberMationToEditById(InputObject inputObject, OutputObject outputObject) {
         rmGroupMemberService.queryRmGroupMemberMationToEditById(inputObject, outputObject);
     }
 
@@ -97,10 +91,9 @@ public class RmGroupMemberController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupMemberController/editRmGroupMemberMationById")
-    public void editRmGroupMemberMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmGroupMemberMationById(InputObject inputObject, OutputObject outputObject) {
         rmGroupMemberService.editRmGroupMemberMationById(inputObject, outputObject);
     }
 
@@ -109,10 +102,9 @@ public class RmGroupMemberController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupMemberController/editRmGroupMemberAndPropertyMationById")
-    public void editRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject) {
         rmGroupMemberService.editRmGroupMemberAndPropertyMationById(inputObject, outputObject);
     }
 
@@ -121,10 +113,9 @@ public class RmGroupMemberController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupMemberController/queryRmGroupMemberAndPropertyMationById")
-    public void queryRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject) {
         rmGroupMemberService.queryRmGroupMemberAndPropertyMationById(inputObject, outputObject);
     }
 

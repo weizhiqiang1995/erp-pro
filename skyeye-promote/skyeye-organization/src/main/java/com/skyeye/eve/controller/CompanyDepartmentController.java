@@ -8,14 +8,11 @@ import com.skyeye.annotation.api.Api;
 import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.CompanyDepartmentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -38,10 +35,9 @@ public class CompanyDepartmentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentList")
-    public void queryCompanyDepartmentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyDepartmentList(InputObject inputObject, OutputObject outputObject) {
         companyDepartmentService.queryCompanyDepartmentList(inputObject, outputObject);
     }
 
@@ -50,10 +46,9 @@ public class CompanyDepartmentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyDepartmentController/insertCompanyDepartmentMation")
-    public void insertCompanyDepartmentMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertCompanyDepartmentMation(InputObject inputObject, OutputObject outputObject) {
         companyDepartmentService.insertCompanyDepartmentMation(inputObject, outputObject);
     }
 
@@ -62,10 +57,9 @@ public class CompanyDepartmentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyDepartmentController/deleteCompanyDepartmentMationById")
-    public void deleteCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject) {
         companyDepartmentService.deleteCompanyDepartmentMationById(inputObject, outputObject);
     }
 
@@ -74,10 +68,9 @@ public class CompanyDepartmentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentMationToEditById")
-    public void queryCompanyDepartmentMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyDepartmentMationToEditById(InputObject inputObject, OutputObject outputObject) {
         companyDepartmentService.queryCompanyDepartmentMationToEditById(inputObject, outputObject);
     }
 
@@ -86,10 +79,9 @@ public class CompanyDepartmentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyDepartmentController/editCompanyDepartmentMationById")
-    public void editCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject) {
         companyDepartmentService.editCompanyDepartmentMationById(inputObject, outputObject);
     }
 
@@ -98,10 +90,9 @@ public class CompanyDepartmentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentListTreeByCompanyId")
-    public void queryCompanyDepartmentListTreeByCompanyId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyDepartmentListTreeByCompanyId(InputObject inputObject, OutputObject outputObject) {
         companyDepartmentService.queryCompanyDepartmentListTreeByCompanyId(inputObject, outputObject);
     }
 
@@ -110,10 +101,9 @@ public class CompanyDepartmentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentListByCompanyIdToSelect")
-    public void queryCompanyDepartmentListByCompanyIdToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyDepartmentListByCompanyIdToSelect(InputObject inputObject, OutputObject outputObject) {
         companyDepartmentService.queryCompanyDepartmentListByCompanyIdToSelect(inputObject, outputObject);
     }
 
@@ -122,10 +112,9 @@ public class CompanyDepartmentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentListToChoose")
-    public void queryCompanyDepartmentListToChoose(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyDepartmentListToChoose(InputObject inputObject, OutputObject outputObject) {
         companyDepartmentService.queryCompanyDepartmentListToChoose(inputObject, outputObject);
     }
 
@@ -134,13 +123,12 @@ public class CompanyDepartmentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "companydepartment009", value = "根据部门ids获取部门信息列表", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "ids", name = "ids", value = "部门ids，逗号隔开", required = "required")})
     @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentListByIds")
-    public void queryCompanyDepartmentListByIds(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyDepartmentListByIds(InputObject inputObject, OutputObject outputObject) {
         companyDepartmentService.queryCompanyDepartmentListByIds(inputObject, outputObject);
     }
 
@@ -149,11 +137,10 @@ public class CompanyDepartmentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "queryDepartmentListByCurrentUserBelong", value = "获取当前登录用户所属企业的所有部门信息", method = "GET", allUse = "2")
     @RequestMapping("/post/CompanyDepartmentController/queryDepartmentListByCurrentUserBelong")
-    public void queryDepartmentListByCurrentUserBelong(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDepartmentListByCurrentUserBelong(InputObject inputObject, OutputObject outputObject) {
         companyDepartmentService.queryDepartmentListByCurrentUserBelong(inputObject, outputObject);
     }
 

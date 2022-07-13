@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,25 +9,25 @@ import com.skyeye.common.object.OutputObject;
 
 public interface CompanyMationService {
 
-    public void queryCompanyMationList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryCompanyMationList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertCompanyMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertCompanyMation(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteCompanyMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteCompanyMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryCompanyMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryCompanyMationToEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editCompanyMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editCompanyMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryOverAllCompanyMationList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryOverAllCompanyMationList(InputObject inputObject, OutputObject outputObject);
 
-    public void queryCompanyMationListTree(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryCompanyMationListTree(InputObject inputObject, OutputObject outputObject);
 
-    public void queryCompanyListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryCompanyListToSelect(InputObject inputObject, OutputObject outputObject);
 
-    public void queryCompanyOrganization(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryCompanyOrganization(InputObject inputObject, OutputObject outputObject);
 
-    public void queryCompanyMationListToChoose(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryCompanyMationListToChoose(InputObject inputObject, OutputObject outputObject);
 
-    public void queryCompanyMationListByIds(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryCompanyMationListByIds(InputObject inputObject, OutputObject outputObject);
 }

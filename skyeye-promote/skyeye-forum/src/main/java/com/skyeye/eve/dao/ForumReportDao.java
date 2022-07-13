@@ -9,20 +9,20 @@ import java.util.Map;
 
 public interface ForumReportDao {
 
-    public int insertForumReportMation(Map<String, Object> map) throws Exception;
+    int insertForumReportMation(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryReportNoCheckList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryReportNoCheckList(Map<String, Object> map);
 
-    public int editReportCheckMationById(Map<String, Object> map) throws Exception;
+    int editReportCheckMationById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryReportCheckedList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryReportCheckedList(Map<String, Object> map);
 
-    public Map<String, Object> queryForumReportMationToDetails(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryForumReportMationToDetails(Map<String, Object> map);
 
-    public Map<String, Object> queryForumReportStateById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryForumReportStateById(Map<String, Object> map);
 
-    public Map<String, Object> queryForumReportMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryForumReportMationById(Map<String, Object> map);
 
-    public int insertForumNoticeMation(Map<String, Object> map) throws Exception;
+    int insertForumNoticeMation(Map<String, Object> map);
 
 }

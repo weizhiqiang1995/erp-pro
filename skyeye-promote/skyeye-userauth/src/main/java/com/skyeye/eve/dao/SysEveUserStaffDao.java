@@ -40,7 +40,6 @@ public interface SysEveUserStaffDao {
      *
      * @param map
      * @return
-     * @throws Exception
      */
     List<Map<String, Object>> queryAllSysUserIsIncumbency(Map<String, Object> map);
 

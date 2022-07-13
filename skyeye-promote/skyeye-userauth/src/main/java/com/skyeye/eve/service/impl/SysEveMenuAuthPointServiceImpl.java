@@ -30,10 +30,9 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysEveMenuAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveMenuAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveMenuAuthPointDao.querySysEveMenuAuthPointListByMenuId(map);
@@ -47,11 +46,10 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysEveMenuAuthPointMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysEveMenuAuthPointMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveMenuAuthPointDao.querySysEveMenuAuthPointMationByAuthName(map);
         if (bean == null) {
@@ -71,10 +69,9 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysEveMenuAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveMenuAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveMenuAuthPointDao.querySysEveMenuAuthPointMationToEditById(map);
         outputObject.setBean(bean);
@@ -85,11 +82,10 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysEveMenuAuthPointMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysEveMenuAuthPointMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveMenuAuthPointDao.querySysEveMenuAuthPointMationByAuthNameAndId(map);
         if (bean == null) {
@@ -104,11 +100,10 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysEveMenuAuthPointMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysEveMenuAuthPointMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         sysEveMenuAuthPointDao.deleteSysEveMenuAuthPointMationById(map);
     }

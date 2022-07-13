@@ -22,10 +22,9 @@ public class RmTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmTypeController/queryRmTypeList")
-    public void queryRmTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmTypeList(InputObject inputObject, OutputObject outputObject) {
         rmTypeService.queryRmTypeList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class RmTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmTypeController/insertRmTypeMation")
-    public void insertRmTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertRmTypeMation(InputObject inputObject, OutputObject outputObject) {
         rmTypeService.insertRmTypeMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class RmTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmTypeController/deleteRmTypeById")
-    public void deleteRmTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteRmTypeById(InputObject inputObject, OutputObject outputObject) {
         rmTypeService.deleteRmTypeById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class RmTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmTypeController/queryRmTypeMationToEditById")
-    public void queryRmTypeMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmTypeMationToEditById(InputObject inputObject, OutputObject outputObject) {
         rmTypeService.queryRmTypeMationToEditById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class RmTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmTypeController/editRmTypeMationById")
-    public void editRmTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmTypeMationById(InputObject inputObject, OutputObject outputObject) {
         rmTypeService.editRmTypeMationById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class RmTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmTypeController/editRmTypeSortTopById")
-    public void editRmTypeSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmTypeSortTopById(InputObject inputObject, OutputObject outputObject) {
         rmTypeService.editRmTypeSortTopById(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class RmTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmTypeController/editRmTypeSortLowerById")
-    public void editRmTypeSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmTypeSortLowerById(InputObject inputObject, OutputObject outputObject) {
         rmTypeService.editRmTypeSortLowerById(inputObject, outputObject);
     }
 
@@ -106,10 +99,9 @@ public class RmTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmTypeController/queryRmTypeAllList")
-    public void queryRmTypeAllList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmTypeAllList(InputObject inputObject, OutputObject outputObject) {
         rmTypeService.queryRmTypeAllList(inputObject, outputObject);
     }
 

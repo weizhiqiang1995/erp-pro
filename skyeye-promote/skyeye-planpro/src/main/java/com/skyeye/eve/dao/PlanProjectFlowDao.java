@@ -9,24 +9,24 @@ import java.util.Map;
 
 public interface PlanProjectFlowDao {
 
-    List<Map<String, Object>> queryPlanProjectFlowList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryPlanProjectFlowList(Map<String, Object> map);
 
-    int insertPlanProjectFlowMation(Map<String, Object> map) throws Exception;
+    int insertPlanProjectFlowMation(Map<String, Object> map);
 
-    Map<String, Object> queryPlanProjectFlowMationByName(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryPlanProjectFlowMationByName(Map<String, Object> map);
 
-    int deletePlanProjectFlowMationById(Map<String, Object> map) throws Exception;
+    int deletePlanProjectFlowMationById(Map<String, Object> map);
 
-    Map<String, Object> queryPlanProjectFlowMationToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryPlanProjectFlowMationToEditById(Map<String, Object> map);
 
-    Map<String, Object> queryPlanProjectFlowMationByNameAndId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryPlanProjectFlowMationByNameAndId(Map<String, Object> map);
 
-    int editPlanProjectFlowMationById(Map<String, Object> map) throws Exception;
+    int editPlanProjectFlowMationById(Map<String, Object> map);
 
-    Map<String, Object> queryChildNumMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryChildNumMationById(Map<String, Object> map);
 
-    Map<String, Object> queryPlanProjectFlowJsonContentMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryPlanProjectFlowJsonContentMationById(Map<String, Object> map);
 
-    int editPlanProjectFlowJsonContentMationById(Map<String, Object> map) throws Exception;
+    int editPlanProjectFlowJsonContentMationById(Map<String, Object> map);
 
 }

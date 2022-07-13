@@ -7,6 +7,7 @@ package com.skyeye.mq.consumer;
 import cn.hutool.json.JSONUtil;
 import com.skyeye.common.constans.MqConstants;
 import com.skyeye.common.util.SpringUtils;
+import com.skyeye.exception.CustomException;
 import com.skyeye.mq.job.JobMateService;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
@@ -26,13 +27,16 @@ public class Consumer {
      * activeMq监听监听接收消息队列
      *
      * @param data 从消息队列获得到的参数
-     * @throws Exception
      */
     @JmsListener(destination = "${queue}")
-    public void receive(String data) throws Exception {
+    public void receive(String data) {
         Map<String, Object> map = JSONUtil.toBean(data, null);
         String type = map.get("type").toString();
-        Thread.sleep(3000);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            throw new CustomException(ex);
+        }
         JobMateService jobMateService = SpringUtils.getBean(MqConstants.JobMateMationJobType.getServiceNameByJobType(type));
         jobMateService.call(data);
     }

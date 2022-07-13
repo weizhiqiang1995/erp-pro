@@ -22,10 +22,9 @@ public class UserPhoneController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserPhoneController/queryPhoneToLogin")
-    public void queryPhoneToLogin(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPhoneToLogin(InputObject inputObject, OutputObject outputObject) {
         userPhoneService.queryPhoneToLogin(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class UserPhoneController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserPhoneController/queryPhoneUserMation")
-    public void queryPhoneUserMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPhoneUserMation(InputObject inputObject, OutputObject outputObject) {
         userPhoneService.queryPhoneUserMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class UserPhoneController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserPhoneController/queryPhoneUserMenuAuth")
-    public void queryPhoneUserMenuAuth(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPhoneUserMenuAuth(InputObject inputObject, OutputObject outputObject) {
         userPhoneService.queryPhoneUserMenuAuth(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class UserPhoneController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserPhoneController/queryPhoneToExit")
-    public void queryPhoneToExit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPhoneToExit(InputObject inputObject, OutputObject outputObject) {
         userPhoneService.queryPhoneToExit(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class UserPhoneController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserPhoneController/queryUserMationByOpenId")
-    public void queryUserMationByOpenId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUserMationByOpenId(InputObject inputObject, OutputObject outputObject) {
         userPhoneService.queryUserMationByOpenId(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class UserPhoneController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserPhoneController/insertUserMationByOpenId")
-    public void insertUserMationByOpenId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertUserMationByOpenId(InputObject inputObject, OutputObject outputObject) {
         userPhoneService.insertUserMationByOpenId(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class UserPhoneController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/UserPhoneController/queryAllPeopleToTree")
-    public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) {
         userPhoneService.queryAllPeopleToTree(inputObject, outputObject);
     }
 

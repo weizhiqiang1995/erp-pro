@@ -65,10 +65,9 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyJobScoreList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyJobScoreList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = companyJobScoreDao.queryCompanyJobScoreList(map);
@@ -81,11 +80,10 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertCompanyJobScoreMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertCompanyJobScoreMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 根据判断该名称是否存在
         Map<String, Object> mation = companyJobScoreDao.queryCompanyJobScoreByNameAndNotId(map.get("nameCn").toString(), map.get("jobId").toString(), null);
@@ -111,7 +109,7 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
      * @param str
      * @param id
      */
-    private void companyJobScoreField(String str, String id) throws Exception {
+    private void companyJobScoreField(String str, String id) {
         companyJobScoreFieldDao.deleteCompanyJobScoreFieldByJobScoreId(id);
         if (ToolUtil.isBlank(str)) {
             return;
@@ -131,10 +129,9 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyJobScoreMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyJobScoreMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = companyJobScoreDao.queryCompanyJobScoreMationById(id);
@@ -152,11 +149,10 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> mation = companyJobScoreDao.queryCompanyJobScoreByNameAndNotId(map.get("nameCn").toString(), map.get("jobId").toString(), id);
@@ -176,11 +172,10 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         companyJobScoreDao.editCompanyJobScoreStateMationById(map.get("id").toString(), STATE.START_DELETE.getState());
     }
@@ -190,11 +185,10 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void enableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void enableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         companyJobScoreDao.editCompanyJobScoreStateMationById(map.get("id").toString(), STATE.START_UP.getState());
     }
@@ -204,11 +198,10 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void disableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void disableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         companyJobScoreDao.editCompanyJobScoreStateMationById(map.get("id").toString(), STATE.START_DOWN.getState());
     }
@@ -218,10 +211,9 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryEnableCompanyJobScoreList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryEnableCompanyJobScoreList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyJobScoreDao.queryEnableCompanyJobScoreList(map);
         outputObject.setBeans(beans);
@@ -233,10 +225,9 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyJobScoreDetailMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyJobScoreDetailMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = companyJobScoreDao.queryCompanyJobScoreMationById(id);

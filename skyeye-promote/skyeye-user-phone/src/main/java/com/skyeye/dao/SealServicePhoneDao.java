@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.dao;
 
 import org.apache.ibatis.annotations.Param;
@@ -10,18 +11,18 @@ import java.util.Map;
 
 public interface SealServicePhoneDao {
 
-    public List<Map<String, Object>> queryNumberInEveryStateIsMine(@Param("userId") String userId) throws Exception;
+    List<Map<String, Object>> queryNumberInEveryStateIsMine(@Param("userId") String userId);
 
-    public List<Map<String, Object>> queryNumberInEveryStateIsAll() throws Exception;
+    List<Map<String, Object>> queryNumberInEveryStateIsAll();
 
-    public Map<String, Object> querySealSeServiceState(@Param("id") String string) throws Exception;
+    Map<String, Object> querySealSeServiceState(@Param("id") String string);
 
-    public int insertSealSeServiceWaitToSignonMation(Map<String, Object> map) throws Exception;
+    int insertSealSeServiceWaitToSignonMation(Map<String, Object> map);
 
-    public int editSealSeServiceWaitToSignonMation(Map<String, Object> map) throws Exception;
+    int editSealSeServiceWaitToSignonMation(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryFeedBackList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryFeedBackList(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryAllPartsList(Map<String, Object> params) throws Exception;
+    List<Map<String, Object>> queryAllPartsList(Map<String, Object> params);
 
 }

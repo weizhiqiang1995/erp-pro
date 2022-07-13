@@ -33,10 +33,9 @@ public class CompanyMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyMationController/queryCompanyMationList")
-    public void queryCompanyMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyMationList(InputObject inputObject, OutputObject outputObject) {
         companyMationService.queryCompanyMationList(inputObject, outputObject);
     }
 
@@ -45,10 +44,9 @@ public class CompanyMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyMationController/insertCompanyMation")
-    public void insertCompanyMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertCompanyMation(InputObject inputObject, OutputObject outputObject) {
         companyMationService.insertCompanyMation(inputObject, outputObject);
     }
 
@@ -57,10 +55,9 @@ public class CompanyMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyMationController/deleteCompanyMationById")
-    public void deleteCompanyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteCompanyMationById(InputObject inputObject, OutputObject outputObject) {
         companyMationService.deleteCompanyMationById(inputObject, outputObject);
     }
 
@@ -69,10 +66,9 @@ public class CompanyMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyMationController/queryCompanyMationToEditById")
-    public void queryCompanyMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyMationToEditById(InputObject inputObject, OutputObject outputObject) {
         companyMationService.queryCompanyMationToEditById(inputObject, outputObject);
     }
 
@@ -81,10 +77,9 @@ public class CompanyMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyMationController/editCompanyMationById")
-    public void editCompanyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCompanyMationById(InputObject inputObject, OutputObject outputObject) {
         companyMationService.editCompanyMationById(inputObject, outputObject);
     }
 
@@ -93,10 +88,9 @@ public class CompanyMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyMationController/queryOverAllCompanyMationList")
-    public void queryOverAllCompanyMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryOverAllCompanyMationList(InputObject inputObject, OutputObject outputObject) {
         companyMationService.queryOverAllCompanyMationList(inputObject, outputObject);
     }
 
@@ -105,11 +99,10 @@ public class CompanyMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "queryCompanyMationListTree", value = "获取公司信息列表展示为树", method = "POST", allUse = "2")
     @RequestMapping("/post/CompanyMationController/queryCompanyMationListTree")
-    public void queryCompanyMationListTree(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyMationListTree(InputObject inputObject, OutputObject outputObject) {
         companyMationService.queryCompanyMationListTree(inputObject, outputObject);
     }
 
@@ -118,10 +111,9 @@ public class CompanyMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyMationController/queryCompanyListToSelect")
-    public void queryCompanyListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyListToSelect(InputObject inputObject, OutputObject outputObject) {
         companyMationService.queryCompanyListToSelect(inputObject, outputObject);
     }
 
@@ -130,10 +122,9 @@ public class CompanyMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyMationController/queryCompanyOrganization")
-    public void queryCompanyOrganization(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyOrganization(InputObject inputObject, OutputObject outputObject) {
         companyMationService.queryCompanyOrganization(inputObject, outputObject);
     }
 
@@ -142,10 +133,9 @@ public class CompanyMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyMationController/queryCompanyMationListToChoose")
-    public void queryCompanyMationListToChoose(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyMationListToChoose(InputObject inputObject, OutputObject outputObject) {
         companyMationService.queryCompanyMationListToChoose(inputObject, outputObject);
     }
 
@@ -154,10 +144,9 @@ public class CompanyMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyMationController/queryCompanyMationListByIds")
-    public void queryCompanyMationListByIds(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyMationListByIds(InputObject inputObject, OutputObject outputObject) {
         companyMationService.queryCompanyMationListByIds(inputObject, outputObject);
     }
 

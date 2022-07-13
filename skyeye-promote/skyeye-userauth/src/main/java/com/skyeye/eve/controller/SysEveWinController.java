@@ -22,10 +22,9 @@ public class SysEveWinController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinController/queryWinMationList")
-    public void queryWinMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWinMationList(InputObject inputObject, OutputObject outputObject) {
         sysEveWinService.queryWinMationList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class SysEveWinController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinController/insertWinMation")
-    public void insertWinMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWinMation(InputObject inputObject, OutputObject outputObject) {
         sysEveWinService.insertWinMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class SysEveWinController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinController/queryWinMationToEditById")
-    public void queryWinMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWinMationToEditById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinService.queryWinMationToEditById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class SysEveWinController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinController/editWinMationById")
-    public void editWinMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editWinMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinService.editWinMationById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class SysEveWinController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinController/deleteWinMationById")
-    public void deleteWinMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteWinMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinService.deleteWinMationById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class SysEveWinController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinController/editAuthorizationById")
-    public void editAuthorizationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAuthorizationById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinService.editAuthorizationById(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class SysEveWinController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinController/editCancleAuthorizationById")
-    public void editCancleAuthorizationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCancleAuthorizationById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinService.editCancleAuthorizationById(inputObject, outputObject);
     }
 
@@ -106,10 +99,9 @@ public class SysEveWinController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinController/queryWinMationListToShow")
-    public void queryWinMationListToShow(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWinMationListToShow(InputObject inputObject, OutputObject outputObject) {
         sysEveWinService.queryWinMationListToShow(inputObject, outputObject);
     }
 
@@ -118,10 +110,9 @@ public class SysEveWinController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinController/insertWinMationImportantSynchronization")
-    public void insertWinMationImportantSynchronization(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWinMationImportantSynchronization(InputObject inputObject, OutputObject outputObject) {
         sysEveWinService.insertWinMationImportantSynchronization(inputObject, outputObject);
     }
 
@@ -130,10 +121,9 @@ public class SysEveWinController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinController/queryWinMationImportantSynchronizationData")
-    public void queryWinMationImportantSynchronizationData(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWinMationImportantSynchronizationData(InputObject inputObject, OutputObject outputObject) {
         sysEveWinService.queryWinMationImportantSynchronizationData(inputObject, outputObject);
     }
 

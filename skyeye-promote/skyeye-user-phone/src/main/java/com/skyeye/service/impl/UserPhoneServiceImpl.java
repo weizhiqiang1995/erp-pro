@@ -62,10 +62,9 @@ public class UserPhoneServiceImpl implements UserPhoneService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryPhoneToLogin(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPhoneToLogin(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> userMation = userPhoneDao.queryMationByUserCode(map);
         if (userMation == null) {
@@ -100,10 +99,9 @@ public class UserPhoneServiceImpl implements UserPhoneService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryPhoneUserMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPhoneUserMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> user = inputObject.getLogParams();
         outputObject.setBean(user);
     }
@@ -113,10 +111,9 @@ public class UserPhoneServiceImpl implements UserPhoneService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryPhoneUserMenuAuth(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPhoneUserMenuAuth(InputObject inputObject, OutputObject outputObject) {
         List<Map<String, Object>> allMenuMation = inputObject.getLogAllMenuParams();
         outputObject.setBeans(allMenuMation);
     }
@@ -126,10 +123,9 @@ public class UserPhoneServiceImpl implements UserPhoneService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryPhoneToExit(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPhoneToExit(InputObject inputObject, OutputObject outputObject) {
         String userId = GetUserToken.getUserTokenUserId(PutObject.getRequest());
         SysUserAuthConstants.delUserLoginRedisCache(userId);
         jedisClient.del("allMenuMation:" + userId);
@@ -141,10 +137,9 @@ public class UserPhoneServiceImpl implements UserPhoneService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryUserMationByOpenId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryUserMationByOpenId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String openId = map.get("openId").toString();
         //判断该微信用户在redis中是否存在数据
@@ -197,10 +192,9 @@ public class UserPhoneServiceImpl implements UserPhoneService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void insertUserMationByOpenId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertUserMationByOpenId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String userCode = map.get("userCode").toString();
         String password = map.get("password").toString();
@@ -268,10 +262,9 @@ public class UserPhoneServiceImpl implements UserPhoneService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map = compareSelUserListByParams(map, inputObject);
         List<Map<String, Object>> beans = userPhoneDao.queryAllPeopleToTree(map);
@@ -285,9 +278,8 @@ public class UserPhoneServiceImpl implements UserPhoneService {
      * @param map
      * @param inputObject
      * @return
-     * @throws Exception
      */
-    public Map<String, Object> compareSelUserListByParams(Map<String, Object> map, InputObject inputObject) throws Exception {
+    public Map<String, Object> compareSelUserListByParams(Map<String, Object> map, InputObject inputObject) {
         String chooseOrNotMy = map.get("chooseOrNotMy").toString();//人员列表中是否包含自己--1.包含；其他参数不包含
         if (!"1".equals(chooseOrNotMy)) {
             Map<String, Object> user = inputObject.getLogParams();

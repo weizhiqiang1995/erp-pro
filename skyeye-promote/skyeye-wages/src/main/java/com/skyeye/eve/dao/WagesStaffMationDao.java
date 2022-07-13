@@ -35,7 +35,6 @@ public interface WagesStaffMationDao {
      * @param lastMonthDate 上个月的年月
      * @param staffId       不包含的员工id
      * @return
-     * @throws Exception
      */
     public Map<String, Object> queryNoWagesLastMonthByLastMonthDate(@Param("lastMonthDate") String lastMonthDate, @Param("list") List<String> staffId);
 
@@ -45,7 +44,6 @@ public interface WagesStaffMationDao {
      * @param staffId       员工id
      * @param lastMonthDate 上个月的年月
      * @return
-     * @throws Exception
      */
     public List<Map<String, Object>> queryLastMonthCheckWork(@Param("staffId") String staffId, @Param("lastMonthDate") String lastMonthDate);
 
@@ -55,7 +53,6 @@ public interface WagesStaffMationDao {
      * @param staffId       员工id
      * @param lastMonthDate 上个月的年月
      * @return
-     * @throws Exception
      */
     public List<Map<String, Object>> queryLastMonthLeaveTime(@Param("staffId") String staffId, @Param("lastMonthDate") String lastMonthDate);
 
@@ -65,7 +62,6 @@ public interface WagesStaffMationDao {
      * @param staffId       员工id
      * @param lastMonthDate 上个月的年月
      * @return
-     * @throws Exception
      */
     public List<Map<String, Object>> queryLastMonthCancleLeaveTime(@Param("staffId") String staffId, @Param("lastMonthDate") String lastMonthDate);
 
@@ -73,7 +69,6 @@ public interface WagesStaffMationDao {
      * 将指定员工月度清零的薪资字段设置为0
      *
      * @param staffId 员工id
-     * @throws Exception
      */
     public void editStaffMonthlyClearingWagesByStaffId(@Param("staffId") String staffId);
 
@@ -83,7 +78,6 @@ public interface WagesStaffMationDao {
      * @param staffId  员工id
      * @param payMonth 月份
      * @return
-     * @throws Exception
      */
     public Map<String, Object> queryWagesStaffPaymentDetail(@Param("staffId") String staffId, @Param("payMonth") String payMonth);
 

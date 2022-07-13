@@ -53,10 +53,9 @@ public class ShopStoreIntercourseQuartz {
     /**
      * 定时器计算门店昨日支出/收入往来信息,每天凌晨两点执行一次
      *
-     * @throws Exception
      */
     @Scheduled(cron = "0 0 2 * * ?")
-    public void calcShopStoreIntercourse() throws Exception {
+    public void calcShopStoreIntercourse() {
         String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         log.info("定时器计算门店昨日支出/收入往来信息执行 start");
         RedisLock lock = new RedisLock(LOCK_KEY);

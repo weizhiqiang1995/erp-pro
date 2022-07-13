@@ -22,10 +22,9 @@ public class SysEveUserNoticeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserNoticeController/getNoticeListByUserId")
-    public void getNoticeListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void getNoticeListByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEveUserNoticeService.getNoticeListByUserId(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class SysEveUserNoticeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserNoticeController/getAllNoticeListByUserId")
-    public void getAllNoticeListByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void getAllNoticeListByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEveUserNoticeService.getAllNoticeListByUserId(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class SysEveUserNoticeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserNoticeController/editNoticeMationById")
-    public void editNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editNoticeMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveUserNoticeService.editNoticeMationById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class SysEveUserNoticeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserNoticeController/deleteNoticeMationById")
-    public void deleteNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteNoticeMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveUserNoticeService.deleteNoticeMationById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class SysEveUserNoticeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserNoticeController/editNoticeMationByIds")
-    public void editNoticeMationByIds(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editNoticeMationByIds(InputObject inputObject, OutputObject outputObject) {
         sysEveUserNoticeService.editNoticeMationByIds(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class SysEveUserNoticeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserNoticeController/deleteNoticeMationByIds")
-    public void deleteNoticeMationByIds(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteNoticeMationByIds(InputObject inputObject, OutputObject outputObject) {
         sysEveUserNoticeService.deleteNoticeMationByIds(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class SysEveUserNoticeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveUserNoticeController/queryNoticeMationById")
-    public void queryNoticeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryNoticeMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveUserNoticeService.queryNoticeMationById(inputObject, outputObject);
     }
 

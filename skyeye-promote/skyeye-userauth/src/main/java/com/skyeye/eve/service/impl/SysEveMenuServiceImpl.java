@@ -11,7 +11,6 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveMenuDao;
 import com.skyeye.eve.service.SysEveMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +31,9 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysMenuList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysMenuList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveMenuDao.querySysMenuList(map);
@@ -48,11 +46,10 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysMenuMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysMenuMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         if (Constants.SYS_MENU_TYPE_IS_IFRAME.equals(map.get("menuType").toString())) {//iframe
@@ -88,10 +85,9 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysEveMenuDao.querySysMenuMationBySimpleLevel(map);
         if (!beans.isEmpty()) {
@@ -105,10 +101,9 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysMenuMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysMenuMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveMenuDao.querySysMenuMationToEditById(map);
         outputObject.setBean(bean);
@@ -120,11 +115,10 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysMenuMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysMenuMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         if (Constants.SYS_MENU_TYPE_IS_IFRAME.equals(map.get("menuType").toString())) {//iframe
             map.put("openType", Constants.SYS_MENU_OPEN_TYPE_IS_IFRAME);//1：打开iframe
@@ -162,11 +156,10 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysMenuMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysMenuMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> menuBean = sysEveMenuDao.queryUseThisMenuRoleById(map);
         if (menuBean == null) {
@@ -191,10 +184,9 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryTreeSysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryTreeSysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysEveMenuDao.queryTreeSysMenuMationBySimpleLevel(map);
         if (!beans.isEmpty()) {
@@ -208,10 +200,9 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysMenuLevelList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysMenuLevelList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysEveMenuDao.querySysMenuLevelList(map);
         if (!beans.isEmpty()) {
@@ -225,11 +216,10 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysEveMenuSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysEveMenuSortTopById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = sysEveMenuDao.querySysEveMenuISTopByThisId(map);//根据同一级排序获取这条数据的上一条数据
         if (topBean == null) {
@@ -244,7 +234,7 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
         }
     }
 
-    private void setUpdateUserMation(InputObject inputObject, Map<String, Object> map) throws Exception {
+    private void setUpdateUserMation(InputObject inputObject, Map<String, Object> map) {
         map.put("lastUpdateId", inputObject.getLogParams().get("id"));
         map.put("lastUpdateTime", DateUtil.getTimeAndToString());
     }
@@ -254,11 +244,10 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysEveMenuSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysEveMenuSortLowerById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = sysEveMenuDao.querySysEveMenuISLowerByThisId(map);//根据同一级排序获取这条数据的下一条数据
         if (topBean == null) {
@@ -278,10 +267,9 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysWinMationListBySysId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysWinMationListBySysId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysEveMenuDao.querySysWinMationListBySysId(map);
         if (!beans.isEmpty()) {
@@ -295,10 +283,9 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysEveMenuBySysId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveMenuBySysId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveMenuDao.querySysEveMenuBySysId(map);
         if (!bean.isEmpty()) {

@@ -9,17 +9,17 @@ import java.util.Map;
 
 public interface ForumSensitiveWordsDao {
 
-    public List<Map<String, Object>> queryForumSensitiveWordsList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryForumSensitiveWordsList(Map<String, Object> map);
 
-    public Map<String, Object> queryForumSensitiveWordsMationByName(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryForumSensitiveWordsMationByName(Map<String, Object> map);
 
-    public int insertForumSensitiveWordsMation(Map<String, Object> map) throws Exception;
+    int insertForumSensitiveWordsMation(Map<String, Object> map);
 
-    public int deleteForumSensitiveWordsById(Map<String, Object> map) throws Exception;
+    int deleteForumSensitiveWordsById(Map<String, Object> map);
 
-    public Map<String, Object> selectForumSensitiveWordsById(Map<String, Object> map) throws Exception;
+    Map<String, Object> selectForumSensitiveWordsById(Map<String, Object> map);
 
-    public int editForumSensitiveWordsMationById(Map<String, Object> map) throws Exception;
+    int editForumSensitiveWordsMationById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryForumSensitiveWordsListAll() throws Exception;
+    List<Map<String, Object>> queryForumSensitiveWordsListAll();
 }

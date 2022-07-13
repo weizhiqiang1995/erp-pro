@@ -36,7 +36,7 @@ public class MySysWorkMationService implements TaskMateService {
     private JobMateMationService jobMateMationService;
 
     @Override
-    public void call(SysQuartz sysQuartz) throws Exception {
+    public void call(SysQuartz sysQuartz) {
         Map<String, Object> map = new HashMap<>();
         LOGGER.info("start task name is: {}", sysQuartz.getName());
         map.put("id", sysQuartz.getName());

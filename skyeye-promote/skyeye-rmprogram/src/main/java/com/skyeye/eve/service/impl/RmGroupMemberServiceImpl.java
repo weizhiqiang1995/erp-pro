@@ -45,10 +45,9 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryRmGroupMemberList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmGroupMemberList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String tPath = "images/upload/smpropic/";
         map.put("basePath", tPath);
@@ -63,11 +62,10 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertRmGroupMemberMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertRmGroupMemberMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -87,11 +85,10 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editRmGroupMemberSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmGroupMemberSortTopById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = rmGroupMemberDao.queryRmGroupMemberISTopByThisId(map);//根据排序获取这条数据的上一条数据
         if (topBean == null) {
@@ -109,11 +106,10 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editRmGroupMemberSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmGroupMemberSortLowerById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = rmGroupMemberDao.queryRmGroupMemberISLowerByThisId(map);//根据排序获取这条数据的下一条数据
         if (topBean == null) {
@@ -131,11 +127,10 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteRmGroupMemberById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteRmGroupMemberById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmGroupMemberDao.queryUseRmGroupMemberNumById(map);
         if (bean == null) {
@@ -161,10 +156,9 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryRmGroupMemberMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmGroupMemberMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String tPath = "images/upload/smpropic/";
         map.put("basePath", tPath);
@@ -178,11 +172,10 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editRmGroupMemberMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmGroupMemberMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> item = rmGroupMemberDao.queryRmGroupMemberMationById(map);
         if (!item.get("printsPicUrl").toString().equals(map.get("img").toString())) {//保存的图片和原来的图片不符
@@ -198,11 +191,10 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         String[] propertyIds = map.get("propertyIds").toString().split(",");
@@ -230,10 +222,9 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = rmGroupMemberDao.queryRmGroupMemberAndPropertyMationById(map);
         if (beans != null && !beans.isEmpty()) {

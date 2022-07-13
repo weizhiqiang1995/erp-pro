@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,22 +9,22 @@ import com.skyeye.common.object.OutputObject;
 
 public interface RmGroupMemberService {
 
-    public void queryRmGroupMemberList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryRmGroupMemberList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertRmGroupMemberMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertRmGroupMemberMation(InputObject inputObject, OutputObject outputObject);
 
-    public void editRmGroupMemberSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editRmGroupMemberSortTopById(InputObject inputObject, OutputObject outputObject);
 
-    public void editRmGroupMemberSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editRmGroupMemberSortLowerById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteRmGroupMemberById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteRmGroupMemberById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryRmGroupMemberMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryRmGroupMemberMationToEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editRmGroupMemberMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editRmGroupMemberMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject);
 
 }

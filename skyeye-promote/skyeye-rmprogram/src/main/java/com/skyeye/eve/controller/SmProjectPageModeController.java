@@ -25,10 +25,9 @@ public class SmProjectPageModeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectPageModeController/queryProPageModeMationByPageIdList")
-    public void queryProPageModeMationByPageIdList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryProPageModeMationByPageIdList(InputObject inputObject, OutputObject outputObject) {
         smProjectPageModeService.queryProPageModeMationByPageIdList(inputObject, outputObject);
     }
 
@@ -37,10 +36,9 @@ public class SmProjectPageModeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectPageModeController/editProPageModeMationByPageIdList")
-    public void editProPageModeMationByPageIdList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editProPageModeMationByPageIdList(InputObject inputObject, OutputObject outputObject) {
         smProjectPageModeService.editProPageModeMationByPageIdList(inputObject, outputObject);
     }
 
@@ -49,10 +47,9 @@ public class SmProjectPageModeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectPageModeController/queryPropertyListByMemberId")
-    public void queryPropertyListByMemberId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPropertyListByMemberId(InputObject inputObject, OutputObject outputObject) {
         smProjectPageModeService.queryPropertyListByMemberId(inputObject, outputObject);
     }
 
@@ -61,10 +58,9 @@ public class SmProjectPageModeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectPageModeController/queryPageToExportH5ByPageId")
-    public void queryPageToExportH5ByPageId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryPageToExportH5ByPageId(InputObject inputObject, OutputObject outputObject) {
         smProjectPageModeService.queryPageToExportH5ByPageId(inputObject, outputObject);
     }
 

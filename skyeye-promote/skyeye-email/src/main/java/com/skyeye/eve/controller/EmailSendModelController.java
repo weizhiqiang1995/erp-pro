@@ -22,10 +22,9 @@ public class EmailSendModelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/EmailSendModel/queryEmailSendModelList")
-    public void queryEmailSendModelList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryEmailSendModelList(InputObject inputObject, OutputObject outputObject) {
         emailSendModelService.queryEmailSendModelList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class EmailSendModelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/EmailSendModel/insertEmailSendModel")
-    public void insertEmailSendModel(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertEmailSendModel(InputObject inputObject, OutputObject outputObject) {
         emailSendModelService.insertEmailSendModel(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class EmailSendModelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/EmailSendModel/queryEmailSendModelInfoById")
-    public void queryEmailSendModelInfoById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryEmailSendModelInfoById(InputObject inputObject, OutputObject outputObject) {
         emailSendModelService.queryEmailSendModelInfoById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class EmailSendModelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/EmailSendModel/delEmailSendModelById")
-    public void delEmailSendModelById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void delEmailSendModelById(InputObject inputObject, OutputObject outputObject) {
         emailSendModelService.delEmailSendModelById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class EmailSendModelController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/EmailSendModel/updateEmailSendModelById")
-    public void updateEmailSendModelById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateEmailSendModelById(InputObject inputObject, OutputObject outputObject) {
         emailSendModelService.updateEmailSendModelById(inputObject, outputObject);
     }
 

@@ -11,54 +11,54 @@ import java.util.Map;
 
 public interface MyNoteDao {
 
-    public int insertFileFolderByUserId(Map<String, Object> map) throws Exception;
+    int insertFileFolderByUserId(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryFileFolderByUserIdAndParentId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryFileFolderByUserIdAndParentId(Map<String, Object> map);
 
-    public Map<String, Object> queryFolderMationById(@Param("folderId") String folderId) throws Exception;
+    Map<String, Object> queryFolderMationById(@Param("folderId") String folderId);
 
-    public int deleteFileFolderById(Map<String, Object> map) throws Exception;
+    int deleteFileFolderById(Map<String, Object> map);
 
-    public int deleteFilesByFolderId(Map<String, Object> map) throws Exception;
+    int deleteFilesByFolderId(Map<String, Object> map);
 
-    public int deleteFolderChildByFolderId(Map<String, Object> map) throws Exception;
+    int deleteFolderChildByFolderId(Map<String, Object> map);
 
-    public int deleteNoteContentById(Map<String, Object> map) throws Exception;
+    int deleteNoteContentById(Map<String, Object> map);
 
-    public int editFileFolderById(Map<String, Object> map) throws Exception;
+    int editFileFolderById(Map<String, Object> map);
 
-    public int editNoteContentNameById(Map<String, Object> map) throws Exception;
+    int editNoteContentNameById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryMyNoteListNewByUserId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryMyNoteListNewByUserId(Map<String, Object> map);
 
-    public int insertMyNoteContentByUserId(Map<String, Object> map) throws Exception;
+    int insertMyNoteContentByUserId(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryFileAndContentListByFolderId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryFileAndContentListByFolderId(Map<String, Object> map);
 
-    public Map<String, Object> queryMyNoteContentMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryMyNoteContentMationById(Map<String, Object> map);
 
-    public int editMyNoteContentById(Map<String, Object> map) throws Exception;
+    int editMyNoteContentById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryFileFolderListByList(List<Map<String, Object>> folderBeans) throws Exception;
+    List<Map<String, Object>> queryFileFolderListByList(List<Map<String, Object>> folderBeans);
 
-    public int deleteFileFolderListByList(List<Map<String, Object>> folderBeans) throws Exception;
+    int deleteFileFolderListByList(List<Map<String, Object>> folderBeans);
 
-    public List<Map<String, Object>> queryFileListByList(List<Map<String, Object>> folderNew) throws Exception;
+    List<Map<String, Object>> queryFileListByList(List<Map<String, Object>> folderNew);
 
-    public int deleteFileListByList(List<Map<String, Object>> folderNew) throws Exception;
+    int deleteFileListByList(List<Map<String, Object>> folderNew);
 
-    public int insertFileFolderListByList(List<Map<String, Object>> folderNew) throws Exception;
+    int insertFileFolderListByList(List<Map<String, Object>> folderNew);
 
-    public int insertFileListByList(List<Map<String, Object>> fileNew) throws Exception;
+    int insertFileListByList(List<Map<String, Object>> fileNew);
 
-    public List<Map<String, Object>> queryTreeToMoveByUserId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryTreeToMoveByUserId(Map<String, Object> map);
 
-    public Map<String, Object> queryShareNoteById(@Param("fileId") String fileId) throws Exception;
+    Map<String, Object> queryShareNoteById(@Param("fileId") String fileId);
 
-    public List<Map<String, Object>> queryAllFolderListByFolderId(@Param("folderId") String folderId) throws Exception;
+    List<Map<String, Object>> queryAllFolderListByFolderId(@Param("folderId") String folderId);
 
-    public List<Map<String, Object>> queryAllFileListByFolderList(List<Map<String, Object>> beans) throws Exception;
+    List<Map<String, Object>> queryAllFileListByFolderList(List<Map<String, Object>> beans);
 
-    public int editNoteToMoveById(@Param("fileId") String fileId, @Param("parentId") String parentId, @Param("userId") String userId) throws Exception;
+    int editNoteToMoveById(@Param("fileId") String fileId, @Param("parentId") String parentId, @Param("userId") String userId);
 
 }

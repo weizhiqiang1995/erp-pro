@@ -22,10 +22,9 @@ public class MailListController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MailListController/queryMailMationList")
-    public void queryMailMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMailMationList(InputObject inputObject, OutputObject outputObject) {
         mailListService.queryMailMationList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class MailListController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MailListController/insertMailMation")
-    public void insertMailMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertMailMation(InputObject inputObject, OutputObject outputObject) {
         mailListService.insertMailMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class MailListController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MailListController/deleteMailMationById")
-    public void deleteMailMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteMailMationById(InputObject inputObject, OutputObject outputObject) {
         mailListService.deleteMailMationById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class MailListController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MailListController/queryMailMationToEditById")
-    public void queryMailMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMailMationToEditById(InputObject inputObject, OutputObject outputObject) {
         mailListService.queryMailMationToEditById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class MailListController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MailListController/editMailMationById")
-    public void editMailMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editMailMationById(InputObject inputObject, OutputObject outputObject) {
         mailListService.editMailMationById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class MailListController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MailListController/queryMailMationDetailsById")
-    public void queryMailMationDetailsById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMailMationDetailsById(InputObject inputObject, OutputObject outputObject) {
         mailListService.queryMailMationDetailsById(inputObject, outputObject);
     }
 

@@ -22,10 +22,9 @@ public class CompanyTalkGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyTalkGroupController/insertGroupMation")
-    public void queryCodeModelList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCodeModelList(InputObject inputObject, OutputObject outputObject) {
         companyTalkGroupService.insertGroupMation(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class CompanyTalkGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyTalkGroupController/queryGroupInvitationMation")
-    public void queryGroupInvitationMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryGroupInvitationMation(InputObject inputObject, OutputObject outputObject) {
         companyTalkGroupService.queryGroupInvitationMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class CompanyTalkGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyTalkGroupController/editAgreeInGroupInvitationMation")
-    public void editAgreeInGroupInvitationMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAgreeInGroupInvitationMation(InputObject inputObject, OutputObject outputObject) {
         companyTalkGroupService.editAgreeInGroupInvitationMation(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class CompanyTalkGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyTalkGroupController/editRefuseInGroupInvitationMation")
-    public void editRefuseInGroupInvitationMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRefuseInGroupInvitationMation(InputObject inputObject, OutputObject outputObject) {
         companyTalkGroupService.editRefuseInGroupInvitationMation(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class CompanyTalkGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyTalkGroupController/queryGroupMationList")
-    public void queryGroupMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryGroupMationList(InputObject inputObject, OutputObject outputObject) {
         companyTalkGroupService.queryGroupMationList(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class CompanyTalkGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyTalkGroupController/insertGroupMationToTalk")
-    public void insertGroupMationToTalk(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertGroupMationToTalk(InputObject inputObject, OutputObject outputObject) {
         companyTalkGroupService.insertGroupMationToTalk(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class CompanyTalkGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyTalkGroupController/queryGroupMemberByGroupId")
-    public void queryGroupMemberByGroupId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryGroupMemberByGroupId(InputObject inputObject, OutputObject outputObject) {
         companyTalkGroupService.queryGroupMemberByGroupId(inputObject, outputObject);
     }
 
@@ -106,10 +99,9 @@ public class CompanyTalkGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyTalkGroupController/queryChatLogByType")
-    public void queryChatLogByType(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryChatLogByType(InputObject inputObject, OutputObject outputObject) {
         companyTalkGroupService.queryChatLogByType(inputObject, outputObject);
     }
 
@@ -118,10 +110,9 @@ public class CompanyTalkGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyTalkGroupController/editUserToExitGroup")
-    public void editUserToExitGroup(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserToExitGroup(InputObject inputObject, OutputObject outputObject) {
         companyTalkGroupService.editUserToExitGroup(inputObject, outputObject);
     }
 
@@ -130,10 +121,9 @@ public class CompanyTalkGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyTalkGroupController/editCreateToExitGroup")
-    public void editCreateToExitGroup(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCreateToExitGroup(InputObject inputObject, OutputObject outputObject) {
         companyTalkGroupService.editCreateToExitGroup(inputObject, outputObject);
     }
 

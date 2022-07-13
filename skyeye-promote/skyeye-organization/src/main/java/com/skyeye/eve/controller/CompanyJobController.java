@@ -27,10 +27,9 @@ public class CompanyJobController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyJobController/queryCompanyJobList")
-    public void queryCompanyJobList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyJobList(InputObject inputObject, OutputObject outputObject) {
         companyJobService.queryCompanyJobList(inputObject, outputObject);
     }
 
@@ -39,10 +38,9 @@ public class CompanyJobController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyJobController/insertCompanyJobMation")
-    public void insertCompanyJobMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertCompanyJobMation(InputObject inputObject, OutputObject outputObject) {
         companyJobService.insertCompanyJobMation(inputObject, outputObject);
     }
 
@@ -51,10 +49,9 @@ public class CompanyJobController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyJobController/deleteCompanyJobMationById")
-    public void deleteCompanyJobMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteCompanyJobMationById(InputObject inputObject, OutputObject outputObject) {
         companyJobService.deleteCompanyJobMationById(inputObject, outputObject);
     }
 
@@ -63,10 +60,9 @@ public class CompanyJobController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyJobController/queryCompanyJobMationToEditById")
-    public void queryCompanyJobMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyJobMationToEditById(InputObject inputObject, OutputObject outputObject) {
         companyJobService.queryCompanyJobMationToEditById(inputObject, outputObject);
     }
 
@@ -75,10 +71,9 @@ public class CompanyJobController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyJobController/editCompanyJobMationById")
-    public void editCompanyJobMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCompanyJobMationById(InputObject inputObject, OutputObject outputObject) {
         companyJobService.editCompanyJobMationById(inputObject, outputObject);
     }
 
@@ -87,10 +82,9 @@ public class CompanyJobController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyJobController/queryCompanyJobListTreeByDepartmentId")
-    public void queryCompanyJobListTreeByDepartmentId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyJobListTreeByDepartmentId(InputObject inputObject, OutputObject outputObject) {
         companyJobService.queryCompanyJobListTreeByDepartmentId(inputObject, outputObject);
     }
 
@@ -99,13 +93,12 @@ public class CompanyJobController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "companyjob007", value = "根据部门id获取职位列表展示为下拉选择框", method = "GET", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "departmentId", name = "departmentId", value = "部门id")})
     @RequestMapping("/post/CompanyJobController/queryCompanyJobListByToSelect")
-    public void queryCompanyJobListByToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyJobListByToSelect(InputObject inputObject, OutputObject outputObject) {
         companyJobService.queryCompanyJobListByToSelect(inputObject, outputObject);
     }
 
@@ -114,10 +107,9 @@ public class CompanyJobController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyJobController/queryCompanyJobSimpleListByToSelect")
-    public void queryCompanyJobSimpleListByToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyJobSimpleListByToSelect(InputObject inputObject, OutputObject outputObject) {
         companyJobService.queryCompanyJobSimpleListByToSelect(inputObject, outputObject);
     }
 

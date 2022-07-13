@@ -9,23 +9,23 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysEveRoleService {
 
-    public void querySysRoleList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysRoleList(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysRoleBandMenuList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysRoleBandMenuList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysRoleMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysRoleMation(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysRoleMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysRoleMationToEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysRoleMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysRoleMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSysRoleMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteSysRoleMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysRoleBandAppMenuList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysRoleBandAppMenuList(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysRoleToAppMenuEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysRoleToAppMenuEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysRoleAppMenuById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysRoleAppMenuById(InputObject inputObject, OutputObject outputObject);
 
-    void editSysRolePCAuth(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysRolePCAuth(InputObject inputObject, OutputObject outputObject);
 }

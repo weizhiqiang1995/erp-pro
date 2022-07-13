@@ -16,7 +16,6 @@ import com.skyeye.eve.dao.CompanyJobDao;
 import com.skyeye.eve.dao.CompanyMationDao;
 import com.skyeye.eve.dao.CompanyTaxRateDao;
 import com.skyeye.eve.service.CompanyMationService;
-import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,10 +50,9 @@ public class CompanyMationServiceImpl implements CompanyMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyMationList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyMationDao.queryCompanyMationList(map);
         if (!beans.isEmpty()) {
@@ -68,11 +66,10 @@ public class CompanyMationServiceImpl implements CompanyMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertCompanyMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertCompanyMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyMationDao.queryCompanyMationByName(map);
         if (bean == null) {
@@ -95,7 +92,7 @@ public class CompanyMationServiceImpl implements CompanyMationService {
      * @param str
      * @param companyId 公司id
      */
-    private void dealTaxRate(String str, String companyId) throws Exception {
+    private void dealTaxRate(String str, String companyId) {
         companyTaxRateDao.deleteCompanyTaxRateByCompanyId(companyId);
         if (ToolUtil.isBlank(str)) {
             return;
@@ -116,11 +113,10 @@ public class CompanyMationServiceImpl implements CompanyMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteCompanyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteCompanyMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyMationDao.queryCompanyMationById(map);
         if (Integer.parseInt(bean.get("childsNum").toString()) == 0) {//判断是否有子公司
@@ -149,10 +145,9 @@ public class CompanyMationServiceImpl implements CompanyMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String companyId = map.get("id").toString();
         Map<String, Object> bean = companyMationDao.queryCompanyMationToEditById(companyId);
@@ -167,11 +162,10 @@ public class CompanyMationServiceImpl implements CompanyMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editCompanyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCompanyMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyMationDao.queryCompanyMationByNameAndId(map);
         if (bean == null) {
@@ -189,10 +183,9 @@ public class CompanyMationServiceImpl implements CompanyMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryOverAllCompanyMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryOverAllCompanyMationList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyMationDao.queryOverAllCompanyMationList(map);
         if (!beans.isEmpty()) {
@@ -206,10 +199,9 @@ public class CompanyMationServiceImpl implements CompanyMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyMationListTree(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyMationListTree(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyMationDao.queryCompanyMationListTree(map);
         String[] s;
@@ -235,10 +227,9 @@ public class CompanyMationServiceImpl implements CompanyMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyListToSelect(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyMationDao.queryCompanyListToSelect(map);
         if (!beans.isEmpty()) {
@@ -252,10 +243,9 @@ public class CompanyMationServiceImpl implements CompanyMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyOrganization(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyOrganization(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = new ArrayList<>();
         // 1.获取企业
@@ -302,10 +292,9 @@ public class CompanyMationServiceImpl implements CompanyMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyMationListToChoose(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyMationListToChoose(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = companyMationDao.queryCompanyMationListToChoose(map);
@@ -318,10 +307,9 @@ public class CompanyMationServiceImpl implements CompanyMationService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyMationListByIds(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyMationListByIds(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<String> idsList = Arrays.asList(map.get("ids").toString().split(","));
         List<Map<String, Object>> beans = new ArrayList<>();

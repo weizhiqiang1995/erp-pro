@@ -25,7 +25,7 @@ public class EmailSendModelServiceImpl implements EmailSendModelService {
     private EmailSendModelDao emailSendModelDao;
 
     @Override
-    public void queryEmailSendModelList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryEmailSendModelList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> inputParams = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(inputParams.get("page").toString()), Integer.parseInt(inputParams.get("limit").toString()));
         inputParams.put("userId", inputObject.getLogParams().get("id"));
@@ -35,7 +35,7 @@ public class EmailSendModelServiceImpl implements EmailSendModelService {
     }
 
     @Override
-    public void insertEmailSendModel(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertEmailSendModel(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> inputParams = inputObject.getParams();
         inputParams.put("id", ToolUtil.getSurFaceId());
         inputParams.put("createId", inputObject.getLogParams().get("id"));
@@ -44,7 +44,7 @@ public class EmailSendModelServiceImpl implements EmailSendModelService {
     }
 
     @Override
-    public void queryEmailSendModelInfoById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryEmailSendModelInfoById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> inputParams = inputObject.getParams();
         Map<String, Object> emailSendModelInfo = emailSendModelDao.queryEmailSendModelInfoById(inputParams.get("id").toString());
         outputObject.setBean(emailSendModelInfo);
@@ -52,13 +52,13 @@ public class EmailSendModelServiceImpl implements EmailSendModelService {
     }
 
     @Override
-    public void delEmailSendModelById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void delEmailSendModelById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> inputParams = inputObject.getParams();
         emailSendModelDao.delEmailSendModelById(inputParams.get("id").toString());
     }
 
     @Override
-    public void updateEmailSendModelById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateEmailSendModelById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> inputParams = inputObject.getParams();
         inputParams.put("lastUpdateId", inputObject.getLogParams().get("id"));
         inputParams.put("lastUpdateTime", DateUtil.getTimeAndToString());

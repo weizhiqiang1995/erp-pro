@@ -9,29 +9,29 @@ import java.util.Map;
 
 public interface SmProjectDao {
 
-    public List<Map<String, Object>> querySmProjectList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySmProjectList(Map<String, Object> map);
 
-    public Map<String, Object> querySmProjectByNameAndUserId(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySmProjectByNameAndUserId(Map<String, Object> map);
 
-    public int insertSmProjectMation(Map<String, Object> map) throws Exception;
+    int insertSmProjectMation(Map<String, Object> map);
 
-    public Map<String, Object> querySmProjectPageNumById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySmProjectPageNumById(Map<String, Object> map);
 
-    public int deleteSmProjectById(Map<String, Object> map) throws Exception;
+    int deleteSmProjectById(Map<String, Object> map);
 
-    public Map<String, Object> querySmProjectMationToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySmProjectMationToEditById(Map<String, Object> map);
 
-    public Map<String, Object> querySmProjectMationByIdAndName(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySmProjectMationByIdAndName(Map<String, Object> map);
 
-    public int editSmProjectMationById(Map<String, Object> map) throws Exception;
+    int editSmProjectMationById(Map<String, Object> map);
 
-    public Map<String, Object> querySmProjectPageModelNumById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySmProjectPageModelNumById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryGroupTypeMationList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryGroupTypeMationList(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryGroupMationListByTypeId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryGroupMationListByTypeId(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryGroupMemberMationList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryGroupMemberMationList(Map<String, Object> map);
 
 
 }

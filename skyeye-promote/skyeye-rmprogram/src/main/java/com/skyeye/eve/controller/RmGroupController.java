@@ -22,10 +22,9 @@ public class RmGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupController/queryRmGroupList")
-    public void queryRmGroupList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmGroupList(InputObject inputObject, OutputObject outputObject) {
         rmGroupService.queryRmGroupList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class RmGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupController/insertRmGroupMation")
-    public void insertRmGroupMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertRmGroupMation(InputObject inputObject, OutputObject outputObject) {
         rmGroupService.insertRmGroupMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class RmGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupController/deleteRmGroupById")
-    public void deleteRmGroupById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteRmGroupById(InputObject inputObject, OutputObject outputObject) {
         rmGroupService.deleteRmGroupById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class RmGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupController/queryRmGroupMationToEditById")
-    public void queryRmGroupMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmGroupMationToEditById(InputObject inputObject, OutputObject outputObject) {
         rmGroupService.queryRmGroupMationToEditById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class RmGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupController/editRmGroupMationById")
-    public void editRmGroupMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmGroupMationById(InputObject inputObject, OutputObject outputObject) {
         rmGroupService.editRmGroupMationById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class RmGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupController/editRmGroupSortTopById")
-    public void editRmGroupSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmGroupSortTopById(InputObject inputObject, OutputObject outputObject) {
         rmGroupService.editRmGroupSortTopById(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class RmGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupController/editRmGroupSortLowerById")
-    public void editRmGroupSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmGroupSortLowerById(InputObject inputObject, OutputObject outputObject) {
         rmGroupService.editRmGroupSortLowerById(inputObject, outputObject);
     }
 
@@ -106,10 +99,9 @@ public class RmGroupController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/RmGroupController/queryRmGroupAllList")
-    public void queryRmGroupAllList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmGroupAllList(InputObject inputObject, OutputObject outputObject) {
         rmGroupService.queryRmGroupAllList(inputObject, outputObject);
     }
 

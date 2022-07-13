@@ -105,11 +105,10 @@ public class BaseDataSourceConfig {
      *
      * @param dataSource
      * @return
-     * @throws Exception
      */
     @Primary
     @Bean(name = "baseSqlSessionFactory")
-    public SqlSessionFactory baseSqlSessionFactory(@Qualifier("baseDataSource") DataSource dataSource) throws Exception {
+    public SqlSessionFactory baseSqlSessionFactory(@Qualifier("baseDataSource") DataSource dataSource) {
         MybatisSqlSessionFactoryBean mybatisSqlSessionFactoryBean = new MybatisSqlSessionFactoryBean();
 
         mybatisSqlSessionFactoryBean.setDataSource(dataSource);
@@ -154,7 +153,7 @@ public class BaseDataSourceConfig {
 
     @Primary
     @Bean(name = "sqlSessionTemplate")
-    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("baseSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("baseSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         // 使用上面配置的Factory
         return new SqlSessionTemplate(sqlSessionFactory);
     }

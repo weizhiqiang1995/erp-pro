@@ -22,10 +22,9 @@ public class WagesModelTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesModelTypeController/queryWagesModelTypeList")
-    public void queryWagesModelTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesModelTypeList(InputObject inputObject, OutputObject outputObject) {
         wagesModelTypeService.queryWagesModelTypeList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class WagesModelTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesModelTypeController/insertWagesModelTypeMation")
-    public void insertWagesModelTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWagesModelTypeMation(InputObject inputObject, OutputObject outputObject) {
         wagesModelTypeService.insertWagesModelTypeMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class WagesModelTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesModelTypeController/queryWagesModelTypeMationToEditById")
-    public void queryWagesModelTypeMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesModelTypeMationToEditById(InputObject inputObject, OutputObject outputObject) {
         wagesModelTypeService.queryWagesModelTypeMationToEditById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class WagesModelTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesModelTypeController/editWagesModelTypeMationById")
-    public void editWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) {
         wagesModelTypeService.editWagesModelTypeMationById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class WagesModelTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesModelTypeController/deleteWagesModelTypeMationById")
-    public void deleteWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) {
         wagesModelTypeService.deleteWagesModelTypeMationById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class WagesModelTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesModelTypeController/enableWagesModelTypeMationById")
-    public void enableWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void enableWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) {
         wagesModelTypeService.enableWagesModelTypeMationById(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class WagesModelTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesModelTypeController/disableWagesModelTypeMationById")
-    public void disableWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void disableWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) {
         wagesModelTypeService.disableWagesModelTypeMationById(inputObject, outputObject);
     }
 
@@ -106,10 +99,9 @@ public class WagesModelTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesModelTypeController/queryEnableWagesModelTypeList")
-    public void queryEnableWagesModelTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryEnableWagesModelTypeList(InputObject inputObject, OutputObject outputObject) {
         wagesModelTypeService.queryEnableWagesModelTypeList(inputObject, outputObject);
     }
 

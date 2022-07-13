@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.dao;
 
 import java.util.List;
@@ -8,16 +9,16 @@ import java.util.Map;
 
 public interface SmProjectPageModeDao {
 
-    public List<Map<String, Object>> queryProPageModeMationByPageIdList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryProPageModeMationByPageIdList(Map<String, Object> map);
 
-    public int deletePageModelMationListByPageId(Map<String, Object> map) throws Exception;
+    int deletePageModelMationListByPageId(Map<String, Object> map);
 
-    public int editProPageModeMationByPageIdList(List<Map<String, Object>> beans) throws Exception;
+    int editProPageModeMationByPageIdList(List<Map<String, Object>> beans);
 
-    public List<Map<String, Object>> queryPropertyListByMemberId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryPropertyListByMemberId(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryPropertyValuesListByPropertyId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryPropertyValuesListByPropertyId(Map<String, Object> map);
 
-    public Map<String, Object> queryProPageMationByPageId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryProPageMationByPageId(Map<String, Object> map);
 
 }

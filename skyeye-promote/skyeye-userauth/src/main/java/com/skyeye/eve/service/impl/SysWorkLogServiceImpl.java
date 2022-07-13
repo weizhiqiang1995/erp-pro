@@ -26,10 +26,9 @@ public class SysWorkLogServiceImpl implements SysWorkLogService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysWorkLogList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysWorkLogList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("total", (Integer.parseInt(map.get("page").toString()) - 1) * Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysWorkLogDao.querySysWorkLogList(map);

@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,20 +9,20 @@ import com.skyeye.common.object.OutputObject;
 
 public interface RmGroupService {
 
-    public void queryRmGroupList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryRmGroupList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertRmGroupMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertRmGroupMation(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteRmGroupById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteRmGroupById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryRmGroupMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryRmGroupMationToEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editRmGroupMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editRmGroupMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editRmGroupSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editRmGroupSortTopById(InputObject inputObject, OutputObject outputObject);
 
-    public void editRmGroupSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editRmGroupSortLowerById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryRmGroupAllList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryRmGroupAllList(InputObject inputObject, OutputObject outputObject);
 
 }

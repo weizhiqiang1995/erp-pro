@@ -46,10 +46,9 @@ public class MailGroupServiceImpl implements MailGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMailMationTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMailMationTypeList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -65,11 +64,10 @@ public class MailGroupServiceImpl implements MailGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertMailMationType(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertMailMationType(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -90,11 +88,10 @@ public class MailGroupServiceImpl implements MailGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteMailMationTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteMailMationTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -112,10 +109,9 @@ public class MailGroupServiceImpl implements MailGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMailMationTypeToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMailMationTypeToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = mailGroupDao.queryMailMationTypeToEditById(map);
         outputObject.setBean(bean);
@@ -126,11 +122,10 @@ public class MailGroupServiceImpl implements MailGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editMailMationTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editMailMationTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -143,10 +138,9 @@ public class MailGroupServiceImpl implements MailGroupService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMailMationTypeListToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMailMationTypeListToSelect(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         List<Map<String, Object>> beans;

@@ -33,10 +33,9 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryProPageMationByProIdList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryProPageMationByProIdList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = smProjectPageDao.queryProPageMationByProIdList(map);
         if (beans != null && !beans.isEmpty()) {
@@ -50,11 +49,10 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertProPageMationByProId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertProPageMationByProId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         if (!jedisClient.exists(RmProGramConstants.REDIS_PROJECT_PAGE_FILE_PATH)) {//判断redis中是否存在文件路径--不存在
@@ -111,11 +109,10 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSmProjectPageSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSmProjectPageSortTopById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = smProjectPageDao.querySmProjectPageISTopByThisId(map);//根据排序获取这条数据的上一条数据
         if (topBean == null) {
@@ -133,11 +130,10 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSmProjectPageSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSmProjectPageSortLowerById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = smProjectPageDao.querySmProjectPageISLowerByThisId(map);//根据排序获取这条数据的上一条数据
         if (topBean == null) {
@@ -155,10 +151,9 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySmProjectPageMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySmProjectPageMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = smProjectPageDao.querySmProjectPageMationToEditById(map);
         outputObject.setBean(bean);
@@ -170,11 +165,10 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSmProjectPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSmProjectPageMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         smProjectPageDao.editSmProjectPageMationById(map);
     }
@@ -184,11 +178,10 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSmProjectPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSmProjectPageMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         smProjectPageDao.deleteSmProjectPageMationById(map);//删除页面
         smProjectPageDao.deleteSmProjectPageModeMationById(map);//删除页面绑定的小程序组件

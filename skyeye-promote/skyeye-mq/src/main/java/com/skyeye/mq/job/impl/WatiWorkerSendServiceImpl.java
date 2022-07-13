@@ -43,7 +43,7 @@ public class WatiWorkerSendServiceImpl implements JobMateService {
     private JobMateMationService jobMateMationService;
 
     @Override
-    public void call(String data) throws Exception {
+    public void call(String data) {
         Map<String, Object> map = JSONUtil.toBean(data, null);
         String jobId = map.get("jobMateId").toString();
         try {

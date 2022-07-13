@@ -4,14 +4,11 @@
 
 package com.skyeye.eve.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.ForumReportService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,10 +22,9 @@ public class ForumReportController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumReportController/insertForumReportMation")
-    public void insertForumReportMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertForumReportMation(InputObject inputObject, OutputObject outputObject) {
         forumReportService.insertForumReportMation(inputObject, outputObject);
     }
 
@@ -37,10 +33,9 @@ public class ForumReportController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumReportController/queryReportNoCheckList")
-    public void queryReportNoCheckList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryReportNoCheckList(InputObject inputObject, OutputObject outputObject) {
         forumReportService.queryReportNoCheckList(inputObject, outputObject);
     }
 
@@ -49,10 +44,9 @@ public class ForumReportController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumReportController/editReportCheckMationById")
-    public void editForumContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editForumContentMationById(InputObject inputObject, OutputObject outputObject) {
         forumReportService.editReportCheckMationById(inputObject, outputObject);
     }
 
@@ -61,10 +55,9 @@ public class ForumReportController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumReportController/queryReportCheckedList")
-    public void queryReportCheckedList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryReportCheckedList(InputObject inputObject, OutputObject outputObject) {
         forumReportService.queryReportCheckedList(inputObject, outputObject);
     }
 
@@ -73,10 +66,9 @@ public class ForumReportController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumReportController/queryForumReportMationToDetails")
-    public void queryForumReportMationToDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumReportMationToDetails(InputObject inputObject, OutputObject outputObject) {
         forumReportService.queryForumReportMationToDetails(inputObject, outputObject);
     }
 

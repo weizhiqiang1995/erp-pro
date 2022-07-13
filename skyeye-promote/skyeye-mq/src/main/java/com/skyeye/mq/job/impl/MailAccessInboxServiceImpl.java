@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.mq.job.impl;
 
 import cn.hutool.json.JSONUtil;
@@ -50,9 +51,8 @@ public class MailAccessInboxServiceImpl implements JobMateService {
     @Autowired
     private SystemFoundationSettingsService systemFoundationSettingsService;
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void call(String data) throws Exception {
+    public void call(String data) {
         Map<String, Object> map = JSONUtil.toBean(data, null);
         String jobId = map.get("jobMateId").toString();
         try {
@@ -95,8 +95,10 @@ public class MailAccessInboxServiceImpl implements JobMateService {
 
                 //遍历邮件数据
                 for (int i = 0; i < message.length; i++) {
-                    if (!message[i].getFolder().isOpen()) //判断是否open
-                        message[i].getFolder().open(Folder.READ_ONLY); //如果close，就重新open
+                    if (!message[i].getFolder().isOpen()) {
+                        // 判断是否open,如果close，就重新open
+                        message[i].getFolder().open(Folder.READ_ONLY);
+                    }
                     re = new ShowMail((MimeMessage) message[i]);
                     try {
                         LOGGER.info("get message mation is {}", JSONUtil.toJsonStr(re));
@@ -117,18 +119,21 @@ public class MailAccessInboxServiceImpl implements JobMateService {
                     }
                     if (beans.size() >= 20) {//每20条数据保存一次
                         mqUserEmailDao.insertEmailListToServer(beans);
-                        if (!enclosureBeans.isEmpty())
+                        if (!enclosureBeans.isEmpty()) {
                             mqUserEmailDao.insertEmailEnclosureListToServer(enclosureBeans);
+                        }
                         beans.clear();
                         enclosureBeans.clear();
                         //重置当前邮箱已有的邮件
                         emailHasMail = mqUserEmailDao.queryEmailListByEmailAddress(map);
                     }
                 }
-                if (!beans.isEmpty())
+                if (!beans.isEmpty()) {
                     mqUserEmailDao.insertEmailListToServer(beans);
-                if (!enclosureBeans.isEmpty())
+                }
+                if (!enclosureBeans.isEmpty()) {
                     mqUserEmailDao.insertEmailEnclosureListToServer(enclosureBeans);
+                }
             } catch (Exception e) {
                 LOGGER.warn("Inbox mail acquisition failed, reason is {}.", e);
                 // 任务失败

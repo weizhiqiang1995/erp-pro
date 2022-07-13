@@ -22,10 +22,9 @@ public class SmProjectPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectPageController/queryProPageMationByProIdList")
-    public void queryProPageMationByProIdList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryProPageMationByProIdList(InputObject inputObject, OutputObject outputObject) {
         smProjectPageService.queryProPageMationByProIdList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class SmProjectPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectPageController/insertProPageMationByProId")
-    public void insertProPageMationByProId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertProPageMationByProId(InputObject inputObject, OutputObject outputObject) {
         smProjectPageService.insertProPageMationByProId(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class SmProjectPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectPageController/editSmProjectPageSortTopById")
-    public void editSmProjectPageSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSmProjectPageSortTopById(InputObject inputObject, OutputObject outputObject) {
         smProjectPageService.editSmProjectPageSortTopById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class SmProjectPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectPageController/editSmProjectPageSortLowerById")
-    public void editSmProjectPageSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSmProjectPageSortLowerById(InputObject inputObject, OutputObject outputObject) {
         smProjectPageService.editSmProjectPageSortLowerById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class SmProjectPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectPageController/querySmProjectPageMationToEditById")
-    public void querySmProjectPageMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySmProjectPageMationToEditById(InputObject inputObject, OutputObject outputObject) {
         smProjectPageService.querySmProjectPageMationToEditById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class SmProjectPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectPageController/editSmProjectPageMationById")
-    public void editSmProjectPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSmProjectPageMationById(InputObject inputObject, OutputObject outputObject) {
         smProjectPageService.editSmProjectPageMationById(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class SmProjectPageController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SmProjectPageController/deleteSmProjectPageMationById")
-    public void deleteSmProjectPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSmProjectPageMationById(InputObject inputObject, OutputObject outputObject) {
         smProjectPageService.deleteSmProjectPageMationById(inputObject, outputObject);
     }
 

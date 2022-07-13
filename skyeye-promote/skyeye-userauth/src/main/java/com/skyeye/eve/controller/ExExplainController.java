@@ -38,10 +38,9 @@ public class ExExplainController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ExExplainController/insertExExplainMation")
-    public void insertExExplainMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertExExplainMation(InputObject inputObject, OutputObject outputObject) {
         exExplainService.insertExExplainMation(inputObject, outputObject);
     }
 
@@ -50,10 +49,9 @@ public class ExExplainController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ExExplainController/queryExExplainMation")
-    public void queryExExplainMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryExExplainMation(InputObject inputObject, OutputObject outputObject) {
         exExplainService.queryExExplainMation(inputObject, outputObject);
     }
 
@@ -62,10 +60,9 @@ public class ExExplainController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ExExplainController/editExExplainMationById")
-    public void editExExplainMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editExExplainMationById(InputObject inputObject, OutputObject outputObject) {
         exExplainService.editExExplainMationById(inputObject, outputObject);
     }
 
@@ -74,13 +71,12 @@ public class ExExplainController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "queryExExplainMationToShow", value = "获取使用说明信息供展示", method = "GET", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "type", name = "type", value = "说明介绍类型", required = "required,num")})
     @RequestMapping("/post/ExExplainController/queryExExplainMationToShow")
-    public void queryExExplainMationToShow(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryExExplainMationToShow(InputObject inputObject, OutputObject outputObject) {
         exExplainService.queryExExplainMationToShow(inputObject, outputObject);
     }
 

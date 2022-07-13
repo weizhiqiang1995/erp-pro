@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,24 +9,24 @@ import com.skyeye.common.object.OutputObject;
 
 public interface CompanyTalkGroupService {
 
-    public void insertGroupMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertGroupMation(InputObject inputObject, OutputObject outputObject);
 
-    public void queryGroupInvitationMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryGroupInvitationMation(InputObject inputObject, OutputObject outputObject);
 
-    public void editAgreeInGroupInvitationMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editAgreeInGroupInvitationMation(InputObject inputObject, OutputObject outputObject);
 
-    public void editRefuseInGroupInvitationMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editRefuseInGroupInvitationMation(InputObject inputObject, OutputObject outputObject);
 
-    public void queryGroupMationList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryGroupMationList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertGroupMationToTalk(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertGroupMationToTalk(InputObject inputObject, OutputObject outputObject);
 
-    public void queryGroupMemberByGroupId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryGroupMemberByGroupId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryChatLogByType(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryChatLogByType(InputObject inputObject, OutputObject outputObject);
 
-    public void editUserToExitGroup(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editUserToExitGroup(InputObject inputObject, OutputObject outputObject);
 
-    public void editCreateToExitGroup(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editCreateToExitGroup(InputObject inputObject, OutputObject outputObject);
 
 }

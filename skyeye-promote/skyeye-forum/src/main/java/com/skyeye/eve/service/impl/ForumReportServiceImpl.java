@@ -39,11 +39,10 @@ public class ForumReportServiceImpl implements ForumReportService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertForumReportMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertForumReportMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("reportId", user.get("id"));
@@ -58,10 +57,9 @@ public class ForumReportServiceImpl implements ForumReportService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryReportNoCheckList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryReportNoCheckList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = forumReportDao.queryReportNoCheckList(map);
@@ -74,11 +72,10 @@ public class ForumReportServiceImpl implements ForumReportService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editReportCheckMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editReportCheckMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> beans = forumReportDao.queryForumReportStateById(map);
         if ("1".equals(beans.get("examineState").toString())) {//未审核的状态可以审核
@@ -127,10 +124,9 @@ public class ForumReportServiceImpl implements ForumReportService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryReportCheckedList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryReportCheckedList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = forumReportDao.queryReportCheckedList(map);
@@ -143,10 +139,9 @@ public class ForumReportServiceImpl implements ForumReportService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryForumReportMationToDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumReportMationToDetails(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumReportDao.queryForumReportMationToDetails(map);
         outputObject.setBean(bean);

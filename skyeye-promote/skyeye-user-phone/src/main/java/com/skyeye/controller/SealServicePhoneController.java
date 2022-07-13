@@ -4,14 +4,11 @@
 
 package com.skyeye.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.service.SealServicePhoneService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,10 +22,9 @@ public class SealServicePhoneController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SealServicePhoneController/queryNumberInEveryState")
-    public void queryNumberInEveryState(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryNumberInEveryState(InputObject inputObject, OutputObject outputObject) {
         sealServicePhoneService.queryNumberInEveryState(inputObject, outputObject);
     }
 
@@ -37,10 +33,9 @@ public class SealServicePhoneController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SealServicePhoneController/insertSealSeServiceWaitToSignonMation")
-    public void insertSealSeServiceWaitToSignonMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSealSeServiceWaitToSignonMation(InputObject inputObject, OutputObject outputObject) {
         sealServicePhoneService.insertSealSeServiceWaitToSignonMation(inputObject, outputObject);
     }
 
@@ -49,10 +44,9 @@ public class SealServicePhoneController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SealServicePhoneController/queryFeedBackList")
-    public void queryFeedBackList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFeedBackList(InputObject inputObject, OutputObject outputObject) {
         sealServicePhoneService.queryFeedBackList(inputObject, outputObject);
     }
 
@@ -61,10 +55,9 @@ public class SealServicePhoneController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SealServicePhoneController/queryAllPartsList")
-    public void queryAllPartsList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllPartsList(InputObject inputObject, OutputObject outputObject) {
         sealServicePhoneService.queryAllPartsList(inputObject, outputObject);
     }
 

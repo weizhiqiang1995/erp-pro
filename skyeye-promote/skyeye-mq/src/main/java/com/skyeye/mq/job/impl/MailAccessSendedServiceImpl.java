@@ -50,9 +50,8 @@ public class MailAccessSendedServiceImpl implements JobMateService {
     @Autowired
     private SystemFoundationSettingsService systemFoundationSettingsService;
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void call(String data) throws Exception {
+    public void call(String data) {
         Map<String, Object> map = JSONUtil.toBean(data, null);
         String jobId = map.get("jobMateId").toString();
         try {
@@ -92,8 +91,10 @@ public class MailAccessSendedServiceImpl implements JobMateService {
 
             //遍历邮件数据
             for (int i = 0; i < message.length; i++) {
-                if (!message[i].getFolder().isOpen()) //判断是否open
-                    message[i].getFolder().open(Folder.READ_ONLY); //如果close，就重新open
+                if (!message[i].getFolder().isOpen()) {
+                    // 判断是否open,如果close，就重新open
+                    message[i].getFolder().open(Folder.READ_ONLY);
+                }
                 re = new ShowMail((MimeMessage) message[i]);
                 try {
                     LOGGER.info("get message mation is {}", JSONUtil.toJsonStr(re));
@@ -112,19 +113,23 @@ public class MailAccessSendedServiceImpl implements JobMateService {
                     beans.add(bean);
                 }
                 if (beans.size() >= 20) {//每20条数据保存一次
-                    if (!beans.isEmpty())
+                    if (!beans.isEmpty()) {
                         mqUserEmailDao.insertEmailListToServer(beans);
-                    if (!enclosureBeans.isEmpty())
+                    }
+                    if (!enclosureBeans.isEmpty()) {
                         mqUserEmailDao.insertEmailEnclosureListToServer(enclosureBeans);
+                    }
                     beans.clear();
                     enclosureBeans.clear();
                     emailHasMail = mqUserEmailDao.queryEmailListByEmailFromAddress(map);
                 }
             }
-            if (!beans.isEmpty())
+            if (!beans.isEmpty()) {
                 mqUserEmailDao.insertEmailListToServer(beans);
-            if (!enclosureBeans.isEmpty())
+            }
+            if (!enclosureBeans.isEmpty()) {
                 mqUserEmailDao.insertEmailEnclosureListToServer(enclosureBeans);
+            }
             // 任务完成
             jobMateMationService.comMQJobMation(jobId, MqConstants.JOB_TYPE_IS_SUCCESS, "");
         } catch (Exception e) {

@@ -22,10 +22,9 @@ public class SysEveModelTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveModelTypeController/querySysEveModelTypeList")
-    public void querySysEveModelTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveModelTypeList(InputObject inputObject, OutputObject outputObject) {
         sysEveModelTypeService.querySysEveModelTypeList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class SysEveModelTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveModelTypeController/insertSysEveModelType")
-    public void insertSysEveModelType(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysEveModelType(InputObject inputObject, OutputObject outputObject) {
         sysEveModelTypeService.insertSysEveModelType(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class SysEveModelTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveModelTypeController/delSysEveModelTypeById")
-    public void delSysEveModelTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void delSysEveModelTypeById(InputObject inputObject, OutputObject outputObject) {
         sysEveModelTypeService.delSysEveModelTypeById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class SysEveModelTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveModelTypeController/querySysEveModelTypeById")
-    public void querySysEveModelTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveModelTypeById(InputObject inputObject, OutputObject outputObject) {
         sysEveModelTypeService.querySysEveModelTypeById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class SysEveModelTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveModelTypeController/updateSysEveModelTypeById")
-    public void updateSysEveModelTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateSysEveModelTypeById(InputObject inputObject, OutputObject outputObject) {
         sysEveModelTypeService.updateSysEveModelTypeById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class SysEveModelTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveModelTypeController/querySysEveModelTypeByParentId")
-    public void querySysEveModelTypeByParentId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveModelTypeByParentId(InputObject inputObject, OutputObject outputObject) {
         sysEveModelTypeService.querySysEveModelTypeByParentId(inputObject, outputObject);
     }
 }

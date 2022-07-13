@@ -9,28 +9,28 @@ import java.util.Map;
 
 public interface LightAppDao {
 
-    public List<Map<String, Object>> queryLightAppList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryLightAppList(Map<String, Object> map);
 
-    public Map<String, Object> queryLightAppMationByName(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryLightAppMationByName(Map<String, Object> map);
 
-    public Map<String, Object> queryLightAppMationByNameAndId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryLightAppMationByNameAndId(Map<String, Object> map);
 
-    public int insertLightAppMation(Map<String, Object> map) throws Exception;
+    int insertLightAppMation(Map<String, Object> map);
 
-    public Map<String, Object> queryLightAppMationToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryLightAppMationToEditById(Map<String, Object> map);
 
-    public Map<String, Object> queryLightAppStateById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryLightAppStateById(Map<String, Object> map);
 
-    public Map<String, Object> queryLightAppMationToAddWinById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryLightAppMationToAddWinById(Map<String, Object> map);
 
-    public int editLightAppMationById(Map<String, Object> map) throws Exception;
+    int editLightAppMationById(Map<String, Object> map);
 
-    public int deleteLightAppById(Map<String, Object> map) throws Exception;
+    int deleteLightAppById(Map<String, Object> map);
 
-    public int editLightAppUpById(Map<String, Object> map) throws Exception;
+    int editLightAppUpById(Map<String, Object> map);
 
-    public int editLightAppDownById(Map<String, Object> map) throws Exception;
+    int editLightAppDownById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryLightAppUpList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryLightAppUpList(Map<String, Object> map);
 
 }

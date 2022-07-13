@@ -17,61 +17,60 @@ import java.util.Map;
  */
 public interface SysNoticeDao {
 
-    public List<Map<String, Object>> querySysNoticeList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysNoticeList(Map<String, Object> map);
 
-    public Map<String, Object> querySysNoticeMationByName(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysNoticeMationByName(Map<String, Object> map);
 
-    public Map<String, Object> querySysNoticeMationByNameAndId(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysNoticeMationByNameAndId(Map<String, Object> map);
 
     /**
      * 新增公告
      *
      * @param map 公告信息
      * @return 成功的条数
-     * @throws Exception
      */
-    public int insertSysNoticeMation(Map<String, Object> map) throws Exception;
+    int insertSysNoticeMation(Map<String, Object> map);
 
-    public Map<String, Object> querySysNoticeBySimpleLevel(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysNoticeBySimpleLevel(Map<String, Object> map);
 
-    public int deleteSysNoticeById(Map<String, Object> map) throws Exception;
+    int deleteSysNoticeById(Map<String, Object> map);
 
-    public int updateUpSysNoticeById(Map<String, Object> map) throws Exception;
+    int updateUpSysNoticeById(Map<String, Object> map);
 
-    public int updateDownSysNoticeById(Map<String, Object> map) throws Exception;
+    int updateDownSysNoticeById(Map<String, Object> map);
 
-    public Map<String, Object> selectSysNoticeById(Map<String, Object> map) throws Exception;
+    Map<String, Object> selectSysNoticeById(Map<String, Object> map);
 
-    public int editSysNoticeMationById(Map<String, Object> map) throws Exception;
+    int editSysNoticeMationById(Map<String, Object> map);
 
-    public Map<String, Object> querySysNoticeUpMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysNoticeUpMationById(Map<String, Object> map);
 
-    public int editSysNoticeMationOrderNumUpById(Map<String, Object> map) throws Exception;
+    int editSysNoticeMationOrderNumUpById(Map<String, Object> map);
 
-    public Map<String, Object> querySysNoticeDownMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysNoticeDownMationById(Map<String, Object> map);
 
-    public Map<String, Object> querySysNoticeStateById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysNoticeStateById(Map<String, Object> map);
 
-    public int insertSysNoticeUser(List<Map<String, Object>> beans) throws Exception;
+    int insertSysNoticeUser(List<Map<String, Object>> beans);
 
-    public int deleteSysNoticeUserById(Map<String, Object> map) throws Exception;
+    int deleteSysNoticeUserById(Map<String, Object> map);
 
-    public Map<String, Object> querySysNoticeStateAndTimeSend(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysNoticeStateAndTimeSend(Map<String, Object> map);
 
-    public int editSysNoticeTimeUpMation(Map<String, Object> map) throws Exception;
+    int editSysNoticeTimeUpMation(Map<String, Object> map);
 
-    public Map<String, Object> querySysNoticeDetailsById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysNoticeDetailsById(Map<String, Object> map);
 
-    public List<Map<String, Object>> selectAllSendUser(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> selectAllSendUser(Map<String, Object> map);
 
-    public Map<String, Object> querySysNoticeMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysNoticeMationById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryUserReceivedSysNotice(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryUserReceivedSysNotice(Map<String, Object> map);
 
-    public Map<String, Object> queryReceivedSysNoticeDetailsById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryReceivedSysNoticeDetailsById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryReceivedSysNoticeUserInfoById(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryReceivedSysNoticeUserInfoById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryAllUserList() throws Exception;
+    List<Map<String, Object>> queryAllUserList();
 
 }

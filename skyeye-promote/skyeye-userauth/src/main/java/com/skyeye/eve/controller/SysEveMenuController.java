@@ -36,10 +36,9 @@ public class SysEveMenuController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveMenuController/querySysMenuList")
-    public void querySysMenuList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysMenuList(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.querySysMenuList(inputObject, outputObject);
     }
 
@@ -48,12 +47,11 @@ public class SysEveMenuController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "sys007", value = "添加菜单", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysMenuMation.class)
     @RequestMapping("/post/SysEveMenuController/insertSysMenuMation")
-    public void insertSysMenuMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysMenuMation(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.insertSysMenuMation(inputObject, outputObject);
     }
 
@@ -62,10 +60,9 @@ public class SysEveMenuController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveMenuController/querySysMenuMationBySimpleLevel")
-    public void querySysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.querySysMenuMationBySimpleLevel(inputObject, outputObject);
     }
 
@@ -74,10 +71,9 @@ public class SysEveMenuController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveMenuController/querySysMenuMationToEditById")
-    public void querySysMenuMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysMenuMationToEditById(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.querySysMenuMationToEditById(inputObject, outputObject);
     }
 
@@ -86,13 +82,12 @@ public class SysEveMenuController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "sys010", value = "编辑菜单信息", method = "PUT", allUse = "1")
     @ApiImplicitParams(classBean = SysMenuMation.class, value = {
         @ApiImplicitParam(id = "rowId", name = "id", value = "菜单ID", required = "required")})
     @RequestMapping("/post/SysEveMenuController/editSysMenuMationById")
-    public void editSysMenuMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysMenuMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.editSysMenuMationById(inputObject, outputObject);
     }
 
@@ -101,10 +96,9 @@ public class SysEveMenuController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveMenuController/deleteSysMenuMationById")
-    public void deleteSysMenuMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysMenuMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.deleteSysMenuMationById(inputObject, outputObject);
     }
 
@@ -113,10 +107,9 @@ public class SysEveMenuController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveMenuController/queryTreeSysMenuMationBySimpleLevel")
-    public void queryTreeSysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryTreeSysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.queryTreeSysMenuMationBySimpleLevel(inputObject, outputObject);
     }
 
@@ -125,10 +118,9 @@ public class SysEveMenuController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveMenuController/querySysMenuLevelList")
-    public void querySysMenuLevelList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysMenuLevelList(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.querySysMenuLevelList(inputObject, outputObject);
     }
 
@@ -137,10 +129,9 @@ public class SysEveMenuController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveMenuController/editSysEveMenuSortTopById")
-    public void editSysEveMenuSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysEveMenuSortTopById(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.editSysEveMenuSortTopById(inputObject, outputObject);
     }
 
@@ -149,10 +140,9 @@ public class SysEveMenuController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveMenuController/editSysEveMenuSortLowerById")
-    public void editSysEveMenuSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysEveMenuSortLowerById(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.editSysEveMenuSortLowerById(inputObject, outputObject);
     }
 
@@ -161,10 +151,9 @@ public class SysEveMenuController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveMenuController/querySysWinMationListBySysId")
-    public void querySysWinMationListBySysId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysWinMationListBySysId(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.querySysWinMationListBySysId(inputObject, outputObject);
     }
 
@@ -173,10 +162,9 @@ public class SysEveMenuController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveMenuController/querySysEveMenuBySysId")
-    public void querySysEveMenuBySysId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveMenuBySysId(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.querySysEveMenuBySysId(inputObject, outputObject);
     }
 

@@ -11,23 +11,23 @@ import java.util.Map;
 
 public interface WagesModelDao {
 
-    public List<Map<String, Object>> queryWagesModelList(Map<String, Object> map);
+    List<Map<String, Object>> queryWagesModelList(Map<String, Object> map);
 
-    public int editWagesModelMationStateMationById(@Param("id") String id, @Param("state") int state);
+    int editWagesModelMationStateMationById(@Param("id") String id, @Param("state") int state);
 
-    public Map<String, Object> queryWagesModelMationByTitleAndNotId(@Param("title") String title, @Param("notId") String notId);
+    Map<String, Object> queryWagesModelMationByTitleAndNotId(@Param("title") String title, @Param("notId") String notId);
 
-    public int insertWagesModelMation(Map<String, Object> map);
+    int insertWagesModelMation(Map<String, Object> map);
 
-    public Map<String, Object> queryWagesModelMationById(@Param("id") String id);
+    Map<String, Object> queryWagesModelMationById(@Param("id") String id);
 
-    public List<Map<String, Object>> queryStaffNameListByStaffIdList(@Param("list") List<String> staffIds);
+    List<Map<String, Object>> queryStaffNameListByStaffIdList(@Param("list") List<String> staffIds);
 
-    public List<Map<String, Object>> queryDepartMentNameListByDepartMentIdList(@Param("list") List<String> departMentIds);
+    List<Map<String, Object>> queryDepartMentNameListByDepartMentIdList(@Param("list") List<String> departMentIds);
 
-    public List<Map<String, Object>> queryCompanyNameListByCompanyIdList(@Param("list") List<String> companyIds);
+    List<Map<String, Object>> queryCompanyNameListByCompanyIdList(@Param("list") List<String> companyIds);
 
-    public int editWagesModelMationById(Map<String, Object> map);
+    int editWagesModelMationById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryWagesModelListByApplicableObjectIds(@Param("list") List<String> wagesApplicableObjectIds);
+    List<Map<String, Object>> queryWagesModelListByApplicableObjectIds(@Param("list") List<String> wagesApplicableObjectIds);
 }

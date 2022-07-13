@@ -38,10 +38,9 @@ public class MailListServiceImpl implements MailListService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMailMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMailMationList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -56,11 +55,10 @@ public class MailListServiceImpl implements MailListService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertMailMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertMailMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         // 通讯录类型
@@ -91,11 +89,10 @@ public class MailListServiceImpl implements MailListService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteMailMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteMailMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -107,10 +104,9 @@ public class MailListServiceImpl implements MailListService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMailMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMailMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = mailListDao.queryMailMationToEditById(map);
         outputObject.setBean(bean);
@@ -122,11 +118,10 @@ public class MailListServiceImpl implements MailListService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editMailMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editMailMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         //通讯录类型
         String category = map.get("category").toString();
@@ -153,10 +148,9 @@ public class MailListServiceImpl implements MailListService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMailMationDetailsById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMailMationDetailsById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = mailListDao.queryMailMationDetailsById(map);
         outputObject.setBean(bean);

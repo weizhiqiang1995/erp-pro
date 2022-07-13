@@ -9,18 +9,18 @@ import java.util.Map;
 
 public interface SysEveIconDao {
 
-    public List<Map<String, Object>> querySysIconList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysIconList(Map<String, Object> map);
 
-    public int insertSysIconMation(Map<String, Object> map) throws Exception;
+    int insertSysIconMation(Map<String, Object> map);
 
-    public Map<String, Object> checkSysIconMation(Map<String, Object> map) throws Exception;
+    Map<String, Object> checkSysIconMation(Map<String, Object> map);
 
-    public int deleteSysIconMationById(Map<String, Object> map) throws Exception;
+    int deleteSysIconMationById(Map<String, Object> map);
 
-    public Map<String, Object> querySysIconMationToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysIconMationToEditById(Map<String, Object> map);
 
-    public int editSysIconMationById(Map<String, Object> map) throws Exception;
+    int editSysIconMationById(Map<String, Object> map);
 
-    public List<Map<String, Object>> querySysIconListToMenu(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysIconListToMenu(Map<String, Object> map);
 
 }

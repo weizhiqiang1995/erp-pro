@@ -28,11 +28,10 @@ public class StickyNotesServiceImpl implements StickyNotesService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertStickyNotesMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("id", ToolUtil.getSurFaceId());
         map.put("createId", inputObject.getLogParams().get("id"));
@@ -46,10 +45,9 @@ public class StickyNotesServiceImpl implements StickyNotesService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void selectStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectStickyNotesMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("createId", inputObject.getLogParams().get("id"));
         List<Map<String, Object>> beans = stickyNotesDao.selectStickyNotesMation(map);
@@ -62,11 +60,10 @@ public class StickyNotesServiceImpl implements StickyNotesService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editStickyNotesMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         stickyNotesDao.editStickyNotesMation(map);
     }
@@ -76,11 +73,10 @@ public class StickyNotesServiceImpl implements StickyNotesService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteStickyNotesMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteStickyNotesMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         stickyNotesDao.deleteStickyNotesMation(map);
     }

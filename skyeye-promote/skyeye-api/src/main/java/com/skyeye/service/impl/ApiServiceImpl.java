@@ -35,10 +35,9 @@ public class ApiServiceImpl implements ApiService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAllSysEveReqMapping(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysEveReqMapping(InputObject inputObject, OutputObject outputObject) {
         String appId = inputObject.getParams().get("appId").toString();
         List<Map<String, Object>> beans = new ArrayList<>();
         // xml方式
@@ -74,10 +73,9 @@ public class ApiServiceImpl implements ApiService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryApiDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryApiDetails(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String appId = map.get("appId").toString();
         String apiId = map.get("id").toString();
@@ -110,10 +108,9 @@ public class ApiServiceImpl implements ApiService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryLimitRestrictions(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryLimitRestrictions(InputObject inputObject, OutputObject outputObject) {
         List<Map<String, Object>> beans = ObjectConstant.VerificationParams.getList();
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
@@ -124,10 +121,9 @@ public class ApiServiceImpl implements ApiService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryApiMicroservices(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryApiMicroservices(InputObject inputObject, OutputObject outputObject) {
         List<String> keys = jedisClientService.getKeyListByPattern(ApiConstants.API_MICROSERVICES_REDIS_CACHE_KEY + "*");
         List<Map<String, Object>> result = new ArrayList<>();
         keys.forEach(key -> {

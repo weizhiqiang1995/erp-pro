@@ -1088,7 +1088,6 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      *
      * @param fileExtName 文件后缀
      * @param path        文件地址
-     * @throws Exception
      */
     private void createFile(String fileExtName, String path) {
         if (DiskCloudConstants.FileMation.OFFICE_IS_DOCX.getFileExt().equalsIgnoreCase(fileExtName)) {

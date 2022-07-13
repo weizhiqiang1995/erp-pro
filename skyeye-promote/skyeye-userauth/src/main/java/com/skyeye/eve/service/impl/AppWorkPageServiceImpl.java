@@ -60,10 +60,9 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAppWorkPageList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAppWorkPageList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = appWorkPageDao.queryAppWorkPageList(map);
         outputObject.setBeans(beans);
@@ -75,11 +74,10 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertAppWorkPageMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertAppWorkPageMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("createId", user.get("id"));
@@ -108,10 +106,9 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAppWorkPageListById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAppWorkPageListById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = appWorkPageDao.queryAppWorkPageListById(map);
@@ -124,11 +121,10 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("createId", user.get("id"));
@@ -155,10 +151,9 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = appWorkPageDao.queryAppWorkPageMationById(map);
         outputObject.setBean(bean);
@@ -170,11 +165,10 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = appWorkPageDao.queryAppWorkPageStateById(map);
         int state = Integer.parseInt(bean.get("state").toString());
@@ -201,7 +195,7 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
         }
     }
 
-    private void setUpdateUserMation(InputObject inputObject, Map<String, Object> map) throws Exception {
+    private void setUpdateUserMation(InputObject inputObject, Map<String, Object> map) {
         map.put("last_update_id", inputObject.getLogParams().get("id"));
         map.put("last_update_time", DateUtil.getTimeAndToString());
     }
@@ -211,11 +205,10 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = appWorkPageDao.queryAppWorkPageStateById(map);
         int state = Integer.parseInt(bean.get("state").toString());
@@ -234,11 +227,10 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkPageSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkPageSortTopById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 根据同一级排序获取这条数据的上一条数据
         Map<String, Object> topBean = appWorkPageDao.queryAppWorkPageISTopByThisId(map);
@@ -259,11 +251,10 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkPageSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkPageSortLowerById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 根据同一级排序获取这条数据的下一条数据
         Map<String, Object> topBean = appWorkPageDao.queryAppWorkPageISLowerByThisId(map);
@@ -284,11 +275,10 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkPageUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkPageUpById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = appWorkPageDao.queryAppWorkPageStateById(map);
         int state = Integer.parseInt(bean.get("state").toString());
@@ -307,11 +297,10 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkPageDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkPageDownById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = appWorkPageDao.queryAppWorkPageStateById(map);
         int state = Integer.parseInt(bean.get("state").toString());
@@ -330,11 +319,10 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkPageTitleById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkPageTitleById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = appWorkPageDao.queryAppWorkPageStateById(map);
         int state = Integer.parseInt(bean.get("state").toString());
@@ -352,11 +340,10 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteAppWorkPageById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteAppWorkPageById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = appWorkPageDao.queryAppWorkPageStateById(map);
         int state = Integer.parseInt(bean.get("state").toString());
@@ -375,11 +362,10 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkUpById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = appWorkPageDao.queryAppWorkPageStateById(map);
         int state = Integer.parseInt(bean.get("state").toString());
@@ -398,11 +384,10 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkDownById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = appWorkPageDao.queryAppWorkPageStateById(map);
         int state = Integer.parseInt(bean.get("state").toString());
@@ -421,11 +406,10 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkSortTopById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = appWorkPageDao.queryAppWorkISTopByThisId(map);//根据同一级排序获取这条数据的上一条数据
         if (topBean == null) {
@@ -445,11 +429,10 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editAppWorkSortLowerById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = appWorkPageDao.queryAppWorkISLowerByThisId(map);//根据同一级排序获取这条数据的下一条数据
         if (topBean == null) {

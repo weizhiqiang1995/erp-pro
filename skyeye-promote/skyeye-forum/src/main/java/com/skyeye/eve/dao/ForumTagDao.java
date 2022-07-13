@@ -9,32 +9,32 @@ import java.util.Map;
 
 public interface ForumTagDao {
 
-    public List<Map<String, Object>> queryForumTagList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryForumTagList(Map<String, Object> map);
 
-    public Map<String, Object> queryForumTagMationByName(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryForumTagMationByName(Map<String, Object> map);
 
-    public int insertForumTagMation(Map<String, Object> map) throws Exception;
+    int insertForumTagMation(Map<String, Object> map);
 
-    public Map<String, Object> queryForumTagBySimpleLevel(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryForumTagBySimpleLevel(Map<String, Object> map);
 
-    public int deleteForumTagById(Map<String, Object> map) throws Exception;
+    int deleteForumTagById(Map<String, Object> map);
 
-    public int updateUpForumTagById(Map<String, Object> map) throws Exception;
+    int updateUpForumTagById(Map<String, Object> map);
 
-    public int updateDownForumTagById(Map<String, Object> map) throws Exception;
+    int updateDownForumTagById(Map<String, Object> map);
 
-    public Map<String, Object> selectForumTagById(Map<String, Object> map) throws Exception;
+    Map<String, Object> selectForumTagById(Map<String, Object> map);
 
-    public int editForumTagMationById(Map<String, Object> map) throws Exception;
+    int editForumTagMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryForumTagUpMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryForumTagUpMationById(Map<String, Object> map);
 
-    public int editForumTagMationOrderNumUpById(Map<String, Object> map) throws Exception;
+    int editForumTagMationOrderNumUpById(Map<String, Object> map);
 
-    public Map<String, Object> queryForumTagDownMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryForumTagDownMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryForumTagStateById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryForumTagStateById(Map<String, Object> map);
 
-    public List<Map<String, Object>> queryForumTagUpStateList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryForumTagUpStateList(Map<String, Object> map);
 
 }

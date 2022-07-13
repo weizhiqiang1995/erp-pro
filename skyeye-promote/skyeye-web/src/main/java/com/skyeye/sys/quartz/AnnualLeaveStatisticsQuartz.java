@@ -82,10 +82,9 @@ public class AnnualLeaveStatisticsQuartz {
     /**
      * 每个季度的第一天零点开始执行员工年假计算任务
      *
-     * @throws Exception
      */
     @Scheduled(cron = "0 00 00 1 1,4,7,10 ?")
-    public void annualLeaveStatistics() throws Exception {
+    public void annualLeaveStatistics() {
         String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         LOGGER.info("annualLeaveStatistics start.");
         try {
@@ -150,9 +149,8 @@ public class AnnualLeaveStatisticsQuartz {
      *
      * @param differDays 相差的天数
      * @return
-     * @throws IllegalAccessException
      */
-    private String getDifferYear(int differDays) throws IllegalAccessException {
+    private String getDifferYear(int differDays) {
         String year = CalculationUtil.divide(String.valueOf(differDays), "365", 2);
         if (ToolUtil.isBlank(year)) {
             return "0";
@@ -164,9 +162,8 @@ public class AnnualLeaveStatisticsQuartz {
      * 获取年假信息
      *
      * @return
-     * @throws Exception
      */
-    private List<Map<String, Object>> getSystemYearHolidaysMation() throws Exception {
+    private List<Map<String, Object>> getSystemYearHolidaysMation() {
         Map<String, Object> sysSetting = systemFoundationSettingsService.getSystemFoundationSettings();
         String yearHolidaysMationStr = sysSetting.get("yearHolidaysMation").toString();
         return JSONUtil.toList(yearHolidaysMationStr, null);

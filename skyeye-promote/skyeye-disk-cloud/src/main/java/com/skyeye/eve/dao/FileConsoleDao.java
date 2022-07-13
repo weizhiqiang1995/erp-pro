@@ -44,7 +44,6 @@ public interface FileConsoleDao {
      *
      * @param folderId 文件夹id
      * @return 文件夹信息
-     * @throws Exception
      */
     Map<String, Object> queryFolderMationById(@Param("folderId") String folderId);
 
@@ -53,7 +52,6 @@ public interface FileConsoleDao {
      *
      * @param id 文件夹id
      * @return 该文件夹下的所有文件
-     * @throws Exception
      */
     List<Map<String, Object>> queryFilesByFolderId(@Param("id") String id);
 

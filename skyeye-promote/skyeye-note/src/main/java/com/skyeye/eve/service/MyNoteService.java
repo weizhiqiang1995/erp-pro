@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,32 +9,32 @@ import com.skyeye.common.object.OutputObject;
 
 public interface MyNoteService {
 
-    public void queryFileMyNoteByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryFileMyNoteByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void insertFileMyNoteByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertFileMyNoteByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteFileFolderById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteFileFolderById(InputObject inputObject, OutputObject outputObject);
 
-    public void editFileFolderById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editFileFolderById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryMyNoteListNewByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryMyNoteListNewByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void insertMyNoteContentByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertMyNoteContentByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryFileAndContentListByFolderId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryFileAndContentListByFolderId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryMyNoteContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryMyNoteContentMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editMyNoteContentById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editMyNoteContentById(InputObject inputObject, OutputObject outputObject);
 
-    public void editFileToDragById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editFileToDragById(InputObject inputObject, OutputObject outputObject);
 
-    public void editNoteToMoveById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editNoteToMoveById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryTreeToMoveByUserId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryTreeToMoveByUserId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryShareNoteById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryShareNoteById(InputObject inputObject, OutputObject outputObject);
 
-    public void outputNoteIsZipJob(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void outputNoteIsZipJob(InputObject inputObject, OutputObject outputObject);
 
 }

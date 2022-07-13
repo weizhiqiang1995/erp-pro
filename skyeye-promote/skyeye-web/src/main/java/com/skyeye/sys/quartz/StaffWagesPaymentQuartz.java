@@ -54,10 +54,9 @@ public class StaffWagesPaymentQuartz {
     /**
      * 定时发放薪资功能，每月15日上午10:15触发
      *
-     * @throws Exception
      */
     @Scheduled(cron = "0 15 10 15 * ?")
-    public void staffWagesPayment() throws Exception {
+    public void staffWagesPayment() {
         String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         LOGGER.info("staff wagesPayment month is start");
         try {
@@ -103,7 +102,7 @@ public class StaffWagesPaymentQuartz {
      * @param staffWages    员工薪资信息
      * @param lastMonthDate 上个月的年月
      */
-    private void paymentStaffWages(Map<String, Object> staffWages, String lastMonthDate) throws Exception {
+    private void paymentStaffWages(Map<String, Object> staffWages, String lastMonthDate) {
         String staffId = staffWages.get("staffId").toString();
         // 这里处理薪资发放的信息
 

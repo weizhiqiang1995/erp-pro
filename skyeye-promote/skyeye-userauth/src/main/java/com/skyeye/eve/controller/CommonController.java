@@ -8,13 +8,11 @@ import com.skyeye.annotation.api.Api;
 import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.service.CommonService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,10 +27,9 @@ public class CommonController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CommonController/uploadFile")
-    public void uploadFile(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void uploadFile(InputObject inputObject, OutputObject outputObject) {
         commonService.uploadFile(inputObject, outputObject);
     }
 
@@ -41,10 +38,9 @@ public class CommonController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CommonController/uploadFileBase64")
-    public void uploadFileBase64(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void uploadFileBase64(InputObject inputObject, OutputObject outputObject) {
         commonService.uploadFileBase64(inputObject, outputObject);
     }
 
@@ -53,10 +49,9 @@ public class CommonController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CommonController/downloadFileByJsonData")
-    public void downloadFileByJsonData(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void downloadFileByJsonData(InputObject inputObject, OutputObject outputObject) {
         commonService.downloadFileByJsonData(inputObject, outputObject);
     }
 
@@ -65,10 +60,9 @@ public class CommonController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CommonController/querySysWinMationById")
-    public void querySysWinMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysWinMationById(InputObject inputObject, OutputObject outputObject) {
         commonService.querySysWinMationById(inputObject, outputObject);
     }
 
@@ -77,10 +71,9 @@ public class CommonController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CommonController/queryAllSysUserIsIncumbency")
-    public void queryAllSysUserIsIncumbency(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysUserIsIncumbency(InputObject inputObject, OutputObject outputObject) {
         commonService.queryAllSysUserIsIncumbency(inputObject, outputObject);
     }
 
@@ -89,13 +82,12 @@ public class CommonController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "queryFilePathByFileType", value = "根据文件类型获取文件的保存地址以及访问地址", method = "GET", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "fileType", name = "fileType", value = "文件类型", required = "required,num")})
     @RequestMapping("/post/CommonController/queryFilePathByFileType")
-    public void queryFilePathByFileType(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFilePathByFileType(InputObject inputObject, OutputObject outputObject) {
         commonService.queryFilePathByFileType(inputObject, outputObject);
     }
 

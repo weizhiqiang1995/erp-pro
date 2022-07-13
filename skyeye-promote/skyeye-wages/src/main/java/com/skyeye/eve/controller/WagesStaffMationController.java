@@ -22,10 +22,9 @@ public class WagesStaffMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesStaffMationController/queryWagesStaffWaitAllocatedMationList")
-    public void queryWagesStaffWaitAllocatedMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesStaffWaitAllocatedMationList(InputObject inputObject, OutputObject outputObject) {
         wagesStaffMationService.queryWagesStaffWaitAllocatedMationList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class WagesStaffMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesStaffMationController/queryStaffWagesModelFieldMationListByStaffId")
-    public void queryStaffWagesModelFieldMationListByStaffId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryStaffWagesModelFieldMationListByStaffId(InputObject inputObject, OutputObject outputObject) {
         wagesStaffMationService.queryStaffWagesModelFieldMationListByStaffId(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class WagesStaffMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesStaffMationController/saveStaffWagesModelFieldMation")
-    public void saveStaffWagesModelFieldMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void saveStaffWagesModelFieldMation(InputObject inputObject, OutputObject outputObject) {
         wagesStaffMationService.saveStaffWagesModelFieldMation(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class WagesStaffMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesStaffMationController/queryWagesStaffDesignMationList")
-    public void queryWagesStaffDesignMationList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesStaffDesignMationList(InputObject inputObject, OutputObject outputObject) {
         wagesStaffMationService.queryWagesStaffDesignMationList(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class WagesStaffMationController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/WagesStaffMationController/queryWagesStaffPaymentDetail")
-    public void queryWagesStaffPaymentDetail(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesStaffPaymentDetail(InputObject inputObject, OutputObject outputObject) {
         wagesStaffMationService.queryWagesStaffPaymentDetail(inputObject, outputObject);
     }
 

@@ -1,3 +1,7 @@
+/*******************************************************************************
+ * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
+ ******************************************************************************/
+
 package com.skyeye.eve.dao;
 
 import org.apache.ibatis.annotations.Param;
@@ -7,10 +11,10 @@ import java.util.Map;
 
 public interface CompanyJobScoreFieldDao {
 
-    public int insertCompanyJobScoreField(@Param("list") List<Map<String, Object>> beans) throws Exception;
+    int insertCompanyJobScoreField(@Param("list") List<Map<String, Object>> beans);
 
-    public int deleteCompanyJobScoreFieldByJobScoreId(@Param("jobScoreId") String jobScoreId) throws Exception;
+    int deleteCompanyJobScoreFieldByJobScoreId(@Param("jobScoreId") String jobScoreId);
 
-    public List<Map<String, Object>> queryCompanyJobScoreFieldByJobScoreId(@Param("jobScoreId") String jobScoreId) throws Exception;
+    List<Map<String, Object>> queryCompanyJobScoreFieldByJobScoreId(@Param("jobScoreId") String jobScoreId);
 
 }

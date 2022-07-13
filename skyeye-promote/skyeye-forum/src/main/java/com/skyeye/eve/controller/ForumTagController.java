@@ -22,10 +22,9 @@ public class ForumTagController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumTagController/queryForumTagList")
-    public void queryForumTagList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumTagList(InputObject inputObject, OutputObject outputObject) {
         forumTagService.queryForumTagList(inputObject, outputObject);
     }
 
@@ -35,10 +34,9 @@ public class ForumTagController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumTagController/insertForumTagMation")
-    public void insertForumTagMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertForumTagMation(InputObject inputObject, OutputObject outputObject) {
         forumTagService.insertForumTagMation(inputObject, outputObject);
     }
 
@@ -47,10 +45,9 @@ public class ForumTagController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumTagController/deleteForumTagById")
-    public void deleteForumTagById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteForumTagById(InputObject inputObject, OutputObject outputObject) {
         forumTagService.deleteForumTagById(inputObject, outputObject);
     }
 
@@ -59,10 +56,9 @@ public class ForumTagController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumTagController/updateUpForumTagById")
-    public void updateUpForumTagById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateUpForumTagById(InputObject inputObject, OutputObject outputObject) {
         forumTagService.updateUpForumTagById(inputObject, outputObject);
     }
 
@@ -71,10 +67,9 @@ public class ForumTagController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumTagController/updateDownForumTagById")
-    public void updateDownForumTagById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateDownForumTagById(InputObject inputObject, OutputObject outputObject) {
         forumTagService.updateDownForumTagById(inputObject, outputObject);
     }
 
@@ -83,10 +78,9 @@ public class ForumTagController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumTagController/selectForumTagById")
-    public void selectForumTagById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectForumTagById(InputObject inputObject, OutputObject outputObject) {
         forumTagService.selectForumTagById(inputObject, outputObject);
     }
 
@@ -95,10 +89,9 @@ public class ForumTagController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumTagController/editForumTagMationById")
-    public void editForumTagMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editForumTagMationById(InputObject inputObject, OutputObject outputObject) {
         forumTagService.editForumTagMationById(inputObject, outputObject);
     }
 
@@ -107,10 +100,9 @@ public class ForumTagController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumTagController/editForumTagMationOrderNumUpById")
-    public void editSysWinTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysWinTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) {
         forumTagService.editForumTagMationOrderNumUpById(inputObject, outputObject);
     }
 
@@ -119,10 +111,9 @@ public class ForumTagController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumTagController/editForumTagMationOrderNumDownById")
-    public void editSysWinTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysWinTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) {
         forumTagService.editForumTagMationOrderNumDownById(inputObject, outputObject);
     }
 
@@ -131,10 +122,9 @@ public class ForumTagController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumTagController/queryForumTagUpStateList")
-    public void queryForumTagUpStateList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumTagUpStateList(InputObject inputObject, OutputObject outputObject) {
         forumTagService.queryForumTagUpStateList(inputObject, outputObject);
     }
 

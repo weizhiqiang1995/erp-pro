@@ -26,10 +26,9 @@ public class SysTAreaServiceImpl implements SysTAreaService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysTAreaList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysTAreaList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysTAreaDao.querySysTAreaList(map);
         if (!beans.isEmpty()) {
@@ -43,10 +42,9 @@ public class SysTAreaServiceImpl implements SysTAreaService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysTAreaProvinceList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysTAreaProvinceList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysTAreaDao.querySysTAreaProvinceList(map);
         if (!beans.isEmpty()) {
@@ -60,10 +58,9 @@ public class SysTAreaServiceImpl implements SysTAreaService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysTAreaCityList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysTAreaCityList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysTAreaDao.querySysTAreaCityList(map);
         if (!beans.isEmpty()) {
@@ -77,10 +74,9 @@ public class SysTAreaServiceImpl implements SysTAreaService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysTAreaChildAreaList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysTAreaChildAreaList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysTAreaDao.querySysTAreaChildAreaList(map);
         if (!beans.isEmpty()) {
@@ -94,10 +90,9 @@ public class SysTAreaServiceImpl implements SysTAreaService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysTAreaTownShipList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysTAreaTownShipList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysTAreaDao.querySysTAreaTownShipList(map);
         if (!beans.isEmpty()) {

@@ -22,10 +22,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/queryDwSurveyDirectoryList")
-    public void queryDwSurveyDirectoryList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDwSurveyDirectoryList(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.queryDwSurveyDirectoryList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/insertDwSurveyDirectoryMation")
-    public void insertDwSurveyDirectoryMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertDwSurveyDirectoryMation(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.insertDwSurveyDirectoryMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/queryDwSurveyDirectoryMationById")
-    public void queryDwSurveyDirectoryMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDwSurveyDirectoryMationById(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.queryDwSurveyDirectoryMationById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/queryDwSurveyMationById")
-    public void queryDwSurveyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDwSurveyMationById(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.queryDwSurveyMationById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/editDwSurveyMationById")
-    public void editDwSurveyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editDwSurveyMationById(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.editDwSurveyMationById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuFillblankMation")
-    public void addQuFillblankMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuFillblankMation(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.addQuFillblankMation(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuScoreMation")
-    public void addQuScoreMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuScoreMation(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.addQuScoreMation(inputObject, outputObject);
     }
 
@@ -106,10 +99,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuOrderquMation")
-    public void addQuOrderquMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuOrderquMation(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.addQuOrderquMation(inputObject, outputObject);
     }
 
@@ -118,10 +110,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuPagetagMation")
-    public void addQuPagetagMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuPagetagMation(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.addQuPagetagMation(inputObject, outputObject);
     }
 
@@ -130,10 +121,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuRadioMation")
-    public void addQuRadioMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuRadioMation(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.addQuRadioMation(inputObject, outputObject);
     }
 
@@ -142,10 +132,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuCheckBoxMation")
-    public void addQuCheckBoxMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuCheckBoxMation(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.addQuCheckBoxMation(inputObject, outputObject);
     }
 
@@ -154,10 +143,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuMultiFillblankMation")
-    public void addQuMultiFillblankMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuMultiFillblankMation(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.addQuMultiFillblankMation(inputObject, outputObject);
     }
 
@@ -166,10 +154,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuParagraphMation")
-    public void addQuParagraphMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuParagraphMation(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.addQuParagraphMation(inputObject, outputObject);
     }
 
@@ -178,10 +165,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuChenMation")
-    public void addQuChenMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void addQuChenMation(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.addQuChenMation(inputObject, outputObject);
     }
 
@@ -190,10 +176,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteQuestionMationById")
-    public void deleteQuestionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteQuestionMationById(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.deleteQuestionMationById(inputObject, outputObject);
     }
 
@@ -202,10 +187,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteQuestionChenColumnMationById")
-    public void deleteQuestionChenColumnMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteQuestionChenColumnMationById(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.deleteQuestionChenColumnMationById(inputObject, outputObject);
     }
 
@@ -214,10 +198,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteQuestionChenRowMationById")
-    public void deleteQuestionChenRowMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteQuestionChenRowMationById(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.deleteQuestionChenRowMationById(inputObject, outputObject);
     }
 
@@ -226,10 +209,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteQuestionRadioOptionMationById")
-    public void deleteQuestionRadioOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteQuestionRadioOptionMationById(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.deleteQuestionRadioOptionMationById(inputObject, outputObject);
     }
 
@@ -238,10 +220,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteQuestionChedkBoxOptionMationById")
-    public void deleteQuestionChedkBoxOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteQuestionChedkBoxOptionMationById(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.deleteQuestionChedkBoxOptionMationById(inputObject, outputObject);
     }
 
@@ -250,10 +231,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteQuestionScoreOptionMationById")
-    public void deleteQuestionScoreOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteQuestionScoreOptionMationById(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.deleteQuestionScoreOptionMationById(inputObject, outputObject);
     }
 
@@ -262,10 +242,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteQuestionOrderOptionMationById")
-    public void deleteQuestionOrderOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteQuestionOrderOptionMationById(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.deleteQuestionOrderOptionMationById(inputObject, outputObject);
     }
 
@@ -274,10 +253,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteQuestionMultiFillblankOptionMationById")
-    public void deleteQuestionMultiFillblankOptionMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteQuestionMultiFillblankOptionMationById(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.deleteQuestionMultiFillblankOptionMationById(inputObject, outputObject);
     }
 
@@ -286,10 +264,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/editSurveyStateToReleaseById")
-    public void editSurveyStateToReleaseById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSurveyStateToReleaseById(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.editSurveyStateToReleaseById(inputObject, outputObject);
     }
 
@@ -298,10 +275,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/queryDwSurveyDirectoryMationByIdToHTML")
-    public void queryDwSurveyDirectoryMationByIdToHTML(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDwSurveyDirectoryMationByIdToHTML(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.queryDwSurveyDirectoryMationByIdToHTML(inputObject, outputObject);
     }
 
@@ -310,10 +286,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteSurveyMationById")
-    public void deleteSurveyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSurveyMationById(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.deleteSurveyMationById(inputObject, outputObject);
     }
 
@@ -322,10 +297,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/querySurveyFxMationById")
-    public void querySurveyFxMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySurveyFxMationById(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.querySurveyFxMationById(inputObject, outputObject);
     }
 
@@ -334,10 +308,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/insertSurveyMationCopyById")
-    public void insertSurveyMationCopyById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSurveyMationCopyById(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.insertSurveyMationCopyById(inputObject, outputObject);
     }
 
@@ -346,10 +319,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/queryAnswerSurveyMationByIp")
-    public void queryAnswerSurveyMationByIp(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAnswerSurveyMationByIp(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.queryAnswerSurveyMationByIp(inputObject, outputObject);
     }
 
@@ -358,10 +330,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/insertAnswerSurveyMationByIp")
-    public void insertAnswerSurveyMationByIp(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertAnswerSurveyMationByIp(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.insertAnswerSurveyMationByIp(inputObject, outputObject);
     }
 
@@ -370,10 +341,9 @@ public class DwSurveyDirectoryController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/DwSurveyDirectoryController/updateSurveyMationEndById")
-    public void updateSurveyMationEndById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateSurveyMationEndById(InputObject inputObject, OutputObject outputObject) {
         dwSurveyDirectoryService.updateSurveyMationEndById(inputObject, outputObject);
     }
 

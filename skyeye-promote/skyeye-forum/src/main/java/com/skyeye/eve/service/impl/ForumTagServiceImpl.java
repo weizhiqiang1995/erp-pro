@@ -46,10 +46,9 @@ public class ForumTagServiceImpl implements ForumTagService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryForumTagList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumTagList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = forumTagDao.queryForumTagList(map);
@@ -62,11 +61,10 @@ public class ForumTagServiceImpl implements ForumTagService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertForumTagMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertForumTagMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagMationByName(map);
         if (!CollectionUtils.isEmpty(bean)) {
@@ -89,11 +87,10 @@ public class ForumTagServiceImpl implements ForumTagService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteForumTagById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteForumTagById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagStateById(map);
         if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {
@@ -109,11 +106,10 @@ public class ForumTagServiceImpl implements ForumTagService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void updateUpForumTagById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateUpForumTagById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagStateById(map);
         if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {//新建或者下线可以上线
@@ -129,11 +125,10 @@ public class ForumTagServiceImpl implements ForumTagService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void updateDownForumTagById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateDownForumTagById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagStateById(map);
         if ("2".equals(bean.get("state").toString())) {//上线状态可以下线
@@ -149,10 +144,9 @@ public class ForumTagServiceImpl implements ForumTagService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void selectForumTagById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectForumTagById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.selectForumTagById(map);
         outputObject.setBean(bean);
@@ -164,11 +158,10 @@ public class ForumTagServiceImpl implements ForumTagService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editForumTagMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editForumTagMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagStateById(map);
         if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {//新建或者下线可以编辑
@@ -188,11 +181,10 @@ public class ForumTagServiceImpl implements ForumTagService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editForumTagMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editForumTagMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagUpMationById(map);//获取当前数据的同级分类下的上一条数据
         if (CollectionUtils.isEmpty(bean)) {
@@ -212,11 +204,10 @@ public class ForumTagServiceImpl implements ForumTagService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editForumTagMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editForumTagMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagDownMationById(map);//获取当前数据的同级分类下的下一条数据
         if (CollectionUtils.isEmpty(bean)) {
@@ -236,10 +227,9 @@ public class ForumTagServiceImpl implements ForumTagService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryForumTagUpStateList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumTagUpStateList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans;
         if (ToolUtil.isBlank(jedisClient.get(ForumConstants.FORUM_TAG_UP_STATE_LIST))) {

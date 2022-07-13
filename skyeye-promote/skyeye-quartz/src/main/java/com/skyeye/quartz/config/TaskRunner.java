@@ -40,7 +40,7 @@ public class TaskRunner implements ApplicationRunner, Ordered {
     private String quartzPort;
 
     @Override
-    public void run(ApplicationArguments applicationArguments) throws Exception {
+    public void run(ApplicationArguments applicationArguments) {
         LOGGER.info("定时任务程序启动");
         Map<String, Object> map = new HashMap<>();
         map.put("quartzIp", quartzIp);

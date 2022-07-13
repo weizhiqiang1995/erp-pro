@@ -62,10 +62,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMyForumContentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyForumContentList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
@@ -90,11 +89,10 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertForumContentMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertForumContentMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String str = querySensitiveWordsByMap(map);
         if (str.length() > 0) {
@@ -142,11 +140,10 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteForumContentById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteForumContentById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         try {
             UpdateResponse response = solrClient.deleteById(map.get("id").toString(), 1000);
@@ -170,10 +167,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryForumContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumContentMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumContentDao.queryForumContentMationById(map);
         List<Map<String, Object>> beans = forumContentDao.selectForumTagById(bean);
@@ -187,11 +183,10 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editForumContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editForumContentMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String str = querySensitiveWordsByMap(map);
         if (str.length() > 0) {
@@ -239,10 +234,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryForumContentMationToDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumContentMationToDetails(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumContentDao.queryForumContentMationToDetails(map);
         outputObject.setBean(bean);
@@ -316,10 +310,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryNewForumContentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryNewForumContentList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         List<Map<String, Object>> beans = forumContentDao.queryNewForumContentList(map);
@@ -332,11 +325,10 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertForumCommentMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertForumCommentMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -360,10 +352,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryForumCommentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumCommentList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = forumContentDao.queryForumCommentList(map);
         for (Map<String, Object> m : beans) {
@@ -379,11 +370,10 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertForumReplyMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertForumReplyMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("id", ToolUtil.getSurFaceId());
@@ -405,10 +395,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryForumReplyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumReplyList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = forumContentDao.queryForumReplyList(map);
         for (Map<String, Object> m : beans) {
@@ -424,10 +413,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryForumMyBrowerList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumMyBrowerList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String userId = inputObject.getLogParams().get("id").toString();
         String keys = ForumConstants.forumBrowseMationByUserid(userId);
@@ -475,10 +463,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryNewCommentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryNewCommentList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = forumContentDao.queryNewCommentList(map);
         outputObject.setBeans(beans);
@@ -490,10 +477,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryForumListByTagId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumListByTagId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = new ArrayList<>();
         long total = 0;
@@ -554,10 +540,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryHotTagList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryHotTagList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = forumContentDao.queryHotTagList(map);
         outputObject.setBeans(beans);
@@ -569,10 +554,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryActiveUsersList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryActiveUsersList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = forumContentDao.queryActiveUsersList(map);
         outputObject.setBeans(beans);
@@ -584,10 +568,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryHotForumList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryHotForumList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         List<Map<String, Object>> beans = forumContentDao.queryHotForumList(map);
@@ -626,10 +609,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySearchForumList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySearchForumList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String searchValue = map.get("searchValue").toString();
         List<Map<String, Object>> beans = new ArrayList<>();
@@ -698,10 +680,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySolrSynchronousTime(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySolrSynchronousTime(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = new HashMap<>();
         String keys = ForumConstants.forumSolrSynchronoustime();
         if (!ToolUtil.isBlank(jedisClient.get(keys))) {
@@ -717,10 +698,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void updateSolrSynchronousData(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateSolrSynchronousData(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = forumContentDao.queryAllForumList(map);
         DocumentObjectBinder binder = new DocumentObjectBinder();
@@ -760,10 +740,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMyCommentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyCommentList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
@@ -781,10 +760,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void deleteCommentById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteCommentById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         forumContentDao.deleteCommentById(map);
     }
@@ -794,10 +772,9 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryMyNoticeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyNoticeList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map.put("userId", inputObject.getLogParams().get("id"));
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
@@ -815,11 +792,10 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteNoticeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteNoticeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         forumContentDao.deleteNoticeById(map);
     }
@@ -829,9 +805,8 @@ public class ForumContentServiceImpl implements ForumContentService {
      *
      * @param map
      * @return
-     * @throws Exception
      */
-    public String querySensitiveWordsByMap(Map<String, Object> map) throws Exception {
+    public String querySensitiveWordsByMap(Map<String, Object> map) {
         String content = map.get("title").toString() + "," + map.get("textConent").toString();
         List<Map<String, Object>> sensitiveWords;
         if (ToolUtil.isBlank(jedisClient.get(ForumConstants.forumSensitiveWordsAll()))) {

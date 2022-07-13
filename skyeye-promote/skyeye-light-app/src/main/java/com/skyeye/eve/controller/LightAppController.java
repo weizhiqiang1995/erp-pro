@@ -22,10 +22,9 @@ public class LightAppController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppController/queryLightAppList")
-    public void queryLightAppList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryLightAppList(InputObject inputObject, OutputObject outputObject) {
         lightAppService.queryLightAppList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class LightAppController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppController/insertLightAppMation")
-    public void insertLightAppMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertLightAppMation(InputObject inputObject, OutputObject outputObject) {
         lightAppService.insertLightAppMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class LightAppController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppController/queryLightAppMationToEditById")
-    public void queryLightAppMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryLightAppMationToEditById(InputObject inputObject, OutputObject outputObject) {
         lightAppService.queryLightAppMationToEditById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class LightAppController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppController/editLightAppMationById")
-    public void editLightAppMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editLightAppMationById(InputObject inputObject, OutputObject outputObject) {
         lightAppService.editLightAppMationById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class LightAppController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppController/deleteLightAppById")
-    public void deleteLightAppById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteLightAppById(InputObject inputObject, OutputObject outputObject) {
         lightAppService.deleteLightAppById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class LightAppController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppController/editLightAppUpById")
-    public void editLightAppUpTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editLightAppUpTypeById(InputObject inputObject, OutputObject outputObject) {
         lightAppService.editLightAppUpById(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class LightAppController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppController/editLightAppDownById")
-    public void editLightAppDownTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editLightAppDownTypeById(InputObject inputObject, OutputObject outputObject) {
         lightAppService.editLightAppDownById(inputObject, outputObject);
     }
 
@@ -106,10 +99,9 @@ public class LightAppController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppController/queryLightAppUpList")
-    public void queryLightAppUpList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryLightAppUpList(InputObject inputObject, OutputObject outputObject) {
         lightAppService.queryLightAppUpList(inputObject, outputObject);
     }
 
@@ -118,10 +110,9 @@ public class LightAppController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/LightAppController/insertLightAppToWin")
-    public void insertLightAppToWin(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertLightAppToWin(InputObject inputObject, OutputObject outputObject) {
         lightAppService.insertLightAppToWin(inputObject, outputObject);
     }
 

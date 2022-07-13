@@ -17,19 +17,19 @@ import java.util.Map;
  */
 public interface AppWorkPageAuthPointDao {
 
-    public List<Map<String, Object>> queryAppWorkPageAuthPointListByMenuId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryAppWorkPageAuthPointListByMenuId(Map<String, Object> map);
 
-    public Map<String, Object> queryAppWorkPageAuthPointMationByAuthName(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryAppWorkPageAuthPointMationByAuthName(Map<String, Object> map);
 
-    public int insertAppWorkPageAuthPointMation(Map<String, Object> map) throws Exception;
+    int insertAppWorkPageAuthPointMation(Map<String, Object> map);
 
-    public Map<String, Object> queryAppWorkPageAuthPointMationToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryAppWorkPageAuthPointMationToEditById(Map<String, Object> map);
 
-    public Map<String, Object> queryAppWorkPageAuthPointMationByAuthNameAndId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryAppWorkPageAuthPointMationByAuthNameAndId(Map<String, Object> map);
 
-    public int editAppWorkPageAuthPointMationById(Map<String, Object> map) throws Exception;
+    int editAppWorkPageAuthPointMationById(Map<String, Object> map);
 
-    public int deleteAppWorkPageAuthPointMationById(Map<String, Object> map) throws Exception;
+    int deleteAppWorkPageAuthPointMationById(Map<String, Object> map);
 
 
 }

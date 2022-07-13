@@ -36,7 +36,6 @@ public class SysEveRoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "sys013", value = "获取角色列表", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -44,7 +43,7 @@ public class SysEveRoleController {
         @ApiImplicitParam(id = "page", name = "page", value = "分页参数,第几页", required = "required,num"),
         @ApiImplicitParam(id = "roleName", name = "roleName", value = "角色名称", required = "")})
     @RequestMapping("/post/SysEveRoleController/querySysRoleList")
-    public void querySysRoleList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysRoleList(InputObject inputObject, OutputObject outputObject) {
         sysEveRoleService.querySysRoleList(inputObject, outputObject);
     }
 
@@ -53,11 +52,10 @@ public class SysEveRoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "sys014", value = "获取角色需要绑定的菜单列表", method = "GET", allUse = "2")
     @RequestMapping("/post/SysEveRoleController/querySysRoleBandMenuList")
-    public void querySysRoleBandMenuList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysRoleBandMenuList(InputObject inputObject, OutputObject outputObject) {
         sysEveRoleService.querySysRoleBandMenuList(inputObject, outputObject);
     }
 
@@ -66,12 +64,11 @@ public class SysEveRoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "sys015", value = "新增角色", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = RoleMation.class)
     @RequestMapping("/post/SysEveRoleController/insertSysRoleMation")
-    public void insertSysRoleMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysRoleMation(InputObject inputObject, OutputObject outputObject) {
         sysEveRoleService.insertSysRoleMation(inputObject, outputObject);
     }
 
@@ -80,13 +77,12 @@ public class SysEveRoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "sys016", value = "编辑角色时的信息回显", method = "GET", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "角色ID", required = "required")})
     @RequestMapping("/post/SysEveRoleController/querySysRoleMationToEditById")
-    public void querySysRoleMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysRoleMationToEditById(InputObject inputObject, OutputObject outputObject) {
         sysEveRoleService.querySysRoleMationToEditById(inputObject, outputObject);
     }
 
@@ -95,13 +91,12 @@ public class SysEveRoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "sys017", value = "编辑角色", method = "PUT", allUse = "1")
     @ApiImplicitParams(classBean = RoleMation.class, value = {
         @ApiImplicitParam(id = "rowId", name = "id", value = "主键id", required = "required")})
     @RequestMapping("/post/SysEveRoleController/editSysRoleMationById")
-    public void editSysRoleMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysRoleMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveRoleService.editSysRoleMationById(inputObject, outputObject);
     }
 
@@ -110,13 +105,12 @@ public class SysEveRoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "editSysRolePCAuth", value = "编辑角色PC端权限", method = "PUT", allUse = "1")
     @ApiImplicitParams(classBean = RoleMation.class, value = {
         @ApiImplicitParam(id = "rowId", name = "id", value = "主键id", required = "required")})
     @RequestMapping("/post/SysEveRoleController/editSysRolePCAuth")
-    public void editSysRolePCAuth(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysRolePCAuth(InputObject inputObject, OutputObject outputObject) {
         sysEveRoleService.editSysRolePCAuth(inputObject, outputObject);
     }
 
@@ -125,13 +119,12 @@ public class SysEveRoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "sys018", value = "删除角色", method = "DELETE", allUse = "1")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "rowId", name = "id", value = "角色ID", required = "required")})
     @RequestMapping("/post/SysEveRoleController/deleteSysRoleMationById")
-    public void deleteSysRoleMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysRoleMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveRoleService.deleteSysRoleMationById(inputObject, outputObject);
     }
 
@@ -140,10 +133,9 @@ public class SysEveRoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveRoleController/querySysRoleBandAppMenuList")
-    public void querySysRoleBandAppMenuList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysRoleBandAppMenuList(InputObject inputObject, OutputObject outputObject) {
         sysEveRoleService.querySysRoleBandAppMenuList(inputObject, outputObject);
     }
 
@@ -152,10 +144,9 @@ public class SysEveRoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveRoleController/querySysRoleToAppMenuEditById")
-    public void querySysRoleToAppMenuEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysRoleToAppMenuEditById(InputObject inputObject, OutputObject outputObject) {
         sysEveRoleService.querySysRoleToAppMenuEditById(inputObject, outputObject);
     }
 
@@ -164,10 +155,9 @@ public class SysEveRoleController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveRoleController/editSysRoleAppMenuById")
-    public void editSysRoleAppMenuById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysRoleAppMenuById(InputObject inputObject, OutputObject outputObject) {
         sysEveRoleService.editSysRoleAppMenuById(inputObject, outputObject);
     }
 

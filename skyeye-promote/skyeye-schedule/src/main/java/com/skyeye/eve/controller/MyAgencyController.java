@@ -22,10 +22,9 @@ public class MyAgencyController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MyAgencyController/queryMyAgencyList")
-    public void queryMyAgencyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyAgencyList(InputObject inputObject, OutputObject outputObject) {
         myAgencyService.queryMyAgencyList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class MyAgencyController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/MyAgencyController/deleteMyAgencyList")
-    public void deleteMyAgencyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteMyAgencyList(InputObject inputObject, OutputObject outputObject) {
         myAgencyService.deleteMyAgencyList(inputObject, outputObject);
     }
 

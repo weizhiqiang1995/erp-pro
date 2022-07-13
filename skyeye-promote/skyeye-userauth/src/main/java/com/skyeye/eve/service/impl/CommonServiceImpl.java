@@ -17,6 +17,7 @@ import com.skyeye.common.util.FileUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.*;
 import com.skyeye.eve.service.CommonService;
+import com.skyeye.exception.CustomException;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -74,10 +76,9 @@ public class CommonServiceImpl implements CommonService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void uploadFile(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void uploadFile(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(PutObject.getRequest().getSession().getServletContext());
@@ -105,7 +106,11 @@ public class CommonServiceImpl implements CommonService {
                     String path = basePath + "/" + newFileName;
                     LOGGER.info("upload file type is: {}, path is: {}", type, path);
                     // 上传
-                    file.transferTo(new File(path));
+                    try {
+                        file.transferTo(new File(path));
+                    } catch (IOException ex) {
+                        throw new CustomException(ex);
+                    }
                     newFileName = Constants.FileUploadPath.getVisitPath(type) + newFileName;
                     if (ToolUtil.isBlank(trueFileName.toString())) {
                         trueFileName.append(newFileName);
@@ -126,10 +131,9 @@ public class CommonServiceImpl implements CommonService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void uploadFileBase64(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void uploadFileBase64(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         int type = Integer.parseInt(map.get("type").toString());
         String imgStr = map.get("images").toString();
@@ -170,11 +174,10 @@ public class CommonServiceImpl implements CommonService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void downloadFileByJsonData(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void downloadFileByJsonData(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonData").toString(), null);
         List<Map<String, Object>> inBeans = new ArrayList<>();
@@ -183,29 +186,35 @@ public class CommonServiceImpl implements CommonService {
         String basePath = tPath + Constants.FileUploadPath.CODE_GENERATOR.getSavePath();
         FileUtil.createDirs(basePath);
         String strZipPath = tPath + Constants.FileUploadPath.CODE_GENERATOR.getSavePath() + "/" + zipName;
-        ZipOutputStream out = new ZipOutputStream(new FileOutputStream(strZipPath));
-        byte[] buffer = new byte[1024];
+        ZipOutputStream out = null;
+        try {
+            out = new ZipOutputStream(new FileOutputStream(strZipPath));
+            byte[] buffer = new byte[1024];
 
-        for (int i = 0; i < array.size(); i++) {
-            JSONObject object = (JSONObject) array.get(i);
-            String content = object.getStr("content");
-            // 加入压缩包
-            ByteArrayInputStream stream = new ByteArrayInputStream(content.getBytes());
-            if ("javascript".equals(object.getStr("modelType").toLowerCase())) {
-                out.putNextEntry(new ZipEntry(object.getStr("fileName") + ".js"));
-            } else {
-                out.putNextEntry(new ZipEntry(object.getStr("fileName") + "." + object.getStr("modelType").toLowerCase()));
+            for (int i = 0; i < array.size(); i++) {
+                JSONObject object = (JSONObject) array.get(i);
+                String content = object.getStr("content");
+                // 加入压缩包
+                ByteArrayInputStream stream = new ByteArrayInputStream(content.getBytes());
+                if ("javascript".equals(object.getStr("modelType").toLowerCase())) {
+                    out.putNextEntry(new ZipEntry(object.getStr("fileName") + ".js"));
+                } else {
+                    out.putNextEntry(new ZipEntry(object.getStr("fileName") + "." + object.getStr("modelType").toLowerCase()));
+                }
+                int len;
+                // 读入需要下载的文件的内容，打包到zip文件
+                while ((len = stream.read(buffer)) > 0) {
+                    out.write(buffer, 0, len);
+                }
+                out.closeEntry();
+                Map<String, Object> bean = getCodeModelHoitoryObject(user, zipName, object, content);
+                inBeans.add(bean);
             }
-            int len;
-            // 读入需要下载的文件的内容，打包到zip文件
-            while ((len = stream.read(buffer)) > 0) {
-                out.write(buffer, 0, len);
-            }
-            out.closeEntry();
-            Map<String, Object> bean = getCodeModelHoitoryObject(user, zipName, object, content);
-            inBeans.add(bean);
+        } catch (Exception ex) {
+            throw new CustomException(ex);
+        } finally {
+            FileUtil.close(out);
         }
-        out.close();
         commonDao.insertCodeModelHistory(inBeans);
     }
 
@@ -233,10 +242,9 @@ public class CommonServiceImpl implements CommonService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysWinMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysWinMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
 
         // 获取win系统桌面图片列表供展示
@@ -263,10 +271,9 @@ public class CommonServiceImpl implements CommonService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryAllSysUserIsIncumbency(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysUserIsIncumbency(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Integer> state = this.getIncumbencyState();
         map.put("state", state);
@@ -288,10 +295,9 @@ public class CommonServiceImpl implements CommonService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryFilePathByFileType(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryFilePathByFileType(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Integer fileType = Integer.parseInt(map.get("fileType").toString());
         String savePath = tPath + Constants.FileUploadPath.getSavePath(fileType);

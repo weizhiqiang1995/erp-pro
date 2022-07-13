@@ -9,20 +9,20 @@ import java.util.Map;
 
 public interface SysEveWinLockBgPicDao {
 
-    List<Map<String, Object>> querySysEveWinLockBgPicList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysEveWinLockBgPicList(Map<String, Object> map);
 
-    int insertSysEveWinLockBgPicMation(Map<String, Object> map) throws Exception;
+    int insertSysEveWinLockBgPicMation(Map<String, Object> map);
 
-    int deleteSysEveWinLockBgPicMationById(Map<String, Object> map) throws Exception;
+    int deleteSysEveWinLockBgPicMationById(Map<String, Object> map);
 
-    Map<String, Object> querySysEveMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysEveMationById(Map<String, Object> map);
 
     List<Map<String, Object>> querySysEveWinBgPicListToShow(Map<String, Object> map);
 
-    int insertSysEveWinBgPicMationByCustom(Map<String, Object> map) throws Exception;
+    int insertSysEveWinBgPicMationByCustom(Map<String, Object> map);
 
-    List<Map<String, Object>> querySysEveWinBgPicCustomList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysEveWinBgPicCustomList(Map<String, Object> map);
 
-    int deleteSysEveWinBgPicMationCustomById(Map<String, Object> map) throws Exception;
+    int deleteSysEveWinBgPicMationCustomById(Map<String, Object> map);
 
 }

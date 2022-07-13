@@ -22,10 +22,9 @@ public class SysEveDesktopController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveDesktopController/querySysDesktopList")
-    public void querySysDesktopList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysDesktopList(InputObject inputObject, OutputObject outputObject) {
         sysEveDesktopService.querySysDesktopList(inputObject, outputObject);
     }
 
@@ -35,10 +34,9 @@ public class SysEveDesktopController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveDesktopController/insertSysDesktopMation")
-    public void insertSysDesktopMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysDesktopMation(InputObject inputObject, OutputObject outputObject) {
         sysEveDesktopService.insertSysDesktopMation(inputObject, outputObject);
     }
 
@@ -47,10 +45,9 @@ public class SysEveDesktopController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveDesktopController/deleteSysDesktopById")
-    public void deleteSysDesktopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysDesktopById(InputObject inputObject, OutputObject outputObject) {
         sysEveDesktopService.deleteSysDesktopById(inputObject, outputObject);
     }
 
@@ -59,10 +56,9 @@ public class SysEveDesktopController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveDesktopController/updateUpSysDesktopById")
-    public void updateUpSysDesktopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateUpSysDesktopById(InputObject inputObject, OutputObject outputObject) {
         sysEveDesktopService.updateUpSysDesktopById(inputObject, outputObject);
     }
 
@@ -71,10 +67,9 @@ public class SysEveDesktopController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveDesktopController/updateDownSysDesktopById")
-    public void updateDownSysDesktopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateDownSysDesktopById(InputObject inputObject, OutputObject outputObject) {
         sysEveDesktopService.updateDownSysDesktopById(inputObject, outputObject);
     }
 
@@ -83,10 +78,9 @@ public class SysEveDesktopController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveDesktopController/selectSysDesktopById")
-    public void selectSysDesktopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void selectSysDesktopById(InputObject inputObject, OutputObject outputObject) {
         sysEveDesktopService.selectSysDesktopById(inputObject, outputObject);
     }
 
@@ -95,10 +89,9 @@ public class SysEveDesktopController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveDesktopController/editSysDesktopMationById")
-    public void editSysDesktopMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysDesktopMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveDesktopService.editSysDesktopMationById(inputObject, outputObject);
     }
 
@@ -107,10 +100,9 @@ public class SysEveDesktopController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveDesktopController/editSysDesktopMationOrderNumUpById")
-    public void editSysWinTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysWinTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) {
         sysEveDesktopService.editSysDesktopMationOrderNumUpById(inputObject, outputObject);
     }
 
@@ -119,10 +111,9 @@ public class SysEveDesktopController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveDesktopController/editSysDesktopMationOrderNumDownById")
-    public void editSysWinTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysWinTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) {
         sysEveDesktopService.editSysDesktopMationOrderNumDownById(inputObject, outputObject);
     }
 
@@ -131,10 +122,9 @@ public class SysEveDesktopController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveDesktopController/queryAllSysDesktopList")
-    public void queryAllSysDesktopList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryAllSysDesktopList(InputObject inputObject, OutputObject outputObject) {
         sysEveDesktopService.queryAllSysDesktopList(inputObject, outputObject);
     }
 
@@ -143,10 +133,9 @@ public class SysEveDesktopController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveDesktopController/removeAllSysEveMenuByDesktopId")
-    public void removeAllSysEveMenuByDesktopId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void removeAllSysEveMenuByDesktopId(InputObject inputObject, OutputObject outputObject) {
         sysEveDesktopService.removeAllSysEveMenuByDesktopId(inputObject, outputObject);
     }
 

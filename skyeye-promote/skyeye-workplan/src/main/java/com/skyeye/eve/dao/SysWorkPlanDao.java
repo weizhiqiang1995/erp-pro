@@ -43,7 +43,6 @@ public interface SysWorkPlanDao {
      *
      * @param planId 计划id
      * @return
-     * @throws Exception
      */
     int deleteSysWorkPlanUserById(@Param("planId") String planId);
 

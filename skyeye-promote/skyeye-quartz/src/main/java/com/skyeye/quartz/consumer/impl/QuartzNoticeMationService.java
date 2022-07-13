@@ -25,7 +25,7 @@ public class QuartzNoticeMationService implements TaskMateService {
     private static final Logger LOGGER = LoggerFactory.getLogger(QuartzNoticeMationService.class);
 
     @Override
-    public void call(SysQuartz sysQuartz) throws Exception {
+    public void call(SysQuartz sysQuartz) {
         LOGGER.info("start quartz notice, quartz id is: {}", sysQuartz.getId());
         String noticeId = sysQuartz.getName();
         // 上线状态

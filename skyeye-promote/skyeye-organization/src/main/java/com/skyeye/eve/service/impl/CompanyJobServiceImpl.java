@@ -40,10 +40,9 @@ public class CompanyJobServiceImpl implements CompanyJobService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyJobList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyJobList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyJobDao.queryCompanyJobList(map);
         String[] s;
@@ -64,11 +63,10 @@ public class CompanyJobServiceImpl implements CompanyJobService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertCompanyJobMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertCompanyJobMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyJobDao.queryCompanyJobMationByName(map);
         if (bean == null) {
@@ -87,11 +85,10 @@ public class CompanyJobServiceImpl implements CompanyJobService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteCompanyJobMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteCompanyJobMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 1.删除职位信息
         companyJobDao.deleteCompanyJobMationById(map);
@@ -104,10 +101,9 @@ public class CompanyJobServiceImpl implements CompanyJobService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyJobMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyJobMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyJobDao.queryCompanyJobMationToEditById(map);
         outputObject.setBean(bean);
@@ -119,11 +115,10 @@ public class CompanyJobServiceImpl implements CompanyJobService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editCompanyJobMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCompanyJobMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyJobDao.queryCompanyJobMationByNameAndId(map);
         if (bean == null) {
@@ -138,10 +133,9 @@ public class CompanyJobServiceImpl implements CompanyJobService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyJobListTreeByDepartmentId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyJobListTreeByDepartmentId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyJobDao.queryCompanyJobListTreeByDepartmentId(map);
         String[] s;
@@ -167,10 +161,9 @@ public class CompanyJobServiceImpl implements CompanyJobService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyJobListByToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyJobListByToSelect(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyJobDao.queryCompanyJobListByToSelect(map);
         if (!beans.isEmpty()) {
@@ -184,10 +177,9 @@ public class CompanyJobServiceImpl implements CompanyJobService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyJobSimpleListByToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyJobSimpleListByToSelect(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyJobDao.queryCompanyJobSimpleListByToSelect(map);
         if (!beans.isEmpty()) {

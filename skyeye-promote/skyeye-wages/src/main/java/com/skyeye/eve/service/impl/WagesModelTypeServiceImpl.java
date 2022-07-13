@@ -26,7 +26,7 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
     @Autowired
     private WagesModelTypeDao wagesModelTypeDao;
 
-    public static enum STATE {
+    public enum STATE {
         START_UP(1, "启用"),
         START_DOWN(2, "禁用"),
         START_DELETE(3, "删除");
@@ -52,10 +52,9 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWagesModelTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesModelTypeList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = wagesModelTypeDao.queryWagesModelTypeList(map);
@@ -68,11 +67,10 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertWagesModelTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertWagesModelTypeMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 根据判断该名称是否存在
         Map<String, Object> mation = wagesModelTypeDao.queryWagesModelTypeByNameAndNotId(map.get("nameCn").toString(), null);
@@ -94,10 +92,9 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryWagesModelTypeMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryWagesModelTypeMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = wagesModelTypeDao.queryWagesModelTypeMationToEditById(id);
@@ -114,11 +111,10 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> mation = wagesModelTypeDao.queryWagesModelTypeByNameAndNotId(map.get("nameCn").toString(), id);
@@ -136,11 +132,10 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         wagesModelTypeDao.editWagesModelTypeStateMationById(map.get("id").toString(), STATE.START_DELETE.getState());
     }
@@ -150,11 +145,10 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void enableWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void enableWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         wagesModelTypeDao.editWagesModelTypeStateMationById(map.get("id").toString(), STATE.START_UP.getState());
     }
@@ -164,11 +158,10 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void disableWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void disableWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         wagesModelTypeDao.editWagesModelTypeStateMationById(map.get("id").toString(), STATE.START_DOWN.getState());
     }
@@ -178,10 +171,9 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryEnableWagesModelTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryEnableWagesModelTypeList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = wagesModelTypeDao.queryEnableWagesModelTypeList(map);
         outputObject.setBeans(beans);

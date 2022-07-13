@@ -43,10 +43,9 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyDepartmentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyDepartmentList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = companyDepartmentDao.queryCompanyDepartmentList(map);
@@ -63,11 +62,10 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertCompanyDepartmentMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertCompanyDepartmentMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyDepartmentDao.queryCompanyDepartmentMationByName(map);
         if (ObjectUtils.isEmpty(bean)) {
@@ -85,11 +83,10 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyDepartmentDao.queryCompanyDepartmentUserMationById(map);
         if (Integer.parseInt(bean.get("childsNum").toString()) == 0) {
@@ -111,10 +108,9 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyDepartmentMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyDepartmentMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
         Map<String, Object> bean = companyDepartmentDao.queryCompanyDepartmentMationById(id);
@@ -127,11 +123,10 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyDepartmentDao.queryCompanyDepartmentMationByNameAndId(map);
         if (bean == null) {
@@ -146,10 +141,9 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyDepartmentListTreeByCompanyId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyDepartmentListTreeByCompanyId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyDepartmentDao.queryCompanyDepartmentListTreeByCompanyId(map);
         beans = ToolUtil.listToTree(beans, "id", "parentId", "children");
@@ -164,10 +158,9 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyDepartmentListByCompanyIdToSelect(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyDepartmentListByCompanyIdToSelect(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyDepartmentDao.queryCompanyDepartmentListByCompanyIdToSelect(map);
         if (!beans.isEmpty()) {
@@ -181,10 +174,9 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyDepartmentListToChoose(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyDepartmentListToChoose(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = companyDepartmentDao.queryCompanyDepartmentListToChoose(map);
@@ -197,10 +189,9 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryCompanyDepartmentListByIds(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryCompanyDepartmentListByIds(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<String> idsList = Arrays.asList(map.get("ids").toString().split(","));
         List<Map<String, Object>> beans = new ArrayList<>();
@@ -216,24 +207,11 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
     /**
      * 根据部门id获取部门加班结算方式
      *
-     * @param departmentId 部门id
-     * @return 部门加班结算方式
-     * @throws Exception
-     */
-    @Override
-    public int getDepartmentOvertimeSettlementType(String departmentId) throws Exception {
-        Map<String, Object> bean = companyDepartmentDao.queryCompanyDepartmentMationById(departmentId);
-        return Integer.parseInt(bean.get("overtimeSettlementType").toString());
-    }
-
-    /**
-     * 根据部门id获取部门加班结算方式
-     *
      * @param inputObject
      * @param outputObject
      */
     @Override
-    public void queryDepartmentListByCurrentUserBelong(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryDepartmentListByCurrentUserBelong(InputObject inputObject, OutputObject outputObject) {
         String companyId = inputObject.getLogParams().get("companyId").toString();
         List<Map<String, Object>> list = companyDepartmentDao.queryDepartmentListByCompanyId(companyId);
         outputObject.setBeans(list);

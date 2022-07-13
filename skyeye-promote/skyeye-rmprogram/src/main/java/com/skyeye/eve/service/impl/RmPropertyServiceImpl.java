@@ -31,10 +31,9 @@ public class RmPropertyServiceImpl implements RmPropertyService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryRmPropertyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmPropertyList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = rmPropertyDao.queryRmPropertyList(map);
@@ -47,11 +46,10 @@ public class RmPropertyServiceImpl implements RmPropertyService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertRmPropertyMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertRmPropertyMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmPropertyDao.queryRmPropertyMationByName(map);
         if (CollectionUtils.isEmpty(bean)) {
@@ -70,11 +68,10 @@ public class RmPropertyServiceImpl implements RmPropertyService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteRmPropertyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteRmPropertyMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmPropertyDao.queryRmPropertyValueNumById(map);
         if (CollectionUtils.isEmpty(bean)) {
@@ -111,10 +108,9 @@ public class RmPropertyServiceImpl implements RmPropertyService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryRmPropertyMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmPropertyMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmPropertyDao.queryRmPropertyMationToEditById(map);
         outputObject.setBean(bean);
@@ -126,11 +122,10 @@ public class RmPropertyServiceImpl implements RmPropertyService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editRmPropertyMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editRmPropertyMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmPropertyDao.queryRmPropertyMationByNameAndId(map);
         if (CollectionUtils.isEmpty(bean)) {
@@ -145,10 +140,9 @@ public class RmPropertyServiceImpl implements RmPropertyService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryRmPropertyListToShow(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryRmPropertyListToShow(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = rmPropertyDao.queryRmPropertyListToShow(map);
         if (beans != null && !beans.isEmpty()) {

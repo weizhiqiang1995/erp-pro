@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,21 +9,21 @@ import com.skyeye.common.object.OutputObject;
 
 public interface WagesFieldTypeService {
 
-    public void queryWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryWagesFieldTypeList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertWagesFieldTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertWagesFieldTypeMation(InputObject inputObject, OutputObject outputObject);
 
-    public void queryWagesFieldTypeMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryWagesFieldTypeMationToEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void enableWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void enableWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void disableWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void disableWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryEnableWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryEnableWagesFieldTypeList(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysWagesFieldTypeList(InputObject inputObject, OutputObject outputObject);
 }

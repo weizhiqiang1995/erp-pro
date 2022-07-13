@@ -22,10 +22,9 @@ public class SysEveWinThemeColorController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinThemeColorController/querySysEveWinThemeColorList")
-    public void querySysEveWinThemeColorList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveWinThemeColorList(InputObject inputObject, OutputObject outputObject) {
         sysEveWinThemeColorService.querySysEveWinThemeColorList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class SysEveWinThemeColorController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinThemeColorController/insertSysEveWinThemeColorMation")
-    public void insertSysEveWinThemeColorMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysEveWinThemeColorMation(InputObject inputObject, OutputObject outputObject) {
         sysEveWinThemeColorService.insertSysEveWinThemeColorMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class SysEveWinThemeColorController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinThemeColorController/deleteSysEveWinThemeColorMationById")
-    public void deleteSysEveWinThemeColorMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysEveWinThemeColorMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinThemeColorService.deleteSysEveWinThemeColorMationById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class SysEveWinThemeColorController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinThemeColorController/querySysEveWinThemeColorMationToEditById")
-    public void querySysEveWinThemeColorMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveWinThemeColorMationToEditById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinThemeColorService.querySysEveWinThemeColorMationToEditById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class SysEveWinThemeColorController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysEveWinThemeColorController/editSysEveWinThemeColorMationById")
-    public void editSysEveWinThemeColorMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysEveWinThemeColorMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveWinThemeColorService.editSysEveWinThemeColorMationById(inputObject, outputObject);
     }
 

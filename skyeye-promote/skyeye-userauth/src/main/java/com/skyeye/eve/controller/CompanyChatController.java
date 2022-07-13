@@ -22,10 +22,9 @@ public class CompanyChatController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyChatController/getList")
-    public void getList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void getList(InputObject inputObject, OutputObject outputObject) {
         companyChatService.getList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class CompanyChatController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/CompanyChatController/editUserSignByUserId")
-    public void editUserSignByUserId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editUserSignByUserId(InputObject inputObject, OutputObject outputObject) {
         companyChatService.editUserSignByUserId(inputObject, outputObject);
     }
 

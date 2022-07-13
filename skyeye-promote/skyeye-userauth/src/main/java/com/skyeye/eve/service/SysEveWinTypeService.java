@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,30 +9,30 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysEveWinTypeService {
 
-    public void querySysWinTypeList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysWinTypeList(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysWinFirstTypeList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysWinFirstTypeList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysWinTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysWinTypeMation(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysWinTypeMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysWinTypeMationToEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysWinTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysWinTypeMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysWinFirstTypeListNotIsThisId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysWinFirstTypeListNotIsThisId(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSysWinTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteSysWinTypeMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysWinTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysWinTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysWinTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysWinTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysWinTypeMationStateUpById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysWinTypeMationStateUpById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysWinTypeMationStateDownById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysWinTypeMationStateDownById(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysWinTypeFirstMationStateIsUp(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysWinTypeFirstMationStateIsUp(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysWinTypeSecondMationStateIsUp(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysWinTypeSecondMationStateIsUp(InputObject inputObject, OutputObject outputObject);
 
 }

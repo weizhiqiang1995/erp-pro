@@ -7,13 +7,15 @@ package com.skyeye.sys.quartz;
 import cn.hutool.json.JSONUtil;
 import com.skyeye.cache.local.LocalCacheMap;
 import com.skyeye.common.client.ExecuteFeignClient;
-import com.skyeye.common.util.CalculationUtil;
 import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.util.*;
 import com.skyeye.eve.dao.*;
 import com.skyeye.eve.entity.quartz.SysQuartzRunHistory;
 import com.skyeye.eve.rest.checkwork.CheckWorkTimeService;
-import com.skyeye.eve.service.*;
+import com.skyeye.eve.service.SysQuartzRunHistoryService;
+import com.skyeye.eve.service.SystemFoundationSettingsService;
+import com.skyeye.eve.service.WagesModelService;
+import com.skyeye.eve.service.WagesStaffMationService;
 import com.skyeye.jedis.JedisClientService;
 import com.skyeye.wages.constant.WagesConstant;
 import org.slf4j.Logger;
@@ -107,7 +109,7 @@ public class StaffWagesQuartz {
 
     // 每月十号的凌晨两点开始执行薪资统计任务
     @Scheduled(cron = "0 0 2 10 * ?")
-    public void statisticsStaffWages() throws Exception {
+    public void statisticsStaffWages() {
         String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         try {
             // 获取上个月的年月
@@ -170,11 +172,10 @@ public class StaffWagesQuartz {
      * @param workTime                 考勤制度
      * @param lastMonthDate            上个月的年月
      * @param taxRate                  个人所得税缴纳比例
-     * @throws Exception
      */
     private void calcStaffWages(Map<String, Object> staff, List<Map<String, Object>> wagesModelMation, List<Map<String, Object>> socialSecurityFund,
                                 Map<String, Object> systemFoundationSettings, List<Map<String, Object>> workTime, String lastMonthDate, Map<String,
-        List<Map<String, Object>>> taxRate) throws Exception {
+        List<Map<String, Object>>> taxRate) {
         String companyId = staff.get("companyId").toString();
         String departmentId = staff.get("departmentId").toString();
         String staffId = staff.get("id").toString();
@@ -218,12 +219,10 @@ public class StaffWagesQuartz {
      * @param socialSecurityFundMoney 该员工应该缴纳的社保公积金的金额
      * @param staffCheckWorkMoney     员工的考勤相关应扣的薪资，如果为负数，则说明加班和销假>请假以及异常考勤
      * @return
-     * @throws Exception
      */
     private String calcMonthRealMoney(String lastMonthDate, Map<String, List<Map<String, Object>>> taxRate,
                                       String companyId, String actWages, List<Map<String, Object>> staffModelField,
-                                      Map<String, String> staffModelFieldMap, String socialSecurityFundMoney, String staffCheckWorkMoney)
-        throws Exception {
+                                      Map<String, String> staffModelFieldMap, String socialSecurityFundMoney, String staffCheckWorkMoney) {
         String monthlyStandardRealMoney = CalculationUtil.subtract(actWages, socialSecurityFundMoney, 2);
         monthlyStandardRealMoney = CalculationUtil.subtract(monthlyStandardRealMoney, staffCheckWorkMoney, 2);
         for (Map<String, Object> bean : staffModelField) {
@@ -255,7 +254,7 @@ public class StaffWagesQuartz {
      * @param modelIds           员工拥有的模板的模型id
      */
     private void outputJsonToSQL(List<Map<String, Object>> wagesModelMation, Map<String, String> staffModelFieldMap, String staffId, String lastMonthDate,
-                                 List<String> modelIds) throws Exception {
+                                 List<String> modelIds) {
         Map<String, Object> map = new HashMap<>();
         map.put("staffId", staffId);
         map.put("createTime", DateUtil.getTimeAndToString());
@@ -383,7 +382,7 @@ public class StaffWagesQuartz {
      * @return
      */
     private String calcTaxRate(String monthlyStandardRealMoney, Map<String, List<Map<String, Object>>> taxRate, String companyId, String lastMonthDate,
-                               Map<String, String> staffModelFieldMap) throws Exception {
+                               Map<String, String> staffModelFieldMap) {
         List<Map<String, Object>> companyTaxRate = taxRate.get(companyId);
         String finalMonthlyStandardRealMoney = monthlyStandardRealMoney;
         List<Map<String, Object>> staffTaxRate = companyTaxRate.stream().filter(bean -> {
@@ -465,7 +464,7 @@ public class StaffWagesQuartz {
      * @return 如果返回值为负数，则说明加班和销假>请假以及异常考勤
      */
     private String calcStaffCheckWork(String staffId, Map<String, Object> systemFoundationSettings, List<Map<String, Object>> workTime,
-                                      Map<String, String> staffModelFieldMap, String lastMonthDate) throws Exception {
+                                      Map<String, String> staffModelFieldMap, String lastMonthDate) {
         // 1.获取该员工拥有的考勤班次id集合
         List<Map<String, Object>> staffTimeIdMation = sysEveUserStaffDao
             .queryStaffCheckWorkTimeRelationByStaffId(staffId);
@@ -503,7 +502,7 @@ public class StaffWagesQuartz {
      * @param staffModelFieldMap 该员工拥有的所有薪资要素字段以及对应的值
      * @return
      */
-    private String calcCancleLeaveTimeMation(String staffId, String lastMonthDate, Map<String, String> staffModelFieldMap) throws Exception {
+    private String calcCancleLeaveTimeMation(String staffId, String lastMonthDate, Map<String, String> staffModelFieldMap) {
         // 获取上个月指定员工的所有审批通过销假记录信息
         List<Map<String, Object>> cancleLeaveTime = wagesStaffMationDao.queryLastMonthCancleLeaveTime(staffId, lastMonthDate);
         // 获取月标准小时薪资计算
@@ -533,7 +532,7 @@ public class StaffWagesQuartz {
      * @return
      */
     private String calcCheckWorkMation(List<String> lateMinute, List<String> earlyMinute, Map<String, String> staffModelFieldMap,
-                                       Map<String, Object> systemFoundationSettings) throws Exception {
+                                       Map<String, Object> systemFoundationSettings) {
         // 异常考勤制度管理信息
         List<Map<String, Object>> abnormalMation = JSONUtil.toList(systemFoundationSettings.get("abnormalMation").toString(), null);
         // 1.早退
@@ -564,7 +563,7 @@ public class StaffWagesQuartz {
      * @return
      */
     private String calcMoney(List<String> minute, List<Map<String, Object>> abnormalTypes, Map<String, String> staffModelFieldMap,
-                             String key) throws Exception {
+                             String key) {
         if (abnormalTypes != null && !abnormalTypes.isEmpty()) {
             Map<String, Object> abnormalType = abnormalTypes.get(0);
             // 扣费类型  1.按次扣费  2.按时间扣费
@@ -598,7 +597,7 @@ public class StaffWagesQuartz {
      * @param staffModelFieldMap 该员工拥有的所有薪资要素字段以及对应的值
      * @return
      */
-    private String calcMinerMoney(List<Map<String, Object>> abnormalTypes, Map<String, String> staffModelFieldMap) throws Exception {
+    private String calcMinerMoney(List<Map<String, Object>> abnormalTypes, Map<String, String> staffModelFieldMap) {
         if (abnormalTypes != null && !abnormalTypes.isEmpty()) {
             Map<String, Object> abnormalType = abnormalTypes.get(0);
             // 扣费类型  1.按次扣费  2.按时间扣费
@@ -634,7 +633,7 @@ public class StaffWagesQuartz {
      * @return 请假的扣薪金额
      */
     private String calcLeaveTimeMation(Map<String, Object> systemFoundationSettings, String staffId, String lastMonthDate,
-                                       List<Map<String, Object>> staffWorkTime, Map<String, String> staffModelFieldMap) throws Exception {
+                                       List<Map<String, Object>> staffWorkTime, Map<String, String> staffModelFieldMap) {
         // 获取上个月指定员工的所有审批通过请假记录信息
         List<Map<String, Object>> leaveTime = wagesStaffMationDao.queryLastMonthLeaveTime(staffId, lastMonthDate);
         // 企业假期类型以及扣薪信息
@@ -684,7 +683,7 @@ public class StaffWagesQuartz {
      * @param staffWorkTime      该员工拥有的考勤班次id集合
      */
     private void setStaffCheckWorkMation(List<Map<String, Object>> lastMonthCheckWork, Map<String, String> staffModelFieldMap,
-                                         List<String> lateMinute, List<String> earlyMinute, List<Map<String, Object>> staffWorkTime) throws Exception {
+                                         List<String> lateMinute, List<String> earlyMinute, List<Map<String, Object>> staffWorkTime) {
         // 全勤以及工时不足的都算为实际出勤
         int lastMonthRealNum = 0;
         String lastMonthRealHour = "0";
@@ -754,7 +753,7 @@ public class StaffWagesQuartz {
      * @return
      */
     private String getSocialSecurityFundMoney(String companyId, String departmentId, String staffId, List<Map<String, Object>> socialSecurityFund,
-                                              Map<String, String> staffModelFieldMap) throws IllegalAccessException {
+                                              Map<String, String> staffModelFieldMap) {
         // 根据公司id，部门id，员工id找到适用该员工的社保公积金缴纳信息
         List<Map<String, Object>> applyThisUserStaffSocialSecurityFund = socialSecurityFund.stream().filter(bean -> {
             String objectId = bean.get("objectId").toString();
@@ -804,10 +803,9 @@ public class StaffWagesQuartz {
      * @param staffId          员工id
      * @param wagesModelMation 所有启用中的薪资模板适用对象关系以及模板要素字段
      * @return
-     * @throws Exception
      */
     private List<Map<String, Object>> getUserStaffWagesModelField(String companyId, String departmentId, String staffId,
-                                                                  List<Map<String, Object>> wagesModelMation) throws Exception {
+                                                                  List<Map<String, Object>> wagesModelMation) {
         // 获取该员工具备的模板id
         List<String> modelIds = wagesModelMation.stream().filter(bean -> {
             String objectId = bean.get("objectId").toString();
@@ -828,7 +826,7 @@ public class StaffWagesQuartz {
      * @param lastMonthDate 上个月的年月
      * @return
      */
-    private List<Map<String, Object>> getSocialSecurityFund(String lastMonthDate) throws Exception {
+    private List<Map<String, Object>> getSocialSecurityFund(String lastMonthDate) {
         List<Map<String, Object>> socialSecurityFund = wagesSocialSecurityFundApplicableObjectsDao
             .queryAllWagesSocialSecurityFundApplicableObjects(lastMonthDate);
         return socialSecurityFund;
@@ -838,9 +836,8 @@ public class StaffWagesQuartz {
      * 获取所有公司个人所得税缴纳比例
      *
      * @return
-     * @throws Exception
      */
-    private Map<String, List<Map<String, Object>>> getTaxRate() throws Exception {
+    private Map<String, List<Map<String, Object>>> getTaxRate() {
         List<Map<String, Object>> companyTaxRate = companyTaxRateDao.queryAllCompanyTaxRate();
         return companyTaxRate.stream()
             .collect(Collectors.groupingBy(map -> map.get("companyId").toString()));
@@ -851,9 +848,8 @@ public class StaffWagesQuartz {
      *
      * @param lastMonthDate 上个月的年月
      * @return
-     * @throws Exception
      */
-    private List<Map<String, Object>> getWagesModel(String lastMonthDate) throws Exception {
+    private List<Map<String, Object>> getWagesModel(String lastMonthDate) {
         try {
             // 获取所有启用中的薪资模板适用对象关系
             List<Map<String, Object>> applicableObjects = wagesModelApplicableObjectsDao.queryAllEanbleWagesModelApplicableObjects(lastMonthDate);

@@ -8,14 +8,14 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 
 public interface EmailSendModelService {
-    void queryEmailSendModelList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryEmailSendModelList(InputObject inputObject, OutputObject outputObject);
 
-    void insertEmailSendModel(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertEmailSendModel(InputObject inputObject, OutputObject outputObject);
 
-    void queryEmailSendModelInfoById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryEmailSendModelInfoById(InputObject inputObject, OutputObject outputObject);
 
-    void delEmailSendModelById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void delEmailSendModelById(InputObject inputObject, OutputObject outputObject);
 
-    void updateEmailSendModelById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void updateEmailSendModelById(InputObject inputObject, OutputObject outputObject);
 
 }

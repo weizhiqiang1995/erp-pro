@@ -20,7 +20,7 @@ public class EndSurveyMationService implements TaskMateService {
     private SysQuartzDao sysQuartzDao;
 
     @Override
-    public void call(SysQuartz sysQuartz) throws Exception {
+    public void call(SysQuartz sysQuartz) {
         Map<String, Object> map = new HashMap<>();
         map.put("id", sysQuartz.getName());
         // 获取问卷信息

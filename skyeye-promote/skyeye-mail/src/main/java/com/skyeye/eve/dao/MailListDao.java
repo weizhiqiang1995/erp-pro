@@ -17,16 +17,16 @@ import java.util.Map;
  */
 public interface MailListDao {
 
-    public List<Map<String, Object>> queryMailMationList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryMailMationList(Map<String, Object> map);
 
-    public int insertMailMation(Map<String, Object> map) throws Exception;
+    int insertMailMation(Map<String, Object> map);
 
-    public int deleteMailMationById(Map<String, Object> map) throws Exception;
+    int deleteMailMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryMailMationToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryMailMationToEditById(Map<String, Object> map);
 
-    public int editMailMationById(Map<String, Object> map) throws Exception;
+    int editMailMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryMailMationDetailsById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryMailMationDetailsById(Map<String, Object> map);
 
 }

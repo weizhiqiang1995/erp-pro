@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,52 +9,52 @@ import com.skyeye.common.object.OutputObject;
 
 public interface ForumContentService {
 
-    public void queryMyForumContentList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryMyForumContentList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertForumContentMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertForumContentMation(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteForumContentById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteForumContentById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryForumContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryForumContentMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void editForumContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editForumContentMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryForumContentMationToDetails(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryForumContentMationToDetails(InputObject inputObject, OutputObject outputObject);
 
-    public void queryNewForumContentList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryNewForumContentList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertForumCommentMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertForumCommentMation(InputObject inputObject, OutputObject outputObject);
 
-    public void queryForumCommentList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryForumCommentList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertForumReplyMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertForumReplyMation(InputObject inputObject, OutputObject outputObject);
 
-    public void queryForumReplyList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryForumReplyList(InputObject inputObject, OutputObject outputObject);
 
-    public void queryForumMyBrowerList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryForumMyBrowerList(InputObject inputObject, OutputObject outputObject);
 
-    public void queryNewCommentList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryNewCommentList(InputObject inputObject, OutputObject outputObject);
 
-    public void queryForumListByTagId(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryForumListByTagId(InputObject inputObject, OutputObject outputObject);
 
-    public void queryHotTagList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryHotTagList(InputObject inputObject, OutputObject outputObject);
 
-    public void queryActiveUsersList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryActiveUsersList(InputObject inputObject, OutputObject outputObject);
 
-    public void queryHotForumList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryHotForumList(InputObject inputObject, OutputObject outputObject);
 
-    public void querySearchForumList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySearchForumList(InputObject inputObject, OutputObject outputObject);
 
-    public void querySolrSynchronousTime(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySolrSynchronousTime(InputObject inputObject, OutputObject outputObject);
 
-    public void updateSolrSynchronousData(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void updateSolrSynchronousData(InputObject inputObject, OutputObject outputObject);
 
-    public void queryMyCommentList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryMyCommentList(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteCommentById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteCommentById(InputObject inputObject, OutputObject outputObject);
 
-    public void queryMyNoticeList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void queryMyNoticeList(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteNoticeById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteNoticeById(InputObject inputObject, OutputObject outputObject);
 
 }

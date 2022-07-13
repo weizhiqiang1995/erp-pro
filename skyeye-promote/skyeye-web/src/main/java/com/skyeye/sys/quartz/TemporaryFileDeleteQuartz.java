@@ -47,10 +47,9 @@ public class TemporaryFileDeleteQuartz {
     /**
      * 定时删除临时的云压缩文件,每天23点执行
      *
-     * @throws Exception
      */
     @Scheduled(cron = "0 0 23 * * ?")
-    public void deleteTemporaryFile() throws Exception {
+    public void deleteTemporaryFile() {
         String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         log.info("TemporaryFileDeleteQuartz start");
         try {
@@ -71,7 +70,7 @@ public class TemporaryFileDeleteQuartz {
         sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_SUCCESS.getState());
     }
 
-    public void getAllFileByRecursion(File[] fileList) throws Exception {
+    public void getAllFileByRecursion(File[] fileList) {
         for (int i = 0; i < fileList.length; i++) {
             if (fileList[i].isFile()) {
                 // 如果是文件,获取文件最后的修改时间

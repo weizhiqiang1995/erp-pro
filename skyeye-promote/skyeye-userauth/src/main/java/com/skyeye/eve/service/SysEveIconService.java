@@ -1,6 +1,7 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.eve.service;
 
 import com.skyeye.common.object.InputObject;
@@ -8,17 +9,17 @@ import com.skyeye.common.object.OutputObject;
 
 public interface SysEveIconService {
 
-    public void querySysIconList(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysIconList(InputObject inputObject, OutputObject outputObject);
 
-    public void insertSysIconMation(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void insertSysIconMation(InputObject inputObject, OutputObject outputObject);
 
-    public void deleteSysIconMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void deleteSysIconMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysIconMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysIconMationToEditById(InputObject inputObject, OutputObject outputObject);
 
-    public void editSysIconMationById(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void editSysIconMationById(InputObject inputObject, OutputObject outputObject);
 
-    public void querySysIconListToMenu(InputObject inputObject, OutputObject outputObject) throws Exception;
+    void querySysIconListToMenu(InputObject inputObject, OutputObject outputObject);
 
 
 }

@@ -29,7 +29,7 @@ public class MyAgencyServiceImpl implements MyAgencyService {
     private QuartzService quartzService;
 
     @Override
-    public void queryMyAgencyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyAgencyList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
@@ -44,11 +44,10 @@ public class MyAgencyServiceImpl implements MyAgencyService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteMyAgencyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteMyAgencyList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 删除定时任务
         quartzService.stopAndDeleteTaskQuartz(map.get("id").toString(), QuartzConstants.QuartzMateMationJobType.MY_SCHEDULEDAY_MATION.getTaskType());

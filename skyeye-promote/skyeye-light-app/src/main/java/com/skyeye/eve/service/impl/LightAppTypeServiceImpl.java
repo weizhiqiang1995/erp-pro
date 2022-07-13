@@ -45,10 +45,9 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryLightAppTypeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryLightAppTypeList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = lightAppTypeDao.queryLightAppTypeList(map);
@@ -61,11 +60,10 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertLightAppTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertLightAppTypeMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = lightAppTypeDao.queryLightAppTypeMationByTypeName(map);
         if (bean != null && !bean.isEmpty()) {
@@ -95,10 +93,9 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryLightAppTypeMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryLightAppTypeMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = lightAppTypeDao.queryLightAppTypeMationToEditById(map);
         outputObject.setBean(bean);
@@ -110,11 +107,10 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editLightAppTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editLightAppTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> beans = lightAppTypeDao.queryLightAppTypeMationStateById(map);
         if ("1".equals(beans.get("state").toString()) || "3".equals(beans.get("state").toString())) {//新建或者下线的状态可以编辑
@@ -134,11 +130,10 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editLightAppTypeSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editLightAppTypeSortTopById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = lightAppTypeDao.queryLightAppTypeISTopByThisId(map);//根据同一级排序获取这条数据的上一条数据
         if (topBean == null) {
@@ -157,11 +152,10 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editLightAppTypeSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editLightAppTypeSortLowerById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> topBean = lightAppTypeDao.queryLightAppTypeISLowerByThisId(map);//根据同一级排序获取这条数据的下一条数据
         if (topBean == null) {
@@ -180,11 +174,10 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteLightAppTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteLightAppTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = lightAppTypeDao.queryLightAppTypeMationStateById(map);
         if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {//新建或者下线的状态可以删除
@@ -199,11 +192,10 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editLightAppTypeUpTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editLightAppTypeUpTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = lightAppTypeDao.queryLightAppTypeMationStateById(map);
         if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {
@@ -221,11 +213,10 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editLightAppTypeDownTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editLightAppTypeDownTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = lightAppTypeDao.queryLightAppTypeMationStateById(map);
         if ("2".equals(bean.get("state").toString())) {//上线状态可以下线
@@ -242,10 +233,9 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void queryLightAppTypeUpList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryLightAppTypeUpList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans;
         if (ToolUtil.isBlank(jedisClient.get(Constants.checkAppLightAppTypeUpList()))) {

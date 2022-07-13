@@ -64,7 +64,6 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     public void queryKnowledgeTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -81,7 +80,6 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -106,7 +104,6 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -129,7 +126,6 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -153,7 +149,6 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -177,7 +172,6 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     public void selectKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -192,7 +186,6 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -222,7 +215,6 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     public void queryUpKnowledgeTypeTreeMation(InputObject inputObject, OutputObject outputObject) {

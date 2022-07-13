@@ -22,10 +22,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/queryMyForumContentList")
-    public void queryMyForumContentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyForumContentList(InputObject inputObject, OutputObject outputObject) {
         forumContentService.queryMyForumContentList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/insertForumContentMation")
-    public void insertForumContentMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertForumContentMation(InputObject inputObject, OutputObject outputObject) {
         forumContentService.insertForumContentMation(inputObject, outputObject);
     }
 
@@ -46,10 +44,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/deleteForumContentById")
-    public void deleteForumContentById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteForumContentById(InputObject inputObject, OutputObject outputObject) {
         forumContentService.deleteForumContentById(inputObject, outputObject);
     }
 
@@ -58,10 +55,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/queryForumContentMationById")
-    public void queryForumContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumContentMationById(InputObject inputObject, OutputObject outputObject) {
         forumContentService.queryForumContentMationById(inputObject, outputObject);
     }
 
@@ -70,10 +66,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/editForumContentMationById")
-    public void editForumContentMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editForumContentMationById(InputObject inputObject, OutputObject outputObject) {
         forumContentService.editForumContentMationById(inputObject, outputObject);
     }
 
@@ -82,10 +77,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/queryForumContentMationToDetails")
-    public void queryForumContentMationToDetails(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumContentMationToDetails(InputObject inputObject, OutputObject outputObject) {
         forumContentService.queryForumContentMationToDetails(inputObject, outputObject);
     }
 
@@ -94,10 +88,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/queryNewForumContentList")
-    public void queryNewForumContentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryNewForumContentList(InputObject inputObject, OutputObject outputObject) {
         forumContentService.queryNewForumContentList(inputObject, outputObject);
     }
 
@@ -106,10 +99,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/insertForumCommentMation")
-    public void insertForumCommentMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertForumCommentMation(InputObject inputObject, OutputObject outputObject) {
         forumContentService.insertForumCommentMation(inputObject, outputObject);
     }
 
@@ -118,10 +110,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/queryForumCommentList")
-    public void queryForumCommentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumCommentList(InputObject inputObject, OutputObject outputObject) {
         forumContentService.queryForumCommentList(inputObject, outputObject);
     }
 
@@ -130,10 +121,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/insertForumReplyMation")
-    public void insertForumReplyMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertForumReplyMation(InputObject inputObject, OutputObject outputObject) {
         forumContentService.insertForumReplyMation(inputObject, outputObject);
     }
 
@@ -142,10 +132,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/queryForumReplyList")
-    public void queryForumReplyList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumReplyList(InputObject inputObject, OutputObject outputObject) {
         forumContentService.queryForumReplyList(inputObject, outputObject);
     }
 
@@ -154,10 +143,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/queryForumMyBrowerList")
-    public void queryForumMyBrowerList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumMyBrowerList(InputObject inputObject, OutputObject outputObject) {
         forumContentService.queryForumMyBrowerList(inputObject, outputObject);
     }
 
@@ -166,10 +154,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/queryNewCommentList")
-    public void queryNewCommentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryNewCommentList(InputObject inputObject, OutputObject outputObject) {
         forumContentService.queryNewCommentList(inputObject, outputObject);
     }
 
@@ -178,10 +165,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/queryForumListByTagId")
-    public void queryForumListByTagId(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryForumListByTagId(InputObject inputObject, OutputObject outputObject) {
         forumContentService.queryForumListByTagId(inputObject, outputObject);
     }
 
@@ -190,10 +176,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/queryHotTagList")
-    public void queryHotTagList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryHotTagList(InputObject inputObject, OutputObject outputObject) {
         forumContentService.queryHotTagList(inputObject, outputObject);
     }
 
@@ -202,10 +187,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/queryActiveUsersList")
-    public void queryActiveUsersList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryActiveUsersList(InputObject inputObject, OutputObject outputObject) {
         forumContentService.queryActiveUsersList(inputObject, outputObject);
     }
 
@@ -214,10 +198,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/queryHotForumList")
-    public void queryHotForumList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryHotForumList(InputObject inputObject, OutputObject outputObject) {
         forumContentService.queryHotForumList(inputObject, outputObject);
     }
 
@@ -226,10 +209,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/querySearchForumList")
-    public void querySearchForumList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySearchForumList(InputObject inputObject, OutputObject outputObject) {
         forumContentService.querySearchForumList(inputObject, outputObject);
     }
 
@@ -238,10 +220,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/querySolrSynchronousTime")
-    public void querySolrSynchronousTime(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySolrSynchronousTime(InputObject inputObject, OutputObject outputObject) {
         forumContentService.querySolrSynchronousTime(inputObject, outputObject);
     }
 
@@ -250,10 +231,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/updateSolrSynchronousData")
-    public void updateSolrSynchronousData(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void updateSolrSynchronousData(InputObject inputObject, OutputObject outputObject) {
         forumContentService.updateSolrSynchronousData(inputObject, outputObject);
     }
 
@@ -262,10 +242,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/queryMyCommentList")
-    public void queryMyCommentList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyCommentList(InputObject inputObject, OutputObject outputObject) {
         forumContentService.queryMyCommentList(inputObject, outputObject);
     }
 
@@ -274,10 +253,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/deleteCommentById")
-    public void deleteCommentById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteCommentById(InputObject inputObject, OutputObject outputObject) {
         forumContentService.deleteCommentById(inputObject, outputObject);
     }
 
@@ -286,10 +264,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/queryMyNoticeList")
-    public void queryMyNoticeList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void queryMyNoticeList(InputObject inputObject, OutputObject outputObject) {
         forumContentService.queryMyNoticeList(inputObject, outputObject);
     }
 
@@ -298,10 +275,9 @@ public class ForumContentController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/ForumContentController/deleteNoticeById")
-    public void deleteNoticeById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteNoticeById(InputObject inputObject, OutputObject outputObject) {
         forumContentService.deleteNoticeById(inputObject, outputObject);
     }
 

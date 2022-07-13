@@ -35,10 +35,9 @@ public class SysEveWinThemeColorServiceImpl implements SysEveWinThemeColorServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysEveWinThemeColorList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveWinThemeColorList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveWinThemeColorDao.querySysEveWinThemeColorList(map);
@@ -51,11 +50,10 @@ public class SysEveWinThemeColorServiceImpl implements SysEveWinThemeColorServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysEveWinThemeColorMation(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void insertSysEveWinThemeColorMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinThemeColorDao.querySysEveWinThemeColorMationByName(map);
         if (bean == null) {
@@ -75,11 +73,10 @@ public class SysEveWinThemeColorServiceImpl implements SysEveWinThemeColorServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysEveWinThemeColorMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void deleteSysEveWinThemeColorMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         sysEveWinThemeColorDao.deleteSysEveWinThemeColorMationById(map);
         jedisClient.del(Constants.getSysWinThemeColorRedisKey());
@@ -90,10 +87,9 @@ public class SysEveWinThemeColorServiceImpl implements SysEveWinThemeColorServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
-    public void querySysEveWinThemeColorMationToEditById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysEveWinThemeColorMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinThemeColorDao.querySysEveWinThemeColorMationToEditById(map);
         outputObject.setBean(bean);
@@ -105,11 +101,10 @@ public class SysEveWinThemeColorServiceImpl implements SysEveWinThemeColorServic
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysEveWinThemeColorMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void editSysEveWinThemeColorMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinThemeColorDao.querySysEveWinThemeColorMationByNameAndId(map);
         if (bean == null) {

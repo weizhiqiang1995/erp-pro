@@ -9,18 +9,18 @@ import java.util.Map;
 
 public interface SysEveMenuAuthPointDao {
 
-    public List<Map<String, Object>> querySysEveMenuAuthPointListByMenuId(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> querySysEveMenuAuthPointListByMenuId(Map<String, Object> map);
 
-    public Map<String, Object> querySysEveMenuAuthPointMationByAuthName(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysEveMenuAuthPointMationByAuthName(Map<String, Object> map);
 
-    public int insertSysEveMenuAuthPointMation(Map<String, Object> map) throws Exception;
+    int insertSysEveMenuAuthPointMation(Map<String, Object> map);
 
-    public Map<String, Object> querySysEveMenuAuthPointMationToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysEveMenuAuthPointMationToEditById(Map<String, Object> map);
 
-    public Map<String, Object> querySysEveMenuAuthPointMationByAuthNameAndId(Map<String, Object> map) throws Exception;
+    Map<String, Object> querySysEveMenuAuthPointMationByAuthNameAndId(Map<String, Object> map);
 
-    public int editSysEveMenuAuthPointMationById(Map<String, Object> map) throws Exception;
+    int editSysEveMenuAuthPointMationById(Map<String, Object> map);
 
-    public int deleteSysEveMenuAuthPointMationById(Map<String, Object> map) throws Exception;
+    int deleteSysEveMenuAuthPointMationById(Map<String, Object> map);
 
 }

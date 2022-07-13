@@ -37,7 +37,6 @@ public class KnowledgeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgetype001", value = "获取知识库类型列表", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -68,7 +67,6 @@ public class KnowledgeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgetype003", value = "删除知识库类型", method = "DELETE", allUse = "1")
     @ApiImplicitParams({
@@ -83,7 +81,6 @@ public class KnowledgeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgetype004", value = "上线知识库类型", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -98,7 +95,6 @@ public class KnowledgeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgetype005", value = "下线知识库类型", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -113,7 +109,6 @@ public class KnowledgeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgetype006", value = "通过id查找对应的知识库类型信息", method = "GET", allUse = "2")
     @ApiImplicitParams({
@@ -128,7 +123,6 @@ public class KnowledgeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgetype007", value = "编辑知识库类型", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -144,7 +138,6 @@ public class KnowledgeTypeController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @ApiOperation(id = "knowledgetype008", value = "获取已经上线的知识库类型，数据为tree格式", method = "GET", allUse = "2")
     @RequestMapping("/post/KnowledgeTypeController/queryUpKnowledgeTypeTreeMation")

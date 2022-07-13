@@ -22,10 +22,9 @@ public class SysDataBaseController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysDataBaseController/querySysDataBaseSelectList")
-    public void querySysDataBaseSelectList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysDataBaseSelectList(InputObject inputObject, OutputObject outputObject) {
         sysDataBaseService.querySysDataBaseSelectList(inputObject, outputObject);
     }
 
@@ -34,10 +33,9 @@ public class SysDataBaseController {
      *
      * @param inputObject
      * @param outputObject
-     * @throws Exception
      */
     @RequestMapping("/post/SysDataBaseController/querySysDataBaseDescSelectList")
-    public void querySysDataBaseDescSelectList(InputObject inputObject, OutputObject outputObject) throws Exception {
+    public void querySysDataBaseDescSelectList(InputObject inputObject, OutputObject outputObject) {
         sysDataBaseService.querySysDataBaseDescSelectList(inputObject, outputObject);
     }
 

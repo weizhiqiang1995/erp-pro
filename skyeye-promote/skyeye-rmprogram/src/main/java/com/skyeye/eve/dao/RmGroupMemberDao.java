@@ -9,32 +9,32 @@ import java.util.Map;
 
 public interface RmGroupMemberDao {
 
-    public List<Map<String, Object>> queryRmGroupMemberList(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryRmGroupMemberList(Map<String, Object> map);
 
-    public Map<String, Object> queryRmGroupMemberISTop(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryRmGroupMemberISTop(Map<String, Object> map);
 
-    public int insertRmGroupMemberMation(Map<String, Object> map) throws Exception;
+    int insertRmGroupMemberMation(Map<String, Object> map);
 
-    public Map<String, Object> queryRmGroupMemberISLowerByThisId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryRmGroupMemberISLowerByThisId(Map<String, Object> map);
 
-    public Map<String, Object> queryRmGroupMemberISTopByThisId(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryRmGroupMemberISTopByThisId(Map<String, Object> map);
 
-    public int editRmGroupMemberSortTopById(Map<String, Object> map) throws Exception;
+    int editRmGroupMemberSortTopById(Map<String, Object> map);
 
-    public Map<String, Object> queryUseRmGroupMemberNumById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryUseRmGroupMemberNumById(Map<String, Object> map);
 
-    public int deleteRmGroupMemberById(Map<String, Object> map) throws Exception;
+    int deleteRmGroupMemberById(Map<String, Object> map);
 
-    public Map<String, Object> queryRmGroupMemberMationToEditById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryRmGroupMemberMationToEditById(Map<String, Object> map);
 
-    public int editRmGroupMemberMationById(Map<String, Object> map) throws Exception;
+    int editRmGroupMemberMationById(Map<String, Object> map);
 
-    public Map<String, Object> queryRmGroupMemberMationById(Map<String, Object> map) throws Exception;
+    Map<String, Object> queryRmGroupMemberMationById(Map<String, Object> map);
 
-    public int deleteRmGroupMemberAndPropertyMationById(Map<String, Object> map) throws Exception;
+    int deleteRmGroupMemberAndPropertyMationById(Map<String, Object> map);
 
-    public int insertRmGroupMemberAndPropertyMationById(List<Map<String, Object>> beans) throws Exception;
+    int insertRmGroupMemberAndPropertyMationById(List<Map<String, Object>> beans);
 
-    public List<Map<String, Object>> queryRmGroupMemberAndPropertyMationById(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> queryRmGroupMemberAndPropertyMationById(Map<String, Object> map);
 
 }
