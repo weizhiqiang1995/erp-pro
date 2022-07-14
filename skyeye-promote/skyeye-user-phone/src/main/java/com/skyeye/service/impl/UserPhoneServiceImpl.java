@@ -36,7 +36,7 @@ public class UserPhoneServiceImpl implements UserPhoneService {
     /**
      * 账号状态
      */
-    public static enum STATE {
+    public enum STATE {
         SYS_USER_LOCK_STATE_ISUNLOCK(0, "未锁定"),
         SYS_USER_LOCK_STATE_ISLOCK(1, "锁定");
 
@@ -83,6 +83,11 @@ public class UserPhoneServiceImpl implements UserPhoneService {
                     String userId = userMation.get("id").toString();
                     String roleId = userMation.get("roleId").toString();
                     userMation.remove("roleId");
+
+                    // 获取动态token
+                    String userToken = GetUserToken.createNewToken(userId, password);
+                    userMation.put("userToken", userToken);
+
                     SysUserAuthConstants.setUserLoginRedisCache(userId + SysUserAuthConstants.APP_IDENTIFYING, userMation);
                     jedisClient.set("allMenuMation:" + userId + SysUserAuthConstants.APP_IDENTIFYING, roleId);
                     jedisClient.set("authPointsMation:" + userId + SysUserAuthConstants.APP_IDENTIFYING, roleId);
