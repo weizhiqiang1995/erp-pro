@@ -29,17 +29,6 @@ public class UserPhoneController {
     }
 
     /**
-     * 手机端从session中获取用户信息
-     *
-     * @param inputObject
-     * @param outputObject
-     */
-    @RequestMapping("/post/UserPhoneController/queryPhoneUserMation")
-    public void queryPhoneUserMation(InputObject inputObject, OutputObject outputObject) {
-        userPhoneService.queryPhoneUserMation(inputObject, outputObject);
-    }
-
-    /**
      * 手机端从session中获取菜单权限信息
      *
      * @param inputObject

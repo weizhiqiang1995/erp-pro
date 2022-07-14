@@ -15,6 +15,7 @@ import com.skyeye.common.object.PutObject;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.UserPhoneDao;
+import com.skyeye.eve.dao.SysEveUserDao;
 import com.skyeye.jedis.JedisClientService;
 import com.skyeye.service.UserPhoneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class UserPhoneServiceImpl implements UserPhoneService {
 
     @Autowired
     private JedisClientService jedisClient;
+
+    @Autowired
+    private SysEveUserDao sysEveUserDao;
 
     /**
      * 账号状态
@@ -97,18 +101,6 @@ public class UserPhoneServiceImpl implements UserPhoneService {
                 outputObject.setreturnMessage("密码输入错误！");
             }
         }
-    }
-
-    /**
-     * 手机端从session中获取用户信息
-     *
-     * @param inputObject
-     * @param outputObject
-     */
-    @Override
-    public void queryPhoneUserMation(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> user = inputObject.getLogParams();
-        outputObject.setBean(user);
     }
 
     /**
@@ -204,9 +196,9 @@ public class UserPhoneServiceImpl implements UserPhoneService {
         String userCode = map.get("userCode").toString();
         String password = map.get("password").toString();
         String openId = map.get("openId").toString();
-        //根据账号获取用户信息
-        Map<String, Object> userMation = userPhoneDao.queryUserMationByUserCode(userCode);
-        //判断该账号是否存在
+        // 根据账号获取用户信息
+        Map<String, Object> userMation = sysEveUserDao.queryMationByUserCode(userCode);
+        // 判断该账号是否存在
         if (userMation != null && !userMation.isEmpty()) {
             int pwdNum = Integer.parseInt(userMation.get("pwdNum").toString());
             for (int i = 0; i < pwdNum; i++) {

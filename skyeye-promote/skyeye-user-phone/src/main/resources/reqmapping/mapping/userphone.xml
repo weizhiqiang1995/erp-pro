@@ -19,8 +19,6 @@
 		<property id="password" name="password" ref="required" var="密码"/>
 		<property id="cId" name="cId" ref="" var="cId,用于手机端消息通知"/>
 	</url>
-	<url id="userphone002" path="/post/UserPhoneController/queryPhoneUserMation" val="手机端从session中获取用户信息" allUse="2">
-	</url>
 	<url id="userphone003" path="/post/UserPhoneController/queryPhoneToExit" val="手机端注销登录" allUse="2">
 	</url>
 	<url id="userphone004" path="/post/UserPhoneController/queryUserMationByOpenId" val="根据openId获取用户信息" allUse="0">

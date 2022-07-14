@@ -242,7 +242,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     @Override
     public void queryUserToLogin(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> userMation = sysEveUserDao.queryMationByUserCode(map);
+        String userCode = map.get("userCode").toString();
+        Map<String, Object> userMation = sysEveUserDao.queryMationByUserCode(userCode);
         if (userMation == null) {
             outputObject.setreturnMessage("请确保用户名输入无误！");
         } else {
@@ -524,8 +525,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     public void editUserPassword(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
-        map.put("userCode", user.get("userCode"));
-        Map<String, Object> userMation = sysEveUserDao.queryMationByUserCode(map);//根据redis中的用户信息userCode获取用户信息
+        // 根据redis中的用户信息userCode获取用户信息
+        Map<String, Object> userMation = sysEveUserDao.queryMationByUserCode(user.get("userCode").toString());
         int pwdNum = Integer.parseInt(userMation.get("pwdNum").toString());
         String password = map.get("oldPassword").toString();
         for (int i = 0; i < pwdNum; i++) {

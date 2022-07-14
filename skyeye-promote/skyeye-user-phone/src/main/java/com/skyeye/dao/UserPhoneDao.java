@@ -17,8 +17,6 @@ public interface UserPhoneDao {
 
     int insertWxUserMation(Map<String, Object> map);
 
-    Map<String, Object> queryUserMationByUserCode(@Param("userCode") String userCode);
-
     Map<String, Object> queryUserBindMationByUserId(@Param("userId") String userId);
 
     int updateBindUserMation(Map<String, Object> map);

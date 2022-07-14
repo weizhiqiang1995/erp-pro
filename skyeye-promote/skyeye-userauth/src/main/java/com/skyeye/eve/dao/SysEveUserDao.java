@@ -27,7 +27,7 @@ public interface SysEveUserDao {
      */
     int editSysUserPasswordMationById(Map<String, Object> map);
 
-    Map<String, Object> queryMationByUserCode(Map<String, Object> map);
+    Map<String, Object> queryMationByUserCode(@Param("userCode") String userCode);
 
     List<Map<String, Object>> queryRoleList(Map<String, Object> map);
 

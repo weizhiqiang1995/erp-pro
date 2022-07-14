@@ -90,7 +90,7 @@
 		WHERE id = #{id}
 	</update>
 	
-	<select id="queryMationByUserCode" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryMationByUserCode" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.user_code userCode,
