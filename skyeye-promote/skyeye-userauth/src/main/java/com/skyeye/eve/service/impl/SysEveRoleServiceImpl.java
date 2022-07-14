@@ -7,6 +7,7 @@ package com.skyeye.eve.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.Constants;
+import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
@@ -49,9 +50,9 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
      */
     @Override
     public void querySysRoleList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = sysEveRoleDao.querySysRoleList(map);
+        CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
+        Page pages = PageHelper.startPage(commonPageInfo.getPage(), commonPageInfo.getLimit());
+        List<Map<String, Object>> beans = sysEveRoleDao.querySysRoleList(commonPageInfo);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

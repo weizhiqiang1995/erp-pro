@@ -4,6 +4,7 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.common.entity.CommonPageInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.Map;
  */
 public interface SysEveRoleDao {
 
-    List<Map<String, Object>> querySysRoleList(Map<String, Object> map);
+    List<Map<String, Object>> querySysRoleList(CommonPageInfo commonPageInfo);
 
     List<Map<String, Object>> querySysRoleBandMenuList(Map<String, Object> map);
 

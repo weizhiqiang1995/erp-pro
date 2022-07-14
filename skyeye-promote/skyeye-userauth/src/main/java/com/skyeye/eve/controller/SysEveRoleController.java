@@ -8,6 +8,7 @@ import com.skyeye.annotation.api.Api;
 import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
+import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.entity.userauth.auth.RoleMation;
@@ -38,10 +39,7 @@ public class SysEveRoleController {
      * @param outputObject
      */
     @ApiOperation(id = "sys013", value = "获取角色列表", method = "POST", allUse = "1")
-    @ApiImplicitParams({
-        @ApiImplicitParam(id = "limit", name = "limit", value = "分页参数,每页多少条数据", required = "required,num"),
-        @ApiImplicitParam(id = "page", name = "page", value = "分页参数,第几页", required = "required,num"),
-        @ApiImplicitParam(id = "roleName", name = "roleName", value = "角色名称", required = "")})
+    @ApiImplicitParams(classBean = CommonPageInfo.class)
     @RequestMapping("/post/SysEveRoleController/querySysRoleList")
     public void querySysRoleList(InputObject inputObject, OutputObject outputObject) {
         sysEveRoleService.querySysRoleList(inputObject, outputObject);
