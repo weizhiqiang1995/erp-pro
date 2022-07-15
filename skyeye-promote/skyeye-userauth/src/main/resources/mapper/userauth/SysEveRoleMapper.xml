@@ -13,9 +13,9 @@
 		FROM
 			sys_eve_role a
 		<where>
-<!--			<if test="roleName != '' and roleName != null">-->
-<!--				AND a.role_name LIKE '%${roleName}%'-->
-<!--			</if>-->
+			<if test="sqlExtract != '' and sqlExtract != null">
+				${sqlExtract}
+			</if>
 		</where>
 		ORDER BY a.create_time DESC
 	</select>
