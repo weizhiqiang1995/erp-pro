@@ -11,12 +11,15 @@ import com.skyeye.common.constans.RequestConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.ObjectConstant;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.search.SearchMation;
+import com.skyeye.eve.service.SearchConfigService;
 import com.skyeye.jedis.JedisClientService;
 import com.skyeye.service.ApiService;
 import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -29,6 +32,9 @@ public class ApiServiceImpl implements ApiService {
 
     @Value("${spring.profiles.active}")
     private String env;
+
+    @Autowired
+    private SearchConfigService searchConfigService;
 
     /**
      * 获取接口列表
@@ -79,9 +85,9 @@ public class ApiServiceImpl implements ApiService {
         Map<String, Object> map = inputObject.getParams();
         String appId = map.get("appId").toString();
         String apiId = map.get("id").toString();
-        Map<String, Object> jMation = RedisConstants.getApiMationByUrlId(apiId, appId);
-        if (jMation != null && !jMation.isEmpty()) {
-            String allUse = jMation.get("allUse").toString();
+        Map<String, Object> apiMation = RedisConstants.getApiMationByUrlId(apiId, appId);
+        if (apiMation != null && !apiMation.isEmpty()) {
+            String allUse = apiMation.get("allUse").toString();
             String s = "";
             if ("0".equals(allUse)) {
                 s = "无需登录，无需授权即可访问。";
@@ -92,14 +98,39 @@ public class ApiServiceImpl implements ApiService {
             } else {
                 s = "错误参数。";
             }
-            jMation.put("sq", s);//权限说明
-            jMation.put("requestId", apiId);
-            List<Map<String, Object>> params = (List<Map<String, Object>>) jMation.get("list");
+            // 权限说明
+            apiMation.put("sq", s);
+            apiMation.put("requestId", apiId);
+            List<Map<String, Object>> params = (List<Map<String, Object>>) apiMation.get("list");
             params = params.stream().sorted(Comparator.comparing(bean -> bean.get("number").toString())).collect(Collectors.toList());
-            jMation.put("list", params);
-            outputObject.setBean(jMation);
+            apiMation.put("list", params);
+            loadSearchConfig(appId, apiId, params, apiMation);
+            outputObject.setBean(apiMation);
         } else {
             outputObject.setreturnMessage("该信息不存在。");
+        }
+    }
+
+    /**
+     * 加载高级筛选json信息
+     *
+     * @param appId     appId
+     * @param urlId     接口id
+     * @param params    入参信息
+     * @param apiMation api信息
+     */
+    private void loadSearchConfig(String appId, String urlId, List<Map<String, Object>> params, Map<String, Object> apiMation) {
+        Map<String, Object> pageParam = params.stream().filter(bean -> "page".equals(bean.get("name").toString())).findFirst().orElse(null);
+        Map<String, Object> limitParam = params.stream().filter(bean -> "limit".equals(bean.get("name").toString())).findFirst().orElse(null);
+        apiMation.put("advancedSearch", false);
+        if (!CollectionUtils.isEmpty(pageParam) && !CollectionUtils.isEmpty(limitParam)) {
+            apiMation.put("advancedSearch", true);
+            // 存在分页参数，择取获取高级筛选json
+            SearchMation searchMation = searchConfigService.querySearchMation(urlId, appId);
+            if (searchMation != null) {
+                apiMation.put("searchParams", searchMation.getParamsConfigStr());
+                apiMation.put("searchParamsId", searchMation.getId());
+            }
         }
     }
 
