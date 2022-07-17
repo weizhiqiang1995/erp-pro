@@ -16,6 +16,9 @@
 			<if test="sqlExtract != '' and sqlExtract != null">
 				${sqlExtract}
 			</if>
+			<if test="keyword != null and keyword != ''">
+				AND a.role_name LIKE '%${keyword}%'
+			</if>
 		</where>
 		ORDER BY a.create_time DESC
 	</select>

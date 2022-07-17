@@ -39,20 +39,8 @@
 			<if test="sqlExtract != '' and sqlExtract != null">
 				${sqlExtract}
 			</if>
-			<if test="userCode != '' and userCode != null">
-				AND a.user_code like '%${userCode}%'
-			</if>
-			<if test="userName != '' and userName != null">
-				AND k.user_name like '%${userName}%'
-			</if>
-			<if test="companyName != '' and companyName != null">
-				AND k.company_id = #{companyName}
-			</if>
-			<if test="departmentName != '' and departmentName != null">
-				AND k.department_id = #{departmentName}
-			</if>
-			<if test="jobName != '' and jobName != null">
-				AND k.job_id = #{jobName}
+			<if test="keyword != '' and keyword != null">
+				AND (a.user_code like '%${keyword}%' OR k.user_name like '%${keyword}%' OR k.job_number like '%${keyword}%')
 			</if>
 		</where>
 		ORDER BY a.user_lock ASC, a.create_time DESC

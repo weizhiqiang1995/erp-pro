@@ -5,7 +5,6 @@
 package com.skyeye.eve.entity.wages;
 
 import com.skyeye.annotation.api.ApiModel;
-import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.common.entity.CommonPageInfo;
 import lombok.Data;
 
@@ -22,24 +21,6 @@ import java.io.Serializable;
 @Data
 @ApiModel("已发放薪资发放历史列表查询条件实体类")
 public class WagesPaymentHistoryQueryDo extends CommonPageInfo implements Serializable {
-
-    @ApiModelProperty(value = "工号")
-    private String jobNumber;
-
-    @ApiModelProperty(value = "员工姓名")
-    private String userName;
-
-    @ApiModelProperty(value = "企业id")
-    private String companyId;
-
-    @ApiModelProperty(value = "部门id")
-    private String departmentId;
-
-    @ApiModelProperty(value = "职位id")
-    private String jobId;
-
-    @ApiModelProperty(value = "月份")
-    private String payMonth;
 
     private Integer state;
 

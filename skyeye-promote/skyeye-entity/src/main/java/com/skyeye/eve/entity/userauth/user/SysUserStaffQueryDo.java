@@ -23,19 +23,4 @@ import java.io.Serializable;
 @ApiModel("员工列表查询条件实体类")
 public class SysUserStaffQueryDo extends CommonPageInfo implements Serializable {
 
-    @ApiModelProperty(value = "员工姓名")
-    private String userName;
-
-    @ApiModelProperty(value = "身份证")
-    private String userIdCard;
-
-    @ApiModelProperty(value = "公司")
-    private String companyName;
-
-    @ApiModelProperty(value = "部门")
-    private String departmentName;
-
-    @ApiModelProperty(value = "职位")
-    private String jobName;
-
 }

@@ -31,20 +31,8 @@
 			<if test="sqlExtract != '' and sqlExtract != null">
 				${sqlExtract}
 			</if>
-			<if test="userName != '' and userName != null">
-				AND a.user_name LIKE '%${userName}%'
-			</if>
-			<if test="userIdCard != '' and userIdCard != null">
-				AND a.user_idcard LIKE '%${userIdCard}%'
-			</if>
-			<if test="companyName != '' and companyName != null">
-				AND a.company_id = #{companyName}
-			</if>
-			<if test="departmentName != '' and departmentName != null">
-				AND a.department_id = #{departmentName}
-			</if>
-			<if test="jobName != '' and jobName != null">
-				AND a.job_id = #{jobName}
+			<if test="keyword != '' and keyword != null">
+				AND (a.user_name like '%${keyword}%' OR a.job_number like '%${keyword}%')
 			</if>
 		</where>
 		GROUP BY a.id
