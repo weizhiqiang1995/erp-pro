@@ -3,7 +3,7 @@
 > 基于SpringBoot 2.X框架，为中小企业打造开源好用的ERP软件。主要模块有零售管理、采购管理、销售管理、仓库管理、财务管理、报表查询、系统管理等。支持预付款、收入支出、仓库调拨、组装拆卸、订单，生产等特色功能。拥有库存状况、出入库统计等报表。对权限进行精确划分，同时支持多系统集成方案，可与OA，CRM，知识库等多个系统进行集成使用。同时对角色和权限进行了细致全面控制，精确到每个按钮和菜单。集成apollo配置中心。
 
 - 该项目企业版有体验地址，需要的加微信(账号独立，不免费)
-- 最新资讯： [2022-07-11 云办公系统 skyeye v3.7.20 发布，PM 模块以及 AMS 模块](https://mp.weixin.qq.com/s/F06JG6hrrnQnATo8nZcD3g)
+- 最新资讯： [2022-07-11 云办公系统 skyeye v3.7.20 发布，PM 模块以及 AMS 模块](https://www.oschina.net/news/202516)
 - [软件更新资讯](https://gitee.com/doc_wei01/skyeye/blob/company_server/HISTORY_UPDATE.md)
 - 开源版请下载`master`分支
 - [项目功能结构](https://docs.qq.com/flowchart/DYUFQQnlCUm9Ua2FI)
@@ -15,9 +15,9 @@
 
 ### 联系作者
 
-| 作者微信/或者搜索 wzq_598748873，加上之后请先自报家门 | QQ交流群/或者搜索 1016439713 | 更新资讯公众号 | 企业版设计思路知识星球 | 扫码进微信群畅聊(禁止发广告)                                                                                                                                                |
+| 作者微信/或者搜索 wzq_598748873，加上之后请先自报家门 | QQ交流群/或者搜索 1016439713 | 企业版设计思路知识星球 | 扫码进微信群畅聊(禁止发广告)                                                                                                                                                |
 | ------ | ---- | ---- | ---- |----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/%E5%BE%AE%E4%BF%A1.jpg) | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/skyeye%E7%B3%BB%E5%88%97QQ%E7%BE%A4%E8%81%8A%E4%BA%8C%E7%BB%B4%E7%A0%81.png)|![](https://images.gitee.com/uploads/images/2021/0320/091531_8c3ba4d8_1541735.jpeg "qrcode_for_gh_e7f97ff1beda_430.jpg")| ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/%E7%9F%A5%E8%AF%86%E6%98%9F%E7%90%83.png) | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220626095834.jpg) |
+| ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/%E5%BE%AE%E4%BF%A1.jpg) | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/skyeye%E7%B3%BB%E5%88%97QQ%E7%BE%A4%E8%81%8A%E4%BA%8C%E7%BB%B4%E7%A0%81.png)| ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/%E7%9F%A5%E8%AF%86%E6%98%9F%E7%90%83.png) | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220626095834.jpg) |
 
 #### 环境搭建
 
