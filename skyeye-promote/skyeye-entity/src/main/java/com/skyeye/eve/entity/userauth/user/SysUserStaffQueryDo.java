@@ -24,18 +24,18 @@ import java.io.Serializable;
 public class SysUserStaffQueryDo extends CommonPageInfo implements Serializable {
 
     @ApiModelProperty(value = "员工姓名")
-    private Integer userName;
+    private String userName;
 
     @ApiModelProperty(value = "身份证")
-    private Integer userIdCard;
+    private String userIdCard;
 
     @ApiModelProperty(value = "公司")
-    private Integer companyName;
+    private String companyName;
 
     @ApiModelProperty(value = "部门")
-    private Integer departmentName;
+    private String departmentName;
 
     @ApiModelProperty(value = "职位")
-    private Integer jobName;
+    private String jobName;
 
 }

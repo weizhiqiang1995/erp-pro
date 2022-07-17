@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.dao.WagesPaymentHistoryDao;
+import com.skyeye.eve.entity.wages.WagesPaymentHistoryQueryDo;
 import com.skyeye.eve.service.WagesPaymentHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,10 +59,10 @@ public class WagesPaymentHistoryServiceImpl implements WagesPaymentHistoryServic
      */
     @Override
     public void queryAllGrantWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        map.put("state", STATE.START_GRANT.getState());
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = wagesPaymentHistoryDao.queryAllWagesPaymentHistoryList(map);
+        WagesPaymentHistoryQueryDo wagesPaymentHistoryQuery = inputObject.getParams(WagesPaymentHistoryQueryDo.class);
+        wagesPaymentHistoryQuery.setState(STATE.START_GRANT.getState());
+        Page pages = PageHelper.startPage(wagesPaymentHistoryQuery.getPage(), wagesPaymentHistoryQuery.getLimit());
+        List<Map<String, Object>> beans = wagesPaymentHistoryDao.queryAllWagesPaymentHistoryList(wagesPaymentHistoryQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -90,10 +91,10 @@ public class WagesPaymentHistoryServiceImpl implements WagesPaymentHistoryServic
      */
     @Override
     public void queryAllNotGrantWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        map.put("state", STATE.START_WAIT_GRANT.getState());
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = wagesPaymentHistoryDao.queryAllWagesPaymentHistoryList(map);
+        WagesPaymentHistoryQueryDo wagesPaymentHistoryQuery = inputObject.getParams(WagesPaymentHistoryQueryDo.class);
+        wagesPaymentHistoryQuery.setState(STATE.START_WAIT_GRANT.getState());
+        Page pages = PageHelper.startPage(wagesPaymentHistoryQuery.getPage(), wagesPaymentHistoryQuery.getLimit());
+        List<Map<String, Object>> beans = wagesPaymentHistoryDao.queryAllWagesPaymentHistoryList(wagesPaymentHistoryQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

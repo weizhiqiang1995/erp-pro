@@ -20,26 +20,31 @@
             LEFT JOIN company_mation p ON b.company_id = p.id
             LEFT JOIN company_department q ON b.department_id = q.id
             LEFT JOIN company_job e ON b.job_id = e.id
-        WHERE a.staff_id = b.id
-        AND a.state = #{state}
-        <if test="jobNumber != null and jobNumber != ''">
-            AND b.job_number LIKE '%${jobNumber}%'
-        </if>
-        <if test="userName != null and userName != ''">
-            AND b.user_name LIKE '%${userName}%'
-        </if>
-        <if test="companyId != null and companyId != ''">
-            AND b.company_id = #{companyId}
-        </if>
-        <if test="departmentId != null and departmentId != ''">
-            AND b.department_id = #{departmentId}
-        </if>
-        <if test="jobId != null and jobId != ''">
-            AND b.job_id = #{jobId}
-        </if>
-        <if test="payMonth != null and payMonth != ''">
-            AND a.pay_month = #{payMonth}
-        </if>
+        <where>
+            a.staff_id = b.id
+            AND a.state = #{state}
+            <if test="sqlExtract != '' and sqlExtract != null">
+                ${sqlExtract}
+            </if>
+            <if test="jobNumber != null and jobNumber != ''">
+                AND b.job_number LIKE '%${jobNumber}%'
+            </if>
+            <if test="userName != null and userName != ''">
+                AND b.user_name LIKE '%${userName}%'
+            </if>
+            <if test="companyId != null and companyId != ''">
+                AND b.company_id = #{companyId}
+            </if>
+            <if test="departmentId != null and departmentId != ''">
+                AND b.department_id = #{departmentId}
+            </if>
+            <if test="jobId != null and jobId != ''">
+                AND b.job_id = #{jobId}
+            </if>
+            <if test="payMonth != null and payMonth != ''">
+                AND a.pay_month = #{payMonth}
+            </if>
+        </where>
         ORDER BY a.create_time DESC
     </select>
 

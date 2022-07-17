@@ -4,6 +4,7 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.wages.WagesPaymentHistoryQueryDo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.Map;
  */
 public interface WagesPaymentHistoryDao {
 
-    List<Map<String, Object>> queryAllWagesPaymentHistoryList(Map<String, Object> map);
+    List<Map<String, Object>> queryAllWagesPaymentHistoryList(WagesPaymentHistoryQueryDo wagesPaymentHistoryQuery);
 
     List<Map<String, Object>> queryMyWagesPaymentHistoryList(Map<String, Object> map);
 

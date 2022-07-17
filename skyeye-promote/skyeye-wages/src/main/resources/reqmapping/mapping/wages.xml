@@ -216,29 +216,9 @@
     <!-- 薪资模板结束 -->
 
     <!-- 薪资发放历史开始 -->
-    <url id="wagespaymenthistory001" path="/post/WagesPaymentHistoryController/queryAllGrantWagesPaymentHistoryList" val="获取所有已发放薪资发放历史列表" allUse="1" groupName="薪资发放历史">
-        <property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-        <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-        <property id="jobNumber" name="jobNumber" ref="" var="工号" />
-        <property id="userName" name="userName" ref="" var="员工姓名" />
-        <property id="companyId" name="companyId" ref="" var="企业id"/>
-        <property id="departmentId" name="departmentId" ref="" var="部门id"/>
-        <property id="jobId" name="jobId" ref="" var="职位id"/>
-        <property id="payMonth" name="payMonth" ref="" var="月份"/>
-    </url>
     <url id="wagespaymenthistory002" path="/post/WagesPaymentHistoryController/queryMyWagesPaymentHistoryList" val="获取我的薪资发放历史列表" allUse="1" groupName="薪资发放历史">
         <property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
         <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-        <property id="payMonth" name="payMonth" ref="" var="月份"/>
-    </url>
-    <url id="wagespaymenthistory003" path="/post/WagesPaymentHistoryController/queryAllNotGrantWagesPaymentHistoryList" val="获取所有待发放薪资列表" allUse="1" groupName="薪资发放历史">
-        <property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-        <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-        <property id="jobNumber" name="jobNumber" ref="" var="工号" />
-        <property id="userName" name="userName" ref="" var="员工姓名" />
-        <property id="companyId" name="companyId" ref="" var="企业id"/>
-        <property id="departmentId" name="departmentId" ref="" var="部门id"/>
-        <property id="jobId" name="jobId" ref="" var="职位id"/>
         <property id="payMonth" name="payMonth" ref="" var="月份"/>
     </url>
     <!-- 薪资发放历史结束 -->
