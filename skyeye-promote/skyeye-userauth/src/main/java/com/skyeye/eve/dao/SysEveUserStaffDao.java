@@ -4,6 +4,7 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.userauth.user.SysUserStaffQueryDo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.Map;
  */
 public interface SysEveUserStaffDao {
 
-    List<Map<String, Object>> querySysUserStaffList(Map<String, Object> map);
+    List<Map<String, Object>> querySysUserStaffList(SysUserStaffQueryDo sysUserStaffQuery);
 
     Map<String, Object> querySysUserStaffMationByIdCard(Map<String, Object> map);
 

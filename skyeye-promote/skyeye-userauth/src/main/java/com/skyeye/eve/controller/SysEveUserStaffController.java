@@ -11,6 +11,7 @@ import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.entity.userauth.user.SysUserStaffMation;
+import com.skyeye.eve.entity.userauth.user.SysUserStaffQueryDo;
 import com.skyeye.eve.service.SysEveUserStaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,15 +39,7 @@ public class SysEveUserStaffController {
      * @param outputObject
      */
     @ApiOperation(id = "staff001", value = "查看所有员工列表", method = "POST", allUse = "1")
-    @ApiImplicitParams({
-        @ApiImplicitParam(id = "limit", name = "limit", value = "分页参数,每页多少条数据", required = "required,num"),
-        @ApiImplicitParam(id = "page", name = "page", value = "分页参数,第几页", required = "required,num"),
-        @ApiImplicitParam(id = "userName", name = "userName", value = "员工姓名"),
-        @ApiImplicitParam(id = "userIdCard", name = "userIdCard", value = "身份证"),
-        @ApiImplicitParam(id = "userSex", name = "userSex", value = "员工性别  0保密   1男  2女"),
-        @ApiImplicitParam(id = "companyName", name = "companyName", value = "公司"),
-        @ApiImplicitParam(id = "departmentName", name = "departmentName", value = "部门"),
-        @ApiImplicitParam(id = "jobName", name = "jobName", value = "职位")})
+    @ApiImplicitParams(classBean = SysUserStaffQueryDo.class)
     @RequestMapping("/post/SysEveUserStaffController/querySysUserStaffList")
     public void querySysUserStaffList(InputObject inputObject, OutputObject outputObject) {
         sysEveUserStaffService.querySysUserStaffList(inputObject, outputObject);

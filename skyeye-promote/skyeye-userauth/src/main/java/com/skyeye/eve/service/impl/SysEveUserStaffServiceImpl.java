@@ -14,6 +14,7 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveUserDao;
 import com.skyeye.eve.dao.SysEveUserStaffDao;
 import com.skyeye.eve.dao.WagesFieldTypeDao;
+import com.skyeye.eve.entity.userauth.user.SysUserStaffQueryDo;
 import com.skyeye.eve.service.SysEveUserService;
 import com.skyeye.eve.service.SysEveUserStaffService;
 import com.skyeye.exception.CustomException;
@@ -101,9 +102,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
      */
     @Override
     public void querySysUserStaffList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = sysEveUserStaffDao.querySysUserStaffList(map);
+        SysUserStaffQueryDo sysUserStaffQuery = inputObject.getParams(SysUserStaffQueryDo.class);
+        Page pages = PageHelper.startPage(sysUserStaffQuery.getPage(), sysUserStaffQuery.getLimit());
+        List<Map<String, Object>> beans = sysEveUserStaffDao.querySysUserStaffList(sysUserStaffQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

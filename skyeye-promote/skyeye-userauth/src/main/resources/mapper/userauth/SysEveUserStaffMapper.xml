@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.skyeye.eve.dao.SysEveUserStaffDao">
 
-	<select id="querySysUserStaffList" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="querySysUserStaffList" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.job_number jobNumber,
@@ -27,15 +27,15 @@
 			LEFT JOIN company_job p ON a.job_id = p.id
 			LEFT JOIN company_department q ON a.department_id = q.id
 			LEFT JOIN company_mation u ON a.company_id = u.id
-		WHERE 1=1
+		<where>
+			<if test="sqlExtract != '' and sqlExtract != null">
+				${sqlExtract}
+			</if>
 			<if test="userName != '' and userName != null">
 				AND a.user_name LIKE '%${userName}%'
 			</if>
 			<if test="userIdCard != '' and userIdCard != null">
 				AND a.user_idcard LIKE '%${userIdCard}%'
-			</if>
-			<if test="userSex != '' and userSex != null">
-				AND a.user_sex = #{userSex}
 			</if>
 			<if test="companyName != '' and companyName != null">
 				AND a.company_id = #{companyName}
@@ -46,6 +46,7 @@
 			<if test="jobName != '' and jobName != null">
 				AND a.job_id = #{jobName}
 			</if>
+		</where>
 		GROUP BY a.id
 		ORDER BY a.state ASC, a.entry_time DESC
 	</select>
