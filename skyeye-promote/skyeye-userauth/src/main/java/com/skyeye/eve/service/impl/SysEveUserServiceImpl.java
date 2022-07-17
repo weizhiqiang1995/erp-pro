@@ -18,6 +18,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveUserDao;
 import com.skyeye.eve.dao.SysEveUserStaffDao;
+import com.skyeye.eve.entity.userauth.user.SysUserQueryDo;
 import com.skyeye.eve.service.SysAuthorityService;
 import com.skyeye.eve.service.SysEveUserService;
 import com.skyeye.jedis.JedisClientService;
@@ -89,9 +90,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      */
     @Override
     public void querySysUserList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = sysEveUserDao.querySysUserList(map);
+        SysUserQueryDo sysUserQuery = inputObject.getParams(SysUserQueryDo.class);
+        Page pages = PageHelper.startPage(sysUserQuery.getPage(), sysUserQuery.getLimit());
+        List<Map<String, Object>> beans = sysEveUserDao.querySysUserList(sysUserQuery);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

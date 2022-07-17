@@ -4,6 +4,7 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.userauth.user.SysUserQueryDo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.Map;
 
 public interface SysEveUserDao {
 
-    List<Map<String, Object>> querySysUserList(Map<String, Object> map);
+    List<Map<String, Object>> querySysUserList(SysUserQueryDo sysUserQuery);
 
     Map<String, Object> querySysUserLockStateById(Map<String, Object> map);
 

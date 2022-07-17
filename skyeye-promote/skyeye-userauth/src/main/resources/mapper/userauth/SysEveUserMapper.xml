@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.skyeye.eve.dao.SysEveUserDao">
 	
-	<select id="querySysUserList" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="querySysUserList" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.user_code userCode,
@@ -34,25 +34,27 @@
 						AND o.department_id = q.id 
 						AND o.job_id = p.id) m ON a.id = m.user_id,
 			sys_eve_user_staff k
-		WHERE a.id = k.user_id
-		<if test="userCode != '' and userCode != null">
-			AND a.user_code like '%${userCode}%'
-		</if>
-		<if test="userName != '' and userName != null">
-			AND k.user_name like '%${userName}%'
-		</if>
-		<if test="sexName != '' and sexName != null">
-			AND k.user_sex = #{sexName}
-		</if>
-		<if test="companyName != '' and companyName != null">
-			AND k.company_id = #{companyName}
-		</if>
-		<if test="departmentName != '' and departmentName != null">
-			AND k.department_id = #{departmentName}
-		</if>
-		<if test="jobName != '' and jobName != null">
-			AND k.job_id = #{jobName}
-		</if>
+		<where>
+			a.id = k.user_id
+			<if test="sqlExtract != '' and sqlExtract != null">
+				${sqlExtract}
+			</if>
+			<if test="userCode != '' and userCode != null">
+				AND a.user_code like '%${userCode}%'
+			</if>
+			<if test="userName != '' and userName != null">
+				AND k.user_name like '%${userName}%'
+			</if>
+			<if test="companyName != '' and companyName != null">
+				AND k.company_id = #{companyName}
+			</if>
+			<if test="departmentName != '' and departmentName != null">
+				AND k.department_id = #{departmentName}
+			</if>
+			<if test="jobName != '' and jobName != null">
+				AND k.job_id = #{jobName}
+			</if>
+		</where>
 		ORDER BY a.user_lock ASC, a.create_time DESC
 	</select>
 	
