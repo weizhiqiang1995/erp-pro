@@ -226,41 +226,6 @@
 	</url>
 	<!-- 自定义菜单结束 -->
 	
-	<!-- 系统图片类型开始 -->
-	<url id="pictype001" path="/post/SysEvePicTypeController/querySysPicTypeList" val="获取图片类型列表" allUse="1" groupName="系统图片类型">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="typeName" name="typeName" ref="" var="图片类型名称"/>
-	</url>
-	<url id="pictype002" path="/post/SysEvePicTypeController/insertSysPicTypeMation" val="新增图片类型" allUse="1" groupName="系统图片类型">
-	    <property id="typeName" name="typeName" ref="required" var="图片种类名称"/>
-	</url>
-	<url id="pictype003" path="/post/SysEvePicTypeController/deleteSysPicTypeById" val="删除图片类型" allUse="1" groupName="系统图片类型">
-	    <property id="rowId" name="id" ref="required" var="图片种类名称id"/>
-	</url>
-	<url id="pictype004" path="/post/SysEvePicTypeController/updateUpSysPicTypeById" val="上线图片类型" allUse="1" groupName="系统图片类型">
-	    <property id="rowId" name="id" ref="required" var="图片种类名称id"/>
-	</url>
-	<url id="pictype005" path="/post/SysEvePicTypeController/updateDownSysPicTypeById" val="下线图片类型" allUse="1" groupName="系统图片类型">
-	    <property id="rowId" name="id" ref="required" var="图片种类名称id"/>
-	</url>
-	<url id="pictype006" path="/post/SysEvePicTypeController/selectSysPicTypeById" val="获取选中的图片类型信息" allUse="2" groupName="系统图片类型">
-	    <property id="rowId" name="id" ref="required" var="图片种类名称id"/>
-	</url>
-	<url id="pictype007" path="/post/SysEvePicTypeController/editSysPicTypeMationById" val="编辑图片类型信息" allUse="1" groupName="系统图片类型">
-	    <property id="rowId" name="id" ref="required" var="图片种类名称id"/>
-	    <property id="typeName" name="typeName" ref="required" var="图片种类名称"/>
-	</url>
-	<url id="pictype008" path="/post/SysEvePicTypeController/editSysPicTypeMationOrderNumUpById" val="图片类型上移" allUse="1" groupName="系统图片类型">
-		<property id="rowId" name="id" ref="required" var="分类id" />
-	</url>
-	<url id="pictype009" path="/post/SysEvePicTypeController/editSysPicTypeMationOrderNumDownById" val="图片类型下移" allUse="1" groupName="系统图片类型">
-		<property id="rowId" name="id" ref="required" var="分类id" />
-	</url>
-	<url id="pictype010" path="/post/SysEvePicTypeController/querySysPicTypeUpStateList" val="获取已经上线的图片类型列表" allUse="2" groupName="系统图片类型">
-	</url>
-	<!-- 系统图片类型结束 -->
-	
 	<!-- 员工操作开始 -->
 	<url id="staff007" path="/post/SysEveUserStaffController/editTurnTeacher" val="普通员工转教职工" allUse="1" groupName="员工操作">
 	    <property id="staffId" name="staffId" ref="required" var="员工id"/>
