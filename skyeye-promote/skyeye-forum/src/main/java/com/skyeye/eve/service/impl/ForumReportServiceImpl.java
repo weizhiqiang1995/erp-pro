@@ -12,6 +12,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.ForumReportDao;
 import com.skyeye.eve.service.ForumReportService;
+import com.skyeye.eve.service.SysDictDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +34,9 @@ public class ForumReportServiceImpl implements ForumReportService {
 
     @Autowired
     private ForumReportDao forumReportDao;
+
+    @Autowired
+    private SysDictDataService sysDictDataService;
 
     /**
      * 新增举报信息
@@ -63,6 +67,7 @@ public class ForumReportServiceImpl implements ForumReportService {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = forumReportDao.queryReportNoCheckList(map);
+        sysDictDataService.getDictDataNameByIdList(beans, "reportTypeId", "reportType");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -130,6 +135,7 @@ public class ForumReportServiceImpl implements ForumReportService {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = forumReportDao.queryReportCheckedList(map);
+        sysDictDataService.getDictDataNameByIdList(beans, "reportTypeId", "reportType");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -144,6 +150,7 @@ public class ForumReportServiceImpl implements ForumReportService {
     public void queryForumReportMationToDetails(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumReportDao.queryForumReportMationToDetails(map);
+        sysDictDataService.getDictDataNameByIdBean(bean, "reportTypeId", "reportType");
         outputObject.setBean(bean);
         outputObject.settotal(1);
     }

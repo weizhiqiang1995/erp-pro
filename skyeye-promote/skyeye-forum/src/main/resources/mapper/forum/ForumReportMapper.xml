@@ -13,7 +13,7 @@
 			a.id,
 			d.forum_title title,
 			d.id forumId,
-            CASE WHEN a.report_type_id = 'other' THEN '其他' ELSE c.type_name END as reportType,
+			a.report_type_id reportTypeId,
 			a.examine_state examineState,
 			a.report_other_content reportContent,
 			a.report_desc reportDesc,
@@ -22,7 +22,6 @@
 		FROM
 			forum_report a
 			LEFT JOIN sys_eve_user_staff b ON a.report_id = b.user_id
-			LEFT JOIN forum_report_type c ON a.report_type_id = c.id
 			LEFT JOIN forum_content d ON a.forum_id = d.id
 		WHERE a.examine_state = '1'
 			<if test="reportTypeId != '' and reportTypeId != null">
@@ -59,7 +58,7 @@
 			a.id,
 			e.forum_title title,
 			e.id forumId,
-            CASE WHEN a.report_type_id = 'other' THEN '其他' ELSE c.type_name END as reportType,
+			a.report_type_id reportTypeId,
 			a.examine_state examineState,
 			a.report_other_content reportContent,
 			a.report_desc reportDesc,
@@ -71,7 +70,6 @@
 		FROM
 			forum_report a
 			LEFT JOIN sys_eve_user_staff b ON a.report_id = b.user_id
-			LEFT JOIN forum_report_type c ON a.report_type_id = c.id
 			LEFT JOIN sys_eve_user_staff d ON a.examine_id = d.user_id
 			LEFT JOIN forum_content e ON a.forum_id = e.id
 		WHERE (a.examine_state = '2' OR a.examine_state = '3')
@@ -94,7 +92,7 @@
 		SELECT
 			a.id,
 			e.forum_title title,
-			CASE WHEN a.report_type_id = 'other' THEN '其他' ELSE c.type_name END as reportType,
+			a.report_type_id reportTypeId,
 			CASE a.examine_state WHEN '1' THEN '未审核' WHEN '2' THEN '审核通过' WHEN '3' THEN '审核不通过' END examineState,
 			a.report_other_content reportContent,
 			a.report_desc reportDesc,
@@ -106,7 +104,6 @@
 		FROM
 			forum_report a
 			LEFT JOIN sys_eve_user_staff b ON a.report_id = b.user_id
-			LEFT JOIN forum_report_type c ON a.report_type_id = c.id
 			LEFT JOIN sys_eve_user_staff d ON a.examine_id = d.user_id
 			LEFT JOIN forum_content e ON a.forum_id = e.id
 		WHERE a.id = #{id}
