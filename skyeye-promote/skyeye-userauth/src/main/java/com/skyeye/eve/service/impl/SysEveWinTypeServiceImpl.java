@@ -6,6 +6,7 @@ package com.skyeye.eve.service.impl;
 
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveWinTypeDao;
@@ -71,14 +72,13 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
         if (!CollectionUtils.isEmpty(bean)) {
             outputObject.setreturnMessage("该分类名称已存在，请更换");
         } else {
-            Map<String, Object> itemCount = sysEveWinTypeDao.querySysWinTypeBySimpleLevel(map);//获取同级分类数量
-            Map<String, Object> user = inputObject.getLogParams();
+            // 获取同级分类数量
+            Map<String, Object> itemCount = sysEveWinTypeDao.querySysWinTypeBySimpleLevel(map);
             int thisOrderBy = Integer.parseInt(itemCount.get("simpleNum").toString()) + 1;
             map.put("orderBy", thisOrderBy);
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("state", "1");//默认新建
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            // 默认新建
+            map.put("state", "1");
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             sysEveWinTypeDao.insertSysWinTypeMation(map);
         }
     }

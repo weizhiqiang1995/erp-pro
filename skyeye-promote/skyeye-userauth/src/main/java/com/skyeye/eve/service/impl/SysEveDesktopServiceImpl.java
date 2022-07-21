@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveDesktopDao;
@@ -80,13 +81,11 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
             outputObject.setreturnMessage("该桌面名称已存在，请更换");
         } else {
             Map<String, Object> itemCount = sysEveDesktopDao.querySysDesktopBySimpleLevel(map);
-            Map<String, Object> user = inputObject.getLogParams();
             int thisOrderBy = Integer.parseInt(itemCount.get("simpleNum").toString()) + 1;
             map.put("orderBy", thisOrderBy);
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("state", STATE.START_NEW.getState());//默认新建
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            // 默认新建
+            map.put("state", STATE.START_NEW.getState());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             sysEveDesktopDao.insertSysDesktopMation(map);
         }
     }

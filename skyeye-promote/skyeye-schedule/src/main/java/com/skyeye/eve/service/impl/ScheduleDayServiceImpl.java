@@ -15,10 +15,7 @@ import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.object.PutObject;
-import com.skyeye.common.util.DateAfterSpacePointTime;
-import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.ExcelUtil;
-import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.*;
 import com.skyeye.eve.dao.ScheduleDayDao;
 import com.skyeye.eve.entity.checkwork.DayWorkMationRest;
 import com.skyeye.eve.entity.checkwork.UserOtherDayMationRest;
@@ -86,17 +83,15 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
                 // 日程提醒时间早于当前时间
                 outputObject.setreturnMessage("日程提醒时间不能早于当前时间");
             } else {
-                if (DateUtil.compare(map.get("scheduleEndTime").toString(), scheduleStartTime)) {//结束时间早于开始时间
+                if (DateUtil.compare(map.get("scheduleEndTime").toString(), scheduleStartTime)) {
+                    // 结束时间早于开始时间
                     outputObject.setreturnMessage("日程结束时间不能早于开始时间");
                 } else {
-                    String id = ToolUtil.getSurFaceId();
                     map.put("remindTime", remindTime);
-                    map.put("id", id);
-                    map.put("createId", user.get("id"));
-                    map.put("createTime", DateUtil.getTimeAndToString());
+                    DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
                     scheduleDayDao.insertScheduleDayMation(map);
                     // 定时任务
-                    quartzService.startUpTaskQuartz(id, map.get("scheduleTitle").toString(), remindTime, user.get("id").toString(),
+                    quartzService.startUpTaskQuartz(map.get("id").toString(), map.get("scheduleTitle").toString(), remindTime, user.get("id").toString(),
                         QuartzConstants.QuartzMateMationJobType.MY_SCHEDULEDAY_MATION.getTaskType());
                     outputObject.setBean(map);
                 }
@@ -465,16 +460,14 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
         if (m != null && !m.isEmpty()) {
             outputObject.setreturnMessage("该节假日时间段与已有的节假日时间段有冲突，请重新设置节假日");
         } else {
-            map.put("id", ToolUtil.getSurFaceId());
             map.put("allDay", "1");
             map.put("remindType", "0");
             map.put("type", CheckWorkConstants.CheckDayType.DAY_IS_HOLIDAY.getType());
             map.put("typeName", "节假日");
             map.put("state", "0");
             map.put("import", "1");
-            map.put("createId", inputObject.getLogParams().get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
             map.put("isRemind", "0");
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             scheduleDayDao.addSchedule(map);
         }
 
@@ -539,8 +532,6 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     @Override
     public String synchronizationSchedule(String title, String content, String startTime, String endTime, String userId, String objectId, int objectType) {
         Map<String, Object> map = new HashMap<>();
-        String scheduleId = ToolUtil.getSurFaceId();
-        map.put("id", scheduleId);
         map.put("scheduleTitle", title);
         int length = content.length();
         map.put("remarks", length > 1000 ? content.substring(0, 1000) : content);
@@ -554,10 +545,9 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
         map.put("objectId", objectId);
         // object类型：1.任务计划id，2.项目任务id
         map.put("objectType", objectType);
-        map.put("createId", userId);
-        map.put("createTime", DateUtil.getTimeAndToString());
+        DataCommonUtil.setCommonData(map, userId);
         scheduleDayDao.insertScheduleDayMation(map);
-        return scheduleId;
+        return map.get("id").toString();
     }
 
 }

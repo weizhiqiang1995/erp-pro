@@ -8,6 +8,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.AppWorkPageDao;
@@ -79,10 +80,7 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertAppWorkPageMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("createId", user.get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
-        map.put("id", ToolUtil.getSurFaceId());
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         map.put("title", "新建目录");
         map.put("state", State.START_NEW.getState());
         map.put("type", 1);
@@ -126,10 +124,7 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("createId", user.get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
-        map.put("id", ToolUtil.getSurFaceId());
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         map.put("state", State.START_NEW.getState());
         map.put("type", 2);
         Map<String, Object> orderBy = appWorkPageDao.queryAppWorkPageTAfterOrderBum(map);

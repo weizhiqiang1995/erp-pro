@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.FileUtil;
 import com.skyeye.common.util.ToolUtil;
@@ -60,10 +61,7 @@ public class SysEveWinLockBgPicServiceImpl implements SysEveWinLockBgPicService 
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysEveWinLockBgPicMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("id", ToolUtil.getSurFaceId());
-        map.put("createId", user.get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         sysEveWinLockBgPicDao.insertSysEveWinLockBgPicMation(map);
         jedisClient.del(Constants.getSysWinLockBgPicRedisKey());
     }
@@ -95,10 +93,7 @@ public class SysEveWinLockBgPicServiceImpl implements SysEveWinLockBgPicService 
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysEveWinBgPicMationByCustom(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("id", ToolUtil.getSurFaceId());
-        map.put("createId", user.get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         sysEveWinLockBgPicDao.insertSysEveWinBgPicMationByCustom(map);
     }
 

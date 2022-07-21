@@ -9,6 +9,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.WagesModelApplicableObjectsDao;
@@ -93,17 +94,14 @@ public class WagesModelServiceImpl implements WagesModelService {
             outputObject.setreturnMessage("The same title exists, please replace it.");
             return;
         }
-        String id = ToolUtil.getSurFaceId();
-        LOGGER.info("create wages model id is: {}", id);
-        map.put("createId", inputObject.getLogParams().get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
+        LOGGER.info("create wages model");
         map.put("state", STATE.START_UP.getState());
-        map.put("id", id);
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         wagesModelDao.insertWagesModelMation(map);
         // 处理薪资模板使用对象信息
-        wagesModelApplicableObjects(map.get("str").toString(), id);
+        wagesModelApplicableObjects(map.get("str").toString(), map.get("id").toString());
         // 处理薪资模板字段属性信息
-        wagesModelField(map.get("fieldStr").toString(), id);
+        wagesModelField(map.get("fieldStr").toString(), map.get("id").toString());
     }
 
     /**

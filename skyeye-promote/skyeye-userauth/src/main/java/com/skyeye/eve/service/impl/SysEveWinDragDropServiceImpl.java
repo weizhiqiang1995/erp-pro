@@ -7,6 +7,7 @@ package com.skyeye.eve.service.impl;
 import cn.hutool.json.JSONUtil;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveUserDao;
@@ -55,10 +56,8 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
             if (orderNum != null && !orderNum.isEmpty()) {
                 order = Integer.parseInt(orderNum.get("orderNum").toString()) + 1;
             }
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
             map.put("order", order);
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             sysEveWinDragDropDao.insertWinCustomMenuBox(map);
             outputObject.setBean(map);
             List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(user);//桌面菜单列表
@@ -83,12 +82,10 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
         if (menuBoxNameList != null && !menuBoxNameList.isEmpty()) {
             outputObject.setreturnMessage("该名称已存在，请更换。");
         } else {
-            map.put("id", ToolUtil.getSurFaceId());
             map.put("menuType", "html");
             map.put("menuParentId", "0");
             map.put("openType", "2");
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             sysEveWinDragDropDao.insertWinCustomMenu(map);
             outputObject.setBean(map);
             List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(user);//桌面菜单列表
@@ -110,18 +107,22 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
         Map<String, Object> bean = sysEveWinDragDropDao.queryMenuMationFromSysById(map);//查询菜单
-        if (bean != null && !bean.isEmpty()) {//菜单存在
-            if ("1".equals(bean.get("type").toString())) {//要删除的菜单是系统菜单
+        if (bean != null && !bean.isEmpty()) {
+            // 菜单存在
+            if ("1".equals(bean.get("type").toString())) {
+                // 要删除的菜单是系统菜单
                 List<Map<String, Object>> childs = sysEveWinDragDropDao.queryChildsMenuById(map);
                 List<Map<String, Object>> removeChild = new ArrayList<>();//系统子菜单移出自定义删除表
                 String delCustomMenu = "";//自定义子菜单直接删除
                 for (Map<String, Object> child : childs) {
-                    if ("1".equals(child.get("type").toString())) {//系统子菜单
+                    if ("1".equals(child.get("type").toString())) {
+                        // 系统子菜单
                         child.put("rowId", ToolUtil.getSurFaceId());
                         child.put("createId", user.get("id"));
                         child.put("createTime", DateUtil.getTimeAndToString());
                         removeChild.add(child);
-                    } else if ("2".equals(child.get("type").toString())) {//自定义菜单
+                    } else if ("2".equals(child.get("type").toString())) {
+                        // 自定义菜单
                         delCustomMenu += child.get("id").toString();
                     }
                 }
@@ -129,29 +130,30 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
                 if (!removeChild.isEmpty()) {
                     sysEveWinDragDropDao.deleteUserSysMenuByIds(removeChild);
                 }
-                //删除自定义菜单
+                // 删除自定义菜单
                 Map<String, Object> delCustomMenuBean = new HashMap<>();
                 delCustomMenuBean.put("ids", delCustomMenu);
                 sysEveWinDragDropDao.deleteCustomMenuByIds(delCustomMenuBean);
                 sysEveWinDragDropDao.deleteCustomMenuParentByIds(delCustomMenuBean);
-                //删除系统文件夹
+                // 删除系统文件夹
                 Map<String, Object> delSysBoxMenuBean = new HashMap<>();
-                delSysBoxMenuBean.put("id", ToolUtil.getSurFaceId());
                 delSysBoxMenuBean.put("menuId", map.get("id"));
-                delSysBoxMenuBean.put("createId", user.get("id"));
-                delSysBoxMenuBean.put("createTime", DateUtil.getTimeAndToString());
+                DataCommonUtil.setCommonData(delSysBoxMenuBean, user.get("id").toString());
                 sysEveWinDragDropDao.deleteSysBoxMenuById(delSysBoxMenuBean);
-            } else if ("2".equals(bean.get("type").toString())) {//要删除的菜单是菜单文件夹（菜单盒子）
+            } else if ("2".equals(bean.get("type").toString())) {
+                // 要删除的菜单是菜单文件夹（菜单盒子）
                 List<Map<String, Object>> childs = sysEveWinDragDropDao.queryChildsMenuById(map);
                 List<Map<String, Object>> removeChild = new ArrayList<>();//系统子菜单移出自定义删除表
                 String delCustomMenu = "";//自定义子菜单直接删除
                 for (Map<String, Object> child : childs) {
-                    if ("1".equals(child.get("type").toString())) {//系统子菜单
+                    if ("1".equals(child.get("type").toString())) {
+                        // 系统子菜单
                         child.put("rowId", ToolUtil.getSurFaceId());
                         child.put("createId", user.get("id"));
                         child.put("createTime", DateUtil.getTimeAndToString());
                         removeChild.add(child);
-                    } else if ("2".equals(child.get("type").toString())) {//自定义菜单
+                    } else if ("2".equals(child.get("type").toString())) {
+                        // 自定义菜单
                         delCustomMenu += child.get("id").toString();
                     }
                 }
@@ -166,7 +168,8 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
                 sysEveWinDragDropDao.deleteCustomMenuParentByIds(delCustomMenuBean);
                 //删除自定义文件夹
                 sysEveWinDragDropDao.deleteCustomBoxMenuById(map);
-            } else if ("3".equals(bean.get("type").toString())) {//要删除的菜单是自定义菜单,直接删除
+            } else if ("3".equals(bean.get("type").toString())) {
+                // 要删除的菜单是自定义菜单,直接删除
                 sysEveWinDragDropDao.deleteCustomMenuById(map);
             }
             List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(user);//桌面菜单列表

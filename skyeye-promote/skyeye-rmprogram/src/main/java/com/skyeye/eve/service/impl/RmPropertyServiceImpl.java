@@ -8,8 +8,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.eve.dao.RmPropertyDao;
 import com.skyeye.eve.service.RmPropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,10 +52,7 @@ public class RmPropertyServiceImpl implements RmPropertyService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmPropertyDao.queryRmPropertyMationByName(map);
         if (CollectionUtils.isEmpty(bean)) {
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             rmPropertyDao.insertRmPropertyMation(map);
         } else {
             outputObject.setreturnMessage("该样式属性名称已存在，不可进行二次保存");

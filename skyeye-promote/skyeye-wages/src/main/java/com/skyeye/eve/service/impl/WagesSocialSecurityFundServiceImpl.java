@@ -9,6 +9,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
@@ -94,14 +95,11 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
             outputObject.setreturnMessage("The same name exists, please replace it.");
             return;
         }
-        String id = ToolUtil.getSurFaceId();
-        map.put("createId", inputObject.getLogParams().get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
         map.put("state", STATE.START_UP.getState());
-        map.put("id", id);
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         wagesSocialSecurityFundDao.insertWagesSocialSecurityFundMation(map);
         // 处理社保公积金使用对象信息
-        wagesSocialSecurityFundApplicableObjects(map.get("str").toString(), id);
+        wagesSocialSecurityFundApplicableObjects(map.get("str").toString(), map.get("id").toString());
     }
 
     /**

@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveWinThemeColorDao;
@@ -57,10 +58,7 @@ public class SysEveWinThemeColorServiceImpl implements SysEveWinThemeColorServic
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinThemeColorDao.querySysEveWinThemeColorMationByName(map);
         if (bean == null) {
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             sysEveWinThemeColorDao.insertSysEveWinThemeColorMation(map);
             jedisClient.del(Constants.getSysWinThemeColorRedisKey());
         } else {

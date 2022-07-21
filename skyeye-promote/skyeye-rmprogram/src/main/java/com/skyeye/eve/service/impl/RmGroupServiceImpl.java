@@ -8,8 +8,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.eve.dao.RmGroupDao;
 import com.skyeye.eve.service.RmGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,11 +51,9 @@ public class RmGroupServiceImpl implements RmGroupService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = rmGroupDao.queryRmGroupByName(map);
         if (bean == null) {
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
-            Map<String, Object> item = rmGroupDao.queryRmGroupISTop(map);//获取最靠前的小程序分类
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
+            // 获取最靠前的小程序分类
+            Map<String, Object> item = rmGroupDao.queryRmGroupISTop(map);
             if (item == null) {
                 map.put("sort", 1);
             } else {

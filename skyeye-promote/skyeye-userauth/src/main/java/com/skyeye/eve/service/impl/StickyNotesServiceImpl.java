@@ -6,8 +6,7 @@ package com.skyeye.eve.service.impl;
 
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.eve.dao.StickyNotesDao;
 import com.skyeye.eve.service.StickyNotesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +32,7 @@ public class StickyNotesServiceImpl implements StickyNotesService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertStickyNotesMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        map.put("id", ToolUtil.getSurFaceId());
-        map.put("createId", inputObject.getLogParams().get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         stickyNotesDao.insertStickyNotesMation(map);
         outputObject.setBean(map);
     }

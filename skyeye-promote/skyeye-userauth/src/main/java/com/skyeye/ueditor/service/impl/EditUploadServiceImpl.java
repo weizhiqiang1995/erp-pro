@@ -8,6 +8,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.SysUserAuthConstants;
 import com.skyeye.common.object.GetUserToken;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.EditUploadDao;
@@ -79,18 +80,16 @@ public class EditUploadServiceImpl implements EditUploadService {
             String filePath = "/images/upload/ueditor/" + trueFileName;
             rs.put("url", filePath);
             Map<String, Object> bean = new HashMap<>();
-            bean.put("id", ToolUtil.getSurFaceId());
             bean.put("imgPath", filePath);
             bean.put("fileOriginalName", fileName);
             // 用户信息
             Map<String, Object> userMation = SysUserAuthConstants.getUserLoginRedisCache(GetUserToken.getUserTokenUserId(req));
-            bean.put("createId", userMation.get("id"));
-            bean.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(bean, userMation.get("id").toString());
             bean.put("createType", "2");
             editUploadDao.insertFileImgMation(bean);
         } catch (Exception ee) {
             LOGGER.warn("uploadContentPic failed {}.", ee);
-            rs.put("state", "文件上传失败!"); //在此处写上错误提示信息，这样当错误的时候就会显示此信息
+            rs.put("state", "文件上传失败!");
             rs.put("url", "");
             rs.put("title", "");
             rs.put("original", "");

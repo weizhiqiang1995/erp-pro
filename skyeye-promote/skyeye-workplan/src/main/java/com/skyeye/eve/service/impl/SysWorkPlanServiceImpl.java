@@ -13,6 +13,7 @@ import com.skyeye.common.constans.ScheduleDayConstants;
 import com.skyeye.common.constans.WorkPlanConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.ScheduleDayDao;
@@ -152,8 +153,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
         map.put("planCycle", WorkPlanConstants.SysWorkPlan.getClockInState(map.get("nowCheckType").toString()));//转化计划周期类型为数字
         map.put("planType", "1");//计划类型  1.个人计划  2.部门计划  3.公司计划
         map.put("whetherNotify", whetherNotify);//是否已经通知  1.未通知  2.已通知
-        map.put("createId", userId);//计划创建人
-        map.put("createTime", DateUtil.getTimeAndToString());//创建时间
+        map.put("createId", userId);
+        map.put("createTime", DateUtil.getTimeAndToString());
         sysWorkPlanDao.insertSysWorkPlanISPeople(map);
         sysWorkPlanDao.insertSysWorkPlanExecutorISPeople(executor);
 
@@ -270,19 +271,16 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     private void sendInsideNotice(List<Map<String, Object>> userJson) {
         // 调用消息系统添加通知
         List<Map<String, Object>> notices = new ArrayList<>();
-        Map<String, Object> notice = null;
         for (int i = 0; i < userJson.size(); i++) {
             Map<String, Object> userJsonObject = userJson.get(i);
-            notice = new HashMap<>();
-            notice.put("id", ToolUtil.getSurFaceId());
+            Map<String, Object> notice = new HashMap<>();
             notice.put("title", MESSAGE_TITLE);
             notice.put("noticeDesc", "您有一条新的工作计划信息，请及时阅读。");
             notice.put("content", userJsonObject.get("content").toString());
             notice.put("state", "1");//未读消息
             notice.put("userId", userJsonObject.get("userId").toString());
             notice.put("type", "2");//消息类型
-            notice.put("createId", "0dc9dd4cd4d446ae9455215fe753c44e");//默认系统管理员
-            notice.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(notice, "0dc9dd4cd4d446ae9455215fe753c44e");
             notices.add(notice);
         }
         if (!notices.isEmpty()) {
@@ -339,8 +337,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
         map.put("planCycle", WorkPlanConstants.SysWorkPlan.getClockInState(map.get("nowCheckType").toString()));//转化计划周期类型为数字
         map.put("planType", "2");//计划类型  1.个人计划  2.部门计划  3.公司计划
         map.put("whetherNotify", whetherNotify);//是否已经通知  1.未通知  2.已通知
-        map.put("createId", userId);//计划创建人
-        map.put("createTime", DateUtil.getTimeAndToString());//创建时间
+        map.put("createId", userId);
+        map.put("createTime", DateUtil.getTimeAndToString());
         sysWorkPlanDao.insertSysWorkPlanISPeople(map);
         // 修改计划执行者
         editWorkPlanExecutors(map, planId);
@@ -419,8 +417,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
         map.put("planCycle", WorkPlanConstants.SysWorkPlan.getClockInState(map.get("nowCheckType").toString()));//转化计划周期类型为数字
         map.put("planType", "3");//计划类型  1.个人计划  2.部门计划  3.公司计划
         map.put("whetherNotify", whetherNotify);//是否已经通知  1.未通知  2.已通知
-        map.put("createId", userId);//计划创建人
-        map.put("createTime", DateUtil.getTimeAndToString());//创建时间
+        map.put("createId", userId);
+        map.put("createTime", DateUtil.getTimeAndToString());
         sysWorkPlanDao.insertSysWorkPlanISPeople(map);
         // 修改计划执行者
         editWorkPlanExecutors(map, planId);

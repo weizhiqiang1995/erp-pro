@@ -12,7 +12,7 @@ import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.object.PutObject;
-import com.skyeye.common.util.DateUtil;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.FileUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.*;
@@ -220,12 +220,10 @@ public class CommonServiceImpl implements CommonService {
 
     private Map<String, Object> getCodeModelHoitoryObject(Map<String, Object> user, String zipName, JSONObject object, String content) {
         Map<String, Object> bean = new HashMap<>();
-        bean.put("id", ToolUtil.getSurFaceId());
         bean.put("tableName", object.getStr("tableName"));
         bean.put("groupId", object.getStr("groupId"));
         bean.put("modelId", object.getStr("modelId"));
         bean.put("content", content);
-        bean.put("createId", user.get("id"));
         bean.put("fileName", object.getStr("fileName"));
         if ("javascript".equals(object.getStr("modelType").toLowerCase())) {
             bean.put("fileType", "js");
@@ -233,7 +231,7 @@ public class CommonServiceImpl implements CommonService {
             bean.put("fileType", object.getStr("modelType").toLowerCase());
         }
         bean.put("filePath", zipName);
-        bean.put("createTime", DateUtil.getTimeAndToString());
+        DataCommonUtil.setCommonData(bean, user.get("id").toString());
         return bean;
     }
 

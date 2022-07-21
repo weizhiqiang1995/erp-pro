@@ -14,6 +14,7 @@ import com.skyeye.common.constans.SysUserAuthConstants;
 import com.skyeye.common.object.GetUserToken;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveUserDao;
@@ -205,15 +206,13 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      */
     private void setUserBaseInstall(String userId, String createId) {
         Map<String, Object> bean = new HashMap<>();
-        bean.put("id", ToolUtil.getSurFaceId());
         bean.put("userId", userId);
         bean.put("winBgPicUrl", "/images/upload/winbgpic/default.jpg");
         bean.put("winLockBgPicUrl", "/images/upload/winlockbgpic/default.jpg");
         bean.put("winThemeColor", "31");
         bean.put("winStartMenuSize", "sm");
         bean.put("winTaskPosition", "bottom");
-        bean.put("createId", createId);
-        bean.put("createTime", DateUtil.getTimeAndToString());
+        DataCommonUtil.setCommonData(bean, userId);
         sysEveUserDao.insertSysUserInstallMation(bean);
     }
 

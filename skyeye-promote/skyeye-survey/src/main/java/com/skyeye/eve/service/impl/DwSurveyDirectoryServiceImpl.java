@@ -11,6 +11,7 @@ import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.object.PutObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.IPSeeker;
 import com.skyeye.common.util.ToolUtil;
@@ -74,14 +75,11 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertDwSurveyDirectoryMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("id", ToolUtil.getSurFaceId());
         map.put("sId", ToolUtil.randomStr(6, 12));//用于短链接的ID
         map.put("dirType", 2);//2问卷
         map.put("surveyModel", 1);//问卷所属的问卷模块   1问卷模块
-        map.put("createId", user.get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
         map.put("surveyNote", "非常感谢您的参与！如有涉及个人信息，我们将严格保密。");
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         dwSurveyDirectoryDao.insertDwSurveyDirectoryMation(map);
     }
 
@@ -1016,17 +1014,14 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSurveyMationCopyById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        String surveyId = ToolUtil.getSurFaceId();
-        map.put("id", surveyId);
         map.put("sId", ToolUtil.randomStr(6, 12));//用于短链接的ID
         map.put("dirType", 2);//2问卷
         map.put("surveyModel", 1);//问卷所属的问卷模块   1问卷模块
-        map.put("createId", user.get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
-        //复制问卷
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
+        // 复制问卷
         dwSurveyDirectoryDao.insertSurveyMationCopyById(map);
         List<Map<String, Object>> questions = dwSurveyDirectoryDao.queryQuestionMationCopyById(map);
+        String surveyId = map.get("id").toString();
         for (Map<String, Object> question : questions) {
             question.put("copyFormId", question.get("id"));
             question.put("id", ToolUtil.getSurFaceId());

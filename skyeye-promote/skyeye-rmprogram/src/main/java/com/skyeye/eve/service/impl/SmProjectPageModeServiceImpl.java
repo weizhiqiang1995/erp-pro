@@ -8,6 +8,7 @@ import cn.hutool.json.JSONUtil;
 import com.skyeye.common.constans.RmProGramConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.FileUtil;
 import com.skyeye.common.util.ToolUtil;
@@ -61,21 +62,20 @@ public class SmProjectPageModeServiceImpl implements SmProjectPageModeService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editProPageModeMationByPageIdList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        smProjectPageModeDao.deletePageModelMationListByPageId(map);//根据页面id删除之前的页面和模块的绑定信息
-        List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonData").toString(), null);//获取模板绑定信息
+        // 根据页面id删除之前的页面和模块的绑定信息
+        smProjectPageModeDao.deletePageModelMationListByPageId(map);
+        // 获取模板绑定信息
+        List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonData").toString(), null);
         if (array.size() > 0) {
-            Map<String, Object> user = inputObject.getLogParams();
+            String userId = inputObject.getLogParams().get("id").toString();
             List<Map<String, Object>> beans = new ArrayList<>();
-            Map<String, Object> bean;
             for (int i = 0; i < array.size(); i++) {
                 Map<String, Object> object = array.get(i);
-                bean = new HashMap<>();
+                Map<String, Object> bean = new HashMap<>();
                 bean.put("pageId", object.get("pageId"));
                 bean.put("modelId", object.get("modelId"));
-                bean.put("id", ToolUtil.getSurFaceId());
-                bean.put("createId", user.get("id"));
-                bean.put("createTime", DateUtil.getTimeAndToString());
                 bean.put("sort", i);
+                DataCommonUtil.setCommonData(bean, userId);
                 beans.add(bean);
             }
             smProjectPageModeDao.editProPageModeMationByPageIdList(beans);

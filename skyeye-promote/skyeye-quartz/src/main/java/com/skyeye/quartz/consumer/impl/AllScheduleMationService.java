@@ -6,6 +6,7 @@ package com.skyeye.quartz.consumer.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.skyeye.common.constans.MqConstants;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysQuartzDao;
@@ -68,15 +69,13 @@ public class AllScheduleMationService implements TaskMateService {
             for (int i = 0; i < userJson.size(); i++) {
                 Map<String, Object> userJsonObject = userJson.get(i);
                 notice = new HashMap<>();
-                notice.put("id", ToolUtil.getSurFaceId());
                 notice.put("title", "日程提醒");
                 notice.put("noticeDesc", "您有一条新的日程信息，请及时阅读。");
                 notice.put("content", userJsonObject.get("content").toString());
                 notice.put("state", "1");//未读消息
                 notice.put("userId", userJsonObject.get("userId").toString());
                 notice.put("type", "1");//消息类型
-                notice.put("createId", "0dc9dd4cd4d446ae9455215fe753c44e");//默认系统管理员
-                notice.put("createTime", DateUtil.getTimeAndToString());
+                DataCommonUtil.setCommonData(notice, "0dc9dd4cd4d446ae9455215fe753c44e");
                 notices.add(notice);
             }
             if (!notices.isEmpty()) {

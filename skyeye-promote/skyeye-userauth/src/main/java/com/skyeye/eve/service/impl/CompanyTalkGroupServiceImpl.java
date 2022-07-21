@@ -10,6 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.CompanyTalkGroupDao;
@@ -55,41 +56,38 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
         String[] invites = map.get("userIds").toString().split(",");
         if (invites.length > 0) {
             Map<String, Object> user = inputObject.getLogParams();
-            //插入群组信息
-            String id = ToolUtil.getSurFaceId();//群组id
-            map.put("id", id);
+            String userId = user.get("id").toString();
+            DataCommonUtil.setCommonData(map, userId);
+            // 插入群组信息
+            String id = map.get("id").toString();//群组id
             map.put("groupUserNum", 200);//默认每个群组的人数最多200人
             map.put("state", 1);//群状态，正常
             map.put("groupNum", ToolUtil.getTalkGroupNum());//群号
             map.put("groupHistroyImg", map.get("groupImg").toString() + ",");//群历史logo
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
             companyTalkGroupDao.insertGroupMation(map);
             //插入被邀请人信息
             List<Map<String, Object>> inviteBeans = new ArrayList<>();
-            Map<String, Object> inviteBean;
             for (String str : invites) {
                 if (!ToolUtil.isBlank(str)) {
-                    inviteBean = new HashMap<>();
-                    inviteBean.put("id", ToolUtil.getSurFaceId());
+                    Map<String, Object> inviteBean = new HashMap<>();
                     inviteBean.put("inviteUserId", str);//被邀请人id
                     inviteBean.put("groupId", id);//群组id
                     inviteBean.put("state", 0);//等待查看
                     inviteBean.put("inGroupType", 1);//进群方式  1被邀请进群
-                    inviteBean.put("createId", user.get("id"));
-                    inviteBean.put("createTime", DateUtil.getTimeAndToString());
+                    DataCommonUtil.setCommonData(inviteBean, userId);
                     inviteBeans.add(inviteBean);
                 }
             }
             companyTalkGroupDao.insertGroupInviteMation(inviteBeans);
-            //插入创建人入群数据
+            // 插入创建人入群数据
             Map<String, Object> groupUser = new HashMap<>();
             groupUser.put("id", ToolUtil.getSurFaceId());
-            groupUser.put("userId", user.get("id"));
+            groupUser.put("userId", userId);
             groupUser.put("groupId", id);
             groupUser.put("createTime", DateUtil.getTimeAndToString());
             companyTalkGroupDao.insertMakeGroupUserMation(groupUser);
-            jedisService.del(Constants.getSysTalkUserHasGroupListMationById(user.get("id").toString()));//删除该用户在redis中存储的群组列表信息
+            // 删除该用户在redis中存储的群组列表信息
+            jedisService.del(Constants.getSysTalkUserHasGroupListMationById(userId));
             outputObject.setBean(map);
         } else {
             outputObject.setreturnMessage("群组中最少拥有两名成员。");
@@ -221,13 +219,11 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
                 if (Integer.parseInt(createGroupUser.get("groupUserNum").toString())
                     > Integer.parseInt(createGroupUser.get("newGroupNum").toString())) {//当前群聊人数小于总人数限制
                     Map<String, Object> inviteBean = new HashMap<>();
-                    inviteBean.put("id", ToolUtil.getSurFaceId());
                     inviteBean.put("inviteUserId", createGroupUser.get("createId"));//审批人id
                     inviteBean.put("groupId", map.get("groupId"));//群组id
                     inviteBean.put("state", 0);//等待查看
                     inviteBean.put("inGroupType", 2);//进群方式  2搜索账号进群
-                    inviteBean.put("createId", user.get("id"));
-                    inviteBean.put("createTime", DateUtil.getTimeAndToString());
+                    DataCommonUtil.setCommonData(inviteBean, inputObject.getLogParams().get("id").toString());
                     companyTalkGroupDao.insertInGroupInviteByUserAndGroupId(inviteBean);
                     outputObject.setBean(inviteBean);
                     outputObject.settotal(1);

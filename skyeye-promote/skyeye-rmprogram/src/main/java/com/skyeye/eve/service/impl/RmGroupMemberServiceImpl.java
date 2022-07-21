@@ -8,6 +8,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.FileUtil;
 import com.skyeye.common.util.ToolUtil;
@@ -67,11 +68,9 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertRmGroupMemberMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("id", ToolUtil.getSurFaceId());
-        map.put("createId", user.get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
-        Map<String, Object> item = rmGroupMemberDao.queryRmGroupMemberISTop(map);//获取最靠前的小程序组件
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
+        // 获取最靠前的小程序组件
+        Map<String, Object> item = rmGroupMemberDao.queryRmGroupMemberISTop(map);
         if (item == null) {
             map.put("sort", 1);
         } else {
@@ -196,24 +195,23 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
         String[] propertyIds = map.get("propertyIds").toString().split(",");
         List<Map<String, Object>> beans = new ArrayList<>();
-        Map<String, Object> bean = null;
+        String userId = inputObject.getLogParams().get("id").toString();
         for (String str : propertyIds) {
             if (!ToolUtil.isBlank(str)) {
-                bean = new HashMap<>();
-                bean.put("id", ToolUtil.getSurFaceId());
+                Map<String, Object> bean = new HashMap<>();
                 bean.put("propertyId", str);
                 bean.put("memberId", map.get("memberId"));
-                bean.put("createId", user.get("id"));
-                bean.put("createTime", DateUtil.getTimeAndToString());
+                DataCommonUtil.setCommonData(bean, userId);
                 beans.add(bean);
             }
         }
         if (!beans.isEmpty()) {
-            rmGroupMemberDao.deleteRmGroupMemberAndPropertyMationById(map);//删除之前的绑定信息
-            rmGroupMemberDao.insertRmGroupMemberAndPropertyMationById(beans);//新增绑定信息
+            // 删除之前的绑定信息
+            rmGroupMemberDao.deleteRmGroupMemberAndPropertyMationById(map);
+            // 新增绑定信息
+            rmGroupMemberDao.insertRmGroupMemberAndPropertyMationById(beans);
         }
     }
 

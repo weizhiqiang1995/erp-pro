@@ -95,7 +95,6 @@ public class SysDataSqlServiceImpl implements SysDataSqlService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertTableBackUps(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
         Map<String, Object> version = sysDataSqlDao.queryDataSqlVersion(map);
         String basePath = tPath + "\\upload\\datasql";
         FileUtil.createDirs(basePath);
@@ -112,9 +111,7 @@ public class SysDataSqlServiceImpl implements SysDataSqlService {
             if (process.waitFor() == 0) {// 0 表示线程正常终止。
                 System.out.println("执行完毕");
                 //保存到数据库
-                map.put("id", ToolUtil.getSurFaceId());
-                map.put("createId", user.get("id"));
-                map.put("createTime", DateUtil.getTimeAndToString());
+                DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
                 map.put("mysqlVersion", version.get("version"));//数据库版本
                 String filePath = "/images/upload/datasql/" + newFileName;
                 map.put("filePath", filePath);//文件存储地址

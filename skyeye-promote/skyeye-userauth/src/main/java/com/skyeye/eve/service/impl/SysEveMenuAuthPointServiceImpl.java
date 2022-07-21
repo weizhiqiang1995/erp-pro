@@ -8,6 +8,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveMenuAuthPointDao;
@@ -53,11 +54,8 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveMenuAuthPointDao.querySysEveMenuAuthPointMationByAuthName(map);
         if (bean == null) {
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
             map.put("menuNum", DateUtil.getTimeStampAndToString());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             sysEveMenuAuthPointDao.insertSysEveMenuAuthPointMation(map);
         } else {
             outputObject.setreturnMessage("该菜单下已存在该名称的权限点，请进行更改.");

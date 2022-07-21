@@ -12,6 +12,7 @@ import com.skyeye.common.object.GetUserToken;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.object.PutObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.HttpClient;
 import com.skyeye.common.util.ToolUtil;
@@ -68,10 +69,7 @@ public class SysEveWinServiceImpl implements SysEveWinService {
         if (bean != null && !bean.isEmpty()) {
             outputObject.setreturnMessage("存在相同的系统或系统地址，请更换");
         } else {
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             sysEveWinDao.insertWinMation(map);
         }
     }
@@ -137,11 +135,8 @@ public class SysEveWinServiceImpl implements SysEveWinService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinDao.querySysEveWinNum(map);
         if (bean != null && !bean.isEmpty()) {
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("id", ToolUtil.getSurFaceId());
             map.put("winNumId", bean.get("id"));
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             sysEveWinDao.insertAuthorizationById(map);
         } else {
             outputObject.setreturnMessage("暂无可授权的商户。");

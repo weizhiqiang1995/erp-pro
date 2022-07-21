@@ -10,6 +10,7 @@ import com.skyeye.common.constans.Constants;
 import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveRoleDao;
@@ -95,13 +96,9 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysRoleMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
         Map<String, Object> roleName = sysEveRoleDao.querySysRoleNameByName(map);
         if (roleName == null) {
-            String roleId = ToolUtil.getSurFaceId();
-            map.put("id", roleId);
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             sysEveRoleDao.insertSysRoleMation(map);
             LOGGER.info("add role [{}] success", map.get("roleName").toString());
         } else {

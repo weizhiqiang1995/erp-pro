@@ -182,18 +182,15 @@ public class MyNoteServiceImpl implements MyNoteService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertMyNoteContentByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
         String parentId = setParentId(map.get("parentId").toString());
         if ("0".equals(parentId)) {
             outputObject.setreturnMessage("错误的文件夹编码！");
             return;
         }
         map.put("parentId", parentId);
-        map.put("id", ToolUtil.getSurFaceId());
         map.put("state", 1);
-        map.put("createId", user.get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
         map.put("iconLogo", getIconLogoPathByType(map.get("type").toString()));
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         myNoteDao.insertMyNoteContentByUserId(map);
         outputObject.setBean(map);
     }

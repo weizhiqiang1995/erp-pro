@@ -7,6 +7,7 @@ package com.skyeye.eve.service.impl;
 import com.skyeye.common.constans.RmProGramConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SmProjectPageDao;
@@ -54,7 +55,6 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertProPageMationByProId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
         if (!jedisClient.exists(RmProGramConstants.REDIS_PROJECT_PAGE_FILE_PATH)) {//判断redis中是否存在文件路径--不存在
             Map<String, Object> redisFilePathNum = smProjectPageDao.queryFilePathNumMaxMation(map);
             if (redisFilePathNum == null) {
@@ -87,7 +87,7 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
         jedisClient.set(RmProGramConstants.REDIS_PROJECT_PAGE_FILE_PATH, String.valueOf(Integer.parseInt(jedisClient.get(RmProGramConstants.REDIS_PROJECT_PAGE_FILE_PATH).toString()) + 1));
         jedisClient.set(RmProGramConstants.REDIS_PROJECT_PAGE_FILE_NAME, String.valueOf(Integer.parseInt(jedisClient.get(RmProGramConstants.REDIS_PROJECT_PAGE_FILE_NAME).toString()) + 1));
 
-        //获取当前项目中页面排序序列值最大的一个
+        // 获取当前项目中页面排序序列值最大的一个
         Map<String, Object> sortMax = smProjectPageDao.querySortMaxMationByProjectId(map);
         if (sortMax == null) {
             map.put("sort", 1);
@@ -98,9 +98,7 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
                 map.put("sort", 1);
             }
         }
-        map.put("id", ToolUtil.getSurFaceId());
-        map.put("createId", user.get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         smProjectPageDao.insertProPageMationByProId(map);
     }
 

@@ -8,6 +8,7 @@ import cn.hutool.json.JSONUtil;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.ExExplainDao;
@@ -41,16 +42,12 @@ public class ExExplainServiceImpl implements ExExplainService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = exExplainDao.queryExExplainMation(map);
         if (bean == null) {
-            Integer type = Integer.parseInt(map.get("type").toString());
-            Map<String, Object> user = inputObject.getLogParams();
-            String id = ToolUtil.getSurFaceId();
-            map.put("id", id);
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             exExplainDao.insertExExplainMation(map);
+            Integer type = Integer.parseInt(map.get("type").toString());
             jedisClient.del(Constants.getSysExplainExexplainRedisKey(type));
             bean = new HashMap<>();
-            bean.put("id", id);
+            bean.put("id", map.get("id").toString());
             outputObject.setBean(bean);
         } else {
             outputObject.setreturnMessage("该代码生成器说明已存在，不可进行二次保存");

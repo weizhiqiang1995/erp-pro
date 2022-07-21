@@ -8,6 +8,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.WagesFieldTypeDao;
@@ -104,9 +105,7 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
         }
 
         // 将该薪资字段插入数据库
-        map.put("id", ToolUtil.getSurFaceId());
-        map.put("createId", inputObject.getLogParams().get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         // 默认启用
         map.put("state", STATE.START_UP.getState());
         wagesFieldTypeDao.insertWagesFieldTypeMation(map);
