@@ -8,8 +8,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.CodeModelDao;
 import com.skyeye.eve.entity.codedoc.model.CodeModelQueryDo;
 import com.skyeye.eve.service.CodeModelService;
@@ -60,12 +60,9 @@ public class CodeModelServiceImpl implements CodeModelService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertCodeModelMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = codeModelDao.queryCodeModelMationByName(map);
-        if (bean == null) {
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+        Map<String, Object> checkBean = codeModelDao.queryCodeModelMationByName(map);
+        if (CollectionUtils.isEmpty(checkBean)) {
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             codeModelDao.insertCodeModelMation(map);
         } else {
             outputObject.setreturnMessage("该模板已存在，请更换。");
@@ -109,8 +106,8 @@ public class CodeModelServiceImpl implements CodeModelService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editCodeModelMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = codeModelDao.queryCodeModelMationByIdAndName(map);
-        if (CollectionUtils.isEmpty(bean)) {
+        Map<String, Object> checkBean = codeModelDao.queryCodeModelMationByIdAndName(map);
+        if (CollectionUtils.isEmpty(checkBean)) {
             Map<String, Object> user = inputObject.getLogParams();
             map.put("lastUpdateId", user.get("id"));
             map.put("lastUpdateTime", DateUtil.getTimeAndToString());

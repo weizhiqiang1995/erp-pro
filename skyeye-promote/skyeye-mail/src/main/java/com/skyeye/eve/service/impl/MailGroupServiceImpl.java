@@ -10,7 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DateUtil;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.MailGroupDao;
 import com.skyeye.eve.service.MailGroupService;
@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -69,15 +68,13 @@ public class MailGroupServiceImpl implements MailGroupService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertMailMationType(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
+        String userId = inputObject.getLogParams().get("id").toString();
+        map.put("userId", userId);
         Map<String, Object> bean = mailGroupDao.queryMailMationTypeByName(map);
         if (CollectionUtils.isEmpty(bean)) {
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(map, userId);
             mailGroupDao.insertMailMationType(map);
-            jedisClient.del(Constants.getPersonMailTypeListByUserId(user.get("id").toString()));
+            jedisClient.del(Constants.getPersonMailTypeListByUserId(userId));
         } else {
             outputObject.setreturnMessage("该名称已存在，请更换。");
         }

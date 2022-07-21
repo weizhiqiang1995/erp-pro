@@ -8,6 +8,7 @@ import cn.hutool.json.JSONUtil;
 import com.skyeye.common.constans.KnowlgConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.KnowledgeTypeDao;
@@ -90,11 +91,9 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
         if (bean != null && !bean.isEmpty()) {
             outputObject.setreturnMessage("该名称已存在，请更换");
         } else {
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("state", state.START_NEW.getState());//默认新建
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            // 默认新建
+            map.put("state", state.START_NEW.getState());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             knowledgeTypeDao.insertKnowledgeTypeMation(map);
         }
     }

@@ -11,6 +11,7 @@ import com.skyeye.common.constans.KnowlgConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.object.PutObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.FileUtil;
 import com.skyeye.common.util.ToolUtil;
@@ -81,11 +82,9 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertKnowledgeContentMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        map.put("id", ToolUtil.getSurFaceId());
         map.put("state", "1");
         map.put("readNum", '0');
-        map.put("createId", inputObject.getLogParams().get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         knowledgeContentDao.insertKnowledgeContentMation(map);
     }
 
@@ -190,11 +189,9 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
                     trueFileName = "/images/upload/wordfolder/" + userId + "/" + newFileName;
                     map.put("fileType", fileExtName);//文件类型
                     map.put("fileSizeType", "bytes");//文件大小单位
-                    map.put("id", ToolUtil.getSurFaceId());
-                    map.put("createId", userId);
-                    map.put("createTime", DateUtil.getTimeAndToString());
                     map.put("fileAddress", trueFileName);//文件地址
                     map.put("fileThumbnail", "-1");
+                    DataCommonUtil.setCommonData(map, userId);
                     List<Map<String, Object>> beans;
                     if (ToolUtil.isBlank(jedisClient.get(KnowlgConstants.getSysWordFileModuleByMd5(map.get("md5").toString())))) {
                         beans = new ArrayList<>();

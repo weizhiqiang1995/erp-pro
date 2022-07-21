@@ -10,7 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DateUtil;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.ReportTypeDao;
 import com.skyeye.eve.service.ReportTypeService;
@@ -18,6 +18,7 @@ import com.skyeye.jedis.JedisClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +69,7 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     public void insertReportTypeMation(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = reportTypeDao.queryReportTypeMationByTypeName(map);
-        if (bean != null && !bean.isEmpty()) {
+        if (!CollectionUtils.isEmpty(bean)) {
             outputObject.setreturnMessage("该类型名称已存在，不能重复添加！");
         } else {
             Map<String, Object> orderBy = reportTypeDao.queryReportTypeAfterOrderBum(map);
@@ -81,11 +82,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
                     map.put("orderBy", 1);
                 }
             }
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
-            map.put("id", ToolUtil.getSurFaceId());
             map.put("state", "1");
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             reportTypeDao.insertReportTypeMation(map);
         }
     }
@@ -117,7 +115,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     public void editReportTypeMationById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> beans = reportTypeDao.queryReportTypeMationStateById(map);
-        if ("1".equals(beans.get("state").toString()) || "3".equals(beans.get("state").toString())) {//新建或者下线的状态可以编辑
+        if ("1".equals(beans.get("state").toString()) || "3".equals(beans.get("state").toString())) {
+            // 新建或者下线的状态可以编辑
             Map<String, Object> bean = reportTypeDao.queryReportTypeMationByTypeNameAndId(map);
             if (bean == null) {
                 reportTypeDao.editReportTypeMationById(map);
@@ -140,7 +139,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editReportTypeSortTopById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> topBean = reportTypeDao.queryReportTypeISTopByThisId(map);//根据同一级排序获取这条数据的上一条数据
+        // 根据同一级排序获取这条数据的上一条数据
+        Map<String, Object> topBean = reportTypeDao.queryReportTypeISTopByThisId(map);
         if (topBean == null) {
             outputObject.setreturnMessage("已经是最靠前举报类型，无法移动。");
         } else {
@@ -148,7 +148,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
             topBean.put("orderBy", topBean.get("thisOrderBy"));
             reportTypeDao.editReportTypeSortTopById(map);
             reportTypeDao.editReportTypeSortTopById(topBean);
-            jedisClient.del(Constants.forumReportTypeUpList());//删除上线举报类型的redis
+            // 删除上线举报类型的redis
+            jedisClient.del(Constants.forumReportTypeUpList());
         }
     }
 
@@ -163,7 +164,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editReportTypeSortLowerById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> topBean = reportTypeDao.queryReportTypeISLowerByThisId(map);//根据同一级排序获取这条数据的下一条数据
+        // 根据同一级排序获取这条数据的下一条数据
+        Map<String, Object> topBean = reportTypeDao.queryReportTypeISLowerByThisId(map);
         if (topBean == null) {
             outputObject.setreturnMessage("已经是最靠后举报类型，无法移动。");
         } else {
@@ -171,7 +173,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
             topBean.put("orderBy", topBean.get("thisOrderBy"));
             reportTypeDao.editReportTypeSortLowerById(map);
             reportTypeDao.editReportTypeSortLowerById(topBean);
-            jedisClient.del(Constants.forumReportTypeUpList());//删除上线举报类型的redis
+            // 删除上线举报类型的redis
+            jedisClient.del(Constants.forumReportTypeUpList());
         }
     }
 
@@ -187,7 +190,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     public void deleteReportTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = reportTypeDao.queryReportTypeMationStateById(map);
-        if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {//新建或者下线的状态可以删除
+        if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {
+            // 新建或者下线的状态可以删除
             reportTypeDao.deleteReportTypeById(map);
         } else {
             outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
@@ -206,9 +210,11 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     public void editReportTypeUpTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = reportTypeDao.queryReportTypeMationStateById(map);
-        if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {//新建或者下线的状态可以上线
+        if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {
+            // 新建或者下线的状态可以上线
             reportTypeDao.editReportTypeUpTypeById(map);
-            jedisClient.del(Constants.forumReportTypeUpList());//删除上线举报类型的redis
+            // 删除上线举报类型的redis
+            jedisClient.del(Constants.forumReportTypeUpList());
         } else {
             outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
         }
@@ -226,9 +232,11 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     public void editReportTypeDownTypeById(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = reportTypeDao.queryReportTypeMationStateById(map);
-        if ("2".equals(bean.get("state").toString())) {//上线状态可以下线
+        if ("2".equals(bean.get("state").toString())) {
+            // 上线状态可以下线
             reportTypeDao.editReportTypeDownTypeById(map);
-            jedisClient.del(Constants.forumReportTypeUpList());//删除上线举报类型的redis
+            // 删除上线举报类型的redis
+            jedisClient.del(Constants.forumReportTypeUpList());
         } else {
             outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
         }
@@ -244,7 +252,7 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     @Override
     public void queryReportTypeUpList(InputObject inputObject, OutputObject outputObject) throws Exception {
         Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = new ArrayList<>();
+        List<Map<String, Object>> beans;
         if (ToolUtil.isBlank(jedisClient.get(Constants.forumReportTypeUpList()))) {
             beans = reportTypeDao.queryReportTypeUpList(map);
             jedisClient.set(Constants.forumReportTypeUpList(), JSONUtil.toJsonStr(beans));

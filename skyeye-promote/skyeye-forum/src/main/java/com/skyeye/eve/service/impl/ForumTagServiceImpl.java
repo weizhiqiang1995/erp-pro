@@ -10,7 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.ForumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DateUtil;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.ForumTagDao;
 import com.skyeye.eve.service.ForumTagService;
@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -71,13 +70,11 @@ public class ForumTagServiceImpl implements ForumTagService {
             outputObject.setreturnMessage("该论坛标签名称已存在，请更换");
         } else {
             Map<String, Object> itemCount = forumTagDao.queryForumTagBySimpleLevel(map);
-            Map<String, Object> user = inputObject.getLogParams();
             int thisOrderBy = Integer.parseInt(itemCount.get("simpleNum").toString()) + 1;
             map.put("orderBy", thisOrderBy);
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("state", "1");//默认新建
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            // 默认新建
+            map.put("state", "1");
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             forumTagDao.insertForumTagMation(map);
         }
     }
@@ -112,9 +109,11 @@ public class ForumTagServiceImpl implements ForumTagService {
     public void updateUpForumTagById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagStateById(map);
-        if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {//新建或者下线可以上线
+        if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {
+            // 新建或者下线可以上线
             forumTagDao.updateUpForumTagById(map);
-            jedisClient.del(ForumConstants.FORUM_TAG_UP_STATE_LIST);//删除上线论坛标签的redis
+            // 删除上线论坛标签的redis
+            jedisClient.del(ForumConstants.FORUM_TAG_UP_STATE_LIST);
         } else {
             outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
         }
@@ -131,9 +130,11 @@ public class ForumTagServiceImpl implements ForumTagService {
     public void updateDownForumTagById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagStateById(map);
-        if ("2".equals(bean.get("state").toString())) {//上线状态可以下线
+        if ("2".equals(bean.get("state").toString())) {
+            // 上线状态可以下线
             forumTagDao.updateDownForumTagById(map);
-            jedisClient.del(ForumConstants.FORUM_TAG_UP_STATE_LIST);//删除上线论坛标签的redis
+            // 删除上线论坛标签的redis
+            jedisClient.del(ForumConstants.FORUM_TAG_UP_STATE_LIST);
         } else {
             outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
         }
@@ -164,7 +165,8 @@ public class ForumTagServiceImpl implements ForumTagService {
     public void editForumTagMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumTagDao.queryForumTagStateById(map);
-        if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {//新建或者下线可以编辑
+        if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {
+            // 新建或者下线可以编辑
             Map<String, Object> b = forumTagDao.queryForumTagMationByName(map);
             if (b != null && !b.isEmpty()) {
                 outputObject.setreturnMessage("该论坛标签名称已存在，请更换");
@@ -186,16 +188,18 @@ public class ForumTagServiceImpl implements ForumTagService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editForumTagMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = forumTagDao.queryForumTagUpMationById(map);//获取当前数据的同级分类下的上一条数据
+        // 获取当前数据的同级分类下的上一条数据
+        Map<String, Object> bean = forumTagDao.queryForumTagUpMationById(map);
         if (CollectionUtils.isEmpty(bean)) {
             outputObject.setreturnMessage("当前标签已经是首位，无须进行上移。");
         } else {
-            //进行位置交换
+            // 进行位置交换
             map.put("upOrderBy", bean.get("prevOrderBy"));
             bean.put("upOrderBy", bean.get("thisOrderBy"));
             forumTagDao.editForumTagMationOrderNumUpById(map);
             forumTagDao.editForumTagMationOrderNumUpById(bean);
-            jedisClient.del(ForumConstants.FORUM_TAG_UP_STATE_LIST);//删除上线论坛标签的redis
+            // 删除上线论坛标签的redis
+            jedisClient.del(ForumConstants.FORUM_TAG_UP_STATE_LIST);
         }
     }
 
@@ -209,16 +213,18 @@ public class ForumTagServiceImpl implements ForumTagService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editForumTagMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = forumTagDao.queryForumTagDownMationById(map);//获取当前数据的同级分类下的下一条数据
+        // 获取当前数据的同级分类下的下一条数据
+        Map<String, Object> bean = forumTagDao.queryForumTagDownMationById(map);
         if (CollectionUtils.isEmpty(bean)) {
             outputObject.setreturnMessage("当前标签已经是末位，无须进行下移。");
         } else {
-            //进行位置交换
+            // 进行位置交换
             map.put("upOrderBy", bean.get("prevOrderBy"));
             bean.put("upOrderBy", bean.get("thisOrderBy"));
             forumTagDao.editForumTagMationOrderNumUpById(map);
             forumTagDao.editForumTagMationOrderNumUpById(bean);
-            jedisClient.del(ForumConstants.FORUM_TAG_UP_STATE_LIST);//删除上线论坛标签的redis
+            // 删除上线论坛标签的redis
+            jedisClient.del(ForumConstants.FORUM_TAG_UP_STATE_LIST);
         }
     }
 

@@ -9,10 +9,7 @@ import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.object.PutObject;
-import com.skyeye.common.util.BytesUtil;
-import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.FileUtil;
-import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.*;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.service.SysEnclosureService;
 import com.skyeye.exception.CustomException;
@@ -126,12 +123,14 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
-        if ("1".equals(map.get("parentId").toString())) {//如果父id为1，即：我的附件，则将parentId设置为0
+        if ("1".equals(map.get("parentId").toString())) {
+            // 如果父id为1，即：我的附件，则将parentId设置为0
             map.put("parentId", "0");
         }
         List<Map<String, Object>> beans = sysEnclosureDao.queryThisFolderChilsByFolderId(map);
         for (Map<String, Object> bean : beans) {
-            if (!"folder".equals(bean.get("fileType").toString())) {//不是文件夹
+            if (!"folder".equals(bean.get("fileType").toString())) {
+                // 不是文件夹
                 String size = BytesUtil.sizeFormatNum2String(Long.parseLong(bean.get("fileSize").toString()));
                 bean.put("fileSize", size);
             }
@@ -166,9 +165,11 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     public void editSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String fileType = map.get("fileType").toString();
-        if ("folder".equals(fileType)) {//编辑的附件数据为文件夹
+        if ("folder".equals(fileType)) {
+            // 编辑的附件数据为文件夹
             sysEnclosureDao.editSysEnclosureFolderMationByUserId(map);
-        } else {//编辑的附件数据为文件
+        } else {
+            // 编辑的附件数据为文件
             sysEnclosureDao.editSysEnclosureFileMationByUserId(map);
         }
     }
@@ -194,12 +195,10 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
             // 获取multiRequest 中所有的文件名
             Iterator iter = multiRequest.getFileNames();
             String basePath = tPath + "\\upload\\enclosurefile\\" + userId;
-            String trueFileName = "";
-            String fileName = "";
             while (iter.hasNext()) {
                 // 一次遍历所有文件
                 MultipartFile file = multiRequest.getFile(iter.next().toString());
-                fileName = file.getOriginalFilename();// 文件名称
+                String fileName = file.getOriginalFilename();
                 //得到文件扩展名
                 String fileExtName = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
                 if (file != null) {
@@ -213,14 +212,13 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
                     } catch (IOException e) {
                         throw new CustomException(e);
                     }
-                    //初始化文件对象内容
-                    trueFileName = "/images/upload/enclosurefile/" + userId + "/" + newFileName;
-                    map.put("fileType", fileExtName);//文件类型
-                    map.put("fileSizeType", "bytes");//文件大小单位
-                    map.put("id", ToolUtil.getSurFaceId());
-                    map.put("createId", userId);
-                    map.put("createTime", DateUtil.getTimeAndToString());
-                    map.put("fileAddress", trueFileName);//文件地址
+                    // 文件类型
+                    map.put("fileType", fileExtName);
+                    // 文件大小单位
+                    map.put("fileSizeType", "bytes");
+                    DataCommonUtil.setCommonData(map, userId);
+                    // 文件地址
+                    map.put("fileAddress", "/images/upload/enclosurefile/" + userId + "/" + newFileName);
                     map.put("fileThumbnail", "-1");
                     map.put("folderId", map.get("folderId"));
                     List<Map<String, Object>> beans;
@@ -250,9 +248,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
         String userId = user.get("id").toString();
         List<Map<String, Object>> beans = JSONUtil.toList(jedisClient.get(Constants.getSysEnclosureFileModuleByMd5(map.get("md5").toString())).toString(), null);
         List<File> fileList = new ArrayList<>();
-        File f;
         for (Map<String, Object> bean : beans) {
-            f = new File(tPath.replace("images", "") + bean.get("fileAddress").toString());
+            File f = new File(tPath.replace("images", "") + bean.get("fileAddress").toString());
             fileList.add(f);
         }
         String fileName = map.get("name").toString();
@@ -282,14 +279,13 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
             FileUtil.close(outChnnel);
         }
         jedisClient.del(Constants.getSysEnclosureFileModuleByMd5(map.get("md5").toString()));
-        //初始化文件对象内容
-        String trueFileName = "/images/upload/enclosurefile/" + userId + "/" + newFileName;
-        map.put("fileType", fileExtName);//文件类型
-        map.put("fileSizeType", "bytes");//文件大小单位
-        map.put("id", ToolUtil.getSurFaceId());
-        map.put("createId", userId);
-        map.put("createTime", DateUtil.getTimeAndToString());
-        map.put("fileAddress", trueFileName);//文件地址
+        // 文件类型
+        map.put("fileType", fileExtName);
+        // 文件大小单位
+        map.put("fileSizeType", "bytes");
+        // 文件地址
+        map.put("fileAddress", "/images/upload/enclosurefile/" + userId + "/" + newFileName);
+        DataCommonUtil.setCommonData(map, userId);
         sysEnclosureDao.insertUploadFileByUserId(map);
         outputObject.setBean(map);
     }
@@ -463,7 +459,7 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      * 获取人员列表时的参数转换
      *
      * @param map
-     * @param inputObject  入参以及用户信息等获取对象
+     * @param inputObject 入参以及用户信息等获取对象
      * @return
      */
     public Map<String, Object> compareSelUserListByParams(Map<String, Object> map, InputObject inputObject) {
@@ -501,19 +497,17 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
             //决定存储路径
             String basePath = tPath + "\\upload\\enclosurefile\\" + userId;
             String trueFileName = "";
-            String fileName = "";
             while (iter.hasNext()) {
                 // 一次遍历所有文件
                 MultipartFile file = multiRequest.getFile(iter.next().toString());
-                fileName = file.getOriginalFilename();// 文件名称
-                //得到文件扩展名
+                String fileName = file.getOriginalFilename();
+                // 得到文件扩展名
                 String fileExtName = fileName.substring(fileName.lastIndexOf(".") + 1);
                 if (file != null) {
                     FileUtil.createDirs(basePath);
                     // 自定义的文件名称
                     String newFileName = String.valueOf(System.currentTimeMillis()) + "." + fileExtName;
                     String path = basePath + "\\" + newFileName;
-                    // 上传
                     try {
                         file.transferTo(new File(path));
                     } catch (IOException e) {
@@ -525,17 +519,17 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
                     } else {
                         trueFileName = trueFileName + "," + newFileName;
                     }
-                    //存储附件到数据库
+                    // 存储附件到数据库
                     Map<String, Object> bean = new HashMap<>();
-                    bean.put("fileType", fileExtName);//文件类型
-                    bean.put("fileSizeType", "bytes");//文件大小单位
-                    bean.put("id", ToolUtil.getSurFaceId());
-                    bean.put("createId", userId);
+                    // 文件类型
+                    bean.put("fileType", fileExtName);
+                    // 文件大小单位
+                    bean.put("fileSizeType", "bytes");
                     bean.put("size", file.getSize());
                     bean.put("folderId", "0");
                     bean.put("name", fileName);
-                    bean.put("createTime", DateUtil.getTimeAndToString());
-                    bean.put("fileAddress", trueFileName);//文件地址
+                    bean.put("fileAddress", trueFileName);
+                    DataCommonUtil.setCommonData(bean, userId);
                     sysEnclosureDao.insertUploadFileByUserId(bean);
                     outputObject.setBean(bean);
                     return;

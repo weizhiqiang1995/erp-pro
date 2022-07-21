@@ -7,6 +7,7 @@ package com.skyeye.mq.job.impl;
 import cn.hutool.json.JSONUtil;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.constans.MqConstants;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.MailUtil;
 import com.skyeye.common.util.ToolUtil;
@@ -57,22 +58,21 @@ public class WatiWorkerSendServiceImpl implements JobMateService {
             if (mation != null) {
                 //调用消息系统添加通知
                 List<Map<String, Object>> notices = new ArrayList<>();
-                Map<String, Object> notice = null;
                 String content;
                 //1.接收人通知
                 if (!ToolUtil.isBlank(mation.get("userId").toString())) {
                     //1.1内部消息
                     content = Constants.getNoticeServiceUserContent(mation.get("orderNum").toString(), mation.get("userName").toString());
-                    notice = new HashMap<>();
-                    notice.put("id", ToolUtil.getSurFaceId());
+                    Map<String, Object> notice = new HashMap<>();
                     notice.put("title", "工单派工提醒");
                     notice.put("noticeDesc", "您有一条新的派工信息，请及时阅读。");
                     notice.put("content", content);
-                    notice.put("state", "1");//未读消息
+                    // 未读消息
+                    notice.put("state", "1");
                     notice.put("userId", mation.get("userId").toString());
-                    notice.put("type", "3");//消息类型
-                    notice.put("createId", "0dc9dd4cd4d446ae9455215fe753c44e");//默认系统管理员
-                    notice.put("createTime", DateUtil.getTimeAndToString());
+                    // 消息类型
+                    notice.put("type", "3");
+                    DataCommonUtil.setCommonData(notice, "0dc9dd4cd4d446ae9455215fe753c44e");
                     notices.add(notice);
                     //1.2发送邮件
                     String email = mation.get("email").toString();
@@ -88,16 +88,16 @@ public class WatiWorkerSendServiceImpl implements JobMateService {
                     for (Map<String, Object> user : cooperationUser) {
                         //2.1内部消息
                         content = Constants.getNoticeCooperationUserContent(mation.get("orderNum").toString(), user.get("name").toString());
-                        notice = new HashMap<>();
-                        notice.put("id", ToolUtil.getSurFaceId());
+                        Map<String, Object> notice = new HashMap<>();
                         notice.put("title", "工单派工提醒");
                         notice.put("noticeDesc", "您有一条新的派工信息，请及时阅读。");
                         notice.put("content", content);
-                        notice.put("state", "1");//未读消息
+                        // 未读消息
+                        notice.put("state", "1");
                         notice.put("userId", user.get("id").toString());
-                        notice.put("type", "3");//消息类型
-                        notice.put("createId", "0dc9dd4cd4d446ae9455215fe753c44e");//默认系统管理员
-                        notice.put("createTime", DateUtil.getTimeAndToString());
+                        // 消息类型
+                        notice.put("type", "3");
+                        DataCommonUtil.setCommonData(notice, "0dc9dd4cd4d446ae9455215fe753c44e");
                         notices.add(notice);
                         //2.2发送邮件
                         String email = user.get("email").toString();

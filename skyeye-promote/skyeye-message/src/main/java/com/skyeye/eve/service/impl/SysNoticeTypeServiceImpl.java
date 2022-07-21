@@ -8,7 +8,7 @@ import cn.hutool.json.JSONUtil;
 import com.skyeye.common.constans.MessageConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DateUtil;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysNoticeTypeDao;
 import com.skyeye.eve.service.SysNoticeTypeService;
@@ -65,7 +65,8 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysNoticeTypeMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeMationByName(map);//查询是否已经存在该公告类型名称
+        // 查询是否已经存在该公告类型名称
+        Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeMationByName(map);
         if (!CollectionUtils.isEmpty(bean)) {
             outputObject.setreturnMessage("该公告类型名称已存在，请更换");
         } else {
@@ -73,11 +74,10 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
             Map<String, Object> user = inputObject.getLogParams();
             int thisOrderBy = Integer.parseInt(itemCount.get("simpleNum").toString()) + 1;
             map.put("orderBy", thisOrderBy);
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("state", "1");//默认新建
-            map.put("createId", user.get("id"));
+            // 默认新建
+            map.put("state", "1");
             map.put("createName", user.get("userName"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             sysNoticeTypeDao.insertSysNoticeTypeMation(map);
         }
     }
@@ -93,7 +93,8 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
     public void deleteSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeStateById(map);
-        if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {//新建或者下线可以删除
+        if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {
+            // 新建或者下线可以删除
             sysNoticeTypeDao.deleteSysNoticeTypeById(map);
         } else {
             outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
@@ -111,10 +112,13 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
     public void updateUpSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysNoticeTypeDao.querySysNoticeTypeStateById(map);
-        if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {//新建或者下线可以上线
+        if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {
+            // 新建或者下线可以上线
             sysNoticeTypeDao.updateUpSysNoticeTypeById(map);
-            bean = sysNoticeTypeDao.querySysNoticeTypeById(map);    //查询该公告类型的父级id
-            jedisClient.del(MessageConstants.sysSecondNoticeTypeUpStateList(bean.get("parentId").toString()));//删除上线公告类型的redis
+            // 查询该公告类型的父级id
+            bean = sysNoticeTypeDao.querySysNoticeTypeById(map);
+            // 删除上线公告类型的redis
+            jedisClient.del(MessageConstants.sysSecondNoticeTypeUpStateList(bean.get("parentId").toString()));
         } else {
             outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
         }

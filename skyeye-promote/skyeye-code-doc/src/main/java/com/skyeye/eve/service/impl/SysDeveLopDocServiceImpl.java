@@ -10,7 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DateUtil;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysDeveLopDocDao;
 import com.skyeye.eve.entity.codedoc.develop.SysDeveLopDocQueryDo;
@@ -62,16 +62,14 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopByName(map);
         if (CollectionUtils.isEmpty(bean)) {
-            Map<String, Object> user = inputObject.getLogParams();
-            Map<String, Object> item = sysDeveLopDocDao.queryMaxSysDeveLopBySimpleParentId(map);//获取同级下的排位序号最大的数据
+            // 获取同级下的排位序号最大的数据
+            Map<String, Object> item = sysDeveLopDocDao.queryMaxSysDeveLopBySimpleParentId(map);
             if (item == null) {
                 map.put("orderBy", 1);
             } else {
                 map.put("orderBy", Integer.parseInt(item.get("orderBy").toString()) + 1);
             }
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             sysDeveLopDocDao.insertSysDeveLopType(map);
         } else {
             outputObject.setreturnMessage("该目录已存在，请更换。");
@@ -269,16 +267,14 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopDocByNameAndParentId(map);
         if (CollectionUtils.isEmpty(bean)) {
-            Map<String, Object> user = inputObject.getLogParams();
-            Map<String, Object> item = sysDeveLopDocDao.queryMaxSysDeveLopDocBySimpleParentId(map);//获取同级下的排位序号最大的数据
+            // 获取同级下的排位序号最大的数据
+            Map<String, Object> item = sysDeveLopDocDao.queryMaxSysDeveLopDocBySimpleParentId(map);
             if (item == null) {
                 map.put("orderBy", 1);
             } else {
                 map.put("orderBy", Integer.parseInt(item.get("orderBy").toString()) + 1);
             }
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             sysDeveLopDocDao.insertSysDeveLopDoc(map);
         } else {
             outputObject.setreturnMessage("该文档已存在，请更换。");
@@ -341,10 +337,13 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     public void editSysDeveLopDocStateISupById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopDocStateById(map);
-        if ("0".equals(bean.get("state").toString()) || "2".equals(bean.get("state").toString())) {//新建或者下线可以上线
+        if ("0".equals(bean.get("state").toString()) || "2".equals(bean.get("state").toString())) {
+            // 新建或者下线可以上线
             sysDeveLopDocDao.editSysDeveLopDocStateISupById(map);
-            jedisClient.del(Constants.getSysDeveLopDocTitleList(bean.get("typeId").toString()));//删除父分类的redis
-            jedisClient.del(Constants.getSysDeveLopDocContent(map.get("id").toString()));//删除开发文档的redis
+            // 删除父分类的redis
+            jedisClient.del(Constants.getSysDeveLopDocTitleList(bean.get("typeId").toString()));
+            // 删除开发文档的redis
+            jedisClient.del(Constants.getSysDeveLopDocContent(map.get("id").toString()));
         } else {
             outputObject.setreturnMessage("该文档状态已改变，请刷新页面。");
         }
@@ -361,10 +360,13 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     public void editSysDeveLopDocStateISdownById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopDocStateById(map);
-        if ("1".equals(bean.get("state").toString())) {//上线状态可以下线
+        if ("1".equals(bean.get("state").toString())) {
+            // 上线状态可以下线
             sysDeveLopDocDao.editSysDeveLopDocStateISdownById(map);
-            jedisClient.del(Constants.getSysDeveLopDocTitleList(bean.get("typeId").toString()));//删除父分类的redis
-            jedisClient.del(Constants.getSysDeveLopDocContent(map.get("id").toString()));//删除开发文档的redis
+            // 删除父分类的redis
+            jedisClient.del(Constants.getSysDeveLopDocTitleList(bean.get("typeId").toString()));
+            // 删除开发文档的redis
+            jedisClient.del(Constants.getSysDeveLopDocContent(map.get("id").toString()));
         } else {
             outputObject.setreturnMessage("该文档状态已改变，请刷新页面。");
         }

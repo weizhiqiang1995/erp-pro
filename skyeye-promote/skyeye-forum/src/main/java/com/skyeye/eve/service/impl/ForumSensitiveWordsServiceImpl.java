@@ -9,8 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.ForumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.eve.dao.ForumSensitiveWordsDao;
 import com.skyeye.eve.service.ForumSensitiveWordsService;
 import com.skyeye.jedis.JedisClientService;
@@ -68,10 +67,7 @@ public class ForumSensitiveWordsServiceImpl implements ForumSensitiveWordsServic
         if (!CollectionUtils.isEmpty(bean)) {
             outputObject.setreturnMessage("该论坛敏感词名称已存在，请更换");
         } else {
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             forumSensitiveWordsDao.insertForumSensitiveWordsMation(map);
             jedisClient.del(ForumConstants.forumSensitiveWordsAll());
         }

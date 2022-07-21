@@ -6,8 +6,7 @@ package com.skyeye.eve.service.impl;
 
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.eve.dao.PlanProjectFlowDao;
 import com.skyeye.eve.service.PlanProjectFlowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,10 +57,7 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = planProjectFlowDao.queryPlanProjectFlowMationByName(map);
         if (bean == null) {
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             planProjectFlowDao.insertPlanProjectFlowMation(map);
         } else {
             outputObject.setreturnMessage("该项目规划-项目流程图表名称已存在，不可进行二次保存");
@@ -79,7 +75,8 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
     public void deletePlanProjectFlowMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = planProjectFlowDao.queryChildNumMationById(map);
-        if (Integer.parseInt(bean.get("childNum").toString()) == 0) {//判断是否有子项
+        if (Integer.parseInt(bean.get("childNum").toString()) == 0) {
+            // 判断是否有子项
             planProjectFlowDao.deletePlanProjectFlowMationById(map);
         } else {
             outputObject.setreturnMessage("该目录下存在子项，无法直接删除。");

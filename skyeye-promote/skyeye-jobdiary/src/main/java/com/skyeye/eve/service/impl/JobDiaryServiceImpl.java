@@ -8,6 +8,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.JobDiaryDao;
@@ -66,17 +67,14 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertDayJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        map.put("id", ToolUtil.getSurFaceId());
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("createId", user.get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         map.put("state", "1");
         jobDiaryDao.insertDayJobDiary(map);
         List<Map<String, Object>> beans = new ArrayList<>();
-        String[] userId = map.get("userId").toString().split(",");//把字符串以","分截成字符数组
-        if (userId.length > 0) {  //如果数组长度大于0
+        String[] userId = map.get("userId").toString().split(",");
+        if (userId.length > 0) {
             Map<String, Object> item;
-            for (String str : userId) {  //遍历数组
+            for (String str : userId) {
                 item = new HashMap<>();
                 item.put("id", ToolUtil.getSurFaceId());
                 item.put("diaryDayId", map.get("id"));
@@ -84,10 +82,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
                     item.put("receivedId", str);
                 }
                 item.put("state", "1");
-                beans.add(item); //把一个个item对象放入集合beans
+                beans.add(item);
             }
         }
-        jobDiaryDao.insertDayJobDiaryReceived(beans);  //在数据库中插入集合beans
+        jobDiaryDao.insertDayJobDiaryReceived(beans);
     }
 
     /**
@@ -143,10 +141,11 @@ public class JobDiaryServiceImpl implements JobDiaryService {
         map.put("createId", user.get("id"));
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = jobDiaryDao.queryJobDiaryDayMysend(map);
-        for (Map<String, Object> str : beans) {  //遍历数组
+        for (Map<String, Object> str : beans) {
             // 计算当前时间和创建时间的时间差，返回分钟
             long twoHour = DateUtil.getDistanceMinute(DateUtil.getTimeAndToString(), str.get("realCreateTime").toString());
-            if (twoHour < 120) {  //两个小时之内可以撤销
+            if (twoHour < 120) {
+                // 两个小时之内可以撤销
                 str.put("isrepeal", "1");
             } else {
                 str.put("isrepeal", "2");
@@ -169,13 +168,14 @@ public class JobDiaryServiceImpl implements JobDiaryService {
         Map<String, Object> createtime = jobDiaryDao.queryCreateTime(map);
         // 计算当前时间和创建时间的时间差，返回分钟
         long twoHour = DateUtil.getDistanceMinute(DateUtil.getTimeAndToString(), createtime.get("realCreateTime").toString());
-        if (twoHour < 120) {  //两个小时之内可以撤销
+        if (twoHour < 120) {
+            //两个小时之内可以撤销
             if ("1".equals(createtime.get("diaryType").toString())) {
-                jobDiaryDao.editJobDiaryDayMysendState(map);  //修改日报表状态
+                jobDiaryDao.editJobDiaryDayMysendState(map);
             } else if ("2".equals(createtime.get("diaryType").toString())) {
-                jobDiaryDao.editJobDiaryWeekMysendState(map);  //修改周报表状态
+                jobDiaryDao.editJobDiaryWeekMysendState(map);
             } else if ("3".equals(createtime.get("diaryType").toString())) {
-                jobDiaryDao.editJobDiaryMonthMysendState(map);  //修改月报表状态
+                jobDiaryDao.editJobDiaryMonthMysendState(map);
             }
         } else {
             outputObject.setreturnMessage("已超出撤销时间，撤销失败！");
@@ -229,10 +229,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertWeekJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        map.put("id", ToolUtil.getSurFaceId());
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("createId", user.get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         map.put("state", "1");
         jobDiaryDao.insertWeekJobDiary(map);
         List<Map<String, Object>> beans = new ArrayList<>();
@@ -303,10 +300,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertMonthJobDiary(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        map.put("id", ToolUtil.getSurFaceId());
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("createId", user.get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         map.put("state", "1");
         jobDiaryDao.insertMonthJobDiary(map);
         List<Map<String, Object>> beans = new ArrayList<>();
@@ -379,11 +373,11 @@ public class JobDiaryServiceImpl implements JobDiaryService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> createtime = jobDiaryDao.queryJobDiaryType(map);
         if ("1".equals(createtime.get("diaryType").toString())) {
-            jobDiaryDao.editJobDiaryDayMysendDelete(map);  //修改日报表状态变删除
+            jobDiaryDao.editJobDiaryDayMysendDelete(map);
         } else if ("2".equals(createtime.get("diaryType").toString())) {
-            jobDiaryDao.editJobDiaryWeekMysendDelete(map);  //修改周报表状态变删除
+            jobDiaryDao.editJobDiaryWeekMysendDelete(map);
         } else if ("3".equals(createtime.get("diaryType").toString())) {
-            jobDiaryDao.editJobDiaryMonthMysendDelete(map);  //修改月报表状态变删除
+            jobDiaryDao.editJobDiaryMonthMysendDelete(map);
         }
     }
 
@@ -419,10 +413,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
         jobDiaryDao.editDayJobDiary(map);
         jobDiaryDao.deleteJobDiaryReceived(map);
         List<Map<String, Object>> beans = new ArrayList<>();
-        String[] userId = map.get("userId").toString().split(",");//把字符串以","分截成字符数组
-        if (userId.length > 0) {  //如果数组长度大于0
+        String[] userId = map.get("userId").toString().split(",");
+        if (userId.length > 0) {
             Map<String, Object> item;
-            for (String str : userId) {  //遍历数组
+            for (String str : userId) {
                 item = new HashMap<>();
                 item.put("id", ToolUtil.getSurFaceId());
                 item.put("diaryDayId", map.get("id"));
@@ -430,10 +424,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
                     item.put("receivedId", str);
                 }
                 item.put("state", "1");
-                beans.add(item); //把一个个item对象放入集合beans
+                beans.add(item);
             }
         }
-        jobDiaryDao.insertDayJobDiaryReceived(beans);  //在数据库中插入集合beans
+        jobDiaryDao.insertDayJobDiaryReceived(beans);
     }
 
     /**
@@ -468,10 +462,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
         jobDiaryDao.editWeekDayJobDiary(map);
         jobDiaryDao.deleteWeekJobDiaryReceived(map);
         List<Map<String, Object>> beans = new ArrayList<>();
-        String[] userId = map.get("userId").toString().split(",");//把字符串以","分截成字符数组
-        if (userId.length > 0) {  //如果数组长度大于0
+        String[] userId = map.get("userId").toString().split(",");
+        if (userId.length > 0) {
             Map<String, Object> item;
-            for (String str : userId) {  //遍历数组
+            for (String str : userId) {
                 item = new HashMap<>();
                 item.put("id", ToolUtil.getSurFaceId());
                 item.put("diaryWeekId", map.get("id"));
@@ -479,10 +473,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
                     item.put("receivedId", str);
                 }
                 item.put("state", "1");
-                beans.add(item); //把一个个item对象放入集合beans
+                beans.add(item);
             }
         }
-        jobDiaryDao.insertWeekJobDiaryReceived(beans);  //在数据库中插入集合beans
+        jobDiaryDao.insertWeekJobDiaryReceived(beans);
     }
 
     /**
@@ -517,10 +511,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
         jobDiaryDao.editMonthDayJobDiary(map);
         jobDiaryDao.deleteMonthJobDiaryReceived(map);
         List<Map<String, Object>> beans = new ArrayList<>();
-        String[] userId = map.get("userId").toString().split(",");//把字符串以","分截成字符数组
-        if (userId.length > 0) {  //如果数组长度大于0
+        String[] userId = map.get("userId").toString().split(",");
+        if (userId.length > 0) {
             Map<String, Object> item;
-            for (String str : userId) {  //遍历数组
+            for (String str : userId) {
                 item = new HashMap<>();
                 item.put("id", ToolUtil.getSurFaceId());
                 item.put("diaryMonthId", map.get("id"));
@@ -528,10 +522,10 @@ public class JobDiaryServiceImpl implements JobDiaryService {
                     item.put("receivedId", str);
                 }
                 item.put("state", "1");
-                beans.add(item); //把一个个item对象放入集合beans
+                beans.add(item);
             }
         }
-        jobDiaryDao.insertMonthJobDiaryReceived(beans);  //在数据库中插入集合beans
+        jobDiaryDao.insertMonthJobDiaryReceived(beans);
     }
 
     /**
@@ -562,7 +556,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
         map.put("receivedId", user.get("id"));
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = jobDiaryDao.queryJobDiaryListToTimeTree(map);
-        List<Map<String, Object>> rows = null;//当天的日志列表
+        List<Map<String, Object>> rows = null;
         for (Map<String, Object> bean : beans) {
             bean.put("receivedId", user.get("id"));
             bean.put("createName", map.get("createName"));

@@ -18,10 +18,7 @@ import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.object.PutObject;
-import com.skyeye.common.util.BytesUtil;
-import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.FileUtil;
-import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.*;
 import com.skyeye.eve.dao.FileConsoleDao;
 import com.skyeye.eve.entity.diskcloud.filerecycle.FileRecycleQueryDo;
 import com.skyeye.eve.entity.diskcloud.fileshare.FileShareQueryDo;
@@ -178,7 +175,6 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertFileFolderByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
         String parentId = map.get("parentId").toString();
         if ("1".equals(parentId) || "2".equals(parentId) || "3".equals(parentId)) {
             // 收藏夹   我的文档   企业网盘
@@ -193,9 +189,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                 return;
             }
         }
-        map.put("id", ToolUtil.getSurFaceId());
-        map.put("createId", user.get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         map.put("logoPath", DiskCloudConstants.SYS_FILE_CONSOLE_IS_FOLDER_LOGO_PATH);
         fileConsoleDao.insertFileFolderByUserId(map);
         // 删除父目录的redis的key
@@ -369,11 +363,9 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                     trueFileName = Constants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + "/" + userId + "/" + newFileName;
                     map.put("fileType", fileExtName);//文件类型
                     map.put("fileSizeType", "bytes");//文件大小单位
-                    map.put("id", ToolUtil.getSurFaceId());
-                    map.put("createId", userId);
-                    map.put("createTime", DateUtil.getTimeAndToString());
                     map.put("fileAddress", trueFileName);//文件地址
                     map.put("fileThumbnail", "-1");
+                    DataCommonUtil.setCommonData(map, userId);
                     String folderId = getThisFolderChildParentId(map.get("folderId").toString());
                     map.put("folderId", folderId);
                     fileConsoleDao.insertUploadFileByUserId(map);
@@ -395,7 +387,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
             // 收藏夹   我的文档   企业网盘
             folderId = String.format(Locale.ROOT, "%s", folderId);
         } else {
-            Map<String, Object> folder = fileConsoleDao.queryFolderMationById(folderId);//根据当前所属目录查询该目录的父id
+            // 根据当前所属目录查询该目录的父id
+            Map<String, Object> folder = fileConsoleDao.queryFolderMationById(folderId);
             if (!ObjectUtils.isEmpty(folder)) {
                 folderId = String.format(Locale.ROOT, "%s%s", folder.get("parentId").toString(), folderId);
             } else {
@@ -419,9 +412,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         String userId = inputObject.getLogParams().get("id").toString();
         List<Map<String, Object>> beans = fileConsoleDao.queryUploadFileChunksByMd5(map);
         List<File> fileList = new ArrayList<>();
-        File f;
         for (Map<String, Object> bean : beans) {
-            f = new File(tPath.replace("images", "") + bean.get("fileAddress").toString());
+            File f = new File(tPath.replace("images", "") + bean.get("fileAddress").toString());
             fileList.add(f);
         }
         String fileName = map.get("name").toString();
@@ -455,16 +447,16 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         String trueFileName = Constants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId + "/" + newFileName;
         map.put("fileType", fileExtName);//文件类型
         map.put("fileSizeType", "bytes");//文件大小单位
-        map.put("id", ToolUtil.getSurFaceId());
-        map.put("createId", userId);
-        map.put("createTime", DateUtil.getTimeAndToString());
         map.put("fileAddress", trueFileName);//文件地址
         map.put("chunk", 0);//文件整合完之后的序号 默认0
         map.put("chunkSize", map.get("size"));//文件整合之后的大小
         map.put("md5", "");//文件整合之后的编码
-        if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileExtName, 1)) {//图片
+        DataCommonUtil.setCommonData(map, userId);
+        if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileExtName, 1)) {
+            // 图片
             map.put("fileThumbnail", trueFileName);//文件缩略图地址
-        } else if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileExtName, 6)) {//电子书
+        } else if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileExtName, 6)) {
+            // 电子书
             String picName = String.valueOf(System.currentTimeMillis()) + ".jpg";
             String newFilename = basePath + "/" + userId + "/" + picName;
             writeAndReadQpubFileThumbnail(path, newFilename);
@@ -476,7 +468,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         } else if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileExtName, 5)) {
             // ace文件缩略图地址
             map.put("fileThumbnail", DiskCloudConstants.FileMation.getIconByFileExt(fileExtName));
-        } else if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileExtName, 3)) {//视频
+        } else if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileExtName, 3)) {
+            // 视频
             String ffmpegGPath = tPath + "/util/ffmpeg.exe";//工具路径
             String fileThumbnail = String.valueOf(System.currentTimeMillis()) + ".jpg";
             FileUtil.createDirs(basePath + "/" + userId + "/ffmpeg/");
@@ -487,9 +480,11 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                 outputObject.setreturnMessage("上传失败。");
                 return;
             }
-        } else if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileExtName, 4)) {//压缩包
+        } else if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileExtName, 4)) {
+            // 压缩包
             map.put("fileThumbnail", "../../assets/images/rar.png");//文件缩略图地址
-        } else {//其他
+        } else {
+            // 其他
             map.put("fileThumbnail", "../../assets/images/other-icon.png");//文件缩略图地址
         }
         String folderId = getThisFolderChildParentId(map.get("folderId").toString());
@@ -612,8 +607,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertFileCatalogToRecycleById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
+        String userId = inputObject.getLogParams().get("id").toString();
+        map.put("userId", userId);
         Map<String, Object> bean = fileConsoleDao.queryFileCatalogByUserIdAndId(map);
         if (!ObjectUtils.isEmpty(bean)) {
             //删除父目录在redis的缓存信息
@@ -623,9 +618,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
             map.put("fileId", bean.get("id"));
             map.put("fileName", bean.get("fileName"));
             map.put("fileType", bean.get("fileType"));
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(map, userId);
             fileConsoleDao.insertFileCatalogToRecycleById(map);
         } else {
             outputObject.setreturnMessage("该文件不存在或者不属于您该账户下的文件。");
@@ -689,15 +682,11 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> mation = fileConsoleDao.queryFileMationByIdAndUserId(map);
         if (!CollectionUtils.isEmpty(mation)) {
-            Map<String, Object> user = inputObject.getLogParams();
-            String id = ToolUtil.getSurFaceId();
-            map.put("createId", user.get("id"));
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             map.put("fileType", mation.get("fileType"));
             map.put("fileId", mation.get("id"));
             map.put("fileName", mation.get("fileName"));
-            map.put("id", id);
-            map.put("createTime", DateUtil.getTimeAndToString());
-            map.put("shareUrl", DiskCloudConstants.getFileShareUrl(id));//链接地址
+            map.put("shareUrl", DiskCloudConstants.getFileShareUrl(map.get("id").toString()));//链接地址
             map.put("shareCode", ToolUtil.randomStr(0, 20));//链接code
             map.put("state", 1);//正常
             if ("2".equals(map.get("shareType").toString())) {//有提取码
@@ -777,7 +766,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = fileConsoleDao.queryShareFileMationCheckById(map);
         if (bean != null && !bean.isEmpty()) {
-            if (!bean.get("sharePassword").toString().toLowerCase().equals(map.get("sharePassword").toString().toLowerCase())) {//密码输入正确
+            if (!bean.get("sharePassword").toString().toLowerCase().equals(map.get("sharePassword").toString().toLowerCase())) {
+                // 密码输入正确
                 outputObject.setreturnMessage("提取码输入错误");
                 return;
             }
@@ -808,13 +798,16 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     public void queryShareFileListByParentId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans;
-        if ("-1".equals(map.get("folderId").toString())) {//加载初始目录
+        if ("-1".equals(map.get("folderId").toString())) {
+            // 加载初始目录
             beans = fileConsoleDao.queryShareFileFirstListByParentId(map);
-        } else {//加载子目录
+        } else {
+            // 加载子目录
             beans = fileConsoleDao.queryShareFileListByParentId(map);
         }
         for (Map<String, Object> bean : beans) {
-            if (!"folder".equals(bean.get("fileType").toString())) {//不是文件夹
+            if (!"folder".equals(bean.get("fileType").toString())) {
+                // 不是文件夹
                 String size = BytesUtil.sizeFormatNum2String(Long.parseLong(bean.get("fileSize").toString()));
                 bean.put("fileSize", size);
             }
@@ -1069,15 +1062,13 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         map.put("fileType", fileExtName);//文件类型
         map.put("fileSizeType", "bytes");//文件大小单位
         map.put("size", 0);//文件大小
-        map.put("id", ToolUtil.getSurFaceId());
         map.put("name", "新建文件" + "." + fileExtName);//文件名
-        map.put("createId", userId);
-        map.put("createTime", DateUtil.getTimeAndToString());
         map.put("fileAddress", trueFileName);//文件地址
         map.put("chunk", 0);//文件整合完之后的序号 默认0
         map.put("chunkSize", 0);//文件整合之后的大小
         map.put("md5", "");//文件整合之后的编码
         map.put("fileThumbnail", DiskCloudConstants.FileMation.getIconByFileExt(fileExtName));//文件缩略图地址
+        DataCommonUtil.setCommonData(map, userId);
         folderId = getThisFolderChildParentId(folderId);
         map.put("folderId", folderId);
         fileConsoleDao.insertUploadFileByUserId(map);
@@ -1348,7 +1339,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertFileMationToPackageToFolder(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonStr").toString(), null);//获取数据信息
+        List<Map<String, Object>> array = JSONUtil.toList(map.get("jsonStr").toString(), null);
         if (array.size() > 0) {
             Map<String, Object> user = inputObject.getLogParams();
             String userId = user.get("id").toString();
@@ -1360,7 +1351,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                 bean = new HashMap<>();
                 Map<String, Object> object = array.get(i);
                 bean.put("id", object.get("rowId"));
-                if ("folder".equals(object.get("rowType").toString())) {//文件夹
+                if ("folder".equals(object.get("rowType").toString())) {
                     folderBeans.add(bean);
                 } else {
                     fileBeans.add(bean);
@@ -1369,19 +1360,22 @@ public class FileConsoleServiceImpl implements FileConsoleService {
 
             //加载数据
             List<Map<String, Object>> dowlLoadFile = new ArrayList<>();
-            if (!folderBeans.isEmpty()) {//选择保存的文件夹不为空
+            if (!folderBeans.isEmpty()) {
+                // 选择保存的文件夹不为空
                 List<Map<String, Object>> folderNew = fileConsoleDao.queryToPackageFileFolderListByList(folderBeans);
                 List<Map<String, Object>> fileNew = fileConsoleDao.queryToPackageFileListByList(folderNew);
                 dowlLoadFile.addAll(folderNew);
                 dowlLoadFile.addAll(fileNew);
             }
-            if (!fileBeans.isEmpty()) {//选择保存的文件不为空
+            if (!fileBeans.isEmpty()) {
+                // 选择保存的文件不为空
                 List<Map<String, Object>> fileNew = fileConsoleDao.queryToPackageFileListByFileList(fileBeans);
                 dowlLoadFile.addAll(fileNew);
             }
 
             if (!dowlLoadFile.isEmpty()) {
-                for (Map<String, Object> folder : dowlLoadFile) {//重置父id
+                for (Map<String, Object> folder : dowlLoadFile) {
+                    // 重置父id
                     String[] str = folder.get("parentId").toString().split(",");
                     folder.put("directParentId", str[str.length - 1]);
                 }
@@ -1412,15 +1406,13 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                 map.put("fileType", fileExtName);//文件类型
                 map.put("fileSizeType", "bytes");//文件大小单位
                 map.put("size", zipFile.length());//文件大小
-                map.put("id", ToolUtil.getSurFaceId());
                 map.put("name", "压缩文件" + "." + fileExtName);//文件名
-                map.put("createId", userId);
-                map.put("createTime", DateUtil.getTimeAndToString());
                 map.put("fileAddress", trueFileName);//文件地址
                 map.put("chunk", 0);//文件整合完之后的序号 默认0
                 map.put("chunkSize", zipFile.length());//文件整合之后的大小
                 map.put("md5", "");//文件整合之后的编码
                 map.put("fileThumbnail", "../../assets/images/rar.png");//文件缩略图地址
+                DataCommonUtil.setCommonData(map, userId);
                 if ("1".equals(map.get("folderId").toString()) || "2".equals(map.get("folderId").toString()) || "3".equals(map.get("folderId").toString())) {//收藏夹   我的文档   企业网盘
                     map.put("folderId", map.get("folderId").toString() + ",");
                 } else {

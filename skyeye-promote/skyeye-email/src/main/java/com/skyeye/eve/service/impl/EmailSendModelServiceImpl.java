@@ -8,8 +8,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.EmailSendModelDao;
 import com.skyeye.eve.service.EmailSendModelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +37,7 @@ public class EmailSendModelServiceImpl implements EmailSendModelService {
     @Override
     public void insertEmailSendModel(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> inputParams = inputObject.getParams();
-        inputParams.put("id", ToolUtil.getSurFaceId());
-        inputParams.put("createId", inputObject.getLogParams().get("id"));
-        inputParams.put("createTime", DateUtil.getTimeAndToString());
+        DataCommonUtil.setCommonData(inputParams, inputObject.getLogParams().get("id").toString());
         emailSendModelDao.insertEmailSendModel(inputParams);
     }
 

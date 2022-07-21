@@ -8,6 +8,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.CodeModelGroupDao;
@@ -65,12 +66,9 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertCodeModelGroupMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = codeModelGroupDao.queryCodeModelGroupMationByName(map);
-        if (bean == null) {
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+        Map<String, Object> checkBean = codeModelGroupDao.queryCodeModelGroupMationByName(map);
+        if (CollectionUtils.isEmpty(checkBean)) {
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             map.put("groupNum", ToolUtil.card());
             codeModelGroupDao.insertCodeModelGroupMation(map);
         } else {
@@ -89,10 +87,11 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
     public void deleteCodeModelGroupById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = codeModelGroupDao.queryCodeModelNumById(map);
-        if (bean == null) {
+        if (CollectionUtils.isEmpty(bean)) {
             codeModelGroupDao.deleteCodeModelGroupById(map);
         } else {
-            if (Integer.parseInt(bean.get("modelNum").toString()) == 0) {//该模板分组下没有模板
+            if (Integer.parseInt(bean.get("modelNum").toString()) == 0) {
+                // 该模板分组下没有模板
                 codeModelGroupDao.deleteCodeModelGroupById(map);
             } else {
                 outputObject.setreturnMessage("该模板分组下存在模板，无法删除。");

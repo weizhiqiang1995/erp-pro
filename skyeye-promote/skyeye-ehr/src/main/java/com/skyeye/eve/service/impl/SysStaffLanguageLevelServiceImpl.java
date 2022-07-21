@@ -8,6 +8,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysStaffLanguageLevelDao;
@@ -38,7 +39,7 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
     @Autowired
     private SysDictDataService sysDictDataService;
 
-    public static enum state {
+    public enum state {
         START_UP(1, "启动"),
         START_DOWN(2, "禁用"),
         START_DELETE(3, "删除");
@@ -87,10 +88,8 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
         Map<String, Object> params = inputObject.getParams();
         Map<String, Object> bean = sysStaffLanguageLevelDao.querySysStaffLanguageLevelByName(params);
         if (CollectionUtils.isEmpty(bean)) {
-            params.put("id", ToolUtil.getSurFaceId());
             params.put("state", state.START_UP.getState());
-            params.put("createId", inputObject.getLogParams().get("id"));
-            params.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(params, inputObject.getLogParams().get("id").toString());
             sysStaffLanguageLevelDao.insertSysStaffLanguageLevelMation(params);
         } else {
             outputObject.setreturnMessage("该语种等级已存在.");

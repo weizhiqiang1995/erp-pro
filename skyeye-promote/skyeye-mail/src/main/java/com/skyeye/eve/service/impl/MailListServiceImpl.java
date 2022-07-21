@@ -8,6 +8,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.MailListDao;
@@ -60,27 +61,28 @@ public class MailListServiceImpl implements MailListService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertMailMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
         // 通讯录类型
         String category = map.get("category").toString();
-        if ("1".equals(category)) {//个人通讯录
-            if (ToolUtil.isBlank(map.get("typeId").toString())) {//通讯录所属类别为空
+        if ("1".equals(category)) {
+            // 个人通讯录
+            if (ToolUtil.isBlank(map.get("typeId").toString())) {
+                // 通讯录所属类别为空
                 outputObject.setreturnMessage("请选择类别");
                 return;
             }
             // 将他人权限制空
             map.remove("readonly");
-        } else if ("2".equals(category)) {//公共通讯录
-            if (ToolUtil.isBlank(map.get("readonly").toString())) {//他人只读为空
+        } else if ("2".equals(category)) {
+            // 公共通讯录
+            if (ToolUtil.isBlank(map.get("readonly").toString())) {
+                // 他人是否只读为空
                 outputObject.setreturnMessage("请选择他人只读权限");
                 return;
             }
             // 将所属类别制空
             map.remove("typeId");
         }
-        map.put("id", ToolUtil.getSurFaceId());
-        map.put("createId", user.get("id"));
-        map.put("createTime", DateUtil.getTimeAndToString());
+        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         mailListDao.insertMailMation(map);
     }
 
@@ -123,17 +125,21 @@ public class MailListServiceImpl implements MailListService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editMailMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        //通讯录类型
+        // 通讯录类型
         String category = map.get("category").toString();
-        if ("1".equals(category)) {//个人通讯录
-            if (ToolUtil.isBlank(map.get("typeId").toString())) {//通讯录所属类别为空
+        if ("1".equals(category)) {
+            // 个人通讯录
+            if (ToolUtil.isBlank(map.get("typeId").toString())) {
+                // 通讯录所属类别为空
                 outputObject.setreturnMessage("请选择类别");
                 return;
             }
             // 将他人权限制空
             map.remove("readonly");
-        } else if ("2".equals(category)) {//公共通讯录
-            if (ToolUtil.isBlank(map.get("readonly").toString())) {//他人只读为空
+        } else if ("2".equals(category)) {
+            // 公共通讯录
+            if (ToolUtil.isBlank(map.get("readonly").toString())) {
+                // 他人是否只读为空
                 outputObject.setreturnMessage("请选择他人只读权限");
                 return;
             }

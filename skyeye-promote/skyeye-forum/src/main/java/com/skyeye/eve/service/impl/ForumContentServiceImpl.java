@@ -10,10 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.ForumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.SensitiveWordInit;
-import com.skyeye.common.util.SensitivewordEngine;
-import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.*;
 import com.skyeye.eve.dao.ForumContentDao;
 import com.skyeye.eve.dao.ForumSensitiveWordsDao;
 import com.skyeye.eve.service.ForumContentService;
@@ -98,21 +95,19 @@ public class ForumContentServiceImpl implements ForumContentService {
         if (str.length() > 0) {
             outputObject.setreturnMessage("该帖子包含以下敏感词：" + str.substring(0, str.length() - 1) + "！");
         } else {
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("id", ToolUtil.getSurFaceId());
             map.put("state", 1);
             map.put("reportState", 1);
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
-            //贴子纯文本内容
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
+            // 贴子纯文本内容
             String content = map.get("textConent").toString();
-            //简介
+            // 简介
             map.put("desc", content.length() > 400 ? content.substring(0, 400) : content);
-            //贴子对应的solr对象
+            // 贴子对应的solr对象
             Forum forum = new Forum();
             forum.setId(map.get("id").toString());
             forum.setForumTitle(map.get("title").toString());
-            forum.setForumContent(content);//纯文本内容
+            // 纯文本内容
+            forum.setForumContent(content);
             forum.setForumDesc(map.get("desc").toString());
             forum.setType(map.get("forumType").toString());
             forum.setCreateId(map.get("createId").toString());
@@ -192,15 +187,16 @@ public class ForumContentServiceImpl implements ForumContentService {
         if (str.length() > 0) {
             outputObject.setreturnMessage("该帖子包含以下敏感词：" + str.substring(0, str.length() - 1) + "！");
         } else {
-            //贴子纯文本内容
+            // 贴子纯文本内容
             String content = map.get("textConent").toString();
-            //简介
+            // 简介
             map.put("desc", content.length() > 400 ? content.substring(0, 400) : content);
             Map<String, Object> bean = forumContentDao.queryForumContentMationById(map);
             Forum forum = new Forum();
             forum.setId(map.get("id").toString());
             forum.setForumTitle(map.get("title").toString());
-            forum.setForumContent(content);//纯文本内容
+            // 纯文本内容
+            forum.setForumContent(content);
             forum.setForumDesc(map.get("desc").toString());
             forum.setType(map.get("forumType").toString());
             forum.setCreateId(bean.get("createId").toString());
@@ -265,7 +261,8 @@ public class ForumContentServiceImpl implements ForumContentService {
         //新增浏览信息
         String keys = ForumConstants.forumBrowseMationByUserid(userId);
         List<Map<String, Object>> beans = new ArrayList<>();
-        if (ToolUtil.isBlank(jedisClient.get(keys))) {//用户之前是否浏览过帖子
+        if (ToolUtil.isBlank(jedisClient.get(keys))) {
+            // 用户之前是否浏览过帖子
             Map<String, Object> m = new HashMap<>();
             m.put("forumId", forumId);
             m.put("tagName", bean.get("tagName"));
@@ -278,7 +275,8 @@ public class ForumContentServiceImpl implements ForumContentService {
             jedisClient.set(keys, JSONUtil.toJsonStr(beans));
         } else {
             beans = JSONUtil.toList(jedisClient.get(keys), null);
-            boolean ifexist = false;//用户之前是否浏览过当前帖子，浏览过则更改浏览时间为当前时间
+            // 用户之前是否浏览过当前帖子，浏览过则更改浏览时间为当前时间
+            boolean ifexist = false;
             for (Map<String, Object> m : beans) {
                 if (m.get("forumId").toString().equals(forumId)) {
                     m.put("tagName", bean.get("tagName"));
@@ -290,7 +288,8 @@ public class ForumContentServiceImpl implements ForumContentService {
                     ifexist = true;
                 }
             }
-            if (!ifexist) {//没有浏览过则新增
+            if (!ifexist) {
+                // 没有浏览过则新增
                 Map<String, Object> m = new HashMap<>();
                 m.put("forumId", forumId);
                 m.put("tagName", bean.get("tagName") == null ? "" : bean.get("tagName"));
@@ -337,7 +336,7 @@ public class ForumContentServiceImpl implements ForumContentService {
         map.put("belongCommentId", "0");
         map.put("replyId", "");
         forumContentDao.insertForumCommentMation(map);
-        //获取、设置评论量
+        // 获取、设置评论量
         String key = ForumConstants.forumCommentNumsByForumId(map.get("forumId").toString());
         if (ToolUtil.isBlank(jedisClient.get(key))) {
             jedisClient.set(key, "1");
@@ -380,7 +379,7 @@ public class ForumContentServiceImpl implements ForumContentService {
         map.put("commentId", user.get("id"));
         map.put("commentTime", DateUtil.getTimeAndToString());
         forumContentDao.insertForumReplyMation(map);
-        //获取、设置评论量
+        // 获取、设置评论量
         String key = ForumConstants.forumCommentNumsByForumId(map.get("forumId").toString());
         if (ToolUtil.isBlank(jedisClient.get(key))) {
             jedisClient.set(key, "1");
@@ -422,12 +421,12 @@ public class ForumContentServiceImpl implements ForumContentService {
         List<Map<String, Object>> beans = new ArrayList<>();
         if (!ToolUtil.isBlank(jedisClient.get(keys))) {
             beans = JSONUtil.toList(jedisClient.get(keys), null);
-            //按浏览时间给集合排序
-            beans.sort(new Comparator<Map<String, Object>>() {//Comparator 比较器. 需要实现比较方法
+            // 按浏览时间给集合排序
+            beans.sort(new Comparator<Map<String, Object>>() {
                 @Override
                 public int compare(Map<String, Object> m1, Map<String, Object> m2) {
                     int flag = m1.get("browseTime").toString().compareTo(m2.get("browseTime").toString());
-                    return -flag; // 不取反，则按正序排列
+                    return -flag;
                 }
             });
             int count = beans.size();
@@ -438,20 +437,22 @@ public class ForumContentServiceImpl implements ForumContentService {
             beans = beans.subList((Integer.parseInt(map.get("page").toString()) - 1) * Integer.parseInt(map.get("limit").toString()), pageMaxSize);
             for (Map<String, Object> m : beans) {
                 String key = ForumConstants.forumBrowseNumsByForumId(m.get("forumId").toString());
-                if (ToolUtil.isBlank(jedisClient.get(key))) {//浏览量
+                if (ToolUtil.isBlank(jedisClient.get(key))) {
+                    // 浏览量
                     m.put("browseNum", 0);
                 } else {
                     String browseNum = jedisClient.get(key);
                     m.put("browseNum", browseNum);
                 }
                 Map<String, Object> ma = forumContentDao.selectForumCommentNumById(m);
-                if (!ToolUtil.isBlank(ma.get("commentNum").toString())) {//评论数
+                if (!ToolUtil.isBlank(ma.get("commentNum").toString())) {
+                    // 评论数
                     m.put("commentNum", ma.get("commentNum"));
                 } else {
                     m.put("commentNum", 0);
                 }
-                String browseTime = ToolUtil.timeFormat(m.get("browseTime").toString());
-                m.put("browseTime", browseTime);//浏览时间
+                // 浏览时间
+                m.put("browseTime", ToolUtil.timeFormat(m.get("browseTime").toString()));
             }
         }
         outputObject.setBeans(beans);
@@ -492,7 +493,8 @@ public class ForumContentServiceImpl implements ForumContentService {
                 String createTime = ToolUtil.timeFormat(m.get("createTime").toString());
                 m.put("createTime", createTime);
                 String key = ForumConstants.forumBrowseNumsByForumId(m.get("id").toString());
-                if (ToolUtil.isBlank(jedisClient.get(key))) {//浏览量
+                if (ToolUtil.isBlank(jedisClient.get(key))) {
+                    // 浏览量
                     m.put("browseNum", 0);
                 } else {
                     String browseNum = jedisClient.get(key);
@@ -506,21 +508,22 @@ public class ForumContentServiceImpl implements ForumContentService {
                 String createTime = ToolUtil.timeFormat(m.get("createTime").toString());
                 m.put("createTime", createTime);
                 String key = ForumConstants.forumBrowseNumsByForumId(m.get("id").toString());
-                if (ToolUtil.isBlank(jedisClient.get(key))) {//浏览量
+                if (ToolUtil.isBlank(jedisClient.get(key))) {
+                    // 浏览量
                     m.put("browseNum", 0);
                 } else {
                     String browseNum = jedisClient.get(key);
                     m.put("browseNum", browseNum);
                 }
             }
-            //按浏览量和评论数给集合排序
-            beans.sort(new Comparator<Map<String, Object>>() {//Comparator 比较器. 需要实现比较方法
+            // 按浏览量和评论数给集合排序
+            beans.sort(new Comparator<Map<String, Object>>() {
                 @Override
                 public int compare(Map<String, Object> m1, Map<String, Object> m2) {
                     Integer m1num = Integer.parseInt(m1.get("browseNum").toString()) + Integer.parseInt(m1.get("commentNum").toString());
                     Integer m2num = Integer.parseInt(m2.get("browseNum").toString()) + Integer.parseInt(m2.get("commentNum").toString());
                     int flag = m1num.compareTo(m2num);
-                    return -flag; // 不取反，则按正序排列
+                    return -flag;
                 }
             });
             int count = beans.size();
@@ -578,7 +581,8 @@ public class ForumContentServiceImpl implements ForumContentService {
             String createTime = ToolUtil.timeFormat(m.get("createTime").toString());
             m.put("createTime", createTime);
             String key = ForumConstants.forumBrowseNumsByForumId(m.get("id").toString());
-            if (ToolUtil.isBlank(jedisClient.get(key))) {//浏览量
+            if (ToolUtil.isBlank(jedisClient.get(key))) {
+                // 浏览量
                 m.put("browseNum", 0);
             } else {
                 String browseNum = jedisClient.get(key);
@@ -586,13 +590,13 @@ public class ForumContentServiceImpl implements ForumContentService {
             }
         }
         //按浏览量和评论数给集合排序
-        beans.sort(new Comparator<Map<String, Object>>() {//Comparator 比较器. 需要实现比较方法
+        beans.sort(new Comparator<Map<String, Object>>() {
             @Override
             public int compare(Map<String, Object> m1, Map<String, Object> m2) {
                 Integer m1num = Integer.parseInt(m1.get("browseNum").toString()) + Integer.parseInt(m1.get("commentNum").toString());
                 Integer m2num = Integer.parseInt(m2.get("browseNum").toString()) + Integer.parseInt(m2.get("commentNum").toString());
                 int flag = m1num.compareTo(m2num);
-                return -flag; // 不取反，则按正序排列
+                return -flag;
             }
         });
         int count = beans.size();

@@ -9,6 +9,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.CompanyDepartmentDao;
@@ -73,14 +74,10 @@ public class CompanyMationServiceImpl implements CompanyMationService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyMationDao.queryCompanyMationByName(map);
         if (bean == null) {
-            Map<String, Object> user = inputObject.getLogParams();
-            String companyId = ToolUtil.getSurFaceId();
-            map.put("id", companyId);
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             companyMationDao.insertCompanyMation(map);
             // 处理个人所得税税率信息
-            dealTaxRate(map.get("taxRateStr").toString(), companyId);
+            dealTaxRate(map.get("taxRateStr").toString(), map.get("id").toString());
         } else {
             outputObject.setreturnMessage("该公司信息已注册，请确认。");
         }

@@ -10,6 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.LightAppTypeDao;
@@ -79,11 +80,8 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
                     map.put("orderBy", 1);
                 }
             }
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
-            map.put("id", ToolUtil.getSurFaceId());
             map.put("state", "1");
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             lightAppTypeDao.insertLightAppTypeMation(map);
         }
     }

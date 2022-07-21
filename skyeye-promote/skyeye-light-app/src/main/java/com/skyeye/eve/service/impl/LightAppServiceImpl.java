@@ -10,6 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.LightAppDao;
@@ -77,11 +78,8 @@ public class LightAppServiceImpl implements LightAppService {
         if (bean != null && !bean.isEmpty()) {
             outputObject.setreturnMessage("该应用名称已存在，不能重复添加！");
         } else {
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
-            map.put("id", ToolUtil.getSurFaceId());
             map.put("state", "1");
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             lightAppDao.insertLightAppMation(map);
         }
     }
@@ -135,7 +133,8 @@ public class LightAppServiceImpl implements LightAppService {
     public void deleteLightAppById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = lightAppDao.queryLightAppStateById(map);
-        if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {//新建或者下线的状态可以删除
+        if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {
+            // 新建或者下线的状态可以删除
             lightAppDao.deleteLightAppById(map);
         } else {
             outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
@@ -153,10 +152,13 @@ public class LightAppServiceImpl implements LightAppService {
     public void editLightAppUpById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = lightAppDao.queryLightAppStateById(map);
-        if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {//新建或者下线的状态可以上线
+        if ("1".equals(bean.get("state").toString()) || "3".equals(bean.get("state").toString())) {
+            // 新建或者下线的状态可以上线
             lightAppDao.editLightAppUpById(map);
-            jedisClient.del(Constants.checkAppLightAppUpListById(bean.get("typeId").toString()));//根据类型Id删除上线轻应用的redis
-            jedisClient.del(Constants.checkAppLightAppUpListById(""));//删除上线轻应用的redis
+            // 根据类型Id删除上线轻应用的redis
+            jedisClient.del(Constants.checkAppLightAppUpListById(bean.get("typeId").toString()));
+            // 删除上线轻应用的redis
+            jedisClient.del(Constants.checkAppLightAppUpListById(""));
         } else {
             outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
         }
@@ -176,8 +178,10 @@ public class LightAppServiceImpl implements LightAppService {
         if ("2".equals(bean.get("state").toString())) {
             // 上线状态可以下线
             lightAppDao.editLightAppDownById(map);
-            jedisClient.del(Constants.checkAppLightAppUpListById(bean.get("typeId").toString()));//根据类型Id删除上线轻应用的redis
-            jedisClient.del(Constants.checkAppLightAppUpListById(""));//删除上线轻应用的redis
+            // 根据类型Id删除上线轻应用的redis
+            jedisClient.del(Constants.checkAppLightAppUpListById(bean.get("typeId").toString()));
+            // 删除上线轻应用的redis
+            jedisClient.del(Constants.checkAppLightAppUpListById(""));
         } else {
             outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
         }
@@ -217,11 +221,9 @@ public class LightAppServiceImpl implements LightAppService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = lightAppDao.queryLightAppMationToAddWinById(map);
         if (bean != null && !bean.isEmpty()) {
-            if ("2".equals(bean.get("state").toString())) {//上线状态可以添加
+            if ("2".equals(bean.get("state").toString())) {
+                // 上线状态可以添加
                 Map<String, Object> user = inputObject.getLogParams();
-                map.put("createId", user.get("id"));
-                map.put("createTime", DateUtil.getTimeAndToString());
-                map.put("id", ToolUtil.getSurFaceId());
                 map.put("menuName", bean.get("appName"));
                 map.put("titleName", bean.get("appName"));
                 map.put("menuUrl", bean.get("appUrl"));
@@ -231,8 +233,10 @@ public class LightAppServiceImpl implements LightAppService {
                 map.put("menuParentId", 0);
                 map.put("openType", 2);
                 map.put("lightAppId", bean.get("id"));
+                DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
                 sysEveWinDragDropDao.insertWinCustomMenu(map);
-                List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(user);//桌面菜单列表
+                // 桌面菜单列表
+                List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(user);
                 deskTops = ToolUtil.deskTopsTree(deskTops);
                 jedisClient.set("deskTopsMation:" + user.get("id").toString(), JSONUtil.toJsonStr(deskTops));
                 outputObject.setBean(map);

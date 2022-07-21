@@ -6,7 +6,7 @@ package com.skyeye.eve.service.impl;
 
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DateUtil;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.CompanyJobDao;
 import com.skyeye.eve.dao.CompanyJobScoreDao;
@@ -70,10 +70,7 @@ public class CompanyJobServiceImpl implements CompanyJobService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyJobDao.queryCompanyJobMationByName(map);
         if (bean == null) {
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("createId", user.get("id"));
-            map.put("createTime", DateUtil.getTimeAndToString());
+            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             companyJobDao.insertCompanyJobMation(map);
         } else {
             outputObject.setreturnMessage("该公司部门职位名称已存在.");
