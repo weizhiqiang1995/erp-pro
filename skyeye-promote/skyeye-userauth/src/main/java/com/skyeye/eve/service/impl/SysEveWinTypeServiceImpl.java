@@ -27,8 +27,8 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
     /**
      * 获取分类列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysWinTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -43,8 +43,8 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
     /**
      * 获取所有一级分类展示为下拉选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -60,8 +60,8 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
     /**
      * 新增系统分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -86,8 +86,8 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
     /**
      * 编辑系统分类时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysWinTypeMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -99,8 +99,8 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
     /**
      * 编辑系统分类时
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -122,8 +122,8 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
     /**
      * 获取所有不是当前分类的一级分类展示为下拉选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysWinFirstTypeListNotIsThisId(InputObject inputObject, OutputObject outputObject) {
@@ -138,8 +138,8 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
     /**
      * 删除系统分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -152,8 +152,8 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
     /**
      * 系统分类上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -174,8 +174,8 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
     /**
      * 系统分类下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -196,8 +196,8 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
     /**
      * 系统分类上线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -214,8 +214,8 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
     /**
      * 系统分类下线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -232,8 +232,8 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
     /**
      * 获取已经上线的一级分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysWinTypeFirstMationStateIsUp(InputObject inputObject, OutputObject outputObject) {
@@ -250,8 +250,8 @@ public class SysEveWinTypeServiceImpl implements SysEveWinTypeService {
     /**
      * 获取已经上线的二级分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysWinTypeSecondMationStateIsUp(InputObject inputObject, OutputObject outputObject) {

@@ -20,8 +20,8 @@ public class LightAppController {
     /**
      * 获取轻应用列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppController/queryLightAppList")
     public void queryLightAppList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class LightAppController {
     /**
      * 新增轻应用
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppController/insertLightAppMation")
     public void insertLightAppMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class LightAppController {
     /**
      * 编辑轻应用时进行信息回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppController/queryLightAppMationToEditById")
     public void queryLightAppMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class LightAppController {
     /**
      * 编辑轻应用信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppController/editLightAppMationById")
     public void editLightAppMationById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class LightAppController {
     /**
      * 删除轻应用
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppController/deleteLightAppById")
     public void deleteLightAppById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class LightAppController {
     /**
      * 轻应用上线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppController/editLightAppUpById")
     public void editLightAppUpTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class LightAppController {
     /**
      * 轻应用下线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppController/editLightAppDownById")
     public void editLightAppDownTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -97,8 +97,8 @@ public class LightAppController {
     /**
      * 获取轻应用上线列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppController/queryLightAppUpList")
     public void queryLightAppUpList(InputObject inputObject, OutputObject outputObject) {
@@ -108,8 +108,8 @@ public class LightAppController {
     /**
      * 添加轻应用到桌面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppController/insertLightAppToWin")
     public void insertLightAppToWin(InputObject inputObject, OutputObject outputObject) {

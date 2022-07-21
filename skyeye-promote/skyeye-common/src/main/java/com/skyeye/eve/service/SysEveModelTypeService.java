@@ -20,48 +20,48 @@ public interface SysEveModelTypeService {
     /**
      * 获取系统模板分类列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     void querySysEveModelTypeList(InputObject inputObject, OutputObject outputObject);
 
     /**
      * 新增系统模板分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     void insertSysEveModelType(InputObject inputObject, OutputObject outputObject);
 
     /**
      * 根据id查询系统模板分类详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     void querySysEveModelTypeById(InputObject inputObject, OutputObject outputObject);
 
     /**
      * 通过parentId查找对应的系统模板分类列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     void querySysEveModelTypeByParentId(InputObject inputObject, OutputObject outputObject);
 
     /**
      * 通过id编辑对应的系统模板分类信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     void updateSysEveModelTypeById(InputObject inputObject, OutputObject outputObject);
 
     /**
      * 删除系统模板分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     void delSysEveModelTypeById(InputObject inputObject, OutputObject outputObject);
 

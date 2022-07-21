@@ -20,8 +20,8 @@ public class SysDataBaseController {
     /**
      * 获取数据库表名信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDataBaseController/querySysDataBaseSelectList")
     public void querySysDataBaseSelectList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class SysDataBaseController {
     /**
      * 获取数据库表备注信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDataBaseController/querySysDataBaseDescSelectList")
     public void querySysDataBaseDescSelectList(InputObject inputObject, OutputObject outputObject) {

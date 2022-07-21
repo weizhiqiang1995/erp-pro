@@ -20,8 +20,8 @@ public class SysDataSqlController {
     /**
      * 获取历史备份列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDataSqlController/querySysDataSqlBackupsList")
     public void querySysDataSqlBackupsList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class SysDataSqlController {
     /**
      * 获取所有表的列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDataSqlController/queryAllTableMationList")
     public void queryAllTableMationList(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class SysDataSqlController {
     /**
      * 开始备份
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDataSqlController/insertTableBackUps")
     public void insertTableBackUps(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class SysDataSqlController {
     /**
      * 开始还原
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDataSqlController/insertTableReduction")
     public void insertTableReduction(InputObject inputObject, OutputObject outputObject) {

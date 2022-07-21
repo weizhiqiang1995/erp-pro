@@ -20,8 +20,8 @@ public class SmProjectPageController {
     /**
      * 根据项目获取项目内部的页面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectPageController/queryProPageMationByProIdList")
     public void queryProPageMationByProIdList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class SmProjectPageController {
     /**
      * 添加项目内部的页面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectPageController/insertProPageMationByProId")
     public void insertProPageMationByProId(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class SmProjectPageController {
     /**
      * 小程序页面展示顺序上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectPageController/editSmProjectPageSortTopById")
     public void editSmProjectPageSortTopById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class SmProjectPageController {
     /**
      * 小程序页面展示顺序下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectPageController/editSmProjectPageSortLowerById")
     public void editSmProjectPageSortLowerById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class SmProjectPageController {
     /**
      * 编辑小程序页面信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectPageController/querySmProjectPageMationToEditById")
     public void querySmProjectPageMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class SmProjectPageController {
     /**
      * 编辑小程序页面信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectPageController/editSmProjectPageMationById")
     public void editSmProjectPageMationById(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class SmProjectPageController {
     /**
      * 删除小程序页面信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectPageController/deleteSmProjectPageMationById")
     public void deleteSmProjectPageMationById(InputObject inputObject, OutputObject outputObject) {

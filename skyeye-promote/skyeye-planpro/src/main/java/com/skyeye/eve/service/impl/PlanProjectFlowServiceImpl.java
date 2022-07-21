@@ -26,8 +26,8 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
     /**
      * 获取项目规划-项目流程图表列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryPlanProjectFlowList(InputObject inputObject, OutputObject outputObject) {
@@ -49,8 +49,8 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
     /**
      * 添加项目规划-项目流程图表信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -71,8 +71,8 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
     /**
      * 删除项目规划-项目流程图表信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -90,8 +90,8 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
     /**
      * 编辑项目规划-项目流程图表信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryPlanProjectFlowMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -104,8 +104,8 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
     /**
      * 编辑项目规划-项目流程图表信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -122,8 +122,8 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
     /**
      * 获取项目流程图内容进行设计
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryPlanProjectFlowJsonContentMationById(InputObject inputObject, OutputObject outputObject) {
@@ -135,8 +135,8 @@ public class PlanProjectFlowServiceImpl implements PlanProjectFlowService {
     /**
      * 设计项目流程图
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

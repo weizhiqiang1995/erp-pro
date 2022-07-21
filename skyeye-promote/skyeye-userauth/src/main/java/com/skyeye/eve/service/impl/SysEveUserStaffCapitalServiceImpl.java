@@ -79,8 +79,8 @@ public class SysEveUserStaffCapitalServiceImpl implements SysEveUserStaffCapital
     /**
      * 根据月份以及部门查询未结算的额外资金
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryStaffCapitalWaitPayMonthList(InputObject inputObject, OutputObject outputObject) {

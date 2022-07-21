@@ -58,8 +58,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     /**
      * 获取知识库列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryKnowledgeContentList(InputObject inputObject, OutputObject outputObject) {
@@ -74,8 +74,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     /**
      * 添加知识库
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -92,8 +92,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     /**
      * 通过id查找对应的知识库信息用以编辑
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void selectKnowledgeContentById(InputObject inputObject, OutputObject outputObject) {
@@ -106,8 +106,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     /**
      * 编辑知识库信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -120,8 +120,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     /**
      * 删除知识库
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -133,8 +133,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     /**
      * 知识库详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryKnowledgeContentMationById(InputObject inputObject, OutputObject outputObject) {
@@ -147,8 +147,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     /**
      * 上传文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -211,8 +211,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     /**
      * 上传文件合并块
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -290,8 +290,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     /**
      * 文件分块上传检测是否上传
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) {
@@ -332,8 +332,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     /**
      * 获取待审核的知识库列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryUnCheckedKnowledgeContentList(InputObject inputObject, OutputObject outputObject) {
@@ -347,8 +347,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     /**
      * 获取知识库信息用于回显审核
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryKnowledgeContentByIdToCheck(InputObject inputObject, OutputObject outputObject) {
@@ -361,8 +361,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     /**
      * 审核知识库
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -376,8 +376,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     /**
      * 获取已经审核的知识库列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCheckedKnowledgeContentList(InputObject inputObject, OutputObject outputObject) {
@@ -391,8 +391,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     /**
      * 未审核知识库详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryUncheckedKnowledgeContent(InputObject inputObject, OutputObject outputObject) {
@@ -405,8 +405,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     /**
      * 已审核的知识库详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCheckedKnowledgeContent(InputObject inputObject, OutputObject outputObject) {
@@ -419,8 +419,8 @@ public class KnowledgeContentServiceImpl implements KnowledgeContentService {
     /**
      * 获取企业知识库列表(已审核通过)
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllPassKnowledgeContentList(InputObject inputObject, OutputObject outputObject) {

@@ -62,8 +62,8 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
     /**
      * 查出所有知识库类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryKnowledgeTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -78,8 +78,8 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
     /**
      * 新增知识库类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -102,8 +102,8 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
     /**
      * 删除知识库类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -124,8 +124,8 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
     /**
      * 上线知识库类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -147,8 +147,8 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
     /**
      * 下线知识库类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -170,8 +170,8 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
     /**
      * 通过id查找对应的知识库类型信息用以编辑
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void selectKnowledgeTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -184,8 +184,8 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
     /**
      * 编辑知识库类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -213,8 +213,8 @@ public class KnowledgeTypeServiceImpl implements KnowledgeTypeService {
     /**
      * 获取已经上线的知识库类型，数据为tree格式
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryUpKnowledgeTypeTreeMation(InputObject inputObject, OutputObject outputObject) {

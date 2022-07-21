@@ -31,8 +31,8 @@ public class CompanyMationController {
     /**
      * 获取公司信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyMationController/queryCompanyMationList")
     public void queryCompanyMationList(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class CompanyMationController {
     /**
      * 添加公司信息信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyMationController/insertCompanyMation")
     public void insertCompanyMation(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class CompanyMationController {
     /**
      * 删除公司信息信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyMationController/deleteCompanyMationById")
     public void deleteCompanyMationById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class CompanyMationController {
     /**
      * 编辑公司信息信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyMationController/queryCompanyMationToEditById")
     public void queryCompanyMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class CompanyMationController {
     /**
      * 编辑公司信息信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyMationController/editCompanyMationById")
     public void editCompanyMationById(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class CompanyMationController {
     /**
      * 获取总公司信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyMationController/queryOverAllCompanyMationList")
     public void queryOverAllCompanyMationList(InputObject inputObject, OutputObject outputObject) {
@@ -97,8 +97,8 @@ public class CompanyMationController {
     /**
      * 获取公司信息列表展示为树
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryCompanyMationListTree", value = "获取公司信息列表展示为树", method = "POST", allUse = "2")
     @RequestMapping("/post/CompanyMationController/queryCompanyMationListTree")
@@ -109,8 +109,8 @@ public class CompanyMationController {
     /**
      * 获取公司列表展示为下拉选择框
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyMationController/queryCompanyListToSelect")
     public void queryCompanyListToSelect(InputObject inputObject, OutputObject outputObject) {
@@ -120,8 +120,8 @@ public class CompanyMationController {
     /**
      * 获取企业组织机构图
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyMationController/queryCompanyOrganization")
     public void queryCompanyOrganization(InputObject inputObject, OutputObject outputObject) {
@@ -131,8 +131,8 @@ public class CompanyMationController {
     /**
      * 获取公司信息列表展示为表格供其他需要选择
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyMationController/queryCompanyMationListToChoose")
     public void queryCompanyMationListToChoose(InputObject inputObject, OutputObject outputObject) {
@@ -142,8 +142,8 @@ public class CompanyMationController {
     /**
      * 根据公司ids获取公司信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyMationController/queryCompanyMationListByIds")
     public void queryCompanyMationListByIds(InputObject inputObject, OutputObject outputObject) {

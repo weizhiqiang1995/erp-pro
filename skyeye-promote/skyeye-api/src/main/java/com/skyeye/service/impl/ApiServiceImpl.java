@@ -39,8 +39,8 @@ public class ApiServiceImpl implements ApiService {
     /**
      * 获取接口列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllSysEveReqMapping(InputObject inputObject, OutputObject outputObject) {
@@ -77,8 +77,8 @@ public class ApiServiceImpl implements ApiService {
     /**
      * 获取接口详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryApiDetails(InputObject inputObject, OutputObject outputObject) {
@@ -137,8 +137,8 @@ public class ApiServiceImpl implements ApiService {
     /**
      * 获取限制条件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryLimitRestrictions(InputObject inputObject, OutputObject outputObject) {
@@ -150,8 +150,8 @@ public class ApiServiceImpl implements ApiService {
     /**
      * 获取所有微服务列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryApiMicroservices(InputObject inputObject, OutputObject outputObject) {

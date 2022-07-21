@@ -25,8 +25,8 @@ public class SysStaffEducationController {
     /**
      * 查询所有教育背景列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffEducationController/queryAllSysStaffEducationList")
     public void queryAllSysStaffEducationList(InputObject inputObject, OutputObject outputObject) {
@@ -36,8 +36,8 @@ public class SysStaffEducationController {
     /**
      * 员工教育背景信息录入
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffEducationController/insertSysStaffEducationMation")
     public void insertSysStaffEducationMation(InputObject inputObject, OutputObject outputObject) {
@@ -47,8 +47,8 @@ public class SysStaffEducationController {
     /**
      * 编辑员工教育背景信息时回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffEducationController/querySysStaffEducationMationToEdit")
     public void querySysStaffEducationMationToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -58,8 +58,8 @@ public class SysStaffEducationController {
     /**
      * 编辑员工教育背景信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffEducationController/editSysStaffEducationMationById")
     public void editSysStaffEducationMationById(InputObject inputObject, OutputObject outputObject) {
@@ -69,8 +69,8 @@ public class SysStaffEducationController {
     /**
      * 删除员工教育背景信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffEducationController/deleteSysStaffEducationMationById")
     public void deleteSysStaffEducationMationById(InputObject inputObject, OutputObject outputObject) {
@@ -80,8 +80,8 @@ public class SysStaffEducationController {
     /**
      * 查询指定员工的教育背景列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysstaffeducation006", value = "查询指定员工的教育背景列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = PointStaffQueryDo.class)

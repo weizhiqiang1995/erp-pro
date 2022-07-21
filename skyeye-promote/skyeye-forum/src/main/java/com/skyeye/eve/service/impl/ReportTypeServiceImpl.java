@@ -43,8 +43,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     /**
      * 获取举报类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      * @throws Exception
      */
     @Override
@@ -59,8 +59,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     /**
      * 新增举报类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      * @throws Exception
      */
     @Override
@@ -93,8 +93,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     /**
      * 编辑举报类型时进行信息回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      * @throws Exception
      */
     @Override
@@ -108,8 +108,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     /**
      * 编辑举报类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      * @throws Exception
      */
     @Override
@@ -132,8 +132,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     /**
      * 举报类型展示顺序上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      * @throws Exception
      */
     @Override
@@ -155,8 +155,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     /**
      * 举报类型展示顺序下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      * @throws Exception
      */
     @Override
@@ -178,8 +178,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     /**
      * 删除举报类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      * @throws Exception
      */
     @Override
@@ -197,8 +197,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     /**
      * 举报类型上线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      * @throws Exception
      */
     @Override
@@ -217,8 +217,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     /**
      * 举报类型下线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      * @throws Exception
      */
     @Override
@@ -237,8 +237,8 @@ public class ReportTypeServiceImpl implements ReportTypeService {
     /**
      * 获取举报类型上线列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      * @throws Exception
      */
     @Override

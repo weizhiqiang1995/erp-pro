@@ -23,8 +23,8 @@ public class CrmPageController {
     /**
      * 获取指定年度的客户新增量，联系人新增量
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CrmPageController/queryInsertNumByYear")
     public void queryInsertNumByYear(InputObject inputObject, OutputObject outputObject) {
@@ -34,8 +34,8 @@ public class CrmPageController {
     /**
      * 根据客户分类，客户来源，所属行业，客户分组统计客户数量
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CrmPageController/queryCustomNumByOtherType")
     public void queryCustomNumByOtherType(InputObject inputObject, OutputObject outputObject) {
@@ -45,8 +45,8 @@ public class CrmPageController {
     /**
      * 客户跟单方式分析
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CrmPageController/queryCustomDocumentaryType")
     public void queryCustomDocumentaryType(InputObject inputObject, OutputObject outputObject) {
@@ -56,8 +56,8 @@ public class CrmPageController {
     /**
      * 获取合同在指定年度的月新增量
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CrmPageController/queryNewContractNum")
     public void queryNewContractNum(InputObject inputObject, OutputObject outputObject) {
@@ -67,8 +67,8 @@ public class CrmPageController {
     /**
      * 获取员工跟单在指定年度的月新增量
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CrmPageController/queryNewDocumentaryNum")
     public void queryNewDocumentaryNum(InputObject inputObject, OutputObject outputObject) {

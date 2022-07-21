@@ -25,8 +25,8 @@ public class SysStaffFamilyController {
     /**
      * 查询所有家庭情况列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffFamilyController/queryAllSysStaffFamilyList")
     public void queryAllSysStaffFamilyList(InputObject inputObject, OutputObject outputObject) {
@@ -36,8 +36,8 @@ public class SysStaffFamilyController {
     /**
      * 员工家庭情况信息录入
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffFamilyController/insertSysStaffFamilyMation")
     public void insertSysStaffFamilyMation(InputObject inputObject, OutputObject outputObject) {
@@ -47,8 +47,8 @@ public class SysStaffFamilyController {
     /**
      * 编辑员工家庭情况信息时回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffFamilyController/querySysStaffFamilyMationToEdit")
     public void querySysStaffFamilyMationToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -58,8 +58,8 @@ public class SysStaffFamilyController {
     /**
      * 编辑员工家庭情况信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffFamilyController/editSysStaffFamilyMationById")
     public void editSysStaffFamilyMationById(InputObject inputObject, OutputObject outputObject) {
@@ -69,8 +69,8 @@ public class SysStaffFamilyController {
     /**
      * 删除员工家庭情况信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffFamilyController/deleteSysStaffFamilyMationById")
     public void deleteSysStaffFamilyMationById(InputObject inputObject, OutputObject outputObject) {
@@ -80,8 +80,8 @@ public class SysStaffFamilyController {
     /**
      * 查询指定员工的家庭情况列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysstafffamily006", value = "查询指定员工的家庭情况列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = PointStaffQueryDo.class)

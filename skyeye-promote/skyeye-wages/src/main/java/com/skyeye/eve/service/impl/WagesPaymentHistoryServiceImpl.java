@@ -54,8 +54,8 @@ public class WagesPaymentHistoryServiceImpl implements WagesPaymentHistoryServic
     /**
      * 获取所有已发放薪资发放历史列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllGrantWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) {
@@ -70,8 +70,8 @@ public class WagesPaymentHistoryServiceImpl implements WagesPaymentHistoryServic
     /**
      * 获取我的薪资发放历史列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMyWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class WagesPaymentHistoryServiceImpl implements WagesPaymentHistoryServic
     /**
      * 获取所有待发放薪资列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllNotGrantWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) {

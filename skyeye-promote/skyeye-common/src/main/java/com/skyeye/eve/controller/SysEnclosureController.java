@@ -23,8 +23,8 @@ public class SysEnclosureController {
     /**
      * 获取我的附件分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/querySysEnclosureListByUserId")
     public void querySysEnclosureListByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -34,8 +34,8 @@ public class SysEnclosureController {
     /**
      * 新增我的附件分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/insertSysEnclosureMationByUserId")
     public void insertSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -45,8 +45,8 @@ public class SysEnclosureController {
     /**
      * 获取我的附件一级分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/querySysEnclosureFirstTypeListByUserId")
     public void querySysEnclosureFirstTypeListByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -56,8 +56,8 @@ public class SysEnclosureController {
     /**
      * 获取指定文件夹下的文件夹和文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/queryThisFolderChilsByFolderId")
     public void queryThisFolderChilsByFolderId(InputObject inputObject, OutputObject outputObject) {
@@ -67,8 +67,8 @@ public class SysEnclosureController {
     /**
      * 编辑我的附件分类时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/querySysEnclosureMationByUserIdToEdit")
     public void querySysEnclosureMationByUserIdToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -78,8 +78,8 @@ public class SysEnclosureController {
     /**
      * 编辑我的附件分类/附件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/editSysEnclosureMationByUserId")
     public void editSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -89,8 +89,8 @@ public class SysEnclosureController {
     /**
      * 上传文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/insertUploadFileByUserId")
     public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -100,8 +100,8 @@ public class SysEnclosureController {
     /**
      * 上传文件合并块
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/insertUploadFileChunksByUserId")
     public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -111,8 +111,8 @@ public class SysEnclosureController {
     /**
      * 文件分块上传检测是否上传
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/queryUploadFileChunksByChunkMd5")
     public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) {
@@ -122,8 +122,8 @@ public class SysEnclosureController {
     /**
      * 获取我的附件库
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/querySysEnclosureListToTreeByUserId")
     public void querySysEnclosureListToTreeByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -133,8 +133,8 @@ public class SysEnclosureController {
     /**
      * 人员选择获取所有公司和人
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/queryAllPeopleToTree")
     public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) {
@@ -144,8 +144,8 @@ public class SysEnclosureController {
     /**
      * 人员选择根据当前用户所属公司获取这个公司的人
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/queryCompanyPeopleToTreeByUserBelongCompany")
     public void queryCompanyPeopleToTreeByUserBelongCompany(InputObject inputObject, OutputObject outputObject) {
@@ -155,8 +155,8 @@ public class SysEnclosureController {
     /**
      * 人员选择根据当前用户所属公司获取这个公司部门展示的人
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/queryDepartmentPeopleToTreeByUserBelongDepartment")
     public void queryDepartmentPeopleToTreeByUserBelongDepartment(InputObject inputObject, OutputObject outputObject) {
@@ -166,8 +166,8 @@ public class SysEnclosureController {
     /**
      * 人员选择根据当前用户所属公司获取这个公司岗位展示的人
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/queryJobPeopleToTreeByUserBelongJob")
     public void queryJobPeopleToTreeByUserBelongJob(InputObject inputObject, OutputObject outputObject) {
@@ -177,8 +177,8 @@ public class SysEnclosureController {
     /**
      * 人员选择根据当前用户所属公司获取这个公司同级部门展示的人
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/querySimpleDepPeopleToTreeByUserBelongSimpleDep")
     public void querySimpleDepPeopleToTreeByUserBelongSimpleDep(InputObject inputObject, OutputObject outputObject) {
@@ -188,8 +188,8 @@ public class SysEnclosureController {
     /**
      * 根据聊天组展示用户
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/queryTalkGroupUserListByUserId")
     public void queryTalkGroupUserListByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -199,8 +199,8 @@ public class SysEnclosureController {
     /**
      * 一次性上传附件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEnclosureController/insertUploadFileToDataByUserId")
     public void insertUploadFileToDataByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -210,8 +210,8 @@ public class SysEnclosureController {
     /**
      * 根据ids(逗号隔开)获取多个附件信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryEnclosureInfoByIds", value = "根据ids(逗号隔开)获取多个附件信息", method = "POST", allUse = "0")
     @ApiImplicitParams({

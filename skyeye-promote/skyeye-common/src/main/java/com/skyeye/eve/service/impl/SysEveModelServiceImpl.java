@@ -46,8 +46,8 @@ public class SysEveModelServiceImpl implements SysEveModelService {
     /**
      * 获取系统编辑器模板表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysEveModelList(InputObject inputObject, OutputObject outputObject) {
@@ -62,8 +62,8 @@ public class SysEveModelServiceImpl implements SysEveModelService {
     /**
      * 新增系统编辑器模板
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -83,8 +83,8 @@ public class SysEveModelServiceImpl implements SysEveModelService {
     /**
      * 删除编辑器模板
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -101,8 +101,8 @@ public class SysEveModelServiceImpl implements SysEveModelService {
     /**
      * 通过id查找对应的编辑器模板
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void selectSysEveModelById(InputObject inputObject, OutputObject outputObject) {
@@ -116,8 +116,8 @@ public class SysEveModelServiceImpl implements SysEveModelService {
     /**
      * 通过id编辑对应的编辑器模板
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -136,8 +136,8 @@ public class SysEveModelServiceImpl implements SysEveModelService {
     /**
      * 通过id查找对应的编辑器模板详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void selectSysEveModelMationById(InputObject inputObject, OutputObject outputObject) {

@@ -36,8 +36,8 @@ public class ExExplainController {
     /**
      * 添加使用说明信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ExExplainController/insertExExplainMation")
     public void insertExExplainMation(InputObject inputObject, OutputObject outputObject) {
@@ -47,8 +47,8 @@ public class ExExplainController {
     /**
      * 编辑使用说明信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ExExplainController/queryExExplainMation")
     public void queryExExplainMation(InputObject inputObject, OutputObject outputObject) {
@@ -58,8 +58,8 @@ public class ExExplainController {
     /**
      * 编辑使用说明信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ExExplainController/editExExplainMationById")
     public void editExExplainMationById(InputObject inputObject, OutputObject outputObject) {
@@ -69,8 +69,8 @@ public class ExExplainController {
     /**
      * 获取使用说明信息供展示
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryExExplainMationToShow", value = "获取使用说明信息供展示", method = "GET", allUse = "2")
     @ApiImplicitParams({

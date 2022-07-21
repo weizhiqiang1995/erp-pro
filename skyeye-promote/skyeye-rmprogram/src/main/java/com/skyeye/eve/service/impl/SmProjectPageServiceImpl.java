@@ -31,8 +31,8 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
     /**
      * 根据项目获取项目内部的页面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryProPageMationByProIdList(InputObject inputObject, OutputObject outputObject) {
@@ -47,8 +47,8 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
     /**
      * 添加项目内部的页面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -107,8 +107,8 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
     /**
      * 小程序页面展示顺序上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -128,8 +128,8 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
     /**
      * 小程序页面展示顺序下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -149,8 +149,8 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
     /**
      * 编辑小程序页面信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySmProjectPageMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -163,8 +163,8 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
     /**
      * 编辑小程序页面信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -176,8 +176,8 @@ public class SmProjectPageServiceImpl implements SmProjectPageService {
     /**
      * 删除小程序页面信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

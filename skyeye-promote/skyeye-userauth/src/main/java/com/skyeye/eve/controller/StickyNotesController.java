@@ -20,8 +20,8 @@ public class StickyNotesController {
     /**
      * 新增便签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/StickyNotesController/insertStickyNotesMation")
     public void insertStickyNotesMation(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class StickyNotesController {
     /**
      * 查询便签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/StickyNotesController/selectStickyNotesMation")
     public void selectStickyNotesMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class StickyNotesController {
     /**
      * 编辑便签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/StickyNotesController/editStickyNotesMation")
     public void editStickyNotesMation(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class StickyNotesController {
     /**
      * 删除便签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/StickyNotesController/deleteStickyNotesMation")
     public void deleteStickyNotesMation(InputObject inputObject, OutputObject outputObject) {

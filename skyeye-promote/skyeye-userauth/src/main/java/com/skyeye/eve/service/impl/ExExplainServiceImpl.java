@@ -32,8 +32,8 @@ public class ExExplainServiceImpl implements ExExplainService {
     /**
      * 添加使用说明信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -60,8 +60,8 @@ public class ExExplainServiceImpl implements ExExplainService {
     /**
      * 编辑使用说明信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryExExplainMation(InputObject inputObject, OutputObject outputObject) {
@@ -74,8 +74,8 @@ public class ExExplainServiceImpl implements ExExplainService {
     /**
      * 编辑使用说明信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -94,8 +94,8 @@ public class ExExplainServiceImpl implements ExExplainService {
     /**
      * 获取使用说明信息供展示
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryExExplainMationToShow(InputObject inputObject, OutputObject outputObject) {

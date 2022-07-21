@@ -28,8 +28,8 @@ public class SysStaffArchivesController {
     /**
      * 查询所有档案列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffArchivesController/queryAllSysStaffArchivesList")
     public void queryAllSysStaffArchivesList(InputObject inputObject, OutputObject outputObject) {
@@ -39,8 +39,8 @@ public class SysStaffArchivesController {
     /**
      * 离职员工在档列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffArchivesController/querySysLeaveStaffArchivesList")
     public void querySysLeaveStaffArchivesList(InputObject inputObject, OutputObject outputObject) {
@@ -50,8 +50,8 @@ public class SysStaffArchivesController {
     /**
      * 员工不在档列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffArchivesController/querySysStaffNotInArchivesList")
     public void querySysStaffNotInArchivesList(InputObject inputObject, OutputObject outputObject) {
@@ -61,8 +61,8 @@ public class SysStaffArchivesController {
     /**
      * 员工无在档列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffArchivesController/querySysStaffNoArchivesList")
     public void querySysStaffNoArchivesList(InputObject inputObject, OutputObject outputObject) {
@@ -72,8 +72,8 @@ public class SysStaffArchivesController {
     /**
      * 员工档案信息录入
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffArchivesController/insertSysStaffArchivesMation")
     public void insertSysStaffArchivesMation(InputObject inputObject, OutputObject outputObject) {
@@ -83,8 +83,8 @@ public class SysStaffArchivesController {
     /**
      * 编辑员工档案信息时回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffArchivesController/querySysStaffArchivesMationToEdit")
     public void querySysStaffArchivesMationToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -94,8 +94,8 @@ public class SysStaffArchivesController {
     /**
      * 编辑员工档案信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffArchivesController/editSysStaffArchivesMationById")
     public void editSysStaffArchivesMationById(InputObject inputObject, OutputObject outputObject) {

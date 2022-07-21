@@ -20,8 +20,8 @@ public class SmProjectController {
     /**
      * 获取小程序列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectController/querySmProjectList")
     public void querySmProjectList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class SmProjectController {
     /**
      * 新增小程序
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectController/insertSmProjectMation")
     public void insertSmProjectMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class SmProjectController {
     /**
      * 删除小程序
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectController/deleteSmProjectById")
     public void deleteSmProjectById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class SmProjectController {
     /**
      * 编辑小程序信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectController/querySmProjectMationToEditById")
     public void querySmProjectMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class SmProjectController {
     /**
      * 编辑小程序信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectController/editSmProjectMationById")
     public void editSmProjectMationById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class SmProjectController {
     /**
      * 获取小程序组信息供展示
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectController/queryGroupMationList")
     public void queryGroupMationList(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class SmProjectController {
     /**
      * 根据分组获取小程序组件信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectController/queryGroupMemberMationList")
     public void queryGroupMemberMationList(InputObject inputObject, OutputObject outputObject) {

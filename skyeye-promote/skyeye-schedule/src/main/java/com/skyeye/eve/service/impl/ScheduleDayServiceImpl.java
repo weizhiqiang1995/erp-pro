@@ -69,8 +69,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 添加日程信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -109,8 +109,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 获取当前用户的日程信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryScheduleDayMationByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -138,8 +138,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 根据用户获取今日日程信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryScheduleDayMationTodayByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -156,8 +156,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 修改日程日期信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -200,8 +200,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 获取日程详细信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryScheduleDayMationById(InputObject inputObject, OutputObject outputObject) {
@@ -214,8 +214,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 删除日程信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -230,8 +230,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 获取系统发布的请假日程
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryHolidayScheduleList(InputObject inputObject, OutputObject outputObject) {
@@ -253,8 +253,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 下载节假日导入模板
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void downloadScheduleTemplate(InputObject inputObject, OutputObject outputObject) {
@@ -267,8 +267,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 导入节假日日程
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -344,8 +344,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 删除节假日日程
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -360,8 +360,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 删除本年度节假日日程
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -378,8 +378,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 添加节假日日程提醒
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -413,8 +413,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 取消节假日日程提醒
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -429,8 +429,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 回显节假日信息以编辑
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryScheduleByIdToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -443,8 +443,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 编辑节假日
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void editScheduleById(InputObject inputObject, OutputObject outputObject) {
@@ -455,8 +455,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 新增节假日
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void addSchedule(InputObject inputObject, OutputObject outputObject) {
@@ -483,8 +483,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 获取所有节假日
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryHolidayScheduleListBySys(InputObject inputObject, OutputObject outputObject) {
@@ -496,8 +496,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 获取我的日程
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMyScheduleList(InputObject inputObject, OutputObject outputObject) {
@@ -512,8 +512,8 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     /**
      * 其他模块同步到日程
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void insertScheduleMationByOtherModule(InputObject inputObject, OutputObject outputObject) {

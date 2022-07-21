@@ -120,8 +120,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 根据当前用户获取目录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryFileFolderByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -171,8 +171,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 添加目录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -206,8 +206,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 获取这个目录下的所有文件+目录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryFilesListByFolderId(InputObject inputObject, OutputObject outputObject) {
@@ -255,8 +255,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 删除目录以及目录下的所有文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -308,8 +308,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 编辑目录名称
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -328,8 +328,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 上传文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -409,8 +409,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 上传文件合并块
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -500,8 +500,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 文件分块上传检测是否上传
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -525,8 +525,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 文件获取路径
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryUploadFilePathById(InputObject inputObject, OutputObject outputObject) {
@@ -538,8 +538,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * office文件编辑
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -583,8 +583,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 根据当前用户获取总文件大小
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllFileSizeByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -605,8 +605,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 加入回收站
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -635,8 +635,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 我的回收站
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryFileRecycleBinByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -651,8 +651,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 回收站内容还原
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void deleteFileRecycleBinById(InputObject inputObject, OutputObject outputObject) {
@@ -680,8 +680,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 文件分享
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -713,8 +713,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 文件分享列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryShareFileListByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -729,8 +729,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 删除文件分享外链
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -744,8 +744,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 文件共享输入密码时获取文件信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryShareFileMationById(InputObject inputObject, OutputObject outputObject) {
@@ -769,8 +769,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 文件共享输入密码时校验
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryShareFileMationCheckById(InputObject inputObject, OutputObject outputObject) {
@@ -788,8 +788,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 获取分享文件基础信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryShareFileBaseMationById(InputObject inputObject, OutputObject outputObject) {
@@ -801,8 +801,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 根据父id获取该id下分享的文件和文件夹
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryShareFileListByParentId(InputObject inputObject, OutputObject outputObject) {
@@ -826,8 +826,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 分享文件保存
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -967,8 +967,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 文档在线预览
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryFileToShowById(InputObject inputObject, OutputObject outputObject) {
@@ -1105,8 +1105,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 新建word文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -1118,8 +1118,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 新建excel文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -1131,8 +1131,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 新建ppt文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -1144,8 +1144,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 新建txt文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -1157,8 +1157,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 新建html文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -1170,8 +1170,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 创建副本
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -1323,8 +1323,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 获取文件属性
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryFileMationById(InputObject inputObject, OutputObject outputObject) {
@@ -1341,8 +1341,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 文件打包
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -1438,8 +1438,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 压缩包解压
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -1597,8 +1597,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 文件或者文件夹复制
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -1748,8 +1748,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 文件或者文件夹剪切
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -1844,8 +1844,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * office文件编辑获取修改时间作为最新的key
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryOfficeUpdateTimeToKey(InputObject inputObject, OutputObject outputObject) {
@@ -1857,8 +1857,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 文件统计报表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryFileNumStatistics(InputObject inputObject, OutputObject outputObject) {
@@ -1902,8 +1902,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 文件打包下载
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void insertFileMationToPackageDownload(InputObject inputObject, OutputObject outputObject) {

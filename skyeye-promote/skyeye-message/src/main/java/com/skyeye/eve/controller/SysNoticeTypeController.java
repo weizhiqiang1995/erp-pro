@@ -20,8 +20,8 @@ public class SysNoticeTypeController {
     /**
      * 获取公告类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeTypeController/querySysNoticeTypeList")
     public void querySysNoticeTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -32,8 +32,8 @@ public class SysNoticeTypeController {
     /**
      * 添加公告类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeTypeController/insertSysNoticeTypeMation")
     public void insertSysNoticeTypeMation(InputObject inputObject, OutputObject outputObject) {
@@ -43,8 +43,8 @@ public class SysNoticeTypeController {
     /**
      * 删除公告类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeTypeController/deleteSysNoticeTypeById")
     public void deleteSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -54,8 +54,8 @@ public class SysNoticeTypeController {
     /**
      * 上线公告类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeTypeController/updateUpSysNoticeTypeById")
     public void updateUpSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -65,8 +65,8 @@ public class SysNoticeTypeController {
     /**
      * 下线公告类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeTypeController/updateDownSysNoticeTypeById")
     public void updateDownSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -76,8 +76,8 @@ public class SysNoticeTypeController {
     /**
      * 通过id查找对应的公告类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeTypeController/selectSysNoticeTypeById")
     public void selectSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -87,8 +87,8 @@ public class SysNoticeTypeController {
     /**
      * 编辑公告类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeTypeController/editSysNoticeTypeMationById")
     public void editSysNoticeTypeMationById(InputObject inputObject, OutputObject outputObject) {
@@ -98,8 +98,8 @@ public class SysNoticeTypeController {
     /**
      * 公告类型上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeTypeController/editSysNoticeTypeMationOrderNumUpById")
     public void editSysWinTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) {
@@ -109,8 +109,8 @@ public class SysNoticeTypeController {
     /**
      * 公告类型下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeTypeController/editSysNoticeTypeMationOrderNumDownById")
     public void editSysWinTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) {
@@ -120,8 +120,8 @@ public class SysNoticeTypeController {
     /**
      * 获取已经上线的一级类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeTypeController/queryFirstSysNoticeTypeUpStateList")
     public void queryFirstSysNoticeTypeUpStateList(InputObject inputObject, OutputObject outputObject) {
@@ -131,8 +131,8 @@ public class SysNoticeTypeController {
     /**
      * 获取所有的一级类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeTypeController/queryAllFirstSysNoticeTypeStateList")
     public void queryAllFirstSysNoticeTypeStateList(InputObject inputObject, OutputObject outputObject) {
@@ -142,8 +142,8 @@ public class SysNoticeTypeController {
     /**
      * 获取上线的一级类型对应的上线的二级类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeTypeController/querySecondSysNoticeTypeUpStateList")
     public void querySecondSysNoticeTypeUpStateList(InputObject inputObject, OutputObject outputObject) {

@@ -28,8 +28,8 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
     /**
      * 获取菜单权限点列表根据菜单id
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysEveMenuAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) {
@@ -44,8 +44,8 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
     /**
      * 添加菜单权限点
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -67,8 +67,8 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
     /**
      * 编辑菜单权限点时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysEveMenuAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -80,8 +80,8 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
     /**
      * 编辑菜单权限点
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -98,8 +98,8 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
     /**
      * 删除菜单权限点
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

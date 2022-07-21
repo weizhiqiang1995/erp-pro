@@ -33,8 +33,8 @@ public class SysScheduleCommonController {
     /**
      * 判断指定日期是否是节假日
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "judgeISHoliday", value = "判断指定日期是否是节假日", method = "GET", allUse = "2")
     @ApiImplicitParams({

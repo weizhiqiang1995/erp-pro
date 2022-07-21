@@ -25,8 +25,8 @@ public class WagesPaymentHistoryController {
     /**
      * 获取所有已发放薪资发放历史列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "wagespaymenthistory001", value = "获取所有已发放薪资发放历史列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = WagesPaymentHistoryQueryDo.class)
@@ -38,8 +38,8 @@ public class WagesPaymentHistoryController {
     /**
      * 获取我的薪资发放历史列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesPaymentHistoryController/queryMyWagesPaymentHistoryList")
     public void queryMyWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) {
@@ -49,8 +49,8 @@ public class WagesPaymentHistoryController {
     /**
      * 获取所有待发放薪资列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "wagespaymenthistory003", value = "获取所有待发放薪资列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = WagesPaymentHistoryQueryDo.class)

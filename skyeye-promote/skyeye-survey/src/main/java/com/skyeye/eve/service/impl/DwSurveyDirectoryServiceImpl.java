@@ -52,8 +52,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 获取调查问卷列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDwSurveyDirectoryList(InputObject inputObject, OutputObject outputObject) {
@@ -67,8 +67,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 新增调查问卷
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -88,8 +88,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 获取调查问卷题目信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDwSurveyDirectoryMationById(InputObject inputObject, OutputObject outputObject) {
@@ -170,8 +170,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 获取调查问卷信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDwSurveyMationById(InputObject inputObject, OutputObject outputObject) {
@@ -188,8 +188,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 编辑调查问卷信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -259,8 +259,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 添加填空题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -286,8 +286,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 添加评分题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -322,8 +322,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 添加排序题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -358,8 +358,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 添加分页标记
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -377,8 +377,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 添加单选题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -413,8 +413,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 添加多选题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -449,8 +449,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 添加多选填空题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -485,8 +485,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 添加段落题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -504,8 +504,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 添加矩阵单选题,矩阵多选题,矩阵评分题,矩阵填空题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -561,8 +561,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 删除问题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -592,8 +592,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 删除矩阵单选题,矩阵多选题,矩阵评分题,矩阵填空题列选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -612,8 +612,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 删除矩阵单选题,矩阵多选题,矩阵评分题,矩阵填空题行选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -632,8 +632,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 删除单选题选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -652,8 +652,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 删除多选题选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -672,8 +672,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 删除评分题选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -692,8 +692,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 删除排序选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -712,8 +712,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 删除多项填空题选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -732,8 +732,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 发布问卷
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -765,8 +765,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 获取调查问卷题目信息用来生成html页面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDwSurveyDirectoryMationByIdToHTML(InputObject inputObject, OutputObject outputObject) {
@@ -797,8 +797,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 删除问卷
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -810,8 +810,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 分析报告问卷
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySurveyFxMationById(InputObject inputObject, OutputObject outputObject) {
@@ -1009,8 +1009,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 复制问卷
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -1105,8 +1105,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 判断该ip的用户是否回答过此问卷
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAnswerSurveyMationByIp(InputObject inputObject, OutputObject outputObject) {
@@ -1120,8 +1120,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 用户回答问卷
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -1153,7 +1153,7 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
      *
      * @param map
      * @param request
-     * @param outputObject
+     * @param outputObject 出参以及提示信息的返回值对象
      * @return
      */
     public boolean judgeWhetherExaming(Map<String, Object> map, HttpServletRequest request, OutputObject outputObject) {
@@ -1924,8 +1924,8 @@ public class DwSurveyDirectoryServiceImpl implements DwSurveyDirectoryService {
     /**
      * 手动结束问卷
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

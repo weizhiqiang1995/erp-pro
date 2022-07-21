@@ -20,8 +20,8 @@ public class DwSurveyDirectoryController {
     /**
      * 获取调查问卷列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/queryDwSurveyDirectoryList")
     public void queryDwSurveyDirectoryList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class DwSurveyDirectoryController {
     /**
      * 新增调查问卷
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/insertDwSurveyDirectoryMation")
     public void insertDwSurveyDirectoryMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class DwSurveyDirectoryController {
     /**
      * 获取调查问卷题目信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/queryDwSurveyDirectoryMationById")
     public void queryDwSurveyDirectoryMationById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class DwSurveyDirectoryController {
     /**
      * 获取调查问卷信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/queryDwSurveyMationById")
     public void queryDwSurveyMationById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class DwSurveyDirectoryController {
     /**
      * 编辑调查问卷信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/editDwSurveyMationById")
     public void editDwSurveyMationById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class DwSurveyDirectoryController {
     /**
      * 添加填空题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuFillblankMation")
     public void addQuFillblankMation(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class DwSurveyDirectoryController {
     /**
      * 添加评分题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuScoreMation")
     public void addQuScoreMation(InputObject inputObject, OutputObject outputObject) {
@@ -97,8 +97,8 @@ public class DwSurveyDirectoryController {
     /**
      * 添加排序题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuOrderquMation")
     public void addQuOrderquMation(InputObject inputObject, OutputObject outputObject) {
@@ -108,8 +108,8 @@ public class DwSurveyDirectoryController {
     /**
      * 添加分页标记
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuPagetagMation")
     public void addQuPagetagMation(InputObject inputObject, OutputObject outputObject) {
@@ -119,8 +119,8 @@ public class DwSurveyDirectoryController {
     /**
      * 添加单选题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuRadioMation")
     public void addQuRadioMation(InputObject inputObject, OutputObject outputObject) {
@@ -130,8 +130,8 @@ public class DwSurveyDirectoryController {
     /**
      * 添加多选题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuCheckBoxMation")
     public void addQuCheckBoxMation(InputObject inputObject, OutputObject outputObject) {
@@ -141,8 +141,8 @@ public class DwSurveyDirectoryController {
     /**
      * 添加多选填空题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuMultiFillblankMation")
     public void addQuMultiFillblankMation(InputObject inputObject, OutputObject outputObject) {
@@ -152,8 +152,8 @@ public class DwSurveyDirectoryController {
     /**
      * 添加段落题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuParagraphMation")
     public void addQuParagraphMation(InputObject inputObject, OutputObject outputObject) {
@@ -163,8 +163,8 @@ public class DwSurveyDirectoryController {
     /**
      * 添加矩阵单选题,矩阵多选题,矩阵评分题,矩阵填空题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/addQuChenMation")
     public void addQuChenMation(InputObject inputObject, OutputObject outputObject) {
@@ -174,8 +174,8 @@ public class DwSurveyDirectoryController {
     /**
      * 删除问题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteQuestionMationById")
     public void deleteQuestionMationById(InputObject inputObject, OutputObject outputObject) {
@@ -185,8 +185,8 @@ public class DwSurveyDirectoryController {
     /**
      * 删除矩阵单选题,矩阵多选题,矩阵评分题,矩阵填空题列选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteQuestionChenColumnMationById")
     public void deleteQuestionChenColumnMationById(InputObject inputObject, OutputObject outputObject) {
@@ -196,8 +196,8 @@ public class DwSurveyDirectoryController {
     /**
      * 删除矩阵单选题,矩阵多选题,矩阵评分题,矩阵填空题行选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteQuestionChenRowMationById")
     public void deleteQuestionChenRowMationById(InputObject inputObject, OutputObject outputObject) {
@@ -207,8 +207,8 @@ public class DwSurveyDirectoryController {
     /**
      * 删除单选题选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteQuestionRadioOptionMationById")
     public void deleteQuestionRadioOptionMationById(InputObject inputObject, OutputObject outputObject) {
@@ -218,8 +218,8 @@ public class DwSurveyDirectoryController {
     /**
      * 删除多选题选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteQuestionChedkBoxOptionMationById")
     public void deleteQuestionChedkBoxOptionMationById(InputObject inputObject, OutputObject outputObject) {
@@ -229,8 +229,8 @@ public class DwSurveyDirectoryController {
     /**
      * 删除评分题选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteQuestionScoreOptionMationById")
     public void deleteQuestionScoreOptionMationById(InputObject inputObject, OutputObject outputObject) {
@@ -240,8 +240,8 @@ public class DwSurveyDirectoryController {
     /**
      * 删除排序选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteQuestionOrderOptionMationById")
     public void deleteQuestionOrderOptionMationById(InputObject inputObject, OutputObject outputObject) {
@@ -251,8 +251,8 @@ public class DwSurveyDirectoryController {
     /**
      * 删除多项填空题选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteQuestionMultiFillblankOptionMationById")
     public void deleteQuestionMultiFillblankOptionMationById(InputObject inputObject, OutputObject outputObject) {
@@ -262,8 +262,8 @@ public class DwSurveyDirectoryController {
     /**
      * 问卷发布
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/editSurveyStateToReleaseById")
     public void editSurveyStateToReleaseById(InputObject inputObject, OutputObject outputObject) {
@@ -273,8 +273,8 @@ public class DwSurveyDirectoryController {
     /**
      * 获取调查问卷题目信息用来生成html页面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/queryDwSurveyDirectoryMationByIdToHTML")
     public void queryDwSurveyDirectoryMationByIdToHTML(InputObject inputObject, OutputObject outputObject) {
@@ -284,8 +284,8 @@ public class DwSurveyDirectoryController {
     /**
      * 删除问卷
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/deleteSurveyMationById")
     public void deleteSurveyMationById(InputObject inputObject, OutputObject outputObject) {
@@ -295,8 +295,8 @@ public class DwSurveyDirectoryController {
     /**
      * 分析报告问卷
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/querySurveyFxMationById")
     public void querySurveyFxMationById(InputObject inputObject, OutputObject outputObject) {
@@ -306,8 +306,8 @@ public class DwSurveyDirectoryController {
     /**
      * 复制问卷
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/insertSurveyMationCopyById")
     public void insertSurveyMationCopyById(InputObject inputObject, OutputObject outputObject) {
@@ -317,8 +317,8 @@ public class DwSurveyDirectoryController {
     /**
      * 判断该ip的用户是否回答过此问卷
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/queryAnswerSurveyMationByIp")
     public void queryAnswerSurveyMationByIp(InputObject inputObject, OutputObject outputObject) {
@@ -328,8 +328,8 @@ public class DwSurveyDirectoryController {
     /**
      * 用户回答问卷
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/insertAnswerSurveyMationByIp")
     public void insertAnswerSurveyMationByIp(InputObject inputObject, OutputObject outputObject) {
@@ -339,8 +339,8 @@ public class DwSurveyDirectoryController {
     /**
      * 手动结束问卷
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/DwSurveyDirectoryController/updateSurveyMationEndById")
     public void updateSurveyMationEndById(InputObject inputObject, OutputObject outputObject) {

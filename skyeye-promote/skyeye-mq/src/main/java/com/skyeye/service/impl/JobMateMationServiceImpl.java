@@ -60,8 +60,8 @@ public class JobMateMationServiceImpl implements JobMateMationService {
     /**
      * 根据大类获取任务信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryJobMateMationByBigTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -77,8 +77,8 @@ public class JobMateMationServiceImpl implements JobMateMationService {
     /**
      * 其他模块同步生产消息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void sendMQProducer(InputObject inputObject, OutputObject outputObject) {

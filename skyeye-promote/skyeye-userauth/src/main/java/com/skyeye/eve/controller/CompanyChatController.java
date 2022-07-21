@@ -20,8 +20,8 @@ public class CompanyChatController {
     /**
      * 获取好友列表，群聊信息，个人信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyChatController/getList")
     public void getList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class CompanyChatController {
     /**
      * 编辑签名
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyChatController/editUserSignByUserId")
     public void editUserSignByUserId(InputObject inputObject, OutputObject outputObject) {

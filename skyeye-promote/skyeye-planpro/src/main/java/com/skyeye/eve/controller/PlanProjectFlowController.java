@@ -20,8 +20,8 @@ public class PlanProjectFlowController {
     /**
      * 获取项目规划-项目流程图表列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/PlanProjectFlowController/queryPlanProjectFlowList")
     public void queryPlanProjectFlowList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class PlanProjectFlowController {
     /**
      * 添加项目规划-项目流程图表信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/PlanProjectFlowController/insertPlanProjectFlowMation")
     public void insertPlanProjectFlowMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class PlanProjectFlowController {
     /**
      * 删除项目规划-项目流程图表信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/PlanProjectFlowController/deletePlanProjectFlowMationById")
     public void deletePlanProjectFlowMationById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class PlanProjectFlowController {
     /**
      * 编辑项目规划-项目流程图表信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/PlanProjectFlowController/queryPlanProjectFlowMationToEditById")
     public void queryPlanProjectFlowMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class PlanProjectFlowController {
     /**
      * 编辑项目规划-项目流程图表信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/PlanProjectFlowController/editPlanProjectFlowMationById")
     public void editPlanProjectFlowMationById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class PlanProjectFlowController {
     /**
      * 获取项目流程图内容进行设计
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/PlanProjectFlowController/queryPlanProjectFlowJsonContentMationById")
     public void queryPlanProjectFlowJsonContentMationById(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class PlanProjectFlowController {
     /**
      * 设计项目流程图
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/PlanProjectFlowController/editPlanProjectFlowJsonContentMationById")
     public void editPlanProjectFlowJsonContentMationById(InputObject inputObject, OutputObject outputObject) {

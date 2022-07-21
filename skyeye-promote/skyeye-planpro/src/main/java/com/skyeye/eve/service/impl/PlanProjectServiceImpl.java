@@ -28,8 +28,8 @@ public class PlanProjectServiceImpl implements PlanProjectService {
     /**
      * 获取业务流程规划列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryPlanProjectList(InputObject inputObject, OutputObject outputObject) {
@@ -43,8 +43,8 @@ public class PlanProjectServiceImpl implements PlanProjectService {
     /**
      * 新增业务流程规划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -65,8 +65,8 @@ public class PlanProjectServiceImpl implements PlanProjectService {
     /**
      * 删除业务流程规划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -78,8 +78,8 @@ public class PlanProjectServiceImpl implements PlanProjectService {
     /**
      * 编辑业务流程规划时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryPlanProjectMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -92,8 +92,8 @@ public class PlanProjectServiceImpl implements PlanProjectService {
     /**
      * 编辑业务流程规划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

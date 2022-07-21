@@ -23,8 +23,8 @@ public class RmGroupMemberController {
     /**
      * 获取小程序组件列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupMemberController/queryRmGroupMemberList")
     public void queryRmGroupMemberList(InputObject inputObject, OutputObject outputObject) {
@@ -34,8 +34,8 @@ public class RmGroupMemberController {
     /**
      * 添加小程序组件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupMemberController/insertRmGroupMemberMation")
     public void insertRmGroupMemberMation(InputObject inputObject, OutputObject outputObject) {
@@ -45,8 +45,8 @@ public class RmGroupMemberController {
     /**
      * 小程序组件展示顺序上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupMemberController/editRmGroupMemberSortTopById")
     public void editRmGroupMemberSortTopById(InputObject inputObject, OutputObject outputObject) {
@@ -56,8 +56,8 @@ public class RmGroupMemberController {
     /**
      * 小程序组件展示顺序下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupMemberController/editRmGroupMemberSortLowerById")
     public void editRmGroupMemberSortLowerById(InputObject inputObject, OutputObject outputObject) {
@@ -67,8 +67,8 @@ public class RmGroupMemberController {
     /**
      * 删除小程序组件信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupMemberController/deleteRmGroupMemberById")
     public void deleteRmGroupMemberById(InputObject inputObject, OutputObject outputObject) {
@@ -78,8 +78,8 @@ public class RmGroupMemberController {
     /**
      * 编辑小程序组件信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupMemberController/queryRmGroupMemberMationToEditById")
     public void queryRmGroupMemberMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -89,8 +89,8 @@ public class RmGroupMemberController {
     /**
      * 编辑小程序组件信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupMemberController/editRmGroupMemberMationById")
     public void editRmGroupMemberMationById(InputObject inputObject, OutputObject outputObject) {
@@ -100,8 +100,8 @@ public class RmGroupMemberController {
     /**
      * 编辑小程序组件和标签属性的绑定信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupMemberController/editRmGroupMemberAndPropertyMationById")
     public void editRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject) {
@@ -111,8 +111,8 @@ public class RmGroupMemberController {
     /**
      * 获取小程序组件和标签属性的绑定信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupMemberController/queryRmGroupMemberAndPropertyMationById")
     public void queryRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject) {

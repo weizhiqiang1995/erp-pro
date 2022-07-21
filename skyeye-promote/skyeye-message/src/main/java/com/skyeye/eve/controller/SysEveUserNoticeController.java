@@ -20,8 +20,8 @@ public class SysEveUserNoticeController {
     /**
      * 根据用户id获取用户的消息只查询8条
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserNoticeController/getNoticeListByUserId")
     public void getNoticeListByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class SysEveUserNoticeController {
     /**
      * 根据用户id获取用户的消息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserNoticeController/getAllNoticeListByUserId")
     public void getAllNoticeListByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class SysEveUserNoticeController {
     /**
      * 用户阅读消息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserNoticeController/editNoticeMationById")
     public void editNoticeMationById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class SysEveUserNoticeController {
     /**
      * 用户删除消息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserNoticeController/deleteNoticeMationById")
     public void deleteNoticeMationById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class SysEveUserNoticeController {
     /**
      * 用户批量阅读消息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserNoticeController/editNoticeMationByIds")
     public void editNoticeMationByIds(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class SysEveUserNoticeController {
     /**
      * 用户批量删除消息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserNoticeController/deleteNoticeMationByIds")
     public void deleteNoticeMationByIds(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class SysEveUserNoticeController {
     /**
      * 获取消息详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserNoticeController/queryNoticeMationById")
     public void queryNoticeMationById(InputObject inputObject, OutputObject outputObject) {

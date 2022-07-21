@@ -20,8 +20,8 @@ public class ErpPageController {
     /**
      * 获取本月累计销售，本月累计零售，本月累计采购，本月利润（已审核通过）
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ErpPageController/queryFourTypeMoneyList")
     public void queryFourTypeMoneyList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class ErpPageController {
     /**
      * 获取近半年的采购统计
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ErpPageController/querySixMonthPurchaseMoneyList")
     public void querySixMonthPurchaseMoneyList(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class ErpPageController {
     /**
      * 获取近半年的销售统计
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ErpPageController/querySixMonthSealsMoneyList")
     public void querySixMonthSealsMoneyList(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class ErpPageController {
     /**
      * 获取近十二个月的利润统计
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ErpPageController/queryTwelveMonthProfitMoneyList")
     public void queryTwelveMonthProfitMoneyList(InputObject inputObject, OutputObject outputObject) {

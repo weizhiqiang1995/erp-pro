@@ -41,8 +41,8 @@ public class ForumReportServiceImpl implements ForumReportService {
     /**
      * 新增举报信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -59,8 +59,8 @@ public class ForumReportServiceImpl implements ForumReportService {
     /**
      * 获取论坛举报未审核列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryReportNoCheckList(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class ForumReportServiceImpl implements ForumReportService {
     /**
      * 举报信息审核
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -127,8 +127,8 @@ public class ForumReportServiceImpl implements ForumReportService {
     /**
      * 获取论坛举报已审核列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryReportCheckedList(InputObject inputObject, OutputObject outputObject) {
@@ -143,8 +143,8 @@ public class ForumReportServiceImpl implements ForumReportService {
     /**
      * 举报详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryForumReportMationToDetails(InputObject inputObject, OutputObject outputObject) {

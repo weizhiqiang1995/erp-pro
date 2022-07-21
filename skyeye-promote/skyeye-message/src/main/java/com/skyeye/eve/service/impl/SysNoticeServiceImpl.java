@@ -51,8 +51,8 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     /**
      * 查出所有公告列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysNoticeList(InputObject inputObject, OutputObject outputObject) {
@@ -66,8 +66,8 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     /**
      * 新增公告
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -169,8 +169,8 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     /**
      * 删除公告
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -190,8 +190,8 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     /**
      * 手动上线公告
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -227,8 +227,8 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     /**
      * 下线公告
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -245,8 +245,8 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     /**
      * 通过id查找对应的公告信息用以编辑
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void selectSysNoticeById(InputObject inputObject, OutputObject outputObject) {
@@ -261,8 +261,8 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     /**
      * 编辑公告信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -313,8 +313,8 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     /**
      * 公告上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -335,8 +335,8 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     /**
      * 公告下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -357,8 +357,8 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     /**
      * 定时上线时间
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -389,8 +389,8 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     /**
      * 公告详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysNoticeDetailsById(InputObject inputObject, OutputObject outputObject) {
@@ -403,8 +403,8 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     /**
      * 用户收到的公告
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryUserReceivedSysNotice(InputObject inputObject, OutputObject outputObject) {
@@ -419,8 +419,8 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     /**
      * 用户收到的公告详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryReceivedSysNoticeDetailsById(InputObject inputObject, OutputObject outputObject) {

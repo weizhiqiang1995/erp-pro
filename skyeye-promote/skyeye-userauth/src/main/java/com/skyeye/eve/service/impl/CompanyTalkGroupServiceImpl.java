@@ -45,8 +45,8 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
     /**
      * 添加群组信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -99,8 +99,8 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
     /**
      * 获取邀请信息/入群信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryGroupInvitationMation(InputObject inputObject, OutputObject outputObject) {
@@ -116,8 +116,8 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
     /**
      * 同意入群
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -163,8 +163,8 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
     /**
      * 拒绝入群
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -187,8 +187,8 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
     /**
      * 搜索群组列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryGroupMationList(InputObject inputObject, OutputObject outputObject) {
@@ -204,8 +204,8 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
     /**
      * 申请加入群聊
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -243,8 +243,8 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
     /**
      * 获取群成员
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryGroupMemberByGroupId(InputObject inputObject, OutputObject outputObject) {
@@ -266,8 +266,8 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
     /**
      * 获取聊天记录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryChatLogByType(InputObject inputObject, OutputObject outputObject) {
@@ -294,8 +294,8 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
     /**
      * 退出群聊
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -320,8 +320,8 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
     /**
      * 解散群聊
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

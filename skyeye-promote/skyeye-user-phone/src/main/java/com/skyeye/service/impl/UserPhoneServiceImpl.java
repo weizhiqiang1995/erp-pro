@@ -64,8 +64,8 @@ public class UserPhoneServiceImpl implements UserPhoneService {
     /**
      * 手机端用户登录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryPhoneToLogin(InputObject inputObject, OutputObject outputObject) {
@@ -106,8 +106,8 @@ public class UserPhoneServiceImpl implements UserPhoneService {
     /**
      * 手机端从session中获取菜单权限信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryPhoneUserMenuAuth(InputObject inputObject, OutputObject outputObject) {
@@ -118,8 +118,8 @@ public class UserPhoneServiceImpl implements UserPhoneService {
     /**
      * 手机端注销登录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryPhoneToExit(InputObject inputObject, OutputObject outputObject) {
@@ -132,8 +132,8 @@ public class UserPhoneServiceImpl implements UserPhoneService {
     /**
      * 根据openId获取用户信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryUserMationByOpenId(InputObject inputObject, OutputObject outputObject) {
@@ -187,8 +187,8 @@ public class UserPhoneServiceImpl implements UserPhoneService {
     /**
      * openId绑定用户信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void insertUserMationByOpenId(InputObject inputObject, OutputObject outputObject) {
@@ -257,8 +257,8 @@ public class UserPhoneServiceImpl implements UserPhoneService {
     /**
      * 人员选择获取所有公司和人
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) {
@@ -273,7 +273,7 @@ public class UserPhoneServiceImpl implements UserPhoneService {
      * 获取人员列表时的参数转换
      *
      * @param map
-     * @param inputObject
+     * @param inputObject  入参以及用户信息等获取对象
      * @return
      */
     public Map<String, Object> compareSelUserListByParams(Map<String, Object> map, InputObject inputObject) {

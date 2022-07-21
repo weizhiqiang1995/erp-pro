@@ -23,8 +23,8 @@ public class MyNoteController {
     /**
      * 根据当前用户获取笔记文件夹
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MyNoteController/queryFileMyNoteByUserId")
     public void queryFileMyNoteByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -34,8 +34,8 @@ public class MyNoteController {
     /**
      * 添加文件夹
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MyNoteController/insertFileMyNoteByUserId")
     public void insertFileMyNoteByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -45,8 +45,8 @@ public class MyNoteController {
     /**
      * 删除文件夹以及文件夹下的所有文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MyNoteController/deleteFileFolderById")
     public void deleteFileFolderById(InputObject inputObject, OutputObject outputObject) {
@@ -56,8 +56,8 @@ public class MyNoteController {
     /**
      * 编辑文件夹名称
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MyNoteController/editFileFolderById")
     public void editFileFolderById(InputObject inputObject, OutputObject outputObject) {
@@ -67,8 +67,8 @@ public class MyNoteController {
     /**
      * 根据当前用户获取最新的笔记列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MyNoteController/queryMyNoteListNewByUserId")
     public void queryMyNoteListNewByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -78,8 +78,8 @@ public class MyNoteController {
     /**
      * 添加笔记
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MyNoteController/insertMyNoteContentByUserId")
     public void insertMyNoteContentByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -89,8 +89,8 @@ public class MyNoteController {
     /**
      * 根据文件夹id获取文件夹下的文件夹和笔记列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MyNoteController/queryFileAndContentListByFolderId")
     public void queryFileAndContentListByFolderId(InputObject inputObject, OutputObject outputObject) {
@@ -100,8 +100,8 @@ public class MyNoteController {
     /**
      * 编辑笔记时回显信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MyNoteController/queryMyNoteContentMationById")
     public void queryMyNoteContentMationById(InputObject inputObject, OutputObject outputObject) {
@@ -111,8 +111,8 @@ public class MyNoteController {
     /**
      * 编辑笔记信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MyNoteController/editMyNoteContentById")
     public void editMyNoteContentById(InputObject inputObject, OutputObject outputObject) {
@@ -122,8 +122,8 @@ public class MyNoteController {
     /**
      * 保存文件夹拖拽后的信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MyNoteController/editFileToDragById")
     public void editFileToDragById(InputObject inputObject, OutputObject outputObject) {
@@ -133,8 +133,8 @@ public class MyNoteController {
     /**
      * 保存笔记移动后的信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MyNoteController/editNoteToMoveById")
     public void editNoteToMoveById(InputObject inputObject, OutputObject outputObject) {
@@ -144,8 +144,8 @@ public class MyNoteController {
     /**
      * 获取文件夹或笔记移动时的选择树
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MyNoteController/queryTreeToMoveByUserId")
     public void queryTreeToMoveByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -155,8 +155,8 @@ public class MyNoteController {
     /**
      * 根据id获取分享笔记的内容
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MyNoteController/queryShareNoteById")
     public void queryShareNoteById(InputObject inputObject, OutputObject outputObject) {
@@ -166,8 +166,8 @@ public class MyNoteController {
     /**
      * 根据id(文件夹或者笔记id)将笔记输出为压缩包
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MyNoteController/outputNoteIsZipJob")
     public void outputNoteIsZipJob(InputObject inputObject, OutputObject outputObject) {

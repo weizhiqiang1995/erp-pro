@@ -33,8 +33,8 @@ public class CodeModelGroupController {
     /**
      * 获取模板分组列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "codemodel001", value = "获取模板分组列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = CodeModelGroupQueryDo.class)
@@ -46,8 +46,8 @@ public class CodeModelGroupController {
     /**
      * 新增模板分组列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CodeModelGroupController/insertCodeModelGroupMation")
     public void insertCodeModelGroupMation(InputObject inputObject, OutputObject outputObject) {
@@ -57,8 +57,8 @@ public class CodeModelGroupController {
     /**
      * 删除模板分组信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CodeModelGroupController/deleteCodeModelGroupById")
     public void deleteCodeModelGroupById(InputObject inputObject, OutputObject outputObject) {
@@ -68,8 +68,8 @@ public class CodeModelGroupController {
     /**
      * 编辑模板分组信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CodeModelGroupController/queryCodeModelGroupMationToEditById")
     public void queryCodeModelGroupMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -79,8 +79,8 @@ public class CodeModelGroupController {
     /**
      * 编辑模板分组信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CodeModelGroupController/editCodeModelGroupMationById")
     public void editCodeModelGroupMationById(InputObject inputObject, OutputObject outputObject) {
@@ -90,8 +90,8 @@ public class CodeModelGroupController {
     /**
      * 根据表名获取表的相关信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CodeModelGroupController/queryTableParameterByTableName")
     public void queryTableParameterByTableName(InputObject inputObject, OutputObject outputObject) {
@@ -101,8 +101,8 @@ public class CodeModelGroupController {
     /**
      * 根据表名获取表的相关转换信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CodeModelGroupController/queryTableMationByTableName")
     public void queryTableMationByTableName(InputObject inputObject, OutputObject outputObject) {
@@ -112,8 +112,8 @@ public class CodeModelGroupController {
     /**
      * 根据分组id获取模板列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CodeModelGroupController/queryCodeModelListByGroupId")
     public void queryCodeModelListByGroupId(InputObject inputObject, OutputObject outputObject) {

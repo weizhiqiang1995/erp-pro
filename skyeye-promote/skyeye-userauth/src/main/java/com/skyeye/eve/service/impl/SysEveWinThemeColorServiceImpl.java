@@ -33,8 +33,8 @@ public class SysEveWinThemeColorServiceImpl implements SysEveWinThemeColorServic
     /**
      * 获取win系统主题颜色列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysEveWinThemeColorList(InputObject inputObject, OutputObject outputObject) {
@@ -48,8 +48,8 @@ public class SysEveWinThemeColorServiceImpl implements SysEveWinThemeColorServic
     /**
      * 添加win系统主题颜色信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -71,8 +71,8 @@ public class SysEveWinThemeColorServiceImpl implements SysEveWinThemeColorServic
     /**
      * 删除win系统主题颜色信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -85,8 +85,8 @@ public class SysEveWinThemeColorServiceImpl implements SysEveWinThemeColorServic
     /**
      * 编辑win系统主题颜色信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysEveWinThemeColorMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -99,8 +99,8 @@ public class SysEveWinThemeColorServiceImpl implements SysEveWinThemeColorServic
     /**
      * 编辑win系统主题颜色信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

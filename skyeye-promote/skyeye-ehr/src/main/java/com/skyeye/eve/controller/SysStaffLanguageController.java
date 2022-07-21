@@ -26,8 +26,8 @@ public class SysStaffLanguageController {
     /**
      * 查询所有语言能力列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysstafflanguage001", value = "查询所有语言能力列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysStaffLanguageQueryDo.class)
@@ -39,8 +39,8 @@ public class SysStaffLanguageController {
     /**
      * 员工语言能力信息录入
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffLanguageController/insertSysStaffLanguageMation")
     public void insertSysStaffLanguageMation(InputObject inputObject, OutputObject outputObject) {
@@ -50,8 +50,8 @@ public class SysStaffLanguageController {
     /**
      * 编辑员工语言能力信息时回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffLanguageController/querySysStaffLanguageMationToEdit")
     public void querySysStaffLanguageMationToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -61,8 +61,8 @@ public class SysStaffLanguageController {
     /**
      * 编辑员工语言能力信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffLanguageController/editSysStaffLanguageMationById")
     public void editSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) {
@@ -72,8 +72,8 @@ public class SysStaffLanguageController {
     /**
      * 删除员工语言能力信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffLanguageController/deleteSysStaffLanguageMationById")
     public void deleteSysStaffLanguageMationById(InputObject inputObject, OutputObject outputObject) {
@@ -83,8 +83,8 @@ public class SysStaffLanguageController {
     /**
      * 查询指定员工的语言能力列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysstafflanguage006", value = "查询指定员工的语言能力列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = PointStaffQueryDo.class)

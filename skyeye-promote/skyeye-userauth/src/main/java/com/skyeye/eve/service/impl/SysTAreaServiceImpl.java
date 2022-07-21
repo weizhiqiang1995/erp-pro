@@ -24,8 +24,8 @@ public class SysTAreaServiceImpl implements SysTAreaService {
     /**
      * 获取行政区划信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysTAreaList(InputObject inputObject, OutputObject outputObject) {
@@ -40,8 +40,8 @@ public class SysTAreaServiceImpl implements SysTAreaService {
     /**
      * 获取一级省行政区划信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysTAreaProvinceList(InputObject inputObject, OutputObject outputObject) {
@@ -56,8 +56,8 @@ public class SysTAreaServiceImpl implements SysTAreaService {
     /**
      * 获取二级市行政区划信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysTAreaCityList(InputObject inputObject, OutputObject outputObject) {
@@ -72,8 +72,8 @@ public class SysTAreaServiceImpl implements SysTAreaService {
     /**
      * 获取三级县行政区划信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysTAreaChildAreaList(InputObject inputObject, OutputObject outputObject) {
@@ -88,8 +88,8 @@ public class SysTAreaServiceImpl implements SysTAreaService {
     /**
      * 获取四级镇行政区划信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysTAreaTownShipList(InputObject inputObject, OutputObject outputObject) {

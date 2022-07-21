@@ -53,8 +53,8 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
     /**
      * 查出所有桌面列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysDesktopList(InputObject inputObject, OutputObject outputObject) {
@@ -68,8 +68,8 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
     /**
      * 新增桌面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -94,8 +94,8 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
     /**
      * 删除桌面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -120,8 +120,8 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
     /**
      * 上线桌面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -141,8 +141,8 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
     /**
      * 下线桌面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -162,8 +162,8 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
     /**
      * 通过id查找对应的桌面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void selectSysDesktopById(InputObject inputObject, OutputObject outputObject) {
@@ -176,8 +176,8 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
     /**
      * 通过id编辑对应的桌面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -203,8 +203,8 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
     /**
      * 桌面上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -225,8 +225,8 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
     /**
      * 桌面下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -247,8 +247,8 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
     /**
      * 获取全部的桌面用于系统菜单
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllSysDesktopList(InputObject inputObject, OutputObject outputObject) {
@@ -266,8 +266,8 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
     /**
      * 一键移除所有菜单
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

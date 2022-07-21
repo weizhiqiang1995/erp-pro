@@ -48,8 +48,8 @@ public class CompanyMationServiceImpl implements CompanyMationService {
     /**
      * 获取公司信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyMationList(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class CompanyMationServiceImpl implements CompanyMationService {
     /**
      * 添加公司信息信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -111,8 +111,8 @@ public class CompanyMationServiceImpl implements CompanyMationService {
     /**
      * 删除公司信息信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -143,8 +143,8 @@ public class CompanyMationServiceImpl implements CompanyMationService {
     /**
      * 编辑公司信息信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -160,8 +160,8 @@ public class CompanyMationServiceImpl implements CompanyMationService {
     /**
      * 编辑公司信息信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -181,8 +181,8 @@ public class CompanyMationServiceImpl implements CompanyMationService {
     /**
      * 获取总公司信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryOverAllCompanyMationList(InputObject inputObject, OutputObject outputObject) {
@@ -197,8 +197,8 @@ public class CompanyMationServiceImpl implements CompanyMationService {
     /**
      * 获取公司信息列表展示为树
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyMationListTree(InputObject inputObject, OutputObject outputObject) {
@@ -225,8 +225,8 @@ public class CompanyMationServiceImpl implements CompanyMationService {
     /**
      * 获取公司列表展示为下拉选择框
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyListToSelect(InputObject inputObject, OutputObject outputObject) {
@@ -241,8 +241,8 @@ public class CompanyMationServiceImpl implements CompanyMationService {
     /**
      * 获取企业组织机构图
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyOrganization(InputObject inputObject, OutputObject outputObject) {
@@ -290,8 +290,8 @@ public class CompanyMationServiceImpl implements CompanyMationService {
     /**
      * 获取公司信息列表展示为表格供其他需要选择
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyMationListToChoose(InputObject inputObject, OutputObject outputObject) {
@@ -305,8 +305,8 @@ public class CompanyMationServiceImpl implements CompanyMationService {
     /**
      * 根据公司ids获取公司信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyMationListByIds(InputObject inputObject, OutputObject outputObject) {

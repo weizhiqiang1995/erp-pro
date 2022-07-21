@@ -20,8 +20,8 @@ public class ForumContentController {
     /**
      * 获取我的帖子列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/queryMyForumContentList")
     public void queryMyForumContentList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class ForumContentController {
     /**
      * 新增我的帖子
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/insertForumContentMation")
     public void insertForumContentMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class ForumContentController {
     /**
      * 删除帖子
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/deleteForumContentById")
     public void deleteForumContentById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class ForumContentController {
     /**
      * 查询帖子信息用以编辑
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/queryForumContentMationById")
     public void queryForumContentMationById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class ForumContentController {
     /**
      * 编辑帖子信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/editForumContentMationById")
     public void editForumContentMationById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class ForumContentController {
     /**
      * 帖子详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/queryForumContentMationToDetails")
     public void queryForumContentMationToDetails(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class ForumContentController {
     /**
      * 获取最新帖子
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/queryNewForumContentList")
     public void queryNewForumContentList(InputObject inputObject, OutputObject outputObject) {
@@ -97,8 +97,8 @@ public class ForumContentController {
     /**
      * 新增帖子评论
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/insertForumCommentMation")
     public void insertForumCommentMation(InputObject inputObject, OutputObject outputObject) {
@@ -108,8 +108,8 @@ public class ForumContentController {
     /**
      * 获取帖子评论信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/queryForumCommentList")
     public void queryForumCommentList(InputObject inputObject, OutputObject outputObject) {
@@ -119,8 +119,8 @@ public class ForumContentController {
     /**
      * 新增帖子评论回复
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/insertForumReplyMation")
     public void insertForumReplyMation(InputObject inputObject, OutputObject outputObject) {
@@ -130,8 +130,8 @@ public class ForumContentController {
     /**
      * 获取帖子评论回复信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/queryForumReplyList")
     public void queryForumReplyList(InputObject inputObject, OutputObject outputObject) {
@@ -141,8 +141,8 @@ public class ForumContentController {
     /**
      * 获取我的浏览信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/queryForumMyBrowerList")
     public void queryForumMyBrowerList(InputObject inputObject, OutputObject outputObject) {
@@ -152,8 +152,8 @@ public class ForumContentController {
     /**
      * 获取最新评论
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/queryNewCommentList")
     public void queryNewCommentList(InputObject inputObject, OutputObject outputObject) {
@@ -163,8 +163,8 @@ public class ForumContentController {
     /**
      * 根据标签id获取帖子列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/queryForumListByTagId")
     public void queryForumListByTagId(InputObject inputObject, OutputObject outputObject) {
@@ -174,8 +174,8 @@ public class ForumContentController {
     /**
      * 获取热门标签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/queryHotTagList")
     public void queryHotTagList(InputObject inputObject, OutputObject outputObject) {
@@ -185,8 +185,8 @@ public class ForumContentController {
     /**
      * 获取活跃用户
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/queryActiveUsersList")
     public void queryActiveUsersList(InputObject inputObject, OutputObject outputObject) {
@@ -196,8 +196,8 @@ public class ForumContentController {
     /**
      * 获取热门贴
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/queryHotForumList")
     public void queryHotForumList(InputObject inputObject, OutputObject outputObject) {
@@ -207,8 +207,8 @@ public class ForumContentController {
     /**
      * 获取用户搜索的帖子
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/querySearchForumList")
     public void querySearchForumList(InputObject inputObject, OutputObject outputObject) {
@@ -218,8 +218,8 @@ public class ForumContentController {
     /**
      * 获取solr上次同步数据的时间
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/querySolrSynchronousTime")
     public void querySolrSynchronousTime(InputObject inputObject, OutputObject outputObject) {
@@ -229,8 +229,8 @@ public class ForumContentController {
     /**
      * solr同步数据
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/updateSolrSynchronousData")
     public void updateSolrSynchronousData(InputObject inputObject, OutputObject outputObject) {
@@ -240,8 +240,8 @@ public class ForumContentController {
     /**
      * 获取我的帖子列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/queryMyCommentList")
     public void queryMyCommentList(InputObject inputObject, OutputObject outputObject) {
@@ -251,8 +251,8 @@ public class ForumContentController {
     /**
      * 根据评论id删除评论
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/deleteCommentById")
     public void deleteCommentById(InputObject inputObject, OutputObject outputObject) {
@@ -262,8 +262,8 @@ public class ForumContentController {
     /**
      * 获取我的通知列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/queryMyNoticeList")
     public void queryMyNoticeList(InputObject inputObject, OutputObject outputObject) {
@@ -273,8 +273,8 @@ public class ForumContentController {
     /**
      * 根据通知id删除通知
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumContentController/deleteNoticeById")
     public void deleteNoticeById(InputObject inputObject, OutputObject outputObject) {

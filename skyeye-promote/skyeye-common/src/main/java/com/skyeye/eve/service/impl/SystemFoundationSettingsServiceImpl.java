@@ -46,8 +46,8 @@ public class SystemFoundationSettingsServiceImpl implements SystemFoundationSett
     /**
      * 获取系统基础设置
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySystemFoundationSettingsList(InputObject inputObject, OutputObject outputObject) {
@@ -59,8 +59,8 @@ public class SystemFoundationSettingsServiceImpl implements SystemFoundationSett
     /**
      * 编辑系统基础设置
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

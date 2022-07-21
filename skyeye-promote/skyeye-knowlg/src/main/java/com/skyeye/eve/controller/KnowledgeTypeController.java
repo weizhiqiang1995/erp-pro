@@ -35,8 +35,8 @@ public class KnowledgeTypeController {
     /**
      * 获取知识库类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgetype001", value = "获取知识库类型列表", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -52,8 +52,8 @@ public class KnowledgeTypeController {
     /**
      * 添加知识库类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgetype002", value = "新增知识库类型", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = KnowledgeTypeMation.class)
@@ -65,8 +65,8 @@ public class KnowledgeTypeController {
     /**
      * 删除知识库类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgetype003", value = "删除知识库类型", method = "DELETE", allUse = "1")
     @ApiImplicitParams({
@@ -79,8 +79,8 @@ public class KnowledgeTypeController {
     /**
      * 上线知识库类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgetype004", value = "上线知识库类型", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -93,8 +93,8 @@ public class KnowledgeTypeController {
     /**
      * 下线知识库类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgetype005", value = "下线知识库类型", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -107,8 +107,8 @@ public class KnowledgeTypeController {
     /**
      * 通过id查找对应的知识库类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgetype006", value = "通过id查找对应的知识库类型信息", method = "GET", allUse = "2")
     @ApiImplicitParams({
@@ -121,8 +121,8 @@ public class KnowledgeTypeController {
     /**
      * 编辑知识库类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgetype007", value = "编辑知识库类型", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -136,8 +136,8 @@ public class KnowledgeTypeController {
     /**
      * 获取已经上线的知识库类型，数据为tree格式
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgetype008", value = "获取已经上线的知识库类型，数据为tree格式", method = "GET", allUse = "2")
     @RequestMapping("/post/KnowledgeTypeController/queryUpKnowledgeTypeTreeMation")

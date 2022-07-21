@@ -63,8 +63,8 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
     /**
      * 获取职位定级信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyJobScoreList(InputObject inputObject, OutputObject outputObject) {
@@ -78,8 +78,8 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
     /**
      * 新增职位定级信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -127,8 +127,8 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
     /**
      * 编辑职位定级信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyJobScoreMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -147,8 +147,8 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
     /**
      * 编辑职位定级信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -170,8 +170,8 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
     /**
      * 删除职位定级信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -183,8 +183,8 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
     /**
      * 启用职位定级信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -196,8 +196,8 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
     /**
      * 禁用职位定级信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -209,8 +209,8 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
     /**
      * 获取已经启用的职位定级信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryEnableCompanyJobScoreList(InputObject inputObject, OutputObject outputObject) {
@@ -223,8 +223,8 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
     /**
      * 获取职位定级信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyJobScoreDetailMationById(InputObject inputObject, OutputObject outputObject) {

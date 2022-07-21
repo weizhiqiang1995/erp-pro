@@ -35,8 +35,8 @@ public class SysEveUserStaffController {
     /**
      * 获取员工列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "staff001", value = "查看所有员工列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysUserStaffQueryDo.class)
@@ -48,8 +48,8 @@ public class SysEveUserStaffController {
     /**
      * 新增员工信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "staff002", value = "新增员工信息", method = "POST", allUse = "2")
     @ApiImplicitParams(classBean = SysUserStaffMation.class)
@@ -61,8 +61,8 @@ public class SysEveUserStaffController {
     /**
      * 通过id查询一条员工信息回显编辑
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "staff003", value = "通过id查询一条员工信息回显编辑", method = "GET", allUse = "2")
     @ApiImplicitParams({
@@ -75,8 +75,8 @@ public class SysEveUserStaffController {
     /**
      * 编辑员工信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "staff004", value = "编辑员工信息", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysUserStaffMation.class, value = {
@@ -89,8 +89,8 @@ public class SysEveUserStaffController {
     /**
      * 通过id查询一条员工信息展示详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "staff005", value = "通过id查询一条员工信息展示详情", method = "GET", allUse = "2")
     @ApiImplicitParams({
@@ -103,8 +103,8 @@ public class SysEveUserStaffController {
     /**
      * 员工离职
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "staff006", value = "员工离职", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -119,8 +119,8 @@ public class SysEveUserStaffController {
     /**
      * 普通员工转教职工
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserStaffController/editTurnTeacher")
     public void editTurnTeacher(InputObject inputObject, OutputObject outputObject) {
@@ -130,8 +130,8 @@ public class SysEveUserStaffController {
     /**
      * 查看所有员工列表展示为表格供其他选择
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "staff008", value = "查看所有员工列表展示为表格供其他选择", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -151,8 +151,8 @@ public class SysEveUserStaffController {
     /**
      * 根据员工ids获取员工信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserStaffController/querySysUserStaffListByIds")
     public void querySysUserStaffListByIds(InputObject inputObject, OutputObject outputObject) {
@@ -162,8 +162,8 @@ public class SysEveUserStaffController {
     /**
      * 获取当前登录员工的信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "staff010", value = "获取当前登录员工的信息", method = "GET", allUse = "2")
     @RequestMapping("/post/SysEveUserStaffController/querySysUserStaffLogin")
@@ -174,8 +174,8 @@ public class SysEveUserStaffController {
     /**
      * 根据用户ids获取用户信息集合
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryUserNameList", value = "根据用户ids获取用户信息集合", method = "POST", allUse = "0")
     @ApiImplicitParams({
@@ -188,8 +188,8 @@ public class SysEveUserStaffController {
     /**
      * 通过用户id查询一条员工信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "querySysUserStaffDetailsByUserId", value = "通过用户id查询一条员工信息", method = "GET", allUse = "0")
     @ApiImplicitParams({
@@ -202,8 +202,8 @@ public class SysEveUserStaffController {
     /**
      * 修改员工剩余年假信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "editSysUserStaffAnnualLeaveById", value = "修改员工剩余年假信息", method = "POST", allUse = "0")
     @ApiImplicitParams({
@@ -218,8 +218,8 @@ public class SysEveUserStaffController {
     /**
      * 修改员工的补休池剩余补休信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "updateSysUserStaffHolidayNumberById", value = "修改员工的补休池剩余补休信息", method = "POST", allUse = "0")
     @ApiImplicitParams({
@@ -234,8 +234,8 @@ public class SysEveUserStaffController {
     /**
      * 修改员工的补休池已休补休信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "updateSysUserStaffRetiredHolidayNumberById", value = "修改员工的补休池已休补休信息", method = "POST", allUse = "0")
     @ApiImplicitParams({
@@ -250,8 +250,8 @@ public class SysEveUserStaffController {
     /**
      * 根据员工id获取该员工的考勤时间段
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryStaffCheckWorkTimeRelationNameByStaffId", value = "根据员工id获取该员工的考勤时间段", method = "GET", allUse = "2")
     @ApiImplicitParams({

@@ -54,8 +54,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 根据用户获取该用户绑定的邮箱信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryEmailListByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -70,8 +70,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 用户新增邮箱
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -108,8 +108,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 从服务器上获取收件箱里的邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -135,8 +135,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 根据绑定邮箱id获取收件箱内容
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryInboxEmailListByEmailId(InputObject inputObject, OutputObject outputObject) {
@@ -152,8 +152,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 获取邮件内容
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryEmailMationByEmailId(InputObject inputObject, OutputObject outputObject) {
@@ -173,8 +173,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 从服务器上获取已发送邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void insertSendedEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -199,8 +199,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 根据绑定邮箱id获取已发送邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySendedEmailListByEmailId(InputObject inputObject, OutputObject outputObject) {
@@ -216,8 +216,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 从服务器上获取已删除邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -243,8 +243,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 根据绑定邮箱id获取已删除邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDeleteEmailListByEmailId(InputObject inputObject, OutputObject outputObject) {
@@ -260,8 +260,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 从服务器上获取草稿箱邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -287,8 +287,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 根据绑定邮箱id获取草稿箱邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDraftsEmailListByEmailId(InputObject inputObject, OutputObject outputObject) {
@@ -304,8 +304,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 发送邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -408,8 +408,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 保存邮件为草稿
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -512,8 +512,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 编辑草稿箱内容展示时回显使用
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDraftsEmailMationToEditByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -537,8 +537,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 草稿邮件修改
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -656,8 +656,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 草稿箱邮件发送
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -776,8 +776,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 转发时进行信息回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryForwardEmailMationToEditByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -801,8 +801,8 @@ public class UserEmailServiceImpl implements UserEmailService {
     /**
      * 转发邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

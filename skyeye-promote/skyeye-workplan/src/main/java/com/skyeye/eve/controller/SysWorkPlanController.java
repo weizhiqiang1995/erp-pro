@@ -33,8 +33,8 @@ public class SysWorkPlanController {
     /**
      * 获取计划列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysworkplan001", value = "获取计划列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysWorkPlanQueryDo.class)
@@ -46,8 +46,8 @@ public class SysWorkPlanController {
     /**
      * 新增个人计划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysWorkPlanController/insertSysWorkPlanISPeople")
     public void insertSysWorkPlanISPeople(InputObject inputObject, OutputObject outputObject) {
@@ -57,8 +57,8 @@ public class SysWorkPlanController {
     /**
      * 新增部门计划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysWorkPlanController/insertSysWorkPlanISDepartMent")
     public void insertSysWorkPlanISDepartMent(InputObject inputObject, OutputObject outputObject) {
@@ -68,8 +68,8 @@ public class SysWorkPlanController {
     /**
      * 新增公司计划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysWorkPlanController/insertSysWorkPlanISCompany")
     public void insertSysWorkPlanISCompany(InputObject inputObject, OutputObject outputObject) {
@@ -79,8 +79,8 @@ public class SysWorkPlanController {
     /**
      * 取消定时发送
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysWorkPlanController/deleteSysWorkPlanTimingById")
     public void deleteSysWorkPlanTimingById(InputObject inputObject, OutputObject outputObject) {
@@ -90,8 +90,8 @@ public class SysWorkPlanController {
     /**
      * 删除计划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysWorkPlanController/deleteSysWorkPlanById")
     public void deleteSysWorkPlanById(InputObject inputObject, OutputObject outputObject) {
@@ -101,8 +101,8 @@ public class SysWorkPlanController {
     /**
      * 编辑计划时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysWorkPlanController/querySysWorkPlanToEditById")
     public void querySysWorkPlanToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -112,8 +112,8 @@ public class SysWorkPlanController {
     /**
      * 编辑个人计划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysWorkPlanController/editSysWorkPlanISPeople")
     public void editSysWorkPlanISPeople(InputObject inputObject, OutputObject outputObject) {
@@ -123,8 +123,8 @@ public class SysWorkPlanController {
     /**
      * 编辑部门计划或者公司计划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysWorkPlanController/editSysWorkPlanISDepartMentOrCompany")
     public void editSysWorkPlanISDepartMentOrCompany(InputObject inputObject, OutputObject outputObject) {
@@ -134,8 +134,8 @@ public class SysWorkPlanController {
     /**
      * 定时发送
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysWorkPlanController/editSysWorkPlanTimingSend")
     public void editSysWorkPlanTimingSend(InputObject inputObject, OutputObject outputObject) {
@@ -145,8 +145,8 @@ public class SysWorkPlanController {
     /**
      * 计划详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysWorkPlanController/querySysWorkPlanDetailsById")
     public void querySysWorkPlanDetailsById(InputObject inputObject, OutputObject outputObject) {
@@ -156,8 +156,8 @@ public class SysWorkPlanController {
     /**
      * 获取我的任务计划列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysworkplan013", value = "获取我的任务计划列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysWorkPlanQueryDo.class)
@@ -169,8 +169,8 @@ public class SysWorkPlanController {
     /**
      * 计划状态变更
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysWorkPlanController/subEditWorkPlanStateById")
     public void subEditWorkPlanStateById(InputObject inputObject, OutputObject outputObject) {
@@ -180,8 +180,8 @@ public class SysWorkPlanController {
     /**
      * 获取我创建的任务计划列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysworkplan015", value = "获取我创建的任务计划列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysWorkPlanQueryDo.class)
@@ -193,8 +193,8 @@ public class SysWorkPlanController {
     /**
      * 获取所有任务计划列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysworkplan016", value = "获取所有任务计划列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysWorkPlanQueryDo.class)
@@ -206,8 +206,8 @@ public class SysWorkPlanController {
     /**
      * 获取我的下属的任务计划列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysworkplan017", value = "获取我的下属的任务计划列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysWorkPlanQueryDo.class)

@@ -45,8 +45,8 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
     /**
      * 获取角色列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysRoleList(InputObject inputObject, OutputObject outputObject) {
@@ -60,8 +60,8 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
     /**
      * 获取角色需要绑定的菜单列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysRoleBandMenuList(InputObject inputObject, OutputObject outputObject) {
@@ -88,8 +88,8 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
     /**
      * 新增角色
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -112,8 +112,8 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
     /**
      * 编辑角色时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysRoleMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -128,8 +128,8 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
     /**
      * 编辑角色
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -149,8 +149,8 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
     /**
      * 编辑角色PC端权限
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void editSysRolePCAuth(InputObject inputObject, OutputObject outputObject) {
@@ -189,8 +189,8 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
     /**
      * 删除角色
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -223,8 +223,8 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
     /**
      * 获取角色需要绑定的手机端菜单列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysRoleBandAppMenuList(InputObject inputObject, OutputObject outputObject) {
@@ -240,8 +240,8 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
     /**
      * 手机端菜单授权时的信息回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysRoleToAppMenuEditById(InputObject inputObject, OutputObject outputObject) {
@@ -256,8 +256,8 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
     /**
      * 手机端菜单授权
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

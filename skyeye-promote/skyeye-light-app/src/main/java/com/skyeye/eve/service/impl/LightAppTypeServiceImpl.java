@@ -43,8 +43,8 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
     /**
      * 获取轻应用类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryLightAppTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -58,8 +58,8 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
     /**
      * 新增轻应用类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -91,8 +91,8 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
     /**
      * 编辑轻应用类型时进行信息回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryLightAppTypeMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -105,8 +105,8 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
     /**
      * 编辑轻应用类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -128,8 +128,8 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
     /**
      * 轻应用类型展示顺序上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -150,8 +150,8 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
     /**
      * 轻应用类型展示顺序下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -172,8 +172,8 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
     /**
      * 删除轻应用类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -190,8 +190,8 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
     /**
      * 轻应用类型上线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -211,8 +211,8 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
     /**
      * 轻应用类型下线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -231,8 +231,8 @@ public class LightAppTypeServiceImpl implements LightAppTypeService {
     /**
      * 获取轻应用类型上线列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryLightAppTypeUpList(InputObject inputObject, OutputObject outputObject) {

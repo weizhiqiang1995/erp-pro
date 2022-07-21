@@ -44,8 +44,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 获取我的附件分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysEnclosureListByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -69,8 +69,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 新增我的附件分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -102,8 +102,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 获取我的附件一级分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysEnclosureFirstTypeListByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -118,8 +118,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 获取指定文件夹下的文件夹和文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryThisFolderChilsByFolderId(InputObject inputObject, OutputObject outputObject) {
@@ -143,8 +143,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 编辑我的附件分类时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysEnclosureMationByUserIdToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -158,8 +158,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 编辑我的附件分类/附件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -176,8 +176,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 上传文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -239,8 +239,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 上传文件合并块
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -297,8 +297,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 文件分块上传检测是否上传
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) {
@@ -339,8 +339,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 获取我的附件库
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysEnclosureListToTreeByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -360,8 +360,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 人员选择获取所有公司和人
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) {
@@ -374,8 +374,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 人员选择根据当前用户所属公司获取这个公司的人
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyPeopleToTreeByUserBelongCompany(InputObject inputObject, OutputObject outputObject) {
@@ -392,8 +392,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 人员选择根据当前用户所属公司获取这个公司部门展示的人
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDepartmentPeopleToTreeByUserBelongDepartment(InputObject inputObject, OutputObject outputObject) {
@@ -410,8 +410,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 人员选择根据当前用户所属公司获取这个公司岗位展示的人
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryJobPeopleToTreeByUserBelongJob(InputObject inputObject, OutputObject outputObject) {
@@ -428,8 +428,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 人员选择根据当前用户所属公司获取这个公司同级部门展示的人
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySimpleDepPeopleToTreeByUserBelongSimpleDep(InputObject inputObject, OutputObject outputObject) {
@@ -446,8 +446,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 根据聊天组展示用户
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryTalkGroupUserListByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -463,7 +463,7 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
      * 获取人员列表时的参数转换
      *
      * @param map
-     * @param inputObject
+     * @param inputObject  入参以及用户信息等获取对象
      * @return
      */
     public Map<String, Object> compareSelUserListByParams(Map<String, Object> map, InputObject inputObject) {
@@ -484,8 +484,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 一次性上传附件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void insertUploadFileToDataByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -547,8 +547,8 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
     /**
      * 根据ids(逗号隔开)获取多个附件信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryEnclosureInfo(InputObject inputObject, OutputObject outputObject) {

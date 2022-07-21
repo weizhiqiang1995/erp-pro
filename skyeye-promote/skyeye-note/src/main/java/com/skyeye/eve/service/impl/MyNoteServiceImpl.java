@@ -48,8 +48,8 @@ public class MyNoteServiceImpl implements MyNoteService {
     /**
      * 根据当前用户获取笔记文件夹
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryFileMyNoteByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -82,8 +82,8 @@ public class MyNoteServiceImpl implements MyNoteService {
     /**
      * 添加文件夹
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -108,8 +108,8 @@ public class MyNoteServiceImpl implements MyNoteService {
     /**
      * 删除文件夹以及文件夹下的所有文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -134,8 +134,8 @@ public class MyNoteServiceImpl implements MyNoteService {
     /**
      * 编辑文件夹名称
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -158,8 +158,8 @@ public class MyNoteServiceImpl implements MyNoteService {
     /**
      * 根据当前用户获取最新的笔记列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMyNoteListNewByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -175,8 +175,8 @@ public class MyNoteServiceImpl implements MyNoteService {
     /**
      * 添加笔记
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -232,8 +232,8 @@ public class MyNoteServiceImpl implements MyNoteService {
     /**
      * 根据文件夹id获取文件夹下的文件夹和笔记列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryFileAndContentListByFolderId(InputObject inputObject, OutputObject outputObject) {
@@ -248,8 +248,8 @@ public class MyNoteServiceImpl implements MyNoteService {
     /**
      * 编辑笔记时回显信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMyNoteContentMationById(InputObject inputObject, OutputObject outputObject) {
@@ -261,8 +261,8 @@ public class MyNoteServiceImpl implements MyNoteService {
     /**
      * 编辑笔记信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -281,8 +281,8 @@ public class MyNoteServiceImpl implements MyNoteService {
     /**
      * 保存文件夹拖拽后的信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -379,8 +379,8 @@ public class MyNoteServiceImpl implements MyNoteService {
     /**
      * 保存笔记移动后的信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -401,8 +401,8 @@ public class MyNoteServiceImpl implements MyNoteService {
     /**
      * 获取文件夹或笔记移动时的选择树
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryTreeToMoveByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -428,8 +428,8 @@ public class MyNoteServiceImpl implements MyNoteService {
     /**
      * 根据id获取分享笔记的内容
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryShareNoteById(InputObject inputObject, OutputObject outputObject) {
@@ -445,8 +445,8 @@ public class MyNoteServiceImpl implements MyNoteService {
     /**
      * 根据id(文件夹或者笔记id)将笔记输出为压缩包
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void outputNoteIsZipJob(InputObject inputObject, OutputObject outputObject) {

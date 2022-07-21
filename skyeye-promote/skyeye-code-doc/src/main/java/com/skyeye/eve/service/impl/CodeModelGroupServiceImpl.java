@@ -43,8 +43,8 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
     /**
      * 获取模板分组列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCodeModelGroupList(InputObject inputObject, OutputObject outputObject) {
@@ -58,8 +58,8 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
     /**
      * 新增模板分组列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -81,8 +81,8 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
     /**
      * 删除模板分组信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -103,8 +103,8 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
     /**
      * 编辑模板分组信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCodeModelGroupMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -117,8 +117,8 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
     /**
      * 编辑模板分组信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -138,8 +138,8 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
     /**
      * 根据表名获取表的相关信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryTableParameterByTableName(InputObject inputObject, OutputObject outputObject) {
@@ -177,8 +177,8 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
     /**
      * 根据表名获取表的相关转换信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryTableMationByTableName(InputObject inputObject, OutputObject outputObject) {
@@ -208,8 +208,8 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
     /**
      * 根据分组id获取模板列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCodeModelListByGroupId(InputObject inputObject, OutputObject outputObject) {

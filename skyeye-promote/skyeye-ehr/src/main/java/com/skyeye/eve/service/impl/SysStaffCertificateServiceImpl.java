@@ -45,8 +45,8 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
     /**
      * 查询所有证书列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllSysStaffCertificateList(InputObject inputObject, OutputObject outputObject) {
@@ -61,8 +61,8 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
     /**
      * 员工证书信息录入
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -76,8 +76,8 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
     /**
      * 编辑员工证书信息时回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysStaffCertificateMationToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -101,8 +101,8 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
     /**
      * 编辑员工证书信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -120,8 +120,8 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
     /**
      * 删除员工证书信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -134,8 +134,8 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
     /**
      * 查询指定员工的证书列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryPointStaffSysStaffCertificateList(InputObject inputObject, OutputObject outputObject) {

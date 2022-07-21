@@ -23,8 +23,8 @@ public class SmProjectPageModeController {
     /**
      * 根据项目页面获取该页面拥有的组件列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectPageModeController/queryProPageModeMationByPageIdList")
     public void queryProPageModeMationByPageIdList(InputObject inputObject, OutputObject outputObject) {
@@ -34,8 +34,8 @@ public class SmProjectPageModeController {
     /**
      * 插入项目页面对应的模块内容
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectPageModeController/editProPageModeMationByPageIdList")
     public void editProPageModeMationByPageIdList(InputObject inputObject, OutputObject outputObject) {
@@ -45,8 +45,8 @@ public class SmProjectPageModeController {
     /**
      * 根据组件id获取标签属性
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectPageModeController/queryPropertyListByMemberId")
     public void queryPropertyListByMemberId(InputObject inputObject, OutputObject outputObject) {
@@ -56,8 +56,8 @@ public class SmProjectPageModeController {
     /**
      * 导出当前页面为h5
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SmProjectPageModeController/queryPageToExportH5ByPageId")
     public void queryPageToExportH5ByPageId(InputObject inputObject, OutputObject outputObject) {

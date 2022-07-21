@@ -33,8 +33,8 @@ public class PlanProjectController {
     /**
      * 获取业务流程规划列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "planproject001", value = "获取业务流程规划列表", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -49,8 +49,8 @@ public class PlanProjectController {
     /**
      * 新增业务流程规划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/PlanProjectController/insertPlanProjectMation")
     public void insertPlanProjectMation(InputObject inputObject, OutputObject outputObject) {
@@ -60,8 +60,8 @@ public class PlanProjectController {
     /**
      * 删除业务流程规划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/PlanProjectController/deletePlanProjectMationById")
     public void deletePlanProjectMationById(InputObject inputObject, OutputObject outputObject) {
@@ -71,8 +71,8 @@ public class PlanProjectController {
     /**
      * 编辑业务流程规划时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/PlanProjectController/queryPlanProjectMationToEditById")
     public void queryPlanProjectMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -82,8 +82,8 @@ public class PlanProjectController {
     /**
      * 编辑业务流程规划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/PlanProjectController/editPlanProjectMationById")
     public void editPlanProjectMationById(InputObject inputObject, OutputObject outputObject) {

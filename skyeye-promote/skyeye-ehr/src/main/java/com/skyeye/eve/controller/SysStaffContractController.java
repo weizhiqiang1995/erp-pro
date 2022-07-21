@@ -26,8 +26,8 @@ public class SysStaffContractController {
     /**
      * 查询所有合同列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffContractController/queryAllSysStaffContractList")
     public void queryAllSysStaffContractList(InputObject inputObject, OutputObject outputObject) {
@@ -37,8 +37,8 @@ public class SysStaffContractController {
     /**
      * 员工合同信息录入
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffContractController/insertSysStaffContractMation")
     public void insertSysStaffContractMation(InputObject inputObject, OutputObject outputObject) {
@@ -48,8 +48,8 @@ public class SysStaffContractController {
     /**
      * 编辑员工合同信息时回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffContractController/querySysStaffContractMationToEdit")
     public void querySysStaffContractMationToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -59,8 +59,8 @@ public class SysStaffContractController {
     /**
      * 编辑员工合同信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffContractController/editSysStaffContractMationById")
     public void editSysStaffContractMationById(InputObject inputObject, OutputObject outputObject) {
@@ -70,8 +70,8 @@ public class SysStaffContractController {
     /**
      * 删除员工合同信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffContractController/deleteSysStaffContractMationById")
     public void deleteSysStaffContractMationById(InputObject inputObject, OutputObject outputObject) {
@@ -81,8 +81,8 @@ public class SysStaffContractController {
     /**
      * 查询指定员工的合同列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysstaffcontract006", value = "查询指定员工的合同列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = PointStaffQueryDo.class)
@@ -94,8 +94,8 @@ public class SysStaffContractController {
     /**
      * 员工合同签约
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysstaffcontract007", value = "员工合同签约", method = "GET", allUse = "1")
     @ApiImplicitParams({

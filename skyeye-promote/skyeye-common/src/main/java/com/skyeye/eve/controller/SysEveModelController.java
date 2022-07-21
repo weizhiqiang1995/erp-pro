@@ -34,8 +34,8 @@ public class SysEveModelController {
     /**
      * 获取系统编辑器模板表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysevemodel001", value = "获取系统编辑器模板列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysEveModelQueryDo.class)
@@ -47,8 +47,8 @@ public class SysEveModelController {
     /**
      * 新增系统编辑器模板
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveModelController/insertSysEveModelMation")
     public void insertSysEveModelMation(InputObject inputObject, OutputObject outputObject) {
@@ -58,8 +58,8 @@ public class SysEveModelController {
     /**
      * 删除系统编辑器模板
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveModelController/deleteSysEveModelById")
     public void deleteSysEveModelById(InputObject inputObject, OutputObject outputObject) {
@@ -69,8 +69,8 @@ public class SysEveModelController {
     /**
      * 通过id查找对应的系统编辑器模板
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveModelController/selectSysEveModelById")
     public void selectSysEveModelById(InputObject inputObject, OutputObject outputObject) {
@@ -80,8 +80,8 @@ public class SysEveModelController {
     /**
      * 通过id编辑对应的系统编辑器模板
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveModelController/editSysEveModelMationById")
     public void editSysEveModelMationById(InputObject inputObject, OutputObject outputObject) {
@@ -91,8 +91,8 @@ public class SysEveModelController {
     /**
      * 通过id查找对应的系统编辑器模板详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveModelController/selectSysEveModelMationById")
     public void selectSysEveModelMationById(InputObject inputObject, OutputObject outputObject) {

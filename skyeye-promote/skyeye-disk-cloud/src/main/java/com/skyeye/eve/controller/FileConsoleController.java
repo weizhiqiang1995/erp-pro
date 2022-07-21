@@ -36,8 +36,8 @@ public class FileConsoleController {
     /**
      * 根据当前用户获取目录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/queryFileFolderByUserId")
     public void queryFileFolderByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -47,8 +47,8 @@ public class FileConsoleController {
     /**
      * 添加目录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertFileFolderByUserId")
     public void insertFileFolderByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -58,8 +58,8 @@ public class FileConsoleController {
     /**
      * 获取这个目录下的所有文件+目录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/queryFilesListByFolderId")
     public void queryFilesListByFolderId(InputObject inputObject, OutputObject outputObject) {
@@ -69,8 +69,8 @@ public class FileConsoleController {
     /**
      * 删除目录以及目录下的所有文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "fileconsole004", value = "删除目录以及目录下的所有文件", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -83,8 +83,8 @@ public class FileConsoleController {
     /**
      * 编辑目录名称
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/editFileFolderById")
     public void editFileFolderById(InputObject inputObject, OutputObject outputObject) {
@@ -94,8 +94,8 @@ public class FileConsoleController {
     /**
      * 上传文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertUploadFileByUserId")
     public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -105,8 +105,8 @@ public class FileConsoleController {
     /**
      * 上传文件合并块
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertUploadFileChunksByUserId")
     public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -116,8 +116,8 @@ public class FileConsoleController {
     /**
      * 文件分块上传检测是否上传
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/queryUploadFileChunksByChunkMd5")
     public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) {
@@ -127,8 +127,8 @@ public class FileConsoleController {
     /**
      * 文件获取路径
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/queryUploadFilePathById")
     public void queryUploadFilePathById(InputObject inputObject, OutputObject outputObject) {
@@ -138,8 +138,8 @@ public class FileConsoleController {
     /**
      * office文件编辑
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping(value = "/post/FileConsoleController/editUploadOfficeFileById", method = RequestMethod.POST)
     public void editUploadOfficeFileById(InputObject inputObject, OutputObject outputObject) {
@@ -149,8 +149,8 @@ public class FileConsoleController {
     /**
      * 根据当前用户获取总文件大小
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/queryAllFileSizeByUserId")
     public void queryAllFileSizeByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -160,8 +160,8 @@ public class FileConsoleController {
     /**
      * 加入回收站
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertFileCatalogToRecycleById")
     public void insertFileCatalogToRecycleById(InputObject inputObject, OutputObject outputObject) {
@@ -171,8 +171,8 @@ public class FileConsoleController {
     /**
      * 我的回收站
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "fileconsole014", value = "我的回收站", method = "POST", allUse = "2")
     @ApiImplicitParams(classBean = FileRecycleQueryDo.class)
@@ -184,8 +184,8 @@ public class FileConsoleController {
     /**
      * 回收站内容还原
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/deleteFileRecycleBinById")
     public void deleteFileRecycleBinById(InputObject inputObject, OutputObject outputObject) {
@@ -195,8 +195,8 @@ public class FileConsoleController {
     /**
      * 文件分享
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertFileToShareById")
     public void insertFileToShareById(InputObject inputObject, OutputObject outputObject) {
@@ -206,8 +206,8 @@ public class FileConsoleController {
     /**
      * 文件分享列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "fileconsole017", value = "我的文件分享列表", method = "POST", allUse = "2")
     @ApiImplicitParams(classBean = FileShareQueryDo.class)
@@ -219,8 +219,8 @@ public class FileConsoleController {
     /**
      * 删除文件分享外链
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/deleteShareFileById")
     public void deleteShareFileById(InputObject inputObject, OutputObject outputObject) {
@@ -230,8 +230,8 @@ public class FileConsoleController {
     /**
      * 文件共享输入密码时获取文件信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/queryShareFileMationById")
     public void queryShareFileMationById(InputObject inputObject, OutputObject outputObject) {
@@ -241,8 +241,8 @@ public class FileConsoleController {
     /**
      * 文件共享输入密码时校验
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/queryShareFileMationCheckById")
     public void queryShareFileMationCheckById(InputObject inputObject, OutputObject outputObject) {
@@ -252,8 +252,8 @@ public class FileConsoleController {
     /**
      * 获取分享文件基础信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/queryShareFileBaseMationById")
     public void queryShareFileBaseMationById(InputObject inputObject, OutputObject outputObject) {
@@ -263,8 +263,8 @@ public class FileConsoleController {
     /**
      * 根据父id获取该id下分享的文件和文件夹
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/queryShareFileListByParentId")
     public void queryShareFileListByParentId(InputObject inputObject, OutputObject outputObject) {
@@ -274,8 +274,8 @@ public class FileConsoleController {
     /**
      * 分享文件保存
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertShareFileListToSave")
     public void insertShareFileListToSave(InputObject inputObject, OutputObject outputObject) {
@@ -285,8 +285,8 @@ public class FileConsoleController {
     /**
      * 文档在线预览
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/queryFileToShowById")
     public void queryFileToShowById(InputObject inputObject, OutputObject outputObject) {
@@ -296,8 +296,8 @@ public class FileConsoleController {
     /**
      * 新建word文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertWordFileToService")
     public void insertWordFileToService(InputObject inputObject, OutputObject outputObject) {
@@ -307,8 +307,8 @@ public class FileConsoleController {
     /**
      * 新建excel文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertExcelFileToService")
     public void insertExcelFileToService(InputObject inputObject, OutputObject outputObject) {
@@ -318,8 +318,8 @@ public class FileConsoleController {
     /**
      * 新建ppt文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertPPTFileToService")
     public void insertPPTFileToService(InputObject inputObject, OutputObject outputObject) {
@@ -329,8 +329,8 @@ public class FileConsoleController {
     /**
      * 新建txt文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertTXTFileToService")
     public void insertTXTFileToService(InputObject inputObject, OutputObject outputObject) {
@@ -340,8 +340,8 @@ public class FileConsoleController {
     /**
      * 新建html文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertHtmlFileToService")
     public void insertHtmlFileToService(InputObject inputObject, OutputObject outputObject) {
@@ -351,8 +351,8 @@ public class FileConsoleController {
     /**
      * 创建副本
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertDuplicateCopyToService")
     public void insertDuplicateCopyToService(InputObject inputObject, OutputObject outputObject) {
@@ -362,8 +362,8 @@ public class FileConsoleController {
     /**
      * 获取文件属性
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/queryFileMationById")
     public void queryFileMationById(InputObject inputObject, OutputObject outputObject) {
@@ -373,8 +373,8 @@ public class FileConsoleController {
     /**
      * 文件打包
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertFileMationToPackageToFolder")
     public void insertFileMationToPackageToFolder(InputObject inputObject, OutputObject outputObject) {
@@ -384,8 +384,8 @@ public class FileConsoleController {
     /**
      * 压缩包解压
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertFileMationPackageToFolder")
     public void insertFileMationPackageToFolder(InputObject inputObject, OutputObject outputObject) {
@@ -395,8 +395,8 @@ public class FileConsoleController {
     /**
      * 文件或者文件夹复制
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertPasteCopyToService")
     public void insertPasteCopyToService(InputObject inputObject, OutputObject outputObject) {
@@ -406,8 +406,8 @@ public class FileConsoleController {
     /**
      * 文件或者文件夹剪切
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertPasteCutToService")
     public void insertPasteCutToService(InputObject inputObject, OutputObject outputObject) {
@@ -417,8 +417,8 @@ public class FileConsoleController {
     /**
      * office文件编辑获取修改时间作为最新的key
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/queryOfficeUpdateTimeToKey")
     public void queryOfficeUpdateTimeToKey(InputObject inputObject, OutputObject outputObject) {
@@ -428,8 +428,8 @@ public class FileConsoleController {
     /**
      * 文件统计报表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/queryFileNumStatistics")
     public void queryFileNumStatistics(InputObject inputObject, OutputObject outputObject) {
@@ -439,8 +439,8 @@ public class FileConsoleController {
     /**
      * 文件打包下载
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/FileConsoleController/insertFileMationToPackageDownload")
     public void insertFileMationToPackageDownload(InputObject inputObject, OutputObject outputObject) {

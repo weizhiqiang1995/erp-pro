@@ -20,8 +20,8 @@ public class TAreaPhoneController {
     /**
      * 手机端查询省市区数据
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/TAreaPhoneController/queryTAreaPhoneList")
     public void queryTAreaPhoneList(InputObject inputObject, OutputObject outputObject) {

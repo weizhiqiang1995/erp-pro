@@ -20,8 +20,8 @@ public class MailListController {
     /**
      * 获取通讯录列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MailListController/queryMailMationList")
     public void queryMailMationList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class MailListController {
     /**
      * 新增通讯录(个人或者公共通讯录)
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MailListController/insertMailMation")
     public void insertMailMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class MailListController {
     /**
      * 删除通讯录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MailListController/deleteMailMationById")
     public void deleteMailMationById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class MailListController {
     /**
      * 编辑通讯录进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MailListController/queryMailMationToEditById")
     public void queryMailMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class MailListController {
     /**
      * 编辑通讯录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MailListController/editMailMationById")
     public void editMailMationById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class MailListController {
     /**
      * 个人/公共通讯录详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MailListController/queryMailMationDetailsById")
     public void queryMailMationDetailsById(InputObject inputObject, OutputObject outputObject) {

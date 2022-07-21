@@ -20,8 +20,8 @@ public class LightAppTypeController {
     /**
      * 获取轻应用类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppTypeController/queryLightAppTypeList")
     public void queryLightAppTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class LightAppTypeController {
     /**
      * 新增轻应用类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppTypeController/insertLightAppTypeMation")
     public void insertLightAppTypeMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class LightAppTypeController {
     /**
      * 编辑轻应用类型时进行信息回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppTypeController/queryLightAppTypeMationToEditById")
     public void queryLightAppTypeMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class LightAppTypeController {
     /**
      * 编辑轻应用类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppTypeController/editLightAppTypeMationById")
     public void editLightAppTypeMationById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class LightAppTypeController {
     /**
      * 轻应用类型展示顺序上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppTypeController/editLightAppTypeSortTopById")
     public void editLightAppTypeSortTopById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class LightAppTypeController {
     /**
      * 轻应用类型展示顺序下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppTypeController/editLightAppTypeSortLowerById")
     public void editLightAppTypeSortLowerById(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class LightAppTypeController {
     /**
      * 删除轻应用类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppTypeController/deleteLightAppTypeById")
     public void deleteLightAppTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -97,8 +97,8 @@ public class LightAppTypeController {
     /**
      * 轻应用类型上线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppTypeController/editLightAppTypeUpTypeById")
     public void editLightAppTypeUpTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -108,8 +108,8 @@ public class LightAppTypeController {
     /**
      * 轻应用类型下线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppTypeController/editLightAppTypeDownTypeById")
     public void editLightAppTypeDownTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -119,8 +119,8 @@ public class LightAppTypeController {
     /**
      * 获取轻应用上线类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/LightAppTypeController/queryLightAppTypeUpList")
     public void queryLightAppTypeUpList(InputObject inputObject, OutputObject outputObject) {

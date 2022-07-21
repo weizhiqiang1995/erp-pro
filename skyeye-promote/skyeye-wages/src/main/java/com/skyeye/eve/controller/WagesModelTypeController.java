@@ -20,8 +20,8 @@ public class WagesModelTypeController {
     /**
      * 获取薪资模板类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesModelTypeController/queryWagesModelTypeList")
     public void queryWagesModelTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class WagesModelTypeController {
     /**
      * 新增薪资模板类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesModelTypeController/insertWagesModelTypeMation")
     public void insertWagesModelTypeMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class WagesModelTypeController {
     /**
      * 编辑薪资模板类型信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesModelTypeController/queryWagesModelTypeMationToEditById")
     public void queryWagesModelTypeMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class WagesModelTypeController {
     /**
      * 编辑薪资模板类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesModelTypeController/editWagesModelTypeMationById")
     public void editWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class WagesModelTypeController {
     /**
      * 删除薪资模板类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesModelTypeController/deleteWagesModelTypeMationById")
     public void deleteWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class WagesModelTypeController {
     /**
      * 启用薪资模板类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesModelTypeController/enableWagesModelTypeMationById")
     public void enableWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class WagesModelTypeController {
     /**
      * 禁用薪资模板类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesModelTypeController/disableWagesModelTypeMationById")
     public void disableWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) {
@@ -97,8 +97,8 @@ public class WagesModelTypeController {
     /**
      * 获取已经启用的薪资模板类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesModelTypeController/queryEnableWagesModelTypeList")
     public void queryEnableWagesModelTypeList(InputObject inputObject, OutputObject outputObject) {

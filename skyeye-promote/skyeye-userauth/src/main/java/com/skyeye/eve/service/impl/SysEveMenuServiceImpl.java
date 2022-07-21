@@ -29,8 +29,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     /**
      * 获取菜单列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysMenuList(InputObject inputObject, OutputObject outputObject) {
@@ -44,8 +44,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     /**
      * 添加菜单
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -83,8 +83,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     /**
      * 查看同级菜单
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject) {
@@ -99,8 +99,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     /**
      * 编辑菜单时进行信息回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysMenuMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -113,8 +113,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     /**
      * 编辑菜单信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -154,8 +154,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     /**
      * 删除菜单信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -182,8 +182,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     /**
      * 异步加载树查看商户拥有的系统
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryTreeSysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject) {
@@ -198,8 +198,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     /**
      * 获取菜单级别列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysMenuLevelList(InputObject inputObject, OutputObject outputObject) {
@@ -214,8 +214,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     /**
      * 菜单展示顺序上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -242,8 +242,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     /**
      * 菜单展示顺序下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -265,8 +265,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     /**
      * 获取该系统商户拥有的系统
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysWinMationListBySysId(InputObject inputObject, OutputObject outputObject) {
@@ -281,8 +281,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     /**
      * 系统菜单详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysEveMenuBySysId(InputObject inputObject, OutputObject outputObject) {

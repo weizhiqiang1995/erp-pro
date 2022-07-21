@@ -25,8 +25,8 @@ public class ApiController {
     /**
      * 获取接口列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryAllSysEveReqMapping", value = "获取接口列表", method = "GET", allUse = "2")
     @ApiImplicitParams({
@@ -39,8 +39,8 @@ public class ApiController {
     /**
      * 获取接口详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryApiDetails", value = "获取接口详情", method = "GET", allUse = "2")
     @ApiImplicitParams({
@@ -54,8 +54,8 @@ public class ApiController {
     /**
      * 获取限制条件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryLimitRestrictions", value = "获取限制条件", method = "GET", allUse = "2")
     @RequestMapping("/post/ApiController/queryLimitRestrictions")
@@ -66,8 +66,8 @@ public class ApiController {
     /**
      * 获取所有微服务列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryApiMicroservices", value = "获取所有微服务列表", method = "GET", allUse = "2")
     @RequestMapping("/post/ApiController/queryApiMicroservices")

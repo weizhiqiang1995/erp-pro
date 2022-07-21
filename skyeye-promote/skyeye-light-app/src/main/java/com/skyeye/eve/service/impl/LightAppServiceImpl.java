@@ -51,8 +51,8 @@ public class LightAppServiceImpl implements LightAppService {
     /**
      * 获取轻应用列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryLightAppList(InputObject inputObject, OutputObject outputObject) {
@@ -66,8 +66,8 @@ public class LightAppServiceImpl implements LightAppService {
     /**
      * 新增轻应用
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -89,8 +89,8 @@ public class LightAppServiceImpl implements LightAppService {
     /**
      * 编辑轻应用时进行信息回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryLightAppMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -103,8 +103,8 @@ public class LightAppServiceImpl implements LightAppService {
     /**
      * 编辑轻应用信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -127,8 +127,8 @@ public class LightAppServiceImpl implements LightAppService {
     /**
      * 删除轻应用
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -145,8 +145,8 @@ public class LightAppServiceImpl implements LightAppService {
     /**
      * 轻应用上线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -165,8 +165,8 @@ public class LightAppServiceImpl implements LightAppService {
     /**
      * 轻应用下线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -186,8 +186,8 @@ public class LightAppServiceImpl implements LightAppService {
     /**
      * 获取轻应用上线列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryLightAppUpList(InputObject inputObject, OutputObject outputObject) {
@@ -208,8 +208,8 @@ public class LightAppServiceImpl implements LightAppService {
     /**
      * 添加轻应用到桌面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

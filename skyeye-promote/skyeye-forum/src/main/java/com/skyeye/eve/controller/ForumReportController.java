@@ -20,8 +20,8 @@ public class ForumReportController {
     /**
      * 添加举报信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumReportController/insertForumReportMation")
     public void insertForumReportMation(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class ForumReportController {
     /**
      * 获取论坛举报未审核列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumReportController/queryReportNoCheckList")
     public void queryReportNoCheckList(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class ForumReportController {
     /**
      * 举报信息审核
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumReportController/editReportCheckMationById")
     public void editForumContentMationById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class ForumReportController {
     /**
      * 获取论坛举报已审核列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumReportController/queryReportCheckedList")
     public void queryReportCheckedList(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class ForumReportController {
     /**
      * 举报详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumReportController/queryForumReportMationToDetails")
     public void queryForumReportMationToDetails(InputObject inputObject, OutputObject outputObject) {

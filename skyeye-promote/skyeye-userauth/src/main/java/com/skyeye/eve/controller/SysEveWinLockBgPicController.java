@@ -20,8 +20,8 @@ public class SysEveWinLockBgPicController {
     /**
      * 获取win系统锁屏桌面图片列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinLockBgPicController/querySysEveWinLockBgPicList")
     public void querySysEveWinLockBgPicList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class SysEveWinLockBgPicController {
     /**
      * 添加win系统锁屏桌面图片信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinLockBgPicController/insertSysEveWinLockBgPicMation")
     public void insertSysEveWinLockBgPicMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class SysEveWinLockBgPicController {
     /**
      * 删除win系统锁屏桌面图片信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinLockBgPicController/deleteSysEveWinLockBgPicMationById")
     public void deleteSysEveWinLockBgPicMationById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class SysEveWinLockBgPicController {
     /**
      * 用户自定义上传win系统锁屏桌面图片信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinLockBgPicController/insertSysEveWinBgPicMationByCustom")
     public void insertSysEveWinBgPicMationByCustom(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class SysEveWinLockBgPicController {
     /**
      * 获取win系统锁屏桌面图片列表用户自定义
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinLockBgPicController/querySysEveWinBgPicCustomList")
     public void querySysEveWinBgPicCustomList(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class SysEveWinLockBgPicController {
     /**
      * 删除win系统锁屏桌面图片信息用户自定义
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinLockBgPicController/deleteSysEveWinBgPicMationCustomById")
     public void deleteSysEveWinBgPicMationCustomById(InputObject inputObject, OutputObject outputObject) {

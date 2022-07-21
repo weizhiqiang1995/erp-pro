@@ -20,8 +20,8 @@ public class SysTAreaController {
     /**
      * 获取行政区划信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysTAreaController/querySysTAreaList")
     public void querySysTAreaList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class SysTAreaController {
     /**
      * 获取一级省行政区划信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysTAreaController/querySysTAreaProvinceList")
     public void querySysTAreaProvinceList(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class SysTAreaController {
     /**
      * 获取二级市行政区划信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysTAreaController/querySysTAreaCityList")
     public void querySysTAreaCityList(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class SysTAreaController {
     /**
      * 获取三级县行政区划信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysTAreaController/querySysTAreaChildAreaList")
     public void querySysTAreaChildAreaList(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class SysTAreaController {
     /**
      * 获取四级镇行政区划信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysTAreaController/querySysTAreaTownShipList")
     public void querySysTAreaTownShipList(InputObject inputObject, OutputObject outputObject) {

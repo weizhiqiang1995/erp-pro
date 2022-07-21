@@ -20,8 +20,8 @@ public class SysEveDesktopController {
     /**
      * 获取桌面列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveDesktopController/querySysDesktopList")
     public void querySysDesktopList(InputObject inputObject, OutputObject outputObject) {
@@ -32,8 +32,8 @@ public class SysEveDesktopController {
     /**
      * 添加桌面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveDesktopController/insertSysDesktopMation")
     public void insertSysDesktopMation(InputObject inputObject, OutputObject outputObject) {
@@ -43,8 +43,8 @@ public class SysEveDesktopController {
     /**
      * 删除桌面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveDesktopController/deleteSysDesktopById")
     public void deleteSysDesktopById(InputObject inputObject, OutputObject outputObject) {
@@ -54,8 +54,8 @@ public class SysEveDesktopController {
     /**
      * 上线桌面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveDesktopController/updateUpSysDesktopById")
     public void updateUpSysDesktopById(InputObject inputObject, OutputObject outputObject) {
@@ -65,8 +65,8 @@ public class SysEveDesktopController {
     /**
      * 下线桌面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveDesktopController/updateDownSysDesktopById")
     public void updateDownSysDesktopById(InputObject inputObject, OutputObject outputObject) {
@@ -76,8 +76,8 @@ public class SysEveDesktopController {
     /**
      * 通过id查找对应的桌面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveDesktopController/selectSysDesktopById")
     public void selectSysDesktopById(InputObject inputObject, OutputObject outputObject) {
@@ -87,8 +87,8 @@ public class SysEveDesktopController {
     /**
      * 通过id编辑对应的桌面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveDesktopController/editSysDesktopMationById")
     public void editSysDesktopMationById(InputObject inputObject, OutputObject outputObject) {
@@ -98,8 +98,8 @@ public class SysEveDesktopController {
     /**
      * 桌面上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveDesktopController/editSysDesktopMationOrderNumUpById")
     public void editSysWinTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) {
@@ -109,8 +109,8 @@ public class SysEveDesktopController {
     /**
      * 桌面下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveDesktopController/editSysDesktopMationOrderNumDownById")
     public void editSysWinTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) {
@@ -120,8 +120,8 @@ public class SysEveDesktopController {
     /**
      * 获取全部的桌面用于系统菜单
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveDesktopController/queryAllSysDesktopList")
     public void queryAllSysDesktopList(InputObject inputObject, OutputObject outputObject) {
@@ -131,8 +131,8 @@ public class SysEveDesktopController {
     /**
      * 一键移除所有菜单
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveDesktopController/removeAllSysEveMenuByDesktopId")
     public void removeAllSysEveMenuByDesktopId(InputObject inputObject, OutputObject outputObject) {

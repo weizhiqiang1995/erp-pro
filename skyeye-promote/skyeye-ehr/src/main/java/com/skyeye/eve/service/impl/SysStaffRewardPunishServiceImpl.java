@@ -45,8 +45,8 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
     /**
      * 查询所有奖惩列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllSysStaffRewardPunishList(InputObject inputObject, OutputObject outputObject) {
@@ -61,8 +61,8 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
     /**
      * 员工奖惩信息录入
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -79,8 +79,8 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
     /**
      * 编辑员工奖惩信息时回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysStaffRewardPunishMationToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -104,8 +104,8 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
     /**
      * 编辑员工奖惩信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -126,8 +126,8 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
     /**
      * 删除员工奖惩信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -140,8 +140,8 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
     /**
      * 查询指定员工的奖惩列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryPointStaffSysStaffRewardPunishList(InputObject inputObject, OutputObject outputObject) {

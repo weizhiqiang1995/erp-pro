@@ -20,8 +20,8 @@ public class SysEveIconController {
     /**
      * 获取ICON列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveIconController/querySysIconList")
     public void querySysIconList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class SysEveIconController {
     /**
      * 添加ICON信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveIconController/insertSysIconMation")
     public void insertSysIconMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class SysEveIconController {
     /**
      * 删除ICON信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveIconController/deleteSysIconMationById")
     public void deleteSysIconMationById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class SysEveIconController {
     /**
      * 编辑ICON信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveIconController/querySysIconMationToEditById")
     public void querySysIconMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class SysEveIconController {
     /**
      * 编辑ICON信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveIconController/editSysIconMationById")
     public void editSysIconMationById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class SysEveIconController {
     /**
      * 获取ICON列表供menu菜单使用
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveIconController/querySysIconListToMenu")
     public void querySysIconListToMenu(InputObject inputObject, OutputObject outputObject) {

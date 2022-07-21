@@ -46,8 +46,8 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
     /**
      * 查询所有语言能力列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) {
@@ -62,8 +62,8 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
     /**
      * 员工语言能力信息录入
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -77,8 +77,8 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
     /**
      * 编辑员工语言能力信息时回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysStaffLanguageMationToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -102,8 +102,8 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
     /**
      * 编辑员工语言能力信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -121,8 +121,8 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
     /**
      * 删除员工语言能力信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -135,8 +135,8 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
     /**
      * 查询指定员工的语言能力列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryPointStaffSysStaffLanguageList(InputObject inputObject, OutputObject outputObject) {

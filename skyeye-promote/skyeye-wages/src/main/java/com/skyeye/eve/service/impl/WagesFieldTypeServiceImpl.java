@@ -55,8 +55,8 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
     /**
      * 获取薪资字段列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -70,8 +70,8 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
     /**
      * 新增薪资字段信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -123,8 +123,8 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
     /**
      * 编辑薪资字段信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryWagesFieldTypeMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -141,8 +141,8 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
     /**
      * 编辑薪资字段信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -161,8 +161,8 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
     /**
      * 删除薪资字段信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -174,8 +174,8 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
     /**
      * 启用薪资字段信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -187,8 +187,8 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
     /**
      * 禁用薪资字段信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -200,8 +200,8 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
     /**
      * 获取已经启用的薪资字段列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryEnableWagesFieldTypeList(InputObject inputObject, OutputObject outputObject) {

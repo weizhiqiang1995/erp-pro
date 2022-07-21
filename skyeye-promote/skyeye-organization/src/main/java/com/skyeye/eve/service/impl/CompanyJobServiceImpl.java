@@ -38,8 +38,8 @@ public class CompanyJobServiceImpl implements CompanyJobService {
     /**
      * 获取公司部门职位信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyJobList(InputObject inputObject, OutputObject outputObject) {
@@ -61,8 +61,8 @@ public class CompanyJobServiceImpl implements CompanyJobService {
     /**
      * 添加公司部门职位信息信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -83,8 +83,8 @@ public class CompanyJobServiceImpl implements CompanyJobService {
     /**
      * 删除公司部门职位信息信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -99,8 +99,8 @@ public class CompanyJobServiceImpl implements CompanyJobService {
     /**
      * 编辑公司部门职位信息信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyJobMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -113,8 +113,8 @@ public class CompanyJobServiceImpl implements CompanyJobService {
     /**
      * 编辑公司部门职位信息信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -131,8 +131,8 @@ public class CompanyJobServiceImpl implements CompanyJobService {
     /**
      * 获取公司部门职位信息列表展示为树根据公司id
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyJobListTreeByDepartmentId(InputObject inputObject, OutputObject outputObject) {
@@ -159,8 +159,8 @@ public class CompanyJobServiceImpl implements CompanyJobService {
     /**
      * 根据部门id获取职位列表展示为下拉选择框
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyJobListByToSelect(InputObject inputObject, OutputObject outputObject) {
@@ -175,8 +175,8 @@ public class CompanyJobServiceImpl implements CompanyJobService {
     /**
      * 根据部门id获取职位同级列表且不包含当前id的值展示为下拉选择框
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyJobSimpleListByToSelect(InputObject inputObject, OutputObject outputObject) {

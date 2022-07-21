@@ -20,8 +20,8 @@ public class ErpProducePageController {
     /**
      * 统计当前部门月度领料图
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ErpProducePageController/queryDepartmentPickMaterial")
     public void queryDepartmentPickMaterial(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class ErpProducePageController {
     /**
      * 统计当前部门月度补料图
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ErpProducePageController/queryDepartmentPatchMaterial")
     public void queryDepartmentPatchMaterial(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class ErpProducePageController {
     /**
      * 统计当前部门月度退料图
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ErpProducePageController/queryDepartmentReturnMaterial")
     public void queryDepartmentReturnMaterial(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class ErpProducePageController {
     /**
      * 统计当前部门月度新建加工单图
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ErpProducePageController/queryDepartmentMachin")
     public void queryDepartmentMachin(InputObject inputObject, OutputObject outputObject) {

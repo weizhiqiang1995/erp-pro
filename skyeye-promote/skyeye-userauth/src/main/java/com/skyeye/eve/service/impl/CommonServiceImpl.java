@@ -74,8 +74,8 @@ public class CommonServiceImpl implements CommonService {
     /**
      * 上传文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void uploadFile(InputObject inputObject, OutputObject outputObject) {
@@ -129,8 +129,8 @@ public class CommonServiceImpl implements CommonService {
     /**
      * 上传文件Base64
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void uploadFileBase64(InputObject inputObject, OutputObject outputObject) {
@@ -172,8 +172,8 @@ public class CommonServiceImpl implements CommonService {
     /**
      * 代码生成器生成下载文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -240,8 +240,8 @@ public class CommonServiceImpl implements CommonService {
     /**
      * 获取win系统桌列表信息供展示
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysWinMationById(InputObject inputObject, OutputObject outputObject) {
@@ -269,8 +269,8 @@ public class CommonServiceImpl implements CommonService {
     /**
      * 获取所有在职的，拥有账号的员工
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllSysUserIsIncumbency(InputObject inputObject, OutputObject outputObject) {
@@ -293,8 +293,8 @@ public class CommonServiceImpl implements CommonService {
     /**
      * 根据文件类型获取文件的保存地址以及访问地址
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryFilePathByFileType(InputObject inputObject, OutputObject outputObject) {

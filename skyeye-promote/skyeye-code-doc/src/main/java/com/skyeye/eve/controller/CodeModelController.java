@@ -33,8 +33,8 @@ public class CodeModelController {
     /**
      * 获取模板列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "codemodel006", value = "获取模板列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = CodeModelQueryDo.class)
@@ -46,8 +46,8 @@ public class CodeModelController {
     /**
      * 新增模板列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CodeModelController/insertCodeModelMation")
     public void insertCodeModelMation(InputObject inputObject, OutputObject outputObject) {
@@ -57,8 +57,8 @@ public class CodeModelController {
     /**
      * 删除模板信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CodeModelController/deleteCodeModelById")
     public void deleteCodeModelById(InputObject inputObject, OutputObject outputObject) {
@@ -68,8 +68,8 @@ public class CodeModelController {
     /**
      * 编辑模板信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CodeModelController/queryCodeModelMationToEditById")
     public void queryCodeModelMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -79,8 +79,8 @@ public class CodeModelController {
     /**
      * 编辑模板信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CodeModelController/editCodeModelMationById")
     public void editCodeModelMationById(InputObject inputObject, OutputObject outputObject) {

@@ -42,8 +42,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 遍历我收到的日志
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryJobDiaryDayReceived(InputObject inputObject, OutputObject outputObject) {
@@ -59,8 +59,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 发表日志
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -93,8 +93,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 查出所有有账户的员工
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysEveUserStaff(InputObject inputObject, OutputObject outputObject) {
@@ -110,8 +110,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 阅读收到的日志内容
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -133,8 +133,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 遍历我发出的所有日志
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryJobDiaryDayMysend(InputObject inputObject, OutputObject outputObject) {
@@ -159,8 +159,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 撤销我发出的日志
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -185,8 +185,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 阅读我发出的日报详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void selectMysendDetails(InputObject inputObject, OutputObject outputObject) {
@@ -202,8 +202,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 删除我收到的日志
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -222,8 +222,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 发表周报
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -256,8 +256,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 阅读我发出的周报详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void selectMysendWeekDetails(InputObject inputObject, OutputObject outputObject) {
@@ -273,8 +273,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 阅读我收到的周报
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -296,8 +296,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 发表月报
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -330,8 +330,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 阅读我发出的月报详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void selectMysendMonthDetails(InputObject inputObject, OutputObject outputObject) {
@@ -347,8 +347,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 阅读我收到的月报
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -370,8 +370,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 删除我发出的日志
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -390,8 +390,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 回显我撤回的日报
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -408,8 +408,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 提交撤回的日报
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -439,8 +439,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 回显我撤回的周报
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryWeekJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -457,8 +457,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 提交撤回的周报
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -488,8 +488,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 回显我撤回的月报
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMonthJobDiaryDayMysendToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -506,8 +506,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 提交撤回的月报
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -537,8 +537,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 查询日志类型各个类型的条数
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryJobDiaryDayNumber(InputObject inputObject, OutputObject outputObject) {
@@ -552,8 +552,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 获取日志列表展示位时间树
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryJobDiaryListToTimeTree(InputObject inputObject, OutputObject outputObject) {
@@ -576,8 +576,8 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     /**
      * 我收到的日志全部设置为已读
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

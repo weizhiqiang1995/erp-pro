@@ -67,8 +67,8 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
     /**
      * 获取社保公积金模板列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryWagesSocialSecurityFundList(InputObject inputObject, OutputObject outputObject) {
@@ -82,8 +82,8 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
     /**
      * 新增社保公积金模板信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -128,8 +128,8 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
     /**
      * 编辑社保公积金模板信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryWagesSocialSecurityFundMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -194,8 +194,8 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
     /**
      * 编辑社保公积金模板信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -217,8 +217,8 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
     /**
      * 删除社保公积金模板信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void deleteWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
@@ -229,8 +229,8 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
     /**
      * 启用社保公积金模板信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void enableWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
@@ -241,8 +241,8 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
     /**
      * 禁用社保公积金模板信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void disableWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
@@ -253,8 +253,8 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
     /**
      * 社保公积金模板详情信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {

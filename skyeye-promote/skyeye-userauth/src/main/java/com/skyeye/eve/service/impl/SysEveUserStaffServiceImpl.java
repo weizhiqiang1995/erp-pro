@@ -97,8 +97,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 查出所有员工列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysUserStaffList(InputObject inputObject, OutputObject outputObject) {
@@ -112,8 +112,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 新增员工
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -253,8 +253,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 通过id查询一条员工信息回显编辑
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysUserStaffById(InputObject inputObject, OutputObject outputObject) {
@@ -277,8 +277,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 编辑员工信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -312,8 +312,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 通过id查询一条员工信息展示详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysUserStaffByIdToDetails(InputObject inputObject, OutputObject outputObject) {
@@ -336,8 +336,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 员工离职
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -362,8 +362,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 普通员工转教职工
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -395,8 +395,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 查看所有员工列表展示为表格供其他选择
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysUserStaffListToTable(InputObject inputObject, OutputObject outputObject) {
@@ -410,8 +410,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 根据员工ids获取员工信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysUserStaffListByIds(InputObject inputObject, OutputObject outputObject) {
@@ -430,8 +430,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 获取当前登录员工的信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysUserStaffLogin(InputObject inputObject, OutputObject outputObject) {
@@ -444,8 +444,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 根据用户ids获取用户信息集合
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryUserNameList(InputObject inputObject, OutputObject outputObject) {
@@ -458,8 +458,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 通过用户id查询一条员工信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysUserStaffDetailsByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -473,8 +473,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 修改员工剩余年假信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void editSysUserStaffAnnualLeaveById(InputObject inputObject, OutputObject outputObject) {
@@ -488,8 +488,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 修改员工的补休池剩余补休信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void updateSysUserStaffHolidayNumberById(InputObject inputObject, OutputObject outputObject) {
@@ -503,8 +503,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 修改员工的补休池已休补休信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void updateSysUserStaffRetiredHolidayNumberById(InputObject inputObject, OutputObject outputObject) {
@@ -518,8 +518,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 根据员工id获取该员工的考勤时间段
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryStaffCheckWorkTimeRelationNameByStaffId(InputObject inputObject, OutputObject outputObject) {

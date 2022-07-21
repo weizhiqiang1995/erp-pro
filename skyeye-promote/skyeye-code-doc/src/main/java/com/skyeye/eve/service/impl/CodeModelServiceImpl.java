@@ -38,8 +38,8 @@ public class CodeModelServiceImpl implements CodeModelService {
     /**
      * 获取模板列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCodeModelList(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class CodeModelServiceImpl implements CodeModelService {
     /**
      * 新增模板列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -75,8 +75,8 @@ public class CodeModelServiceImpl implements CodeModelService {
     /**
      * 删除模板信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -88,8 +88,8 @@ public class CodeModelServiceImpl implements CodeModelService {
     /**
      * 编辑模板信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCodeModelMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -102,8 +102,8 @@ public class CodeModelServiceImpl implements CodeModelService {
     /**
      * 编辑模板信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

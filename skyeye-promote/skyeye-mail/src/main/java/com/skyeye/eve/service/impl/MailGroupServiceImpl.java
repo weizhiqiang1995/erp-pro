@@ -44,8 +44,8 @@ public class MailGroupServiceImpl implements MailGroupService {
     /**
      * 获取我的通讯录类别列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMailMationTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -62,8 +62,8 @@ public class MailGroupServiceImpl implements MailGroupService {
     /**
      * 新增通讯录类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -86,8 +86,8 @@ public class MailGroupServiceImpl implements MailGroupService {
     /**
      * 删除通讯录类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -107,8 +107,8 @@ public class MailGroupServiceImpl implements MailGroupService {
     /**
      * 编辑通讯录类型进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMailMationTypeToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -120,8 +120,8 @@ public class MailGroupServiceImpl implements MailGroupService {
     /**
      * 编辑通讯录类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -136,8 +136,8 @@ public class MailGroupServiceImpl implements MailGroupService {
     /**
      * 获取我的通讯录类型用作下拉框展示
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMailMationTypeListToSelect(InputObject inputObject, OutputObject outputObject) {

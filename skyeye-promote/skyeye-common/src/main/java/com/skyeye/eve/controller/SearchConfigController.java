@@ -33,8 +33,8 @@ public class SearchConfigController {
     /**
      * 新增/编辑高级查询配置
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "writeSearchConfigMation", value = "新增/编辑高级查询配置", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SearchMation.class)

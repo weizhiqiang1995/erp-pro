@@ -25,8 +25,8 @@ public class CommonController {
     /**
      * 上传文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CommonController/uploadFile")
     public void uploadFile(InputObject inputObject, OutputObject outputObject) {
@@ -36,8 +36,8 @@ public class CommonController {
     /**
      * 上传文件Base64
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CommonController/uploadFileBase64")
     public void uploadFileBase64(InputObject inputObject, OutputObject outputObject) {
@@ -47,8 +47,8 @@ public class CommonController {
     /**
      * 代码生成器生成下载文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CommonController/downloadFileByJsonData")
     public void downloadFileByJsonData(InputObject inputObject, OutputObject outputObject) {
@@ -58,8 +58,8 @@ public class CommonController {
     /**
      * 获取win系统桌列表信息供展示
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CommonController/querySysWinMationById")
     public void querySysWinMationById(InputObject inputObject, OutputObject outputObject) {
@@ -69,8 +69,8 @@ public class CommonController {
     /**
      * 获取所有在职的，拥有账号的员工
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CommonController/queryAllSysUserIsIncumbency")
     public void queryAllSysUserIsIncumbency(InputObject inputObject, OutputObject outputObject) {
@@ -80,8 +80,8 @@ public class CommonController {
     /**
      * 根据文件类型获取文件的保存地址以及访问地址
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryFilePathByFileType", value = "根据文件类型获取文件的保存地址以及访问地址", method = "GET", allUse = "2")
     @ApiImplicitParams({

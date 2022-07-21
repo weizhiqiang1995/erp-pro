@@ -42,8 +42,8 @@ public class ForumSensitiveWordsServiceImpl implements ForumSensitiveWordsServic
     /**
      * 查出所有论坛敏感词列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryForumSensitiveWordsList(InputObject inputObject, OutputObject outputObject) {
@@ -57,8 +57,8 @@ public class ForumSensitiveWordsServiceImpl implements ForumSensitiveWordsServic
     /**
      * 新增论坛敏感词
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -80,8 +80,8 @@ public class ForumSensitiveWordsServiceImpl implements ForumSensitiveWordsServic
     /**
      * 删除论坛敏感词
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -94,8 +94,8 @@ public class ForumSensitiveWordsServiceImpl implements ForumSensitiveWordsServic
     /**
      * 通过id查找对应的论坛敏感词信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void selectForumSensitiveWordsById(InputObject inputObject, OutputObject outputObject) {
@@ -108,8 +108,8 @@ public class ForumSensitiveWordsServiceImpl implements ForumSensitiveWordsServic
     /**
      * 通过id编辑对应的论坛敏感词信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

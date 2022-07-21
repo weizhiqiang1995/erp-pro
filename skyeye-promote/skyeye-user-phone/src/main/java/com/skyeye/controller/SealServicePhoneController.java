@@ -20,8 +20,8 @@ public class SealServicePhoneController {
     /**
      * 手机端查询不同状态下的工单数量
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SealServicePhoneController/queryNumberInEveryState")
     public void queryNumberInEveryState(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class SealServicePhoneController {
     /**
      * 手机端签到
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SealServicePhoneController/insertSealSeServiceWaitToSignonMation")
     public void insertSealSeServiceWaitToSignonMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class SealServicePhoneController {
     /**
      * 根据工单id获取情况反馈列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SealServicePhoneController/queryFeedBackList")
     public void queryFeedBackList(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class SealServicePhoneController {
     /**
      * 获取所有配件信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SealServicePhoneController/queryAllPartsList")
     public void queryAllPartsList(InputObject inputObject, OutputObject outputObject) {

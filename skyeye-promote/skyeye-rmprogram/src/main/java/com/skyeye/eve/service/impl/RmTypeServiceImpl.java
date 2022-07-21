@@ -28,8 +28,8 @@ public class RmTypeServiceImpl implements RmTypeService {
     /**
      * 获取小程序分类列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryRmTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -43,8 +43,8 @@ public class RmTypeServiceImpl implements RmTypeService {
     /**
      * 新增小程序分类列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -71,8 +71,8 @@ public class RmTypeServiceImpl implements RmTypeService {
     /**
      * 删除小程序分类信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -93,8 +93,8 @@ public class RmTypeServiceImpl implements RmTypeService {
     /**
      * 编辑小程序分类信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryRmTypeMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -107,8 +107,8 @@ public class RmTypeServiceImpl implements RmTypeService {
     /**
      * 编辑小程序分类信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -125,8 +125,8 @@ public class RmTypeServiceImpl implements RmTypeService {
     /**
      * 小程序分类展示顺序上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -146,8 +146,8 @@ public class RmTypeServiceImpl implements RmTypeService {
     /**
      * 小程序分类展示顺序下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -167,8 +167,8 @@ public class RmTypeServiceImpl implements RmTypeService {
     /**
      * 获取所有小程序分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryRmTypeAllList(InputObject inputObject, OutputObject outputObject) {

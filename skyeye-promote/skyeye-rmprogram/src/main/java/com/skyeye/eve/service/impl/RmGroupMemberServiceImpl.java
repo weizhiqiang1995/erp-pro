@@ -43,8 +43,8 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
     /**
      * 获取小程序组件列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryRmGroupMemberList(InputObject inputObject, OutputObject outputObject) {
@@ -60,8 +60,8 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
     /**
      * 添加小程序组件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -83,8 +83,8 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
     /**
      * 小程序组件展示顺序上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -104,8 +104,8 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
     /**
      * 小程序组件展示顺序下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -125,8 +125,8 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
     /**
      * 删除小程序组件信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -154,8 +154,8 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
     /**
      * 编辑小程序组件信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryRmGroupMemberMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -170,8 +170,8 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
     /**
      * 编辑小程序组件信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -189,8 +189,8 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
     /**
      * 编辑小程序组件和标签属性的绑定信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -220,8 +220,8 @@ public class RmGroupMemberServiceImpl implements RmGroupMemberService {
     /**
      * 获取小程序组件和标签属性的绑定信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryRmGroupMemberAndPropertyMationById(InputObject inputObject, OutputObject outputObject) {

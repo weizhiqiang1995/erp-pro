@@ -20,8 +20,8 @@ public class SysEveWinTypeController {
     /**
      * 获取分类列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinTypeController/querySysWinTypeList")
     public void querySysWinTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class SysEveWinTypeController {
     /**
      * 获取所有一级分类展示为下拉选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinTypeController/querySysWinFirstTypeList")
     public void querySysWinFirstTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class SysEveWinTypeController {
     /**
      * 新增系统分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinTypeController/insertSysWinTypeMation")
     public void insertSysWinTypeMation(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class SysEveWinTypeController {
     /**
      * 编辑系统分类时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinTypeController/querySysWinTypeMationToEditById")
     public void querySysWinTypeMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class SysEveWinTypeController {
     /**
      * 编辑系统分类时
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinTypeController/editSysWinTypeMationById")
     public void editSysWinTypeMationById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class SysEveWinTypeController {
     /**
      * 获取所有不是当前分类的一级分类展示为下拉选项
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinTypeController/querySysWinFirstTypeListNotIsThisId")
     public void querySysWinFirstTypeListNotIsThisId(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class SysEveWinTypeController {
     /**
      * 删除系统分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinTypeController/deleteSysWinTypeMationById")
     public void deleteSysWinTypeMationById(InputObject inputObject, OutputObject outputObject) {
@@ -97,8 +97,8 @@ public class SysEveWinTypeController {
     /**
      * 系统分类上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinTypeController/editSysWinTypeMationOrderNumUpById")
     public void editSysWinTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) {
@@ -108,8 +108,8 @@ public class SysEveWinTypeController {
     /**
      * 系统分类下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinTypeController/editSysWinTypeMationOrderNumDownById")
     public void editSysWinTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) {
@@ -119,8 +119,8 @@ public class SysEveWinTypeController {
     /**
      * 系统分类上线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinTypeController/editSysWinTypeMationStateUpById")
     public void editSysWinTypeMationStateUpById(InputObject inputObject, OutputObject outputObject) {
@@ -130,8 +130,8 @@ public class SysEveWinTypeController {
     /**
      * 系统分类下线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinTypeController/editSysWinTypeMationStateDownById")
     public void editSysWinTypeMationStateDownById(InputObject inputObject, OutputObject outputObject) {
@@ -141,8 +141,8 @@ public class SysEveWinTypeController {
     /**
      * 获取已经上线的一级分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinTypeController/querySysWinTypeFirstMationStateIsUp")
     public void querySysWinTypeFirstMationStateIsUp(InputObject inputObject, OutputObject outputObject) {
@@ -152,8 +152,8 @@ public class SysEveWinTypeController {
     /**
      * 获取已经上线的二级分类
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinTypeController/querySysWinTypeSecondMationStateIsUp")
     public void querySysWinTypeSecondMationStateIsUp(InputObject inputObject, OutputObject outputObject) {

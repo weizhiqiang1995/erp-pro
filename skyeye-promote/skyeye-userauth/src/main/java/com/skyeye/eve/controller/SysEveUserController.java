@@ -35,8 +35,8 @@ public class SysEveUserController {
     /**
      * 获取管理员用户列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sys001", value = "获取用户列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysUserQueryDo.class)
@@ -48,8 +48,8 @@ public class SysEveUserController {
     /**
      * 锁定账号
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sys002", value = "锁定账号", method = "PUT", allUse = "2")
     @ApiImplicitParams({
@@ -62,8 +62,8 @@ public class SysEveUserController {
     /**
      * 解锁账号
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sys003", value = "解锁账号", method = "PUT", allUse = "2")
     @ApiImplicitParams({
@@ -76,8 +76,8 @@ public class SysEveUserController {
     /**
      * 创建账号
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysAdd005", value = "创建账号", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysUserMation.class)
@@ -89,8 +89,8 @@ public class SysEveUserController {
     /**
      * 重置密码
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sys005", value = "重置密码", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -104,8 +104,8 @@ public class SysEveUserController {
     /**
      * 登录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/queryUserToLogin")
     public void queryUserToLogin(InputObject inputObject, OutputObject outputObject) {
@@ -115,8 +115,8 @@ public class SysEveUserController {
     /**
      * 从session中获取用户信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/queryUserMationBySession")
     public void queryUserMationBySession(InputObject inputObject, OutputObject outputObject) {
@@ -126,8 +126,8 @@ public class SysEveUserController {
     /**
      * 退出
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "login003", value = "退出", method = "POST", allUse = "2")
     @RequestMapping("/post/SysEveUserController/deleteUserMationBySession")
@@ -138,8 +138,8 @@ public class SysEveUserController {
     /**
      * 获取角色和当前已经绑定的角色信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/queryRoleAndBindRoleByUserId")
     public void queryRoleAndBindRoleByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -149,8 +149,8 @@ public class SysEveUserController {
     /**
      * 编辑用户绑定的角色
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sys020", value = "编辑用户绑定的角色", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -164,8 +164,8 @@ public class SysEveUserController {
     /**
      * 获取桌面菜单列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "login004", value = "获取桌面菜单列表", method = "GET", allUse = "2")
     @RequestMapping("/post/SysEveUserController/queryDeskTopMenuBySession")
@@ -176,8 +176,8 @@ public class SysEveUserController {
     /**
      * 获取全部菜单列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/queryAllMenuBySession")
     public void queryAllMenuBySession(InputObject inputObject, OutputObject outputObject) {
@@ -187,8 +187,8 @@ public class SysEveUserController {
     /**
      * 自定义设置主题颜色
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/editUserInstallThemeColor")
     public void editUserInstallThemeColor(InputObject inputObject, OutputObject outputObject) {
@@ -198,8 +198,8 @@ public class SysEveUserController {
     /**
      * 自定义设置win背景图片
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/editUserInstallWinBgPic")
     public void editUserInstallWinBgPic(InputObject inputObject, OutputObject outputObject) {
@@ -209,8 +209,8 @@ public class SysEveUserController {
     /**
      * 自定义设置win锁屏背景图片
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/editUserInstallWinLockBgPic")
     public void editUserInstallWinLockBgPic(InputObject inputObject, OutputObject outputObject) {
@@ -220,8 +220,8 @@ public class SysEveUserController {
     /**
      * 自定义设置win开始菜单尺寸
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/editUserInstallWinStartMenuSize")
     public void editUserInstallWinStartMenuSize(InputObject inputObject, OutputObject outputObject) {
@@ -231,8 +231,8 @@ public class SysEveUserController {
     /**
      * 自定义设置win任务栏在屏幕的位置
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/editUserInstallWinTaskPosition")
     public void editUserInstallWinTaskPosition(InputObject inputObject, OutputObject outputObject) {
@@ -242,8 +242,8 @@ public class SysEveUserController {
     /**
      * 修改密码
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/editUserPassword")
     public void editUserPassword(InputObject inputObject, OutputObject outputObject) {
@@ -253,8 +253,8 @@ public class SysEveUserController {
     /**
      * 自定义设置win雾化
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/editUserInstallVagueBgSrc")
     public void editUserInstallVagueBgSrc(InputObject inputObject, OutputObject outputObject) {
@@ -264,8 +264,8 @@ public class SysEveUserController {
     /**
      * 自定义设置窗口下面展示的是图标还是图标+文字
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/editUserInstallLoadMenuIconById")
     public void editUserInstallLoadMenuIconById(InputObject inputObject, OutputObject outputObject) {
@@ -275,8 +275,8 @@ public class SysEveUserController {
     /**
      * 锁屏密码解锁
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/queryUserLockByLockPwd")
     public void queryUserLockByLockPwd(InputObject inputObject, OutputObject outputObject) {
@@ -286,8 +286,8 @@ public class SysEveUserController {
     /**
      * 修改个人信息时获取数据回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/queryUserDetailsMationByUserId")
     public void queryUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -297,8 +297,8 @@ public class SysEveUserController {
     /**
      * 修改个人信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/editUserDetailsMationByUserId")
     public void editUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -308,8 +308,8 @@ public class SysEveUserController {
     /**
      * 获取还没有分配账号的员工
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/querySysUserListByUserName")
     public void querySysUserListByUserName(InputObject inputObject, OutputObject outputObject) {
@@ -319,8 +319,8 @@ public class SysEveUserController {
     /**
      * 获取该用户拥有的桌面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveUserController/querySysDeskTopByUserId")
     public void querySysDeskTopByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -330,8 +330,8 @@ public class SysEveUserController {
     /**
      * 根据用户id获取用户信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryUserMationByUserId", value = "根据用户id获取用户信息", method = "GET", allUse = "2")
     @ApiImplicitParams({

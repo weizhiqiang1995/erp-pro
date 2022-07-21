@@ -85,8 +85,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 获取管理员用户列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysUserList(InputObject inputObject, OutputObject outputObject) {
@@ -100,8 +100,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 锁定账号
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -121,8 +121,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 解锁账号
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -142,8 +142,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 创建账号
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -220,8 +220,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 重置密码
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -237,8 +237,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 登录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryUserToLogin(InputObject inputObject, OutputObject outputObject) {
@@ -327,8 +327,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 从session中获取用户信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryUserMationBySession(InputObject inputObject, OutputObject outputObject) {
@@ -343,8 +343,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 退出
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void deleteUserMationBySession(InputObject inputObject, OutputObject outputObject) {
@@ -370,8 +370,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 获取角色和当前已经绑定的角色信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryRoleAndBindRoleByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -391,8 +391,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 编辑用户绑定的角色
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -404,8 +404,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 获取桌面菜单列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDeskTopMenuBySession(InputObject inputObject, OutputObject outputObject) {
@@ -416,8 +416,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 获取全部菜单列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllMenuBySession(InputObject inputObject, OutputObject outputObject) {
@@ -428,8 +428,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 自定义设置主题颜色
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -446,8 +446,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 自定义设置win背景图片
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -464,8 +464,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 自定义设置win锁屏背景图片
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -482,8 +482,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 自定义设置win开始菜单尺寸
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -500,8 +500,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 自定义设置win任务栏在屏幕的位置
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -518,8 +518,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 修改密码
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -551,8 +551,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 自定义设置win雾化
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -570,8 +570,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 自定义设置窗口下面展示的是图标还是图标+文字
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -588,8 +588,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 锁屏密码解锁
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryUserLockByLockPwd(InputObject inputObject, OutputObject outputObject) {
@@ -608,8 +608,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 修改个人信息时获取数据回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -622,8 +622,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 修改个人信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -638,8 +638,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 获取还没有分配账号的员工
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysUserListByUserName(InputObject inputObject, OutputObject outputObject) {
@@ -653,8 +653,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     /**
      * 获取该用户拥有的桌面
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysDeskTopByUserId(InputObject inputObject, OutputObject outputObject) {

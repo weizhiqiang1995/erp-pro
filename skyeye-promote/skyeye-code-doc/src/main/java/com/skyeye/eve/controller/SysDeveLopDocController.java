@@ -33,8 +33,8 @@ public class SysDeveLopDocController {
     /**
      * 获取开发文档目录信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/querySysDeveLopTypeList")
     public void querySysDeveLopTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -44,8 +44,8 @@ public class SysDeveLopDocController {
     /**
      * 新增开发文档目录信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/insertSysDeveLopType")
     public void insertSysDeveLopType(InputObject inputObject, OutputObject outputObject) {
@@ -55,8 +55,8 @@ public class SysDeveLopDocController {
     /**
      * 编辑开发文档目录信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/querySysDeveLopTypeByIdToEdit")
     public void querySysDeveLopTypeByIdToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -66,8 +66,8 @@ public class SysDeveLopDocController {
     /**
      * 编辑开发文档目录信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/editSysDeveLopTypeById")
     public void editSysDeveLopTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -77,8 +77,8 @@ public class SysDeveLopDocController {
     /**
      * 删除开发文档目录信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/deleteSysDeveLopTypeById")
     public void deleteSysDeveLopTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -88,8 +88,8 @@ public class SysDeveLopDocController {
     /**
      * 获取一级文档目录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/querySysDeveLopTypeByFirstType")
     public void querySysDeveLopTypeByFirstType(InputObject inputObject, OutputObject outputObject) {
@@ -99,8 +99,8 @@ public class SysDeveLopDocController {
     /**
      * 开发文档目录上线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/editSysDeveLopTypeStateISupById")
     public void editSysDeveLopTypeStateISupById(InputObject inputObject, OutputObject outputObject) {
@@ -110,8 +110,8 @@ public class SysDeveLopDocController {
     /**
      * 开发文档目录下线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/editSysDeveLopTypeStateISdownById")
     public void editSysDeveLopTypeStateISdownById(InputObject inputObject, OutputObject outputObject) {
@@ -121,8 +121,8 @@ public class SysDeveLopDocController {
     /**
      * 开发文档目录上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/editSysDeveLopTypeOrderByISupById")
     public void editSysDeveLopTypeOrderByISupById(InputObject inputObject, OutputObject outputObject) {
@@ -132,8 +132,8 @@ public class SysDeveLopDocController {
     /**
      * 开发文档目录下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/editSysDeveLopTypeOrderByISdownById")
     public void editSysDeveLopTypeOrderByISdownById(InputObject inputObject, OutputObject outputObject) {
@@ -143,8 +143,8 @@ public class SysDeveLopDocController {
     /**
      * 获取开发文档信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysdevelopdoc011", value = "获取开发文档信息", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysDeveLopDocQueryDo.class)
@@ -156,8 +156,8 @@ public class SysDeveLopDocController {
     /**
      * 新增开发文档信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/addSysDeveLopDoc")
     public void addSysDeveLopDoc(InputObject inputObject, OutputObject outputObject) {
@@ -167,8 +167,8 @@ public class SysDeveLopDocController {
     /**
      * 编辑开发文档信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/querySysDeveLopDocByIdToEdit")
     public void querySysDeveLopDocByIdToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -178,8 +178,8 @@ public class SysDeveLopDocController {
     /**
      * 编辑开发文档信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/editSysDeveLopDocById")
     public void editSysDeveLopDocById(InputObject inputObject, OutputObject outputObject) {
@@ -189,8 +189,8 @@ public class SysDeveLopDocController {
     /**
      * 删除开发文档信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/deleteSysDeveLopDocById")
     public void deleteSysDeveLopDocById(InputObject inputObject, OutputObject outputObject) {
@@ -200,8 +200,8 @@ public class SysDeveLopDocController {
     /**
      * 开发文档上线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/editSysDeveLopDocStateISupById")
     public void editSysDeveLopDocStateISupById(InputObject inputObject, OutputObject outputObject) {
@@ -211,8 +211,8 @@ public class SysDeveLopDocController {
     /**
      * 开发文档下线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/editSysDeveLopDocStateISdownById")
     public void editSysDeveLopDocStateISdownById(InputObject inputObject, OutputObject outputObject) {
@@ -222,8 +222,8 @@ public class SysDeveLopDocController {
     /**
      * 开发文档上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/editSysDeveLopDocOrderByISupById")
     public void editSysDeveLopDocOrderByISupById(InputObject inputObject, OutputObject outputObject) {
@@ -233,8 +233,8 @@ public class SysDeveLopDocController {
     /**
      * 开发文档下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/editSysDeveLopDocOrderByISdownById")
     public void editSysDeveLopDocOrderByISdownById(InputObject inputObject, OutputObject outputObject) {
@@ -244,8 +244,8 @@ public class SysDeveLopDocController {
     /**
      * 获取一级分类列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/querySysDeveLopFirstTypeToShow")
     public void querySysDeveLopFirstTypeToShow(InputObject inputObject, OutputObject outputObject) {
@@ -255,8 +255,8 @@ public class SysDeveLopDocController {
     /**
      * 获取二级分类列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/querySysDeveLopSecondTypeToShow")
     public void querySysDeveLopSecondTypeToShow(InputObject inputObject, OutputObject outputObject) {
@@ -266,8 +266,8 @@ public class SysDeveLopDocController {
     /**
      * 获取文档标题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/querySysDeveLopDocToShow")
     public void querySysDeveLopDocToShow(InputObject inputObject, OutputObject outputObject) {
@@ -277,8 +277,8 @@ public class SysDeveLopDocController {
     /**
      * 获取文档内容
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysDeveLopDocController/querySysDeveLopDocContentToShow")
     public void querySysDeveLopDocContentToShow(InputObject inputObject, OutputObject outputObject) {

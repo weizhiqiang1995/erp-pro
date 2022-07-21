@@ -92,8 +92,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 获取计划列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
@@ -108,8 +108,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 新增个人计划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -293,8 +293,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 新增部门计划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -373,8 +373,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 新增公司计划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -429,8 +429,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 取消定时发送
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -463,8 +463,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 删除计划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -491,8 +491,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 编辑计划时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysWorkPlanToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -513,8 +513,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 编辑个人计划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -573,8 +573,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 编辑部门或者公司计划
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -631,8 +631,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 定时发送
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -656,8 +656,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 计划详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysWorkPlanDetailsById(InputObject inputObject, OutputObject outputObject) {
@@ -682,8 +682,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 获取我的任务计划列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMySysWorkPlanListByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -698,8 +698,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 计划状态变更
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void subEditWorkPlanStateById(InputObject inputObject, OutputObject outputObject) {
@@ -719,8 +719,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 获取我创建的任务计划列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMyCreateSysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
@@ -735,8 +735,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 获取所有任务计划列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllSysWorkPlanList(InputObject inputObject, OutputObject outputObject) {
@@ -750,8 +750,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 获取我的下属的任务计划列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMyBranchSysWorkPlanList(InputObject inputObject, OutputObject outputObject) {

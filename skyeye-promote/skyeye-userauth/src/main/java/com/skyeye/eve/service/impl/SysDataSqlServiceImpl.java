@@ -51,8 +51,8 @@ public class SysDataSqlServiceImpl implements SysDataSqlService {
     /**
      * 获取历史备份列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysDataSqlBackupsList(InputObject inputObject, OutputObject outputObject) {
@@ -69,8 +69,8 @@ public class SysDataSqlServiceImpl implements SysDataSqlService {
     /**
      * 获取所有表的列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllTableMationList(InputObject inputObject, OutputObject outputObject) {
@@ -88,8 +88,8 @@ public class SysDataSqlServiceImpl implements SysDataSqlService {
     /**
      * 开始备份
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -134,8 +134,8 @@ public class SysDataSqlServiceImpl implements SysDataSqlService {
     /**
      * 开始还原
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void insertTableReduction(InputObject inputObject, OutputObject outputObject) {

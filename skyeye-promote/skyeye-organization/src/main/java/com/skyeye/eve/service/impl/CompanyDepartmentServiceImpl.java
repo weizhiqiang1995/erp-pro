@@ -41,8 +41,8 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
     /**
      * 获取公司部门信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyDepartmentList(InputObject inputObject, OutputObject outputObject) {
@@ -60,8 +60,8 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
     /**
      * 添加公司部门信息信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -81,8 +81,8 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
     /**
      * 删除公司部门信息信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -106,8 +106,8 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
     /**
      * 编辑公司部门信息信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyDepartmentMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -121,8 +121,8 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
     /**
      * 编辑公司部门信息信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -139,8 +139,8 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
     /**
      * 获取公司部门信息列表展示为树根据公司id
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyDepartmentListTreeByCompanyId(InputObject inputObject, OutputObject outputObject) {
@@ -156,8 +156,8 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
     /**
      * 根据公司id获取部门列表展示为下拉选择框
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyDepartmentListByCompanyIdToSelect(InputObject inputObject, OutputObject outputObject) {
@@ -172,8 +172,8 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
     /**
      * 获取部门列表展示为表格供其他选择
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyDepartmentListToChoose(InputObject inputObject, OutputObject outputObject) {
@@ -187,8 +187,8 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
     /**
      * 根据部门ids获取部门信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCompanyDepartmentListByIds(InputObject inputObject, OutputObject outputObject) {
@@ -207,8 +207,8 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
     /**
      * 根据部门id获取部门加班结算方式
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDepartmentListByCurrentUserBelong(InputObject inputObject, OutputObject outputObject) {

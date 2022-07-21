@@ -20,8 +20,8 @@ public class ForumTagController {
     /**
      * 获取论坛标签列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumTagController/queryForumTagList")
     public void queryForumTagList(InputObject inputObject, OutputObject outputObject) {
@@ -32,8 +32,8 @@ public class ForumTagController {
     /**
      * 添加论坛标签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumTagController/insertForumTagMation")
     public void insertForumTagMation(InputObject inputObject, OutputObject outputObject) {
@@ -43,8 +43,8 @@ public class ForumTagController {
     /**
      * 删除论坛标签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumTagController/deleteForumTagById")
     public void deleteForumTagById(InputObject inputObject, OutputObject outputObject) {
@@ -54,8 +54,8 @@ public class ForumTagController {
     /**
      * 上线论坛标签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumTagController/updateUpForumTagById")
     public void updateUpForumTagById(InputObject inputObject, OutputObject outputObject) {
@@ -65,8 +65,8 @@ public class ForumTagController {
     /**
      * 下线论坛标签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumTagController/updateDownForumTagById")
     public void updateDownForumTagById(InputObject inputObject, OutputObject outputObject) {
@@ -76,8 +76,8 @@ public class ForumTagController {
     /**
      * 通过id查找对应的论坛标签信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumTagController/selectForumTagById")
     public void selectForumTagById(InputObject inputObject, OutputObject outputObject) {
@@ -87,8 +87,8 @@ public class ForumTagController {
     /**
      * 通过id编辑对应的论坛标签信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumTagController/editForumTagMationById")
     public void editForumTagMationById(InputObject inputObject, OutputObject outputObject) {
@@ -98,8 +98,8 @@ public class ForumTagController {
     /**
      * 论坛标签上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumTagController/editForumTagMationOrderNumUpById")
     public void editSysWinTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) {
@@ -109,8 +109,8 @@ public class ForumTagController {
     /**
      * 论坛标签下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumTagController/editForumTagMationOrderNumDownById")
     public void editSysWinTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) {
@@ -120,8 +120,8 @@ public class ForumTagController {
     /**
      * 获取已经上线的论坛标签列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/ForumTagController/queryForumTagUpStateList")
     public void queryForumTagUpStateList(InputObject inputObject, OutputObject outputObject) {

@@ -80,8 +80,8 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
     /**
      * 获取待设定薪资员工列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryWagesStaffWaitAllocatedMationList(InputObject inputObject, OutputObject outputObject) {
@@ -95,8 +95,8 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
     /**
      * 根据员工id获取该员工拥有的薪资字段
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryStaffWagesModelFieldMationListByStaffId(InputObject inputObject, OutputObject outputObject) {
@@ -133,8 +133,8 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
     /**
      * 保存员工薪资设定
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -152,8 +152,8 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
     /**
      * 获取已设定薪资员工列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryWagesStaffDesignMationList(InputObject inputObject, OutputObject outputObject) {
@@ -167,8 +167,8 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
     /**
      * 获取员工薪资条薪资
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryWagesStaffPaymentDetail(InputObject inputObject, OutputObject outputObject) {

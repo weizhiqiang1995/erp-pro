@@ -28,8 +28,8 @@ public class MailGroupController {
     /**
      * 获取我的通讯录类别列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MailGroupController/queryMailMationTypeList")
     public void queryMailMationTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -39,8 +39,8 @@ public class MailGroupController {
     /**
      * 新增通讯录类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MailGroupController/insertMailMationType")
     public void insertMailMationType(InputObject inputObject, OutputObject outputObject) {
@@ -50,8 +50,8 @@ public class MailGroupController {
     /**
      * 删除通讯录类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MailGroupController/deleteMailMationTypeById")
     public void deleteMailMationTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -61,8 +61,8 @@ public class MailGroupController {
     /**
      * 编辑通讯录类型进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MailGroupController/queryMailMationTypeToEditById")
     public void queryMailMationTypeToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -72,8 +72,8 @@ public class MailGroupController {
     /**
      * 编辑通讯录类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MailGroupController/editMailMationTypeById")
     public void editMailMationTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -83,8 +83,8 @@ public class MailGroupController {
     /**
      * 获取我的通讯录类型用作下拉框展示
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MailGroupController/queryMailMationTypeListToSelect")
     public void queryMailMationTypeListToSelect(InputObject inputObject, OutputObject outputObject) {

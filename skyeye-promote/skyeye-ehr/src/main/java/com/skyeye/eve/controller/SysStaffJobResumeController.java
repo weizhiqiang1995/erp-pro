@@ -25,8 +25,8 @@ public class SysStaffJobResumeController {
     /**
      * 查询所有工作履历列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffJobResumeController/queryAllSysStaffJobResumeList")
     public void queryAllSysStaffJobResumeList(InputObject inputObject, OutputObject outputObject) {
@@ -36,8 +36,8 @@ public class SysStaffJobResumeController {
     /**
      * 员工工作履历信息录入
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffJobResumeController/insertSysStaffJobResumeMation")
     public void insertSysStaffJobResumeMation(InputObject inputObject, OutputObject outputObject) {
@@ -47,8 +47,8 @@ public class SysStaffJobResumeController {
     /**
      * 编辑员工工作履历信息时回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffJobResumeController/querySysStaffJobResumeMationToEdit")
     public void querySysStaffJobResumeMationToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -58,8 +58,8 @@ public class SysStaffJobResumeController {
     /**
      * 编辑员工工作履历信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffJobResumeController/editSysStaffJobResumeMationById")
     public void editSysStaffJobResumeMationById(InputObject inputObject, OutputObject outputObject) {
@@ -69,8 +69,8 @@ public class SysStaffJobResumeController {
     /**
      * 删除员工工作履历信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffJobResumeController/deleteSysStaffJobResumeMationById")
     public void deleteSysStaffJobResumeMationById(InputObject inputObject, OutputObject outputObject) {
@@ -80,8 +80,8 @@ public class SysStaffJobResumeController {
     /**
      * 查询指定员工的工作履历列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysstaffjobresume006", value = "查询指定员工的工作履历列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = PointStaffQueryDo.class)

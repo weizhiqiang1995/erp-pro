@@ -20,8 +20,8 @@ public class SysEveWinController {
     /**
      * 获取系统信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinController/queryWinMationList")
     public void queryWinMationList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class SysEveWinController {
     /**
      * 新增系统信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinController/insertWinMation")
     public void insertWinMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class SysEveWinController {
     /**
      * 编辑系统信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinController/queryWinMationToEditById")
     public void queryWinMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class SysEveWinController {
     /**
      * 编辑系统信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinController/editWinMationById")
     public void editWinMationById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class SysEveWinController {
     /**
      * 删除系统信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinController/deleteWinMationById")
     public void deleteWinMationById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class SysEveWinController {
     /**
      * 进行商户系统授权
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinController/editAuthorizationById")
     public void editAuthorizationById(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class SysEveWinController {
     /**
      * 进行商户系统取消授权
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinController/editCancleAuthorizationById")
     public void editCancleAuthorizationById(InputObject inputObject, OutputObject outputObject) {
@@ -97,8 +97,8 @@ public class SysEveWinController {
     /**
      * 获取应用商店
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinController/queryWinMationListToShow")
     public void queryWinMationListToShow(InputObject inputObject, OutputObject outputObject) {
@@ -108,8 +108,8 @@ public class SysEveWinController {
     /**
      * 系统重要的同步操作
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinController/insertWinMationImportantSynchronization")
     public void insertWinMationImportantSynchronization(InputObject inputObject, OutputObject outputObject) {
@@ -119,8 +119,8 @@ public class SysEveWinController {
     /**
      * 系统重要的同步操作获取数据
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinController/queryWinMationImportantSynchronizationData")
     public void queryWinMationImportantSynchronizationData(InputObject inputObject, OutputObject outputObject) {

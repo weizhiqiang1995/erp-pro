@@ -29,8 +29,8 @@ public class SysEveIconServiceImpl implements SysEveIconService {
     /**
      * 获取ICON列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysIconList(InputObject inputObject, OutputObject outputObject) {
@@ -44,8 +44,8 @@ public class SysEveIconServiceImpl implements SysEveIconService {
     /**
      * 添加ICON信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -66,8 +66,8 @@ public class SysEveIconServiceImpl implements SysEveIconService {
     /**
      * 删除ICON信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -79,8 +79,8 @@ public class SysEveIconServiceImpl implements SysEveIconService {
     /**
      * 编辑ICON信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysIconMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -93,8 +93,8 @@ public class SysEveIconServiceImpl implements SysEveIconService {
     /**
      * 编辑ICON信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -111,8 +111,8 @@ public class SysEveIconServiceImpl implements SysEveIconService {
     /**
      * 获取ICON列表供menu菜单使用
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysIconListToMenu(InputObject inputObject, OutputObject outputObject) {

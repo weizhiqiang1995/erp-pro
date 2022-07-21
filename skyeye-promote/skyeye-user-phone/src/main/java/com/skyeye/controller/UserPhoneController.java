@@ -20,8 +20,8 @@ public class UserPhoneController {
     /**
      * 手机端用户登录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserPhoneController/queryPhoneToLogin")
     public void queryPhoneToLogin(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class UserPhoneController {
     /**
      * 手机端从session中获取菜单权限信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserPhoneController/queryPhoneUserMenuAuth")
     public void queryPhoneUserMenuAuth(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class UserPhoneController {
     /**
      * 手机端注销登录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserPhoneController/queryPhoneToExit")
     public void queryPhoneToExit(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class UserPhoneController {
     /**
      * 根据openId获取用户信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserPhoneController/queryUserMationByOpenId")
     public void queryUserMationByOpenId(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class UserPhoneController {
     /**
      * openId绑定用户信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserPhoneController/insertUserMationByOpenId")
     public void insertUserMationByOpenId(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class UserPhoneController {
     /**
      * 人员选择获取所有公司和人
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserPhoneController/queryAllPeopleToTree")
     public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) {

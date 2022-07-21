@@ -20,8 +20,8 @@ public class SysEveWinDragDropController {
     /**
      * 用户自定义创建菜单盒子
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinDragDropController/insertWinCustomMenuBox")
     public void insertWinCustomMenuBox(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class SysEveWinDragDropController {
     /**
      * 用户自定义创建菜单
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinDragDropController/insertWinCustomMenu")
     public void insertWinCustomMenu(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class SysEveWinDragDropController {
     /**
      * 用户删除自定义菜单或文件夹
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinDragDropController/deleteWinMenuOrBoxById")
     public void deleteWinMenuOrBoxById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class SysEveWinDragDropController {
     /**
      * 用户自定义父菜单
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinDragDropController/editMenuParentIdById")
     public void editMenuParentIdById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class SysEveWinDragDropController {
     /**
      * 获取菜单类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinDragDropController/queryMenuMationTypeById")
     public void queryMenuMationTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class SysEveWinDragDropController {
     /**
      * 编辑自定义盒子时回显信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinDragDropController/queryCustomMenuBoxMationEditById")
     public void queryCustomMenuBoxMationEditById(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class SysEveWinDragDropController {
     /**
      * 编辑自定义盒子
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinDragDropController/editCustomMenuBoxMationById")
     public void editCustomMenuBoxMationById(InputObject inputObject, OutputObject outputObject) {
@@ -97,8 +97,8 @@ public class SysEveWinDragDropController {
     /**
      * 编辑快捷方式时回显信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinDragDropController/queryCustomMenuMationEditById")
     public void queryCustomMenuMationEditById(InputObject inputObject, OutputObject outputObject) {
@@ -108,8 +108,8 @@ public class SysEveWinDragDropController {
     /**
      * 编辑快捷方式
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinDragDropController/editCustomMenuMationById")
     public void editCustomMenuMationById(InputObject inputObject, OutputObject outputObject) {
@@ -119,8 +119,8 @@ public class SysEveWinDragDropController {
     /**
      * 系统菜单发送到桌面快捷方式
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinDragDropController/editCustomMenuToDeskTopById")
     public void editCustomMenuToDeskTopById(InputObject inputObject, OutputObject outputObject) {

@@ -62,8 +62,8 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
     /**
      * 查询语种等级列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysStaffLanguageLevelList(InputObject inputObject, OutputObject outputObject) {
@@ -78,8 +78,8 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
     /**
      * 新增语种等级
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -100,8 +100,8 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
     /**
      * 修改语种等级时数据回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysStaffLanguageLevelMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -118,8 +118,8 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
     /**
      * 修改语种等级
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -138,8 +138,8 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
     /**
      * 禁用语种等级
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -161,8 +161,8 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
     /**
      * 启用语种等级
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -184,8 +184,8 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
     /**
      * 删除语种等级
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -207,8 +207,8 @@ public class SysStaffLanguageLevelServiceImpl implements SysStaffLanguageLevelSe
     /**
      * 获取所有启用语种等级
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysStaffLanguageLevelUpMation(InputObject inputObject, OutputObject outputObject) {

@@ -44,8 +44,8 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
     /**
      * 查询所有档案列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllSysStaffArchivesList(InputObject inputObject, OutputObject outputObject) {
@@ -60,8 +60,8 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
     /**
      * 离职员工在档列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysLeaveStaffArchivesList(InputObject inputObject, OutputObject outputObject) {
@@ -76,8 +76,8 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
     /**
      * 员工不在档列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysStaffNotInArchivesList(InputObject inputObject, OutputObject outputObject) {
@@ -92,8 +92,8 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
     /**
      * 员工无在档列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysStaffNoArchivesList(InputObject inputObject, OutputObject outputObject) {
@@ -107,8 +107,8 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
     /**
      * 员工档案信息录入
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -128,8 +128,8 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
     /**
      * 编辑员工档案信息时回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysStaffArchivesMationToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -153,8 +153,8 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
     /**
      * 编辑员工档案信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

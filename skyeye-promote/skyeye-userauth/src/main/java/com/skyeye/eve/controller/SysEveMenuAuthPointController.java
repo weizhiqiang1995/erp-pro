@@ -20,8 +20,8 @@ public class SysEveMenuAuthPointController {
     /**
      * 获取菜单权限点列表根据菜单id
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveMenuAuthPointController/querySysEveMenuAuthPointListByMenuId")
     public void querySysEveMenuAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class SysEveMenuAuthPointController {
     /**
      * 添加菜单权限点
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveMenuAuthPointController/insertSysEveMenuAuthPointMation")
     public void insertSysEveMenuAuthPointMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class SysEveMenuAuthPointController {
     /**
      * 编辑菜单权限点时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveMenuAuthPointController/querySysEveMenuAuthPointMationToEditById")
     public void querySysEveMenuAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class SysEveMenuAuthPointController {
     /**
      * 编辑菜单权限点
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveMenuAuthPointController/editSysEveMenuAuthPointMationById")
     public void editSysEveMenuAuthPointMationById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class SysEveMenuAuthPointController {
     /**
      * 删除菜单权限点
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveMenuAuthPointController/deleteSysEveMenuAuthPointMationById")
     public void deleteSysEveMenuAuthPointMationById(InputObject inputObject, OutputObject outputObject) {

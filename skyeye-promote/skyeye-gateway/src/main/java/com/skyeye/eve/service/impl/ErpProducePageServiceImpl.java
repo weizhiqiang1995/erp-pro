@@ -23,8 +23,8 @@ public class ErpProducePageServiceImpl implements ErpProducePageService {
     /**
      * 统计当前部门月度领料图
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDepartmentPickMaterial(InputObject inputObject, OutputObject outputObject) {
@@ -43,8 +43,8 @@ public class ErpProducePageServiceImpl implements ErpProducePageService {
     /**
      * 统计当前部门月度补料图
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDepartmentPatchMaterial(InputObject inputObject, OutputObject outputObject) {
@@ -63,8 +63,8 @@ public class ErpProducePageServiceImpl implements ErpProducePageService {
     /**
      * 统计当前部门月度退料图
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDepartmentReturnMaterial(InputObject inputObject, OutputObject outputObject) {
@@ -83,8 +83,8 @@ public class ErpProducePageServiceImpl implements ErpProducePageService {
     /**
      * 统计当前部门月度新建加工单图
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDepartmentMachin(InputObject inputObject, OutputObject outputObject) {

@@ -34,8 +34,8 @@ public class KnowledgeContentController {
     /**
      * 获取知识库列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgecontent001", value = "获取知识库列表", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -53,8 +53,8 @@ public class KnowledgeContentController {
     /**
      * 添加知识库
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgecontent002", value = "添加知识库", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = KnowledgeContentMation.class)
@@ -66,8 +66,8 @@ public class KnowledgeContentController {
     /**
      * 通过id查找对应的知识库信息用以编辑
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgecontent003", value = "通过id查找对应的知识库信息用以编辑", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -80,8 +80,8 @@ public class KnowledgeContentController {
     /**
      * 编辑知识库信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgecontent004", value = "编辑知识库信息", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = KnowledgeContentMation.class, value = {
@@ -94,8 +94,8 @@ public class KnowledgeContentController {
     /**
      * 删除知识库
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgecontent005", value = "删除知识库", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -108,8 +108,8 @@ public class KnowledgeContentController {
     /**
      * 知识库详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgecontent006", value = "知识库详情", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -122,8 +122,8 @@ public class KnowledgeContentController {
     /**
      * 上传文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgecontent007", value = "上传文件", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -140,8 +140,8 @@ public class KnowledgeContentController {
     /**
      * 上传文件合并块
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgecontent008", value = "上传文件合并块", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -156,8 +156,8 @@ public class KnowledgeContentController {
     /**
      * 文件分块上传检测是否上传
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgecontent009", value = "文件分块上传检测是否上传", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -172,8 +172,8 @@ public class KnowledgeContentController {
     /**
      * 获取待审核的知识库列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgecontent010", value = "获取待审核的知识库列表", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -192,8 +192,8 @@ public class KnowledgeContentController {
     /**
      * 获取知识库信息用于回显审核
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgecontent011", value = "获取知识库信息用于回显审核", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -206,8 +206,8 @@ public class KnowledgeContentController {
     /**
      * 审核知识库
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgecontent012", value = "获取知识库信息用于回显审核", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -222,8 +222,8 @@ public class KnowledgeContentController {
     /**
      * 获取已经审核的知识库列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgecontent013", value = "获取已经审核的知识库列表", method = "POST", allUse = "1")
     @ApiImplicitParams({
@@ -245,8 +245,8 @@ public class KnowledgeContentController {
     /**
      * 未审核知识库详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgecontent014", value = "未审核知识库详情", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -259,8 +259,8 @@ public class KnowledgeContentController {
     /**
      * 已审核的知识库详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgecontent015", value = "已审核的知识库详情", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -273,8 +273,8 @@ public class KnowledgeContentController {
     /**
      * 获取企业知识库列表(已审核通过)
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "knowledgecontent016", value = "获取企业知识库列表(已审核通过)", method = "POST", allUse = "1")
     @ApiImplicitParams({

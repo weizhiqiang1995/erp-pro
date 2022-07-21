@@ -20,8 +20,8 @@ public class SysEveWinThemeColorController {
     /**
      * 获取win系统主题颜色列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinThemeColorController/querySysEveWinThemeColorList")
     public void querySysEveWinThemeColorList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class SysEveWinThemeColorController {
     /**
      * 添加win系统主题颜色信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinThemeColorController/insertSysEveWinThemeColorMation")
     public void insertSysEveWinThemeColorMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class SysEveWinThemeColorController {
     /**
      * 删除win系统主题颜色信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinThemeColorController/deleteSysEveWinThemeColorMationById")
     public void deleteSysEveWinThemeColorMationById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class SysEveWinThemeColorController {
     /**
      * 编辑win系统主题颜色信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinThemeColorController/querySysEveWinThemeColorMationToEditById")
     public void querySysEveWinThemeColorMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class SysEveWinThemeColorController {
     /**
      * 编辑win系统主题颜色信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveWinThemeColorController/editSysEveWinThemeColorMationById")
     public void editSysEveWinThemeColorMationById(InputObject inputObject, OutputObject outputObject) {

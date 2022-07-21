@@ -28,8 +28,8 @@ public class UserEmailController {
     /**
      * 根据用户获取该用户绑定的邮箱信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserEmailController/queryEmailListByUserId")
     public void queryEmailListByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -39,8 +39,8 @@ public class UserEmailController {
     /**
      * 用户新增邮箱
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserEmailController/insertEmailListByUserId")
     public void insertEmailListByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -50,8 +50,8 @@ public class UserEmailController {
     /**
      * 从服务器上获取收件箱里的邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserEmailController/insertEmailListFromServiceByUserId")
     public void insertEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -61,8 +61,8 @@ public class UserEmailController {
     /**
      * 根据绑定邮箱id获取收件箱内容
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "useremail004", value = "根据绑定邮箱id获取收件箱内容", method = "POST", allUse = "2")
     @ApiImplicitParams(classBean = EmailQueryDo.class)
@@ -74,8 +74,8 @@ public class UserEmailController {
     /**
      * 获取邮件内容
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserEmailController/queryEmailMationByEmailId")
     public void queryEmailMationByEmailId(InputObject inputObject, OutputObject outputObject) {
@@ -85,8 +85,8 @@ public class UserEmailController {
     /**
      * 从服务器上获取已发送邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserEmailController/insertSendedEmailListFromServiceByUserId")
     public void insertSendedEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -96,8 +96,8 @@ public class UserEmailController {
     /**
      * 根据绑定邮箱id获取已发送邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "useremail007", value = "根据绑定邮箱id获取已发送邮件", method = "POST", allUse = "2")
     @ApiImplicitParams(classBean = EmailQueryDo.class)
@@ -109,8 +109,8 @@ public class UserEmailController {
     /**
      * 从服务器上获取已删除邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserEmailController/insertDelsteEmailListFromServiceByUserId")
     public void insertDelsteEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -120,8 +120,8 @@ public class UserEmailController {
     /**
      * 根据绑定邮箱id获取已删除邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "useremail009", value = "根据绑定邮箱id获取已删除邮件", method = "POST", allUse = "2")
     @ApiImplicitParams(classBean = EmailQueryDo.class)
@@ -133,8 +133,8 @@ public class UserEmailController {
     /**
      * 从服务器上获取草稿箱邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserEmailController/insertDraftsEmailListFromServiceByUserId")
     public void insertDraftsEmailListFromServiceByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -144,8 +144,8 @@ public class UserEmailController {
     /**
      * 根据绑定邮箱id获取草稿箱邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "useremail011", value = "根据绑定邮箱id获取草稿箱邮件", method = "POST", allUse = "2")
     @ApiImplicitParams(classBean = EmailQueryDo.class)
@@ -157,8 +157,8 @@ public class UserEmailController {
     /**
      * 发送邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserEmailController/insertToSendEmailMationByUserId")
     public void insertToSendEmailMationByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -168,8 +168,8 @@ public class UserEmailController {
     /**
      * 保存邮件为草稿
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserEmailController/insertToDraftsEmailMationByUserId")
     public void insertToDraftsEmailMationByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -179,8 +179,8 @@ public class UserEmailController {
     /**
      * 编辑草稿箱内容展示时回显使用
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserEmailController/queryDraftsEmailMationToEditByUserId")
     public void queryDraftsEmailMationToEditByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -190,8 +190,8 @@ public class UserEmailController {
     /**
      * 草稿邮件修改
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserEmailController/editToDraftsEmailMationByUserId")
     public void editToDraftsEmailMationByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -201,8 +201,8 @@ public class UserEmailController {
     /**
      * 草稿箱邮件发送
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserEmailController/insertToSendEmailMationByEmailId")
     public void insertToSendEmailMationByEmailId(InputObject inputObject, OutputObject outputObject) {
@@ -212,8 +212,8 @@ public class UserEmailController {
     /**
      * 转发时进行信息回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserEmailController/queryForwardEmailMationToEditByUserId")
     public void queryForwardEmailMationToEditByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -223,8 +223,8 @@ public class UserEmailController {
     /**
      * 转发邮件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/UserEmailController/insertForwardToSendEmailMationByUserId")
     public void insertForwardToSendEmailMationByUserId(InputObject inputObject, OutputObject outputObject) {

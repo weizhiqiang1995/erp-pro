@@ -84,7 +84,7 @@ public class SysEveModelTypeServiceImpl implements SysEveModelTypeService {
      * 校验parentId是否存在
      *
      * @param inputParams
-     * @param outputObject
+     * @param outputObject 出参以及提示信息的返回值对象
      * @return true: parentId+typeName存在, 反之false
      */
     private boolean checkParentIdExists(Map<String, Object> inputParams, OutputObject outputObject) {

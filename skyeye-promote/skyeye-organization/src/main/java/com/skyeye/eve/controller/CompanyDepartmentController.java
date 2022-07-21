@@ -33,8 +33,8 @@ public class CompanyDepartmentController {
     /**
      * 获取公司部门信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentList")
     public void queryCompanyDepartmentList(InputObject inputObject, OutputObject outputObject) {
@@ -44,8 +44,8 @@ public class CompanyDepartmentController {
     /**
      * 添加公司部门信息信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyDepartmentController/insertCompanyDepartmentMation")
     public void insertCompanyDepartmentMation(InputObject inputObject, OutputObject outputObject) {
@@ -55,8 +55,8 @@ public class CompanyDepartmentController {
     /**
      * 删除公司部门信息信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyDepartmentController/deleteCompanyDepartmentMationById")
     public void deleteCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject) {
@@ -66,8 +66,8 @@ public class CompanyDepartmentController {
     /**
      * 编辑公司部门信息信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentMationToEditById")
     public void queryCompanyDepartmentMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -77,8 +77,8 @@ public class CompanyDepartmentController {
     /**
      * 编辑公司部门信息信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyDepartmentController/editCompanyDepartmentMationById")
     public void editCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject) {
@@ -88,8 +88,8 @@ public class CompanyDepartmentController {
     /**
      * 获取公司部门信息列表展示为树根据公司id
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentListTreeByCompanyId")
     public void queryCompanyDepartmentListTreeByCompanyId(InputObject inputObject, OutputObject outputObject) {
@@ -99,8 +99,8 @@ public class CompanyDepartmentController {
     /**
      * 根据公司id获取部门列表展示为下拉选择框
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentListByCompanyIdToSelect")
     public void queryCompanyDepartmentListByCompanyIdToSelect(InputObject inputObject, OutputObject outputObject) {
@@ -110,8 +110,8 @@ public class CompanyDepartmentController {
     /**
      * 获取部门列表展示为表格供其他选择
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentListToChoose")
     public void queryCompanyDepartmentListToChoose(InputObject inputObject, OutputObject outputObject) {
@@ -121,8 +121,8 @@ public class CompanyDepartmentController {
     /**
      * 根据部门ids获取部门信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "companydepartment009", value = "根据部门ids获取部门信息列表", method = "POST", allUse = "2")
     @ApiImplicitParams({
@@ -135,8 +135,8 @@ public class CompanyDepartmentController {
     /**
      * 获取当前登录用户所属企业的所有部门信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryDepartmentListByCurrentUserBelong", value = "获取当前登录用户所属企业的所有部门信息", method = "GET", allUse = "2")
     @RequestMapping("/post/CompanyDepartmentController/queryDepartmentListByCurrentUserBelong")

@@ -26,8 +26,8 @@ public class StickyNotesServiceImpl implements StickyNotesService {
     /**
      * 新增便签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -43,8 +43,8 @@ public class StickyNotesServiceImpl implements StickyNotesService {
     /**
      * 查询便签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void selectStickyNotesMation(InputObject inputObject, OutputObject outputObject) {
@@ -58,8 +58,8 @@ public class StickyNotesServiceImpl implements StickyNotesService {
     /**
      * 编辑便签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -71,8 +71,8 @@ public class StickyNotesServiceImpl implements StickyNotesService {
     /**
      * 删除便签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

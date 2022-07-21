@@ -20,8 +20,8 @@ public class MyAgencyController {
     /**
      * 获取我的代办列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MyAgencyController/queryMyAgencyList")
     public void queryMyAgencyList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class MyAgencyController {
     /**
      * 取消代办提醒
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MyAgencyController/deleteMyAgencyList")
     public void deleteMyAgencyList(InputObject inputObject, OutputObject outputObject) {

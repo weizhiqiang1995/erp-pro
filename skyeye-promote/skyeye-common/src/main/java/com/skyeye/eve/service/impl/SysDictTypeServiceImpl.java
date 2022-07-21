@@ -49,8 +49,8 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     /**
      * 获取数据字典类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDictTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     /**
      * 新增/编辑数据字典类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -100,8 +100,8 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     /**
      * 根据ID获取数据字典类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDictTypeMationById(InputObject inputObject, OutputObject outputObject) {
@@ -114,8 +114,8 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     /**
      * 根据ID删除数据字典类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -128,8 +128,8 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     /**
      * 根据状态获取数据字典类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryDictTypeListByStatus(InputObject inputObject, OutputObject outputObject) {

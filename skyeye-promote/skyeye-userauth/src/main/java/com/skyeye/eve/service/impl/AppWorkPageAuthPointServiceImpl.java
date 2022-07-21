@@ -36,8 +36,8 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
     /**
      * 根据菜单id获取菜单权限点列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAppWorkPageAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) {
@@ -52,8 +52,8 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
     /**
      * 添加菜单权限点
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -75,8 +75,8 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
     /**
      * 编辑菜单权限点时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAppWorkPageAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -88,8 +88,8 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
     /**
      * 编辑菜单权限点
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -106,8 +106,8 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
     /**
      * 删除菜单权限点
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

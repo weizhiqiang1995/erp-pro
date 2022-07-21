@@ -25,8 +25,8 @@ public class SysStaffRewardPunishController {
     /**
      * 查询所有奖惩列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffRewardPunishController/queryAllSysStaffRewardPunishList")
     public void queryAllSysStaffRewardPunishList(InputObject inputObject, OutputObject outputObject) {
@@ -36,8 +36,8 @@ public class SysStaffRewardPunishController {
     /**
      * 员工奖惩信息录入
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffRewardPunishController/insertSysStaffRewardPunishMation")
     public void insertSysStaffRewardPunishMation(InputObject inputObject, OutputObject outputObject) {
@@ -47,8 +47,8 @@ public class SysStaffRewardPunishController {
     /**
      * 编辑员工奖惩信息时回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffRewardPunishController/querySysStaffRewardPunishMationToEdit")
     public void querySysStaffRewardPunishMationToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -58,8 +58,8 @@ public class SysStaffRewardPunishController {
     /**
      * 编辑员工奖惩信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffRewardPunishController/editSysStaffRewardPunishMationById")
     public void editSysStaffRewardPunishMationById(InputObject inputObject, OutputObject outputObject) {
@@ -69,8 +69,8 @@ public class SysStaffRewardPunishController {
     /**
      * 删除员工奖惩信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffRewardPunishController/deleteSysStaffRewardPunishMationById")
     public void deleteSysStaffRewardPunishMationById(InputObject inputObject, OutputObject outputObject) {
@@ -80,8 +80,8 @@ public class SysStaffRewardPunishController {
     /**
      * 查询指定员工的奖惩列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysstaffrewardpunish006", value = "查询指定员工的奖惩列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = PointStaffQueryDo.class)

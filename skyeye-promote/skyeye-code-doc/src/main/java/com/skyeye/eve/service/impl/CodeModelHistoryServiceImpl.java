@@ -38,8 +38,8 @@ public class CodeModelHistoryServiceImpl implements CodeModelHistoryService {
     /**
      * 获取模板生成历史列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryCodeModelHistoryList(InputObject inputObject, OutputObject outputObject) {
@@ -62,8 +62,8 @@ public class CodeModelHistoryServiceImpl implements CodeModelHistoryService {
     /**
      * 重新生成文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -103,8 +103,8 @@ public class CodeModelHistoryServiceImpl implements CodeModelHistoryService {
     /**
      * 下载文件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void downloadCodeModelHistory(InputObject inputObject, OutputObject outputObject) {

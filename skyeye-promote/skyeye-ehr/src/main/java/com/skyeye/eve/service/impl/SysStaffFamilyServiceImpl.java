@@ -45,8 +45,8 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
     /**
      * 查询所有家庭情况列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllSysStaffFamilyList(InputObject inputObject, OutputObject outputObject) {
@@ -63,8 +63,8 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
     /**
      * 员工家庭情况信息录入
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -78,8 +78,8 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
     /**
      * 编辑员工家庭情况信息时回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysStaffFamilyMationToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -105,8 +105,8 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
     /**
      * 编辑员工家庭情况信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -124,8 +124,8 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
     /**
      * 删除员工家庭情况信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -138,8 +138,8 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
     /**
      * 查询指定员工的家庭情况列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryPointStaffSysStaffFamilyList(InputObject inputObject, OutputObject outputObject) {

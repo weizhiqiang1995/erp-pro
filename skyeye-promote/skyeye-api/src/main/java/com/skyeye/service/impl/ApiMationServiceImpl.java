@@ -37,8 +37,8 @@ public class ApiMationServiceImpl implements ApiMationService {
     /**
      * 通过id查找对应的api接口信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void selectApiMationById(InputObject inputObject, OutputObject outputObject) {
@@ -52,8 +52,8 @@ public class ApiMationServiceImpl implements ApiMationService {
     /**
      * 编辑api接口信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

@@ -20,8 +20,8 @@ public class RmGroupController {
     /**
      * 获取小程序分组列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupController/queryRmGroupList")
     public void queryRmGroupList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class RmGroupController {
     /**
      * 添加小程序分组
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupController/insertRmGroupMation")
     public void insertRmGroupMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class RmGroupController {
     /**
      * 删除小程序分组信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupController/deleteRmGroupById")
     public void deleteRmGroupById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class RmGroupController {
     /**
      * 编辑小程序分组信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupController/queryRmGroupMationToEditById")
     public void queryRmGroupMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class RmGroupController {
     /**
      * 编辑小程序分组信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupController/editRmGroupMationById")
     public void editRmGroupMationById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class RmGroupController {
     /**
      * 小程序分组展示顺序上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupController/editRmGroupSortTopById")
     public void editRmGroupSortTopById(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class RmGroupController {
     /**
      * 小程序分组展示顺序下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupController/editRmGroupSortLowerById")
     public void editRmGroupSortLowerById(InputObject inputObject, OutputObject outputObject) {
@@ -97,8 +97,8 @@ public class RmGroupController {
     /**
      * 获取所有小程序分组根据小程序分类ID
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/RmGroupController/queryRmGroupAllList")
     public void queryRmGroupAllList(InputObject inputObject, OutputObject outputObject) {

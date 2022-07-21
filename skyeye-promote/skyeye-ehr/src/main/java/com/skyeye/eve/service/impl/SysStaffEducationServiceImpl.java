@@ -45,8 +45,8 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
     /**
      * 查询所有教育背景列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllSysStaffEducationList(InputObject inputObject, OutputObject outputObject) {
@@ -63,8 +63,8 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
     /**
      * 员工教育背景信息录入
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -78,8 +78,8 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
     /**
      * 编辑员工教育背景信息时回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysStaffEducationMationToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -105,8 +105,8 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
     /**
      * 编辑员工教育背景信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -124,8 +124,8 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
     /**
      * 删除员工教育背景信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -138,8 +138,8 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
     /**
      * 查询指定员工的教育背景列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryPointStaffSysStaffEducationList(InputObject inputObject, OutputObject outputObject) {

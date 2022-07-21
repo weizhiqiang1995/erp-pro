@@ -20,8 +20,8 @@ public class EmailSendModelController {
     /**
      * 可根据标题模糊+收件人分页获取邮箱发送模板列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/EmailSendModel/queryEmailSendModelList")
     public void queryEmailSendModelList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class EmailSendModelController {
     /**
      * 用户新增邮件发送模板
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/EmailSendModel/insertEmailSendModel")
     public void insertEmailSendModel(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class EmailSendModelController {
     /**
      * 根据邮箱模板id获取邮件模板详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/EmailSendModel/queryEmailSendModelInfoById")
     public void queryEmailSendModelInfoById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class EmailSendModelController {
     /**
      * 根据邮件模板id删除该模板
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/EmailSendModel/delEmailSendModelById")
     public void delEmailSendModelById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class EmailSendModelController {
     /**
      * 根据邮件模板id更新模板内容
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/EmailSendModel/updateEmailSendModelById")
     public void updateEmailSendModelById(InputObject inputObject, OutputObject outputObject) {

@@ -29,8 +29,8 @@ public class RmPropertyServiceImpl implements RmPropertyService {
     /**
      * 获取小程序样式属性列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryRmPropertyList(InputObject inputObject, OutputObject outputObject) {
@@ -44,8 +44,8 @@ public class RmPropertyServiceImpl implements RmPropertyService {
     /**
      * 添加小程序样式属性信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -66,8 +66,8 @@ public class RmPropertyServiceImpl implements RmPropertyService {
     /**
      * 删除小程序样式属性信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -106,8 +106,8 @@ public class RmPropertyServiceImpl implements RmPropertyService {
     /**
      * 编辑小程序样式属性信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryRmPropertyMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -120,8 +120,8 @@ public class RmPropertyServiceImpl implements RmPropertyService {
     /**
      * 编辑小程序样式属性信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -138,8 +138,8 @@ public class RmPropertyServiceImpl implements RmPropertyService {
     /**
      * 获取小程序样式属性供展示
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryRmPropertyListToShow(InputObject inputObject, OutputObject outputObject) {

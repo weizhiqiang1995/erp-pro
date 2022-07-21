@@ -20,8 +20,8 @@ public class WagesSocialSecurityFundController {
     /**
      * 获取社保公积金模板列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesSocialSecurityFundController/queryWagesSocialSecurityFundList")
     public void queryWagesSocialSecurityFundList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class WagesSocialSecurityFundController {
     /**
      * 新增社保公积金模板信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesSocialSecurityFundController/insertWagesSocialSecurityFundMation")
     public void insertWagesSocialSecurityFundMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class WagesSocialSecurityFundController {
     /**
      * 编辑社保公积金模板信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesSocialSecurityFundController/queryWagesSocialSecurityFundMationToEditById")
     public void queryWagesSocialSecurityFundMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class WagesSocialSecurityFundController {
     /**
      * 编辑社保公积金模板信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesSocialSecurityFundController/editWagesSocialSecurityFundMationById")
     public void editWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class WagesSocialSecurityFundController {
     /**
      * 删除社保公积金模板信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesSocialSecurityFundController/deleteWagesSocialSecurityFundMationById")
     public void deleteWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class WagesSocialSecurityFundController {
     /**
      * 启用社保公积金模板信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesSocialSecurityFundController/enableWagesSocialSecurityFundMationById")
     public void enableWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class WagesSocialSecurityFundController {
     /**
      * 禁用社保公积金模板信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesSocialSecurityFundController/disableWagesSocialSecurityFundMationById")
     public void disableWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
@@ -97,8 +97,8 @@ public class WagesSocialSecurityFundController {
     /**
      * 社保公积金模板详情信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/WagesSocialSecurityFundController/queryWagesSocialSecurityFundMationById")
     public void queryWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {

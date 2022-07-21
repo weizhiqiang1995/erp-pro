@@ -28,8 +28,8 @@ public class RmPropertyValueServiceImpl implements RmPropertyValueService {
     /**
      * 获取小程序样式属性值列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryRmPropertyValueList(InputObject inputObject, OutputObject outputObject) {
@@ -43,8 +43,8 @@ public class RmPropertyValueServiceImpl implements RmPropertyValueService {
     /**
      * 添加小程序样式属性值信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -65,8 +65,8 @@ public class RmPropertyValueServiceImpl implements RmPropertyValueService {
     /**
      * 删除小程序样式属性值信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -78,8 +78,8 @@ public class RmPropertyValueServiceImpl implements RmPropertyValueService {
     /**
      * 编辑小程序样式属性值信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryRmPropertyValueMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -92,8 +92,8 @@ public class RmPropertyValueServiceImpl implements RmPropertyValueService {
     /**
      * 编辑小程序样式属性值信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

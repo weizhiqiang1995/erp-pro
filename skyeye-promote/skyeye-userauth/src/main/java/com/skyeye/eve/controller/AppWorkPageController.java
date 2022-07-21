@@ -20,8 +20,8 @@ public class AppWorkPageController {
     /**
      * 获取手机端菜单目录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/queryAppWorkPageList")
     public void queryLightAppList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class AppWorkPageController {
     /**
      * 新增手机端菜单目录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/insertAppWorkPageMation")
     public void insertAppWorkPageMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class AppWorkPageController {
     /**
      * 根据目录id获取菜单列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/queryAppWorkPageListById")
     public void queryAppWorkPageListById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class AppWorkPageController {
     /**
      * 新增手机端菜单
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/insertAppWorkPageMationById")
     public void insertAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class AppWorkPageController {
     /**
      * 获取菜单信息进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/queryAppWorkPageMationById")
     public void queryAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class AppWorkPageController {
     /**
      * 保存编辑后的菜单信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkPageMationById")
     public void editAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class AppWorkPageController {
     /**
      * 删除菜单
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/deleteAppWorkPageMationById")
     public void deleteAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
@@ -97,8 +97,8 @@ public class AppWorkPageController {
     /**
      * 菜单上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkPageSortTopById")
     public void editAppWorkPageSortTopById(InputObject inputObject, OutputObject outputObject) {
@@ -108,8 +108,8 @@ public class AppWorkPageController {
     /**
      * 菜单下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkPageSortLowerById")
     public void editAppWorkPageSortLowerById(InputObject inputObject, OutputObject outputObject) {
@@ -119,8 +119,8 @@ public class AppWorkPageController {
     /**
      * 菜单上线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkPageUpById")
     public void editAppWorkPageUpById(InputObject inputObject, OutputObject outputObject) {
@@ -130,8 +130,8 @@ public class AppWorkPageController {
     /**
      * 菜单下线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkPageDownById")
     public void editAppWorkPageDownById(InputObject inputObject, OutputObject outputObject) {
@@ -141,8 +141,8 @@ public class AppWorkPageController {
     /**
      * 编辑菜单目录名称
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkPageTitleById")
     public void editAppWorkPageTitleById(InputObject inputObject, OutputObject outputObject) {
@@ -152,8 +152,8 @@ public class AppWorkPageController {
     /**
      * 删除菜单目录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/deleteAppWorkPageById")
     public void deleteAppWorkPageById(InputObject inputObject, OutputObject outputObject) {
@@ -163,8 +163,8 @@ public class AppWorkPageController {
     /**
      * 目录上线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkUpById")
     public void editAppWorkUpById(InputObject inputObject, OutputObject outputObject) {
@@ -174,8 +174,8 @@ public class AppWorkPageController {
     /**
      * 目录下线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkDownById")
     public void editAppWorkDownById(InputObject inputObject, OutputObject outputObject) {
@@ -185,8 +185,8 @@ public class AppWorkPageController {
     /**
      * 目录上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkSortTopById")
     public void editAppWorkSortTopById(InputObject inputObject, OutputObject outputObject) {
@@ -196,8 +196,8 @@ public class AppWorkPageController {
     /**
      * 目录下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/AppWorkPageController/editAppWorkSortLowerById")
     public void editAppWorkSortLowerById(InputObject inputObject, OutputObject outputObject) {

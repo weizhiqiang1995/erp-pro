@@ -60,8 +60,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 获取我的帖子列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMyForumContentList(InputObject inputObject, OutputObject outputObject) {
@@ -87,8 +87,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 新增我的帖子
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -138,8 +138,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 删除我的帖子
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -165,8 +165,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 查询帖子信息用以编辑
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryForumContentMationById(InputObject inputObject, OutputObject outputObject) {
@@ -181,8 +181,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 编辑帖子信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -232,8 +232,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 帖子详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryForumContentMationToDetails(InputObject inputObject, OutputObject outputObject) {
@@ -308,8 +308,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 获取最新帖子
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryNewForumContentList(InputObject inputObject, OutputObject outputObject) {
@@ -323,8 +323,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 新增帖子评论
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -350,8 +350,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 获取帖子评论信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryForumCommentList(InputObject inputObject, OutputObject outputObject) {
@@ -368,8 +368,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 新增帖子评论回复
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -393,8 +393,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 获取帖子评论回复信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryForumReplyList(InputObject inputObject, OutputObject outputObject) {
@@ -411,8 +411,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 获取我的浏览信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryForumMyBrowerList(InputObject inputObject, OutputObject outputObject) {
@@ -461,8 +461,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 获取最新评论
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryNewCommentList(InputObject inputObject, OutputObject outputObject) {
@@ -475,8 +475,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 根据标签id获取帖子列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryForumListByTagId(InputObject inputObject, OutputObject outputObject) {
@@ -538,8 +538,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 获取热门标签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryHotTagList(InputObject inputObject, OutputObject outputObject) {
@@ -552,8 +552,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 获取活跃用户
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryActiveUsersList(InputObject inputObject, OutputObject outputObject) {
@@ -566,8 +566,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 获取热门贴
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryHotForumList(InputObject inputObject, OutputObject outputObject) {
@@ -607,8 +607,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 获取用户搜索的帖子
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySearchForumList(InputObject inputObject, OutputObject outputObject) {
@@ -678,8 +678,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 获取solr上次同步数据的时间
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySolrSynchronousTime(InputObject inputObject, OutputObject outputObject) {
@@ -696,8 +696,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * solr同步数据
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void updateSolrSynchronousData(InputObject inputObject, OutputObject outputObject) {
@@ -738,8 +738,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 获取我的帖子列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMyCommentList(InputObject inputObject, OutputObject outputObject) {
@@ -758,8 +758,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 根据评论id删除评论
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void deleteCommentById(InputObject inputObject, OutputObject outputObject) {
@@ -770,8 +770,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 获取我的通知列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMyNoticeList(InputObject inputObject, OutputObject outputObject) {
@@ -790,8 +790,8 @@ public class ForumContentServiceImpl implements ForumContentService {
     /**
      * 根据通知id删除通知
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

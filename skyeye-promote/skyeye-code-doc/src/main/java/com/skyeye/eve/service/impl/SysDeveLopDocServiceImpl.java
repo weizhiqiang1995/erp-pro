@@ -37,8 +37,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 获取开发文档目录信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysDeveLopTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 新增开发文档目录信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -81,8 +81,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 编辑开发文档目录信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysDeveLopTypeByIdToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -95,8 +95,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 编辑开发文档目录信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -113,8 +113,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 删除开发文档目录信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -131,8 +131,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 获取一级文档目录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysDeveLopTypeByFirstType(InputObject inputObject, OutputObject outputObject) {
@@ -147,8 +147,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 开发文档目录上线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -170,8 +170,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 开发文档目录下线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -193,8 +193,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 开发文档目录上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -219,8 +219,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 开发文档目录下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -245,8 +245,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 获取开发文档信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysDeveLopDocList(InputObject inputObject, OutputObject outputObject) {
@@ -260,8 +260,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 新增开发文档信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -288,8 +288,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 编辑开发文档信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysDeveLopDocByIdToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -302,8 +302,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 编辑开发文档信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -320,8 +320,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 删除开发文档信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -333,8 +333,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 开发文档上线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -353,8 +353,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 开发文档下线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -373,8 +373,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 开发文档上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -395,8 +395,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 开发文档下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -417,8 +417,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 获取一级分类列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysDeveLopFirstTypeToShow(InputObject inputObject, OutputObject outputObject) {
@@ -439,8 +439,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 获取二级分类列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysDeveLopSecondTypeToShow(InputObject inputObject, OutputObject outputObject) {
@@ -461,8 +461,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 获取文档标题
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysDeveLopDocToShow(InputObject inputObject, OutputObject outputObject) {
@@ -483,8 +483,8 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
     /**
      * 获取文档内容
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysDeveLopDocContentToShow(InputObject inputObject, OutputObject outputObject) {

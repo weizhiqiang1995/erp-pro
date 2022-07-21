@@ -36,8 +36,8 @@ public class MailListServiceImpl implements MailListService {
     /**
      * 获取通讯录列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMailMationList(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class MailListServiceImpl implements MailListService {
     /**
      * 新增通讯录(个人或者公共通讯录)
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -87,8 +87,8 @@ public class MailListServiceImpl implements MailListService {
     /**
      * 删除通讯录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -102,8 +102,8 @@ public class MailListServiceImpl implements MailListService {
     /**
      * 编辑通讯录进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMailMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -116,8 +116,8 @@ public class MailListServiceImpl implements MailListService {
     /**
      * 编辑通讯录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -146,8 +146,8 @@ public class MailListServiceImpl implements MailListService {
     /**
      * 个人/公共通讯录详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryMailMationDetailsById(InputObject inputObject, OutputObject outputObject) {

@@ -50,8 +50,8 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
     /**
      * 获取薪资模板类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryWagesModelTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -65,8 +65,8 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
     /**
      * 新增薪资模板类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -90,8 +90,8 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
     /**
      * 编辑薪资模板类型信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryWagesModelTypeMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -109,8 +109,8 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
     /**
      * 编辑薪资模板类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -130,8 +130,8 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
     /**
      * 删除薪资模板类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -143,8 +143,8 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
     /**
      * 启用薪资模板类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -156,8 +156,8 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
     /**
      * 禁用薪资模板类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -169,8 +169,8 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
     /**
      * 获取已经启用的薪资模板类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryEnableWagesModelTypeList(InputObject inputObject, OutputObject outputObject) {

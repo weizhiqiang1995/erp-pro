@@ -34,8 +34,8 @@ public class SysEveMenuController {
     /**
      * 获取菜单列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveMenuController/querySysMenuList")
     public void querySysMenuList(InputObject inputObject, OutputObject outputObject) {
@@ -45,8 +45,8 @@ public class SysEveMenuController {
     /**
      * 添加菜单
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sys007", value = "添加菜单", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysMenuMation.class)
@@ -58,8 +58,8 @@ public class SysEveMenuController {
     /**
      * 查看同级菜单
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveMenuController/querySysMenuMationBySimpleLevel")
     public void querySysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject) {
@@ -69,8 +69,8 @@ public class SysEveMenuController {
     /**
      * 编辑菜单时进行信息回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveMenuController/querySysMenuMationToEditById")
     public void querySysMenuMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -80,8 +80,8 @@ public class SysEveMenuController {
     /**
      * 编辑菜单信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sys010", value = "编辑菜单信息", method = "PUT", allUse = "1")
     @ApiImplicitParams(classBean = SysMenuMation.class, value = {
@@ -94,8 +94,8 @@ public class SysEveMenuController {
     /**
      * 删除菜单信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveMenuController/deleteSysMenuMationById")
     public void deleteSysMenuMationById(InputObject inputObject, OutputObject outputObject) {
@@ -105,8 +105,8 @@ public class SysEveMenuController {
     /**
      * 异步加载树查看商户拥有的系统
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveMenuController/queryTreeSysMenuMationBySimpleLevel")
     public void queryTreeSysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject) {
@@ -116,8 +116,8 @@ public class SysEveMenuController {
     /**
      * 获取菜单级别列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveMenuController/querySysMenuLevelList")
     public void querySysMenuLevelList(InputObject inputObject, OutputObject outputObject) {
@@ -127,8 +127,8 @@ public class SysEveMenuController {
     /**
      * 菜单展示顺序上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveMenuController/editSysEveMenuSortTopById")
     public void editSysEveMenuSortTopById(InputObject inputObject, OutputObject outputObject) {
@@ -138,8 +138,8 @@ public class SysEveMenuController {
     /**
      * 菜单展示顺序下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveMenuController/editSysEveMenuSortLowerById")
     public void editSysEveMenuSortLowerById(InputObject inputObject, OutputObject outputObject) {
@@ -149,8 +149,8 @@ public class SysEveMenuController {
     /**
      * 获取该系统商户拥有的系统
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveMenuController/querySysWinMationListBySysId")
     public void querySysWinMationListBySysId(InputObject inputObject, OutputObject outputObject) {
@@ -160,8 +160,8 @@ public class SysEveMenuController {
     /**
      * 系统菜单详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysEveMenuController/querySysEveMenuBySysId")
     public void querySysEveMenuBySysId(InputObject inputObject, OutputObject outputObject) {

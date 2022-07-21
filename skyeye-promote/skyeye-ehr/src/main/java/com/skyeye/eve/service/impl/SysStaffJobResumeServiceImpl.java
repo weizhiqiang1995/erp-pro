@@ -41,8 +41,8 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
     /**
      * 查询所有工作履历列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllSysStaffJobResumeList(InputObject inputObject, OutputObject outputObject) {
@@ -56,8 +56,8 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
     /**
      * 员工工作履历信息录入
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -71,8 +71,8 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
     /**
      * 编辑员工工作履历信息时回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysStaffJobResumeMationToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -95,8 +95,8 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
     /**
      * 编辑员工工作履历信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -114,8 +114,8 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
     /**
      * 删除员工工作履历信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -128,8 +128,8 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
     /**
      * 查询指定员工的工作履历列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryPointStaffSysStaffJobResumeList(InputObject inputObject, OutputObject outputObject) {

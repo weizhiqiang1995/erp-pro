@@ -20,8 +20,8 @@ public class SysNoticeController {
     /**
      * 获取公告列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeController/querySysNoticeList")
     public void querySysNoticeList(InputObject inputObject, OutputObject outputObject) {
@@ -32,8 +32,8 @@ public class SysNoticeController {
     /**
      * 添加公告
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeController/insertSysNoticeMation")
     public void insertSysNoticeMation(InputObject inputObject, OutputObject outputObject) {
@@ -43,8 +43,8 @@ public class SysNoticeController {
     /**
      * 删除公告
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeController/deleteSysNoticeById")
     public void deleteSysNoticeById(InputObject inputObject, OutputObject outputObject) {
@@ -54,8 +54,8 @@ public class SysNoticeController {
     /**
      * 上线公告
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeController/updateUpSysNoticeById")
     public void updateUpSysNoticeById(InputObject inputObject, OutputObject outputObject) {
@@ -65,8 +65,8 @@ public class SysNoticeController {
     /**
      * 下线公告
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeController/updateDownSysNoticeById")
     public void updateDownSysNoticeById(InputObject inputObject, OutputObject outputObject) {
@@ -76,8 +76,8 @@ public class SysNoticeController {
     /**
      * 通过id查找对应的公告信息用以编辑
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeController/selectSysNoticeById")
     public void selectSysNoticeById(InputObject inputObject, OutputObject outputObject) {
@@ -87,8 +87,8 @@ public class SysNoticeController {
     /**
      * 编辑公告
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeController/editSysNoticeMationById")
     public void editSysNoticeMationById(InputObject inputObject, OutputObject outputObject) {
@@ -98,8 +98,8 @@ public class SysNoticeController {
     /**
      * 公告上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeController/editSysNoticeMationOrderNumUpById")
     public void editSysWinTypeMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) {
@@ -109,8 +109,8 @@ public class SysNoticeController {
     /**
      * 公告下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeController/editSysNoticeMationOrderNumDownById")
     public void editSysWinTypeMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) {
@@ -120,8 +120,8 @@ public class SysNoticeController {
     /**
      * 定时上线时间
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeController/editSysNoticeTimeUpById")
     public void editSysNoticeTimeUpById(InputObject inputObject, OutputObject outputObject) {
@@ -131,8 +131,8 @@ public class SysNoticeController {
     /**
      * 公告详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeController/querySysNoticeDetailsById")
     public void querySysNoticeDetailsById(InputObject inputObject, OutputObject outputObject) {
@@ -142,8 +142,8 @@ public class SysNoticeController {
     /**
      * 用户收到的公告
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeController/queryUserReceivedSysNotice")
     public void queryUserReceivedSysNotice(InputObject inputObject, OutputObject outputObject) {
@@ -153,8 +153,8 @@ public class SysNoticeController {
     /**
      * 用户收到的公告详情
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysNoticeController/queryReceivedSysNoticeDetailsById")
     public void queryReceivedSysNoticeDetailsById(InputObject inputObject, OutputObject outputObject) {

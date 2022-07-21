@@ -20,8 +20,8 @@ public class CompanyJobScoreController {
     /**
      * 获取职位定级信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyJobScoreController/queryCompanyJobScoreList")
     public void queryCompanyJobScoreList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class CompanyJobScoreController {
     /**
      * 新增职位定级信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyJobScoreController/insertCompanyJobScoreMation")
     public void insertCompanyJobScoreMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class CompanyJobScoreController {
     /**
      * 编辑职位定级信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyJobScoreController/queryCompanyJobScoreMationToEditById")
     public void queryCompanyJobScoreMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class CompanyJobScoreController {
     /**
      * 编辑职位定级信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyJobScoreController/editCompanyJobScoreMationById")
     public void editCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class CompanyJobScoreController {
     /**
      * 删除职位定级信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyJobScoreController/deleteCompanyJobScoreMationById")
     public void deleteCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class CompanyJobScoreController {
     /**
      * 启用职位定级信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyJobScoreController/enableCompanyJobScoreMationById")
     public void enableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class CompanyJobScoreController {
     /**
      * 禁用职位定级信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyJobScoreController/disableCompanyJobScoreMationById")
     public void disableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
@@ -97,8 +97,8 @@ public class CompanyJobScoreController {
     /**
      * 获取已经启用的职位定级信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyJobScoreController/queryEnableCompanyJobScoreList")
     public void queryEnableCompanyJobScoreList(InputObject inputObject, OutputObject outputObject) {
@@ -108,8 +108,8 @@ public class CompanyJobScoreController {
     /**
      * 获取职位定级信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/CompanyJobScoreController/queryCompanyJobScoreDetailMationById")
     public void queryCompanyJobScoreDetailMationById(InputObject inputObject, OutputObject outputObject) {

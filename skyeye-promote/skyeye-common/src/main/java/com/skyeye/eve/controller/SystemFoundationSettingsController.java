@@ -31,8 +31,8 @@ public class SystemFoundationSettingsController {
     /**
      * 获取系统基础设置
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sysfdsettings001", value = "获取系统基础设置", method = "GET", allUse = "2")
     @RequestMapping("/post/SystemFoundationSettingsController/querySystemFoundationSettingsList")
@@ -43,8 +43,8 @@ public class SystemFoundationSettingsController {
     /**
      * 编辑系统基础设置
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SystemFoundationSettingsController/editSystemFoundationSettings")
     public void editSystemFoundationSettings(InputObject inputObject, OutputObject outputObject) {

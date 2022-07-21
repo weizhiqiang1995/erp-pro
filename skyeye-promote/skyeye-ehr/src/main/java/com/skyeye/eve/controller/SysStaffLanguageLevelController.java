@@ -20,8 +20,8 @@ public class SysStaffLanguageLevelController {
     /**
      * 查询语种等级列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffLanguageLevelController/querySysStaffLanguageLevelList")
     public void querySysStaffLanguageLevelList(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class SysStaffLanguageLevelController {
     /**
      * 新增语种等级
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffLanguageLevelController/insertSysStaffLanguageLevelMation")
     public void insertSysStaffLanguageLevelMation(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class SysStaffLanguageLevelController {
     /**
      * 修改语种等级时数据回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffLanguageLevelController/querySysStaffLanguageLevelMationToEditById")
     public void querySysStaffLanguageLevelMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class SysStaffLanguageLevelController {
     /**
      * 修改语种等级
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffLanguageLevelController/editSysStaffLanguageLevelMationById")
     public void editSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) {
@@ -64,8 +64,8 @@ public class SysStaffLanguageLevelController {
     /**
      * 禁用语种等级
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffLanguageLevelController/downSysStaffLanguageLevelMationById")
     public void downSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) {
@@ -75,8 +75,8 @@ public class SysStaffLanguageLevelController {
     /**
      * 启用语种等级
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffLanguageLevelController/upSysStaffLanguageLevelMationById")
     public void upSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) {
@@ -86,8 +86,8 @@ public class SysStaffLanguageLevelController {
     /**
      * 删除语种等级
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffLanguageLevelController/deleteSysStaffLanguageLevelMationById")
     public void deleteSysStaffLanguageLevelMationById(InputObject inputObject, OutputObject outputObject) {
@@ -97,8 +97,8 @@ public class SysStaffLanguageLevelController {
     /**
      * 获取所有启用语种等级
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/SysStaffLanguageLevelController/querySysStaffLanguageLevelUpMation")
     public void querySysStaffLanguageLevelUpMation(InputObject inputObject, OutputObject outputObject) {

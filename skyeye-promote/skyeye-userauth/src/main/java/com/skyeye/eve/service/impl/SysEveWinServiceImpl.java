@@ -42,8 +42,8 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     /**
      * 获取系统信息列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryWinMationList(InputObject inputObject, OutputObject outputObject) {
@@ -57,8 +57,8 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     /**
      * 新增系统信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -79,8 +79,8 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     /**
      * 编辑系统信息时进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryWinMationToEditById(InputObject inputObject, OutputObject outputObject) {
@@ -92,8 +92,8 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     /**
      * 编辑系统信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -110,8 +110,8 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     /**
      * 删除系统信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -128,8 +128,8 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     /**
      * 进行商户系统授权
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -151,8 +151,8 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     /**
      * 进行商户系统取消授权
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -164,8 +164,8 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     /**
      * 获取应用商店
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryWinMationListToShow(InputObject inputObject, OutputObject outputObject) {
@@ -179,8 +179,8 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     /**
      * 系统重要的同步操作
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -229,8 +229,8 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     /**
      * 系统重要的同步操作获取数据
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryWinMationImportantSynchronizationData(InputObject inputObject, OutputObject outputObject) {

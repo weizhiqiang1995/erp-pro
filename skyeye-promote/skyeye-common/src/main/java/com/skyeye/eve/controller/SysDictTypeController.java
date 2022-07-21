@@ -35,8 +35,8 @@ public class SysDictTypeController {
     /**
      * 获取数据字典类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryDictTypeList", value = "获取数据字典类型列表", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysDictTypeQueryDO.class)
@@ -48,8 +48,8 @@ public class SysDictTypeController {
     /**
      * 新增/编辑数据字典类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "writeDictTypeMation", value = "新增/编辑数据字典类型", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysDictTypeMation.class)
@@ -61,8 +61,8 @@ public class SysDictTypeController {
     /**
      * 根据ID获取数据字典类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryDictTypeMationById", value = "根据ID获取数据字典类型信息", method = "GET", allUse = "2")
     @ApiImplicitParams({
@@ -75,8 +75,8 @@ public class SysDictTypeController {
     /**
      * 根据ID删除数据字典类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "deleteDictTypeMationById", value = "根据ID删除数据字典类型", method = "DELETE", allUse = "1")
     @ApiImplicitParams({
@@ -89,8 +89,8 @@ public class SysDictTypeController {
     /**
      * 根据状态获取数据字典类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryDictTypeListByStatus", value = "根据状态获取数据字典类型列表", method = "GET", allUse = "2")
     @ApiImplicitParams({

@@ -20,8 +20,8 @@ public class MainPageController {
     /**
      * 获取本月考勤天数，我的文件数，我的论坛帖数，我的知识库文档数
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MainPageController/queryFourNumListByUserId")
     public void queryFourNumListByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -31,8 +31,8 @@ public class MainPageController {
     /**
      * 获取公告类型以及前八条内容
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MainPageController/queryNoticeContentListByUserId")
     public void queryNoticeContentListByUserId(InputObject inputObject, OutputObject outputObject) {
@@ -42,8 +42,8 @@ public class MainPageController {
     /**
      * 获取前八条热门论坛帖
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MainPageController/queryHotForumList")
     public void queryHotForumList(InputObject inputObject, OutputObject outputObject) {
@@ -53,8 +53,8 @@ public class MainPageController {
     /**
      * 获取近期八条已审核的知识库
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @RequestMapping("/post/MainPageController/queryKnowledgeEightList")
     public void queryKnowledgeEightList(InputObject inputObject, OutputObject outputObject) {

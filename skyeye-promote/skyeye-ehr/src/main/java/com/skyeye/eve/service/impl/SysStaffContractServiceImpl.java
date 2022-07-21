@@ -66,8 +66,8 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
     /**
      * 查询所有合同列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllSysStaffContractList(InputObject inputObject, OutputObject outputObject) {
@@ -83,8 +83,8 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
     /**
      * 员工合同信息录入
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -98,8 +98,8 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
     /**
      * 编辑员工合同信息时回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysStaffContractMationToEdit(InputObject inputObject, OutputObject outputObject) {
@@ -122,8 +122,8 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
     /**
      * 编辑员工合同信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -147,8 +147,8 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
     /**
      * 删除员工合同信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -168,8 +168,8 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
     /**
      * 查询指定员工的合同列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryPointStaffSysStaffContractList(InputObject inputObject, OutputObject outputObject) {
@@ -185,8 +185,8 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
     /**
      * 员工合同签约
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)

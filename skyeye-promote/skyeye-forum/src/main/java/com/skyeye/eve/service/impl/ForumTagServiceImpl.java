@@ -44,8 +44,8 @@ public class ForumTagServiceImpl implements ForumTagService {
     /**
      * 查出所有论坛标签列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryForumTagList(InputObject inputObject, OutputObject outputObject) {
@@ -59,8 +59,8 @@ public class ForumTagServiceImpl implements ForumTagService {
     /**
      * 新增论坛标签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -85,8 +85,8 @@ public class ForumTagServiceImpl implements ForumTagService {
     /**
      * 删除论坛标签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -104,8 +104,8 @@ public class ForumTagServiceImpl implements ForumTagService {
     /**
      * 上线论坛标签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -123,8 +123,8 @@ public class ForumTagServiceImpl implements ForumTagService {
     /**
      * 下线论坛标签
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -142,8 +142,8 @@ public class ForumTagServiceImpl implements ForumTagService {
     /**
      * 通过id查找对应的论坛标签信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void selectForumTagById(InputObject inputObject, OutputObject outputObject) {
@@ -156,8 +156,8 @@ public class ForumTagServiceImpl implements ForumTagService {
     /**
      * 通过id编辑对应的论坛标签信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -179,8 +179,8 @@ public class ForumTagServiceImpl implements ForumTagService {
     /**
      * 论坛标签上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -202,8 +202,8 @@ public class ForumTagServiceImpl implements ForumTagService {
     /**
      * 论坛标签下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -225,8 +225,8 @@ public class ForumTagServiceImpl implements ForumTagService {
     /**
      * 获取已经上线的论坛标签列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryForumTagUpStateList(InputObject inputObject, OutputObject outputObject) {

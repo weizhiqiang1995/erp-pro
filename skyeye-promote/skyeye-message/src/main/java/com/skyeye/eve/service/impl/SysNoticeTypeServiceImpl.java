@@ -42,8 +42,8 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
     /**
      * 查出所有公告类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySysNoticeTypeList(InputObject inputObject, OutputObject outputObject) {
@@ -58,8 +58,8 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
     /**
      * 新增公告类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -85,8 +85,8 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
     /**
      * 删除公告类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -103,8 +103,8 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
     /**
      * 上线公告类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -123,8 +123,8 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
     /**
      * 下线公告类型
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -143,8 +143,8 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
     /**
      * 通过id查找对应的公告类型信息用以编辑
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void selectSysNoticeTypeById(InputObject inputObject, OutputObject outputObject) {
@@ -157,8 +157,8 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
     /**
      * 编辑公告类型信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -180,8 +180,8 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
     /**
      * 公告类型上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -204,8 +204,8 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
     /**
      * 公告类型下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -228,8 +228,8 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
     /**
      * 获取已经上线的一级类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryFirstSysNoticeTypeUpStateList(InputObject inputObject, OutputObject outputObject) {
@@ -250,8 +250,8 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
     /**
      * 获取上线的一级类型对应的上线的二级类型列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void querySecondSysNoticeTypeUpStateList(InputObject inputObject, OutputObject outputObject) {
@@ -272,8 +272,8 @@ public class SysNoticeTypeServiceImpl implements SysNoticeTypeService {
     /**
      * 获取所有的一级类型列表用以搜索条件
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAllFirstSysNoticeTypeStateList(InputObject inputObject, OutputObject outputObject) {

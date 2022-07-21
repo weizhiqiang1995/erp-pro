@@ -58,8 +58,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 获取手机端菜单目录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAppWorkPageList(InputObject inputObject, OutputObject outputObject) {
@@ -72,8 +72,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 新增手机端菜单目录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -104,8 +104,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 根据目录id获取菜单列表
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAppWorkPageListById(InputObject inputObject, OutputObject outputObject) {
@@ -119,8 +119,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 新增手机端菜单
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -149,8 +149,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 获取菜单信息进行回显
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
@@ -163,8 +163,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 保存编辑后的菜单信息
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -203,8 +203,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 删除菜单
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -225,8 +225,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 菜单上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -249,8 +249,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 菜单下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -273,8 +273,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 菜单上线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -295,8 +295,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 菜单下线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -317,8 +317,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 编辑菜单目录名称
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -338,8 +338,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 删除菜单目录
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -360,8 +360,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 目录上线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -382,8 +382,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 目录下线
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -404,8 +404,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 目录上移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
@@ -427,8 +427,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     /**
      * 目录下移
      *
-     * @param inputObject
-     * @param outputObject
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
