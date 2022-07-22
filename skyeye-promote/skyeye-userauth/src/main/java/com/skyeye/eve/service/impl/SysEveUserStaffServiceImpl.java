@@ -61,7 +61,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     /**
      * 员工状态
      */
-    public static enum State {
+    public enum State {
         ON_THE_JOB(1, "在职(转正的员工)"),
         QUIT(2, "离职"),
         PROBATION(3, "见习(用于实习生)"),

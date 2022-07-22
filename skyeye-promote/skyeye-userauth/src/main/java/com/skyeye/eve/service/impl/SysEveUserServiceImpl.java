@@ -631,7 +631,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         Map<String, Object> user = inputObject.getLogParams();
         map.put("userId", user.get("id"));
         sysEveUserDao.editUserDetailsMationByUserId(map);
-        jedisClient.del(Constants.getSysTalkUserThisMainMationById(user.get("id").toString()));//删除用户在redis中存储的信息
+        // 删除用户在redis中存储的信息
+        jedisClient.del(Constants.getSysTalkUserThisMainMationById(user.get("id").toString()));
     }
 
     /**
@@ -672,6 +673,12 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         outputObject.settotal(1);
     }
 
+    /**
+     * 根据用户id获取用户信息
+     *
+     * @param userId 用户id
+     * @return 用户信息
+     */
     @Override
     public Map<String, Object> getUserMationByUserId(String userId) {
         String cacheKey = String.format(Locale.ROOT, "userMationDetails:%s", userId);
