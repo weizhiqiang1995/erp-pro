@@ -8,86 +8,35 @@
 			a.auth_menu_name authMenuName,
 			a.auth_menu authMenu,
 			a.menu_num menuNum,
+			a.parent_id parentId,
+			a.type,
 			(SELECT COUNT(*) FROM sys_eve_role_menu b WHERE b.menu_id = a.id) useNum
 		FROM
 			sys_eve_menu_auth_point a
-		WHERE
+		<where>
 			a.menu_id = #{menuId}
-		<if test="authMenuName != '' and authMenuName != null">
-			AND a.auth_menu_name LIKE '%${authMenuName}%'
-		</if>
-		<if test="authMenu != '' and authMenu != null">
-			AND a.auth_menu LIKE '%${authMenu}%'
-		</if>
-		<if test="menuNum != '' and menuNum != null">
-			AND a.menu_num LIKE '%${menuNum}%'
-		</if>
-		ORDER BY a.create_time DESC
-	</select>
-	
-	<select id="querySysEveMenuAuthPointMationByAuthName" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.auth_menu_name authMenuName,
-			a.auth_menu authMenu,
-			a.menu_num menuNum
-		FROM
-			sys_eve_menu_auth_point a
-		WHERE
-			a.menu_id = #{menuId}
-		AND (a.auth_menu_name = #{authMenuName}
-				OR a.auth_menu = #{authMenu})
-	</select>
-	
-	<insert id="insertSysEveMenuAuthPointMation" parameterType="java.util.Map">
-	     insert into sys_eve_menu_auth_point 
-	     (id, menu_id, auth_menu_name, auth_menu, menu_num, create_id, create_time)
-	     values(#{id}, #{menuId}, #{authMenuName}, #{authMenu}, #{menuNum}, #{createId}, #{createTime})
-	</insert>
-	
-	<select id="querySysEveMenuAuthPointMationToEditById" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.auth_menu_name authMenuName,
-			a.auth_menu authMenu
-		FROM
-			sys_eve_menu_auth_point a
-		WHERE
-			a.id = #{id}
-	</select>
-	
-	<select id="querySysEveMenuAuthPointMationByAuthNameAndId" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.auth_menu_name authMenuName,
-			a.auth_menu authMenu
-		FROM
-			sys_eve_menu_auth_point a
-		WHERE
-			a.auth_menu_name = #{authMenuName}
-		AND a.id != #{id}
-		AND a.menu_id = #{menuId}
-	</select>
-	
-	<update id="editSysEveMenuAuthPointMationById" parameterType="java.util.Map">
-		UPDATE sys_eve_menu_auth_point
-		<set>
 			<if test="authMenuName != '' and authMenuName != null">
-				auth_menu_name = #{authMenuName},
+				AND a.auth_menu_name LIKE '%${authMenuName}%'
 			</if>
 			<if test="authMenu != '' and authMenu != null">
-				auth_menu = #{authMenu},
+				AND a.auth_menu LIKE '%${authMenu}%'
 			</if>
-		</set>
-		WHERE id = #{id}
-	</update>
-	
-	<delete id="deleteSysEveMenuAuthPointMationById" parameterType="java.util.Map">
-		DELETE
-		FROM
-			sys_eve_menu_auth_point
-		WHERE
-			id = #{id}
-	</delete>
+			<if test="menuNum != '' and menuNum != null">
+				AND a.menu_num LIKE '%${menuNum}%'
+			</if>
+		</where>
+		ORDER BY a.create_time DESC
+	</select>
+
+	<insert id="insertBatch" parameterType="java.util.Map">
+		INSERT into sys_eve_menu_auth_point
+		(id, menu_id, auth_menu, auth_menu_name, menu_num, parent_id, type,
+		 create_id, create_time, last_update_id, last_update_time)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.id}, #{item.menuId}, #{item.authMenu}, #{item.authMenuName}, #{item.menuNum}, #{item.parentId}, #{item.type},
+			 #{item.createId}, #{item.createTime}, #{item.lastUpdateId}, #{item.lastUpdateTime})
+		</foreach>
+	</insert>
 	
 </mapper>

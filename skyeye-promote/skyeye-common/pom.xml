@@ -15,10 +15,10 @@
 
 	<dependencies>
 
-		<!-- 引入公共模块 -->
+		<!-- 引入公共Rest模块 -->
 		<dependency>
 			<groupId>com.skyeye</groupId>
-			<artifactId>skyeye-common-module</artifactId>
+			<artifactId>skyeye-common-rest</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 

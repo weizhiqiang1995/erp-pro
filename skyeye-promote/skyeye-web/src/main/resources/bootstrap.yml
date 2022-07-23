@@ -23,6 +23,11 @@ spring:
             group: DEFAULT_GROUP # 默认为DEFAULT_GROUP
             refresh: true # 是否动态刷新，默认为false
 
+# 配置打印sql到控制台
+logging:
+  level:
+    com.skyeye.eve.dao: debug
+
 webroot:
   # 商城服务
   skyeye-shop: skyeye-shop-${spring.profiles.active}

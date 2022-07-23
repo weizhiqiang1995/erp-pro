@@ -546,7 +546,7 @@
 	<!-- 系统菜单同步结束 -->
 	
 	<!-- 菜单权限点开始 -->
-	<url id="sysevemenuauthpoint001" path="/post/SysEveMenuAuthPointController/querySysEveMenuAuthPointListByMenuId" val="获取菜单权限点列表根据菜单id" allUse="1" groupName="菜单管理">
+	<url id="sysevemenuauthpoint001" path="/post/SysEveMenuAuthPointController/querySysEveMenuAuthPointListByMenuId" val="获取菜单权限点列表根据菜单id" allUse="1" groupName="菜单权限点管理">
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 	    <property id="menuId" name="menuId" ref="required" var="菜单id"/>
@@ -554,21 +554,10 @@
 	    <property id="authMenu" name="authMenu" ref="" var="权限点后台链接"/>
 	    <property id="menuNum" name="menuNum" ref="" var="菜单数字码"/>
 	</url>
-	<url id="sysevemenuauthpoint002" path="/post/SysEveMenuAuthPointController/insertSysEveMenuAuthPointMation" val="添加菜单权限点" allUse="1" groupName="菜单管理">
-	    <property id="menuId" name="menuId" ref="required" var="菜单id"/>
-	    <property id="authMenuName" name="authMenuName" ref="required" var="权限点名称"/>
-	    <property id="authMenu" name="authMenu" ref="required" var="权限点后台链接"/>
-	</url>
-	<url id="sysevemenuauthpoint003" path="/post/SysEveMenuAuthPointController/querySysEveMenuAuthPointMationToEditById" val="编辑菜单权限点时进行回显" allUse="2" groupName="菜单管理">
+	<url id="sysevemenuauthpoint003" path="/post/SysEveMenuAuthPointController/querySysEveMenuAuthPointMationToEditById" val="编辑菜单权限点时进行回显" allUse="2" groupName="菜单权限点管理">
 	    <property id="rowId" name="id" ref="required" var="权限id"/>
 	</url>
-	<url id="sysevemenuauthpoint004" path="/post/SysEveMenuAuthPointController/editSysEveMenuAuthPointMationById" val="编辑菜单权限点" allUse="1" groupName="菜单管理">
-	    <property id="rowId" name="id" ref="required" var="权限id"/>
-	    <property id="authMenuName" name="authMenuName" ref="required" var="权限点名称"/>
-	    <property id="authMenu" name="authMenu" ref="required" var="权限点后台链接"/>
-	    <property id="menuId" name="menuId" ref="required" var="菜单id"/>
-	</url>
-	<url id="sysevemenuauthpoint005" path="/post/SysEveMenuAuthPointController/deleteSysEveMenuAuthPointMationById" val="删除菜单权限点" allUse="1" groupName="菜单管理">
+	<url id="sysevemenuauthpoint005" path="/post/SysEveMenuAuthPointController/deleteSysEveMenuAuthPointMationById" val="删除菜单权限点" allUse="1" groupName="菜单权限点管理">
 	    <property id="rowId" name="id" ref="required" var="权限id"/>
 	</url>
 	<!-- 菜单权限点结束 -->

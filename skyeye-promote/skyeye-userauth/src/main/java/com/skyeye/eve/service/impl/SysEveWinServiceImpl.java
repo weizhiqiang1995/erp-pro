@@ -15,8 +15,9 @@ import com.skyeye.common.object.PutObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.HttpClient;
-import com.skyeye.common.util.ToolUtil;
+import com.skyeye.eve.dao.SysEveMenuAuthPointDao;
 import com.skyeye.eve.dao.SysEveWinDao;
+import com.skyeye.eve.entity.userauth.menu.SysMenuAuthPointMation;
 import com.skyeye.eve.service.SysEveWinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,9 @@ public class SysEveWinServiceImpl implements SysEveWinService {
 
     @Autowired
     private SysEveWinDao sysEveWinDao;
+
+    @Autowired
+    private SysEveMenuAuthPointDao sysEveMenuAuthPointDao;
 
     /**
      * 获取系统信息列表
@@ -181,7 +185,8 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertWinMationImportantSynchronization(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = sysEveWinDao.queryWinMationSynchronizationById(map);//判断是否有权限
+        // 判断是否有权限
+        Map<String, Object> bean = sysEveWinDao.queryWinMationSynchronizationById(map);
         if (bean == null) {
             outputObject.setreturnMessage("您不具备该系统的同步权限。");
         } else {
@@ -194,24 +199,21 @@ public class SysEveWinServiceImpl implements SysEveWinService {
                 if ("0".equals(json.get("returnCode").toString())) {
                     Map<String, Object> user = inputObject.getLogParams();
                     JSONObject jo = JSONUtil.toBean(json.get("bean").toString(), null);
-                    //处理菜单
+                    // 处理菜单
                     List<Map<String, Object>> beans = JSONUtil.toList(jo.get("menuBeans").toString(), null);
                     for (Map<String, Object> row : beans) {
                         row.put("sysWinId", map.get("id"));
                         row.put("createId", user.get("id"));
                         row.put("createTime", DateUtil.getTimeAndToString());
-                        if (!"--".equals(row.get("menuUrl").toString())) {//一级菜单
+                        if (!"--".equals(row.get("menuUrl").toString())) {
+                            // 一级菜单
                             row.put("menuUrl", map.get("url").toString() + "/" + row.get("menuUrl").toString().replace("../../", ""));
                         }
                     }
                     sysEveWinDao.insertWinMationImportantSynchronization(beans);
-                    //处理权限点
-                    List<Map<String, Object>> points = JSONUtil.toList(jo.get("pointBeans").toString(), null);
-                    for (Map<String, Object> row : points) {
-                        row.put("createId", user.get("id"));
-                        row.put("createTime", DateUtil.getTimeAndToString());
-                    }
-                    sysEveWinDao.insertWinMationImportantSynchronizationPoint(points);
+                    // 处理权限点
+                    List<SysMenuAuthPointMation> points = JSONUtil.toList(jo.get("pointBeans").toString(), SysMenuAuthPointMation.class);
+                    sysEveMenuAuthPointDao.insertBatch(points);
                 } else {
                     outputObject.setreturnMessage(json.get("returnMessage").toString());
                 }

@@ -217,7 +217,13 @@
 			b.menu_id menuId,
 			b.auth_menu authMenu,
 			b.auth_menu_name authMenuName,
-			b.menu_num menuNum
+			b.menu_num menuNum,
+			b.parent_id parentId,
+			b.type,
+			b.create_id createId,
+			CONVERT (b.create_time, CHAR) createTime,
+			b.last_update_id lastUpdateId,
+			CONVERT (b.last_update_time, CHAR) lastUpdateTime
 		FROM
 			sys_eve_menu a,
 			sys_eve_menu_auth_point b
@@ -225,14 +231,5 @@
 			a.is_share = '1'
 		AND a.id = b.menu_id
 	</select>
-	
-	<insert id="insertWinMationImportantSynchronizationPoint" parameterType="java.util.Map">
-	     INSERT into sys_eve_menu_auth_point 
-	     (id, menu_id, auth_menu, auth_menu_name, menu_num, create_id, create_time)
-	     VALUES
-	     <foreach collection="list" item="item" index="index" separator="," >  
-	     	(#{item.id}, #{item.menuId}, #{item.authMenu}, #{item.authMenuName}, #{item.menuNum}, #{item.createId}, #{item.createTime})
-		 </foreach>  
-	</insert>
 	
 </mapper>

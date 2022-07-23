@@ -4,23 +4,16 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.userauth.menu.SysMenuAuthPointMation;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Map;
 
-public interface SysEveMenuAuthPointDao {
+public interface SysEveMenuAuthPointDao extends SkyeyeBaseMapper<SysMenuAuthPointMation> {
 
     List<Map<String, Object>> querySysEveMenuAuthPointListByMenuId(Map<String, Object> map);
 
-    Map<String, Object> querySysEveMenuAuthPointMationByAuthName(Map<String, Object> map);
-
-    int insertSysEveMenuAuthPointMation(Map<String, Object> map);
-
-    Map<String, Object> querySysEveMenuAuthPointMationToEditById(Map<String, Object> map);
-
-    Map<String, Object> querySysEveMenuAuthPointMationByAuthNameAndId(Map<String, Object> map);
-
-    int editSysEveMenuAuthPointMationById(Map<String, Object> map);
-
-    int deleteSysEveMenuAuthPointMationById(Map<String, Object> map);
+    int insertBatch(@Param("list") List<SysMenuAuthPointMation> sysMenuAuthPointMationList);
 
 }

@@ -51,6 +51,4 @@ public interface SysEveWinDao {
 
     List<Map<String, Object>> queryWinMationImportantSynchronizationPointData(Map<String, Object> map);
 
-    void insertWinMationImportantSynchronizationPoint(List<Map<String, Object>> rows);
-
 }

@@ -15,8 +15,6 @@ public interface SysEveMenuAuthPointService {
 
     void querySysEveMenuAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject);
 
-    void editSysEveMenuAuthPointMationById(InputObject inputObject, OutputObject outputObject);
-
     void deleteSysEveMenuAuthPointMationById(InputObject inputObject, OutputObject outputObject);
 
 }

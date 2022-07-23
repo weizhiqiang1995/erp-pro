@@ -4,27 +4,47 @@
 
 package com.skyeye.eve.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
-import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.SysEveMenuAuthPointDao;
+import com.skyeye.eve.entity.userauth.menu.SysMenuAuthPointMation;
+import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.eve.service.SysEveMenuAuthPointService;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @ClassName: SysEveMenuAuthPointServiceImpl
+ * @Description: 菜单权限点管理服务层
+ * @author: skyeye云系列--卫志强
+ * @date: 2022/7/23 19:37
+ * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
+ * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
+ */
 @Service
 public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SysEveMenuAuthPointServiceImpl.class);
+
     @Autowired
     private SysEveMenuAuthPointDao sysEveMenuAuthPointDao;
+
+    @Autowired
+    private IAuthUserService iAuthUserService;
 
     /**
      * 获取菜单权限点列表根据菜单id
@@ -37,13 +57,15 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveMenuAuthPointDao.querySysEveMenuAuthPointListByMenuId(map);
+        iAuthUserService.setNameByIdList(beans, "createId", "createName");
+        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
 
     }
 
     /**
-     * 添加菜单权限点
+     * 新增/编辑菜单权限点
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -51,12 +73,30 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysEveMenuAuthPointMation(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = sysEveMenuAuthPointDao.querySysEveMenuAuthPointMationByAuthName(map);
-        if (bean == null) {
-            map.put("menuNum", DateUtil.getTimeStampAndToString());
-            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
-            sysEveMenuAuthPointDao.insertSysEveMenuAuthPointMation(map);
+        SysMenuAuthPointMation sysMenuAuthPointMation = inputObject.getParams(SysMenuAuthPointMation.class);
+        // 1.根据条件进行校验
+        QueryWrapper<SysMenuAuthPointMation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.and(wrapper ->
+            wrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysMenuAuthPointMation.class, "authMenuName"), sysMenuAuthPointMation.getAuthMenuName())
+                .or().eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysMenuAuthPointMation.class, "authMenu"), sysMenuAuthPointMation.getAuthMenu()));
+        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysMenuAuthPointMation.class, "menuId"), sysMenuAuthPointMation.getMenuId());
+        if (StringUtils.isNotEmpty(sysMenuAuthPointMation.getId())) {
+            queryWrapper.ne(CommonConstants.ID, sysMenuAuthPointMation.getId());
+        }
+        SysMenuAuthPointMation checkSysMenuAuthPointMation = sysEveMenuAuthPointDao.selectOne(queryWrapper);
+
+        if (ObjectUtils.isEmpty(checkSysMenuAuthPointMation)) {
+            String userId = inputObject.getLogParams().get("id").toString();
+            // 2.新增/编辑数据
+            if (StringUtils.isNotEmpty(sysMenuAuthPointMation.getId())) {
+                LOGGER.info("update menu auth point data, id is {}", sysMenuAuthPointMation.getId());
+                DataCommonUtil.setCommonLastUpdateDataByGenericity(sysMenuAuthPointMation, userId);
+                sysEveMenuAuthPointDao.updateById(sysMenuAuthPointMation);
+            } else {
+                DataCommonUtil.setCommonDataByGenericity(sysMenuAuthPointMation, userId);
+                LOGGER.info("insert menu auth point data, id is {}", sysMenuAuthPointMation.getId());
+                sysEveMenuAuthPointDao.insert(sysMenuAuthPointMation);
+            }
         } else {
             outputObject.setreturnMessage("该菜单下已存在该名称的权限点，请进行更改.");
         }
@@ -71,26 +111,10 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
     @Override
     public void querySysEveMenuAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = sysEveMenuAuthPointDao.querySysEveMenuAuthPointMationToEditById(map);
-        outputObject.setBean(bean);
-    }
-
-    /**
-     * 编辑菜单权限点
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysEveMenuAuthPointMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = sysEveMenuAuthPointDao.querySysEveMenuAuthPointMationByAuthNameAndId(map);
-        if (bean == null) {
-            sysEveMenuAuthPointDao.editSysEveMenuAuthPointMationById(map);
-        } else {
-            outputObject.setreturnMessage("该菜单下已存在该名称的权限点，请进行更改.");
-        }
+        String id = map.get("id").toString();
+        SysMenuAuthPointMation sysMenuAuthPointMation = sysEveMenuAuthPointDao.selectById(id);
+        outputObject.setBean(sysMenuAuthPointMation);
+        outputObject.settotal(1);
     }
 
     /**
@@ -103,7 +127,8 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysEveMenuAuthPointMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        sysEveMenuAuthPointDao.deleteSysEveMenuAuthPointMationById(map);
+        String id = map.get("id").toString();
+        sysEveMenuAuthPointDao.deleteById(id);
     }
 
 
