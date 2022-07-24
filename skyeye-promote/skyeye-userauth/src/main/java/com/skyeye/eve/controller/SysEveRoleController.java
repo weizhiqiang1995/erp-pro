@@ -46,12 +46,12 @@ public class SysEveRoleController {
     }
 
     /**
-     * 获取角色需要绑定的菜单列表
+     * 获取所有模块(桌面)/菜单/权限点/分组/数据权限列表
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "sys014", value = "获取角色需要绑定的菜单列表", method = "GET", allUse = "2")
+    @ApiOperation(id = "sys014", value = "获取所有模块(桌面)/菜单/权限点/分组/数据权限列表", method = "GET", allUse = "2")
     @RequestMapping("/post/SysEveRoleController/querySysRoleBandMenuList")
     public void querySysRoleBandMenuList(InputObject inputObject, OutputObject outputObject) {
         sysEveRoleService.querySysRoleBandMenuList(inputObject, outputObject);

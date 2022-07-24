@@ -59,7 +59,7 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
     }
 
     /**
-     * 获取角色需要绑定的菜单列表
+     * 获取所有模块(桌面)/菜单/权限点/分组/数据权限列表
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -77,9 +77,6 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
         deskDefault.put("id", "winfixedpage00000000");
         deskDefault.put("name", "默认桌面");
         deskDefault.put("pId", "0");
-        deskDefault.put("isParent", true);
-        deskDefault.put("type", "0");//
-        deskDefault.put("open", false);
         deskDefault.put("sysName", "基础系统");
         deskDefault.put("pageType", "桌面");
         beans.add(deskDefault);

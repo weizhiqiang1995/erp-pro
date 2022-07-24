@@ -31,10 +31,6 @@
 			a.id,
 			a.menu_name name,
 			CASE a.menu_parent_id WHEN '0' THEN (CASE WHEN a.desktop_id IS NULL THEN 'winfixedpage00000000' WHEN LENGTH(a.desktop_id) = 0 THEN 'winfixedpage00000000' ELSE a.desktop_id END) ELSE a.menu_parent_id END pId,
-			CASE (SELECT COUNT(*) FROM sys_eve_menu c WHERE CASE a.menu_parent_id WHEN '0' THEN CONCAT(a.id, ',') ELSE CONCAT(a.menu_parent_id, a.id, ',') END = c.menu_parent_id) 
-				WHEN '0' THEN false ELSE true END isParent,
-			(a.menu_level + 1) type,
-			'false' open,
 			b.sys_name sysName,
 			CASE a.menu_url WHEN '--' THEN '盒子' ELSE '页面' END pageType
 		FROM
@@ -45,12 +41,9 @@
 		SELECT
 			a.id,
 			a.auth_menu_name name,
-			a.menu_id pId,
-			false isParent,
-			(b.menu_level + 1) type,
-			'false' open,
+			CASE a.parent_id WHEN '0' THEN a.menu_id ELSE a.parent_id END pId,
 			c.sys_name sysName,
-			'权限点' pageType
+			CASE a.type WHEN '1' THEN '权限点' WHEN '2' THEN '数据权限分组' WHEN '3' THEN '数据权限' ELSE '' END pageType
 		FROM
 			sys_eve_menu_auth_point a,
 			sys_eve_menu b
@@ -64,9 +57,6 @@
             a.id,
             a.desktop_name name,
             '0' pId,
-            true isParent,
-            '0' type,
-            'false' open,
             '基础系统' sysName,
             '桌面' pageType
         FROM
