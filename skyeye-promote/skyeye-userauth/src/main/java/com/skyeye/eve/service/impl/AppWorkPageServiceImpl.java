@@ -262,4 +262,25 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
         }
     }
 
+    /**
+     * 根据父目录id获取子目录集合
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryAppWorkPageListByParentId(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        String parentId = map.get("parentId").toString();
+        String desktopId = map.get("desktopId").toString();
+        QueryWrapper<AppWorkPageMation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageMation.class, "parentId"), parentId);
+        if (StringUtils.isNotEmpty(desktopId)) {
+            queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageMation.class, "desktopId"), desktopId);
+        }
+        List<AppWorkPageMation> appWorkPageMationList = appWorkPageDao.selectList(queryWrapper);
+        outputObject.setBeans(appWorkPageMationList);
+        outputObject.settotal(appWorkPageMationList.size());
+    }
+
 }

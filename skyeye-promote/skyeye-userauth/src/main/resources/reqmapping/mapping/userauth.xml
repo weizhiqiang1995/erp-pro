@@ -269,7 +269,7 @@
     <url id="desktop009" path="/post/SysEveDesktopController/editSysDesktopMationOrderNumDownById" val="桌面名称下移" allUse="1" groupName="桌面名称管理">
         <property id="rowId" name="id" ref="required" var="桌面名称id" />
     </url>
-    <url id="desktop011" path="/post/SysEveDesktopController/queryAllSysDesktopList" val="获取全部的桌面名称用于系统菜单" allUse="2" groupName="桌面名称管理">
+    <url id="desktop011" path="/post/SysEveDesktopController/queryAllSysDesktopList" val="获取全部的桌面名称用于系统菜单" allUse="2" method="GET" groupName="桌面名称管理">
     	<property id="language" name="language" ref="" var="语言类型" defaultValue="zh" />
     </url>
     <url id="desktop012" path="/post/SysEveDesktopController/removeAllSysEveMenuByDesktopId" val="一键移除所有菜单" allUse="1" groupName="桌面名称管理">

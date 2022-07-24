@@ -24,7 +24,7 @@ import java.io.Serializable;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Data
-@TableName(value = "sys_eve_menu_auth_point")
+@TableName(value = "app_workbench_page")
 @ApiModel("APP菜单实体类")
 public class AppWorkPageMation extends CommonOperatorUserInfo implements Serializable {
 
@@ -67,5 +67,9 @@ public class AppWorkPageMation extends CommonOperatorUserInfo implements Seriali
     @TableField(value = "parent_id")
     @ApiModelProperty(value = "所属目录id", required = "required")
     private String parentId;
+
+    @TableField(value = "desktop_id")
+    @ApiModelProperty(value = "所属桌面id", required = "required")
+    private String desktopId;
 
 }

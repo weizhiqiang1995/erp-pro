@@ -5,6 +5,7 @@
 package com.skyeye.eve.controller;
 
 import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.entity.CommonPageInfo;
@@ -113,6 +114,21 @@ public class AppWorkPageController {
     @RequestMapping("/post/AppWorkPageController/editAppWorkPageDownById")
     public void editAppWorkPageDownById(InputObject inputObject, OutputObject outputObject) {
         appWorkPageService.editAppWorkPageDownById(inputObject, outputObject);
+    }
+
+    /**
+     * 根据父目录id获取子目录集合
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryAppWorkPageListByParentId", value = "根据父目录id获取子目录集合", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "parentId", name = "parentId", value = "父目录ID", required = "required"),
+        @ApiImplicitParam(id = "desktopId", name = "desktopId", value = "桌面id")})
+    @RequestMapping("/post/AppWorkPageController/queryAppWorkPageListByParentId")
+    public void queryAppWorkPageListByParentId(InputObject inputObject, OutputObject outputObject) {
+        appWorkPageService.queryAppWorkPageListByParentId(inputObject, outputObject);
     }
 
 }

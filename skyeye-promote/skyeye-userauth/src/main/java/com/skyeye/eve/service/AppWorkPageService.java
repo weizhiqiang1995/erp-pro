@@ -25,4 +25,5 @@ public interface AppWorkPageService {
 
     void editAppWorkPageDownById(InputObject inputObject, OutputObject outputObject);
 
+    void queryAppWorkPageListByParentId(InputObject inputObject, OutputObject outputObject);
 }
