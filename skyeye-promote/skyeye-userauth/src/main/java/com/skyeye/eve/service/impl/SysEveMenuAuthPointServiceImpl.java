@@ -5,8 +5,6 @@
 package com.skyeye.eve.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -86,7 +84,6 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
     @Override
     public void querySysEveMenuAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveMenuAuthPointDao.querySysEveMenuAuthPointListByMenuId(map);
         iAuthUserService.setNameByIdList(beans, "createId", "createName");
         iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
@@ -94,7 +91,7 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
             bean.put("typeName", Type.getTypeName(Integer.parseInt(bean.get("type").toString())));
         });
         outputObject.setBeans(beans);
-        outputObject.settotal(pages.getTotal());
+        outputObject.settotal(beans.size());
 
     }
 

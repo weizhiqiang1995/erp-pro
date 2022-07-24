@@ -4,18 +4,26 @@
 
 package com.skyeye.eve.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.common.constans.CommonConstants;
+import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.AppWorkPageDao;
+import com.skyeye.eve.entity.userauth.menu.AppWorkPageMation;
 import com.skyeye.eve.service.AppWorkPageService;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -31,10 +39,12 @@ import java.util.Map;
 @Service
 public class AppWorkPageServiceImpl implements AppWorkPageService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AppWorkPageServiceImpl.class);
+
     @Autowired
     private AppWorkPageDao appWorkPageDao;
 
-    public static enum State {
+    public enum State {
         START_NEW(1, "新建"),
         START_UP(2, "上线"),
         START_DOWN(3, "下线"),
@@ -57,88 +67,63 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     }
 
     /**
-     * 获取手机端菜单目录
+     * 获取菜单列表
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     public void queryAppWorkPageList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = appWorkPageDao.queryAppWorkPageList(map);
-        outputObject.setBeans(beans);
-        outputObject.settotal(beans.size());
-    }
-
-    /**
-     * 新增手机端菜单目录
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertAppWorkPageMation(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
-        map.put("title", "新建目录");
-        map.put("state", State.START_NEW.getState());
-        map.put("type", 1);
-        map.put("parentId", 0);
-        Map<String, Object> orderBy = appWorkPageDao.queryAppWorkPageAfterOrderBum(map);
-        if (orderBy == null) {
-            map.put("orderBy", 1);
-        } else {
-            if (orderBy.containsKey("orderBy")) {
-                map.put("orderBy", Integer.parseInt(orderBy.get("orderBy").toString()) + 1);
-            } else {
-                map.put("orderBy", 1);
-            }
-        }
-        appWorkPageDao.insertAppWorkPageMation(map);
-        outputObject.setBean(map);
-    }
-
-    /**
-     * 根据目录id获取菜单列表
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryAppWorkPageListById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = appWorkPageDao.queryAppWorkPageListById(map);
+        CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
+        Page pages = PageHelper.startPage(commonPageInfo.getPage(), commonPageInfo.getLimit());
+        List<Map<String, Object>> beans = appWorkPageDao.queryAppWorkPageList(commonPageInfo);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
 
     /**
-     * 新增手机端菜单
+     * 新增/编辑手机端菜单
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
-        map.put("state", State.START_NEW.getState());
-        map.put("type", 2);
-        Map<String, Object> orderBy = appWorkPageDao.queryAppWorkPageTAfterOrderBum(map);
-        if (orderBy == null) {
-            map.put("orderBy", 1);
-        } else {
-            if (orderBy.containsKey("orderBy")) {
-                map.put("orderBy", Integer.parseInt(orderBy.get("orderBy").toString()) + 1);
-            } else {
-                map.put("orderBy", 1);
-            }
+    public void writeAppWorkPageMation(InputObject inputObject, OutputObject outputObject) {
+        AppWorkPageMation appWorkPageMation = inputObject.getParams(AppWorkPageMation.class);
+        // 1.根据条件进行校验
+        QueryWrapper<AppWorkPageMation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageMation.class, "parentId"), appWorkPageMation.getParentId());
+        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageMation.class, "title"), appWorkPageMation.getTitle());
+        if (StringUtils.isNotEmpty(appWorkPageMation.getId())) {
+            queryWrapper.ne(CommonConstants.ID, appWorkPageMation.getId());
         }
-        appWorkPageDao.insertAppWorkPageMation(map);
-        outputObject.setBean(map);
+        AppWorkPageMation checkSysMenuAuthPointMation = appWorkPageDao.selectOne(queryWrapper);
+
+        if (ObjectUtils.isEmpty(checkSysMenuAuthPointMation)) {
+            String userId = inputObject.getLogParams().get("id").toString();
+            // 2.新增/编辑数据
+            if (StringUtils.isNotEmpty(appWorkPageMation.getId())) {
+                // 判断parentId是否发生变化，如果发生变化，则需要重新获取orderBy排序字段
+                AppWorkPageMation appWorkPage = appWorkPageDao.selectById(appWorkPageMation.getId());
+                if (!appWorkPage.getParentId().equals(appWorkPageMation.getParentId())) {
+                    Integer currentMaxOrderBy = appWorkPageDao.queryAppWorkPageMaxOrderBumByParentId(appWorkPageMation.getParentId());
+                    appWorkPageMation.setOrderBy(currentMaxOrderBy++);
+                }
+                LOGGER.info("update app work page data, id is {}", appWorkPageMation.getId());
+                DataCommonUtil.setCommonLastUpdateDataByGenericity(appWorkPageMation, userId);
+                appWorkPageDao.updateById(appWorkPageMation);
+            } else {
+                Integer currentMaxOrderBy = appWorkPageDao.queryAppWorkPageMaxOrderBumByParentId(appWorkPageMation.getParentId());
+                appWorkPageMation.setOrderBy(currentMaxOrderBy++);
+                appWorkPageMation.setState(State.START_NEW.getState());
+                DataCommonUtil.setCommonDataByGenericity(appWorkPageMation, userId);
+                LOGGER.info("insert app work page data, id is {}", appWorkPageMation.getId());
+                appWorkPageDao.insert(appWorkPageMation);
+            }
+        } else {
+            outputObject.setreturnMessage("存在相同的菜单，请进行更改.");
+        }
     }
 
     /**
@@ -150,44 +135,10 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     @Override
     public void queryAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = appWorkPageDao.queryAppWorkPageMationById(map);
-        outputObject.setBean(bean);
+        String id = map.get("id").toString();
+        AppWorkPageMation appWorkPageMation = appWorkPageDao.selectById(id);
+        outputObject.setBean(appWorkPageMation);
         outputObject.settotal(1);
-    }
-
-    /**
-     * 保存编辑后的菜单信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = appWorkPageDao.queryAppWorkPageStateById(map);
-        int state = Integer.parseInt(bean.get("state").toString());
-        if (State.START_NEW.getState() == state || State.START_DOWN.getState() == state) {
-            // 新建或者下线的状态可以编辑
-            Map<String, Object> m = appWorkPageDao.queryAppWorkPageMationById(map);
-            setUpdateUserMation(inputObject, map);
-            if (!m.get("parentId").toString().equals(map.get("parentId").toString())) {
-                // 如果用户更改了菜单目录，则根据选择的目录将排序重新赋值
-                Map<String, Object> orderBy = appWorkPageDao.queryAppWorkPageTAfterOrderBum(map);
-                if (orderBy == null) {
-                    map.put("orderBy", 1);
-                } else {
-                    if (orderBy.containsKey("orderBy")) {
-                        map.put("orderBy", Integer.parseInt(orderBy.get("orderBy").toString()) + 1);
-                    } else {
-                        map.put("orderBy", 1);
-                    }
-                }
-            }
-            appWorkPageDao.editAppWorkPageMationById(map);
-        } else {
-            outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
-        }
     }
 
     private void setUpdateUserMation(InputObject inputObject, Map<String, Object> map) {
@@ -205,8 +156,9 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = appWorkPageDao.queryAppWorkPageStateById(map);
-        int state = Integer.parseInt(bean.get("state").toString());
+        String id = map.get("id").toString();
+        AppWorkPageMation appWorkPageMation = appWorkPageDao.selectById(id);
+        int state = appWorkPageMation.getState();
         if (State.START_NEW.getState() == state || State.START_DOWN.getState() == state) {
             setUpdateUserMation(inputObject, map);
             // 新建或者下线的状态可以删除
@@ -275,8 +227,9 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editAppWorkPageUpById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = appWorkPageDao.queryAppWorkPageStateById(map);
-        int state = Integer.parseInt(bean.get("state").toString());
+        String id = map.get("id").toString();
+        AppWorkPageMation appWorkPageMation = appWorkPageDao.selectById(id);
+        int state = appWorkPageMation.getState();
         if (State.START_NEW.getState() == state || State.START_DOWN.getState() == state) {
             setUpdateUserMation(inputObject, map);
             // 新建或者下线的状态可以上线
@@ -297,148 +250,15 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editAppWorkPageDownById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = appWorkPageDao.queryAppWorkPageStateById(map);
-        int state = Integer.parseInt(bean.get("state").toString());
-        if (State.START_UP.getState() == state) {
+        String id = map.get("id").toString();
+        AppWorkPageMation appWorkPageMation = appWorkPageDao.selectById(id);
+        if (State.START_UP.getState() == appWorkPageMation.getState()) {
             setUpdateUserMation(inputObject, map);
             // 上线状态可以下线
             map.put("state", State.START_DOWN.getState());
             appWorkPageDao.editAppWorkPageStateById(map);
         } else {
             outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
-        }
-    }
-
-    /**
-     * 编辑菜单目录名称
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkPageTitleById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = appWorkPageDao.queryAppWorkPageStateById(map);
-        int state = Integer.parseInt(bean.get("state").toString());
-        if (State.START_NEW.getState() == state || State.START_DOWN.getState() == state || State.START_UP.getState() == state) {
-            setUpdateUserMation(inputObject, map);
-            // 新建/下线/上线的状态可以编辑
-            appWorkPageDao.editAppWorkPageTitleById(map);
-        } else {
-            outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
-        }
-    }
-
-    /**
-     * 删除菜单目录
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteAppWorkPageById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = appWorkPageDao.queryAppWorkPageStateById(map);
-        int state = Integer.parseInt(bean.get("state").toString());
-        if (State.START_NEW.getState() == state || State.START_DOWN.getState() == state) {
-            // 新建或者下线的状态可以删除
-            setUpdateUserMation(inputObject, map);
-            map.put("state", State.START_DELETE.getState());
-            appWorkPageDao.editAppWorkPageStateById(map);
-        } else {
-            outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
-        }
-    }
-
-    /**
-     * 目录上线
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkUpById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = appWorkPageDao.queryAppWorkPageStateById(map);
-        int state = Integer.parseInt(bean.get("state").toString());
-        if (State.START_NEW.getState() == state || State.START_DOWN.getState() == state) {
-            // 新建或者下线的状态可以上线
-            setUpdateUserMation(inputObject, map);
-            map.put("state", State.START_UP.getState());
-            appWorkPageDao.editAppWorkPageStateById(map);
-        } else {
-            outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
-        }
-    }
-
-    /**
-     * 目录下线
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkDownById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = appWorkPageDao.queryAppWorkPageStateById(map);
-        int state = Integer.parseInt(bean.get("state").toString());
-        if (State.START_UP.getState() == state) {
-            // 上线状态可以下线
-            setUpdateUserMation(inputObject, map);
-            map.put("state", State.START_DOWN.getState());
-            appWorkPageDao.editAppWorkPageStateById(map);
-        } else {
-            outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
-        }
-    }
-
-    /**
-     * 目录上移
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkSortTopById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> topBean = appWorkPageDao.queryAppWorkISTopByThisId(map);//根据同一级排序获取这条数据的上一条数据
-        if (topBean == null) {
-            outputObject.setreturnMessage("已经是最靠前的目录，无法移动。");
-        } else {
-            map.put("orderBy", topBean.get("orderBy"));
-            topBean.put("orderBy", topBean.get("thisOrderBy"));
-            setUpdateUserMation(inputObject, map);
-            appWorkPageDao.editAppWorkPageSortById(map);
-            setUpdateUserMation(inputObject, topBean);
-            appWorkPageDao.editAppWorkPageSortById(topBean);
-        }
-    }
-
-    /**
-     * 目录下移
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkSortLowerById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> topBean = appWorkPageDao.queryAppWorkISLowerByThisId(map);//根据同一级排序获取这条数据的下一条数据
-        if (topBean == null) {
-            outputObject.setreturnMessage("已经是最靠后的目录，无法移动。");
-        } else {
-            map.put("orderBy", topBean.get("orderBy"));
-            topBean.put("orderBy", topBean.get("thisOrderBy"));
-            setUpdateUserMation(inputObject, map);
-            appWorkPageDao.editAppWorkPageSortById(map);
-            setUpdateUserMation(inputObject, topBean);
-            appWorkPageDao.editAppWorkPageSortById(topBean);
         }
     }
 

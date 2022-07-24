@@ -563,33 +563,8 @@
 	<!-- 菜单权限点结束 -->
 	
 	<!-- 手机端菜单开始 -->
-    <url id="appworkpage001" path="/post/AppWorkPageController/queryAppWorkPageList" val="获取手机端菜单目录" allUse="2" groupName="手机端菜单管理">
-    </url>
-    <url id="appworkpage002" path="/post/AppWorkPageController/insertAppWorkPageMation" val="新增手机端菜单目录" allUse="1" groupName="手机端菜单管理">
-    </url>
-    <url id="appworkpage003" path="/post/AppWorkPageController/queryAppWorkPageListById" val="根据目录id获取菜单列表" allUse="2" groupName="手机端菜单管理">
-        <property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-        <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-        <property id="chooseId" name="chooseId" ref="" var="目录id" />
-        <property id="title" name="title" ref="" var="菜单名称" />
-    </url>
-    <url id="appworkpage004" path="/post/AppWorkPageController/insertAppWorkPageMationById" val="新增手机端菜单" allUse="1" groupName="手机端菜单管理">
-        <property id="parentId" name="parentId" ref="required" var="目录id" />
-        <property id="title" name="title" ref="required" var="页面名称" />
-        <property id="url" name="url" ref="" var="页面路径" />
-		<property id="urlType" name="urlType" ref="required,num" var="页面类型  1.外部系统页面  2.自身系统页面" />
-        <property id="logo" name="logo" ref="" var="logo" />
-    </url>
     <url id="appworkpage005" path="/post/AppWorkPageController/queryAppWorkPageMationById" val="获取菜单信息进行回显" allUse="2" groupName="手机端菜单管理">
         <property id="rowId" name="id" ref="required" var="菜单id" />
-    </url>
-    <url id="appworkpage006" path="/post/AppWorkPageController/editAppWorkPageMationById" val="保存编辑后的菜单信息" allUse="1" groupName="手机端菜单管理">
-        <property id="rowId" name="id" ref="required" var="菜单id" />
-        <property id="parentId" name="parentId" ref="required" var="目录id" />
-        <property id="title" name="title" ref="required" var="页面名称" />
-        <property id="url" name="url" ref="" var="页面路径" />
-		<property id="urlType" name="urlType" ref="required,num" var="页面类型  1.外部系统页面  2.自身系统页面" />
-        <property id="logo" name="logo" ref="" var="logo" />
     </url>
     <url id="appworkpage007" path="/post/AppWorkPageController/deleteAppWorkPageMationById" val="删除菜单" allUse="1" groupName="手机端菜单管理">
         <property id="rowId" name="id" ref="required" var="菜单id" />
@@ -607,25 +582,6 @@
     </url>
     <url id="appworkpage011" path="/post/AppWorkPageController/editAppWorkPageDownById" val="菜单下线" allUse="1" groupName="手机端菜单管理">
         <property id="rowId" name="id" ref="required" var="菜单id" />
-    </url>
-    <url id="appworkpage012" path="/post/AppWorkPageController/editAppWorkPageTitleById" val="编辑菜单目录名称" allUse="1" groupName="手机端菜单管理">
-        <property id="rowId" name="id" ref="required" var="目录id" />
-        <property id="title" name="title" ref="required" var="菜单名称" />
-    </url>
-    <url id="appworkpage013" path="/post/AppWorkPageController/deleteAppWorkPageById" val="删除菜单目录" allUse="1" groupName="手机端菜单管理">
-        <property id="rowId" name="id" ref="required" var="目录id" />
-    </url>
-    <url id="appworkpage014" path="/post/AppWorkPageController/editAppWorkUpById" val="菜单目录上线" allUse="1" groupName="手机端菜单管理">
-        <property id="rowId" name="id" ref="required" var="目录id" />
-    </url>
-    <url id="appworkpage015" path="/post/AppWorkPageController/editAppWorkDownById" val="菜单目录下线" allUse="1" groupName="手机端菜单管理">
-        <property id="rowId" name="id" ref="required" var="目录id" />
-    </url>
-    <url id="appworkpage016" path="/post/AppWorkPageController/editAppWorkSortTopById" val="菜单目录上移" allUse="1" groupName="手机端菜单管理">
-        <property id="rowId" name="id" ref="required" var="目录id" />
-    </url>
-    <url id="appworkpage017" path="/post/AppWorkPageController/editAppWorkSortLowerById" val="菜单目录下移" allUse="1" groupName="手机端菜单管理">
-        <property id="rowId" name="id" ref="required" var="目录id" />
     </url>
     <!-- 手机端菜单结束 -->
 	
