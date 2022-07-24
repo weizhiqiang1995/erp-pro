@@ -37,11 +37,11 @@ public class SysMenuAuthPointMation extends CommonOperatorUserInfo implements Se
     private String menuId;
 
     @TableField("auth_menu_name")
-    @ApiModelProperty(value = "权限点名称", required = "required")
+    @ApiModelProperty(value = "权限点名称/分组名称/数据权限名称", required = "required")
     private String authMenuName;
 
     @TableField("auth_menu")
-    @ApiModelProperty(value = "接口id", required = "required")
+    @ApiModelProperty(value = "接口id/分组标识/数据权限表达式", required = "required")
     private String authMenu;
 
     /**

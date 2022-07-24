@@ -11,6 +11,7 @@ import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
+import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.SysEveMenuAuthPointDao;
 import com.skyeye.eve.entity.userauth.menu.SysMenuAuthPointMation;
@@ -46,6 +47,36 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
     @Autowired
     private IAuthUserService iAuthUserService;
 
+    public enum Type {
+        AUTH_POINT(1, "权限点"),
+        DATA_GROUP(2, "数据分组"),
+        DATA_POINT(3, "数据权限");
+        private int type;
+        private String name;
+
+        Type(int type, String name) {
+            this.type = type;
+            this.name = name;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public static String getTypeName(int type) {
+            for (Type bean : Type.values()) {
+                if (bean.getType() == type) {
+                    return bean.getName();
+                }
+            }
+            return "";
+        }
+    }
+
     /**
      * 获取菜单权限点列表根据菜单id
      *
@@ -59,6 +90,9 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
         List<Map<String, Object>> beans = sysEveMenuAuthPointDao.querySysEveMenuAuthPointListByMenuId(map);
         iAuthUserService.setNameByIdList(beans, "createId", "createName");
         iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
+        beans.forEach(bean -> {
+            bean.put("typeName", Type.getTypeName(Integer.parseInt(bean.get("type").toString())));
+        });
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
 
@@ -93,6 +127,7 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
                 DataCommonUtil.setCommonLastUpdateDataByGenericity(sysMenuAuthPointMation, userId);
                 sysEveMenuAuthPointDao.updateById(sysMenuAuthPointMation);
             } else {
+                sysMenuAuthPointMation.setMenuNum(String.valueOf(DateUtil.getTimeStampAndToString()));
                 DataCommonUtil.setCommonDataByGenericity(sysMenuAuthPointMation, userId);
                 LOGGER.info("insert menu auth point data, id is {}", sysMenuAuthPointMation.getId());
                 sysEveMenuAuthPointDao.insert(sysMenuAuthPointMation);
