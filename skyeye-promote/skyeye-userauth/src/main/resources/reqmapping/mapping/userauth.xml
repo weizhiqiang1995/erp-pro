@@ -563,7 +563,7 @@
 	<!-- 菜单权限点结束 -->
 	
 	<!-- 手机端菜单开始 -->
-    <url id="appworkpage005" path="/post/AppWorkPageController/queryAppWorkPageMationById" val="获取菜单信息进行回显" allUse="2" groupName="手机端菜单管理">
+    <url id="appworkpage005" path="/post/AppWorkPageController/queryAppWorkPageMationById" val="获取菜单信息进行回显" allUse="2" method="GET" groupName="手机端菜单管理">
         <property id="rowId" name="id" ref="required" var="菜单id" />
     </url>
     <url id="appworkpage007" path="/post/AppWorkPageController/deleteAppWorkPageMationById" val="删除菜单" allUse="1" groupName="手机端菜单管理">

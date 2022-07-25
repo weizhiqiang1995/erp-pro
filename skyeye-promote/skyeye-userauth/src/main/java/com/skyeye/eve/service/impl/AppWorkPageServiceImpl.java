@@ -17,6 +17,7 @@ import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.AppWorkPageDao;
 import com.skyeye.eve.entity.userauth.menu.AppWorkPageMation;
 import com.skyeye.eve.service.AppWorkPageService;
+import com.skyeye.eve.service.IAuthUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +44,9 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
 
     @Autowired
     private AppWorkPageDao appWorkPageDao;
+
+    @Autowired
+    private IAuthUserService iAuthUserService;
 
     public enum State {
         START_NEW(1, "新建"),
@@ -77,6 +81,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
         Page pages = PageHelper.startPage(commonPageInfo.getPage(), commonPageInfo.getLimit());
         List<Map<String, Object>> beans = appWorkPageDao.queryAppWorkPageList(commonPageInfo);
+        iAuthUserService.setNameByIdList(beans, "createId", "createName");
+        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -107,15 +113,15 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
                 // 判断parentId是否发生变化，如果发生变化，则需要重新获取orderBy排序字段
                 AppWorkPageMation appWorkPage = appWorkPageDao.selectById(appWorkPageMation.getId());
                 if (!appWorkPage.getParentId().equals(appWorkPageMation.getParentId())) {
-                    Integer currentMaxOrderBy = appWorkPageDao.queryAppWorkPageMaxOrderBumByParentId(appWorkPageMation.getParentId());
-                    appWorkPageMation.setOrderBy(currentMaxOrderBy++);
+                    Integer nextOrderBy = appWorkPageDao.queryAppWorkPageMaxOrderBumByParentId(appWorkPageMation.getParentId());
+                    appWorkPageMation.setOrderBy(nextOrderBy);
                 }
                 LOGGER.info("update app work page data, id is {}", appWorkPageMation.getId());
                 DataCommonUtil.setCommonLastUpdateDataByGenericity(appWorkPageMation, userId);
                 appWorkPageDao.updateById(appWorkPageMation);
             } else {
-                Integer currentMaxOrderBy = appWorkPageDao.queryAppWorkPageMaxOrderBumByParentId(appWorkPageMation.getParentId());
-                appWorkPageMation.setOrderBy(currentMaxOrderBy++);
+                Integer nextOrderBy = appWorkPageDao.queryAppWorkPageMaxOrderBumByParentId(appWorkPageMation.getParentId());
+                appWorkPageMation.setOrderBy(nextOrderBy);
                 appWorkPageMation.setState(State.START_NEW.getState());
                 DataCommonUtil.setCommonDataByGenericity(appWorkPageMation, userId);
                 LOGGER.info("insert app work page data, id is {}", appWorkPageMation.getId());
@@ -275,10 +281,14 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
         String desktopId = map.get("desktopId").toString();
         QueryWrapper<AppWorkPageMation> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageMation.class, "parentId"), parentId);
+        queryWrapper.ne(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageMation.class, "state"), State.START_DELETE.getState());
         if (StringUtils.isNotEmpty(desktopId)) {
             queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageMation.class, "desktopId"), desktopId);
         }
         List<AppWorkPageMation> appWorkPageMationList = appWorkPageDao.selectList(queryWrapper);
+        appWorkPageMationList.forEach(bean -> {
+            bean.setName(bean.getTitle());
+        });
         outputObject.setBeans(appWorkPageMationList);
         outputObject.settotal(appWorkPageMationList.size());
     }

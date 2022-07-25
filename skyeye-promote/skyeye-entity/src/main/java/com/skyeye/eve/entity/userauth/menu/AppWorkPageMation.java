@@ -36,6 +36,12 @@ public class AppWorkPageMation extends CommonOperatorUserInfo implements Seriali
     @ApiModelProperty(value = "菜单/目录名称", required = "required")
     private String title;
 
+    /**
+     * 和title含义一样，用做前台下拉框加载
+     */
+    @TableField(exist = false)
+    private String name;
+
     @TableField("logo")
     @ApiModelProperty(value = "菜单logo")
     private String logo;
@@ -45,7 +51,7 @@ public class AppWorkPageMation extends CommonOperatorUserInfo implements Seriali
     private String url;
 
     @TableField("url_type")
-    @ApiModelProperty(value = "菜单类型  1.外部系统菜单  2.自身系统菜单", required = "required,num")
+    @ApiModelProperty(value = "菜单类型  1.外部系统菜单  2.自身系统菜单", required = "required,num", defaultValue = "2")
     private Integer urlType;
 
     /**
