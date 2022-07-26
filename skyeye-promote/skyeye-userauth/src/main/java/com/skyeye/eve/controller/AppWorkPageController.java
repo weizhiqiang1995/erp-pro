@@ -95,28 +95,6 @@ public class AppWorkPageController {
     }
 
     /**
-     * 菜单上线
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/AppWorkPageController/editAppWorkPageUpById")
-    public void editAppWorkPageUpById(InputObject inputObject, OutputObject outputObject) {
-        appWorkPageService.editAppWorkPageUpById(inputObject, outputObject);
-    }
-
-    /**
-     * 菜单下线
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/AppWorkPageController/editAppWorkPageDownById")
-    public void editAppWorkPageDownById(InputObject inputObject, OutputObject outputObject) {
-        appWorkPageService.editAppWorkPageDownById(inputObject, outputObject);
-    }
-
-    /**
      * 根据父目录id获取子目录集合
      *
      * @param inputObject  入参以及用户信息等获取对象

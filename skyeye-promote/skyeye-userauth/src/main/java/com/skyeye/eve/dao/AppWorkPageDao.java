@@ -31,6 +31,4 @@ public interface AppWorkPageDao extends SkyeyeBaseMapper<AppWorkPageMation> {
 
     Map<String, Object> queryAppWorkPageISLowerByThisId(Map<String, Object> map);
 
-    int editAppWorkPageStateById(Map<String, Object> map);
-
 }

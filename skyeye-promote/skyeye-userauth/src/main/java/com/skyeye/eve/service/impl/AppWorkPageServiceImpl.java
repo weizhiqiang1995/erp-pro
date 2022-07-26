@@ -48,28 +48,6 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     @Autowired
     private IAuthUserService iAuthUserService;
 
-    public enum State {
-        START_NEW(1, "新建"),
-        START_UP(2, "上线"),
-        START_DOWN(3, "下线"),
-        START_DELETE(4, "删除");
-        private int state;
-        private String name;
-
-        State(int state, String name) {
-            this.state = state;
-            this.name = name;
-        }
-
-        public int getState() {
-            return state;
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
-
     /**
      * 获取菜单列表
      *
@@ -122,7 +100,6 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
             } else {
                 Integer nextOrderBy = appWorkPageDao.queryAppWorkPageMaxOrderBumByParentId(appWorkPageMation.getParentId());
                 appWorkPageMation.setOrderBy(nextOrderBy);
-                appWorkPageMation.setState(State.START_NEW.getState());
                 DataCommonUtil.setCommonDataByGenericity(appWorkPageMation, userId);
                 LOGGER.info("insert app work page data, id is {}", appWorkPageMation.getId());
                 appWorkPageDao.insert(appWorkPageMation);
@@ -163,16 +140,7 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     public void deleteAppWorkPageMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String id = map.get("id").toString();
-        AppWorkPageMation appWorkPageMation = appWorkPageDao.selectById(id);
-        int state = appWorkPageMation.getState();
-        if (State.START_NEW.getState() == state || State.START_DOWN.getState() == state) {
-            setUpdateUserMation(inputObject, map);
-            // 新建或者下线的状态可以删除
-            map.put("state", State.START_DELETE.getState());
-            appWorkPageDao.editAppWorkPageStateById(map);
-        } else {
-            outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
-        }
+        appWorkPageDao.deleteById(id);
     }
 
     /**
@@ -224,51 +192,6 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     }
 
     /**
-     * 菜单上线
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkPageUpById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String id = map.get("id").toString();
-        AppWorkPageMation appWorkPageMation = appWorkPageDao.selectById(id);
-        int state = appWorkPageMation.getState();
-        if (State.START_NEW.getState() == state || State.START_DOWN.getState() == state) {
-            setUpdateUserMation(inputObject, map);
-            // 新建或者下线的状态可以上线
-            map.put("state", State.START_UP.getState());
-            appWorkPageDao.editAppWorkPageStateById(map);
-        } else {
-            outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
-        }
-    }
-
-    /**
-     * 菜单下线
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAppWorkPageDownById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String id = map.get("id").toString();
-        AppWorkPageMation appWorkPageMation = appWorkPageDao.selectById(id);
-        if (State.START_UP.getState() == appWorkPageMation.getState()) {
-            setUpdateUserMation(inputObject, map);
-            // 上线状态可以下线
-            map.put("state", State.START_DOWN.getState());
-            appWorkPageDao.editAppWorkPageStateById(map);
-        } else {
-            outputObject.setreturnMessage("该数据状态已改变，请刷新页面！");
-        }
-    }
-
-    /**
      * 根据父目录id获取子目录集合
      *
      * @param inputObject  入参以及用户信息等获取对象
@@ -281,7 +204,6 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
         String desktopId = map.get("desktopId").toString();
         QueryWrapper<AppWorkPageMation> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageMation.class, "parentId"), parentId);
-        queryWrapper.ne(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageMation.class, "state"), State.START_DELETE.getState());
         if (StringUtils.isNotEmpty(desktopId)) {
             queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageMation.class, "desktopId"), desktopId);
         }

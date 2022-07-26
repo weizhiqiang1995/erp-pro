@@ -55,12 +55,6 @@ public class AppWorkPageMation extends CommonOperatorUserInfo implements Seriali
     private Integer urlType;
 
     /**
-     * 状态  1.新建  2.上线  3.下线  4.删除
-     */
-    @TableField("state")
-    private Integer state;
-
-    /**
      * 排序，值越大越往后
      */
     @TableField("order_by")

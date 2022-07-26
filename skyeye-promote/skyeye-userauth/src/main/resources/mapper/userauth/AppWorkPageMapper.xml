@@ -8,8 +8,7 @@
 		FROM
 			app_workbench_page a
 		WHERE a.parent_id = #{parentId}
-		AND a.state != 4
-		ORDER BY a.order_by DESC 
+		ORDER BY a.order_by DESC
 		LIMIT 1
 	</select>
 	
@@ -17,7 +16,6 @@
 		SELECT
 			a.id,
 			a.title,
-			a.state,
 			a.logo,
 			a.url,
 			a.type,
@@ -25,7 +23,7 @@
 			b.title parentTitle,
 			a.order_by orderBy,
 			c.desktop_name desktopName,
-			(SELECT COUNT(1) FROM app_workbench_page d WHERE a.id = d.parent_id AND d.state != 4) childNum,
+			(SELECT COUNT(1) FROM app_workbench_page d WHERE a.id = d.parent_id) childNum,
 			a.create_id createId,
 			CONVERT(a.create_time, char) createTime,
 			a.last_update_id lastUpdateId,
@@ -35,7 +33,6 @@
 			LEFT JOIN app_workbench_page b ON a.parent_id = b.id
 			LEFT JOIN sys_eve_desktop c ON a.desktop_id = c.id
 		<where>
-			a.state != 4
 			<if test="sqlExtract != '' and sqlExtract != null">
 				${sqlExtract}
 			</if>
@@ -57,7 +54,6 @@
 		WHERE
 			a.id = #{id}
 		AND a.order_by > b.order_by
-		AND a.state != 4 AND b.state != 4
 		AND a.type = 2 AND b.type = 2
 		AND a.parent_id = #{parentId} AND b.parent_id = #{parentId}
 		ORDER BY b.order_by DESC LIMIT 1
@@ -84,20 +80,9 @@
 		WHERE
 			a.id = #{id}
 		AND b.order_by > a.order_by
-		AND a.state != 4 AND b.state != 4
 		AND a.type = 2 AND b.type = 2
 		AND a.parent_id = #{parentId} AND b.parent_id = #{parentId}
 		ORDER BY b.order_by ASC LIMIT 1
 	</select>
 
-	<update id="editAppWorkPageStateById" parameterType="java.util.Map">
-		UPDATE app_workbench_page
-		<set>
-			state = #{state},
-			last_update_id = #{lastUpdateId},
-			last_update_time = #{lastUpdateTime},
-		</set>
-		WHERE id = #{id}
-	</update>
-	
 </mapper>

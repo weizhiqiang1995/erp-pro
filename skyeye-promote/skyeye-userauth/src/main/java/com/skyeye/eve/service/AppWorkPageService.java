@@ -21,9 +21,5 @@ public interface AppWorkPageService {
 
     void editAppWorkPageSortLowerById(InputObject inputObject, OutputObject outputObject);
 
-    void editAppWorkPageUpById(InputObject inputObject, OutputObject outputObject);
-
-    void editAppWorkPageDownById(InputObject inputObject, OutputObject outputObject);
-
     void queryAppWorkPageListByParentId(InputObject inputObject, OutputObject outputObject);
 }

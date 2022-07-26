@@ -577,12 +577,6 @@
         <property id="rowId" name="id" ref="required" var="菜单id" />
         <property id="parentId" name="parentId" ref="required" var="目录id" />
     </url>
-    <url id="appworkpage010" path="/post/AppWorkPageController/editAppWorkPageUpById" val="菜单上线" allUse="1" groupName="手机端菜单管理">
-        <property id="rowId" name="id" ref="required" var="菜单id" />
-    </url>
-    <url id="appworkpage011" path="/post/AppWorkPageController/editAppWorkPageDownById" val="菜单下线" allUse="1" groupName="手机端菜单管理">
-        <property id="rowId" name="id" ref="required" var="菜单id" />
-    </url>
     <!-- 手机端菜单结束 -->
 	
     <!-- 手机端菜单权限点开始 -->
