@@ -51,9 +51,9 @@ public class SysEveMenuAuthPointController {
      */
     @ApiOperation(id = "writeSysEveMenuAuthPointMation", value = "新增/编辑菜单权限点", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = SysMenuAuthPointMation.class)
-    @RequestMapping("/post/SysEveMenuAuthPointController/insertSysEveMenuAuthPointMation")
-    public void insertSysEveMenuAuthPointMation(InputObject inputObject, OutputObject outputObject) {
-        sysEveMenuAuthPointService.insertSysEveMenuAuthPointMation(inputObject, outputObject);
+    @RequestMapping("/post/SysEveMenuAuthPointController/writeSysEveMenuAuthPointMation")
+    public void writeSysEveMenuAuthPointMation(InputObject inputObject, OutputObject outputObject) {
+        sysEveMenuAuthPointService.writeSysEveMenuAuthPointMation(inputObject, outputObject);
     }
 
     /**

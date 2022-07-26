@@ -8,86 +8,29 @@
 			a.title authMenuName,
 			a.url authMenu,
 			a.auth_num menuNum,
-			(SELECT COUNT(*) FROM app_workbench_page_auth_role b WHERE b.auth_id = a.id) useNum
+			a.parent_id parentId,
+			a.type,
+			a.create_id createId,
+			CONVERT(a.create_time, char) createTime,
+			a.last_update_id lastUpdateId,
+			CONVERT(a.last_update_time, char) lastUpdateTime,
+			(SELECT COUNT(*) FROM app_workbench_page_auth_role b WHERE b.auth_id = a.id) useNum,
+			(SELECT COUNT(1) FROM app_workbench_page_auth c WHERE c.parent_id = a.id) childNum
 		FROM
 			app_workbench_page_auth a
-		WHERE
+		<where>
 			a.page_id = #{menuId}
-		<if test="authMenuName != '' and authMenuName != null">
-			AND a.title LIKE '%${authMenuName}%'
-		</if>
-		<if test="authMenu != '' and authMenu != null">
-			AND a.url LIKE '%${authMenu}%'
-		</if>
-		<if test="menuNum != '' and menuNum != null">
-			AND a.auth_num LIKE '%${menuNum}%'
-		</if>
-		ORDER BY a.create_time DESC
-	</select>
-	
-	<select id="queryAppWorkPageAuthPointMationByAuthName" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.title authMenuName,
-			a.url authMenu,
-			a.auth_num menuNum
-		FROM
-			app_workbench_page_auth a
-		WHERE
-			a.page_id = #{menuId}
-		AND (a.title = #{authMenuName}
-				OR a.url = #{authMenu})
-	</select>
-	
-	<insert id="insertAppWorkPageAuthPointMation" parameterType="java.util.Map">
-	     insert into app_workbench_page_auth 
-	     (id, page_id, title, url, auth_num, create_id, create_time)
-	     values(#{id}, #{menuId}, #{authMenuName}, #{authMenu}, #{menuNum}, #{createId}, #{createTime})
-	</insert>
-	
-	<select id="queryAppWorkPageAuthPointMationToEditById" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.title authMenuName,
-			a.url authMenu
-		FROM
-			app_workbench_page_auth a
-		WHERE
-			a.id = #{id}
-	</select>
-	
-	<select id="queryAppWorkPageAuthPointMationByAuthNameAndId" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.title authMenuName,
-			a.url authMenu
-		FROM
-			app_workbench_page_auth a
-		WHERE
-			a.title = #{authMenuName}
-		AND a.id != #{id}
-		AND a.page_id = #{menuId}
-	</select>
-	
-	<update id="editAppWorkPageAuthPointMationById" parameterType="java.util.Map">
-		UPDATE app_workbench_page_auth
-		<set>
 			<if test="authMenuName != '' and authMenuName != null">
-				title = #{authMenuName},
+				AND a.title LIKE '%${authMenuName}%'
 			</if>
 			<if test="authMenu != '' and authMenu != null">
-				url = #{authMenu},
+				AND a.url LIKE '%${authMenu}%'
 			</if>
-		</set>
-		WHERE id = #{id}
-	</update>
-	
-	<delete id="deleteAppWorkPageAuthPointMationById" parameterType="java.util.Map">
-		DELETE
-		FROM
-			app_workbench_page_auth
-		WHERE
-			id = #{id}
-	</delete>
+			<if test="menuNum != '' and menuNum != null">
+				AND a.auth_num LIKE '%${menuNum}%'
+			</if>
+		</where>
+		ORDER BY a.create_time DESC
+	</select>
 	
 </mapper>

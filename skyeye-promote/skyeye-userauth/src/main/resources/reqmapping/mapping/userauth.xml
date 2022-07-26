@@ -580,7 +580,7 @@
     <!-- 手机端菜单结束 -->
 	
     <!-- 手机端菜单权限点开始 -->
-    <url id="appworkpageauthpoint001" path="/post/AppWorkPageAuthPointController/queryAppWorkPageAuthPointListByMenuId" val="获取菜单权限点列表根据菜单id" allUse="2" groupName="手机端菜单管理">
+    <url id="appworkpageauthpoint001" path="/post/AppWorkPageAuthPointController/queryAppWorkPageAuthPointListByMenuId" val="获取菜单权限点列表根据菜单id" allUse="2" groupName="手机端菜单权限点管理">
         <property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
         <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
         <property id="menuId" name="menuId" ref="required" var="菜单id"/>
@@ -588,21 +588,10 @@
         <property id="authMenu" name="authMenu" ref="" var="权限点后台链接"/>
         <property id="menuNum" name="menuNum" ref="" var="菜单数字码"/>
     </url>
-    <url id="appworkpageauthpoint002" path="/post/AppWorkPageAuthPointController/insertAppWorkPageAuthPointMation" val="添加菜单权限点" allUse="1" groupName="手机端菜单管理">
-        <property id="menuId" name="menuId" ref="required" var="菜单id"/>
-        <property id="authMenuName" name="authMenuName" ref="required" var="权限点名称"/>
-        <property id="authMenu" name="authMenu" ref="required" var="权限点后台链接"/>
-    </url>
-    <url id="appworkpageauthpoint003" path="/post/AppWorkPageAuthPointController/queryAppWorkPageAuthPointMationToEditById" val="编辑菜单权限点时进行回显" allUse="2" groupName="手机端菜单管理">
+    <url id="appworkpageauthpoint003" path="/post/AppWorkPageAuthPointController/queryAppWorkPageAuthPointMationToEditById" val="编辑菜单权限点时进行回显" allUse="2" method="GET" groupName="手机端菜单权限点管理">
         <property id="rowId" name="id" ref="required" var="权限id"/>
     </url>
-    <url id="appworkpageauthpoint004" path="/post/AppWorkPageAuthPointController/editAppWorkPageAuthPointMationById" val="编辑菜单权限点" allUse="1" groupName="手机端菜单管理">
-        <property id="rowId" name="id" ref="required" var="权限id"/>
-        <property id="authMenuName" name="authMenuName" ref="required" var="权限点名称"/>
-        <property id="authMenu" name="authMenu" ref="required" var="权限点后台链接"/>
-        <property id="menuId" name="menuId" ref="required" var="菜单id"/>
-    </url>
-    <url id="appworkpageauthpoint005" path="/post/AppWorkPageAuthPointController/deleteAppWorkPageAuthPointMationById" val="删除菜单权限点" allUse="1" groupName="手机端菜单管理">
+    <url id="appworkpageauthpoint005" path="/post/AppWorkPageAuthPointController/deleteAppWorkPageAuthPointMationById" val="删除菜单权限点" allUse="1" groupName="手机端菜单权限点管理">
         <property id="rowId" name="id" ref="required" var="权限id"/>
     </url>
     <!-- 手机端菜单权限点结束 -->

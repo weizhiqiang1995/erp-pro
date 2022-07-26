@@ -103,7 +103,7 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysEveMenuAuthPointMation(InputObject inputObject, OutputObject outputObject) {
+    public void writeSysEveMenuAuthPointMation(InputObject inputObject, OutputObject outputObject) {
         SysMenuAuthPointMation sysMenuAuthPointMation = inputObject.getParams(SysMenuAuthPointMation.class);
         // 1.根据条件进行校验
         QueryWrapper<SysMenuAuthPointMation> queryWrapper = new QueryWrapper<>();
@@ -162,6 +162,5 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
         String id = map.get("id").toString();
         sysEveMenuAuthPointDao.deleteById(id);
     }
-
 
 }

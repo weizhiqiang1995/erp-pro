@@ -11,11 +11,9 @@ public interface AppWorkPageAuthPointService {
 
     void queryAppWorkPageAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject);
 
-    void insertAppWorkPageAuthPointMation(InputObject inputObject, OutputObject outputObject);
+    void writeAppWorkPageAuthPointMation(InputObject inputObject, OutputObject outputObject);
 
     void queryAppWorkPageAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject);
-
-    void editAppWorkPageAuthPointMationById(InputObject inputObject, OutputObject outputObject);
 
     void deleteAppWorkPageAuthPointMationById(InputObject inputObject, OutputObject outputObject);
 

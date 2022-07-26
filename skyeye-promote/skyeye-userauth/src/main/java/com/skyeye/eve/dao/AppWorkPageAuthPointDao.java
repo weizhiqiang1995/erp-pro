@@ -4,6 +4,8 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.userauth.menu.AppWorkPageAuthPointMation;
+
 import java.util.List;
 import java.util.Map;
 
@@ -15,21 +17,8 @@ import java.util.Map;
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-public interface AppWorkPageAuthPointDao {
+public interface AppWorkPageAuthPointDao extends SkyeyeBaseMapper<AppWorkPageAuthPointMation> {
 
     List<Map<String, Object>> queryAppWorkPageAuthPointListByMenuId(Map<String, Object> map);
-
-    Map<String, Object> queryAppWorkPageAuthPointMationByAuthName(Map<String, Object> map);
-
-    int insertAppWorkPageAuthPointMation(Map<String, Object> map);
-
-    Map<String, Object> queryAppWorkPageAuthPointMationToEditById(Map<String, Object> map);
-
-    Map<String, Object> queryAppWorkPageAuthPointMationByAuthNameAndId(Map<String, Object> map);
-
-    int editAppWorkPageAuthPointMationById(Map<String, Object> map);
-
-    int deleteAppWorkPageAuthPointMationById(Map<String, Object> map);
-
 
 }
