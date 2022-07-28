@@ -353,14 +353,7 @@
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 		<property id="userName" name="userName" ref="" var="员工姓名" />
 	</url>
-	<url id="sys037" path="/post/SysEveRoleController/querySysRoleBandAppMenuList" val="获取角色需要绑定的手机端菜单列表" allUse="2" method="GET" groupName="系统管理">
-    </url>
     <url id="sys038" path="/post/SysEveRoleController/querySysRoleToAppMenuEditById" val="手机端菜单授权时的信息回显" allUse="2" groupName="系统管理">
-        <property id="rowId" name="id" ref="required" var="角色ID"/>
-    </url>
-    <url id="sys039" path="/post/SysEveRoleController/editSysRoleAppMenuById" val="手机端菜单授权" allUse="2" groupName="系统管理">
-        <property id="menuIds" name="menuIds" ref="required" var="菜单权限"/>
-        <property id="pointIds" name="pointIds" ref="" var="权限点"/>
         <property id="rowId" name="id" ref="required" var="角色ID"/>
     </url>
     <url id="sys040" path="/post/SysEveMenuController/querySysEveMenuBySysId" val="系统菜单详情" allUse="2" groupName="系统管理">

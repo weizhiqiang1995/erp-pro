@@ -132,6 +132,7 @@ public class SysEveRoleController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "sys037", value = "获取角色需要绑定的手机端菜单列表", method = "GET", allUse = "2")
     @RequestMapping("/post/SysEveRoleController/querySysRoleBandAppMenuList")
     public void querySysRoleBandAppMenuList(InputObject inputObject, OutputObject outputObject) {
         sysEveRoleService.querySysRoleBandAppMenuList(inputObject, outputObject);
@@ -154,6 +155,11 @@ public class SysEveRoleController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "sys039", value = "手机端菜单授权", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "menuIds", name = "menuIds", value = "菜单权限", required = "required"),
+        @ApiImplicitParam(id = "pointIds", name = "pointIds", value = "权限点"),
+        @ApiImplicitParam(id = "id", name = "id", value = "角色ID", required = "required")})
     @RequestMapping("/post/SysEveRoleController/editSysRoleAppMenuById")
     public void editSysRoleAppMenuById(InputObject inputObject, OutputObject outputObject) {
         sysEveRoleService.editSysRoleAppMenuById(inputObject, outputObject);

@@ -164,33 +164,42 @@
         (SELECT
             a.id,
             a.title name,
-            a.parent_id pId,
-            CASE (SELECT COUNT(*) FROM app_workbench_page c WHERE c.state != 4 AND CASE a.parent_id WHEN '0' THEN CONCAT(a.id, ',') ELSE CONCAT(a.parent_id, a.id, ',') END = c.parent_id) 
-                WHEN '0' THEN false ELSE true END isParent,
-            'false' open,
-            CASE (select parent_id from app_workbench_page where a.id = id) WHEN '0' THEN '目录'
-            ELSE '菜单' END appType,
-            '手机端' sysName,
-            'menu' type
+			CASE a.parent_id WHEN '0' THEN a.desktop_id ELSE a.parent_id END pId,
+			c.desktop_name sysName,
+			CASE (select parent_id from app_workbench_page where a.id = id) WHEN '0' THEN '目录' ELSE '页面' END pageType,
+			'page' type
         FROM
             app_workbench_page a
-        WHERE a.state != 4
+			LEFT JOIN sys_eve_desktop c ON a.desktop_id = c.id
         ORDER BY a.order_by ASC) m
-        UNION
+        UNION ALL
         SELECT
             a.id,
             a.title name,
-            a.page_id pId,
-            false isParent,
-            'false' open,
-            '权限点' appType,
-            '手机端' sysName,
-            'authpoint' type
+			CASE a.parent_id WHEN '0' THEN a.page_id ELSE a.parent_id END pId,
+			c.desktop_name sysName,
+			CASE a.type WHEN '1' THEN '权限点' WHEN '2' THEN '数据权限分组' WHEN '3' THEN '数据权限' ELSE '' END pageType,
+			'authPoint' type
         FROM
             app_workbench_page_auth a,
             app_workbench_page b
+			LEFT JOIN sys_eve_desktop c ON b.desktop_id = c.id
         WHERE a.page_id = b.id
-            AND b.state != 4
+		UNION ALL
+		SELECT
+			*
+		FROM
+			(SELECT
+				 a.id,
+				 a.desktop_name name,
+				 '0' pId,
+				 '基础系统' sysName,
+				 '桌面' pageType,
+				 'page' type
+			 FROM
+				 sys_eve_desktop a
+			 WHERE a.state != '0'
+			 ORDER BY a.order_by DESC) k
     </select>
 	
     <select id="querySysRoleAppMenuIdByRoleId" parameterType="java.util.Map" resultType="java.util.Map">

@@ -224,10 +224,6 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
     public void querySysRoleBandAppMenuList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysEveRoleDao.querySysRoleBandAppMenuList(map);
-        for (Map<String, Object> bean : beans) {
-            String[] str = bean.get("pId").toString().split(",");
-            bean.put("pId", str[str.length - 1]);
-        }
         outputObject.setBeans(beans);
     }
 
@@ -257,35 +253,39 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysRoleAppMenuById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = new ArrayList<>();
-        List<Map<String, Object>> beanp = new ArrayList<>();
         String[] menuIds = map.get("menuIds").toString().split(",");
         if (menuIds.length > 0) {
+            String roleId = map.get("id").toString();
+            // 桌面模块信息以及菜单页面信息
+            List<Map<String, Object>> menuList = new ArrayList<>();
             for (String str : menuIds) {
                 Map<String, Object> item = new HashMap<>();
                 item.put("id", ToolUtil.getSurFaceId());
-                item.put("roleId", map.get("id").toString());
+                item.put("roleId", roleId);
                 item.put("menuId", str);
-                beans.add(item);
+                menuList.add(item);
             }
-            sysEveRoleDao.deleteRoleAppMenuByRoleId(map);//删除角色菜单关联表信息
-            sysEveRoleDao.insertSysRoleAppMenuMation(beans);
+            sysEveRoleDao.deleteRoleAppMenuByRoleId(map);
+            sysEveRoleDao.insertSysRoleAppMenuMation(menuList);
 
+            // 权限点信息以及数据权限信息
+            List<Map<String, Object>> authPointList = new ArrayList<>();
             String[] pointIds = map.get("pointIds").toString().split(",");
             if (pointIds.length > 0) {
                 for (String str : pointIds) {
                     Map<String, Object> item = new HashMap<>();
                     item.put("id", ToolUtil.getSurFaceId());
-                    item.put("roleId", map.get("id").toString());
+                    item.put("roleId", roleId);
                     item.put("pointId", str);
-                    beanp.add(item);
+                    authPointList.add(item);
                 }
             }
-            sysEveRoleDao.deleteRoleAppPointByRoleId(map);//删除角色权限点关联表信息
-            if (!beanp.isEmpty()) {
-                sysEveRoleDao.insertSysRoleAppPointMation(beanp);
+            sysEveRoleDao.deleteRoleAppPointByRoleId(map);
+            if (!authPointList.isEmpty()) {
+                sysEveRoleDao.insertSysRoleAppPointMation(authPointList);
             }
-            this.deleteAPPRoleCache(map.get("id").toString());
+            // 删除角色关联的APP菜单信息
+            this.deleteAPPRoleCache(roleId);
         } else {
             outputObject.setreturnMessage("请选择该角色即将拥有的权限！");
         }
