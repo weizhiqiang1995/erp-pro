@@ -456,21 +456,6 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     }
 
     /**
-     * 通过用户id查询一条员工信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void querySysUserStaffDetailsByUserId(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String userId = map.get("userId").toString();
-        Map<String, Object> bean = sysEveUserStaffDao.querySysUserStaffDetailsByUserId(userId);
-        outputObject.setBean(bean);
-        outputObject.settotal(1);
-    }
-
-    /**
      * 修改员工剩余年假信息
      *
      * @param inputObject  入参以及用户信息等获取对象

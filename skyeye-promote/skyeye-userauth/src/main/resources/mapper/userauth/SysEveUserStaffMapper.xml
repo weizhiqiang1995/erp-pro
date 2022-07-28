@@ -202,11 +202,46 @@
 	<select id="queryUserNameList" resultType="java.util.Map">
 		SELECT
 			a.user_id id,
+			a.id staffId,
 			CONCAT_WS('_', a.job_number, a.user_name) `name`,
-			a.email
+			a.job_number jobNumber,
+			a.user_name userName,
+			a.user_photo userPhoto,
+			a.user_idcard userIdCard,
+			a.user_sex userSex,
+			a.state,
+			a.email,
+			a.phone userPhone,
+			a.home_phone userHomePhone,
+			a.qq userQq,
+			a.work_time workTime,
+			a.entry_time entryTime,
+			IFNULL(a.quit_time, '') quitTime,
+			IFNULL(a.quit_reason, '') quitReason,
+			a.annual_leave annualLeave,
+			a.holiday_number holidayNumber,
+			a.retired_holiday_number retiredHolidayNumber,
+			IFNULL(a.user_sign, '暂无签名') userSign,
+			CASE a.state WHEN '1' THEN 'state-up' WHEN '2' THEN 'state-down' END colorClass,
+			a.company_id companyId,
+			u.company_name companyName,
+			a.department_id departmentId,
+			q.department_name departmentName,
+			p.job_name jobName,
+			o.name_cn jobScoreName,
+			b.user_code userCode
 		FROM
 			sys_eve_user_staff a
+			LEFT JOIN company_job_score o ON a.job_score_id = o.id,
+			company_job p,
+			company_department q,
+			company_mation u,
+			sys_eve_user b
 		WHERE INSTR(CONCAT(',', #{userIds}, ','), CONCAT(',', a.user_id, ','))
+		AND b.id = a.user_id
+		AND a.company_id = u.id
+		AND a.department_id = q.id
+		AND a.job_id = p.id
 	</select>
 	
 	<select id="querySysUserStaffListToTable" parameterType="java.util.Map" resultType="java.util.Map">
@@ -358,45 +393,6 @@
 		<foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
 			#{item}
 		</foreach>
-	</select>
-
-	<select id="querySysUserStaffDetailsByUserId" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.job_number jobNumber,
-			a.user_name userName,
-			a.user_photo userPhoto,
-			a.user_idcard userIdCard,
-			a.email,
-			a.phone,
-			a.home_phone homePhone,
-			a.qq,
-			a.work_time workTime,
-			a.entry_time entryTime,
-			IFNULL(a.quit_time, '') quitTime,
-			IFNULL(a.quit_reason, '') quitReason,
-			a.annual_leave annualLeave,
-		    a.holiday_number holidayNumber,
-		    a.retired_holiday_number retiredHolidayNumber,
-			IFNULL(a.user_sign, '暂无签名') userSign,
-			CASE a.state WHEN '1' THEN 'state-up' WHEN '2' THEN 'state-down' END colorClass,
-			CASE a.state WHEN '1' THEN '在职' WHEN '2' THEN '离职' END state,
-			CASE a.user_sex WHEN '2' THEN '女' WHEN '1' THEN '男' ELSE '保密' END userSex,
-			u.company_name companyName,
-		    a.department_id departmentId,
-			q.department_name departmentName,
-			p.job_name jobName,
-			o.name_cn jobScoreName
-		FROM
-			sys_eve_user_staff a
-			LEFT JOIN company_job_score o ON a.job_score_id = o.id,
-			company_job p,
-			company_department q,
-			company_mation u
-		WHERE a.user_id = #{userId}
-		  AND a.company_id = u.id
-		  AND a.department_id = q.id
-		  AND a.job_id = p.id
 	</select>
 
 	<update id="editSysUserStaffAnnualLeaveById">

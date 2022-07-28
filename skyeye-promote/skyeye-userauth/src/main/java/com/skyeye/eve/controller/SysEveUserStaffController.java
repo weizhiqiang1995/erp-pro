@@ -186,20 +186,6 @@ public class SysEveUserStaffController {
     }
 
     /**
-     * 通过用户id查询一条员工信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @ApiOperation(id = "querySysUserStaffDetailsByUserId", value = "通过用户id查询一条员工信息", method = "GET", allUse = "0")
-    @ApiImplicitParams({
-        @ApiImplicitParam(id = "userId", name = "userId", value = "用户id", required = "required")})
-    @RequestMapping("/post/SysEveUserStaffController/querySysUserStaffDetailsByUserId")
-    public void querySysUserStaffDetailsByUserId(InputObject inputObject, OutputObject outputObject) {
-        sysEveUserStaffService.querySysUserStaffDetailsByUserId(inputObject, outputObject);
-    }
-
-    /**
      * 修改员工剩余年假信息
      *
      * @param inputObject  入参以及用户信息等获取对象

@@ -7,9 +7,7 @@ package com.skyeye.eve.service.impl;
 import cn.hutool.json.JSONUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.skyeye.cache.redis.RedisCache;
 import com.skyeye.common.constans.Constants;
-import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.constans.SysUserAuthConstants;
 import com.skyeye.common.object.GetUserToken;
 import com.skyeye.common.object.InputObject;
@@ -29,7 +27,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: SysEveUserServiceImpl
@@ -52,9 +53,6 @@ public class SysEveUserServiceImpl implements SysEveUserService {
 
     @Autowired
     private JedisClientService jedisClient;
-
-    @Autowired
-    private RedisCache redisCache;
 
     @Autowired
     private SysAuthorityService sysAuthorityService;
@@ -668,28 +666,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     @Override
     public void queryUserMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        String userId = map.get("userId").toString();
-        outputObject.setBean(getUserMationByUserId(userId));
+        outputObject.setBean(sysEveUserDao.queryUserDetailsMationByUserId(map.get("userId").toString()));
         outputObject.settotal(1);
-    }
-
-    /**
-     * 根据用户id获取用户信息
-     *
-     * @param userId 用户id
-     * @return 用户信息
-     */
-    @Override
-    public Map<String, Object> getUserMationByUserId(String userId) {
-        String cacheKey = String.format(Locale.ROOT, "userMationDetails:%s", userId);
-        return redisCache.getMap(cacheKey, key -> {
-            try {
-                return sysEveUserDao.queryUserDetailsMationByUserId(userId);
-            } catch (Exception ee) {
-                LOGGER.warn("get user details mation by userId error.", ee);
-            }
-            return null;
-        }, RedisConstants.THIRTY_DAY_SECONDS);
     }
 
 }

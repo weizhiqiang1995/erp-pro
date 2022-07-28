@@ -35,8 +35,6 @@ public interface SysEveUserStaffService {
 
     void queryUserNameList(InputObject inputObject, OutputObject outputObject);
 
-    void querySysUserStaffDetailsByUserId(InputObject inputObject, OutputObject outputObject);
-
     void editSysUserStaffAnnualLeaveById(InputObject inputObject, OutputObject outputObject);
 
     void updateSysUserStaffHolidayNumberById(InputObject inputObject, OutputObject outputObject);

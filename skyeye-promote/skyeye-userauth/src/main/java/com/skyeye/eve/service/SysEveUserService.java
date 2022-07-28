@@ -7,8 +7,6 @@ package com.skyeye.eve.service;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 
-import java.util.Map;
-
 public interface SysEveUserService {
 
     void querySysUserList(InputObject inputObject, OutputObject outputObject);
@@ -69,13 +67,5 @@ public interface SysEveUserService {
     void querySysDeskTopByUserId(InputObject inputObject, OutputObject outputObject);
 
     void queryUserMationByUserId(InputObject inputObject, OutputObject outputObject);
-
-    /**
-     * 根据用户id获取用户信息
-     *
-     * @param userId 用户id
-     * @return 用户信息
-     */
-    Map<String, Object> getUserMationByUserId(String userId);
 
 }

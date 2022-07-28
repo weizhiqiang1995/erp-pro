@@ -32,8 +32,6 @@ public interface SysEveUserStaffDao {
 
     Map<String, Object> querySysUserStaffByIdToDetails(@Param("staffId") String staffId);
 
-    Map<String, Object> querySysUserStaffDetailsByUserId(@Param("userId") String userId);
-
     int editSysUserStaffState(Map<String, Object> map);
 
     /**
