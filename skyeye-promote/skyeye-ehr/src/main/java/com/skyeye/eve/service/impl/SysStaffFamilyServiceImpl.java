@@ -13,7 +13,7 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffFamilyDao;
 import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
-import com.skyeye.eve.service.SysDictDataService;
+import com.skyeye.eve.service.ISysDictDataService;
 import com.skyeye.eve.service.SysStaffFamilyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +40,7 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
     private SysEnclosureDao sysEnclosureDao;
 
     @Autowired
-    private SysDictDataService sysDictDataService;
+    private ISysDictDataService iSysDictDataService;
 
     /**
      * 查询所有家庭情况列表
@@ -53,9 +53,9 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffFamilyDao.queryAllSysStaffFamilyList(params);
-        sysDictDataService.getDictDataNameByIdList(beans, "relationshipId", "relationshipName");
-        sysDictDataService.getDictDataNameByIdList(beans, "cardType", "cardTypeName");
-        sysDictDataService.getDictDataNameByIdList(beans, "politicId", "politicName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "relationshipId", "relationshipName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "cardType", "cardTypeName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "politicId", "politicName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -87,9 +87,9 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffFamilyDao.querySysStaffFamilyMationToEdit(id);
         if (certificate != null && !certificate.isEmpty()) {
-            sysDictDataService.getDictDataNameByIdBean(certificate, "relationshipId", "relationshipName");
-            sysDictDataService.getDictDataNameByIdBean(certificate, "cardType", "cardTypeName");
-            sysDictDataService.getDictDataNameByIdBean(certificate, "politicId", "politicName");
+            iSysDictDataService.getDictDataNameByIdBean(certificate, "relationshipId", "relationshipName");
+            iSysDictDataService.getDictDataNameByIdBean(certificate, "cardType", "cardTypeName");
+            iSysDictDataService.getDictDataNameByIdBean(certificate, "politicId", "politicName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
                 List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
@@ -146,9 +146,9 @@ public class SysStaffFamilyServiceImpl implements SysStaffFamilyService {
         PointStaffQueryDo pointStaffQuery = inputObject.getParams(PointStaffQueryDo.class);
         Page pages = PageHelper.startPage(pointStaffQuery.getPage(), pointStaffQuery.getLimit());
         List<Map<String, Object>> beans = sysStaffFamilyDao.queryPointStaffSysStaffFamilyList(pointStaffQuery);
-        sysDictDataService.getDictDataNameByIdList(beans, "relationshipId", "relationshipName");
-        sysDictDataService.getDictDataNameByIdList(beans, "cardType", "cardTypeName");
-        sysDictDataService.getDictDataNameByIdList(beans, "politicId", "politicName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "relationshipId", "relationshipName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "cardType", "cardTypeName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "politicId", "politicName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

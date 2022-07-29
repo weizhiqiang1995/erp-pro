@@ -14,6 +14,7 @@ import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffLanguageDao;
 import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
 import com.skyeye.eve.entity.ehr.language.SysStaffLanguageQueryDo;
+import com.skyeye.eve.service.ISysDictDataService;
 import com.skyeye.eve.service.SysDictDataService;
 import com.skyeye.eve.service.SysStaffLanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
     private SysEnclosureDao sysEnclosureDao;
 
     @Autowired
-    private SysDictDataService sysDictDataService;
+    private ISysDictDataService iSysDictDataService;
 
     /**
      * 查询所有语言能力列表
@@ -54,7 +55,7 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
         SysStaffLanguageQueryDo sysStaffLanguageQuery = inputObject.getParams(SysStaffLanguageQueryDo.class);
         Page pages = PageHelper.startPage(sysStaffLanguageQuery.getPage(), sysStaffLanguageQuery.getLimit());
         List<Map<String, Object>> beans = sysStaffLanguageDao.queryAllSysStaffLanguageList(sysStaffLanguageQuery);
-        sysDictDataService.getDictDataNameByIdList(beans, "languageId", "languageTypeName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "languageId", "languageTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -86,7 +87,7 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffLanguageDao.querySysStaffLanguageMationToEdit(id);
         if (certificate != null && !certificate.isEmpty()) {
-            sysDictDataService.getDictDataNameByIdBean(certificate, "languageId", "languageTypeName");
+            iSysDictDataService.getDictDataNameByIdBean(certificate, "languageId", "languageTypeName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
                 List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
@@ -143,7 +144,7 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
         PointStaffQueryDo pointStaffQuery = inputObject.getParams(PointStaffQueryDo.class);
         Page pages = PageHelper.startPage(pointStaffQuery.getPage(), pointStaffQuery.getLimit());
         List<Map<String, Object>> beans = sysStaffLanguageDao.queryPointStaffSysStaffLanguageList(pointStaffQuery);
-        sysDictDataService.getDictDataNameByIdList(beans, "languageId", "languageTypeName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "languageId", "languageTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

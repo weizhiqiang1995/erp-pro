@@ -13,7 +13,7 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffEducationDao;
 import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
-import com.skyeye.eve.service.SysDictDataService;
+import com.skyeye.eve.service.ISysDictDataService;
 import com.skyeye.eve.service.SysStaffEducationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +40,7 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
     private SysEnclosureDao sysEnclosureDao;
 
     @Autowired
-    private SysDictDataService sysDictDataService;
+    private ISysDictDataService iSysDictDataService;
 
     /**
      * 查询所有教育背景列表
@@ -53,9 +53,9 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffEducationDao.queryAllSysStaffEducationList(params);
-        sysDictDataService.getDictDataNameByIdList(beans, "educationId", "educationName");
-        sysDictDataService.getDictDataNameByIdList(beans, "learningModalityId", "learningModalityName");
-        sysDictDataService.getDictDataNameByIdList(beans, "schoolNature", "schoolNatureName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "educationId", "educationName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "learningModalityId", "learningModalityName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "schoolNature", "schoolNatureName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -87,9 +87,9 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffEducationDao.querySysStaffEducationMationToEdit(id);
         if (certificate != null && !certificate.isEmpty()) {
-            sysDictDataService.getDictDataNameByIdBean(certificate, "educationId", "educationName");
-            sysDictDataService.getDictDataNameByIdBean(certificate, "learningModalityId", "learningModalityName");
-            sysDictDataService.getDictDataNameByIdBean(certificate, "schoolNature", "schoolNatureName");
+            iSysDictDataService.getDictDataNameByIdBean(certificate, "educationId", "educationName");
+            iSysDictDataService.getDictDataNameByIdBean(certificate, "learningModalityId", "learningModalityName");
+            iSysDictDataService.getDictDataNameByIdBean(certificate, "schoolNature", "schoolNatureName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
                 List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
@@ -146,9 +146,9 @@ public class SysStaffEducationServiceImpl implements SysStaffEducationService {
         PointStaffQueryDo pointStaffQuery = inputObject.getParams(PointStaffQueryDo.class);
         Page pages = PageHelper.startPage(pointStaffQuery.getPage(), pointStaffQuery.getLimit());
         List<Map<String, Object>> beans = sysStaffEducationDao.queryPointStaffSysStaffEducationList(pointStaffQuery);
-        sysDictDataService.getDictDataNameByIdList(beans, "educationId", "educationName");
-        sysDictDataService.getDictDataNameByIdList(beans, "learningModalityId", "learningModalityName");
-        sysDictDataService.getDictDataNameByIdList(beans, "schoolNature", "schoolNatureName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "educationId", "educationName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "learningModalityId", "learningModalityName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "schoolNature", "schoolNatureName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

@@ -13,7 +13,7 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffCertificateDao;
 import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
-import com.skyeye.eve.service.SysDictDataService;
+import com.skyeye.eve.service.ISysDictDataService;
 import com.skyeye.eve.service.SysStaffCertificateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +40,7 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
     private SysEnclosureDao sysEnclosureDao;
 
     @Autowired
-    private SysDictDataService sysDictDataService;
+    private ISysDictDataService iSysDictDataService;
 
     /**
      * 查询所有证书列表
@@ -53,7 +53,7 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffCertificateDao.queryAllSysStaffCertificateList(params);
-        sysDictDataService.getDictDataNameByIdList(beans, "typeId", "certificateTypeName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "typeId", "certificateTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -85,7 +85,7 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffCertificateDao.querySysStaffCertificateMationToEdit(id);
         if (certificate != null && !certificate.isEmpty()) {
-            sysDictDataService.getDictDataNameByIdBean(certificate, "typeId", "certificateTypeName");
+            iSysDictDataService.getDictDataNameByIdBean(certificate, "typeId", "certificateTypeName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
                 List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
@@ -142,7 +142,7 @@ public class SysStaffCertificateServiceImpl implements SysStaffCertificateServic
         PointStaffQueryDo pointStaffQuery = inputObject.getParams(PointStaffQueryDo.class);
         Page pages = PageHelper.startPage(pointStaffQuery.getPage(), pointStaffQuery.getLimit());
         List<Map<String, Object>> beans = sysStaffCertificateDao.queryPointStaffSysStaffCertificateList(pointStaffQuery);
-        sysDictDataService.getDictDataNameByIdList(beans, "typeId", "certificateTypeName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "typeId", "certificateTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

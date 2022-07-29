@@ -13,7 +13,7 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffRewardPunishDao;
 import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
-import com.skyeye.eve.service.SysDictDataService;
+import com.skyeye.eve.service.ISysDictDataService;
 import com.skyeye.eve.service.SysStaffRewardPunishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +40,7 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
     private SysEnclosureDao sysEnclosureDao;
 
     @Autowired
-    private SysDictDataService sysDictDataService;
+    private ISysDictDataService iSysDictDataService;
 
     /**
      * 查询所有奖惩列表
@@ -53,7 +53,7 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffRewardPunishDao.queryAllSysStaffRewardPunishList(params);
-        sysDictDataService.getDictDataNameByIdList(beans, "typeId", "rewardPunishTypeName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "typeId", "rewardPunishTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -88,7 +88,7 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffRewardPunishDao.querySysStaffRewardPunishMationToEdit(id);
         if (certificate != null && !certificate.isEmpty()) {
-            sysDictDataService.getDictDataNameByIdBean(certificate, "typeId", "rewardPunishTypeName");
+            iSysDictDataService.getDictDataNameByIdBean(certificate, "typeId", "rewardPunishTypeName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
                 List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
@@ -148,7 +148,7 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
         PointStaffQueryDo pointStaffQuery = inputObject.getParams(PointStaffQueryDo.class);
         Page pages = PageHelper.startPage(pointStaffQuery.getPage(), pointStaffQuery.getLimit());
         List<Map<String, Object>> beans = sysStaffRewardPunishDao.queryPointStaffSysStaffRewardPunishList(pointStaffQuery);
-        sysDictDataService.getDictDataNameByIdList(beans, "typeId", "rewardPunishTypeName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "typeId", "rewardPunishTypeName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

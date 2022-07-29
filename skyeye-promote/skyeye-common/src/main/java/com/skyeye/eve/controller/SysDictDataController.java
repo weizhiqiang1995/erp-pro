@@ -73,6 +73,20 @@ public class SysDictDataController {
     }
 
     /**
+     * 根据IDs批量获取数据字典信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryDictDataMationByIds", value = "根据IDs批量获取数据字典信息", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "ids", name = "ids", value = "主键id，多个用逗号隔开", required = "required")})
+    @RequestMapping("/post/SysDictDataController/queryDictDataMationByIds")
+    public void queryDictDataMationByIds(InputObject inputObject, OutputObject outputObject) {
+        sysDictDataService.queryDictDataMationByIds(inputObject, outputObject);
+    }
+
+    /**
      * 根据ID删除数据字典
      *
      * @param inputObject  入参以及用户信息等获取对象

@@ -12,7 +12,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.ForumReportDao;
 import com.skyeye.eve.service.ForumReportService;
-import com.skyeye.eve.service.SysDictDataService;
+import com.skyeye.eve.service.ISysDictDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +36,7 @@ public class ForumReportServiceImpl implements ForumReportService {
     private ForumReportDao forumReportDao;
 
     @Autowired
-    private SysDictDataService sysDictDataService;
+    private ISysDictDataService iSysDictDataService;
 
     /**
      * 新增举报信息
@@ -67,7 +67,7 @@ public class ForumReportServiceImpl implements ForumReportService {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = forumReportDao.queryReportNoCheckList(map);
-        sysDictDataService.getDictDataNameByIdList(beans, "reportTypeId", "reportType");
+        iSysDictDataService.getDictDataNameByIdList(beans, "reportTypeId", "reportType");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -89,7 +89,8 @@ public class ForumReportServiceImpl implements ForumReportService {
             map.put("examineTime", DateUtil.getTimeAndToString());
             int edit = forumReportDao.editReportCheckMationById(map);
             if (edit == 1) {
-                if (map.get("examineState").toString().equals("2")) {//审核通过，通知举报人和发帖人
+                if (map.get("examineState").toString().equals("2")) {
+                    // 审核通过，通知举报人和发帖人
                     Map<String, Object> m = forumReportDao.queryForumReportMationById(map);
                     Map<String, Object> bean = new HashMap<>();
                     bean.put("id", ToolUtil.getSurFaceId());
@@ -100,12 +101,15 @@ public class ForumReportServiceImpl implements ForumReportService {
                     bean.put("type", 1);
                     bean.put("state", 1);
                     bean.put("createTime", DateUtil.getTimeAndToString());
-                    forumReportDao.insertForumNoticeMation(bean);//通知发帖人
+                    // 通知发帖人
+                    forumReportDao.insertForumNoticeMation(bean);
                     bean.put("id", ToolUtil.getSurFaceId());
                     bean.put("receiveId", m.get("reportId"));
                     bean.put("noticeTitle", "举报");
-                    forumReportDao.insertForumNoticeMation(bean);//通知举报人
-                } else if (map.get("examineState").toString().equals("3")) {//审核不通过，通知举报人
+                    // 通知举报人
+                    forumReportDao.insertForumNoticeMation(bean);
+                } else if (map.get("examineState").toString().equals("3")) {
+                    // 审核不通过，通知举报人
                     Map<String, Object> m = forumReportDao.queryForumReportMationById(map);
                     Map<String, Object> bean = new HashMap<>();
                     bean.put("id", ToolUtil.getSurFaceId());
@@ -135,7 +139,7 @@ public class ForumReportServiceImpl implements ForumReportService {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = forumReportDao.queryReportCheckedList(map);
-        sysDictDataService.getDictDataNameByIdList(beans, "reportTypeId", "reportType");
+        iSysDictDataService.getDictDataNameByIdList(beans, "reportTypeId", "reportType");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -150,7 +154,7 @@ public class ForumReportServiceImpl implements ForumReportService {
     public void queryForumReportMationToDetails(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = forumReportDao.queryForumReportMationToDetails(map);
-        sysDictDataService.getDictDataNameByIdBean(bean, "reportTypeId", "reportType");
+        iSysDictDataService.getDictDataNameByIdBean(bean, "reportTypeId", "reportType");
         outputObject.setBean(bean);
         outputObject.settotal(1);
     }

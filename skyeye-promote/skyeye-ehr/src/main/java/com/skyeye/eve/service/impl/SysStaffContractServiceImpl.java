@@ -13,7 +13,7 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffContractDao;
 import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
-import com.skyeye.eve.service.SysDictDataService;
+import com.skyeye.eve.service.ISysDictDataService;
 import com.skyeye.eve.service.SysStaffContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,16 +40,16 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
     private SysEnclosureDao sysEnclosureDao;
 
     @Autowired
-    private SysDictDataService sysDictDataService;
+    private ISysDictDataService iSysDictDataService;
 
-    public static enum state {
+    public enum State {
         START_SIGNED(1, "待签约"),
         START_EXECUTION(2, "执行中"),
         START_OVERDUE(3, "过期");
         private int state;
         private String name;
 
-        state(int state, String name) {
+        State(int state, String name) {
             this.state = state;
             this.name = name;
         }
@@ -74,8 +74,8 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
         Map<String, Object> params = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(params.get("page").toString()), Integer.parseInt(params.get("limit").toString()));
         List<Map<String, Object>> beans = sysStaffContractDao.queryAllSysStaffContractList(params);
-        sysDictDataService.getDictDataNameByIdList(beans, "typeId", "typeName");
-        sysDictDataService.getDictDataNameByIdList(beans, "moldId", "moldName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "typeId", "typeName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "moldId", "moldName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -133,7 +133,7 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
         Map<String, Object> certificate = sysStaffContractDao.querySysStaffContractMationToEdit(id);
         if (certificate != null && !certificate.isEmpty()) {
             int nowState = Integer.parseInt(certificate.get("contractState").toString());
-            if (nowState == state.START_SIGNED.getState()) {
+            if (nowState == State.START_SIGNED.getState()) {
                 // 待签约状态的可以编辑
                 sysStaffContractDao.editSysStaffContractMationById(map);
             } else {
@@ -157,7 +157,7 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffContractDao.querySysStaffContractMationToEdit(id);
         int nowState = Integer.parseInt(certificate.get("contractState").toString());
-        if (nowState == state.START_SIGNED.getState()) {
+        if (nowState == State.START_SIGNED.getState()) {
             // 待签约状态的可以删除
             sysStaffContractDao.deleteSysStaffContractMationById(id);
         } else {
@@ -176,8 +176,8 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
         PointStaffQueryDo pointStaffQuery = inputObject.getParams(PointStaffQueryDo.class);
         Page pages = PageHelper.startPage(pointStaffQuery.getPage(), pointStaffQuery.getLimit());
         List<Map<String, Object>> beans = sysStaffContractDao.queryPointStaffSysStaffContractList(pointStaffQuery);
-        sysDictDataService.getDictDataNameByIdList(beans, "typeId", "typeName");
-        sysDictDataService.getDictDataNameByIdList(beans, "moldId", "moldName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "typeId", "typeName");
+        iSysDictDataService.getDictDataNameByIdList(beans, "moldId", "moldName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -195,9 +195,9 @@ public class SysStaffContractServiceImpl implements SysStaffContractService {
         String id = map.get("id").toString();
         Map<String, Object> certificate = sysStaffContractDao.querySysStaffContractMationToEdit(id);
         int nowState = Integer.parseInt(certificate.get("contractState").toString());
-        if (nowState == state.START_SIGNED.getState()) {
+        if (nowState == State.START_SIGNED.getState()) {
             // 待签约状态的可以签约
-            sysStaffContractDao.editSysStaffContractStateById(id, state.START_EXECUTION.getState());
+            sysStaffContractDao.editSysStaffContractStateById(id, State.START_EXECUTION.getState());
         } else {
             outputObject.setreturnMessage("该合同信息已签约，无法删除.");
         }
