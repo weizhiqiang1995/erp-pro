@@ -13,6 +13,7 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffJobResumeDao;
 import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
+import com.skyeye.eve.service.IEnclosureService;
 import com.skyeye.eve.service.SysStaffJobResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
     private SysStaffJobResumeDao sysStaffJobResumeDao;
 
     @Autowired
-    private SysEnclosureDao sysEnclosureDao;
+    private IEnclosureService iEnclosureService;
 
     /**
      * 查询所有工作履历列表
@@ -82,7 +83,7 @@ public class SysStaffJobResumeServiceImpl implements SysStaffJobResumeService {
         if (certificate != null && !certificate.isEmpty()) {
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
-                List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
+                List<Map<String, Object>> beans = iEnclosureService.queryEnclosureInfoByIds(certificate.get("enclosure").toString());
                 certificate.put("enclosureInfo", beans);
             }
             outputObject.setBean(certificate);

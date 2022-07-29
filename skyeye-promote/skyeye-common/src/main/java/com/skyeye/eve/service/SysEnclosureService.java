@@ -48,12 +48,4 @@ public interface SysEnclosureService {
 
     void queryEnclosureInfo(InputObject inputObject, OutputObject outputObject);
 
-    /**
-     * 根据ids(逗号隔开)获取多个附件信息
-     *
-     * @param enclosureInfoIds ids(逗号隔开)
-     * @return
-     */
-    List<Map<String, Object>> queryEnclosureInfoListByIds(String enclosureInfoIds);
-
 }

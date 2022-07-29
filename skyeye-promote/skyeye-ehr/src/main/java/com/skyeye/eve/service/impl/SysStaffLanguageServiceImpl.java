@@ -14,6 +14,7 @@ import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffLanguageDao;
 import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
 import com.skyeye.eve.entity.ehr.language.SysStaffLanguageQueryDo;
+import com.skyeye.eve.service.IEnclosureService;
 import com.skyeye.eve.service.ISysDictDataService;
 import com.skyeye.eve.service.SysDictDataService;
 import com.skyeye.eve.service.SysStaffLanguageService;
@@ -39,7 +40,7 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
     private SysStaffLanguageDao sysStaffLanguageDao;
 
     @Autowired
-    private SysEnclosureDao sysEnclosureDao;
+    private IEnclosureService iEnclosureService;
 
     @Autowired
     private ISysDictDataService iSysDictDataService;
@@ -90,7 +91,7 @@ public class SysStaffLanguageServiceImpl implements SysStaffLanguageService {
             iSysDictDataService.getDictDataNameByIdBean(certificate, "languageId", "languageTypeName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
-                List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
+                List<Map<String, Object>> beans = iEnclosureService.queryEnclosureInfoByIds(certificate.get("enclosure").toString());
                 certificate.put("enclosureInfo", beans);
             }
             outputObject.setBean(certificate);

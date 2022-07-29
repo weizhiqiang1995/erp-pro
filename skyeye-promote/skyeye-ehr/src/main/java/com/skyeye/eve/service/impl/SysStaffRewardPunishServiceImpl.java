@@ -13,6 +13,7 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffRewardPunishDao;
 import com.skyeye.eve.entity.ehr.common.PointStaffQueryDo;
+import com.skyeye.eve.service.IEnclosureService;
 import com.skyeye.eve.service.ISysDictDataService;
 import com.skyeye.eve.service.SysStaffRewardPunishService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
     private SysStaffRewardPunishDao sysStaffRewardPunishDao;
 
     @Autowired
-    private SysEnclosureDao sysEnclosureDao;
+    private IEnclosureService iEnclosureService;
 
     @Autowired
     private ISysDictDataService iSysDictDataService;
@@ -91,7 +92,7 @@ public class SysStaffRewardPunishServiceImpl implements SysStaffRewardPunishServ
             iSysDictDataService.getDictDataNameByIdBean(certificate, "typeId", "rewardPunishTypeName");
             // 附件
             if (certificate.containsKey("enclosure") && !ToolUtil.isBlank(certificate.get("enclosure").toString())) {
-                List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(certificate.get("enclosure").toString());
+                List<Map<String, Object>> beans = iEnclosureService.queryEnclosureInfoByIds(certificate.get("enclosure").toString());
                 certificate.put("enclosureInfo", beans);
             }
             outputObject.setBean(certificate);

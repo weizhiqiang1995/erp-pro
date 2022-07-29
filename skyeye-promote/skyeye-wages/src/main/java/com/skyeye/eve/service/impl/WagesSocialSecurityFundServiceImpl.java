@@ -12,9 +12,9 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
-import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.WagesSocialSecurityFundApplicableObjectsDao;
 import com.skyeye.eve.dao.WagesSocialSecurityFundDao;
+import com.skyeye.eve.service.IEnclosureService;
 import com.skyeye.eve.service.WagesSocialSecurityFundService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,19 +39,19 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
     private WagesSocialSecurityFundApplicableObjectsDao wagesSocialSecurityFundApplicableObjectsDao;
 
     @Autowired
-    private SysEnclosureDao sysEnclosureDao;
+    private IEnclosureService iEnclosureService;
 
     /**
      * 社保公积金状态
      */
-    public static enum STATE {
+    public enum State {
         START_UP(1, "启用"),
         START_DOWN(2, "禁用"),
         START_DELETE(3, "删除");
         private int state;
         private String name;
 
-        STATE(int state, String name) {
+        State(int state, String name) {
             this.state = state;
             this.name = name;
         }
@@ -95,7 +95,7 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
             outputObject.setreturnMessage("The same name exists, please replace it.");
             return;
         }
-        map.put("state", STATE.START_UP.getState());
+        map.put("state", State.START_UP.getState());
         DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         wagesSocialSecurityFundDao.insertWagesSocialSecurityFundMation(map);
         // 处理社保公积金使用对象信息
@@ -138,7 +138,7 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
             outputObject.setreturnMessage("The data does not exist.");
             return;
         }
-        bean.put("enclosureInfo", sysEnclosureDao.queryEnclosureInfo(bean.get("enclosure").toString()));
+        bean.put("enclosureInfo", iEnclosureService.queryEnclosureInfoByIds(bean.get("enclosure").toString()));
         getWagesSocialSecurityFundApplicableObjects(bean, id);
         outputObject.setBean(bean);
         outputObject.settotal(1);
@@ -221,7 +221,7 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
     @Override
     public void deleteWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        wagesSocialSecurityFundDao.editWagesSocialSecurityFundStateMationById(map.get("id").toString(), STATE.START_DELETE.getState());
+        wagesSocialSecurityFundDao.editWagesSocialSecurityFundStateMationById(map.get("id").toString(), State.START_DELETE.getState());
     }
 
     /**
@@ -233,7 +233,7 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
     @Override
     public void enableWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        wagesSocialSecurityFundDao.editWagesSocialSecurityFundStateMationById(map.get("id").toString(), STATE.START_UP.getState());
+        wagesSocialSecurityFundDao.editWagesSocialSecurityFundStateMationById(map.get("id").toString(), State.START_UP.getState());
     }
 
     /**
@@ -245,7 +245,7 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
     @Override
     public void disableWagesSocialSecurityFundMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        wagesSocialSecurityFundDao.editWagesSocialSecurityFundStateMationById(map.get("id").toString(), STATE.START_DOWN.getState());
+        wagesSocialSecurityFundDao.editWagesSocialSecurityFundStateMationById(map.get("id").toString(), State.START_DOWN.getState());
     }
 
     /**
@@ -263,7 +263,7 @@ public class WagesSocialSecurityFundServiceImpl implements WagesSocialSecurityFu
             outputObject.setreturnMessage("The data does not exist.");
             return;
         }
-        bean.put("enclosureInfo", sysEnclosureDao.queryEnclosureInfo(bean.get("enclosure").toString()));
+        bean.put("enclosureInfo", iEnclosureService.queryEnclosureInfoByIds(bean.get("enclosure").toString()));
         getWagesSocialSecurityFundApplicableObjects(bean, id);
         outputObject.setBean(bean);
         outputObject.settotal(1);

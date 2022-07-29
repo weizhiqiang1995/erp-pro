@@ -12,7 +12,7 @@ import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.JobDiaryDao;
-import com.skyeye.eve.dao.SysEnclosureDao;
+import com.skyeye.eve.service.IEnclosureService;
 import com.skyeye.eve.service.JobDiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +38,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
     private JobDiaryDao jobDiaryDao;
 
     @Autowired
-    private SysEnclosureDao sysEnclosureDao;
+    private IEnclosureService iEnclosureService;
 
     /**
      * 遍历我收到的日志
@@ -122,7 +122,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
         }
         Map<String, Object> bean = jobDiaryDao.queryJobDiaryDetails(map);
         if (!ToolUtil.isBlank(bean.get("enclosureInfo").toString())) {
-            bean.put("enclosureInfo", sysEnclosureDao.queryEnclosureInfo(bean.get("enclosureInfo").toString()));
+            bean.put("enclosureInfo", iEnclosureService.queryEnclosureInfoByIds(bean.get("enclosureInfo").toString()));
         }
         outputObject.setBean(bean);
         outputObject.settotal(1);
@@ -193,7 +193,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = jobDiaryDao.selectMysendDetails(map);
         if (!ToolUtil.isBlank(bean.get("enclosureInfo").toString())) {
-            bean.put("enclosureInfo", sysEnclosureDao.queryEnclosureInfo(bean.get("enclosureInfo").toString()));
+            bean.put("enclosureInfo", iEnclosureService.queryEnclosureInfoByIds(bean.get("enclosureInfo").toString()));
         }
         outputObject.setBean(bean);
         outputObject.settotal(1);
@@ -261,7 +261,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = jobDiaryDao.selectMysendWeekDetails(map);
         if (!ToolUtil.isBlank(bean.get("enclosureInfo").toString())) {
-            bean.put("enclosureInfo", sysEnclosureDao.queryEnclosureInfo(bean.get("enclosureInfo").toString()));
+            bean.put("enclosureInfo", iEnclosureService.queryEnclosureInfoByIds(bean.get("enclosureInfo").toString()));
         }
         outputObject.setBean(bean);
         outputObject.settotal(1);
@@ -284,7 +284,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
         }
         Map<String, Object> bean = jobDiaryDao.queryWeekJobDiaryDetails(map);
         if (!ToolUtil.isBlank(bean.get("enclosureInfo").toString())) {
-            bean.put("enclosureInfo", sysEnclosureDao.queryEnclosureInfo(bean.get("enclosureInfo").toString()));
+            bean.put("enclosureInfo", iEnclosureService.queryEnclosureInfoByIds(bean.get("enclosureInfo").toString()));
         }
         outputObject.setBean(bean);
         outputObject.settotal(1);
@@ -332,7 +332,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = jobDiaryDao.selectMysendMonthDetails(map);
         if (!ToolUtil.isBlank(bean.get("enclosureInfo").toString())) {
-            bean.put("enclosureInfo", sysEnclosureDao.queryEnclosureInfo(bean.get("enclosureInfo").toString()));
+            bean.put("enclosureInfo", iEnclosureService.queryEnclosureInfoByIds(bean.get("enclosureInfo").toString()));
         }
         outputObject.setBean(bean);
         outputObject.settotal(1);
@@ -355,7 +355,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
         }
         Map<String, Object> bean = jobDiaryDao.queryMonthJobDiaryDetails(map);
         if (!ToolUtil.isBlank(bean.get("enclosureInfo").toString())) {
-            bean.put("enclosureInfo", sysEnclosureDao.queryEnclosureInfo(bean.get("enclosureInfo").toString()));
+            bean.put("enclosureInfo", iEnclosureService.queryEnclosureInfoByIds(bean.get("enclosureInfo").toString()));
         }
         outputObject.setBean(bean);
         outputObject.settotal(1);
@@ -392,7 +392,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = jobDiaryDao.queryJobDiaryDayMysendToEdit(map);
         if (!ToolUtil.isBlank(bean.get("enclosureInfo").toString())) {
-            bean.put("enclosureInfo", sysEnclosureDao.queryEnclosureInfo(bean.get("enclosureInfo").toString()));
+            bean.put("enclosureInfo", iEnclosureService.queryEnclosureInfoByIds(bean.get("enclosureInfo").toString()));
         }
         bean.put("userInfo", jobDiaryDao.queryJobDiaryDayReceivedUserInfoById(map));
         outputObject.setBean(bean);
@@ -441,7 +441,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = jobDiaryDao.queryWeekJobDiaryDayMysendToEdit(map);
         if (!ToolUtil.isBlank(bean.get("enclosureInfo").toString())) {
-            bean.put("enclosureInfo", sysEnclosureDao.queryEnclosureInfo(bean.get("enclosureInfo").toString()));
+            bean.put("enclosureInfo", iEnclosureService.queryEnclosureInfoByIds(bean.get("enclosureInfo").toString()));
         }
         bean.put("userInfo", jobDiaryDao.queryWeekJobDiaryDayReceivedUserInfoById(map));
         outputObject.setBean(bean);
@@ -490,7 +490,7 @@ public class JobDiaryServiceImpl implements JobDiaryService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = jobDiaryDao.queryMonthJobDiaryDayMysendToEdit(map);
         if (!ToolUtil.isBlank(bean.get("enclosureInfo").toString())) {
-            bean.put("enclosureInfo", sysEnclosureDao.queryEnclosureInfo(bean.get("enclosureInfo").toString()));
+            bean.put("enclosureInfo", iEnclosureService.queryEnclosureInfoByIds(bean.get("enclosureInfo").toString()));
         }
         bean.put("userInfo", jobDiaryDao.queryMonthJobDiaryDayReceivedUserInfoById(map));
         outputObject.setBean(bean);

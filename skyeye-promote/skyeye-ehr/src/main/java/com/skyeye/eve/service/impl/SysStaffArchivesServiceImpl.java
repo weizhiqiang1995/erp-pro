@@ -12,6 +12,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEnclosureDao;
 import com.skyeye.eve.dao.SysStaffArchivesDao;
+import com.skyeye.eve.service.IEnclosureService;
 import com.skyeye.eve.service.ISysDictDataService;
 import com.skyeye.eve.service.SysStaffArchivesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
     private SysStaffArchivesDao sysStaffArchivesDao;
 
     @Autowired
-    private SysEnclosureDao sysEnclosureDao;
+    private IEnclosureService iEnclosureService;
 
     @Autowired
     private ISysDictDataService iSysDictDataService;
@@ -140,7 +141,7 @@ public class SysStaffArchivesServiceImpl implements SysStaffArchivesService {
             iSysDictDataService.getDictDataNameByIdBean(archivesMation, "educationId", "educationName");
             // 附件
             if (archivesMation.containsKey("enclosure") && !ToolUtil.isBlank(archivesMation.get("enclosure").toString())) {
-                List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(archivesMation.get("enclosure").toString());
+                List<Map<String, Object>> beans = iEnclosureService.queryEnclosureInfoByIds(archivesMation.get("enclosure").toString());
                 archivesMation.put("enclosureInfo", beans);
             }
             outputObject.setBean(archivesMation);

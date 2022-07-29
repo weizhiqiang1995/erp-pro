@@ -19,6 +19,7 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.ScheduleDayDao;
 import com.skyeye.eve.dao.SysWorkPlanDao;
 import com.skyeye.eve.entity.workplan.SysWorkPlanQueryDo;
+import com.skyeye.eve.service.IEnclosureService;
 import com.skyeye.eve.service.ScheduleDayService;
 import com.skyeye.eve.service.SysEnclosureService;
 import com.skyeye.eve.service.SysWorkPlanService;
@@ -61,7 +62,7 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     private JobMateMationService jobMateMationService;
 
     @Autowired
-    private SysEnclosureService sysEnclosureService;
+    private IEnclosureService iEnclosureService;
 
     private static final String MESSAGE_TITLE = "计划提醒";
 
@@ -501,7 +502,7 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
         // 获取计划执行人信息
         List<Map<String, Object>> executors = sysWorkPlanDao.querySysWorkPlanExecutorsToEditById(map);
         // 获取附件信息
-        List<Map<String, Object>> enclosures = sysEnclosureService.queryEnclosureInfoListByIds(bean.get("enclosureInfo").toString());
+        List<Map<String, Object>> enclosures = iEnclosureService.queryEnclosureInfoByIds(bean.get("enclosureInfo").toString());
         bean.put("executors", executors);
         bean.put("enclosures", enclosures);
         outputObject.setBean(bean);
@@ -664,10 +665,10 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
         Map<String, Object> bean = sysWorkPlanDao.querySysWorkPlanDetailsById(map.get("id").toString(), map.get("executorId").toString());
         if (bean != null && !bean.isEmpty()) {
             bean.put("planCycle", WorkPlanConstants.SysWorkPlan.getClockInName(bean.get("planCycle").toString()));
-            //获取计划执行人信息
+            // 获取计划执行人信息
             List<Map<String, Object>> executors = sysWorkPlanDao.querySysWorkPlanExecutorsToEditById(map);
-            //获取附件信息
-            List<Map<String, Object>> enclosures = sysEnclosureService.queryEnclosureInfoListByIds(bean.get("enclosureInfo").toString());
+            // 获取附件信息
+            List<Map<String, Object>> enclosures = iEnclosureService.queryEnclosureInfoByIds(bean.get("enclosureInfo").toString());
             bean.put("executors", executors);
             bean.put("enclosures", enclosures);
             outputObject.setBean(bean);

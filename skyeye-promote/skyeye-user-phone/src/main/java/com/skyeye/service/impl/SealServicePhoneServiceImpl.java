@@ -11,7 +11,7 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.SealServicePhoneDao;
-import com.skyeye.eve.dao.SysEnclosureDao;
+import com.skyeye.eve.service.IEnclosureService;
 import com.skyeye.service.SealServicePhoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class SealServicePhoneServiceImpl implements SealServicePhoneService {
     private SealServicePhoneDao sealServicePhoneDao;
 
     @Autowired
-    private SysEnclosureDao sysEnclosureDao;
+    private IEnclosureService iEnclosureService;
 
     /**
      * 手机端查询不同状态下的工单数量
@@ -89,7 +89,7 @@ public class SealServicePhoneServiceImpl implements SealServicePhoneService {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sealServicePhoneDao.queryFeedBackList(map);
         for (Map<String, Object> item : beans) {
-            item.put("enclosureInfo", sysEnclosureDao.queryEnclosureInfo(item.get("enclosureInfo").toString()));
+            item.put("enclosureInfo", iEnclosureService.queryEnclosureInfoByIds(item.get("enclosureInfo").toString()));
         }
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
