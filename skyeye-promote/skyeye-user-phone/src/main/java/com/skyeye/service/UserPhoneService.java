@@ -11,10 +11,6 @@ public interface UserPhoneService {
 
     void queryPhoneToLogin(InputObject inputObject, OutputObject outputObject);
 
-    void queryPhoneUserMenuAuth(InputObject inputObject, OutputObject outputObject);
-
-    void queryPhoneToExit(InputObject inputObject, OutputObject outputObject);
-
     void queryUserMationByOpenId(InputObject inputObject, OutputObject outputObject);
 
     void insertUserMationByOpenId(InputObject inputObject, OutputObject outputObject);

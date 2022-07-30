@@ -179,6 +179,7 @@ public class SysEveUserController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "login005", value = "获取当前登录用户的桌面菜单列表", method = "GET", allUse = "2")
     @RequestMapping("/post/SysEveUserController/queryAllMenuBySession")
     public void queryAllMenuBySession(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.queryAllMenuBySession(inputObject, outputObject);

@@ -16,6 +16,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.UserPhoneDao;
 import com.skyeye.eve.dao.SysEveUserDao;
+import com.skyeye.eve.service.SysAuthorityService;
 import com.skyeye.jedis.JedisClientService;
 import com.skyeye.service.UserPhoneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,9 @@ public class UserPhoneServiceImpl implements UserPhoneService {
 
     @Autowired
     private SysEveUserDao sysEveUserDao;
+
+    @Autowired
+    private SysAuthorityService sysAuthorityService;
 
     /**
      * 账号状态
@@ -85,48 +89,26 @@ public class UserPhoneServiceImpl implements UserPhoneService {
                     outputObject.setreturnMessage("您的账号已被锁定，请联系管理员解除！");
                 } else {
                     String userId = userMation.get("id").toString();
-                    String roleId = userMation.get("roleId").toString();
+                    String roleIds = userMation.get("roleId").toString();
                     userMation.remove("roleId");
 
                     // 获取动态token
                     String userToken = GetUserToken.createNewToken(userId, password);
                     userMation.put("userToken", userToken);
 
-                    SysUserAuthConstants.setUserLoginRedisCache(userId + SysUserAuthConstants.APP_IDENTIFYING, userMation);
-                    jedisClient.set("allMenuMation:" + userId + SysUserAuthConstants.APP_IDENTIFYING, roleId);
-                    jedisClient.set("authPointsMation:" + userId + SysUserAuthConstants.APP_IDENTIFYING, roleId);
+                    String appUserId = userId + SysUserAuthConstants.APP_IDENTIFYING;
+                    SysUserAuthConstants.setUserLoginRedisCache(appUserId, userMation);
+                    jedisClient.set("allMenuMation:" + appUserId, roleIds);
+                    jedisClient.set("authPointsMation:" + appUserId, roleIds);
+                    // 获取用户权限点返回给前台
+                    List<Map<String, Object>> authPoints = sysAuthorityService.getRoleHasMenuPointListByRoleIds(roleIds, userId);
                     outputObject.setBean(userMation);
+                    outputObject.setBeans(authPoints);
                 }
             } else {
                 outputObject.setreturnMessage("密码输入错误！");
             }
         }
-    }
-
-    /**
-     * 手机端从session中获取菜单权限信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryPhoneUserMenuAuth(InputObject inputObject, OutputObject outputObject) {
-        List<Map<String, Object>> allMenuMation = inputObject.getLogAllMenuParams();
-        outputObject.setBeans(allMenuMation);
-    }
-
-    /**
-     * 手机端注销登录
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryPhoneToExit(InputObject inputObject, OutputObject outputObject) {
-        String userId = GetUserToken.getUserTokenUserId(PutObject.getRequest());
-        SysUserAuthConstants.delUserLoginRedisCache(userId);
-        jedisClient.del("allMenuMation:" + userId);
-        jedisClient.del("authPointsMation:" + userId);
     }
 
     /**

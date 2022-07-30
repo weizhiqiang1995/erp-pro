@@ -29,28 +29,6 @@ public class UserPhoneController {
     }
 
     /**
-     * 手机端从session中获取菜单权限信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/UserPhoneController/queryPhoneUserMenuAuth")
-    public void queryPhoneUserMenuAuth(InputObject inputObject, OutputObject outputObject) {
-        userPhoneService.queryPhoneUserMenuAuth(inputObject, outputObject);
-    }
-
-    /**
-     * 手机端注销登录
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/UserPhoneController/queryPhoneToExit")
-    public void queryPhoneToExit(InputObject inputObject, OutputObject outputObject) {
-        userPhoneService.queryPhoneToExit(inputObject, outputObject);
-    }
-
-    /**
      * 根据openId获取用户信息
      *
      * @param inputObject  入参以及用户信息等获取对象

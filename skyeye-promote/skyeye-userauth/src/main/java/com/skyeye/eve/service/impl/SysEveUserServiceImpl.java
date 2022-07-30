@@ -12,6 +12,7 @@ import com.skyeye.common.constans.SysUserAuthConstants;
 import com.skyeye.common.object.GetUserToken;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.object.PutObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
@@ -345,8 +346,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      */
     @Override
     public void deleteUserMationBySession(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String userId = inputObject.getLogParams().get("id").toString();
+        String userId = GetUserToken.getUserTokenUserId(PutObject.getRequest());
         this.removeLogin(userId);
         inputObject.removeSession();
     }
