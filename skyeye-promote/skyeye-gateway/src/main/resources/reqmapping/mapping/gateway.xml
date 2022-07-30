@@ -30,8 +30,6 @@
     <url id="crmpage001" path="/post/CrmPageController/queryInsertNumByYear" val="获取指定年度的客户新增量，联系人新增量" allUse="2">
     	<property id="year" name="year" ref="required" var="指定年度"></property>
     </url>
-    <url id="crmpage002" path="/post/CrmPageController/queryCustomNumByOtherType" val="根据客户分类，客户来源，所属行业，客户分组统计客户数量" allUse="2">
-    </url>
     <url id="crmpage003" path="/post/CrmPageController/queryCustomDocumentaryType" val="客户跟单方式分析" allUse="2">
     	<property id="year" name="year" ref="required" var="指定年度"></property>
     </url>

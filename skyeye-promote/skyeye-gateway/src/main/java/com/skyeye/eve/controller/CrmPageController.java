@@ -4,6 +4,11 @@
 
 package com.skyeye.eve.controller;
 
+import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParam;
+import com.skyeye.annotation.api.ApiImplicitParams;
+import com.skyeye.annotation.api.ApiOperation;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +20,7 @@ import com.skyeye.eve.service.CrmPageService;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Api(value = "CRM统计", tags = "CRM统计", modelName = "统计模块")
 public class CrmPageController {
 
     @Autowired
@@ -37,6 +43,12 @@ public class CrmPageController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "crmpage002", value = "根据客户分类，客户来源，所属行业，客户分组统计客户数量", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "crmCustomerType", name = "crmCustomerType", value = "客户分类的code", required = "required"),
+        @ApiImplicitParam(id = "crmCustomerFrom", name = "crmCustomerFrom", value = "客户来源的code", required = "required"),
+        @ApiImplicitParam(id = "crmCustomerIndustry", name = "crmCustomerIndustry", value = "所属行业的code", required = "required"),
+        @ApiImplicitParam(id = "crmCustomerGroup", name = "crmCustomerGroup", value = "客户分组的code", required = "required")})
     @RequestMapping("/post/CrmPageController/queryCustomNumByOtherType")
     public void queryCustomNumByOtherType(InputObject inputObject, OutputObject outputObject) {
         crmPageService.queryCustomNumByOtherType(inputObject, outputObject);
