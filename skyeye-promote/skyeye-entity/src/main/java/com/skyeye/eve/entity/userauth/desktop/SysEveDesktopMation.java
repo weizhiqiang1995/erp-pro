@@ -43,6 +43,10 @@ public class SysEveDesktopMation extends CommonOperatorUserInfo implements Seria
     @ApiModelProperty(value = "logo", required = "required")
     private String logo;
 
+    @TableField("app_page_url")
+    @ApiModelProperty(value = "手机端页面跳转地址")
+    private String appPageUrl;
+
     /**
      * 序号
      */
