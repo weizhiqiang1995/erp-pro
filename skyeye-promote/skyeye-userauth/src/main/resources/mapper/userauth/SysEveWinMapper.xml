@@ -11,9 +11,7 @@
 			a.sys_pic sysPic,
 			CONVERT(a.create_time, char) createTime,
 			COUNT(c.id) menuNum,
-			(SELECT COUNT(1) FROM sys_eve_win_super_power d WHERE d.win_id = a.id) useNum,
-			(SELECT e.type_name FROM sys_eve_win_type e WHERE a.first_type = e.id) firstTypeName,
-			(SELECT f.type_name FROM sys_eve_win_type f WHERE a.second_type = f.id) secondTypeName
+			(SELECT COUNT(1) FROM sys_eve_win_super_power d WHERE d.win_id = a.id) useNum
 		FROM
 			sys_eve_win a
 			LEFT JOIN sys_eve_menu c ON a.id = c.sys_win_id

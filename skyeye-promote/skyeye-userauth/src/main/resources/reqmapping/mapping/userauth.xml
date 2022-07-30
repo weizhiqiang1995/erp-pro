@@ -443,50 +443,6 @@
 	</url>
 	<!-- 系统管理结束 -->
 	
-	<!-- 系统分类开始 -->
-	<url id="sysevewintype001" path="/post/SysEveWinTypeController/querySysWinTypeList" val="获取分类列表" allUse="1">
-		<property id="typeName" name="typeName" ref="" var="分类名称" />
-	    <property id="state" name="state" ref="" var="状态"/>
-	</url>
-	<url id="sysevewintype002" path="/post/SysEveWinTypeController/querySysWinFirstTypeList" val="获取所有一级分类展示为下拉选项" allUse="2">
-	</url>
-	<url id="sysevewintype003" path="/post/SysEveWinTypeController/insertSysWinTypeMation" val="新增系统分类" allUse="1">
-		<property id="typeName" name="typeName" ref="required" var="分类名称" />
-	    <property id="parentId" name="parentId" ref="required" var="分类父id"/>
-	</url>
-	<url id="sysevewintype004" path="/post/SysEveWinTypeController/querySysWinTypeMationToEditById" val="编辑系统分类时进行回显" allUse="2">
-		<property id="rowId" name="id" ref="required" var="分类id" />
-	</url>
-	<url id="sysevewintype005" path="/post/SysEveWinTypeController/editSysWinTypeMationById" val="编辑系统分类时" allUse="1">
-		<property id="typeName" name="typeName" ref="required" var="分类名称" />
-	    <property id="parentId" name="parentId" ref="required" var="分类父id"/>
-	    <property id="rowId" name="id" ref="required" var="分类id" />
-	</url>
-	<url id="sysevewintype006" path="/post/SysEveWinTypeController/querySysWinFirstTypeListNotIsThisId" val="获取所有不是当前分类的一级分类展示为下拉选项" allUse="2">
-		<property id="rowId" name="id" ref="required" var="分类id" />
-	</url>
-	<url id="sysevewintype007" path="/post/SysEveWinTypeController/deleteSysWinTypeMationById" val="删除系统分类" allUse="1">
-		<property id="rowId" name="id" ref="required" var="分类id" />
-	</url>
-	<url id="sysevewintype008" path="/post/SysEveWinTypeController/editSysWinTypeMationOrderNumUpById" val="系统分类上移" allUse="1">
-		<property id="rowId" name="id" ref="required" var="分类id" />
-	</url>
-	<url id="sysevewintype009" path="/post/SysEveWinTypeController/editSysWinTypeMationOrderNumDownById" val="系统分类下移" allUse="1">
-		<property id="rowId" name="id" ref="required" var="分类id" />
-	</url>
-	<url id="sysevewintype010" path="/post/SysEveWinTypeController/editSysWinTypeMationStateUpById" val="系统分类上线" allUse="1">
-		<property id="rowId" name="id" ref="required" var="分类id" />
-	</url>
-	<url id="sysevewintype011" path="/post/SysEveWinTypeController/editSysWinTypeMationStateDownById" val="系统分类下线" allUse="1">
-		<property id="rowId" name="id" ref="required" var="分类id" />
-	</url>
-	<url id="sysevewintype012" path="/post/SysEveWinTypeController/querySysWinTypeFirstMationStateIsUp" val="获取已经上线的一级分类" allUse="2">
-	</url>
-	<url id="sysevewintype013" path="/post/SysEveWinTypeController/querySysWinTypeSecondMationStateIsUp" val="获取已经上线的二级分类" allUse="2">
-		<property id="rowId" name="parentId" ref="required" var="分类父id" />
-	</url>
-	<!-- 系统分类结束 -->
-	
 	<!-- 系统菜单同步开始 -->
 	<url id="sysimportantsynchronization001" path="/post/SysEveWinController/insertWinMationImportantSynchronization" val="系统重要的同步操作" allUse="1">
 		<property id="rowId" name="id" ref="required" var="系统id" />
