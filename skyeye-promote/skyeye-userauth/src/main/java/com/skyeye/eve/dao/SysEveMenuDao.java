@@ -31,8 +31,6 @@ public interface SysEveMenuDao {
 
     int deleteSysMenuMationById(Map<String, Object> map);
 
-    List<Map<String, Object>> queryTreeSysMenuMationBySimpleLevel(Map<String, Object> map);
-
     Map<String, Object> queryUseThisMenuRoleById(Map<String, Object> map);
 
     List<Map<String, Object>> querySysMenuLevelList(Map<String, Object> map);
@@ -48,8 +46,6 @@ public interface SysEveMenuDao {
     Map<String, Object> querySysEveMenuISLowerByThisId(Map<String, Object> map);
 
     int editSysEveMenuSortLowerById(Map<String, Object> map);
-
-    List<Map<String, Object>> querySysWinMationListBySysId(Map<String, Object> map);
 
     Map<String, Object> querySysEveMenuBySysId(Map<String, Object> map);
 

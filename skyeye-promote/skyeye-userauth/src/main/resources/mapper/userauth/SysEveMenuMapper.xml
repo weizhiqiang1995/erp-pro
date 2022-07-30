@@ -185,21 +185,6 @@
 			id = #{id}
 	</delete>
 	
-	<select id="queryTreeSysMenuMationBySimpleLevel" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.sys_name `name`,
-			'0' pId,
-			false isParent,
-			'/assets/images/syswinlogo.png' icon
-		FROM
-			sys_eve_win a,
-			sys_eve_win_super_power b,
-			sys_eve_win_num c
-		WHERE c.id = b.win_num_id
-		AND b.win_id = a.id
-	</select>
-	
 	<select id="querySysMenuLevelList" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 			a.menu_level id,
@@ -267,19 +252,6 @@
 		</set>
 		WHERE id = #{id}
 	</update>
-	
-	<select id="querySysWinMationListBySysId" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.sys_name `name`
-		FROM
-			sys_eve_win a,
-			sys_eve_win_super_power b,
-			sys_eve_win_num c
-		WHERE
-			c.id = b.win_num_id
-		AND b.win_id = a.id
-	</select>
 	
 	<select id="querySysEveMenuBySysId" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT

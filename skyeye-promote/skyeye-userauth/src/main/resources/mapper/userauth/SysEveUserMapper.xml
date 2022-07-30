@@ -166,21 +166,17 @@
 				c.menu_icon_pic menuIconPic,
 				c.menu_icon_type menuIconType,
 				IFNULL(c.desktop_id, '') deskTopId,
-			    IFNULL(f.sys_url, '') sysWinUrl # 分布式开发时，其他系统的域名地址
+			    IFNULL(g.sys_url, '') sysWinUrl # 分布式开发时，其他前台服务的域名地址
 			FROM
 				sys_eve_user a,
 				sys_eve_role_menu b,
 				sys_eve_menu c
 				LEFT JOIN sys_eve_user_custom_parent e ON e.menu_id = c.id AND e.create_id = #{id},
-				sys_eve_win_num d,
-				sys_eve_win_super_power f,
 				sys_eve_win g
 			WHERE a.id = #{id}
 			AND INSTR(CONCAT(',', a.role_id, ','), CONCAT(',', b.role_id, ','))
 			AND b.menu_id = c.id AND c.menu_sys_type = '1'
 			AND c.id NOT IN(SELECT d.menu_id FROM sys_eve_user_custom_menu_del d WHERE d.create_id = #{id})
-			AND d.id = f.win_num_id
-			AND f.win_id = g.id
 			AND g.id = c.sys_win_id
 			GROUP BY c.id
 			ORDER BY c.order_num ASC) a
@@ -419,7 +415,7 @@
 			a.id = #{id}
 		AND INSTR(CONCAT(',', a.role_id, ','), CONCAT(',', b.role_id, ','))
 		AND b.menu_id = d.id
-		AND d.state = '2'
+		AND d.state = '1'
 		GROUP BY d.id
 		ORDER BY d.order_by DESC
     </select>

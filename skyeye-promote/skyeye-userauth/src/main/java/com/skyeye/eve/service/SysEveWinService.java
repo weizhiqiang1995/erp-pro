@@ -15,18 +15,7 @@ public interface SysEveWinService {
 
     void queryWinMationToEditById(InputObject inputObject, OutputObject outputObject);
 
-    void editWinMationById(InputObject inputObject, OutputObject outputObject);
-
     void deleteWinMationById(InputObject inputObject, OutputObject outputObject);
 
-    void editAuthorizationById(InputObject inputObject, OutputObject outputObject);
-
-    void editCancleAuthorizationById(InputObject inputObject, OutputObject outputObject);
-
-    void queryWinMationListToShow(InputObject inputObject, OutputObject outputObject);
-
-    void insertWinMationImportantSynchronization(InputObject inputObject, OutputObject outputObject);
-
-    void queryWinMationImportantSynchronizationData(InputObject inputObject, OutputObject outputObject);
-
+    void querySysEveWinList(InputObject inputObject, OutputObject outputObject);
 }

@@ -4,8 +4,11 @@
 
 package com.skyeye.eve.entity.userauth.win;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
+import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.common.entity.CommonOperatorUserInfo;
 import lombok.Data;
 
@@ -24,6 +27,21 @@ import java.io.Serializable;
 @ApiModel("服务管理实体类")
 public class SysEveWinMation extends CommonOperatorUserInfo implements Serializable {
 
+    @TableId("id")
+    @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")
+    private String id;
+
+    @TableField("sys_name")
+    @ApiModelProperty(value = "服务名称", required = "required")
+    private String sysName;
+
+    @TableField("content")
+    @ApiModelProperty(value = "描述")
+    private String content;
+
+    @TableField("sys_url")
+    @ApiModelProperty(value = "服务地址")
+    private String sysUrl;
 
 
 }

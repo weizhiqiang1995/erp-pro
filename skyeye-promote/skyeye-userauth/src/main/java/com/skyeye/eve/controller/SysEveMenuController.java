@@ -103,17 +103,6 @@ public class SysEveMenuController {
     }
 
     /**
-     * 异步加载树查看商户拥有的系统
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/SysEveMenuController/queryTreeSysMenuMationBySimpleLevel")
-    public void queryTreeSysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject) {
-        sysEveMenuService.queryTreeSysMenuMationBySimpleLevel(inputObject, outputObject);
-    }
-
-    /**
      * 获取菜单级别列表
      *
      * @param inputObject  入参以及用户信息等获取对象
@@ -144,17 +133,6 @@ public class SysEveMenuController {
     @RequestMapping("/post/SysEveMenuController/editSysEveMenuSortLowerById")
     public void editSysEveMenuSortLowerById(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.editSysEveMenuSortLowerById(inputObject, outputObject);
-    }
-
-    /**
-     * 获取该系统商户拥有的系统
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/SysEveMenuController/querySysWinMationListBySysId")
-    public void querySysWinMationListBySysId(InputObject inputObject, OutputObject outputObject) {
-        sysEveMenuService.querySysWinMationListBySysId(inputObject, outputObject);
     }
 
     /**

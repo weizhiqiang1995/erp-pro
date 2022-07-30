@@ -4,26 +4,27 @@
 
 package com.skyeye.eve.service.impl;
 
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.skyeye.common.object.GetUserToken;
+import com.skyeye.common.constans.CommonConstants;
+import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.object.PutObject;
 import com.skyeye.common.util.DataCommonUtil;
-import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.HttpClient;
-import com.skyeye.eve.dao.SysEveMenuAuthPointDao;
+import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.SysEveWinDao;
-import com.skyeye.eve.entity.userauth.menu.SysMenuAuthPointMation;
+import com.skyeye.eve.entity.userauth.win.SysEveWinMation;
+import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.eve.service.SysEveWinService;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,11 +39,13 @@ import java.util.Map;
 @Service
 public class SysEveWinServiceImpl implements SysEveWinService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SysEveWinServiceImpl.class);
+
     @Autowired
     private SysEveWinDao sysEveWinDao;
 
     @Autowired
-    private SysEveMenuAuthPointDao sysEveMenuAuthPointDao;
+    private IAuthUserService iAuthUserService;
 
     /**
      * 获取服务信息列表
@@ -52,15 +55,17 @@ public class SysEveWinServiceImpl implements SysEveWinService {
      */
     @Override
     public void queryWinMationList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = sysEveWinDao.queryWinMationList(map);
+        CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
+        Page pages = PageHelper.startPage(commonPageInfo.getPage(), commonPageInfo.getLimit());
+        List<Map<String, Object>> beans = sysEveWinDao.queryWinMationList(commonPageInfo);
+        iAuthUserService.setNameByIdList(beans, "createId", "createName");
+        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
 
     /**
-     * 新增服务信息
+     * 新增/编辑服务信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -68,13 +73,29 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertWinMation(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = sysEveWinDao.queryWinMationByNameOrUrl(map);
-        if (bean != null && !bean.isEmpty()) {
-            outputObject.setreturnMessage("存在相同的服务或服务地址，请更换");
+        SysEveWinMation sysEveWinMation = inputObject.getParams(SysEveWinMation.class);
+        // 1.根据条件进行校验
+        QueryWrapper<SysEveWinMation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysEveWinMation.class, "sysName"), sysEveWinMation.getSysName());
+        if (StringUtils.isNotEmpty(sysEveWinMation.getId())) {
+            queryWrapper.ne(CommonConstants.ID, sysEveWinMation.getId());
+        }
+        SysEveWinMation checkSysEveWin = sysEveWinDao.selectOne(queryWrapper);
+
+        if (ObjectUtils.isEmpty(checkSysEveWin)) {
+            String userId = inputObject.getLogParams().get("id").toString();
+            // 2.新增/编辑数据
+            if (StringUtils.isNotEmpty(sysEveWinMation.getId())) {
+                LOGGER.info("update sys win data, id is {}", sysEveWinMation.getId());
+                DataCommonUtil.setCommonLastUpdateDataByGenericity(sysEveWinMation, userId);
+                sysEveWinDao.updateById(sysEveWinMation);
+            } else {
+                DataCommonUtil.setCommonDataByGenericity(sysEveWinMation, userId);
+                LOGGER.info("insert sys win data, id is {}", sysEveWinMation.getId());
+                sysEveWinDao.insert(sysEveWinMation);
+            }
         } else {
-            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
-            sysEveWinDao.insertWinMation(map);
+            outputObject.setreturnMessage("该服务已存在，请更换.");
         }
     }
 
@@ -87,26 +108,10 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     @Override
     public void queryWinMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = sysEveWinDao.queryWinMationToEditById(map);
-        outputObject.setBean(bean);
-    }
-
-    /**
-     * 编辑服务信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editWinMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = sysEveWinDao.queryWinMationByNameOrUrlAndId(map);
-        if (bean != null && !bean.isEmpty()) {
-            outputObject.setreturnMessage("存在相同的服务或服务地址，请更换");
-        } else {
-            sysEveWinDao.editWinMationById(map);
-        }
+        String id = map.get("id").toString();
+        SysEveWinMation sysEveWinMation = sysEveWinDao.selectById(id);
+        outputObject.setBean(sysEveWinMation);
+        outputObject.settotal(1);
     }
 
     /**
@@ -119,129 +124,26 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteWinMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = sysEveWinDao.queryChildMationById(map);
-        if (Integer.parseInt(bean.get("menuNum").toString()) > 0 || Integer.parseInt(bean.get("useNum").toString()) > 0) {
-            outputObject.setreturnMessage("该服务存在功能菜单或者使用商户，请先进行菜单或商户操作。");
+        String id = map.get("id").toString();
+        Map<String, Object> bean = sysEveWinDao.queryChildMationById(id);
+        if (Integer.parseInt(bean.get("menuNum").toString()) > 0) {
+            outputObject.setreturnMessage("该服务存在功能菜单，请先进行菜单移除操作。");
         } else {
-            sysEveWinDao.deleteWinMationById(map);
+            sysEveWinDao.deleteById(id);
         }
     }
 
     /**
-     * 进行商户服务授权
+     * 获取所有的服务信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editAuthorizationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = sysEveWinDao.querySysEveWinNum(map);
-        if (bean != null && !bean.isEmpty()) {
-            map.put("winNumId", bean.get("id"));
-            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
-            sysEveWinDao.insertAuthorizationById(map);
-        } else {
-            outputObject.setreturnMessage("暂无可授权的商户。");
-        }
-    }
-
-    /**
-     * 进行商户服务取消授权
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editCancleAuthorizationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        sysEveWinDao.editCancleAuthorizationById(map);
-    }
-
-    /**
-     * 获取应用商店
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryWinMationListToShow(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = sysEveWinDao.queryWinMationListToShow(map);
+    public void querySysEveWinList(InputObject inputObject, OutputObject outputObject) {
+        List<Map<String, Object>> beans = sysEveWinDao.querySysEveWinList();
         outputObject.setBeans(beans);
-        outputObject.settotal(pages.getTotal());
-    }
-
-    /**
-     * 服务重要的同步操作
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertWinMationImportantSynchronization(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        // 判断是否有权限
-        Map<String, Object> bean = sysEveWinDao.queryWinMationSynchronizationById(map);
-        if (bean == null) {
-            outputObject.setreturnMessage("您不具备该服务的同步权限。");
-        } else {
-            List<Map<String, Object>> hasRows = sysEveWinDao.queryWinMationSynchronizationByWinId(map);
-            if (hasRows.isEmpty()) {
-                String url = map.get("url") + "/sysimportantsynchronization002?loginPCIp=" + PutObject.getRequest().getHeader("loginPCIp")
-                    + "&userToken=" + GetUserToken.getUserToken(PutObject.getRequest()) + "&winid=" + map.get("id");
-                String str = HttpClient.doGet(url);
-                JSONObject json = JSONUtil.toBean(str, null);
-                if ("0".equals(json.get("returnCode").toString())) {
-                    Map<String, Object> user = inputObject.getLogParams();
-                    JSONObject jo = JSONUtil.toBean(json.get("bean").toString(), null);
-                    // 处理菜单
-                    List<Map<String, Object>> beans = JSONUtil.toList(jo.get("menuBeans").toString(), null);
-                    for (Map<String, Object> row : beans) {
-                        row.put("sysWinId", map.get("id"));
-                        row.put("createId", user.get("id"));
-                        row.put("createTime", DateUtil.getTimeAndToString());
-                        if (!"--".equals(row.get("menuUrl").toString())) {
-                            // 一级菜单
-                            row.put("menuUrl", map.get("url").toString() + "/" + row.get("menuUrl").toString().replace("../../", ""));
-                        }
-                    }
-                    sysEveWinDao.insertWinMationImportantSynchronization(beans);
-                    // 处理权限点
-                    List<SysMenuAuthPointMation> points = JSONUtil.toList(jo.get("pointBeans").toString(), SysMenuAuthPointMation.class);
-                    sysEveMenuAuthPointDao.insertBatch(points);
-                } else {
-                    outputObject.setreturnMessage(json.get("returnMessage").toString());
-                }
-            } else {
-                outputObject.setreturnMessage("服务菜单只能同步一次哦。");
-            }
-        }
-    }
-
-    /**
-     * 服务重要的同步操作获取数据
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryWinMationImportantSynchronizationData(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> menuBeans = sysEveWinDao.queryWinMationImportantSynchronizationData(map);
-        List<Map<String, Object>> pointBeans = sysEveWinDao.queryWinMationImportantSynchronizationPointData(map);
-        if (!menuBeans.isEmpty() || !pointBeans.isEmpty()) {
-            Map<String, Object> bean = new HashMap<>();
-            bean.put("menuBeans", menuBeans);
-            bean.put("pointBeans", pointBeans);
-            outputObject.setBean(bean);
-        } else {
-            outputObject.setreturnMessage("暂无可以同步的数据");
-        }
+        outputObject.settotal(beans.size());
     }
 
 }

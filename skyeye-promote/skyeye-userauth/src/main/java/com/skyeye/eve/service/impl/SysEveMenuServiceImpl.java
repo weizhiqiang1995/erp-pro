@@ -180,22 +180,6 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     }
 
     /**
-     * 异步加载树查看商户拥有的系统
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryTreeSysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = sysEveMenuDao.queryTreeSysMenuMationBySimpleLevel(map);
-        if (!beans.isEmpty()) {
-            outputObject.setBeans(beans);
-            outputObject.settotal(beans.size());
-        }
-    }
-
-    /**
      * 获取菜单级别列表
      *
      * @param inputObject  入参以及用户信息等获取对象
@@ -249,7 +233,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysEveMenuSortLowerById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> topBean = sysEveMenuDao.querySysEveMenuISLowerByThisId(map);//根据同一级排序获取这条数据的下一条数据
+        // 根据同一级排序获取这条数据的下一条数据
+        Map<String, Object> topBean = sysEveMenuDao.querySysEveMenuISLowerByThisId(map);
         if (topBean == null) {
             outputObject.setreturnMessage("已经是最靠后菜单，无法移动。");
         } else {
@@ -259,22 +244,6 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
             sysEveMenuDao.editSysEveMenuSortLowerById(map);
             setUpdateUserMation(inputObject, topBean);
             sysEveMenuDao.editSysEveMenuSortLowerById(topBean);
-        }
-    }
-
-    /**
-     * 获取该系统商户拥有的系统
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void querySysWinMationListBySysId(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = sysEveMenuDao.querySysWinMationListBySysId(map);
-        if (!beans.isEmpty()) {
-            outputObject.setBeans(beans);
-            outputObject.settotal(beans.size());
         }
     }
 

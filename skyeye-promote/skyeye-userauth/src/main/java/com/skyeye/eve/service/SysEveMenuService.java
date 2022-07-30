@@ -21,15 +21,11 @@ public interface SysEveMenuService {
 
     void deleteSysMenuMationById(InputObject inputObject, OutputObject outputObject);
 
-    void queryTreeSysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject);
-
     void querySysMenuLevelList(InputObject inputObject, OutputObject outputObject);
 
     void editSysEveMenuSortTopById(InputObject inputObject, OutputObject outputObject);
 
     void editSysEveMenuSortLowerById(InputObject inputObject, OutputObject outputObject);
-
-    void querySysWinMationListBySysId(InputObject inputObject, OutputObject outputObject);
 
     void querySysEveMenuBySysId(InputObject inputObject, OutputObject outputObject);
 

@@ -257,8 +257,6 @@
 	<url id="sys011" path="/post/SysEveMenuController/deleteSysMenuMationById" val="删除菜单信息" allUse="1" groupName="菜单管理">
 		<property id="rowId" name="id" ref="required" var="菜单ID" />
 	</url>
-	<url id="sys012" path="/post/SysEveMenuController/queryTreeSysMenuMationBySimpleLevel" val="异步加载树查看商户拥有的系统" allUse="2" method="GET" groupName="菜单管理">
-	</url>
 	<url id="sys019" path="/post/SysEveUserController/queryRoleAndBindRoleByUserId" val="获取角色和当前已经绑定的角色信息" allUse="2" groupName="角色管理">
 		<property id="rowId" name="id" ref="required" var="账号ID" />
 	</url>
@@ -292,8 +290,6 @@
 	</url>
 	<url id="sys030" path="/post/SysEveUserController/editUserInstallLoadMenuIconById" val="自定义设置窗口下面展示的是图标还是图标+文字" allUse="2" groupName="系统管理">
 		<property id="loadBottomMenuIcon" name="loadBottomMenuIcon" ref="required,num" var="是否只展示图标，1是  0否" />
-	</url>
-	<url id="sys031" path="/post/SysEveMenuController/querySysWinMationListBySysId" val="获取该系统商户拥有的系统" allUse="2" groupName="系统管理">
 	</url>
 	<url id="sys032" path="/post/SysEveUserController/queryUserDetailsMationByUserId" val="修改个人信息时获取数据回显" allUse="2" groupName="系统管理">
 	</url>
@@ -399,59 +395,6 @@
 	    <property id="colorClass" name="colorClass" ref="required" var="win系统主题颜色属性"/>
 	</url>
 	<!-- 系统管理结束 -->
-	
-	<!-- 系统管理开始 -->
-	<url id="sysevewin001" path="/post/SysEveWinController/queryWinMationList" val="获取系统信息列表" allUse="1">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-	    <property id="sysName" name="sysName" ref="" var="系统名称"/>
-	</url>
-	<url id="sysevewin002" path="/post/SysEveWinController/insertWinMation" val="新增系统信息" allUse="1">
-	    <property id="sysName" name="sysName" ref="required" var="系统名称"/>
-		<property id="sysDesc" name="sysDesc" ref="" var="系统介绍" />
-	    <property id="sysUrl" name="sysUrl" ref="required" var="系统域名"/>
-	    <property id="sysPic" name="sysPic" ref="required" var="系统图片"/>
-	    <property id="sysFirstType" name="sysFirstType" ref="required" var="一级分类"/>
-	    <property id="sysSecondType" name="sysSecondType" ref="required" var="二级分类"/>
-	</url>
-	<url id="sysevewin003" path="/post/SysEveWinController/queryWinMationToEditById" val="编辑系统信息时进行回显" allUse="2">
-	    <property id="rowId" name="id" ref="required" var="系统id"/>
-	</url>
-	<url id="sysevewin004" path="/post/SysEveWinController/editWinMationById" val="编辑系统信息" allUse="1">
-	    <property id="sysName" name="sysName" ref="required" var="系统名称"/>
-		<property id="sysDesc" name="sysDesc" ref="" var="系统介绍" />
-	    <property id="sysUrl" name="sysUrl" ref="required" var="系统域名"/>
-	    <property id="rowId" name="id" ref="required" var="系统id"/>
-	    <property id="sysPic" name="sysPic" ref="required" var="系统图片"/>
-	    <property id="sysFirstType" name="sysFirstType" ref="required" var="一级分类"/>
-	    <property id="sysSecondType" name="sysSecondType" ref="required" var="二级分类"/>
-	</url>
-	<url id="sysevewin005" path="/post/SysEveWinController/deleteWinMationById" val="删除系统信息" allUse="1">
-	    <property id="rowId" name="id" ref="required" var="系统id"/>
-	</url>
-	<url id="sysevewin006" path="/post/SysEveWinController/editAuthorizationById" val="进行商户系统授权" allUse="1">
-	    <property id="rowId" name="winId" ref="required" var="系统id"/>
-	</url>
-	<url id="sysevewin007" path="/post/SysEveWinController/editCancleAuthorizationById" val="进行商户系统取消授权" allUse="1">
-	    <property id="rowId" name="winId" ref="required" var="系统id"/>
-	</url>
-	<url id="sysevewin008" path="/post/SysEveWinController/queryWinMationListToShow" val="获取应用商店" allUse="2">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-	    <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-	    <property id="firstType" name="firstType" ref="" var="第一分类"/>
-	    <property id="secondType" name="secondType" ref="" var="第二分类"/>
-	</url>
-	<!-- 系统管理结束 -->
-	
-	<!-- 系统菜单同步开始 -->
-	<url id="sysimportantsynchronization001" path="/post/SysEveWinController/insertWinMationImportantSynchronization" val="系统重要的同步操作" allUse="1">
-		<property id="rowId" name="id" ref="required" var="系统id" />
-		<property id="url" name="url" ref="required" var="系统部署地址" />
-	</url>
-	<url id="sysimportantsynchronization002" path="/post/SysEveWinController/queryWinMationImportantSynchronizationData" val="系统重要的同步操作获取数据" allUse="0">
-		<property id="winid" name="winid" ref="required" var="系统id" />
-	</url>
-	<!-- 系统菜单同步结束 -->
 	
 	<!-- 菜单权限点开始 -->
 	<url id="sysevemenuauthpoint001" path="/post/SysEveMenuAuthPointController/querySysEveMenuAuthPointListByMenuId" val="获取菜单权限点列表根据菜单id" allUse="1" groupName="菜单权限点管理">
