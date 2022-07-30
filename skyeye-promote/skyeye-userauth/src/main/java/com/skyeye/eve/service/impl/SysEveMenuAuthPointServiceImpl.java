@@ -114,9 +114,9 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
         if (StringUtils.isNotEmpty(sysMenuAuthPointMation.getId())) {
             queryWrapper.ne(CommonConstants.ID, sysMenuAuthPointMation.getId());
         }
-        SysMenuAuthPointMation checkSysMenuAuthPointMation = sysEveMenuAuthPointDao.selectOne(queryWrapper);
+        SysMenuAuthPointMation checkSysMenuAuthPoint = sysEveMenuAuthPointDao.selectOne(queryWrapper);
 
-        if (ObjectUtils.isEmpty(checkSysMenuAuthPointMation)) {
+        if (ObjectUtils.isEmpty(checkSysMenuAuthPoint)) {
             String userId = inputObject.getLogParams().get("id").toString();
             // 2.新增/编辑数据
             if (StringUtils.isNotEmpty(sysMenuAuthPointMation.getId())) {

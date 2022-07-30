@@ -11,17 +11,11 @@ public interface SysEveDesktopService {
 
     void querySysDesktopList(InputObject inputObject, OutputObject outputObject);
 
-    void insertSysDesktopMation(InputObject inputObject, OutputObject outputObject);
+    void writeSysEveDesktopMation(InputObject inputObject, OutputObject outputObject);
 
     void deleteSysDesktopById(InputObject inputObject, OutputObject outputObject);
 
-    void updateUpSysDesktopById(InputObject inputObject, OutputObject outputObject);
-
-    void updateDownSysDesktopById(InputObject inputObject, OutputObject outputObject);
-
     void selectSysDesktopById(InputObject inputObject, OutputObject outputObject);
-
-    void editSysDesktopMationById(InputObject inputObject, OutputObject outputObject);
 
     void editSysDesktopMationOrderNumUpById(InputObject inputObject, OutputObject outputObject);
 

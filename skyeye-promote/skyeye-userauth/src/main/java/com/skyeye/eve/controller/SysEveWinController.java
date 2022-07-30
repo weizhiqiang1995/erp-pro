@@ -11,6 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ *
+ * @ClassName: SysEveWinController
+ * @Description: 服务管理控制层
+ * @author: skyeye云系列--卫志强
+ * @date: 2022/7/30 0:10
+ *
+ * @Copyright: 2022 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
+ * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
+ */
 @RestController
 public class SysEveWinController {
 
@@ -18,7 +28,7 @@ public class SysEveWinController {
     private SysEveWinService sysEveWinService;
 
     /**
-     * 获取系统信息列表
+     * 获取服务信息列表
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -29,7 +39,7 @@ public class SysEveWinController {
     }
 
     /**
-     * 新增系统信息
+     * 新增服务信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -40,7 +50,7 @@ public class SysEveWinController {
     }
 
     /**
-     * 编辑系统信息时进行回显
+     * 编辑服务信息时进行回显
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -51,7 +61,7 @@ public class SysEveWinController {
     }
 
     /**
-     * 编辑系统信息
+     * 编辑服务信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -62,7 +72,7 @@ public class SysEveWinController {
     }
 
     /**
-     * 删除系统信息
+     * 删除服务信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -73,7 +83,7 @@ public class SysEveWinController {
     }
 
     /**
-     * 进行商户系统授权
+     * 进行商户服务授权
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -84,7 +94,7 @@ public class SysEveWinController {
     }
 
     /**
-     * 进行商户系统取消授权
+     * 进行商户服务取消授权
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -106,7 +116,7 @@ public class SysEveWinController {
     }
 
     /**
-     * 系统重要的同步操作
+     * 服务重要的同步操作
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -117,7 +127,7 @@ public class SysEveWinController {
     }
 
     /**
-     * 系统重要的同步操作获取数据
+     * 服务重要的同步操作获取数据
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象

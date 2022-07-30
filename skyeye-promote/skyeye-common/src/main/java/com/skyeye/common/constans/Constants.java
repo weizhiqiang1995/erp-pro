@@ -173,7 +173,7 @@ public class Constants {
         TALKPIC(new int[]{9}, "/talkpic", "/talkpic/", "聊天图片"),
         TALKFILE(new int[]{10}, "/talkfile", "/talkfile/", "聊天附件"),
         EDIT(new int[]{11}, "/edit", "/edit/", "富文本内容图片"),
-        MENULOGO(new int[]{12}, "/menulogo", "/menulogo/", "菜单logo图片"),
+        MENULOGO(new int[]{12}, "/menulogo", "/menulogo/", "菜单/桌面logo图片"),
         LAYEDIT(new int[]{13}, "/layedit", "/layedit/", "富文本编辑图片"),
         ORDER(new int[]{14}, "/order", "/order/", "工单图片"),
         STUDENTPIC(new int[]{15}, "/studentPic", "/studentPic/", "学生照图片"),

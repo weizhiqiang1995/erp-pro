@@ -4,24 +4,18 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.common.entity.CommonPageInfo;
+import com.skyeye.eve.entity.userauth.desktop.SysEveDesktopMation;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
 
-public interface SysEveDesktopDao {
+public interface SysEveDesktopDao extends SkyeyeBaseMapper<SysEveDesktopMation> {
 
-    List<Map<String, Object>> querySysDesktopList(Map<String, Object> map);
-
-    int insertSysDesktopMation(Map<String, Object> map);
-
-    Map<String, Object> querySysDesktopBySimpleLevel(Map<String, Object> map);
+    List<Map<String, Object>> querySysDesktopList(CommonPageInfo commonPageInfo);
 
     int editSysDesktopStateById(@Param("id") String id, @Param("state") Integer state);
-
-    Map<String, Object> selectSysDesktopById(Map<String, Object> map);
-
-    int editSysDesktopMationById(Map<String, Object> map);
 
     Map<String, Object> querySysDesktopUpMationById(Map<String, Object> map);
 
@@ -29,14 +23,11 @@ public interface SysEveDesktopDao {
 
     Map<String, Object> querySysDesktopDownMationById(Map<String, Object> map);
 
-    Map<String, Object> querySysDesktopStateById(Map<String, Object> map);
-
-    Map<String, Object> checkSysDesktopMation(Map<String, Object> map);
-
     List<Map<String, Object>> queryAllSysDesktopList(Map<String, Object> map);
 
     int removeAllSysEveMenuByDesktopId(Map<String, Object> map);
 
-    Map<String, Object> querySysDesktopStateAndMenuNumById(Map<String, Object> map);
+    Map<String, Object> querySysDesktopStateAndMenuNumById(@Param("id") String id);
 
+    Integer querySysEveDesktopMaxOrderBum();
 }

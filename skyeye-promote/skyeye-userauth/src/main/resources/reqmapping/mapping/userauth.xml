@@ -236,47 +236,6 @@
 	</url>
 	<!-- 员工操作结束 -->
 	
-	<!-- 桌面名称管理开始 -->
-    <url id="desktop001" path="/post/SysEveDesktopController/querySysDesktopList" val="获取桌面名称列表" allUse="1" groupName="桌面名称管理">
-        <property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-        <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-        <property id="desktopName" name="desktopName" ref="" var="桌面名称"/>
-    </url>
-    <url id="desktop002" path="/post/SysEveDesktopController/insertSysDesktopMation" val="新增桌面名称" allUse="1" groupName="桌面名称管理">
-        <property id="desktopName" name="desktopName" ref="required" var="桌面名称"/>
-        <property id="desktopCnName" name="desktopCnName" ref="required" var="桌面名称"/>
-    </url>
-    <url id="desktop003" path="/post/SysEveDesktopController/deleteSysDesktopById" val="删除桌面名称" allUse="1" groupName="桌面名称管理">
-        <property id="rowId" name="id" ref="required" var="桌面id"/>
-    </url>
-    <url id="desktop004" path="/post/SysEveDesktopController/updateUpSysDesktopById" val="上线桌面名称" allUse="1" groupName="桌面名称管理">
-        <property id="rowId" name="id" ref="required" var="桌面id"/>
-    </url>
-    <url id="desktop005" path="/post/SysEveDesktopController/updateDownSysDesktopById" val="下线桌面名称" allUse="1" groupName="桌面名称管理">
-        <property id="rowId" name="id" ref="required" var="桌面id"/>
-    </url>
-    <url id="desktop006" path="/post/SysEveDesktopController/selectSysDesktopById" val="获取选中的桌面名称信息" allUse="2" groupName="桌面名称管理">
-        <property id="rowId" name="id" ref="required" var="桌面id"/>
-    </url>
-    <url id="desktop007" path="/post/SysEveDesktopController/editSysDesktopMationById" val="编辑桌面名称信息" allUse="1" groupName="桌面名称管理">
-        <property id="rowId" name="id" ref="required" var="桌面id"/>
-        <property id="desktopName" name="desktopName" ref="required" var="桌面名称"/>
-        <property id="desktopCnName" name="desktopCnName" ref="required" var="桌面名称"/>
-    </url>
-    <url id="desktop008" path="/post/SysEveDesktopController/editSysDesktopMationOrderNumUpById" val="桌面名称上移" allUse="1" groupName="桌面名称管理">
-        <property id="rowId" name="id" ref="required" var="桌面名称id" />
-    </url>
-    <url id="desktop009" path="/post/SysEveDesktopController/editSysDesktopMationOrderNumDownById" val="桌面名称下移" allUse="1" groupName="桌面名称管理">
-        <property id="rowId" name="id" ref="required" var="桌面名称id" />
-    </url>
-    <url id="desktop011" path="/post/SysEveDesktopController/queryAllSysDesktopList" val="获取全部的桌面名称用于系统菜单" allUse="2" method="GET" groupName="桌面名称管理">
-    	<property id="language" name="language" ref="" var="语言类型" defaultValue="zh" />
-    </url>
-    <url id="desktop012" path="/post/SysEveDesktopController/removeAllSysEveMenuByDesktopId" val="一键移除所有菜单" allUse="1" groupName="桌面名称管理">
-        <property id="rowId" name="id" ref="required" var="桌面id" />
-    </url>
-    <!-- 桌面名称管理结束 -->
-    
     <!-- 系统管理开始 -->
 	<url id="sys006" path="/post/SysEveMenuController/querySysMenuList" val="获取菜单列表" allUse="1" groupName="菜单管理">
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />

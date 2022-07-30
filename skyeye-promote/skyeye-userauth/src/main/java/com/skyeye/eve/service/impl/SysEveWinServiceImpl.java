@@ -29,7 +29,7 @@ import java.util.Map;
 
 /**
  * @ClassName: SysEveWinServiceImpl
- * @Description: 系统信息管理服务类
+ * @Description: 服务信息管理服务类
  * @author: skyeye云系列--卫志强
  * @date: 2021/8/7 23:26
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
@@ -45,7 +45,7 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     private SysEveMenuAuthPointDao sysEveMenuAuthPointDao;
 
     /**
-     * 获取系统信息列表
+     * 获取服务信息列表
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -60,7 +60,7 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     }
 
     /**
-     * 新增系统信息
+     * 新增服务信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -71,7 +71,7 @@ public class SysEveWinServiceImpl implements SysEveWinService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinDao.queryWinMationByNameOrUrl(map);
         if (bean != null && !bean.isEmpty()) {
-            outputObject.setreturnMessage("存在相同的系统或系统地址，请更换");
+            outputObject.setreturnMessage("存在相同的服务或服务地址，请更换");
         } else {
             DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             sysEveWinDao.insertWinMation(map);
@@ -79,7 +79,7 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     }
 
     /**
-     * 编辑系统信息时进行回显
+     * 编辑服务信息时进行回显
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -92,7 +92,7 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     }
 
     /**
-     * 编辑系统信息
+     * 编辑服务信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -103,14 +103,14 @@ public class SysEveWinServiceImpl implements SysEveWinService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinDao.queryWinMationByNameOrUrlAndId(map);
         if (bean != null && !bean.isEmpty()) {
-            outputObject.setreturnMessage("存在相同的系统或系统地址，请更换");
+            outputObject.setreturnMessage("存在相同的服务或服务地址，请更换");
         } else {
             sysEveWinDao.editWinMationById(map);
         }
     }
 
     /**
-     * 删除系统信息
+     * 删除服务信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -121,14 +121,14 @@ public class SysEveWinServiceImpl implements SysEveWinService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinDao.queryChildMationById(map);
         if (Integer.parseInt(bean.get("menuNum").toString()) > 0 || Integer.parseInt(bean.get("useNum").toString()) > 0) {
-            outputObject.setreturnMessage("该系统存在功能菜单或者使用商户，请先进行菜单或商户操作。");
+            outputObject.setreturnMessage("该服务存在功能菜单或者使用商户，请先进行菜单或商户操作。");
         } else {
             sysEveWinDao.deleteWinMationById(map);
         }
     }
 
     /**
-     * 进行商户系统授权
+     * 进行商户服务授权
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -148,7 +148,7 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     }
 
     /**
-     * 进行商户系统取消授权
+     * 进行商户服务取消授权
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -176,7 +176,7 @@ public class SysEveWinServiceImpl implements SysEveWinService {
     }
 
     /**
-     * 系统重要的同步操作
+     * 服务重要的同步操作
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -188,7 +188,7 @@ public class SysEveWinServiceImpl implements SysEveWinService {
         // 判断是否有权限
         Map<String, Object> bean = sysEveWinDao.queryWinMationSynchronizationById(map);
         if (bean == null) {
-            outputObject.setreturnMessage("您不具备该系统的同步权限。");
+            outputObject.setreturnMessage("您不具备该服务的同步权限。");
         } else {
             List<Map<String, Object>> hasRows = sysEveWinDao.queryWinMationSynchronizationByWinId(map);
             if (hasRows.isEmpty()) {
@@ -218,13 +218,13 @@ public class SysEveWinServiceImpl implements SysEveWinService {
                     outputObject.setreturnMessage(json.get("returnMessage").toString());
                 }
             } else {
-                outputObject.setreturnMessage("系统菜单只能同步一次哦。");
+                outputObject.setreturnMessage("服务菜单只能同步一次哦。");
             }
         }
     }
 
     /**
-     * 系统重要的同步操作获取数据
+     * 服务重要的同步操作获取数据
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象

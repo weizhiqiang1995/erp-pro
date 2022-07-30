@@ -82,9 +82,9 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
         if (StringUtils.isNotEmpty(appWorkPageMation.getId())) {
             queryWrapper.ne(CommonConstants.ID, appWorkPageMation.getId());
         }
-        AppWorkPageMation checkSysMenuAuthPointMation = appWorkPageDao.selectOne(queryWrapper);
+        AppWorkPageMation checkAppWorkPage = appWorkPageDao.selectOne(queryWrapper);
 
-        if (ObjectUtils.isEmpty(checkSysMenuAuthPointMation)) {
+        if (ObjectUtils.isEmpty(checkAppWorkPage)) {
             String userId = inputObject.getLogParams().get("id").toString();
             // 2.新增/编辑数据
             if (StringUtils.isNotEmpty(appWorkPageMation.getId())) {

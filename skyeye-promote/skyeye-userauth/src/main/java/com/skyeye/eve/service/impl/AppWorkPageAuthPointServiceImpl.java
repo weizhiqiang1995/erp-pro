@@ -113,9 +113,9 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
         if (StringUtils.isNotEmpty(appWorkPageAuthPointMation.getId())) {
             queryWrapper.ne(CommonConstants.ID, appWorkPageAuthPointMation.getId());
         }
-        AppWorkPageAuthPointMation checkSysMenuAuthPointMation = appWorkPageAuthPointDao.selectOne(queryWrapper);
+        AppWorkPageAuthPointMation checkAppWorkPageAuthPoint = appWorkPageAuthPointDao.selectOne(queryWrapper);
 
-        if (ObjectUtils.isEmpty(checkSysMenuAuthPointMation)) {
+        if (ObjectUtils.isEmpty(checkAppWorkPageAuthPoint)) {
             String userId = inputObject.getLogParams().get("id").toString();
             // 2.新增/编辑数据
             if (StringUtils.isNotEmpty(appWorkPageAuthPointMation.getId())) {
