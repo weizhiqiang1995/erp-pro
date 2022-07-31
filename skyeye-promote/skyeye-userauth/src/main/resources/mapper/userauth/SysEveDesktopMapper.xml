@@ -9,6 +9,7 @@
 			a.desktop_name_cn desktopCnName,
 			a.state,
 			a.logo,
+			a.code,
 			a.app_page_url appPageUrl,
 			a.order_by orderBy,
 			(SELECT COUNT(*) FROM sys_eve_menu b WHERE b.desktop_id = a.id) allNum,

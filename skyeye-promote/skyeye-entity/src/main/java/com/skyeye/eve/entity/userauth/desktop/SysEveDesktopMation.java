@@ -60,4 +60,11 @@ public class SysEveDesktopMation extends CommonOperatorUserInfo implements Seria
     @ApiModelProperty(value = "状态", required = "required,num")
     private Integer state;
 
+    /**
+     * 序号
+     */
+    @TableField("code")
+    @ApiModelProperty(value = "区分桌面的code，唯一", required = "required")
+    private String desktopCode;
+
 }
