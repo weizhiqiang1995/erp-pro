@@ -96,8 +96,10 @@ public class CrmPageServiceImpl implements CrmPageService {
      */
     @Override
     public void queryCustomDocumentaryType(InputObject inputObject, OutputObject outputObject) {
-        String year = inputObject.getParams().get("year").toString();
-        List<Map<String, Object>> beans = crmPageDao.queryCustomDocumentaryType(year);
+        Map<String, Object> params = inputObject.getParams();
+        String year = params.get("year").toString();
+        String crmDocumentaryType = params.get("crmDocumentaryType").toString();
+        List<Map<String, Object>> beans = this.getDictDataNun(crmDocumentaryType, crmPageDao.queryCustomDocumentaryType(year));
         outputObject.setBeans(beans);
     }
 

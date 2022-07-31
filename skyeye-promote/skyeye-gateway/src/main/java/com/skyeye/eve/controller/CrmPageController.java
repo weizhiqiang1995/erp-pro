@@ -60,6 +60,10 @@ public class CrmPageController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "crmpage003", value = "客户跟单方式分析", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "year", name = "year", value = "指定年度", required = "required"),
+        @ApiImplicitParam(id = "crmDocumentaryType", name = "crmDocumentaryType", value = "跟单方式code", required = "required")})
     @RequestMapping("/post/CrmPageController/queryCustomDocumentaryType")
     public void queryCustomDocumentaryType(InputObject inputObject, OutputObject outputObject) {
         crmPageService.queryCustomDocumentaryType(inputObject, outputObject);

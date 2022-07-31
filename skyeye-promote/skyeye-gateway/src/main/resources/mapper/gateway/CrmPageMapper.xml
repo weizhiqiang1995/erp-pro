@@ -62,12 +62,11 @@
 	<select id="queryCustomDocumentaryType" resultType="java.util.Map">
 		SELECT
 			COUNT(d.id) number,
-			c.`name` typeName
+			d.type_id dictDataId
 		FROM
-			crm_documentary_type c
-			LEFT JOIN crm_documentary d ON d.type_id = c.id AND YEAR(d.create_time) = #{year}
-		WHERE c.state = '2'
-		GROUP BY c.id
+			crm_documentary d
+		WHERE YEAR(d.create_time) = #{year}
+		GROUP BY d.type_id
 	</select>
 	
 	<select id="queryNewContractNum" resultType="java.util.Map">
