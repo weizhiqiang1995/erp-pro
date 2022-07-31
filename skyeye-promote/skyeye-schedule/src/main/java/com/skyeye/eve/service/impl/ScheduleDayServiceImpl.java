@@ -11,7 +11,6 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.client.ExecuteFeignClient;
 import com.skyeye.common.constans.CheckWorkConstants;
 import com.skyeye.common.constans.QuartzConstants;
-import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.object.PutObject;

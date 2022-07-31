@@ -7,6 +7,7 @@ package com.skyeye.eve.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.Constants;
+import com.skyeye.common.constans.FileConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.object.PutObject;
@@ -46,7 +47,7 @@ public class CodeModelHistoryServiceImpl implements CodeModelHistoryService {
         CodeModelHistoryQueryDo codeModelHistoryQuery = inputObject.getParams(CodeModelHistoryQueryDo.class);
         Page pages = PageHelper.startPage(codeModelHistoryQuery.getPage(), codeModelHistoryQuery.getLimit());
         List<Map<String, Object>> beans = codeModelHistoryDao.queryCodeModelHistoryList(codeModelHistoryQuery);
-        String basePath = tPath + Constants.FileUploadPath.CODE_GENERATOR.getSavePath();
+        String basePath = tPath + FileConstants.FileUploadPath.CODE_GENERATOR.getSavePath();
         for (Map<String, Object> bean : beans) {
             File file = new File(basePath + "/" + bean.get("filePath").toString());
             if (!file.exists()) {
@@ -69,7 +70,7 @@ public class CodeModelHistoryServiceImpl implements CodeModelHistoryService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertCodeModelHistoryCreate(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        String basePath = tPath + Constants.FileUploadPath.CODE_GENERATOR.getSavePath();
+        String basePath = tPath + FileConstants.FileUploadPath.CODE_GENERATOR.getSavePath();
         FileUtil.createDirs(basePath);
         String strZipPath = basePath + "/" + map.get("filePath").toString();
         File zipFile = new File(strZipPath);
@@ -109,7 +110,7 @@ public class CodeModelHistoryServiceImpl implements CodeModelHistoryService {
     @Override
     public void downloadCodeModelHistory(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        String basePath = tPath + Constants.FileUploadPath.CODE_GENERATOR.getSavePath();
+        String basePath = tPath + FileConstants.FileUploadPath.CODE_GENERATOR.getSavePath();
         String strZipPath = basePath + "/" + map.get("filePath").toString();
         InputStream bis = null;
         BufferedOutputStream out = null;

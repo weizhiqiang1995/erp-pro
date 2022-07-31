@@ -14,6 +14,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.cache.redis.RedisCache;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.constans.DiskCloudConstants;
+import com.skyeye.common.constans.FileConstants;
 import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -74,7 +75,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
     /**
      * 文件上传时保存文件的路径
      */
-    private static final Integer FILE_PATH_TYPE = Constants.FileUploadPath.FILE_CONSOLE.getType()[0];
+    private static final Integer FILE_PATH_TYPE = FileConstants.FileUploadPath.FILE_CONSOLE.getType()[0];
 
     @Value("${IMAGES_PATH}")
     private String tPath;
@@ -339,7 +340,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) PutObject.getRequest();
             // 获取multiRequest 中所有的文件名
             Iterator iter = multiRequest.getFileNames();
-            String basePath = tPath + Constants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/" + userId;
+            String basePath = tPath + FileConstants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/" + userId;
             String trueFileName = "";
             String fileName = "";
             while (iter.hasNext()) {
@@ -360,7 +361,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                         throw new CustomException(e);
                     }
                     //初始化文件对象内容
-                    trueFileName = Constants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + "/" + userId + "/" + newFileName;
+                    trueFileName = FileConstants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + "/" + userId + "/" + newFileName;
                     map.put("fileType", fileExtName);//文件类型
                     map.put("fileSizeType", "bytes");//文件大小单位
                     map.put("fileAddress", trueFileName);//文件地址
@@ -419,7 +420,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         String fileName = map.get("name").toString();
         String fileExtName = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();//文件后缀
         String newFileName = String.valueOf(System.currentTimeMillis()) + "." + fileExtName;//新文件名
-        String basePath = tPath + Constants.FileUploadPath.getSavePath(FILE_PATH_TYPE);
+        String basePath = tPath + FileConstants.FileUploadPath.getSavePath(FILE_PATH_TYPE);
         String path = basePath + "/" + userId + "/" + newFileName;//文件路径
         FileChannel outChnnel = null;
         try {
@@ -444,7 +445,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         }
         fileConsoleDao.deleteUploadFileChunksByMd5(map);
         //初始化文件对象内容
-        String trueFileName = Constants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId + "/" + newFileName;
+        String trueFileName = FileConstants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId + "/" + newFileName;
         map.put("fileType", fileExtName);//文件类型
         map.put("fileSizeType", "bytes");//文件大小单位
         map.put("fileAddress", trueFileName);//文件地址
@@ -461,7 +462,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
             String newFilename = basePath + "/" + userId + "/" + picName;
             writeAndReadQpubFileThumbnail(path, newFilename);
 
-            map.put("fileThumbnail", Constants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId + "/" + picName);//文件缩略图地址
+            map.put("fileThumbnail", FileConstants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId + "/" + picName);//文件缩略图地址
         } else if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileExtName, 2)) {
             // office文件缩略图地址
             map.put("fileThumbnail", DiskCloudConstants.FileMation.getIconByFileExt(fileExtName));
@@ -474,7 +475,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
             String fileThumbnail = String.valueOf(System.currentTimeMillis()) + ".jpg";
             FileUtil.createDirs(basePath + "/" + userId + "/ffmpeg/");
             if (ToolUtil.take(path, basePath + "/" + userId + "/ffmpeg/" + fileThumbnail, ffmpegGPath)) {
-                map.put("fileThumbnail", Constants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId + "/ffmpeg/" + fileThumbnail);
+                map.put("fileThumbnail", FileConstants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId + "/ffmpeg/" + fileThumbnail);
             } else {
                 FileUtil.deleteFile(path);
                 outputObject.setreturnMessage("上传失败。");
@@ -831,8 +832,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         String userId = user.get("id").toString();
         if (array.size() > 0) {
             String folderId = getThisFolderChildParentId(map.get("folderId").toString());
-            String basePath = tPath + Constants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/" + userId;
-            String visitPath = Constants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId;
+            String basePath = tPath + FileConstants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/" + userId;
+            String visitPath = FileConstants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId;
             List<Map<String, Object>> folderBeans = new ArrayList<>();
             List<Map<String, Object>> fileBeans = new ArrayList<>();
             Map<String, Object> bean;
@@ -1050,9 +1051,9 @@ public class FileConsoleServiceImpl implements FileConsoleService {
      */
     public void createNewFileOrFolder(String fileExtName, String userId, String folderId) {
         String newFileName = String.valueOf(System.currentTimeMillis()) + "." + fileExtName;//新文件名
-        String basePath = tPath + Constants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/" + userId;
+        String basePath = tPath + FileConstants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/" + userId;
         FileUtil.createDirs(basePath);
-        String visitPath = Constants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId;
+        String visitPath = FileConstants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId;
         String path = basePath + "/" + newFileName;
         createFile(fileExtName, path);
 
@@ -1172,8 +1173,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         Map<String, Object> user = inputObject.getLogParams();
         String userId = user.get("id").toString();
         if (array.size() > 0) {
-            String basePath = tPath + Constants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/" + userId;
-            String visitPath = Constants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId;
+            String basePath = tPath + FileConstants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/" + userId;
+            String visitPath = FileConstants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId;
             String folderId = getThisFolderChildParentId(map.get("folderId").toString());
             List<Map<String, Object>> folderBeans = new ArrayList<>();
             List<Map<String, Object>> fileBeans = new ArrayList<>();
@@ -1383,8 +1384,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                 dowlLoadFile = ToolUtil.listToTree(dowlLoadFile, "id", "directParentId", "children");
                 //打包
                 String fileName = String.valueOf(System.currentTimeMillis());//压缩包文件名
-                String basePath = tPath + Constants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/" + userId;
-                String visitPath = Constants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId;
+                String basePath = tPath + FileConstants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/" + userId;
+                String visitPath = FileConstants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId;
                 String strZipPath = basePath + "/" + fileName + ".zip";
                 File zipFile = new File(strZipPath);
                 if (zipFile.exists()) {
@@ -1442,8 +1443,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         if (DiskCloudConstants.FileMation.judgeIsAllowedFileType(fileType, 4)) {//压缩包
             Map<String, Object> user = inputObject.getLogParams();
             String userId = user.get("id").toString();
-            String basePath = tPath + Constants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/" + userId + "/";
-            String visitPath = Constants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId;
+            String basePath = tPath + FileConstants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/" + userId + "/";
+            String visitPath = FileConstants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId;
             String parentId = file.get("parentId").toString();//压缩包父id
             String zipfile = tPath.replace("images", "") + file.get("fileAddress").toString();//压缩包文件
             if (new File(zipfile).exists()) {
@@ -1601,8 +1602,8 @@ public class FileConsoleServiceImpl implements FileConsoleService {
         String userId = user.get("id").toString();
         if (array.size() > 0) {
             String folderId = getThisFolderChildParentId(map.get("folderId").toString());
-            String basePath = tPath + Constants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/" + userId;
-            String visitPath = Constants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId;
+            String basePath = tPath + FileConstants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/" + userId;
+            String visitPath = FileConstants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + userId;
             List<Map<String, Object>> folderBeans = new ArrayList<>();
             List<Map<String, Object>> fileBeans = new ArrayList<>();
             Map<String, Object> bean;
@@ -1919,7 +1920,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                     fileBeans.add(bean);
                 }
             }
-            String basePath = tPath + Constants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/temporaryfile/" + userId + "/";
+            String basePath = tPath + FileConstants.FileUploadPath.getSavePath(FILE_PATH_TYPE) + "/temporaryfile/" + userId + "/";
             FileUtil.createDirs(basePath);
             //加载数据
             List<Map<String, Object>> dowlLoadFile = new ArrayList<>();
@@ -1960,7 +1961,7 @@ public class FileConsoleServiceImpl implements FileConsoleService {
                         FileUtil.close(out);
                     }
                 }
-                trueFileName = Constants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + "temporaryfile/" + userId + "/" + fileName + ".zip";
+                trueFileName = FileConstants.FileUploadPath.getVisitPath(FILE_PATH_TYPE) + "temporaryfile/" + userId + "/" + fileName + ".zip";
             } else {
                 outputObject.setreturnMessage("未找到要打包的文件.");
                 return;

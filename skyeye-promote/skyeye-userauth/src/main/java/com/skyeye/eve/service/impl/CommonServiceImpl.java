@@ -8,6 +8,7 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.skyeye.cache.redis.RedisCache;
 import com.skyeye.common.constans.Constants;
+import com.skyeye.common.constans.FileConstants;
 import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -89,7 +90,7 @@ public class CommonServiceImpl implements CommonService {
             // 获取multiRequest 中所有的文件名
             Iterator iter = multiRequest.getFileNames();
             int type = Integer.parseInt(map.get("type").toString());
-            String basePath = tPath + Constants.FileUploadPath.getSavePath(type);
+            String basePath = tPath + FileConstants.FileUploadPath.getSavePath(type);
             Map<String, Object> bean = new HashMap<>();
             StringBuffer trueFileName = new StringBuffer();
             String fileName = "";
@@ -111,7 +112,7 @@ public class CommonServiceImpl implements CommonService {
                     } catch (IOException ex) {
                         throw new CustomException(ex);
                     }
-                    newFileName = Constants.FileUploadPath.getVisitPath(type) + newFileName;
+                    newFileName = FileConstants.FileUploadPath.getVisitPath(type) + newFileName;
                     if (ToolUtil.isBlank(trueFileName.toString())) {
                         trueFileName.append(newFileName);
                     } else {
@@ -147,14 +148,14 @@ public class CommonServiceImpl implements CommonService {
                 try {
                     byte[] bytes = Base64.decodeBase64(new String(data).getBytes());
                     // 决定存储路径
-                    String basePath = tPath + Constants.FileUploadPath.getSavePath(type);
+                    String basePath = tPath + FileConstants.FileUploadPath.getSavePath(type);
                     FileUtil.createDirs(basePath);
                     // 自定义的文件名称
                     String trueFileName = String.valueOf(System.currentTimeMillis()) + "." + FileUtil.getBase64FileTypeByPrix(dataPrix);
                     // 写入文件
                     FileUtil.writeByteToPointPath(bytes, basePath + "/" + trueFileName);
                     Map<String, Object> bean = new HashMap<>();
-                    bean.put("picUrl", Constants.FileUploadPath.getVisitPath(type) + trueFileName);
+                    bean.put("picUrl", FileConstants.FileUploadPath.getVisitPath(type) + trueFileName);
                     bean.put("type", type);
                     outputObject.setBean(bean);
                 } catch (Exception ee) {
@@ -183,9 +184,9 @@ public class CommonServiceImpl implements CommonService {
         List<Map<String, Object>> inBeans = new ArrayList<>();
         Map<String, Object> user = inputObject.getLogParams();
         String zipName = ToolUtil.getSurFaceId() + ".zip";
-        String basePath = tPath + Constants.FileUploadPath.CODE_GENERATOR.getSavePath();
+        String basePath = tPath + FileConstants.FileUploadPath.CODE_GENERATOR.getSavePath();
         FileUtil.createDirs(basePath);
-        String strZipPath = tPath + Constants.FileUploadPath.CODE_GENERATOR.getSavePath() + "/" + zipName;
+        String strZipPath = tPath + FileConstants.FileUploadPath.CODE_GENERATOR.getSavePath() + "/" + zipName;
         ZipOutputStream out = null;
         try {
             out = new ZipOutputStream(new FileOutputStream(strZipPath));
@@ -298,9 +299,9 @@ public class CommonServiceImpl implements CommonService {
     public void queryFilePathByFileType(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Integer fileType = Integer.parseInt(map.get("fileType").toString());
-        String savePath = tPath + Constants.FileUploadPath.getSavePath(fileType);
+        String savePath = tPath + FileConstants.FileUploadPath.getSavePath(fileType);
         FileUtil.createDirs(savePath);
-        String visitPath = Constants.FileUploadPath.getVisitPath(fileType);
+        String visitPath = FileConstants.FileUploadPath.getVisitPath(fileType);
 
         Map<String, Object> result = new HashMap<>();
         result.put("savePath", savePath);

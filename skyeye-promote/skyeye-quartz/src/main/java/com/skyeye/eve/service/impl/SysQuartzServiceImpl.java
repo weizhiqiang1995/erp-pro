@@ -11,8 +11,12 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.SpringUtils;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysQuartzDao;
+import com.skyeye.eve.entity.quartz.SysQuartzMation;
 import com.skyeye.eve.service.SysQuartzService;
 import com.skyeye.jedis.JedisClientService;
+import com.skyeye.quartz.config.QuartzService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
@@ -33,11 +37,16 @@ import java.util.Map;
 @Service
 public class SysQuartzServiceImpl implements SysQuartzService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SysQuartzServiceImpl.class);
+
     @Autowired
     private SysQuartzDao sysQuartzDao;
 
     @Autowired
     private JedisClientService jedisClient;
+
+    @Autowired
+    private QuartzService quartzService;
 
     /**
      * 获取系统定时任务列表
@@ -93,6 +102,21 @@ public class SysQuartzServiceImpl implements SysQuartzService {
             Method method = ReflectionUtils.findMethod(object.getClass(), methodName);
             ReflectionUtils.invokeMethod(method, object);
         }
+    }
+
+    /**
+     * 启动定时任务
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void startUpTaskQuartz(InputObject inputObject, OutputObject outputObject) {
+        SysQuartzMation sysQuartz = inputObject.getParams(SysQuartzMation.class);
+        String userId = inputObject.getLogParams().get("id").toString();
+        LOGGER.info("start quartz, title is {}, userId is {}", sysQuartz.getTitle(), userId);
+        quartzService.startUpTaskQuartz(sysQuartz.getName(), sysQuartz.getTitle(), sysQuartz.getDelayedTime(),
+            userId, sysQuartz.getGroupId());
     }
 
 }
