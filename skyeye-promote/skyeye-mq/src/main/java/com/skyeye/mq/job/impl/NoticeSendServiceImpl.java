@@ -6,12 +6,13 @@ package com.skyeye.mq.job.impl;
 import cn.hutool.json.JSONUtil;
 import com.skyeye.common.constans.MqConstants;
 import com.skyeye.common.util.MailUtil;
-import com.skyeye.mq.job.JobMateService;
 import com.skyeye.service.JobMateMationService;
+import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
+import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -22,8 +23,12 @@ import java.util.Map;
  * @Description: 消息通知
  * @date 2020年8月22日
  */
-@Service("noticeSendService")
-public class NoticeSendServiceImpl implements JobMateService {
+@Component
+@RocketMQMessageListener(
+    topic = "${topic.notice-send-service}",
+    consumerGroup = "${topic.notice-send-service}",
+    selectorExpression = "${spring.profiles.active}")
+public class NoticeSendServiceImpl implements RocketMQListener<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NoticeSendServiceImpl.class);
 
@@ -31,7 +36,7 @@ public class NoticeSendServiceImpl implements JobMateService {
     private JobMateMationService jobMateMationService;
 
     @Override
-    public void call(String data) {
+    public void onMessage(String data) {
         Map<String, Object> map = JSONUtil.toBean(data, null);
         String jobId = map.get("jobMateId").toString();
         try {

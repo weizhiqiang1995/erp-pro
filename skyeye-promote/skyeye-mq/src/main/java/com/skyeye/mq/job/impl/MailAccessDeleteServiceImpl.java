@@ -12,12 +12,14 @@ import com.skyeye.common.util.ShowMail;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.MQUserEmailDao;
 import com.skyeye.eve.service.SystemFoundationSettingsService;
-import com.skyeye.mq.job.JobMateService;
 import com.skyeye.service.JobMateMationService;
+import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
+import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.mail.Folder;
@@ -36,8 +38,12 @@ import java.util.Map;
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-@Service("mailAccessDeleteService")
-public class MailAccessDeleteServiceImpl implements JobMateService {
+@Component
+@RocketMQMessageListener(
+    topic = "${topic.mail-access-delete-service}",
+    consumerGroup = "${topic.mail-access-delete-service}",
+    selectorExpression = "${spring.profiles.active}")
+public class MailAccessDeleteServiceImpl implements RocketMQListener<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MailAccessDeleteServiceImpl.class);
 
@@ -54,7 +60,7 @@ public class MailAccessDeleteServiceImpl implements JobMateService {
     private SystemFoundationSettingsService systemFoundationSettingsService;
 
     @Override
-    public void call(String data) {
+    public void onMessage(String data) {
         Map<String, Object> map = JSONUtil.toBean(data, null);
         String jobId = map.get("jobMateId").toString();
         try {

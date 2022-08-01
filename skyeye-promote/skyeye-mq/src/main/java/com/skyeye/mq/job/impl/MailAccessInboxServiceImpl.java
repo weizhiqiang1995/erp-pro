@@ -11,13 +11,14 @@ import com.skyeye.common.util.ShowMail;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.MQUserEmailDao;
 import com.skyeye.eve.service.SystemFoundationSettingsService;
-import com.skyeye.mq.job.JobMateService;
 import com.skyeye.service.JobMateMationService;
+import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
+import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -34,8 +35,12 @@ import java.util.Map;
  * @Description: 收件箱邮件获取
  * @date 2020年8月22日
  */
-@Service("mailAccessInboxService")
-public class MailAccessInboxServiceImpl implements JobMateService {
+@Component
+@RocketMQMessageListener(
+    topic = "${topic.mail-access-inbox-service}",
+    consumerGroup = "${topic.mail-access-inbox-service}",
+    selectorExpression = "${spring.profiles.active}")
+public class MailAccessInboxServiceImpl implements RocketMQListener<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MailAccessInboxServiceImpl.class);
 
@@ -52,7 +57,7 @@ public class MailAccessInboxServiceImpl implements JobMateService {
     private SystemFoundationSettingsService systemFoundationSettingsService;
 
     @Override
-    public void call(String data) {
+    public void onMessage(String data) {
         Map<String, Object> map = JSONUtil.toBean(data, null);
         String jobId = map.get("jobMateId").toString();
         try {

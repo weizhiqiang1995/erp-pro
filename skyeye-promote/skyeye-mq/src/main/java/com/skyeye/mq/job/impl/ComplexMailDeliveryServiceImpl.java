@@ -10,13 +10,14 @@ import com.skyeye.common.util.MailUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.MQUserEmailDao;
 import com.skyeye.eve.service.SystemFoundationSettingsService;
-import com.skyeye.mq.job.JobMateService;
 import com.skyeye.service.JobMateMationService;
+import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
+import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,8 +32,12 @@ import java.util.Map;
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-@Service("complexMailDeliveryService")
-public class ComplexMailDeliveryServiceImpl implements JobMateService {
+@Component
+@RocketMQMessageListener(
+    topic = "${topic.complex-mail-delivery-service}",
+    consumerGroup = "${topic.complex-mail-delivery-service}",
+    selectorExpression = "${spring.profiles.active}")
+public class ComplexMailDeliveryServiceImpl implements RocketMQListener<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ComplexMailDeliveryServiceImpl.class);
 
@@ -49,7 +54,7 @@ public class ComplexMailDeliveryServiceImpl implements JobMateService {
     private SystemFoundationSettingsService systemFoundationSettingsService;
 
     @Override
-    public void call(String data) {
+    public void onMessage(String data) {
         Map<String, Object> map = JSONUtil.toBean(data, null);
         String jobId = map.get("jobMateId").toString();
         try {

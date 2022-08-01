@@ -6,12 +6,13 @@ package com.skyeye.mq.job.impl;
 import cn.hutool.json.JSONUtil;
 import com.skyeye.common.constans.MqConstants;
 import com.skyeye.common.util.MailUtil;
-import com.skyeye.mq.job.JobMateService;
 import com.skyeye.service.JobMateMationService;
+import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
+import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
@@ -21,17 +22,20 @@ import java.util.Map;
  * @Description: 普通邮件发送任务
  * @date 2020年8月22日
  */
-@Service("ordinaryMailDeliveryService")
-public class OrdinaryMailDeliveryServiceImpl implements JobMateService {
+@Component
+@RocketMQMessageListener(
+    topic = "${topic.ordinary-mail-delivery-service}",
+    consumerGroup = "${topic.ordinary-mail-delivery-service}",
+    selectorExpression = "${spring.profiles.active}")
+public class OrdinaryMailDeliveryServiceImpl implements RocketMQListener<String> {
 
     private static Logger LOGGER = LoggerFactory.getLogger(OrdinaryMailDeliveryServiceImpl.class);
 
     @Autowired
     private JobMateMationService jobMateMationService;
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void call(String data) {
+    public void onMessage(String data) {
         Map<String, Object> map = JSONUtil.toBean(data, null);
         String jobId = map.get("jobMateId").toString();
         try {
