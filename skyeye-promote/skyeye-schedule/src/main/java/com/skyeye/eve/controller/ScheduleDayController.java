@@ -241,4 +241,18 @@ public class ScheduleDayController {
         scheduleDayService.insertScheduleMationByOtherModule(inputObject, outputObject);
     }
 
+    /**
+     * 根据ObjectId删除日程
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "deleteScheduleMationByObjectId", value = "根据ObjectId删除日程", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "objectId", name = "objectId", value = "日程关联ID", required = "required")})
+    @RequestMapping("/post/ScheduleDayController/deleteScheduleMationByObjectId")
+    public void deleteScheduleMationByObjectId(InputObject inputObject, OutputObject outputObject) {
+        scheduleDayService.deleteScheduleMationByObjectId(inputObject, outputObject);
+    }
+
 }

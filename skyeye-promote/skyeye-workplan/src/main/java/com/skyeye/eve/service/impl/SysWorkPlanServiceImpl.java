@@ -16,14 +16,11 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
-import com.skyeye.eve.dao.ScheduleDayDao;
 import com.skyeye.eve.dao.SysWorkPlanDao;
 import com.skyeye.eve.entity.workplan.SysWorkPlanQueryDo;
-import com.skyeye.eve.service.IEnclosureService;
-import com.skyeye.eve.service.ScheduleDayService;
-import com.skyeye.eve.service.SysWorkPlanService;
-import com.skyeye.quartz.config.QuartzService;
-import com.skyeye.service.JobMateMationService;
+import com.skyeye.eve.rest.mq.JobMateMation;
+import com.skyeye.eve.rest.quartz.SysQuartzMation;
+import com.skyeye.eve.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,16 +46,16 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     private SysWorkPlanDao sysWorkPlanDao;
 
     @Autowired
-    private QuartzService quartzService;
+    private IQuartzService iQuartzService;
 
     @Autowired
-    private ScheduleDayDao scheduleDayDao;
+    private IScheduleDayService iScheduleDayService;
 
     @Autowired
     private ScheduleDayService scheduleDayService;
 
     @Autowired
-    private JobMateMationService jobMateMationService;
+    private IJobMateMationService iJobMateMationService;
 
     @Autowired
     private IEnclosureService iEnclosureService;
@@ -68,7 +65,7 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 计划执行状态
      */
-    public static enum PLAN_EXECUTOR_STATE {
+    public enum PLAN_EXECUTOR_STATE {
         START_NEW(1, "待执行"),
         START_SUCCESS(2, "执行完成"),
         START_DELAY(3, "延期"),
@@ -129,21 +126,20 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
 
         //是否通知
         String whetherNotify = "1";
-        //是否定时通知  1.是  2.否
-        //如果为定时通知，则通知时间不能为空
+        //是否定时通知  1.是  2.否，如果为定时通知，则通知时间不能为空
         if ("1".equals(map.get("whetherTime").toString())) {
             //通知时间为空，返回提示信息
             if (ToolUtil.isBlank(map.get("notifyTime").toString())) {
                 outputObject.setreturnMessage("请选择通知时间。");
                 return;
             }
-            if (!DateUtil.compare(DateUtil.getTimeAndToString(), map.get("notifyTime").toString())) {//定时时间小于当前时间
+            if (!DateUtil.compare(DateUtil.getTimeAndToString(), map.get("notifyTime").toString())) {
+                //定时时间小于当前时间
                 outputObject.setreturnMessage("定时发送时间不能小于当前时间");
                 return;
             }
             // 启动定时任务
-            quartzService.startUpTaskQuartz(planId, map.get("title").toString(), map.get("notifyTime").toString(), userId,
-                QuartzConstants.QuartzMateMationJobType.PLAN_QUARTZ_GROUPS.getTaskType());
+            startUpTaskQuartz(planId, map.get("title").toString(), map.get("notifyTime").toString());
         } else {
             // 非定时通知，执行邮件判断，内部通知判断
             sendMessageToStaff(map, userId, executor.get("userId").toString());
@@ -162,6 +158,15 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
         scheduleDayService.synchronizationSchedule(map.get("title").toString(), map.get("content").toString(),
             map.get("startTime").toString(), map.get("endTime").toString(), executor.get("userId").toString(), planId,
             ScheduleDayConstants.ScheduleDayObjectType.OBJECT_TYPE_IS_PLAN);
+    }
+
+    private void startUpTaskQuartz(String name, String title, String delayedTime) {
+        SysQuartzMation sysQuartzMation = new SysQuartzMation();
+        sysQuartzMation.setName(name);
+        sysQuartzMation.setTitle(title);
+        sysQuartzMation.setDelayedTime(delayedTime);
+        sysQuartzMation.setGroupId(QuartzConstants.QuartzMateMationJobType.PLAN_QUARTZ_GROUPS.getTaskType());
+        iQuartzService.startUpTaskQuartz(sysQuartzMation);
     }
 
     /**
@@ -223,8 +228,6 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
         List<Map<String, Object>> userMations = sysWorkPlanDao.queryUserMationByUserIds(carryPeople);
         // 内部消息通知对象
         List<Map<String, Object>> userJson = new ArrayList<>();
-        //uJson内部通知对象
-        Map<String, Object> uJson = null;
         for (Map<String, Object> userMation : userMations) {
             //发送的消息内容
             String content = "尊敬的" + userMation.get("userName").toString() + ",您好：<br/>您收到一条新的工作计划信息《" + map.get("title").toString() + "》，请登录系统查看";
@@ -233,14 +236,15 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
                     sendEmailToStaff(userMation.get("email").toString(), content, userId);
                 }
             }
-            if ("1".equals(whetherNotice)) {//内部通告通知
-                uJson = new HashMap<>();
+            if ("1".equals(whetherNotice)) {
+                // 内部通告通知
+                Map<String, Object> uJson = new HashMap<>();
                 uJson.put("content", content);
                 uJson.put("userId", userMation.get("userId"));
                 userJson.add(uJson);
             }
         }
-        //内部通告通知
+        // 内部通告通知
         if (!userJson.isEmpty()) {
             // 调用消息系统添加通知
             sendInsideNotice(userJson);
@@ -260,7 +264,10 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
         emailNotice.put("content", content);
         emailNotice.put("email", email);
         emailNotice.put("type", MqConstants.JobMateMationJobType.ORDINARY_MAIL_DELIVERY.getJobType());
-        jobMateMationService.sendMQProducer(JSONUtil.toJsonStr(emailNotice), createId);
+        JobMateMation jobMateMation = new JobMateMation();
+        jobMateMation.setUserId(createId);
+        jobMateMation.setJsonStr(JSONUtil.toJsonStr(emailNotice));
+        iJobMateMationService.sendMQProducer(jobMateMation);
     }
 
     /**
@@ -325,8 +332,7 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
                 return;
             }
             // 启动定时任务
-            quartzService.startUpTaskQuartz(planId, map.get("title").toString(), map.get("notifyTime").toString(), userId,
-                QuartzConstants.QuartzMateMationJobType.PLAN_QUARTZ_GROUPS.getTaskType());
+            startUpTaskQuartz(planId, map.get("title").toString(), map.get("notifyTime").toString());
         } else {
             // 非定时通知，执行邮件判断，内部通知判断,通知状态设置为已通知
             whetherNotify = "2";
@@ -405,8 +411,7 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
                 return;
             }
             // 启动定时任务
-            quartzService.startUpTaskQuartz(planId, map.get("title").toString(), map.get("notifyTime").toString(), userId,
-                QuartzConstants.QuartzMateMationJobType.PLAN_QUARTZ_GROUPS.getTaskType());
+            startUpTaskQuartz(planId, map.get("title").toString(), map.get("notifyTime").toString());
         } else {
             // 非定时通知，执行邮件判断，内部通知判断,通知状态设置为已通知
             whetherNotify = "2";
@@ -440,9 +445,9 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
         if (planMation != null) {
             if ("1".equals(planMation.get("whetherTime").toString())) {
                 // 当前计划有定时任务
-                if (DateUtil.compare(DateUtil.getTimeAndToString(), planMation.get("notifyTime").toString())) {//定时时间大于当前时间
-                    // 删除定时任务
-                    quartzService.stopAndDeleteTaskQuartz(map.get("id").toString(), QuartzConstants.QuartzMateMationJobType.PLAN_QUARTZ_GROUPS.getTaskType());
+                if (DateUtil.compare(DateUtil.getTimeAndToString(), planMation.get("notifyTime").toString())) {
+                    // 定时时间比当前时间晚，则删除定时任务
+                    iQuartzService.stopAndDeleteTaskQuartz(map.get("id").toString(), QuartzConstants.QuartzMateMationJobType.PLAN_QUARTZ_GROUPS.getTaskType());
                     // 修改计划数据状态
                     map.put("whetherTime", 2);
                     map.put("notifyTime", null);
@@ -474,11 +479,11 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
         Map<String, Object> planMation = sysWorkPlanDao.queryPlanMationByUserIdAndPlanId(map);
         if (planMation != null) {
             // 删除定时任务
-            quartzService.stopAndDeleteTaskQuartz(planId, QuartzConstants.QuartzMateMationJobType.PLAN_QUARTZ_GROUPS.getTaskType());
+            iQuartzService.stopAndDeleteTaskQuartz(planId, QuartzConstants.QuartzMateMationJobType.PLAN_QUARTZ_GROUPS.getTaskType());
             // 删除计划
             sysWorkPlanDao.deleteSysWorkPlanById(map);
             // 删除日程
-            scheduleDayDao.deleteScheduleDayMationByPlanId(planId);
+            iScheduleDayService.deleteScheduleMationByObjectId(planId);
             // 删除计划相关用户绑定信息
             sysWorkPlanDao.deleteSysWorkPlanUserById(planId);
         } else {
@@ -547,15 +552,14 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
                 outputObject.setreturnMessage("定时发送时间不能小于当前时间");
                 return;
             }
-            //启动定时任务
-            quartzService.startUpTaskQuartz(planId, map.get("title").toString(), map.get("notifyTime").toString(), userId,
-                QuartzConstants.QuartzMateMationJobType.PLAN_QUARTZ_GROUPS.getTaskType());
+            // 启动定时任务
+            startUpTaskQuartz(planId, map.get("title").toString(), map.get("notifyTime").toString());
         } else {
             // 非定时通知，执行邮件判断，内部通知判断
             sendMessageToStaff(map, userId, executor.get("userId").toString());
         }
         // 删除日程
-        scheduleDayDao.deleteScheduleDayMationByPlanId(planId);
+        iScheduleDayService.deleteScheduleMationByObjectId(planId);
         // 删除计划相关用户绑定信息
         sysWorkPlanDao.deleteSysWorkPlanUserById(planId);
         // 修改数据
@@ -608,14 +612,13 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
                 return;
             }
             // 启动定时任务
-            quartzService.startUpTaskQuartz(planId, map.get("title").toString(), map.get("notifyTime").toString(), userId,
-                QuartzConstants.QuartzMateMationJobType.PLAN_QUARTZ_GROUPS.getTaskType());
+            startUpTaskQuartz(planId, map.get("title").toString(), map.get("notifyTime").toString());
         } else {
             // 非定时通知，执行邮件判断，内部通知判断,通知状态设置为已通知
             sendMessageToStaff(map, userId, map.get("carryPeople").toString());
         }
         // 删除日程
-        scheduleDayDao.deleteScheduleDayMationByPlanId(planId);
+        iScheduleDayService.deleteScheduleMationByObjectId(planId);
         // 删除计划相关用户绑定信息
         sysWorkPlanDao.deleteSysWorkPlanUserById(planId);
         // 修改数据
@@ -643,8 +646,7 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
             // 计划id
             String planId = map.get("id").toString();
             // 启动定时任务
-            quartzService.startUpTaskQuartz(planId, planMation.get("title").toString(), map.get("notifyTime").toString(), user.get("id").toString(),
-                QuartzConstants.QuartzMateMationJobType.PLAN_QUARTZ_GROUPS.getTaskType());
+            startUpTaskQuartz(planId, planMation.get("title").toString(), map.get("notifyTime").toString());
             sysWorkPlanDao.editSysWorkPlanTimingSend(map);
         } else {
             outputObject.setreturnMessage("您不具备该权限或者该数据已被删除，请刷新数据~");

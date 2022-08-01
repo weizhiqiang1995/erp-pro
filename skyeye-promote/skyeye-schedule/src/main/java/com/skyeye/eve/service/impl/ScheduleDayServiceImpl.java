@@ -21,10 +21,10 @@ import com.skyeye.eve.entity.checkwork.UserOtherDayMationRest;
 import com.skyeye.eve.entity.schedule.OtherModuleScheduleMation;
 import com.skyeye.eve.entity.schedule.ScheduleDayQueryDo;
 import com.skyeye.eve.rest.checkwork.CheckWorkService;
+import com.skyeye.eve.rest.quartz.SysQuartzMation;
+import com.skyeye.eve.service.IQuartzService;
 import com.skyeye.eve.service.ScheduleDayService;
 import com.skyeye.exception.CustomException;
-import com.skyeye.jedis.JedisClientService;
-import com.skyeye.quartz.config.QuartzService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,10 +54,7 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     private ScheduleDayDao scheduleDayDao;
 
     @Autowired
-    private QuartzService quartzService;
-
-    @Autowired
-    public JedisClientService jedisClient;
+    private IQuartzService iQuartzService;
 
     @Autowired
     private CheckWorkService checkWorkService;
@@ -72,7 +69,6 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertScheduleDayMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
         int remindTimeType = Integer.parseInt(map.get("remindType").toString());
         String scheduleStartTime = map.get("scheduleStartTime").toString();
         String remindTime = DateAfterSpacePointTime.getSpecifiedTime(remindTimeType, scheduleStartTime, DateUtil.YYYY_MM_DD_HH_MM_SS, DateAfterSpacePointTime.AroundType.BEFORE);
@@ -90,14 +86,22 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
                     DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
                     scheduleDayDao.insertScheduleDayMation(map);
                     // 定时任务
-                    quartzService.startUpTaskQuartz(map.get("id").toString(), map.get("scheduleTitle").toString(), remindTime, user.get("id").toString(),
-                        QuartzConstants.QuartzMateMationJobType.MY_SCHEDULEDAY_MATION.getTaskType());
+                    startUpTaskQuartz(map.get("id").toString(), map.get("scheduleTitle").toString(), remindTime);
                     outputObject.setBean(map);
                 }
             }
         } else {
             outputObject.setreturnMessage("参数错误");
         }
+    }
+
+    private void startUpTaskQuartz(String name, String title, String delayedTime) {
+        SysQuartzMation sysQuartzMation = new SysQuartzMation();
+        sysQuartzMation.setName(name);
+        sysQuartzMation.setTitle(title);
+        sysQuartzMation.setDelayedTime(delayedTime);
+        sysQuartzMation.setGroupId(QuartzConstants.QuartzMateMationJobType.MY_SCHEDULEDAY_MATION.getTaskType());
+        iQuartzService.startUpTaskQuartz(sysQuartzMation);
     }
 
     /**
@@ -184,8 +188,7 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
             // 删除缓存中的日程信息
             Map<String, Object> user = inputObject.getLogParams();
             // 修改定时任务
-            quartzService.startUpTaskQuartz(map.get("id").toString(), map.get("scheduleTitle").toString(), remindTime, user.get("id").toString(),
-                QuartzConstants.QuartzMateMationJobType.MY_SCHEDULEDAY_MATION.getTaskType());
+            startUpTaskQuartz(map.get("id").toString(), map.get("scheduleTitle").toString(), remindTime);
         } else {
             outputObject.setreturnMessage("参数错误");
         }
@@ -218,7 +221,7 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
         // 删除日程信息
         scheduleDayDao.deleteScheduleDayMationById(map);
         // 删除定时任务
-        quartzService.stopAndDeleteTaskQuartz(map.get("id").toString(), QuartzConstants.QuartzMateMationJobType.MY_SCHEDULEDAY_MATION.getTaskType());
+        iQuartzService.stopAndDeleteTaskQuartz(map.get("id").toString(), QuartzConstants.QuartzMateMationJobType.MY_SCHEDULEDAY_MATION.getTaskType());
     }
 
     /**
@@ -348,7 +351,7 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
         // 删除节假日信息
         scheduleDayDao.deleteHolidayScheduleById(map);
         // 删除定时任务
-        quartzService.stopAndDeleteTaskQuartz(map.get("id").toString(), QuartzConstants.QuartzMateMationJobType.MY_SCHEDULEDAY_MATION.getTaskType());
+        iQuartzService.stopAndDeleteTaskQuartz(map.get("id").toString(), QuartzConstants.QuartzMateMationJobType.MY_SCHEDULEDAY_MATION.getTaskType());
     }
 
     /**
@@ -361,10 +364,11 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteHolidayScheduleByThisYear(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = scheduleDayDao.queryHolidayScheduleByThisYear(map);//获取本年度节假日
+        // 获取本年度节假日
+        List<Map<String, Object>> beans = scheduleDayDao.queryHolidayScheduleByThisYear(map);
         for (Map<String, Object> bean : beans) {
             // 删除定时任务
-            quartzService.stopAndDeleteTaskQuartz(map.get("id").toString(), QuartzConstants.QuartzMateMationJobType.MY_SCHEDULEDAY_MATION.getTaskType());
+            iQuartzService.stopAndDeleteTaskQuartz(bean.get("id").toString(), QuartzConstants.QuartzMateMationJobType.MY_SCHEDULEDAY_MATION.getTaskType());
         }
         scheduleDayDao.deleteHolidayScheduleByThisYear(map);
     }
@@ -395,13 +399,21 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
                     map.put("remindTime", remindTime);
                     scheduleDayDao.addHolidayScheduleRemind(map);
                     // 定时任务
-                    quartzService.startUpTaskQuartz(map.get("id").toString(), bean.get("scheduleTitle").toString(), remindTime, inputObject.getLogParams().get("id").toString(),
-                        QuartzConstants.QuartzMateMationJobType.ALL_SCHEDULE_MATION.getTaskType());
+                    startAllUpTaskQuartz(map.get("id").toString(), bean.get("scheduleTitle").toString(), remindTime);
                 }
             }
         } else {
             outputObject.setreturnMessage("参数错误");
         }
+    }
+
+    private void startAllUpTaskQuartz(String name, String title, String delayedTime) {
+        SysQuartzMation sysQuartzMation = new SysQuartzMation();
+        sysQuartzMation.setName(name);
+        sysQuartzMation.setTitle(title);
+        sysQuartzMation.setDelayedTime(delayedTime);
+        sysQuartzMation.setGroupId(QuartzConstants.QuartzMateMationJobType.ALL_SCHEDULE_MATION.getTaskType());
+        iQuartzService.startUpTaskQuartz(sysQuartzMation);
     }
 
     /**
@@ -417,7 +429,7 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
         // 修改节假日信息
         scheduleDayDao.deleteHolidayScheduleRemind(map);
         // 删除定时任务
-        quartzService.stopAndDeleteTaskQuartz(map.get("id").toString(), QuartzConstants.QuartzMateMationJobType.ALL_SCHEDULE_MATION.getTaskType());
+        iQuartzService.stopAndDeleteTaskQuartz(map.get("id").toString(), QuartzConstants.QuartzMateMationJobType.ALL_SCHEDULE_MATION.getTaskType());
     }
 
     /**
@@ -547,6 +559,18 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
         DataCommonUtil.setCommonData(map, userId);
         scheduleDayDao.insertScheduleDayMation(map);
         return map.get("id").toString();
+    }
+
+    /**
+     * 根据ObjectId删除日程
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void deleteScheduleMationByObjectId(InputObject inputObject, OutputObject outputObject) {
+        String objectId = inputObject.getParams().get("objectId").toString();
+        scheduleDayDao.deleteScheduleMationByObjectId(objectId);
     }
 
 }

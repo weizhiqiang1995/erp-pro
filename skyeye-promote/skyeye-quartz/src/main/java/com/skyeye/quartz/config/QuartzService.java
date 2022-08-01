@@ -77,7 +77,7 @@ public class QuartzService {
         sysQuartz.setName(name);
         sysQuartz.setGroups(groupId);
         // 删除任务
-        delete(sysQuartz);
+        this.delete(sysQuartz);
         // 删除表数据
         sysQuartzDao.deleteByName(sysQuartz.getName());
     }

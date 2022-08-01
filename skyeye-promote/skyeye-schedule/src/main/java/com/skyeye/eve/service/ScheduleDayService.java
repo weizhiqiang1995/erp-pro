@@ -60,4 +60,6 @@ public interface ScheduleDayService {
      * @param objectType object类型：1.任务计划id，2.项目任务id
      */
    String synchronizationSchedule(String title, String content, String startTime, String endTime, String userId, String objectId, int objectType);
+
+   void deleteScheduleMationByObjectId(InputObject inputObject, OutputObject outputObject);
 }

@@ -249,7 +249,7 @@
 		WHERE a.type = '3'
 	</select>
 
-    <delete id="deleteScheduleDayMationByPlanId">
+    <delete id="deleteScheduleMationByObjectId">
 		DELETE
 		FROM
 			schedule_day

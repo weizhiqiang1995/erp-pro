@@ -20,13 +20,6 @@
 
 	<dependencies>
 		
-		<!-- 引入任务的依赖 -->
-		<dependency>
-			<groupId>com.skyeye</groupId>
-			<artifactId>skyeye-quartz</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		
 		<!-- 引入email的依赖 -->
 		<dependency>
 			<groupId>com.skyeye</groupId>

@@ -11,7 +11,7 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.SpringUtils;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysQuartzDao;
-import com.skyeye.eve.entity.quartz.SysQuartzMation;
+import com.skyeye.eve.rest.quartz.SysQuartzMation;
 import com.skyeye.eve.service.SysQuartzService;
 import com.skyeye.jedis.JedisClientService;
 import com.skyeye.quartz.config.QuartzService;
@@ -117,6 +117,21 @@ public class SysQuartzServiceImpl implements SysQuartzService {
         LOGGER.info("start quartz, title is {}, userId is {}", sysQuartz.getTitle(), userId);
         quartzService.startUpTaskQuartz(sysQuartz.getName(), sysQuartz.getTitle(), sysQuartz.getDelayedTime(),
             userId, sysQuartz.getGroupId());
+    }
+
+    /**
+     * 停止并删除定时任务
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void stopAndDeleteTaskQuartz(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        String name = map.get("name").toString();
+        String groupId = map.get("groupId").toString();
+        LOGGER.info("stop quartz, name is {}, groupId is {}", name, groupId);
+        quartzService.stopAndDeleteTaskQuartz(name, groupId);
     }
 
 }

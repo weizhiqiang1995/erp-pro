@@ -72,7 +72,7 @@ public interface ScheduleDayDao {
      * @param objectId 关联id
      * @return
      */
-    int deleteScheduleDayMationByPlanId(@Param("objectId") String objectId);
+    int deleteScheduleMationByObjectId(@Param("objectId") String objectId);
 
     /**
      * 获取我的日程信息

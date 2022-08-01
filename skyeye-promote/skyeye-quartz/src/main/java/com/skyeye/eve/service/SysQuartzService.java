@@ -24,4 +24,6 @@ public interface SysQuartzService {
     void runSystemQuartz(InputObject inputObject, OutputObject outputObject);
 
     void startUpTaskQuartz(InputObject inputObject, OutputObject outputObject);
+
+    void stopAndDeleteTaskQuartz(InputObject inputObject, OutputObject outputObject);
 }
