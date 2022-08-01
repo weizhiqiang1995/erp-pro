@@ -21,28 +21,6 @@ public interface ScheduleDayService {
 
    void deleteScheduleDayMationById(InputObject inputObject, OutputObject outputObject);
 
-   void queryHolidayScheduleList(InputObject inputObject, OutputObject outputObject);
-
-   void downloadScheduleTemplate(InputObject inputObject, OutputObject outputObject);
-
-   void exploreScheduleTemplate(InputObject inputObject, OutputObject outputObject);
-
-   void deleteHolidayScheduleById(InputObject inputObject, OutputObject outputObject);
-
-   void deleteHolidayScheduleByThisYear(InputObject inputObject, OutputObject outputObject);
-
-   void addHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject);
-
-   void deleteHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject);
-
-   void queryScheduleByIdToEdit(InputObject inputObject, OutputObject outputObject);
-
-   void editScheduleById(InputObject inputObject, OutputObject outputObject);
-
-   void addSchedule(InputObject inputObject, OutputObject outputObject);
-
-   void queryHolidayScheduleListBySys(InputObject inputObject, OutputObject outputObject);
-
    void queryMyScheduleList(InputObject inputObject, OutputObject outputObject);
 
     void insertScheduleMationByOtherModule(InputObject inputObject, OutputObject outputObject);

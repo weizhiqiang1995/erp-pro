@@ -2,15 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.skyeye.eve.dao.ScheduleDayDao">
 	
-	<insert id="insertScheduleDayMation" parameterType="java.util.Map">
-	     INSERT INTO schedule_day
-	     (id, title, remarks, all_day, start_time, end_time, remind_type, remind_time, type, type_name, state, import,
-	      create_id, create_time, is_remind, object_id, object_type)
-	     VALUES
-	     (#{id}, #{scheduleTitle}, #{remarks}, #{allDay}, #{scheduleStartTime}, #{scheduleEndTime}, #{remindType}, #{remindTime}, #{type}, #{typeName}, '0', #{import},
-	      #{createId}, #{createTime}, '1', #{objectId}, #{objectType})
-	</insert>
-	
 	<select id="queryScheduleDayMationByUserId" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 			a.id,

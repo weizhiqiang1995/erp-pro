@@ -10,8 +10,9 @@ import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.eve.entity.schedule.OtherModuleScheduleMation;
 import com.skyeye.eve.entity.schedule.ScheduleDayQueryDo;
+import com.skyeye.eve.rest.schedule.OtherModuleScheduleMation;
+import com.skyeye.eve.rest.schedule.ScheduleMation;
 import com.skyeye.eve.service.ScheduleDayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,8 @@ public class ScheduleDayController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "syseveschedule001", value = "添加日程信息", method = "POST", allUse = "2")
+    @ApiImplicitParams(classBean = ScheduleMation.class)
     @RequestMapping("/post/ScheduleDayController/insertScheduleDayMation")
     public void insertScheduleDayMation(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.insertScheduleDayMation(inputObject, outputObject);
@@ -92,127 +95,6 @@ public class ScheduleDayController {
     @RequestMapping("/post/ScheduleDayController/deleteScheduleDayMationById")
     public void deleteScheduleDayMationById(InputObject inputObject, OutputObject outputObject) {
         scheduleDayService.deleteScheduleDayMationById(inputObject, outputObject);
-    }
-
-    /**
-     * 获取系统发布的请假日程
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/ScheduleDayController/queryHolidayScheduleList")
-    public void queryHolidayScheduleList(InputObject inputObject, OutputObject outputObject) {
-        scheduleDayService.queryHolidayScheduleList(inputObject, outputObject);
-    }
-
-    /**
-     * 下载节假日导入模板
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/ScheduleDayController/downloadScheduleTemplate")
-    public void downloadScheduleTemplate(InputObject inputObject, OutputObject outputObject) {
-        scheduleDayService.downloadScheduleTemplate(inputObject, outputObject);
-    }
-
-    /**
-     * 导入节假日日程
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/ScheduleDayController/exploreScheduleTemplate")
-    public void exploreScheduleTemplate(InputObject inputObject, OutputObject outputObject) {
-        scheduleDayService.exploreScheduleTemplate(inputObject, outputObject);
-    }
-
-    /**
-     * 删除节假日日程
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/ScheduleDayController/deleteHolidayScheduleById")
-    public void deleteHolidayScheduleById(InputObject inputObject, OutputObject outputObject) {
-        scheduleDayService.deleteHolidayScheduleById(inputObject, outputObject);
-    }
-
-    /**
-     * 删除本年度节假日日程
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/ScheduleDayController/deleteHolidayScheduleByThisYear")
-    public void deleteHolidayScheduleByThisYear(InputObject inputObject, OutputObject outputObject) {
-        scheduleDayService.deleteHolidayScheduleByThisYear(inputObject, outputObject);
-    }
-
-    /**
-     * 添加节假日日程提醒
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/ScheduleDayController/addHolidayScheduleRemind")
-    public void addHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject) {
-        scheduleDayService.addHolidayScheduleRemind(inputObject, outputObject);
-    }
-
-    /**
-     * 取消节假日日程提醒
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/ScheduleDayController/deleteHolidayScheduleRemind")
-    public void deleteHolidayScheduleRemind(InputObject inputObject, OutputObject outputObject) {
-        scheduleDayService.deleteHolidayScheduleRemind(inputObject, outputObject);
-    }
-
-    /**
-     * 回显节假日信息以编辑
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/ScheduleDayController/queryScheduleByIdToEdit")
-    public void queryScheduleByIdToEdit(InputObject inputObject, OutputObject outputObject) {
-        scheduleDayService.queryScheduleByIdToEdit(inputObject, outputObject);
-    }
-
-    /**
-     * 编辑节假日
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/ScheduleDayController/editScheduleById")
-    public void editScheduleById(InputObject inputObject, OutputObject outputObject) {
-        scheduleDayService.editScheduleById(inputObject, outputObject);
-    }
-
-    /**
-     * 新增节假日
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/ScheduleDayController/addSchedule")
-    public void addSchedule(InputObject inputObject, OutputObject outputObject) {
-        scheduleDayService.addSchedule(inputObject, outputObject);
-    }
-
-    /**
-     * 获取所有节假日
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/ScheduleDayController/queryHolidayScheduleListBySys")
-    public void queryHolidayScheduleListBySys(InputObject inputObject, OutputObject outputObject) {
-        scheduleDayService.queryHolidayScheduleListBySys(inputObject, outputObject);
     }
 
     /**
