@@ -5,7 +5,7 @@
 package com.skyeye.eve.dao;
 
 import com.skyeye.eve.entity.schedule.ScheduleDayQueryDo;
-import com.skyeye.eve.rest.schedule.ScheduleMation;
+import com.skyeye.eve.entity.schedule.ScheduleMation;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

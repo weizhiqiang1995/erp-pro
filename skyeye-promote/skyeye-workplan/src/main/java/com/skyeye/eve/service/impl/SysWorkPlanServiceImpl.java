@@ -20,6 +20,7 @@ import com.skyeye.eve.dao.SysWorkPlanDao;
 import com.skyeye.eve.entity.workplan.SysWorkPlanQueryDo;
 import com.skyeye.eve.rest.mq.JobMateMation;
 import com.skyeye.eve.rest.quartz.SysQuartzMation;
+import com.skyeye.eve.rest.schedule.OtherModuleScheduleMation;
 import com.skyeye.eve.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,9 +51,6 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
 
     @Autowired
     private IScheduleDayService iScheduleDayService;
-
-    @Autowired
-    private ScheduleDayService scheduleDayService;
 
     @Autowired
     private IJobMateMationService iJobMateMationService;
@@ -155,9 +153,30 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
         sysWorkPlanDao.insertSysWorkPlanExecutorISPeople(executor);
 
         // 同步到日程
-        scheduleDayService.synchronizationSchedule(map.get("title").toString(), map.get("content").toString(),
-            map.get("startTime").toString(), map.get("endTime").toString(), executor.get("userId").toString(), planId,
-            ScheduleDayConstants.ScheduleDayObjectType.OBJECT_TYPE_IS_PLAN);
+        insertScheduleMationByOtherModule(map.get("title").toString(), map.get("content").toString(),
+            map.get("startTime").toString(), map.get("endTime").toString(), executor.get("userId").toString(), planId);
+    }
+
+    /**
+     * 工作计划同步到日程
+     *
+     * @param title     标题
+     * @param content   日程内容
+     * @param startTime 开始时间,格式为：yyyy-MM-dd HH:mm:ss
+     * @param endTime   结束时间,格式为：yyyy-MM-dd HH:mm:ss
+     * @param userId    执行人
+     * @param objectId  关联id
+     */
+    private void insertScheduleMationByOtherModule(String title, String content, String startTime, String endTime, String userId, String objectId) {
+        OtherModuleScheduleMation scheduleMation = new OtherModuleScheduleMation();
+        scheduleMation.setTitle(title);
+        scheduleMation.setContent(content);
+        scheduleMation.setStartTime(startTime);
+        scheduleMation.setEndTime(endTime);
+        scheduleMation.setUserId(userId);
+        scheduleMation.setObjectId(objectId);
+        scheduleMation.setObjectType(ScheduleDayConstants.ScheduleDayObjectType.OBJECT_TYPE_IS_PLAN);
+        iScheduleDayService.insertScheduleMationByOtherModule(scheduleMation);
     }
 
     private void startUpTaskQuartz(String name, String title, String delayedTime) {
@@ -364,9 +383,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
             executors.forEach(bean -> {
                 // 同步到日程
                 try {
-                    scheduleDayService.synchronizationSchedule(map.get("title").toString(), map.get("content").toString(),
-                        map.get("startTime").toString(), map.get("endTime").toString(), bean.get("userId").toString(), planId,
-                        ScheduleDayConstants.ScheduleDayObjectType.OBJECT_TYPE_IS_PLAN);
+                    insertScheduleMationByOtherModule(map.get("title").toString(), map.get("content").toString(),
+                        map.get("startTime").toString(), map.get("endTime").toString(), bean.get("userId").toString(), planId);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -567,9 +585,8 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
         // 重新插入计划接收人
         sysWorkPlanDao.insertSysWorkPlanExecutorISPeople(executor);
         // 同步到日程
-        scheduleDayService.synchronizationSchedule(map.get("title").toString(), map.get("content").toString(),
-            mation.get("startTime").toString(), mation.get("endTime").toString(), executor.get("userId").toString(), planId,
-            ScheduleDayConstants.ScheduleDayObjectType.OBJECT_TYPE_IS_PLAN);
+        insertScheduleMationByOtherModule(map.get("title").toString(), map.get("content").toString(),
+            mation.get("startTime").toString(), mation.get("endTime").toString(), executor.get("userId").toString(), planId);
     }
 
     /**

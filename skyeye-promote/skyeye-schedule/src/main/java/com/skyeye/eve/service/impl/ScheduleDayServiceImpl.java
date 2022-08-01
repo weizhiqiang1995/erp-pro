@@ -4,23 +4,24 @@
 
 package com.skyeye.eve.service.impl;
 
-import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.client.ExecuteFeignClient;
 import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.*;
+import com.skyeye.common.util.DataCommonUtil;
+import com.skyeye.common.util.DateAfterSpacePointTime;
+import com.skyeye.common.util.DateUtil;
+import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.ScheduleDayDao;
 import com.skyeye.eve.entity.checkwork.DayWorkMationRest;
 import com.skyeye.eve.entity.checkwork.UserOtherDayMationRest;
 import com.skyeye.eve.entity.schedule.ScheduleDayQueryDo;
+import com.skyeye.eve.entity.schedule.ScheduleMation;
 import com.skyeye.eve.rest.checkwork.CheckWorkService;
 import com.skyeye.eve.rest.quartz.SysQuartzMation;
 import com.skyeye.eve.rest.schedule.OtherModuleScheduleMation;
-import com.skyeye.eve.rest.schedule.ScheduleMation;
 import com.skyeye.eve.service.IQuartzService;
 import com.skyeye.eve.service.ScheduleDayService;
 import org.slf4j.Logger;
@@ -29,7 +30,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: ScheduleDayServiceImpl
@@ -242,33 +244,13 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
      */
     @Override
     public void insertScheduleMationByOtherModule(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        OtherModuleScheduleMation scheduleMation = JSONUtil.toBean(JSON.toJSONString(map),
-            OtherModuleScheduleMation.class);
-        this.synchronizationSchedule(scheduleMation.getTitle(), scheduleMation.getContent(), scheduleMation.getStartTime(),
-            scheduleMation.getEndTime(), scheduleMation.getUserId(), scheduleMation.getObjectId(), scheduleMation.getObjectType());
-    }
-
-    /**
-     * 将其他模块同步到日程
-     * 不启动日程定时任务，如需启动，在该接口外面自行启动
-     *
-     * @param title      标题
-     * @param content    日程内容
-     * @param startTime  开始时间,格式为：yyyy-MM-dd HH:mm:ss
-     * @param endTime    结束时间,格式为：yyyy-MM-dd HH:mm:ss
-     * @param userId     执行人
-     * @param objectId   关联id
-     * @param objectType object类型：1.任务计划id，2.项目任务id
-     */
-    @Override
-    public String synchronizationSchedule(String title, String content, String startTime, String endTime, String userId, String objectId, int objectType) {
+        OtherModuleScheduleMation scheduleMationParams = inputObject.getParams(OtherModuleScheduleMation.class);
         ScheduleMation scheduleMation = new ScheduleMation();
-        scheduleMation.setScheduleTitle(title);
-        int length = content.length();
-        scheduleMation.setRemarks(length > 1000 ? content.substring(0, 1000) : content);
-        scheduleMation.setScheduleStartTime(startTime);
-        scheduleMation.setScheduleEndTime(endTime);
+        scheduleMation.setScheduleTitle(scheduleMationParams.getTitle());
+        int length = scheduleMationParams.getContent().length();
+        scheduleMation.setRemarks(length > 1000 ? scheduleMationParams.getContent().substring(0, 1000) : scheduleMationParams.getContent());
+        scheduleMation.setScheduleStartTime(scheduleMationParams.getStartTime());
+        scheduleMation.setScheduleEndTime(scheduleMationParams.getEndTime());
         scheduleMation.setIsRemind(0);
         // 是否全天 0否 1是
         scheduleMation.setAllDay(1);
@@ -278,11 +260,10 @@ public class ScheduleDayServiceImpl implements ScheduleDayService {
         // 提醒时间所属类型  0.无需提醒
         scheduleMation.setRemindType(0);
         scheduleMation.setImported(1);
-        scheduleMation.setObjectId(objectId);
+        scheduleMation.setObjectId(scheduleMationParams.getObjectId());
         scheduleMation.setObjectType(2);
-        DataCommonUtil.setCommonDataByGenericity(scheduleMation, userId);
+        DataCommonUtil.setCommonDataByGenericity(scheduleMation, scheduleMationParams.getUserId());
         scheduleDayDao.insert(scheduleMation);
-        return scheduleMation.getId();
     }
 
     /**
