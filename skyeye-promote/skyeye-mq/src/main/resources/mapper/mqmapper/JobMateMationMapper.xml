@@ -63,7 +63,7 @@
 			a.type,
 			a.request_body requestBody,
 			a.response_body responseBody,
-			a.parent_id parentId
+			a.parent_id parentId,
 			a.`status`
 		FROM
 			job_mate_mation a
@@ -80,7 +80,7 @@
 			a.type,
 			a.request_body requestBody,
 			a.response_body responseBody,
-			a.parent_id parentId
+			a.parent_id parentId,
 			a.`status`
 		FROM
 			job_mate_mation a

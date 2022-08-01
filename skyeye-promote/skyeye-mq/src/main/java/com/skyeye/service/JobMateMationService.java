@@ -13,6 +13,8 @@ public interface JobMateMationService {
 
     void sendMQProducer(String jsonStr, String userId);
 
+    void comMQJobMation(InputObject inputObject, OutputObject outputObject);
+
     void comMQJobMation(String jobId, String status, String responseBody);
 
     void sendMQProducer(InputObject inputObject, OutputObject outputObject);

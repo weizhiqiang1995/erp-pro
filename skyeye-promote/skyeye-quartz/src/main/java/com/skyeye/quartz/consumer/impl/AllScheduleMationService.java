@@ -7,7 +7,6 @@ package com.skyeye.quartz.consumer.impl;
 import cn.hutool.json.JSONUtil;
 import com.skyeye.common.constans.MqConstants;
 import com.skyeye.common.util.DataCommonUtil;
-import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysQuartzDao;
 import com.skyeye.quartz.consumer.TaskMateService;

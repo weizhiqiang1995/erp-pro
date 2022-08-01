@@ -11,6 +11,8 @@ import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.entity.mq.JobMateQueryDO;
+import com.skyeye.eve.rest.mq.JobMateMation;
+import com.skyeye.eve.rest.mq.JobMateUpdateMation;
 import com.skyeye.service.JobMateMationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,13 +45,23 @@ public class JobMateMationController {
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "sendMQProducer", value = "其他模块同步生产消息", method = "POST", allUse = "2")
-    @ApiImplicitParams({
-        @ApiImplicitParam(id = "jsonStr", name = "jsonStr", value = "消费者消费的json字符串", required = "required"),
-        @ApiImplicitParam(id = "userId", name = "userId", value = "用户id", required = "required")})
+    @ApiImplicitParams(classBean = JobMateMation.class)
     @RequestMapping("/post/JobMateMationController/sendMQProducer")
     public void sendMQProducer(InputObject inputObject, OutputObject outputObject) {
         jobMateMationService.sendMQProducer(inputObject, outputObject);
     }
 
+    /**
+     * 修改任务信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "comMQJobMation", value = "修改任务信息", method = "POST", allUse = "0")
+    @ApiImplicitParams(classBean = JobMateUpdateMation.class)
+    @RequestMapping("/post/JobMateMationController/comMQJobMation")
+    public void comMQJobMation(InputObject inputObject, OutputObject outputObject) {
+        jobMateMationService.comMQJobMation(inputObject, outputObject);
+    }
 
 }

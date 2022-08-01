@@ -14,18 +14,21 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.dao.JobMateMationDao;
 import com.skyeye.eve.entity.mq.JobMateQueryDO;
+import com.skyeye.eve.rest.mq.JobMateMation;
+import com.skyeye.eve.rest.mq.JobMateUpdateMation;
 import com.skyeye.exception.CustomException;
 import com.skyeye.service.JobMateMationService;
 import com.skyeye.websocket.TalkWebSocket;
+import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.core.JmsMessagingTemplate;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.jms.Queue;
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
@@ -49,13 +52,13 @@ public class JobMateMationServiceImpl implements JobMateMationService {
     private JobMateMationDao jobMateMationDao;
 
     @Autowired
-    private JmsMessagingTemplate jmsMessagingTemplate;
+    private RocketMQTemplate rocketMQTemplate;
 
     @Autowired
     private TalkWebSocket talkWebSocket;
 
-    @Autowired
-    private Queue queue;
+    @Value("${spring.profiles.active}")
+    private String tag;
 
     /**
      * 根据大类获取任务信息
@@ -82,10 +85,8 @@ public class JobMateMationServiceImpl implements JobMateMationService {
      */
     @Override
     public void sendMQProducer(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String jsonStr = map.get("jsonStr").toString();
-        String userId = map.get("userId").toString();
-        this.sendMQProducer(jsonStr, userId);
+        JobMateMation jobMateMation = inputObject.getParams(JobMateMation.class);
+        this.sendMQProducer(jobMateMation.getJsonStr(), jobMateMation.getUserId());
     }
 
     /**
@@ -109,8 +110,13 @@ public class JobMateMationServiceImpl implements JobMateMationService {
         map.put("jobMateId", parentJob.get("jobId"));
         parentJob.put("requestBody", JSONUtil.toJsonStr(map));
         jobMateMationDao.editJobRequestBodyMation(parentJob);
+        String jobType = parentJob.get("jobType").toString();
         // 发起消息
-        jmsMessagingTemplate.convertAndSend(queue, parentJob.get("requestBody").toString());
+        String topic = MqConstants.JobMateMationJobType.getTopicByJobType(jobType);
+        // 同步发送
+        SendResult sendResult = rocketMQTemplate.syncSend(topic + ":" + tag,
+            MessageBuilder.withPayload(parentJob.get("requestBody").toString()).build());
+        LOGGER.info("mq send topic is [{}], send result: [{}]", topic, sendResult);
     }
 
     /**
@@ -139,6 +145,19 @@ public class JobMateMationServiceImpl implements JobMateMationService {
         job.put("createIp", address.getHostAddress());
         job.put("createTime", DateUtil.getTimeAndToString());
         return job;
+    }
+
+    /**
+     * 修改任务信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void comMQJobMation(InputObject inputObject, OutputObject outputObject) {
+        JobMateUpdateMation jobMateUpdateMation = inputObject.getParams(JobMateUpdateMation.class);
+        LOGGER.info("update job [{}], status is {}", jobMateUpdateMation.getJobId(), jobMateUpdateMation.getStatus());
+        this.comMQJobMation(jobMateUpdateMation.getJobId(), jobMateUpdateMation.getStatus(), jobMateUpdateMation.getResponseBody());
     }
 
     /**

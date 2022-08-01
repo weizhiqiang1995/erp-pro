@@ -99,13 +99,6 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		
-		<!-- 引入笔记模块的依赖 -->
-		<dependency>
-			<groupId>com.skyeye</groupId>
-			<artifactId>skyeye-note</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		
 		<!-- 引入开发文档和代码生成器模块的依赖 -->
 		<dependency>
 			<groupId>com.skyeye</groupId>

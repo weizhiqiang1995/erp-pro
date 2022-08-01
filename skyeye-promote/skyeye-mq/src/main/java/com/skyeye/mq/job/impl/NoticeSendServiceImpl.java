@@ -4,8 +4,8 @@
 package com.skyeye.mq.job.impl;
 
 import cn.hutool.json.JSONUtil;
-import com.skyeye.common.util.MailUtil;
 import com.skyeye.common.constans.MqConstants;
+import com.skyeye.common.util.MailUtil;
 import com.skyeye.mq.job.JobMateService;
 import com.skyeye.service.JobMateMationService;
 import org.slf4j.Logger;
