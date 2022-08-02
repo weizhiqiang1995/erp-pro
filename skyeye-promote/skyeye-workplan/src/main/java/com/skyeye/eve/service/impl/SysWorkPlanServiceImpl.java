@@ -63,7 +63,7 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
     /**
      * 计划执行状态
      */
-    public enum PLAN_EXECUTOR_STATE {
+    public enum ExecutorState {
         START_NEW(1, "待执行"),
         START_SUCCESS(2, "执行完成"),
         START_DELAY(3, "延期"),
@@ -71,7 +71,7 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
         private int state;
         private String name;
 
-        PLAN_EXECUTOR_STATE(int state, String name) {
+        ExecutorState(int state, String name) {
             this.state = state;
             this.name = name;
         }
@@ -210,7 +210,7 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
             executor.put("userId", userId);
         }
         executor.put("planId", planId);
-        executor.put("state", PLAN_EXECUTOR_STATE.START_NEW.getState());
+        executor.put("state", ExecutorState.START_NEW.getState());
         executor.put("id", ToolUtil.getSurFaceId());
         return executor;
     }
@@ -229,7 +229,7 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
                 Map<String, Object> executor = new HashMap<>();
                 executor.put("userId", str);
                 executor.put("planId", planId);
-                executor.put("state", PLAN_EXECUTOR_STATE.START_NEW.getState());
+                executor.put("state", ExecutorState.START_NEW.getState());
                 executor.put("id", ToolUtil.getSurFaceId());
                 executors.add(executor);
             }
@@ -724,7 +724,7 @@ public class SysWorkPlanServiceImpl implements SysWorkPlanService {
         String userId = inputObject.getLogParams().get("id").toString();
         Map<String, Object> executorMation = sysWorkPlanDao.queryMySysWorkPlanMationByUserId(map.get("id").toString(), userId);
         int nowState = Integer.parseInt(executorMation.get("state").toString());
-        if (PLAN_EXECUTOR_STATE.START_NEW.getState() == nowState) {
+        if (ExecutorState.START_NEW.getState() == nowState) {
             // 待执行
             map.put("userId", userId);
             sysWorkPlanDao.subEditWorkPlanStateById(map);

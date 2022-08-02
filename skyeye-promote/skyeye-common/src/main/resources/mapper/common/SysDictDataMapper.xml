@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyeye.eve.dao.SysDictDataDao">
+
+    <select id="queryDictDataList" resultType="com.skyeye.eve.entity.dict.SysDictDataMation">
+        SELECT
+            s.id,
+            s.dict_name dictName,
+            s.dict_type_id dictTypeId,
+            a.dict_name dictTypeName,
+            s.dict_sort dictSort,
+            s.is_default isDefault,
+            s.status,
+            s.remark,
+            CONCAT_WS('_', b.job_number, b.user_name) createName,
+            CONVERT(s.create_time, char) createTime,
+            CONCAT_WS('_', c.job_number, c.user_name) lastUpdateName,
+            CONVERT(s.last_update_time, char) lastUpdateTime
+        FROM
+            sys_dict_data s
+            LEFT JOIN sys_dict_type a ON s.dict_type_id = a.id
+            LEFT JOIN sys_eve_user_staff b ON s.create_id = b.user_id
+            LEFT JOIN sys_eve_user_staff c ON s.last_update_id = c.user_id
+        WHERE 1=1
+        <if test="dictName != '' and dictName != null">
+            AND s.dict_name LIKE '%${dictName}%'
+        </if>
+        <if test="dictTypeId != '' and dictTypeId != null">
+            AND s.dict_type_id = #{dictTypeId}
+        </if>
+        ORDER BY s.create_time DESC
+    </select>
+
+    <select id="queryDictDataListByDictTypeCode" resultType="com.skyeye.eve.entity.dict.SysDictDataMation">
+        SELECT
+            s.id,
+            s.dict_name dictName,
+            s.dict_sort dictSort,
+            s.is_default isDefault
+        FROM
+            sys_dict_data s,
+            sys_dict_type a
+        WHERE s.dict_type_id = a.id
+        AND a.dict_code = #{dictTypeCpde}
+        AND s.status = 0
+        AND a.status = 0
+        ORDER BY s.dict_sort ASC
+    </select>
+
+</mapper>
