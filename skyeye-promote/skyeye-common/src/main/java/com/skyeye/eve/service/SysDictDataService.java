@@ -29,12 +29,4 @@ public interface SysDictDataService {
 
     void queryDictDataListByDictTypeCode(InputObject inputObject, OutputObject outputObject);
 
-    /**
-     * 根据字典ID获取缓存在redis中的key
-     *
-     * @param id 字典ID
-     * @return 缓存在redis中的key
-     */
-    String queryDictDataCacheKeyById(String id);
-
 }

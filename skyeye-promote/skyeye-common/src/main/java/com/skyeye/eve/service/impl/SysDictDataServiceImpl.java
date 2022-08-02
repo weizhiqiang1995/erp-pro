@@ -21,6 +21,7 @@ import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.SysDictDataDao;
 import com.skyeye.eve.entity.dict.SysDictDataMation;
 import com.skyeye.eve.entity.dict.SysDictDataQueryDO;
+import com.skyeye.eve.service.ISysDictDataService;
 import com.skyeye.eve.service.SysDictDataService;
 import com.skyeye.jedis.JedisClientService;
 import org.apache.commons.lang3.StringUtils;
@@ -31,7 +32,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -52,6 +56,9 @@ public class SysDictDataServiceImpl implements SysDictDataService {
 
     @Autowired
     private JedisClientService jedisClientService;
+
+    @Autowired
+    private ISysDictDataService iSysDictDataService;
 
     /**
      * 获取数据字典列表
@@ -162,7 +169,7 @@ public class SysDictDataServiceImpl implements SysDictDataService {
         LOGGER.info("delete dictData data, id is {}", id);
         sysDictDataDao.deleteById(id);
         // 删除字典缓存
-        String cacheKey = this.queryDictDataCacheKeyById(id);
+        String cacheKey = iSysDictDataService.queryDictDataCacheKeyById(id);
         jedisClientService.del(cacheKey);
     }
 
@@ -186,14 +193,4 @@ public class SysDictDataServiceImpl implements SysDictDataService {
         outputObject.settotal(result.size());
     }
 
-    /**
-     * 根据字典ID获取缓存在redis中的key
-     *
-     * @param id 字典ID
-     * @return 缓存在redis中的key
-     */
-    @Override
-    public String queryDictDataCacheKeyById(String id) {
-        return String.format(Locale.ROOT, "sysDictDataDetails:%s", id);
-    }
 }
