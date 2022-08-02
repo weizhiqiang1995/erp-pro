@@ -116,7 +116,7 @@ public class ScheduleDayController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "insertScheduleMationByOtherModule", value = "其他模块同步到日程", method = "POST", allUse = "2")
+    @ApiOperation(id = "insertScheduleMationByOtherModule", value = "其他模块同步到日程", method = "POST", allUse = "0")
     @ApiImplicitParams(classBean = OtherModuleScheduleMation.class)
     @RequestMapping("/post/ScheduleDayController/insertScheduleMationByOtherModule")
     public void insertScheduleMationByOtherModule(InputObject inputObject, OutputObject outputObject) {

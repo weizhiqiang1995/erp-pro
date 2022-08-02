@@ -5,6 +5,7 @@
 package com.skyeye.eve.controller;
 
 import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
@@ -31,6 +32,36 @@ public class SearchConfigController {
     private SearchConfigService searchConfigService;
 
     /**
+     * 根据urlId以及appId获取高级查询的参数配置信息----用于前台使用
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "querySearchParamsConfigToHtml", value = "根据urlId以及appId获取高级查询的参数配置信息----用于前台使用", method = "POST", allUse = "0")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "urlId", name = "urlId", value = "接口的urlId", required = "required"),
+        @ApiImplicitParam(id = "appId", name = "appId", value = "微服务的APPID", required = "required")})
+    @RequestMapping("/post/SearchConfigController/querySearchParamsConfigToHtml")
+    public void querySearchParamsConfigToHtml(InputObject inputObject, OutputObject outputObject) {
+        searchConfigService.querySearchParamsConfigToHtml(inputObject, outputObject);
+    }
+
+    /**
+     * 根据urlId以及appId获取高级查询的参数配置信息----用于后台使用
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "querySearchParamsConfig", value = "根据urlId以及appId获取高级查询的参数配置信息----用于后台使用", method = "POST", allUse = "0")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "urlId", name = "urlId", value = "接口的urlId", required = "required"),
+        @ApiImplicitParam(id = "appId", name = "appId", value = "微服务的APPID", required = "required")})
+    @RequestMapping("/post/SearchConfigController/querySearchParamsConfig")
+    public void querySearchParamsConfig(InputObject inputObject, OutputObject outputObject) {
+        searchConfigService.querySearchParamsConfig(inputObject, outputObject);
+    }
+
+    /**
      * 新增/编辑高级查询配置
      *
      * @param inputObject  入参以及用户信息等获取对象
@@ -42,6 +73,5 @@ public class SearchConfigController {
     public void writeSearchConfigMation(InputObject inputObject, OutputObject outputObject) {
         searchConfigService.writeSearchConfigMation(inputObject, outputObject);
     }
-
 
 }
