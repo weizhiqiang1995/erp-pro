@@ -34,7 +34,6 @@
 		<module>skyeye-mail</module>
 		<module>skyeye-schedule</module>
 		<module>skyeye-planpro</module>
-		<module>skyeye-workplan</module>
 		<module>skyeye-user-phone</module>
 		<module>skyeye-gateway</module>
     	<module>skyeye-ehr</module>

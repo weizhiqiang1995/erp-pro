@@ -57,13 +57,6 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		
-		<!-- 引入工作计划模块的依赖 -->
-		<dependency>
-			<groupId>com.skyeye</groupId>
-			<artifactId>skyeye-workplan</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		
 		<!-- 引入日程模块的依赖 -->
 		<dependency>
 			<groupId>com.skyeye</groupId>
