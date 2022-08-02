@@ -22,7 +22,6 @@
 		<module>skyeye-solr</module>
 		<module>skyeye-userauth</module>
 		<module>skyeye-threed</module>
-		<module>skyeye-rmprogram</module>
 		<module>skyeye-message</module>
 		<module>skyeye-knowlg</module>
 		<module>skyeye-forum</module>
