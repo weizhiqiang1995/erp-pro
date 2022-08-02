@@ -100,6 +100,9 @@ public class SysDictDataServiceImpl implements SysDictDataService {
                 LOGGER.info("update dictData data, id is {}", sysDictDataMation.getId());
                 DataCommonUtil.setCommonLastUpdateDataByGenericity(sysDictDataMation, userId);
                 sysDictDataDao.updateById(sysDictDataMation);
+                // 删除字典缓存
+                String cacheKey = iSysDictDataService.queryDictDataCacheKeyById(sysDictDataMation.getId());
+                jedisClientService.del(cacheKey);
             } else {
                 DataCommonUtil.setCommonDataByGenericity(sysDictDataMation, userId);
                 LOGGER.info("insert dictData data, id is {}", sysDictDataMation.getId());
