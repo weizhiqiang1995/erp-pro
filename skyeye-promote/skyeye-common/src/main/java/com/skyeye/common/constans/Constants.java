@@ -4,9 +4,10 @@
 
 package com.skyeye.common.constans;
 
-import cn.hutool.core.util.ArrayUtil;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: Constants
@@ -119,13 +120,6 @@ public class Constants {
         return SYS_TALK_GROUP_USER_LIST_MATION + id;
     }
 
-    // 获取已经上线的图片类型列表的redis的key
-    public static final String SYS_EVE_PIC_TYPE_UP_STATE_LIST = "sys_eve_pic_type_up_state_list";
-
-    public static String sysEvePicTypeUpStateList() {
-        return SYS_EVE_PIC_TYPE_UP_STATE_LIST;
-    }
-
     // 获取已经上线的轻应用类型的redis的key
     public static final String CHECK_APP_LIGHTAPPTYPE_UP_LIST = "check_app_lightapptype_up_list";
 
@@ -165,20 +159,6 @@ public class Constants {
 
     public static String checkSysEveTalkGroupUserListByGroupId(String groupId) {
         return SYS_EVE_TALK_GROUP_USER_LIST + groupId;
-    }
-
-    // 我的个人通讯录类型列表
-    public static final String PERSON_MAIL_TYPE_LIST = "person_mail_type_list_";
-
-    public static String getPersonMailTypeListByUserId(String userId) {
-        return PERSON_MAIL_TYPE_LIST + userId;
-    }
-
-    // 获取已经上线的论坛举报类型的redis的key
-    public static final String FORUM_REPORT_TYPE_UP_LIST = "forum_report_type_up_list";
-
-    public static String forumReportTypeUpList() {
-        return FORUM_REPORT_TYPE_UP_LIST;
     }
 
     /**
