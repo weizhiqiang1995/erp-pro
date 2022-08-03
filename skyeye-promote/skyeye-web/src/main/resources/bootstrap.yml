@@ -37,22 +37,6 @@ webroot:
 topic:
   # 邮件通知的topic
   ordinary-mail-delivery-service: ORDINARY_MAIL_DELIVERY_SERVICE
-  # 收件箱邮件获取的topic
-  mail-access-inbox-service: MAIL_ACCESS_INBOX_SERVICE
-  # 已发送邮件获取的TOPIC
-  mail-access-sended-service: MAIL_ACCESS_SENDED_SERVICE
-  # 已删除邮件获取的topic
-  mail-access-delete-service: MAIL_ACCESS_DELETE_SERVICE
-  # 草稿箱邮件获取的topic
-  mail-access-drafts-service: MAIL_ACCESS_DRAFTS_SERVICE
-  # 邮件发送的topic
-  complex-mail-delivery-service: COMPLEX_MAIL_DELIVERY_SERVICE
-  # 保存草稿同步的topic
-  mail-drafts-save-service: MAIL_DRAFTS_SAVE_SERVICE
-  # 草稿编辑同步的topic
-  mail-drafts-edit-service: MAIL_DRAFTS_EDIT_SERVICE
-  # 草稿箱邮件发送的topic
-  mail-drafts-send-service: MAIL_DRAFTS_SEND_SERVICE
   # 消息通知的topic
   notice-send-service: NOTICE_SEND_SERVICE
   # 派工通知的topic

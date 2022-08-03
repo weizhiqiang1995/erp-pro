@@ -11,22 +11,6 @@ import java.util.Map;
 
 public interface MQUserEmailDao {
 
-    List<Map<String, Object>> queryEmailListByEmailAddress(Map<String, Object> map);
-
-    int insertEmailListToServer(List<Map<String, Object>> enclosureBeans);
-
-    int insertEmailEnclosureListToServer(List<Map<String, Object>> beans);
-
-    List<Map<String, Object>> queryEmailListByEmailFromAddress(Map<String, Object> map);
-
-    List<Map<String, Object>> queryDeleteEmailListByEmailFromAddress(Map<String, Object> map);
-
-    List<Map<String, Object>> queryDraftsEmailListByEmailFromAddress(Map<String, Object> map);
-
-    Map<String, Object> queryEmailMessageIdByEmailId(Map<String, Object> map);
-
-    int editEmailMessageIdByEmailId(Map<String, Object> emailEditMessageId);
-
     Map<String, Object> queryServiceMationBySericeId(@Param("serviceId") String serviceId);
 
     List<Map<String, Object>> queryCooperationUserNameById(@Param("serviceId") String serviceId);

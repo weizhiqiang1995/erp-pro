@@ -27,7 +27,6 @@
 		<module>skyeye-light-app</module>
 		<module>skyeye-code-doc</module>
 		<module>skyeye-jobdiary</module>
-		<module>skyeye-email</module>
 		<module>skyeye-schedule</module>
 		<module>skyeye-planpro</module>
 		<module>skyeye-user-phone</module>
