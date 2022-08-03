@@ -106,13 +106,6 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		
-		<!-- 引入知识库模块的依赖 -->
-		<dependency>
-			<groupId>com.skyeye</groupId>
-			<artifactId>skyeye-knowlg</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		
 		<!-- 引入论坛模块的依赖 -->
 		<dependency>
 			<groupId>com.skyeye</groupId>
