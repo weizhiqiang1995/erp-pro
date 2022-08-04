@@ -64,13 +64,6 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		
-		<!-- 引入项目规划模块的依赖 -->
-		<dependency>
-			<groupId>com.skyeye</groupId>
-			<artifactId>skyeye-planpro</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		
 		<!-- 引入工作日志模块的依赖 -->
 		<dependency>
 			<groupId>com.skyeye</groupId>

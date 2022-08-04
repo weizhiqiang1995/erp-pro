@@ -48,10 +48,10 @@ public class SkyEyeApplication {
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
         factory.setLocation(tPath);
-        //单个文件最大
-        factory.setMaxFileSize("102400KB");//KB,MB 100MB
-        //设置总上传数据总大小
-        factory.setMaxRequestSize("1024000KB");// 1000MB
+        // 单个文件最大，KB,MB 100MB
+        factory.setMaxFileSize("102400KB");
+        // 设置总上传数据总大小，1000MB
+        factory.setMaxRequestSize("1024000KB");
         return factory.createMultipartConfig();
     }
 
