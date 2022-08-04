@@ -10,7 +10,6 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.WagesModelTypeDao;
 import com.skyeye.eve.service.WagesModelTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +26,14 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
     @Autowired
     private WagesModelTypeDao wagesModelTypeDao;
 
-    public enum STATE {
+    public enum State {
         START_UP(1, "启用"),
         START_DOWN(2, "禁用"),
         START_DELETE(3, "删除");
         private int state;
         private String name;
 
-        STATE(int state, String name) {
+        State(int state, String name) {
             this.state = state;
             this.name = name;
         }
@@ -82,7 +81,7 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
         // 将该薪资字段插入数据库
         DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         // 默认启用
-        map.put("state", WagesFieldTypeServiceImpl.STATE.START_UP.getState());
+        map.put("state", WagesFieldTypeServiceImpl.State.START_UP.getState());
         wagesModelTypeDao.insertWagesModelTypeMation(map);
     }
 
@@ -136,7 +135,7 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        wagesModelTypeDao.editWagesModelTypeStateMationById(map.get("id").toString(), STATE.START_DELETE.getState());
+        wagesModelTypeDao.editWagesModelTypeStateMationById(map.get("id").toString(), State.START_DELETE.getState());
     }
 
     /**
@@ -149,7 +148,7 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void enableWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        wagesModelTypeDao.editWagesModelTypeStateMationById(map.get("id").toString(), STATE.START_UP.getState());
+        wagesModelTypeDao.editWagesModelTypeStateMationById(map.get("id").toString(), State.START_UP.getState());
     }
 
     /**
@@ -162,7 +161,7 @@ public class WagesModelTypeServiceImpl implements WagesModelTypeService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void disableWagesModelTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        wagesModelTypeDao.editWagesModelTypeStateMationById(map.get("id").toString(), STATE.START_DOWN.getState());
+        wagesModelTypeDao.editWagesModelTypeStateMationById(map.get("id").toString(), State.START_DOWN.getState());
     }
 
     /**

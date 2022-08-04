@@ -22,12 +22,10 @@
 		<module>skyeye-solr</module>
 		<module>skyeye-userauth</module>
 		<module>skyeye-threed</module>
-		<module>skyeye-message</module>
 		<module>skyeye-forum</module>
 		<module>skyeye-light-app</module>
 		<module>skyeye-code-doc</module>
 		<module>skyeye-jobdiary</module>
-		<module>skyeye-schedule</module>
 		<module>skyeye-user-phone</module>
 		<module>skyeye-gateway</module>
     	<module>skyeye-ehr</module>

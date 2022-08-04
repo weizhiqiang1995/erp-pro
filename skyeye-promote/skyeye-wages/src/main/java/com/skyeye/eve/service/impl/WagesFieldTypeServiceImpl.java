@@ -10,7 +10,6 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.WagesFieldTypeDao;
 import com.skyeye.eve.service.WagesFieldTypeService;
 import com.skyeye.wages.constant.WagesConstant;
@@ -32,14 +31,14 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
     /**
      * 计薪资字段状态
      */
-    public static enum STATE {
+    public enum State {
         START_UP(1, "启用"),
         START_DOWN(2, "禁用"),
         START_DELETE(3, "删除");
         private int state;
         private String name;
 
-        STATE(int state, String name) {
+        State(int state, String name) {
             this.state = state;
             this.name = name;
         }
@@ -93,7 +92,7 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
         if (fields != null && !fields.isEmpty()) {
             // 获取未删除的薪资字段
             List<Map<String, Object>> noDeleteFields = fields.stream()
-                .filter(field -> STATE.START_DELETE.getState() != Integer.parseInt(field.get("state").toString()))
+                .filter(field -> State.START_DELETE.getState() != Integer.parseInt(field.get("state").toString()))
                 .collect(Collectors.toList());
             if (noDeleteFields != null && !noDeleteFields.isEmpty()) {
                 outputObject.setreturnMessage("this ['key'] is Already exists.");
@@ -107,7 +106,7 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
         // 将该薪资字段插入数据库
         DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         // 默认启用
-        map.put("state", STATE.START_UP.getState());
+        map.put("state", State.START_UP.getState());
         wagesFieldTypeDao.insertWagesFieldTypeMation(map);
     }
 
@@ -167,7 +166,7 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        wagesFieldTypeDao.editWagesFieldTypeStateMationById(map.get("id").toString(), STATE.START_DELETE.getState());
+        wagesFieldTypeDao.editWagesFieldTypeStateMationById(map.get("id").toString(), State.START_DELETE.getState());
     }
 
     /**
@@ -180,7 +179,7 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void enableWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        wagesFieldTypeDao.editWagesFieldTypeStateMationById(map.get("id").toString(), STATE.START_UP.getState());
+        wagesFieldTypeDao.editWagesFieldTypeStateMationById(map.get("id").toString(), State.START_UP.getState());
     }
 
     /**
@@ -193,7 +192,7 @@ public class WagesFieldTypeServiceImpl implements WagesFieldTypeService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void disableWagesFieldTypeMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        wagesFieldTypeDao.editWagesFieldTypeStateMationById(map.get("id").toString(), STATE.START_DOWN.getState());
+        wagesFieldTypeDao.editWagesFieldTypeStateMationById(map.get("id").toString(), State.START_DOWN.getState());
     }
 
     /**

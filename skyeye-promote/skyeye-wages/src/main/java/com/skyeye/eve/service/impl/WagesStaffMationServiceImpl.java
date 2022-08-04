@@ -14,7 +14,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.eve.dao.WagesModelDao;
 import com.skyeye.eve.dao.WagesModelFieldDao;
 import com.skyeye.eve.dao.WagesStaffMationDao;
-import com.skyeye.eve.service.SysScheduleCommonService;
+import com.skyeye.eve.service.IScheduleDayService;
 import com.skyeye.eve.service.WagesStaffMationService;
 import com.skyeye.wages.constant.WagesConstant;
 import org.slf4j.Logger;
@@ -52,7 +52,7 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
     private WagesModelFieldDao wagesModelFieldDao;
 
     @Autowired
-    private SysScheduleCommonService sysScheduleCommonService;
+    private IScheduleDayService iScheduleDayService;
 
     /**
      * 计薪资字段状态
@@ -195,8 +195,9 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
         String lastMonthBeHour = "0";
         for (Map<String, Object> bean : staffWorkTime) {
             List<Map<String, Object>> days = (List<Map<String, Object>>) bean.get("days");
-            for (String day : lastMonthDays) {// 周几
-                if (sysScheduleCommonService.judgeISHoliday(day)) {
+            for (String day : lastMonthDays) {
+                // 周几
+                if (iScheduleDayService.judgeISHoliday(day)) {
                     // 如果是节假日，则不计算
                     continue;
                 }

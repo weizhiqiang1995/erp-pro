@@ -18,17 +18,10 @@
 	</properties>
 
 	<dependencies>
-		<!-- 引入common的依赖 -->
+
 		<dependency>
 			<groupId>com.skyeye</groupId>
-			<artifactId>skyeye-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		
-		<!-- 引入消息模块的依赖 -->
-		<dependency>
-			<groupId>com.skyeye</groupId>
-			<artifactId>skyeye-message</artifactId>
+			<artifactId>skyeye-quartz</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		

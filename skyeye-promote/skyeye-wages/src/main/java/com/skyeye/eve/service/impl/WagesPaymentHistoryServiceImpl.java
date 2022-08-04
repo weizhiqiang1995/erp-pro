@@ -31,13 +31,13 @@ public class WagesPaymentHistoryServiceImpl implements WagesPaymentHistoryServic
     @Autowired
     private WagesPaymentHistoryDao wagesPaymentHistoryDao;
 
-    public static enum STATE {
+    public enum State {
         START_WAIT_GRANT(1, "待发放"),
         START_GRANT(2, "已发放");
         private int state;
         private String name;
 
-        STATE(int state, String name) {
+        State(int state, String name) {
             this.state = state;
             this.name = name;
         }
@@ -60,7 +60,7 @@ public class WagesPaymentHistoryServiceImpl implements WagesPaymentHistoryServic
     @Override
     public void queryAllGrantWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) {
         WagesPaymentHistoryQueryDo wagesPaymentHistoryQuery = inputObject.getParams(WagesPaymentHistoryQueryDo.class);
-        wagesPaymentHistoryQuery.setState(STATE.START_GRANT.getState());
+        wagesPaymentHistoryQuery.setState(State.START_GRANT.getState());
         Page pages = PageHelper.startPage(wagesPaymentHistoryQuery.getPage(), wagesPaymentHistoryQuery.getLimit());
         List<Map<String, Object>> beans = wagesPaymentHistoryDao.queryAllWagesPaymentHistoryList(wagesPaymentHistoryQuery);
         outputObject.setBeans(beans);
@@ -92,7 +92,7 @@ public class WagesPaymentHistoryServiceImpl implements WagesPaymentHistoryServic
     @Override
     public void queryAllNotGrantWagesPaymentHistoryList(InputObject inputObject, OutputObject outputObject) {
         WagesPaymentHistoryQueryDo wagesPaymentHistoryQuery = inputObject.getParams(WagesPaymentHistoryQueryDo.class);
-        wagesPaymentHistoryQuery.setState(STATE.START_WAIT_GRANT.getState());
+        wagesPaymentHistoryQuery.setState(State.START_WAIT_GRANT.getState());
         Page pages = PageHelper.startPage(wagesPaymentHistoryQuery.getPage(), wagesPaymentHistoryQuery.getLimit());
         List<Map<String, Object>> beans = wagesPaymentHistoryDao.queryAllWagesPaymentHistoryList(wagesPaymentHistoryQuery);
         outputObject.setBeans(beans);

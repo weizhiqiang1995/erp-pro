@@ -15,8 +15,8 @@ import com.skyeye.eve.entity.quartz.SysQuartzRunHistory;
 import com.skyeye.eve.rest.checkwork.CheckWorkLeaveService;
 import com.skyeye.eve.rest.checkwork.CheckWorkService;
 import com.skyeye.eve.rest.checkwork.CheckWorkTimeService;
+import com.skyeye.eve.service.IScheduleDayService;
 import com.skyeye.eve.service.SysQuartzRunHistoryService;
-import com.skyeye.eve.service.SysScheduleCommonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,14 +54,13 @@ public class CheckWorkQuartz {
     private CheckWorkLeaveService checkWorkLeaveService;
 
     @Autowired
-    private SysScheduleCommonService sysScheduleCommonService;
+    private IScheduleDayService iScheduleDayService;
 
     @Autowired
     private SysQuartzRunHistoryService sysQuartzRunHistoryService;
 
     /**
      * 定时器填充打卡信息,每天凌晨一点执行一次
-     *
      */
     @Scheduled(cron = "0 0 1 * * ?")
     public void editCheckWorkMation() {
@@ -73,7 +72,7 @@ public class CheckWorkQuartz {
             // 得到昨天的时间
             String yesterdayTime = DateAfterSpacePointTime.getSpecifiedTime(
                 DateAfterSpacePointTime.ONE_DAY.getType(), DateUtil.getTimeAndToString(), DateUtil.YYYY_MM_DD, DateAfterSpacePointTime.AroundType.BEFORE);
-            if (workTime != null && !workTime.isEmpty() && !sysScheduleCommonService.judgeISHoliday(yesterdayTime)) {
+            if (workTime != null && !workTime.isEmpty() && !iScheduleDayService.judgeISHoliday(yesterdayTime)) {
                 // 班次信息不为空，并且昨天不是节假日
                 log.info("Fill in the clocking information for timing task execution time is {}", yesterdayTime);
                 // 判断昨天的日期是周几
