@@ -27,4 +27,8 @@ public interface MainPageDao {
 
     List<Map<String, Object>> queryKnowledgeContentPhoneList(Map<String, Object> map);
 
+    int insertForumHotByList(List<Map<String, Object>> list);
+
+    int insertForumStatisticsDayByList(List<Map<String, Object>> list);
+
 }

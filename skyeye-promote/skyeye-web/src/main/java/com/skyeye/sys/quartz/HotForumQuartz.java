@@ -9,7 +9,7 @@ import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.util.DateAfterSpacePointTime;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
-import com.skyeye.eve.dao.ForumContentDao;
+import com.skyeye.eve.dao.MainPageDao;
 import com.skyeye.eve.entity.quartz.SysQuartzRunHistory;
 import com.skyeye.eve.service.SysQuartzRunHistoryService;
 import com.skyeye.jedis.JedisClientService;
@@ -39,14 +39,13 @@ public class HotForumQuartz {
     public JedisClientService jedisClient;
 
     @Autowired
-    public ForumContentDao forumContentDao;
+    public MainPageDao mainPageDao;
 
     @Autowired
     private SysQuartzRunHistoryService sysQuartzRunHistoryService;
 
     /**
      * 定时器计算每日热门贴
-     *
      */
     @Scheduled(cron = "0 0 2 * * ?") //每天凌晨两点执行一次
     public void editHotForumMation() {
@@ -101,7 +100,7 @@ public class HotForumQuartz {
                     jedisClient.set(everyforumEverydayNums, String.valueOf(Integer.parseInt(bnum) + Integer.parseInt(cnum)));//将每个帖子每天的浏览量+评论量存入redis中
 
                     if (list.size() >= 20) {//每20条数据保存一次
-                        forumContentDao.insertForumStatisticsDayByList(list);//将每天被浏览过的帖子存入统计表中
+                        mainPageDao.insertForumStatisticsDayByList(list);//将每天被浏览过的帖子存入统计表中
                         if (!beans.isEmpty()) {
                             list.addAll(beans);
                             beans.clear();
@@ -113,7 +112,7 @@ public class HotForumQuartz {
                 }
 
                 if (!list.isEmpty()) {
-                    forumContentDao.insertForumStatisticsDayByList(list);//将每天被浏览过的帖子存入统计表中
+                    mainPageDao.insertForumStatisticsDayByList(list);//将每天被浏览过的帖子存入统计表中
                     if (!beans.isEmpty()) {
                         list.addAll(beans);
                         beans.clear();
@@ -128,7 +127,7 @@ public class HotForumQuartz {
                 }
 
                 if (!beans.isEmpty()) {
-                    forumContentDao.insertForumHotByList(beans);
+                    mainPageDao.insertForumHotByList(beans);
                 }
                 jedisClient.del(everydayBrowseKey);//清空每天被浏览过的帖子
             } else {

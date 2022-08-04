@@ -137,5 +137,23 @@
 			a.examine_time DESC
 		LIMIT 8
 	</select>
+
+	<insert id="insertForumHotByList" parameterType="java.util.Map">
+		insert into forum_hot
+		(id, forum_id, update_time)
+		values
+		<foreach collection="list" item="item" index="index" separator="," >
+			(#{item.id}, #{item.forumId}, #{item.time})
+		</foreach>
+	</insert>
+
+	<insert id="insertForumStatisticsDayByList" parameterType="java.util.Map">
+		insert into forum_statistics_day
+		(id, forum_id, browse_num, comment_num, create_time)
+		values
+		<foreach collection="list" item="item" index="index" separator="," >
+			(#{item.id}, #{item.forumId}, #{item.bnum}, #{item.cnum}, #{item.time})
+		</foreach>
+	</insert>
 	
 </mapper>
