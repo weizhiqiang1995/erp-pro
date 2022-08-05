@@ -23,7 +23,6 @@
 		<module>skyeye-threed</module>
 		<module>skyeye-light-app</module>
 		<module>skyeye-code-doc</module>
-		<module>skyeye-jobdiary</module>
 		<module>skyeye-user-phone</module>
 		<module>skyeye-gateway</module>
     	<module>skyeye-ehr</module>
