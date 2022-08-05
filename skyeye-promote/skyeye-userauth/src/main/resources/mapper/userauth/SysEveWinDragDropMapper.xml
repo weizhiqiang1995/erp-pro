@@ -74,9 +74,11 @@
 	
 	<insert id="insertWinCustomMenu" parameterType="java.util.Map">
 	     INSERT into sys_eve_user_custom_menu 
-	     (id, menu_name, menu_name_en, menu_url, menu_icon_type, menu_icon_pic, menu_icon, menu_icon_color, menu_icon_bg, menu_type, menu_parent_id, open_type, light_app_id, desktop_id, create_id, create_time)
+	     (id, menu_name, menu_name_en, menu_url, menu_icon_type, menu_icon_pic, menu_icon, menu_icon_color, menu_icon_bg, menu_type, menu_parent_id, open_type,
+	      light_app_id, desktop_id, create_id, create_time)
 	     VALUES
-	     (#{id}, #{menuName}, #{menuNameEn}, #{menuUrl}, #{menuIconType}, #{menuIconPic}, #{menuIcon}, #{menuIconColor}, #{menuIconBg}, #{menuType}, #{menuParentId}, #{openType}, #{lightAppId}, #{deskTopId}, #{createId}, #{createTime})
+	     (#{id}, #{menuName}, #{menuNameEn}, #{menuUrl}, #{menuIconType}, #{menuIconPic}, #{menuIcon}, #{menuIconColor}, #{menuIconBg}, #{menuType}, #{menuParentId}, #{openType},
+	      #{lightAppId}, #{deskTopId}, #{createId}, #{createTime})
 	</insert>
 	
 	<select id="queryMenuMationFromSysById" parameterType="java.util.Map" resultType="java.util.Map">

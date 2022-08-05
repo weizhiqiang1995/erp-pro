@@ -144,7 +144,7 @@
 		WHERE id = #{id}
 	</update>
 	
-	<select id="queryDeskTopsMenuByUserId" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryDeskTopsMenuByUserId" resultType="java.util.Map">
 		SELECT
 			a.*
 		FROM 
@@ -171,12 +171,12 @@
 				sys_eve_user a,
 				sys_eve_role_menu b,
 				sys_eve_menu c
-				LEFT JOIN sys_eve_user_custom_parent e ON e.menu_id = c.id AND e.create_id = #{id},
+				LEFT JOIN sys_eve_user_custom_parent e ON e.menu_id = c.id AND e.create_id = #{userId},
 				sys_eve_win g
-			WHERE a.id = #{id}
+			WHERE a.id = #{userId}
 			AND INSTR(CONCAT(',', a.role_id, ','), CONCAT(',', b.role_id, ','))
 			AND b.menu_id = c.id AND c.menu_sys_type = '1'
-			AND c.id NOT IN(SELECT d.menu_id FROM sys_eve_user_custom_menu_del d WHERE d.create_id = #{id})
+			AND c.id NOT IN(SELECT d.menu_id FROM sys_eve_user_custom_menu_del d WHERE d.create_id = #{userId})
 			AND g.id = c.sys_win_id
 			GROUP BY c.id
 			ORDER BY c.order_num ASC) a
@@ -202,8 +202,8 @@
 			    '' sysWinUrl
 			FROM
 				sys_eve_user_custom_menu a
-				LEFT JOIN sys_eve_user_custom_parent e ON e.menu_id = a.id AND e.create_id = #{id}
-			WHERE a.create_id = #{id}
+				LEFT JOIN sys_eve_user_custom_parent e ON e.menu_id = a.id AND e.create_id = #{userId}
+			WHERE a.create_id = #{userId}
 		UNION
 			SELECT
 				a.id,
@@ -226,7 +226,7 @@
 			    '' sysWinUrl
 			FROM
 				sys_eve_user_custom_menubox a
-			WHERE a.create_id = #{id}
+			WHERE a.create_id = #{userId}
 	</select>
 	
 	<update id="editUserInstallThemeColor" parameterType="java.util.Map">

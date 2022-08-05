@@ -21,7 +21,6 @@
 		<module>skyeye-mq</module>
 		<module>skyeye-userauth</module>
 		<module>skyeye-threed</module>
-		<module>skyeye-light-app</module>
 		<module>skyeye-code-doc</module>
 		<module>skyeye-user-phone</module>
 		<module>skyeye-gateway</module>

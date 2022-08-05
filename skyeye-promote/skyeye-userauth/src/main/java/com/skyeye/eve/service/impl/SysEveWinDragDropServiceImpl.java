@@ -45,13 +45,14 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertWinCustomMenuBox(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
+        String userId = inputObject.getLogParams().get("id").toString();
+        map.put("userId", userId);
         List<Map<String, Object>> menuBoxNameList = sysEveWinDragDropDao.queryMenuBoxNameInByName(map);
         if (menuBoxNameList != null && !menuBoxNameList.isEmpty()) {
             outputObject.setreturnMessage("该名称已存在，请更换。");
         } else {
-            Map<String, Object> orderNum = sysEveWinDragDropDao.queryWinCustomMenuBoxNumByUserId(map);//获取当前用户已经创建的菜单盒子中值最大的排序号
+            // 获取当前用户已经创建的菜单盒子中值最大的排序号
+            Map<String, Object> orderNum = sysEveWinDragDropDao.queryWinCustomMenuBoxNumByUserId(map);
             int order = 1;
             if (orderNum != null && !orderNum.isEmpty()) {
                 order = Integer.parseInt(orderNum.get("orderNum").toString()) + 1;
@@ -60,9 +61,10 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
             DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             sysEveWinDragDropDao.insertWinCustomMenuBox(map);
             outputObject.setBean(map);
-            List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(user);//桌面菜单列表
+            // 桌面菜单列表
+            List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
             deskTops = ToolUtil.deskTopsTree(deskTops);
-            jedisClient.set("deskTopsMation:" + user.get("id").toString(), JSONUtil.toJsonStr(deskTops));
+            jedisClient.set("deskTopsMation:" + userId, JSONUtil.toJsonStr(deskTops));
         }
     }
 
@@ -76,8 +78,8 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertWinCustomMenu(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
+        String userId = inputObject.getLogParams().get("id").toString();
+        map.put("userId", userId);
         List<Map<String, Object>> menuBoxNameList = sysEveWinDragDropDao.queryMenuNameInByName(map);
         if (menuBoxNameList != null && !menuBoxNameList.isEmpty()) {
             outputObject.setreturnMessage("该名称已存在，请更换。");
@@ -88,9 +90,10 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
             DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             sysEveWinDragDropDao.insertWinCustomMenu(map);
             outputObject.setBean(map);
-            List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(user);//桌面菜单列表
+            // 桌面菜单列表
+            List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
             deskTops = ToolUtil.deskTopsTree(deskTops);
-            jedisClient.set("deskTopsMation:" + user.get("id").toString(), JSONUtil.toJsonStr(deskTops));
+            jedisClient.set("deskTopsMation:" + userId, JSONUtil.toJsonStr(deskTops));
         }
     }
 
@@ -104,8 +107,8 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteWinMenuOrBoxById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
+        String userId = inputObject.getLogParams().get("id").toString();
+        map.put("userId", userId);
         Map<String, Object> bean = sysEveWinDragDropDao.queryMenuMationFromSysById(map);//查询菜单
         if (bean != null && !bean.isEmpty()) {
             // 菜单存在
@@ -118,7 +121,7 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
                     if ("1".equals(child.get("type").toString())) {
                         // 系统子菜单
                         child.put("rowId", ToolUtil.getSurFaceId());
-                        child.put("createId", user.get("id"));
+                        child.put("createId", userId);
                         child.put("createTime", DateUtil.getTimeAndToString());
                         removeChild.add(child);
                     } else if ("2".equals(child.get("type").toString())) {
@@ -138,7 +141,7 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
                 // 删除系统文件夹
                 Map<String, Object> delSysBoxMenuBean = new HashMap<>();
                 delSysBoxMenuBean.put("menuId", map.get("id"));
-                DataCommonUtil.setCommonData(delSysBoxMenuBean, user.get("id").toString());
+                DataCommonUtil.setCommonData(delSysBoxMenuBean, userId);
                 sysEveWinDragDropDao.deleteSysBoxMenuById(delSysBoxMenuBean);
             } else if ("2".equals(bean.get("type").toString())) {
                 // 要删除的菜单是菜单文件夹（菜单盒子）
@@ -149,7 +152,7 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
                     if ("1".equals(child.get("type").toString())) {
                         // 系统子菜单
                         child.put("rowId", ToolUtil.getSurFaceId());
-                        child.put("createId", user.get("id"));
+                        child.put("createId", userId);
                         child.put("createTime", DateUtil.getTimeAndToString());
                         removeChild.add(child);
                     } else if ("2".equals(child.get("type").toString())) {
@@ -172,9 +175,10 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
                 // 要删除的菜单是自定义菜单,直接删除
                 sysEveWinDragDropDao.deleteCustomMenuById(map);
             }
-            List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(user);//桌面菜单列表
+            // 桌面菜单列表
+            List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
             deskTops = ToolUtil.deskTopsTree(deskTops);
-            jedisClient.set("deskTopsMation:" + user.get("id").toString(), JSONUtil.toJsonStr(deskTops));
+            jedisClient.set("deskTopsMation:" + userId, JSONUtil.toJsonStr(deskTops));
         } else {
             outputObject.setreturnMessage("该菜单不存在，请刷新页面");
         }
@@ -190,8 +194,8 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editMenuParentIdById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
+        String userId = inputObject.getLogParams().get("id").toString();
+        map.put("userId", userId);
         sysEveWinDragDropDao.delMenuParentIdById(map);
         map.put("id", ToolUtil.getSurFaceId());
         map.put("createTime", DateUtil.getTimeAndToString());
@@ -203,9 +207,10 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
             map.put("menuLevel", "0");
         }
         sysEveWinDragDropDao.insertMenuParentId(map);
-        List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(user);//桌面菜单列表
+        // 桌面菜单列表
+        List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
         deskTops = ToolUtil.deskTopsTree(deskTops);
-        jedisClient.set("deskTopsMation:" + user.get("id").toString(), JSONUtil.toJsonStr(deskTops));
+        jedisClient.set("deskTopsMation:" + userId, JSONUtil.toJsonStr(deskTops));
     }
 
     /**
@@ -246,12 +251,13 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editCustomMenuBoxMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
+        String userId = inputObject.getLogParams().get("id").toString();
+        map.put("userId", userId);
         sysEveWinDragDropDao.editCustomMenuBoxMationById(map);
-        List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(user);//桌面菜单列表
+        // 桌面菜单列表
+        List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
         deskTops = ToolUtil.deskTopsTree(deskTops);
-        jedisClient.set("deskTopsMation:" + user.get("id").toString(), JSONUtil.toJsonStr(deskTops));
+        jedisClient.set("deskTopsMation:" + userId, JSONUtil.toJsonStr(deskTops));
     }
 
     /**
@@ -279,12 +285,13 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editCustomMenuMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
+        String userId = inputObject.getLogParams().get("id").toString();
+        map.put("userId", userId);
         sysEveWinDragDropDao.editCustomMenuMationById(map);
-        List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(user);//桌面菜单列表
+        // 桌面菜单列表
+        List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
         deskTops = ToolUtil.deskTopsTree(deskTops);
-        jedisClient.set("deskTopsMation:" + user.get("id").toString(), JSONUtil.toJsonStr(deskTops));
+        jedisClient.set("deskTopsMation:" + userId, JSONUtil.toJsonStr(deskTops));
     }
 
     /**
@@ -297,15 +304,16 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editCustomMenuToDeskTopById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
+        String userId = inputObject.getLogParams().get("id").toString();
+        map.put("userId", userId);
         Map<String, Object> bean = sysEveWinDragDropDao.queryCustomMenuToDeskTopById(map);
         if (bean != null && !bean.isEmpty()) {
             sysEveWinDragDropDao.editCustomMenuToDeskTopById(map);
             Map<String, Object> item = sysEveWinDragDropDao.queryMenuToDeskTopById(map);
-            List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(user);//桌面菜单列表
+            // 桌面菜单列表
+            List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
             deskTops = ToolUtil.deskTopsTree(deskTops);
-            jedisClient.set("deskTopsMation:" + user.get("id").toString(), JSONUtil.toJsonStr(deskTops));
+            jedisClient.set("deskTopsMation:" + userId, JSONUtil.toJsonStr(deskTops));
             outputObject.setBean(item);
         } else {
             outputObject.setreturnMessage("该菜单在桌面上已存在。");

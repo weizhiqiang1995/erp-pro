@@ -120,20 +120,6 @@ public class Constants {
         return SYS_TALK_GROUP_USER_LIST_MATION + id;
     }
 
-    // 获取已经上线的轻应用类型的redis的key
-    public static final String CHECK_APP_LIGHTAPPTYPE_UP_LIST = "check_app_lightapptype_up_list";
-
-    public static String checkAppLightAppTypeUpList() {
-        return CHECK_APP_LIGHTAPPTYPE_UP_LIST;
-    }
-
-    // 获取已经上线的轻应用的redis的key
-    public static final String CHECK_APP_LIGHTAPP_UP_LIST_BYID = "check_app_lightapp_up_list_byid_";
-
-    public static String checkAppLightAppUpListById(String typeId) {
-        return CHECK_APP_LIGHTAPP_UP_LIST_BYID + typeId;
-    }
-
     // 获取我的附件0级列表
     public static final List<Map<String, Object>> getSysEnclosureZeroList() {
         List<Map<String, Object>> beans = new ArrayList<>();

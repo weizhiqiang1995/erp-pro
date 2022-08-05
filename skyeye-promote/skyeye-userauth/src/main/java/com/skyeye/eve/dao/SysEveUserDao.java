@@ -36,7 +36,7 @@ public interface SysEveUserDao {
 
     int editRoleIdsByUserId(Map<String, Object> map);
 
-    List<Map<String, Object>> queryDeskTopsMenuByUserId(Map<String, Object> userMation);
+    List<Map<String, Object>> queryDeskTopsMenuByUserId(@Param("userId") String userId);
 
     int editUserInstallThemeColor(Map<String, Object> map);
 

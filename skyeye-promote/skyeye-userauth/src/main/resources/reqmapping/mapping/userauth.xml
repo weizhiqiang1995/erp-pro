@@ -187,6 +187,7 @@
 		<property id="menuIconBg" name="menuIconBg" ref="" var="菜单图标背景颜色"/>
 		<property id="menuIconColor" name="menuIconColor" ref="" var="菜单图标颜色"/>
 		<property id="deskTopId" name="deskTopId" ref="required" var="所属桌面id"/>
+		<property id="lightAppId" name="lightAppId" ref="" var="轻应用id"/>
 	</url>
 	<url id="sysevewindragdrop003" path="/post/SysEveWinDragDropController/deleteWinMenuOrBoxById" val="用户删除自定义菜单或文件夹" allUse="2" groupName="自定义菜单">
 		<property id="rowId" name="id" ref="required" var="要删除的菜单或者文件夹id"/>

@@ -342,4 +342,18 @@ public class SysEveUserController {
         sysEveUserService.queryUserMationByUserId(inputObject, outputObject);
     }
 
+    /**
+     * 根据用户id获取桌面菜单信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryDeskTopsMenuByUserId", value = "根据用户id获取桌面菜单信息", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "userId", name = "userId", value = "用户id(账号ID)", required = "required")})
+    @RequestMapping("/post/SysEveUserController/queryDeskTopsMenuByUserId")
+    public void queryDeskTopsMenuByUserId(InputObject inputObject, OutputObject outputObject) {
+        sysEveUserService.queryDeskTopsMenuByUserId(inputObject, outputObject);
+    }
+
 }

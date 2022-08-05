@@ -285,7 +285,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         LOGGER.info("get menu and auth mation.");
         String roleIds = userMation.get("roleId").toString();
         // 桌面菜单列表
-        List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userMation);
+        List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
         deskTops = ToolUtil.deskTopsTree(deskTops);
         List<Map<String, Object>> authPoints = sysAuthorityService.getRoleHasMenuPointListByRoleIds(roleIds, userId);
 
@@ -663,11 +663,33 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         outputObject.setBeans(beans);
     }
 
+    /**
+     * 根据用户id获取用户信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
     @Override
     public void queryUserMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         outputObject.setBean(sysEveUserDao.queryUserDetailsMationByUserId(map.get("userId").toString()));
         outputObject.settotal(1);
+    }
+
+    /**
+     * 根据用户id获取桌面菜单信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryDeskTopsMenuByUserId(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        String userId = map.get("userId").toString();
+        // 桌面菜单列表
+        List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
+        outputObject.setBeans(deskTops);
+        outputObject.settotal(deskTops.size());
     }
 
 }
