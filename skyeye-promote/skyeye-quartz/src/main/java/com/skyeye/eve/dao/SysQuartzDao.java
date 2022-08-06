@@ -59,16 +59,6 @@ public interface SysQuartzDao {
 
     void editNoticeStateById(@Param("noticeId") String noticeId, @Param("state") String state);
 
-    List<Map<String, Object>> querySystemQuartzList(Map<String, Object> map);
-
     List<Map<String, Object>> queryMyTaskQuartzList(Map<String, Object> map);
 
-    /**
-     * 根据定时任务id以及类型查到任务信息
-     *
-     * @param quartzId 定时任务id
-     * @param type     类型
-     * @return
-     */
-    Map<String, Object> querySystemQuartzByIdAndType(@Param("quartzId") String quartzId, @Param("type") int type);
 }

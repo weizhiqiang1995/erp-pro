@@ -4,16 +4,13 @@
 
 package com.skyeye.sys.quartz;
 
-import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.util.DateUtil;
-import com.skyeye.eve.entity.quartz.SysQuartzRunHistory;
-import com.skyeye.eve.service.SysQuartzRunHistoryService;
 import com.skyeye.jedis.JedisClientService;
+import com.xxl.job.core.handler.annotation.XxlJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -31,26 +28,19 @@ public class TemporaryFileDeleteQuartz {
 
     private static Logger log = LoggerFactory.getLogger(TemporaryFileDeleteQuartz.class);
 
-    private static final String QUARTZ_ID = QuartzConstants.SysQuartzMateMationJobType.TEMPORARY_FILE_DELETE_QUARTZ.getQuartzId();
-
     @Autowired
     public JedisClientService jedisClientService;
 
     @Value("${IMAGES_PATH}")
     private String tPath;
 
-    @Autowired
-    private SysQuartzRunHistoryService sysQuartzRunHistoryService;
-
     private long DAY_MINUTE_TIME = 24 * 60;
 
     /**
      * 定时删除临时的云压缩文件,每天23点执行
-     *
      */
-    @Scheduled(cron = "0 0 23 * * ?")
+    @XxlJob("temporaryFileDeleteQuartz")
     public void deleteTemporaryFile() {
-        String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         log.info("TemporaryFileDeleteQuartz start");
         try {
             // 临时文件存储路径
@@ -63,11 +53,9 @@ public class TemporaryFileDeleteQuartz {
             // 读取指定路径下的文件名和目录名
             getAllFileByRecursion(pack.listFiles());
         } catch (Exception e) {
-            sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_ERROR.getState());
             log.warn("TemporaryFileDeleteQuartz error.", e);
         }
         log.info("TemporaryFileDeleteQuartz end");
-        sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_SUCCESS.getState());
     }
 
     public void getAllFileByRecursion(File[] fileList) {

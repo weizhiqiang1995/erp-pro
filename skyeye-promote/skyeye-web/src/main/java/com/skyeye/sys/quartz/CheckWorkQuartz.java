@@ -6,17 +6,14 @@ package com.skyeye.sys.quartz;
 
 import cn.hutool.json.JSONUtil;
 import com.skyeye.common.client.ExecuteFeignClient;
-import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.util.DateAfterSpacePointTime;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.entity.checkwork.CheckWorkMationRest;
-import com.skyeye.eve.entity.quartz.SysQuartzRunHistory;
 import com.skyeye.eve.rest.checkwork.CheckWorkLeaveService;
 import com.skyeye.eve.rest.checkwork.CheckWorkService;
 import com.skyeye.eve.rest.checkwork.CheckWorkTimeService;
 import com.skyeye.eve.service.IScheduleDayService;
-import com.skyeye.eve.service.SysQuartzRunHistoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +39,6 @@ public class CheckWorkQuartz {
 
     private static Logger log = LoggerFactory.getLogger(CheckWorkQuartz.class);
 
-    private static final String QUARTZ_ID = QuartzConstants.SysQuartzMateMationJobType.CHECK_WORK_QUARTZ.getQuartzId();
-
     @Autowired
     private CheckWorkService checkWorkService;
 
@@ -56,15 +51,11 @@ public class CheckWorkQuartz {
     @Autowired
     private IScheduleDayService iScheduleDayService;
 
-    @Autowired
-    private SysQuartzRunHistoryService sysQuartzRunHistoryService;
-
     /**
      * 定时器填充打卡信息,每天凌晨一点执行一次
      */
     @Scheduled(cron = "0 0 1 * * ?")
     public void editCheckWorkMation() {
-        String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         log.info("填充打卡信息定时任务执行");
         try {
             // 1.获取所有的考勤班次信息
@@ -97,11 +88,9 @@ public class CheckWorkQuartz {
             // 4 处理所有昨天加班只打早卡没有打晚卡的记录id
             handleNotCheckWorkEndMember(yesterdayTime, "-");
         } catch (Exception e) {
-            sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_ERROR.getState());
             log.warn("CheckWorkQuartz error.", e);
         }
         log.info("填充打卡信息定时任务 end");
-        sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_SUCCESS.getState());
     }
 
     /**

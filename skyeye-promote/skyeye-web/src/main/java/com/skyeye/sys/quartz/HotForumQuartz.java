@@ -5,14 +5,13 @@
 package com.skyeye.sys.quartz;
 
 import com.skyeye.common.constans.ForumConstants;
-import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.util.DateAfterSpacePointTime;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.MainPageDao;
-import com.skyeye.eve.entity.quartz.SysQuartzRunHistory;
-import com.skyeye.eve.service.SysQuartzRunHistoryService;
 import com.skyeye.jedis.JedisClientService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -33,7 +32,7 @@ import java.util.*;
 @Component
 public class HotForumQuartz {
 
-    private static final String QUARTZ_ID = QuartzConstants.SysQuartzMateMationJobType.HOT_FORUM_QUARTZ.getQuartzId();
+    private static Logger log = LoggerFactory.getLogger(HotForumQuartz.class);
 
     @Autowired
     public JedisClientService jedisClient;
@@ -41,15 +40,11 @@ public class HotForumQuartz {
     @Autowired
     public MainPageDao mainPageDao;
 
-    @Autowired
-    private SysQuartzRunHistoryService sysQuartzRunHistoryService;
-
     /**
      * 定时器计算每日热门贴
      */
     @Scheduled(cron = "0 0 2 * * ?") //每天凌晨两点执行一次
     public void editHotForumMation() {
-        String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         try {
             String yestoday = DateAfterSpacePointTime.getSpecifiedTime(
                 DateAfterSpacePointTime.ONE_DAY.getType(), DateUtil.getTimeAndToString(), DateUtil.YYYY_MM_DD, DateAfterSpacePointTime.AroundType.BEFORE);
@@ -134,9 +129,8 @@ public class HotForumQuartz {
                 jedisClient.del(everydayBrowseKey);//清空每天被浏览过的帖子
             }
         } catch (Exception e) {
-            sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_ERROR.getState());
+            log.warn("editHotForumMation error.", e);
         }
-        sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_SUCCESS.getState());
     }
 
     /**

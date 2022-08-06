@@ -7,12 +7,9 @@ package com.skyeye.sys.quartz;
 import cn.hutool.json.JSONUtil;
 import com.skyeye.cache.local.LocalCacheMap;
 import com.skyeye.common.client.ExecuteFeignClient;
-import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.util.*;
 import com.skyeye.eve.dao.*;
-import com.skyeye.eve.entity.quartz.SysQuartzRunHistory;
 import com.skyeye.eve.rest.checkwork.CheckWorkTimeService;
-import com.skyeye.eve.service.SysQuartzRunHistoryService;
 import com.skyeye.eve.service.SystemFoundationSettingsService;
 import com.skyeye.eve.service.WagesModelService;
 import com.skyeye.eve.service.WagesStaffMationService;
@@ -39,8 +36,6 @@ import java.util.stream.Collectors;
 public class StaffWagesQuartz {
 
     private static Logger LOGGER = LoggerFactory.getLogger(StaffWagesQuartz.class);
-
-    private static final String QUARTZ_ID = QuartzConstants.SysQuartzMateMationJobType.STAFF_WAGES_QUARTZ.getQuartzId();
 
     @Autowired
     private WagesStaffMationDao wagesStaffMationDao;
@@ -78,9 +73,6 @@ public class StaffWagesQuartz {
     @Autowired
     private WagesStaffMationService wagesStaffMationService;
 
-    @Autowired
-    private SysQuartzRunHistoryService sysQuartzRunHistoryService;
-
     public enum AbnormalCheckworkType {
         ABNORMAL_LEAVEEARLY("leaveEarly", "早退"),
         ABNORMAL_LATE("late", "迟到"),
@@ -110,7 +102,6 @@ public class StaffWagesQuartz {
     // 每月十号的凌晨两点开始执行薪资统计任务
     @Scheduled(cron = "0 0 2 10 * ?")
     public void statisticsStaffWages() {
-        String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         try {
             // 获取上个月的年月
             String lastMonthDate = DateUtil.getLastMonthDate();
@@ -155,11 +146,9 @@ public class StaffWagesQuartz {
             }
             deleteStatisticsRedisMation();
         } catch (Exception e) {
-            sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_ERROR.getState());
             LOGGER.warn("StaffWagesQuartz error.", e);
         }
         LOGGER.info("statistics staff wages month is end");
-        sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_SUCCESS.getState());
     }
 
     /**

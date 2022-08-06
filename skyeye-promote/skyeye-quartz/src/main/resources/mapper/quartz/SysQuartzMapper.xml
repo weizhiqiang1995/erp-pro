@@ -226,19 +226,6 @@
 		WHERE id = #{noticeId}
 	</update>
 
-	<select id="querySystemQuartzList" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.name,
-			a.groups,
-			a.cron,
-			a.remark,
-			a.quartz_key quartzKey
-		FROM
-			sys_quartz a
-		WHERE a.quartz_type = '2'
-	</select>
-
 	<select id="queryMyTaskQuartzList" resultType="java.util.Map">
 		SELECT
 			a.id,
@@ -251,22 +238,6 @@
 			sys_quartz a
 		WHERE a.create_id = #{userId}
 		AND a.quartz_type = '1'
-	</select>
-
-	<select id="querySystemQuartzByIdAndType" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.name,
-			a.groups,
-			a.cron,
-			a.remark,
-			a.quartz_key quartzKey,
-		    a.class_path classPath,
-		    a.method_name methodName
-		FROM
-			sys_quartz a
-		WHERE a.quartz_type = #{type}
-		AND a.id = #{quartzId}
 	</select>
 
 </mapper>

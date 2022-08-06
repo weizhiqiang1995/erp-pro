@@ -24,17 +24,6 @@ public class SysQuartzController {
     private SysQuartzService sysQuartzService;
 
     /**
-     * 获取系统定时任务列表
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/SysQuartzController/querySystemQuartzList")
-    public void querySystemQuartzList(InputObject inputObject, OutputObject outputObject) {
-        sysQuartzService.querySystemQuartzList(inputObject, outputObject);
-    }
-
-    /**
      * 获取我的定时任务列表
      *
      * @param inputObject  入参以及用户信息等获取对象
@@ -43,17 +32,6 @@ public class SysQuartzController {
     @RequestMapping("/post/SysQuartzController/queryMyTaskQuartzList")
     public void queryMyTaskQuartzList(InputObject inputObject, OutputObject outputObject) {
         sysQuartzService.queryMyTaskQuartzList(inputObject, outputObject);
-    }
-
-    /**
-     * 启动系统定时任务
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/SysQuartzController/runSystemQuartz")
-    public void runSystemQuartz(InputObject inputObject, OutputObject outputObject) {
-        sysQuartzService.runSystemQuartz(inputObject, outputObject);
     }
 
     /**

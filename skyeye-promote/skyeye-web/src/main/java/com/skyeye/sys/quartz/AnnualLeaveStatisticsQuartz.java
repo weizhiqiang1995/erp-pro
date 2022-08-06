@@ -5,14 +5,12 @@
 package com.skyeye.sys.quartz;
 
 import cn.hutool.json.JSONUtil;
-import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.util.CalculationUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveUserStaffDao;
-import com.skyeye.eve.entity.quartz.SysQuartzRunHistory;
-import com.skyeye.eve.service.SysQuartzRunHistoryService;
 import com.skyeye.eve.service.SystemFoundationSettingsService;
+import com.xxl.job.core.handler.annotation.XxlJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,18 +36,13 @@ public class AnnualLeaveStatisticsQuartz {
 
     private static Logger LOGGER = LoggerFactory.getLogger(AnnualLeaveStatisticsQuartz.class);
 
-    private static final String QUARTZ_ID = QuartzConstants.SysQuartzMateMationJobType.ANNUAL_LEAVE_STATISTICS_QUARTZ.getQuartzId();
-
     @Autowired
     private SystemFoundationSettingsService systemFoundationSettingsService;
 
     @Autowired
     private SysEveUserStaffDao sysEveUserStaffDao;
 
-    @Autowired
-    private SysQuartzRunHistoryService sysQuartzRunHistoryService;
-
-    private static enum YearLimits {
+    private enum YearLimits {
         ONE_YEAR(0, 1, "1"), // 1年以下
         ONE_THREE_YEAR(1, 3, "2"), // 1年 ~ 3年
         THREE_FIVE_YEAR(3, 5, "3"), // 3年 ~ 5年
@@ -81,11 +74,10 @@ public class AnnualLeaveStatisticsQuartz {
 
     /**
      * 每个季度的第一天零点开始执行员工年假计算任务
-     *
      */
     @Scheduled(cron = "0 00 00 1 1,4,7,10 ?")
+    @XxlJob("annualLeaveStatisticsQuartz")
     public void annualLeaveStatistics() {
-        String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         LOGGER.info("annualLeaveStatistics start.");
         try {
             // 1.获取年假信息
@@ -115,11 +107,9 @@ public class AnnualLeaveStatisticsQuartz {
                 }
             }
         } catch (Exception e) {
-            sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_ERROR.getState());
             LOGGER.warn("AnnualLeaveStatisticsQuartz error.", e);
         }
         LOGGER.info("annualLeaveStatistics end.");
-        sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_SUCCESS.getState());
     }
 
     /**

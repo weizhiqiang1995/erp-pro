@@ -5,11 +5,8 @@
 package com.skyeye.sys.quartz;
 
 import cn.hutool.json.JSONUtil;
-import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.eve.dao.WagesPaymentHistoryDao;
-import com.skyeye.eve.entity.quartz.SysQuartzRunHistory;
-import com.skyeye.eve.service.SysQuartzRunHistoryService;
 import com.skyeye.jedis.JedisClientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,16 +32,11 @@ public class StaffWagesPaymentQuartz {
 
     private static Logger LOGGER = LoggerFactory.getLogger(StaffWagesPaymentQuartz.class);
 
-    private static final String QUARTZ_ID = QuartzConstants.SysQuartzMateMationJobType.STAFF_WAGES_PAYMENT_QUARTZ.getQuartzId();
-
     @Autowired
     private JedisClientService jedisClient;
 
     @Autowired
     private WagesPaymentHistoryDao wagesPaymentHistoryDao;
-
-    @Autowired
-    private SysQuartzRunHistoryService sysQuartzRunHistoryService;
 
     /**
      * 当前薪资发放中的员工id存储在redis的key，因为存在多台机器同时处理员工薪资的情况，所以不去主动删除该缓存信息，等待自动失效即可
@@ -53,11 +45,9 @@ public class StaffWagesPaymentQuartz {
 
     /**
      * 定时发放薪资功能，每月15日上午10:15触发
-     *
      */
     @Scheduled(cron = "0 15 10 15 * ?")
     public void staffWagesPayment() {
-        String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         LOGGER.info("staff wagesPayment month is start");
         try {
             // 获取上个月的年月
@@ -89,11 +79,9 @@ public class StaffWagesPaymentQuartz {
             }
             deleteWagesPaymentRedisMation();
         } catch (Exception e) {
-            sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_ERROR.getState());
             LOGGER.warn("StaffWagesPaymentQuartz error.", e);
         }
         LOGGER.info("staff wagesPayment month is end");
-        sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_SUCCESS.getState());
     }
 
     /**

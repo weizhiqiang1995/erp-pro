@@ -7,15 +7,12 @@ package com.skyeye.sys.quartz;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.skyeye.common.client.ExecuteFeignClient;
-import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.util.DateAfterSpacePointTime;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
-import com.skyeye.eve.entity.quartz.SysQuartzRunHistory;
 import com.skyeye.eve.entity.shop.store.ShopStoreIntercourseMation;
 import com.skyeye.eve.entity.shop.store.ShopStoreIntercourseMationRest;
 import com.skyeye.eve.rest.shop.store.ShopStoreService;
-import com.skyeye.eve.service.SysQuartzRunHistoryService;
 import com.skyeye.jedis.util.RedisLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,11 +37,6 @@ public class ShopStoreIntercourseQuartz {
 
     private static Logger log = LoggerFactory.getLogger(ShopStoreIntercourseQuartz.class);
 
-    private static final String QUARTZ_ID = QuartzConstants.SysQuartzMateMationJobType.SHOP_STORE_INTERCOURSE_QUARTZ.getQuartzId();
-
-    @Autowired
-    private SysQuartzRunHistoryService sysQuartzRunHistoryService;
-
     @Autowired
     private ShopStoreService shopStoreService;
 
@@ -52,11 +44,9 @@ public class ShopStoreIntercourseQuartz {
 
     /**
      * 定时器计算门店昨日支出/收入往来信息,每天凌晨两点执行一次
-     *
      */
     @Scheduled(cron = "0 0 2 * * ?")
     public void calcShopStoreIntercourse() {
-        String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         log.info("定时器计算门店昨日支出/收入往来信息执行 start");
         RedisLock lock = new RedisLock(LOCK_KEY);
         try {
@@ -91,13 +81,11 @@ public class ShopStoreIntercourseQuartz {
             shopStoreService.insertStoreIntercourse(shopStoreIntercourseVO);
             log.info("保存数据完成");
         } catch (Exception e) {
-            sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_ERROR.getState());
             log.warn("calcShopStoreIntercourse error.", e);
         } finally {
             lock.unlock();
         }
         log.info("定时器计算门店昨日支出/收入往来信息 end");
-        sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_SUCCESS.getState());
     }
 
 }

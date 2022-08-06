@@ -5,14 +5,11 @@
 package com.skyeye.sys.quartz;
 
 import com.skyeye.common.client.ExecuteFeignClient;
-import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.util.CalculationUtil;
 import com.skyeye.eve.dao.SysEveUserStaffDao;
-import com.skyeye.eve.entity.quartz.SysQuartzRunHistory;
 import com.skyeye.eve.rest.checkwork.CheckWorkService;
 import com.skyeye.eve.rest.checkwork.CheckWorkTimeService;
 import com.skyeye.eve.service.SysEveUserStaffCapitalService;
-import com.skyeye.eve.service.SysQuartzRunHistoryService;
 import com.skyeye.eve.service.WagesStaffMationService;
 import com.skyeye.wages.constant.WagesConstant;
 import org.slf4j.Logger;
@@ -40,11 +37,6 @@ public class CalcStaffWaitPayWages {
 
     private static Logger log = LoggerFactory.getLogger(CalcStaffWaitPayWages.class);
 
-    private static final String QUARTZ_ID = QuartzConstants.SysQuartzMateMationJobType.CALC_STAFF_WAIT_PAY_WAGES_QUARTZ.getQuartzId();
-
-    @Autowired
-    private SysQuartzRunHistoryService sysQuartzRunHistoryService;
-
     @Autowired
     private CheckWorkService checkWorkService;
 
@@ -62,20 +54,16 @@ public class CalcStaffWaitPayWages {
 
     /**
      * 定时统计员工待结算其他奖金的数据 凌晨一点半执行
-     *
      */
     @Scheduled(cron = "0 30 1 * * ?")
     public void handler() {
-        String historyId = sysQuartzRunHistoryService.startSysQuartzRun(QUARTZ_ID);
         log.info("定时统计员工待结算薪资的数据定时任务开始执行");
         try {
             calcWaitWages();
         } catch (Exception e) {
-            sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_ERROR.getState());
             log.warn("CalcStaffWaitPayWages error.", e);
         }
         log.info("定时统计员工待结算薪资的数据定时任务执行完成");
-        sysQuartzRunHistoryService.endSysQuartzRun(historyId, SysQuartzRunHistory.State.START_SUCCESS.getState());
     }
 
     private void calcWaitWages() {
