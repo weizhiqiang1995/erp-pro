@@ -4,11 +4,4 @@
         - allUse  是否需要登录才能使用   1是   0否  2需要登陆才能访问，但无需授权    默认为否
      -->
 
-    <!-- 系统定时任务开始 -->
-    <url id="sysquartz002" path="/post/SysQuartzController/queryMyTaskQuartzList" val="获取我的定时任务列表" allUse="1" groupName="定时任务">
-        <property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-        <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-    </url>
-    <!-- 系统定时任务结束 -->
-
 </controller>

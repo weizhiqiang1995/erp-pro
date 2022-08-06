@@ -1,18 +1,21 @@
 /*******************************************************************************
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
+
 package com.skyeye.quartz.consumer.impl;
 
 import cn.hutool.json.JSONUtil;
+import com.skyeye.common.client.ExecuteFeignClient;
 import com.skyeye.common.constans.MqConstants;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysQuartzDao;
-import com.skyeye.quartz.consumer.TaskMateService;
-import com.skyeye.eve.entity.quartz.SysQuartz;
+import com.skyeye.eve.rest.xxljob.XxlJobService;
 import com.skyeye.service.JobMateMationService;
+import com.xxl.job.core.context.XxlJobHelper;
+import com.xxl.job.core.handler.annotation.XxlJob;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,8 +23,8 @@ import java.util.Map;
 /**
  * 我的日程提醒
  */
-@Service("myScheduleDayMationService")
-public class MyScheduleDayMationService implements TaskMateService {
+@Component
+public class MyScheduleDayMationService {
 
     @Autowired
     private SysQuartzDao sysQuartzDao;
@@ -29,10 +32,15 @@ public class MyScheduleDayMationService implements TaskMateService {
     @Autowired
     private JobMateMationService jobMateMationService;
 
-    @Override
-    public void call(SysQuartz sysQuartz) {
+    @Autowired
+    private XxlJobService xxlJobService;
+
+    @XxlJob("myScheduleDayMationService")
+    public void call() {
+        String param = XxlJobHelper.getJobParam();
+        Map<String, String> paramMap = JSONUtil.toBean(param, null);
         Map<String, Object> bean = new HashMap<>();
-        bean.put("id", sysQuartz.getName());
+        bean.put("id", paramMap.get("objectId"));
         bean = sysQuartzDao.queryMationByScheduleId(bean);
         //发送消息
         String content = "尊敬的" + bean.get("userName").toString() + ",您好：<br/>您于" + bean.get("createTime").toString() + "设定的日程《" + bean.get("title").toString() + "》即将于" + bean.get("startTime").toString() + "开始，请做好准备哦。";
@@ -58,10 +66,11 @@ public class MyScheduleDayMationService implements TaskMateService {
             emailNotice.put("content", content);
             emailNotice.put("email", bean.get("email").toString());
             emailNotice.put("type", MqConstants.JobMateMationJobType.ORDINARY_MAIL_DELIVERY.getJobType());
-            jobMateMationService.sendMQProducer(JSONUtil.toJsonStr(emailNotice), sysQuartz.getCreateId());
+            jobMateMationService.sendMQProducer(JSONUtil.toJsonStr(emailNotice), paramMap.get("userId"));
         }
         //修改日程状态
         sysQuartzDao.editMationByScheduleId(bean);
+        ExecuteFeignClient.get(() -> xxlJobService.removeJob(paramMap.get("objectId")));
     }
 
 }

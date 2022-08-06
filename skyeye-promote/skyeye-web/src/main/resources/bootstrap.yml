@@ -33,6 +33,8 @@ webroot:
   skyeye-shop: skyeye-shop-${spring.profiles.active}
   # 工作流相关的服务
   skyeye-flowable: skyeye-flowable-${spring.profiles.active}
+  # xxl-job
+  xxl-job: xxl-job-${spring.profiles.active}
 
 topic:
   # 邮件通知的topic

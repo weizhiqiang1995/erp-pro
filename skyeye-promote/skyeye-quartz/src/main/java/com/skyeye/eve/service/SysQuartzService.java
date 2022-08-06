@@ -17,8 +17,6 @@ import com.skyeye.common.object.OutputObject;
  */
 public interface SysQuartzService {
 
-    void queryMyTaskQuartzList(InputObject inputObject, OutputObject outputObject);
-
     void startUpTaskQuartz(InputObject inputObject, OutputObject outputObject);
 
     void stopAndDeleteTaskQuartz(InputObject inputObject, OutputObject outputObject);

@@ -4,20 +4,24 @@
 
 package com.skyeye.eve.service.impl;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
+import com.alibaba.fastjson.JSON;
+import com.skyeye.common.client.ExecuteFeignClient;
+import com.skyeye.common.constans.QuartzConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.eve.dao.SysQuartzDao;
+import com.skyeye.common.util.ToolUtil;
+import com.skyeye.eve.entity.xxljob.XxlJobInfo;
 import com.skyeye.eve.rest.quartz.SysQuartzMation;
+import com.skyeye.eve.rest.xxljob.XxlJobService;
+import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.eve.service.SysQuartzService;
-import com.skyeye.quartz.config.QuartzService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -34,26 +38,13 @@ public class SysQuartzServiceImpl implements SysQuartzService {
     private static final Logger LOGGER = LoggerFactory.getLogger(SysQuartzServiceImpl.class);
 
     @Autowired
-    private SysQuartzDao sysQuartzDao;
+    private XxlJobService xxlJobService;
 
     @Autowired
-    private QuartzService quartzService;
+    private IAuthUserService iAuthUserService;
 
-    /**
-     * 获取我的定时任务列表
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryMyTaskQuartzList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        map.put("userId", inputObject.getLogParams().get("id"));
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = sysQuartzDao.queryMyTaskQuartzList(map);
-        outputObject.setBeans(beans);
-        outputObject.settotal(pages.getTotal());
-    }
+    @Value("${xxl.job.executor.appname}")
+    private String appName;
 
     /**
      * 启动定时任务
@@ -66,8 +57,39 @@ public class SysQuartzServiceImpl implements SysQuartzService {
         SysQuartzMation sysQuartz = inputObject.getParams(SysQuartzMation.class);
         String userId = inputObject.getLogParams().get("id").toString();
         LOGGER.info("start quartz, title is {}, userId is {}", sysQuartz.getTitle(), userId);
-        quartzService.startUpTaskQuartz(sysQuartz.getName(), sysQuartz.getTitle(), sysQuartz.getDelayedTime(),
-            userId, sysQuartz.getGroupId());
+        String groupId = ExecuteFeignClient.get(() -> xxlJobService.getGroupId(appName)).getBean().get("id").toString();
+        LOGGER.info("xxl-job groupId is {}", groupId);
+        XxlJobInfo xxlJobInfo = this.getXxlJobInfo(sysQuartz.getName(), groupId, sysQuartz.getDelayedTime(), sysQuartz.getTitle(), sysQuartz.getGroupId(), userId);
+        ExecuteFeignClient.get(() -> xxlJobService.addAndStart(xxlJobInfo));
+    }
+
+    private XxlJobInfo getXxlJobInfo(String objectId, String groupId, String delayedTime, String jobDesc, String taskType, String userId) {
+        XxlJobInfo xxlJobInfo = new XxlJobInfo();
+        Map<String, Object> user = iAuthUserService.queryUserMationByUserId(userId);
+        xxlJobInfo.setAuthor(user.get("name").toString());
+        xxlJobInfo.setJobGroup(Integer.parseInt(groupId));
+        xxlJobInfo.setJobDesc(QuartzConstants.QuartzMateMationJobType.getRemarkPrefixByTaskType(taskType, jobDesc));
+        xxlJobInfo.setScheduleType("CRON");
+        String cron = ToolUtil.getCrons1(delayedTime);
+        xxlJobInfo.setScheduleConf(cron);
+        xxlJobInfo.setGlueType("BEAN");
+        xxlJobInfo.setExecutorRouteStrategy("FIRST");
+        xxlJobInfo.setExecutorHandler(QuartzConstants.QuartzMateMationJobType.getServiceNameByTaskType(taskType));
+        xxlJobInfo.setObjectId(objectId);
+        xxlJobInfo.setExecutorParam(this.getExecutorParam(objectId, userId));
+        xxlJobInfo.setMisfireStrategy("DO_NOTHING");
+        xxlJobInfo.setExecutorBlockStrategy("SERIAL_EXECUTION");
+        xxlJobInfo.setExecutorTimeout(0);
+        xxlJobInfo.setExecutorFailRetryCount(0);
+        xxlJobInfo.setGlueRemark("GLUE代码初始化");
+        return xxlJobInfo;
+    }
+
+    private String getExecutorParam(String objectId, String userId) {
+        Map<String, String> executorParam = new HashMap<>();
+        executorParam.put("objectId", objectId);
+        executorParam.put("userId", userId);
+        return JSON.toJSONString(executorParam);
     }
 
     /**
@@ -80,9 +102,8 @@ public class SysQuartzServiceImpl implements SysQuartzService {
     public void stopAndDeleteTaskQuartz(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String name = map.get("name").toString();
-        String groupId = map.get("groupId").toString();
-        LOGGER.info("stop quartz, name is {}, groupId is {}", name, groupId);
-        quartzService.stopAndDeleteTaskQuartz(name, groupId);
+        LOGGER.info("stop quartz, name is {}", name);
+        ExecuteFeignClient.get(() -> xxlJobService.removeJob(name));
     }
 
 }

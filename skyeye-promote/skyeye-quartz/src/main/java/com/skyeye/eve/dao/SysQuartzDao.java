@@ -4,7 +4,6 @@
 
 package com.skyeye.eve.dao;
 
-import com.skyeye.eve.entity.quartz.SysQuartz;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,16 +18,6 @@ import java.util.Map;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 public interface SysQuartzDao {
-
-    int deleteByPrimaryKey(String id);
-
-    int insert(SysQuartz record);
-
-    List<SysQuartz> selectAll(Map<String, Object> map);
-
-    int deleteByName(String name);
-
-    int updateByName(SysQuartz record);
 
     // 问卷管理
     Map<String, Object> querySurveyMationById(Map<String, Object> map);
@@ -58,7 +47,5 @@ public interface SysQuartzDao {
     List<Map<String, Object>> queryUserMationsByWorkPlanId(Map<String, Object> map);
 
     void editNoticeStateById(@Param("noticeId") String noticeId, @Param("state") String state);
-
-    List<Map<String, Object>> queryMyTaskQuartzList(Map<String, Object> map);
 
 }
