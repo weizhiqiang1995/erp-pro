@@ -8,10 +8,10 @@ import cn.hutool.json.JSONUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.eve.dao.WagesPaymentHistoryDao;
 import com.skyeye.jedis.JedisClientService;
+import com.xxl.job.core.handler.annotation.XxlJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class StaffWagesPaymentQuartz {
     /**
      * 定时发放薪资功能，每月15日上午10:15触发
      */
-    @Scheduled(cron = "0 15 10 15 * ?")
+    @XxlJob("staffWagesPaymentQuartz")
     public void staffWagesPayment() {
         LOGGER.info("staff wagesPayment month is start");
         try {

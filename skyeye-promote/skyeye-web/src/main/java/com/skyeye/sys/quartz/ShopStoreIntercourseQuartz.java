@@ -14,10 +14,10 @@ import com.skyeye.eve.entity.shop.store.ShopStoreIntercourseMation;
 import com.skyeye.eve.entity.shop.store.ShopStoreIntercourseMationRest;
 import com.skyeye.eve.rest.shop.store.ShopStoreService;
 import com.skyeye.jedis.util.RedisLock;
+import com.xxl.job.core.handler.annotation.XxlJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -45,7 +45,7 @@ public class ShopStoreIntercourseQuartz {
     /**
      * 定时器计算门店昨日支出/收入往来信息,每天凌晨两点执行一次
      */
-    @Scheduled(cron = "0 0 2 * * ?")
+    @XxlJob("shopStoreIntercourseQuartz")
     public void calcShopStoreIntercourse() {
         log.info("定时器计算门店昨日支出/收入往来信息执行 start");
         RedisLock lock = new RedisLock(LOCK_KEY);

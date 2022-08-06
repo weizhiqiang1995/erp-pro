@@ -12,10 +12,10 @@ import com.skyeye.eve.rest.checkwork.CheckWorkTimeService;
 import com.skyeye.eve.service.SysEveUserStaffCapitalService;
 import com.skyeye.eve.service.WagesStaffMationService;
 import com.skyeye.wages.constant.WagesConstant;
+import com.xxl.job.core.handler.annotation.XxlJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -55,7 +55,7 @@ public class CalcStaffWaitPayWages {
     /**
      * 定时统计员工待结算其他奖金的数据 凌晨一点半执行
      */
-    @Scheduled(cron = "0 30 1 * * ?")
+    @XxlJob("calcStaffWaitPayWages")
     public void handler() {
         log.info("定时统计员工待结算薪资的数据定时任务开始执行");
         try {

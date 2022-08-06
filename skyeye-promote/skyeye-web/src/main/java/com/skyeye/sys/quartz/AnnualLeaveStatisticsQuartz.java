@@ -14,7 +14,6 @@ import com.xxl.job.core.handler.annotation.XxlJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
@@ -75,7 +74,6 @@ public class AnnualLeaveStatisticsQuartz {
     /**
      * 每个季度的第一天零点开始执行员工年假计算任务
      */
-    @Scheduled(cron = "0 00 00 1 1,4,7,10 ?")
     @XxlJob("annualLeaveStatisticsQuartz")
     public void annualLeaveStatistics() {
         LOGGER.info("annualLeaveStatistics start.");

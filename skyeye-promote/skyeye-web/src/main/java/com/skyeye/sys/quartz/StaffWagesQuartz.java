@@ -15,10 +15,10 @@ import com.skyeye.eve.service.WagesModelService;
 import com.skyeye.eve.service.WagesStaffMationService;
 import com.skyeye.jedis.JedisClientService;
 import com.skyeye.wages.constant.WagesConstant;
+import com.xxl.job.core.handler.annotation.XxlJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -99,8 +99,10 @@ public class StaffWagesQuartz {
      */
     private static final String IN_STATISTICS_STAFF_REDIS_KEY = "inStatisticsWagesStaff";
 
-    // 每月十号的凌晨两点开始执行薪资统计任务
-    @Scheduled(cron = "0 0 2 10 * ?")
+    /**
+     * 每月十号的凌晨两点开始执行薪资统计任务
+     */
+    @XxlJob("staffWagesQuartz")
     public void statisticsStaffWages() {
         try {
             // 获取上个月的年月

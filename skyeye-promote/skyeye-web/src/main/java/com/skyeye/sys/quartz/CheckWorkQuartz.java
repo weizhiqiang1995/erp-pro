@@ -14,10 +14,10 @@ import com.skyeye.eve.rest.checkwork.CheckWorkLeaveService;
 import com.skyeye.eve.rest.checkwork.CheckWorkService;
 import com.skyeye.eve.rest.checkwork.CheckWorkTimeService;
 import com.skyeye.eve.service.IScheduleDayService;
+import com.xxl.job.core.handler.annotation.XxlJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public class CheckWorkQuartz {
     /**
      * 定时器填充打卡信息,每天凌晨一点执行一次
      */
-    @Scheduled(cron = "0 0 1 * * ?")
+    @XxlJob("checkWorkQuartz")
     public void editCheckWorkMation() {
         log.info("填充打卡信息定时任务执行");
         try {

@@ -10,10 +10,10 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.MainPageDao;
 import com.skyeye.jedis.JedisClientService;
+import com.xxl.job.core.handler.annotation.XxlJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
@@ -43,7 +43,7 @@ public class HotForumQuartz {
     /**
      * 定时器计算每日热门贴
      */
-    @Scheduled(cron = "0 0 2 * * ?") //每天凌晨两点执行一次
+    @XxlJob("hotForumQuartz")
     public void editHotForumMation() {
         try {
             String yestoday = DateAfterSpacePointTime.getSpecifiedTime(
