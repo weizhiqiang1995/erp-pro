@@ -17,6 +17,8 @@ import com.skyeye.common.object.OutputObject;
  */
 public interface SysEveUserStaffCapitalService {
 
+    void addMonthMoney2StaffCapital(InputObject inputObject, OutputObject outputObject);
+
     /**
      * 新增员工待结算资金池信息
      *

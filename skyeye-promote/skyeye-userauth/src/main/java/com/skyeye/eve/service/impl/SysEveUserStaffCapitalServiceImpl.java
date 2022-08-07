@@ -34,6 +34,23 @@ public class SysEveUserStaffCapitalServiceImpl implements SysEveUserStaffCapital
     @Autowired
     private SysEveUserStaffCapitalDao sysEveUserStaffCapitalDao;
 
+    /**
+     * 新增员工待结算资金池信息(用于定时任务)
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void addMonthMoney2StaffCapital(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        String staffId = map.get("staffId").toString();
+        String companyId = map.get("companyId").toString();
+        String departmentId = map.get("departmentId").toString();
+        String monthTime = map.get("monthTime").toString();
+        Integer type = Integer.parseInt(map.get("type").toString());
+        String money = map.get("money").toString();
+        this.addMonthMoney2StaffCapital(staffId, companyId, departmentId, monthTime, type, money);
+    }
 
     /**
      * 新增员工待结算资金池信息

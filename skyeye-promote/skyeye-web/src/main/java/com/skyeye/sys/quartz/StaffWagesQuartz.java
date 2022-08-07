@@ -7,6 +7,7 @@ package com.skyeye.sys.quartz;
 import cn.hutool.json.JSONUtil;
 import com.skyeye.cache.local.LocalCacheMap;
 import com.skyeye.common.client.ExecuteFeignClient;
+import com.skyeye.common.constans.WagesConstant;
 import com.skyeye.common.util.*;
 import com.skyeye.eve.dao.*;
 import com.skyeye.eve.rest.checkwork.CheckWorkTimeService;
@@ -14,7 +15,6 @@ import com.skyeye.eve.service.SystemFoundationSettingsService;
 import com.skyeye.eve.service.WagesModelService;
 import com.skyeye.eve.service.WagesStaffMationService;
 import com.skyeye.jedis.JedisClientService;
-import com.skyeye.wages.constant.WagesConstant;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -467,7 +467,11 @@ public class StaffWagesQuartz {
         // 2.获取上个月指定员工的所有考勤记录信息
         List<Map<String, Object>> lastMonthCheckWork = wagesStaffMationDao.queryLastMonthCheckWork(staffId, lastMonthDate);
         // 3.设置应出勤的班次以及小时
-        wagesStaffMationService.setLastMonthBe(staffWorkTime, staffModelFieldMap, lastMonthDate);
+        Map<String, Object> monthBe = wagesStaffMationService.setLastMonthBe(staffWorkTime, lastMonthDate);
+        staffModelFieldMap.put(WagesConstant.DEFAULT_WAGES_FIELD_TYPE.LAST_MONTH_BE_NUM.getKey(),
+            monthBe.get(WagesConstant.DEFAULT_WAGES_FIELD_TYPE.LAST_MONTH_BE_NUM.getKey()).toString());
+        staffModelFieldMap.put(WagesConstant.DEFAULT_WAGES_FIELD_TYPE.LAST_MONTH_BE_HOUR.getKey(),
+            monthBe.get(WagesConstant.DEFAULT_WAGES_FIELD_TYPE.LAST_MONTH_BE_HOUR.getKey()).toString());
         // 上个月迟到的分钟集合
         List<String> lateMinute = new ArrayList<>();
         // 上个月早退的分钟集合

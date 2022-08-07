@@ -7,6 +7,7 @@ package com.skyeye.eve.service.impl;
 import cn.hutool.json.JSONUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.common.constans.WagesConstant;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.CalculationUtil;
@@ -14,19 +15,16 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.eve.dao.WagesModelDao;
 import com.skyeye.eve.dao.WagesModelFieldDao;
 import com.skyeye.eve.dao.WagesStaffMationDao;
+import com.skyeye.eve.entity.wages.WagesStaffWorkTimeMation;
 import com.skyeye.eve.service.IScheduleDayService;
 import com.skyeye.eve.service.WagesStaffMationService;
-import com.skyeye.wages.constant.WagesConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -57,13 +55,13 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
     /**
      * 计薪资字段状态
      */
-    public static enum STATE {
+    public enum State {
         WAIT_DESIGN_WAGES(1, "待设定"),
         TOO_DESIGN_WAGES(2, "已设定");
         private int state;
         private String name;
 
-        STATE(int state, String name) {
+        State(int state, String name) {
             this.state = state;
             this.name = name;
         }
@@ -146,7 +144,7 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
         // 保存薪资要素字段信息
         wagesStaffMationDao.saveStaffWagesModelFieldMation(wagesModelFieldMation);
         // 保存员工月标准薪资信息以及设定状态
-        wagesStaffMationDao.editStaffDesignWagesByStaffId(staffId, STATE.TOO_DESIGN_WAGES.getState(), map.get("actMoney").toString());
+        wagesStaffMationDao.editStaffDesignWagesByStaffId(staffId, State.TOO_DESIGN_WAGES.getState(), map.get("actMoney").toString());
     }
 
     /**
@@ -182,14 +180,28 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
     }
 
     /**
-     * 设置应出勤的班次以及小时
+     * 获取应出勤的班次以及小时
      *
-     * @param staffWorkTime      员工对应的考勤班次
-     * @param staffModelFieldMap 员工拥有的所有薪资要素字段以及对应的值
-     * @param lastMonthDate      指定年月，格式为yyyy-MM
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
-    public void setLastMonthBe(List<Map<String, Object>> staffWorkTime, Map<String, String> staffModelFieldMap, String lastMonthDate) {
+    public void setLastMonthBe(InputObject inputObject, OutputObject outputObject) {
+        WagesStaffWorkTimeMation wagesStaffWorkTimeMation = inputObject.getParams(WagesStaffWorkTimeMation.class);
+        Map<String, Object> staffModelFieldMap = this.setLastMonthBe(wagesStaffWorkTimeMation.getStaffWorkTime(),
+            wagesStaffWorkTimeMation.getLastMonthDate());
+        outputObject.setBean(staffModelFieldMap);
+    }
+
+    /**
+     * 设置应出勤的班次以及小时
+     *
+     * @param staffWorkTime 员工对应的考勤班次
+     * @param lastMonthDate 指定年月，格式为yyyy-MM
+     * @return 员工拥有的所有薪资要素字段以及对应的值
+     */
+    @Override
+    public Map<String, Object> setLastMonthBe(List<Map<String, Object>> staffWorkTime, String lastMonthDate) {
         List<String> lastMonthDays = DateUtil.getMonthFullDay(Integer.parseInt(lastMonthDate.split("-")[0]), Integer.parseInt(lastMonthDate.split("-")[1]));
         int lastMonthBeNum = 0;
         String lastMonthBeHour = "0";
@@ -224,8 +236,10 @@ public class WagesStaffMationServiceImpl implements WagesStaffMationService {
                 }
             }
         }
+        Map<String, Object> staffModelFieldMap = new HashMap<>();
         staffModelFieldMap.put(WagesConstant.DEFAULT_WAGES_FIELD_TYPE.LAST_MONTH_BE_NUM.getKey(), String.valueOf(lastMonthBeNum));
         staffModelFieldMap.put(WagesConstant.DEFAULT_WAGES_FIELD_TYPE.LAST_MONTH_BE_HOUR.getKey(), CalculationUtil.divide(lastMonthBeHour, "60", 2));
+        return staffModelFieldMap;
     }
 
 }

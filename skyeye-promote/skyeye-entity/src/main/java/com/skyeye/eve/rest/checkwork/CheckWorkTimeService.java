@@ -29,21 +29,4 @@ public interface CheckWorkTimeService {
     @GetMapping("/getAllCheckWorkTime")
     String getAllCheckWorkTime(@RequestParam("pointMonthDate") String pointMonthDate);
 
-    /**
-     * 获取所有未删除的考勤班次
-     *
-     * @return 所有未删除的考勤班次
-     */
-    @GetMapping("/queryAllStaffCheckWorkTime")
-    String queryAllStaffCheckWorkTime();
-
-    /**
-     * 获取指定考勤班次的工作日信息
-     *
-     * @param timeId 考勤班次id
-     * @return 指定考勤班次的工作日信息
-     */
-    @GetMapping("/queryWeekDayByTimeId")
-    String queryWeekDayByTimeId(@RequestParam("timeId") String timeId);
-
 }

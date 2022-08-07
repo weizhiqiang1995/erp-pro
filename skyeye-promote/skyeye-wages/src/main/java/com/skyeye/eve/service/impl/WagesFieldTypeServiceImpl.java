@@ -6,13 +6,13 @@ package com.skyeye.eve.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.common.constans.WagesConstant;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.eve.dao.WagesFieldTypeDao;
 import com.skyeye.eve.service.WagesFieldTypeService;
-import com.skyeye.wages.constant.WagesConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -4,14 +4,19 @@
 
 package com.skyeye.eve.controller;
 
+import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParams;
+import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.wages.WagesStaffWorkTimeMation;
 import com.skyeye.eve.service.WagesStaffMationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Api(value = "员工薪资管理", tags = "员工薪资管理", modelName = "薪资模块")
 public class WagesStaffMationController {
 
     @Autowired
@@ -70,6 +75,19 @@ public class WagesStaffMationController {
     @RequestMapping("/post/WagesStaffMationController/queryWagesStaffPaymentDetail")
     public void queryWagesStaffPaymentDetail(InputObject inputObject, OutputObject outputObject) {
         wagesStaffMationService.queryWagesStaffPaymentDetail(inputObject, outputObject);
+    }
+
+    /**
+     * 获取应出勤的班次以及小时
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "setLastMonthBe", value = "获取应出勤的班次以及小时", method = "POST", allUse = "0")
+    @ApiImplicitParams(classBean = WagesStaffWorkTimeMation.class)
+    @RequestMapping("/post/WagesStaffMationController/setLastMonthBe")
+    public void setLastMonthBe(InputObject inputObject, OutputObject outputObject) {
+        wagesStaffMationService.setLastMonthBe(inputObject, outputObject);
     }
 
 }
