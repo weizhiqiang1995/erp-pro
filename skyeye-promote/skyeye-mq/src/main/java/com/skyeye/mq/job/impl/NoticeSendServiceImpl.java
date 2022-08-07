@@ -43,11 +43,12 @@ public class NoticeSendServiceImpl implements RocketMQListener<String> {
             // 任务开始
             jobMateMationService.comMQJobMation(jobId, MqConstants.JOB_TYPE_IS_PROCESSING, "");
             String email = map.get("email").toString();
-            List<Map<String, Object>> beans = JSONUtil.toList(email, null);    //把字符串转成json数组
+            List<Map<String, Object>> beans = JSONUtil.toList(email, null);
             for (int i = 0; i < beans.size(); i++) {
                 Map<String, Object> bean = beans.get(i);
-                if (bean != null && !bean.isEmpty()) {    //邮件账号不为空
-                    new MailUtil().send(bean.get("userEmail").toString(), map.get("title").toString(), map.get("content").toString());    //发送邮件
+                if (bean != null && !bean.isEmpty()) {
+                    // 邮件账号不为空，发送邮件
+                    new MailUtil().send(bean.get("userEmail").toString(), map.get("title").toString(), map.get("content").toString());
                 }
             }
             // 任务完成

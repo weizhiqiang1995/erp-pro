@@ -18,7 +18,6 @@ import com.skyeye.eve.service.SysQuartzService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -43,9 +42,6 @@ public class SysQuartzServiceImpl implements SysQuartzService {
     @Autowired
     private IAuthUserService iAuthUserService;
 
-    @Value("${xxl.job.executor.appname}")
-    private String appName;
-
     /**
      * 启动定时任务
      *
@@ -57,7 +53,7 @@ public class SysQuartzServiceImpl implements SysQuartzService {
         SysQuartzMation sysQuartz = inputObject.getParams(SysQuartzMation.class);
         String userId = inputObject.getLogParams().get("id").toString();
         LOGGER.info("start quartz, title is {}, userId is {}", sysQuartz.getTitle(), userId);
-        String groupId = ExecuteFeignClient.get(() -> xxlJobService.getGroupId(appName)).getBean().get("id").toString();
+        String groupId = ExecuteFeignClient.get(() -> xxlJobService.getGroupId(sysQuartz.getAppName())).getBean().get("id").toString();
         LOGGER.info("xxl-job groupId is {}", groupId);
         XxlJobInfo xxlJobInfo = this.getXxlJobInfo(sysQuartz.getName(), groupId, sysQuartz.getDelayedTime(), sysQuartz.getTitle(), sysQuartz.getGroupId(), userId);
         ExecuteFeignClient.get(() -> xxlJobService.addAndStart(xxlJobInfo));
@@ -101,9 +97,9 @@ public class SysQuartzServiceImpl implements SysQuartzService {
     @Override
     public void stopAndDeleteTaskQuartz(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        String name = map.get("name").toString();
-        LOGGER.info("stop quartz, name is {}", name);
-        ExecuteFeignClient.get(() -> xxlJobService.removeJob(name));
+        String objectId = map.get("objectId").toString();
+        LOGGER.info("stop quartz, name is {}", objectId);
+        ExecuteFeignClient.get(() -> xxlJobService.removeJob(objectId));
     }
 
 }

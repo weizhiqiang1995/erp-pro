@@ -44,7 +44,7 @@ public class JobMateMationController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "sendMQProducer", value = "其他模块同步生产消息", method = "POST", allUse = "2")
+    @ApiOperation(id = "sendMQProducer", value = "其他模块同步生产消息", method = "POST", allUse = "0")
     @ApiImplicitParams(classBean = JobMateMation.class)
     @RequestMapping("/post/JobMateMationController/sendMQProducer")
     public void sendMQProducer(InputObject inputObject, OutputObject outputObject) {
