@@ -95,7 +95,8 @@ public class MainPageServiceImpl implements MainPageService {
             String createTime = ToolUtil.timeFormat(m.get("createTime").toString());
             m.put("createTime", createTime);
             String key = ForumConstants.forumBrowseNumsByForumId(m.get("id").toString());
-            if (ToolUtil.isBlank(jedisClient.get(key))) {//浏览量
+            if (ToolUtil.isBlank(jedisClient.get(key))) {
+                // 浏览量
                 m.put("browseNum", 0);
             } else {
                 String browseNum = jedisClient.get(key);
@@ -103,7 +104,7 @@ public class MainPageServiceImpl implements MainPageService {
             }
         }
         //按浏览量和评论数给集合排序
-        beans.sort(new Comparator<Map<String, Object>>() {//Comparator 比较器. 需要实现比较方法
+        beans.sort(new Comparator<Map<String, Object>>() {
             @Override
             public int compare(Map<String, Object> m1, Map<String, Object> m2) {
                 Integer m1num = Integer.parseInt(m1.get("browseNum").toString()) + Integer.parseInt(m1.get("commentNum").toString());

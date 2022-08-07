@@ -29,8 +29,6 @@ logging:
     com.skyeye.eve.dao: debug
 
 webroot:
-  # 商城服务
-  skyeye-shop: skyeye-shop-${spring.profiles.active}
   # 工作流相关的服务
   skyeye-flowable: skyeye-flowable-${spring.profiles.active}
   # xxl-job
