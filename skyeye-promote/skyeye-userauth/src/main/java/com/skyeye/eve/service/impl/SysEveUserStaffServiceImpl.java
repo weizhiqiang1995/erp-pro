@@ -497,7 +497,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         String staffId = map.get("staffId").toString();
         String retiredHolidayNumber = map.get("retiredHolidayNumber").toString();
         String retiredHolidayStatisTime = map.get("retiredHolidayStatisTime").toString();
-        sysEveUserStaffDao.updateSysUserStaffHolidayNumberById(staffId, retiredHolidayNumber, retiredHolidayStatisTime);
+        sysEveUserStaffDao.updateSysUserStaffRetiredHolidayNumberById(staffId, retiredHolidayNumber, retiredHolidayStatisTime);
     }
 
     /**

@@ -9,25 +9,15 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @ClassName: WagesFieldTypeDao
+ * @Description: 薪资要素字段
+ * @author: skyeye云系列--卫志强
+ * @date: 2022/8/8 22:23
+ * @Copyright: 2022 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
+ * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
+ */
 public interface WagesFieldTypeDao {
-
-    List<Map<String, Object>> queryWagesFieldTypeList(Map<String, Object> map);
-
-    List<Map<String, Object>> queryWagesFieldTypeListByKey(@Param("key") String key);
-
-    int insertWagesFieldTypeMation(Map<String, Object> key);
-
-    int insertWagesFieldTypeKeyToStaff(@Param("list") List<Map<String, Object>> staff);
-
-    Map<String, Object> queryWagesFieldTypeMationById(@Param("id") String id);
-
-    int editWagesFieldTypeMationById(Map<String, Object> map);
-
-    int editWagesFieldTypeStateMationById(@Param("id") String id, @Param("state") int state);
-
-    List<Map<String, Object>> queryEnableWagesFieldTypeList(Map<String, Object> map);
-
-    List<Map<String, Object>> queryAllStaffMationList();
 
     /**
      * 获取所有的薪资要素字段，包括启用，禁用，以及删除的要素字段key；相同的key，该SQL语句会根据key进行分组
@@ -35,4 +25,7 @@ public interface WagesFieldTypeDao {
      * @return List<Map < String, Object>>
      */
     List<Map<String, Object>> queryAllWagesFieldTypeList();
+
+    int insertWagesFieldTypeKeyToStaff(@Param("list") List<Map<String, Object>> staff);
+
 }

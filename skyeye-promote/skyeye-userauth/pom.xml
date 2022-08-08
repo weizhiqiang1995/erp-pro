@@ -19,11 +19,10 @@
 	</properties>
 
 	<dependencies>
-		
-		<!-- 引入薪资的依赖 -->
+
 		<dependency>
 			<groupId>com.skyeye</groupId>
-			<artifactId>skyeye-wages</artifactId>
+			<artifactId>skyeye-entity</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 

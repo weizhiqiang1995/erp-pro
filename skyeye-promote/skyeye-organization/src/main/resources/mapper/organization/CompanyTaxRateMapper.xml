@@ -46,28 +46,4 @@
         ORDER BY a.sort_no ASC
     </select>
 
-    <select id="queryAllCompanyTaxRate" resultType="java.util.Map">
-        SELECT
-            a.id,
-            a.company_id companyId,
-            CONVERT(a.min_money, decimal(24, 2)) minMoney,
-            CONVERT(a.max_money, decimal(24, 2)) maxMoney,
-            CONVERT(a.jan_rate, decimal(24, 2)) janRate,
-            CONVERT(a.feb_rate, decimal(24, 2)) febRate,
-            CONVERT(a.mar_rate, decimal(24, 2)) marRate,
-            CONVERT(a.apr_rate, decimal(24, 2)) aprRate,
-            CONVERT(a.may_rate, decimal(24, 2)) mayRate,
-            CONVERT(a.jun_rate, decimal(24, 2)) junRate,
-            CONVERT(a.jul_rate, decimal(24, 2)) julRate,
-            CONVERT(a.aug_rate, decimal(24, 2)) augRate,
-            CONVERT(a.sept_rate, decimal(24, 2)) septRate,
-            CONVERT(a.oct_rate, decimal(24, 2)) octRate,
-            CONVERT(a.nov_rate, decimal(24, 2)) novRate,
-            CONVERT(a.dec_rate, decimal(24, 2)) decRate,
-            a.sort_no sortNo
-        FROM
-            company_tax_rate a
-        ORDER BY a.sort_no ASC
-    </select>
-
 </mapper>

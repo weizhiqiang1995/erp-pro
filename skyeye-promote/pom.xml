@@ -24,7 +24,6 @@
 		<module>skyeye-code-doc</module>
 		<module>skyeye-user-phone</module>
 		<module>skyeye-gateway</module>
-        <module>skyeye-wages</module>
         <module>skyeye-organization</module>
         <module>skyeye-api</module>
     </modules>

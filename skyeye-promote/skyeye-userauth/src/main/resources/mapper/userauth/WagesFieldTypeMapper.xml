@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyeye.eve.dao.WagesFieldTypeDao">
+
+    <select id="queryAllWagesFieldTypeList" resultType="java.util.Map">
+        SELECT
+            a.key
+        FROM
+            wages_field_type a
+        GROUP BY a.key
+    </select>
+
+    <insert id="insertWagesFieldTypeKeyToStaff">
+        INSERT into wages_field_staff_mation
+        (staff_id, field_type_key)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.id}, #{item.key})
+        </foreach>
+    </insert>
+
+</mapper>

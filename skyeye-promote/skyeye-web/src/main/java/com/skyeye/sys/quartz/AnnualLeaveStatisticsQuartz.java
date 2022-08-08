@@ -9,7 +9,7 @@ import com.skyeye.common.util.CalculationUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveUserStaffDao;
-import com.skyeye.eve.service.SystemFoundationSettingsService;
+import com.skyeye.eve.service.ISystemFoundationSettingsService;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +36,7 @@ public class AnnualLeaveStatisticsQuartz {
     private static Logger LOGGER = LoggerFactory.getLogger(AnnualLeaveStatisticsQuartz.class);
 
     @Autowired
-    private SystemFoundationSettingsService systemFoundationSettingsService;
+    private ISystemFoundationSettingsService iSystemFoundationSettingsService;
 
     @Autowired
     private SysEveUserStaffDao sysEveUserStaffDao;
@@ -152,7 +152,7 @@ public class AnnualLeaveStatisticsQuartz {
      * @return
      */
     private List<Map<String, Object>> getSystemYearHolidaysMation() {
-        Map<String, Object> sysSetting = systemFoundationSettingsService.getSystemFoundationSettings();
+        Map<String, Object> sysSetting = iSystemFoundationSettingsService.querySystemFoundationSettingsList();
         String yearHolidaysMationStr = sysSetting.get("yearHolidaysMation").toString();
         return JSONUtil.toList(yearHolidaysMationStr, null);
     }

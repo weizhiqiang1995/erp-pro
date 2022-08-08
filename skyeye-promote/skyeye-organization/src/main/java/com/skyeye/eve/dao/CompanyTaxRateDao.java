@@ -23,6 +23,4 @@ public interface CompanyTaxRateDao {
 
     List<Map<String, Object>> queryCompanyTaxRateByCompanyId(@Param("companyId") String companyId);
 
-    List<Map<String, Object>> queryAllCompanyTaxRate();
-
 }
