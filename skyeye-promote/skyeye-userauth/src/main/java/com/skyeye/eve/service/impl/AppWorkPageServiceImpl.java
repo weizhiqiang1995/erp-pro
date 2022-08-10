@@ -77,8 +77,8 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
         AppWorkPageMation appWorkPageMation = inputObject.getParams(AppWorkPageMation.class);
         // 1.根据条件进行校验
         QueryWrapper<AppWorkPageMation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageMation.class, "parentId"), appWorkPageMation.getParentId());
-        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageMation.class, "title"), appWorkPageMation.getTitle());
+        queryWrapper.eq(MybatisPlusUtil.toColumns(AppWorkPageMation::getParentId), appWorkPageMation.getParentId());
+        queryWrapper.eq(MybatisPlusUtil.toColumns(AppWorkPageMation::getTitle), appWorkPageMation.getTitle());
         if (StringUtils.isNotEmpty(appWorkPageMation.getId())) {
             queryWrapper.ne(CommonConstants.ID, appWorkPageMation.getId());
         }
@@ -203,9 +203,9 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
         String parentId = map.get("parentId").toString();
         String desktopId = map.get("desktopId").toString();
         QueryWrapper<AppWorkPageMation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageMation.class, "parentId"), parentId);
+        queryWrapper.eq(MybatisPlusUtil.toColumns(AppWorkPageMation::getParentId), parentId);
         if (StringUtils.isNotEmpty(desktopId)) {
-            queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageMation.class, "desktopId"), desktopId);
+            queryWrapper.eq(MybatisPlusUtil.toColumns(AppWorkPageMation::getDesktopId), desktopId);
         }
         List<AppWorkPageMation> appWorkPageMationList = appWorkPageDao.selectList(queryWrapper);
         appWorkPageMationList.forEach(bean -> {

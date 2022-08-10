@@ -76,7 +76,7 @@ public class SysEveWinServiceImpl implements SysEveWinService {
         SysEveWinMation sysEveWinMation = inputObject.getParams(SysEveWinMation.class);
         // 1.根据条件进行校验
         QueryWrapper<SysEveWinMation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysEveWinMation.class, "sysName"), sysEveWinMation.getSysName());
+        queryWrapper.eq(MybatisPlusUtil.toColumns(SysEveWinMation::getSysName), sysEveWinMation.getSysName());
         if (StringUtils.isNotEmpty(sysEveWinMation.getId())) {
             queryWrapper.ne(CommonConstants.ID, sysEveWinMation.getId());
         }

@@ -107,9 +107,9 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
         // 1.根据条件进行校验
         QueryWrapper<AppWorkPageAuthPointMation> queryWrapper = new QueryWrapper<>();
         queryWrapper.and(wrapper ->
-            wrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageAuthPointMation.class, "title"), appWorkPageAuthPointMation.getTitle())
-                .or().eq(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageAuthPointMation.class, "authMenu"), appWorkPageAuthPointMation.getAuthMenu()));
-        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(AppWorkPageAuthPointMation.class, "menuId"), appWorkPageAuthPointMation.getMenuId());
+            wrapper.eq(MybatisPlusUtil.toColumns(AppWorkPageAuthPointMation::getTitle), appWorkPageAuthPointMation.getTitle())
+                .or().eq(MybatisPlusUtil.toColumns(AppWorkPageAuthPointMation::getAuthMenu), appWorkPageAuthPointMation.getAuthMenu()));
+        queryWrapper.eq(MybatisPlusUtil.toColumns(AppWorkPageAuthPointMation::getMenuId), appWorkPageAuthPointMation.getMenuId());
         if (StringUtils.isNotEmpty(appWorkPageAuthPointMation.getId())) {
             queryWrapper.ne(CommonConstants.ID, appWorkPageAuthPointMation.getId());
         }

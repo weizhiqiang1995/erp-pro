@@ -92,10 +92,10 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
         SysEveDesktopMation sysEveDesktopMation = inputObject.getParams(SysEveDesktopMation.class);
         // 1.根据条件进行校验
         QueryWrapper<SysEveDesktopMation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.ne(MybatisPlusUtil.getDeclaredFieldsInfo2(SysEveDesktopMation.class, "state"), State.START_DELETE.getState());
+        queryWrapper.ne(MybatisPlusUtil.toColumns(SysEveDesktopMation::getState), State.START_DELETE.getState());
         queryWrapper.and(wrapper ->
-            wrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysEveDesktopMation.class, "desktopName"), sysEveDesktopMation.getDesktopName())
-                .or().eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysEveDesktopMation.class, "desktopCode"), sysEveDesktopMation.getDesktopCode()));
+            wrapper.eq(MybatisPlusUtil.toColumns(SysEveDesktopMation::getDesktopName), sysEveDesktopMation.getDesktopName())
+                .or().eq(MybatisPlusUtil.toColumns(SysEveDesktopMation::getDesktopCode), sysEveDesktopMation.getDesktopCode()));
         if (StringUtils.isNotEmpty(sysEveDesktopMation.getId())) {
             queryWrapper.ne(CommonConstants.ID, sysEveDesktopMation.getId());
         }

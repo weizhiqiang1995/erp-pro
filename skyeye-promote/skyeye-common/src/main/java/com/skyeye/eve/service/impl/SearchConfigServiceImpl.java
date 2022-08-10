@@ -133,8 +133,8 @@ public class SearchConfigServiceImpl implements SearchConfigService {
         SearchMation searchMation = inputObject.getParams(SearchMation.class);
         // 1.根据appId和urlId进行校验
         QueryWrapper<SearchMation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SearchMation.class, "appId"), searchMation.getAppId());
-        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SearchMation.class, "urlId"), searchMation.getUrlId());
+        queryWrapper.eq(MybatisPlusUtil.toColumns(SearchMation::getAppId), searchMation.getAppId());
+        queryWrapper.eq(MybatisPlusUtil.toColumns(SearchMation::getUrlId), searchMation.getUrlId());
         if (StringUtils.isNotEmpty(searchMation.getId())) {
             queryWrapper.ne(CommonConstants.ID, searchMation.getId());
         }
@@ -161,8 +161,8 @@ public class SearchConfigServiceImpl implements SearchConfigService {
     @Override
     public SearchMation querySearchMation(String urlId, String appId) {
         QueryWrapper<SearchMation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SearchMation.class, "urlId"), urlId);
-        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SearchMation.class, "appId"), appId);
+        queryWrapper.eq(MybatisPlusUtil.toColumns(SearchMation::getUrlId), urlId);
+        queryWrapper.eq(MybatisPlusUtil.toColumns(SearchMation::getAppId), appId);
         return searchDao.selectOne(queryWrapper);
     }
 

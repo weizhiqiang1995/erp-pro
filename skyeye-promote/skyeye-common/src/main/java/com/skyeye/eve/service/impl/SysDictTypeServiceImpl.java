@@ -74,8 +74,8 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
         // 1.根据dictName和dictCode进行校验
         QueryWrapper<SysDictTypeMation> queryWrapper = new QueryWrapper<>();
         queryWrapper.and(wrapper ->
-            wrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysDictTypeMation.class, "dictName"), sysDictTypeMation.getDictName())
-                .or().eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysDictTypeMation.class, "dictCode"), sysDictTypeMation.getDictCode()));
+            wrapper.eq(MybatisPlusUtil.toColumns(SysDictTypeMation::getDictName), sysDictTypeMation.getDictName())
+                .or().eq(MybatisPlusUtil.toColumns(SysDictTypeMation::getDictCode), sysDictTypeMation.getDictCode()));
         if (StringUtils.isNotEmpty(sysDictTypeMation.getId())) {
             queryWrapper.ne(CommonConstants.ID, sysDictTypeMation.getId());
         }
@@ -136,7 +136,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
         String status = inputObject.getParams().get("status").toString();
         QueryWrapper<SysDictTypeMation> queryWrapper = new QueryWrapper<>();
         if (StringUtils.isNotEmpty(status)) {
-            queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysDictTypeMation.class, "status"), status);
+            queryWrapper.eq(MybatisPlusUtil.toColumns(SysDictTypeMation::getStatus), status);
         }
         List<SysDictTypeMation> dictTypeList = sysDictTypeDao.selectList(queryWrapper);
         List<Map<String, Object>> result = new ArrayList<>();

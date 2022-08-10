@@ -87,8 +87,8 @@ public class SysDictDataServiceImpl implements SysDictDataService {
         SysDictDataMation sysDictDataMation = inputObject.getParams(SysDictDataMation.class);
         // 1.根据dictName和dictTypeId进行校验
         QueryWrapper<SysDictDataMation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysDictDataMation.class, "dictName"), sysDictDataMation.getDictName());
-        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysDictDataMation.class, "dictTypeId"), sysDictDataMation.getDictTypeId());
+        queryWrapper.eq(MybatisPlusUtil.toColumns(SysDictDataMation::getDictName), sysDictDataMation.getDictName());
+        queryWrapper.eq(MybatisPlusUtil.toColumns(SysDictDataMation::getDictTypeId), sysDictDataMation.getDictTypeId());
         if (StringUtils.isNotEmpty(sysDictDataMation.getId())) {
             queryWrapper.ne(CommonConstants.ID, sysDictDataMation.getId());
         }
@@ -118,9 +118,9 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     private void setIsDefault(SysDictDataMation sysDictDataMation) {
         if (CommonLetterConstants.LETTER_BIG_Y.equals(sysDictDataMation.getIsDefault())) {
             UpdateWrapper<SysDictDataMation> updateWrapper = new UpdateWrapper<>();
-            updateWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysDictDataMation.class, "dictTypeId"), sysDictDataMation.getDictTypeId());
+            updateWrapper.eq(MybatisPlusUtil.toColumns(SysDictDataMation::getDictTypeId), sysDictDataMation.getDictTypeId());
             updateWrapper.ne(CommonConstants.ID, sysDictDataMation.getId());
-            updateWrapper.set(MybatisPlusUtil.getDeclaredFieldsInfo2(SysDictDataMation.class, "isDefault"), CommonLetterConstants.LETTER_BIG_N);
+            updateWrapper.set(MybatisPlusUtil.toColumns(SysDictDataMation::getIsDefault), CommonLetterConstants.LETTER_BIG_N);
             sysDictDataDao.update(null, updateWrapper);
         }
     }

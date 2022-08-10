@@ -108,9 +108,9 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
         // 1.根据条件进行校验
         QueryWrapper<SysMenuAuthPointMation> queryWrapper = new QueryWrapper<>();
         queryWrapper.and(wrapper ->
-            wrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysMenuAuthPointMation.class, "authMenuName"), sysMenuAuthPointMation.getAuthMenuName())
-                .or().eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysMenuAuthPointMation.class, "authMenu"), sysMenuAuthPointMation.getAuthMenu()));
-        queryWrapper.eq(MybatisPlusUtil.getDeclaredFieldsInfo2(SysMenuAuthPointMation.class, "menuId"), sysMenuAuthPointMation.getMenuId());
+            wrapper.eq(MybatisPlusUtil.toColumns(SysMenuAuthPointMation::getAuthMenuName), sysMenuAuthPointMation.getAuthMenuName())
+                .or().eq(MybatisPlusUtil.toColumns(SysMenuAuthPointMation::getAuthMenu), sysMenuAuthPointMation.getAuthMenu()));
+        queryWrapper.eq(MybatisPlusUtil.toColumns(SysMenuAuthPointMation::getMenuId), sysMenuAuthPointMation.getMenuId());
         if (StringUtils.isNotEmpty(sysMenuAuthPointMation.getId())) {
             queryWrapper.ne(CommonConstants.ID, sysMenuAuthPointMation.getId());
         }
