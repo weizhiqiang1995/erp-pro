@@ -16,7 +16,9 @@ import com.skyeye.eve.dao.SearchDao;
 import com.skyeye.eve.entity.search.SearchMation;
 import com.skyeye.eve.entity.search.SearchOperatorMation;
 import com.skyeye.eve.entity.search.SearchParamsConfigMation;
+import com.skyeye.eve.service.ISearchConfigService;
 import com.skyeye.eve.service.SearchConfigService;
+import com.skyeye.jedis.JedisClientService;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -38,6 +40,12 @@ public class SearchConfigServiceImpl implements SearchConfigService {
 
     @Autowired
     private SearchDao searchDao;
+
+    @Autowired
+    private ISearchConfigService iSearchConfigService;
+
+    @Autowired
+    private JedisClientService jedisService;
 
     /**
      * 根据urlId以及appId获取高级查询的参数配置信息----用于前台使用
@@ -152,6 +160,11 @@ public class SearchConfigServiceImpl implements SearchConfigService {
                 LOGGER.info("insert searchConfig data, id is {}", searchMation.getId());
                 searchDao.insert(searchMation);
             }
+            // 删除缓存
+            String searchParamsConfigCacheKey = iSearchConfigService.querySearchParamsConfigCacheKeyById(searchMation.getUrlId(), searchMation.getAppId());
+            String searchParamsConfigToHtmlCacheKey = iSearchConfigService.querySearchParamsConfigToHtmlCacheKeyById(searchMation.getUrlId(), searchMation.getAppId());
+            jedisService.del(searchParamsConfigCacheKey);
+            jedisService.del(searchParamsConfigToHtmlCacheKey);
             outputObject.setBean(searchMation);
         } else {
             outputObject.setreturnMessage("this data is non-existent.");
