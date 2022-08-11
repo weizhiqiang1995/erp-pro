@@ -93,8 +93,6 @@ public class SysEveWinController {
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "querySysEveWinList", value = "获取所有的服务信息", method = "GET", allUse = "2")
-    @ApiImplicitParams({
-        @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
     @RequestMapping("/post/SysEveWinController/querySysEveWinList")
     public void querySysEveWinList(InputObject inputObject, OutputObject outputObject) {
         sysEveWinService.querySysEveWinList(inputObject, outputObject);
