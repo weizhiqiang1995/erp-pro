@@ -88,7 +88,7 @@ BOM表|为自产商品打造结构清单，清晰了解成本价等|生产计划
 [Maven](http://maven.apache.org/)|项目构建管理|
 [redis](https://redis.io/)|key-value存储系统|3.2集群（不要问我单机的能不能行）
 [webSocket](http://www.runoob.com/html/html5-websocket.html)|浏览器与服务器全双工(full-duplex)通信|
-[quartz](http://www.quartz-scheduler.org/)|定时任务|2.2.2
+xxl-job|定时任务|https://gitee.com/xuxueli0323/xxl-job?_from=gitee_search/
 [RocketMQ](https://rocketmq.apache.org/dowloading/releases/)|消息队列|
 [Java]()|Java|1.8
 [MySQL]()|数据库|5.5.28
