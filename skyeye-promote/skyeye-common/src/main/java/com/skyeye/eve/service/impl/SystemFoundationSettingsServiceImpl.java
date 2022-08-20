@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSON;
 import com.skyeye.common.client.ExecuteFeignClient;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.MapUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SystemFoundationSettingsDao;
 import com.skyeye.eve.rest.flowable.order.SysOrderService;
@@ -18,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,7 +79,7 @@ public class SystemFoundationSettingsServiceImpl implements SystemFoundationSett
     @Override
     public Map<String, Object> getSystemFoundationSettings() {
         Map<String, Object> map = systemFoundationSettingsDao.querySystemFoundationSettingsList();
-        if (map == null || map.isEmpty()) {
+        if (CollectionUtils.isEmpty(map)) {
             map = getBaseSettings();
             systemFoundationSettingsDao.insertSystemFoundationSettings(map);
         }
@@ -109,21 +111,20 @@ public class SystemFoundationSettingsServiceImpl implements SystemFoundationSett
      */
     private void judgeAndInitDefault(Map<String, Object> map) {
         // 企业假期类型以及扣薪信息
-        if (!map.containsKey("holidaysTypeJson") || ToolUtil.isBlank(map.get("holidaysTypeJson").toString())) {
+        if (MapUtil.checkKeyIsNull(map, "holidaysTypeJson")) {
             map.put("holidaysTypeJson", new ArrayList<>());
         }
         // 年假信息
-        if (!map.containsKey("yearHolidaysMation") || ToolUtil.isBlank(map.get("yearHolidaysMation").toString())) {
+        if (MapUtil.checkKeyIsNull(map, "yearHolidaysMation")) {
             map.put("yearHolidaysMation", new ArrayList<>());
         }
         // 异常考勤制度管理信息
-        if (!map.containsKey("abnormalMation") || ToolUtil.isBlank(map.get("abnormalMation").toString())) {
+        if (MapUtil.checkKeyIsNull(map, "abnormalMation")) {
             map.put("abnormalMation", new ArrayList<>());
         }
         // ERP单据审核的一些设置
-        if (!map.containsKey("erpExamineBasicDesign") || ToolUtil.isBlank(map.get("erpExamineBasicDesign").toString())) {
-            List<Map<String, Object>> beans =
-                ExecuteFeignClient.get(() -> sysOrderService.querySysOrderConstants()).getRows();
+        if (MapUtil.checkKeyIsNull(map, "erpExamineBasicDesign")) {
+            List<Map<String, Object>> beans = ExecuteFeignClient.get(() -> sysOrderService.querySysOrderConstants()).getRows();
             map.put("erpExamineBasicDesign", JSON.toJSONString(beans));
         }
     }
