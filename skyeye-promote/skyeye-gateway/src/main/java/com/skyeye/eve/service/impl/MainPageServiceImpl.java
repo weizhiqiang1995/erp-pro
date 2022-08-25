@@ -11,8 +11,11 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.MainPageDao;
+import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.eve.service.MainPageService;
 import com.skyeye.jedis.JedisClientService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +24,16 @@ import java.util.*;
 @Service
 public class MainPageServiceImpl implements MainPageService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainPageServiceImpl.class);
+
     @Autowired
     private MainPageDao mainPageDao;
 
     @Autowired
     public JedisClientService jedisClient;
+
+    @Autowired
+    private IAuthUserService iAuthUserService;
 
     /**
      * 获取本月考勤天数，我的文件数，我的论坛帖数，我的知识库文档数
@@ -64,17 +72,18 @@ public class MainPageServiceImpl implements MainPageService {
         List<Map<String, Object>> beans = new ArrayList<>();
         if (ToolUtil.isBlank(jedisClient.get(MessageConstants.sysSecondNoticeTypeUpStateList("")))) {
             //若缓存中无值
-            beans = mainPageDao.queryFirstSysNoticeTypeUpStateList(); //从数据库中查询
-            jedisClient.set(MessageConstants.sysSecondNoticeTypeUpStateList(""), JSONUtil.toJsonStr(beans));    //将从数据库中查来的内容存到缓存中
+            beans = mainPageDao.queryFirstSysNoticeTypeUpStateList();
+            jedisClient.set(MessageConstants.sysSecondNoticeTypeUpStateList(""), JSONUtil.toJsonStr(beans));
         } else {
             beans = JSONUtil.toList(jedisClient.get(MessageConstants.sysSecondNoticeTypeUpStateList("")), null);
         }
         beans.forEach(bean -> {
             try {
                 List<Map<String, Object>> content = mainPageDao.queryNoticeContentListByUserIdAndTypeId(userId, bean.get("id").toString());
+                iAuthUserService.setNameByIdList(content, "createId", "createName");
                 bean.put("content", content);
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.warn("queryNoticeContentListByUserId failed, reason is {}.", e);
             }
         });
         outputObject.setBeans(beans);

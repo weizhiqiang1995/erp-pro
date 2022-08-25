@@ -61,7 +61,7 @@
 					a.id,
 					a.title,
 					CONVERT (a.real_lines_time, CHAR) linesTime,
-					a.create_name createName,
+					a.create_id createId,
 					d.type_name typeName
 				FROM
 					sys_notice a,
@@ -79,7 +79,7 @@
 					a.id,
 					a.title,
 					CONVERT (a.real_lines_time, CHAR) linesTime,
-					a.create_name createName,
+					a.create_id createId,
 					d.type_name typeName
 				FROM
 					sys_notice a,
