@@ -4,9 +4,8 @@
 
 package com.skyeye.dao;
 
-import org.apache.ibatis.annotations.Param;
-
-import java.util.Map;
+import com.skyeye.eve.dao.SkyeyeBaseMapper;
+import com.skyeye.eve.entity.api.ApiMation;
 
 /**
  * @ClassName: ApiMationDao
@@ -16,11 +15,6 @@ import java.util.Map;
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-public interface ApiMationDao {
+public interface ApiMationDao extends SkyeyeBaseMapper<ApiMation> {
 
-    Map<String, Object> queryApiMationToEditById(@Param("urlId") String urlId);
-
-    int editApiMationById(Map<String, Object> map);
-
-    int insertApiMation(Map<String, Object> map);
 }

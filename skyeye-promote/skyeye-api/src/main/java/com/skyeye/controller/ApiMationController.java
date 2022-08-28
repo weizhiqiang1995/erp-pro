@@ -4,39 +4,50 @@
 
 package com.skyeye.controller;
 
+import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParam;
+import com.skyeye.annotation.api.ApiImplicitParams;
+import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.api.ApiMation;
 import com.skyeye.service.ApiMationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Api(value = "公共接口", tags = "公共接口", modelName = "API模块")
 public class ApiMationController {
 
     @Autowired
     private ApiMationService apiMationService;
 
     /**
-     * 通过id查找对应的api接口信息
+     * 新增/编辑api接口信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @RequestMapping("/post/ApiMationController/selectApiMationById")
-    public void selectApiMationById(InputObject inputObject, OutputObject outputObject) {
-        apiMationService.selectApiMationById(inputObject, outputObject);
+    @ApiOperation(id = "writeApiMation", value = "新增/编辑api接口信息", method = "POST", allUse = "2")
+    @ApiImplicitParams(classBean = ApiMation.class)
+    @RequestMapping("/post/ApiMationController/writeApiMation")
+    public void writeApiMation(InputObject inputObject, OutputObject outputObject) {
+        apiMationService.writeApiMation(inputObject, outputObject);
     }
 
     /**
-     * 编辑api接口信息
+     * 删除api接口信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @RequestMapping("/post/ApiMationController/editApiMationById")
-    public void editApiMationById(InputObject inputObject, OutputObject outputObject) {
-        apiMationService.editApiMationById(inputObject, outputObject);
+    @ApiOperation(id = "deleteApiMationById", value = "删除api接口信息", method = "DELETE", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
+    @RequestMapping("/post/ApiMationController/deleteApiMationById")
+    public void deleteApiMationById(InputObject inputObject, OutputObject outputObject) {
+        apiMationService.deleteApiMationById(inputObject, outputObject);
     }
 
 }

@@ -4,18 +4,24 @@
 
 package com.skyeye.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.DataCommonUtil;
+import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.dao.ApiMationDao;
+import com.skyeye.eve.entity.api.ApiMation;
 import com.skyeye.service.ApiMationService;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * @ClassName: ApiMationServiceImpl
@@ -28,26 +34,10 @@ import java.util.Map;
 @Service
 public class ApiMationServiceImpl implements ApiMationService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApiMationServiceImpl.class);
+
     @Autowired
     private ApiMationDao apiMationDao;
-
-    @Value("${skyeye.appid}")
-    private String appId;
-
-    /**
-     * 通过id查找对应的api接口信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void selectApiMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String urlId = map.get("urlId").toString();
-        Map<String, Object> bean = apiMationDao.queryApiMationToEditById(urlId);
-        outputObject.setBean(bean);
-        outputObject.settotal(1);
-    }
 
     /**
      * 编辑api接口信息
@@ -57,19 +47,61 @@ public class ApiMationServiceImpl implements ApiMationService {
      */
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editApiMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String urlId = map.get("urlId").toString();
-        Map<String, Object> bean = apiMationDao.queryApiMationToEditById(urlId);
-        map.put("userId", inputObject.getLogParams().get("id"));
-        map.put("currentTime", DateUtil.getTimeAndToString());
-        if (bean != null && !bean.isEmpty()) {
-            apiMationDao.editApiMationById(map);
-        } else {
-            map.put("id", ToolUtil.getSurFaceId());
-            map.put("appId", appId);
-            apiMationDao.insertApiMation(map);
+    public void writeApiMation(InputObject inputObject, OutputObject outputObject) {
+        ApiMation apiMation = inputObject.getParams(ApiMation.class);
+        // 1.校验
+        QueryWrapper<ApiMation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(MybatisPlusUtil.toColumns(ApiMation::getAppId), apiMation.getAppId());
+        queryWrapper.eq(MybatisPlusUtil.toColumns(ApiMation::getRequestUrl), apiMation.getRequestUrl());
+        queryWrapper.eq(MybatisPlusUtil.toColumns(ApiMation::getTitle), apiMation.getTitle());
+        if (StringUtils.isNotEmpty(apiMation.getId())) {
+            queryWrapper.ne(CommonConstants.ID, apiMation.getId());
         }
+        ApiMation checkDictTypeMation = apiMationDao.selectOne(queryWrapper);
+        if (ObjectUtils.isEmpty(checkDictTypeMation)) {
+            String userId = inputObject.getLogParams().get("id").toString();
+            // 2.新增/编辑数据
+            if (StringUtils.isNotEmpty(apiMation.getId())) {
+                LOGGER.info("update ApiMation data, id is {}", apiMation.getId());
+                DataCommonUtil.setCommonLastUpdateDataByGenericity(apiMation, userId);
+                apiMationDao.updateById(apiMation);
+            } else {
+                DataCommonUtil.setCommonDataByGenericity(apiMation, userId);
+                LOGGER.info("insert ApiMation data, id is {}", apiMation.getId());
+                apiMationDao.insert(apiMation);
+            }
+            outputObject.setBean(apiMation);
+        } else {
+            outputObject.setreturnMessage("this data [title] is non-existent.");
+        }
+    }
+
+    /**
+     * 根据appId和urlId获取接口参数信息
+     *
+     * @param appId
+     * @param urlId
+     * @return
+     */
+    @Override
+    public List<ApiMation> queryApiMationByAppIdAndUrlId(String appId, String urlId) {
+        QueryWrapper<ApiMation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(MybatisPlusUtil.toColumns(ApiMation::getAppId), appId);
+        queryWrapper.eq(MybatisPlusUtil.toColumns(ApiMation::getRequestUrl), urlId);
+        List<ApiMation> apiMations = apiMationDao.selectList(queryWrapper);
+        return apiMations;
+    }
+
+    /**
+     * 删除api接口信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void deleteApiMationById(InputObject inputObject, OutputObject outputObject) {
+        String id = inputObject.getParams().get("id").toString();
+        apiMationDao.deleteById(id);
     }
 
 }

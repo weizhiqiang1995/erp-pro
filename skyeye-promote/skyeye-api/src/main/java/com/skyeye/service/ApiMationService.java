@@ -6,11 +6,15 @@ package com.skyeye.service;
 
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.api.ApiMation;
+
+import java.util.List;
 
 public interface ApiMationService {
 
-    void selectApiMationById(InputObject inputObject, OutputObject outputObject);
+    void writeApiMation(InputObject inputObject, OutputObject outputObject);
 
-    void editApiMationById(InputObject inputObject, OutputObject outputObject);
+    List<ApiMation> queryApiMationByAppIdAndUrlId(String appId, String urlId);
 
+    void deleteApiMationById(InputObject inputObject, OutputObject outputObject);
 }

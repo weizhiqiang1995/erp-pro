@@ -11,9 +11,11 @@ import com.skyeye.common.constans.RequestConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.ObjectConstant;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.api.ApiMation;
 import com.skyeye.eve.entity.search.SearchMation;
 import com.skyeye.eve.service.SearchConfigService;
 import com.skyeye.jedis.JedisClientService;
+import com.skyeye.service.ApiMationService;
 import com.skyeye.service.ApiService;
 import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,9 @@ public class ApiServiceImpl implements ApiService {
 
     @Autowired
     private SearchConfigService searchConfigService;
+
+    @Autowired
+    private ApiMationService apiMationService;
 
     /**
      * 获取接口列表
@@ -105,10 +110,23 @@ public class ApiServiceImpl implements ApiService {
             params = params.stream().sorted(Comparator.comparing(bean -> bean.get("number").toString())).collect(Collectors.toList());
             apiMation.put("list", params);
             loadSearchConfig(appId, apiId, params, apiMation);
+
+            loadApiParamsMation(appId, apiId, apiMation);
             outputObject.setBean(apiMation);
         } else {
             outputObject.setreturnMessage("该信息不存在。");
         }
+    }
+
+    /**
+     * 获取api参数信息
+     *
+     * @param appId
+     * @param apiId
+     */
+    private void loadApiParamsMation(String appId, String apiId, Map<String, Object> apiMation) {
+        List<ApiMation> apiParamsList = apiMationService.queryApiMationByAppIdAndUrlId(appId, apiId);
+        apiMation.put("apiParamsList", apiParamsList);
     }
 
     /**
