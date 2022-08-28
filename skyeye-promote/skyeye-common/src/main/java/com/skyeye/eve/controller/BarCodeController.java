@@ -5,12 +5,12 @@
 package com.skyeye.eve.controller;
 
 import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.entity.barcode.BarCodeApiMation;
-import com.skyeye.eve.entity.dict.SysDictDataQueryDO;
 import com.skyeye.eve.service.BarCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +42,20 @@ public class BarCodeController {
     @RequestMapping("/post/BarCodeController/writeBarCode")
     public void writeBarCode(InputObject inputObject, OutputObject outputObject) {
         barCodeService.writeBarCode(inputObject, outputObject);
+    }
+
+    /**
+     * 根据条形码code获取数据信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "getDataByBarCode", value = "根据条形码code获取数据信息", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "barCode", name = "barCode", value = "条形码code", required = "required")})
+    @RequestMapping("/post/BarCodeController/getDataByBarCode")
+    public void getDataByBarCode(InputObject inputObject, OutputObject outputObject) {
+        barCodeService.getDataByBarCode(inputObject, outputObject);
     }
 
 }

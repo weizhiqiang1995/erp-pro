@@ -4,18 +4,25 @@
 
 package com.skyeye.eve.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
+import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.BarCodeDao;
 import com.skyeye.eve.entity.barcode.BarCodeApiMation;
 import com.skyeye.eve.entity.barcode.BarCodeMation;
 import com.skyeye.eve.service.BarCodeService;
+import com.skyeye.eve.service.IBarCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: BarCodeServiceImpl
@@ -30,6 +37,12 @@ public class BarCodeServiceImpl extends ServiceImpl<BarCodeDao, BarCodeMation> i
 
     @Autowired
     private BarCodeDao barCodeDao;
+
+    @Autowired
+    private IBarCodeService iBarCodeService;
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
 
     /**
      * 批量新增条形码
@@ -48,5 +61,32 @@ public class BarCodeServiceImpl extends ServiceImpl<BarCodeDao, BarCodeMation> i
             barCodeMation.setCreateTime(createTime);
         });
         this.saveBatch(barCodeList);
+    }
+
+    /**
+     * 根据条形码code获取数据信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void getDataByBarCode(InputObject inputObject, OutputObject outputObject) {
+        String barCode = inputObject.getParams().get("barCode").toString();
+        QueryWrapper<BarCodeMation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(MybatisPlusUtil.toColumns(BarCodeMation::getCodeNum), barCode);
+        BarCodeMation barCodeMation = barCodeDao.selectOne(queryWrapper);
+
+        // 根据服务名获取服务实例
+        List<ServiceInstance> allInstances = discoveryClient.getInstances(barCodeMation.getSpringApplicationName());
+        if (CollectionUtils.isEmpty(allInstances)) {
+            outputObject.setreturnMessage("this service[{}] has no instance.", barCodeMation.getSpringApplicationName());
+            return;
+        }
+
+        // 调用SDK服务获取数据信息
+        Map<String, Object> result = iBarCodeService.getDataSdkByObjectId(allInstances.get(0).getUri(), barCodeMation.getObjectId(),
+            barCodeMation.getCodeImplClass());
+        outputObject.setBean(result);
+        outputObject.settotal(1);
     }
 }

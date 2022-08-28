@@ -27,6 +27,7 @@ spring:
 logging:
   level:
     com.skyeye.eve.dao: debug
+    com.skyeye.eve.rest: debug
 
 webroot:
   # 工作流相关的服务
