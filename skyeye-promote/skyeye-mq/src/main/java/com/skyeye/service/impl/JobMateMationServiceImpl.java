@@ -12,6 +12,7 @@ import com.skyeye.common.constans.SocketConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
+import com.skyeye.common.util.MapUtil;
 import com.skyeye.dao.JobMateMationDao;
 import com.skyeye.eve.entity.mq.JobMateQueryDO;
 import com.skyeye.eve.rest.mq.JobMateMation;
@@ -95,27 +96,37 @@ public class JobMateMationServiceImpl implements JobMateMationService {
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void sendMQProducer(String jsonStr, String userId) {
-        // 父任务
-        Map<String, Object> parentJob;
-        try {
-            parentJob = resetParentJobMation(jsonStr, userId);
-        } catch (UnknownHostException e) {
-            LOGGER.warn("sendMQProducer failed, reason is {}.", e);
-            throw new CustomException(e);
+        Map<String, Object> jobBody = JSONUtil.toBean(jsonStr, null);
+        String topic;
+        SendResult sendResult;
+        if (!MapUtil.checkKeyIsNull(jobBody, "whetherCreatTask") && !Boolean.valueOf(jobBody.get("whetherCreatTask").toString())) {
+            // jobBody中是否包含whetherCreatTask参数，如果包含并且为false则不创建任务
+            topic = jobBody.get("topic").toString();
+            // 同步发送
+            sendResult = rocketMQTemplate.syncSend(topic + ":" + tag,
+                MessageBuilder.withPayload(jsonStr).build());
+        } else {
+            // 父任务
+            Map<String, Object> parentJob;
+            try {
+                parentJob = resetParentJobMation(jsonStr, userId);
+            } catch (UnknownHostException e) {
+                LOGGER.warn("sendMQProducer failed, reason is {}.", e);
+                throw new CustomException(e);
+            }
+            jobMateMationDao.insertJobMation(parentJob);
+            LOGGER.info("create job mation is {}", JSONUtil.toJsonStr(parentJob));
+            // 重置请求体中的任务id
+            jobBody.put("jobMateId", parentJob.get("jobId"));
+            parentJob.put("requestBody", JSONUtil.toJsonStr(jobBody));
+            jobMateMationDao.editJobRequestBodyMation(parentJob);
+            String jobType = parentJob.get("jobType").toString();
+            // 发起消息
+            topic = MqConstants.JobMateMationJobType.getTopicByJobType(jobType);
+            // 同步发送
+            sendResult = rocketMQTemplate.syncSend(topic + ":" + tag,
+                MessageBuilder.withPayload(parentJob.get("requestBody").toString()).build());
         }
-        jobMateMationDao.insertJobMation(parentJob);
-        LOGGER.info("create job mation is {}", JSONUtil.toJsonStr(parentJob));
-        // 重置请求体中的任务id
-        Map<String, Object> map = JSONUtil.toBean(jsonStr, null);
-        map.put("jobMateId", parentJob.get("jobId"));
-        parentJob.put("requestBody", JSONUtil.toJsonStr(map));
-        jobMateMationDao.editJobRequestBodyMation(parentJob);
-        String jobType = parentJob.get("jobType").toString();
-        // 发起消息
-        String topic = MqConstants.JobMateMationJobType.getTopicByJobType(jobType);
-        // 同步发送
-        SendResult sendResult = rocketMQTemplate.syncSend(topic + ":" + tag,
-            MessageBuilder.withPayload(parentJob.get("requestBody").toString()).build());
         LOGGER.info("mq send topic is [{}], send result: [{}]", topic, sendResult);
     }
 
