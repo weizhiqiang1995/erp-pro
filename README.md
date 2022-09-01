@@ -74,7 +74,6 @@ BOM表|为自产商品打造结构清单，清晰了解成本价等|生产计划
 ---|---|---
 [SpringBoot](http://spring.io/projects/spring-boot)|核心框架|2.0.3
 [MyBatis](http://www.mybatis.org/mybatis-3/zh/index.html)|ORM框架
-[Druid](https://github.com/alibaba/druid)|数据库连接池|
 [Maven](http://maven.apache.org/)|项目构建管理|
 [redis](https://redis.io/)|key-value存储系统|3.2集群（不要问我单机的能不能行）
 [webSocket](http://www.runoob.com/html/html5-websocket.html)|浏览器与服务器全双工(full-duplex)通信|
