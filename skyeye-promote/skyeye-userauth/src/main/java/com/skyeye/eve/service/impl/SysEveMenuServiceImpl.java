@@ -6,12 +6,13 @@ package com.skyeye.eve.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.eve.dao.SysEveMenuDao;
+import com.skyeye.eve.entity.userauth.menu.SysMenuMation;
+import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.eve.service.SysEveMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +21,36 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ * @ClassName: SysEveMenuServiceImpl
+ * @Description: 菜单管理
+ * @author: skyeye云系列--卫志强
+ * @date: 2022/9/3 11:24
+ *
+ * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
+ * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
+ */
 @Service
 public class SysEveMenuServiceImpl implements SysEveMenuService {
 
     @Autowired
     private SysEveMenuDao sysEveMenuDao;
+
+    @Autowired
+    private IAuthUserService iAuthUserService;
+
+    /**
+     * 菜单链接打开类型，父菜单默认为1.1：打开iframe，2：打开html。
+     */
+    public static final Integer SYS_MENU_OPEN_TYPE_IS_IFRAME = 1;
+    public static final Integer SYS_MENU_OPEN_TYPE_IS_HTML = 2;
+
+    /**
+     * 菜单类型
+     */
+    public static final String SYS_MENU_TYPE_IS_IFRAME = "win";
+    public static final String SYS_MENU_TYPE_IS_HTML = "html";
 
     /**
      * 获取菜单列表
@@ -37,6 +63,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveMenuDao.querySysMenuList(map);
+        iAuthUserService.setNameByIdList(beans, "createId", "createName");
+        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -50,34 +78,47 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void insertSysMenuMation(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        if (Constants.SYS_MENU_TYPE_IS_IFRAME.equals(map.get("menuType").toString())) {//iframe
-            map.put("openType", Constants.SYS_MENU_OPEN_TYPE_IS_IFRAME);//1：打开iframe
-        } else if (Constants.SYS_MENU_TYPE_IS_HTML.equals(map.get("menuType").toString())) {//html
-            map.put("openType", Constants.SYS_MENU_OPEN_TYPE_IS_HTML);//2：打开html
-        } else {
-            outputObject.setreturnMessage("菜单类型错误。");
-            return;
-        }
-        if ("0".equals(map.get("parentId").toString())) {
-            map.put("menuLevel", 0);
-        } else {
-            String[] str = map.get("parentId").toString().split(",");
-            map.put("menuLevel", str.length);
-        }
-        Map<String, Object> orderNum = sysEveMenuDao.querySysMenuAfterOrderBumByParentId(map);
+        SysMenuMation sysMenuMation = inputObject.getParams(SysMenuMation.class);
+        // 设置菜单链接打开类型
+        setOpenType(sysMenuMation);
+        // 设置菜单级别
+        setMenuLevel(sysMenuMation);
+        // 设置培训序号
+        setOrderNum(sysMenuMation);
+        DataCommonUtil.setCommonDataByGenericity(sysMenuMation, inputObject.getLogParams().get("id").toString());
+        sysEveMenuDao.insert(sysMenuMation);
+    }
+
+    private void setOrderNum(SysMenuMation sysMenuMation) {
+        Map<String, Object> orderNum = sysEveMenuDao.querySysMenuAfterOrderBumByParentId(sysMenuMation.getParentId());
         if (orderNum == null) {
-            map.put("orderNum", 0);
+            sysMenuMation.setOrderNum(0);
         } else {
             if (orderNum.containsKey("orderNum")) {
-                map.put("orderNum", Integer.parseInt(orderNum.get("orderNum").toString()) + 1);
+                sysMenuMation.setOrderNum(Integer.parseInt(orderNum.get("orderNum").toString()) + 1);
             } else {
-                map.put("orderNum", 0);
+                sysMenuMation.setOrderNum(0);
             }
         }
-        DataCommonUtil.setCommonData(map, user.get("id").toString());
-        sysEveMenuDao.insertSysMenuMation(map);
+    }
+
+    private void setMenuLevel(SysMenuMation sysMenuMation) {
+        if ("0".equals(sysMenuMation.getParentId())) {
+            sysMenuMation.setMenuLevel(0);
+        } else {
+            String[] str = sysMenuMation.getParentId().split(",");
+            sysMenuMation.setMenuLevel(str.length);
+        }
+    }
+
+    private void setOpenType(SysMenuMation sysMenuMation) {
+        if (SYS_MENU_TYPE_IS_IFRAME.equals(sysMenuMation.getMenuType())) {
+            // iframe
+            sysMenuMation.setOpenType(SYS_MENU_OPEN_TYPE_IS_IFRAME);
+        } else if (SYS_MENU_TYPE_IS_HTML.equals(sysMenuMation.getMenuType())) {
+            // html
+            sysMenuMation.setOpenType(SYS_MENU_OPEN_TYPE_IS_HTML);
+        }
     }
 
     /**
@@ -105,7 +146,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     @Override
     public void querySysMenuMationToEditById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = sysEveMenuDao.querySysMenuMationToEditById(map);
+        String id = map.get("id").toString();
+        Map<String, Object> bean = sysEveMenuDao.queryMenuMationById(id);
         outputObject.setBean(bean);
         outputObject.settotal(1);
     }
@@ -119,36 +161,18 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     @Override
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysMenuMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        if (Constants.SYS_MENU_TYPE_IS_IFRAME.equals(map.get("menuType").toString())) {//iframe
-            map.put("openType", Constants.SYS_MENU_OPEN_TYPE_IS_IFRAME);//1：打开iframe
-        } else if (Constants.SYS_MENU_TYPE_IS_HTML.equals(map.get("menuType").toString())) {//html
-            map.put("openType", Constants.SYS_MENU_OPEN_TYPE_IS_HTML);//2：打开html
-        } else {
-            outputObject.setreturnMessage("菜单类型错误。");
-            return;
+        SysMenuMation sysMenuMation = inputObject.getParams(SysMenuMation.class);
+        // 设置菜单链接打开类型
+        setOpenType(sysMenuMation);
+        // 设置菜单级别
+        setMenuLevel(sysMenuMation);
+        Map<String, Object> oldParent = sysEveMenuDao.queryMenuMationById(sysMenuMation.getId());
+        if (!oldParent.get("parentId").toString().equals(sysMenuMation.getParentId())) {
+            // 修改之后不再是之前父类的子菜单，设置培训序号
+            setOrderNum(sysMenuMation);
         }
-        if ("0".equals(map.get("parentId").toString())) {
-            map.put("menuLevel", 0);
-        } else {
-            String[] str = map.get("parentId").toString().split(",");
-            map.put("menuLevel", str.length);
-        }
-        Map<String, Object> oldParent = sysEveMenuDao.queryOldParentIdById(map);
-        if (!oldParent.get("parentId").toString().equals(map.get("parentId").toString())) {//修改之后不再是之前父类的子菜单
-            Map<String, Object> orderNum = sysEveMenuDao.querySysMenuAfterOrderBumByParentId(map);
-            if (orderNum == null) {
-                map.put("orderNum", 0);
-            } else {
-                if (orderNum.containsKey("orderNum")) {
-                    map.put("orderNum", Integer.parseInt(orderNum.get("orderNum").toString()) + 1);
-                } else {
-                    map.put("orderNum", 0);
-                }
-            }
-        }
-        setUpdateUserMation(inputObject, map);
-        sysEveMenuDao.editSysMenuMationById(map);
+        DataCommonUtil.setCommonLastUpdateDataByGenericity(sysMenuMation, inputObject.getLogParams().get("id").toString());
+        sysEveMenuDao.updateById(sysMenuMation);
     }
 
     /**
@@ -161,18 +185,20 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteSysMenuMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
+        String id = map.get("id").toString();
+        // 判断菜单有没有角色使用，没有则可以删除
         Map<String, Object> menuBean = sysEveMenuDao.queryUseThisMenuRoleById(map);
         if (menuBean == null) {
-            //删除子菜单
+            // 删除子菜单
             sysEveMenuDao.deleteSysMenuChildMationById(map);
-            //删除自身菜单
-            sysEveMenuDao.deleteSysMenuMationById(map);
+            // 删除自身菜单
+            sysEveMenuDao.deleteById(id);
         } else {
-            if (Integer.parseInt(menuBean.get("roleNum").toString()) == 0) {//该菜单没有角色使用
-                //删除子菜单
+            if (Integer.parseInt(menuBean.get("roleNum").toString()) == 0) {
+                // 删除子菜单
                 sysEveMenuDao.deleteSysMenuChildMationById(map);
-                //删除自身菜单
-                sysEveMenuDao.deleteSysMenuMationById(map);
+                // 删除自身菜单
+                sysEveMenuDao.deleteById(id);
             } else {
                 outputObject.setreturnMessage("该菜单正在被一个或多个角色使用，无法删除。");
             }
@@ -205,7 +231,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysEveMenuSortTopById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> topBean = sysEveMenuDao.querySysEveMenuISTopByThisId(map);//根据同一级排序获取这条数据的上一条数据
+        // 根据同一级排序获取这条数据的上一条数据
+        Map<String, Object> topBean = sysEveMenuDao.querySysEveMenuISTopByThisId(map);
         if (topBean == null) {
             outputObject.setreturnMessage("已经是最靠前菜单，无法移动。");
         } else {

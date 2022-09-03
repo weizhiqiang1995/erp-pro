@@ -85,7 +85,7 @@ public class SysEveMenuController {
      */
     @ApiOperation(id = "sys010", value = "编辑菜单信息", method = "PUT", allUse = "1")
     @ApiImplicitParams(classBean = SysMenuMation.class, value = {
-        @ApiImplicitParam(id = "rowId", name = "id", value = "菜单ID", required = "required")})
+        @ApiImplicitParam(id = "id", name = "id", value = "菜单ID", required = "required")})
     @RequestMapping("/post/SysEveMenuController/editSysMenuMationById")
     public void editSysMenuMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.editSysMenuMationById(inputObject, outputObject);

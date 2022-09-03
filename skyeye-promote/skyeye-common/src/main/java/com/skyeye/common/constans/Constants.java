@@ -30,18 +30,6 @@ public class Constants {
     public static String LANGUAGE_CN = "cn";
 
     /**
-     * 菜单类型
-     */
-    public static final String SYS_MENU_TYPE_IS_IFRAME = "win";
-    public static final String SYS_MENU_TYPE_IS_HTML = "html";
-
-    /**
-     * 菜单链接打开类型，父菜单默认为1.1：打开iframe，2：打开html。
-     */
-    public static final String SYS_MENU_OPEN_TYPE_IS_IFRAME = "1";
-    public static final String SYS_MENU_OPEN_TYPE_IS_HTML = "2";
-
-    /**
      * 保存模板说明的redis的key
      */
     public static final String REDIS_CODEMODEL_EXPLAIN_EXEXPLAIN = "exexplaintocodemodel";

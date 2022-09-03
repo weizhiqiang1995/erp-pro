@@ -152,7 +152,7 @@
 				c.id,
 				c.menu_name `name`,
 				c.menu_name_en menuNameEn,
-				c.menu_icon icon,
+				c.icon,
 				c.menu_url pageURL,
 				c.open_type openType,
 				c.menu_type menuType,
@@ -161,10 +161,10 @@
 				null childs,
 				IFNULL(e.parent_id, c.menu_parent_id) parentId,
 				IFNULL(e.menu_level, c.menu_level) menuLevel,
-				c.menu_icon_color menuIconColor,
-				c.menu_icon_bg menuIconBg,
-				c.menu_icon_pic menuIconPic,
-				c.menu_icon_type menuIconType,
+				c.icon_color menuIconColor,
+				c.icon_bg menuIconBg,
+				c.icon_pic menuIconPic,
+				c.icon_type menuIconType,
 				IFNULL(c.desktop_id, '') deskTopId,
 			    IFNULL(g.sys_url, '') sysWinUrl # 分布式开发时，其他前台服务的域名地址
 			FROM

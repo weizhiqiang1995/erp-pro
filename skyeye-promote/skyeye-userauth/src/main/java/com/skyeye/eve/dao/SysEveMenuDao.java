@@ -4,6 +4,9 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.eve.entity.userauth.menu.SysMenuMation;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Map;
 
@@ -15,29 +18,21 @@ import java.util.Map;
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-public interface SysEveMenuDao {
+public interface SysEveMenuDao extends SkyeyeBaseMapper<SysMenuMation> {
 
     List<Map<String, Object>> querySysMenuList(Map<String, Object> map);
 
-    int insertSysMenuMation(Map<String, Object> map);
-
-    Map<String, Object> querySysMenuMationToEditById(Map<String, Object> map);
+    Map<String, Object> queryMenuMationById(@Param("id") String id);
 
     List<Map<String, Object>> querySysMenuMationBySimpleLevel(Map<String, Object> map);
 
-    int editSysMenuMationById(Map<String, Object> map);
-
     int deleteSysMenuChildMationById(Map<String, Object> map);
-
-    int deleteSysMenuMationById(Map<String, Object> map);
 
     Map<String, Object> queryUseThisMenuRoleById(Map<String, Object> map);
 
     List<Map<String, Object>> querySysMenuLevelList(Map<String, Object> map);
 
-    Map<String, Object> querySysMenuAfterOrderBumByParentId(Map<String, Object> map);
-
-    Map<String, Object> queryOldParentIdById(Map<String, Object> map);
+    Map<String, Object> querySysMenuAfterOrderBumByParentId(@Param("parentId") String parentId);
 
     Map<String, Object> querySysEveMenuISTopByThisId(Map<String, Object> map);
 
