@@ -7,11 +7,11 @@
 			a.id,
 			a.menu_name menuName,
 			a.menu_name_en menuNameEn,
-			a.icon menuIcon,
-			a.icon_color menuIconColor,
-			a.icon_bg menuIconBg,
-			a.icon_type menuIconType,
-			a.icon_pic menuIconPic,
+			a.icon,
+			a.icon_color iconColor,
+			a.icon_bg iconBg,
+			a.icon_type iconType,
+			a.icon_pic iconPic,
 			a.menu_level menuLevel,
 			a.menu_parent_id parentId,
 			a.menu_url menuUrl,
@@ -28,28 +28,29 @@
 			sys_eve_menu a
 			LEFT JOIN sys_eve_menu c ON INSTR(CONCAT(',', a.menu_parent_id, ','), CONCAT(',', c.id, ','))
 			LEFT JOIN sys_eve_desktop d ON a.desktop_id = d.id
-		WHERE 1=1
-		<if test="menuName != '' and menuName != null">
-			AND a.menu_name LIKE '%${menuName}%'
-		</if>
-		<if test="parentMenuName != '' and parentMenuName != null">
-			AND c.menu_name LIKE '%${parentMenuName}%'
-		</if>
-		<if test="menuUrl != '' and menuUrl != null">
-			AND a.menu_url LIKE '%${menuUrl}%'
-		</if>
-		<if test="menuLevel != '' and menuLevel != null">
-			AND a.menu_level = #{menuLevel}
-		</if>
-		<if test="isShare != '' and isShare != null">
-			AND a.is_share = #{isShare}
-		</if>
-		<if test="parentId != '' and parentId != null and parentId != '0'.toString()">
-			AND a.sys_win_id = #{parentId}
-		</if>
-		<if test="desktopId != '' and desktopId != null">
-            AND a.desktop_id = #{desktopId}
-        </if>
+		<where>
+			<if test="menuName != '' and menuName != null">
+				AND a.menu_name LIKE '%${menuName}%'
+			</if>
+			<if test="parentMenuName != '' and parentMenuName != null">
+				AND c.menu_name LIKE '%${parentMenuName}%'
+			</if>
+			<if test="menuUrl != '' and menuUrl != null">
+				AND a.menu_url LIKE '%${menuUrl}%'
+			</if>
+			<if test="menuLevel != '' and menuLevel != null">
+				AND a.menu_level = #{menuLevel}
+			</if>
+			<if test="isShare != '' and isShare != null">
+				AND a.is_share = #{isShare}
+			</if>
+			<if test="parentId != '' and parentId != null and parentId != '0'.toString()">
+				AND a.sys_win_id = #{parentId}
+			</if>
+			<if test="desktopId != '' and desktopId != null">
+				AND a.desktop_id = #{desktopId}
+			</if>
+		</where>
 		GROUP BY a.id
 		ORDER BY a.order_num ASC
 	</select>
