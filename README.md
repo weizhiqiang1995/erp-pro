@@ -13,8 +13,8 @@
 ### 联系作者
 
 | 作者微信(备注：姓名-联系方式，其余概不通过。) | 企业版设计思路知识星球 |
-| ---- | ---- |
-| ![](web/src/main/resources/template/tpl/common/微信.jpg)| ![](web/src/main/resources/template/tpl/common/%E7%9F%A5%E8%AF%86%E6%98%9F%E7%90%83.png) |
+| ---- | ---- |---- |
+| ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/微信.jpg)| ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/web/src/main/resources/template/tpl/common/%E7%9F%A5%E8%AF%86%E6%98%9F%E7%90%83.png) |
 
 #### 环境搭建
 
