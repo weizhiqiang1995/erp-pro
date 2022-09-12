@@ -21,4 +21,5 @@ public interface SkyeyeClassEnumService extends IService<SkyeyeClassEnumMation> 
 
     void writeClassEnum(InputObject inputObject, OutputObject outputObject);
 
+    void getEnumDataByClassName(InputObject inputObject, OutputObject outputObject);
 }

@@ -18,7 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName: SkyeyeClassEnumServiceImpl
@@ -61,5 +64,36 @@ public class SkyeyeClassEnumServiceImpl extends ServiceImpl<SkyeyeClassEnumDao, 
         });
 
         saveBatch(skyeyeClassEnumMationList);
+    }
+
+    /**
+     * 根据className获取可以展示在界面上的枚举数据信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void getEnumDataByClassName(InputObject inputObject, OutputObject outputObject) {
+        String className = inputObject.getParams().get("className").toString();
+        QueryWrapper<SkyeyeClassEnumMation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassEnumMation::getClassName), className);
+        SkyeyeClassEnumMation skyeyeClassEnumMation = skyeyeClassEnumDao.selectOne(queryWrapper);
+        // 只加载可以展示的数据
+        List<Map<String, Object>> skyeyeEnumDtoList = skyeyeClassEnumMation.getValueList()
+            .stream().filter(bean -> bean.getShow())
+            .map(bean -> {
+                Map<String, Object> item = new HashMap<>();
+                item.put("id", bean.getKey());
+                item.put("name", bean.getValue());
+                item.put("isDefault", bean.getIsDefault());
+                return item;
+            }).collect(Collectors.toList());
+
+        Map<String, String> skyeyeEnumDtoMap = skyeyeClassEnumMation.getValueList()
+            .stream().filter(bean -> bean.getShow()).collect(Collectors.toMap(bean -> String.valueOf(bean.getKey()), bean -> bean.getValue()));
+
+        outputObject.setBean(skyeyeEnumDtoMap);
+        outputObject.setBeans(skyeyeEnumDtoList);
+        outputObject.settotal(skyeyeEnumDtoList.size());
     }
 }

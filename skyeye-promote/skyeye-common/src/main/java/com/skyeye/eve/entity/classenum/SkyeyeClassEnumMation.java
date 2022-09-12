@@ -7,7 +7,6 @@ package com.skyeye.eve.entity.classenum;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.common.base.classenum.dto.SkyeyeEnumDto;
 import com.skyeye.common.entity.CommonOperatorUserInfo;
@@ -51,7 +50,7 @@ public class SkyeyeClassEnumMation extends CommonOperatorUserInfo implements Ser
     /**
      * 枚举对应的值
      */
-    @TableField(value = "value_list", typeHandler = FastjsonTypeHandler.class)
+    @TableField(value = "value_list", typeHandler = SkyeyeClassEnumListTypeHandler.class)
     private List<SkyeyeEnumDto> valueList;
 
 }

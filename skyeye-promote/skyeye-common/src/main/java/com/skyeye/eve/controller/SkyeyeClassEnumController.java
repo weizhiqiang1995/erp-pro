@@ -5,6 +5,7 @@
 package com.skyeye.eve.controller;
 
 import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
@@ -41,6 +42,20 @@ public class SkyeyeClassEnumController {
     @RequestMapping("/post/SkyeyeClassEnumController/writeClassEnum")
     public void writeClassEnum(InputObject inputObject, OutputObject outputObject) {
         skyeyeClassEnumService.writeClassEnum(inputObject, outputObject);
+    }
+
+    /**
+     * 根据className获取可以展示在界面上的枚举数据信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "getEnumDataByClassName", value = "根据className获取可以展示在界面上的枚举数据信息", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "className", name = "className", value = "className", required = "required")})
+    @RequestMapping("/post/SkyeyeClassEnumController/getEnumDataByClassName")
+    public void getEnumDataByClassName(InputObject inputObject, OutputObject outputObject) {
+        skyeyeClassEnumService.getEnumDataByClassName(inputObject, outputObject);
     }
 
 }
