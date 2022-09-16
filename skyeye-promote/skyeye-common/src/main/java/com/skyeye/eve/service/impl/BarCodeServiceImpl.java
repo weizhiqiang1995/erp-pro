@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -51,6 +52,7 @@ public class BarCodeServiceImpl extends ServiceImpl<BarCodeDao, BarCodeMation> i
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void writeBarCode(InputObject inputObject, OutputObject outputObject) {
         BarCodeApiMation barCodeApiMation = inputObject.getParams(BarCodeApiMation.class);
         List<BarCodeMation> barCodeList = barCodeApiMation.getBarCodeList();
