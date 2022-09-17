@@ -18,6 +18,7 @@ import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
+import com.skyeye.common.util.SpringUtils;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.CodeMaxSerialDao;
 import com.skyeye.eve.dao.CodeRuleDao;
@@ -69,9 +70,6 @@ public class CodeRuleServiceImpl implements CodeRuleService {
 
     @Autowired
     private JedisClientService jedisClient;
-
-    @Autowired
-    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     /**
      * 获取编码规则列表
@@ -297,6 +295,7 @@ public class CodeRuleServiceImpl implements CodeRuleService {
 
     private void refresh(String featureCode, String relationId, String serialCode) {
         // 异步更新数据库
+        ThreadPoolTaskExecutor threadPoolTaskExecutor = SpringUtils.getBean("threadPoolTaskExecutor");
         threadPoolTaskExecutor.execute(() -> {
             UpdateWrapper<CodeMaxSerialMation> updateWrapper = new UpdateWrapper<>();
             updateWrapper.set(MybatisPlusUtil.toColumns(CodeMaxSerialMation::getSerialCode), serialCode);
