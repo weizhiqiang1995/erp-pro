@@ -6,9 +6,10 @@
         SELECT
             a.id,
             a.`name`,
-            a.codeNum,
+            a.code_num codeNum,
             a.pattern,
             a.alarm,
+            a.remark,
             a.create_id createId,
             CONVERT(a.create_time, char) createTime,
             a.last_update_id lastUpdateId,
@@ -20,10 +21,10 @@
                 ${sqlExtract}
             </if>
             <if test="keyword != '' and keyword != null">
-                AND a.`name` like '%${keyword}%'
+                AND (a.`name` like '%${keyword}%' OR a.code_num like '%${keyword}%')
             </if>
         </where>
-        ORDER BY s.create_time DESC
+        ORDER BY a.create_time DESC
     </select>
 
 </mapper>

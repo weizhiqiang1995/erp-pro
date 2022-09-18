@@ -28,14 +28,15 @@ import java.io.Serializable;
 public class CodeRuleMation extends CommonOperatorUserInfo implements Serializable {
 
     @TableId("id")
+    @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")
     private String id;
 
     @TableField("`name`")
-    @ApiModelProperty(value = "名称")
+    @ApiModelProperty(value = "名称", required = "required")
     private String name;
 
     @TableField("code_num")
-    @ApiModelProperty(value = "编码")
+    @ApiModelProperty(value = "编码", required = "required")
     private String codeNum;
 
     @TableField("remark")
@@ -43,7 +44,7 @@ public class CodeRuleMation extends CommonOperatorUserInfo implements Serializab
     private String remark;
 
     @TableField("pattern")
-    @ApiModelProperty(value = "命名模式")
+    @ApiModelProperty(value = "命名模式", required = "required")
     private String pattern;
 
     @TableField("ignore_chars")
@@ -51,12 +52,15 @@ public class CodeRuleMation extends CommonOperatorUserInfo implements Serializab
     private String ignoreChars;
 
     @TableField("feature_script")
-    @ApiModelProperty(value = "特征码变量扩展规则", exampleDefault="{\"sex\":{\"type\":\"map\",\"content\":{\"1\":\"man\",\"2\":\"women\"}}}" +
-        "或  {\"sex\":{\"type\":\"javascript\",\"content\":\"if(value == '1'){\nreturn 'man';\n}else{\nreturn 'women';\n}\"}}")
+    @ApiModelProperty(value = "特征码变量扩展规则")
     private String featureScript;
 
+    @TableField("pattern_list")
+    @ApiModelProperty(value = "使用到的编码规则列表", required = "required")
+    private String patternList;
+
     @TableField("alarm")
-    @ApiModelProperty(value = "是否告警：0不告警1告警 默认0，编码使用超90%告警")
-    private Boolean alarm;
+    @ApiModelProperty(value = "是否告警：0不告警1告警 默认0，编码使用超90%告警", required = "required,num")
+    private Integer alarm;
 
 }

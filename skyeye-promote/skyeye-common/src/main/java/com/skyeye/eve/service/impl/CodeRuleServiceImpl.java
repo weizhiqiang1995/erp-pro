@@ -18,6 +18,7 @@ import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
+import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.SpringUtils;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.CodeMaxSerialDao;
@@ -28,6 +29,7 @@ import com.skyeye.eve.entity.coderule.util.CodePattern;
 import com.skyeye.eve.entity.coderule.util.FeatureScriptUtil;
 import com.skyeye.eve.rest.coderule.CodeMation;
 import com.skyeye.eve.service.CodeRuleService;
+import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.exception.CustomException;
 import com.skyeye.jedis.JedisClientService;
 import com.skyeye.jedis.util.RedisLock;
@@ -71,6 +73,9 @@ public class CodeRuleServiceImpl implements CodeRuleService {
     @Autowired
     private JedisClientService jedisClient;
 
+    @Autowired
+    private IAuthUserService iAuthUserService;
+
     /**
      * 获取编码规则列表
      *
@@ -82,6 +87,8 @@ public class CodeRuleServiceImpl implements CodeRuleService {
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
         Page pages = PageHelper.startPage(commonPageInfo.getPage(), commonPageInfo.getLimit());
         List<Map<String, Object>> beans = codeRuleDao.queryCodeRuleList(commonPageInfo);
+        iAuthUserService.setNameByIdList(beans, "createId", "createName");
+        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -280,6 +287,7 @@ public class CodeRuleServiceImpl implements CodeRuleService {
         codeMaxSerialMation.setFeatureCode(featureCode);
         codeMaxSerialMation.setCodeRuleId(relationId);
         codeMaxSerialMation.setSerialCode(String.valueOf(size));
+        DataCommonUtil.setCommonDataByGenericity(codeMaxSerialMation, "0dc9dd4cd4d446ae9455215fe753c44e");
         codeMaxSerialDao.insert(codeMaxSerialMation);
     }
 
@@ -299,6 +307,7 @@ public class CodeRuleServiceImpl implements CodeRuleService {
         threadPoolTaskExecutor.execute(() -> {
             UpdateWrapper<CodeMaxSerialMation> updateWrapper = new UpdateWrapper<>();
             updateWrapper.set(MybatisPlusUtil.toColumns(CodeMaxSerialMation::getSerialCode), serialCode);
+            updateWrapper.set(MybatisPlusUtil.toColumns(CodeMaxSerialMation::getLastUpdateTime), DateUtil.getTimeAndToString());
             updateWrapper.eq(MybatisPlusUtil.toColumns(CodeMaxSerialMation::getCodeRuleId), relationId);
             updateWrapper.eq(MybatisPlusUtil.toColumns(CodeMaxSerialMation::getFeatureCode), featureCode);
             codeMaxSerialDao.update(null, updateWrapper);
