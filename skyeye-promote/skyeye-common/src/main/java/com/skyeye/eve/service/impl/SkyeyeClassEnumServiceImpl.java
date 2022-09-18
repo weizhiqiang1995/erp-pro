@@ -49,7 +49,7 @@ public class SkyeyeClassEnumServiceImpl extends ServiceImpl<SkyeyeClassEnumDao, 
 
         // 根据服务名删除枚举信息
         QueryWrapper<SkyeyeClassEnumMation> wrapper = new QueryWrapper<>();
-        wrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassEnumMation::getSpringApplicationName), skyeyeClassEnumApiMation.getSpringApplicationName());
+        wrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassEnumMation::getAppId), skyeyeClassEnumApiMation.getAppId());
         remove(wrapper);
 
         // 解析数据并添加
@@ -58,7 +58,7 @@ public class SkyeyeClassEnumServiceImpl extends ServiceImpl<SkyeyeClassEnumDao, 
             SkyeyeClassEnumMation skyeyeClassEnumMation = new SkyeyeClassEnumMation();
             skyeyeClassEnumMation.setClassName(className);
             skyeyeClassEnumMation.setValueList(enumDto);
-            skyeyeClassEnumMation.setSpringApplicationName(skyeyeClassEnumApiMation.getSpringApplicationName());
+            skyeyeClassEnumMation.setAppId(skyeyeClassEnumApiMation.getAppId());
             DataCommonUtil.setCommonDataByGenericity(skyeyeClassEnumMation, "0dc9dd4cd4d446ae9455215fe753c44e");
             skyeyeClassEnumMationList.add(skyeyeClassEnumMation);
         });
