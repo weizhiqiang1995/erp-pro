@@ -5,7 +5,10 @@
 package com.skyeye.eve.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.skyeye.common.constans.CommonConstants;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
@@ -118,5 +121,36 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
 
         outputObject.setBean(result);
         outputObject.settotal(1);
+    }
+
+    /**
+     * 获取需要配置编码的服务类列表
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryClassCodeRuleList(InputObject inputObject, OutputObject outputObject) {
+        List<SkyeyeClassCodeRuleMation> classCodeRuleMationList = super.list();
+        Map<String, List<SkyeyeClassCodeRuleMation>> collect = classCodeRuleMationList.stream().collect(Collectors.groupingBy(SkyeyeClassCodeRuleMation::getAppName));
+        outputObject.setBean(collect);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
+    }
+
+    /**
+     * 根据id配置编码规则
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void editClassCodeRuleConfig(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> params = inputObject.getParams();
+        String id = params.get("id").toString();
+        String cudeRuleId = params.get("cudeRuleId").toString();
+        UpdateWrapper<SkyeyeClassCodeRuleMation> wrapper = new UpdateWrapper<>();
+        wrapper.eq(CommonConstants.ID, id);
+        wrapper.set(MybatisPlusUtil.toColumns(SkyeyeClassCodeRuleMation::getCodeRuleId), cudeRuleId);
+        super.update(wrapper);
     }
 }

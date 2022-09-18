@@ -4,8 +4,10 @@
 
 package com.skyeye.eve.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.coderule.CodeRuleMation;
 
 /**
  * @ClassName: CodeRuleService
@@ -15,7 +17,7 @@ import com.skyeye.common.object.OutputObject;
  * @Copyright: 2022 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-public interface CodeRuleService {
+public interface CodeRuleService extends IService<CodeRuleMation> {
     void queryCodeRuleList(InputObject inputObject, OutputObject outputObject);
 
     void writeCodeRuleMation(InputObject inputObject, OutputObject outputObject);
@@ -25,4 +27,6 @@ public interface CodeRuleService {
     void deleteCodeRuleMationById(InputObject inputObject, OutputObject outputObject);
 
     void getNextCodes(InputObject inputObject, OutputObject outputObject);
+
+    void getAllCodeRuleList(InputObject inputObject, OutputObject outputObject);
 }

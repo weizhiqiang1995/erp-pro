@@ -100,4 +100,16 @@ public class CodeRuleController {
         codeRuleService.getNextCodes(inputObject, outputObject);
     }
 
+    /**
+     * 获取所有的编码规则
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "getAllCodeRuleList", value = "获取所有的编码规则", method = "GET", allUse = "2")
+    @RequestMapping("/post/CodeRuleController/getAllCodeRuleList")
+    public void getAllCodeRuleList(InputObject inputObject, OutputObject outputObject) {
+        codeRuleService.getAllCodeRuleList(inputObject, outputObject);
+    }
+
 }

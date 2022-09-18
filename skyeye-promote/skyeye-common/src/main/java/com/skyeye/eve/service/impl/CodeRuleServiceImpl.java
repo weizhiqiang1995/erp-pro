@@ -9,6 +9,7 @@ import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.cache.redis.RedisCache;
@@ -19,7 +20,6 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.SpringUtils;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.CodeMaxSerialDao;
 import com.skyeye.eve.dao.CodeRuleDao;
@@ -37,12 +37,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
 import java.util.*;
+import java.util.concurrent.Executor;
 
 /**
  * @ClassName: CodeRuleServiceImpl
@@ -53,7 +54,7 @@ import java.util.*;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
-public class CodeRuleServiceImpl implements CodeRuleService {
+public class CodeRuleServiceImpl extends ServiceImpl<CodeRuleDao, CodeRuleMation> implements CodeRuleService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CodeRuleServiceImpl.class);
 
@@ -75,6 +76,9 @@ public class CodeRuleServiceImpl implements CodeRuleService {
 
     @Autowired
     private IAuthUserService iAuthUserService;
+
+    @Autowired
+    private Executor codeRuleExecutor;
 
     /**
      * 获取编码规则列表
@@ -263,13 +267,13 @@ public class CodeRuleServiceImpl implements CodeRuleService {
                 // 加锁失败
                 throw new CustomException("当前并发量较大，请稍后再次尝试.");
             }
-            CodeMaxSerialMation codeMaxSerial = this.getCodeMaxSerial(featureCode, relationId);
-            if (codeMaxSerial == null) {
+            Map<String, Object> codeMaxSerial = this.getCodeMaxSerial(featureCode, relationId);
+            if (CollectionUtils.isEmpty(codeMaxSerial)) {
                 // 创建maxSerial数据
                 serialCode = (long) size;
                 this.saveCodeMaxSerial(featureCode, relationId, size);
             } else {
-                serialCode = Long.parseLong(codeMaxSerial.getSerialCode()) + size;
+                serialCode = Long.parseLong(codeMaxSerial.get("serialCode").toString()) + size;
             }
             // 刷新缓存
             this.refresh(featureCode, relationId, String.valueOf(serialCode));
@@ -291,9 +295,9 @@ public class CodeRuleServiceImpl implements CodeRuleService {
         codeMaxSerialDao.insert(codeMaxSerialMation);
     }
 
-    private CodeMaxSerialMation getCodeMaxSerial(String featureCode, String relationId) {
+    private Map<String, Object> getCodeMaxSerial(String featureCode, String relationId) {
         String cacheKey = getCacheKey(featureCode, relationId);
-        return (CodeMaxSerialMation) redisCache.getMap(cacheKey, key -> {
+        return redisCache.getMap(cacheKey, key -> {
             QueryWrapper<CodeMaxSerialMation> wrapper = new QueryWrapper<>();
             wrapper.eq(MybatisPlusUtil.toColumns(CodeMaxSerialMation::getFeatureCode), featureCode);
             wrapper.eq(MybatisPlusUtil.toColumns(CodeMaxSerialMation::getCodeRuleId), relationId);
@@ -303,8 +307,7 @@ public class CodeRuleServiceImpl implements CodeRuleService {
 
     private void refresh(String featureCode, String relationId, String serialCode) {
         // 异步更新数据库
-        ThreadPoolTaskExecutor threadPoolTaskExecutor = SpringUtils.getBean("threadPoolTaskExecutor");
-        threadPoolTaskExecutor.execute(() -> {
+        codeRuleExecutor.execute(() -> {
             UpdateWrapper<CodeMaxSerialMation> updateWrapper = new UpdateWrapper<>();
             updateWrapper.set(MybatisPlusUtil.toColumns(CodeMaxSerialMation::getSerialCode), serialCode);
             updateWrapper.set(MybatisPlusUtil.toColumns(CodeMaxSerialMation::getLastUpdateTime), DateUtil.getTimeAndToString());
@@ -325,6 +328,19 @@ public class CodeRuleServiceImpl implements CodeRuleService {
     private String getCacheKey(String featureCode, String relationId) {
         String cacheKey = String.format(Locale.ROOT, "codeMaxSerial:%s_%s", featureCode, relationId);
         return cacheKey;
+    }
+
+    /**
+     * 获取所有的编码规则
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void getAllCodeRuleList(InputObject inputObject, OutputObject outputObject) {
+        List<CodeRuleMation> codeRuleMationList = super.list();
+        outputObject.setBeans(codeRuleMationList);
+        outputObject.settotal(codeRuleMationList.size());
     }
 
 }

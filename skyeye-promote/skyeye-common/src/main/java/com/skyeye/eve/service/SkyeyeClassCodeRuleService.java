@@ -22,4 +22,8 @@ public interface SkyeyeClassCodeRuleService extends IService<SkyeyeClassCodeRule
     void writeClassCodeRule(InputObject inputObject, OutputObject outputObject);
 
     void getClassCodeRuleData(InputObject inputObject, OutputObject outputObject);
+
+    void queryClassCodeRuleList(InputObject inputObject, OutputObject outputObject);
+
+    void editClassCodeRuleConfig(InputObject inputObject, OutputObject outputObject);
 }
