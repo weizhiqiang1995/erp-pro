@@ -16,7 +16,6 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.CodeRuleDao;
 import com.skyeye.eve.dao.SkyeyeClassCodeRuleDao;
-import com.skyeye.eve.entity.classenum.SkyeyeClassEnumMation;
 import com.skyeye.eve.entity.coderule.CodeRuleMation;
 import com.skyeye.eve.entity.coderule.SkyeyeClassCodeRuleApiMation;
 import com.skyeye.eve.entity.coderule.SkyeyeClassCodeRuleMation;
@@ -81,7 +80,7 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
             .filter(item -> !newKeys.contains(item.getClassName() + item.getServiceName())).collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(deleteBeans)) {
             List<String> classNames = deleteBeans.stream().map(bean -> bean.getClassName()).collect(Collectors.toList());
-            QueryWrapper<SkyeyeClassEnumMation> deleteWrapper = new QueryWrapper<>();
+            QueryWrapper<SkyeyeClassCodeRuleApiMation> deleteWrapper = new QueryWrapper<>();
             deleteWrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassCodeRuleMation::getAppId), skyeyeClassCodeRuleApiMation.getAppId());
             deleteWrapper.in(MybatisPlusUtil.toColumns(SkyeyeClassCodeRuleMation::getClassName), classNames);
             remove(wrapper);
@@ -120,7 +119,7 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
         }
 
         outputObject.setBean(result);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**
