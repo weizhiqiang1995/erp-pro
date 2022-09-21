@@ -64,7 +64,7 @@ public class BarCodeController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "queryBarCodeByObjectIds", value = "根据业务数据id获取条形码数据", method = "GET", allUse = "2")
+    @ApiOperation(id = "queryBarCodeByObjectIds", value = "根据业务数据id获取条形码数据", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "springApplicationName", name = "springApplicationName", value = "服务名", required = "required"),
         @ApiImplicitParam(id = "codeImplClass", name = "codeImplClass", value = "条形码类型，对应的服务层类地址", required = "required"),

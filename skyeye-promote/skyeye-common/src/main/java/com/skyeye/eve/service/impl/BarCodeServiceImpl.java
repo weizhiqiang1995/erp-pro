@@ -15,6 +15,7 @@ import com.skyeye.eve.entity.barcode.BarCodeApiMation;
 import com.skyeye.eve.entity.barcode.BarCodeMation;
 import com.skyeye.eve.service.BarCodeService;
 import com.skyeye.eve.service.IBarCodeService;
+import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -103,7 +104,7 @@ public class BarCodeServiceImpl extends ServiceImpl<BarCodeDao, BarCodeMation> i
         Map<String, Object> params = inputObject.getParams();
         String springApplicationName = params.get("springApplicationName").toString();
         String codeImplClass = params.get("codeImplClass").toString();
-        List<String> objectIds = (List<String>) params.get("objectIds");
+        List<String> objectIds = JSONArray.fromObject(params.get("objectIds").toString());
         QueryWrapper<BarCodeMation> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(MybatisPlusUtil.toColumns(BarCodeMation::getSpringApplicationName), springApplicationName);
         queryWrapper.eq(MybatisPlusUtil.toColumns(BarCodeMation::getCodeImplClass), codeImplClass);
