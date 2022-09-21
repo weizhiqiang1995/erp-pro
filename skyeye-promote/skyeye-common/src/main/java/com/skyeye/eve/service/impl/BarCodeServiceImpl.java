@@ -91,4 +91,25 @@ public class BarCodeServiceImpl extends ServiceImpl<BarCodeDao, BarCodeMation> i
         outputObject.setBean(result);
         outputObject.settotal(1);
     }
+
+    /**
+     * 根据业务数据id获取条形码数据
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryBarCodeByObjectIds(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> params = inputObject.getParams();
+        String springApplicationName = params.get("springApplicationName").toString();
+        String codeImplClass = params.get("codeImplClass").toString();
+        List<String> objectIds = (List<String>) params.get("objectIds");
+        QueryWrapper<BarCodeMation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(MybatisPlusUtil.toColumns(BarCodeMation::getSpringApplicationName), springApplicationName);
+        queryWrapper.eq(MybatisPlusUtil.toColumns(BarCodeMation::getCodeImplClass), codeImplClass);
+        queryWrapper.in(MybatisPlusUtil.toColumns(BarCodeMation::getObjectId), objectIds);
+        List<BarCodeMation> barCodeMationList = super.list(queryWrapper);
+        outputObject.setBeans(barCodeMationList);
+        outputObject.settotal(barCodeMationList.size());
+    }
 }

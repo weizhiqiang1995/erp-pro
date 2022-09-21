@@ -22,4 +22,6 @@ public interface BarCodeService extends IService<BarCodeMation> {
     void writeBarCode(InputObject inputObject, OutputObject outputObject);
 
     void getDataByBarCode(InputObject inputObject, OutputObject outputObject);
+
+    void queryBarCodeByObjectIds(InputObject inputObject, OutputObject outputObject);
 }
