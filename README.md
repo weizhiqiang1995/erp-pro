@@ -2,10 +2,10 @@
 
 > 基于SpringBoot 2.X框架，为中小企业打造开源好用的ERP软件。主要模块有零售管理、采购管理、销售管理、仓库管理、财务管理、报表查询、系统管理等。支持预付款、收入支出、仓库调拨、组装拆卸、订单，生产等特色功能。拥有库存状况、出入库统计等报表。对权限进行精确划分，同时支持多系统集成方案，可与OA，CRM，知识库等多个系统进行集成使用。同时对角色和权限进行了细致全面控制，精确到每个按钮和菜单。集成apollo配置中心。
 
-- 最新资讯：[2022-09-05 智能制造云办公 v3.7.29 发布，动态表单](https://www.oschina.net/news/209220/win10-skyeye-3-7-29-released)
+- 最新资讯：[2022-09-26 智能制造云办公 v3.8.2 发布，ERP 更新](https://www.oschina.net/news/211675/win10-skyeye-3-8-2-released)
 - [软件更新资讯](https://gitee.com/doc_wei01/skyeye/blob/company_server/HISTORY_UPDATE.md)
 - 开源版请下载`master`分支
-- [企业版信息以及价格表](https://docs.qq.com/doc/DQlRxcVRMWWVjbU1i?_from=1&disableReturnList=1)
+- [企业版信息](https://docs.qq.com/doc/DQlRxcVRMWWVjbU1i?_from=1&disableReturnList=1)
 - 作者本人承诺，知识星球人数达到1000人，即开放所有功能模块源代码(仅供星球内部成员使用)
 - 免费体验账号，联系作者填写信息后申请
 - 个人软件，无发票
