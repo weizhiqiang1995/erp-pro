@@ -12,9 +12,9 @@
 
 ### 联系作者
 
-| 作者微信(备注：姓名-联系方式，其余概不通过。)                                                         | 知识星球(可获取企业版所有功能) | 软件咨询(备注：姓名-联系方式，其余概不通过。) |
-|----------------------------------------------------------------------------------| ---- | ---- |
-| ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/微信.jpg) | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/知识星球.png) |![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/image.png)|
+| 作者微信(备注：姓名-联系方式，其余概不通过。)                                                         | 知识星球(可获取企业版所有功能) | 软件咨询(备注：姓名-联系方式，其余概不通过。) | QQ群 |
+|----------------------------------------------------------------------------------| ---- | ---- | ---- |
+| ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/微信.jpg) | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/知识星球.png) |![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/image.png)|![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/Skyeye智能制造云办公官方①群群二维码.png)|
 
 
 #### 环境搭建
