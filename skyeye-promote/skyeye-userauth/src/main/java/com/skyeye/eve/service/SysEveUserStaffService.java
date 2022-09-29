@@ -33,7 +33,7 @@ public interface SysEveUserStaffService {
 
     void querySysUserStaffLogin(InputObject inputObject, OutputObject outputObject);
 
-    void queryUserNameList(InputObject inputObject, OutputObject outputObject);
+    void queryUserMationList(InputObject inputObject, OutputObject outputObject);
 
     void editSysUserStaffAnnualLeaveById(InputObject inputObject, OutputObject outputObject);
 

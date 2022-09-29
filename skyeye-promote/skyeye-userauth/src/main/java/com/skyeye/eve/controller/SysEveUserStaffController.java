@@ -172,17 +172,18 @@ public class SysEveUserStaffController {
     }
 
     /**
-     * 根据用户ids获取用户信息集合
+     * 根据用户ids/员工ids获取员工信息集合
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "queryUserNameList", value = "根据用户ids获取用户信息集合", method = "POST", allUse = "0")
+    @ApiOperation(id = "queryUserMationList", value = "根据用户ids/员工ids获取员工信息集合", method = "POST", allUse = "0")
     @ApiImplicitParams({
-        @ApiImplicitParam(id = "userIds", name = "userIds", value = "用户id")})
-    @RequestMapping("/post/SysEveUserStaffController/queryUserNameList")
-    public void queryUserNameList(InputObject inputObject, OutputObject outputObject) {
-        sysEveUserStaffService.queryUserNameList(inputObject, outputObject);
+        @ApiImplicitParam(id = "userIds", name = "userIds", value = "用户id，多个逗号隔离(两个参数传一个即可，默认优先以userIds查询为主)"),
+        @ApiImplicitParam(id = "staffIds", name = "staffIds", value = "员工id，多个逗号隔开(两个参数传一个即可，默认优先以userIds查询为主)")})
+    @RequestMapping("/post/SysEveUserStaffController/queryUserMationList")
+    public void queryUserMationList(InputObject inputObject, OutputObject outputObject) {
+        sysEveUserStaffService.queryUserMationList(inputObject, outputObject);
     }
 
     /**

@@ -664,19 +664,6 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     }
 
     /**
-     * 根据用户id获取用户信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryUserMationByUserId(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        outputObject.setBean(sysEveUserDao.queryUserDetailsMationByUserId(map.get("userId").toString()));
-        outputObject.settotal(1);
-    }
-
-    /**
      * 根据用户id获取桌面菜单信息
      *
      * @param inputObject  入参以及用户信息等获取对象

@@ -199,7 +199,7 @@
 	    VALUES(#{id}, #{staffId}, #{schoolId})
 	</insert>
 	
-	<select id="queryUserNameList" resultType="java.util.Map">
+	<select id="queryUserMationList" resultType="java.util.Map">
 		SELECT
 			a.user_id id,
 			a.id staffId,
@@ -232,16 +232,24 @@
 			b.user_code userCode
 		FROM
 			sys_eve_user_staff a
-			LEFT JOIN company_job_score o ON a.job_score_id = o.id,
+			LEFT JOIN company_job_score o ON a.job_score_id = o.id
+			LEFT JOIN sys_eve_user b ON b.id = a.user_id,
 			company_job p,
 			company_department q,
-			company_mation u,
-			sys_eve_user b
-		WHERE INSTR(CONCAT(',', #{userIds}, ','), CONCAT(',', a.user_id, ','))
-		AND b.id = a.user_id
-		AND a.company_id = u.id
-		AND a.department_id = q.id
-		AND a.job_id = p.id
+			company_mation u
+		<where>
+			<choose>
+				<when test="userIds != '' and userIds != null">
+					INSTR(CONCAT(',', #{userIds}, ','), CONCAT(',', a.user_id, ','))
+				</when>
+				<otherwise>
+					INSTR(CONCAT(',', #{staffIds}, ','), CONCAT(',', a.id, ','))
+				</otherwise>
+			</choose>
+			AND a.company_id = u.id
+			AND a.department_id = q.id
+			AND a.job_id = p.id
+		</where>
 	</select>
 	
 	<select id="querySysUserStaffListToTable" parameterType="java.util.Map" resultType="java.util.Map">

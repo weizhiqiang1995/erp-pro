@@ -442,15 +442,21 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     }
 
     /**
-     * 根据用户ids获取用户信息集合
+     * 根据用户ids/员工ids获取员工信息集合
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
-    public void queryUserNameList(InputObject inputObject, OutputObject outputObject) {
-        String userIds = inputObject.getParams().get("userIds").toString();
-        List<Map<String, Object>> beans = sysEveUserStaffDao.queryUserNameList(userIds);
+    public void queryUserMationList(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> params = inputObject.getParams();
+        String userIds = params.get("userIds").toString();
+        String staffIds = params.get("staffIds").toString();
+        List<Map<String, Object>> beans = new ArrayList<>();
+        // 用户id和员工id只要有一个不为空就进行查询
+        if (!ToolUtil.isBlank(userIds) || !ToolUtil.isBlank(staffIds)) {
+            beans = sysEveUserStaffDao.queryUserMationList(userIds, staffIds);
+        }
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
     }

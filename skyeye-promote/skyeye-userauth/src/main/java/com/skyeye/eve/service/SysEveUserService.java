@@ -66,7 +66,5 @@ public interface SysEveUserService {
 
     void querySysDeskTopByUserId(InputObject inputObject, OutputObject outputObject);
 
-    void queryUserMationByUserId(InputObject inputObject, OutputObject outputObject);
-
     void queryDeskTopsMenuByUserId(InputObject inputObject, OutputObject outputObject);
 }

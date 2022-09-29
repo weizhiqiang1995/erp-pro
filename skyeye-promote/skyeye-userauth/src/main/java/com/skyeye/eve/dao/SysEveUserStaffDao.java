@@ -48,7 +48,7 @@ public interface SysEveUserStaffDao {
 
     int insertSchoolStaffMation(Map<String, Object> schoolStaff);
 
-    List<Map<String, Object>> queryUserNameList(@Param("userIds") String userIds);
+    List<Map<String, Object>> queryUserMationList(@Param("userIds") String userIds, @Param("staffIds") String staffIds);
 
     List<Map<String, Object>> queryStaffNameListByIdList(@Param("list") List<String> userIds);
 
