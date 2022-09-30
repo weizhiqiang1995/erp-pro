@@ -16,10 +16,11 @@
 		FROM
 			sys_develop_doc_type a
 			LEFT JOIN sys_develop_doc b ON a.id = b.type_id
-		WHERE 1=1
+		<where>
 			<if test="typeName != '' and typeName != null">
 				AND a.`title` LIKE '%${typeName}%'
 			</if>
+		</where>
 		GROUP BY a.id
 		ORDER BY a.order_by ASC
 	</select>
@@ -37,10 +38,8 @@
 			a.order_by orderBy
 		FROM
 			sys_develop_doc_type a
-		WHERE
-			a.parent_id = #{parentId}
-		ORDER BY
-			a.order_by DESC
+		WHERE a.parent_id = #{parentId}
+		ORDER BY a.order_by DESC
 		LIMIT 1
 	</select>
 	
@@ -78,8 +77,7 @@
 		DELETE
 		FROM
 			sys_develop_doc_type
-		WHERE
-			id = #{id}
+		WHERE id = #{id}
 	</delete>
 	
 	<select id="querySysDeveLopTypeContentNumById" parameterType="java.util.Map" resultType="java.util.Map">
@@ -92,8 +90,7 @@
 			LEFT JOIN sys_develop_doc b ON a.id = b.type_id
 		WHERE
 			a.id = #{id}
-		GROUP BY
-			a.id
+		GROUP BY a.id
 	</select>
 	
 	<select id="querySysDeveLopTypeByFirstType" parameterType="java.util.Map" resultType="java.util.Map">
@@ -201,10 +198,12 @@
 			CONVERT(a.create_time, char) createTime
 		FROM
 			sys_develop_doc a
-		WHERE a.type_id = #{parentId}
+		<where>
+			a.type_id = #{parentId}
 			<if test="title != '' and title != null">
 				AND a.`title` LIKE '%${title}%'
 			</if>
+		</where>
 		ORDER BY a.order_by ASC
 	</select>
 	

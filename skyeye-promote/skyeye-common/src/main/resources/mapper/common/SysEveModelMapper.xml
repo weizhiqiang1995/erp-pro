@@ -21,7 +21,7 @@
 			LEFT JOIN sys_eve_model_type c ON a.second_type_id = c.id
 			LEFT JOIN sys_eve_user_staff d ON a.create_id = d.user_id
 			LEFT JOIN sys_eve_user_staff e ON a.last_update_id = e.user_id
-		WHERE 1 = 1
+		<where>
 			<if test="title != '' and title != null">
 				AND a.title LIKE '%${title}%'
 			</if>
@@ -37,7 +37,8 @@
 			<if test="type == '2'.toString()">
 				AND a.create_id = #{userId}
 			</if>
-			ORDER BY a.create_time DESC
+		</where>
+		ORDER BY a.create_time DESC
 	</select>
 
 	<select id="querySysEveModelMationByNameAndType" parameterType="java.util.Map" resultType="java.util.Map">
@@ -45,15 +46,16 @@
 			a.id
 		FROM
 			sys_eve_model a
-		WHERE
+		<where>
 			a.title = #{title}
 			AND a.type = #{type}
-		<if test="id != '' and id != null">
-			AND a.id != #{id}
-		</if>
-		<if test="type == '2'.toString()">
-			AND a.create_id = #{userId}
-		</if>
+			<if test="id != '' and id != null">
+				AND a.id != #{id}
+			</if>
+			<if test="type == '2'.toString()">
+				AND a.create_id = #{userId}
+			</if>
+		</where>
 	</select>
 
 	<insert id="insertSysEveModelMation" parameterType="java.util.Map">
@@ -66,8 +68,7 @@
 		DELETE
 		FROM
 			sys_eve_model
-		WHERE
-			id = #{id}
+		WHERE id = #{id}
 	</delete>
 
 	<select id="selectSysEveModelMationById" resultType="java.util.Map">
@@ -86,8 +87,7 @@
 			sys_eve_model a
 			LEFT JOIN sys_eve_model_type b ON a.first_type_id = b.id
 			LEFT JOIN sys_eve_model_type c ON a.second_type_id = c.id
-		WHERE
-			a.id = #{id}
+		WHERE a.id = #{id}
 	</select>
 	
 	<update id="editSysEveModelMationById" parameterType="java.util.Map">
@@ -105,4 +105,4 @@
 		WHERE id = #{id}
 	</update>
 	
-	</mapper>
+</mapper>

@@ -21,13 +21,14 @@
             LEFT JOIN sys_dict_type a ON s.dict_type_id = a.id
             LEFT JOIN sys_eve_user_staff b ON s.create_id = b.user_id
             LEFT JOIN sys_eve_user_staff c ON s.last_update_id = c.user_id
-        WHERE 1=1
-        <if test="dictName != '' and dictName != null">
-            AND s.dict_name LIKE '%${dictName}%'
-        </if>
-        <if test="dictTypeId != '' and dictTypeId != null">
-            AND s.dict_type_id = #{dictTypeId}
-        </if>
+        <where>
+            <if test="dictName != '' and dictName != null">
+                AND s.dict_name LIKE '%${dictName}%'
+            </if>
+            <if test="dictTypeId != '' and dictTypeId != null">
+                AND s.dict_type_id = #{dictTypeId}
+            </if>
+        </where>
         ORDER BY s.create_time DESC
     </select>
 

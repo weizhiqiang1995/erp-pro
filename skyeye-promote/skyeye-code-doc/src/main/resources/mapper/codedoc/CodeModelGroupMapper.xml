@@ -18,13 +18,14 @@
 			code_model_group a
 			LEFT JOIN sys_eve_user_staff d ON a.create_id = d.user_id
 			LEFT JOIN sys_eve_user_staff e ON a.last_update_id = e.user_id
-		WHERE 1 = 1
+		<where>
 			<if test="groupName != '' and groupName != null">
 				AND a.group_name LIKE '%${groupName}%'
 			</if>
 			<if test="groupNum != '' and groupNum != null">
 				AND a.group_num LIKE '%${groupNum}%'
 			</if>
+		</where>
 		ORDER BY a.create_time DESC
 	</select>
 	

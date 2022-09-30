@@ -16,7 +16,7 @@
 			company_job a
 			LEFT JOIN company_mation b ON a.company_id = b.id 
 			LEFT JOIN company_department c ON a.department_id = c.id 
-		WHERE 1 = 1
+		<where>
 			<if test="jobName != '' and jobName != null">
 				AND a.job_name LIKE '%${jobName}%'
 			</if>
@@ -26,7 +26,8 @@
 			<if test="departmentId != '' and departmentId != null">
 				AND a.department_id = #{departmentId}
 			</if>
-			ORDER BY a.create_time DESC
+		</where>
+		ORDER BY a.create_time DESC
 	</select>
 	
 	<select id="queryCompanyJobMationByName" parameterType="java.util.Map" resultType="java.util.Map">
@@ -35,7 +36,7 @@
 		FROM
 			company_job a
 		WHERE a.job_name = #{jobName}
-			AND a.department_id = #{departmentId}
+		AND a.department_id = #{departmentId}
 	</select>
 	
 	<insert id="insertCompanyJobMation" parameterType="java.util.Map">
@@ -49,8 +50,7 @@
 		DELETE
 		FROM
 			company_job
-		WHERE
-			id = #{id}
+		WHERE id = #{id}
 	</delete>
 	
 	<select id="queryCompanyJobMationToEditById" parameterType="java.util.Map" resultType="java.util.Map">
@@ -72,8 +72,8 @@
 		FROM
 			company_job a
 		WHERE a.job_name = #{jobName}
-			AND a.id != #{id}
-			AND a.department_id = #{departmentId}
+		AND a.id != #{id}
+		AND a.department_id = #{departmentId}
 	</select>
 	
 	<update id="editCompanyJobMationById" parameterType="java.util.Map">
@@ -115,11 +115,13 @@
 			a.job_name name
 		FROM
 			company_job a
-		WHERE a.department_id = #{departmentId}
-		AND INSTR(CONCAT(',', a.p_id, ','), CONCAT(',', #{pId}, ','))
-		<if test="id != '' and id != null">
-			AND a.id != #{id}
-		</if>
+		<where>
+			a.department_id = #{departmentId}
+			AND INSTR(CONCAT(',', a.p_id, ','), CONCAT(',', #{pId}, ','))
+			<if test="id != '' and id != null">
+				AND a.id != #{id}
+			</if>
+		</where>
 	</select>
 
 	<select id="queryCompanyJobOrganization" parameterType="java.util.Map" resultType="java.util.Map">

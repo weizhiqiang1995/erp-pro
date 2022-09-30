@@ -18,15 +18,15 @@
 					id
 				FROM
 					sys_work_log
-				WHERE 1=1
-				<if test="userName != '' and userName != null">
-					AND user_name LIKE '%${userName}%'
-				</if>
-				<if test="realPath != '' and realPath != null">
-					AND real_path LIKE '%${realPath}%'
-				</if>
-				ORDER BY
-					create_time DESC
+				<where>
+					<if test="userName != '' and userName != null">
+						AND user_name LIKE '%${userName}%'
+					</if>
+					<if test="realPath != '' and realPath != null">
+						AND real_path LIKE '%${realPath}%'
+					</if>
+				</where>
+				ORDER BY create_time DESC
 				LIMIT ${total}, ${limit}
 			) AS myNew USING (id)
 	</select>

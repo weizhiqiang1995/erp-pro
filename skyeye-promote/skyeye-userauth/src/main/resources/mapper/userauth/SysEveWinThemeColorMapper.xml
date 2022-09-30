@@ -9,11 +9,12 @@
 			CONVERT(a.create_time, char) createTime
 		FROM
 			sys_eve_win_theme_color a
-		WHERE 1 = 1
+		<where>
 			<if test="colorClass != '' and colorClass != null">
 				AND a.color_class LIKE '%${colorClass}%'
 			</if>
-			ORDER BY a.create_time DESC
+		</where>
+		ORDER BY a.create_time DESC
 	</select>
 	
 	<select id="querySysEveWinThemeColorMationByName" parameterType="java.util.Map" resultType="java.util.Map">
@@ -57,7 +58,7 @@
 		FROM
 			sys_eve_win_theme_color a
 		WHERE a.id != #{id}
-			AND a.color_class = #{colorClass}
+		AND a.color_class = #{colorClass}
 	</select>
 	
 	<update id="editSysEveWinThemeColorMationById" parameterType="java.util.Map">
