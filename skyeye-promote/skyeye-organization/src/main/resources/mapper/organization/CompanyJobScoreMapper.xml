@@ -8,22 +8,22 @@
             a.name_cn nameCn,
             a.name_en nameEn,
             a.state,
-            bu.user_name createName,
+            a.create_id createId,
             DATE_FORMAT(CONVERT(a.create_time, CHAR),'%Y-%m-%d') createTime,
-            cu.user_name lastUpdateName,
+            a.last_update_id lastUpdateId,
             DATE_FORMAT(CONVERT(a.last_update_time, CHAR),'%Y-%m-%d') lastUpdateTime
         FROM
             company_job_score a
-            LEFT JOIN sys_eve_user_staff bu ON a.create_id = bu.user_id
-            LEFT JOIN sys_eve_user_staff cu ON a.last_update_id = cu.user_id
-        WHERE a.state != '3'
-        AND a.job_id = #{jobId}
-        <if test="name != '' and name != null">
-            AND (a.name_cn LIKE '%${name}%' OR a.name_en LIKE '%${name}%')
-        </if>
-        <if test="state != '' and state != null">
-            AND a.state = #{state}
-        </if>
+        <where>
+            a.state != '3'
+            AND a.job_id = #{jobId}
+            <if test="name != '' and name != null">
+                AND (a.name_cn LIKE '%${name}%' OR a.name_en LIKE '%${name}%')
+            </if>
+            <if test="state != '' and state != null">
+                AND a.state = #{state}
+            </if>
+        </where>
     </select>
 
     <select id="queryCompanyJobScoreByNameAndNotId" resultType="java.util.Map">

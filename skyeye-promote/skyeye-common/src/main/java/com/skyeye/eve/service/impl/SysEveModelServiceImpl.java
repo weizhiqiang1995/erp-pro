@@ -13,6 +13,7 @@ import com.skyeye.common.util.FileUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveModelDao;
 import com.skyeye.eve.entity.sysmodel.SysEveModelQueryDo;
+import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.eve.service.SysEveModelService;
 import com.skyeye.jedis.JedisClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +39,13 @@ public class SysEveModelServiceImpl implements SysEveModelService {
     private SysEveModelDao sysEveModelDao;
 
     @Autowired
-    public JedisClientService jedisClient;
+    private JedisClientService jedisClient;
 
     @Value("${IMAGES_PATH}")
     private String tPath;
+
+    @Autowired
+    private IAuthUserService iAuthUserService;
 
     /**
      * 获取系统编辑器模板表
@@ -55,6 +59,8 @@ public class SysEveModelServiceImpl implements SysEveModelService {
         sysEveModelQuery.setUserId(inputObject.getLogParams().get("id").toString());
         Page pages = PageHelper.startPage(sysEveModelQuery.getPage(), sysEveModelQuery.getLimit());
         List<Map<String, Object>> beans = sysEveModelDao.querySysEveModelList(sysEveModelQuery);
+        iAuthUserService.setNameByIdList(beans, "createId", "createName");
+        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

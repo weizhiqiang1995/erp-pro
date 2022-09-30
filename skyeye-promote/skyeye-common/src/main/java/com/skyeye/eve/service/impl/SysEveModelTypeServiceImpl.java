@@ -9,6 +9,7 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveModelTypeDao;
+import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.eve.service.SysEveModelTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,14 +32,23 @@ public class SysEveModelTypeServiceImpl implements SysEveModelTypeService {
     @Autowired
     private SysEveModelTypeDao sysEveModelTypeDao;
 
+    @Autowired
+    private IAuthUserService iAuthUserService;
+
+    /**
+     * 获取系统模板分类列表
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
     @Override
     public void querySysEveModelTypeList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> inputParams = inputObject.getParams();
         List<Map<String, Object>> beans = sysEveModelTypeDao.querySysEveModelTypeList(inputParams);
-        if (!beans.isEmpty()) {
-            outputObject.setBeans(beans);
-            outputObject.settotal(beans.size());
-        }
+        iAuthUserService.setNameByIdList(beans, "createId", "createName");
+        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
+        outputObject.setBeans(beans);
+        outputObject.settotal(beans.size());
     }
 
     @Override

@@ -90,7 +90,7 @@ public class CompanyJobServiceImpl implements CompanyJobService {
         // 1.删除职位信息
         companyJobDao.deleteCompanyJobMationById(map);
         // 2.删除职位等级信息
-        companyJobScoreDao.editCompanyJobScoreStateMationByJobId(map.get("id").toString(), CompanyJobScoreServiceImpl.STATE.START_DELETE.getState());
+        companyJobScoreDao.editCompanyJobScoreStateMationByJobId(map.get("id").toString(), CompanyJobScoreServiceImpl.State.START_DELETE.getState());
     }
 
     /**

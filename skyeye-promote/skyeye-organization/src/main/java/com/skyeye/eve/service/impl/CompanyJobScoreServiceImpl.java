@@ -15,6 +15,7 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.CompanyJobScoreDao;
 import com.skyeye.eve.dao.CompanyJobScoreFieldDao;
 import com.skyeye.eve.service.CompanyJobScoreService;
+import com.skyeye.eve.service.IAuthUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,14 +41,17 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
     @Autowired
     private CompanyJobScoreFieldDao companyJobScoreFieldDao;
 
-    public static enum STATE {
+    @Autowired
+    private IAuthUserService iAuthUserService;
+
+    public enum State {
         START_UP(1, "启用"),
         START_DOWN(2, "禁用"),
         START_DELETE(3, "删除");
         private int state;
         private String name;
 
-        STATE(int state, String name) {
+        State(int state, String name) {
             this.state = state;
             this.name = name;
         }
@@ -72,6 +76,8 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = companyJobScoreDao.queryCompanyJobScoreList(map);
+        iAuthUserService.setNameByIdList(beans, "createId", "createName");
+        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -94,7 +100,7 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
         }
         DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
         // 默认启用
-        map.put("state", STATE.START_UP.getState());
+        map.put("state", State.START_UP.getState());
         companyJobScoreDao.insertCompanyJobScoreMation(map);
         // 处理薪资模板字段属性信息
         companyJobScoreField(map.get("fieldStr").toString(), map.get("id").toString());
@@ -174,7 +180,7 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void deleteCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        companyJobScoreDao.editCompanyJobScoreStateMationById(map.get("id").toString(), STATE.START_DELETE.getState());
+        companyJobScoreDao.editCompanyJobScoreStateMationById(map.get("id").toString(), State.START_DELETE.getState());
     }
 
     /**
@@ -187,7 +193,7 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void enableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        companyJobScoreDao.editCompanyJobScoreStateMationById(map.get("id").toString(), STATE.START_UP.getState());
+        companyJobScoreDao.editCompanyJobScoreStateMationById(map.get("id").toString(), State.START_UP.getState());
     }
 
     /**
@@ -200,7 +206,7 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void disableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        companyJobScoreDao.editCompanyJobScoreStateMationById(map.get("id").toString(), STATE.START_DOWN.getState());
+        companyJobScoreDao.editCompanyJobScoreStateMationById(map.get("id").toString(), State.START_DOWN.getState());
     }
 
     /**
