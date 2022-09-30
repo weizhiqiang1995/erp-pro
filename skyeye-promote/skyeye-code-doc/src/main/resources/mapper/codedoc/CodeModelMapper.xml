@@ -10,14 +10,12 @@
 			a.model_text modelText,
 			a.model_type modelType,
 			(SELECT COUNT(*) FROM code_model_history b WHERE b.model_id = a.id) useNum,
-			CONCAT_WS('_', d.job_number, d.user_name) createName,
+			a.create_id createId,
 			CONVERT(a.create_time, char) createTime,
-			CONCAT_WS('_', e.job_number, e.user_name) lastUpdateName,
+			a.last_update_id lastUpdateId,
 			CONVERT(a.last_update_time, char) lastUpdateTime
 		FROM
 			code_model a
-			LEFT JOIN sys_eve_user_staff d ON a.create_id = d.user_id
-			LEFT JOIN sys_eve_user_staff e ON a.last_update_id = e.user_id
 		WHERE a.group_id = #{groupId}
 		ORDER BY a.create_time DESC
 	</select>
@@ -46,8 +44,7 @@
 		DELETE
 		FROM
 			code_model
-		WHERE
-			id = #{id}
+		WHERE id = #{id}
 	</delete>
 	
 	<select id="queryCodeModelMationToEditById" parameterType="java.util.Map" resultType="java.util.Map">

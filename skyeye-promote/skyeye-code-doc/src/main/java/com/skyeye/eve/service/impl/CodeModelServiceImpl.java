@@ -13,6 +13,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.eve.dao.CodeModelDao;
 import com.skyeye.eve.entity.codedoc.model.CodeModelQueryDo;
 import com.skyeye.eve.service.CodeModelService;
+import com.skyeye.eve.service.IAuthUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +36,9 @@ public class CodeModelServiceImpl implements CodeModelService {
     @Autowired
     private CodeModelDao codeModelDao;
 
+    @Autowired
+    private IAuthUserService iAuthUserService;
+
     /**
      * 获取模板列表
      *
@@ -46,6 +50,8 @@ public class CodeModelServiceImpl implements CodeModelService {
         CodeModelQueryDo codeModelQuery = inputObject.getParams(CodeModelQueryDo.class);
         Page pages = PageHelper.startPage(codeModelQuery.getPage(), codeModelQuery.getLimit());
         List<Map<String, Object>> beans = codeModelDao.queryCodeModelList(codeModelQuery);
+        iAuthUserService.setNameByIdList(beans, "createId", "createName");
+        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

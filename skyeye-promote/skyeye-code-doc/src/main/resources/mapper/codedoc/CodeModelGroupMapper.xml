@@ -8,16 +8,14 @@
 			a.group_name groupName,
 			a.group_num groupNum,
 			a.group_desc groupDesc,
-			CONCAT_WS('_', d.job_number, d.user_name) createName,
+			a.create_id createId,
 			CONVERT(a.create_time, char) createTime,
-			CONCAT_WS('_', e.job_number, e.user_name) lastUpdateName,
+			a.last_update_id lastUpdateId,
 			CONVERT(a.last_update_time, char) lastUpdateTime,
 			(SELECT COUNT(*) FROM code_model b WHERE b.group_id = a.id) modelNum,
 			(SELECT COUNT(*) FROM (SELECT COUNT(*), c.group_id FROM code_model_history c GROUP BY c.file_path) d WHERE d.group_id = a.id) useNum
 		FROM
 			code_model_group a
-			LEFT JOIN sys_eve_user_staff d ON a.create_id = d.user_id
-			LEFT JOIN sys_eve_user_staff e ON a.last_update_id = e.user_id
 		<where>
 			<if test="groupName != '' and groupName != null">
 				AND a.group_name LIKE '%${groupName}%'
@@ -52,16 +50,14 @@
 			COUNT(*) modelNum
 		FROM 
 			code_model b 
-		WHERE 
-			b.group_id = #{id} 
+		WHERE b.group_id = #{id}
 	</select>
 	
 	<delete id="deleteCodeModelGroupById" parameterType="java.util.Map">
 		DELETE
 		FROM
 			code_model_group
-		WHERE
-			id = #{id}
+		WHERE id = #{id}
 	</delete>
 	
 	<select id="queryCodeModelGroupMationToEditById" parameterType="java.util.Map" resultType="java.util.Map">
@@ -81,7 +77,7 @@
 		FROM
 			code_model_group a
 		WHERE a.id != #{id}
-			AND a.group_name = #{groupName}
+		AND a.group_name = #{groupName}
 	</select>
 	
 	<update id="editCodeModelGroupMationById" parameterType="java.util.Map">
@@ -112,7 +108,7 @@
 			b.TABLE_COMMENT AS tableComment
 		FROM
 			information_schema.COLUMNS a
-		LEFT JOIN information_schema.TABLES b ON a.TABLE_NAME = b.TABLE_NAME
+			LEFT JOIN information_schema.TABLES b ON a.TABLE_NAME = b.TABLE_NAME
 		WHERE a.TABLE_SCHEMA = #{dbName}
 		AND a.TABLE_NAME = #{tableName}
 		GROUP BY a.COLUMN_NAME
@@ -130,7 +126,7 @@
 		FROM
 			code_model a
 		WHERE a.group_id = #{groupId}
-			ORDER BY a.create_time DESC
+		ORDER BY a.create_time DESC
 	</select>
 	
 	<select id="queryTableBzByTableName" parameterType="java.util.Map" resultType="java.util.Map">
@@ -148,11 +144,10 @@
 			b.TABLE_COMMENT AS tableComment
 		FROM
 			information_schema.COLUMNS a
-		LEFT JOIN information_schema.TABLES b ON a.TABLE_NAME = b.TABLE_NAME
-		WHERE
-			a.TABLE_SCHEMA = #{dbName}
-			AND a.TABLE_NAME = #{tableName}
-			GROUP BY a.TABLE_NAME
+			LEFT JOIN information_schema.TABLES b ON a.TABLE_NAME = b.TABLE_NAME
+		WHERE a.TABLE_SCHEMA = #{dbName}
+		AND a.TABLE_NAME = #{tableName}
+		GROUP BY a.TABLE_NAME
 	</select>
 	
 </mapper>

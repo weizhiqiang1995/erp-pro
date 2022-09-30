@@ -14,6 +14,7 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.CodeModelGroupDao;
 import com.skyeye.eve.entity.codedoc.group.CodeModelGroupQueryDo;
 import com.skyeye.eve.service.CodeModelGroupService;
+import com.skyeye.eve.service.IAuthUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,9 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
     @Value("${jdbc.database.name}")
     private String dbName;
 
+    @Autowired
+    private IAuthUserService iAuthUserService;
+
     /**
      * 获取模板分组列表
      *
@@ -52,6 +56,8 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
         CodeModelGroupQueryDo codeModelGroupQuery = inputObject.getParams(CodeModelGroupQueryDo.class);
         Page pages = PageHelper.startPage(codeModelGroupQuery.getPage(), codeModelGroupQuery.getLimit());
         List<Map<String, Object>> beans = codeModelGroupDao.queryCodeModelGroupList(codeModelGroupQuery);
+        iAuthUserService.setNameByIdList(beans, "createId", "createName");
+        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

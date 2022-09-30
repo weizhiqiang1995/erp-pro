@@ -21,6 +21,7 @@ import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.SysDictDataDao;
 import com.skyeye.eve.entity.dict.SysDictDataMation;
 import com.skyeye.eve.entity.dict.SysDictDataQueryDO;
+import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.eve.service.ISysDictDataService;
 import com.skyeye.eve.service.SysDictDataService;
 import com.skyeye.jedis.JedisClientService;
@@ -60,6 +61,9 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     @Autowired
     private ISysDictDataService iSysDictDataService;
 
+    @Autowired
+    private IAuthUserService iAuthUserService;
+
     /**
      * 获取数据字典列表
      *
@@ -71,6 +75,8 @@ public class SysDictDataServiceImpl implements SysDictDataService {
         SysDictDataQueryDO sysDictDataQuery = inputObject.getParams(SysDictDataQueryDO.class);
         Page pages = PageHelper.startPage(sysDictDataQuery.getPage(), sysDictDataQuery.getLimit());
         List<SysDictDataMation> beans = sysDictDataDao.queryDictDataList(sysDictDataQuery);
+        iAuthUserService.setNameByIdForEntity(beans, "createId", "createName");
+        iAuthUserService.setNameByIdForEntity(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
