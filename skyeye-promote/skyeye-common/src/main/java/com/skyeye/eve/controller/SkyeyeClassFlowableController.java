@@ -46,7 +46,7 @@ public class SkyeyeClassFlowableController {
     }
 
     /**
-     * 获取工作流业务对象服务
+     * 获取工作流业务对象服务---common层使用
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -61,12 +61,12 @@ public class SkyeyeClassFlowableController {
     }
 
     /**
-     * 获取所有工作流业务对象服务列表
+     * 获取所有工作流业务对象服务列表---前台使用
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "queryClassFlowableDataList", value = "获取所有工作流业务对象服务列表", method = "GET", allUse = "2")
+    @ApiOperation(id = "queryClassFlowableDataList", value = "获取所有工作流业务对象服务列表", method = "POST", allUse = "2")
     @ApiImplicitParams(classBean = CommonPageInfo.class)
     @RequestMapping("/post/SkyeyeClassFlowableController/queryClassFlowableDataList")
     public void queryClassFlowableDataList(InputObject inputObject, OutputObject outputObject) {

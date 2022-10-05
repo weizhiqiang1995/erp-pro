@@ -4,7 +4,7 @@
 
 package com.skyeye.eve.dao;
 
-import com.github.pagehelper.Page;
+import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.eve.entity.classflowable.SkyeyeClassFlowableLinkMation;
 
 import java.util.List;
@@ -19,6 +19,6 @@ import java.util.List;
  */
 public interface SkyeyeClassFlowableDao extends SkyeyeBaseMapper<SkyeyeClassFlowableLinkMation> {
 
-    List<SkyeyeClassFlowableLinkMation> queryClassFlowableDataList(Page pages);
+    List<SkyeyeClassFlowableLinkMation> queryClassFlowableDataList(CommonPageInfo commonPageInfo);
 
 }

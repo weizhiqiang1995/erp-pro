@@ -113,7 +113,7 @@ public class SkyeyeClassFlowableServiceImpl extends ServiceImpl<SkyeyeClassFlowa
     public void queryClassFlowableDataList(InputObject inputObject, OutputObject outputObject) {
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
         Page pages = PageHelper.startPage(commonPageInfo.getPage(), commonPageInfo.getLimit());
-        List<SkyeyeClassFlowableLinkMation> beans = skyeyeClassFlowableDao.queryClassFlowableDataList(pages);
+        List<SkyeyeClassFlowableLinkMation> beans = skyeyeClassFlowableDao.queryClassFlowableDataList(commonPageInfo);
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

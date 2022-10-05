@@ -15,7 +15,7 @@
                 ${sqlExtract}
             </if>
             <if test="keyword != '' and keyword != null">
-                AND a.serviceName like '%${keyword}%'
+                AND a.service_name like '%${keyword}%'
             </if>
         </where>
         ORDER BY a.create_time DESC
