@@ -9,7 +9,6 @@ import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.eve.entity.dict.SysDictTypeQueryDO;
 import com.skyeye.eve.entity.sysmodel.SysEveModelQueryDo;
 import com.skyeye.eve.service.SysEveModelService;
 import org.springframework.beans.factory.annotation.Autowired;

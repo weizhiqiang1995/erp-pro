@@ -62,7 +62,7 @@
         <property id="holidaysTypeJson" name="holidaysTypeJson" ref="required,json" var="企业假期类型以及扣薪信息"/>
         <property id="yearHolidaysMation" name="yearHolidaysMation" ref="required,json" var="年假信息"/>
         <property id="abnormalMation" name="abnormalMation" ref="required,json" var="异常考勤制度管理信息"/>
-        <property id="erpExamineBasicDesign" name="erpExamineBasicDesign" ref="required,json" var="ERP单据审核的一些设置"/>
+        <property id="sysOrderBasicDesign" name="sysOrderBasicDesign" ref="required,json" var="系统单据审核的一些设置"/>
     </url>
     <!-- 系统基础设置结束 -->
 

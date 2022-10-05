@@ -5,14 +5,11 @@
 package com.skyeye.eve.service.impl;
 
 import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson.JSON;
-import com.skyeye.common.client.ExecuteFeignClient;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.MapUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SystemFoundationSettingsDao;
-import com.skyeye.eve.rest.flowable.order.SysOrderService;
 import com.skyeye.eve.service.SystemFoundationSettingsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +20,6 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,9 +37,6 @@ public class SystemFoundationSettingsServiceImpl implements SystemFoundationSett
 
     @Autowired
     private SystemFoundationSettingsDao systemFoundationSettingsDao;
-
-    @Autowired
-    private SysOrderService sysOrderService;
 
     /**
      * 获取系统基础设置
@@ -122,10 +115,9 @@ public class SystemFoundationSettingsServiceImpl implements SystemFoundationSett
         if (MapUtil.checkKeyIsNull(map, "abnormalMation")) {
             map.put("abnormalMation", new ArrayList<>());
         }
-        // ERP单据审核的一些设置
-        if (MapUtil.checkKeyIsNull(map, "erpExamineBasicDesign")) {
-            List<Map<String, Object>> beans = ExecuteFeignClient.get(() -> sysOrderService.querySysOrderConstants()).getRows();
-            map.put("erpExamineBasicDesign", JSON.toJSONString(beans));
+        // 系统单据审核的一些设置
+        if (MapUtil.checkKeyIsNull(map, "sysOrderBasicDesign")) {
+            map.put("sysOrderBasicDesign", new ArrayList<>());
         }
     }
 

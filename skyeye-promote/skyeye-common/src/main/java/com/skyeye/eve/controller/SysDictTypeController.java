@@ -8,10 +8,10 @@ import com.skyeye.annotation.api.Api;
 import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
+import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.entity.dict.SysDictTypeMation;
-import com.skyeye.eve.entity.dict.SysDictTypeQueryDO;
 import com.skyeye.eve.service.SysDictTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +39,7 @@ public class SysDictTypeController {
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryDictTypeList", value = "获取数据字典类型列表", method = "POST", allUse = "1")
-    @ApiImplicitParams(classBean = SysDictTypeQueryDO.class)
+    @ApiImplicitParams(classBean = CommonPageInfo.class)
     @RequestMapping("/post/SysDictTypeController/queryDictTypeList")
     public void queryDictTypeList(InputObject inputObject, OutputObject outputObject) {
         sysDictTypeService.queryDictTypeList(inputObject, outputObject);

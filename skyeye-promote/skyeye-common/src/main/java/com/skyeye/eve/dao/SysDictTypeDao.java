@@ -4,8 +4,8 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.eve.entity.dict.SysDictTypeMation;
-import com.skyeye.eve.entity.dict.SysDictTypeQueryDO;
 
 import java.util.List;
 
@@ -19,6 +19,6 @@ import java.util.List;
  */
 public interface SysDictTypeDao extends SkyeyeBaseMapper<SysDictTypeMation> {
 
-    List<SysDictTypeMation> queryDictTypeList(SysDictTypeQueryDO sysDictTypeQuery);
+    List<SysDictTypeMation> queryDictTypeList(CommonPageInfo commonPageInfo);
 
 }

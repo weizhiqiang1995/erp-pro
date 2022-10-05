@@ -13,6 +13,7 @@ import com.skyeye.common.constans.CommonCharConstants;
 import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.CommonLetterConstants;
 import com.skyeye.common.constans.CommonNumConstants;
+import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
@@ -20,7 +21,6 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.SysDictDataDao;
 import com.skyeye.eve.entity.dict.SysDictDataMation;
-import com.skyeye.eve.entity.dict.SysDictDataQueryDO;
 import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.eve.service.ISysDictDataService;
 import com.skyeye.eve.service.SysDictDataService;
@@ -72,9 +72,9 @@ public class SysDictDataServiceImpl implements SysDictDataService {
      */
     @Override
     public void queryDictDataList(InputObject inputObject, OutputObject outputObject) {
-        SysDictDataQueryDO sysDictDataQuery = inputObject.getParams(SysDictDataQueryDO.class);
-        Page pages = PageHelper.startPage(sysDictDataQuery.getPage(), sysDictDataQuery.getLimit());
-        List<SysDictDataMation> beans = sysDictDataDao.queryDictDataList(sysDictDataQuery);
+        CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
+        Page pages = PageHelper.startPage(commonPageInfo.getPage(), commonPageInfo.getLimit());
+        List<SysDictDataMation> beans = sysDictDataDao.queryDictDataList(commonPageInfo);
         iAuthUserService.setNameByIdForEntity(beans, "createId", "createName");
         iAuthUserService.setNameByIdForEntity(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);

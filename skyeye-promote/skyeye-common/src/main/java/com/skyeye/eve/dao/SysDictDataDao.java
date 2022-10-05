@@ -4,8 +4,8 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.eve.entity.dict.SysDictDataMation;
-import com.skyeye.eve.entity.dict.SysDictDataQueryDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
  */
 public interface SysDictDataDao extends SkyeyeBaseMapper<SysDictDataMation> {
 
-    List<SysDictDataMation> queryDictDataList(SysDictDataQueryDO sysDictDataQuery);
+    List<SysDictDataMation> queryDictDataList(CommonPageInfo commonPageInfo);
 
     List<SysDictDataMation> queryDictDataListByDictTypeCode(@Param("dictTypeCpde") String dictTypeCpde);
 }

@@ -17,11 +17,11 @@
         FROM
             sys_dict_type s
         <where>
-            <if test="dictName != '' and dictName != null">
-                AND s.dict_name LIKE '%${dictName}%'
+            <if test="sqlExtract != '' and sqlExtract != null">
+                ${sqlExtract}
             </if>
-            <if test="dictCode != '' and dictCode != null">
-                AND s.dict_code LIKE '%${dictCode}%'
+            <if test="keyword != null and keyword != ''">
+                AND (s.dict_name LIKE '%${keyword}%' OR s.dict_code LIKE '%${keyword}%')
             </if>
         </where>
         ORDER BY s.create_time DESC

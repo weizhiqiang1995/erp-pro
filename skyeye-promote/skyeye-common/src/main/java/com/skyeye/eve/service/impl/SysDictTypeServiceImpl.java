@@ -10,13 +10,13 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.CommonNumConstants;
+import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.SysDictTypeDao;
 import com.skyeye.eve.entity.dict.SysDictTypeMation;
-import com.skyeye.eve.entity.dict.SysDictTypeQueryDO;
 import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.eve.service.SysDictTypeService;
 import org.apache.commons.lang3.StringUtils;
@@ -58,9 +58,9 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
      */
     @Override
     public void queryDictTypeList(InputObject inputObject, OutputObject outputObject) {
-        SysDictTypeQueryDO sysDictTypeQuery = inputObject.getParams(SysDictTypeQueryDO.class);
-        Page pages = PageHelper.startPage(sysDictTypeQuery.getPage(), sysDictTypeQuery.getLimit());
-        List<SysDictTypeMation> beans = sysDictTypeDao.queryDictTypeList(sysDictTypeQuery);
+        CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
+        Page pages = PageHelper.startPage(commonPageInfo.getPage(), commonPageInfo.getLimit());
+        List<SysDictTypeMation> beans = sysDictTypeDao.queryDictTypeList(commonPageInfo);
         iAuthUserService.setNameByIdForEntity(beans, "createId", "createName");
         iAuthUserService.setNameByIdForEntity(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);

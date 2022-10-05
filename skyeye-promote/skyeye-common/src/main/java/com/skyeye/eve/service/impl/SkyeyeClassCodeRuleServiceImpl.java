@@ -89,7 +89,7 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
     }
 
     /**
-     * 获取需要获取编码的服务类
+     * 根据serviceClassName获取编码信息，用于rest层调用
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象

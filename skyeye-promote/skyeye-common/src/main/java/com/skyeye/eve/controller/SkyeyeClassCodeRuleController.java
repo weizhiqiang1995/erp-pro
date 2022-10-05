@@ -45,12 +45,12 @@ public class SkyeyeClassCodeRuleController {
     }
 
     /**
-     * 获取需要获取编码的服务类
+     * 根据serviceClassName获取编码信息，用于rest层调用
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "getClassCodeRuleData", value = "获取需要获取编码的服务类", method = "POST", allUse = "2")
+    @ApiOperation(id = "getClassCodeRuleData", value = "根据serviceClassName获取编码信息，用于rest层调用", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "className", name = "className", value = "className", required = "required"),
         @ApiImplicitParam(id = "appId", name = "appId", value = "appId", required = "required")})
