@@ -57,7 +57,7 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
         QueryWrapper<SkyeyeClassCodeRuleMation> wrapper = new QueryWrapper<>();
         wrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassCodeRuleMation::getAppId), skyeyeClassCodeRuleApiMation.getAppId());
         List<SkyeyeClassCodeRuleMation> oldList = super.list(wrapper);
-        List<String> oldKeys = oldList.stream().map(bean -> bean.getClassName() + bean.getServiceName()).collect(Collectors.toList());
+        List<String> oldKeys = oldList.stream().map(bean -> bean.getClassName() + bean.getGroupName() + bean.getServiceName()).collect(Collectors.toList());
 
         // 获取入参的数据
         List<SkyeyeClassCodeRuleMation> classNameList = skyeyeClassCodeRuleApiMation.getClassNameList();
@@ -66,24 +66,24 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
             classNameBean.setAppName(skyeyeClassCodeRuleApiMation.getAppName());
             DataCommonUtil.setCommonDataByGenericity(classNameBean, "0dc9dd4cd4d446ae9455215fe753c44e");
         }
-        List<String> newKeys = classNameList.stream().map(bean -> bean.getClassName() + bean.getServiceName()).collect(Collectors.toList());
-
-        // (新数据 - 旧数据) 添加到数据库
-        List<SkyeyeClassCodeRuleMation> addBeans = classNameList.stream()
-            .filter(item -> !oldKeys.contains(item.getClassName() + item.getServiceName())).collect(Collectors.toList());
-        if (!CollectionUtils.isEmpty(addBeans)) {
-            saveBatch(addBeans);
-        }
+        List<String> newKeys = classNameList.stream().map(bean -> bean.getClassName() + bean.getGroupName() + bean.getServiceName()).collect(Collectors.toList());
 
         // (旧数据 - 新数据) 从数据库删除
         List<SkyeyeClassCodeRuleMation> deleteBeans = oldList.stream()
-            .filter(item -> !newKeys.contains(item.getClassName() + item.getServiceName())).collect(Collectors.toList());
+            .filter(item -> !newKeys.contains(item.getClassName() + item.getGroupName() + item.getServiceName())).collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(deleteBeans)) {
             List<String> classNames = deleteBeans.stream().map(bean -> bean.getClassName()).collect(Collectors.toList());
             QueryWrapper<SkyeyeClassCodeRuleApiMation> deleteWrapper = new QueryWrapper<>();
             deleteWrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassCodeRuleMation::getAppId), skyeyeClassCodeRuleApiMation.getAppId());
             deleteWrapper.in(MybatisPlusUtil.toColumns(SkyeyeClassCodeRuleMation::getClassName), classNames);
             remove(wrapper);
+        }
+
+        // (新数据 - 旧数据) 添加到数据库
+        List<SkyeyeClassCodeRuleMation> addBeans = classNameList.stream()
+            .filter(item -> !oldKeys.contains(item.getClassName() + item.getGroupName() + item.getServiceName())).collect(Collectors.toList());
+        if (!CollectionUtils.isEmpty(addBeans)) {
+            saveBatch(addBeans);
         }
 
     }
@@ -131,7 +131,8 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
     @Override
     public void queryClassCodeRuleList(InputObject inputObject, OutputObject outputObject) {
         List<SkyeyeClassCodeRuleMation> classCodeRuleMationList = super.list();
-        Map<String, List<SkyeyeClassCodeRuleMation>> collect = classCodeRuleMationList.stream().collect(Collectors.groupingBy(SkyeyeClassCodeRuleMation::getAppName));
+        Map<String, Map<String, List<SkyeyeClassCodeRuleMation>>> collect = classCodeRuleMationList.stream()
+            .collect(Collectors.groupingBy(SkyeyeClassCodeRuleMation::getAppName, Collectors.groupingBy(SkyeyeClassCodeRuleMation::getGroupName)));
         outputObject.setBean(collect);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
     }

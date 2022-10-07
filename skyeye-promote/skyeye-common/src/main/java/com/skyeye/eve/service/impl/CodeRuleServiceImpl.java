@@ -111,7 +111,8 @@ public class CodeRuleServiceImpl extends ServiceImpl<CodeRuleDao, CodeRuleMation
         QueryWrapper<CodeRuleMation> queryWrapper = new QueryWrapper<>();
         queryWrapper.and(wrapper ->
             wrapper.eq(MybatisPlusUtil.toColumns(CodeRuleMation::getCodeNum), codeRule.getCodeNum())
-                .or().eq(MybatisPlusUtil.toColumns(CodeRuleMation::getName), codeRule.getName()));
+                .or().eq(MybatisPlusUtil.toColumns(CodeRuleMation::getName), codeRule.getName())
+                .or().eq(MybatisPlusUtil.toColumns(CodeRuleMation::getPattern), codeRule.getPattern()));
         if (StringUtils.isNotEmpty(codeRule.getId())) {
             queryWrapper.ne(CommonConstants.ID, codeRule.getId());
         }

@@ -61,6 +61,13 @@ public class SkyeyeClassCodeRuleMation extends CommonOperatorUserInfo implements
     private String serviceName;
 
     /**
+     * className对应的服务名称
+     */
+    @TableField("group_name")
+    @ApiModelProperty(value = "className对应的分组名称", required = "required")
+    private String groupName;
+
+    /**
      * 编码规则id
      */
     @TableField("code_rule_id")
