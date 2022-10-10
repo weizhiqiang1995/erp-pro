@@ -157,6 +157,8 @@ public class CodePattern {
             if ("map".equalsIgnoreCase(type)) {
                 if (obj.getJSONObject("content").containsKey(value)) {
                     return obj.getJSONObject("content").getStr(value);
+                } else {
+                    return value;
                 }
             } else {
                 return FeatureScriptUtil.invokeScript(obj.getStr("content"), key, value);
@@ -164,7 +166,6 @@ public class CodePattern {
         } else {
             return value;
         }
-        return "";
     }
 
     /**
