@@ -120,14 +120,12 @@ public class CodeRuleServiceImpl extends ServiceImpl<CodeRuleDao, CodeRuleMation
         if (ObjectUtils.isEmpty(checkCodeRule)) {
             CodePattern.validationCodeRulePatten(codeRule.getPattern());
             this.validFeatureScript(codeRule.getFeatureScript());
-            String userId = inputObject.getLogParams().get("id").toString();
             // 2.新增/编辑数据
             if (StringUtils.isNotEmpty(codeRule.getId())) {
                 LOGGER.info("update codeRule data, id is {}", codeRule.getId());
-                DataCommonUtil.setCommonLastUpdateDataByGenericity(codeRule, userId);
                 codeRuleDao.updateById(codeRule);
             } else {
-                DataCommonUtil.setCommonDataByGenericity(codeRule, userId);
+                DataCommonUtil.setId(codeRule);
                 LOGGER.info("insert codeRule data, id is {}", codeRule.getId());
                 codeRuleDao.insert(codeRule);
             }
@@ -293,6 +291,7 @@ public class CodeRuleServiceImpl extends ServiceImpl<CodeRuleDao, CodeRuleMation
         codeMaxSerialMation.setCodeRuleId(relationId);
         codeMaxSerialMation.setSerialCode(String.valueOf(size));
         DataCommonUtil.setCommonDataByGenericity(codeMaxSerialMation, "0dc9dd4cd4d446ae9455215fe753c44e");
+        DataCommonUtil.setId(codeMaxSerialMation);
         codeMaxSerialDao.insert(codeMaxSerialMation);
     }
 

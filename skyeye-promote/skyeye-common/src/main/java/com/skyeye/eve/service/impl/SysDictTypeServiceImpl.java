@@ -87,14 +87,12 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
         }
         SysDictTypeMation checkDictTypeMation = sysDictTypeDao.selectOne(queryWrapper);
         if (ObjectUtils.isEmpty(checkDictTypeMation)) {
-            String userId = inputObject.getLogParams().get("id").toString();
             // 2.新增/编辑数据
             if (StringUtils.isNotEmpty(sysDictTypeMation.getId())) {
                 LOGGER.info("update dictType data, id is {}", sysDictTypeMation.getId());
-                DataCommonUtil.setCommonLastUpdateDataByGenericity(sysDictTypeMation, userId);
                 sysDictTypeDao.updateById(sysDictTypeMation);
             } else {
-                DataCommonUtil.setCommonDataByGenericity(sysDictTypeMation, userId);
+                DataCommonUtil.setId(sysDictTypeMation);
                 LOGGER.info("insert dictType data, id is {}", sysDictTypeMation.getId());
                 sysDictTypeDao.insert(sysDictTypeMation);
             }

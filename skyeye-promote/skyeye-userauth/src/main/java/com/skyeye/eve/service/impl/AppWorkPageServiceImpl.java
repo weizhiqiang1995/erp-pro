@@ -85,7 +85,6 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
         AppWorkPageMation checkAppWorkPage = appWorkPageDao.selectOne(queryWrapper);
 
         if (ObjectUtils.isEmpty(checkAppWorkPage)) {
-            String userId = inputObject.getLogParams().get("id").toString();
             // 2.新增/编辑数据
             if (StringUtils.isNotEmpty(appWorkPageMation.getId())) {
                 // 判断parentId是否发生变化，如果发生变化，则需要重新获取orderBy排序字段
@@ -95,12 +94,11 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
                     appWorkPageMation.setOrderBy(nextOrderBy);
                 }
                 LOGGER.info("update app work page data, id is {}", appWorkPageMation.getId());
-                DataCommonUtil.setCommonLastUpdateDataByGenericity(appWorkPageMation, userId);
                 appWorkPageDao.updateById(appWorkPageMation);
             } else {
                 Integer nextOrderBy = appWorkPageDao.queryAppWorkPageMaxOrderBumByParentId(appWorkPageMation.getParentId());
                 appWorkPageMation.setOrderBy(nextOrderBy);
-                DataCommonUtil.setCommonDataByGenericity(appWorkPageMation, userId);
+                DataCommonUtil.setId(appWorkPageMation);
                 LOGGER.info("insert app work page data, id is {}", appWorkPageMation.getId());
                 appWorkPageDao.insert(appWorkPageMation);
             }

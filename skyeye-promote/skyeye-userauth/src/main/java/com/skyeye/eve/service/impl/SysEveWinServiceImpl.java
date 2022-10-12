@@ -83,14 +83,12 @@ public class SysEveWinServiceImpl implements SysEveWinService {
         SysEveWinMation checkSysEveWin = sysEveWinDao.selectOne(queryWrapper);
 
         if (ObjectUtils.isEmpty(checkSysEveWin)) {
-            String userId = inputObject.getLogParams().get("id").toString();
             // 2.新增/编辑数据
             if (StringUtils.isNotEmpty(sysEveWinMation.getId())) {
                 LOGGER.info("update sys win data, id is {}", sysEveWinMation.getId());
-                DataCommonUtil.setCommonLastUpdateDataByGenericity(sysEveWinMation, userId);
                 sysEveWinDao.updateById(sysEveWinMation);
             } else {
-                DataCommonUtil.setCommonDataByGenericity(sysEveWinMation, userId);
+                DataCommonUtil.setId(sysEveWinMation);
                 LOGGER.info("insert sys win data, id is {}", sysEveWinMation.getId());
                 sysEveWinDao.insert(sysEveWinMation);
             }

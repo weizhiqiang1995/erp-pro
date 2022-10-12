@@ -12,8 +12,6 @@ import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.common.entity.CommonIconOrImgInfo;
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * @ClassName: SysMenuMation
  * @Description: 菜单管理实体类
@@ -25,7 +23,7 @@ import java.io.Serializable;
 @Data
 @TableName(value = "sys_eve_menu")
 @ApiModel("菜单管理实体类")
-public class SysMenuMation extends CommonIconOrImgInfo implements Serializable {
+public class SysMenuMation extends CommonIconOrImgInfo {
 
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")

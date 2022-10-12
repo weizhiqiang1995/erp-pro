@@ -116,15 +116,13 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
         AppWorkPageAuthPointMation checkAppWorkPageAuthPoint = appWorkPageAuthPointDao.selectOne(queryWrapper);
 
         if (ObjectUtils.isEmpty(checkAppWorkPageAuthPoint)) {
-            String userId = inputObject.getLogParams().get("id").toString();
             // 2.新增/编辑数据
             if (StringUtils.isNotEmpty(appWorkPageAuthPointMation.getId())) {
                 LOGGER.info("update app menu auth point data, id is {}", appWorkPageAuthPointMation.getId());
-                DataCommonUtil.setCommonLastUpdateDataByGenericity(appWorkPageAuthPointMation, userId);
                 appWorkPageAuthPointDao.updateById(appWorkPageAuthPointMation);
             } else {
                 appWorkPageAuthPointMation.setMenuNum(String.valueOf(DateUtil.getTimeStampAndToString()));
-                DataCommonUtil.setCommonDataByGenericity(appWorkPageAuthPointMation, userId);
+                DataCommonUtil.setId(appWorkPageAuthPointMation);
                 LOGGER.info("insert app menu auth point data, id is {}", appWorkPageAuthPointMation.getId());
                 appWorkPageAuthPointDao.insert(appWorkPageAuthPointMation);
             }

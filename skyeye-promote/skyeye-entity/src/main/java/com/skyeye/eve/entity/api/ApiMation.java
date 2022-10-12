@@ -13,8 +13,6 @@ import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.common.entity.CommonOperatorUserInfo;
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * @ClassName: ApiMation
  * @Description: api接口信息实体类
@@ -26,7 +24,7 @@ import java.io.Serializable;
 @Data
 @TableName(value = "api_mation")
 @ApiModel("api接口信息实体类")
-public class ApiMation extends CommonOperatorUserInfo implements Serializable {
+public class ApiMation extends CommonOperatorUserInfo {
 
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")

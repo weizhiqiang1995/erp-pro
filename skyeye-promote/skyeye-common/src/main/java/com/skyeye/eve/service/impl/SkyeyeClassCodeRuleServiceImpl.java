@@ -65,6 +65,7 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
             classNameBean.setAppId(skyeyeClassCodeRuleApiMation.getAppId());
             classNameBean.setAppName(skyeyeClassCodeRuleApiMation.getAppName());
             DataCommonUtil.setCommonDataByGenericity(classNameBean, "0dc9dd4cd4d446ae9455215fe753c44e");
+            DataCommonUtil.setId(classNameBean);
         }
         List<String> newKeys = classNameList.stream().map(bean -> bean.getClassName() + bean.getGroupName() + bean.getServiceName()).collect(Collectors.toList());
 

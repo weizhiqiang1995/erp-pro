@@ -117,15 +117,13 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
         SysMenuAuthPointMation checkSysMenuAuthPoint = sysEveMenuAuthPointDao.selectOne(queryWrapper);
 
         if (ObjectUtils.isEmpty(checkSysMenuAuthPoint)) {
-            String userId = inputObject.getLogParams().get("id").toString();
             // 2.新增/编辑数据
             if (StringUtils.isNotEmpty(sysMenuAuthPointMation.getId())) {
                 LOGGER.info("update menu auth point data, id is {}", sysMenuAuthPointMation.getId());
-                DataCommonUtil.setCommonLastUpdateDataByGenericity(sysMenuAuthPointMation, userId);
                 sysEveMenuAuthPointDao.updateById(sysMenuAuthPointMation);
             } else {
                 sysMenuAuthPointMation.setMenuNum(String.valueOf(DateUtil.getTimeStampAndToString()));
-                DataCommonUtil.setCommonDataByGenericity(sysMenuAuthPointMation, userId);
+                DataCommonUtil.setId(sysMenuAuthPointMation);
                 LOGGER.info("insert menu auth point data, id is {}", sysMenuAuthPointMation.getId());
                 sysEveMenuAuthPointDao.insert(sysMenuAuthPointMation);
             }

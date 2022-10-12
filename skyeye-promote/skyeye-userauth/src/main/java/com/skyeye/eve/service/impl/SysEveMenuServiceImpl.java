@@ -22,12 +22,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @ClassName: SysEveMenuServiceImpl
  * @Description: 菜单管理
  * @author: skyeye云系列--卫志强
  * @date: 2022/9/3 11:24
- *
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
@@ -85,7 +83,7 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
         setMenuLevel(sysMenuMation);
         // 设置培训序号
         setOrderNum(sysMenuMation);
-        DataCommonUtil.setCommonDataByGenericity(sysMenuMation, inputObject.getLogParams().get("id").toString());
+        DataCommonUtil.setId(sysMenuMation);
         sysEveMenuDao.insert(sysMenuMation);
     }
 
@@ -171,7 +169,6 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
             // 修改之后不再是之前父类的子菜单，设置培训序号
             setOrderNum(sysMenuMation);
         }
-        DataCommonUtil.setCommonLastUpdateDataByGenericity(sysMenuMation, inputObject.getLogParams().get("id").toString());
         sysEveMenuDao.updateById(sysMenuMation);
     }
 

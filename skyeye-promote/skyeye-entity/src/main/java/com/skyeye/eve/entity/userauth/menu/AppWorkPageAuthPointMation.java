@@ -13,8 +13,6 @@ import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.common.entity.CommonOperatorUserInfo;
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * @ClassName: AppWorkPageAuthPointMation
  * @Description: 手机端菜单权限点实体类
@@ -26,7 +24,7 @@ import java.io.Serializable;
 @Data
 @TableName(value = "app_workbench_page_auth")
 @ApiModel("手机端菜单权限点实体类")
-public class AppWorkPageAuthPointMation extends CommonOperatorUserInfo implements Serializable {
+public class AppWorkPageAuthPointMation extends CommonOperatorUserInfo {
 
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")

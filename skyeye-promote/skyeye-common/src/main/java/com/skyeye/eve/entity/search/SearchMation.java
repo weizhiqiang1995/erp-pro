@@ -12,7 +12,6 @@ import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.common.entity.CommonOperatorUserInfo;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -26,7 +25,7 @@ import java.util.Map;
 @Data
 @TableName(value = "sys_search")
 @ApiModel("高级查询配置实体类")
-public class SearchMation extends CommonOperatorUserInfo implements Serializable {
+public class SearchMation extends CommonOperatorUserInfo {
 
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")

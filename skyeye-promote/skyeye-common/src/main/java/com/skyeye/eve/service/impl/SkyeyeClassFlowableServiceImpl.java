@@ -61,6 +61,7 @@ public class SkyeyeClassFlowableServiceImpl extends ServiceImpl<SkyeyeClassFlowa
         for (SkyeyeClassFlowableLinkMation classNameBean : flowableServiceList) {
             classNameBean.setAppId(skyeyeClassFlowableLinkApiMation.getAppId());
             DataCommonUtil.setCommonDataByGenericity(classNameBean, "0dc9dd4cd4d446ae9455215fe753c44e");
+            DataCommonUtil.setId(classNameBean);
         }
         List<String> newKeys = flowableServiceList.stream().map(bean -> bean.getClassName() + bean.getServiceName() + bean.getListenerClassStr()).collect(Collectors.toList());
 

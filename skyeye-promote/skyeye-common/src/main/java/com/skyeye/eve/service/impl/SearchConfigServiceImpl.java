@@ -148,15 +148,13 @@ public class SearchConfigServiceImpl implements SearchConfigService {
         }
         SearchMation checkSearchMation = searchDao.selectOne(queryWrapper);
         if (ObjectUtils.isEmpty(checkSearchMation)) {
-            String userId = inputObject.getLogParams().get("id").toString();
             searchMation.setParamsConfigStr(JSONUtil.toJsonStr(searchMation.getParamsConfig()));
             // 2.新增/编辑数据
             if (StringUtils.isNotEmpty(searchMation.getId())) {
                 LOGGER.info("update searchConfig data, id is {}", searchMation.getId());
-                DataCommonUtil.setCommonLastUpdateDataByGenericity(searchMation, userId);
                 searchDao.updateById(searchMation);
             } else {
-                DataCommonUtil.setCommonDataByGenericity(searchMation, userId);
+                DataCommonUtil.setId(searchMation);
                 LOGGER.info("insert searchConfig data, id is {}", searchMation.getId());
                 searchDao.insert(searchMation);
             }

@@ -59,14 +59,12 @@ public class ApiMationServiceImpl implements ApiMationService {
         }
         ApiMation checkDictTypeMation = apiMationDao.selectOne(queryWrapper);
         if (ObjectUtils.isEmpty(checkDictTypeMation)) {
-            String userId = inputObject.getLogParams().get("id").toString();
             // 2.新增/编辑数据
             if (StringUtils.isNotEmpty(apiMation.getId())) {
                 LOGGER.info("update ApiMation data, id is {}", apiMation.getId());
-                DataCommonUtil.setCommonLastUpdateDataByGenericity(apiMation, userId);
                 apiMationDao.updateById(apiMation);
             } else {
-                DataCommonUtil.setCommonDataByGenericity(apiMation, userId);
+                DataCommonUtil.setId(apiMation);
                 LOGGER.info("insert ApiMation data, id is {}", apiMation.getId());
                 apiMationDao.insert(apiMation);
             }

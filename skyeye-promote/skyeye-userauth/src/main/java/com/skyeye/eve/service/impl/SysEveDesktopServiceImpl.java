@@ -102,17 +102,15 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
         SysEveDesktopMation checkSysEveDesktop = sysEveDesktopDao.selectOne(queryWrapper);
 
         if (ObjectUtils.isEmpty(checkSysEveDesktop)) {
-            String userId = inputObject.getLogParams().get("id").toString();
             // 2.新增/编辑数据
             if (StringUtils.isNotEmpty(sysEveDesktopMation.getId())) {
                 LOGGER.info("update sys desktop data, id is {}", sysEveDesktopMation.getId());
-                DataCommonUtil.setCommonLastUpdateDataByGenericity(sysEveDesktopMation, userId);
                 sysEveDesktopDao.updateById(sysEveDesktopMation);
             } else {
                 // 获取序号
                 Integer nextOrderBy = sysEveDesktopDao.querySysEveDesktopMaxOrderBum();
                 sysEveDesktopMation.setOrderBy(nextOrderBy);
-                DataCommonUtil.setCommonDataByGenericity(sysEveDesktopMation, userId);
+                DataCommonUtil.setId(sysEveDesktopMation);
                 LOGGER.info("insert sys desktop data, id is {}", sysEveDesktopMation.getId());
                 sysEveDesktopDao.insert(sysEveDesktopMation);
             }

@@ -100,17 +100,15 @@ public class SysDictDataServiceImpl implements SysDictDataService {
         }
         SysDictDataMation checkDictDataMation = sysDictDataDao.selectOne(queryWrapper);
         if (ObjectUtils.isEmpty(checkDictDataMation)) {
-            String userId = inputObject.getLogParams().get("id").toString();
             // 2.新增/编辑数据
             if (StringUtils.isNotEmpty(sysDictDataMation.getId())) {
                 LOGGER.info("update dictData data, id is {}", sysDictDataMation.getId());
-                DataCommonUtil.setCommonLastUpdateDataByGenericity(sysDictDataMation, userId);
                 sysDictDataDao.updateById(sysDictDataMation);
                 // 删除字典缓存
                 String cacheKey = iSysDictDataService.queryDictDataCacheKeyById(sysDictDataMation.getId());
                 jedisClientService.del(cacheKey);
             } else {
-                DataCommonUtil.setCommonDataByGenericity(sysDictDataMation, userId);
+                DataCommonUtil.setId(sysDictDataMation);
                 LOGGER.info("insert dictData data, id is {}", sysDictDataMation.getId());
                 sysDictDataDao.insert(sysDictDataMation);
             }

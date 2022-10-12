@@ -60,6 +60,7 @@ public class SkyeyeClassEnumServiceImpl extends ServiceImpl<SkyeyeClassEnumDao, 
             skyeyeClassEnumMation.setValueList(enumDto);
             skyeyeClassEnumMation.setAppId(skyeyeClassEnumApiMation.getAppId());
             DataCommonUtil.setCommonDataByGenericity(skyeyeClassEnumMation, "0dc9dd4cd4d446ae9455215fe753c44e");
+            DataCommonUtil.setId(skyeyeClassEnumApiMation);
             skyeyeClassEnumMationList.add(skyeyeClassEnumMation);
         });
 

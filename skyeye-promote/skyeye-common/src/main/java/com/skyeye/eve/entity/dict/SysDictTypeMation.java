@@ -12,8 +12,6 @@ import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.common.entity.CommonOperatorUserInfo;
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * @ClassName: SysDictTypeMation
  * @Description: 数据字典类型实体类
@@ -25,7 +23,7 @@ import java.io.Serializable;
 @Data
 @TableName(value = "sys_dict_type")
 @ApiModel("数据字典类型实体类")
-public class SysDictTypeMation extends CommonOperatorUserInfo implements Serializable {
+public class SysDictTypeMation extends CommonOperatorUserInfo {
 
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")
