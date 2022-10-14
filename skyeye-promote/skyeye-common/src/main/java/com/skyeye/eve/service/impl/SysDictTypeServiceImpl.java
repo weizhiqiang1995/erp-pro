@@ -97,7 +97,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
                 sysDictTypeDao.insert(sysDictTypeMation);
             }
         } else {
-            outputObject.setreturnMessage("this data is non-existent.");
+            outputObject.setreturnMessage("this name or dictCode is exist.");
         }
     }
 
