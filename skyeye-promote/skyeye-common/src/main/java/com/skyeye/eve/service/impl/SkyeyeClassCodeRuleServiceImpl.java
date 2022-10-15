@@ -57,6 +57,8 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
         QueryWrapper<SkyeyeClassCodeRuleMation> wrapper = new QueryWrapper<>();
         wrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassCodeRuleMation::getAppId), skyeyeClassCodeRuleApiMation.getAppId());
         List<SkyeyeClassCodeRuleMation> oldList = super.list(wrapper);
+        Map<String, String> classNameToColeRuleId = oldList.stream()
+            .collect(Collectors.toMap(SkyeyeClassCodeRuleMation::getClassName, SkyeyeClassCodeRuleMation::getCodeRuleId));
         List<String> oldKeys = oldList.stream().map(bean -> bean.getClassName() + bean.getGroupName() + bean.getServiceName()).collect(Collectors.toList());
 
         // 获取入参的数据
@@ -84,6 +86,9 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
         List<SkyeyeClassCodeRuleMation> addBeans = classNameList.stream()
             .filter(item -> !oldKeys.contains(item.getClassName() + item.getGroupName() + item.getServiceName())).collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(addBeans)) {
+            addBeans.forEach(bean -> {
+                bean.setCodeRuleId(classNameToColeRuleId.get(bean.getClassName()));
+            });
             saveBatch(addBeans);
         }
 
