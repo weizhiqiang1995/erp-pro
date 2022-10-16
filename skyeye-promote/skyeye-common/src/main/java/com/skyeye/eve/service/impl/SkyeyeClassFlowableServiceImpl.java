@@ -65,22 +65,22 @@ public class SkyeyeClassFlowableServiceImpl extends ServiceImpl<SkyeyeClassFlowa
         }
         List<String> newKeys = flowableServiceList.stream().map(bean -> bean.getClassName() + bean.getServiceName() + bean.getListenerClassStr()).collect(Collectors.toList());
 
-        // (新数据 - 旧数据) 添加到数据库
-        List<SkyeyeClassFlowableLinkMation> addBeans = flowableServiceList.stream()
-            .filter(item -> !oldKeys.contains(item.getClassName() + item.getServiceName() + item.getListenerClassStr())).collect(Collectors.toList());
-        if (!CollectionUtils.isEmpty(addBeans)) {
-            saveBatch(addBeans);
-        }
-
         // (旧数据 - 新数据) 从数据库删除
         List<SkyeyeClassFlowableLinkMation> deleteBeans = oldList.stream()
             .filter(item -> !newKeys.contains(item.getClassName() + item.getServiceName() + item.getListenerClassStr())).collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(deleteBeans)) {
             List<String> classNames = deleteBeans.stream().map(bean -> bean.getClassName()).collect(Collectors.toList());
-            QueryWrapper<SkyeyeClassFlowableLinkApiMation> deleteWrapper = new QueryWrapper<>();
+            QueryWrapper<SkyeyeClassFlowableLinkMation> deleteWrapper = new QueryWrapper<>();
             deleteWrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassFlowableLinkMation::getAppId), skyeyeClassFlowableLinkApiMation.getAppId());
             deleteWrapper.in(MybatisPlusUtil.toColumns(SkyeyeClassFlowableLinkMation::getClassName), classNames);
-            remove(wrapper);
+            remove(deleteWrapper);
+        }
+
+        // (新数据 - 旧数据) 添加到数据库
+        List<SkyeyeClassFlowableLinkMation> addBeans = flowableServiceList.stream()
+            .filter(item -> !oldKeys.contains(item.getClassName() + item.getServiceName() + item.getListenerClassStr())).collect(Collectors.toList());
+        if (!CollectionUtils.isEmpty(addBeans)) {
+            saveBatch(addBeans);
         }
 
     }

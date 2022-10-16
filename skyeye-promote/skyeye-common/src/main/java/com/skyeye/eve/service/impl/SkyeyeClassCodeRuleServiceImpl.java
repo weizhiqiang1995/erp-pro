@@ -79,10 +79,10 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
             .filter(item -> !newKeys.contains(item.getClassName() + item.getGroupName() + item.getServiceName())).collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(deleteBeans)) {
             List<String> classNames = deleteBeans.stream().map(bean -> bean.getClassName()).collect(Collectors.toList());
-            QueryWrapper<SkyeyeClassCodeRuleApiMation> deleteWrapper = new QueryWrapper<>();
+            QueryWrapper<SkyeyeClassCodeRuleMation> deleteWrapper = new QueryWrapper<>();
             deleteWrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassCodeRuleMation::getAppId), skyeyeClassCodeRuleApiMation.getAppId());
             deleteWrapper.in(MybatisPlusUtil.toColumns(SkyeyeClassCodeRuleMation::getClassName), classNames);
-            remove(wrapper);
+            remove(deleteWrapper);
         }
 
         // (新数据 - 旧数据) 添加到数据库
