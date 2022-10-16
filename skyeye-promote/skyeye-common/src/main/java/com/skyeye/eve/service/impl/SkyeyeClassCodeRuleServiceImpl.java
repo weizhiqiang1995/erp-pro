@@ -23,6 +23,7 @@ import com.skyeye.eve.service.SkyeyeClassCodeRuleService;
 import com.skyeye.exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -50,6 +51,7 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void writeClassCodeRule(InputObject inputObject, OutputObject outputObject) {
         SkyeyeClassCodeRuleApiMation skyeyeClassCodeRuleApiMation = inputObject.getParams(SkyeyeClassCodeRuleApiMation.class);
 
@@ -58,6 +60,7 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
         wrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassCodeRuleMation::getAppId), skyeyeClassCodeRuleApiMation.getAppId());
         List<SkyeyeClassCodeRuleMation> oldList = super.list(wrapper);
         Map<String, String> classNameToColeRuleId = oldList.stream()
+            .filter(bean -> !ToolUtil.isBlank(bean.getCodeRuleId()))
             .collect(Collectors.toMap(SkyeyeClassCodeRuleMation::getClassName, SkyeyeClassCodeRuleMation::getCodeRuleId));
         List<String> oldKeys = oldList.stream().map(bean -> bean.getClassName() + bean.getGroupName() + bean.getServiceName()).collect(Collectors.toList());
 
@@ -150,6 +153,7 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editClassCodeRuleConfig(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         String id = params.get("id").toString();

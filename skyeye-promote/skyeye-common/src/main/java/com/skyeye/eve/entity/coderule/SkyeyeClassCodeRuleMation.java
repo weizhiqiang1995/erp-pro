@@ -27,7 +27,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "skyeye_class_cude_rule", autoResultMap = true)
+@TableName(value = "skyeye_class_code_rule", autoResultMap = true)
 @ApiModel("需要获取编码的服务类的集合实体类")
 public class SkyeyeClassCodeRuleMation extends CommonOperatorUserInfo implements Serializable {
 
