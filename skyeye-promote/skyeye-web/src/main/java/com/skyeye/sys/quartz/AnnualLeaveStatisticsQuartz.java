@@ -8,9 +8,12 @@ import cn.hutool.json.JSONUtil;
 import com.skyeye.common.util.CalculationUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
-import com.skyeye.eve.dao.SysEveUserStaffDao;
+import com.skyeye.personnel.dao.SysEveUserStaffDao;
 import com.skyeye.eve.service.ISystemFoundationSettingsService;
 import com.xxl.job.core.handler.annotation.XxlJob;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,34 +44,20 @@ public class AnnualLeaveStatisticsQuartz {
     @Autowired
     private SysEveUserStaffDao sysEveUserStaffDao;
 
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     private enum YearLimits {
-        ONE_YEAR(0, 1, "1"), // 1年以下
-        ONE_THREE_YEAR(1, 3, "2"), // 1年 ~ 3年
-        THREE_FIVE_YEAR(3, 5, "3"), // 3年 ~ 5年
-        FIVE_EIGHT_YEAR(5, 8, "4"), // 5年 ~ 8年
-        EIGHT_YEAR(8, 100, "5"); // 8年以上
+        ONE_YEAR(0, 1, "1", "1年以下"),
+        ONE_THREE_YEAR(1, 3, "2", "1年 ~ 3年"),
+        THREE_FIVE_YEAR(3, 5, "3", "3年 ~ 5年"),
+        FIVE_EIGHT_YEAR(5, 8, "4", "5年 ~ 8年"),
+        EIGHT_YEAR(8, 100, "5", "8年以上");
 
         private int min;
         private int max;
         private String yearType;
-
-        YearLimits(int min, int max, String yearType) {
-            this.min = min;
-            this.max = max;
-            this.yearType = yearType;
-        }
-
-        public int getMin() {
-            return min;
-        }
-
-        public int getMax() {
-            return max;
-        }
-
-        public String getYearType() {
-            return yearType;
-        }
+        private String title;
     }
 
     /**

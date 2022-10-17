@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyeye.win.dao.SysEveWinDao">
+	
+	<select id="queryWinMationList" resultType="java.util.Map">
+		SELECT
+			a.id,
+			a.sys_name sysName,
+			a.sys_url sysUrl,
+			a.content,
+			a.create_id createId,
+			CONVERT(a.create_time, char) createTime,
+			a.last_update_id lastUpdateId,
+			CONVERT(a.last_update_time, char) lastUpdateTime,
+			COUNT(c.id) menuNum
+		FROM
+			sys_eve_win a
+			LEFT JOIN sys_eve_menu c ON a.id = c.sys_win_id
+		<where>
+			<if test="sqlExtract != '' and sqlExtract != null">
+				${sqlExtract}
+			</if>
+			<if test="keyword != null and keyword != ''">
+				AND a.sys_name LIKE '%${keyword}%'
+			</if>
+		</where>
+		GROUP BY a.id
+		ORDER BY a.create_time DESC
+	</select>
+	
+	<select id="queryChildMationById" resultType="java.util.Map">
+		SELECT
+			COUNT(b.id) menuNum
+		FROM
+			sys_eve_win a
+			LEFT JOIN sys_eve_menu b ON a.id = b.sys_win_id
+		WHERE a.id = #{id}
+		GROUP BY a.id
+	</select>
+
+	<select id="querySysEveWinList" resultType="java.util.Map">
+		SELECT
+			a.id,
+			a.sys_name `name`,
+			'0' pId,
+			false isParent,
+			'/assets/images/syswinlogo.png' icon
+		FROM
+			sys_eve_win a
+	</select>
+
+</mapper>
