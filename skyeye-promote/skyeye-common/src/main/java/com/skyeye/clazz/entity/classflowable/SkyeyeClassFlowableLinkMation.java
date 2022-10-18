@@ -7,7 +7,6 @@ package com.skyeye.clazz.entity.classflowable;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.google.common.base.Joiner;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
@@ -63,7 +62,7 @@ public class SkyeyeClassFlowableLinkMation extends CommonOperatorUserInfo implem
     @ApiModelProperty(value = "需要提交到工作流的属性获取的Entity类", required = "required")
     private String transformClassBean;
 
-    @TableField(value = "listener_list", typeHandler = JacksonTypeHandler.class)
+    @TableField(value = "listener_list", typeHandler = SkyeyeClassFlowableLinkListenerListTypeHandler.class)
     @ApiModelProperty(value = "该工作流对应的监听器")
     private List<ListenerMation> listenerList;
 

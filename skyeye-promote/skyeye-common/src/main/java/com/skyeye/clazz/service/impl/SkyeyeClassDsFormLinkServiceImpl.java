@@ -138,17 +138,20 @@ public class SkyeyeClassDsFormLinkServiceImpl extends ServiceImpl<SkyeyeClassDsF
             outputObject.setreturnMessage("this data is non-exits.");
             return;
         }
-        String[] dsFormPageIds = bean.get("dsFormPageIds").toString().split(",");
-        List<Map<String, Object>> dsFormPageMations = new ArrayList<>();
-        Arrays.asList(dsFormPageIds).forEach(dsFormPageId -> {
-            // 获取表单页面信息
-            Map<String, Object> formPageMation = ExecuteFeignClient.get(() -> dsFormPageService.queryDsFormPageById(dsFormPageId)).getBean();
-            if (!CollectionUtils.isEmpty(formPageMation)) {
-                // 表单页面信息不为空
-                dsFormPageMations.add(formPageMation);
-            }
-        });
-        bean.put("dsFormPageMations", dsFormPageMations);
+        String dsFormPageIdsStr = bean.get("dsFormPageIds").toString();
+        if (!ToolUtil.isBlank(dsFormPageIdsStr)) {
+            String[] dsFormPageIds = dsFormPageIdsStr.split(",");
+            List<Map<String, Object>> dsFormPageMations = new ArrayList<>();
+            Arrays.asList(dsFormPageIds).forEach(dsFormPageId -> {
+                // 获取表单页面信息
+                Map<String, Object> formPageMation = ExecuteFeignClient.get(() -> dsFormPageService.queryDsFormPageById(dsFormPageId)).getBean();
+                if (!CollectionUtils.isEmpty(formPageMation)) {
+                    // 表单页面信息不为空
+                    dsFormPageMations.add(formPageMation);
+                }
+            });
+            bean.put("dsFormPageMations", dsFormPageMations);
+        }
         iAuthUserService.setNameByIdBean(bean, "createId", "createName");
         iAuthUserService.setNameByIdBean(bean, "lastUpdateId", "lastUpdateName");
         outputObject.setBean(bean);
@@ -190,20 +193,23 @@ public class SkyeyeClassDsFormLinkServiceImpl extends ServiceImpl<SkyeyeClassDsF
         if (CollectionUtils.isEmpty(bean)) {
             return;
         }
-        String[] dsFormPageIds = bean.get("dsFormPageIds").toString().split(",");
-        // 返回给前台的值
-        List<Map<String, Object>> dsFormPageMations = new ArrayList<>();
-        for (String dsFormPageId : Arrays.asList(dsFormPageIds)) {
-            // 获取表单页面信息
-            Map<String, Object> formPageMation = ExecuteFeignClient.get(() -> dsFormPageService.queryDsFormPageById(dsFormPageId)).getBean();
-            if (!CollectionUtils.isEmpty(formPageMation)) {
-                // 表单页面信息不为空
-                formPageMation.put("content", dsFormPageContentService.queryFormPageContentByPageId(formPageMation.get("id").toString()));
-                dsFormPageMations.add(formPageMation);
+        String dsFormPageIdsStr = bean.get("dsFormPageIds").toString();
+        if (!ToolUtil.isBlank(dsFormPageIdsStr)) {
+            String[] dsFormPageIds = dsFormPageIdsStr.split(",");
+            // 返回给前台的值
+            List<Map<String, Object>> dsFormPageMations = new ArrayList<>();
+            for (String dsFormPageId : Arrays.asList(dsFormPageIds)) {
+                // 获取表单页面信息
+                Map<String, Object> formPageMation = ExecuteFeignClient.get(() -> dsFormPageService.queryDsFormPageById(dsFormPageId)).getBean();
+                if (!CollectionUtils.isEmpty(formPageMation)) {
+                    // 表单页面信息不为空
+                    formPageMation.put("content", dsFormPageContentService.queryFormPageContentByPageId(formPageMation.get("id").toString()));
+                    dsFormPageMations.add(formPageMation);
+                }
             }
+            outputObject.setBeans(dsFormPageMations);
+            outputObject.settotal(dsFormPageMations.size());
         }
-        outputObject.setBeans(dsFormPageMations);
-        outputObject.settotal(dsFormPageMations.size());
     }
 
 }
