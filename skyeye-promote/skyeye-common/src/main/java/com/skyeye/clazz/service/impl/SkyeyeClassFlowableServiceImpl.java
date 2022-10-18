@@ -20,6 +20,7 @@ import com.skyeye.clazz.entity.classflowable.SkyeyeClassFlowableLinkMation;
 import com.skyeye.clazz.service.SkyeyeClassFlowableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -47,6 +48,7 @@ public class SkyeyeClassFlowableServiceImpl extends ServiceImpl<SkyeyeClassFlowa
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void writeClassFlowable(InputObject inputObject, OutputObject outputObject) {
         SkyeyeClassFlowableLinkApiMation skyeyeClassFlowableLinkApiMation = inputObject.getParams(SkyeyeClassFlowableLinkApiMation.class);
 

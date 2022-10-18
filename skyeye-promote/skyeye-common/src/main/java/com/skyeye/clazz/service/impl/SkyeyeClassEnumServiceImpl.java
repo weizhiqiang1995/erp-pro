@@ -18,6 +18,7 @@ import com.skyeye.clazz.entity.classenum.SkyeyeClassEnumMation;
 import com.skyeye.clazz.service.SkyeyeClassEnumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +47,7 @@ public class SkyeyeClassEnumServiceImpl extends ServiceImpl<SkyeyeClassEnumDao, 
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void writeClassEnum(InputObject inputObject, OutputObject outputObject) {
         SkyeyeClassEnumApiMation skyeyeClassEnumApiMation = inputObject.getParams(SkyeyeClassEnumApiMation.class);
 

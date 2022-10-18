@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @ClassName: SkyeyeClassCodeRuleController
- * @Description: 需要获取编码的服务类服务服务层
+ * @Description: 需要获取编码的服务类服务控制层
  * @author: skyeye云系列--卫志强
  * @date: 2022/9/18 16:08
  * @Copyright: 2022 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.

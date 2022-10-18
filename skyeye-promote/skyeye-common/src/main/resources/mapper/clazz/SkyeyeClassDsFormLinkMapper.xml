@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyeye.clazz.dao.SkyeyeClassDsFormLinkDao">
+
+    <select id="queryDsFormLinkList" resultType="java.util.Map">
+        SELECT
+            a.id,
+            a.service_name serviceName,
+            a.class_name className,
+            a.app_id appId,
+            a.app_name appName,
+            a.create_id createId,
+            CONVERT(a.create_time, char) createTime,
+            a.last_update_id lastUpdateId,
+            CONVERT(a.last_update_time, char) lastUpdateTime
+        FROM
+            skyeye_class_ds_form_link a
+        <where>
+            <if test="sqlExtract != '' and sqlExtract != null">
+                ${sqlExtract}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                AND (a.service_name like '%${keyword}%' OR a.class_name LIKE '%${keyword}%')
+            </if>
+        </where>
+        ORDER BY a.create_time DESC
+    </select>
+
+    <select id="queryDsFormLinkMationById" resultType="java.util.Map">
+        SELECT
+            a.id,
+            a.service_name serviceName,
+            a.class_name className,
+            a.app_id appId,
+            a.app_name appName,
+            IFNULL(a.ds_form_page_ids, '') dsFormPageIds,
+            a.create_id createId,
+            CONVERT(a.create_time, char) createTime,
+            a.last_update_id lastUpdateId,
+            CONVERT(a.last_update_time, char) lastUpdateTime
+        FROM
+            skyeye_class_ds_form_link a
+        <where>
+            <if test="id != '' and id != null">
+                AND a.id = #{id}
+            </if>
+            <if test="code != '' and code != null">
+                AND a.code = #{code}
+            </if>
+        </where>
+    </select>
+
+    <update id="editDsFormLinkMationById">
+        UPDATE skyeye_class_ds_form_link
+        SET
+            ds_form_page_ids = #{dsFormPageIds},
+            last_update_id = #{userId},
+            last_update_time = #{lastUpdateTime}
+        WHERE id = #{id}
+    </update>
+
+</mapper>
