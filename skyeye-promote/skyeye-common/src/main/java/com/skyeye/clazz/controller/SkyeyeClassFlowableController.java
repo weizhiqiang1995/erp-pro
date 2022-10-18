@@ -2,7 +2,7 @@
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
 
-package com.skyeye.eve.controller;
+package com.skyeye.clazz.controller;
 
 import com.skyeye.annotation.api.Api;
 import com.skyeye.annotation.api.ApiImplicitParam;
@@ -11,8 +11,8 @@ import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.eve.entity.classflowable.SkyeyeClassFlowableLinkApiMation;
-import com.skyeye.eve.service.SkyeyeClassFlowableService;
+import com.skyeye.clazz.entity.classflowable.SkyeyeClassFlowableLinkApiMation;
+import com.skyeye.clazz.service.SkyeyeClassFlowableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +33,7 @@ public class SkyeyeClassFlowableController {
     private SkyeyeClassFlowableService skyeyeClassFlowableService;
 
     /**
-     * 批量新增工作流业务对象服务
+     * 批量新增工作流业务对象服务---common层使用
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象

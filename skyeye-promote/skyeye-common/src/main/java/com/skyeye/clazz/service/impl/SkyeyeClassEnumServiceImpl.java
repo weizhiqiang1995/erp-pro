@@ -2,7 +2,7 @@
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
 
-package com.skyeye.eve.service.impl;
+package com.skyeye.clazz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -12,10 +12,10 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
-import com.skyeye.eve.dao.SkyeyeClassEnumDao;
-import com.skyeye.eve.entity.classenum.SkyeyeClassEnumApiMation;
-import com.skyeye.eve.entity.classenum.SkyeyeClassEnumMation;
-import com.skyeye.eve.service.SkyeyeClassEnumService;
+import com.skyeye.clazz.dao.SkyeyeClassEnumDao;
+import com.skyeye.clazz.entity.classenum.SkyeyeClassEnumApiMation;
+import com.skyeye.clazz.entity.classenum.SkyeyeClassEnumMation;
+import com.skyeye.clazz.service.SkyeyeClassEnumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
