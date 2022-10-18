@@ -6,7 +6,6 @@ package com.skyeye.eve.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.skyeye.common.base.classenum.dto.SkyeyeEnumDto;
 import com.skyeye.common.constans.CommonCharConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -20,7 +19,10 @@ import com.skyeye.eve.service.SkyeyeClassEnumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -60,7 +62,7 @@ public class SkyeyeClassEnumServiceImpl extends ServiceImpl<SkyeyeClassEnumDao, 
             skyeyeClassEnumMation.setValueList(enumDto);
             skyeyeClassEnumMation.setAppId(skyeyeClassEnumApiMation.getAppId());
             DataCommonUtil.setCommonDataByGenericity(skyeyeClassEnumMation, "0dc9dd4cd4d446ae9455215fe753c44e");
-            DataCommonUtil.setId(skyeyeClassEnumApiMation);
+            DataCommonUtil.setId(skyeyeClassEnumMation);
             skyeyeClassEnumMationList.add(skyeyeClassEnumMation);
         });
 
@@ -78,36 +80,26 @@ public class SkyeyeClassEnumServiceImpl extends ServiceImpl<SkyeyeClassEnumDao, 
         Map<String, Object> params = inputObject.getParams();
         String className = params.get("className").toString();
         String filterKey = params.get("filterKey").toString();
+        String filterValue = params.get("filterValue").toString();
         QueryWrapper<SkyeyeClassEnumMation> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassEnumMation::getClassName), className);
         SkyeyeClassEnumMation skyeyeClassEnumMation = skyeyeClassEnumDao.selectOne(queryWrapper);
         // 只加载可以展示的数据
         List<Map<String, Object>> skyeyeEnumDtoList = skyeyeClassEnumMation.getValueList()
-            .stream().filter(bean -> filterSkyeyeEnumDto(bean, filterKey))
-            .map(bean -> {
-                Map<String, Object> item = new HashMap<>();
-                item.put("id", bean.getKey());
-                item.put("name", bean.getValue());
-                item.put("isDefault", bean.getIsDefault());
-                return item;
-            }).collect(Collectors.toList());
+            .stream().filter(bean -> filterSkyeyeEnumDto(bean, filterKey, filterValue)).collect(Collectors.toList());
 
-        Map<String, String> skyeyeEnumDtoMap = skyeyeClassEnumMation.getValueList()
-            .stream().filter(bean -> filterSkyeyeEnumDto(bean, filterKey))
-            .collect(Collectors.toMap(bean -> String.valueOf(bean.getKey()), bean -> bean.getValue()));
-
-        outputObject.setBean(skyeyeEnumDtoMap);
         outputObject.setBeans(skyeyeEnumDtoList);
         outputObject.settotal(skyeyeEnumDtoList.size());
     }
 
-    private Boolean filterSkyeyeEnumDto(SkyeyeEnumDto skyeyeEnumDto, String filterKey) {
-        if (ToolUtil.isBlank(filterKey)) {
-            return skyeyeEnumDto.getShow();
+    private Boolean filterSkyeyeEnumDto(Map<String, Object> enumValueMap, String filterKey, String filterValue) {
+        Boolean show = (Boolean) enumValueMap.get("show");
+        if (ToolUtil.isBlank(filterValue)) {
+            return show;
         }
-        List<String> filterKeyList = Arrays.asList(filterKey.split(CommonCharConstants.COMMA_MARK));
+        List<String> filterValueList = Arrays.asList(filterValue.split(CommonCharConstants.COMMA_MARK));
         // 需要过滤出来的数据并且是可以显示的数据
-        if (filterKeyList.contains(String.valueOf(skyeyeEnumDto.getKey())) && skyeyeEnumDto.getShow()) {
+        if (filterValueList.contains(String.valueOf(enumValueMap.get(filterKey))) && show) {
             return true;
         }
         return false;

@@ -5,10 +5,10 @@
 package com.skyeye.eve.entity.classenum;
 
 import com.alibaba.fastjson.TypeReference;
-import com.skyeye.common.base.classenum.dto.SkyeyeEnumDto;
 import com.skyeye.common.base.handler.ListTypeHandler;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: SkyeyeClassEnumListTypeHandler
@@ -18,11 +18,11 @@ import java.util.List;
  * @Copyright: 2022 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-public class SkyeyeClassEnumListTypeHandler extends ListTypeHandler<SkyeyeEnumDto> {
+public class SkyeyeClassEnumListTypeHandler extends ListTypeHandler<Map<String, Object>> {
 
     @Override
-    protected TypeReference<List<SkyeyeEnumDto>> specificType() {
-        return new TypeReference<List<SkyeyeEnumDto>>() {
+    protected TypeReference<List<Map<String, Object>>> specificType() {
+        return new TypeReference<List<Map<String, Object>>>() {
         };
     }
 

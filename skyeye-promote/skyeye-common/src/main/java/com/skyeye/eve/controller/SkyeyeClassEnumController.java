@@ -53,7 +53,8 @@ public class SkyeyeClassEnumController {
     @ApiOperation(id = "getEnumDataByClassName", value = "根据className获取可以展示在界面上的枚举数据信息", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "className", name = "className", value = "className", required = "required"),
-        @ApiImplicitParam(id = "filterKey", name = "filterKey", value = "需要过滤出来的指定的枚举数据，多个逗号隔开")})
+        @ApiImplicitParam(id = "filterKey", name = "filterKey", value = "指定需要匹配的key"),
+        @ApiImplicitParam(id = "filterValue", name = "filterValue", value = "需要过滤出来的指定的枚举数据，多个逗号隔开")})
     @RequestMapping("/post/SkyeyeClassEnumController/getEnumDataByClassName")
     public void getEnumDataByClassName(InputObject inputObject, OutputObject outputObject) {
         skyeyeClassEnumService.getEnumDataByClassName(inputObject, outputObject);

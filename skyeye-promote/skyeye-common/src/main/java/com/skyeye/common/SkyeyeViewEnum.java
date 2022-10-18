@@ -22,11 +22,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public enum SkyeyeViewEnum implements SkyeyeEnumClass {
 
-    WIN_10(0, "", true, true);
+    WIN_10("../../tpl/index/index.html", "WIN10 桌面", true, true),
+    TRADITION_PAGE("../../tpl/traditionpage/index.html", "传统风格", true, false);
 
-    private Integer key;
+    private String path;
 
-    private String value;
+    private String name;
 
     private Boolean show;
 

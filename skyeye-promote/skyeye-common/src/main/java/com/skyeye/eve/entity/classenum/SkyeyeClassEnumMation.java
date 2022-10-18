@@ -8,7 +8,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
-import com.skyeye.common.base.classenum.dto.SkyeyeEnumDto;
 import com.skyeye.common.entity.CommonOperatorUserInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +15,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: SkyeyeClassEnumMation
@@ -51,6 +51,6 @@ public class SkyeyeClassEnumMation extends CommonOperatorUserInfo implements Ser
      * 枚举对应的值
      */
     @TableField(value = "value_list", typeHandler = SkyeyeClassEnumListTypeHandler.class)
-    private List<SkyeyeEnumDto> valueList;
+    private List<Map<String, Object>> valueList;
 
 }

@@ -6,7 +6,6 @@ package com.skyeye.eve.entity.classenum;
 
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
-import com.skyeye.common.base.classenum.dto.SkyeyeEnumDto;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -35,6 +34,6 @@ public class SkyeyeClassEnumApiMation implements Serializable {
      * 枚举信息
      */
     @ApiModelProperty(value = "枚举信息", required = "required")
-    private Map<String, List<SkyeyeEnumDto>> valueList;
+    private Map<String, List<Map<String, Object>>> valueList;
 
 }
