@@ -45,7 +45,7 @@
                 AND a.id = #{id}
             </if>
             <if test="code != '' and code != null">
-                AND a.code = #{code}
+                AND a.class_name = #{code}
             </if>
         </where>
     </select>

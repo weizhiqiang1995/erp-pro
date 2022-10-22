@@ -203,7 +203,7 @@ public class SkyeyeClassDsFormLinkServiceImpl extends ServiceImpl<SkyeyeClassDsF
                 Map<String, Object> formPageMation = ExecuteFeignClient.get(() -> dsFormPageService.queryDsFormPageById(dsFormPageId)).getBean();
                 if (!CollectionUtils.isEmpty(formPageMation)) {
                     // 表单页面信息不为空
-                    formPageMation.put("content", dsFormPageContentService.queryFormPageContentByPageId(formPageMation.get("id").toString()));
+                    formPageMation.put("content", ExecuteFeignClient.get(() -> dsFormPageContentService.queryFormPageContentByPageId(formPageMation.get("id").toString())).getRows());
                     dsFormPageMations.add(formPageMation);
                 }
             }
