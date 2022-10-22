@@ -6,6 +6,7 @@ package com.skyeye.eve.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
@@ -116,7 +117,7 @@ public class SysEveModelServiceImpl implements SysEveModelService {
         String id = map.get("id").toString();
         Map<String, Object> bean = sysEveModelDao.selectSysEveModelMationById(id);
         outputObject.setBean(bean);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**
@@ -151,7 +152,7 @@ public class SysEveModelServiceImpl implements SysEveModelService {
         String id = map.get("id").toString();
         Map<String, Object> bean = sysEveModelDao.selectSysEveModelMationById(id);
         outputObject.setBean(bean);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 }
 

@@ -6,6 +6,7 @@ package com.skyeye.icon.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
@@ -83,7 +84,7 @@ public class SysEveIconServiceImpl implements SysEveIconService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveIconDao.querySysIconMationToEditById(map);
         outputObject.setBean(bean);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**

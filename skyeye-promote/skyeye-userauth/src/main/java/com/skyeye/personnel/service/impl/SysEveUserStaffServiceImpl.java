@@ -6,6 +6,7 @@ package com.skyeye.personnel.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -268,7 +269,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
                 .queryStaffCheckWorkTimeRelationByStaffId(bean.get("id").toString());
             bean.put("checkTimeStr", staffTimeMation);
             outputObject.setBean(bean);
-            outputObject.settotal(1);
+            outputObject.settotal(CommonNumConstants.NUM_ONE);
         } else {
             outputObject.setreturnMessage("The data does not exist");
         }
@@ -327,7 +328,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
                 .queryStaffCheckWorkTimeRelationNameByStaffId(staffId);
             bean.put("checkTimeStr", staffTimeMation);
             outputObject.setBean(bean);
-            outputObject.settotal(1);
+            outputObject.settotal(CommonNumConstants.NUM_ONE);
         } else {
             outputObject.setreturnMessage("The data does not exist");
         }
@@ -438,7 +439,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         String staffId = inputObject.getLogParams().get("staffId").toString();
         Map<String, Object> bean = sysEveUserStaffDao.querySysUserStaffByIdToDetails(staffId);
         outputObject.setBean(bean);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**
@@ -519,7 +520,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         // 员工考勤时间段信息
         List<Map<String, Object>> staffTimeMation = sysEveUserStaffDao.queryStaffCheckWorkTimeRelationNameByStaffId(staffId);
         outputObject.setBeans(staffTimeMation);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
 }

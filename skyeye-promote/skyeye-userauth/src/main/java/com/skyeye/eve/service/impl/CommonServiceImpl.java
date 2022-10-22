@@ -7,6 +7,7 @@ package com.skyeye.eve.service.impl;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.skyeye.cache.redis.RedisCache;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.constans.FileConstants;
 import com.skyeye.common.constans.RedisConstants;
@@ -267,7 +268,7 @@ public class CommonServiceImpl implements CommonService {
         map.put("winLockBgPic", winLockBgPic);
         map.put("winThemeColor", winThemeColor);
         outputObject.setBean(map);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**
@@ -312,7 +313,7 @@ public class CommonServiceImpl implements CommonService {
         result.put("savePath", savePath);
         result.put("visitPath", visitPath);
         outputObject.setBean(result);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
 }

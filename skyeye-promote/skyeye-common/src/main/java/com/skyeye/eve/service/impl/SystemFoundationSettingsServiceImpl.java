@@ -5,6 +5,7 @@
 package com.skyeye.eve.service.impl;
 
 import cn.hutool.json.JSONUtil;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.MapUtil;
@@ -48,7 +49,7 @@ public class SystemFoundationSettingsServiceImpl implements SystemFoundationSett
     public void querySystemFoundationSettingsList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> bean = this.getSystemFoundationSettings();
         outputObject.setBean(bean);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**

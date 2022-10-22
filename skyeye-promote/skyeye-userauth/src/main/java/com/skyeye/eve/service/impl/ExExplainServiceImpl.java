@@ -5,6 +5,7 @@
 package com.skyeye.eve.service.impl;
 
 import cn.hutool.json.JSONUtil;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -65,7 +66,7 @@ public class ExExplainServiceImpl implements ExExplainService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = exExplainDao.queryExExplainMation(map);
         outputObject.setBean(bean);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**

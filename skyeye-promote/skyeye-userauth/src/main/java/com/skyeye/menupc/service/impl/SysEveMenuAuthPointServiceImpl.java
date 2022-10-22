@@ -6,6 +6,7 @@ package com.skyeye.menupc.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.common.constans.CommonConstants;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
@@ -144,7 +145,7 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
         String id = map.get("id").toString();
         SysMenuAuthPointMation sysMenuAuthPointMation = sysEveMenuAuthPointDao.selectById(id);
         outputObject.setBean(sysMenuAuthPointMation);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**

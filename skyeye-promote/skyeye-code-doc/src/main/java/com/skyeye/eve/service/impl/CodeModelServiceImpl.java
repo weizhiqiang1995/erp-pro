@@ -4,8 +4,10 @@
 
 package com.skyeye.eve.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
@@ -17,7 +19,6 @@ import com.skyeye.eve.service.IAuthUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -67,7 +68,7 @@ public class CodeModelServiceImpl implements CodeModelService {
     public void insertCodeModelMation(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> checkBean = codeModelDao.queryCodeModelMationByName(map);
-        if (CollectionUtils.isEmpty(checkBean)) {
+        if (CollectionUtil.isEmpty(checkBean)) {
             DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
             codeModelDao.insertCodeModelMation(map);
         } else {
@@ -99,7 +100,7 @@ public class CodeModelServiceImpl implements CodeModelService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = codeModelDao.queryCodeModelMationToEditById(map);
         outputObject.setBean(bean);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**
@@ -113,7 +114,7 @@ public class CodeModelServiceImpl implements CodeModelService {
     public void editCodeModelMationById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> checkBean = codeModelDao.queryCodeModelMationByIdAndName(map);
-        if (CollectionUtils.isEmpty(checkBean)) {
+        if (CollectionUtil.isEmpty(checkBean)) {
             Map<String, Object> user = inputObject.getLogParams();
             map.put("lastUpdateId", user.get("id"));
             map.put("lastUpdateTime", DateUtil.getTimeAndToString());

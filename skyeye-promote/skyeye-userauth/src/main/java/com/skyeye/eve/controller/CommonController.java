@@ -28,6 +28,9 @@ public class CommonController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "common003", value = "上传文件", method = "POST", allUse = "0")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "type", name = "type", value = "文件类型", required = "required,num")})
     @RequestMapping("/post/CommonController/uploadFile")
     public void uploadFile(InputObject inputObject, OutputObject outputObject) {
         commonService.uploadFile(inputObject, outputObject);

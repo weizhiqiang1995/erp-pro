@@ -6,6 +6,7 @@ package com.skyeye.win.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -89,7 +90,7 @@ public class SysEveWinThemeColorServiceImpl implements SysEveWinThemeColorServic
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveWinThemeColorDao.querySysEveWinThemeColorMationToEditById(map);
         outputObject.setBean(bean);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**

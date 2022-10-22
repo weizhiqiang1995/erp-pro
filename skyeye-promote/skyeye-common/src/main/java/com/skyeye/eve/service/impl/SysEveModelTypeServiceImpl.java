@@ -4,6 +4,7 @@
 
 package com.skyeye.eve.service.impl;
 
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
@@ -68,7 +69,7 @@ public class SysEveModelTypeServiceImpl implements SysEveModelTypeService {
         Map<String, Object> inputParams = inputObject.getParams();
         Map<String, Object> sysEveModelTypeBean = sysEveModelTypeDao.querySysEveModelTypeById(inputParams.get("id").toString());
         outputObject.setBean(sysEveModelTypeBean);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     @Override

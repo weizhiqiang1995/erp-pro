@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.CommonConstants;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -119,7 +120,7 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
         String id = map.get("id").toString();
         AppWorkPageMation appWorkPageMation = appWorkPageDao.selectById(id);
         outputObject.setBean(appWorkPageMation);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     private void setUpdateUserMation(InputObject inputObject, Map<String, Object> map) {

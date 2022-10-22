@@ -5,6 +5,7 @@
 package com.skyeye.eve.service.impl;
 
 import cn.hutool.json.JSONUtil;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -109,7 +110,7 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
         map.put("userId", user.get("id"));
         List<Map<String, Object>> beans = sysEnclosureDao.querySysEnclosureFirstTypeListByUserId(map);
         outputObject.setBeans(beans);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**
@@ -136,7 +137,7 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
             }
         }
         outputObject.setBeans(beans);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**

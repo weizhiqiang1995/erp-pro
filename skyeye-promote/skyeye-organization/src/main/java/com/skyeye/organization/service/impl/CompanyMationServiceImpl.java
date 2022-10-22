@@ -7,6 +7,7 @@ package com.skyeye.organization.service.impl;
 import cn.hutool.json.JSONUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
@@ -150,7 +151,7 @@ public class CompanyMationServiceImpl implements CompanyMationService {
         // 个人所得税税率信息
         bean.put("taxRateJson", companyTaxRateDao.queryCompanyTaxRateByCompanyId(companyId));
         outputObject.setBean(bean);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**

@@ -14,6 +14,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.cache.redis.RedisCache;
 import com.skyeye.common.constans.CommonConstants;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
@@ -175,7 +176,7 @@ public class CodeRuleServiceImpl extends ServiceImpl<CodeRuleDao, CodeRuleMation
         String id = inputObject.getParams().get("id").toString();
         CodeRuleMation codeRule = codeRuleDao.selectById(id);
         outputObject.setBean(codeRule);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**
@@ -210,7 +211,7 @@ public class CodeRuleServiceImpl extends ServiceImpl<CodeRuleDao, CodeRuleMation
         Map<String, Object> result = new HashMap<>();
         result.put("list", codes);
         outputObject.setBean(result);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     private List<String> getNextCodes(String ruleCode, Map<String, Object> businessData, int size) {

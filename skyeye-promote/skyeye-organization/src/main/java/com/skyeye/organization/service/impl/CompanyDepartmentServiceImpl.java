@@ -6,6 +6,7 @@ package com.skyeye.organization.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.OrganizationConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -114,7 +115,7 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
         String id = map.get("id").toString();
         Map<String, Object> bean = companyDepartmentDao.queryCompanyDepartmentMationById(id);
         outputObject.setBean(bean);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**

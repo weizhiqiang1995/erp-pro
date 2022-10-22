@@ -6,6 +6,7 @@ package com.skyeye.menuapp.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.common.constans.CommonConstants;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
@@ -144,7 +145,7 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
         String id = map.get("id").toString();
         AppWorkPageAuthPointMation appWorkPageAuthPointMation = appWorkPageAuthPointDao.selectById(id);
         outputObject.setBean(appWorkPageAuthPointMation);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**

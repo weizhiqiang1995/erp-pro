@@ -7,6 +7,7 @@ package com.skyeye.eve.service.impl;
 import cn.hutool.json.JSONUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -226,7 +227,7 @@ public class CompanyTalkGroupServiceImpl implements CompanyTalkGroupService {
                     DataCommonUtil.setCommonData(inviteBean, inputObject.getLogParams().get("id").toString());
                     companyTalkGroupDao.insertInGroupInviteByUserAndGroupId(inviteBean);
                     outputObject.setBean(inviteBean);
-                    outputObject.settotal(1);
+                    outputObject.settotal(CommonNumConstants.NUM_ONE);
                 } else {
                     outputObject.setreturnMessage("该群聊人数已满。");
                 }

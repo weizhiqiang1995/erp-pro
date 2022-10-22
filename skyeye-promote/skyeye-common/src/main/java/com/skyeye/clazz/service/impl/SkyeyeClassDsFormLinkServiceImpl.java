@@ -15,6 +15,7 @@ import com.skyeye.clazz.rest.DsFormPageContentService;
 import com.skyeye.clazz.rest.DsFormPageService;
 import com.skyeye.clazz.service.SkyeyeClassDsFormLinkService;
 import com.skyeye.common.client.ExecuteFeignClient;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -155,7 +156,7 @@ public class SkyeyeClassDsFormLinkServiceImpl extends ServiceImpl<SkyeyeClassDsF
         iAuthUserService.setNameByIdBean(bean, "createId", "createName");
         iAuthUserService.setNameByIdBean(bean, "lastUpdateId", "lastUpdateName");
         outputObject.setBean(bean);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**

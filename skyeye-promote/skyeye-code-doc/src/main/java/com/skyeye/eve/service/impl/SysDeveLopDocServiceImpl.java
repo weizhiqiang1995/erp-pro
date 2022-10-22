@@ -7,6 +7,7 @@ package com.skyeye.eve.service.impl;
 import cn.hutool.json.JSONUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -87,7 +88,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopTypeByIdToEdit(map);
         outputObject.setBean(bean);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**
@@ -292,7 +293,7 @@ public class SysDeveLopDocServiceImpl implements SysDeveLopDocService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysDeveLopDocDao.querySysDeveLopDocByIdToEdit(map);
         outputObject.setBean(bean);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**

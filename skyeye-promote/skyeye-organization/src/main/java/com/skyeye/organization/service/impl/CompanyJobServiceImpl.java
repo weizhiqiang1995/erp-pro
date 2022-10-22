@@ -4,6 +4,7 @@
 
 package com.skyeye.organization.service.impl;
 
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
@@ -104,7 +105,7 @@ public class CompanyJobServiceImpl implements CompanyJobService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = companyJobDao.queryCompanyJobMationToEditById(map);
         outputObject.setBean(bean);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**

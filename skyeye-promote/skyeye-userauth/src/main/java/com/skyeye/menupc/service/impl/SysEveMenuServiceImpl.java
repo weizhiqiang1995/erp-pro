@@ -6,6 +6,7 @@ package com.skyeye.menupc.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
@@ -147,7 +148,7 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
         String id = map.get("id").toString();
         Map<String, Object> bean = sysEveMenuDao.queryMenuMationById(id);
         outputObject.setBean(bean);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**
@@ -283,7 +284,7 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
         Map<String, Object> bean = sysEveMenuDao.querySysEveMenuBySysId(map);
         if (!bean.isEmpty()) {
             outputObject.setBean(bean);
-            outputObject.settotal(1);
+            outputObject.settotal(CommonNumConstants.NUM_ONE);
         }
     }
 

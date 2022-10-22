@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.CommonConstants;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
@@ -150,7 +151,7 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
         Map<String, Object> map = inputObject.getParams();
         SysEveDesktopMation sysEveDesktop = sysEveDesktopDao.selectById(map.get("id").toString());
         outputObject.setBean(sysEveDesktop);
-        outputObject.settotal(1);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**

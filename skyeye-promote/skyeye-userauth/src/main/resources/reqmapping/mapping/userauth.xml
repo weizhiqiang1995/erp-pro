@@ -5,9 +5,6 @@
 	 -->
 	
 	<!-- 公共请求开始 -->
-	<url id="common003" path="/post/CommonController/uploadFile" val="上传文件" allUse="0" groupName="公共接口" notRead="1">
-		<property id="type" name="type" ref="required,num" var="图片类型"/>
-	</url>
 	<url id="common004" path="/post/CommonController/uploadFileBase64" val="上传文件Base64" allUse="2" groupName="公共接口">
 		<property id="type" name="type" ref="required,num" var="图片类型"/>
 		<property id="images" name="images" ref="required" var="图片Base64"/>
