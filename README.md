@@ -10,12 +10,11 @@
 - 免费体验账号，联系作者填写信息后申请
 - 个人软件，无发票
 
-### 联系作者
+### 沟通交流
 
-| 作者微信(备注：姓名-联系方式，其余概不通过。)                                                         | 知识星球(可获取企业版所有功能) | 软件咨询(备注：姓名-联系方式，其余概不通过。) | QQ群 |
-|----------------------------------------------------------------------------------| ---- | ---- | ---- |
-| ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/微信.jpg) | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/知识星球.png) |![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/image.png)|![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/Skyeye智能制造云办公官方①群群二维码.png)|
-
+|                企业部署版(联系作者进知识星球获取)                 |             微信群(进群请修改备注，格式：城市-职位-昵称)             | QQ群 |
+|:-------------------------------------------------:|:------------------------------------------------:|:--------------------------:|
+| <img src="https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/知识星球.png" width="200px"> | <img src="https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/微信群.jpg" width="200px"> | <img src="https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/Skyeye智能制造云办公官方①群群二维码.png" width="200px"> |
 
 #### 环境搭建
 
