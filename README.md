@@ -10,6 +10,14 @@
 - 免费体验账号，联系作者填写信息后申请
 - 个人软件，无发票
 
+### 演示视频
+
+- 视频一：[多桌面任务](https://www.bilibili.com/video/BV1yb41127oB/)
+- 视频二：[聊天](https://www.bilibili.com/video/BV11b41127FV)
+- 视频三：[日程](https://www.bilibili.com/video/BV1vb411i75M)
+- 视频四：[ERP + 生产 202007版](https://www.bilibili.com/video/BV1yA411e7mm)
+- 视频五：[ERP + 生产 202109升级模块](https://www.bilibili.com/video/BV1vR4y1p7ka)
+
 ### 沟通交流
 
 |                企业部署版(联系作者进知识星球获取)                 |             微信群(进群请修改备注，格式：城市-职位-昵称)             | QQ群 |
