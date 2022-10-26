@@ -374,8 +374,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     @Override
     public void queryRoleAndBindRoleByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> roles = sysEveUserDao.queryRoleList(map);//获取角色列表
-        Map<String, Object> userRole = sysEveUserDao.queryBindRoleMationByUserId(map);//获取用户绑定的角色ID串
+        // 获取角色列表
+        List<Map<String, Object>> roles = sysEveUserDao.queryRoleList(map);
+        // 获取用户绑定的角色ID串
+        Map<String, Object> userRole = sysEveUserDao.queryBindRoleMationByUserId(map);
         String[] roleIds = userRole.get("roleIds").toString().split(",");
         for (Map<String, Object> bean : roles) {
             if (Arrays.asList(roleIds).contains(bean.get("id").toString())) {
@@ -531,8 +533,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         for (int i = 0; i < pwdNum; i++) {
             password = ToolUtil.MD5(password);
         }
-        if (password.equals(userMation.get("password").toString())) {//输入的旧密码数据库中的旧密码一致
-            //转化新密码
+        if (password.equals(userMation.get("password").toString())) {
+            // 输入的旧密码数据库中的旧密码一致，转化新密码
             String newPassword = map.get("newPassword").toString();
             for (int i = 0; i < pwdNum; i++) {
                 newPassword = ToolUtil.MD5(newPassword);
