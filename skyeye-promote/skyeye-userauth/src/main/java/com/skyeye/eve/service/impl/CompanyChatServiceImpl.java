@@ -4,6 +4,7 @@
 
 package com.skyeye.eve.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.json.JSONUtil;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
@@ -72,7 +73,7 @@ public class CompanyChatServiceImpl implements CompanyChatService {
             } else {
                 userList = JSONUtil.toList(jedisService.get(Constants.getSysTalkGroupUserListMationById(depart.get("id").toString() + "_" + userId)), null);
             }
-            if (userList != null && !userList.isEmpty()) {
+            if (CollectionUtil.isNotEmpty(userList)) {
                 Set<String> uId = TalkWebSocket.getOnlineUserId();
                 for (Map<String, Object> u : userList) {
                     if (uId.contains(u.get("id").toString())) {
