@@ -20,12 +20,6 @@
 	</url>
 	<url id="login002" path="/post/SysEveUserController/queryUserMationBySession" val="从session中获取用户信息" allUse="2" groupName="登陆相关" notRead="1">
 	</url>
-	<url id="login006" path="/post/SysWorkLogController/querySysWorkLogList" val="获取日志列表" allUse="1">
-		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="userName" name="userName" ref="" var="操作人姓名" />
-		<property id="realPath" name="realPath" ref="" var="真实链接"/>
-	</url>
 	<url id="login007" path="/post/SysEveUserController/editUserPassword" val="修改密码" allUse="2" method="POST" groupName="登陆相关" notRead="1">
 		<property id="newPassword" name="newPassword" ref="required" var="新密码"/>
 		<property id="oldPassword" name="oldPassword" ref="required" var="旧密码"/>
