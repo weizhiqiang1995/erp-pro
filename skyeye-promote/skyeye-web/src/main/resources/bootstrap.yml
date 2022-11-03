@@ -26,7 +26,7 @@ spring:
 # 配置打印sql到控制台
 logging:
   level:
-    com.skyeye.eve.dao: debug
+    com.skyeye: debug
 
 webroot:
   # 工作流相关的服务

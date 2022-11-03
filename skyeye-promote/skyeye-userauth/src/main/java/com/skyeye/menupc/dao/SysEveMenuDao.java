@@ -6,6 +6,7 @@ package com.skyeye.menupc.dao;
 
 import com.skyeye.eve.dao.SkyeyeBaseMapper;
 import com.skyeye.eve.entity.userauth.menu.SysMenuMation;
+import com.skyeye.eve.entity.userauth.menu.SysMenuQueryDo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -21,17 +22,13 @@ import java.util.Map;
  */
 public interface SysEveMenuDao extends SkyeyeBaseMapper<SysMenuMation> {
 
-    List<Map<String, Object>> querySysMenuList(Map<String, Object> map);
-
-    Map<String, Object> queryMenuMationById(@Param("id") String id);
+    List<Map<String, Object>> querySysMenuList(SysMenuQueryDo sysMenuQuery);
 
     List<Map<String, Object>> querySysMenuMationBySimpleLevel(Map<String, Object> map);
 
     int deleteSysMenuChildMationById(Map<String, Object> map);
 
     Map<String, Object> queryUseThisMenuRoleById(Map<String, Object> map);
-
-    List<Map<String, Object>> querySysMenuLevelList(Map<String, Object> map);
 
     Map<String, Object> querySysMenuAfterOrderBumByParentId(@Param("parentId") String parentId);
 
@@ -43,6 +40,15 @@ public interface SysEveMenuDao extends SkyeyeBaseMapper<SysMenuMation> {
 
     int editSysEveMenuSortLowerById(Map<String, Object> map);
 
-    Map<String, Object> querySysEveMenuBySysId(Map<String, Object> map);
+    Map<String, Object> querySysEveMenuBySysId(@Param("id") String id);
 
+    /**
+     * 根据父id查询所有的子节点信息(包含父id)，如果是多个
+     *
+     * @param ids 父id
+     * @return
+     */
+    List<String> queryAllChildIdsByParentId(@Param("ids") List<String> ids);
+
+    List<Map<String, Object>> querySysMenuListByIds(@Param("ids") List<String> ids);
 }

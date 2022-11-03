@@ -63,7 +63,7 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
             outputObject.setBean(map);
             // 桌面菜单列表
             List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
-            deskTops = ToolUtil.deskTopsTree(deskTops);
+            deskTops = ToolUtil.listToTree(deskTops, "id", "parentId", "childs");
             jedisClient.set("deskTopsMation:" + userId, JSONUtil.toJsonStr(deskTops));
         }
     }
@@ -92,7 +92,7 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
             outputObject.setBean(map);
             // 桌面菜单列表
             List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
-            deskTops = ToolUtil.deskTopsTree(deskTops);
+            deskTops = ToolUtil.listToTree(deskTops, "id", "parentId", "childs");
             jedisClient.set("deskTopsMation:" + userId, JSONUtil.toJsonStr(deskTops));
         }
     }
@@ -177,7 +177,7 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
             }
             // 桌面菜单列表
             List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
-            deskTops = ToolUtil.deskTopsTree(deskTops);
+            deskTops = ToolUtil.listToTree(deskTops, "id", "parentId", "childs");
             jedisClient.set("deskTopsMation:" + userId, JSONUtil.toJsonStr(deskTops));
         } else {
             outputObject.setreturnMessage("该菜单不存在，请刷新页面");
@@ -209,7 +209,7 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
         sysEveWinDragDropDao.insertMenuParentId(map);
         // 桌面菜单列表
         List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
-        deskTops = ToolUtil.deskTopsTree(deskTops);
+        deskTops = ToolUtil.listToTree(deskTops, "id", "parentId", "childs");
         jedisClient.set("deskTopsMation:" + userId, JSONUtil.toJsonStr(deskTops));
     }
 
@@ -256,7 +256,7 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
         sysEveWinDragDropDao.editCustomMenuBoxMationById(map);
         // 桌面菜单列表
         List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
-        deskTops = ToolUtil.deskTopsTree(deskTops);
+        deskTops = ToolUtil.listToTree(deskTops, "id", "parentId", "childs");
         jedisClient.set("deskTopsMation:" + userId, JSONUtil.toJsonStr(deskTops));
     }
 
@@ -290,7 +290,7 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
         sysEveWinDragDropDao.editCustomMenuMationById(map);
         // 桌面菜单列表
         List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
-        deskTops = ToolUtil.deskTopsTree(deskTops);
+        deskTops = ToolUtil.listToTree(deskTops, "id", "parentId", "childs");
         jedisClient.set("deskTopsMation:" + userId, JSONUtil.toJsonStr(deskTops));
     }
 
@@ -312,7 +312,7 @@ public class SysEveWinDragDropServiceImpl implements SysEveWinDragDropService {
             Map<String, Object> item = sysEveWinDragDropDao.queryMenuToDeskTopById(map);
             // 桌面菜单列表
             List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
-            deskTops = ToolUtil.deskTopsTree(deskTops);
+            deskTops = ToolUtil.listToTree(deskTops, "id", "parentId", "childs");
             jedisClient.set("deskTopsMation:" + userId, JSONUtil.toJsonStr(deskTops));
             outputObject.setBean(item);
         } else {

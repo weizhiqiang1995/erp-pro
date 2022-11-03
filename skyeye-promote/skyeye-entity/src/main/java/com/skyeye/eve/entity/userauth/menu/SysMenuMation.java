@@ -47,16 +47,14 @@ public class SysMenuMation extends CommonIconOrImgInfo {
 
     @TableField("menu_sys_type")
     @ApiModelProperty(value = "是否为系统菜单", required = "required,num")
-    private String menuSysType;
+    private Integer menuSysType;
 
     @TableField("menu_parent_id")
     @ApiModelProperty(value = "菜单父ID", required = "required")
     private String parentId;
 
-    /**
-     * 菜单级别    0：创世菜单   1：一级子菜单  2：二级子菜单
-     */
     @TableField("menu_level")
+    @ApiModelProperty(value = "菜单级别    0：父菜单   1：子菜单", required = "required,num")
     private Integer menuLevel;
 
     /**

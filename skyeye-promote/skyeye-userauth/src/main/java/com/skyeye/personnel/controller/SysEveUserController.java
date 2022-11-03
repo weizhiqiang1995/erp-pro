@@ -162,12 +162,12 @@ public class SysEveUserController {
     }
 
     /**
-     * 获取桌面菜单列表
+     * 获取当前登录用户的桌面菜单列表
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "login004", value = "获取桌面菜单列表", method = "GET", allUse = "2")
+    @ApiOperation(id = "login004", value = "获取当前登录用户的桌面菜单列表", method = "GET", allUse = "2")
     @RequestMapping("/post/SysEveUserController/queryDeskTopMenuBySession")
     public void queryDeskTopMenuBySession(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.queryDeskTopMenuBySession(inputObject, outputObject);

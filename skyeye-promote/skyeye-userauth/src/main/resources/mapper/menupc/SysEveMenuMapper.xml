@@ -2,7 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.skyeye.menupc.dao.SysEveMenuDao">
 	
-	<select id="querySysMenuList" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="querySysMenuList" resultType="java.util.Map">
+		SELECT
+			a.id
+		FROM
+			sys_eve_menu a
+		<where>
+			<if test="sqlExtract != '' and sqlExtract != null">
+				${sqlExtract}
+			</if>
+			<choose>
+				<when test="keyword != null and keyword != ''">
+					AND (a.menu_name LIKE '%${keyword}%' OR a.menu_name_en LIKE '%${keyword}%')
+				</when>
+				<otherwise>
+					AND a.menu_parent_id = '0'
+				</otherwise>
+			</choose>
+			<if test="sysWinId != '' and sysWinId != null and sysWinId != '0'.toString()">
+				AND a.sys_win_id = #{sysWinId}
+			</if>
+		</where>
+		ORDER BY a.order_num ASC
+	</select>
+
+	<select id="querySysMenuListByIds" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.menu_name menuName,
@@ -19,39 +43,22 @@
 			a.order_num orderNum,
 			a.is_share isShare,
 			(SELECT COUNT(*) FROM sys_eve_role_menu d WHERE d.menu_id = a.id) roleNum,
-			IFNULL(GROUP_CONCAT(c.menu_name separator '->'), '创世菜单') menuParentName,
+			c.menu_name menuParentName,
 			a.create_id createId,
 			CONVERT(a.create_time, char) createTime,
 			a.last_update_id lastUpdateId,
 			CONVERT(a.last_update_time, char) lastUpdateTime
 		FROM
 			sys_eve_menu a
-			LEFT JOIN sys_eve_menu c ON INSTR(CONCAT(',', a.menu_parent_id, ','), CONCAT(',', c.id, ','))
+			LEFT JOIN sys_eve_menu c ON a.menu_parent_id = c.id
 			LEFT JOIN sys_eve_desktop d ON a.desktop_id = d.id
 		<where>
-			<if test="menuName != '' and menuName != null">
-				AND a.menu_name LIKE '%${menuName}%'
-			</if>
-			<if test="parentMenuName != '' and parentMenuName != null">
-				AND c.menu_name LIKE '%${parentMenuName}%'
-			</if>
-			<if test="menuUrl != '' and menuUrl != null">
-				AND a.menu_url LIKE '%${menuUrl}%'
-			</if>
-			<if test="menuLevel != '' and menuLevel != null">
-				AND a.menu_level = #{menuLevel}
-			</if>
-			<if test="isShare != '' and isShare != null">
-				AND a.is_share = #{isShare}
-			</if>
-			<if test="parentId != '' and parentId != null and parentId != '0'.toString()">
-				AND a.sys_win_id = #{parentId}
-			</if>
-			<if test="desktopId != '' and desktopId != null">
-				AND a.desktop_id = #{desktopId}
+			<if test="ids != null and ids.size() &gt; 0">
+				<foreach collection="ids" item="id" separator="," open=" AND a.id in(" close=")">
+					#{id}
+				</foreach>
 			</if>
 		</where>
-		GROUP BY a.id
 		ORDER BY a.order_num ASC
 	</select>
 	
@@ -78,35 +85,12 @@
 			<if test="parentId != &quot;0&quot;">
 				,sys_eve_menu b
 			</if>
-		WHERE INSTR(CONCAT(',', a.menu_parent_id, ','), CONCAT(',', #{parentId}, ','))
+		WHERE a.menu_parent_id = #{parentId}
 		<if test="parentId != &quot;0&quot;">
 			AND b.id = #{parentId}
 			AND (b.menu_level + 1) = a.menu_level
 		</if>
 		ORDER BY a.order_num ASC
-	</select>
-	
-	<select id="queryMenuMationById" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.menu_name menuName,
-			a.icon icon,
-			a.icon_color iconColor,
-			a.icon_bg iconBg,
-			a.icon_type iconType,
-			a.icon_pic iconPic,
-			a.menu_name_en menuNameEn,
-			a.menu_level menuLevel,
-			a.menu_type menuType,
-			a.menu_sys_type menuSysType,
-			a.menu_parent_id parentId,
-			a.menu_url menuUrl,
-			a.sys_win_id sysWinId,
-			a.desktop_id desktopId,
-			a.is_share isShare
-		FROM
-			sys_eve_menu a
-		WHERE a.id = #{id}
 	</select>
 	
 	<select id="queryUseThisMenuRoleById" parameterType="java.util.Map" resultType="java.util.Map">
@@ -121,19 +105,9 @@
 		DELETE
 		FROM
 			sys_eve_menu
-		WHERE
-			INSTR(CONCAT(',', menu_parent_id, ','), CONCAT(',', #{id}, ','))
+		WHERE menu_parent_id = #{id}
 	</delete>
 
-	<select id="querySysMenuLevelList" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.menu_level id,
-			CASE a.menu_level WHEN '0' THEN '创世菜单' ELSE CONCAT(CONVERT(a.menu_level, char), '级子菜单') END name
-		FROM
-			sys_eve_menu a
-		GROUP BY a.menu_level
-	</select>
-	
 	<select id="querySysEveMenuISTopByThisId" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 			b.id,
@@ -184,35 +158,72 @@
 		WHERE id = #{id}
 	</update>
 	
-	<select id="querySysEveMenuBySysId" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="querySysEveMenuBySysId" resultType="java.util.Map">
         SELECT
             a.id,
             a.menu_name menuName,
-            CASE a.icon_type WHEN '1' THEN a.icon WHEN '2' THEN a.icon_pic END menuIcon,
-            a.icon_color menuIconColor,
-            a.icon_bg menuIconBg,
-			a.icon_type menuIconType,
-			a.icon_pic menuIconPic,
+			a.icon,
+			a.icon_color iconColor,
+			a.icon_bg iconBg,
+			a.icon_type iconType,
+			a.icon_pic iconPic,
             a.menu_name_en menuNameEn,
             a.menu_level menuLevel,
             a.menu_type menuType,
-            CASE a.menu_sys_type WHEN '1' THEN '是' WHEN '2' THEN '否' ELSE '参数错误' END menuSysType,
+			a.menu_sys_type menuSysType,
+            CASE a.menu_sys_type WHEN '1' THEN '是' ELSE '否' END menuSysTypeName,
             a.menu_parent_id parentId,
             a.menu_url menuUrl,
             CONVERT(a.create_time, char) createTime,
             b.user_name userName,
+			a.sys_win_id sysWinId,
+			e.sys_name sysWinName,
+			a.desktop_id desktopId,
             CASE a.desktop_id WHEN 'winfixedpage00000000' THEN '默认桌面' ELSE d.desktop_name END desktopName,
             a.order_num orderNum,
-            CASE a.is_share WHEN '0' THEN '否' WHEN '1' THEN '是' ELSE '参数错误' END isShare,
-            IFNULL(GROUP_CONCAT(c.menu_name separator '->'), '创世菜单') menuParentName,
+			a.is_share isShare,
+            CASE a.is_share WHEN '0' THEN '否' ELSE '是' END isShareName,
+            IFNULL(c.menu_name, '') menuParentName,
             (SELECT COUNT(*) FROM sys_eve_role_menu d WHERE d.menu_id = a.id) roleNum,
             (SELECT COUNT(*) FROM sys_eve_menu_auth_point e WHERE e.menu_id = a.id) authpointNum
+
         FROM
             sys_eve_menu a
             LEFT JOIN sys_eve_user_staff b ON a.create_id = b.user_id
-            LEFT JOIN sys_eve_menu c ON INSTR(CONCAT(',', a.menu_parent_id, ','), CONCAT(',', c.id, ','))
+            LEFT JOIN sys_eve_menu c ON a.menu_parent_id = c.id
             LEFT JOIN sys_eve_desktop d ON a.desktop_id = d.id
+			LEFT JOIN sys_eve_win e ON a.sys_win_id = e.id
         WHERE a.id = #{id}
     </select>
-	
+
+	<select id="queryAllChildIdsByParentId" resultType="java.lang.String">
+		<foreach collection="ids" item="id" index="idx" separator="UNION">
+			SELECT
+				d.id
+			FROM
+				(
+					SELECT
+						@ids${idx} AS _ids,
+						(
+							SELECT
+								@ids${idx} := GROUP_CONCAT(id)
+							FROM
+								sys_eve_menu
+							WHERE FIND_IN_SET(menu_parent_id, @ids${idx})
+						) AS cids,
+						@l${idx} := @l${idx} + 1 AS level
+					FROM
+						sys_eve_menu,
+						(
+							SELECT
+								@ids${idx} := #{id},
+								@l${idx} := 0
+						) b
+					WHERE @ids${idx} IS NOT NULL
+				) i,
+				sys_eve_menu d
+			WHERE FIND_IN_SET(d.id, i._ids)
+		</foreach>
+	</select>
+
 </mapper>

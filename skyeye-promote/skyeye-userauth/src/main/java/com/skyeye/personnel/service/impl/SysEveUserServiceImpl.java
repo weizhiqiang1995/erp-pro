@@ -287,7 +287,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         String roleIds = userMation.get("roleId").toString();
         // 桌面菜单列表
         List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
-        deskTops = ToolUtil.deskTopsTree(deskTops);
+        deskTops = ToolUtil.listToTree(deskTops, "id", "parentId", "childs");
         List<Map<String, Object>> authPoints = sysAuthorityService.getRoleHasMenuPointListByRoleIds(roleIds, userId);
 
         LOGGER.info("set menu and auth mation to redis cache start.");
@@ -402,7 +402,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     }
 
     /**
-     * 获取桌面菜单列表
+     * 获取当前登录用户的桌面菜单列表
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象

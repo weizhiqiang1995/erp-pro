@@ -11,6 +11,7 @@ import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.entity.userauth.menu.SysMenuMation;
+import com.skyeye.eve.entity.userauth.menu.SysMenuQueryDo;
 import com.skyeye.menupc.service.SysEveMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,8 @@ public class SysEveMenuController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "sys006", value = "获取菜单列表", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = SysMenuQueryDo.class)
     @RequestMapping("/post/SysEveMenuController/querySysMenuList")
     public void querySysMenuList(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.querySysMenuList(inputObject, outputObject);
@@ -56,25 +59,17 @@ public class SysEveMenuController {
     }
 
     /**
-     * 查看同级菜单
+     * 根据父菜单ID查看子菜单
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "sys009", value = "根据父菜单ID查看子菜单", method = "GET", allUse = "2")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(id = "parentId", name = "parentId", value = "父菜单ID", required = "required")})
     @RequestMapping("/post/SysEveMenuController/querySysMenuMationBySimpleLevel")
     public void querySysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.querySysMenuMationBySimpleLevel(inputObject, outputObject);
-    }
-
-    /**
-     * 编辑菜单时进行信息回显
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/SysEveMenuController/querySysMenuMationToEditById")
-    public void querySysMenuMationToEditById(InputObject inputObject, OutputObject outputObject) {
-        sysEveMenuService.querySysMenuMationToEditById(inputObject, outputObject);
     }
 
     /**
@@ -100,17 +95,6 @@ public class SysEveMenuController {
     @RequestMapping("/post/SysEveMenuController/deleteSysMenuMationById")
     public void deleteSysMenuMationById(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.deleteSysMenuMationById(inputObject, outputObject);
-    }
-
-    /**
-     * 获取菜单级别列表
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/SysEveMenuController/querySysMenuLevelList")
-    public void querySysMenuLevelList(InputObject inputObject, OutputObject outputObject) {
-        sysEveMenuService.querySysMenuLevelList(inputObject, outputObject);
     }
 
     /**
@@ -141,6 +125,9 @@ public class SysEveMenuController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "sys040", value = "系统菜单详情", method = "GET", allUse = "2")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(id = "id", name = "id", value = "菜单ID", required = "required")})
     @RequestMapping("/post/SysEveMenuController/querySysEveMenuBySysId")
     public void querySysEveMenuBySysId(InputObject inputObject, OutputObject outputObject) {
         sysEveMenuService.querySysEveMenuBySysId(inputObject, outputObject);

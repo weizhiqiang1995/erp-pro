@@ -8,6 +8,7 @@ import cn.hutool.json.JSONUtil;
 import com.skyeye.common.constans.ApiConstants;
 import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.constans.RequestConstants;
+import com.skyeye.common.enumeration.VerificationParamsEnum;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.ObjectConstant;
 import com.skyeye.common.object.OutputObject;
@@ -160,7 +161,7 @@ public class ApiServiceImpl implements ApiService {
      */
     @Override
     public void queryLimitRestrictions(InputObject inputObject, OutputObject outputObject) {
-        List<Map<String, Object>> beans = ObjectConstant.VerificationParams.getList();
+        List<Map<String, Object>> beans = VerificationParamsEnum.getList();
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
     }

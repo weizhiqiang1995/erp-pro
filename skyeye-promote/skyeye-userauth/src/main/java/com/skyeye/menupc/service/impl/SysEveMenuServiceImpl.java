@@ -4,16 +4,20 @@
 
 package com.skyeye.menupc.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.google.common.base.Joiner;
+import com.skyeye.common.constans.CommonCharConstants;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
-import com.skyeye.menupc.dao.SysEveMenuDao;
 import com.skyeye.eve.entity.userauth.menu.SysMenuMation;
+import com.skyeye.eve.entity.userauth.menu.SysMenuQueryDo;
 import com.skyeye.eve.service.IAuthUserService;
+import com.skyeye.menupc.dao.SysEveMenuDao;
 import com.skyeye.menupc.service.SysEveMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName: SysEveMenuServiceImpl
@@ -59,11 +64,22 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
      */
     @Override
     public void querySysMenuList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = sysEveMenuDao.querySysMenuList(map);
+        SysMenuQueryDo sysMenuQuery = inputObject.getParams(SysMenuQueryDo.class);
+        Page pages = PageHelper.startPage(sysMenuQuery.getPage(), sysMenuQuery.getLimit());
+        List<Map<String, Object>> beans = sysEveMenuDao.querySysMenuList(sysMenuQuery);
+        List<String> ids = beans.stream().map(bean -> bean.get("id").toString()).collect(Collectors.toList());
+        if (CollectionUtil.isEmpty(ids)) {
+            return;
+        }
+        // 查询子节点信息(包含当前节点)
+        List<String> childIds = sysEveMenuDao.queryAllChildIdsByParentId(ids);
+        beans = sysEveMenuDao.querySysMenuListByIds(childIds);
+
         iAuthUserService.setNameByIdList(beans, "createId", "createName");
         iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
+        beans.forEach(bean -> {
+            bean.put("lay_is_open", true);
+        });
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -105,8 +121,7 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
         if ("0".equals(sysMenuMation.getParentId())) {
             sysMenuMation.setMenuLevel(0);
         } else {
-            String[] str = sysMenuMation.getParentId().split(",");
-            sysMenuMation.setMenuLevel(str.length);
+            sysMenuMation.setMenuLevel(CommonNumConstants.NUM_ONE);
         }
     }
 
@@ -121,7 +136,7 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     }
 
     /**
-     * 查看同级菜单
+     * 根据父菜单ID查看子菜单
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -130,25 +145,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     public void querySysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysEveMenuDao.querySysMenuMationBySimpleLevel(map);
-        if (!beans.isEmpty()) {
-            outputObject.setBeans(beans);
-            outputObject.settotal(beans.size());
-        }
-    }
-
-    /**
-     * 编辑菜单时进行信息回显
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void querySysMenuMationToEditById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String id = map.get("id").toString();
-        Map<String, Object> bean = sysEveMenuDao.queryMenuMationById(id);
-        outputObject.setBean(bean);
-        outputObject.settotal(CommonNumConstants.NUM_ONE);
+        outputObject.setBeans(beans);
+        outputObject.settotal(beans.size());
     }
 
     /**
@@ -165,7 +163,7 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
         setOpenType(sysMenuMation);
         // 设置菜单级别
         setMenuLevel(sysMenuMation);
-        Map<String, Object> oldParent = sysEveMenuDao.queryMenuMationById(sysMenuMation.getId());
+        Map<String, Object> oldParent = sysEveMenuDao.querySysEveMenuBySysId(sysMenuMation.getId());
         if (!oldParent.get("parentId").toString().equals(sysMenuMation.getParentId())) {
             // 修改之后不再是之前父类的子菜单，设置培训序号
             setOrderNum(sysMenuMation);
@@ -200,22 +198,6 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
             } else {
                 outputObject.setreturnMessage("该菜单正在被一个或多个角色使用，无法删除。");
             }
-        }
-    }
-
-    /**
-     * 获取菜单级别列表
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void querySysMenuLevelList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = sysEveMenuDao.querySysMenuLevelList(map);
-        if (!beans.isEmpty()) {
-            outputObject.setBeans(beans);
-            outputObject.settotal(beans.size());
         }
     }
 
@@ -281,11 +263,10 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
     @Override
     public void querySysEveMenuBySysId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = sysEveMenuDao.querySysEveMenuBySysId(map);
-        if (!bean.isEmpty()) {
-            outputObject.setBean(bean);
-            outputObject.settotal(CommonNumConstants.NUM_ONE);
-        }
+        String id = map.get("id").toString();
+        Map<String, Object> bean = sysEveMenuDao.querySysEveMenuBySysId(id);
+        outputObject.setBean(bean);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
 }
