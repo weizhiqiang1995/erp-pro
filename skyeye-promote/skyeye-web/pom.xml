@@ -15,6 +15,13 @@
 
 	<dependencies>
 
+		<!-- 引入基本服务模块的依赖 -->
+		<dependency>
+			<groupId>com.skyeye</groupId>
+			<artifactId>skyeye-base-server</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 		<!-- 引入API模块的依赖 -->
 		<dependency>
 			<groupId>com.skyeye</groupId>

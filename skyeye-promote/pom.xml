@@ -26,6 +26,7 @@
 		<module>skyeye-gateway</module>
         <module>skyeye-organization</module>
         <module>skyeye-api</module>
+        <module>skyeye-base-server</module>
     </modules>
 
 </project>
