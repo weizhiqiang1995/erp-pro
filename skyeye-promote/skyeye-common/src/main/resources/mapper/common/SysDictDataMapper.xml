@@ -2,15 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.skyeye.eve.dao.SysDictDataDao">
 
-    <select id="queryDictDataList" resultType="com.skyeye.eve.entity.dict.SysDictDataMation">
+    <select id="queryDictDataList" resultType="java.util.Map">
         SELECT
             s.id,
             s.dict_name dictName,
             s.dict_type_id dictTypeId,
-            a.dict_name dictTypeName,
+            b.dict_type dictType,
+            b.dict_code dictCode,
             s.dict_sort dictSort,
+            s.level,
             s.is_default isDefault,
-            s.status,
+            s.parent_id parentId,
+            s.enabled,
             s.remark,
             s.create_id createId,
             CONVERT(s.create_time, char) createTime,
@@ -18,16 +21,17 @@
             CONVERT(s.last_update_time, char) lastUpdateTime
         FROM
             sys_dict_data s
-            LEFT JOIN sys_dict_type a ON s.dict_type_id = a.id
+            LEFT JOIN sys_dict_type b ON s.dict_type_id = b.id
         <where>
             <if test="sqlExtract != '' and sqlExtract != null">
                 ${sqlExtract}
             </if>
-            <if test="keyword != '' and keyword != null">
+            <if test="keyword != null and keyword != ''">
                 AND s.dict_name like '%${keyword}%'
             </if>
+            AND s.dict_type_id = #{dictTypeId}
         </where>
-        ORDER BY s.create_time DESC
+        ORDER BY s.dict_sort ASC
     </select>
 
     <select id="queryDictDataListByDictTypeCode" resultType="com.skyeye.eve.entity.dict.SysDictDataMation">
@@ -35,15 +39,78 @@
             s.id,
             s.dict_name dictName,
             s.dict_sort dictSort,
-            s.is_default isDefault
+            s.is_default isDefault,
+            s.parent_id parentId
         FROM
             sys_dict_data s,
             sys_dict_type a
         WHERE s.dict_type_id = a.id
         AND a.dict_code = #{dictTypeCpde}
-        AND s.status = 0
-        AND a.status = 0
+        AND s.enabled = #{enabled}
+        AND a.enabled = #{enabled}
         ORDER BY s.dict_sort ASC
+    </select>
+
+    <select id="queryAllParentNodeById" resultType="java.util.Map">
+        <foreach collection="ids" item="id" index="idx" separator="UNION">
+            SELECT
+                #{id} childId,
+                T1.lvl level,
+                T2.id parentId,
+                T2.dict_name `name`
+            FROM
+                (
+                    SELECT
+                        @r${idx} AS _id,
+                        (
+                            SELECT
+                                @r${idx} := parent_id
+                            FROM
+                                sys_dict_data
+                            WHERE id = _id
+                        ) AS parent_id,
+                        @l${idx} := @l${idx} + 1 AS lvl
+                    FROM
+                    (
+                        SELECT
+                            @r${idx} := #{id},
+                            @l${idx} := 0
+                        ) vars,
+                        sys_dict_data h
+                    WHERE @r${idx} != '0'
+                ) T1
+                JOIN sys_dict_data T2 ON T1._id = T2.id
+        </foreach>
+    </select>
+
+    <select id="queryAllChildIdsByParentId" resultType="java.lang.String">
+        <foreach collection="ids" item="id" index="idx" separator="UNION">
+            SELECT
+                d.id
+            FROM
+                (
+                    SELECT
+                        @ids${idx} AS _ids,
+                        (
+                            SELECT
+                                @ids${idx} := GROUP_CONCAT(id)
+                            FROM
+                                sys_dict_data
+                            WHERE FIND_IN_SET(parent_id, @ids${idx})
+                        ) AS cids,
+                        @l${idx} := @l${idx} + 1 AS level
+                    FROM
+                        sys_dict_data,
+                        (
+                            SELECT
+                                @ids${idx} := #{id},
+                                @l${idx} := 0
+                        ) b
+                    WHERE @ids${idx} IS NOT NULL
+                ) i,
+                sys_dict_data d
+            WHERE FIND_IN_SET(d.id, i._ids)
+        </foreach>
     </select>
 
 </mapper>

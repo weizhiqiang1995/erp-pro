@@ -39,7 +39,8 @@ public class SysDictDataController {
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryDictDataList", value = "获取数据字典列表", method = "POST", allUse = "1")
-    @ApiImplicitParams(classBean = CommonPageInfo.class)
+    @ApiImplicitParams(classBean = CommonPageInfo.class, value = {
+        @ApiImplicitParam(id = "dictTypeId", name = "dictTypeId", value = "数据字典分类id")})
     @RequestMapping("/post/SysDictDataController/queryDictDataList")
     public void queryDictDataList(InputObject inputObject, OutputObject outputObject) {
         sysDictDataService.queryDictDataList(inputObject, outputObject);
@@ -112,6 +113,36 @@ public class SysDictDataController {
     @RequestMapping("/post/SysDictDataController/queryDictDataListByDictTypeCode")
     public void queryDictDataListByDictTypeCode(InputObject inputObject, OutputObject outputObject) {
         sysDictDataService.queryDictDataListByDictTypeCode(inputObject, outputObject);
+    }
+
+    /**
+     * 获取指定分类下不等于指定ID的数据字典集合
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryDictDataListByDictTypeCodeAndNotId", value = "获取指定分类下不等于指定ID的数据字典集合", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "dictTypeCode", name = "dictTypeCode", value = "所属类型Code", required = "required"),
+        @ApiImplicitParam(id = "notId", name = "notId", value = "不等于这个ID")})
+    @RequestMapping("/post/SysDictDataController/queryDictDataListByDictTypeCodeAndNotId")
+    public void queryDictDataListByDictTypeCodeAndNotId(InputObject inputObject, OutputObject outputObject) {
+        sysDictDataService.queryDictDataListByDictTypeCodeAndNotId(inputObject, outputObject);
+    }
+
+    /**
+     * 移动位置
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "setDictDataParent", value = "移动位置", method = "PUT", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "id", name = "id", value = "数据字典id", required = "required"),
+        @ApiImplicitParam(id = "parentId", name = "parentId", value = "父节点id", required = "required")})
+    @RequestMapping("/post/SysDictDataController/setDictDataParent")
+    public void setDictDataParent(InputObject inputObject, OutputObject outputObject) {
+        sysDictDataService.setDictDataParent(inputObject, outputObject);
     }
 
 }

@@ -4,16 +4,16 @@
 
 package com.skyeye.eve.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
+import com.google.common.base.Joiner;
 import com.skyeye.common.constans.CommonCharConstants;
 import com.skyeye.common.constans.CommonConstants;
-import com.skyeye.common.constans.CommonLetterConstants;
 import com.skyeye.common.constans.CommonNumConstants;
-import com.skyeye.common.entity.CommonPageInfo;
+import com.skyeye.common.enumeration.EnableEnum;
+import com.skyeye.common.enumeration.IsDefaultEnum;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
@@ -33,10 +33,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -72,13 +69,12 @@ public class SysDictDataServiceImpl implements SysDictDataService {
      */
     @Override
     public void queryDictDataList(InputObject inputObject, OutputObject outputObject) {
-        CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
-        Page pages = PageHelper.startPage(commonPageInfo.getPage(), commonPageInfo.getLimit());
-        List<SysDictDataMation> beans = sysDictDataDao.queryDictDataList(commonPageInfo);
-        iAuthUserService.setNameByIdForEntity(beans, "createId", "createName");
-        iAuthUserService.setNameByIdForEntity(beans, "lastUpdateId", "lastUpdateName");
+        Map<String, Object> map = inputObject.getParams();
+        List<Map<String, Object>> beans = sysDictDataDao.queryDictDataList(map);
+        iAuthUserService.setUserNameStr(beans, "createId", "createName");
+        iAuthUserService.setUserNameStr(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
-        outputObject.settotal(pages.getTotal());
+        outputObject.settotal(beans.size());
     }
 
     /**
@@ -120,11 +116,11 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     }
 
     private void setIsDefault(SysDictDataMation sysDictDataMation) {
-        if (CommonLetterConstants.LETTER_BIG_Y.equals(sysDictDataMation.getIsDefault())) {
+        if (sysDictDataMation.getIsDefault() == IsDefaultEnum.IS_DEFAULT.getKey()) {
             UpdateWrapper<SysDictDataMation> updateWrapper = new UpdateWrapper<>();
             updateWrapper.eq(MybatisPlusUtil.toColumns(SysDictDataMation::getDictTypeId), sysDictDataMation.getDictTypeId());
             updateWrapper.ne(CommonConstants.ID, sysDictDataMation.getId());
-            updateWrapper.set(MybatisPlusUtil.toColumns(SysDictDataMation::getIsDefault), CommonLetterConstants.LETTER_BIG_N);
+            updateWrapper.set(MybatisPlusUtil.toColumns(SysDictDataMation::getIsDefault), IsDefaultEnum.NOT_DEFAULT.getKey());
             sysDictDataDao.update(null, updateWrapper);
         }
     }
@@ -139,6 +135,18 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     public void queryDictDataMationById(InputObject inputObject, OutputObject outputObject) {
         String id = inputObject.getParams().get("id").toString();
         SysDictDataMation sysDictDataMation = sysDictDataDao.selectById(id);
+
+        // 设置路径名称
+        List<Map<String, Object>> parentNames = sysDictDataDao.queryAllParentNodeById(Arrays.asList(id));
+        Map<String, List<Map<String, Object>>> groupByMap = parentNames.stream()
+            .sorted(Comparator.comparing(bean -> bean.get("level").toString(), Comparator.reverseOrder()))
+            .collect(Collectors.groupingBy(bean -> bean.get("childId").toString()));
+        List<Map<String, Object>> parentList = groupByMap.get(sysDictDataMation.getId());
+        if (CollectionUtil.isNotEmpty(parentList)) {
+            List<String> names = parentList.stream().map(bean -> bean.get("name").toString()).collect(Collectors.toList());
+            sysDictDataMation.setPathName(Joiner.on(CommonCharConstants.SLASH_MARK).join(names));
+        }
+
         outputObject.setBean(sysDictDataMation);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
@@ -159,6 +167,20 @@ public class SysDictDataServiceImpl implements SysDictDataService {
         QueryWrapper<SysDictDataMation> queryWrapper = new QueryWrapper<>();
         queryWrapper.in(CommonConstants.ID, idList);
         List<SysDictDataMation> sysDictDataMationList = sysDictDataDao.selectList(queryWrapper);
+
+        // 设置路径名称
+        List<Map<String, Object>> parentNames = sysDictDataDao.queryAllParentNodeById(idList);
+        Map<String, List<Map<String, Object>>> groupByMap = parentNames.stream()
+            .sorted(Comparator.comparing(bean -> bean.get("level").toString(), Comparator.reverseOrder()))
+            .collect(Collectors.groupingBy(bean -> bean.get("childId").toString()));
+        sysDictDataMationList.forEach(sysDictDataMation -> {
+            List<Map<String, Object>> parentList = groupByMap.get(sysDictDataMation.getId());
+            if (CollectionUtil.isNotEmpty(parentList)) {
+                List<String> names = parentList.stream().map(bean -> bean.get("name").toString()).collect(Collectors.toList());
+                sysDictDataMation.setPathName(Joiner.on(CommonCharConstants.SLASH_MARK).join(names));
+            }
+        });
+
         outputObject.setBeans(sysDictDataMationList);
         outputObject.settotal(sysDictDataMationList.size());
     }
@@ -189,7 +211,7 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     @Override
     public void queryDictDataListByDictTypeCode(InputObject inputObject, OutputObject outputObject) {
         String dictTypeCode = inputObject.getParams().get("dictTypeCode").toString();
-        List<SysDictDataMation> dictDataList = sysDictDataDao.queryDictDataListByDictTypeCode(dictTypeCode);
+        List<SysDictDataMation> dictDataList = sysDictDataDao.queryDictDataListByDictTypeCode(dictTypeCode, EnableEnum.ENABLE_USING.getKey());
         List<Map<String, Object>> result = new ArrayList<>();
         for (SysDictDataMation bean : dictDataList) {
             Map<String, Object> map = JSONObject.parseObject(JSONObject.toJSONString(bean), Map.class);
@@ -197,7 +219,54 @@ public class SysDictDataServiceImpl implements SysDictDataService {
             result.add(map);
         }
         outputObject.setBeans(result);
+        outputObject.setCustomBeans("treeRows", ToolUtil.listToTree(result, "id", "parentId", "children"));
         outputObject.settotal(result.size());
+    }
+
+    /**
+     * 获取指定分类下不等于指定ID的数据字典集合
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryDictDataListByDictTypeCodeAndNotId(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> params = inputObject.getParams();
+        String dictTypeCode = params.get("dictTypeCode").toString();
+        String notId = params.get("notId").toString();
+        // 获取所有的数据字典
+        List<SysDictDataMation> dictDataList = sysDictDataDao.queryDictDataListByDictTypeCode(dictTypeCode, EnableEnum.ENABLE_USING.getKey());
+        if (!ToolUtil.isBlank(notId)) {
+            // 移除不需要查询的节点，包含子节点
+            List<String> childId = sysDictDataDao.queryAllChildIdsByParentId(Arrays.asList(notId));
+            dictDataList = dictDataList.stream().filter(bean -> !childId.contains(bean.getId())).collect(Collectors.toList());
+        }
+        List<Map<String, Object>> result = new ArrayList<>();
+        for (SysDictDataMation bean : dictDataList) {
+            Map<String, Object> map = JSONObject.parseObject(JSONObject.toJSONString(bean), Map.class);
+            map.put("name", map.get("dictName"));
+            result.add(map);
+        }
+        result = ToolUtil.listToTree(result, "id", "parentId", "children");
+        outputObject.setBeans(result);
+        outputObject.settotal(result.size());
+    }
+
+    /**
+     * 移动位置
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void setDictDataParent(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> params = inputObject.getParams();
+        String id = params.get("id").toString();
+        String parentId = params.get("parentId").toString();
+        UpdateWrapper<SysDictDataMation> wrapper = new UpdateWrapper<>();
+        wrapper.eq(CommonConstants.ID, id);
+        wrapper.set(MybatisPlusUtil.toColumns(SysDictDataMation::getParentId), parentId);
+        sysDictDataDao.update(null, wrapper);
     }
 
 }

@@ -147,6 +147,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
         for (SysDictTypeMation bean : dictTypeList) {
             Map<String, Object> map = BeanUtil.beanToMap(bean);
             map.put("name", map.get("dictName"));
+            map.put("pId", CommonNumConstants.NUM_ZERO);
             result.add(map);
         }
         outputObject.setBeans(result);

@@ -30,33 +30,41 @@ public class SysDictDataMation extends CommonOperatorUserInfo {
     private String id;
 
     @TableField("dict_name")
-    @ApiModelProperty(value = "字典分类名称", required = "required")
+    @ApiModelProperty(value = "字典名称", required = "required")
     private String dictName;
+
+    /**
+     * 多级节点时，节点路径名称
+     */
+    @TableField(exist = false)
+    private String pathName;
 
     @TableField("dict_type_id")
     @ApiModelProperty(value = "数据字典类型id", required = "required")
     private String dictTypeId;
 
-    /**
-     * 数据字典类型名称
-     */
-    @TableField(exist = false)
-    private String dictTypeName;
-
     @TableField("dict_sort")
     @ApiModelProperty(value = "字典排序", required = "required,num")
     private Integer dictSort;
 
+    @TableField("parent_id")
+    @ApiModelProperty(value = "父节点id", required = "required")
+    private String parentId;
+
+    @TableField("level")
+    @ApiModelProperty(value = "级别", required = "required,num")
+    private Integer level;
+
     @TableField("is_default")
-    @ApiModelProperty(value = "是否默认（Y是 N否）", required = "required")
-    private String isDefault;
+    @ApiModelProperty(value = "是否默认 1.是  2.否", required = "required,num")
+    private Integer isDefault;
 
     @TableField("remark")
     @ApiModelProperty(value = "备注信息")
     private String remark;
 
-    @TableField("status")
-    @ApiModelProperty(value = "状态（0正常 1停用）", required = "required,num")
-    private Integer status;
+    @TableField("enabled")
+    @ApiModelProperty(value = "状态（1 启用  2.停用）", required = "required,num")
+    private Integer enabled;
 
 }

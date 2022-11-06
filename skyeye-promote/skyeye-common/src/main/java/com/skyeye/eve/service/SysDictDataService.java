@@ -29,4 +29,7 @@ public interface SysDictDataService {
 
     void queryDictDataListByDictTypeCode(InputObject inputObject, OutputObject outputObject);
 
+    void queryDictDataListByDictTypeCodeAndNotId(InputObject inputObject, OutputObject outputObject);
+
+    void setDictDataParent(InputObject inputObject, OutputObject outputObject);
 }

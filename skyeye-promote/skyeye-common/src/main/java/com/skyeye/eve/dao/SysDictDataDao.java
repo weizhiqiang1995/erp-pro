@@ -4,11 +4,11 @@
 
 package com.skyeye.eve.dao;
 
-import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.eve.entity.dict.SysDictDataMation;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: SysDictDataDao
@@ -20,7 +20,24 @@ import java.util.List;
  */
 public interface SysDictDataDao extends SkyeyeBaseMapper<SysDictDataMation> {
 
-    List<SysDictDataMation> queryDictDataList(CommonPageInfo commonPageInfo);
+    List<Map<String, Object>> queryDictDataList(Map<String, Object> map);
 
-    List<SysDictDataMation> queryDictDataListByDictTypeCode(@Param("dictTypeCpde") String dictTypeCpde);
+    List<SysDictDataMation> queryDictDataListByDictTypeCode(@Param("dictTypeCpde") String dictTypeCpde, @Param("enabled") Integer enabled);
+
+    /**
+     * 根据子id查询所有的父节点信息(包含子节点信息)
+     *
+     * @param ids 子id
+     * @return
+     */
+    List<Map<String, Object>> queryAllParentNodeById(@Param("ids") List<String> ids);
+
+    /**
+     * 根据父id查询所有的子节点信息(包含父id)
+     *
+     * @param ids        父id
+     * @return
+     */
+    List<String> queryAllChildIdsByParentId(@Param("ids") List<String> ids);
+
 }
