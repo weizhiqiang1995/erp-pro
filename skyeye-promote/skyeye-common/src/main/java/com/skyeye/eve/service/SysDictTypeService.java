@@ -25,5 +25,5 @@ public interface SysDictTypeService {
 
     void deleteDictTypeMationById(InputObject inputObject, OutputObject outputObject);
 
-    void queryDictTypeListByStatus(InputObject inputObject, OutputObject outputObject);
+    void queryDictTypeListByEnabled(InputObject inputObject, OutputObject outputObject);
 }

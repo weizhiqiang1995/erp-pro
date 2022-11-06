@@ -92,12 +92,12 @@ public class SysDictTypeController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "queryDictTypeListByStatus", value = "根据状态获取数据字典类型列表", method = "GET", allUse = "2")
+    @ApiOperation(id = "queryDictTypeListByEnabled", value = "根据状态获取数据字典类型列表", method = "GET", allUse = "2")
     @ApiImplicitParams({
-        @ApiImplicitParam(id = "status", name = "status", value = "状态（0正常 1停用）", required = "num")})
-    @RequestMapping("/post/SysDictTypeController/queryDictTypeListByStatus")
-    public void queryDictTypeListByStatus(InputObject inputObject, OutputObject outputObject) {
-        sysDictTypeService.queryDictTypeListByStatus(inputObject, outputObject);
+        @ApiImplicitParam(id = "enabled", name = "enabled", value = "状态（1 启用  2.停用）", required = "num")})
+    @RequestMapping("/post/SysDictTypeController/queryDictTypeListByEnabled")
+    public void queryDictTypeListByEnabled(InputObject inputObject, OutputObject outputObject) {
+        sysDictTypeService.queryDictTypeListByEnabled(inputObject, outputObject);
     }
 
 }

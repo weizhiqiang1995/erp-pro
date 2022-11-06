@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyeye.contacts.dao.ContactsDao">
+
+    <select id="queryContactsList" resultType="java.util.Map">
+        SELECT
+			a.id,
+			a.object_id objectId,
+			a.object_key objectKey,
+			a.`name`,
+			a.department,
+			a.job,
+			a.work_phone workPhone,
+			a.mobile_phone mobilePhone,
+			a.email,
+			a.qq,
+			a.wechat,
+			a.is_default isDefault,
+            a.create_id createId,
+			DATE_FORMAT(CONVERT(a.create_time, CHAR),'%Y-%m-%d') createTime,
+            a.last_update_id lastUpdateId,
+			DATE_FORMAT(CONVERT(a.last_update_time, CHAR),'%Y-%m-%d') lastUpdateTime
+		FROM
+            skyeye_contacts a
+		<where>
+            a.delete_flag = #{deleteFlag}
+            <if test="sqlExtract != '' and sqlExtract != null">
+                ${sqlExtract}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                AND (a.`name` LIKE '%${keyword}%' OR a.mobile_phone LIKE '%${keyword}%')
+            </if>
+            <if test="objectId != null and objectId != ''">
+                AND a.object_id = #{objectId}
+            </if>
+            <if test="objectKey != null and objectKey != ''">
+                AND a.object_key = #{objectKey}
+            </if>
+            <if test="createId != null and createId != ''">
+                AND a.create_id = #{createId}
+            </if>
+        </where>
+        ORDER BY a.create_time DESC
+    </select>
+    
+    <update id="setContactsIsNotDefault">
+        UPDATE skyeye_contacts
+        <set>
+            is_default = ${isDefault}
+        </set>
+        WHERE object_id = #{objectId}
+    </update>
+
+    <update id="setContactsIsDefault">
+        UPDATE skyeye_contacts
+        <set>
+            is_default = ${isDefault}
+        </set>
+        WHERE id = #{id}
+    </update>
+    
+</mapper>

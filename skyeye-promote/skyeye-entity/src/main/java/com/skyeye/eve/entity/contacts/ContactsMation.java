@@ -30,14 +30,14 @@ public class ContactsMation extends CommonOperatorUserInfo {
     private String id;
 
     @TableField(value = "object_id")
-    @ApiModelProperty(value = "所属第三方的ID", required = "required")
+    @ApiModelProperty(value = "所属第三方业务数据id", required = "required")
     private String objectId;
 
     @TableField(value = "object_key")
-    @ApiModelProperty(value = "所属第三方的类型", required = "required")
+    @ApiModelProperty(value = "所属第三方业务数据的key", required = "required")
     private String objectKey;
 
-    @TableField(value = "name")
+    @TableField(value = "`name`")
     @ApiModelProperty(value = "联系人姓名", required = "required")
     private String name;
 

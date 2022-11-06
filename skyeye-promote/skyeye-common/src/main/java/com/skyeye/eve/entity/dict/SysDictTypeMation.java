@@ -45,8 +45,12 @@ public class SysDictTypeMation extends CommonOperatorUserInfo {
     @ApiModelProperty(value = "字典类型  1. 一级分类  2. 多级分类", required = "required,num")
     private Integer dictType;
 
-    @TableField("status")
-    @ApiModelProperty(value = "状态（0正常 1停用）", required = "required,num")
-    private Integer status;
+    @TableField("choose_level")
+    @ApiModelProperty(value = "几级之后的可以选择，比如设置2级(包含2级)之后的可以选择", required = "required,num")
+    private Integer chooseLevel;
+
+    @TableField("enabled")
+    @ApiModelProperty(value = "状态（1 启用  2.停用）", required = "required,num")
+    private Integer enabled;
 
 }

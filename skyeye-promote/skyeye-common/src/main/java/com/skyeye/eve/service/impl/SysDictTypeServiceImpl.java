@@ -4,7 +4,7 @@
 
 package com.skyeye.eve.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -136,16 +136,16 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
-    public void queryDictTypeListByStatus(InputObject inputObject, OutputObject outputObject) {
-        String status = inputObject.getParams().get("status").toString();
+    public void queryDictTypeListByEnabled(InputObject inputObject, OutputObject outputObject) {
+        String enabled = inputObject.getParams().get("enabled").toString();
         QueryWrapper<SysDictTypeMation> queryWrapper = new QueryWrapper<>();
-        if (StringUtils.isNotEmpty(status)) {
-            queryWrapper.eq(MybatisPlusUtil.toColumns(SysDictTypeMation::getStatus), status);
+        if (StringUtils.isNotEmpty(enabled)) {
+            queryWrapper.eq(MybatisPlusUtil.toColumns(SysDictTypeMation::getEnabled), enabled);
         }
         List<SysDictTypeMation> dictTypeList = sysDictTypeDao.selectList(queryWrapper);
         List<Map<String, Object>> result = new ArrayList<>();
         for (SysDictTypeMation bean : dictTypeList) {
-            Map<String, Object> map = JSONObject.parseObject(JSONObject.toJSONString(bean), Map.class);
+            Map<String, Object> map = BeanUtil.beanToMap(bean);
             map.put("name", map.get("dictName"));
             result.add(map);
         }

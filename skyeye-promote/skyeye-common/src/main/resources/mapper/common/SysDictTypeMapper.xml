@@ -8,7 +8,7 @@
             s.dict_name dictName,
             s.dict_code dictCode,
             s.dict_type dictType,
-            s.status,
+            s.enabled,
             s.remark,
             s.create_id createId,
             CONVERT(s.create_time, char) createTime,
