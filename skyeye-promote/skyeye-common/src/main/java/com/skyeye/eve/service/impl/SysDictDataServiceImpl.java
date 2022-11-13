@@ -20,7 +20,9 @@ import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.SysDictDataDao;
+import com.skyeye.eve.dao.SysDictTypeDao;
 import com.skyeye.eve.entity.dict.SysDictDataMation;
+import com.skyeye.eve.entity.dict.SysDictTypeMation;
 import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.eve.service.ISysDictDataService;
 import com.skyeye.eve.service.SysDictDataService;
@@ -51,6 +53,9 @@ public class SysDictDataServiceImpl implements SysDictDataService {
 
     @Autowired
     private SysDictDataDao sysDictDataDao;
+
+    @Autowired
+    private SysDictTypeDao sysDictTypeDao;
 
     @Autowired
     private JedisClientService jedisClientService;
@@ -100,14 +105,14 @@ public class SysDictDataServiceImpl implements SysDictDataService {
             if (StringUtils.isNotEmpty(sysDictDataMation.getId())) {
                 LOGGER.info("update dictData data, id is {}", sysDictDataMation.getId());
                 sysDictDataDao.updateById(sysDictDataMation);
-                // 删除字典缓存
-                String cacheKey = iSysDictDataService.queryDictDataCacheKeyById(sysDictDataMation.getId());
-                jedisClientService.del(cacheKey);
             } else {
                 DataCommonUtil.setId(sysDictDataMation);
                 LOGGER.info("insert dictData data, id is {}", sysDictDataMation.getId());
                 sysDictDataDao.insert(sysDictDataMation);
             }
+            // 删除字典缓存
+            String cacheKey = iSysDictDataService.queryDictDataCacheKeyById(sysDictDataMation.getId());
+            jedisClientService.del(cacheKey);
             // 3.设置默认值
             setIsDefault(sysDictDataMation);
         } else {
@@ -138,6 +143,9 @@ public class SysDictDataServiceImpl implements SysDictDataService {
 
         // 设置路径名称
         List<Map<String, Object>> parentNames = sysDictDataDao.queryAllParentNodeById(Arrays.asList(id));
+        if (CollectionUtil.isEmpty(parentNames)) {
+            return;
+        }
         Map<String, List<Map<String, Object>>> groupByMap = parentNames.stream()
             .sorted(Comparator.comparing(bean -> bean.get("level").toString(), Comparator.reverseOrder()))
             .collect(Collectors.groupingBy(bean -> bean.get("childId").toString()));
@@ -212,15 +220,34 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     public void queryDictDataListByDictTypeCode(InputObject inputObject, OutputObject outputObject) {
         String dictTypeCode = inputObject.getParams().get("dictTypeCode").toString();
         List<SysDictDataMation> dictDataList = sysDictDataDao.queryDictDataListByDictTypeCode(dictTypeCode, EnableEnum.ENABLE_USING.getKey());
+        if (CollectionUtil.isEmpty(dictDataList)) {
+            return;
+        }
         List<Map<String, Object>> result = new ArrayList<>();
         for (SysDictDataMation bean : dictDataList) {
             Map<String, Object> map = JSONObject.parseObject(JSONObject.toJSONString(bean), Map.class);
             map.put("name", map.get("dictName"));
             result.add(map);
         }
+
+        List<Map<String, Object>> listTree = ToolUtil.listToTree(result, "id", "parentId", "children");
+        SysDictTypeMation sysDictTypeMation = sysDictTypeDao.selectById(dictDataList.get(0).getDictTypeId());
+        resetCheckNode(listTree, 1, sysDictTypeMation.getChooseLevel());
         outputObject.setBeans(result);
-        outputObject.setCustomBeans("treeRows", ToolUtil.listToTree(result, "id", "parentId", "children"));
+        outputObject.setCustomBeans("treeRows", listTree);
         outputObject.settotal(result.size());
+    }
+
+    private void resetCheckNode(List<Map<String, Object>> listTree, int parentLevel, int chooseLevel) {
+        listTree.forEach(node -> {
+            if (parentLevel < chooseLevel) {
+                node.put("nocheck", true);
+                List<Map<String, Object>> child = (List<Map<String, Object>>) node.get("children");
+                if (CollectionUtil.isNotEmpty(child)) {
+                    resetCheckNode(child, parentLevel + 1, chooseLevel);
+                }
+            }
+        });
     }
 
     /**

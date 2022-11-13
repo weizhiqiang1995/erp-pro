@@ -40,7 +40,8 @@
             s.dict_name dictName,
             s.dict_sort dictSort,
             s.is_default isDefault,
-            s.parent_id parentId
+            s.parent_id parentId,
+            s.dict_type_id dictTypeId
         FROM
             sys_dict_data s,
             sys_dict_type a
