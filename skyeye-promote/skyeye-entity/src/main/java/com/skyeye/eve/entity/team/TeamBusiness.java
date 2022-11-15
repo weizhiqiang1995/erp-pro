@@ -12,6 +12,8 @@ import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.common.entity.CommonOperatorUserInfo;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @ClassName: TeamBusiness
  * @Description: 团队实体类
@@ -43,5 +45,11 @@ public class TeamBusiness extends CommonOperatorUserInfo {
     @TableField("team_template_id")
     @ApiModelProperty(value = "团队模板id", required = "required")
     private String teamTemplateId;
+
+    /**
+     * 团队角色信息
+     */
+    @TableField(exist = false)
+    private List<TeamRole> teamRoleList;
 
 }

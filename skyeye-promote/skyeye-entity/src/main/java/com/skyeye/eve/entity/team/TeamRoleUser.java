@@ -9,8 +9,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
+import com.skyeye.annotation.unique.UniqueField;
 import com.skyeye.common.entity.CommonOperatorUserInfo;
 import lombok.Data;
+
+import java.util.Map;
 
 /**
  * @ClassName: TeamRoleUser
@@ -21,12 +24,19 @@ import lombok.Data;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Data
+@UniqueField(value = {"teamId", "teamKey", "roleId", "userId"})
 @TableName(value = "team_role_user")
 @ApiModel("团队用户实体类")
 public class TeamRoleUser extends CommonOperatorUserInfo {
 
     @TableId("id")
     private String id;
+
+    /**
+     * 用户信息
+     */
+    @TableField(exist = false)
+    private Map<String, Object> userMation;
 
     @TableField("team_id")
     @ApiModelProperty(value = "团队id", required = "required")
@@ -40,7 +50,7 @@ public class TeamRoleUser extends CommonOperatorUserInfo {
     @ApiModelProperty(value = "团队角色id(数据字典中的团队角色类型)", required = "required")
     private String roleId;
 
-    @TableField("role_id")
+    @TableField("user_id")
     @ApiModelProperty(value = "用户id", required = "required")
     private String userId;
 
