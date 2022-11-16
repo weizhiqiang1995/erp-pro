@@ -4,8 +4,12 @@
 
 package com.skyeye.team.dao;
 
+import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.eve.dao.SkyeyeBaseMapper;
 import com.skyeye.eve.entity.team.TeamTemplate;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: TeamTemplateDao
@@ -16,4 +20,7 @@ import com.skyeye.eve.entity.team.TeamTemplate;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 public interface TeamTemplateDao extends SkyeyeBaseMapper<TeamTemplate> {
+
+    List<Map<String, Object>> queryList(CommonPageInfo commonPageInfo);
+
 }

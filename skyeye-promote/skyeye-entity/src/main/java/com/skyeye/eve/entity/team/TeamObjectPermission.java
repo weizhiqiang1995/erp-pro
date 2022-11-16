@@ -29,19 +29,19 @@ public class TeamObjectPermission extends CommonOperatorUserInfo {
     private String id;
 
     @TableField("team_id")
-    @ApiModelProperty(value = "团队id", required = "required")
+    @ApiModelProperty(value = "团队id，单独保存时必填(因为有和团队一起的保存)")
     private String teamId;
 
     @TableField("team_key")
-    @ApiModelProperty(value = "团队类型", required = "required")
+    @ApiModelProperty(value = "团队类型，单独保存时必填(因为有和团队一起的保存)")
     private String teamKey;
 
     @TableField("object_id")
-    @ApiModelProperty(value = "业务对象id", required = "required")
+    @ApiModelProperty(value = "业务对象id，单独保存时必填(因为有和团队一起的保存)")
     private String objectId;
 
     @TableField("object_key")
-    @ApiModelProperty(value = "业务对象的key", required = "required")
+    @ApiModelProperty(value = "业务对象的key，单独保存时必填(因为有和团队一起的保存)")
     private String objectKey;
 
     @TableField("permission_value")
@@ -59,5 +59,9 @@ public class TeamObjectPermission extends CommonOperatorUserInfo {
     @TableField("owner_key")
     @ApiModelProperty(value = "权限点拥有者的key，例如团队角色，用户等", required = "required")
     private String ownerKey;
+
+    @TableField("from_type")
+    @ApiModelProperty(value = "权限来源  参考：#ObjectPermissionFromType", required = "required,num")
+    private Integer fromType;
 
 }

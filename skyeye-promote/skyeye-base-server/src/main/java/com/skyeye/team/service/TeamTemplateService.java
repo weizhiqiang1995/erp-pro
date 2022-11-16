@@ -21,4 +21,11 @@ public interface TeamTemplateService extends SkyeyeBusinessService<TeamTemplate>
 
     void queryTeamTemplateMation(InputObject inputObject, OutputObject outputObject);
 
+    /**
+     * 设置为使用中
+     *
+     * @param id
+     */
+    void setUsed(String id);
+
 }

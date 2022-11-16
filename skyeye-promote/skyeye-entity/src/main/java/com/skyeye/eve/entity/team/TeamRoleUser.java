@@ -24,7 +24,7 @@ import java.util.Map;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Data
-@UniqueField(value = {"teamId", "teamKey", "roleId", "userId"})
+@UniqueField(value = {"teamId", "teamKey", "userId"})
 @TableName(value = "team_role_user")
 @ApiModel("团队用户实体类")
 public class TeamRoleUser extends CommonOperatorUserInfo {

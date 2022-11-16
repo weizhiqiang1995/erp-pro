@@ -56,4 +56,14 @@ public class TeamTemplate extends CommonOperatorUserInfo {
     @ApiModelProperty(value = "团队角色", required = "required,json")
     private List<TeamRole> teamRoleList;
 
+    @TableField(exist = false)
+    @ApiModelProperty(value = "团队权限", required = "required,json")
+    private List<TeamObjectPermission> teamObjectPermissionList;
+
+    /**
+     * 是否使用中 0-未使用  2-已使用
+     */
+    @TableField("is_used")
+    private Integer isUsed;
+
 }

@@ -4,10 +4,19 @@
 
 package com.skyeye.team.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
+import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
+import com.skyeye.eve.entity.team.TeamObjectPermission;
 import com.skyeye.team.dao.TeamObjectPermissionDao;
 import com.skyeye.team.service.TeamObjectPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @ClassName: TeamObjectPermissionServiceImpl
@@ -18,9 +27,22 @@ import org.springframework.stereotype.Service;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
-public class TeamObjectPermissionServiceImpl implements TeamObjectPermissionService {
+public class TeamObjectPermissionServiceImpl extends SkyeyeBusinessServiceImpl<TeamObjectPermissionDao, TeamObjectPermission> implements TeamObjectPermissionService {
 
     @Autowired
     private TeamObjectPermissionDao teamObjectPermissionDao;
 
+    @Override
+    public List<TeamObjectPermission> queryPermissionByTeamId(String teamId, List<String> ownerIds, String ownerKey) {
+        if (ToolUtil.isBlank(teamId) || CollectionUtil.isEmpty(ownerIds) || ToolUtil.isBlank(ownerKey)) {
+            return new ArrayList<>();
+        }
+        QueryWrapper<TeamObjectPermission> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(MybatisPlusUtil.toColumns(TeamObjectPermission::getTeamId), teamId);
+        queryWrapper.in(MybatisPlusUtil.toColumns(TeamObjectPermission::getOwnerId), ownerIds);
+        queryWrapper.eq(MybatisPlusUtil.toColumns(TeamObjectPermission::getOwnerKey), ownerKey);
+        queryWrapper.eq(MybatisPlusUtil.toColumns(TeamObjectPermission::getFromType), 1);
+        List<TeamObjectPermission> teamObjectPermissionList = super.list(queryWrapper);
+        return teamObjectPermissionList;
+    }
 }

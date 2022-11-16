@@ -35,9 +35,6 @@ import java.util.stream.Collectors;
 public class TeamRoleServiceImpl extends SkyeyeBusinessServiceImpl<TeamRoleDao, TeamRole> implements TeamRoleService {
 
     @Autowired
-    private TeamRoleDao teamRoleDao;
-
-    @Autowired
     private TeamRoleUserService teamRoleUserService;
 
     @Autowired

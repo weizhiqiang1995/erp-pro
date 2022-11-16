@@ -4,6 +4,17 @@
 
 package com.skyeye.team.controller;
 
+import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParam;
+import com.skyeye.annotation.api.ApiImplicitParams;
+import com.skyeye.annotation.api.ApiOperation;
+import com.skyeye.common.entity.CommonPageInfo;
+import com.skyeye.common.object.InputObject;
+import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.team.TeamTemplate;
+import com.skyeye.team.service.TeamTemplateService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -15,5 +26,64 @@ import org.springframework.web.bind.annotation.RestController;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @RestController
+@Api(value = "团队模板管理", tags = "团队模板管理", modelName = "团队模块")
 public class TeamTemplateController {
+
+    @Autowired
+    private TeamTemplateService teamTemplateService;
+
+    /**
+     * 查询团队模板列表信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryTeamTemplate", value = "查询团队模板列表信息", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = CommonPageInfo.class)
+    @RequestMapping("/post/TeamTemplateController/queryTeamTemplate")
+    public void queryTeamTemplate(InputObject inputObject, OutputObject outputObject) {
+        teamTemplateService.queryPageList(inputObject, outputObject);
+    }
+
+    /**
+     * 新增/编辑团队模板信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "writeTeamTemplate", value = "新增/编辑团队模板信息", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = TeamTemplate.class)
+    @RequestMapping("/post/TeamTemplateController/writeTeamTemplate")
+    public void writeTeamTemplate(InputObject inputObject, OutputObject outputObject) {
+        teamTemplateService.saveOrUpdateEntity(inputObject, outputObject);
+    }
+
+    /**
+     * 删除团队模板信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "deleteTeamTemplateById", value = "删除团队模板信息", method = "DELETE", allUse = "1")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "id", name = "id", value = "团队模板id", required = "required")})
+    @RequestMapping("/post/TeamTemplateController/deleteTeamTemplateById")
+    public void deleteTeamTemplateById(InputObject inputObject, OutputObject outputObject) {
+        teamTemplateService.deleteById(inputObject, outputObject);
+    }
+
+    /**
+     * 查询团队模板详情信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryTeamTemplateById", value = "查询团队模板详情信息", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "id", name = "id", value = "团队模板id", required = "required")})
+    @RequestMapping("/post/TeamTemplateController/queryTeamTemplateById")
+    public void queryTeamTemplateById(InputObject inputObject, OutputObject outputObject) {
+        teamTemplateService.queryTeamTemplateMation(inputObject, outputObject);
+    }
+
 }
