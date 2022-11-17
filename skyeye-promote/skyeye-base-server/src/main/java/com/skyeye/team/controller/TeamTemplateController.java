@@ -86,4 +86,16 @@ public class TeamTemplateController {
         teamTemplateService.queryTeamTemplateMation(inputObject, outputObject);
     }
 
+    /**
+     * 查询已启用的团队模板列表
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryEnableTeamTemplateList", value = "查询已启用的团队模板列表", method = "GET", allUse = "2")
+    @RequestMapping("/post/TeamTemplateController/queryEnableTeamTemplateList")
+    public void queryEnableTeamTemplateList(InputObject inputObject, OutputObject outputObject) {
+        teamTemplateService.queryEnableTeamTemplateList(inputObject, outputObject);
+    }
+
 }

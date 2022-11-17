@@ -28,4 +28,5 @@ public interface TeamTemplateService extends SkyeyeBusinessService<TeamTemplate>
      */
     void setUsed(String id);
 
+    void queryEnableTeamTemplateList(InputObject inputObject, OutputObject outputObject);
 }
