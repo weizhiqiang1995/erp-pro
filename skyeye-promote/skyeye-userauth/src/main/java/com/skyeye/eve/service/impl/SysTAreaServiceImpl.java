@@ -4,101 +4,58 @@
 
 package com.skyeye.eve.service.impl;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
+import com.skyeye.common.entity.TableSelectInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.dao.SysTAreaDao;
+import com.skyeye.eve.entity.userauth.area.SysTArea;
 import com.skyeye.eve.service.SysTAreaService;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @ClassName: SysTAreaServiceImpl
+ * @Description: 区域管理服务类
+ * @author: skyeye云系列--卫志强
+ * @date: 2022/11/18 23:45
+ * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
+ * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
+ */
 @Service
-public class SysTAreaServiceImpl implements SysTAreaService {
+public class SysTAreaServiceImpl extends SkyeyeBusinessServiceImpl<SysTAreaDao, SysTArea> implements SysTAreaService {
 
     @Autowired
     private SysTAreaDao sysTAreaDao;
 
-    /**
-     * 获取行政区划信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void querySysTAreaList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = sysTAreaDao.querySysTAreaList(map);
-        if (!beans.isEmpty()) {
-            outputObject.setBeans(beans);
-            outputObject.settotal(beans.size());
-        }
+    public List<Map<String, Object>> queryDataList(InputObject inputObject) {
+        TableSelectInfo selectInfo = inputObject.getParams(TableSelectInfo.class);
+        return sysTAreaDao.querySysTAreaList(selectInfo);
     }
 
     /**
-     * 获取一级省行政区划信息
+     * 根据父id获取子节点信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
-    public void querySysTAreaProvinceList(InputObject inputObject, OutputObject outputObject) {
+    public void queryAreaListByPId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = sysTAreaDao.querySysTAreaProvinceList(map);
-        if (!beans.isEmpty()) {
-            outputObject.setBeans(beans);
-            outputObject.settotal(beans.size());
+        String pId = map.get("pId").toString();
+        String parentCode = "0";
+        if (!StringUtils.equals("0", pId)) {
+            // 如果父ID不是0，则查询的不是一级节点，则需要先获取编码code
+            SysTArea sysTArea = selectById(pId);
+            parentCode = sysTArea.getCodeId();
         }
-    }
-
-    /**
-     * 获取二级市行政区划信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void querySysTAreaCityList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = sysTAreaDao.querySysTAreaCityList(map);
-        if (!beans.isEmpty()) {
-            outputObject.setBeans(beans);
-            outputObject.settotal(beans.size());
-        }
-    }
-
-    /**
-     * 获取三级县行政区划信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void querySysTAreaChildAreaList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = sysTAreaDao.querySysTAreaChildAreaList(map);
-        if (!beans.isEmpty()) {
-            outputObject.setBeans(beans);
-            outputObject.settotal(beans.size());
-        }
-    }
-
-    /**
-     * 获取四级镇行政区划信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void querySysTAreaTownShipList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = sysTAreaDao.querySysTAreaTownShipList(map);
-        if (!beans.isEmpty()) {
-            outputObject.setBeans(beans);
-            outputObject.settotal(beans.size());
-        }
+        List<Map<String, Object>> beans = sysTAreaDao.queryAreaListByParentCode(parentCode);
+        outputObject.setBeans(beans);
+        outputObject.settotal(beans.size());
     }
 
 }

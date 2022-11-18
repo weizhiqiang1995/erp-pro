@@ -4,19 +4,17 @@
 
 package com.skyeye.eve.dao;
 
+import com.skyeye.common.entity.TableSelectInfo;
+import com.skyeye.eve.entity.userauth.area.SysTArea;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Map;
 
-public interface SysTAreaDao {
+public interface SysTAreaDao extends SkyeyeBaseMapper<SysTArea> {
 
-    List<Map<String, Object>> querySysTAreaList(Map<String, Object> map);
+    List<Map<String, Object>> querySysTAreaList(TableSelectInfo selectInfo);
 
-    List<Map<String, Object>> querySysTAreaProvinceList(Map<String, Object> map);
-
-    List<Map<String, Object>> querySysTAreaCityList(Map<String, Object> map);
-
-    List<Map<String, Object>> querySysTAreaChildAreaList(Map<String, Object> map);
-
-    List<Map<String, Object>> querySysTAreaTownShipList(Map<String, Object> map);
+    List<Map<String, Object>> queryAreaListByParentCode(@Param("parentCode") String parentCode);
 
 }

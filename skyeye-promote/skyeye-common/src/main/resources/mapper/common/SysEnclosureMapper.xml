@@ -204,12 +204,12 @@
 		FROM
 			sys_eve_user_staff a
 		WHERE a.state = '1'
-		AND LENGTH(a.user_id) > 0 AND a.user_id != ""
+		AND LENGTH(a.user_id) > 0 AND a.user_id != ''
 		<if test="userId != null and userId != ''">
 			AND a.user_id != #{userId}
 		</if>
 		<if test="hasEmail != null and hasEmail != ''">
-			AND LENGTH(a.email) > 0 AND a.email != ""
+			AND LENGTH(a.email) > 0 AND a.email != ''
 		</if>
 	</select>
 	
@@ -273,12 +273,12 @@
 			sys_eve_user_staff a
 		WHERE a.state = '1'
 		AND a.company_id = #{companyId}
-		AND LENGTH(a.user_id) > 0 AND a.user_id != ""
+		AND LENGTH(a.user_id) > 0 AND a.user_id != ''
 		<if test="userId != null and userId != ''">
 			AND a.user_id != #{userId}
 		</if>
 		<if test="hasEmail != null and hasEmail != ''">
-			AND LENGTH(a.email) > 0 AND a.email != ""
+			AND LENGTH(a.email) > 0 AND a.email != ''
 		</if>
 	</select>
 	
@@ -319,12 +319,12 @@
 			sys_eve_user_staff a
 		WHERE a.state = '1'
 		AND a.company_id = #{companyId}
-		AND LENGTH(a.user_id) > 0 AND a.user_id != ""
+		AND LENGTH(a.user_id) > 0 AND a.user_id != ''
 		<if test="userId != null and userId != ''">
 			AND a.user_id != #{userId}
 		</if>
 		<if test="hasEmail != null and hasEmail != ''">
-			AND LENGTH(a.email) > 0 AND a.email != ""
+			AND LENGTH(a.email) > 0 AND a.email != ''
 		</if>
 	</select>
 	
@@ -365,12 +365,12 @@
 			sys_eve_user_staff a
 		WHERE a.state = '1'
 		AND a.company_id = #{companyId}
-		AND LENGTH(a.user_id) > 0 AND a.user_id != ""
+		AND LENGTH(a.user_id) > 0 AND a.user_id != ''
 		<if test="userId != null and userId != ''">
 			AND a.user_id != #{userId}
 		</if>
 		<if test="hasEmail != null and hasEmail != ''">
-			AND LENGTH(a.email) > 0 AND a.email != ""
+			AND LENGTH(a.email) > 0 AND a.email != ''
 		</if>
 	</select>
 	
@@ -399,12 +399,12 @@
 			sys_eve_user_staff a
 		WHERE a.state = '1'
 		AND a.department_id = #{departmentId}
-		AND LENGTH(a.user_id) > 0 AND a.user_id != ""
+		AND LENGTH(a.user_id) > 0 AND a.user_id != ''
 		<if test="userId != null and userId != ''">
 			AND a.user_id != #{userId}
 		</if>
 		<if test="hasEmail != null and hasEmail != ''">
-			AND LENGTH(a.email) > 0 AND a.email != ""
+			AND LENGTH(a.email) > 0 AND a.email != ''
 		</if>
 	</select>
 	
@@ -440,12 +440,12 @@
 		AND a.user_id = c.user_id
 		AND b.user_id = #{createId}
 		AND c.group_id = b.group_id
-		AND LENGTH(a.user_id) > 0 AND a.user_id != ""
+		AND LENGTH(a.user_id) > 0 AND a.user_id != ''
 		<if test="userId != null and userId != ''">
 			AND a.user_id != #{userId}
 		</if>
 		<if test="hasEmail != null and hasEmail != ''">
-			AND LENGTH(a.email) > 0 AND a.email != ""
+			AND LENGTH(a.email) > 0 AND a.email != ''
 		</if>
 	</select>
 	

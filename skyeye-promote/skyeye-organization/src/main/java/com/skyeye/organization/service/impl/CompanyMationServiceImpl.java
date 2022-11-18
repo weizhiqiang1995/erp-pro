@@ -12,6 +12,7 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.ToolUtil;
+import com.skyeye.eve.service.IAreaService;
 import com.skyeye.organization.dao.CompanyDepartmentDao;
 import com.skyeye.organization.dao.CompanyJobDao;
 import com.skyeye.organization.dao.CompanyMationDao;
@@ -46,6 +47,9 @@ public class CompanyMationServiceImpl implements CompanyMationService {
     @Autowired
     private CompanyTaxRateDao companyTaxRateDao;
 
+    @Autowired
+    private IAreaService iAreaService;
+
     /**
      * 获取公司信息列表
      *
@@ -56,10 +60,12 @@ public class CompanyMationServiceImpl implements CompanyMationService {
     public void queryCompanyMationList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyMationDao.queryCompanyMationList(map);
-        if (!beans.isEmpty()) {
-            outputObject.setBeans(beans);
-            outputObject.settotal(beans.size());
-        }
+        iAreaService.setAreaNameById(beans, "addressProvince", "provinceName");
+        iAreaService.setAreaNameById(beans, "addressCity", "cityName");
+        iAreaService.setAreaNameById(beans, "addressArea", "areaName");
+        iAreaService.setAreaNameById(beans, "addressTownship", "townshipName");
+        outputObject.setBeans(beans);
+        outputObject.settotal(beans.size());
     }
 
     /**

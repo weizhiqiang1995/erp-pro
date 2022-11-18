@@ -4,19 +4,13 @@
 
 package com.skyeye.eve.service;
 
+import com.skyeye.base.business.service.SkyeyeBusinessService;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.userauth.area.SysTArea;
 
-public interface SysTAreaService {
+public interface SysTAreaService extends SkyeyeBusinessService<SysTArea> {
 
-    void querySysTAreaList(InputObject inputObject, OutputObject outputObject);
-
-    void querySysTAreaProvinceList(InputObject inputObject, OutputObject outputObject);
-
-    void querySysTAreaCityList(InputObject inputObject, OutputObject outputObject);
-
-    void querySysTAreaChildAreaList(InputObject inputObject, OutputObject outputObject);
-
-    void querySysTAreaTownShipList(InputObject inputObject, OutputObject outputObject);
+    void queryAreaListByPId(InputObject inputObject, OutputObject outputObject);
 
 }

@@ -32,23 +32,6 @@
     </url>
 	<!-- 登录结束 -->
 	
-	<!-- 行政区划开始 -->
-	<url id="commontarea001" path="/post/SysTAreaController/querySysTAreaProvinceList" val="获取一级省行政区划信息" allUse="2" groupName="行政区划">
-	</url>
-	<url id="commontarea002" path="/post/SysTAreaController/querySysTAreaCityList" val="获取二级市行政区划信息" allUse="2" groupName="行政区划">
-		<property id="rowId" name="id" ref="required" var="省级行政区划id"/>
-	</url>
-	<url id="commontarea003" path="/post/SysTAreaController/querySysTAreaChildAreaList" val="获取三级县行政区划信息" allUse="2" groupName="行政区划">
-		<property id="rowId" name="id" ref="required" var="市级行政区划id"/>
-	</url>
-	<url id="commontarea004" path="/post/SysTAreaController/querySysTAreaTownShipList" val="获取四级镇行政区划信息" allUse="2" groupName="行政区划">
-		<property id="rowId" name="id" ref="required" var="县级行政区划id"/>
-	</url>
-	<url id="systarea001" path="/post/SysTAreaController/querySysTAreaList" val="获取行政区划信息" allUse="1" groupName="行政区划">
-		<property id="addressName" name="addressName" ref="" var="地域名称"/>
-	</url>
-	<!-- 行政区划结束 -->
-	
 	<!-- 聊天开始 -->
 	<url id="companychat001" path="/post/CompanyChatController/getList" val="获取好友列表，群聊信息，个人信息" allUse="2" method="GET" groupName="聊天模块">
 	</url>

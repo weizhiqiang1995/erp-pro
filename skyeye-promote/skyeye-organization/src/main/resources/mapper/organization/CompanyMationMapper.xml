@@ -8,10 +8,10 @@
 			a.company_name companyName,
 			a.company_desc companyDesc,
 			a.p_id pId,
-			b.`name` provinceName,
-			c.`name` cityName,
-			d.`name` areaName,
-			e.`name` townshipName,
+			a.address_province addressProvince,
+			a.address_city addressCity,
+			a.address_area addressArea,
+			a.address_township addressTownship,
 			a.address_detailed addressDetailed,
 			(SELECT COUNT(*) FROM company_mation f WHERE a.id = f.p_id) childsNum,
 			(SELECT COUNT(*) FROM sys_eve_user_staff g WHERE g.company_id = a.id) userNum,
@@ -19,10 +19,6 @@
 			CONVERT(a.create_time, char) createTime
 		FROM
 			company_mation a
-			LEFT JOIN t_area b ON a.address_province = b.id
-			LEFT JOIN t_area c ON a.address_city = c.id
-			LEFT JOIN t_area d ON a.address_area = d.id
-			LEFT JOIN t_area e ON a.address_township = e.id
 		<where>
 			<if test="companyName != '' and companyName != null">
 				AND a.company_name LIKE '%${companyName}%'

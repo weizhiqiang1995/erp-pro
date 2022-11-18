@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.skyeye.eve.dao.SysTAreaDao">
 	
-	<select id="querySysTAreaList" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="querySysTAreaList" resultType="java.util.Map">
 		SELECT
 			a.code_id id,
 			IFNULL(a.parent_code_id, '0') pId,
@@ -10,55 +10,24 @@
 			false lay_is_open
 		FROM
 			t_area a
-		WHERE 3 > a.level
-			<if test="addressName != '' and addressName != null">
-				AND a.`name`  like '%${addressName}%'
+		<where>
+			3 > a.level
+			<if test="sqlExtract != '' and sqlExtract != null">
+				${sqlExtract}
 			</if>
+			<if test="keyword != null and keyword != ''">
+				AND a.`name` LIKE '%${keyword}%'
+			</if>
+		</where>
 	</select>
 	
-	<select id="querySysTAreaProvinceList" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryAreaListByParentCode" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.`name`
 		FROM
 			t_area a
-		WHERE a.level = '0'
-	</select>
-	
-	<select id="querySysTAreaCityList" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.`name`
-		FROM
-			t_area a,
-			t_area b
-		WHERE a.level = '1'
-			AND a.parent_code_id = b.code_id
-			AND b.id = #{id}
-	</select>
-	
-	<select id="querySysTAreaChildAreaList" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.`name`
-		FROM
-			t_area a,
-			t_area b
-		WHERE a.level = '2'
-			AND a.parent_code_id = b.code_id
-			AND b.id = #{id}
-	</select>
-	
-	<select id="querySysTAreaTownShipList" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.`name`
-		FROM
-			t_area a,
-			t_area b
-		WHERE a.level = '3'
-			AND a.parent_code_id = b.code_id
-			AND b.id = #{id}
+		WHERE a.parent_code_id = #{parentCode}
 	</select>
 	
 </mapper>

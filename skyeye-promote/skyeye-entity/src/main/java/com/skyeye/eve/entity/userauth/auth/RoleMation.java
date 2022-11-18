@@ -6,9 +6,9 @@ package com.skyeye.eve.entity.userauth.auth;
 
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
+import com.skyeye.common.entity.CommonInfo;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Data
 @ApiModel("角色管理实体类")
-public class RoleMation implements Serializable {
+public class RoleMation extends CommonInfo {
 
     private String id;
 
