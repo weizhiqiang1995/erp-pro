@@ -4,15 +4,14 @@
 
 package com.skyeye.organization.service.impl;
 
-import cn.hutool.json.JSONUtil;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.skyeye.common.constans.CommonNumConstants;
+import cn.hutool.core.collection.CollectionUtil;
+import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.ToolUtil;
+import com.skyeye.eve.entity.organization.company.Company;
 import com.skyeye.eve.service.IAreaService;
+import com.skyeye.exception.CustomException;
 import com.skyeye.organization.dao.CompanyDepartmentDao;
 import com.skyeye.organization.dao.CompanyJobDao;
 import com.skyeye.organization.dao.CompanyMationDao;
@@ -20,9 +19,11 @@ import com.skyeye.organization.dao.CompanyTaxRateDao;
 import com.skyeye.organization.service.CompanyMationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: CompanyMationServiceImpl
@@ -33,7 +34,7 @@ import java.util.*;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
-public class CompanyMationServiceImpl implements CompanyMationService {
+public class CompanyMationServiceImpl extends SkyeyeBusinessServiceImpl<CompanyMationDao, Company> implements CompanyMationService {
 
     @Autowired
     private CompanyMationDao companyMationDao;
@@ -50,135 +51,71 @@ public class CompanyMationServiceImpl implements CompanyMationService {
     @Autowired
     private IAreaService iAreaService;
 
-    /**
-     * 获取公司信息列表
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    public void queryCompanyMationList(InputObject inputObject, OutputObject outputObject) {
+    public List<Map<String, Object>> queryDataList(InputObject inputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyMationDao.queryCompanyMationList(map);
-        iAreaService.setAreaNameById(beans, "addressProvince", "provinceName");
-        iAreaService.setAreaNameById(beans, "addressCity", "cityName");
-        iAreaService.setAreaNameById(beans, "addressArea", "areaName");
-        iAreaService.setAreaNameById(beans, "addressTownship", "townshipName");
-        outputObject.setBeans(beans);
-        outputObject.settotal(beans.size());
+        iAreaService.setAreaNameById(beans, "provinceId", "provinceName");
+        iAreaService.setAreaNameById(beans, "cityId", "cityName");
+        iAreaService.setAreaNameById(beans, "areaId", "areaName");
+        iAreaService.setAreaNameById(beans, "townshipId", "townshipName");
+        return beans;
     }
 
-    /**
-     * 添加公司信息信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertCompanyMation(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = companyMationDao.queryCompanyMationByName(map);
-        if (bean == null) {
-            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
-            companyMationDao.insertCompanyMation(map);
-            // 处理个人所得税税率信息
-            dealTaxRate(map.get("taxRateStr").toString(), map.get("id").toString());
-        } else {
-            outputObject.setreturnMessage("该公司信息已注册，请确认。");
-        }
+    public void writePostpose(Company entity, String userId) {
+        dealTaxRate(entity);
     }
 
     /**
      * 处理个人所得税税率信息
      *
-     * @param str
-     * @param companyId 公司id
+     * @param entity
      */
-    private void dealTaxRate(String str, String companyId) {
-        companyTaxRateDao.deleteCompanyTaxRateByCompanyId(companyId);
-        if (ToolUtil.isBlank(str)) {
-            return;
-        }
-        List<Map<String, Object>> beans = JSONUtil.toList(JSONUtil.parseArray(str), null);
-        beans.stream().forEach(bean -> {
+    private void dealTaxRate(Company entity) {
+        companyTaxRateDao.deleteCompanyTaxRateByCompanyId(entity.getId());
+        List<Map<String, Object>> beans = entity.getTaxRate();
+        beans.forEach(bean -> {
             bean.put("id", ToolUtil.getSurFaceId());
-            bean.put("companyId", companyId);
+            bean.put("companyId", entity.getId());
         });
-        if (beans.isEmpty()) {
+        if (CollectionUtil.isEmpty(beans)) {
             return;
         }
         companyTaxRateDao.insertCompanyTaxRate(beans);
     }
 
-    /**
-     * 删除公司信息信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteCompanyMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = companyMationDao.queryCompanyMationById(map);
-        if (Integer.parseInt(bean.get("childsNum").toString()) == 0) {//判断是否有子公司
-            bean = companyMationDao.queryCompanyDepartMentNumMationById(map);
-            if (Integer.parseInt(bean.get("departmentNum").toString()) == 0) {//判断是否有部门
-                bean = companyMationDao.queryCompanyUserNumMationById(map);
-                if (Integer.parseInt(bean.get("companyUserNum").toString()) == 0) {//判断是否有员工
-                    String companyId = map.get("id").toString();
-                    // 1.删除企业信息
-                    companyMationDao.deleteCompanyMationById(companyId);
-                    // 2.根据公司id删除该公司拥有的个人所得税税率信息
-                    companyTaxRateDao.deleteCompanyTaxRateByCompanyId(companyId);
-                } else {
-                    outputObject.setreturnMessage("该公司下存在员工，无法直接删除。");
-                }
-            } else {
-                outputObject.setreturnMessage("该公司下存在部门，无法直接删除。");
-            }
-        } else {
-            outputObject.setreturnMessage("该公司下存在子公司，无法直接删除。");
+    public void deletePreExecution(String id) {
+        // 判断是否有子公司
+        Map<String, Object> bean = companyMationDao.queryCompanyMationById(id);
+        if (Integer.parseInt(bean.get("childsNum").toString()) > 0) {
+            throw new CustomException("该公司下存在子公司，无法直接删除。");
+        }
+        // 判断是否有部门
+        bean = companyMationDao.queryCompanyDepartMentNumMationById(id);
+        if (Integer.parseInt(bean.get("departmentNum").toString()) > 0) {
+            throw new CustomException("该公司下存在部门，无法直接删除。");
+        }
+        // 判断是否有员工
+        bean = companyMationDao.queryCompanyUserNumMationById(id);
+        if (Integer.parseInt(bean.get("companyUserNum").toString()) > 0) {
+            throw new CustomException("该公司下存在员工，无法直接删除。");
         }
     }
 
-    /**
-     * 编辑公司信息信息时进行回显
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    public void queryCompanyMationToEditById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String companyId = map.get("id").toString();
-        Map<String, Object> bean = companyMationDao.queryCompanyMationToEditById(companyId);
+    public void deletePostpose(String id) {
+        // 删除完成后的后置执行事件，根据公司id删除该公司拥有的个人所得税税率信息
+        companyTaxRateDao.deleteCompanyTaxRateByCompanyId(id);
+    }
+
+    @Override
+    public Company getDataFromDb(String id) {
+        Company company = super.getDataFromDb(id);
         // 个人所得税税率信息
-        bean.put("taxRateJson", companyTaxRateDao.queryCompanyTaxRateByCompanyId(companyId));
-        outputObject.setBean(bean);
-        outputObject.settotal(CommonNumConstants.NUM_ONE);
-    }
-
-    /**
-     * 编辑公司信息信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editCompanyMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = companyMationDao.queryCompanyMationByNameAndId(map);
-        if (bean == null) {
-            companyMationDao.editCompanyMationById(map);
-            String companyId = map.get("id").toString();
-            // 处理个人所得税税率信息
-            dealTaxRate(map.get("taxRateStr").toString(), companyId);
-        } else {
-            outputObject.setreturnMessage("该公司信息已注册，请确认。");
-        }
+        company.setTaxRate(companyTaxRateDao.queryCompanyTaxRateByCompanyId(id));
+        return company;
     }
 
     /**
@@ -218,7 +155,7 @@ public class CompanyMationServiceImpl implements CompanyMationService {
             }
         }
         beans = ToolUtil.listToTree(beans, "id", "parentId", "children");
-        if (!beans.isEmpty()) {
+        if (CollectionUtil.isNotEmpty(beans)) {
             ToolUtil.setLastIdentification(beans);
             outputObject.setBeans(beans);
             outputObject.settotal(beans.size());
@@ -235,10 +172,8 @@ public class CompanyMationServiceImpl implements CompanyMationService {
     public void queryCompanyListToSelect(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyMationDao.queryCompanyListToSelect(map);
-        if (!beans.isEmpty()) {
-            outputObject.setBeans(beans);
-            outputObject.settotal(beans.size());
-        }
+        outputObject.setBeans(beans);
+        outputObject.settotal(beans.size());
     }
 
     /**
@@ -290,39 +225,9 @@ public class CompanyMationServiceImpl implements CompanyMationService {
         return beans;
     }
 
-    /**
-     * 获取公司信息列表展示为表格供其他需要选择
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    public void queryCompanyMationListToChoose(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = companyMationDao.queryCompanyMationListToChoose(map);
-        outputObject.setBeans(beans);
-        outputObject.settotal(pages.getTotal());
-    }
-
-    /**
-     * 根据公司ids获取公司信息列表
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryCompanyMationListByIds(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        List<String> idsList = Arrays.asList(map.get("ids").toString().split(","));
-        List<Map<String, Object>> beans = new ArrayList<>();
-        if (!idsList.isEmpty()) {
-            beans = companyMationDao.queryCompanyMationListByIds(idsList);
-            outputObject.setBeans(beans);
-            outputObject.settotal(beans.size());
-        } else {
-            outputObject.setBeans(beans);
-        }
+    public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
+        return this.queryDataList(inputObject);
     }
 
 }

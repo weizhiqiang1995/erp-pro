@@ -17,10 +17,10 @@
 
     <dependencies>
 
-        <!-- 引入common的依赖 -->
+        <!-- 引入entity的依赖 -->
         <dependency>
             <groupId>com.skyeye</groupId>
-            <artifactId>skyeye-common</artifactId>
+            <artifactId>skyeye-entity</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

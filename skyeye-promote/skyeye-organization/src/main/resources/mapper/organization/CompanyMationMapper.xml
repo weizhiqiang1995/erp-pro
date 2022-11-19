@@ -5,14 +5,14 @@
 	<select id="queryCompanyMationList" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 			a.id,
-			a.company_name companyName,
-			a.company_desc companyDesc,
+			a.`name`,
+			a.remark,
 			a.p_id pId,
-			a.address_province addressProvince,
-			a.address_city addressCity,
-			a.address_area addressArea,
-			a.address_township addressTownship,
-			a.address_detailed addressDetailed,
+			a.province_id provinceId,
+			a.city_id cityId,
+			a.area_id areaId,
+			a.township_id townshipId,
+			a.absolute_address absoluteAddress,
 			(SELECT COUNT(*) FROM company_mation f WHERE a.id = f.p_id) childsNum,
 			(SELECT COUNT(*) FROM sys_eve_user_staff g WHERE g.company_id = a.id) userNum,
 			(SELECT COUNT(*) FROM company_department h WHERE a.id = h.company_id) departmentNum,
@@ -20,34 +20,19 @@
 		FROM
 			company_mation a
 		<where>
-			<if test="companyName != '' and companyName != null">
-				AND a.company_name LIKE '%${companyName}%'
+			<if test="sqlExtract != '' and sqlExtract != null">
+				${sqlExtract}
+			</if>
+			<if test="keyword != null and keyword != ''">
+				AND a.`name` LIKE '%${keyword}%'
 			</if>
 		</where>
 		ORDER BY a.create_time DESC
 	</select>
 	
-	<select id="queryCompanyMationByName" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryCompanyMationById" resultType="java.util.Map">
 		SELECT
 			a.id,
-			a.company_name companyName
-		FROM
-			company_mation a
-		WHERE 
-			a.company_name = #{companyName}
-	</select>
-	
-	<insert id="insertCompanyMation" parameterType="java.util.Map">
-	     INSERT into company_mation
-	     (id, company_name, company_desc, p_id, address_province, address_city, address_area, address_township, address_detailed, create_id, create_time)
-	     VALUES
-	     (#{id}, #{companyName}, #{companyDesc}, #{pId}, #{provinceId}, #{cityId}, #{areaId}, #{townshipId}, #{addressDetailed}, #{createId}, #{createTime})
-	</insert>
-	
-	<select id="queryCompanyMationById" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.company_name companyName,
 			a.p_id pId,
 			(SELECT COUNT(*) FROM company_mation b WHERE b.p_id = a.id) childsNum
 		FROM
@@ -55,7 +40,7 @@
 		WHERE a.id = #{id}
 	</select>
 	
-	<select id="queryCompanyDepartMentNumMationById" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryCompanyDepartMentNumMationById" resultType="java.util.Map">
 		SELECT 
 			COUNT(*) departmentNum
 		FROM 
@@ -63,7 +48,7 @@
 		WHERE a.company_id = #{id}
 	</select>
 	
-	<select id="queryCompanyUserNumMationById" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryCompanyUserNumMationById" resultType="java.util.Map">
 		SELECT 
 			COUNT(*) companyUserNum
 		FROM 
@@ -71,63 +56,10 @@
 		WHERE a.company_id = #{id}
 	</select>
 	
-	<delete id="deleteCompanyMationById">
-		DELETE
-		FROM
-			company_mation
-		WHERE
-			id = #{companyId}
-	</delete>
-	
-	<select id="queryCompanyMationToEditById" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.company_name companyName,
-			a.company_desc companyDesc,
-			a.p_id pId,
-			a.address_province provinceId,
-			a.address_city cityId,
-			a.address_area areaId,
-			a.address_township townshipId,
-			a.address_detailed addressDetailed,
-			CONVERT(a.create_time, char) createTime
-		FROM
-			company_mation a
-		WHERE a.id = #{companyId}
-	</select>
-	
-	<select id="queryCompanyMationByNameAndId" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.company_name companyName
-		FROM
-			company_mation a
-		WHERE 
-			a.company_name = #{companyName}
-			AND a.id != #{id}
-	</select>
-	
-	<update id="editCompanyMationById" parameterType="java.util.Map">
-		UPDATE company_mation
-		<set>
-			<if test="companyName != '' and companyName != null">
-				company_name = #{companyName},
-			</if>
-			address_province = #{provinceId},
-			address_city = #{cityId},
-			address_area = #{areaId},
-			address_township = #{townshipId},
-			address_detailed = #{addressDetailed},
-			p_id = #{pId},
-			company_desc = #{companyDesc},
-		</set>
-		WHERE id = #{id}
-	</update>
-	
 	<select id="queryOverAllCompanyMationList" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 			a.id,
-			a.company_name name
+			a.`name`
 		FROM
 			company_mation a
 		WHERE a.p_id = '0'
@@ -140,7 +72,7 @@
 	<select id="queryCompanyMationListTree" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 			a.id,
-			a.company_name title,
+			a.`name` title,
 			a.p_id parentId,
 			'[{"type": "0", "isChecked": "0"}]' checkArr
 		FROM
@@ -151,53 +83,11 @@
 	<select id="queryCompanyListToSelect" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 			a.id,
-			a.company_name name,
+			a.`name`,
 		   '企业' title,
 			a.p_id parentId
 		FROM
 			company_mation a
-	</select>
-
-	<select id="queryCompanyMationListToChoose" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.company_name companyName,
-			a.company_desc companyDesc,
-			a.p_id pId,
-			b.`name` provinceName,
-			c.`name` cityName,
-			d.`name` areaName,
-			e.`name` townshipName,
-			a.address_detailed addressDetailed,
-			(SELECT COUNT(*) FROM sys_eve_user_staff g WHERE g.company_id = a.id) userNum,
-			(SELECT COUNT(*) FROM company_department h WHERE a.id = h.company_id) departmentNum
-		FROM
-			company_mation a
-			LEFT JOIN t_area b ON a.address_province = b.id
-			LEFT JOIN t_area c ON a.address_city = c.id
-			LEFT JOIN t_area d ON a.address_area = d.id
-			LEFT JOIN t_area e ON a.address_township = e.id
-		<where>
-			<if test="companyName != '' and companyName != null">
-				AND a.company_name LIKE '%${companyName}%'
-			</if>
-		</where>
-		ORDER BY a.create_time DESC
-	</select>
-
-	<select id="queryCompanyMationListByIds" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.company_name `name`
-		FROM
-			company_mation a
-		<where>
-			<if test="idsList != null and idsList.size() &gt; 0">
-				<foreach collection="idsList" item="id" separator="," open=" AND a.id in(" close=")">
-					#{id}
-				</foreach>
-			</if>
-		</where>
 	</select>
 
 </mapper>

@@ -11,8 +11,11 @@ import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.cache.RedisCacheField;
 import com.skyeye.annotation.unique.UniqueField;
-import com.skyeye.common.entity.CommonOperatorUserInfo;
+import com.skyeye.common.entity.other.AreaInfo;
 import lombok.Data;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: Company
@@ -27,14 +30,26 @@ import lombok.Data;
 @UniqueField
 @RedisCacheField(name = "organization:company")
 @TableName(value = "company_mation")
-public class Company extends CommonOperatorUserInfo {
+public class Company extends AreaInfo {
 
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")
     private String id;
 
-    @TableField("company_name")
+    @TableField("`name`")
     @ApiModelProperty(value = "企业名称", required = "required")
-    private String companyName;
+    private String name;
+
+    @TableField("remark")
+    @ApiModelProperty(value = "公司简介")
+    private String remark;
+
+    @TableField("p_id")
+    @ApiModelProperty(value = "所属公司ID，一级公司为0", required = "required")
+    private String pId;
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "公司个人所得税税率信息", required = "json")
+    private List<Map<String, Object>> taxRate;
 
 }

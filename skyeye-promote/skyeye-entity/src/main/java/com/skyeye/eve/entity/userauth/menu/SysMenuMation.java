@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
-import com.skyeye.common.entity.CommonIconOrImgInfo;
+import com.skyeye.common.entity.other.IconOrImgInfo;
 import lombok.Data;
 
 /**
@@ -23,7 +23,7 @@ import lombok.Data;
 @Data
 @TableName(value = "sys_eve_menu")
 @ApiModel("菜单管理实体类")
-public class SysMenuMation extends CommonIconOrImgInfo {
+public class SysMenuMation extends IconOrImgInfo {
 
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")

@@ -101,7 +101,7 @@
 			c.user_name userName,
 			c.user_photo userPhoto,
 			c.company_id companyId,
-			u.company_name companyName,
+			u.`name` companyName,
 			c.department_id departmentId,
 			q.department_name departmentName,
 			c.job_id jobId,

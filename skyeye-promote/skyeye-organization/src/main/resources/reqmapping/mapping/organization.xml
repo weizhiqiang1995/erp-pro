@@ -6,9 +6,6 @@
 	 -->
 
     <!-- 公司管理开始 -->
-    <url id="companymation001" path="/post/CompanyMationController/queryCompanyMationList" val="获取公司信息列表" allUse="1" groupName="企业管理">
-        <property id="companyName" name="companyName" ref="" var="公司名称"/>
-    </url>
     <url id="companymation002" path="/post/CompanyMationController/insertCompanyMation" val="添加公司信息信息" allUse="1" groupName="企业管理">
         <property id="companyName" name="companyName" ref="required" var="公司名称"/>
         <property id="companyDesc" name="companyDesc" ref="" var="公司简介"/>
@@ -40,18 +37,6 @@
     </url>
     <url id="companymation006" path="/post/CompanyMationController/queryOverAllCompanyMationList" val="获取总公司信息列表" allUse="2" groupName="企业管理">
         <property id="notId" name="notId" ref="" var="不包含的企业id"/>
-    </url>
-    <url id="companymation008" path="/post/CompanyMationController/queryCompanyListToSelect" val="获取公司列表展示为下拉选择框" allUse="2" method="GET" groupName="企业管理">
-    </url>
-    <url id="companymation009" path="/post/CompanyMationController/queryCompanyOrganization" val="获取企业组织机构图" allUse="1" method="GET" groupName="企业管理">
-    </url>
-    <url id="companymation010" path="/post/CompanyMationController/queryCompanyMationListToChoose" val="获取公司信息列表展示为表格供其他需要选择" allUse="2" groupName="企业管理">
-        <property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-        <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-        <property id="companyName" name="companyName" ref="" var="公司名称"/>
-    </url>
-    <url id="companymation011" path="/post/CompanyMationController/queryCompanyMationListByIds" val="根据公司ids获取公司信息列表" allUse="2" groupName="企业管理">
-        <property id="ids" name="ids" ref="required" var="公司ids，逗号隔开"/>
     </url>
     <!-- 公司管理结束 -->
 
