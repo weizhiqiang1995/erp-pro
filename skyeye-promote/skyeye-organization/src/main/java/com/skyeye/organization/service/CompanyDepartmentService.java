@@ -4,10 +4,12 @@
 
 package com.skyeye.organization.service;
 
+import com.skyeye.base.business.service.SkyeyeBusinessService;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.organization.department.Department;
 
-public interface CompanyDepartmentService {
+public interface CompanyDepartmentService extends SkyeyeBusinessService<Department> {
 
     void queryCompanyDepartmentList(InputObject inputObject, OutputObject outputObject);
 
@@ -24,8 +26,6 @@ public interface CompanyDepartmentService {
     void queryCompanyDepartmentListByCompanyIdToSelect(InputObject inputObject, OutputObject outputObject);
 
     void queryCompanyDepartmentListToChoose(InputObject inputObject, OutputObject outputObject);
-
-    void queryCompanyDepartmentListByIds(InputObject inputObject, OutputObject outputObject);
 
     void queryDepartmentListByCurrentUserBelong(InputObject inputObject, OutputObject outputObject);
 }

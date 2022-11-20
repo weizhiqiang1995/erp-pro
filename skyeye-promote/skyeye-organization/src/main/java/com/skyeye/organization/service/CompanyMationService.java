@@ -9,6 +9,9 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.entity.organization.company.Company;
 
+import java.util.List;
+import java.util.Map;
+
 public interface CompanyMationService extends SkyeyeBusinessService<Company> {
 
     void queryOverAllCompanyMationList(InputObject inputObject, OutputObject outputObject);
@@ -18,4 +21,6 @@ public interface CompanyMationService extends SkyeyeBusinessService<Company> {
     void queryCompanyListToSelect(InputObject inputObject, OutputObject outputObject);
 
     void queryCompanyOrganization(InputObject inputObject, OutputObject outputObject);
+
+    List<Map<String, Object>> queryAllDataToTree(String companyId);
 }

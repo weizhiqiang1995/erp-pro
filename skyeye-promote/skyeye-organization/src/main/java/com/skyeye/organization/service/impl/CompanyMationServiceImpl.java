@@ -20,10 +20,8 @@ import com.skyeye.organization.service.CompanyMationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName: CompanyMationServiceImpl
@@ -114,8 +112,23 @@ public class CompanyMationServiceImpl extends SkyeyeBusinessServiceImpl<CompanyM
     public Company getDataFromDb(String id) {
         Company company = super.getDataFromDb(id);
         // 个人所得税税率信息
-        company.setTaxRate(companyTaxRateDao.queryCompanyTaxRateByCompanyId(id));
+        company.setTaxRate(companyTaxRateDao.queryCompanyTaxRateByCompanyId(Arrays.asList(id)));
         return company;
+    }
+
+    @Override
+    public List<Company> getDataFromDb(List<String> ids) {
+        List<Company> companyList = super.getDataFromDb(ids);
+        if (CollectionUtil.isEmpty(companyList)) {
+            return new ArrayList<>();
+        }
+        List<Map<String, Object>> taxRateList = companyTaxRateDao.queryCompanyTaxRateByCompanyId(ids);
+        Map<String, List<Map<String, Object>>> taxRateMap = taxRateList.stream()
+            .collect(Collectors.groupingBy(bean -> bean.get("companyId").toString()));
+        companyList.forEach(company -> {
+            company.setTaxRate(taxRateMap.get(company.getId()));
+        });
+        return companyList;
     }
 
     /**
@@ -228,6 +241,12 @@ public class CompanyMationServiceImpl extends SkyeyeBusinessServiceImpl<CompanyM
     @Override
     public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
         return this.queryDataList(inputObject);
+    }
+
+    @Override
+    public List<Map<String, Object>> queryAllDataToTree(String companyId) {
+        List<Map<String, Object>> beans = companyMationDao.queryAllDataToTree(companyId);
+        return CollectionUtil.isNotEmpty(beans) ? beans : new ArrayList<>();
     }
 
 }

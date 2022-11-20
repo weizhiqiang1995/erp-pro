@@ -32,18 +32,6 @@ public interface SysEnclosureService {
 
     void querySysEnclosureListToTreeByUserId(InputObject inputObject, OutputObject outputObject);
 
-    void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject);
-
-    void queryCompanyPeopleToTreeByUserBelongCompany(InputObject inputObject, OutputObject outputObject);
-
-    void queryDepartmentPeopleToTreeByUserBelongDepartment(InputObject inputObject, OutputObject outputObject);
-
-    void queryJobPeopleToTreeByUserBelongJob(InputObject inputObject, OutputObject outputObject);
-
-    void querySimpleDepPeopleToTreeByUserBelongSimpleDep(InputObject inputObject, OutputObject outputObject);
-
-    void queryTalkGroupUserListByUserId(InputObject inputObject, OutputObject outputObject);
-
     void insertUploadFileToDataByUserId(InputObject inputObject, OutputObject outputObject);
 
     void queryEnclosureInfo(InputObject inputObject, OutputObject outputObject);

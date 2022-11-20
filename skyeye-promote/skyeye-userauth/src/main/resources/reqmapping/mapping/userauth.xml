@@ -104,8 +104,6 @@
 		<property id="chooseOrNotMy" name="chooseOrNotMy" ref="required,num" var="人员列表中是否包含自己--1.包含；其他参数不包含" />
 		<property id="chooseOrNotEmail" name="chooseOrNotEmail" ref="required,num" var="人员列表中是否必须绑定邮箱--1.必须；其他参数没必要" />
 	</url>
-	<url id="commonselpeople007" path="/post/CommonController/queryAllSysUserIsIncumbency" val="获取所有在职的，拥有账号的员工" allUse="2" groupName="企业人员选择模块">
-    </url>
 	<!-- 人员选择结束 -->
 	
 	<!-- 系统各部分说明开始 -->

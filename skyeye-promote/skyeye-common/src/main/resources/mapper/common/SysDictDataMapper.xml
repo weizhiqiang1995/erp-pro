@@ -53,12 +53,16 @@
     </select>
 
     <select id="queryAllParentNodeById" resultType="java.util.Map">
+        SELECT
+            T2.id parentId,
+            T2.dict_name `name`,
+            k.*
+        FROM (
         <foreach collection="ids" item="id" index="idx" separator="UNION">
             SELECT
+                T${idx}._id,
                 #{id} childId,
-                T1.lvl level,
-                T2.id parentId,
-                T2.dict_name `name`
+                T${idx}.lvl level
             FROM
                 (
                     SELECT
@@ -69,6 +73,7 @@
                             FROM
                                 sys_dict_data
                             WHERE id = _id
+                            LIMIT 1
                         ) AS parent_id,
                         @l${idx} := @l${idx} + 1 AS lvl
                     FROM
@@ -79,9 +84,10 @@
                         ) vars,
                         sys_dict_data h
                     WHERE @r${idx} != '0'
-                ) T1
-                JOIN sys_dict_data T2 ON T1._id = T2.id
-        </foreach>
+                ) T${idx}
+        </foreach>) k,
+            sys_dict_data T2
+        where k._id = T2.id
     </select>
 
     <select id="queryAllChildIdsByParentId" resultType="java.lang.String">

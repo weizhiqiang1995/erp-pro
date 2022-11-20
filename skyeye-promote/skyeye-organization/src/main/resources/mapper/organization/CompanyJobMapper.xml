@@ -10,11 +10,10 @@
 			(SELECT COUNT(*) FROM sys_eve_user_staff b WHERE b.job_id = a.id) userNum,
 			CONVERT(a.create_time, char) createTime,
 			a.p_id pId,
-			b.company_name companyName,
+			a.company_id companyId,
 			c.department_name departmentName
 		FROM
 			company_job a
-			LEFT JOIN company_mation b ON a.company_id = b.id 
 			LEFT JOIN company_department c ON a.department_id = c.id 
 		<where>
 			<if test="jobName != '' and jobName != null">

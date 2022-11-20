@@ -272,30 +272,6 @@ public class CommonServiceImpl implements CommonService {
     }
 
     /**
-     * 获取所有在职的，拥有账号的员工
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryAllSysUserIsIncumbency(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        List<Integer> state = this.getIncumbencyState();
-        map.put("state", state);
-        List<Map<String, Object>> beans = sysEveUserStaffDao.queryAllSysUserIsIncumbency(map);
-        outputObject.setBeans(beans);
-        outputObject.settotal(beans.size());
-    }
-
-    private List<Integer> getIncumbencyState() {
-        List<Integer> list = new ArrayList<>();
-        list.add(SysEveUserStaffServiceImpl.State.ON_THE_JOB.getState());
-        list.add(SysEveUserStaffServiceImpl.State.PROBATION.getState());
-        list.add(SysEveUserStaffServiceImpl.State.PROBATION_PERIOD.getState());
-        return list;
-    }
-
-    /**
      * 根据文件类型获取文件的保存地址以及访问地址
      *
      * @param inputObject  入参以及用户信息等获取对象

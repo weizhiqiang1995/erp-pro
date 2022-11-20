@@ -8,13 +8,13 @@
 			a.id,
 			'online' status,
 			b.user_photo avatar,
-			c.company_name companyName,
+			b.company_id companyId,
 			d.department_name departmentName,
 			b.user_sign sign
 		FROM
 			sys_eve_user a,
-			sys_eve_user_staff b LEFT JOIN company_mation c ON b.company_id = c.id
-							LEFT JOIN company_department d ON d.id = b.department_id
+			sys_eve_user_staff b
+			LEFT JOIN company_department d ON d.id = b.department_id
 		WHERE a.id = b.user_id
 		AND a.id = #{userId}
 	</select>
@@ -55,7 +55,7 @@
 			'offline' status,
 			a.user_photo avatar,
 			IFNULL(a.user_sign, '暂无签名') sign,
-			m.company_name companyName,
+			a.company_id companyId,
 			m.department_name departmentName,
 			m.job_name jobName
 		FROM
@@ -63,15 +63,12 @@
 			LEFT JOIN (SELECT 
 							o.user_id,
 							p.job_name,
-							q.department_name,
-							u.company_name
+							q.department_name
 						FROM 
 							sys_eve_user_staff o, 
 							company_job p, 
-							company_department q, 
-							company_mation u 
-						WHERE o.company_id = u.id 
-							AND o.department_id = q.id 
+							company_department q
+						WHERE o.department_id = q.id
 							AND o.job_id = p.id) m ON m.user_id = a.user_id,
 			sys_eve_user b
 		WHERE a.department_id = #{id}

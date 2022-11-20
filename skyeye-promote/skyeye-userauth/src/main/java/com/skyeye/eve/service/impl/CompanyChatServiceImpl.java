@@ -13,6 +13,7 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.CompanyChatDao;
 import com.skyeye.eve.service.CompanyChatService;
 import com.skyeye.jedis.JedisClientService;
+import com.skyeye.organization.service.ICompanyService;
 import com.skyeye.websocket.TalkWebSocket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,9 @@ public class CompanyChatServiceImpl implements CompanyChatService {
     @Autowired
     private JedisClientService jedisService;
 
+    @Autowired
+    private ICompanyService iCompanyService;
+
     /**
      * 获取好友列表，群聊信息，个人信息
      *
@@ -47,6 +51,7 @@ public class CompanyChatServiceImpl implements CompanyChatService {
         Map<String, Object> mine = null;
         if (ToolUtil.isBlank(jedisService.get(Constants.getSysTalkUserThisMainMationById(userId)))) {
             mine = companyChatDao.queryUserMineByUserId(map);
+            iCompanyService.setName(mine, "companyId", "companyName");
             jedisService.set(Constants.getSysTalkUserThisMainMationById(userId), JSONUtil.toJsonStr(mine));
         } else {
             mine = JSONUtil.toBean(jedisService.get(Constants.getSysTalkUserThisMainMationById(userId)), null);
@@ -69,6 +74,7 @@ public class CompanyChatServiceImpl implements CompanyChatService {
             List<Map<String, Object>> userList = null;
             if (ToolUtil.isBlank(jedisService.get(Constants.getSysTalkGroupUserListMationById(depart.get("id").toString() + "_" + userId)))) {
                 userList = companyChatDao.queryDepartmentUserByDepartId(depart);
+                iCompanyService.setName(userList, "companyId", "companyName");
                 jedisService.set(Constants.getSysTalkGroupUserListMationById(depart.get("id").toString() + "_" + userId), JSONUtil.toJsonStr(userList));
             } else {
                 userList = JSONUtil.toList(jedisService.get(Constants.getSysTalkGroupUserListMationById(depart.get("id").toString() + "_" + userId)), null);

@@ -90,4 +90,22 @@
 			company_mation a
 	</select>
 
+    <select id="queryAllDataToTree" resultType="java.util.Map">
+		SELECT
+			a.id,
+			a.`name`,
+			a.p_id pId,
+			'isCompany' folderType,
+			1 isParent,
+			'../../assets/images/company-icon.png' `icon`,
+			'' `email`
+		FROM
+			company_mation a
+		<where>
+			<if test="id != '' and id != null">
+				AND a.id = #{id}
+			</if>
+		</where>
+	</select>
+
 </mapper>

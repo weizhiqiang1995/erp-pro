@@ -42,7 +42,10 @@
             a.sort_no sortNo
         FROM
             company_tax_rate a
-        WHERE a.company_id = #{companyId}
+        WHERE a.company_id IN
+        <foreach collection="companyIds" item="companyId" index="index" open="(" close=")" separator=",">
+            #{companyId}
+        </foreach>
         ORDER BY a.sort_no ASC
     </select>
 

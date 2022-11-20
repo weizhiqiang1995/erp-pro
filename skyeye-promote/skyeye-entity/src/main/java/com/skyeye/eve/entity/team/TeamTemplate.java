@@ -11,6 +11,7 @@ import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.cache.RedisCacheField;
 import com.skyeye.annotation.unique.UniqueField;
+import com.skyeye.common.constans.CacheConstants;
 import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.entity.CommonOperatorUserInfo;
 import lombok.Data;
@@ -27,7 +28,7 @@ import java.util.List;
  */
 @Data
 @UniqueField
-@RedisCacheField(name = "team:template", cacheTime = RedisConstants.THIRTY_DAY_SECONDS)
+@RedisCacheField(name = CacheConstants.TEAM_TEMPLATE_CACHE_KEY, cacheTime = RedisConstants.THIRTY_DAY_SECONDS)
 @TableName(value = "team_template")
 @ApiModel("团队模板实体类")
 public class TeamTemplate extends CommonOperatorUserInfo {

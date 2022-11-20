@@ -67,4 +67,18 @@ public interface SysEveUserService {
     void querySysDeskTopByUserId(InputObject inputObject, OutputObject outputObject);
 
     void queryDeskTopsMenuByUserId(InputObject inputObject, OutputObject outputObject);
+
+    void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject);
+
+    void queryCompanyPeopleToTreeByUserBelongCompany(InputObject inputObject, OutputObject outputObject);
+
+    void queryDepartmentPeopleToTreeByUserBelongDepartment(InputObject inputObject, OutputObject outputObject);
+
+    void queryJobPeopleToTreeByUserBelongJob(InputObject inputObject, OutputObject outputObject);
+
+    void querySimpleDepPeopleToTreeByUserBelongSimpleDep(InputObject inputObject, OutputObject outputObject);
+
+    void queryTalkGroupUserListByUserId(InputObject inputObject, OutputObject outputObject);
+
+    void queryAllSysUserIsIncumbency(InputObject inputObject, OutputObject outputObject);
 }

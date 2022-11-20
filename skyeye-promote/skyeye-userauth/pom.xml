@@ -22,7 +22,7 @@
 
 		<dependency>
 			<groupId>com.skyeye</groupId>
-			<artifactId>skyeye-entity</artifactId>
+			<artifactId>skyeye-organization</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 

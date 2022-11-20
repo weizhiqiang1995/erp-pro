@@ -138,37 +138,20 @@
 	<select id="queryCompanyDepartmentListToChoose" resultType="java.util.Map">
 		SELECT
 			a.id,
-			CONCAT_WS('_', b.company_name, a.department_name) departmentName,
-			a.department_desc departmentDesc,
-			(SELECT COUNT(*) FROM sys_eve_user_staff b WHERE b.department_id = a.id) userNum,
-			(SELECT COUNT(*) FROM company_job c WHERE c.department_id = a.id) jobNum
+			a.company_id companyId,
+			a.department_name departmentName,
+			a.department_desc departmentDesc
 		FROM
-			company_department a,
-			company_mation b
-		WHERE a.company_id = b.id
-		<if test="departmentName != '' and departmentName != null">
-			AND a.department_name LIKE '%${departmentName}%'
-		</if>
-		<if test="companyName != '' and companyName != null">
-			AND b.company_name LIKE '%${companyName}%'
-		</if>
+			company_department a
+		<where>
+			<if test="sqlExtract != '' and sqlExtract != null">
+				${sqlExtract}
+			</if>
+			<if test="keyword != null and keyword != ''">
+				AND a.`name` LIKE '%${keyword}%'
+			</if>
+		</where>
 		ORDER BY a.create_time DESC
-	</select>
-
-	<select id="queryCompanyDepartmentListByIds" resultType="java.util.Map">
-		SELECT
-			a.id,
-			CONCAT_WS('_', b.company_name, a.department_name) `name`,
-			a.overtime_settlement_type overtimeSettlementType
-		FROM
-			company_department a,
-			company_mation b
-		WHERE a.company_id = b.id
-		<if test="idsList != null and idsList.size() &gt; 0">
-			<foreach collection="idsList" item="id" separator="," open=" AND a.id in(" close=")">
-				#{id}
-			</foreach>
-		</if>
 	</select>
 
 	<select id="queryDepartmentListByCompanyId" resultType="java.util.Map">

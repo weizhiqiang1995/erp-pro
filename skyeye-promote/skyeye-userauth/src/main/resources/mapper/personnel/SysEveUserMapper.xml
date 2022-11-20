@@ -14,7 +14,7 @@
 			a.user_lock userLock,
 			(SELECT c.user_name FROM sys_eve_user_staff c WHERE a.creater = c.user_id) createName,
 			(SELECT group_concat(distinct b.role_name) FROM sys_eve_role b WHERE INSTR(CONCAT(',', a.role_id, ','), CONCAT(',', b.id, ','))) roleName,
-			m.company_name companyName,
+			k.company_id companyId,
 			m.department_name departmentName,
 			m.job_name jobName,
 			CONVERT(a.create_time, char) createTime
@@ -24,14 +24,12 @@
 						o.user_id,
 						p.job_name,
 						q.department_name,
-						u.company_name
+						o.company_id companyId
 					FROM 
 						sys_eve_user_staff o, 
 						company_job p, 
-						company_department q, 
-						company_mation u 
-					WHERE o.company_id = u.id 
-						AND o.department_id = q.id 
+						company_department q
+					WHERE o.department_id = q.id
 						AND o.job_id = p.id) m ON a.id = m.user_id,
 			sys_eve_user_staff k
 		<where>
@@ -101,7 +99,6 @@
 			c.user_name userName,
 			c.user_photo userPhoto,
 			c.company_id companyId,
-			u.`name` companyName,
 			c.department_id departmentId,
 			q.department_name departmentName,
 			c.job_id jobId,
@@ -112,7 +109,6 @@
 			sys_eve_user_staff c
 			LEFT JOIN company_job p ON c.job_id = p.id
 			LEFT JOIN company_department q ON c.department_id = q.id
-			LEFT JOIN company_mation u ON c.company_id = u.id
 		WHERE
 			a.user_code = #{userCode}
 		AND a.id = c.user_id
@@ -343,7 +339,6 @@
 			IFNULL(a.user_sign, '暂无签名') userSign,
 			CASE a.state WHEN '1' THEN 'state-up' WHEN '2' THEN 'state-down' END colorClass,
 		    a.company_id companyId,
-			u.company_name companyName,
 			a.department_id departmentId,
 			q.department_name departmentName,
 			p.job_name jobName,
@@ -354,11 +349,9 @@
 			LEFT JOIN company_job_score o ON a.job_score_id = o.id,
 			company_job p,
 			company_department q,
-			company_mation u,
 			sys_eve_user b
 		WHERE a.user_id = #{userId}
 		AND b.id = a.user_id
-		AND a.company_id = u.id
 		AND a.department_id = q.id
 		AND a.job_id = p.id
 	</select>
@@ -442,5 +435,237 @@
 		</set>
 		WHERE id = #{userId}
 	</update>
+
+	<select id="queryAllPeopleToTree" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			a.id,
+			a.department_name `name`,
+			a.company_id pId,
+			'isDepartment' folderType,
+			1 isParent,
+			'../../assets/images/department-icon.png' `icon`,
+			'' `email`
+			FROM
+			company_department a
+		UNION ALL
+			SELECT
+			a.id,
+			a.job_name `name`,
+			a.department_id pId,
+			'isJob' folderType,
+			1 isParent,
+			'../../assets/images/job-icon.png' `icon`,
+			'' `email`
+			FROM
+			company_job a
+		UNION ALL
+			SELECT
+			a.user_id id,
+			CONCAT_WS('_', a.job_number, a.user_name) `name`,
+			a.job_id pId,
+			'isPeople' folderType,
+			0 isParent,
+			'../../assets/images/people-icon.png' `icon`,
+			a.email `email`
+			FROM
+			sys_eve_user_staff a
+			WHERE a.state = '1'
+			AND LENGTH(a.user_id) > 0 AND a.user_id != ''
+			<if test="userId != null and userId != ''">
+				AND a.user_id != #{userId}
+			</if>
+			<if test="hasEmail != null and hasEmail != ''">
+				AND LENGTH(a.email) > 0 AND a.email != ''
+			</if>
+	</select>
+
+	<select id="queryCompanyPeopleToTreeByUserBelongCompany" parameterType="java.util.Map" resultType="java.util.Map">
+			SELECT
+			a.id,
+			a.department_name `name`,
+			a.company_id pId,
+			'isDepartment' folderType,
+			1 isParent,
+			'../../assets/images/department-icon.png' `icon`,
+			'' `email`
+			FROM
+			company_department a
+			WHERE a.company_id = #{companyId}
+		UNION ALL
+			SELECT
+			a.id,
+			a.job_name `name`,
+			a.department_id pId,
+			'isJob' folderType,
+			1 isParent,
+			'../../assets/images/job-icon.png' `icon`,
+			'' `email`
+			FROM
+			company_job a
+			WHERE a.company_id = #{companyId}
+		UNION ALL
+			SELECT
+			a.user_id id,
+			CONCAT_WS('_', a.job_number, a.user_name) `name`,
+			a.job_id pId,
+			'isPeople' folderType,
+			0 isParent,
+			'../../assets/images/people-icon.png' `icon`,
+			a.email `email`
+			FROM
+			sys_eve_user_staff a
+			WHERE a.state = '1'
+			AND a.company_id = #{companyId}
+			AND LENGTH(a.user_id) > 0 AND a.user_id != ''
+			<if test="userId != null and userId != ''">
+				AND a.user_id != #{userId}
+			</if>
+			<if test="hasEmail != null and hasEmail != ''">
+				AND LENGTH(a.email) > 0 AND a.email != ''
+			</if>
+	</select>
+
+	<select id="queryDepartmentPeopleToTreeByUserBelongDepartment" parameterType="java.util.Map" resultType="java.util.Map">
+			SELECT
+			a.id,
+			a.department_name `name`,
+			a.company_id pId,
+			'isDepartment' folderType,
+			1 isParent,
+			'../../assets/images/department-icon.png' `icon`,
+			'' `email`
+			FROM
+			company_department a
+			WHERE a.company_id = #{companyId}
+		UNION ALL
+			SELECT
+			a.user_id id,
+			CONCAT_WS('_', a.job_number, a.user_name) `name`,
+			a.department_id pId,
+			'isPeople' folderType,
+			0 isParent,
+			'../../assets/images/people-icon.png' `icon`,
+			a.email `email`
+			FROM
+			sys_eve_user_staff a
+			WHERE a.state = '1'
+			AND a.company_id = #{companyId}
+			AND LENGTH(a.user_id) > 0 AND a.user_id != ''
+			<if test="userId != null and userId != ''">
+				AND a.user_id != #{userId}
+			</if>
+			<if test="hasEmail != null and hasEmail != ''">
+				AND LENGTH(a.email) > 0 AND a.email != ''
+			</if>
+	</select>
+
+	<select id="queryJobPeopleToTreeByUserBelongJob" parameterType="java.util.Map" resultType="java.util.Map">
+			SELECT
+			a.id,
+			a.job_name `name`,
+			a.company_id pId,
+			'isJob' folderType,
+			1 isParent,
+			'../../assets/images/job-icon.png' `icon`,
+			'' `email`
+			FROM
+			company_job a
+			WHERE a.company_id = #{companyId}
+		UNION ALL
+			SELECT
+			a.user_id id,
+			CONCAT_WS('_', a.job_number, a.user_name) `name`,
+			a.job_id pId,
+			'isPeople' folderType,
+			0 isParent,
+			'../../assets/images/people-icon.png' `icon`,
+			a.email `email`
+			FROM
+			sys_eve_user_staff a
+			WHERE a.state = '1'
+			AND a.company_id = #{companyId}
+			AND LENGTH(a.user_id) > 0 AND a.user_id != ''
+			<if test="userId != null and userId != ''">
+				AND a.user_id != #{userId}
+			</if>
+			<if test="hasEmail != null and hasEmail != ''">
+				AND LENGTH(a.email) > 0 AND a.email != ''
+			</if>
+	</select>
+
+	<select id="querySimpleDepPeopleToTreeByUserBelongSimpleDep" parameterType="java.util.Map" resultType="java.util.Map">
+			SELECT
+			a.id,
+			a.department_name `name`,
+			'0' pId,
+			'isDepartment' folderType,
+			1 isParent,
+			'../../assets/images/department-icon.png' `icon`,
+			'' `email`
+			FROM
+			company_department a
+			WHERE a.id = #{departmentId}
+		UNION ALL
+			SELECT
+			a.user_id id,
+			CONCAT_WS('_', a.job_number, a.user_name) `name`,
+			a.department_id pId,
+			'isPeople' folderType,
+			0 isParent,
+			'../../assets/images/people-icon.png' `icon`,
+			a.email `email`
+			FROM
+			sys_eve_user_staff a
+			WHERE a.state = '1'
+			AND a.department_id = #{departmentId}
+			AND LENGTH(a.user_id) > 0 AND a.user_id != ''
+			<if test="userId != null and userId != ''">
+				AND a.user_id != #{userId}
+			</if>
+			<if test="hasEmail != null and hasEmail != ''">
+				AND LENGTH(a.email) > 0 AND a.email != ''
+			</if>
+	</select>
+
+	<select id="queryTalkGroupUserListByUserId" parameterType="java.util.Map" resultType="java.util.Map">
+			SELECT
+			a.id,
+			a.group_name `name`,
+			'0' pId,
+			'isGroup' folderType,
+			1 isParent,
+			'../../assets/images/talk-group-icon.png' `icon`,
+			'' `email`
+			FROM
+			sys_talk_group a,
+			sys_talk_group_user b
+			WHERE
+			a.id = b.group_id
+			AND b.user_id = #{createId}
+		UNION ALL
+			SELECT
+			a.user_id id,
+			CONCAT_WS('_', a.job_number, a.user_name) `name`,
+			c.group_id pId,
+			'isPeople' folderType,
+			0 isParent,
+			'../../assets/images/people-icon.png' `icon`,
+			a.email `email`
+			FROM
+			sys_eve_user_staff a,
+			sys_talk_group_user b,
+			sys_talk_group_user c
+			WHERE a.state = '1'
+			AND a.user_id = c.user_id
+			AND b.user_id = #{createId}
+			AND c.group_id = b.group_id
+			AND LENGTH(a.user_id) > 0 AND a.user_id != ''
+			<if test="userId != null and userId != ''">
+				AND a.user_id != #{userId}
+			</if>
+			<if test="hasEmail != null and hasEmail != ''">
+				AND LENGTH(a.email) > 0 AND a.email != ''
+			</if>
+	</select>
 	
 </mapper>

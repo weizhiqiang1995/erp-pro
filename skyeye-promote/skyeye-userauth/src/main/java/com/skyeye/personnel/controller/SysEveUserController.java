@@ -342,4 +342,82 @@ public class SysEveUserController {
         sysEveUserService.queryDeskTopsMenuByUserId(inputObject, outputObject);
     }
 
+    /**
+     * 人员选择获取所有公司和人
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @RequestMapping("/post/SysEnclosureController/queryAllPeopleToTree")
+    public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) {
+        sysEveUserService.queryAllPeopleToTree(inputObject, outputObject);
+    }
+
+    /**
+     * 人员选择根据当前用户所属公司获取这个公司的人
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @RequestMapping("/post/SysEnclosureController/queryCompanyPeopleToTreeByUserBelongCompany")
+    public void queryCompanyPeopleToTreeByUserBelongCompany(InputObject inputObject, OutputObject outputObject) {
+        sysEveUserService.queryCompanyPeopleToTreeByUserBelongCompany(inputObject, outputObject);
+    }
+
+    /**
+     * 人员选择根据当前用户所属公司获取这个公司部门展示的人
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @RequestMapping("/post/SysEnclosureController/queryDepartmentPeopleToTreeByUserBelongDepartment")
+    public void queryDepartmentPeopleToTreeByUserBelongDepartment(InputObject inputObject, OutputObject outputObject) {
+        sysEveUserService.queryDepartmentPeopleToTreeByUserBelongDepartment(inputObject, outputObject);
+    }
+
+    /**
+     * 人员选择根据当前用户所属公司获取这个公司岗位展示的人
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @RequestMapping("/post/SysEnclosureController/queryJobPeopleToTreeByUserBelongJob")
+    public void queryJobPeopleToTreeByUserBelongJob(InputObject inputObject, OutputObject outputObject) {
+        sysEveUserService.queryJobPeopleToTreeByUserBelongJob(inputObject, outputObject);
+    }
+
+    /**
+     * 人员选择根据当前用户所属公司获取这个公司同级部门展示的人
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @RequestMapping("/post/SysEnclosureController/querySimpleDepPeopleToTreeByUserBelongSimpleDep")
+    public void querySimpleDepPeopleToTreeByUserBelongSimpleDep(InputObject inputObject, OutputObject outputObject) {
+        sysEveUserService.querySimpleDepPeopleToTreeByUserBelongSimpleDep(inputObject, outputObject);
+    }
+
+    /**
+     * 根据聊天组展示用户
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @RequestMapping("/post/SysEnclosureController/queryTalkGroupUserListByUserId")
+    public void queryTalkGroupUserListByUserId(InputObject inputObject, OutputObject outputObject) {
+        sysEveUserService.queryTalkGroupUserListByUserId(inputObject, outputObject);
+    }
+
+    /**
+     * 获取所有在职的，拥有账号的员工
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "commonselpeople007", value = "获取所有在职的，拥有账号的员工", method = "POST", allUse = "2")
+    @RequestMapping("/post/SysEveUserController/queryAllSysUserIsIncumbency")
+    public void queryAllSysUserIsIncumbency(InputObject inputObject, OutputObject outputObject) {
+        sysEveUserService.queryAllSysUserIsIncumbency(inputObject, outputObject);
+    }
+
 }

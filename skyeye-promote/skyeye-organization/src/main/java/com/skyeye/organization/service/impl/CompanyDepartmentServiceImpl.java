@@ -6,21 +6,23 @@ package com.skyeye.organization.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.OrganizationConstants;
+import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.ToolUtil;
+import com.skyeye.eve.entity.organization.department.Department;
 import com.skyeye.organization.dao.CompanyDepartmentDao;
 import com.skyeye.organization.service.CompanyDepartmentService;
+import com.skyeye.organization.service.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -33,10 +35,13 @@ import java.util.Map;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
-public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
+public class CompanyDepartmentServiceImpl extends SkyeyeBusinessServiceImpl<CompanyDepartmentDao, Department> implements CompanyDepartmentService {
 
     @Autowired
     private CompanyDepartmentDao companyDepartmentDao;
+
+    @Autowired
+    private ICompanyService iCompanyService;
 
     /**
      * 获取公司部门信息列表
@@ -175,33 +180,15 @@ public class CompanyDepartmentServiceImpl implements CompanyDepartmentService {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+
     @Override
     public void queryCompanyDepartmentListToChoose(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = companyDepartmentDao.queryCompanyDepartmentListToChoose(map);
+        CommonPageInfo pageInfo = inputObject.getParams(CommonPageInfo.class);
+        Page pages = PageHelper.startPage(pageInfo.getPage(), pageInfo.getLimit());
+        List<Map<String, Object>> beans = companyDepartmentDao.queryCompanyDepartmentListToChoose(pageInfo);
+        iCompanyService.setName(beans, "companyId", "companyName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
-    }
-
-    /**
-     * 根据部门ids获取部门信息列表
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryCompanyDepartmentListByIds(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        List<String> idsList = Arrays.asList(map.get("ids").toString().split(","));
-        List<Map<String, Object>> beans = new ArrayList<>();
-        if (!idsList.isEmpty()) {
-            beans = companyDepartmentDao.queryCompanyDepartmentListByIds(idsList);
-            outputObject.setBeans(beans);
-            outputObject.settotal(beans.size());
-        } else {
-            outputObject.setBeans(beans);
-        }
     }
 
     /**

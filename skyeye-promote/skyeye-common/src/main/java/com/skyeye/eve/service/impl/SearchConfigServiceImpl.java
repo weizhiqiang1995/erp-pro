@@ -19,7 +19,6 @@ import com.skyeye.eve.entity.search.SearchParamsConfigMation;
 import com.skyeye.eve.service.ISearchConfigService;
 import com.skyeye.eve.service.SearchConfigService;
 import com.skyeye.jedis.JedisClientService;
-import net.sf.json.JSONObject;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -29,7 +28,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,10 +73,8 @@ public class SearchConfigServiceImpl implements SearchConfigService {
         Map<String, Object> result = querySearchParamsConfig(urlId, appId);
         if (result != null) {
             result.forEach((key, value) -> {
-                Map classMap = new HashMap();
-                classMap.put("searchCondition", SearchOperatorMation.class);
-                SearchParamsConfigMation searchParamsConfigMation = (SearchParamsConfigMation) JSONObject.toBean((JSONObject) value,
-                    SearchParamsConfigMation.class, classMap);
+                String valueStr = JSONUtil.toJsonStr(value);
+                SearchParamsConfigMation searchParamsConfigMation = JSONUtil.toBean(valueStr, SearchParamsConfigMation.class);
                 // 获取筛选条件
                 List<SearchOperatorMation> searchCondition = searchParamsConfigMation.getSearchCondition();
                 if (CollectionUtils.isNotEmpty(searchCondition)) {
@@ -123,7 +119,7 @@ public class SearchConfigServiceImpl implements SearchConfigService {
     public Map<String, Object> querySearchParamsConfig(String urlId, String appId) {
         SearchMation searchMation = querySearchMation(urlId, appId);
         if (searchMation != null) {
-            Map<String, Object> result = JSONObject.fromObject(searchMation.getParamsConfigStr());
+            Map<String, Object> result = JSONUtil.toBean(searchMation.getParamsConfigStr(), null);
             return result;
         }
         return null;

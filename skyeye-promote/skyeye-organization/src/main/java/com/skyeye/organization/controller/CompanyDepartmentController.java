@@ -8,6 +8,7 @@ import com.skyeye.annotation.api.Api;
 import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
+import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.organization.service.CompanyDepartmentService;
@@ -113,6 +114,8 @@ public class CompanyDepartmentController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "companydepartment008", value = "获取用户列表", method = "POST", allUse = "2")
+    @ApiImplicitParams(classBean = CommonPageInfo.class)
     @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentListToChoose")
     public void queryCompanyDepartmentListToChoose(InputObject inputObject, OutputObject outputObject) {
         companyDepartmentService.queryCompanyDepartmentListToChoose(inputObject, outputObject);
@@ -124,12 +127,12 @@ public class CompanyDepartmentController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "companydepartment009", value = "根据部门ids获取部门信息列表", method = "POST", allUse = "2")
+    @ApiOperation(id = "queryDepartmentListByIds", value = "根据部门ids获取部门信息列表", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "ids", name = "ids", value = "部门ids，逗号隔开", required = "required")})
-    @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentListByIds")
-    public void queryCompanyDepartmentListByIds(InputObject inputObject, OutputObject outputObject) {
-        companyDepartmentService.queryCompanyDepartmentListByIds(inputObject, outputObject);
+    @RequestMapping("/post/CompanyDepartmentController/queryDepartmentListByIds")
+    public void queryDepartmentListByIds(InputObject inputObject, OutputObject outputObject) {
+        companyDepartmentService.selectByIds(inputObject, outputObject);
     }
 
     /**

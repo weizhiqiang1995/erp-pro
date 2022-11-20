@@ -70,17 +70,6 @@ public class CommonController {
     }
 
     /**
-     * 获取所有在职的，拥有账号的员工
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/CommonController/queryAllSysUserIsIncumbency")
-    public void queryAllSysUserIsIncumbency(InputObject inputObject, OutputObject outputObject) {
-        commonService.queryAllSysUserIsIncumbency(inputObject, outputObject);
-    }
-
-    /**
      * 根据文件类型获取文件的保存地址以及访问地址
      *
      * @param inputObject  入参以及用户信息等获取对象

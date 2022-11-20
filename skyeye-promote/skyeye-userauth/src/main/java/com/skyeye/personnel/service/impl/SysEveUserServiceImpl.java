@@ -17,22 +17,23 @@ import com.skyeye.common.object.PutObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
-import com.skyeye.personnel.dao.SysEveUserDao;
-import com.skyeye.personnel.dao.SysEveUserStaffDao;
 import com.skyeye.eve.entity.userauth.user.SysUserQueryDo;
 import com.skyeye.eve.service.SysAuthorityService;
-import com.skyeye.personnel.service.SysEveUserService;
 import com.skyeye.jedis.JedisClientService;
+import com.skyeye.organization.service.CompanyMationService;
+import com.skyeye.organization.service.ICompanyService;
+import com.skyeye.personnel.classenum.UserLockState;
+import com.skyeye.personnel.dao.SysEveUserDao;
+import com.skyeye.personnel.dao.SysEveUserStaffDao;
+import com.skyeye.personnel.service.SysEveUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @ClassName: SysEveUserServiceImpl
@@ -59,29 +60,11 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     @Autowired
     private SysAuthorityService sysAuthorityService;
 
-    /**
-     * 账号状态
-     */
-    public static enum STATE {
-        SYS_USER_LOCK_STATE_ISUNLOCK(0, "未锁定"),
-        SYS_USER_LOCK_STATE_ISLOCK(1, "锁定");
+    @Autowired
+    private ICompanyService iCompanyService;
 
-        private int state;
-        private String name;
-
-        STATE(int state, String name) {
-            this.state = state;
-            this.name = name;
-        }
-
-        public int getState() {
-            return state;
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
+    @Autowired
+    private CompanyMationService companyMationService;
 
     /**
      * 获取管理员用户列表
@@ -94,6 +77,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         SysUserQueryDo sysUserQuery = inputObject.getParams(SysUserQueryDo.class);
         Page pages = PageHelper.startPage(sysUserQuery.getPage(), sysUserQuery.getLimit());
         List<Map<String, Object>> beans = sysEveUserDao.querySysUserList(sysUserQuery);
+        iCompanyService.setName(beans, "companyId", "companyName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -110,9 +94,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveUserDao.querySysUserLockStateById(map);
         int userLock = Integer.parseInt(bean.get("userLock").toString());
-        if (STATE.SYS_USER_LOCK_STATE_ISUNLOCK.getState() == userLock) {
+        if (UserLockState.SYS_USER_LOCK_STATE_ISUNLOCK.getKey() == userLock) {
             // 未锁定，设置为锁定
-            map.put("userLock", STATE.SYS_USER_LOCK_STATE_ISLOCK.getState());
+            map.put("userLock", UserLockState.SYS_USER_LOCK_STATE_ISLOCK.getKey());
             sysEveUserDao.editSysUserLockStateToLockById(map);
         } else {
             outputObject.setreturnMessage("该账号已被锁定，请刷新页面.");
@@ -131,9 +115,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> bean = sysEveUserDao.querySysUserLockStateById(map);
         int userLock = Integer.parseInt(bean.get("userLock").toString());
-        if (STATE.SYS_USER_LOCK_STATE_ISLOCK.getState() == userLock) {
+        if (UserLockState.SYS_USER_LOCK_STATE_ISLOCK.getKey() == userLock) {
             // 锁定，设置为解锁
-            map.put("userLock", STATE.SYS_USER_LOCK_STATE_ISUNLOCK.getState());
+            map.put("userLock", UserLockState.SYS_USER_LOCK_STATE_ISUNLOCK.getKey());
             sysEveUserDao.editSysUserLockStateToUnLockById(map);
         } else {
             outputObject.setreturnMessage("该账号已解锁，请刷新页面.");
@@ -255,10 +239,11 @@ public class SysEveUserServiceImpl implements SysEveUserService {
             String userDBPassword = userMation.get("password").toString();
             if (password.equals(userDBPassword)) {
                 int userLock = Integer.parseInt(userMation.get("userLock").toString());
-                if (STATE.SYS_USER_LOCK_STATE_ISLOCK.getState() == userLock) {
+                if (UserLockState.SYS_USER_LOCK_STATE_ISLOCK.getKey() == userLock) {
                     outputObject.setreturnMessage("您的账号已被锁定，请联系管理员解除！");
                 } else {
                     String userId = userMation.get("id").toString();
+                    setUserOtherMation(userMation);
                     List<Map<String, Object>> authPoints = getMenuAndAuthToRedis(userMation, userId);
                     judgeAndGetSchoolMation(userMation, userId);
                     LOGGER.info("set userMation to redis cache start.");
@@ -273,6 +258,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
                 outputObject.setreturnMessage("密码输入错误！");
             }
         }
+    }
+
+    private void setUserOtherMation(Map<String, Object> userMation) {
+        iCompanyService.setName(userMation, "companyId", "companyName");
     }
 
     /**
@@ -615,6 +604,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     public void queryUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> user = inputObject.getLogParams();
         Map<String, Object> bean = sysEveUserDao.queryUserDetailsMationByUserId(user.get("id").toString());
+        iCompanyService.setName(bean, "companyId", "companyName");
         outputObject.setBean(bean);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
@@ -680,6 +670,159 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         List<Map<String, Object>> deskTops = sysEveUserDao.queryDeskTopsMenuByUserId(userId);
         outputObject.setBeans(deskTops);
         outputObject.settotal(deskTops.size());
+    }
+
+    /**
+     * 人员选择获取所有公司和人
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        map = compareSelUserListByParams(map, inputObject);
+        List<Map<String, Object>> beans = sysEveUserDao.queryAllPeopleToTree(map);
+        setOrganization(beans, StringUtils.EMPTY);
+        outputObject.setBeans(beans);
+    }
+
+    /**
+     * 设置组织信息
+     *
+     * @param beans
+     * @param companyId
+     */
+    private void setOrganization(List<Map<String, Object>> beans, String companyId) {
+        beans.addAll(companyMationService.queryAllDataToTree(companyId));
+    }
+
+    /**
+     * 人员选择根据当前用户所属公司获取这个公司的人
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryCompanyPeopleToTreeByUserBelongCompany(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        map = compareSelUserListByParams(map, inputObject);
+        String companyId = inputObject.getLogParams().get("companyId").toString();
+        map.put("companyId", companyId);
+        List<Map<String, Object>> beans = sysEveUserDao.queryCompanyPeopleToTreeByUserBelongCompany(map);
+        setOrganization(beans, companyId);
+        outputObject.setBeans(beans);
+    }
+
+    /**
+     * 人员选择根据当前用户所属公司获取这个公司部门展示的人
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryDepartmentPeopleToTreeByUserBelongDepartment(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        map = compareSelUserListByParams(map, inputObject);
+        String companyId = inputObject.getLogParams().get("companyId").toString();
+        map.put("companyId", companyId);
+        List<Map<String, Object>> beans = sysEveUserDao.queryDepartmentPeopleToTreeByUserBelongDepartment(map);
+        setOrganization(beans, companyId);
+        outputObject.setBeans(beans);
+    }
+
+    /**
+     * 人员选择根据当前用户所属公司获取这个公司岗位展示的人
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryJobPeopleToTreeByUserBelongJob(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        map = compareSelUserListByParams(map, inputObject);
+        String companyId = inputObject.getLogParams().get("companyId").toString();
+        map.put("companyId", companyId);
+        List<Map<String, Object>> beans = sysEveUserDao.queryJobPeopleToTreeByUserBelongJob(map);
+        setOrganization(beans, companyId);
+        outputObject.setBeans(beans);
+    }
+
+    /**
+     * 人员选择根据当前用户所属公司获取这个公司同级部门展示的人
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void querySimpleDepPeopleToTreeByUserBelongSimpleDep(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        map = compareSelUserListByParams(map, inputObject);
+        map.put("departmentId", inputObject.getLogParams().get("departmentId"));
+        List<Map<String, Object>> beans = sysEveUserDao.querySimpleDepPeopleToTreeByUserBelongSimpleDep(map);
+        outputObject.setBeans(beans);
+    }
+
+    /**
+     * 根据聊天组展示用户
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryTalkGroupUserListByUserId(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        map = compareSelUserListByParams(map, inputObject);
+        Map<String, Object> user = inputObject.getLogParams();
+        map.put("createId", user.get("id"));
+        List<Map<String, Object>> beans = sysEveUserDao.queryTalkGroupUserListByUserId(map);
+        outputObject.setBeans(beans);
+    }
+
+    /**
+     * 获取人员列表时的参数转换
+     *
+     * @param map
+     * @param inputObject 入参以及用户信息等获取对象
+     * @return
+     */
+    public Map<String, Object> compareSelUserListByParams(Map<String, Object> map, InputObject inputObject) {
+        //人员列表中是否包含自己--1.包含；其他参数不包含
+        String chooseOrNotMy = map.get("chooseOrNotMy").toString();
+        if (!"1".equals(chooseOrNotMy)) {
+            Map<String, Object> user = inputObject.getLogParams();
+            map.put("userId", user.get("id"));
+        }
+        //人员列表中是否必须绑定邮箱--1.必须；其他参数没必要
+        String chooseOrNotEmail = map.get("chooseOrNotEmail").toString();
+        if ("1".equals(chooseOrNotEmail)) {
+            map.put("hasEmail", "1");
+        }
+        return map;
+    }
+
+    /**
+     * 获取所有在职的，拥有账号的员工
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryAllSysUserIsIncumbency(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        List<Integer> state = this.getIncumbencyState();
+        map.put("state", state);
+        List<Map<String, Object>> beans = sysEveUserStaffDao.queryAllSysUserIsIncumbency(map);
+        outputObject.setBeans(beans);
+        outputObject.settotal(beans.size());
+    }
+
+    private List<Integer> getIncumbencyState() {
+        List<Integer> list = new ArrayList<>();
+        list.add(SysEveUserStaffServiceImpl.State.ON_THE_JOB.getState());
+        list.add(SysEveUserStaffServiceImpl.State.PROBATION.getState());
+        list.add(SysEveUserStaffServiceImpl.State.PROBATION_PERIOD.getState());
+        return list;
     }
 
 }

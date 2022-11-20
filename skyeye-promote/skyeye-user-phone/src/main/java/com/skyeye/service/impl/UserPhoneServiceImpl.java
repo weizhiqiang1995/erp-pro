@@ -13,10 +13,13 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.UserPhoneDao;
-import com.skyeye.personnel.dao.SysEveUserDao;
 import com.skyeye.eve.service.SysAuthorityService;
 import com.skyeye.jedis.JedisClientService;
+import com.skyeye.organization.service.CompanyMationService;
+import com.skyeye.organization.service.ICompanyService;
+import com.skyeye.personnel.dao.SysEveUserDao;
 import com.skyeye.service.UserPhoneService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +41,12 @@ public class UserPhoneServiceImpl implements UserPhoneService {
 
     @Autowired
     private SysAuthorityService sysAuthorityService;
+
+    @Autowired
+    private ICompanyService iCompanyService;
+
+    @Autowired
+    private CompanyMationService companyMationService;
 
     /**
      * 账号状态
@@ -133,6 +142,7 @@ public class UserPhoneServiceImpl implements UserPhoneService {
                 //如果已经绑定用户，则获取用户信息
                 if (bean.containsKey("userId") && !ToolUtil.isBlank(bean.get("userId").toString())) {
                     Map<String, Object> userMation = userPhoneDao.queryUserMationByOPenId(openId);
+                    iCompanyService.setName(userMation, "companyId", "companyName");
                     // 2.将账号的信息存入redis
                     SysUserAuthConstants.setUserLoginRedisCache(bean.get("userId").toString() + SysUserAuthConstants.APP_IDENTIFYING, userMation);
                     //3.将权限的信息存入redis
@@ -153,6 +163,7 @@ public class UserPhoneServiceImpl implements UserPhoneService {
             //如果已经绑定用户，则获取用户信息
             if (map.containsKey("userId") && !ToolUtil.isBlank(map.get("userId").toString())) {
                 Map<String, Object> userMation = userPhoneDao.queryUserMationByOPenId(openId);
+                iCompanyService.setName(userMation, "companyId", "companyName");
                 //2.将账号的信息存入redis
                 SysUserAuthConstants.setUserLoginRedisCache(map.get("userId").toString() + SysUserAuthConstants.APP_IDENTIFYING, userMation);
                 //3.将权限的信息存入redis
@@ -245,6 +256,7 @@ public class UserPhoneServiceImpl implements UserPhoneService {
         Map<String, Object> map = inputObject.getParams();
         map = compareSelUserListByParams(map, inputObject);
         List<Map<String, Object>> beans = userPhoneDao.queryAllPeopleToTree(map);
+        beans.addAll(companyMationService.queryAllDataToTree(StringUtils.EMPTY));
         beans = ToolUtil.listToTree(beans, "id", "pId", "children");
         outputObject.setBeans(beans);
     }
@@ -253,7 +265,7 @@ public class UserPhoneServiceImpl implements UserPhoneService {
      * 获取人员列表时的参数转换
      *
      * @param map
-     * @param inputObject  入参以及用户信息等获取对象
+     * @param inputObject 入参以及用户信息等获取对象
      * @return
      */
     public Map<String, Object> compareSelUserListByParams(Map<String, Object> map, InputObject inputObject) {

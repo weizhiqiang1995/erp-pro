@@ -11,6 +11,7 @@ import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.cache.RedisCacheField;
 import com.skyeye.annotation.unique.UniqueField;
+import com.skyeye.common.constans.CacheConstants;
 import com.skyeye.common.entity.CommonOperatorUserInfo;
 import lombok.Data;
 
@@ -25,7 +26,7 @@ import lombok.Data;
 @Data
 @ApiModel("区域管理实体类")
 @UniqueField
-@RedisCacheField(name = "sys:tarea")
+@RedisCacheField(name = CacheConstants.SYS_TAREA_CACHE_KEY)
 @TableName(value = "t_area")
 public class SysTArea extends CommonOperatorUserInfo {
 

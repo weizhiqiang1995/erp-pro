@@ -17,7 +17,5 @@ public interface CommonService {
 
     void querySysWinMationById(InputObject inputObject, OutputObject outputObject);
 
-    void queryAllSysUserIsIncumbency(InputObject inputObject, OutputObject outputObject);
-
     void queryFilePathByFileType(InputObject inputObject, OutputObject outputObject);
 }

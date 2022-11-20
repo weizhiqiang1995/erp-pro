@@ -13,6 +13,7 @@ import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysEveUserStaffCapitalDao;
 import com.skyeye.eve.service.SysEveUserStaffCapitalService;
+import com.skyeye.organization.service.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,9 @@ public class SysEveUserStaffCapitalServiceImpl implements SysEveUserStaffCapital
 
     @Autowired
     private SysEveUserStaffCapitalDao sysEveUserStaffCapitalDao;
+
+    @Autowired
+    private ICompanyService iCompanyService;
 
     /**
      * 新增员工待结算资金池信息(用于定时任务)
@@ -104,6 +108,7 @@ public class SysEveUserStaffCapitalServiceImpl implements SysEveUserStaffCapital
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveUserStaffCapitalDao.queryStaffCapitalWaitPayMonthList(map);
+        iCompanyService.setName(beans, "companyId", "companyName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

@@ -4,6 +4,9 @@
 
 package com.skyeye.organization.dao;
 
+import com.skyeye.common.entity.CommonPageInfo;
+import com.skyeye.eve.dao.SkyeyeBaseMapper;
+import com.skyeye.eve.entity.organization.department.Department;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -17,7 +20,7 @@ import java.util.Map;
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-public interface CompanyDepartmentDao {
+public interface CompanyDepartmentDao extends SkyeyeBaseMapper<Department> {
 
     List<Map<String, Object>> queryCompanyDepartmentList(Map<String, Object> map);
 
@@ -43,9 +46,7 @@ public interface CompanyDepartmentDao {
 
     List<Map<String, Object>> queryCompanyDepartmentOrganization(Map<String, Object> map);
 
-    List<Map<String, Object>> queryCompanyDepartmentListToChoose(Map<String, Object> map);
-
-    List<Map<String, Object>> queryCompanyDepartmentListByIds(@Param("idsList") List<String> idsList);
+    List<Map<String, Object>> queryCompanyDepartmentListToChoose(CommonPageInfo pageInfo);
 
     List<Map<String, Object>> queryDepartmentListByCompanyId(@Param("companyId") String companyId);
 }

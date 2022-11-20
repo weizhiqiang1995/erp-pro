@@ -4,6 +4,7 @@
 
 package com.skyeye.personnel.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.CommonNumConstants;
@@ -12,14 +13,16 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
-import com.skyeye.personnel.dao.SysEveUserDao;
-import com.skyeye.personnel.dao.SysEveUserStaffDao;
 import com.skyeye.eve.dao.WagesFieldTypeDao;
 import com.skyeye.eve.entity.userauth.user.SysUserStaffQueryDo;
-import com.skyeye.personnel.service.SysEveUserService;
-import com.skyeye.personnel.service.SysEveUserStaffService;
 import com.skyeye.exception.CustomException;
 import com.skyeye.jedis.JedisClientService;
+import com.skyeye.organization.service.ICompanyService;
+import com.skyeye.personnel.classenum.UserLockState;
+import com.skyeye.personnel.dao.SysEveUserDao;
+import com.skyeye.personnel.dao.SysEveUserStaffDao;
+import com.skyeye.personnel.service.SysEveUserService;
+import com.skyeye.personnel.service.SysEveUserStaffService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -58,6 +61,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
 
     @Value("${skyeye.jobNumberPrefix}")
     private String jobNumberPrefix;
+
+    @Autowired
+    private ICompanyService iCompanyService;
 
     /**
      * 员工状态
@@ -106,6 +112,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         SysUserStaffQueryDo sysUserStaffQuery = inputObject.getParams(SysUserStaffQueryDo.class);
         Page pages = PageHelper.startPage(sysUserStaffQuery.getPage(), sysUserStaffQuery.getLimit());
         List<Map<String, Object>> beans = sysEveUserStaffDao.querySysUserStaffList(sysUserStaffQuery);
+        iCompanyService.setName(beans, "companyId", "companyName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -321,7 +328,8 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         Map<String, Object> map = inputObject.getParams();
         String staffId = map.get("id").toString();
         Map<String, Object> bean = sysEveUserStaffDao.querySysUserStaffByIdToDetails(staffId);
-        if (bean != null && !bean.isEmpty()) {
+        if (CollectionUtil.isNotEmpty(bean)) {
+            iCompanyService.setName(bean, "companyId", "companyName");
             bean.put("stateName", State.getNameByState(Integer.parseInt(bean.get("state").toString())));
             // 1.员工考勤时间段信息
             List<Map<String, Object>> staffTimeMation = sysEveUserStaffDao
@@ -354,7 +362,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
             // 删除redis中缓存的单位下的用户
             jedisClient.delKeys(Constants.getSysTalkGroupUserListMationById(departmentId) + "*");
             // 锁定帐号
-            sysEveUserDao.editSysUserLock(userId, SysEveUserServiceImpl.STATE.SYS_USER_LOCK_STATE_ISLOCK.getState());
+            sysEveUserDao.editSysUserLock(userId, UserLockState.SYS_USER_LOCK_STATE_ISLOCK.getKey());
             // 退出登录
             sysEveUserService.removeLogin(userId);
         }
@@ -373,10 +381,10 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         String staffId = map.get("staffId").toString();
 
         // 员工类型判断
-        Map<String, Object> staffType = sysEveUserStaffDao.querySysUserStaffByIdToDetails(staffId);
-        if (staffType != null && !staffType.isEmpty()) {
+        Map<String, Object> staffMation = sysEveUserStaffDao.querySysUserStaffByIdToDetails(staffId);
+        if (CollectionUtil.isNotEmpty(staffMation)) {
             //如果是普通员工，则允许转教职工
-            if ("1".equals(staffType.get("staffType").toString())) {
+            if ("1".equals(staffMation.get("staffType").toString())) {
                 //修改类型
                 sysEveUserStaffDao.editStaffTypeById(staffId);
                 //添加教职工学校绑定信息
@@ -404,6 +412,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveUserStaffDao.querySysUserStaffListToTable(map);
+        iCompanyService.setName(beans, "companyId", "companyName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -438,6 +447,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     public void querySysUserStaffLogin(InputObject inputObject, OutputObject outputObject) {
         String staffId = inputObject.getLogParams().get("staffId").toString();
         Map<String, Object> bean = sysEveUserStaffDao.querySysUserStaffByIdToDetails(staffId);
+        iCompanyService.setName(bean, "companyId", "companyName");
         outputObject.setBean(bean);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
@@ -457,6 +467,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         // 用户id和员工id只要有一个不为空就进行查询
         if (!ToolUtil.isBlank(userIds) || !ToolUtil.isBlank(staffIds)) {
             beans = sysEveUserStaffDao.queryUserMationList(userIds, staffIds);
+            iCompanyService.setName(beans, "companyId", "companyName");
         }
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());

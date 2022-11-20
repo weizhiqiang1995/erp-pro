@@ -31,20 +31,6 @@ public interface SysEnclosureDao {
 
     List<Map<String, Object>> querySysEnclosureListToTreeByUserId(Map<String, Object> map);
 
-    List<Map<String, Object>> queryAllPeopleToTree(Map<String, Object> map);
-
-    List<Map<String, Object>> queryCompanyPeopleToTreeByUserBelongCompany(Map<String, Object> map);
-
-    Map<String, Object> queryCompanyMationByUserId(Map<String, Object> user);
-
-    List<Map<String, Object>> queryDepartmentPeopleToTreeByUserBelongDepartment(Map<String, Object> map);
-
-    List<Map<String, Object>> queryJobPeopleToTreeByUserBelongJob(Map<String, Object> map);
-
-    List<Map<String, Object>> querySimpleDepPeopleToTreeByUserBelongSimpleDep(Map<String, Object> map);
-
-    List<Map<String, Object>> queryTalkGroupUserListByUserId(Map<String, Object> map);
-
     List<Map<String, Object>> queryEnclosureInfo(@Param("enclosure") String enclosure);
 
 }

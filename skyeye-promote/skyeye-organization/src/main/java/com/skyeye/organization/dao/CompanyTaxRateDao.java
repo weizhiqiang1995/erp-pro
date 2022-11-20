@@ -21,6 +21,6 @@ public interface CompanyTaxRateDao {
      */
     int deleteCompanyTaxRateByCompanyId(@Param("companyId") String companyId);
 
-    List<Map<String, Object>> queryCompanyTaxRateByCompanyId(@Param("companyId") String companyId);
+    List<Map<String, Object>> queryCompanyTaxRateByCompanyId(@Param("companyIds") List<String> companyIds);
 
 }

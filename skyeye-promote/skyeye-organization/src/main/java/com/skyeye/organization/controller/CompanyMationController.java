@@ -54,8 +54,8 @@ public class CompanyMationController {
      */
     @ApiOperation(id = "writeCompanyMation", value = "添加/编辑公司信息", method = "POST", allUse = "1")
     @ApiImplicitParams(classBean = Company.class)
-    @RequestMapping("/post/CompanyMationController/insertCompanyMation")
-    public void insertCompanyMation(InputObject inputObject, OutputObject outputObject) {
+    @RequestMapping("/post/CompanyMationController/writeCompanyMation")
+    public void writeCompanyMation(InputObject inputObject, OutputObject outputObject) {
         companyMationService.saveOrUpdateEntity(inputObject, outputObject);
     }
 
@@ -93,6 +93,9 @@ public class CompanyMationController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "companymation006", value = "获取总公司信息列表", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "notId", name = "notId", value = "不包含的企业id")})
     @RequestMapping("/post/CompanyMationController/queryOverAllCompanyMationList")
     public void queryOverAllCompanyMationList(InputObject inputObject, OutputObject outputObject) {
         companyMationService.queryOverAllCompanyMationList(inputObject, outputObject);
@@ -145,6 +148,20 @@ public class CompanyMationController {
     @RequestMapping("/post/CompanyMationController/queryCompanyMationListToChoose")
     public void queryCompanyMationListToChoose(InputObject inputObject, OutputObject outputObject) {
         companyMationService.queryPageList(inputObject, outputObject);
+    }
+
+    /**
+     * 根据id批量查询公司信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryCompanyListByIds", value = "根据id批量查询公司信息", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "ids", name = "ids", value = "主键id，多个用逗号隔开", required = "required")})
+    @RequestMapping("/post/CompanyMationController/queryCompanyListByIds")
+    public void queryCompanyListByIds(InputObject inputObject, OutputObject outputObject) {
+        companyMationService.selectByIds(inputObject, outputObject);
     }
 
 }
