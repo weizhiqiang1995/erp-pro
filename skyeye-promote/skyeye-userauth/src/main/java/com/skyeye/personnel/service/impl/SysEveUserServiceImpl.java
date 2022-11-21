@@ -22,6 +22,7 @@ import com.skyeye.eve.service.SysAuthorityService;
 import com.skyeye.jedis.JedisClientService;
 import com.skyeye.organization.service.CompanyMationService;
 import com.skyeye.organization.service.ICompanyService;
+import com.skyeye.organization.service.IDepmentService;
 import com.skyeye.personnel.classenum.UserLockState;
 import com.skyeye.personnel.dao.SysEveUserDao;
 import com.skyeye.personnel.dao.SysEveUserStaffDao;
@@ -62,6 +63,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
 
     @Autowired
     private ICompanyService iCompanyService;
+
+    @Autowired
+    private IDepmentService iDepmentService;
 
     @Autowired
     private CompanyMationService companyMationService;
@@ -262,6 +266,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
 
     private void setUserOtherMation(Map<String, Object> userMation) {
         iCompanyService.setName(userMation, "companyId", "companyName");
+        iDepmentService.setName(userMation, "departmentId", "departmentName");
     }
 
     /**

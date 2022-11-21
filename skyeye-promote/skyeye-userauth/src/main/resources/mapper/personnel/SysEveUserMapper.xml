@@ -100,7 +100,6 @@
 			c.user_photo userPhoto,
 			c.company_id companyId,
 			c.department_id departmentId,
-			q.department_name departmentName,
 			c.job_id jobId,
 			p.job_name jobName
 		FROM
@@ -108,7 +107,6 @@
 			LEFT JOIN sys_eve_user_install b ON a.id = b.user_id,
 			sys_eve_user_staff c
 			LEFT JOIN company_job p ON c.job_id = p.id
-			LEFT JOIN company_department q ON c.department_id = q.id
 		WHERE
 			a.user_code = #{userCode}
 		AND a.id = c.user_id

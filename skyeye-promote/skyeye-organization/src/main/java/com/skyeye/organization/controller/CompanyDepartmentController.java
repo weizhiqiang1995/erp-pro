@@ -11,6 +11,7 @@ import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.entity.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.organization.department.Department;
 import com.skyeye.organization.service.CompanyDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,66 +33,68 @@ public class CompanyDepartmentController {
     private CompanyDepartmentService companyDepartmentService;
 
     /**
-     * 获取公司部门信息列表
+     * 获取部门信息列表
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "companydepartment001", value = "获取部门信息列表", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = CommonPageInfo.class)
     @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentList")
     public void queryCompanyDepartmentList(InputObject inputObject, OutputObject outputObject) {
-        companyDepartmentService.queryCompanyDepartmentList(inputObject, outputObject);
+        companyDepartmentService.queryPageList(inputObject, outputObject);
     }
 
     /**
-     * 添加公司部门信息信息
+     * 添加/编辑部门信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @RequestMapping("/post/CompanyDepartmentController/insertCompanyDepartmentMation")
-    public void insertCompanyDepartmentMation(InputObject inputObject, OutputObject outputObject) {
-        companyDepartmentService.insertCompanyDepartmentMation(inputObject, outputObject);
+    @ApiOperation(id = "writeDepartmentMation", value = "添加/编辑公司部门信息", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = Department.class)
+    @RequestMapping("/post/CompanyDepartmentController/writeDepartmentMation")
+    public void writeDepartmentMation(InputObject inputObject, OutputObject outputObject) {
+        companyDepartmentService.saveOrUpdateEntity(inputObject, outputObject);
     }
 
     /**
-     * 删除公司部门信息信息
+     * 删除部门信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "deleteDepartmentMationById", value = "删除部门信息", method = "DELETE", allUse = "1")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
     @RequestMapping("/post/CompanyDepartmentController/deleteCompanyDepartmentMationById")
     public void deleteCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject) {
-        companyDepartmentService.deleteCompanyDepartmentMationById(inputObject, outputObject);
+        companyDepartmentService.deleteById(inputObject, outputObject);
     }
 
     /**
-     * 编辑公司部门信息信息时进行回显
+     * 根据id查询部门详情信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentMationToEditById")
-    public void queryCompanyDepartmentMationToEditById(InputObject inputObject, OutputObject outputObject) {
-        companyDepartmentService.queryCompanyDepartmentMationToEditById(inputObject, outputObject);
+    @ApiOperation(id = "queryDepartmentMationById", value = "根据id查询部门详情信息", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
+    @RequestMapping("/post/CompanyDepartmentController/queryDepartmentMationById")
+    public void queryDepartmentMationById(InputObject inputObject, OutputObject outputObject) {
+        companyDepartmentService.selectById(inputObject, outputObject);
     }
 
     /**
-     * 编辑公司部门信息信息
+     * 根据公司id获取部门信息列表展示为树
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @RequestMapping("/post/CompanyDepartmentController/editCompanyDepartmentMationById")
-    public void editCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject) {
-        companyDepartmentService.editCompanyDepartmentMationById(inputObject, outputObject);
-    }
-
-    /**
-     * 获取公司部门信息列表展示为树根据公司id
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
+    @ApiOperation(id = "companydepartment006", value = "根据公司id获取部门信息列表展示为树", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "companyId", name = "companyId", value = "公司id", required = "required")})
     @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentListTreeByCompanyId")
     public void queryCompanyDepartmentListTreeByCompanyId(InputObject inputObject, OutputObject outputObject) {
         companyDepartmentService.queryCompanyDepartmentListTreeByCompanyId(inputObject, outputObject);
@@ -103,6 +106,9 @@ public class CompanyDepartmentController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "companydepartment007", value = "根据公司id获取部门列表展示为下拉选择框", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "companyId", name = "companyId", value = "公司id", required = "required")})
     @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentListByCompanyIdToSelect")
     public void queryCompanyDepartmentListByCompanyIdToSelect(InputObject inputObject, OutputObject outputObject) {
         companyDepartmentService.queryCompanyDepartmentListByCompanyIdToSelect(inputObject, outputObject);
@@ -114,7 +120,7 @@ public class CompanyDepartmentController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "companydepartment008", value = "获取用户列表", method = "POST", allUse = "2")
+    @ApiOperation(id = "companydepartment008", value = "获取部门列表展示为表格供其他选择", method = "POST", allUse = "2")
     @ApiImplicitParams(classBean = CommonPageInfo.class)
     @RequestMapping("/post/CompanyDepartmentController/queryCompanyDepartmentListToChoose")
     public void queryCompanyDepartmentListToChoose(InputObject inputObject, OutputObject outputObject) {
@@ -127,7 +133,7 @@ public class CompanyDepartmentController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "queryDepartmentListByIds", value = "根据部门ids获取部门信息列表", method = "POST", allUse = "2")
+    @ApiOperation(id = "queryDepartmentListByIds", value = "根据部门ids获取部门信息列表", method = "POST", allUse = "0")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "ids", name = "ids", value = "部门ids，逗号隔开", required = "required")})
     @RequestMapping("/post/CompanyDepartmentController/queryDepartmentListByIds")

@@ -4,41 +4,6 @@
 		- allUse  是否需要登录才能使用   1是   0否  2需要登陆才能访问，但无需授权    默认为否
 	 -->
 
-    <!-- 部门管理开始 -->
-    <url id="companydepartment001" path="/post/CompanyDepartmentController/queryCompanyDepartmentList" val="获取公司部门信息列表" allUse="1" groupName="部门管理">
-        <property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
-        <property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-        <property id="departmentName" name="departmentName" ref="" var="部门名称"/>
-        <property id="companyId" name="companyId" ref="" var="公司id"/>
-        <property id="overtimeSettlementType" name="overtimeSettlementType" ref="num" var="部门加班结算方式"/>
-    </url>
-    <url id="companydepartment002" path="/post/CompanyDepartmentController/insertCompanyDepartmentMation" val="添加公司部门信息信息" allUse="1" method="POST" groupName="部门管理">
-        <property id="departmentName" name="departmentName" ref="required" var="部门名称"/>
-        <property id="departmentDesc" name="departmentDesc" ref="" var="部门简介"/>
-        <property id="companyId" name="companyId" ref="required" var="公司id"/>
-        <property id="overtimeSettlementType" name="overtimeSettlementType" ref="required,num" var="部门加班结算方式"/>
-    </url>
-    <url id="companydepartment003" path="/post/CompanyDepartmentController/deleteCompanyDepartmentMationById" val="删除公司部门信息信息" allUse="1" groupName="部门管理">
-        <property id="rowId" name="id" ref="required" var="公司部门信息id"/>
-    </url>
-    <url id="companydepartment004" path="/post/CompanyDepartmentController/queryCompanyDepartmentMationToEditById" val="编辑公司部门信息信息时进行回显" allUse="2" groupName="部门管理">
-        <property id="rowId" name="id" ref="required" var="公司部门信息id"/>
-    </url>
-    <url id="companydepartment005" path="/post/CompanyDepartmentController/editCompanyDepartmentMationById" val="编辑公司部门信息信息" allUse="1" method="PUT" groupName="部门管理">
-        <property id="rowId" name="id" ref="required" var="公司部门信息id"/>
-        <property id="departmentName" name="departmentName" ref="required" var="部门名称"/>
-        <property id="departmentDesc" name="departmentDesc" ref="" var="部门简介"/>
-        <property id="companyId" name="companyId" ref="required" var="公司id"/>
-        <property id="overtimeSettlementType" name="overtimeSettlementType" ref="required,num" var="部门加班结算方式"/>
-    </url>
-    <url id="companydepartment006" path="/post/CompanyDepartmentController/queryCompanyDepartmentListTreeByCompanyId" val="获取公司部门信息列表展示为树根据公司id" allUse="2" groupName="部门管理">
-        <property id="companyId" name="companyId" ref="required" var="公司id"/>
-    </url>
-    <url id="companydepartment007" path="/post/CompanyDepartmentController/queryCompanyDepartmentListByCompanyIdToSelect" val="根据公司id获取部门列表展示为下拉选择框" allUse="2" groupName="部门管理">
-        <property id="companyId" name="companyId" ref="" var="公司id"/>
-    </url>
-    <!-- 部门管理结束 -->
-
     <!-- 职位管理开始 -->
     <url id="companyjob001" path="/post/CompanyJobController/queryCompanyJobList" val="获取公司部门职位信息列表" allUse="1" groupName="职位管理">
         <property id="companyId" name="companyId" ref="" var="公司id"/>

@@ -11,16 +11,6 @@ import com.skyeye.eve.entity.organization.department.Department;
 
 public interface CompanyDepartmentService extends SkyeyeBusinessService<Department> {
 
-    void queryCompanyDepartmentList(InputObject inputObject, OutputObject outputObject);
-
-    void insertCompanyDepartmentMation(InputObject inputObject, OutputObject outputObject);
-
-    void deleteCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject);
-
-    void queryCompanyDepartmentMationToEditById(InputObject inputObject, OutputObject outputObject);
-
-    void editCompanyDepartmentMationById(InputObject inputObject, OutputObject outputObject);
-
     void queryCompanyDepartmentListTreeByCompanyId(InputObject inputObject, OutputObject outputObject);
 
     void queryCompanyDepartmentListByCompanyIdToSelect(InputObject inputObject, OutputObject outputObject);

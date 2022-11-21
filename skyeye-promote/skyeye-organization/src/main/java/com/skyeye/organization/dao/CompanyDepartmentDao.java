@@ -22,31 +22,15 @@ import java.util.Map;
  */
 public interface CompanyDepartmentDao extends SkyeyeBaseMapper<Department> {
 
-    List<Map<String, Object>> queryCompanyDepartmentList(Map<String, Object> map);
+    List<Map<String, Object>> queryCompanyDepartmentList(CommonPageInfo commonPageInfo);
 
-    int insertCompanyDepartmentMation(Map<String, Object> map);
-
-    Map<String, Object> queryCompanyDepartmentMationByName(Map<String, Object> map);
-
-    int deleteCompanyDepartmentMationById(Map<String, Object> map);
-
-    Map<String, Object> queryCompanyDepartmentMationById(@Param("id") String id);
-
-    Map<String, Object> queryCompanyDepartmentMationByNameAndId(Map<String, Object> map);
-
-    int editCompanyDepartmentMationById(Map<String, Object> map);
-
-    Map<String, Object> queryCompanyDepartmentUserMationById(Map<String, Object> map);
+    Map<String, Object> queryCompanyDepartmentUserMationById(@Param("id") String id);
 
     List<Map<String, Object>> queryCompanyDepartmentListTreeByCompanyId(Map<String, Object> map);
 
-    Map<String, Object> queryCompanyJobNumMationById(Map<String, Object> map);
-
-    List<Map<String, Object>> queryCompanyDepartmentListByCompanyIdToSelect(Map<String, Object> map);
+    Map<String, Object> queryCompanyJobNumMationById(@Param("id") String id);
 
     List<Map<String, Object>> queryCompanyDepartmentOrganization(Map<String, Object> map);
-
-    List<Map<String, Object>> queryCompanyDepartmentListToChoose(CommonPageInfo pageInfo);
 
     List<Map<String, Object>> queryDepartmentListByCompanyId(@Param("companyId") String companyId);
 }
