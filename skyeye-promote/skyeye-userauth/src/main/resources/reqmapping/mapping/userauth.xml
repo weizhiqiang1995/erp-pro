@@ -415,8 +415,6 @@
 	<url id="userStaffCapital001" path="/post/SysEveUserStaffCapitalController/queryStaffCapitalWaitPayMonthList" val="根据月份以及部门查询未结算的额外资金" allUse="1" method="POST" groupName="未结算资金池相关接口">
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
-		<property id="companyName" name="companyName" ref="" var="公司名称"/>
-		<property id="departmentName" name="departmentName" ref="" var="部门名称"/>
 		<property id="monthTime" name="monthTime" ref="" var="未结算资金的月份"/>
 	</url>
 	<!-- 未结算资金池相关接口结束 -->

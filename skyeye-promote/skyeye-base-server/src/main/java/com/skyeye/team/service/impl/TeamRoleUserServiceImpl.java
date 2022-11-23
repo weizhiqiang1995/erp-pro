@@ -11,10 +11,8 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.entity.team.TeamRole;
 import com.skyeye.eve.entity.team.TeamRoleUser;
-import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.team.dao.TeamRoleUserDao;
 import com.skyeye.team.service.TeamRoleUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -30,9 +28,6 @@ import java.util.stream.Collectors;
  */
 @Service
 public class TeamRoleUserServiceImpl extends SkyeyeBusinessServiceImpl<TeamRoleUserDao, TeamRoleUser> implements TeamRoleUserService {
-
-    @Autowired
-    private IAuthUserService iAuthUserService;
 
     /**
      * 根据团队id查询该团队下的所有成员(结果的key为：团队id+角色id)

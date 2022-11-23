@@ -69,13 +69,31 @@
 			company_department a
 	</select>
 
-	<select id="queryDepartmentListByCompanyId" resultType="java.util.Map">
+	<select id="queryDepartmentList" resultType="java.util.Map">
 		SELECT
 			a.id,
-			a.`name`
+			a.`name`,
+			a.company_id pId,
+			'isDepartment' folderType,
+			1 isParent,
+			'../../assets/images/department-icon.png' `icon`,
+			'' `email`
 		FROM
 			company_department a
-		WHERE a.company_id = #{companyId}
+		<where>
+			<if test="companyIds != null and companyIds.size() &gt; 0">
+				a.company_id IN
+				<foreach collection="companyIds" item="companyId" index="index" open="(" close=")" separator=",">
+					#{companyId}
+				</foreach>
+			</if>
+			<if test="departmentIds != null and departmentIds.size() &gt; 0">
+				AND a.id IN
+				<foreach collection="departmentIds" item="departmentId" index="index" open="(" close=")" separator=",">
+					#{departmentId}
+				</foreach>
+			</if>
+		</where>
 	</select>
 
 </mapper>

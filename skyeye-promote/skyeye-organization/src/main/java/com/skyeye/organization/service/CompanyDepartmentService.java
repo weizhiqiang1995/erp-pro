@@ -9,6 +9,9 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.entity.organization.department.Department;
 
+import java.util.List;
+import java.util.Map;
+
 public interface CompanyDepartmentService extends SkyeyeBusinessService<Department> {
 
     void queryCompanyDepartmentListTreeByCompanyId(InputObject inputObject, OutputObject outputObject);
@@ -18,4 +21,6 @@ public interface CompanyDepartmentService extends SkyeyeBusinessService<Departme
     void queryCompanyDepartmentListToChoose(InputObject inputObject, OutputObject outputObject);
 
     void queryDepartmentListByCurrentUserBelong(InputObject inputObject, OutputObject outputObject);
+
+    List<Map<String, Object>> queryDepartmentList(List<String> companyIds, List<String> departmentIds);
 }

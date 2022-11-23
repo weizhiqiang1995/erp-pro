@@ -17,7 +17,6 @@ import com.skyeye.eve.entity.team.TeamObjectPermission;
 import com.skyeye.eve.entity.team.TeamRole;
 import com.skyeye.eve.entity.team.TeamRoleUser;
 import com.skyeye.eve.entity.team.TeamTemplate;
-import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.team.classenum.ObjectPermissionFromType;
 import com.skyeye.team.dao.TeamTemplateDao;
 import com.skyeye.team.service.TeamObjectPermissionService;
@@ -52,9 +51,6 @@ public class TeamTemplateServiceImpl extends SkyeyeBusinessServiceImpl<TeamTempl
 
     @Autowired
     private TeamObjectPermissionService teamObjectPermissionService;
-
-    @Autowired
-    private IAuthUserService iAuthUserService;
 
     @Override
     protected List<Map<String, Object>> queryPageDataList(InputObject inputObject) {

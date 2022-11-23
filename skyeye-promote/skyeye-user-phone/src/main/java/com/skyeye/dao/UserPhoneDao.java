@@ -13,7 +13,7 @@ public interface UserPhoneDao {
 
     Map<String, Object> queryMationByUserCode(Map<String, Object> map);
 
-    Map<String, Object> queryUserMationByOpenId(String openId);
+    Map<String, Object> queryWxUserMationByOpenId(@Param("openId") String openId);
 
     int insertWxUserMation(Map<String, Object> map);
 
@@ -21,7 +21,7 @@ public interface UserPhoneDao {
 
     int updateBindUserMation(Map<String, Object> map);
 
-    Map<String, Object> queryUserMationByOPenId(String openId);
+    Map<String, Object> queryUserMationByOpenId(@Param("openId") String openId);
 
     List<Map<String, Object>> queryAllPeopleToTree(Map<String, Object> map);
 

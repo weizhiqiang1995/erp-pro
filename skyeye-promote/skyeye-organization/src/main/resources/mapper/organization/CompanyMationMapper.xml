@@ -90,7 +90,7 @@
 			company_mation a
 	</select>
 
-    <select id="queryAllDataToTree" resultType="java.util.Map">
+    <select id="queryCompanyList" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.`name`,

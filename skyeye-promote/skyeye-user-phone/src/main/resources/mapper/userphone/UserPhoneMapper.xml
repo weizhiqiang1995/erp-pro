@@ -12,20 +12,19 @@
 			c.user_name userName,
 			c.user_photo userPhoto,
 			c.user_sign userSign,
-			d.department_name departmentName,
+			c.department_id departmentId,
 			e.job_name jobName,
 		    a.role_id roleId
 		FROM
 			sys_eve_user a
 			LEFT JOIN sys_eve_user_install b ON a.id = b.user_id
 			LEFT JOIN sys_eve_user_staff c ON a.id = c.user_id
-			LEFT JOIN company_department d ON d.id = c.department_id
 			LEFT JOIN company_job e ON e.id = c.job_id
 		WHERE
 			a.user_code = #{userCode}
 	</select>
 	
-	<select id="queryUserMationByOpenId" parameterType="java.lang.String" resultType="java.util.Map">
+	<select id="queryWxUserMationByOpenId" parameterType="java.lang.String" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.open_id openId,
@@ -68,7 +67,7 @@
 		WHERE open_id = #{openId}
 	</update>
 	
-	<select id="queryUserMationByOPenId" parameterType="java.lang.String" resultType="java.util.Map">
+	<select id="queryUserMationByOpenId" parameterType="java.lang.String" resultType="java.util.Map">
 		SELECT
 			a.id,
 			a.user_code userCode,
@@ -86,12 +85,11 @@
 			c.user_name userName,
 			c.user_photo userPhoto,
 			c.company_id companyId,
-			q.department_name departmentName
+			c.department_id departmentId
 		FROM
 			sys_eve_user a
 			LEFT JOIN sys_eve_user_install b ON a.id = b.user_id
-			LEFT JOIN sys_eve_user_staff c ON a.id = c.user_id
-			LEFT JOIN company_department q ON c.department_id = q.id,
+			LEFT JOIN sys_eve_user_staff c ON a.id = c.user_id,
 			wx_user_mation e
 		WHERE
 			e.open_id = #{openId}
@@ -99,17 +97,6 @@
 	</select>
 	
 	<select id="queryAllPeopleToTree" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.department_name `name`,
-			a.company_id pId,
-			'isDepartment' folderType,
-			1 isParent,
-			'../../assets/images/department-icon.png' `icon`,
-			'' `email`
-		FROM
-			company_department a
-		UNION ALL
 		SELECT
 			a.id,
 			a.job_name `name`,
@@ -132,12 +119,12 @@
 		FROM
 			sys_eve_user_staff a
 		WHERE a.state = '1'
-		AND LENGTH(a.user_id) > 0 AND a.user_id != ""
+		AND LENGTH(a.user_id) > 0 AND a.user_id != ''
 		<if test="userId != null and userId != ''">
 			AND a.user_id != #{userId}
 		</if>
 		<if test="hasEmail != null and hasEmail != ''">
-			AND LENGTH(a.email) > 0 AND a.email != ""
+			AND LENGTH(a.email) > 0 AND a.email != ''
 		</if>
 	</select>
 

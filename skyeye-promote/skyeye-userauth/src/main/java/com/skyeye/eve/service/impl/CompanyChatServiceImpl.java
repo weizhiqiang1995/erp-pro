@@ -14,6 +14,7 @@ import com.skyeye.eve.dao.CompanyChatDao;
 import com.skyeye.eve.service.CompanyChatService;
 import com.skyeye.jedis.JedisClientService;
 import com.skyeye.organization.service.ICompanyService;
+import com.skyeye.organization.service.IDepmentService;
 import com.skyeye.websocket.TalkWebSocket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,9 @@ public class CompanyChatServiceImpl implements CompanyChatService {
     @Autowired
     private ICompanyService iCompanyService;
 
+    @Autowired
+    private IDepmentService iDepmentService;
+
     /**
      * 获取好友列表，群聊信息，个人信息
      *
@@ -52,6 +56,7 @@ public class CompanyChatServiceImpl implements CompanyChatService {
         if (ToolUtil.isBlank(jedisService.get(Constants.getSysTalkUserThisMainMationById(userId)))) {
             mine = companyChatDao.queryUserMineByUserId(map);
             iCompanyService.setName(mine, "companyId", "companyName");
+            iDepmentService.setName(mine, "departmentId", "departmentName");
             jedisService.set(Constants.getSysTalkUserThisMainMationById(userId), JSONUtil.toJsonStr(mine));
         } else {
             mine = JSONUtil.toBean(jedisService.get(Constants.getSysTalkUserThisMainMationById(userId)), null);
@@ -75,6 +80,7 @@ public class CompanyChatServiceImpl implements CompanyChatService {
             if (ToolUtil.isBlank(jedisService.get(Constants.getSysTalkGroupUserListMationById(depart.get("id").toString() + "_" + userId)))) {
                 userList = companyChatDao.queryDepartmentUserByDepartId(depart);
                 iCompanyService.setName(userList, "companyId", "companyName");
+                iDepmentService.setName(userList, "departmentId", "departmentName");
                 jedisService.set(Constants.getSysTalkGroupUserListMationById(depart.get("id").toString() + "_" + userId), JSONUtil.toJsonStr(userList));
             } else {
                 userList = JSONUtil.toList(jedisService.get(Constants.getSysTalkGroupUserListMationById(depart.get("id").toString() + "_" + userId)), null);

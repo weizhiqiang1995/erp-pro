@@ -15,14 +15,17 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.UserPhoneDao;
 import com.skyeye.eve.service.SysAuthorityService;
 import com.skyeye.jedis.JedisClientService;
+import com.skyeye.organization.service.CompanyDepartmentService;
 import com.skyeye.organization.service.CompanyMationService;
 import com.skyeye.organization.service.ICompanyService;
+import com.skyeye.organization.service.IDepmentService;
 import com.skyeye.personnel.dao.SysEveUserDao;
 import com.skyeye.service.UserPhoneService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +49,13 @@ public class UserPhoneServiceImpl implements UserPhoneService {
     private ICompanyService iCompanyService;
 
     @Autowired
+    private IDepmentService iDepmentService;
+
+    @Autowired
     private CompanyMationService companyMationService;
+
+    @Autowired
+    private CompanyDepartmentService companyDepartmentService;
 
     /**
      * 账号状态
@@ -104,6 +113,7 @@ public class UserPhoneServiceImpl implements UserPhoneService {
                     userMation.put("userToken", userToken);
 
                     String appUserId = userId + SysUserAuthConstants.APP_IDENTIFYING;
+                    iDepmentService.setName(userMation, "departmentId", "departmentName");
                     SysUserAuthConstants.setUserLoginRedisCache(appUserId, userMation);
                     jedisClient.set("allMenuMation:" + appUserId, roleIds);
                     jedisClient.set("authPointsMation:" + appUserId, roleIds);
@@ -132,7 +142,7 @@ public class UserPhoneServiceImpl implements UserPhoneService {
         String key = WxchatUtil.getWechatUserOpenIdMation(openId);
         if (ToolUtil.isBlank(jedisClient.get(key))) {
             //该用户没有绑定账号
-            Map<String, Object> bean = userPhoneDao.queryUserMationByOpenId(openId);
+            Map<String, Object> bean = userPhoneDao.queryWxUserMationByOpenId(openId);
             //判断该用户的openId是否存在于数据库
             if (bean != null && !bean.isEmpty()) {
                 //存在数据库
@@ -141,8 +151,9 @@ public class UserPhoneServiceImpl implements UserPhoneService {
                 jedisClient.set(key, JSONUtil.toJsonStr(bean));
                 //如果已经绑定用户，则获取用户信息
                 if (bean.containsKey("userId") && !ToolUtil.isBlank(bean.get("userId").toString())) {
-                    Map<String, Object> userMation = userPhoneDao.queryUserMationByOPenId(openId);
+                    Map<String, Object> userMation = userPhoneDao.queryUserMationByOpenId(openId);
                     iCompanyService.setName(userMation, "companyId", "companyName");
+                    iDepmentService.setName(userMation, "departmentId", "departmentName");
                     // 2.将账号的信息存入redis
                     SysUserAuthConstants.setUserLoginRedisCache(bean.get("userId").toString() + SysUserAuthConstants.APP_IDENTIFYING, userMation);
                     //3.将权限的信息存入redis
@@ -162,7 +173,7 @@ public class UserPhoneServiceImpl implements UserPhoneService {
             map = JSONUtil.toBean(jedisClient.get(key), null);
             //如果已经绑定用户，则获取用户信息
             if (map.containsKey("userId") && !ToolUtil.isBlank(map.get("userId").toString())) {
-                Map<String, Object> userMation = userPhoneDao.queryUserMationByOPenId(openId);
+                Map<String, Object> userMation = userPhoneDao.queryUserMationByOpenId(openId);
                 iCompanyService.setName(userMation, "companyId", "companyName");
                 //2.将账号的信息存入redis
                 SysUserAuthConstants.setUserLoginRedisCache(map.get("userId").toString() + SysUserAuthConstants.APP_IDENTIFYING, userMation);
@@ -202,7 +213,7 @@ public class UserPhoneServiceImpl implements UserPhoneService {
                 if (STATE.SYS_USER_LOCK_STATE_ISLOCK.getState() == userLock) {
                     outputObject.setreturnMessage("您的账号已被锁定，请联系管理员解除.");
                 } else {
-                    Map<String, Object> wxUserMation = userPhoneDao.queryUserMationByOpenId(openId);
+                    Map<String, Object> wxUserMation = userPhoneDao.queryWxUserMationByOpenId(openId);
                     //判断该用户的openId是否存在于数据库
                     if (wxUserMation != null && !wxUserMation.isEmpty()) {
                         //判断当前openId是否已经绑定账号
@@ -222,7 +233,7 @@ public class UserPhoneServiceImpl implements UserPhoneService {
                                 map.put("openId", openId);
                                 userPhoneDao.updateBindUserMation(map);
                                 //重新获取绑定信息，存入redis，返回前端
-                                map = userPhoneDao.queryUserMationByOpenId(openId);
+                                map = userPhoneDao.queryWxUserMationByOpenId(openId);
                                 //1.将微信和账号的绑定信息存入redis
                                 String key = WxchatUtil.getWechatUserOpenIdMation(openId);
                                 jedisClient.set(key, JSONUtil.toJsonStr(map));
@@ -256,7 +267,8 @@ public class UserPhoneServiceImpl implements UserPhoneService {
         Map<String, Object> map = inputObject.getParams();
         map = compareSelUserListByParams(map, inputObject);
         List<Map<String, Object>> beans = userPhoneDao.queryAllPeopleToTree(map);
-        beans.addAll(companyMationService.queryAllDataToTree(StringUtils.EMPTY));
+        beans.addAll(companyMationService.queryCompanyList(StringUtils.EMPTY));
+        beans.addAll(companyDepartmentService.queryDepartmentList(new ArrayList<>(), new ArrayList<>()));
         beans = ToolUtil.listToTree(beans, "id", "pId", "children");
         outputObject.setBeans(beans);
     }

@@ -4,6 +4,7 @@
 
 package com.skyeye.organization.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
@@ -13,7 +14,6 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.entity.organization.department.Department;
-import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.exception.CustomException;
 import com.skyeye.organization.dao.CompanyDepartmentDao;
 import com.skyeye.organization.service.CompanyDepartmentService;
@@ -21,8 +21,11 @@ import com.skyeye.organization.service.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName: CompanyDepartmentServiceImpl
@@ -40,9 +43,6 @@ public class CompanyDepartmentServiceImpl extends SkyeyeBusinessServiceImpl<Comp
 
     @Autowired
     private ICompanyService iCompanyService;
-
-    @Autowired
-    private IAuthUserService iAuthUserService;
 
     /**
      * 获取公司部门信息列表
@@ -102,7 +102,7 @@ public class CompanyDepartmentServiceImpl extends SkyeyeBusinessServiceImpl<Comp
     public void queryCompanyDepartmentListByCompanyIdToSelect(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         String companyId = map.get("companyId").toString();
-        List<Map<String, Object>> beans = companyDepartmentDao.queryDepartmentListByCompanyId(companyId);
+        List<Map<String, Object>> beans = queryDepartmentList(Arrays.asList(companyId), new ArrayList<>());
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
     }
@@ -133,9 +133,17 @@ public class CompanyDepartmentServiceImpl extends SkyeyeBusinessServiceImpl<Comp
     @Override
     public void queryDepartmentListByCurrentUserBelong(InputObject inputObject, OutputObject outputObject) {
         String companyId = inputObject.getLogParams().get("companyId").toString();
-        List<Map<String, Object>> list = companyDepartmentDao.queryDepartmentListByCompanyId(companyId);
+        List<Map<String, Object>> list = queryDepartmentList(Arrays.asList(companyId), new ArrayList<>());
         outputObject.setBeans(list);
         outputObject.settotal(list.size());
+    }
+
+    @Override
+    public List<Map<String, Object>> queryDepartmentList(List<String> companyIds, List<String> departmentIds) {
+        companyIds = companyIds.stream().filter(str -> !ToolUtil.isBlank(str)).collect(Collectors.toList());
+        departmentIds = departmentIds.stream().filter(str -> !ToolUtil.isBlank(str)).collect(Collectors.toList());
+        List<Map<String, Object>> beans = companyDepartmentDao.queryDepartmentList(companyIds, departmentIds);
+        return CollectionUtil.isNotEmpty(beans) ? beans : new ArrayList<>();
     }
 
 }

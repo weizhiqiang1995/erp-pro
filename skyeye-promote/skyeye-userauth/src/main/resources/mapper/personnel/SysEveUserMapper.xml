@@ -15,7 +15,7 @@
 			(SELECT c.user_name FROM sys_eve_user_staff c WHERE a.creater = c.user_id) createName,
 			(SELECT group_concat(distinct b.role_name) FROM sys_eve_role b WHERE INSTR(CONCAT(',', a.role_id, ','), CONCAT(',', b.id, ','))) roleName,
 			k.company_id companyId,
-			m.department_name departmentName,
+			k.department_id departmentId,
 			m.job_name jobName,
 			CONVERT(a.create_time, char) createTime
 		FROM
@@ -23,14 +23,11 @@
 			LEFT JOIN (SELECT 
 						o.user_id,
 						p.job_name,
-						q.department_name,
 						o.company_id companyId
 					FROM 
 						sys_eve_user_staff o, 
-						company_job p, 
-						company_department q
-					WHERE o.department_id = q.id
-						AND o.job_id = p.id) m ON a.id = m.user_id,
+						company_job p
+					WHERE o.job_id = p.id) m ON a.id = m.user_id,
 			sys_eve_user_staff k
 		<where>
 			a.id = k.user_id
@@ -338,7 +335,6 @@
 			CASE a.state WHEN '1' THEN 'state-up' WHEN '2' THEN 'state-down' END colorClass,
 		    a.company_id companyId,
 			a.department_id departmentId,
-			q.department_name departmentName,
 			p.job_name jobName,
 			o.name_cn jobScoreName,
 			b.user_code userCode
@@ -346,11 +342,9 @@
 			sys_eve_user_staff a
 			LEFT JOIN company_job_score o ON a.job_score_id = o.id,
 			company_job p,
-			company_department q,
 			sys_eve_user b
 		WHERE a.user_id = #{userId}
 		AND b.id = a.user_id
-		AND a.department_id = q.id
 		AND a.job_id = p.id
 	</select>
 	
@@ -435,17 +429,6 @@
 	</update>
 
 	<select id="queryAllPeopleToTree" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.department_name `name`,
-			a.company_id pId,
-			'isDepartment' folderType,
-			1 isParent,
-			'../../assets/images/department-icon.png' `icon`,
-			'' `email`
-			FROM
-			company_department a
-		UNION ALL
 			SELECT
 			a.id,
 			a.job_name `name`,
@@ -480,18 +463,6 @@
 	<select id="queryCompanyPeopleToTreeByUserBelongCompany" parameterType="java.util.Map" resultType="java.util.Map">
 			SELECT
 			a.id,
-			a.department_name `name`,
-			a.company_id pId,
-			'isDepartment' folderType,
-			1 isParent,
-			'../../assets/images/department-icon.png' `icon`,
-			'' `email`
-			FROM
-			company_department a
-			WHERE a.company_id = #{companyId}
-		UNION ALL
-			SELECT
-			a.id,
 			a.job_name `name`,
 			a.department_id pId,
 			'isJob' folderType,
@@ -524,18 +495,6 @@
 	</select>
 
 	<select id="queryDepartmentPeopleToTreeByUserBelongDepartment" parameterType="java.util.Map" resultType="java.util.Map">
-			SELECT
-			a.id,
-			a.department_name `name`,
-			a.company_id pId,
-			'isDepartment' folderType,
-			1 isParent,
-			'../../assets/images/department-icon.png' `icon`,
-			'' `email`
-			FROM
-			company_department a
-			WHERE a.company_id = #{companyId}
-		UNION ALL
 			SELECT
 			a.user_id id,
 			CONCAT_WS('_', a.job_number, a.user_name) `name`,
@@ -592,18 +551,6 @@
 	</select>
 
 	<select id="querySimpleDepPeopleToTreeByUserBelongSimpleDep" parameterType="java.util.Map" resultType="java.util.Map">
-			SELECT
-			a.id,
-			a.department_name `name`,
-			'0' pId,
-			'isDepartment' folderType,
-			1 isParent,
-			'../../assets/images/department-icon.png' `icon`,
-			'' `email`
-			FROM
-			company_department a
-			WHERE a.id = #{departmentId}
-		UNION ALL
 			SELECT
 			a.user_id id,
 			CONCAT_WS('_', a.job_number, a.user_name) `name`,

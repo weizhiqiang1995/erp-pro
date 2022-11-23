@@ -13,6 +13,7 @@ import com.skyeye.organization.dao.CompanyJobDao;
 import com.skyeye.organization.dao.CompanyJobScoreDao;
 import com.skyeye.organization.service.CompanyJobService;
 import com.skyeye.organization.service.ICompanyService;
+import com.skyeye.organization.service.IDepmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +41,9 @@ public class CompanyJobServiceImpl implements CompanyJobService {
     @Autowired
     private ICompanyService iCompanyService;
 
+    @Autowired
+    private IDepmentService iDepmentService;
+
     /**
      * 获取公司部门职位信息列表
      *
@@ -51,6 +55,7 @@ public class CompanyJobServiceImpl implements CompanyJobService {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyJobDao.queryCompanyJobList(map);
         iCompanyService.setName(beans, "companyId", "companyName");
+        iDepmentService.setName(beans, "departmentId", "departmentName");
         String[] s;
         for (Map<String, Object> bean : beans) {
             s = bean.get("pId").toString().split(",");

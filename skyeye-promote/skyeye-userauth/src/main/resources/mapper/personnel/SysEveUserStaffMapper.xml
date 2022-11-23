@@ -17,7 +17,7 @@
 			a.qq,
 			a.state,
 			a.company_id companyId,
-			q.department_name departmentName,
+			a.department_id departmentId,
 			p.job_name jobName,
 			a.`type` staffType,
 		    COUNT(b.check_work_time_id) workTimeNum
@@ -25,7 +25,6 @@
 			sys_eve_user_staff a
 		    LEFT JOIN sys_eve_user_staff_time b ON a.id = b.staff_id
 			LEFT JOIN company_job p ON a.job_id = p.id
-			LEFT JOIN company_department q ON a.department_id = q.id
 		<where>
 			<if test="sqlExtract != '' and sqlExtract != null">
 				${sqlExtract}
@@ -145,14 +144,12 @@
 			CASE a.user_sex WHEN '2' THEN '女' WHEN '1' THEN '男' ELSE '保密' END userSex,
 			a.company_id companyId,
 		    a.department_id departmentId,
-			q.department_name departmentName,
 			p.job_name jobName,
 		    o.name_cn jobScoreName
 		FROM
 			sys_eve_user_staff a
 		    LEFT JOIN company_job_score o ON a.job_score_id = o.id
 			LEFT JOIN company_job p ON a.job_id = p.id
-			LEFT JOIN company_department q ON a.department_id = q.id
 		WHERE a.id = #{staffId}
 	</select>
 	
@@ -223,7 +220,6 @@
 			CASE a.state WHEN '1' THEN 'state-up' WHEN '2' THEN 'state-down' END colorClass,
 			a.company_id companyId,
 			a.department_id departmentId,
-			q.department_name departmentName,
 			p.job_name jobName,
 			o.name_cn jobScoreName,
 			b.user_code userCode
@@ -231,8 +227,7 @@
 			sys_eve_user_staff a
 			LEFT JOIN company_job_score o ON a.job_score_id = o.id
 			LEFT JOIN sys_eve_user b ON b.id = a.user_id,
-			company_job p,
-			company_department q
+			company_job p
 		<where>
 			<choose>
 				<when test="userIds != '' and userIds != null">
@@ -262,7 +257,6 @@
 			a.state,
 		    a.company_id companyId,
 		    a.department_id departmentId,
-			q.department_name departmentName,
 		    a.job_id jobId,
 			p.job_name jobName,
 		    a.job_score_id jobScoreId,
@@ -271,10 +265,8 @@
 		FROM
 			sys_eve_user_staff a
 		    LEFT JOIN company_job_score o ON a.job_score_id = o.id,
-			company_job p, 
-			company_department q
-		WHERE a.department_id = q.id
-		AND a.job_id = p.id
+			company_job p
+		WHERE a.job_id = p.id
 			<if test="userName != '' and userName != null">
 				AND a.user_name LIKE '%${userName}%'
 			</if>

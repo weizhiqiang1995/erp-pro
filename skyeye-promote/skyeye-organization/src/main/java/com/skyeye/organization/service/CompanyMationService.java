@@ -22,5 +22,5 @@ public interface CompanyMationService extends SkyeyeBusinessService<Company> {
 
     void queryCompanyOrganization(InputObject inputObject, OutputObject outputObject);
 
-    List<Map<String, Object>> queryAllDataToTree(String companyId);
+    List<Map<String, Object>> queryCompanyList(String companyId);
 }

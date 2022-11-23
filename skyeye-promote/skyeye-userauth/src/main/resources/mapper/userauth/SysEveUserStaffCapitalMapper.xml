@@ -29,17 +29,12 @@
     <select id="queryStaffCapitalWaitPayMonthList" resultType="java.util.Map">
         SELECT
             a.company_id companyId,
-            c.department_name departmentName,
+            a.department_id departmentId,
             a.month_time monthTime,
             FORMAT(SUM(a.money), 2) monthAllMony
         FROM
-            sys_eve_user_staff_capital a,
-            company_department c
-        WHERE a.department_id = c.id
-        AND a.type = 1
-        <if test="departmentName != '' and departmentName != null">
-            AND c.department_name LIKE '%${departmentName}%'
-        </if>
+            sys_eve_user_staff_capital a
+        WHERE a.type = 1
         <if test="monthTime != '' and monthTime != null">
             AND a.month_time = #{monthTime}
         </if>

@@ -244,8 +244,8 @@ public class CompanyMationServiceImpl extends SkyeyeBusinessServiceImpl<CompanyM
     }
 
     @Override
-    public List<Map<String, Object>> queryAllDataToTree(String companyId) {
-        List<Map<String, Object>> beans = companyMationDao.queryAllDataToTree(companyId);
+    public List<Map<String, Object>> queryCompanyList(String companyId) {
+        List<Map<String, Object>> beans = companyMationDao.queryCompanyList(companyId);
         return CollectionUtil.isNotEmpty(beans) ? beans : new ArrayList<>();
     }
 

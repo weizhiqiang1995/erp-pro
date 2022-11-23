@@ -12,7 +12,6 @@ import com.skyeye.common.constans.CommonCharConstants;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.entity.team.TeamRole;
 import com.skyeye.eve.entity.team.TeamRoleUser;
-import com.skyeye.eve.service.ISysDictDataService;
 import com.skyeye.team.dao.TeamRoleDao;
 import com.skyeye.team.service.TeamRoleService;
 import com.skyeye.team.service.TeamRoleUserService;
@@ -36,9 +35,6 @@ public class TeamRoleServiceImpl extends SkyeyeBusinessServiceImpl<TeamRoleDao, 
 
     @Autowired
     private TeamRoleUserService teamRoleUserService;
-
-    @Autowired
-    private ISysDictDataService iSysDictDataService;
 
     /**
      * 根据团队id获取团队下的角色信息，并且包含角色下的用户信息

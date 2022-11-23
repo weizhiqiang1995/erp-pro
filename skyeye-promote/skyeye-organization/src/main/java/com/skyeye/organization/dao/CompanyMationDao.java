@@ -27,5 +27,5 @@ public interface CompanyMationDao extends SkyeyeBaseMapper<Company> {
 
     List<Map<String, Object>> queryCompanyListToSelect(Map<String, Object> map);
 
-    List<Map<String, Object>> queryAllDataToTree(@Param("id") String id);
+    List<Map<String, Object>> queryCompanyList(@Param("id") String id);
 }

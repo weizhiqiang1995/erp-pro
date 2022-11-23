@@ -32,5 +32,5 @@ public interface CompanyDepartmentDao extends SkyeyeBaseMapper<Department> {
 
     List<Map<String, Object>> queryCompanyDepartmentOrganization(Map<String, Object> map);
 
-    List<Map<String, Object>> queryDepartmentListByCompanyId(@Param("companyId") String companyId);
+    List<Map<String, Object>> queryDepartmentList(@Param("companyIds") List<String> companyIds, @Param("departmentIds") List<String> departmentIds);
 }

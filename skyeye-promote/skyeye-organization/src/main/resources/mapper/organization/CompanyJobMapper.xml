@@ -11,10 +11,9 @@
 			CONVERT(a.create_time, char) createTime,
 			a.p_id pId,
 			a.company_id companyId,
-			c.department_name departmentName
+			a.department_id departmentId
 		FROM
 			company_job a
-			LEFT JOIN company_department c ON a.department_id = c.id 
 		<where>
 			<if test="jobName != '' and jobName != null">
 				AND a.job_name LIKE '%${jobName}%'

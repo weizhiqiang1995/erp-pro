@@ -9,12 +9,11 @@
 			'online' status,
 			b.user_photo avatar,
 			b.company_id companyId,
-			d.department_name departmentName,
+			b.department_id departmentId,
 			b.user_sign sign
 		FROM
 			sys_eve_user a,
 			sys_eve_user_staff b
-			LEFT JOIN company_department d ON d.id = b.department_id
 		WHERE a.id = b.user_id
 		AND a.id = #{userId}
 	</select>
@@ -37,7 +36,7 @@
 	<select id="queryCompanyDepartmentByUserId" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 			b.id,
-			b.department_name groupname,
+			b.`name` groupname,
 			@rownum := @rownum + 1 AS `online`,
 			#{userId} thisUserId
 		FROM
@@ -56,20 +55,17 @@
 			a.user_photo avatar,
 			IFNULL(a.user_sign, '暂无签名') sign,
 			a.company_id companyId,
-			m.department_name departmentName,
+			a.department_id departmentId,
 			m.job_name jobName
 		FROM
 			sys_eve_user_staff a
 			LEFT JOIN (SELECT 
 							o.user_id,
-							p.job_name,
-							q.department_name
+							p.job_name
 						FROM 
 							sys_eve_user_staff o, 
-							company_job p, 
-							company_department q
-						WHERE o.department_id = q.id
-							AND o.job_id = p.id) m ON m.user_id = a.user_id,
+							company_job p
+						WHERE o.job_id = p.id) m ON m.user_id = a.user_id,
 			sys_eve_user b
 		WHERE a.department_id = #{id}
 		AND a.user_id = b.id
