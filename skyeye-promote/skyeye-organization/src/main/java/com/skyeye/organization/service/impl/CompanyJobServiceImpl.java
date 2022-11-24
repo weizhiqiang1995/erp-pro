@@ -4,11 +4,13 @@
 
 package com.skyeye.organization.service.impl;
 
-import com.skyeye.common.constans.CommonNumConstants;
+import cn.hutool.core.collection.CollectionUtil;
+import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
+import com.skyeye.common.entity.search.TableSelectInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.ToolUtil;
+import com.skyeye.eve.entity.organization.job.CompanyJob;
 import com.skyeye.organization.dao.CompanyJobDao;
 import com.skyeye.organization.dao.CompanyJobScoreDao;
 import com.skyeye.organization.service.CompanyJobService;
@@ -16,10 +18,11 @@ import com.skyeye.organization.service.ICompanyService;
 import com.skyeye.organization.service.IDepmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName: CompanyJobServiceImpl
@@ -30,7 +33,7 @@ import java.util.Map;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
-public class CompanyJobServiceImpl implements CompanyJobService {
+public class CompanyJobServiceImpl extends SkyeyeBusinessServiceImpl<CompanyJobDao, CompanyJob> implements CompanyJobService {
 
     @Autowired
     private CompanyJobDao companyJobDao;
@@ -47,93 +50,29 @@ public class CompanyJobServiceImpl implements CompanyJobService {
     /**
      * 获取公司部门职位信息列表
      *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
+     * @param inputObject 入参以及用户信息等获取对象
      */
     @Override
-    public void queryCompanyJobList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = companyJobDao.queryCompanyJobList(map);
+    public List<Map<String, Object>> queryDataList(InputObject inputObject) {
+        TableSelectInfo tableSelectInfo = inputObject.getParams(TableSelectInfo.class);
+        List<Map<String, Object>> beans = companyJobDao.queryCompanyJobList(tableSelectInfo);
         iCompanyService.setName(beans, "companyId", "companyName");
         iDepmentService.setName(beans, "departmentId", "departmentName");
         String[] s;
         for (Map<String, Object> bean : beans) {
-            s = bean.get("pId").toString().split(",");
+            s = bean.get("parentId").toString().split(",");
             if (s.length > 0) {
-                bean.put("pId", s[s.length - 1]);
+                bean.put("parentId", s[s.length - 1]);
             } else {
-                bean.put("pId", "0");
+                bean.put("parentId", "0");
             }
         }
-        outputObject.setBeans(beans);
-        outputObject.settotal(beans.size());
+        return beans;
     }
 
-    /**
-     * 添加公司部门职位信息信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertCompanyJobMation(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = companyJobDao.queryCompanyJobMationByName(map);
-        if (bean == null) {
-            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
-            companyJobDao.insertCompanyJobMation(map);
-        } else {
-            outputObject.setreturnMessage("该公司部门职位名称已存在.");
-        }
-    }
-
-    /**
-     * 删除公司部门职位信息信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteCompanyJobMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        // 1.删除职位信息
-        companyJobDao.deleteCompanyJobMationById(map);
-        // 2.删除职位等级信息
-        companyJobScoreDao.editCompanyJobScoreStateMationByJobId(map.get("id").toString(), CompanyJobScoreServiceImpl.State.START_DELETE.getState());
-    }
-
-    /**
-     * 编辑公司部门职位信息信息时进行回显
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryCompanyJobMationToEditById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = companyJobDao.queryCompanyJobMationToEditById(map);
-        outputObject.setBean(bean);
-        outputObject.settotal(CommonNumConstants.NUM_ONE);
-    }
-
-    /**
-     * 编辑公司部门职位信息信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editCompanyJobMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> bean = companyJobDao.queryCompanyJobMationByNameAndId(map);
-        if (bean == null) {
-            companyJobDao.editCompanyJobMationById(map);
-        } else {
-            outputObject.setreturnMessage("该公司部门职位名称已存在.");
-        }
+    public void deletePostpose(String id) {
+        // 删除职位等级信息
+        companyJobScoreDao.editCompanyJobScoreStateMationByJobId(id, CompanyJobScoreServiceImpl.State.START_DELETE.getState());
     }
 
     /**
@@ -173,7 +112,7 @@ public class CompanyJobServiceImpl implements CompanyJobService {
     @Override
     public void queryCompanyJobListByToSelect(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = companyJobDao.queryCompanyJobListByToSelect(map);
+        List<Map<String, Object>> beans = companyJobDao.queryCompanyJobSimpleList(map);
         if (!beans.isEmpty()) {
             outputObject.setBeans(beans);
             outputObject.settotal(beans.size());
@@ -189,11 +128,19 @@ public class CompanyJobServiceImpl implements CompanyJobService {
     @Override
     public void queryCompanyJobSimpleListByToSelect(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = companyJobDao.queryCompanyJobSimpleListByToSelect(map);
+        List<Map<String, Object>> beans = companyJobDao.queryCompanyJobSimpleList(map);
         if (!beans.isEmpty()) {
             outputObject.setBeans(beans);
             outputObject.settotal(beans.size());
         }
+    }
+
+    @Override
+    public List<Map<String, Object>> queryJobList(List<String> companyIds, List<String> departmentIds) {
+        companyIds = companyIds.stream().filter(str -> !ToolUtil.isBlank(str)).collect(Collectors.toList());
+        departmentIds = departmentIds.stream().filter(str -> !ToolUtil.isBlank(str)).collect(Collectors.toList());
+        List<Map<String, Object>> beans = companyJobDao.queryJobList(companyIds, departmentIds);
+        return CollectionUtil.isNotEmpty(beans) ? beans : new ArrayList<>();
     }
 
 }

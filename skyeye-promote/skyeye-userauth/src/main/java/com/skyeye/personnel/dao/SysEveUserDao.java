@@ -81,15 +81,9 @@ public interface SysEveUserDao {
      */
     int editSysUserLock(@Param("userId") String userId, @Param("lockState") Integer lockState);
 
-    List<Map<String, Object>> queryAllPeopleToTree(Map<String, Object> map);
+    List<Map<String, Object>> queryUserStaffToTree(Map<String, Object> map);
 
-    List<Map<String, Object>> queryCompanyPeopleToTreeByUserBelongCompany(Map<String, Object> map);
-
-    List<Map<String, Object>> queryDepartmentPeopleToTreeByUserBelongDepartment(Map<String, Object> map);
-
-    List<Map<String, Object>> queryJobPeopleToTreeByUserBelongJob(Map<String, Object> map);
-
-    List<Map<String, Object>> querySimpleDepPeopleToTreeByUserBelongSimpleDep(Map<String, Object> map);
+    List<Map<String, Object>> queryUserStaffDepToTree(Map<String, Object> map);
 
     List<Map<String, Object>> queryTalkGroupUserListByUserId(Map<String, Object> map);
 

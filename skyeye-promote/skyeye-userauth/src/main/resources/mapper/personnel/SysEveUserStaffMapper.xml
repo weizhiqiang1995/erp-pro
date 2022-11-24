@@ -18,13 +18,12 @@
 			a.state,
 			a.company_id companyId,
 			a.department_id departmentId,
-			p.job_name jobName,
+			a.job_id jobId,
 			a.`type` staffType,
 		    COUNT(b.check_work_time_id) workTimeNum
 		FROM
 			sys_eve_user_staff a
 		    LEFT JOIN sys_eve_user_staff_time b ON a.id = b.staff_id
-			LEFT JOIN company_job p ON a.job_id = p.id
 		<where>
 			<if test="sqlExtract != '' and sqlExtract != null">
 				${sqlExtract}
@@ -144,12 +143,11 @@
 			CASE a.user_sex WHEN '2' THEN '女' WHEN '1' THEN '男' ELSE '保密' END userSex,
 			a.company_id companyId,
 		    a.department_id departmentId,
-			p.job_name jobName,
+		    a.job_id jobId,
 		    o.name_cn jobScoreName
 		FROM
 			sys_eve_user_staff a
 		    LEFT JOIN company_job_score o ON a.job_score_id = o.id
-			LEFT JOIN company_job p ON a.job_id = p.id
 		WHERE a.id = #{staffId}
 	</select>
 	
@@ -220,14 +218,13 @@
 			CASE a.state WHEN '1' THEN 'state-up' WHEN '2' THEN 'state-down' END colorClass,
 			a.company_id companyId,
 			a.department_id departmentId,
-			p.job_name jobName,
+			a.job_id jobId,
 			o.name_cn jobScoreName,
 			b.user_code userCode
 		FROM
 			sys_eve_user_staff a
 			LEFT JOIN company_job_score o ON a.job_score_id = o.id
-			LEFT JOIN sys_eve_user b ON b.id = a.user_id,
-			company_job p
+			LEFT JOIN sys_eve_user b ON b.id = a.user_id
 		<where>
 			<choose>
 				<when test="userIds != '' and userIds != null">
@@ -237,8 +234,6 @@
 					INSTR(CONCAT(',', #{staffIds}, ','), CONCAT(',', a.id, ','))
 				</otherwise>
 			</choose>
-			AND a.department_id = q.id
-			AND a.job_id = p.id
 		</where>
 	</select>
 	
@@ -258,15 +253,13 @@
 		    a.company_id companyId,
 		    a.department_id departmentId,
 		    a.job_id jobId,
-			p.job_name jobName,
 		    a.job_score_id jobScoreId,
 		    o.name_cn jobScoreName,
 			a.`type` staffType
 		FROM
 			sys_eve_user_staff a
-		    LEFT JOIN company_job_score o ON a.job_score_id = o.id,
-			company_job p
-		WHERE a.job_id = p.id
+		    LEFT JOIN company_job_score o ON a.job_score_id = o.id
+		<where>
 			<if test="userName != '' and userName != null">
 				AND a.user_name LIKE '%${userName}%'
 			</if>
@@ -285,6 +278,7 @@
 			<if test="jobName != '' and jobName != null">
 				AND a.job_id = #{jobName}
 			</if>
+		</where>
 			ORDER BY a.state ASC, a.entry_time DESC
 	</select>
 	

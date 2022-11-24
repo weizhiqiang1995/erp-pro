@@ -15,10 +15,7 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.UserPhoneDao;
 import com.skyeye.eve.service.SysAuthorityService;
 import com.skyeye.jedis.JedisClientService;
-import com.skyeye.organization.service.CompanyDepartmentService;
-import com.skyeye.organization.service.CompanyMationService;
-import com.skyeye.organization.service.ICompanyService;
-import com.skyeye.organization.service.IDepmentService;
+import com.skyeye.organization.service.*;
 import com.skyeye.personnel.dao.SysEveUserDao;
 import com.skyeye.service.UserPhoneService;
 import org.apache.commons.lang3.StringUtils;
@@ -52,10 +49,16 @@ public class UserPhoneServiceImpl implements UserPhoneService {
     private IDepmentService iDepmentService;
 
     @Autowired
+    private ICompanyJobService iCompanyJobService;
+
+    @Autowired
     private CompanyMationService companyMationService;
 
     @Autowired
     private CompanyDepartmentService companyDepartmentService;
+
+    @Autowired
+    private CompanyJobService companyJobService;
 
     /**
      * 账号状态
@@ -114,6 +117,7 @@ public class UserPhoneServiceImpl implements UserPhoneService {
 
                     String appUserId = userId + SysUserAuthConstants.APP_IDENTIFYING;
                     iDepmentService.setName(userMation, "departmentId", "departmentName");
+                    iCompanyJobService.setName(userMation, "jobId", "jobName");
                     SysUserAuthConstants.setUserLoginRedisCache(appUserId, userMation);
                     jedisClient.set("allMenuMation:" + appUserId, roleIds);
                     jedisClient.set("authPointsMation:" + appUserId, roleIds);
@@ -225,6 +229,7 @@ public class UserPhoneServiceImpl implements UserPhoneService {
                             if (isBindInWx != null && !isBindInWx.isEmpty()) {
                                 outputObject.setreturnMessage("该账号已被绑定.");
                             } else {
+                                iCompanyJobService.setName(userMation, "jobId", "jobName");
                                 //构建绑定信息对象
                                 map = new HashMap<>();
                                 String userId = userMation.get("id").toString();
@@ -269,6 +274,7 @@ public class UserPhoneServiceImpl implements UserPhoneService {
         List<Map<String, Object>> beans = userPhoneDao.queryAllPeopleToTree(map);
         beans.addAll(companyMationService.queryCompanyList(StringUtils.EMPTY));
         beans.addAll(companyDepartmentService.queryDepartmentList(new ArrayList<>(), new ArrayList<>()));
+        beans.addAll(companyJobService.queryJobList(new ArrayList<>(), new ArrayList<>()));
         beans = ToolUtil.listToTree(beans, "id", "pId", "children");
         outputObject.setBeans(beans);
     }

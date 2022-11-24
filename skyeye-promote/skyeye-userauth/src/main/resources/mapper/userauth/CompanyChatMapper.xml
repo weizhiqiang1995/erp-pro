@@ -56,16 +56,9 @@
 			IFNULL(a.user_sign, '暂无签名') sign,
 			a.company_id companyId,
 			a.department_id departmentId,
-			m.job_name jobName
+			a.job_id jobId
 		FROM
-			sys_eve_user_staff a
-			LEFT JOIN (SELECT 
-							o.user_id,
-							p.job_name
-						FROM 
-							sys_eve_user_staff o, 
-							company_job p
-						WHERE o.job_id = p.id) m ON m.user_id = a.user_id,
+			sys_eve_user_staff a,
 			sys_eve_user b
 		WHERE a.department_id = #{id}
 		AND a.user_id = b.id

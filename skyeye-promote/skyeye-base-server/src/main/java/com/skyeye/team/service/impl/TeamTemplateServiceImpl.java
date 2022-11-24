@@ -56,8 +56,6 @@ public class TeamTemplateServiceImpl extends SkyeyeBusinessServiceImpl<TeamTempl
     protected List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
         List<Map<String, Object>> beans = teamTemplateDao.queryList(commonPageInfo);
-        iAuthUserService.setNameByIdList(beans, "createId", "createName");
-        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
         return beans;
     }
 

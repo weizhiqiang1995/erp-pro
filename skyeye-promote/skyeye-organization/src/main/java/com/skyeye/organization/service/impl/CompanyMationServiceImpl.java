@@ -214,7 +214,7 @@ public class CompanyMationServiceImpl extends SkyeyeBusinessServiceImpl<CompanyM
         }
         beans.addAll(department);
         // 3.获取职位
-        List<Map<String, Object>> job = companyJobDao.queryCompanyJobOrganization(map);
+        List<Map<String, Object>> job = companyJobDao.queryCompanyJobSimpleList(new HashMap<>());
         for (Map<String, Object> bean : job) {
             String[] s = bean.get("parentId").toString().split(",");
             if (s.length > 0 && !"0".equals(bean.get("parentId").toString())) {

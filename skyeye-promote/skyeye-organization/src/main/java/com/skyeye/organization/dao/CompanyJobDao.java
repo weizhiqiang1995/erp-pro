@@ -4,30 +4,21 @@
 
 package com.skyeye.organization.dao;
 
+import com.skyeye.common.entity.search.TableSelectInfo;
+import com.skyeye.eve.dao.SkyeyeBaseMapper;
+import com.skyeye.eve.entity.organization.job.CompanyJob;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Map;
 
-public interface CompanyJobDao {
+public interface CompanyJobDao extends SkyeyeBaseMapper<CompanyJob> {
 
-    List<Map<String, Object>> queryCompanyJobList(Map<String, Object> map);
-
-    int insertCompanyJobMation(Map<String, Object> map);
-
-    Map<String, Object> queryCompanyJobMationByName(Map<String, Object> map);
-
-    int deleteCompanyJobMationById(Map<String, Object> map);
-
-    Map<String, Object> queryCompanyJobMationToEditById(Map<String, Object> map);
-
-    Map<String, Object> queryCompanyJobMationByNameAndId(Map<String, Object> map);
-
-    int editCompanyJobMationById(Map<String, Object> map);
+    List<Map<String, Object>> queryCompanyJobList(TableSelectInfo tableSelectInfo);
 
     List<Map<String, Object>> queryCompanyJobListTreeByDepartmentId(Map<String, Object> map);
 
-    List<Map<String, Object>> queryCompanyJobListByToSelect(Map<String, Object> map);
+    List<Map<String, Object>> queryCompanyJobSimpleList(Map<String, Object> map);
 
-    List<Map<String, Object>> queryCompanyJobSimpleListByToSelect(Map<String, Object> map);
-
-    List<Map<String, Object>> queryCompanyJobOrganization(Map<String, Object> map);
+    List<Map<String, Object>> queryJobList(@Param("companyIds") List<String> companyIds, @Param("departmentIds") List<String> departmentIds);
 }

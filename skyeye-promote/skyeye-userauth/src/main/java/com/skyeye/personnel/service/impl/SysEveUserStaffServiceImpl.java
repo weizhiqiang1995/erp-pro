@@ -17,6 +17,7 @@ import com.skyeye.eve.dao.WagesFieldTypeDao;
 import com.skyeye.eve.entity.userauth.user.SysUserStaffQueryDo;
 import com.skyeye.exception.CustomException;
 import com.skyeye.jedis.JedisClientService;
+import com.skyeye.organization.service.ICompanyJobService;
 import com.skyeye.organization.service.ICompanyService;
 import com.skyeye.organization.service.IDepmentService;
 import com.skyeye.personnel.classenum.UserLockState;
@@ -69,6 +70,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     @Autowired
     private IDepmentService iDepmentService;
 
+    @Autowired
+    private ICompanyJobService iCompanyJobService;
+
     /**
      * 员工状态
      */
@@ -118,6 +122,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         List<Map<String, Object>> beans = sysEveUserStaffDao.querySysUserStaffList(sysUserStaffQuery);
         iCompanyService.setName(beans, "companyId", "companyName");
         iDepmentService.setName(beans, "departmentId", "departmentName");
+        iCompanyJobService.setName(beans, "jobId", "jobName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -336,6 +341,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         if (CollectionUtil.isNotEmpty(bean)) {
             iCompanyService.setName(bean, "companyId", "companyName");
             iDepmentService.setName(bean, "departmentId", "departmentName");
+            iCompanyJobService.setName(bean, "jobId", "jobName");
             bean.put("stateName", State.getNameByState(Integer.parseInt(bean.get("state").toString())));
             // 1.员工考勤时间段信息
             List<Map<String, Object>> staffTimeMation = sysEveUserStaffDao
@@ -420,6 +426,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         List<Map<String, Object>> beans = sysEveUserStaffDao.querySysUserStaffListToTable(map);
         iCompanyService.setName(beans, "companyId", "companyName");
         iDepmentService.setName(beans, "departmentId", "departmentName");
+        iCompanyJobService.setName(beans, "jobId", "jobName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -456,6 +463,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         Map<String, Object> bean = sysEveUserStaffDao.querySysUserStaffByIdToDetails(staffId);
         iCompanyService.setName(bean, "companyId", "companyName");
         iDepmentService.setName(bean, "departmentId", "departmentName");
+        iCompanyJobService.setName(bean, "jobId", "jobName");
         outputObject.setBean(bean);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
@@ -477,6 +485,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
             beans = sysEveUserStaffDao.queryUserMationList(userIds, staffIds);
             iCompanyService.setName(beans, "companyId", "companyName");
             iDepmentService.setName(beans, "departmentId", "departmentName");
+            iCompanyJobService.setName(beans, "jobId", "jobName");
         }
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());

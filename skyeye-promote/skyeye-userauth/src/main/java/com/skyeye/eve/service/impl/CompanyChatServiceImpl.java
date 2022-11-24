@@ -13,6 +13,7 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.CompanyChatDao;
 import com.skyeye.eve.service.CompanyChatService;
 import com.skyeye.jedis.JedisClientService;
+import com.skyeye.organization.service.ICompanyJobService;
 import com.skyeye.organization.service.ICompanyService;
 import com.skyeye.organization.service.IDepmentService;
 import com.skyeye.websocket.TalkWebSocket;
@@ -38,6 +39,9 @@ public class CompanyChatServiceImpl implements CompanyChatService {
 
     @Autowired
     private IDepmentService iDepmentService;
+
+    @Autowired
+    private ICompanyJobService iCompanyJobService;
 
     /**
      * 获取好友列表，群聊信息，个人信息
@@ -81,6 +85,7 @@ public class CompanyChatServiceImpl implements CompanyChatService {
                 userList = companyChatDao.queryDepartmentUserByDepartId(depart);
                 iCompanyService.setName(userList, "companyId", "companyName");
                 iDepmentService.setName(userList, "departmentId", "departmentName");
+                iCompanyJobService.setName(userList, "jobId", "jobName");
                 jedisService.set(Constants.getSysTalkGroupUserListMationById(depart.get("id").toString() + "_" + userId), JSONUtil.toJsonStr(userList));
             } else {
                 userList = JSONUtil.toList(jedisService.get(Constants.getSysTalkGroupUserListMationById(depart.get("id").toString() + "_" + userId)), null);

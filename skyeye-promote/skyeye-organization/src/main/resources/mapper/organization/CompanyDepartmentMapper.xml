@@ -48,14 +48,14 @@
 		SELECT
 			a.id,
 			a.`name` title,
-			a.p_id parentId,
-			CASE a.p_id WHEN '0' THEN true ELSE true END isLast,
+			a.parent_id parentId,
+			CASE a.parent_id WHEN '0' THEN true ELSE true END isLast,
 			'[{"type": "0", "isChecked": "0"}]' checkArr,
-			CASE a.p_id WHEN '0' THEN '1' ELSE '2' END level
+			CASE a.parent_id WHEN '0' THEN '1' ELSE '2' END level
 		FROM
 			company_department a
 		WHERE a.company_id = #{companyId}
-		ORDER BY a.p_id ASC
+		ORDER BY a.parent_id ASC
 	</select>
 
 	<select id="queryCompanyDepartmentOrganization" parameterType="java.util.Map" resultType="java.util.Map">
@@ -63,7 +63,7 @@
 			a.id,
 			a.`name`,
 			'部门' title,
-			a.p_id parentId,
+			a.parent_id parentId,
 			a.company_id companyId
 		FROM
 			company_department a

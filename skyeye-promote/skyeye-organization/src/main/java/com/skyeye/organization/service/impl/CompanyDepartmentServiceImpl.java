@@ -54,8 +54,6 @@ public class CompanyDepartmentServiceImpl extends SkyeyeBusinessServiceImpl<Comp
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
         List<Map<String, Object>> beans = companyDepartmentDao.queryCompanyDepartmentList(commonPageInfo);
         iCompanyService.setName(beans, "companyId", "companyName");
-        iAuthUserService.setNameByIdList(beans, "createId", "createName");
-        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
         beans.forEach(bean -> {
             Integer overtimeSettlementType = Integer.parseInt(bean.get("overtimeSettlementType").toString());
             bean.put("overtimeSettlementTypeName", OrganizationConstants.OvertimeSettlementType.getTitleByType(overtimeSettlementType));

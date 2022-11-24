@@ -20,10 +20,7 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.entity.userauth.user.SysUserQueryDo;
 import com.skyeye.eve.service.SysAuthorityService;
 import com.skyeye.jedis.JedisClientService;
-import com.skyeye.organization.service.CompanyDepartmentService;
-import com.skyeye.organization.service.CompanyMationService;
-import com.skyeye.organization.service.ICompanyService;
-import com.skyeye.organization.service.IDepmentService;
+import com.skyeye.organization.service.*;
 import com.skyeye.personnel.classenum.UserLockState;
 import com.skyeye.personnel.dao.SysEveUserDao;
 import com.skyeye.personnel.dao.SysEveUserStaffDao;
@@ -69,10 +66,16 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     private IDepmentService iDepmentService;
 
     @Autowired
+    private ICompanyJobService iCompanyJobService;
+
+    @Autowired
     private CompanyMationService companyMationService;
 
     @Autowired
     private CompanyDepartmentService companyDepartmentService;
+
+    @Autowired
+    private CompanyJobService companyJobService;
 
     /**
      * 获取管理员用户列表
@@ -87,6 +90,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         List<Map<String, Object>> beans = sysEveUserDao.querySysUserList(sysUserQuery);
         iCompanyService.setName(beans, "companyId", "companyName");
         iDepmentService.setName(beans, "departmentId", "departmentName");
+        iCompanyJobService.setName(beans, "jobId", "jobName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -272,6 +276,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     private void setUserOtherMation(Map<String, Object> userMation) {
         iCompanyService.setName(userMation, "companyId", "companyName");
         iDepmentService.setName(userMation, "departmentId", "departmentName");
+        iCompanyJobService.setName(userMation, "jobId", "jobName");
     }
 
     /**
@@ -616,6 +621,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         Map<String, Object> bean = sysEveUserDao.queryUserDetailsMationByUserId(user.get("id").toString());
         iCompanyService.setName(bean, "companyId", "companyName");
         iDepmentService.setName(bean, "departmentId", "departmentName");
+        iCompanyJobService.setName(bean, "jobId", "jobName");
         outputObject.setBean(bean);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
@@ -693,7 +699,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map = compareSelUserListByParams(map, inputObject);
-        List<Map<String, Object>> beans = sysEveUserDao.queryAllPeopleToTree(map);
+        List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffToTree(map);
         setOrganization(beans, StringUtils.EMPTY);
         outputObject.setBeans(beans);
     }
@@ -707,6 +713,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     private void setOrganization(List<Map<String, Object>> beans, String companyId) {
         beans.addAll(companyMationService.queryCompanyList(companyId));
         beans.addAll(companyDepartmentService.queryDepartmentList(Arrays.asList(companyId), new ArrayList<>()));
+        beans.addAll(companyJobService.queryJobList(Arrays.asList(companyId), new ArrayList<>()));
     }
 
     /**
@@ -721,7 +728,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         map = compareSelUserListByParams(map, inputObject);
         String companyId = inputObject.getLogParams().get("companyId").toString();
         map.put("companyId", companyId);
-        List<Map<String, Object>> beans = sysEveUserDao.queryCompanyPeopleToTreeByUserBelongCompany(map);
+        List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffToTree(map);
         setOrganization(beans, companyId);
         outputObject.setBeans(beans);
     }
@@ -738,7 +745,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         map = compareSelUserListByParams(map, inputObject);
         String companyId = inputObject.getLogParams().get("companyId").toString();
         map.put("companyId", companyId);
-        List<Map<String, Object>> beans = sysEveUserDao.queryDepartmentPeopleToTreeByUserBelongDepartment(map);
+        List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffDepToTree(map);
         setOrganization(beans, companyId);
         outputObject.setBeans(beans);
     }
@@ -755,7 +762,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         map = compareSelUserListByParams(map, inputObject);
         String companyId = inputObject.getLogParams().get("companyId").toString();
         map.put("companyId", companyId);
-        List<Map<String, Object>> beans = sysEveUserDao.queryJobPeopleToTreeByUserBelongJob(map);
+        List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffToTree(map);
         setOrganization(beans, companyId);
         outputObject.setBeans(beans);
     }
@@ -770,7 +777,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     public void querySimpleDepPeopleToTreeByUserBelongSimpleDep(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         map = compareSelUserListByParams(map, inputObject);
-        List<Map<String, Object>> beans = sysEveUserDao.querySimpleDepPeopleToTreeByUserBelongSimpleDep(map);
+        List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffDepToTree(map);
         beans.addAll(companyDepartmentService.queryDepartmentList(new ArrayList<>(), Arrays.asList(inputObject.getLogParams().get("departmentId").toString())));
         outputObject.setBeans(beans);
     }

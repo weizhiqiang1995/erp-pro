@@ -4,43 +4,6 @@
 		- allUse  是否需要登录才能使用   1是   0否  2需要登陆才能访问，但无需授权    默认为否
 	 -->
 
-    <!-- 职位管理开始 -->
-    <url id="companyjob001" path="/post/CompanyJobController/queryCompanyJobList" val="获取公司部门职位信息列表" allUse="1" groupName="职位管理">
-        <property id="companyId" name="companyId" ref="" var="公司id"/>
-        <property id="departmentId" name="departmentId" ref="" var="部门id"/>
-        <property id="jobName" name="jobName" ref="" var="部门职位名称"/>
-    </url>
-    <url id="companyjob002" path="/post/CompanyJobController/insertCompanyJobMation" val="添加公司部门职位信息信息" allUse="1" groupName="职位管理">
-        <property id="companyId" name="companyId" ref="required" var="公司id"/>
-        <property id="departmentId" name="departmentId" ref="required" var="部门id"/>
-        <property id="jobName" name="jobName" ref="" var="部门职位名称"/>
-        <property id="jobDesc" name="jobDesc" ref="" var="部门职位简介"/>
-        <property id="pId" name="pId" ref="required" var="父职位id"/>
-    </url>
-    <url id="companyjob003" path="/post/CompanyJobController/deleteCompanyJobMationById" val="删除公司部门职位信息信息" allUse="1" groupName="职位管理">
-        <property id="rowId" name="id" ref="required" var="公司部门职位信息id"/>
-    </url>
-    <url id="companyjob004" path="/post/CompanyJobController/queryCompanyJobMationToEditById" val="编辑公司部门职位信息信息时进行回显" allUse="2" groupName="职位管理">
-        <property id="rowId" name="id" ref="required" var="公司部门职位信息id"/>
-    </url>
-    <url id="companyjob005" path="/post/CompanyJobController/editCompanyJobMationById" val="编辑公司部门职位信息信息" allUse="1" groupName="职位管理">
-        <property id="rowId" name="id" ref="required" var="公司部门职位信息id"/>
-        <property id="jobName" name="jobName" ref="" var="部门职位名称"/>
-        <property id="jobDesc" name="jobDesc" ref="" var="部门职位简介"/>
-        <property id="companyId" name="companyId" ref="required" var="公司id"/>
-        <property id="departmentId" name="departmentId" ref="required" var="部门id"/>
-        <property id="pId" name="pId" ref="required" var="父职位id"/>
-    </url>
-    <url id="companyjob006" path="/post/CompanyJobController/queryCompanyJobListTreeByDepartmentId" val="获取公司部门职位信息列表展示为树根据公司id" allUse="2" groupName="职位管理">
-        <property id="departmentId" name="departmentId" ref="required" var="部门id"/>
-    </url>
-    <url id="companyjob008" path="/post/CompanyJobController/queryCompanyJobSimpleListByToSelect" val="根据部门id获取职位同级列表且不包含当前id的值展示为下拉选择框" allUse="2" method="POST" groupName="职位管理">
-        <property id="departmentId" name="departmentId" ref="required" var="部门id"/>
-        <property id="rowId" name="id" ref="" var="不包含的职位id"/>
-        <property id="pId" name="pId" ref="required" var="父职位id"/>
-    </url>
-    <!-- 职位管理结束 -->
-
     <!-- 职位定级开始 -->
     <url id="companyjobscore001" path="/post/CompanyJobScoreController/queryCompanyJobScoreList" val="获取职位定级信息列表" allUse="1" method="POST" groupName="职位定级">
         <property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />

@@ -13,13 +13,12 @@
 			c.user_photo userPhoto,
 			c.user_sign userSign,
 			c.department_id departmentId,
-			e.job_name jobName,
+			c.job_id jobId,
 		    a.role_id roleId
 		FROM
 			sys_eve_user a
 			LEFT JOIN sys_eve_user_install b ON a.id = b.user_id
 			LEFT JOIN sys_eve_user_staff c ON a.id = c.user_id
-			LEFT JOIN company_job e ON e.id = c.job_id
 		WHERE
 			a.user_code = #{userCode}
 	</select>
@@ -97,17 +96,6 @@
 	</select>
 	
 	<select id="queryAllPeopleToTree" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.job_name `name`,
-			a.department_id pId,
-			'isJob' folderType,
-			1 isParent,
-			'../../assets/images/job-icon.png' `icon`,
-			'' `email`
-		FROM
-			company_job a
-		UNION ALL
 		SELECT
 			a.user_id id,
 			CONCAT_WS('_', a.job_number, a.user_name) `name`,
