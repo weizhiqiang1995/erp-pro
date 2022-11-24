@@ -12,7 +12,7 @@ import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.cache.RedisCacheField;
 import com.skyeye.annotation.unique.UniqueField;
 import com.skyeye.common.constans.CacheConstants;
-import com.skyeye.common.entity.other.AreaInfo;
+import com.skyeye.common.entity.features.AreaInfo;
 import lombok.Data;
 
 import java.util.List;

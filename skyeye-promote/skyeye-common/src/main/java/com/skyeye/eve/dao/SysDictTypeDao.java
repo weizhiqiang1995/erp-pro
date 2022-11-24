@@ -4,7 +4,7 @@
 
 package com.skyeye.eve.dao;
 
-import com.skyeye.common.entity.CommonPageInfo;
+import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.eve.entity.dict.SysDictTypeMation;
 
 import java.util.List;

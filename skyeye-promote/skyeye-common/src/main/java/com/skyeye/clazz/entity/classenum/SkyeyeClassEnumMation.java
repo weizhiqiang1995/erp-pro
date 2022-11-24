@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.skyeye.annotation.api.ApiModel;
-import com.skyeye.common.entity.CommonOperatorUserInfo;
+import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,7 +31,7 @@ import java.util.Map;
 @AllArgsConstructor
 @TableName(value = "skyeye_class_enum", autoResultMap = true)
 @ApiModel("具备某个特征的枚举类表对应的实体类")
-public class SkyeyeClassEnumMation extends CommonOperatorUserInfo implements Serializable {
+public class SkyeyeClassEnumMation extends OperatorUserInfo implements Serializable {
 
     @TableId("id")
     private String id;

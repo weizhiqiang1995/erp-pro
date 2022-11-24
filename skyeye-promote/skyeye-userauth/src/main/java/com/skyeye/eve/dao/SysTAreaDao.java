@@ -4,7 +4,7 @@
 
 package com.skyeye.eve.dao;
 
-import com.skyeye.common.entity.TableSelectInfo;
+import com.skyeye.common.entity.search.TableSelectInfo;
 import com.skyeye.eve.entity.userauth.area.SysTArea;
 import org.apache.ibatis.annotations.Param;
 

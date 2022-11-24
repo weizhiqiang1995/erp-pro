@@ -6,7 +6,7 @@ package com.skyeye.eve.entity.codedoc.model;
 
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
-import com.skyeye.common.entity.CommonPageInfo;
+import com.skyeye.common.entity.search.CommonPageInfo;
 import lombok.Data;
 
 import java.io.Serializable;

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
-import com.skyeye.common.entity.CommonOperatorUserInfo;
+import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
 
 import java.util.Map;
@@ -25,7 +25,7 @@ import java.util.Map;
 @Data
 @TableName(value = "sys_search")
 @ApiModel("高级查询配置实体类")
-public class SearchMation extends CommonOperatorUserInfo {
+public class SearchMation extends OperatorUserInfo {
 
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")

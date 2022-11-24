@@ -4,7 +4,7 @@
 
 package com.skyeye.clazz.dao;
 
-import com.skyeye.common.entity.CommonPageInfo;
+import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.eve.dao.SkyeyeBaseMapper;
 import com.skyeye.clazz.entity.classflowable.SkyeyeClassFlowableLinkMation;
 

@@ -4,7 +4,7 @@
 
 package com.skyeye.team.dao;
 
-import com.skyeye.common.entity.CommonPageInfo;
+import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.eve.dao.SkyeyeBaseMapper;
 import com.skyeye.eve.entity.team.TeamTemplate;
 

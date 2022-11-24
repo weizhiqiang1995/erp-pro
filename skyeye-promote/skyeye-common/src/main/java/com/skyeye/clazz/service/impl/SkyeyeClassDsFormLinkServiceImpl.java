@@ -16,7 +16,7 @@ import com.skyeye.clazz.rest.DsFormPageService;
 import com.skyeye.clazz.service.SkyeyeClassDsFormLinkService;
 import com.skyeye.common.client.ExecuteFeignClient;
 import com.skyeye.common.constans.CommonNumConstants;
-import com.skyeye.common.entity.CommonPageInfo;
+import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
-import com.skyeye.common.entity.CommonOperatorUserInfo;
+import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
 
 /**
@@ -23,7 +23,7 @@ import lombok.Data;
 @Data
 @TableName(value = "team_object_permission")
 @ApiModel("业务对象权限实体类")
-public class TeamObjectPermission extends CommonOperatorUserInfo {
+public class TeamObjectPermission extends OperatorUserInfo {
 
     @TableId("id")
     private String id;

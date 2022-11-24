@@ -4,7 +4,7 @@
 
 package com.skyeye.win.dao;
 
-import com.skyeye.common.entity.CommonPageInfo;
+import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.eve.dao.SkyeyeBaseMapper;
 import com.skyeye.eve.entity.userauth.win.SysEveWinMation;
 import org.apache.ibatis.annotations.Param;
@@ -24,7 +24,7 @@ public interface SysEveWinDao extends SkyeyeBaseMapper<SysEveWinMation> {
 
     List<Map<String, Object>> queryWinMationList(CommonPageInfo commonPageInfo);
 
-    Map<String, Object> queryChildMationById(@Param("id")String id);
+    Map<String, Object> queryChildMationById(@Param("id") String id);
 
     List<Map<String, Object>> querySysEveWinList();
 }

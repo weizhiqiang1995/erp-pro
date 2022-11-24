@@ -4,7 +4,7 @@
 
 package com.skyeye.role.dao;
 
-import com.skyeye.common.entity.CommonPageInfo;
+import com.skyeye.common.entity.search.CommonPageInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -5,7 +5,7 @@
 package com.skyeye.eve.service.impl;
 
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
-import com.skyeye.common.entity.TableSelectInfo;
+import com.skyeye.common.entity.search.TableSelectInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.dao.SysTAreaDao;
@@ -32,6 +32,7 @@ public class SysTAreaServiceImpl extends SkyeyeBusinessServiceImpl<SysTAreaDao, 
     @Autowired
     private SysTAreaDao sysTAreaDao;
 
+    @Override
     public List<Map<String, Object>> queryDataList(InputObject inputObject) {
         TableSelectInfo selectInfo = inputObject.getParams(TableSelectInfo.class);
         return sysTAreaDao.querySysTAreaList(selectInfo);

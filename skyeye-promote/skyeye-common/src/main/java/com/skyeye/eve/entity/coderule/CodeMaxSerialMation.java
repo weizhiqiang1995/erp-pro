@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
-import com.skyeye.common.entity.CommonOperatorUserInfo;
+import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -25,7 +25,7 @@ import java.io.Serializable;
 @Data
 @TableName(value = "skyeye_code_max_serial", autoResultMap = true)
 @ApiModel("编码最大序列值实体类")
-public class CodeMaxSerialMation extends CommonOperatorUserInfo implements Serializable {
+public class CodeMaxSerialMation extends OperatorUserInfo implements Serializable {
 
     @TableId("id")
     private String id;

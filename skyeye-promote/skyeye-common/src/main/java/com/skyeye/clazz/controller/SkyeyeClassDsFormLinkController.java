@@ -10,7 +10,7 @@ import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.clazz.entity.dsformlink.SkyeyeClassDsFormLinkApiMation;
 import com.skyeye.clazz.service.SkyeyeClassDsFormLinkService;
-import com.skyeye.common.entity.CommonPageInfo;
+import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import org.springframework.beans.factory.annotation.Autowired;

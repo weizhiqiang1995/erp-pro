@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
-import com.skyeye.common.entity.CommonOperatorUserInfo;
+import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +29,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @TableName(value = "skyeye_class_ds_form_link", autoResultMap = true)
 @ApiModel("动态表单的服务类注册实体类")
-public class SkyeyeClassDsFormLinkMation extends CommonOperatorUserInfo implements Serializable {
+public class SkyeyeClassDsFormLinkMation extends OperatorUserInfo implements Serializable {
 
     @TableId("id")
     private String id;

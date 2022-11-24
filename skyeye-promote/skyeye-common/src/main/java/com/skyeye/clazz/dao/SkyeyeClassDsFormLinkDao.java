@@ -5,7 +5,7 @@
 package com.skyeye.clazz.dao;
 
 import com.skyeye.clazz.entity.dsformlink.SkyeyeClassDsFormLinkMation;
-import com.skyeye.common.entity.CommonPageInfo;
+import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.eve.dao.SkyeyeBaseMapper;
 import org.apache.ibatis.annotations.Param;
 

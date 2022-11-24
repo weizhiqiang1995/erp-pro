@@ -13,7 +13,7 @@ import com.skyeye.annotation.cache.RedisCacheField;
 import com.skyeye.annotation.unique.UniqueField;
 import com.skyeye.common.constans.CacheConstants;
 import com.skyeye.common.constans.RedisConstants;
-import com.skyeye.common.entity.CommonOperatorUserInfo;
+import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
 
 import java.util.List;
@@ -31,7 +31,7 @@ import java.util.List;
 @RedisCacheField(name = CacheConstants.TEAM_TEMPLATE_CACHE_KEY, cacheTime = RedisConstants.THIRTY_DAY_SECONDS)
 @TableName(value = "team_template")
 @ApiModel("团队模板实体类")
-public class TeamTemplate extends CommonOperatorUserInfo {
+public class TeamTemplate extends OperatorUserInfo {
 
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")

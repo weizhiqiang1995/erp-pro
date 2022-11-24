@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
-import com.skyeye.common.entity.CommonOperatorUserInfo;
+import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +29,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @TableName(value = "skyeye_class_code_rule", autoResultMap = true)
 @ApiModel("需要获取编码的服务类的集合实体类")
-public class SkyeyeClassCodeRuleMation extends CommonOperatorUserInfo implements Serializable {
+public class SkyeyeClassCodeRuleMation extends OperatorUserInfo implements Serializable {
 
     @TableId("id")
     private String id;

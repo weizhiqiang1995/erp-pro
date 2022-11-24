@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
-import com.skyeye.common.entity.CommonOperatorUserInfo;
+import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
 
 /**
@@ -23,7 +23,7 @@ import lombok.Data;
 @Data
 @TableName(value = "sys_eve_win")
 @ApiModel("服务管理实体类")
-public class SysEveWinMation extends CommonOperatorUserInfo {
+public class SysEveWinMation extends OperatorUserInfo {
 
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")
@@ -40,6 +40,5 @@ public class SysEveWinMation extends CommonOperatorUserInfo {
     @TableField("sys_url")
     @ApiModelProperty(value = "服务地址")
     private String sysUrl;
-
 
 }

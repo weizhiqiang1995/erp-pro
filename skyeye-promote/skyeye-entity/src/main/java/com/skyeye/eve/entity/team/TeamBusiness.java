@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
-import com.skyeye.common.entity.CommonOperatorUserInfo;
+import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
 
 import java.util.List;
@@ -25,7 +25,7 @@ import java.util.List;
 @Data
 @TableName(value = "team_business")
 @ApiModel("团队实体类")
-public class TeamBusiness extends CommonOperatorUserInfo {
+public class TeamBusiness extends OperatorUserInfo {
 
     @TableId("id")
     private String id;

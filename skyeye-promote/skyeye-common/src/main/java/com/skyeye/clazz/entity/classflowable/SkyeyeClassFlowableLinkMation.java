@@ -11,7 +11,7 @@ import com.google.common.base.Joiner;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.common.constans.CommonCharConstants;
-import com.skyeye.common.entity.CommonOperatorUserInfo;
+import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @TableName(value = "skyeye_class_flowable_link", autoResultMap = true)
 @ApiModel("工作流业务对象服务关系的实体类")
-public class SkyeyeClassFlowableLinkMation extends CommonOperatorUserInfo implements Serializable {
+public class SkyeyeClassFlowableLinkMation extends OperatorUserInfo implements Serializable {
 
     @TableId("id")
     private String id;

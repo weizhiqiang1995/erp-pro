@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.unique.UniqueField;
-import com.skyeye.common.entity.CommonOperatorUserInfo;
+import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
 
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.List;
 @UniqueField(value = {"teamId", "teamKey", "roleId"})
 @TableName(value = "team_template")
 @ApiModel("团队角色实体类")
-public class TeamRole extends CommonOperatorUserInfo {
+public class TeamRole extends OperatorUserInfo {
 
     @TableId("id")
     private String id;

@@ -4,7 +4,7 @@
 
 package com.skyeye.menuapp.dao;
 
-import com.skyeye.common.entity.CommonPageInfo;
+import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.eve.dao.SkyeyeBaseMapper;
 import com.skyeye.eve.entity.userauth.menu.AppWorkPageMation;
 import org.apache.ibatis.annotations.Param;

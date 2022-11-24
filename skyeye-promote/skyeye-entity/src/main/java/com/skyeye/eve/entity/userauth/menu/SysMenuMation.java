@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
-import com.skyeye.common.entity.other.IconOrImgInfo;
+import com.skyeye.common.entity.features.IconOrImgInfo;
 import lombok.Data;
 
 /**
