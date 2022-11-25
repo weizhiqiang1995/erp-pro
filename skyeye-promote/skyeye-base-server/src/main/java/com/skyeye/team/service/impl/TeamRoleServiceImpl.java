@@ -79,7 +79,7 @@ public class TeamRoleServiceImpl extends SkyeyeBusinessServiceImpl<TeamRoleDao, 
         }
         List<String> roleIds = teamRoleList.stream().map(TeamRole::getRoleId).collect(Collectors.toList());
         // 查询角色信息
-        List<Map<String, Object>> sysDictDataList = iSysDictDataService.queryDictDataMationByIds(Joiner.on(CommonCharConstants.COMMA_MARK).join(roleIds));
+        List<Map<String, Object>> sysDictDataList = iSysDictDataService.queryDataMationByIds(Joiner.on(CommonCharConstants.COMMA_MARK).join(roleIds));
         Map<String, Map<String, Object>> maps = sysDictDataList.stream()
             .collect(Collectors.toMap(item -> item.get("id").toString(), Function.identity()));
         // 循环设置角色名称

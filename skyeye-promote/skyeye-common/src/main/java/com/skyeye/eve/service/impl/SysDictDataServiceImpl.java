@@ -111,7 +111,7 @@ public class SysDictDataServiceImpl implements SysDictDataService {
                 sysDictDataDao.insert(sysDictDataMation);
             }
             // 删除字典缓存
-            String cacheKey = iSysDictDataService.queryDictDataCacheKeyById(sysDictDataMation.getId());
+            String cacheKey = iSysDictDataService.queryCacheKeyById(sysDictDataMation.getId());
             jedisClientService.del(cacheKey);
             // 3.设置默认值
             setIsDefault(sysDictDataMation);
@@ -206,7 +206,7 @@ public class SysDictDataServiceImpl implements SysDictDataService {
         LOGGER.info("delete dictData data, id is {}", id);
         sysDictDataDao.deleteById(id);
         // 删除字典缓存
-        String cacheKey = iSysDictDataService.queryDictDataCacheKeyById(id);
+        String cacheKey = iSysDictDataService.queryCacheKeyById(id);
         jedisClientService.del(cacheKey);
     }
 
