@@ -12,6 +12,7 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.entity.userauth.user.SysUserMation;
 import com.skyeye.eve.entity.userauth.user.SysUserQueryDo;
+import com.skyeye.eve.entity.userauth.user.UserTreeQueryDo;
 import com.skyeye.personnel.service.SysEveUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -348,7 +349,9 @@ public class SysEveUserController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @RequestMapping("/post/SysEnclosureController/queryAllPeopleToTree")
+    @ApiOperation(id = "commonselpeople001", value = "人员选择获取所有公司和人", method = "GET", allUse = "2")
+    @ApiImplicitParams(classBean = UserTreeQueryDo.class)
+    @RequestMapping("/post/SysEveUserController/queryAllPeopleToTree")
     public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.queryAllPeopleToTree(inputObject, outputObject);
     }
@@ -359,7 +362,9 @@ public class SysEveUserController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @RequestMapping("/post/SysEnclosureController/queryCompanyPeopleToTreeByUserBelongCompany")
+    @ApiOperation(id = "commonselpeople002", value = "人员选择根据当前用户所属公司获取这个公司的人", method = "GET", allUse = "2")
+    @ApiImplicitParams(classBean = UserTreeQueryDo.class)
+    @RequestMapping("/post/SysEveUserController/queryCompanyPeopleToTreeByUserBelongCompany")
     public void queryCompanyPeopleToTreeByUserBelongCompany(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.queryCompanyPeopleToTreeByUserBelongCompany(inputObject, outputObject);
     }
@@ -370,7 +375,9 @@ public class SysEveUserController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @RequestMapping("/post/SysEnclosureController/queryDepartmentPeopleToTreeByUserBelongDepartment")
+    @ApiOperation(id = "commonselpeople003", value = "人员选择根据当前用户所属公司获取这个公司部门展示的人", method = "GET", allUse = "2")
+    @ApiImplicitParams(classBean = UserTreeQueryDo.class)
+    @RequestMapping("/post/SysEveUserController/queryDepartmentPeopleToTreeByUserBelongDepartment")
     public void queryDepartmentPeopleToTreeByUserBelongDepartment(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.queryDepartmentPeopleToTreeByUserBelongDepartment(inputObject, outputObject);
     }
@@ -381,7 +388,9 @@ public class SysEveUserController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @RequestMapping("/post/SysEnclosureController/queryJobPeopleToTreeByUserBelongJob")
+    @ApiOperation(id = "commonselpeople004", value = "人员选择根据当前用户所属公司获取这个公司岗位展示的人", method = "GET", allUse = "2")
+    @ApiImplicitParams(classBean = UserTreeQueryDo.class)
+    @RequestMapping("/post/SysEveUserController/queryJobPeopleToTreeByUserBelongJob")
     public void queryJobPeopleToTreeByUserBelongJob(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.queryJobPeopleToTreeByUserBelongJob(inputObject, outputObject);
     }
@@ -392,7 +401,9 @@ public class SysEveUserController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @RequestMapping("/post/SysEnclosureController/querySimpleDepPeopleToTreeByUserBelongSimpleDep")
+    @ApiOperation(id = "commonselpeople005", value = "人员选择根据当前用户所属公司获取这个公司同级部门展示的人", method = "GET", allUse = "2")
+    @ApiImplicitParams(classBean = UserTreeQueryDo.class)
+    @RequestMapping("/post/SysEveUserController/querySimpleDepPeopleToTreeByUserBelongSimpleDep")
     public void querySimpleDepPeopleToTreeByUserBelongSimpleDep(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.querySimpleDepPeopleToTreeByUserBelongSimpleDep(inputObject, outputObject);
     }
@@ -403,7 +414,9 @@ public class SysEveUserController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @RequestMapping("/post/SysEnclosureController/queryTalkGroupUserListByUserId")
+    @ApiOperation(id = "commonselpeople006", value = "根据聊天组展示用户", method = "GET", allUse = "2")
+    @ApiImplicitParams(classBean = UserTreeQueryDo.class)
+    @RequestMapping("/post/SysEveUserController/queryTalkGroupUserListByUserId")
     public void queryTalkGroupUserListByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.queryTalkGroupUserListByUserId(inputObject, outputObject);
     }

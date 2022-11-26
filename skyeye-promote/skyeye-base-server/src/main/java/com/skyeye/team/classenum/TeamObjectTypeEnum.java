@@ -9,6 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @ClassName: TeamObjectTypeEnum
  * @Description: 团队适用对象枚举类
@@ -22,13 +25,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public enum TeamObjectTypeEnum implements SkyeyeEnumClass {
 
-    CUSTOMER(1, "客户团队", true, true),
-    SUPPLIER(2, "供应商团队", true, false),
-    PROJECT(3, "项目团队", true, false);
+    CUSTOMER(1, "客户团队", Arrays.asList("contactsAuthEnum"), true, true),
+    SUPPLIER(2, "供应商团队", Arrays.asList("contactsAuthEnum"), true, false),
+    PROJECT(3, "项目团队", Arrays.asList(), true, false);
 
     private Integer key;
 
     private String value;
+
+    private List<String> pageAuth;
 
     private Boolean show;
 

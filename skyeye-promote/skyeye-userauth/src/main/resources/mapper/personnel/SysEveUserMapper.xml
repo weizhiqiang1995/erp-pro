@@ -423,14 +423,16 @@
 			'isPeople' folderType,
 			0 isParent,
 			'../../assets/images/people-icon.png' `icon`,
-			a.email `email`
+			a.email `email`,
+			a.phone,
+			a.department_id departmentId
 		FROM
 			sys_eve_user_staff a
 		<where>
 			a.state = '1'
 			AND LENGTH(a.user_id) > 0 AND a.user_id != ''
 			<if test="companyId != null and companyId != ''">
-				AND a.company_id != #{companyId}
+				AND a.company_id = #{companyId}
 			</if>
 			<if test="userId != null and userId != ''">
 				AND a.user_id != #{userId}
@@ -441,7 +443,7 @@
 		</where>
 	</select>
 
-	<select id="queryUserStaffDepToTree" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryUserStaffDepToTree" resultType="java.util.Map">
 		SELECT
 			a.user_id id,
 			CONCAT_WS('_', a.job_number, a.user_name) `name`,
@@ -449,17 +451,19 @@
 			'isPeople' folderType,
 			0 isParent,
 			'../../assets/images/people-icon.png' `icon`,
-			a.email `email`
+			a.email `email`,
+			a.phone,
+			a.department_id departmentId
 		FROM
 			sys_eve_user_staff a
 		<where>
 			a.state = '1'
 			AND LENGTH(a.user_id) > 0 AND a.user_id != ''
 			<if test="companyId != null and companyId != ''">
-				AND a.company_id != #{companyId}
+				AND a.company_id = #{companyId}
 			</if>
 			<if test="departmentId != null and departmentId != ''">
-				AND a.department_id != #{departmentId}
+				AND a.department_id = #{departmentId}
 			</if>
 			<if test="userId != null and userId != ''">
 				AND a.user_id != #{userId}
@@ -471,20 +475,21 @@
 	</select>
 
 	<select id="queryTalkGroupUserListByUserId" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.group_name `name`,
-			'0' pId,
-			'isGroup' folderType,
-			1 isParent,
-			'../../assets/images/talk-group-icon.png' `icon`,
-			'' `email`
-		FROM
-			sys_talk_group a,
-			sys_talk_group_user b
-		WHERE
-			a.id = b.group_id
-			AND b.user_id = #{createId}
+			SELECT
+				a.id,
+				a.group_name `name`,
+				'0' pId,
+				'isGroup' folderType,
+				1 isParent,
+				'../../assets/images/talk-group-icon.png' `icon`,
+				'' `email`,
+				'' phone,
+				'' departmentId
+			FROM
+				sys_talk_group a,
+				sys_talk_group_user b
+			WHERE a.id = b.group_id
+			AND b.user_id = #{userId}
 		UNION ALL
 			SELECT
 				a.user_id id,
@@ -493,19 +498,18 @@
 				'isPeople' folderType,
 				0 isParent,
 				'../../assets/images/people-icon.png' `icon`,
-				a.email `email`
+				a.email `email`,
+				a.phone,
+				a.department_id departmentId
 			FROM
 				sys_eve_user_staff a,
 				sys_talk_group_user b,
 				sys_talk_group_user c
 			WHERE a.state = '1'
 			AND a.user_id = c.user_id
-			AND b.user_id = #{createId}
+			AND b.user_id = #{userId}
 			AND c.group_id = b.group_id
 			AND LENGTH(a.user_id) > 0 AND a.user_id != ''
-			<if test="userId != null and userId != ''">
-				AND a.user_id != #{userId}
-			</if>
 			<if test="hasEmail != null and hasEmail != ''">
 				AND LENGTH(a.email) > 0 AND a.email != ''
 			</if>

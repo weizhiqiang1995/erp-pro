@@ -79,33 +79,6 @@
 	</url>
 	<!-- 聊天结束 -->
 	
-	<!-- 人员选择开始 -->
-	<url id="commonselpeople001" path="/post/SysEnclosureController/queryAllPeopleToTree" val="人员选择获取所有公司和人" allUse="2" method="GET" groupName="企业人员选择模块">
-		<property id="chooseOrNotMy" name="chooseOrNotMy" ref="required,num" var="人员列表中是否包含自己--1.包含；其他参数不包含" />
-		<property id="chooseOrNotEmail" name="chooseOrNotEmail" ref="required,num" var="人员列表中是否必须绑定邮箱--1.必须；其他参数没必要" />
-	</url>
-	<url id="commonselpeople002" path="/post/SysEnclosureController/queryCompanyPeopleToTreeByUserBelongCompany" val="人员选择根据当前用户所属公司获取这个公司的人" allUse="2" method="GET" groupName="企业人员选择模块">
-		<property id="chooseOrNotMy" name="chooseOrNotMy" ref="required,num" var="人员列表中是否包含自己--1.包含；其他参数不包含" />
-		<property id="chooseOrNotEmail" name="chooseOrNotEmail" ref="required,num" var="人员列表中是否必须绑定邮箱--1.必须；其他参数没必要" />
-	</url>
-	<url id="commonselpeople003" path="/post/SysEnclosureController/queryDepartmentPeopleToTreeByUserBelongDepartment" val="人员选择根据当前用户所属公司获取这个公司部门展示的人" allUse="2" method="GET" groupName="企业人员选择模块">
-		<property id="chooseOrNotMy" name="chooseOrNotMy" ref="required,num" var="人员列表中是否包含自己--1.包含；其他参数不包含" />
-		<property id="chooseOrNotEmail" name="chooseOrNotEmail" ref="required,num" var="人员列表中是否必须绑定邮箱--1.必须；其他参数没必要" />
-	</url>
-	<url id="commonselpeople004" path="/post/SysEnclosureController/queryJobPeopleToTreeByUserBelongJob" val="人员选择根据当前用户所属公司获取这个公司岗位展示的人" allUse="2" method="GET" groupName="企业人员选择模块">
-		<property id="chooseOrNotMy" name="chooseOrNotMy" ref="required,num" var="人员列表中是否包含自己--1.包含；其他参数不包含" />
-		<property id="chooseOrNotEmail" name="chooseOrNotEmail" ref="required,num" var="人员列表中是否必须绑定邮箱--1.必须；其他参数没必要" />
-	</url>
-	<url id="commonselpeople005" path="/post/SysEnclosureController/querySimpleDepPeopleToTreeByUserBelongSimpleDep" val="人员选择根据当前用户所属公司获取这个公司同级部门展示的人" allUse="2" method="GET" groupName="企业人员选择模块">
-		<property id="chooseOrNotMy" name="chooseOrNotMy" ref="required,num" var="人员列表中是否包含自己--1.包含；其他参数不包含" />
-		<property id="chooseOrNotEmail" name="chooseOrNotEmail" ref="required,num" var="人员列表中是否必须绑定邮箱--1.必须；其他参数没必要" />
-	</url>
-	<url id="commonselpeople006" path="/post/SysEnclosureController/queryTalkGroupUserListByUserId" val="根据聊天组展示用户" allUse="2" method="GET" groupName="企业人员选择模块">
-		<property id="chooseOrNotMy" name="chooseOrNotMy" ref="required,num" var="人员列表中是否包含自己--1.包含；其他参数不包含" />
-		<property id="chooseOrNotEmail" name="chooseOrNotEmail" ref="required,num" var="人员列表中是否必须绑定邮箱--1.必须；其他参数没必要" />
-	</url>
-	<!-- 人员选择结束 -->
-	
 	<!-- 系统各部分说明开始 -->
 	<url id="exexplain001" path="/post/ExExplainController/insertExExplainMation" val="添加代码生成器说明信息" allUse="2" groupName="系统各部分说明">
 		<property id="title" name="title" ref="required" var="代码生成器说明标题"/>

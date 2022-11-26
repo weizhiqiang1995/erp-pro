@@ -18,6 +18,7 @@ import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.entity.userauth.user.SysUserQueryDo;
+import com.skyeye.eve.entity.userauth.user.UserTreeQueryDo;
 import com.skyeye.eve.service.SysAuthorityService;
 import com.skyeye.jedis.JedisClientService;
 import com.skyeye.organization.service.*;
@@ -701,11 +702,14 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      */
     @Override
     public void queryAllPeopleToTree(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        map = compareSelUserListByParams(map, inputObject);
-        List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffToTree(map);
-        setOrganization(beans, StringUtils.EMPTY);
-        outputObject.setBeans(beans);
+        UserTreeQueryDo queryDo = inputObject.getParams(UserTreeQueryDo.class);
+        compareSelUserListByParams(queryDo, inputObject);
+        List<Map<String, Object>> result = new ArrayList<>();
+        setOrganization(result, StringUtils.EMPTY);
+        List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffToTree(queryDo);
+        iDepmentService.setName(beans, "departmentId", "departmentName");
+        result.addAll(beans);
+        outputObject.setBeans(result);
     }
 
     /**
@@ -728,13 +732,17 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      */
     @Override
     public void queryCompanyPeopleToTreeByUserBelongCompany(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        map = compareSelUserListByParams(map, inputObject);
+        UserTreeQueryDo queryDo = inputObject.getParams(UserTreeQueryDo.class);
+        compareSelUserListByParams(queryDo, inputObject);
         String companyId = inputObject.getLogParams().get("companyId").toString();
-        map.put("companyId", companyId);
-        List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffToTree(map);
-        setOrganization(beans, companyId);
-        outputObject.setBeans(beans);
+        queryDo.setCompanyId(companyId);
+
+        List<Map<String, Object>> result = new ArrayList<>();
+        setOrganization(result, companyId);
+        List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffToTree(queryDo);
+        iDepmentService.setName(beans, "departmentId", "departmentName");
+        result.addAll(beans);
+        outputObject.setBeans(result);
     }
 
     /**
@@ -745,13 +753,17 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      */
     @Override
     public void queryDepartmentPeopleToTreeByUserBelongDepartment(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        map = compareSelUserListByParams(map, inputObject);
+        UserTreeQueryDo queryDo = inputObject.getParams(UserTreeQueryDo.class);
+        compareSelUserListByParams(queryDo, inputObject);
         String companyId = inputObject.getLogParams().get("companyId").toString();
-        map.put("companyId", companyId);
-        List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffDepToTree(map);
-        setOrganization(beans, companyId);
-        outputObject.setBeans(beans);
+        queryDo.setCompanyId(companyId);
+        List<Map<String, Object>> result = new ArrayList<>();
+        result.addAll(companyMationService.queryCompanyList(companyId));
+        result.addAll(companyDepartmentService.queryDepartmentList(Arrays.asList(companyId), new ArrayList<>()));
+        List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffDepToTree(queryDo);
+        iDepmentService.setName(beans, "departmentId", "departmentName");
+        result.addAll(beans);
+        outputObject.setBeans(result);
     }
 
     /**
@@ -762,13 +774,16 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      */
     @Override
     public void queryJobPeopleToTreeByUserBelongJob(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        map = compareSelUserListByParams(map, inputObject);
+        UserTreeQueryDo queryDo = inputObject.getParams(UserTreeQueryDo.class);
+        compareSelUserListByParams(queryDo, inputObject);
         String companyId = inputObject.getLogParams().get("companyId").toString();
-        map.put("companyId", companyId);
-        List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffToTree(map);
-        setOrganization(beans, companyId);
-        outputObject.setBeans(beans);
+        queryDo.setCompanyId(companyId);
+        List<Map<String, Object>> result = new ArrayList<>();
+        setOrganization(result, companyId);
+        List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffToTree(queryDo);
+        iDepmentService.setName(beans, "departmentId", "departmentName");
+        result.addAll(beans);
+        outputObject.setBeans(result);
     }
 
     /**
@@ -779,9 +794,12 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      */
     @Override
     public void querySimpleDepPeopleToTreeByUserBelongSimpleDep(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        map = compareSelUserListByParams(map, inputObject);
-        List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffDepToTree(map);
+        UserTreeQueryDo queryDo = inputObject.getParams(UserTreeQueryDo.class);
+        compareSelUserListByParams(queryDo, inputObject);
+        String departmentId = inputObject.getLogParams().get("departmentId").toString();
+        queryDo.setDepartmentId(departmentId);
+        List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffDepToTree(queryDo);
+        iDepmentService.setName(beans, "departmentId", "departmentName");
         beans.addAll(companyDepartmentService.queryDepartmentList(new ArrayList<>(), Arrays.asList(inputObject.getLogParams().get("departmentId").toString())));
         outputObject.setBeans(beans);
     }
@@ -794,34 +812,32 @@ public class SysEveUserServiceImpl implements SysEveUserService {
      */
     @Override
     public void queryTalkGroupUserListByUserId(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        map = compareSelUserListByParams(map, inputObject);
+        UserTreeQueryDo queryDo = inputObject.getParams(UserTreeQueryDo.class);
+        compareSelUserListByParams(queryDo, inputObject);
         Map<String, Object> user = inputObject.getLogParams();
-        map.put("createId", user.get("id"));
-        List<Map<String, Object>> beans = sysEveUserDao.queryTalkGroupUserListByUserId(map);
+        queryDo.setUserId(user.get("id").toString());
+        List<Map<String, Object>> beans = sysEveUserDao.queryTalkGroupUserListByUserId(queryDo);
+        iDepmentService.setName(beans, "departmentId", "departmentName");
         outputObject.setBeans(beans);
     }
 
     /**
      * 获取人员列表时的参数转换
      *
-     * @param map
+     * @param queryDo
      * @param inputObject 入参以及用户信息等获取对象
      * @return
      */
-    public Map<String, Object> compareSelUserListByParams(Map<String, Object> map, InputObject inputObject) {
-        //人员列表中是否包含自己--1.包含；其他参数不包含
-        String chooseOrNotMy = map.get("chooseOrNotMy").toString();
-        if (!"1".equals(chooseOrNotMy)) {
+    public void compareSelUserListByParams(UserTreeQueryDo queryDo, InputObject inputObject) {
+        // 人员列表中是否包含自己--1.包含；其他参数不包含
+        if (queryDo.getChooseOrNotMy() != 1) {
             Map<String, Object> user = inputObject.getLogParams();
-            map.put("userId", user.get("id"));
+            queryDo.setUserId(user.get("id").toString());
         }
-        //人员列表中是否必须绑定邮箱--1.必须；其他参数没必要
-        String chooseOrNotEmail = map.get("chooseOrNotEmail").toString();
-        if ("1".equals(chooseOrNotEmail)) {
-            map.put("hasEmail", "1");
+        // 人员列表中是否必须绑定邮箱--1.必须；其他参数没必要
+        if (queryDo.getChooseOrNotEmail() == 1) {
+            queryDo.setHasEmail(1);
         }
-        return map;
     }
 
     /**

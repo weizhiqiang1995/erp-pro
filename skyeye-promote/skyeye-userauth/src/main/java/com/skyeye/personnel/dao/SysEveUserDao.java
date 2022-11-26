@@ -5,6 +5,7 @@
 package com.skyeye.personnel.dao;
 
 import com.skyeye.eve.entity.userauth.user.SysUserQueryDo;
+import com.skyeye.eve.entity.userauth.user.UserTreeQueryDo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -81,10 +82,10 @@ public interface SysEveUserDao {
      */
     int editSysUserLock(@Param("userId") String userId, @Param("lockState") Integer lockState);
 
-    List<Map<String, Object>> queryUserStaffToTree(Map<String, Object> map);
+    List<Map<String, Object>> queryUserStaffToTree(UserTreeQueryDo queryDo);
 
-    List<Map<String, Object>> queryUserStaffDepToTree(Map<String, Object> map);
+    List<Map<String, Object>> queryUserStaffDepToTree(UserTreeQueryDo queryDo);
 
-    List<Map<String, Object>> queryTalkGroupUserListByUserId(Map<String, Object> map);
+    List<Map<String, Object>> queryTalkGroupUserListByUserId(UserTreeQueryDo queryDo);
 
 }
