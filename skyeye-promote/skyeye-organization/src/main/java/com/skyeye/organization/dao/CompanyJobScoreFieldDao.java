@@ -4,17 +4,15 @@
 
 package com.skyeye.organization.dao;
 
+import com.skyeye.eve.dao.SkyeyeBaseMapper;
+import com.skyeye.eve.entity.organization.jobscore.JobScoreField;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
 
-public interface CompanyJobScoreFieldDao {
+public interface CompanyJobScoreFieldDao extends SkyeyeBaseMapper<JobScoreField> {
 
-    int insertCompanyJobScoreField(@Param("list") List<Map<String, Object>> beans);
-
-    int deleteCompanyJobScoreFieldByJobScoreId(@Param("jobScoreId") String jobScoreId);
-
-    List<Map<String, Object>> queryCompanyJobScoreFieldByJobScoreId(@Param("jobScoreId") String jobScoreId);
+    int deleteCompanyJobScoreFieldByJobScoreId(@Param("jobScoreIdList") List<String> jobScoreIdList);
 
 }

@@ -326,11 +326,10 @@
 		    a.company_id companyId,
 			a.department_id departmentId,
 			a.job_id jobId,
-			o.name_cn jobScoreName,
+			a.job_score_id jobScoreId,
 			b.user_code userCode
 		FROM
-			sys_eve_user_staff a
-			LEFT JOIN company_job_score o ON a.job_score_id = o.id,
+			sys_eve_user_staff a,
 			sys_eve_user b
 		WHERE a.user_id = #{userId}
 		AND b.id = a.user_id

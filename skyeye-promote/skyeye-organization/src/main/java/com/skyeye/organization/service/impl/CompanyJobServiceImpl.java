@@ -12,7 +12,7 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.entity.organization.job.CompanyJob;
 import com.skyeye.organization.dao.CompanyJobDao;
-import com.skyeye.organization.dao.CompanyJobScoreDao;
+import com.skyeye.organization.service.CompanyJobScoreService;
 import com.skyeye.organization.service.CompanyJobService;
 import com.skyeye.organization.service.ICompanyService;
 import com.skyeye.organization.service.IDepmentService;
@@ -39,13 +39,13 @@ public class CompanyJobServiceImpl extends SkyeyeBusinessServiceImpl<CompanyJobD
     private CompanyJobDao companyJobDao;
 
     @Autowired
-    private CompanyJobScoreDao companyJobScoreDao;
-
-    @Autowired
     private ICompanyService iCompanyService;
 
     @Autowired
     private IDepmentService iDepmentService;
+
+    @Autowired
+    private CompanyJobScoreService companyJobScoreService;
 
     /**
      * 获取公司部门职位信息列表
@@ -72,7 +72,7 @@ public class CompanyJobServiceImpl extends SkyeyeBusinessServiceImpl<CompanyJobD
 
     public void deletePostpose(String id) {
         // 删除职位等级信息
-        companyJobScoreDao.editCompanyJobScoreStateMationByJobId(id, CompanyJobScoreServiceImpl.State.START_DELETE.getState());
+        companyJobScoreService.deleteByJobId(id);
     }
 
     /**

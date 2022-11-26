@@ -4,26 +4,29 @@
 
 package com.skyeye.organization.service.impl;
 
-import cn.hutool.json.JSONUtil;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.skyeye.common.constans.CommonNumConstants;
+import cn.hutool.core.collection.CollectionUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.google.common.base.Joiner;
+import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
+import com.skyeye.common.constans.CommonCharConstants;
+import com.skyeye.common.enumeration.EnableEnum;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DataCommonUtil;
-import com.skyeye.common.util.DateUtil;
-import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
+import com.skyeye.eve.entity.organization.jobscore.JobScore;
+import com.skyeye.eve.entity.organization.jobscore.JobScoreField;
+import com.skyeye.eve.entity.organization.jobscore.JobScoreQueryDo;
 import com.skyeye.organization.dao.CompanyJobScoreDao;
-import com.skyeye.organization.dao.CompanyJobScoreFieldDao;
+import com.skyeye.organization.service.CompanyJobScoreFieldService;
 import com.skyeye.organization.service.CompanyJobScoreService;
-import com.skyeye.eve.service.IAuthUserService;
+import com.skyeye.wages.service.IWagesFieldTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName: CompanyJobScoreServiceImpl
@@ -34,180 +37,77 @@ import java.util.Map;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
-public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
+public class CompanyJobScoreServiceImpl extends SkyeyeBusinessServiceImpl<CompanyJobScoreDao, JobScore> implements CompanyJobScoreService {
 
     @Autowired
     private CompanyJobScoreDao companyJobScoreDao;
 
     @Autowired
-    private CompanyJobScoreFieldDao companyJobScoreFieldDao;
+    private CompanyJobScoreFieldService companyJobScoreFieldService;
 
     @Autowired
-    private IAuthUserService iAuthUserService;
+    private IWagesFieldTypeService iWagesFieldTypeService;
 
-    public enum State {
-        START_UP(1, "启用"),
-        START_DOWN(2, "禁用"),
-        START_DELETE(3, "删除");
-        private int state;
-        private String name;
-
-        State(int state, String name) {
-            this.state = state;
-            this.name = name;
-        }
-
-        public int getState() {
-            return state;
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
-
-    /**
-     * 获取职位定级信息列表
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    public void queryCompanyJobScoreList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
-        List<Map<String, Object>> beans = companyJobScoreDao.queryCompanyJobScoreList(map);
-        iAuthUserService.setNameByIdList(beans, "createId", "createName");
-        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
-        outputObject.setBeans(beans);
-        outputObject.settotal(pages.getTotal());
+    public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
+        JobScoreQueryDo pageInfo = inputObject.getParams(JobScoreQueryDo.class);
+        List<Map<String, Object>> beans = companyJobScoreDao.queryCompanyJobScoreList(pageInfo);
+        return beans;
     }
 
-    /**
-     * 新增职位定级信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertCompanyJobScoreMation(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        // 根据判断该名称是否存在
-        Map<String, Object> mation = companyJobScoreDao.queryCompanyJobScoreByNameAndNotId(map.get("nameCn").toString(), map.get("jobId").toString(), null);
-        if (mation != null && !mation.isEmpty()) {
-            outputObject.setreturnMessage("The same name exists, please replace it.");
-            return;
+    public void writePostpose(JobScore entity, String userId) {
+        companyJobScoreFieldService.saveJobScoreFieldList(entity.getId(), entity.getScoreFields(), userId);
+    }
+
+    @Override
+    public JobScore getDataFromDb(String id) {
+        JobScore jobScore = super.getDataFromDb(id);
+        List<JobScoreField> jobScoreFields = companyJobScoreFieldService.queryJobScoreFieldListByJobScoreId(jobScore.getId());
+        jobScore.setScoreFields(jobScoreFields);
+        return jobScore;
+    }
+
+    @Override
+    public List<JobScore> getDataFromDb(List<String> ids) {
+        if (CollectionUtil.isEmpty(ids)) {
+            return new ArrayList<>();
         }
-        DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
-        // 默认启用
-        map.put("state", State.START_UP.getState());
-        companyJobScoreDao.insertCompanyJobScoreMation(map);
-        // 处理薪资模板字段属性信息
-        companyJobScoreField(map.get("fieldStr").toString(), map.get("id").toString());
+        List<JobScore> jobScoreList = super.getDataFromDb(ids);
+        // 批量获取关联的薪资字段信息
+        List<JobScoreField> jobScoreFields = companyJobScoreFieldService.queryJobScoreFieldListByJobScoreId(ids.toArray(new String[]{}));
+        Map<String, List<JobScoreField>> collect = jobScoreFields.stream().collect(Collectors.groupingBy(JobScoreField::getJobScoreId));
+
+        jobScoreList.forEach(jobScore -> jobScore.setScoreFields(collect.get(jobScore.getId())));
+        return jobScoreList;
     }
 
-    /**
-     * 处理职位等级薪资字段属性信息
-     *
-     * @param str
-     * @param id
-     */
-    private void companyJobScoreField(String str, String id) {
-        companyJobScoreFieldDao.deleteCompanyJobScoreFieldByJobScoreId(id);
-        if (ToolUtil.isBlank(str)) {
-            return;
+    @Override
+    public JobScore selectById(String id) {
+        JobScore jobScore = super.selectById(id);
+        List<JobScoreField> jobScoreFields = jobScore.getScoreFields();
+        if (CollectionUtil.isNotEmpty(jobScoreFields)) {
+            List<String> keys = jobScoreFields.stream().map(JobScoreField::getFieldKey).collect(Collectors.toList());
+            String keyStr = Joiner.on(CommonCharConstants.COMMA_MARK).join(keys);
+            List<Map<String, Object>> list = iWagesFieldTypeService.queryWagesFieldListByKeys(keyStr);
+            Map<String, String> fieldMation = list.stream()
+                .collect(Collectors.toMap(bean -> bean.get("key").toString(), bean -> bean.get("name").toString()));
+            jobScoreFields.forEach(jobScoreField -> {
+                jobScoreField.setFieldName(fieldMation.get(jobScoreField.getFieldKey()));
+            });
+            jobScore.setScoreFields(jobScoreFields);
         }
-        List<Map<String, Object>> field = JSONUtil.toList(JSONUtil.parseArray(str), null);
-        field.stream().forEach(bean -> {
-            bean.put("jobScoreId", id);
-        });
-        if (field.isEmpty()) {
-            return;
-        }
-        companyJobScoreFieldDao.insertCompanyJobScoreField(field);
+        return jobScore;
     }
 
-    /**
-     * 编辑职位定级信息时进行回显
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    public void queryCompanyJobScoreMationToEditById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String id = map.get("id").toString();
-        Map<String, Object> bean = companyJobScoreDao.queryCompanyJobScoreMationById(id);
-        if (CollectionUtils.isEmpty(bean)) {
-            outputObject.setreturnMessage("The data does not exist.");
-            return;
-        }
-        bean.put("modelField", companyJobScoreFieldDao.queryCompanyJobScoreFieldByJobScoreId(id));
-        outputObject.setBean(bean);
-        outputObject.settotal(CommonNumConstants.NUM_ONE);
+    public void deletePostpose(String id) {
+        companyJobScoreFieldService.deleteJobScoreFieldByJobScoreId(id);
     }
 
-    /**
-     * 编辑职位定级信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String id = map.get("id").toString();
-        Map<String, Object> mation = companyJobScoreDao.queryCompanyJobScoreByNameAndNotId(map.get("nameCn").toString(), map.get("jobId").toString(), id);
-        if (!CollectionUtils.isEmpty(mation)) {
-            outputObject.setreturnMessage("The same name exists, please replace it.");
-            return;
-        }
-        map.put("lastUpdateId", inputObject.getLogParams().get("id"));
-        map.put("lastUpdateTime", DateUtil.getTimeAndToString());
-        companyJobScoreDao.editCompanyJobScoreMationById(map);
-        // 处理薪资模板字段属性信息
-        companyJobScoreField(map.get("fieldStr").toString(), id);
-    }
-
-    /**
-     * 删除职位定级信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        companyJobScoreDao.editCompanyJobScoreStateMationById(map.get("id").toString(), State.START_DELETE.getState());
-    }
-
-    /**
-     * 启用职位定级信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void enableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        companyJobScoreDao.editCompanyJobScoreStateMationById(map.get("id").toString(), State.START_UP.getState());
-    }
-
-    /**
-     * 禁用职位定级信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void disableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        companyJobScoreDao.editCompanyJobScoreStateMationById(map.get("id").toString(), State.START_DOWN.getState());
+    public void deletePostpose(List<String> ids) {
+        companyJobScoreFieldService.deleteJobScoreFieldByJobScoreId(ids.toArray(new String[]{}));
     }
 
     /**
@@ -219,28 +119,22 @@ public class CompanyJobScoreServiceImpl implements CompanyJobScoreService {
     @Override
     public void queryEnableCompanyJobScoreList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
+        map.put("enabled", EnableEnum.ENABLE_USING.getKey());
         List<Map<String, Object>> beans = companyJobScoreDao.queryEnableCompanyJobScoreList(map);
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
     }
 
-    /**
-     * 获取职位定级信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    public void queryCompanyJobScoreDetailMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String id = map.get("id").toString();
-        Map<String, Object> bean = companyJobScoreDao.queryCompanyJobScoreMationById(id);
-        if (CollectionUtils.isEmpty(bean)) {
-            outputObject.setreturnMessage("The data does not exist.");
+    public void deleteByJobId(String jobId) {
+        QueryWrapper<JobScore> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(MybatisPlusUtil.toColumns(JobScore::getJobId), jobId);
+        List<JobScore> jobScoreList = list(queryWrapper);
+        if (CollectionUtil.isEmpty(jobScoreList)) {
             return;
         }
-        bean.put("modelField", companyJobScoreFieldDao.queryCompanyJobScoreFieldByJobScoreId(id));
-        outputObject.setBean(bean);
-        outputObject.settotal(CommonNumConstants.NUM_ONE);
+        List<String> jobScoreIds = jobScoreList.stream().map(JobScore::getId).collect(Collectors.toList());
+        super.deleteById(jobScoreIds);
     }
+
 }

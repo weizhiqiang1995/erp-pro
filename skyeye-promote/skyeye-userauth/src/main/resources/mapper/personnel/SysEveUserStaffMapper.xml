@@ -144,10 +144,9 @@
 			a.company_id companyId,
 		    a.department_id departmentId,
 		    a.job_id jobId,
-		    o.name_cn jobScoreName
+			a.job_score_id jobScoreId
 		FROM
 			sys_eve_user_staff a
-		    LEFT JOIN company_job_score o ON a.job_score_id = o.id
 		WHERE a.id = #{staffId}
 	</select>
 	
@@ -219,11 +218,10 @@
 			a.company_id companyId,
 			a.department_id departmentId,
 			a.job_id jobId,
-			o.name_cn jobScoreName,
+			a.job_score_id jobScoreId,
 			b.user_code userCode
 		FROM
 			sys_eve_user_staff a
-			LEFT JOIN company_job_score o ON a.job_score_id = o.id
 			LEFT JOIN sys_eve_user b ON b.id = a.user_id
 		<where>
 			<choose>
@@ -254,11 +252,9 @@
 		    a.department_id departmentId,
 		    a.job_id jobId,
 		    a.job_score_id jobScoreId,
-		    o.name_cn jobScoreName,
 			a.`type` staffType
 		FROM
 			sys_eve_user_staff a
-		    LEFT JOIN company_job_score o ON a.job_score_id = o.id
 		<where>
 			<if test="userName != '' and userName != null">
 				AND a.user_name LIKE '%${userName}%'

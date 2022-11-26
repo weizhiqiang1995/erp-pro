@@ -4,26 +4,15 @@
 
 package com.skyeye.organization.service;
 
+import com.skyeye.base.business.service.SkyeyeBusinessService;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.organization.jobscore.JobScore;
 
-public interface CompanyJobScoreService {
-
-    void queryCompanyJobScoreList(InputObject inputObject, OutputObject outputObject);
-
-    void insertCompanyJobScoreMation(InputObject inputObject, OutputObject outputObject);
-
-    void queryCompanyJobScoreMationToEditById(InputObject inputObject, OutputObject outputObject);
-
-    void editCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject);
-
-    void deleteCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject);
-
-    void enableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject);
-
-    void disableCompanyJobScoreMationById(InputObject inputObject, OutputObject outputObject);
+public interface CompanyJobScoreService extends SkyeyeBusinessService<JobScore> {
 
     void queryEnableCompanyJobScoreList(InputObject inputObject, OutputObject outputObject);
 
-    void queryCompanyJobScoreDetailMationById(InputObject inputObject, OutputObject outputObject);
+    void deleteByJobId(String jobId);
+
 }

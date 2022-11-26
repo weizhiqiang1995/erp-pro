@@ -77,6 +77,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     @Autowired
     private CompanyJobService companyJobService;
 
+    @Autowired
+    private ICompanyJobScoreService iCompanyJobScoreService;
+
     /**
      * 获取管理员用户列表
      *
@@ -622,6 +625,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         iCompanyService.setName(bean, "companyId", "companyName");
         iDepmentService.setName(bean, "departmentId", "departmentName");
         iCompanyJobService.setName(bean, "jobId", "jobName");
+        iCompanyJobScoreService.setNameForMap(bean, "jobScoreId", "jobScoreName");
         outputObject.setBean(bean);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
     }

@@ -53,7 +53,7 @@ public class TeamTemplateServiceImpl extends SkyeyeBusinessServiceImpl<TeamTempl
     private TeamObjectPermissionService teamObjectPermissionService;
 
     @Override
-    protected List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
+    public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
         List<Map<String, Object>> beans = teamTemplateDao.queryList(commonPageInfo);
         return beans;
@@ -222,7 +222,7 @@ public class TeamTemplateServiceImpl extends SkyeyeBusinessServiceImpl<TeamTempl
     }
 
     @Override
-    protected TeamTemplate getDataFromDb(String id) {
+    public TeamTemplate getDataFromDb(String id) {
         TeamTemplate teamTemplate = super.getDataFromDb(id);
         Map<String, List<TeamRole>> teamRoleMap = teamRoleService.queryTeamRoleByTeamIds(id);
         teamTemplate.setTeamRoleList(teamRoleMap.get(id));
