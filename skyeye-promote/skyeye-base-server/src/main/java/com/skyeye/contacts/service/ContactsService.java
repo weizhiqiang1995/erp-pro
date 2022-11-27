@@ -4,17 +4,9 @@
 
 package com.skyeye.contacts.service;
 
-import com.skyeye.common.object.InputObject;
-import com.skyeye.common.object.OutputObject;
+import com.skyeye.base.business.service.SkyeyeBusinessService;
+import com.skyeye.eve.entity.contacts.ContactsMation;
 
-public interface ContactsService {
-
-    void queryContactsList(InputObject inputObject, OutputObject outputObject);
-
-    void writeContactsMation(InputObject inputObject, OutputObject outputObject);
-
-    void queryContactsMationById(InputObject inputObject, OutputObject outputObject);
-
-    void deleteContactsMationById(InputObject inputObject, OutputObject outputObject);
+public interface ContactsService extends SkyeyeBusinessService<ContactsMation> {
 
 }

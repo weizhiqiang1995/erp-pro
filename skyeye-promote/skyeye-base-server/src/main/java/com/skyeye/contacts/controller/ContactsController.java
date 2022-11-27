@@ -42,7 +42,7 @@ public class ContactsController {
     @ApiImplicitParams(classBean = BaseServerQueryDo.class)
     @RequestMapping("/post/ContactsController/queryContactsList")
     public void queryContactsList(InputObject inputObject, OutputObject outputObject) {
-        contactsService.queryContactsList(inputObject, outputObject);
+        contactsService.queryPageList(inputObject, outputObject);
     }
 
     /**
@@ -55,7 +55,7 @@ public class ContactsController {
     @ApiImplicitParams(classBean = ContactsMation.class)
     @RequestMapping("/post/ContactsController/writeContactsMation")
     public void writeContactsMation(InputObject inputObject, OutputObject outputObject) {
-        contactsService.writeContactsMation(inputObject, outputObject);
+        contactsService.saveOrUpdateEntity(inputObject, outputObject);
     }
 
     /**
@@ -69,7 +69,7 @@ public class ContactsController {
         @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
     @RequestMapping("/post/ContactsController/queryContactsMationById")
     public void queryContactsMationById(InputObject inputObject, OutputObject outputObject) {
-        contactsService.queryContactsMationById(inputObject, outputObject);
+        contactsService.selectById(inputObject, outputObject);
     }
 
     /**
@@ -83,7 +83,7 @@ public class ContactsController {
         @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
     @RequestMapping("/post/ContactsController/deleteContactsMationById")
     public void deleteContactsMationById(InputObject inputObject, OutputObject outputObject) {
-        contactsService.deleteContactsMationById(inputObject, outputObject);
+        contactsService.deleteById(inputObject, outputObject);
     }
 
 }
