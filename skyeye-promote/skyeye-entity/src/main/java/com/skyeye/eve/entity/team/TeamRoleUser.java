@@ -39,15 +39,15 @@ public class TeamRoleUser extends OperatorUserInfo {
     private Map<String, Object> userMation;
 
     @TableField("team_id")
-    @ApiModelProperty(value = "团队id", required = "required")
+    @ApiModelProperty(value = "团队id，单独保存时必填(因为有和团队一起的保存)")
     private String teamId;
 
     @TableField("team_key")
-    @ApiModelProperty(value = "团队类型", required = "required")
+    @ApiModelProperty(value = "团队类型，单独保存时必填(因为有和团队一起的保存)")
     private String teamKey;
 
     @TableField("role_id")
-    @ApiModelProperty(value = "团队角色id(数据字典中的团队角色类型)", required = "required")
+    @ApiModelProperty(value = "团队角色id(数据字典中的团队角色类型)，单独保存时必填(因为有和团队一起的保存)")
     private String roleId;
 
     @TableField("user_id")

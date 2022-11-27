@@ -41,6 +41,12 @@ public class TeamTemplate extends OperatorUserInfo {
     @ApiModelProperty(value = "名称", required = "required")
     private String name;
 
+    /**
+     * 编码
+     */
+    @TableField("`code`")
+    private String code;
+
     @TableField("remark")
     @ApiModelProperty(value = "描述")
     private String remark;
@@ -58,7 +64,7 @@ public class TeamTemplate extends OperatorUserInfo {
     private List<TeamRole> teamRoleList;
 
     @TableField(exist = false)
-    @ApiModelProperty(value = "团队权限", required = "required,json")
+    @ApiModelProperty(value = "团队权限", required = "json")
     private List<TeamObjectPermission> teamObjectPermissionList;
 
     /**

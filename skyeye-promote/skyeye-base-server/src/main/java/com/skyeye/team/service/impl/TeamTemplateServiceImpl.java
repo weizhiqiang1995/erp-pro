@@ -4,8 +4,10 @@
 
 package com.skyeye.team.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.skyeye.annotation.coderule.CodeRuleService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.CommonNumConstants;
@@ -17,6 +19,7 @@ import com.skyeye.eve.entity.team.TeamObjectPermission;
 import com.skyeye.eve.entity.team.TeamRole;
 import com.skyeye.eve.entity.team.TeamRoleUser;
 import com.skyeye.eve.entity.team.TeamTemplate;
+import com.skyeye.eve.service.ICodeRuleService;
 import com.skyeye.team.classenum.ObjectPermissionFromType;
 import com.skyeye.team.dao.TeamTemplateDao;
 import com.skyeye.team.service.TeamObjectPermissionService;
@@ -38,6 +41,7 @@ import java.util.stream.Collectors;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
+@CodeRuleService(value = "团队模板", groupName = "团队管理")
 public class TeamTemplateServiceImpl extends SkyeyeBusinessServiceImpl<TeamTemplateDao, TeamTemplate> implements TeamTemplateService {
 
     @Autowired
@@ -52,6 +56,9 @@ public class TeamTemplateServiceImpl extends SkyeyeBusinessServiceImpl<TeamTempl
     @Autowired
     private TeamObjectPermissionService teamObjectPermissionService;
 
+    @Autowired
+    private ICodeRuleService iCodeRuleService;
+
     @Override
     public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
@@ -60,11 +67,17 @@ public class TeamTemplateServiceImpl extends SkyeyeBusinessServiceImpl<TeamTempl
     }
 
     @Override
+    public void createPrepose(TeamTemplate entity) {
+        String code = iCodeRuleService.getNextCodeByClassName(this.getServiceClassName(), BeanUtil.beanToMap(entity));
+        entity.setCode(code);
+    }
+
+    @Override
     public void createPostpose(TeamTemplate entity, String userId) {
         String teamTemplateId = entity.getId();
         List<TeamRole> teamRoleList = entity.getTeamRoleList();
         String serviceClassName = getServiceClassName();
-        saveNewTeamRole(teamTemplateId, teamRoleList, userId, serviceClassName);
+        saveNewTeamRole(teamTemplateId, teamRoleList, serviceClassName, userId);
 
         if (CollectionUtil.isNotEmpty(entity.getTeamObjectPermissionList())) {
             saveTeamOwnerPermission(teamTemplateId, serviceClassName, userId, entity.getTeamObjectPermissionList());
@@ -104,7 +117,7 @@ public class TeamTemplateServiceImpl extends SkyeyeBusinessServiceImpl<TeamTempl
         List<TeamRole> addTeamRoleMaps = newTeamRoleList.stream()
             .filter(item -> !oldRoleKeys.contains(item.getRoleId())).collect(Collectors.toList());
         // 新增
-        saveNewTeamRole(teamTemplateId, addTeamRoleMaps, userId, serviceClassName);
+        saveNewTeamRole(teamTemplateId, addTeamRoleMaps, serviceClassName, userId);
         // (旧数据 - 新数据) 从数据库删除
         List<TeamRole> deleteTeamRole = oldTeamRoleList.stream()
             .filter(item -> !newRoleKeys.contains(item.getRoleId())).collect(Collectors.toList());

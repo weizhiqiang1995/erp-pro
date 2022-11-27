@@ -45,7 +45,7 @@ public class TeamObjectPermission extends OperatorUserInfo {
     private String objectKey;
 
     @TableField("permission_value")
-    @ApiModelProperty(value = "权限点，录入：操作文档时，编辑，流程都是权限点", required = "required")
+    @ApiModelProperty(value = "权限点，例如：联系人功能，添加，编辑等都是权限点", required = "required")
     private String permissionValue;
 
     @TableField("permission_key")

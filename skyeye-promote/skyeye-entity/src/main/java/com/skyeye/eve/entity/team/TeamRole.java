@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Data
 @UniqueField(value = {"teamId", "teamKey", "roleId"})
-@TableName(value = "team_template")
+@TableName(value = "team_role")
 @ApiModel("团队角色实体类")
 public class TeamRole extends OperatorUserInfo {
 
@@ -45,11 +45,11 @@ public class TeamRole extends OperatorUserInfo {
     private String pId;
 
     @TableField("team_id")
-    @ApiModelProperty(value = "团队id", required = "required")
+    @ApiModelProperty(value = "团队id，单独保存时必填(因为有和团队一起的保存)")
     private String teamId;
 
     @TableField("team_key")
-    @ApiModelProperty(value = "团队类型", required = "required")
+    @ApiModelProperty(value = "团队类型，单独保存时必填(因为有和团队一起的保存)")
     private String teamKey;
 
     @TableField("role_id")
