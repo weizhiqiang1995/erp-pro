@@ -5,7 +5,7 @@
 package com.skyeye.contacts.service;
 
 import com.skyeye.base.business.service.SkyeyeBusinessService;
-import com.skyeye.eve.entity.contacts.ContactsMation;
+import com.skyeye.contacts.entity.ContactsMation;
 
 public interface ContactsService extends SkyeyeBusinessService<ContactsMation> {
 

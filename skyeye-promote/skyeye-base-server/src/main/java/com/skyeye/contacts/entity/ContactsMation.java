@@ -2,7 +2,7 @@
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
 
-package com.skyeye.eve.entity.contacts;
+package com.skyeye.contacts.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -12,6 +12,7 @@ import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.cache.RedisCacheField;
 import com.skyeye.annotation.unique.UniqueField;
+import com.skyeye.common.constans.CacheConstants;
 import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
@@ -26,7 +27,7 @@ import lombok.Data;
  */
 @Data
 @UniqueField(value = {"name", "objectId"})
-@RedisCacheField(name = "skyeye:contacts", cacheTime = RedisConstants.THIRTY_DAY_SECONDS)
+@RedisCacheField(name = CacheConstants.SKYEYE_CONTACTS_CACHE_KEY, cacheTime = RedisConstants.THIRTY_DAY_SECONDS)
 @TableName(value = "skyeye_contacts")
 @ApiModel("联系人信息实体类")
 public class ContactsMation extends OperatorUserInfo {

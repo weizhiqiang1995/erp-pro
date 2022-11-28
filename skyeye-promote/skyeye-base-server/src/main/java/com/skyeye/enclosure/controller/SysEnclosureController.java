@@ -2,19 +2,29 @@
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
 
-package com.skyeye.eve.controller;
+package com.skyeye.enclosure.controller;
 
+import com.skyeye.annotation.api.Api;
 import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.eve.service.SysEnclosureService;
+import com.skyeye.enclosure.service.SysEnclosureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @ClassName: SysEnclosureController
+ * @Description: 附件管理控制类
+ * @author: skyeye云系列--卫志强
+ * @date: 2022/11/28 21:39
+ * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
+ * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
+ */
 @RestController
+@Api(value = "附件管理", tags = "附件管理", modelName = "基本服务")
 public class SysEnclosureController {
 
     @Autowired

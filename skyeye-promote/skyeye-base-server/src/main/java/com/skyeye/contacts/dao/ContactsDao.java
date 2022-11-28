@@ -5,7 +5,7 @@
 package com.skyeye.contacts.dao;
 
 import com.skyeye.eve.dao.SkyeyeBaseMapper;
-import com.skyeye.eve.entity.contacts.ContactsMation;
+import com.skyeye.contacts.entity.ContactsMation;
 import com.skyeye.eve.entity.object.query.BaseServerQueryDo;
 import org.apache.ibatis.annotations.Param;
 

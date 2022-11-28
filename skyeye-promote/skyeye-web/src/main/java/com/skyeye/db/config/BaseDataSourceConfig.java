@@ -39,6 +39,7 @@ import java.util.Properties;
 @Configuration
 @MapperScan(basePackages = {
     "com.skyeye.*.dao",
+    "com.skyeye.eve.*.dao",
     "com.skyeye.dao"}, sqlSessionFactoryRef = "baseSqlSessionFactory")
 public class BaseDataSourceConfig {
 

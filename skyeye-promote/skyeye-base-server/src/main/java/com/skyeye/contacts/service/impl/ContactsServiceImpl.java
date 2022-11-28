@@ -11,7 +11,7 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.contacts.dao.ContactsDao;
 import com.skyeye.contacts.service.ContactsService;
-import com.skyeye.eve.entity.contacts.ContactsMation;
+import com.skyeye.contacts.entity.ContactsMation;
 import com.skyeye.eve.entity.object.query.BaseServerQueryDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
