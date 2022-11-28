@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.common.entity.features.OperatorUserInfo;
+import com.skyeye.eve.search.entity.SearchParamsConfigMation;
 import lombok.Data;
 
 import java.util.Map;

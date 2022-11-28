@@ -5,7 +5,7 @@
 package com.skyeye.clazz.entity.classflowable;
 
 import com.alibaba.fastjson.TypeReference;
-import com.skyeye.common.base.handler.ListTypeHandler;
+import com.skyeye.common.util.mybatisplus.ListTypeHandler;
 
 import java.util.List;
 

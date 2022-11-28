@@ -13,7 +13,7 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.dao.UserPhoneDao;
-import com.skyeye.eve.service.SysAuthorityService;
+import com.skyeye.eve.authority.service.SysAuthorityService;
 import com.skyeye.jedis.JedisClientService;
 import com.skyeye.organization.service.*;
 import com.skyeye.personnel.dao.SysEveUserDao;
