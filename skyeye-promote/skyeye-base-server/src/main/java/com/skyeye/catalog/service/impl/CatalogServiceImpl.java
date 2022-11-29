@@ -8,6 +8,9 @@ import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.catalog.dao.CatalogDao;
 import com.skyeye.catalog.entity.Catalog;
 import com.skyeye.catalog.service.CatalogService;
+import com.skyeye.common.object.InputObject;
+import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.object.query.BaseServerQueryDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,4 +28,15 @@ public class CatalogServiceImpl extends SkyeyeBusinessServiceImpl<CatalogDao, Ca
     @Autowired
     private CatalogDao catalogDao;
 
+    /**
+     * 一次性获取所有的目录为树结构
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryCatalogForTree(InputObject inputObject, OutputObject outputObject) {
+        BaseServerQueryDo queryDo = inputObject.getParams(BaseServerQueryDo.class);
+
+    }
 }

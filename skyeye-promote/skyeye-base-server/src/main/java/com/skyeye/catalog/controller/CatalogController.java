@@ -5,8 +5,14 @@
 package com.skyeye.catalog.controller;
 
 import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParams;
+import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.catalog.service.CatalogService;
+import com.skyeye.common.object.InputObject;
+import com.skyeye.common.object.OutputObject;
+import com.skyeye.eve.entity.object.query.BaseServerQueryDo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -23,5 +29,18 @@ public class CatalogController {
 
     @Autowired
     private CatalogService catalogService;
+
+    /**
+     * 一次性获取所有的目录为树结构
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryCatalogForTree", value = "一次性获取所有的目录为树结构", method = "POST", allUse = "2")
+    @ApiImplicitParams(classBean = BaseServerQueryDo.class)
+    @RequestMapping("/post/CatalogController/queryCatalogForTree")
+    public void queryCatalogForTree(InputObject inputObject, OutputObject outputObject) {
+        catalogService.queryCatalogForTree(inputObject, outputObject);
+    }
 
 }

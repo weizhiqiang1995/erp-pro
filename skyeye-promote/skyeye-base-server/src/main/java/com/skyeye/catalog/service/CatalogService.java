@@ -6,6 +6,8 @@ package com.skyeye.catalog.service;
 
 import com.skyeye.base.business.service.SkyeyeBusinessService;
 import com.skyeye.catalog.entity.Catalog;
+import com.skyeye.common.object.InputObject;
+import com.skyeye.common.object.OutputObject;
 
 /**
  * @ClassName: CatalogService
@@ -16,4 +18,7 @@ import com.skyeye.catalog.entity.Catalog;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 public interface CatalogService extends SkyeyeBusinessService<Catalog> {
+
+    void queryCatalogForTree(InputObject inputObject, OutputObject outputObject);
+
 }

@@ -25,7 +25,7 @@ import lombok.Data;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Data
-@UniqueField(value = {"name", "parentId", "objectKey", "type"})
+@UniqueField(value = {"name", "parentId", "objectId", "objectKey", "type"})
 @RedisCacheField(name = CacheConstants.SKYEYE_CATALOG_CACHE_KEY, cacheTime = RedisConstants.THIRTY_DAY_SECONDS)
 @TableName(value = "skyeye_catalog")
 @ApiModel("目录信息实体类")
@@ -39,9 +39,17 @@ public class Catalog extends OperatorUserInfo {
     @ApiModelProperty(value = "目录名称", required = "required")
     private String name;
 
+    @TableField(value = "icon")
+    @ApiModelProperty(value = "图标")
+    private String icon;
+
     @TableField(value = "parent_id")
     @ApiModelProperty(value = "所属父节点id", required = "required")
     private String parentId;
+
+    @TableField(value = "object_id")
+    @ApiModelProperty(value = "目录所属业务对象数据的id")
+    private String objectId;
 
     @TableField(value = "object_key")
     @ApiModelProperty(value = "目录所属业务对象", required = "required")
