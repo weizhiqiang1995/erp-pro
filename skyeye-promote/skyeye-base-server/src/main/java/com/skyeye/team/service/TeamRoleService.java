@@ -5,7 +5,7 @@
 package com.skyeye.team.service;
 
 import com.skyeye.base.business.service.SkyeyeBusinessService;
-import com.skyeye.eve.entity.team.TeamRole;
+import com.skyeye.team.entity.TeamRole;
 
 import java.util.List;
 import java.util.Map;

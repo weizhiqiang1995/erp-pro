@@ -7,7 +7,7 @@ package com.skyeye.team.service;
 import com.skyeye.base.business.service.SkyeyeBusinessService;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.eve.entity.team.TeamTemplate;
+import com.skyeye.team.entity.TeamTemplate;
 
 /**
  * @ClassName: TeamTemplateService

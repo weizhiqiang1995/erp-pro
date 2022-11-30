@@ -5,7 +5,7 @@
 package com.skyeye.team.dao;
 
 import com.skyeye.eve.dao.SkyeyeBaseMapper;
-import com.skyeye.eve.entity.team.TeamObjectPermission;
+import com.skyeye.team.entity.TeamObjectPermission;
 
 /**
  * @ClassName: TeamObjectPermissionDao

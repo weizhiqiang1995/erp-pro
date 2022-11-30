@@ -73,4 +73,11 @@ public class SkyeyeClassCatalogLinkServiceImpl extends SkyeyeBusinessServiceImpl
         }
     }
 
+    @Override
+    public SkyeyeClassCatalogLink getCatalogLink(String className) {
+        QueryWrapper<SkyeyeClassCatalogLink> wrapper = new QueryWrapper<>();
+        wrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassCatalogLink::getClassName), className);
+        return getOne(wrapper);
+    }
+
 }

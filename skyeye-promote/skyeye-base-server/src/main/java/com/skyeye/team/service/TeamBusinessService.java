@@ -5,7 +5,7 @@
 package com.skyeye.team.service;
 
 import com.skyeye.base.business.service.SkyeyeBusinessService;
-import com.skyeye.eve.entity.team.TeamBusiness;
+import com.skyeye.team.entity.TeamBusiness;
 
 /**
  * @ClassName: TeamBusinessService

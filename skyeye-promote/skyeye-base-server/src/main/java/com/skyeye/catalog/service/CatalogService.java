@@ -21,4 +21,5 @@ public interface CatalogService extends SkyeyeBusinessService<Catalog> {
 
     void queryCatalogForTree(InputObject inputObject, OutputObject outputObject);
 
+    void queryCatalogList(InputObject inputObject, OutputObject outputObject);
 }

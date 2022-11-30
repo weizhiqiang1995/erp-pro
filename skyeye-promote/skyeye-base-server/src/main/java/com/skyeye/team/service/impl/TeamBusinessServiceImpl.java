@@ -5,7 +5,7 @@
 package com.skyeye.team.service.impl;
 
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
-import com.skyeye.eve.entity.team.TeamBusiness;
+import com.skyeye.team.entity.TeamBusiness;
 import com.skyeye.team.dao.TeamBusinessDao;
 import com.skyeye.team.service.TeamBusinessService;
 import org.springframework.beans.factory.annotation.Autowired;

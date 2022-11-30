@@ -6,7 +6,7 @@ package com.skyeye.team.dao;
 
 import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.eve.dao.SkyeyeBaseMapper;
-import com.skyeye.eve.entity.team.TeamTemplate;
+import com.skyeye.team.entity.TeamTemplate;
 
 import java.util.List;
 import java.util.Map;

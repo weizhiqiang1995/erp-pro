@@ -21,4 +21,6 @@ public interface SkyeyeClassCatalogLinkService extends SkyeyeBusinessService<Sky
 
     void writeCatalogLink(InputObject inputObject, OutputObject outputObject);
 
+    SkyeyeClassCatalogLink getCatalogLink(String className);
+
 }

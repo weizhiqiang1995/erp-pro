@@ -6,6 +6,10 @@ package com.skyeye.catalog.dao;
 
 import com.skyeye.catalog.entity.Catalog;
 import com.skyeye.eve.dao.SkyeyeBaseMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: CatalogDao
@@ -17,5 +21,20 @@ import com.skyeye.eve.dao.SkyeyeBaseMapper;
  */
 public interface CatalogDao extends SkyeyeBaseMapper<Catalog> {
 
+    /**
+     * 根据子id查询所有的父节点信息(包含子节点信息)
+     *
+     * @param ids 子id
+     * @return
+     */
+    List<Map<String, Object>> queryAllParentNodeById(@Param("ids") List<String> ids);
+
+    /**
+     * 根据父id查询所有的子节点信息(包含父id)
+     *
+     * @param ids        父id
+     * @return
+     */
+    List<String> queryAllChildIdsByParentId(@Param("ids") List<String> ids);
 
 }
