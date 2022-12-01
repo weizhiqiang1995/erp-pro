@@ -7,8 +7,8 @@ package com.skyeye.clazz.controller;
 import com.skyeye.annotation.api.Api;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
-import com.skyeye.clazz.entity.classcatalog.SkyeyeClassCatalogLinkApi;
-import com.skyeye.clazz.service.SkyeyeClassCatalogLinkService;
+import com.skyeye.clazz.entity.classcatalog.SkyeyeClassServiceBeanApi;
+import com.skyeye.clazz.service.SkyeyeClassServiceBeanService;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,31 +16,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @ClassName: SkyeyeClassCatalogLinkController
- * @Description: 需要关联目录的服务类注册控制层
+ * @ClassName: SkyeyeClassServiceBeanController
+ * @Description: 所有实现了SkyeyeBusinessService的服务类的注册服务
  * @author: skyeye云系列--卫志强
  * @date: 2022/9/18 16:08
  * @Copyright: 2022 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @RestController
-@Api(value = "需要关联目录的服务类注册", tags = "需要关联目录的服务类注册", modelName = "系统公共模块")
-public class SkyeyeClassCatalogLinkController {
+@Api(value = "服务类注册", tags = "服务类注册", modelName = "系统公共模块")
+public class SkyeyeClassServiceBeanController {
 
     @Autowired
-    private SkyeyeClassCatalogLinkService skyeyeClassCatalogLinkService;
+    private SkyeyeClassServiceBeanService skyeyeClassServiceBeanService;
 
     /**
-     * 动态表单的服务类注册
+     * 服务类注册
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "writeCatalogLink", value = "动态表单的服务类注册", method = "POST", allUse = "0")
-    @ApiImplicitParams(classBean = SkyeyeClassCatalogLinkApi.class)
-    @RequestMapping("/post/SkyeyeClassCatalogLinkController/writeCatalogLink")
-    public void writeCatalogLink(InputObject inputObject, OutputObject outputObject) {
-        skyeyeClassCatalogLinkService.writeCatalogLink(inputObject, outputObject);
+    @ApiOperation(id = "registerServiceBean", value = "服务类注册", method = "POST", allUse = "0")
+    @ApiImplicitParams(classBean = SkyeyeClassServiceBeanApi.class)
+    @RequestMapping("/post/SkyeyeClassServiceBeanController/registerServiceBean")
+    public void registerServiceBean(InputObject inputObject, OutputObject outputObject) {
+        skyeyeClassServiceBeanService.registerServiceBean(inputObject, outputObject);
     }
 
 }

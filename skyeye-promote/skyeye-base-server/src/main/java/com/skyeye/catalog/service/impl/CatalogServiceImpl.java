@@ -17,19 +17,16 @@ import com.skyeye.catalog.dao.CatalogDao;
 import com.skyeye.catalog.entity.Catalog;
 import com.skyeye.catalog.service.CatalogService;
 import com.skyeye.catalog.service.ICatalogService;
-import com.skyeye.clazz.entity.classcatalog.SkyeyeClassCatalogLink;
-import com.skyeye.clazz.service.SkyeyeClassCatalogLinkService;
+import com.skyeye.clazz.service.SkyeyeClassServiceBeanService;
 import com.skyeye.common.constans.CommonCharConstants;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
-import com.skyeye.exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
 
+import java.net.URI;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -48,13 +45,10 @@ public class CatalogServiceImpl extends SkyeyeBusinessServiceImpl<CatalogDao, Ca
     private CatalogDao catalogDao;
 
     @Autowired
-    private DiscoveryClient discoveryClient;
-
-    @Autowired
     private ICatalogService iCatalogService;
 
     @Autowired
-    private SkyeyeClassCatalogLinkService skyeyeClassCatalogLinkService;
+    private SkyeyeClassServiceBeanService skyeyeClassServiceBeanService;
 
     /**
      * 一次性获取所有的目录为树结构
@@ -126,20 +120,12 @@ public class CatalogServiceImpl extends SkyeyeBusinessServiceImpl<CatalogDao, Ca
     @Override
     public void deleteById(String id) {
         Catalog catalog = selectById(id);
-        SkyeyeClassCatalogLink catalogLink = skyeyeClassCatalogLinkService.getCatalogLink(catalog.getObjectKey());
-        if (catalogLink == null) {
-            throw new CustomException("未找到目录对应的业务类配置信息.");
-        }
-        // 根据服务名获取服务实例
-        List<ServiceInstance> allInstances = discoveryClient.getInstances(catalogLink.getSpringApplicationName());
-        if (CollectionUtil.isEmpty(allInstances)) {
-            throw new CustomException(String.format(Locale.ROOT, "this service[%s] has no instance.", catalogLink.getSpringApplicationName()));
-        }
+        URI serviceBeanUri = skyeyeClassServiceBeanService.getServiceBean(catalog.getObjectKey());
         // 获取当前目录与所有的子目录id
         List<String> ids = catalogDao.queryAllChildIdsByParentId(Arrays.asList(id));
         deleteById(ids);
         // 删除业务数据
-        iCatalogService.deleteDataMationByCatalogIds(allInstances.get(0).getUri(), catalog.getObjectKey(), ids);
+        iCatalogService.deleteDataMationByCatalogIds(serviceBeanUri, catalog.getObjectKey(), ids);
     }
 
     @Override

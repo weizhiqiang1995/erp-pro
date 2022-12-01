@@ -17,8 +17,8 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * @ClassName: SkyeyeClassCatalogLink
- * @Description: 需要关联目录的服务类注册实体类
+ * @ClassName: SkyeyeClassServiceBean
+ * @Description: 服务类注册实体类
  * @author: skyeye云系列--卫志强
  * @date: 2022/9/18 13:11
  * @Copyright: 2022 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
@@ -27,9 +27,9 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "skyeye_class_catalog_link", autoResultMap = true)
-@ApiModel("需要关联目录的服务类注册实体类")
-public class SkyeyeClassCatalogLink extends CommonInfo implements Serializable {
+@TableName(value = "skyeye_class_service_bean", autoResultMap = true)
+@ApiModel("服务类注册实体类")
+public class SkyeyeClassServiceBean extends CommonInfo implements Serializable {
 
     @TableId("id")
     private String id;
@@ -41,10 +41,10 @@ public class SkyeyeClassCatalogLink extends CommonInfo implements Serializable {
     private String springApplicationName;
 
     /**
-     * 需要关联目录的服务类的className
+     * 服务类的className
      */
     @TableField("class_name")
-    @ApiModelProperty(value = "需要关联目录的服务类的className", required = "required")
+    @ApiModelProperty(value = "服务类的className", required = "required")
     private String className;
 
 }
