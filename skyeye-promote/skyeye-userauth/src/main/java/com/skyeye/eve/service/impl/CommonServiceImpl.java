@@ -18,10 +18,9 @@ import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.FileUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.CommonDao;
-import com.skyeye.personnel.dao.SysEveUserStaffDao;
 import com.skyeye.eve.service.CommonService;
 import com.skyeye.exception.CustomException;
-import com.skyeye.personnel.service.impl.SysEveUserStaffServiceImpl;
+import com.skyeye.personnel.dao.SysEveUserStaffDao;
 import com.skyeye.win.dao.SysEveWinBgPicDao;
 import com.skyeye.win.dao.SysEveWinLockBgPicDao;
 import com.skyeye.win.dao.SysEveWinThemeColorDao;
@@ -90,47 +89,50 @@ public class CommonServiceImpl implements CommonService {
         // 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(PutObject.getRequest().getSession().getServletContext());
         // 检查form中是否有enctype="multipart/form-data"
-        if (multipartResolver.isMultipart(PutObject.getRequest())) {
-            // 将request变成多部分request
-            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) PutObject.getRequest();
-            // 获取multiRequest 中所有的文件名
-            Iterator iter = multiRequest.getFileNames();
-            int type = Integer.parseInt(map.get("type").toString());
-            String basePath = tPath + FileConstants.FileUploadPath.getSavePath(type);
-            Map<String, Object> bean = new HashMap<>();
-            StringBuffer trueFileName = new StringBuffer();
-            String fileName = "";
-            while (iter.hasNext()) {
-                // 一次遍历所有文件
-                MultipartFile file = multiRequest.getFile(iter.next().toString());
-                fileName = file.getOriginalFilename();// 文件名称
-                //得到文件扩展名
-                String fileExtName = fileName.substring(fileName.lastIndexOf(".") + 1);
-                if (file != null) {
-                    FileUtil.createDirs(basePath);
-                    // 自定义的文件名称
-                    String newFileName = String.format(Locale.ROOT, "%s.%s", System.currentTimeMillis(), fileExtName);
-                    String path = basePath + "/" + newFileName;
-                    LOGGER.info("upload file type is: {}, path is: {}", type, path);
-                    // 上传
-                    try {
-                        file.transferTo(new File(path));
-                    } catch (IOException ex) {
-                        throw new CustomException(ex);
-                    }
-                    newFileName = FileConstants.FileUploadPath.getVisitPath(type) + newFileName;
-                    if (ToolUtil.isBlank(trueFileName.toString())) {
-                        trueFileName.append(newFileName);
-                    } else {
-                        trueFileName.append(",").append(newFileName);
-                    }
-                }
-            }
-            bean.put("picUrl", trueFileName.toString());
-            bean.put("type", type);
-            bean.put("fileName", fileName);
-            outputObject.setBean(bean);
+        if (!multipartResolver.isMultipart(PutObject.getRequest())) {
+            return;
         }
+        // 将request变成多部分request
+        MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) PutObject.getRequest();
+        // 获取multiRequest 中所有的文件名
+        Iterator iter = multiRequest.getFileNames();
+        int type = Integer.parseInt(map.get("type").toString());
+        String basePath = tPath + FileConstants.FileUploadPath.getSavePath(type);
+        Map<String, Object> bean = new HashMap<>();
+        StringBuffer trueFileName = new StringBuffer();
+        String fileName = "";
+        while (iter.hasNext()) {
+            // 一次遍历所有文件
+            MultipartFile file = multiRequest.getFile(iter.next().toString());
+            if (file == null) {
+                continue;
+            }
+            // 文件名称
+            fileName = file.getOriginalFilename();
+            //得到文件扩展名
+            String fileExtName = fileName.substring(fileName.lastIndexOf(".") + 1);
+            FileUtil.createDirs(basePath);
+            // 自定义的文件名称
+            String newFileName = String.format(Locale.ROOT, "%s.%s", System.currentTimeMillis(), fileExtName);
+            String path = basePath + "/" + newFileName;
+            LOGGER.info("upload file type is: {}, path is: {}", type, path);
+            // 上传
+            try {
+                file.transferTo(new File(path));
+            } catch (IOException ex) {
+                throw new CustomException(ex);
+            }
+            newFileName = FileConstants.FileUploadPath.getVisitPath(type) + newFileName;
+            if (ToolUtil.isBlank(trueFileName.toString())) {
+                trueFileName.append(newFileName);
+            } else {
+                trueFileName.append(",").append(newFileName);
+            }
+        }
+        bean.put("picUrl", trueFileName.toString());
+        bean.put("type", type);
+        bean.put("fileName", fileName);
+        outputObject.setBean(bean);
     }
 
     /**
