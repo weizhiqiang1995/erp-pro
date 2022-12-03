@@ -4,7 +4,7 @@
 
 package com.skyeye.clazz.dao;
 
-import com.skyeye.clazz.entity.classcatalog.SkyeyeClassServiceBean;
+import com.skyeye.clazz.entity.classservice.SkyeyeClassServiceBean;
 import com.skyeye.eve.dao.SkyeyeBaseMapper;
 
 /**

@@ -5,7 +5,7 @@
 package com.skyeye.clazz.service;
 
 import com.skyeye.base.business.service.SkyeyeBusinessService;
-import com.skyeye.clazz.entity.classcatalog.SkyeyeClassServiceBean;
+import com.skyeye.clazz.entity.classservice.SkyeyeClassServiceBean;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 

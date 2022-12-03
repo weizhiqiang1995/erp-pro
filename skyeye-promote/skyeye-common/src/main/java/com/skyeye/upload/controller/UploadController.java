@@ -36,7 +36,7 @@ public class UploadController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-//    @ApiOperation(id = "sysenclosure007", value = "上传文件", method = "POST", allUse = "2")
+    @ApiOperation(id = "sysenclosure007", value = "上传文件", method = "POST", allUse = "2")
     @ApiImplicitParams(classBean = Upload.class)
     @RequestMapping("/post/UploadController/uploadFile")
     public void uploadFile(InputObject inputObject, OutputObject outputObject) {
