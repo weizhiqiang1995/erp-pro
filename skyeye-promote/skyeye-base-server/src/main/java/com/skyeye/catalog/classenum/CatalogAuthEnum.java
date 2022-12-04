@@ -2,20 +2,16 @@
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
 
-package com.skyeye.document.classenum;
+package com.skyeye.catalog.classenum;
 
-import com.skyeye.catalog.classenum.CatalogAuthEnum;
 import com.skyeye.common.base.classenum.SkyeyeEnumClass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
- * @ClassName: DocumentAuthEnum
- * @Description: 文档权限控制枚举类
+ * @ClassName: CatalogAuthEnum
+ * @Description: 目录权限控制枚举类
  * @author: skyeye云系列--卫志强
  * @date: 2022/11/16 22:10
  * @Copyright: 2022 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
@@ -24,11 +20,10 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public enum DocumentAuthEnum implements SkyeyeEnumClass {
-    ADD_DOCUMENT("addDocument", "上传文档", true, false),
-    EDIT_DOCUMENT("coverDocument", "覆盖文档", true, false),
-    DELETE_DOCUMENT("deleteDocument", "删除文档", true, false),
-    DETAILS_DOCUMENT("detailsDocument", "文档详情", true, false);
+public enum CatalogAuthEnum implements SkyeyeEnumClass {
+    ADD_CATALOG("addCatalog", "添加目录", true, false),
+    DELETE_CATALOG("deleteCatalog", "删除目录", true, false),
+    RENAME_CATALOG("renameCatalog", "重命名目录", true, false);
 
     private String key;
 
@@ -37,8 +32,4 @@ public enum DocumentAuthEnum implements SkyeyeEnumClass {
     private Boolean show;
 
     private Boolean isDefault;
-
-    public static List<Class> dependOnEnum() {
-        return Arrays.asList(CatalogAuthEnum.class);
-    }
 }
