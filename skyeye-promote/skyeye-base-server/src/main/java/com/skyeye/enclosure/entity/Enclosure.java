@@ -30,7 +30,6 @@ import lombok.Data;
 public class Enclosure extends OperatorUserInfo {
 
     @TableId("id")
-    @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")
     private String id;
 
     @TableField(value = "`name`")

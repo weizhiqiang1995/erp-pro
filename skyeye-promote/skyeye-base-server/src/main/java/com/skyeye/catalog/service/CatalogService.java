@@ -9,6 +9,8 @@ import com.skyeye.catalog.entity.Catalog;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 
+import java.util.List;
+
 /**
  * @ClassName: CatalogService
  * @Description: 目录管理服务接口层
@@ -22,4 +24,6 @@ public interface CatalogService extends SkyeyeBusinessService<Catalog> {
     void queryCatalogForTree(InputObject inputObject, OutputObject outputObject);
 
     void queryCatalogList(InputObject inputObject, OutputObject outputObject);
+
+    List<Catalog> getCatalogs(String objectId, String objectKey, Boolean addOrUser, String userId);
 }

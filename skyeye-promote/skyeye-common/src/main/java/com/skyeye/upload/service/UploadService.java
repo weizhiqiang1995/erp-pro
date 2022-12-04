@@ -19,4 +19,7 @@ public interface UploadService {
 
     void uploadFile(InputObject inputObject, OutputObject outputObject);
 
+    void uploadFileChunks(InputObject inputObject, OutputObject outputObject);
+
+    void checkUploadFileChunks(InputObject inputObject, OutputObject outputObject);
 }

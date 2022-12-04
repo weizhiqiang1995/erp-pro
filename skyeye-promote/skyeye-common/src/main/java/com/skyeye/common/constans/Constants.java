@@ -121,13 +121,6 @@ public class Constants {
         return beans;
     }
 
-    // 附件分块上传时的分块集合存储key
-    public static final String SYS_ENCLOSURE_FILE_MODULE_MD5 = "sys_enclosure_file_module_md5_";
-
-    public static String getSysEnclosureFileModuleByMd5(String md5) {
-        return SYS_ENCLOSURE_FILE_MODULE_MD5 + md5;
-    }
-
     // 获取群组成员列表
     public static final String SYS_EVE_TALK_GROUP_USER_LIST = "sys_eve_talk_group_user_list_";
 

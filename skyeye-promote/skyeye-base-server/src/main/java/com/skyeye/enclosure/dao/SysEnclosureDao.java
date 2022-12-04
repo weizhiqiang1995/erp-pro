@@ -4,33 +4,19 @@
 
 package com.skyeye.enclosure.dao;
 
+import com.skyeye.catalog.entity.CatalogBusinessQueryDo;
+import com.skyeye.enclosure.entity.Enclosure;
+import com.skyeye.eve.dao.SkyeyeBaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
 
-public interface SysEnclosureDao {
+public interface SysEnclosureDao extends SkyeyeBaseMapper<Enclosure> {
 
-    List<Map<String, Object>> querySysEnclosureFirstTypeListByUserId(Map<String, Object> map);
-
-    List<Map<String, Object>> querySysEnclosureSecondTypeListByUserId(Map<String, Object> map);
-
-    Map<String, Object> querySysEnclosureMationByUserIdAndParentId(Map<String, Object> map);
-
-    int insertSysEnclosureMationByUserId(Map<String, Object> map);
-
-    List<Map<String, Object>> queryThisFolderChilsByFolderId(Map<String, Object> map);
-
-    Map<String, Object> querySysEnclosureMationByUserIdToEdit(Map<String, Object> map);
-
-    int editSysEnclosureFolderMationByUserId(Map<String, Object> map);
-
-    int editSysEnclosureFileMationByUserId(Map<String, Object> map);
-
-    int insertUploadFileByUserId(Map<String, Object> map);
-
-    List<Map<String, Object>> querySysEnclosureListToTreeByUserId(Map<String, Object> map);
+    List<Map<String, Object>> queryEnclosureList(CatalogBusinessQueryDo commonPageInfo);
 
     List<Map<String, Object>> queryEnclosureInfo(@Param("enclosure") String enclosure);
 
+    List<Map<String, Object>> queryEnclosureTree(@Param("userId") String userId);
 }

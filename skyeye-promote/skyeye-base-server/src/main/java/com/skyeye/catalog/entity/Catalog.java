@@ -73,4 +73,16 @@ public class Catalog extends OperatorUserInfo {
     @ApiModelProperty(value = "目录类型  1. 公共  2.私有", required = "required,num")
     private Integer type;
 
+    /**
+     * 默认所有节点都是文件夹
+     */
+    @TableField(exist = false)
+    private Boolean isParent = true;
+
+    /**
+     * 对象类型，默认是catalog
+     */
+    @TableField(exist = false)
+    private String objectType = "catalog";
+
 }

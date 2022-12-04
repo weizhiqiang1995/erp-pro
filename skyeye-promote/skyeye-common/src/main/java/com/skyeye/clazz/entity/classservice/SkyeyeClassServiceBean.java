@@ -40,11 +40,12 @@ public class SkyeyeClassServiceBean extends CommonInfo implements Serializable {
     @TableField("spring_application_name")
     private String springApplicationName;
 
-    /**
-     * 服务类的className
-     */
     @TableField("class_name")
     @ApiModelProperty(value = "服务类的className", required = "required")
     private String className;
+
+    @TableField("entity_class_name")
+    @ApiModelProperty(value = "实体类的chassName", required = "required")
+    private String entityClassName;
 
 }

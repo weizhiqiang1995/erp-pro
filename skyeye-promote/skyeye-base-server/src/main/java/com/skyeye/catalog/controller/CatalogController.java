@@ -40,7 +40,8 @@ public class CatalogController {
     @ApiOperation(id = "queryCatalogForTree", value = "一次性获取所有的目录为树结构", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "objectId", name = "objectId", value = "所属第三方业务数据id"),
-        @ApiImplicitParam(id = "objectKey", name = "objectKey", value = "所属第三方业务数据的key", required = "required")})
+        @ApiImplicitParam(id = "objectKey", name = "objectKey", value = "所属第三方业务数据的key", required = "required"),
+        @ApiImplicitParam(id = "addOrUser", name = "addOrUser", value = "是否根据创建人查询", required = "required", defaultValue = "false")})
     @RequestMapping("/post/CatalogController/queryCatalogForTree")
     public void queryCatalogForTree(InputObject inputObject, OutputObject outputObject) {
         catalogService.queryCatalogForTree(inputObject, outputObject);
@@ -55,7 +56,8 @@ public class CatalogController {
     @ApiOperation(id = "queryCatalogList", value = "一次性获取所有的目录", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "objectId", name = "objectId", value = "所属第三方业务数据id"),
-        @ApiImplicitParam(id = "objectKey", name = "objectKey", value = "所属第三方业务数据的key", required = "required")})
+        @ApiImplicitParam(id = "objectKey", name = "objectKey", value = "所属第三方业务数据的key", required = "required"),
+        @ApiImplicitParam(id = "addOrUser", name = "addOrUser", value = "是否根据创建人查询", required = "required", defaultValue = "false")})
     @RequestMapping("/post/CatalogController/queryCatalogList")
     public void queryCatalogList(InputObject inputObject, OutputObject outputObject) {
         catalogService.queryCatalogList(inputObject, outputObject);

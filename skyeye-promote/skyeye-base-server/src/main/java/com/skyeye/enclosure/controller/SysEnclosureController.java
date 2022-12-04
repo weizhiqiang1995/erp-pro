@@ -8,8 +8,10 @@ import com.skyeye.annotation.api.Api;
 import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
+import com.skyeye.catalog.entity.CatalogBusinessQueryDo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.enclosure.entity.Enclosure;
 import com.skyeye.enclosure.service.SysEnclosureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,124 +33,29 @@ public class SysEnclosureController {
     private SysEnclosureService sysEnclosureService;
 
     /**
-     * 获取我的附件分类
+     * 获取指定文件夹下的文件
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @RequestMapping("/post/SysEnclosureController/querySysEnclosureListByUserId")
-    public void querySysEnclosureListByUserId(InputObject inputObject, OutputObject outputObject) {
-        sysEnclosureService.querySysEnclosureListByUserId(inputObject, outputObject);
+    @ApiOperation(id = "sysenclosure004", value = "获取指定文件夹下的文件", method = "POST", allUse = "2")
+    @ApiImplicitParams(classBean = CatalogBusinessQueryDo.class)
+    @RequestMapping("/post/SysEnclosureController/queryEnclosureList")
+    public void queryEnclosureList(InputObject inputObject, OutputObject outputObject) {
+        sysEnclosureService.queryPageList(inputObject, outputObject);
     }
 
     /**
-     * 新增我的附件分类
+     * 新增附件
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @RequestMapping("/post/SysEnclosureController/insertSysEnclosureMationByUserId")
-    public void insertSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) {
-        sysEnclosureService.insertSysEnclosureMationByUserId(inputObject, outputObject);
-    }
-
-    /**
-     * 获取我的附件一级分类
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/SysEnclosureController/querySysEnclosureFirstTypeListByUserId")
-    public void querySysEnclosureFirstTypeListByUserId(InputObject inputObject, OutputObject outputObject) {
-        sysEnclosureService.querySysEnclosureFirstTypeListByUserId(inputObject, outputObject);
-    }
-
-    /**
-     * 获取指定文件夹下的文件夹和文件
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/SysEnclosureController/queryThisFolderChilsByFolderId")
-    public void queryThisFolderChilsByFolderId(InputObject inputObject, OutputObject outputObject) {
-        sysEnclosureService.queryThisFolderChilsByFolderId(inputObject, outputObject);
-    }
-
-    /**
-     * 编辑我的附件分类时进行回显
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/SysEnclosureController/querySysEnclosureMationByUserIdToEdit")
-    public void querySysEnclosureMationByUserIdToEdit(InputObject inputObject, OutputObject outputObject) {
-        sysEnclosureService.querySysEnclosureMationByUserIdToEdit(inputObject, outputObject);
-    }
-
-    /**
-     * 编辑我的附件分类/附件
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/SysEnclosureController/editSysEnclosureMationByUserId")
-    public void editSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) {
-        sysEnclosureService.editSysEnclosureMationByUserId(inputObject, outputObject);
-    }
-
-    /**
-     * 上传文件
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/SysEnclosureController/insertUploadFileByUserId")
-    public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) {
-        sysEnclosureService.insertUploadFileByUserId(inputObject, outputObject);
-    }
-
-    /**
-     * 上传文件合并块
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/SysEnclosureController/insertUploadFileChunksByUserId")
-    public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) {
-        sysEnclosureService.insertUploadFileChunksByUserId(inputObject, outputObject);
-    }
-
-    /**
-     * 文件分块上传检测是否上传
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/SysEnclosureController/queryUploadFileChunksByChunkMd5")
-    public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) {
-        sysEnclosureService.queryUploadFileChunksByChunkMd5(inputObject, outputObject);
-    }
-
-    /**
-     * 获取我的附件库
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/SysEnclosureController/querySysEnclosureListToTreeByUserId")
-    public void querySysEnclosureListToTreeByUserId(InputObject inputObject, OutputObject outputObject) {
-        sysEnclosureService.querySysEnclosureListToTreeByUserId(inputObject, outputObject);
-    }
-
-    /**
-     * 一次性上传附件
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/SysEnclosureController/insertUploadFileToDataByUserId")
-    public void insertUploadFileToDataByUserId(InputObject inputObject, OutputObject outputObject) {
-        sysEnclosureService.insertUploadFileToDataByUserId(inputObject, outputObject);
+    @ApiOperation(id = "createEnclosure", value = "新增附件", method = "POST", allUse = "2")
+    @ApiImplicitParams(classBean = Enclosure.class)
+    @RequestMapping("/post/SysEnclosureController/createEnclosure")
+    public void createEnclosure(InputObject inputObject, OutputObject outputObject) {
+        sysEnclosureService.createEntity(inputObject, outputObject);
     }
 
     /**
@@ -163,6 +70,18 @@ public class SysEnclosureController {
     @RequestMapping("/post/SysEnclosureController/queryEnclosureInfo")
     public void queryEnclosureInfo(InputObject inputObject, OutputObject outputObject) {
         sysEnclosureService.queryEnclosureInfo(inputObject, outputObject);
+    }
+
+    /**
+     * 获取我的附件树
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryEnclosureTree", value = "获取我的附件树", method = "GET", allUse = "2")
+    @RequestMapping("/post/SysEnclosureController/queryEnclosureTree")
+    public void queryEnclosureTree(InputObject inputObject, OutputObject outputObject) {
+        sysEnclosureService.queryEnclosureTree(inputObject, outputObject);
     }
 
 }

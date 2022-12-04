@@ -4,415 +4,49 @@
 
 package com.skyeye.enclosure.service.impl;
 
-import cn.hutool.json.JSONUtil;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.lang.tree.Tree;
+import cn.hutool.core.lang.tree.TreeNodeConfig;
+import cn.hutool.core.lang.tree.TreeUtil;
+import cn.hutool.core.util.StrUtil;
+import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
+import com.skyeye.catalog.entity.Catalog;
+import com.skyeye.catalog.entity.CatalogBusinessQueryDo;
+import com.skyeye.catalog.service.CatalogService;
 import com.skyeye.common.constans.CommonNumConstants;
-import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.object.PutObject;
-import com.skyeye.common.util.*;
+import com.skyeye.common.util.BytesUtil;
 import com.skyeye.enclosure.dao.SysEnclosureDao;
+import com.skyeye.enclosure.entity.Enclosure;
 import com.skyeye.enclosure.service.SysEnclosureService;
-import com.skyeye.exception.CustomException;
-import com.skyeye.jedis.JedisClientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-import java.io.*;
-import java.nio.channels.FileChannel;
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
-public class SysEnclosureServiceImpl implements SysEnclosureService {
+public class SysEnclosureServiceImpl extends SkyeyeBusinessServiceImpl<SysEnclosureDao, Enclosure> implements SysEnclosureService {
 
     @Autowired
     private SysEnclosureDao sysEnclosureDao;
 
     @Autowired
-    public JedisClientService jedisClient;
+    private CatalogService catalogService;
 
-    @Value("${IMAGES_PATH}")
-    private String tPath;
-
-    /**
-     * 获取我的附件分类
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    public void querySysEnclosureListByUserId(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String parentId = map.get("parentId").toString();
-        List<Map<String, Object>> beans = new ArrayList<>();
-        if ("0".equals(parentId)) {//获取每个用户有包含的文件夹
-            beans = Constants.getSysEnclosureZeroList();
-        } else if ("1".equals(parentId)) {//获取一级分类
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("userId", user.get("id"));
-            beans = sysEnclosureDao.querySysEnclosureFirstTypeListByUserId(map);
-        } else {
-            Map<String, Object> user = inputObject.getLogParams();
-            map.put("userId", user.get("id"));
-            beans = sysEnclosureDao.querySysEnclosureSecondTypeListByUserId(map);
-        }
-        outputObject.setBeans(beans);
-    }
-
-    /**
-     * 新增我的附件分类
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
-        String parentId = map.get("parentId").toString();
-        if (!"0".equals(parentId)) {//新增的分类不是一级分类
-            //根据所属父id和当前登录用户判断该父目录是否存在
-            Map<String, Object> bean = sysEnclosureDao.querySysEnclosureMationByUserIdAndParentId(map);
-            if (bean == null) {
-                outputObject.setreturnMessage("该父目录不存在或者不属于当前账号。");
-                return;
-            } else {
-                //所选择的父目录的父id只能为0（该附件分类只能选择到二级分类）
-                if (!"0".equals(bean.get("parentId").toString())) {
-                    outputObject.setreturnMessage("所属文件夹不能为二级文件夹.");
-                    return;
-                }
-            }
-        }
-        map.put("id", ToolUtil.getSurFaceId());
-        map.put("createTime", DateUtil.getTimeAndToString());
-        map.put("state", "1");//默认状态正常
-        sysEnclosureDao.insertSysEnclosureMationByUserId(map);
-    }
-
-    /**
-     * 获取我的附件一级分类
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void querySysEnclosureFirstTypeListByUserId(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
-        List<Map<String, Object>> beans = sysEnclosureDao.querySysEnclosureFirstTypeListByUserId(map);
-        outputObject.setBeans(beans);
-        outputObject.settotal(CommonNumConstants.NUM_ONE);
-    }
-
-    /**
-     * 获取指定文件夹下的文件夹和文件
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryThisFolderChilsByFolderId(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
-        if ("1".equals(map.get("parentId").toString())) {
-            // 如果父id为1，即：我的附件，则将parentId设置为0
-            map.put("parentId", "0");
-        }
-        List<Map<String, Object>> beans = sysEnclosureDao.queryThisFolderChilsByFolderId(map);
-        for (Map<String, Object> bean : beans) {
-            if (!"folder".equals(bean.get("fileType").toString())) {
-                // 不是文件夹
-                String size = BytesUtil.sizeFormatNum2String(Long.parseLong(bean.get("fileSize").toString()));
-                bean.put("fileSize", size);
-            }
-        }
-        outputObject.setBeans(beans);
-        outputObject.settotal(CommonNumConstants.NUM_ONE);
-    }
-
-    /**
-     * 编辑我的附件分类时进行回显
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void querySysEnclosureMationByUserIdToEdit(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
-        Map<String, Object> bean = sysEnclosureDao.querySysEnclosureMationByUserIdToEdit(map);
-        outputObject.setBean(bean);
-    }
-
-    /**
-     * 编辑我的附件分类/附件
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysEnclosureMationByUserId(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String fileType = map.get("fileType").toString();
-        if ("folder".equals(fileType)) {
-            // 编辑的附件数据为文件夹
-            sysEnclosureDao.editSysEnclosureFolderMationByUserId(map);
-        } else {
-            // 编辑的附件数据为文件
-            sysEnclosureDao.editSysEnclosureFileMationByUserId(map);
-        }
-    }
-
-    /**
-     * 上传文件
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertUploadFileByUserId(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        // 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(PutObject.getRequest().getSession().getServletContext());
-        // 检查form中是否有enctype="multipart/form-data"
-        if (multipartResolver.isMultipart(PutObject.getRequest())) {
-            Map<String, Object> user = inputObject.getLogParams();
-            String userId = user.get("id").toString();
-            // 将request变成多部分request
-            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) PutObject.getRequest();
-            // 获取multiRequest 中所有的文件名
-            Iterator iter = multiRequest.getFileNames();
-            String basePath = tPath + "\\upload\\enclosurefile\\" + userId;
-            while (iter.hasNext()) {
-                // 一次遍历所有文件
-                MultipartFile file = multiRequest.getFile(iter.next().toString());
-                String fileName = file.getOriginalFilename();
-                //得到文件扩展名
-                String fileExtName = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
-                if (file != null) {
-                    FileUtil.createDirs(basePath);
-                    // 自定义的文件名称
-                    String newFileName = String.valueOf(System.currentTimeMillis()) + "." + fileExtName;
-                    String path = basePath + "\\" + newFileName;
-                    // 上传
-                    try {
-                        file.transferTo(new File(path));
-                    } catch (IOException e) {
-                        throw new CustomException(e);
-                    }
-                    // 文件类型
-                    map.put("fileType", fileExtName);
-                    // 文件大小单位
-                    map.put("fileSizeType", "bytes");
-                    DataCommonUtil.setCommonData(map, userId);
-                    // 文件地址
-                    map.put("fileAddress", "/images/upload/enclosurefile/" + userId + "/" + newFileName);
-                    map.put("fileThumbnail", "-1");
-                    map.put("folderId", map.get("folderId"));
-                    List<Map<String, Object>> beans;
-                    if (ToolUtil.isBlank(jedisClient.get(Constants.getSysEnclosureFileModuleByMd5(map.get("md5").toString())))) {
-                        beans = new ArrayList<>();
-                    } else {
-                        beans = JSONUtil.toList(jedisClient.get(Constants.getSysEnclosureFileModuleByMd5(map.get("md5").toString())).toString(), null);
-                    }
-                    beans.add(map);
-                    jedisClient.set(Constants.getSysEnclosureFileModuleByMd5(map.get("md5").toString()), JSONUtil.toJsonStr(beans));
-                }
-            }
-        }
-    }
-
-    /**
-     * 上传文件合并块
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertUploadFileChunksByUserId(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        String userId = user.get("id").toString();
-        List<Map<String, Object>> beans = JSONUtil.toList(jedisClient.get(Constants.getSysEnclosureFileModuleByMd5(map.get("md5").toString())).toString(), null);
-        List<File> fileList = new ArrayList<>();
-        for (Map<String, Object> bean : beans) {
-            File f = new File(tPath.replace("images", "") + bean.get("fileAddress").toString());
-            fileList.add(f);
-        }
-        String fileName = map.get("name").toString();
-        String fileExtName = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();//文件后缀
-        String newFileName = String.valueOf(System.currentTimeMillis()) + "." + fileExtName;//新文件名
-        String path = tPath + "\\upload\\enclosurefile" + "\\" + userId + "\\" + newFileName;//文件路径
-        FileChannel outChnnel = null;
-        try {
-            File outputFile = new File(path);
-            //创建文件
-            outputFile.createNewFile();
-            //输出流
-            outChnnel = new FileOutputStream(outputFile).getChannel();
-            FileChannel inChannel;
-            for (File file : fileList) {
-                inChannel = new FileInputStream(file).getChannel();
-                inChannel.transferTo(0, inChannel.size(), outChnnel);
-                inChannel.close();
-                //删除分片
-                file.delete();
-            }
-        } catch (FileNotFoundException e) {
-            throw new CustomException(e);
-        } catch (IOException e) {
-            throw new CustomException(e);
-        } finally {
-            FileUtil.close(outChnnel);
-        }
-        jedisClient.del(Constants.getSysEnclosureFileModuleByMd5(map.get("md5").toString()));
-        // 文件类型
-        map.put("fileType", fileExtName);
-        // 文件大小单位
-        map.put("fileSizeType", "bytes");
-        // 文件地址
-        map.put("fileAddress", "/images/upload/enclosurefile/" + userId + "/" + newFileName);
-        DataCommonUtil.setCommonData(map, userId);
-        sysEnclosureDao.insertUploadFileByUserId(map);
-        outputObject.setBean(map);
-    }
-
-    /**
-     * 文件分块上传检测是否上传
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryUploadFileChunksByChunkMd5(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String md5 = map.get("md5").toString();
-        String chunk = map.get("chunk").toString();
-        List<Map<String, Object>> beans;
-        if (ToolUtil.isBlank(jedisClient.get(Constants.getSysEnclosureFileModuleByMd5(md5)))) {
-            beans = new ArrayList<>();
-        } else {
-            beans = JSONUtil.toList(jedisClient.get(Constants.getSysEnclosureFileModuleByMd5(md5)).toString(), null);
-        }
-        Map<String, Object> bean = null;
-        int index = -1;
-        for (int i = 0; i < beans.size(); i++) {
-            Map<String, Object> item = beans.get(i);
-            if (chunk.equals(item.get("chunk").toString())) {
-                bean = item;
-                index = i;
-                return;
-            }
-        }
-        if (bean != null && !bean.isEmpty()) {
-            String fileAddress = tPath.replace("images", "") + bean.get("fileAddress").toString();
-            File checkFile = new File(fileAddress);
-            String chunkSize = map.get("chunkSize").toString();
-            if (checkFile.exists() && checkFile.length() == Integer.parseInt(chunkSize)) {
-            } else {
-                beans.remove(index);
-                jedisClient.set(Constants.getSysEnclosureFileModuleByMd5(map.get("md5").toString()), JSONUtil.toJsonStr(beans));
-                outputObject.setreturnMessage("文件上传失败");
-            }
-        } else {
-            outputObject.setreturnMessage("文件上传失败");
-        }
-    }
-
-    /**
-     * 获取我的附件库
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void querySysEnclosureListToTreeByUserId(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> user = inputObject.getLogParams();
-        map.put("userId", user.get("id"));
-        List<Map<String, Object>> beans = sysEnclosureDao.querySysEnclosureListToTreeByUserId(map);
-        for (Map<String, Object> bean : beans) {
-            if ("0".equals(bean.get("pId").toString())) {
-                bean.put("pId", "1");
-            }
-        }
-        beans.addAll(Constants.getSysEnclosureZeroList());
-        outputObject.setBeans(beans);
-    }
-
-    /**
-     * 一次性上传附件
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void insertUploadFileToDataByUserId(InputObject inputObject, OutputObject outputObject) {
-        // 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(PutObject.getRequest().getSession().getServletContext());
-        // 检查form中是否有enctype="multipart/form-data"
-        if (multipartResolver.isMultipart(PutObject.getRequest())) {
-            String userId = inputObject.getLogParams().get("id").toString();
-            // 将request变成多部分request
-            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) PutObject.getRequest();
-            // 获取multiRequest 中所有的文件名
-            Iterator iter = multiRequest.getFileNames();
-            //决定存储路径
-            String basePath = tPath + "\\upload\\enclosurefile\\" + userId;
-            String trueFileName = "";
-            while (iter.hasNext()) {
-                // 一次遍历所有文件
-                MultipartFile file = multiRequest.getFile(iter.next().toString());
-                String fileName = file.getOriginalFilename();
-                // 得到文件扩展名
-                String fileExtName = fileName.substring(fileName.lastIndexOf(".") + 1);
-                if (file != null) {
-                    FileUtil.createDirs(basePath);
-                    // 自定义的文件名称
-                    String newFileName = String.valueOf(System.currentTimeMillis()) + "." + fileExtName;
-                    String path = basePath + "\\" + newFileName;
-                    try {
-                        file.transferTo(new File(path));
-                    } catch (IOException e) {
-                        throw new CustomException(e);
-                    }
-                    newFileName = "/images/upload/enclosurefile/" + userId + "/" + newFileName;
-                    if (ToolUtil.isBlank(trueFileName)) {
-                        trueFileName = newFileName;
-                    } else {
-                        trueFileName = trueFileName + "," + newFileName;
-                    }
-                    // 存储附件到数据库
-                    Map<String, Object> bean = new HashMap<>();
-                    // 文件类型
-                    bean.put("fileType", fileExtName);
-                    // 文件大小单位
-                    bean.put("fileSizeType", "bytes");
-                    bean.put("size", file.getSize());
-                    bean.put("folderId", "0");
-                    bean.put("name", fileName);
-                    bean.put("fileAddress", trueFileName);
-                    DataCommonUtil.setCommonData(bean, userId);
-                    sysEnclosureDao.insertUploadFileByUserId(bean);
-                    outputObject.setBean(bean);
-                    return;
-                }
-            }
-        }
+    public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
+        CatalogBusinessQueryDo pageInfo = inputObject.getParams(CatalogBusinessQueryDo.class);
+        pageInfo.setCreateId(inputObject.getLogParams().get("id").toString());
+        List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureList(pageInfo);
+        beans.forEach(bean -> {
+            String size = BytesUtil.sizeFormatNum2String(Long.parseLong(bean.get("size").toString()));
+            bean.put("size", size);
+        });
+        return beans;
     }
 
     /**
@@ -427,6 +61,40 @@ public class SysEnclosureServiceImpl implements SysEnclosureService {
         List<Map<String, Object>> beans = sysEnclosureDao.queryEnclosureInfo(map.get("enclosureInfoIds").toString());
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
+    }
+
+    /**
+     * 获取我的附件树
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryEnclosureTree(InputObject inputObject, OutputObject outputObject) {
+        String userId = inputObject.getLogParams().get("id").toString();
+        List<Map<String, Object>> enclosureList = sysEnclosureDao.queryEnclosureTree(userId);
+        // 获取目录
+        List<Catalog> catalogs = catalogService.getCatalogs(StrUtil.EMPTY, getServiceClassName(), true, userId);
+        for (Catalog catalog : catalogs) {
+            enclosureList.add(BeanUtil.beanToMap(catalog));
+        }
+
+        enclosureList = enclosureList.stream()
+            .sorted(Comparator.comparing(bean -> bean.get("objectType").toString(), Comparator.naturalOrder())).collect(Collectors.toList());
+        // 转为树
+        List<Tree<String>> treeNodes = TreeUtil.build(enclosureList, String.valueOf(CommonNumConstants.NUM_ZERO), new TreeNodeConfig(),
+            (treeNode, tree) -> {
+                tree.setId(treeNode.get("id").toString());
+                tree.setParentId(treeNode.get("parentId").toString());
+                tree.setName(treeNode.get("name").toString());
+                String objectType = treeNode.get("objectType").toString();
+                if (StrUtil.equals(objectType, "catalog")) {
+                    tree.putExtra("isParent", true);
+                }
+                tree.putExtra("objectType", objectType);
+            });
+        outputObject.setBeans(treeNodes);
+        outputObject.settotal(treeNodes.size());
     }
 
 }

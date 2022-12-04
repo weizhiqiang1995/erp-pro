@@ -61,13 +61,17 @@ public class CatalogServiceImpl extends SkyeyeBusinessServiceImpl<CatalogDao, Ca
         Map<String, Object> params = inputObject.getParams();
         String objectId = params.get("objectId").toString();
         String objectKey = params.get("objectKey").toString();
-        List<Catalog> result = getCatalogs(objectId, objectKey);
+        Boolean addOrUser = Boolean.valueOf(params.get("addOrUser").toString());
+        String userId = inputObject.getLogParams().get("id").toString();
+        List<Catalog> result = getCatalogs(objectId, objectKey, addOrUser, userId);
         // 转为树
         List<Tree<String>> treeNodes = TreeUtil.build(result, String.valueOf(CommonNumConstants.NUM_ZERO), new TreeNodeConfig(),
             (treeNode, tree) -> {
                 tree.setId(treeNode.getId());
                 tree.setParentId(treeNode.getParentId());
                 tree.setName(treeNode.getName());
+                tree.putExtra("isParent", true);
+                tree.putExtra("icon", treeNode.getIcon());
             });
         outputObject.setBeans(treeNodes);
         outputObject.settotal(treeNodes.size());
@@ -84,16 +88,19 @@ public class CatalogServiceImpl extends SkyeyeBusinessServiceImpl<CatalogDao, Ca
         Map<String, Object> params = inputObject.getParams();
         String objectId = params.get("objectId").toString();
         String objectKey = params.get("objectKey").toString();
-        List<Catalog> result = getCatalogs(objectId, objectKey);
+        Boolean addOrUser = Boolean.valueOf(params.get("addOrUser").toString());
+        String userId = inputObject.getLogParams().get("id").toString();
+        List<Catalog> result = getCatalogs(objectId, objectKey, addOrUser, userId);
         outputObject.setBeans(result);
         outputObject.settotal(result.size());
     }
 
-    private List<Catalog> getCatalogs(String objectId, String objectKey) {
+    @Override
+    public List<Catalog> getCatalogs(String objectId, String objectKey, Boolean addOrUser, String userId) {
         // 查询这个业务对象所有公共的目录
-        List<Catalog> publicCatalogList = queryList(StrUtil.EMPTY, objectKey, CatalogTypeEnum.PUBLIC.getKey());
+        List<Catalog> publicCatalogList = queryList(StrUtil.EMPTY, objectKey, CatalogTypeEnum.PUBLIC.getKey(), addOrUser, userId);
         // 查询这个业务对象私有的目录
-        List<Catalog> privateCatalogList = queryList(objectId, objectKey, CatalogTypeEnum.PRIVATELY_OWNED.getKey());
+        List<Catalog> privateCatalogList = queryList(objectId, objectKey, CatalogTypeEnum.PRIVATELY_OWNED.getKey(), addOrUser, userId);
 
         List<Catalog> result = new ArrayList<>();
         if (CollectionUtil.isNotEmpty(publicCatalogList)) {
@@ -105,7 +112,7 @@ public class CatalogServiceImpl extends SkyeyeBusinessServiceImpl<CatalogDao, Ca
         return result;
     }
 
-    private List<Catalog> queryList(String objectId, String objectKey, Integer type) {
+    private List<Catalog> queryList(String objectId, String objectKey, Integer type, Boolean addOrUser, String userId) {
         QueryWrapper<Catalog> queryWrapper = new QueryWrapper();
         queryWrapper.eq(MybatisPlusUtil.toColumns(Catalog::getObjectKey), objectKey);
         if (type != null) {
@@ -113,6 +120,9 @@ public class CatalogServiceImpl extends SkyeyeBusinessServiceImpl<CatalogDao, Ca
         }
         if (StrUtil.isNotEmpty(objectId)) {
             queryWrapper.eq(MybatisPlusUtil.toColumns(Catalog::getObjectId), objectId);
+        }
+        if (addOrUser) {
+            queryWrapper.eq(MybatisPlusUtil.toColumns(Catalog::getCreateId), userId);
         }
         return list(queryWrapper);
     }
