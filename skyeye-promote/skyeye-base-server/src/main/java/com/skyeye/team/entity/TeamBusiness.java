@@ -4,12 +4,15 @@
 
 package com.skyeye.team.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
-import com.skyeye.common.entity.features.OperatorUserInfo;
+import com.skyeye.annotation.cache.RedisCacheField;
+import com.skyeye.annotation.unique.UniqueField;
+import com.skyeye.common.constans.CacheConstants;
+import com.skyeye.common.constans.RedisConstants;
 import lombok.Data;
 
 import java.util.List;
@@ -23,26 +26,27 @@ import java.util.List;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Data
+@UniqueField(value = {"businessId", "businessKey"})
+@RedisCacheField(name = CacheConstants.TEAM_BUSINESS_CACHE_KEY, value = {"id", "businessId"}, cacheTime = RedisConstants.HALF_A_YEAR_SECONDS)
 @TableName(value = "team_business")
 @ApiModel("团队实体类")
-public class TeamBusiness extends OperatorUserInfo {
+public class TeamBusiness extends AbstractTeam {
 
-    @TableId("id")
-    private String id;
-
-    @TableField("name")
-    @ApiModelProperty(value = "名称", required = "required")
+    /**
+     * 名称
+     */
+    @TableField(exist = false)
     private String name;
 
-    @TableField("business_id")
+    @TableField(value = "business_id", fill = FieldFill.INSERT)
     @ApiModelProperty(value = "业务对象id", required = "required")
     private String businessId;
 
-    @TableField("business_key")
+    @TableField(value = "business_key", fill = FieldFill.INSERT)
     @ApiModelProperty(value = "业务对象的key", required = "required")
     private String businessKey;
 
-    @TableField("team_template_id")
+    @TableField(value = "team_template_id", fill = FieldFill.INSERT)
     @ApiModelProperty(value = "团队模板id", required = "required")
     private String teamTemplateId;
 

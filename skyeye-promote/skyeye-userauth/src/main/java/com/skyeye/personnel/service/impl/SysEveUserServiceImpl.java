@@ -92,9 +92,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         SysUserQueryDo sysUserQuery = inputObject.getParams(SysUserQueryDo.class);
         Page pages = PageHelper.startPage(sysUserQuery.getPage(), sysUserQuery.getLimit());
         List<Map<String, Object>> beans = sysEveUserDao.querySysUserList(sysUserQuery);
-        iCompanyService.setName(beans, "companyId", "companyName");
-        iDepmentService.setName(beans, "departmentId", "departmentName");
-        iCompanyJobService.setName(beans, "jobId", "jobName");
+        iCompanyService.setNameForMap(beans, "companyId", "companyName");
+        iDepmentService.setNameForMap(beans, "departmentId", "departmentName");
+        iCompanyJobService.setNameForMap(beans, "jobId", "jobName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -278,9 +278,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     }
 
     private void setUserOtherMation(Map<String, Object> userMation) {
-        iCompanyService.setName(userMation, "companyId", "companyName");
-        iDepmentService.setName(userMation, "departmentId", "departmentName");
-        iCompanyJobService.setName(userMation, "jobId", "jobName");
+        iCompanyService.setNameForMap(userMation, "companyId", "companyName");
+        iDepmentService.setNameForMap(userMation, "departmentId", "departmentName");
+        iCompanyJobService.setNameForMap(userMation, "jobId", "jobName");
     }
 
     /**
@@ -623,9 +623,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     public void queryUserDetailsMationByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> user = inputObject.getLogParams();
         Map<String, Object> bean = sysEveUserDao.queryUserDetailsMationByUserId(user.get("id").toString());
-        iCompanyService.setName(bean, "companyId", "companyName");
-        iDepmentService.setName(bean, "departmentId", "departmentName");
-        iCompanyJobService.setName(bean, "jobId", "jobName");
+        iCompanyService.setNameForMap(bean, "companyId", "companyName");
+        iDepmentService.setNameForMap(bean, "departmentId", "departmentName");
+        iCompanyJobService.setNameForMap(bean, "jobId", "jobName");
         iCompanyJobScoreService.setNameForMap(bean, "jobScoreId", "jobScoreName");
         outputObject.setBean(bean);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
@@ -707,7 +707,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         List<Map<String, Object>> result = new ArrayList<>();
         setOrganization(result, StringUtils.EMPTY);
         List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffToTree(queryDo);
-        iDepmentService.setName(beans, "departmentId", "departmentName");
+        iDepmentService.setNameForMap(beans, "departmentId", "departmentName");
         result.addAll(beans);
         outputObject.setBeans(result);
     }
@@ -740,7 +740,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         List<Map<String, Object>> result = new ArrayList<>();
         setOrganization(result, companyId);
         List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffToTree(queryDo);
-        iDepmentService.setName(beans, "departmentId", "departmentName");
+        iDepmentService.setNameForMap(beans, "departmentId", "departmentName");
         result.addAll(beans);
         outputObject.setBeans(result);
     }
@@ -761,7 +761,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         result.addAll(companyMationService.queryCompanyList(companyId));
         result.addAll(companyDepartmentService.queryDepartmentList(Arrays.asList(companyId), new ArrayList<>()));
         List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffDepToTree(queryDo);
-        iDepmentService.setName(beans, "departmentId", "departmentName");
+        iDepmentService.setNameForMap(beans, "departmentId", "departmentName");
         result.addAll(beans);
         outputObject.setBeans(result);
     }
@@ -781,7 +781,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         List<Map<String, Object>> result = new ArrayList<>();
         setOrganization(result, companyId);
         List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffToTree(queryDo);
-        iDepmentService.setName(beans, "departmentId", "departmentName");
+        iDepmentService.setNameForMap(beans, "departmentId", "departmentName");
         result.addAll(beans);
         outputObject.setBeans(result);
     }
@@ -799,7 +799,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         String departmentId = inputObject.getLogParams().get("departmentId").toString();
         queryDo.setDepartmentId(departmentId);
         List<Map<String, Object>> beans = sysEveUserDao.queryUserStaffDepToTree(queryDo);
-        iDepmentService.setName(beans, "departmentId", "departmentName");
+        iDepmentService.setNameForMap(beans, "departmentId", "departmentName");
         beans.addAll(companyDepartmentService.queryDepartmentList(new ArrayList<>(), Arrays.asList(inputObject.getLogParams().get("departmentId").toString())));
         outputObject.setBeans(beans);
     }
@@ -817,7 +817,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         Map<String, Object> user = inputObject.getLogParams();
         queryDo.setUserId(user.get("id").toString());
         List<Map<String, Object>> beans = sysEveUserDao.queryTalkGroupUserListByUserId(queryDo);
-        iDepmentService.setName(beans, "departmentId", "departmentName");
+        iDepmentService.setNameForMap(beans, "departmentId", "departmentName");
         outputObject.setBeans(beans);
     }
 

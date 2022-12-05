@@ -5,7 +5,6 @@
 package com.skyeye.team.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
@@ -13,10 +12,7 @@ import com.skyeye.annotation.cache.RedisCacheField;
 import com.skyeye.annotation.unique.UniqueField;
 import com.skyeye.common.constans.CacheConstants;
 import com.skyeye.common.constans.RedisConstants;
-import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
-
-import java.util.List;
 
 /**
  * @ClassName: TeamTemplate
@@ -31,11 +27,7 @@ import java.util.List;
 @RedisCacheField(name = CacheConstants.TEAM_TEMPLATE_CACHE_KEY, cacheTime = RedisConstants.THIRTY_DAY_SECONDS)
 @TableName(value = "team_template")
 @ApiModel("团队模板实体类")
-public class TeamTemplate extends OperatorUserInfo {
-
-    @TableId("id")
-    @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")
-    private String id;
+public class TeamTemplate extends AbstractTeam {
 
     @TableField("`name`")
     @ApiModelProperty(value = "名称", required = "required")
@@ -58,14 +50,6 @@ public class TeamTemplate extends OperatorUserInfo {
     @TableField("enabled")
     @ApiModelProperty(value = "启用 1-启用  2-禁用", required = "required,num")
     private Integer enabled;
-
-    @TableField(exist = false)
-    @ApiModelProperty(value = "团队角色", required = "required,json")
-    private List<TeamRole> teamRoleList;
-
-    @TableField(exist = false)
-    @ApiModelProperty(value = "团队权限", required = "json")
-    private List<TeamObjectPermission> teamObjectPermissionList;
 
     /**
      * 是否使用中 0-未使用  2-已使用

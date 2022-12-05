@@ -4,23 +4,20 @@
 
 package com.skyeye.team.service;
 
+import com.skyeye.base.business.service.SkyeyeBusinessService;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.team.entity.TeamBusiness;
 
 /**
- * @ClassName: TeamBusinessService
- * @Description: 团队管理服务接口层
+ * @ClassName: AbstractTeamService
+ * @Description: 团队管理抽象类
  * @author: skyeye云系列--卫志强
- * @date: 2022/11/13 19:36
+ * @date: 2022/11/13 19:24
  * @Copyright: 2022 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-public interface TeamBusinessService extends AbstractTeamService<TeamBusiness> {
+public interface AbstractTeamService<T> extends SkyeyeBusinessService<T> {
 
-    void createTeamBusiness(InputObject inputObject, OutputObject outputObject);
+    void queryTeamMation(InputObject inputObject, OutputObject outputObject);
 
-    void queryTeamBusiness(InputObject inputObject, OutputObject outputObject);
-
-    void deleteTeamBusiness(InputObject inputObject, OutputObject outputObject);
 }

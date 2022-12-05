@@ -4,6 +4,16 @@
 
 package com.skyeye.team.controller;
 
+import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParam;
+import com.skyeye.annotation.api.ApiImplicitParams;
+import com.skyeye.annotation.api.ApiOperation;
+import com.skyeye.common.object.InputObject;
+import com.skyeye.common.object.OutputObject;
+import com.skyeye.team.entity.TeamBusiness;
+import com.skyeye.team.service.TeamBusinessService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -15,5 +25,69 @@ import org.springframework.web.bind.annotation.RestController;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @RestController
+@Api(value = "业务对象团队管理", tags = "业务对象团队管理", modelName = "团队模块")
 public class TeamBusinessController {
+
+    @Autowired
+    private TeamBusinessService teamBusinessService;
+
+    /**
+     * 根据团队模板生成团队信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "createTeamBusiness", value = "根据团队模板生成团队信息", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "teamTemplateId", name = "teamTemplateId", value = "团队模板id", required = "required"),
+        @ApiImplicitParam(id = "businessId", name = "businessId", value = "业务对象id", required = "required"),
+        @ApiImplicitParam(id = "businessKey", name = "businessKey", value = "业务对象的key", required = "required")})
+    @RequestMapping("/post/TeamBusinessController/createTeamBusiness")
+    public void createTeamBusiness(InputObject inputObject, OutputObject outputObject) {
+        teamBusinessService.createTeamBusiness(inputObject, outputObject);
+    }
+
+    /**
+     * 根据业务对象id获取团队信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryTeamBusiness", value = "根据业务对象id获取团队信息", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "businessId", name = "businessId", value = "业务对象id", required = "required"),
+        @ApiImplicitParam(id = "businessKey", name = "businessKey", value = "业务对象的key", required = "required")})
+    @RequestMapping("/post/TeamBusinessController/queryTeamBusiness")
+    public void queryTeamBusiness(InputObject inputObject, OutputObject outputObject) {
+        teamBusinessService.queryTeamBusiness(inputObject, outputObject);
+    }
+
+    /**
+     * 根据业务对象id删除团队信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "deleteTeamBusiness", value = "根据业务对象id删除团队信息", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "businessId", name = "businessId", value = "业务对象id", required = "required"),
+        @ApiImplicitParam(id = "businessKey", name = "businessKey", value = "业务对象的key", required = "required")})
+    @RequestMapping("/post/TeamBusinessController/deleteTeamBusiness")
+    public void deleteTeamBusiness(InputObject inputObject, OutputObject outputObject) {
+        teamBusinessService.deleteTeamBusiness(inputObject, outputObject);
+    }
+
+    /**
+     * 编辑团队信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "updateTeamTemplate", value = "编辑团队信息", method = "POST", allUse = "2")
+    @ApiImplicitParams(classBean = TeamBusiness.class)
+    @RequestMapping("/post/TeamTemplateController/updateTeamTemplate")
+    public void updateTeamTemplate(InputObject inputObject, OutputObject outputObject) {
+        teamBusinessService.updateEntity(inputObject, outputObject);
+    }
+
 }

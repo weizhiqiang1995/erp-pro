@@ -56,8 +56,8 @@ public class CompanyJobServiceImpl extends SkyeyeBusinessServiceImpl<CompanyJobD
     public List<Map<String, Object>> queryDataList(InputObject inputObject) {
         TableSelectInfo tableSelectInfo = inputObject.getParams(TableSelectInfo.class);
         List<Map<String, Object>> beans = companyJobDao.queryCompanyJobList(tableSelectInfo);
-        iCompanyService.setName(beans, "companyId", "companyName");
-        iDepmentService.setName(beans, "departmentId", "departmentName");
+        iCompanyService.setNameForMap(beans, "companyId", "companyName");
+        iDepmentService.setNameForMap(beans, "departmentId", "departmentName");
         String[] s;
         for (Map<String, Object> bean : beans) {
             s = bean.get("parentId").toString().split(",");

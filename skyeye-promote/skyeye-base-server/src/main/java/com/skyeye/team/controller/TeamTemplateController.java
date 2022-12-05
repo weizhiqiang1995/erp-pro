@@ -83,7 +83,7 @@ public class TeamTemplateController {
         @ApiImplicitParam(id = "id", name = "id", value = "团队模板id", required = "required")})
     @RequestMapping("/post/TeamTemplateController/queryTeamTemplateById")
     public void queryTeamTemplateById(InputObject inputObject, OutputObject outputObject) {
-        teamTemplateService.queryTeamTemplateMation(inputObject, outputObject);
+        teamTemplateService.queryTeamMation(inputObject, outputObject);
     }
 
     /**

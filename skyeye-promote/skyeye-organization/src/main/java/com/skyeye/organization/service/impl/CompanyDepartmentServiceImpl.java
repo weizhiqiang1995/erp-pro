@@ -53,7 +53,7 @@ public class CompanyDepartmentServiceImpl extends SkyeyeBusinessServiceImpl<Comp
     public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
         List<Map<String, Object>> beans = companyDepartmentDao.queryCompanyDepartmentList(commonPageInfo);
-        iCompanyService.setName(beans, "companyId", "companyName");
+        iCompanyService.setNameForMap(beans, "companyId", "companyName");
         beans.forEach(bean -> {
             Integer overtimeSettlementType = Integer.parseInt(bean.get("overtimeSettlementType").toString());
             bean.put("overtimeSettlementTypeName", OrganizationConstants.OvertimeSettlementType.getTitleByType(overtimeSettlementType));
@@ -117,7 +117,7 @@ public class CompanyDepartmentServiceImpl extends SkyeyeBusinessServiceImpl<Comp
         CommonPageInfo pageInfo = inputObject.getParams(CommonPageInfo.class);
         Page pages = PageHelper.startPage(pageInfo.getPage(), pageInfo.getLimit());
         List<Map<String, Object>> beans = queryPageDataList(inputObject);
-        iCompanyService.setName(beans, "companyId", "companyName");
+        iCompanyService.setNameForMap(beans, "companyId", "companyName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

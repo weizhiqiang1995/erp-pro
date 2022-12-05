@@ -116,8 +116,8 @@ public class UserPhoneServiceImpl implements UserPhoneService {
                     userMation.put("userToken", userToken);
 
                     String appUserId = userId + SysUserAuthConstants.APP_IDENTIFYING;
-                    iDepmentService.setName(userMation, "departmentId", "departmentName");
-                    iCompanyJobService.setName(userMation, "jobId", "jobName");
+                    iDepmentService.setNameForMap(userMation, "departmentId", "departmentName");
+                    iCompanyJobService.setNameForMap(userMation, "jobId", "jobName");
                     SysUserAuthConstants.setUserLoginRedisCache(appUserId, userMation);
                     jedisClient.set("allMenuMation:" + appUserId, roleIds);
                     jedisClient.set("authPointsMation:" + appUserId, roleIds);
@@ -156,8 +156,8 @@ public class UserPhoneServiceImpl implements UserPhoneService {
                 //如果已经绑定用户，则获取用户信息
                 if (bean.containsKey("userId") && !ToolUtil.isBlank(bean.get("userId").toString())) {
                     Map<String, Object> userMation = userPhoneDao.queryUserMationByOpenId(openId);
-                    iCompanyService.setName(userMation, "companyId", "companyName");
-                    iDepmentService.setName(userMation, "departmentId", "departmentName");
+                    iCompanyService.setNameForMap(userMation, "companyId", "companyName");
+                    iDepmentService.setNameForMap(userMation, "departmentId", "departmentName");
                     // 2.将账号的信息存入redis
                     SysUserAuthConstants.setUserLoginRedisCache(bean.get("userId").toString() + SysUserAuthConstants.APP_IDENTIFYING, userMation);
                     //3.将权限的信息存入redis
@@ -178,7 +178,7 @@ public class UserPhoneServiceImpl implements UserPhoneService {
             //如果已经绑定用户，则获取用户信息
             if (map.containsKey("userId") && !ToolUtil.isBlank(map.get("userId").toString())) {
                 Map<String, Object> userMation = userPhoneDao.queryUserMationByOpenId(openId);
-                iCompanyService.setName(userMation, "companyId", "companyName");
+                iCompanyService.setNameForMap(userMation, "companyId", "companyName");
                 //2.将账号的信息存入redis
                 SysUserAuthConstants.setUserLoginRedisCache(map.get("userId").toString() + SysUserAuthConstants.APP_IDENTIFYING, userMation);
                 //3.将权限的信息存入redis
@@ -229,7 +229,7 @@ public class UserPhoneServiceImpl implements UserPhoneService {
                             if (isBindInWx != null && !isBindInWx.isEmpty()) {
                                 outputObject.setreturnMessage("该账号已被绑定.");
                             } else {
-                                iCompanyJobService.setName(userMation, "jobId", "jobName");
+                                iCompanyJobService.setNameForMap(userMation, "jobId", "jobName");
                                 //构建绑定信息对象
                                 map = new HashMap<>();
                                 String userId = userMation.get("id").toString();

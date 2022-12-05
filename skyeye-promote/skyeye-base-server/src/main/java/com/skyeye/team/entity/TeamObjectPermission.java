@@ -37,11 +37,11 @@ public class TeamObjectPermission extends OperatorUserInfo {
     private String teamKey;
 
     @TableField("object_id")
-    @ApiModelProperty(value = "业务对象id，单独保存时必填(因为有和团队一起的保存)")
+    @ApiModelProperty(value = "业务对象下面的子业务数据的id，例如：客户下的联系人，一般用于用户A给用户B赋权时有值")
     private String objectId;
 
     @TableField("object_key")
-    @ApiModelProperty(value = "业务对象的key，单独保存时必填(因为有和团队一起的保存)")
+    @ApiModelProperty(value = "业务对象下面的子业务数据的key，例如：客户下的联系人，一般用于用户A给用户B赋权时有值")
     private String objectKey;
 
     @TableField("permission_value")

@@ -112,8 +112,8 @@ public class SysEveUserStaffCapitalServiceImpl implements SysEveUserStaffCapital
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveUserStaffCapitalDao.queryStaffCapitalWaitPayMonthList(map);
-        iCompanyService.setName(beans, "companyId", "companyName");
-        iDepmentService.setName(beans, "departmentId", "departmentName");
+        iCompanyService.setNameForMap(beans, "companyId", "companyName");
+        iDepmentService.setNameForMap(beans, "departmentId", "departmentName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

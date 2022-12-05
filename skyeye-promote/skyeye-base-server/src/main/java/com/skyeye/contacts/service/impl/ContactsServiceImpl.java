@@ -46,7 +46,7 @@ public class ContactsServiceImpl extends SkyeyeBusinessServiceImpl<ContactsDao, 
 
     @Override
     public void writePostpose(ContactsMation entity, String userId) {
-        if (entity.getIsDefault() == IsDefaultEnum.IS_DEFAULT.getKey()) {
+        if (entity.getIsDefault().equals(IsDefaultEnum.IS_DEFAULT.getKey())) {
             // 如果设置为默认联系人，则修改之前的联系人为非默认
             contactsDao.setContactsIsNotDefault(entity.getObjectId(), IsDefaultEnum.NOT_DEFAULT.getKey());
             contactsDao.setContactsIsDefault(entity.getId(), IsDefaultEnum.IS_DEFAULT.getKey());

@@ -124,9 +124,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         SysUserStaffQueryDo sysUserStaffQuery = inputObject.getParams(SysUserStaffQueryDo.class);
         Page pages = PageHelper.startPage(sysUserStaffQuery.getPage(), sysUserStaffQuery.getLimit());
         List<Map<String, Object>> beans = sysEveUserStaffDao.querySysUserStaffList(sysUserStaffQuery);
-        iCompanyService.setName(beans, "companyId", "companyName");
-        iDepmentService.setName(beans, "departmentId", "departmentName");
-        iCompanyJobService.setName(beans, "jobId", "jobName");
+        iCompanyService.setNameForMap(beans, "companyId", "companyName");
+        iDepmentService.setNameForMap(beans, "departmentId", "departmentName");
+        iCompanyJobService.setNameForMap(beans, "jobId", "jobName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -343,9 +343,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         String staffId = map.get("id").toString();
         Map<String, Object> bean = sysEveUserStaffDao.querySysUserStaffByIdToDetails(staffId);
         if (CollectionUtil.isNotEmpty(bean)) {
-            iCompanyService.setName(bean, "companyId", "companyName");
-            iDepmentService.setName(bean, "departmentId", "departmentName");
-            iCompanyJobService.setName(bean, "jobId", "jobName");
+            iCompanyService.setNameForMap(bean, "companyId", "companyName");
+            iDepmentService.setNameForMap(bean, "departmentId", "departmentName");
+            iCompanyJobService.setNameForMap(bean, "jobId", "jobName");
             iCompanyJobScoreService.setNameForMap(bean, "jobScoreId", "jobScoreName");
             bean.put("stateName", State.getNameByState(Integer.parseInt(bean.get("state").toString())));
             // 1.员工考勤时间段信息
@@ -429,9 +429,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         Map<String, Object> map = inputObject.getParams();
         Page pages = PageHelper.startPage(Integer.parseInt(map.get("page").toString()), Integer.parseInt(map.get("limit").toString()));
         List<Map<String, Object>> beans = sysEveUserStaffDao.querySysUserStaffListToTable(map);
-        iCompanyService.setName(beans, "companyId", "companyName");
-        iDepmentService.setName(beans, "departmentId", "departmentName");
-        iCompanyJobService.setName(beans, "jobId", "jobName");
+        iCompanyService.setNameForMap(beans, "companyId", "companyName");
+        iDepmentService.setNameForMap(beans, "departmentId", "departmentName");
+        iCompanyJobService.setNameForMap(beans, "jobId", "jobName");
         iCompanyJobScoreService.setNameForMap(beans, "jobScoreId", "jobScoreName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
@@ -467,9 +467,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     public void querySysUserStaffLogin(InputObject inputObject, OutputObject outputObject) {
         String staffId = inputObject.getLogParams().get("staffId").toString();
         Map<String, Object> bean = sysEveUserStaffDao.querySysUserStaffByIdToDetails(staffId);
-        iCompanyService.setName(bean, "companyId", "companyName");
-        iDepmentService.setName(bean, "departmentId", "departmentName");
-        iCompanyJobService.setName(bean, "jobId", "jobName");
+        iCompanyService.setNameForMap(bean, "companyId", "companyName");
+        iDepmentService.setNameForMap(bean, "departmentId", "departmentName");
+        iCompanyJobService.setNameForMap(bean, "jobId", "jobName");
         iCompanyJobScoreService.setNameForMap(bean, "jobScoreId", "jobScoreName");
         outputObject.setBean(bean);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
@@ -490,9 +490,9 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         // 用户id和员工id只要有一个不为空就进行查询
         if (!ToolUtil.isBlank(userIds) || !ToolUtil.isBlank(staffIds)) {
             beans = sysEveUserStaffDao.queryUserMationList(userIds, staffIds);
-            iCompanyService.setName(beans, "companyId", "companyName");
-            iDepmentService.setName(beans, "departmentId", "departmentName");
-            iCompanyJobService.setName(beans, "jobId", "jobName");
+            iCompanyService.setNameForMap(beans, "companyId", "companyName");
+            iDepmentService.setNameForMap(beans, "departmentId", "departmentName");
+            iCompanyJobService.setNameForMap(beans, "jobId", "jobName");
             iCompanyJobScoreService.setNameForMap(beans, "jobScoreId", "jobScoreName");
         }
         outputObject.setBeans(beans);

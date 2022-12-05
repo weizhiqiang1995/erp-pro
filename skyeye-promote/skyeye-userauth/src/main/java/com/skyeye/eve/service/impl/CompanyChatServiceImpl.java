@@ -59,8 +59,8 @@ public class CompanyChatServiceImpl implements CompanyChatService {
         Map<String, Object> mine = null;
         if (ToolUtil.isBlank(jedisService.get(Constants.getSysTalkUserThisMainMationById(userId)))) {
             mine = companyChatDao.queryUserMineByUserId(map);
-            iCompanyService.setName(mine, "companyId", "companyName");
-            iDepmentService.setName(mine, "departmentId", "departmentName");
+            iCompanyService.setNameForMap(mine, "companyId", "companyName");
+            iDepmentService.setNameForMap(mine, "departmentId", "departmentName");
             jedisService.set(Constants.getSysTalkUserThisMainMationById(userId), JSONUtil.toJsonStr(mine));
         } else {
             mine = JSONUtil.toBean(jedisService.get(Constants.getSysTalkUserThisMainMationById(userId)), null);
@@ -83,9 +83,9 @@ public class CompanyChatServiceImpl implements CompanyChatService {
             List<Map<String, Object>> userList = null;
             if (ToolUtil.isBlank(jedisService.get(Constants.getSysTalkGroupUserListMationById(depart.get("id").toString() + "_" + userId)))) {
                 userList = companyChatDao.queryDepartmentUserByDepartId(depart);
-                iCompanyService.setName(userList, "companyId", "companyName");
-                iDepmentService.setName(userList, "departmentId", "departmentName");
-                iCompanyJobService.setName(userList, "jobId", "jobName");
+                iCompanyService.setNameForMap(userList, "companyId", "companyName");
+                iDepmentService.setNameForMap(userList, "departmentId", "departmentName");
+                iCompanyJobService.setNameForMap(userList, "jobId", "jobName");
                 jedisService.set(Constants.getSysTalkGroupUserListMationById(depart.get("id").toString() + "_" + userId), JSONUtil.toJsonStr(userList));
             } else {
                 userList = JSONUtil.toList(jedisService.get(Constants.getSysTalkGroupUserListMationById(depart.get("id").toString() + "_" + userId)), null);

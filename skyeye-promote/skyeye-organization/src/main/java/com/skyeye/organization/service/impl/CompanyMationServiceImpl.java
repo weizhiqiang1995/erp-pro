@@ -53,10 +53,10 @@ public class CompanyMationServiceImpl extends SkyeyeBusinessServiceImpl<CompanyM
     public List<Map<String, Object>> queryDataList(InputObject inputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyMationDao.queryCompanyMationList(map);
-        iAreaService.setAreaNameById(beans, "provinceId", "provinceName");
-        iAreaService.setAreaNameById(beans, "cityId", "cityName");
-        iAreaService.setAreaNameById(beans, "areaId", "areaName");
-        iAreaService.setAreaNameById(beans, "townshipId", "townshipName");
+        iAreaService.setNameForMap(beans, "provinceId", "provinceName");
+        iAreaService.setNameForMap(beans, "cityId", "cityName");
+        iAreaService.setNameForMap(beans, "areaId", "areaName");
+        iAreaService.setNameForMap(beans, "townshipId", "townshipName");
         return beans;
     }
 
