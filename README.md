@@ -11,7 +11,7 @@
 - [企业版项目文档](https://gitee.com/doc_wei01/skyeye/blob/company_server/%E4%BC%81%E4%B8%9A%E7%89%88%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3.md)
 - 基础模块 (源代码) 针对星球内部用户开放，具体包含功能可查看：[https://docs.qq.com/sheet/DYWZWUWZQUkFTcmh2?tab=BB08J2](https://docs.qq.com/sheet/DYWZWUWZQUkFTcmh2?tab=BB08J2)
 - 此软件为个人软件，暂不能开发票，需要发票的勿扰，企业版报价：https://docs.qq.com/sheet/DYUh5RUlGSkVPeHVo
-- 免费体验账号(只具备查看权限):
+- 免费体验账号(只具备查看权限)**【体验地址版本为：202203版】** :
   - 地址：http://114.116.253.94:8080/
   - 账号：skyeye
   - 密码：123456
