@@ -97,7 +97,8 @@ public class CatalogController {
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryCatalogByIds", value = "根据id批量获取目录信息", method = "POST", allUse = "0")
-    @ApiImplicitParams(classBean = Catalog.class)
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(id = "ids", name = "ids", value = "主键id，多个用逗号隔开", required = "required")})
     @RequestMapping("/post/CatalogController/queryCatalogByIds")
     public void queryCatalogByIds(InputObject inputObject, OutputObject outputObject) {
         catalogService.selectByIds(inputObject, outputObject);

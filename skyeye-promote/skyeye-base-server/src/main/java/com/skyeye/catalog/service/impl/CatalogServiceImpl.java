@@ -72,6 +72,7 @@ public class CatalogServiceImpl extends SkyeyeBusinessServiceImpl<CatalogDao, Ca
                 tree.setName(treeNode.getName());
                 tree.putExtra("isParent", true);
                 tree.putExtra("icon", treeNode.getIcon());
+                tree.putExtra("type", treeNode.getType());
             });
         outputObject.setBeans(treeNodes);
         outputObject.settotal(treeNodes.size());

@@ -4,6 +4,7 @@
 
 package com.skyeye.catalog.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -55,11 +56,11 @@ public class Catalog extends OperatorUserInfo {
     @TableField(exist = false)
     private String parentIds;
 
-    @TableField(value = "object_id")
+    @TableField(value = "object_id", fill = FieldFill.INSERT)
     @ApiModelProperty(value = "目录所属业务对象数据的id")
     private String objectId;
 
-    @TableField(value = "object_key")
+    @TableField(value = "object_key", fill = FieldFill.INSERT)
     @ApiModelProperty(value = "目录所属业务对象", required = "required")
     private String objectKey;
 
@@ -69,7 +70,7 @@ public class Catalog extends OperatorUserInfo {
     @TableField(exist = false)
     private List<Catalog> children;
 
-    @TableField(value = "type")
+    @TableField(value = "type", fill = FieldFill.INSERT)
     @ApiModelProperty(value = "目录类型  1. 公共  2.私有", required = "required,num")
     private Integer type;
 

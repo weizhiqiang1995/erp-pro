@@ -20,6 +20,7 @@ import com.skyeye.common.util.BytesUtil;
 import com.skyeye.enclosure.dao.SysEnclosureDao;
 import com.skyeye.enclosure.entity.Enclosure;
 import com.skyeye.enclosure.service.SysEnclosureService;
+import com.skyeye.sdk.catalog.service.CatalogSdkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class SysEnclosureServiceImpl extends SkyeyeBusinessServiceImpl<SysEnclosureDao, Enclosure> implements SysEnclosureService {
+public class SysEnclosureServiceImpl extends SkyeyeBusinessServiceImpl<SysEnclosureDao, Enclosure> implements SysEnclosureService, CatalogSdkService {
 
     @Autowired
     private SysEnclosureDao sysEnclosureDao;

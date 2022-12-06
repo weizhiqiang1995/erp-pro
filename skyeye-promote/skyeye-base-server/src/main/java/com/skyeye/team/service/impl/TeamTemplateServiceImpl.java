@@ -71,7 +71,7 @@ public class TeamTemplateServiceImpl extends AbstractTeamServiceImpl<TeamTemplat
             skyeyeBaseMapper.update(template, updateWrapper);
 
             teamTemplate.setIsUsed(1);
-            refreshCache(teamTemplate);
+            refreshCache(id);
         }
     }
 
