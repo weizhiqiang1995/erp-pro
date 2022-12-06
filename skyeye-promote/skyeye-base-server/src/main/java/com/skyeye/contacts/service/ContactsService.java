@@ -4,9 +4,9 @@
 
 package com.skyeye.contacts.service;
 
-import com.skyeye.base.business.service.SkyeyeBusinessService;
+import com.skyeye.base.business.service.SkyeyeTeamAuthService;
 import com.skyeye.contacts.entity.ContactsMation;
 
-public interface ContactsService extends SkyeyeBusinessService<ContactsMation> {
+public interface ContactsService extends SkyeyeTeamAuthService<ContactsMation> {
 
 }

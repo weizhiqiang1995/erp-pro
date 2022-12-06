@@ -4,7 +4,6 @@
 
 package com.skyeye.contacts.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -14,7 +13,7 @@ import com.skyeye.annotation.cache.RedisCacheField;
 import com.skyeye.annotation.unique.UniqueField;
 import com.skyeye.common.constans.CacheConstants;
 import com.skyeye.common.constans.RedisConstants;
-import com.skyeye.common.entity.features.OperatorUserInfo;
+import com.skyeye.common.entity.features.SkyeyeTeamAuth;
 import lombok.Data;
 
 /**
@@ -30,19 +29,11 @@ import lombok.Data;
 @RedisCacheField(name = CacheConstants.SKYEYE_CONTACTS_CACHE_KEY, cacheTime = RedisConstants.THIRTY_DAY_SECONDS)
 @TableName(value = "skyeye_contacts")
 @ApiModel("联系人信息实体类")
-public class ContactsMation extends OperatorUserInfo {
+public class ContactsMation extends SkyeyeTeamAuth {
 
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")
     private String id;
-
-    @TableField(value = "object_id", fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "所属第三方业务数据id", required = "required")
-    private String objectId;
-
-    @TableField(value = "object_key", fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "所属第三方业务数据的key", required = "required")
-    private String objectKey;
 
     @TableField(value = "`name`")
     @ApiModelProperty(value = "联系人姓名", required = "required")
