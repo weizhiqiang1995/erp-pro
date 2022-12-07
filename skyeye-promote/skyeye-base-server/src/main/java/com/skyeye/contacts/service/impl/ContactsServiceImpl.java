@@ -8,7 +8,6 @@ import com.skyeye.base.business.service.impl.SkyeyeTeamAuthServiceImpl;
 import com.skyeye.common.enumeration.DeleteFlagEnum;
 import com.skyeye.common.enumeration.IsDefaultEnum;
 import com.skyeye.common.object.InputObject;
-import com.skyeye.common.util.ToolUtil;
 import com.skyeye.contacts.classenum.ContactsAuthEnum;
 import com.skyeye.contacts.dao.ContactsDao;
 import com.skyeye.contacts.entity.ContactsMation;
@@ -23,7 +22,7 @@ import java.util.Map;
 
 /**
  * @ClassName: ContactsServiceImpl
- * @Description: 客户联系人管理
+ * @Description: 联系人管理
  * @author: skyeye云系列--卫志强
  * @date: 2021/7/6 22:18
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
@@ -49,9 +48,6 @@ public class ContactsServiceImpl extends SkyeyeTeamAuthServiceImpl<ContactsDao, 
     public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
         BaseServerQueryDo baseServerQuery = inputObject.getParams(BaseServerQueryDo.class);
         baseServerQuery.setDeleteFlag(DeleteFlagEnum.NOT_DELETE.getKey());
-        if (ToolUtil.isBlank(baseServerQuery.getObjectId()) && ToolUtil.isBlank(baseServerQuery.getObjectKey())) {
-            baseServerQuery.setCreateId(inputObject.getLogParams().get("id").toString());
-        }
         List<Map<String, Object>> beans = contactsDao.queryContactsList(baseServerQuery);
         return beans;
     }

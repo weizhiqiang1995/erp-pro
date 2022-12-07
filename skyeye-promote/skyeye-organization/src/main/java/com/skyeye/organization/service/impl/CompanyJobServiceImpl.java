@@ -70,6 +70,7 @@ public class CompanyJobServiceImpl extends SkyeyeBusinessServiceImpl<CompanyJobD
         return beans;
     }
 
+    @Override
     public void deletePostpose(String id) {
         // 删除职位等级信息
         companyJobScoreService.deleteByJobId(id);

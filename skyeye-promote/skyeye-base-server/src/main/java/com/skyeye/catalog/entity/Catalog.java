@@ -28,7 +28,7 @@ import java.util.List;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Data
-@UniqueField(value = {"name", "parentId", "objectId", "objectKey", "type"})
+@UniqueField(value = {"name", "parentId", "objectKey"})
 @RedisCacheField(name = CacheConstants.SKYEYE_CATALOG_CACHE_KEY, cacheTime = RedisConstants.THIRTY_DAY_SECONDS)
 @TableName(value = "skyeye_catalog")
 @ApiModel("目录信息实体类")

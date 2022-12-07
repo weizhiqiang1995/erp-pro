@@ -134,7 +134,7 @@ public class CatalogServiceImpl extends SkyeyeBusinessServiceImpl<CatalogDao, Ca
         URI serviceBeanUri = skyeyeClassServiceBeanService.getServiceBean(catalog.getObjectKey());
         // 获取当前目录与所有的子目录id
         List<String> ids = catalogDao.queryAllChildIdsByParentId(Arrays.asList(id));
-        deleteById(ids);
+        super.deleteById(ids);
         // 删除业务数据
         iCatalogService.deleteDataMationByCatalogIds(serviceBeanUri, catalog.getObjectKey(), ids);
     }
@@ -158,4 +158,17 @@ public class CatalogServiceImpl extends SkyeyeBusinessServiceImpl<CatalogDao, Ca
         return catalogList;
     }
 
+    @Override
+    protected QueryWrapper<Catalog> queryWrapper(Catalog entity, String id) {
+        QueryWrapper<Catalog> queryWrapper = super.queryWrapper(entity, id);
+        if (StrUtil.isNotEmpty(entity.getObjectId())) {
+            queryWrapper.eq(MybatisPlusUtil.toColumns(Catalog::getObjectId), entity.getObjectId());
+        }
+        if (entity.getType().equals(CatalogTypeEnum.PRIVATELY_OWNED.getKey())) {
+            String userId = InputObject.getLogParamsStatic().get("id").toString();
+            queryWrapper.eq(MybatisPlusUtil.toColumns(Catalog::getCreateId), userId);
+        }
+
+        return queryWrapper;
+    }
 }
