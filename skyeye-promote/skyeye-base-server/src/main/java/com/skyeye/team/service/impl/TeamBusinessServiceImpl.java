@@ -124,13 +124,14 @@ public class TeamBusinessServiceImpl extends AbstractTeamServiceImpl<TeamBusines
     public void checkTeamBusinessAuthPermission(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         String objectId = params.get("objectId").toString();
+        String enumKey = params.get("enumKey").toString();
         String enumClassName = params.get("enumClassName").toString();
         // 获取枚举类的数据
         List<Map<String, Object>> enumDataList = skyeyeClassEnumService.queryEnumDataList(enumClassName, StrUtil.EMPTY, StrUtil.EMPTY);
         List<String> enumDataId = enumDataList.stream().map(bean -> bean.get(CommonConstants.ID).toString()).collect(Collectors.toList());
 
         String userId = inputObject.getLogParams().get(CommonConstants.ID).toString();
-        Map<String, Boolean> checkAuthPermission = iTeamBusinessService.checkAuthPermission(objectId, enumClassName, enumDataId, userId);
+        Map<String, Boolean> checkAuthPermission = iTeamBusinessService.checkAuthPermission(objectId, enumKey, enumDataId, userId);
         outputObject.setBean(checkAuthPermission);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
     }

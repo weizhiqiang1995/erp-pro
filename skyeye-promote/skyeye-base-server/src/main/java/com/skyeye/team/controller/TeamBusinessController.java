@@ -97,6 +97,7 @@ public class TeamBusinessController {
     @ApiOperation(id = "checkTeamBusinessAuthPermission", value = "校验团队权限信息", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "objectId", name = "objectId", value = "业务对象id", required = "required"),
+        @ApiImplicitParam(id = "enumKey", name = "enumKey", value = "权限的枚举类短名称", required = "required"),
         @ApiImplicitParam(id = "enumClassName", name = "enumClassName", value = "权限的枚举类className名称", required = "required")})
     @RequestMapping("/post/TeamBusinessController/checkTeamBusinessAuthPermission")
     public void checkTeamBusinessAuthPermission(InputObject inputObject, OutputObject outputObject) {
