@@ -5,21 +5,25 @@
 package com.skyeye.team.service.impl;
 
 import cn.hutool.core.convert.Convert;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import cn.hutool.core.util.StrUtil;
+import com.skyeye.clazz.service.SkyeyeClassEnumService;
+import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.exception.CustomException;
 import com.skyeye.team.dao.TeamBusinessDao;
 import com.skyeye.team.entity.TeamBusiness;
 import com.skyeye.team.entity.TeamTemplate;
+import com.skyeye.team.service.ITeamBusinessService;
 import com.skyeye.team.service.TeamBusinessService;
 import com.skyeye.team.service.TeamTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName: TeamBusinessServiceImpl
@@ -35,6 +39,12 @@ public class TeamBusinessServiceImpl extends AbstractTeamServiceImpl<TeamBusines
     @Autowired
     private TeamTemplateService teamTemplateService;
 
+    @Autowired
+    private ITeamBusinessService iTeamBusinessService;
+
+    @Autowired
+    private SkyeyeClassEnumService skyeyeClassEnumService;
+
     /**
      * 根据团队模板生成团队信息
      *
@@ -45,16 +55,16 @@ public class TeamBusinessServiceImpl extends AbstractTeamServiceImpl<TeamBusines
     public void createTeamBusiness(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         String teamTemplateId = params.get("teamTemplateId").toString();
-        String businessId = params.get("businessId").toString();
-        String businessKey = params.get("businessKey").toString();
+        String objectId = params.get("objectId").toString();
+        String objectKey = params.get("objectKey").toString();
         TeamTemplate teamTemplate = teamTemplateService.selectById(teamTemplateId);
         if (teamTemplate == null) {
             throw new CustomException("该团队模板不存在.");
         }
         TeamBusiness teamBusiness = Convert.convert(TeamBusiness.class, teamTemplate);
         teamBusiness.setTeamTemplateId(teamTemplateId);
-        teamBusiness.setBusinessId(businessId);
-        teamBusiness.setBusinessKey(businessKey);
+        teamBusiness.setObjectId(objectId);
+        teamBusiness.setObjectKey(objectKey);
         String userId = inputObject.getLogParams().get("id").toString();
         createEntity(teamBusiness, userId);
         // 设置该模板为启用中
@@ -70,18 +80,10 @@ public class TeamBusinessServiceImpl extends AbstractTeamServiceImpl<TeamBusines
     @Override
     public void queryTeamBusiness(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
-        String businessId = params.get("businessId").toString();
-        String businessKey = params.get("businessKey").toString();
-        TeamBusiness teamBusiness = selectById(businessId);
+        String objectId = params.get("objectId").toString();
+        TeamBusiness teamBusiness = selectById(objectId);
         if (teamBusiness == null) {
-            QueryWrapper<TeamBusiness> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq(MybatisPlusUtil.toColumns(TeamBusiness::getBusinessId), businessId);
-            queryWrapper.eq(MybatisPlusUtil.toColumns(TeamBusiness::getBusinessKey), businessKey);
-            TeamBusiness tmp = getOne(queryWrapper);
-            if (tmp == null) {
-                throw new CustomException("该团队不存在.");
-            }
-            teamBusiness = selectById(tmp.getId());
+            throw new CustomException("该团队不存在.");
         }
         setOtherName(teamBusiness);
         // 设置名称
@@ -101,18 +103,30 @@ public class TeamBusinessServiceImpl extends AbstractTeamServiceImpl<TeamBusines
     @Override
     public void deleteTeamBusiness(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
-        String businessId = params.get("businessId").toString();
-        String businessKey = params.get("businessKey").toString();
-        TeamBusiness teamBusiness = selectById(businessId);
-        if (teamBusiness == null) {
-            QueryWrapper<TeamBusiness> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq(MybatisPlusUtil.toColumns(TeamBusiness::getBusinessId), businessId);
-            queryWrapper.eq(MybatisPlusUtil.toColumns(TeamBusiness::getBusinessKey), businessKey);
-            TeamBusiness tmp = getOne(queryWrapper);
-            if (tmp != null) {
-                deleteById(tmp.getId());
-            }
+        String objectId = params.get("objectId").toString();
+        TeamBusiness teamBusiness = selectById(objectId);
+        if (teamBusiness != null) {
+            deleteById(teamBusiness.getId());
         }
+    }
+
+    /**
+     * 校验团队权限信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void checkTeamBusinessAuthPermission(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> params = inputObject.getParams();
+        String objectId = params.get("objectId").toString();
+        String enumClassName = params.get("enumClassName").toString();
+        // 获取枚举类的数据
+        List<Map<String, Object>> enumDataList = skyeyeClassEnumService.queryEnumDataList(enumClassName, StrUtil.EMPTY, StrUtil.EMPTY);
+        List<String> enumDataId = enumDataList.stream().map(bean -> bean.get(CommonConstants.ID).toString()).collect(Collectors.toList());
+
+        String userId = inputObject.getLogParams().get(CommonConstants.ID).toString();
+        iTeamBusinessService.checkAuthPermission(objectId, enumClassName, enumDataId, userId);
     }
 }
 

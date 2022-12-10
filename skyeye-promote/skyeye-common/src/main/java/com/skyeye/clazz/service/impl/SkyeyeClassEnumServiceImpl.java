@@ -6,16 +6,16 @@ package com.skyeye.clazz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.skyeye.clazz.dao.SkyeyeClassEnumDao;
+import com.skyeye.clazz.entity.classenum.SkyeyeClassEnumApiMation;
+import com.skyeye.clazz.entity.classenum.SkyeyeClassEnumMation;
+import com.skyeye.clazz.service.SkyeyeClassEnumService;
 import com.skyeye.common.constans.CommonCharConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
-import com.skyeye.clazz.dao.SkyeyeClassEnumDao;
-import com.skyeye.clazz.entity.classenum.SkyeyeClassEnumApiMation;
-import com.skyeye.clazz.entity.classenum.SkyeyeClassEnumMation;
-import com.skyeye.clazz.service.SkyeyeClassEnumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -83,15 +83,21 @@ public class SkyeyeClassEnumServiceImpl extends ServiceImpl<SkyeyeClassEnumDao, 
         String className = params.get("className").toString();
         String filterKey = params.get("filterKey").toString();
         String filterValue = params.get("filterValue").toString();
+        List<Map<String, Object>> skyeyeEnumDtoList = queryEnumDataList(className, filterKey, filterValue);
+
+        outputObject.setBeans(skyeyeEnumDtoList);
+        outputObject.settotal(skyeyeEnumDtoList.size());
+    }
+
+    @Override
+    public List<Map<String, Object>> queryEnumDataList(String className, String filterKey, String filterValue) {
         QueryWrapper<SkyeyeClassEnumMation> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassEnumMation::getClassName), className);
         SkyeyeClassEnumMation skyeyeClassEnumMation = skyeyeClassEnumDao.selectOne(queryWrapper);
         // 只加载可以展示的数据
         List<Map<String, Object>> skyeyeEnumDtoList = skyeyeClassEnumMation.getValueList()
             .stream().filter(bean -> filterSkyeyeEnumDto(bean, filterKey, filterValue)).collect(Collectors.toList());
-
-        outputObject.setBeans(skyeyeEnumDtoList);
-        outputObject.settotal(skyeyeEnumDtoList.size());
+        return skyeyeEnumDtoList;
     }
 
     private Boolean filterSkyeyeEnumDto(Map<String, Object> enumValueMap, String filterKey, String filterValue) {

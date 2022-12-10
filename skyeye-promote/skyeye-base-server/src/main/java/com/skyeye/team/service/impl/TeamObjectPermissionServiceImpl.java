@@ -9,10 +9,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
-import com.skyeye.team.entity.TeamObjectPermission;
 import com.skyeye.team.dao.TeamObjectPermissionDao;
+import com.skyeye.team.entity.TeamObjectPermission;
 import com.skyeye.team.service.TeamObjectPermissionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,19 +28,14 @@ import java.util.List;
 @Service
 public class TeamObjectPermissionServiceImpl extends SkyeyeBusinessServiceImpl<TeamObjectPermissionDao, TeamObjectPermission> implements TeamObjectPermissionService {
 
-    @Autowired
-    private TeamObjectPermissionDao teamObjectPermissionDao;
-
     @Override
-    public List<TeamObjectPermission> queryPermissionByTeamId(String teamId, List<String> ownerIds, String ownerKey) {
-        if (ToolUtil.isBlank(teamId) || CollectionUtil.isEmpty(ownerIds) || ToolUtil.isBlank(ownerKey)) {
+    public List<TeamObjectPermission> queryPermissionByTeamId(String teamId, List<String> ownerIds) {
+        if (ToolUtil.isBlank(teamId) || CollectionUtil.isEmpty(ownerIds)) {
             return new ArrayList<>();
         }
         QueryWrapper<TeamObjectPermission> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(MybatisPlusUtil.toColumns(TeamObjectPermission::getTeamId), teamId);
         queryWrapper.in(MybatisPlusUtil.toColumns(TeamObjectPermission::getOwnerId), ownerIds);
-        queryWrapper.eq(MybatisPlusUtil.toColumns(TeamObjectPermission::getOwnerKey), ownerKey);
-        queryWrapper.eq(MybatisPlusUtil.toColumns(TeamObjectPermission::getFromType), 1);
         List<TeamObjectPermission> teamObjectPermissionList = super.list(queryWrapper);
         return teamObjectPermissionList;
     }

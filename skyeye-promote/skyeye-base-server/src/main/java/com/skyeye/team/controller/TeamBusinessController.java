@@ -40,8 +40,8 @@ public class TeamBusinessController {
     @ApiOperation(id = "createTeamBusiness", value = "根据团队模板生成团队信息", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "teamTemplateId", name = "teamTemplateId", value = "团队模板id", required = "required"),
-        @ApiImplicitParam(id = "businessId", name = "businessId", value = "业务对象id", required = "required"),
-        @ApiImplicitParam(id = "businessKey", name = "businessKey", value = "业务对象的key", required = "required")})
+        @ApiImplicitParam(id = "objectId", name = "objectId", value = "业务对象id", required = "required"),
+        @ApiImplicitParam(id = "objectKey", name = "objectKey", value = "业务对象的key", required = "required")})
     @RequestMapping("/post/TeamBusinessController/createTeamBusiness")
     public void createTeamBusiness(InputObject inputObject, OutputObject outputObject) {
         teamBusinessService.createTeamBusiness(inputObject, outputObject);
@@ -55,8 +55,7 @@ public class TeamBusinessController {
      */
     @ApiOperation(id = "queryTeamBusiness", value = "根据业务对象id获取团队信息", method = "GET", allUse = "2")
     @ApiImplicitParams({
-        @ApiImplicitParam(id = "businessId", name = "businessId", value = "业务对象id", required = "required"),
-        @ApiImplicitParam(id = "businessKey", name = "businessKey", value = "业务对象的key", required = "required")})
+        @ApiImplicitParam(id = "objectId", name = "objectId", value = "业务对象id", required = "required")})
     @RequestMapping("/post/TeamBusinessController/queryTeamBusiness")
     public void queryTeamBusiness(InputObject inputObject, OutputObject outputObject) {
         teamBusinessService.queryTeamBusiness(inputObject, outputObject);
@@ -70,8 +69,7 @@ public class TeamBusinessController {
      */
     @ApiOperation(id = "deleteTeamBusiness", value = "根据业务对象id删除团队信息", method = "POST", allUse = "2")
     @ApiImplicitParams({
-        @ApiImplicitParam(id = "businessId", name = "businessId", value = "业务对象id", required = "required"),
-        @ApiImplicitParam(id = "businessKey", name = "businessKey", value = "业务对象的key", required = "required")})
+        @ApiImplicitParam(id = "objectId", name = "objectId", value = "业务对象id", required = "required")})
     @RequestMapping("/post/TeamBusinessController/deleteTeamBusiness")
     public void deleteTeamBusiness(InputObject inputObject, OutputObject outputObject) {
         teamBusinessService.deleteTeamBusiness(inputObject, outputObject);
@@ -83,11 +81,26 @@ public class TeamBusinessController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "updateTeamTemplate", value = "编辑团队信息", method = "POST", allUse = "2")
+    @ApiOperation(id = "updateTeamBusiness", value = "编辑团队信息", method = "POST", allUse = "2")
     @ApiImplicitParams(classBean = TeamBusiness.class)
-    @RequestMapping("/post/TeamTemplateController/updateTeamTemplate")
-    public void updateTeamTemplate(InputObject inputObject, OutputObject outputObject) {
+    @RequestMapping("/post/TeamBusinessController/updateTeamBusiness")
+    public void updateTeamBusiness(InputObject inputObject, OutputObject outputObject) {
         teamBusinessService.updateEntity(inputObject, outputObject);
+    }
+
+    /**
+     * 校验团队权限信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "checkTeamBusinessAuthPermission", value = "校验团队权限信息", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "objectId", name = "objectId", value = "业务对象id", required = "required"),
+        @ApiImplicitParam(id = "enumClassName", name = "enumClassName", value = "权限的枚举类className名称", required = "required")})
+    @RequestMapping("/post/TeamBusinessController/checkTeamBusinessAuthPermission")
+    public void checkTeamBusinessAuthPermission(InputObject inputObject, OutputObject outputObject) {
+        teamBusinessService.checkTeamBusinessAuthPermission(inputObject, outputObject);
     }
 
 }

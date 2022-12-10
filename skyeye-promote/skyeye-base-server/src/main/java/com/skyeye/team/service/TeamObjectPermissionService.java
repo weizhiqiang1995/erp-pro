@@ -19,6 +19,6 @@ import java.util.List;
  */
 public interface TeamObjectPermissionService extends SkyeyeBusinessService<TeamObjectPermission> {
 
-    List<TeamObjectPermission> queryPermissionByTeamId(String teamId, List<String> ownerIds, String ownerKey);
+    List<TeamObjectPermission> queryPermissionByTeamId(String teamId, List<String> ownerIds);
 
 }

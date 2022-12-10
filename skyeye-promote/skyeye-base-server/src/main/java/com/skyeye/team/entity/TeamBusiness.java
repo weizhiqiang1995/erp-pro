@@ -26,8 +26,8 @@ import java.util.List;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Data
-@UniqueField(value = {"businessId", "businessKey"})
-@RedisCacheField(name = CacheConstants.TEAM_BUSINESS_CACHE_KEY, value = {"id", "businessId"}, cacheTime = RedisConstants.HALF_A_YEAR_SECONDS)
+@UniqueField(value = {"objectId", "objectKey"})
+@RedisCacheField(name = CacheConstants.TEAM_BUSINESS_CACHE_KEY, value = {"id", "objectId"}, cacheTime = RedisConstants.HALF_A_YEAR_SECONDS)
 @TableName(value = "team_business")
 @ApiModel("团队实体类")
 public class TeamBusiness extends AbstractTeam {
@@ -38,13 +38,13 @@ public class TeamBusiness extends AbstractTeam {
     @TableField(exist = false)
     private String name;
 
-    @TableField(value = "business_id", fill = FieldFill.INSERT)
+    @TableField(value = "object_id", fill = FieldFill.INSERT)
     @ApiModelProperty(value = "业务对象id", required = "required")
-    private String businessId;
+    private String objectId;
 
-    @TableField(value = "business_key", fill = FieldFill.INSERT)
+    @TableField(value = "object_key", fill = FieldFill.INSERT)
     @ApiModelProperty(value = "业务对象的key", required = "required")
-    private String businessKey;
+    private String objectKey;
 
     @TableField(value = "team_template_id", fill = FieldFill.INSERT)
     @ApiModelProperty(value = "团队模板id", required = "required")

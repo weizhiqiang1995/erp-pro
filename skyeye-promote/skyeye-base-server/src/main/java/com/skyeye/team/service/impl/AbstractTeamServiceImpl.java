@@ -217,17 +217,18 @@ public class AbstractTeamServiceImpl<D extends SkyeyeBaseMapper<T>, T extends Ab
         List<TeamObjectPermission> teamObjectPermissionList = new ArrayList<>();
         if (CollectionUtil.isNotEmpty(team.getTeamRoleList())) {
             // 查询角色权限
-            List<String> roleIds = team.getTeamRoleList().stream().map(TeamRole::getRoleId).collect(Collectors.toList());
-            List<TeamObjectPermission> rolePermissionList = teamObjectPermissionService.queryPermissionByTeamId(id, roleIds, teamRoleService.getServiceClassName());
-            teamObjectPermissionList.addAll(rolePermissionList);
+            List<String> ownerIds = team.getTeamRoleList().stream().map(TeamRole::getRoleId).collect(Collectors.toList());
             // 查询用户权限
             List<String> userIds = team.getTeamRoleList().stream()
                 .filter(teamRole -> CollectionUtil.isNotEmpty(teamRole.getTeamRoleUserList()))
                 .flatMap(teamRole -> teamRole.getTeamRoleUserList().stream())
                 .filter(bean -> !ToolUtil.isBlank(bean.getUserId()))
                 .map(bean -> bean.getUserId()).collect(Collectors.toList());
-            List<TeamObjectPermission> userPermissionList = teamObjectPermissionService.queryPermissionByTeamId(id, userIds, teamRoleUserService.getServiceClassName());
-            teamObjectPermissionList.addAll(userPermissionList);
+            if (CollectionUtil.isNotEmpty(userIds)) {
+                ownerIds.addAll(userIds);
+            }
+            List<TeamObjectPermission> authermissionList = teamObjectPermissionService.queryPermissionByTeamId(id, ownerIds);
+            teamObjectPermissionList.addAll(authermissionList);
         }
         team.setTeamObjectPermissionList(teamObjectPermissionList);
         return team;

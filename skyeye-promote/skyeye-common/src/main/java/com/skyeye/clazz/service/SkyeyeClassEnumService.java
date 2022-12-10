@@ -5,9 +5,12 @@
 package com.skyeye.clazz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.skyeye.clazz.entity.classenum.SkyeyeClassEnumMation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.clazz.entity.classenum.SkyeyeClassEnumMation;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: SkyeyeClassEnumService
@@ -22,4 +25,6 @@ public interface SkyeyeClassEnumService extends IService<SkyeyeClassEnumMation> 
     void writeClassEnum(InputObject inputObject, OutputObject outputObject);
 
     void getEnumDataByClassName(InputObject inputObject, OutputObject outputObject);
+
+    List<Map<String, Object>> queryEnumDataList(String className, String filterKey, String filterValue);
 }
