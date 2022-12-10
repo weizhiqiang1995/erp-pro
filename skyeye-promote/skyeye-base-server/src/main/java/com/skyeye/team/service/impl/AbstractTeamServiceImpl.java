@@ -79,6 +79,8 @@ public class AbstractTeamServiceImpl<D extends SkyeyeBaseMapper<T>, T extends Ab
             teamRoleService.deleteRoleByTeamIds(teamId);
             // 2. 删除角色下的用户
             teamRoleUserService.deleteRoleUserByTeamIds(teamId);
+            // 3. 删除团队下的权限信息
+            teamObjectPermissionService.deletePermissionByTeamIds(teamId);
         }
     }
 
@@ -240,6 +242,8 @@ public class AbstractTeamServiceImpl<D extends SkyeyeBaseMapper<T>, T extends Ab
         teamRoleService.deleteRoleByTeamIds(id);
         // 删除团队下的用户信息
         teamRoleUserService.deleteRoleUserByTeamIds(id);
+        // 删除团队下的权限信息
+        teamObjectPermissionService.deletePermissionByTeamIds(id);
     }
 
     /**

@@ -11,10 +11,12 @@ import com.skyeye.common.util.ToolUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.team.dao.TeamObjectPermissionDao;
 import com.skyeye.team.entity.TeamObjectPermission;
+import com.skyeye.team.entity.TeamRoleUser;
 import com.skyeye.team.service.TeamObjectPermissionService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,4 +41,21 @@ public class TeamObjectPermissionServiceImpl extends SkyeyeBusinessServiceImpl<T
         List<TeamObjectPermission> teamObjectPermissionList = super.list(queryWrapper);
         return teamObjectPermissionList;
     }
+
+    /**
+     * 删除团队下的权限信息
+     *
+     * @param teamIds
+     */
+    @Override
+    public void deletePermissionByTeamIds(String... teamIds) {
+        List<String> teamIdList = Arrays.asList(teamIds);
+        if (CollectionUtil.isEmpty(teamIdList)) {
+            return;
+        }
+        QueryWrapper<TeamObjectPermission> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in(MybatisPlusUtil.toColumns(TeamObjectPermission::getTeamId), teamIdList);
+        remove(queryWrapper);
+    }
+
 }

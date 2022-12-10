@@ -21,4 +21,6 @@ public interface TeamObjectPermissionService extends SkyeyeBusinessService<TeamO
 
     List<TeamObjectPermission> queryPermissionByTeamId(String teamId, List<String> ownerIds);
 
+    void deletePermissionByTeamIds(String... teamIds);
+
 }

@@ -13,6 +13,7 @@ import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.enumeration.EnableEnum;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.coderule.service.ICodeRuleService;
 import com.skyeye.team.dao.TeamTemplateDao;
@@ -68,9 +69,10 @@ public class TeamTemplateServiceImpl extends AbstractTeamServiceImpl<TeamTemplat
             updateWrapper.eq(CommonConstants.ID, id);
             TeamTemplate template = new TeamTemplate();
             template.setIsUsed(1);
+            String userId = InputObject.getLogParamsStatic().get(CommonConstants.ID).toString();
+            DataCommonUtil.setCommonLastUpdateDataByGenericity(template, userId);
             skyeyeBaseMapper.update(template, updateWrapper);
 
-            teamTemplate.setIsUsed(1);
             refreshCache(id);
         }
     }
