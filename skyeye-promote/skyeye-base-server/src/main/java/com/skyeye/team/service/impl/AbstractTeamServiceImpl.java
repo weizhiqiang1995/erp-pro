@@ -236,6 +236,8 @@ public class AbstractTeamServiceImpl<D extends SkyeyeBaseMapper<T>, T extends Ab
         String id = inputObject.getParams().get("id").toString();
         T team = super.selectById(id);
         setOtherName(team);
+        team.setChargeUserMation(iAuthUserService.queryUserNameList(team.getChargeUser())
+            .stream().findFirst().orElse(null));
         outputObject.setBean(team);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
     }

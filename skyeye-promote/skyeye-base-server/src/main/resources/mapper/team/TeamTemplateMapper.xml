@@ -10,6 +10,7 @@
             a.enabled,
             a.is_used isUsed,
             a.remark,
+            a.charge_user chargeUser,
             a.create_id createId,
             CONVERT(a.create_time, char) createTime,
             a.last_update_id lastUpdateId,

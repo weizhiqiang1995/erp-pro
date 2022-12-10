@@ -11,6 +11,7 @@ import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: AbstractTeam
@@ -34,5 +35,15 @@ public class AbstractTeam extends OperatorUserInfo {
     @TableField(exist = false)
     @ApiModelProperty(value = "团队权限", required = "json")
     private List<TeamObjectPermission> teamObjectPermissionList;
+
+    @TableField(value = "charge_user")
+    @ApiModelProperty(value = "团队经理", required = "required")
+    private String chargeUser;
+
+    /**
+     * 团队经理信息
+     */
+    @TableField(exist = false)
+    private Map<String, Object> chargeUserMation;
 
 }

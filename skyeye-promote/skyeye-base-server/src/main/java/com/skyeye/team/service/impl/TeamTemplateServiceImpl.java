@@ -47,6 +47,7 @@ public class TeamTemplateServiceImpl extends AbstractTeamServiceImpl<TeamTemplat
     public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
         List<Map<String, Object>> beans = teamTemplateDao.queryList(commonPageInfo);
+        iAuthUserService.setNameByIdList(beans, "chargeUser", "chargeUserName");
         return beans;
     }
 
