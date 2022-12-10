@@ -20,6 +20,7 @@ import com.skyeye.team.service.TeamBusinessService;
 import com.skyeye.team.service.TeamTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -52,6 +53,7 @@ public class TeamBusinessServiceImpl extends AbstractTeamServiceImpl<TeamBusines
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
+    @Transactional(value = TRANSACTION_MANAGER_VALUE, rollbackFor = Exception.class)
     public void createTeamBusiness(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         String teamTemplateId = params.get("teamTemplateId").toString();
@@ -101,6 +103,7 @@ public class TeamBusinessServiceImpl extends AbstractTeamServiceImpl<TeamBusines
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
+    @Transactional(value = TRANSACTION_MANAGER_VALUE, rollbackFor = Exception.class)
     public void deleteTeamBusiness(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         String objectId = params.get("objectId").toString();
@@ -117,6 +120,7 @@ public class TeamBusinessServiceImpl extends AbstractTeamServiceImpl<TeamBusines
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
+    @Transactional(value = TRANSACTION_MANAGER_VALUE, rollbackFor = Exception.class)
     public void checkTeamBusinessAuthPermission(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         String objectId = params.get("objectId").toString();
@@ -126,7 +130,9 @@ public class TeamBusinessServiceImpl extends AbstractTeamServiceImpl<TeamBusines
         List<String> enumDataId = enumDataList.stream().map(bean -> bean.get(CommonConstants.ID).toString()).collect(Collectors.toList());
 
         String userId = inputObject.getLogParams().get(CommonConstants.ID).toString();
-        iTeamBusinessService.checkAuthPermission(objectId, enumClassName, enumDataId, userId);
+        Map<String, Boolean> checkAuthPermission = iTeamBusinessService.checkAuthPermission(objectId, enumClassName, enumDataId, userId);
+        outputObject.setBean(checkAuthPermission);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 }
 

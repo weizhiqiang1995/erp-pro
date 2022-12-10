@@ -49,7 +49,11 @@ public class AbstractTeamServiceImpl<D extends SkyeyeBaseMapper<T>, T extends Ab
         String teamId = entity.getId();
         List<TeamRole> teamRoleList = entity.getTeamRoleList();
         String serviceClassName = getServiceClassName();
-        saveNewTeamRole(teamId, teamRoleList, serviceClassName, userId);
+        if (CollectionUtil.isNotEmpty(teamRoleList)) {
+            saveRole(userId, teamId, teamRoleList, serviceClassName);
+        }
+        // 修改团队用户信息
+        updateRoleUser(userId, teamId, teamRoleList, serviceClassName, new ArrayList<>());
 
         if (CollectionUtil.isNotEmpty(entity.getTeamObjectPermissionList())) {
             saveTeamOwnerPermission(teamId, serviceClassName, userId, entity.getTeamObjectPermissionList());
@@ -69,7 +73,7 @@ public class AbstractTeamServiceImpl<D extends SkyeyeBaseMapper<T>, T extends Ab
             updateRole(userId, teamId, newTeamRoleList, serviceClassName, oldTeamRoleList, oldRoleKeys);
 
             // 修改团队用户信息
-            updateRoleUser(userId, teamId, newTeamRoleList, serviceClassName, oldRoleKeys);
+            updateRoleUser(userId, teamId, newTeamRoleList, serviceClassName, oldTeamRoleList);
 
             // 修改权限信息
             updatePermission(entity.getTeamObjectPermissionList(), oldTeam.getTeamObjectPermissionList(), teamId, serviceClassName, userId);
@@ -91,7 +95,9 @@ public class AbstractTeamServiceImpl<D extends SkyeyeBaseMapper<T>, T extends Ab
         List<TeamRole> addTeamRoleMaps = newTeamRoleList.stream()
             .filter(item -> !oldRoleKeys.contains(item.getRoleId())).collect(Collectors.toList());
         // 新增
-        saveNewTeamRole(teamId, addTeamRoleMaps, serviceClassName, userId);
+        if (CollectionUtil.isNotEmpty(addTeamRoleMaps)) {
+            saveRole(userId, teamId, addTeamRoleMaps, serviceClassName);
+        }
         // (旧数据 - 新数据) 从数据库删除
         List<TeamRole> deleteTeamRole = oldTeamRoleList.stream()
             .filter(item -> !newRoleKeys.contains(item.getRoleId())).collect(Collectors.toList());
@@ -102,20 +108,16 @@ public class AbstractTeamServiceImpl<D extends SkyeyeBaseMapper<T>, T extends Ab
         }
     }
 
-    private void updateRoleUser(String userId, String teamId, List<TeamRole> newTeamRoleList, String serviceClassName, List<String> oldRoleKeys) {
-        // 新数据和旧数据交集(团队角色)需要编辑的数据
-        List<TeamRole> oldTeamRole = newTeamRoleList.stream()
-            .filter(item -> oldRoleKeys.contains(item.getRoleId())).collect(Collectors.toList());
-
+    private void updateRoleUser(String userId, String teamId, List<TeamRole> newTeamRoleList, String serviceClassName, List<TeamRole> oldTeamRole) {
         // 新数据 - 旧数据 更新到数据库
-        List<TeamRoleUser> newRoleUser = getTeamRoleUserList(oldTeamRole);
-        List<String> newRoleUserKeys = newRoleUser.stream().map(bean -> bean.getTeamId() + bean.getUserId()).collect(Collectors.toList());
+        List<TeamRoleUser> newRoleUser = getTeamRoleUserList(newTeamRoleList);
+        List<String> newRoleUserKeys = newRoleUser.stream().map(bean -> teamId + bean.getUserId()).collect(Collectors.toList());
         // 数据库里面的该团队模板下的用户信息
         List<TeamRoleUser> oldRoleUser = getTeamRoleUserList(oldTeamRole);
-        List<String> oldRoleUserKeys = oldRoleUser.stream().map(bean -> bean.getTeamId() + bean.getUserId()).collect(Collectors.toList());
+        List<String> oldRoleUserKeys = oldRoleUser.stream().map(bean -> teamId + bean.getUserId()).collect(Collectors.toList());
         // 需要新增的用户信息
         List<TeamRoleUser> addTeamRoleUser = newRoleUser.stream()
-            .filter(item -> !oldRoleUserKeys.contains(item.getTeamId() + item.getUserId())).collect(Collectors.toList());
+            .filter(item -> !oldRoleUserKeys.contains(teamId + item.getUserId())).collect(Collectors.toList());
         addTeamRoleUser.forEach(p -> {
             p.setId(null);
             p.setTeamId(teamId);
@@ -126,7 +128,7 @@ public class AbstractTeamServiceImpl<D extends SkyeyeBaseMapper<T>, T extends Ab
         }
         // 删除用户关联信息
         List<TeamRoleUser> deleteRoleUser = oldRoleUser.stream()
-            .filter(predicate -> !newRoleUserKeys.contains(predicate.getTeamId() + predicate.getUserId())).collect(Collectors.toList());
+            .filter(predicate -> !newRoleUserKeys.contains(teamId + predicate.getUserId())).collect(Collectors.toList());
         if (CollectionUtil.isNotEmpty(deleteRoleUser)) {
             List<String> deleteRoleUserLinkIds = deleteRoleUser.stream().map(TeamRoleUser::getId).collect(Collectors.toList());
             teamRoleUserService.deleteById(deleteRoleUserLinkIds);
@@ -171,13 +173,6 @@ public class AbstractTeamServiceImpl<D extends SkyeyeBaseMapper<T>, T extends Ab
             .filter(Objects::nonNull).collect(Collectors.toList());
     }
 
-    public void saveNewTeamRole(String teamId, List<TeamRole> teamRoleList, String serviceClassName, String userId) {
-        if (CollectionUtil.isNotEmpty(teamRoleList)) {
-            saveRole(userId, teamId, teamRoleList, serviceClassName);
-            saveRoleUser(userId, teamId, teamRoleList, serviceClassName);
-        }
-    }
-
     public void saveTeamOwnerPermission(String teamId, String serviceClassName, String userId, List<TeamObjectPermission> addPermission) {
         addPermission.forEach(bean -> {
             bean.setTeamId(teamId);
@@ -195,27 +190,11 @@ public class AbstractTeamServiceImpl<D extends SkyeyeBaseMapper<T>, T extends Ab
         teamRoleService.createEntity(teamRoleList, userId);
     }
 
-    private void saveRoleUser(String userId, String teamId, List<TeamRole> teamRoleList, String serviceClassName) {
-        List<TeamRoleUser> teamRoleUserList = teamRoleList.stream()
-            .filter(teamRole -> CollectionUtil.isNotEmpty(teamRole.getTeamRoleUserList()))
-            .flatMap(teamRole -> {
-                teamRole.getTeamRoleUserList().forEach(teamRoleUser -> {
-                    teamRoleUser.setRoleId(teamRole.getRoleId());
-                    teamRoleUser.setTeamId(teamId);
-                    teamRoleUser.setTeamKey(serviceClassName);
-                });
-                return teamRole.getTeamRoleUserList().stream();
-            }).collect(Collectors.toList());
-        if (CollectionUtil.isNotEmpty(teamRoleUserList)) {
-            teamRoleUserService.createEntity(teamRoleUserList, userId);
-        }
-    }
-
     @Override
     public T getDataFromDb(String id) {
         T team = super.getDataFromDb(id);
-        Map<String, List<TeamRole>> teamRoleMap = teamRoleService.queryTeamRoleByTeamIds(id);
-        team.setTeamRoleList(teamRoleMap.get(id));
+        Map<String, List<TeamRole>> teamRoleMap = teamRoleService.queryTeamRoleByTeamIds(team.getId());
+        team.setTeamRoleList(teamRoleMap.get(team.getId()));
         List<TeamObjectPermission> teamObjectPermissionList = new ArrayList<>();
         if (CollectionUtil.isNotEmpty(team.getTeamRoleList())) {
             // 查询角色权限
@@ -229,7 +208,7 @@ public class AbstractTeamServiceImpl<D extends SkyeyeBaseMapper<T>, T extends Ab
             if (CollectionUtil.isNotEmpty(userIds)) {
                 ownerIds.addAll(userIds);
             }
-            List<TeamObjectPermission> authermissionList = teamObjectPermissionService.queryPermissionByTeamId(id, ownerIds);
+            List<TeamObjectPermission> authermissionList = teamObjectPermissionService.queryPermissionByTeamId(team.getId(), ownerIds);
             teamObjectPermissionList.addAll(authermissionList);
         }
         team.setTeamObjectPermissionList(teamObjectPermissionList);

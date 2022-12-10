@@ -64,7 +64,7 @@ public class TeamTemplateServiceImpl extends AbstractTeamServiceImpl<TeamTemplat
     @Override
     public void setUsed(String id) {
         TeamTemplate teamTemplate = super.selectById(id);
-        if (teamTemplate.getIsUsed() == 0) {
+        if (teamTemplate.getIsUsed() == null || teamTemplate.getIsUsed() == 0) {
             UpdateWrapper<TeamTemplate> updateWrapper = new UpdateWrapper<>();
             updateWrapper.eq(CommonConstants.ID, id);
             TeamTemplate template = new TeamTemplate();
