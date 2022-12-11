@@ -67,7 +67,7 @@ public class AbstractTeamServiceImpl<D extends SkyeyeBaseMapper<T>, T extends Ab
         if (CollectionUtil.isNotEmpty(newTeamRoleList)) {
             String serviceClassName = getServiceClassName();
             T oldTeam = selectById(teamId);
-            List<TeamRole> oldTeamRoleList = oldTeam.getTeamRoleList();
+            List<TeamRole> oldTeamRoleList = CollectionUtil.isEmpty(oldTeam.getTeamRoleList()) ? new ArrayList<>() : oldTeam.getTeamRoleList();
             List<String> oldRoleKeys = oldTeamRoleList.stream().map(bean -> bean.getRoleId()).collect(Collectors.toList());
             // 修改角色信息
             updateRole(userId, teamId, newTeamRoleList, serviceClassName, oldTeamRoleList, oldRoleKeys);
