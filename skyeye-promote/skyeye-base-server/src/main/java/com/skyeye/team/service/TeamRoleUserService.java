@@ -51,4 +51,12 @@ public interface TeamRoleUserService extends SkyeyeBusinessService<TeamRoleUser>
      */
     void deleteRoleUserByRoleIds(String teamId, String... roleIds);
 
+    /**
+     * 获取指定用户所在的团队
+     *
+     * @param userId
+     * @return
+     */
+    List<String> getTeamIdsByUserId(String userId);
+
 }

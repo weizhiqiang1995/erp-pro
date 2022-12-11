@@ -9,10 +9,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
+import com.skyeye.team.dao.TeamRoleUserDao;
 import com.skyeye.team.entity.TeamRole;
 import com.skyeye.team.entity.TeamRoleUser;
-import com.skyeye.team.dao.TeamRoleUserDao;
+import com.skyeye.team.service.TeamBusinessService;
 import com.skyeye.team.service.TeamRoleUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -28,6 +30,9 @@ import java.util.stream.Collectors;
  */
 @Service
 public class TeamRoleUserServiceImpl extends SkyeyeBusinessServiceImpl<TeamRoleUserDao, TeamRoleUser> implements TeamRoleUserService {
+
+    @Autowired
+    private TeamBusinessService teamBusinessService;
 
     /**
      * 根据团队id查询该团队下的所有成员(结果的key为：团队id+角色id)
@@ -107,5 +112,25 @@ public class TeamRoleUserServiceImpl extends SkyeyeBusinessServiceImpl<TeamRoleU
         queryWrapper.in(MybatisPlusUtil.toColumns(TeamRoleUser::getRoleId), roleIdList);
         queryWrapper.eq(MybatisPlusUtil.toColumns(TeamRoleUser::getTeamId), teamId);
         remove(queryWrapper);
+    }
+
+    /**
+     * 获取指定用户所在的团队
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<String> getTeamIdsByUserId(String userId) {
+        QueryWrapper<TeamRoleUser> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select(MybatisPlusUtil.toColumns(TeamRoleUser::getTeamId));
+        queryWrapper.eq(MybatisPlusUtil.toColumns(TeamRoleUser::getUserId), userId);
+        queryWrapper.eq(MybatisPlusUtil.toColumns(TeamRoleUser::getTeamKey), teamBusinessService.getServiceClassName());
+        queryWrapper.groupBy(MybatisPlusUtil.toColumns(TeamRoleUser::getTeamId));
+        List<TeamRoleUser> teamRoleUsers = list(queryWrapper);
+        if (CollectionUtil.isEmpty(teamRoleUsers)) {
+            return new ArrayList<>();
+        }
+        return teamRoleUsers.stream().map(TeamRoleUser::getTeamId).collect(Collectors.toList());
     }
 }

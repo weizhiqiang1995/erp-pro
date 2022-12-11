@@ -4,13 +4,16 @@
 
 package com.skyeye.team.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.clazz.service.SkyeyeClassEnumService;
 import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.exception.CustomException;
 import com.skyeye.team.dao.TeamBusinessDao;
 import com.skyeye.team.entity.TeamBusiness;
@@ -22,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -91,8 +95,7 @@ public class TeamBusinessServiceImpl extends AbstractTeamServiceImpl<TeamBusines
         // 设置名称
         TeamTemplate teamTemplate = teamTemplateService.selectById(teamBusiness.getTeamTemplateId());
         teamBusiness.setName(teamTemplate.getName());
-        teamBusiness.setChargeUserMation(iAuthUserService.queryUserNameList(teamBusiness.getChargeUser())
-            .stream().findFirst().orElse(null));
+        teamBusiness.setChargeUserMation(iAuthUserService.queryUserNameList(teamBusiness.getChargeUser()).stream().findFirst().orElse(null));
         outputObject.setBean(teamBusiness);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
@@ -134,6 +137,38 @@ public class TeamBusinessServiceImpl extends AbstractTeamServiceImpl<TeamBusines
         String userId = inputObject.getLogParams().get(CommonConstants.ID).toString();
         Map<String, Boolean> checkAuthPermission = iTeamBusinessService.checkAuthPermission(objectId, enumKey, enumDataId, userId);
         outputObject.setBean(checkAuthPermission);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
+    }
+
+    /**
+     * 获取我所在的团队对应的团队模板id
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void getMyTeamIds(InputObject inputObject, OutputObject outputObject) {
+        String userId = inputObject.getLogParams().get(CommonConstants.ID).toString();
+        List<String> teamIds = teamRoleUserService.getTeamIdsByUserId(userId);
+        // 根据团队id或者团队经理（当前登录用户）查询团队模板id
+        QueryWrapper<TeamBusiness> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select(MybatisPlusUtil.toColumns(TeamBusiness::getTeamTemplateId));
+        queryWrapper.and(wrapper -> {
+            wrapper.eq(MybatisPlusUtil.toColumns(TeamBusiness::getTeamTemplateId), userId);
+            if (CollectionUtil.isNotEmpty(teamIds)) {
+                wrapper.or().in(CommonConstants.ID, teamIds);
+            }
+        });
+        queryWrapper.groupBy(MybatisPlusUtil.toColumns(TeamBusiness::getTeamTemplateId));
+        List<TeamBusiness> teamBusinessList = list(queryWrapper);
+        if (CollectionUtil.isEmpty(teamBusinessList)) {
+            return;
+        }
+        List<String> teamTemplateIds = teamBusinessList.stream()
+            .map(TeamBusiness::getTeamTemplateId).collect(Collectors.toList());
+        Map<String, Object> result = new HashMap<>();
+        result.put("teamTemplateIds", teamTemplateIds);
+        outputObject.setBean(result);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 }

@@ -104,4 +104,16 @@ public class TeamBusinessController {
         teamBusinessService.checkTeamBusinessAuthPermission(inputObject, outputObject);
     }
 
+    /**
+     * 获取我所在的团队对应的团队模板id
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "getMyTeamIds", value = "获取我所在的团队对应的团队模板id", method = "GET", allUse = "2")
+    @RequestMapping("/post/TeamBusinessController/getMyTeamIds")
+    public void getMyTeamIds(InputObject inputObject, OutputObject outputObject) {
+        teamBusinessService.getMyTeamIds(inputObject, outputObject);
+    }
+
 }
