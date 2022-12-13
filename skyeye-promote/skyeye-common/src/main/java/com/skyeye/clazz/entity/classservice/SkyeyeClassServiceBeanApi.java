@@ -26,6 +26,9 @@ public class SkyeyeClassServiceBeanApi implements Serializable {
     @ApiModelProperty(value = "服务名", required = "required")
     private String springApplicationName;
 
+    @ApiModelProperty(value = "appId", required = "required")
+    private String appId;
+
     /**
      * 服务类信息
      */

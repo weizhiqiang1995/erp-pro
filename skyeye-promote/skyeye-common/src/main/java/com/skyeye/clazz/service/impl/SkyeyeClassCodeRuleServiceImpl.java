@@ -4,9 +4,14 @@
 
 package com.skyeye.clazz.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.skyeye.clazz.dao.SkyeyeClassCodeRuleDao;
+import com.skyeye.clazz.entity.coderule.SkyeyeClassCodeRuleApiMation;
+import com.skyeye.clazz.entity.coderule.SkyeyeClassCodeRuleMation;
+import com.skyeye.clazz.service.SkyeyeClassCodeRuleService;
 import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
@@ -15,16 +20,11 @@ import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.CodeRuleDao;
-import com.skyeye.clazz.dao.SkyeyeClassCodeRuleDao;
 import com.skyeye.eve.entity.coderule.CodeRuleMation;
-import com.skyeye.clazz.entity.coderule.SkyeyeClassCodeRuleApiMation;
-import com.skyeye.clazz.entity.coderule.SkyeyeClassCodeRuleMation;
-import com.skyeye.clazz.service.SkyeyeClassCodeRuleService;
 import com.skyeye.exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -77,7 +77,7 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
         // (旧数据 - 新数据) 从数据库删除
         List<SkyeyeClassCodeRuleMation> deleteBeans = oldList.stream()
             .filter(item -> !newKeys.contains(item.getClassName() + item.getGroupName() + item.getServiceName())).collect(Collectors.toList());
-        if (!CollectionUtils.isEmpty(deleteBeans)) {
+        if (CollectionUtil.isNotEmpty(deleteBeans)) {
             List<String> classNames = deleteBeans.stream().map(bean -> bean.getClassName()).collect(Collectors.toList());
             QueryWrapper<SkyeyeClassCodeRuleMation> deleteWrapper = new QueryWrapper<>();
             deleteWrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassCodeRuleMation::getAppId), skyeyeClassCodeRuleApiMation.getAppId());
@@ -88,7 +88,7 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
         // (新数据 - 旧数据) 添加到数据库
         List<SkyeyeClassCodeRuleMation> addBeans = classNameList.stream()
             .filter(item -> !oldKeys.contains(item.getClassName() + item.getGroupName() + item.getServiceName())).collect(Collectors.toList());
-        if (!CollectionUtils.isEmpty(addBeans)) {
+        if (CollectionUtil.isNotEmpty(addBeans)) {
             addBeans.forEach(bean -> {
                 bean.setCodeRuleId(classNameToColeRuleId.get(bean.getClassName()));
             });

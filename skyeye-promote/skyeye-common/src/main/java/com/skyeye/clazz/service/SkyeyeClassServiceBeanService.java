@@ -25,4 +25,7 @@ public interface SkyeyeClassServiceBeanService extends SkyeyeBusinessService<Sky
 
     URI getServiceBean(String className);
 
+    void queryServiceClassForTree(InputObject inputObject, OutputObject outputObject);
+
+    void queryServiceClass(InputObject inputObject, OutputObject outputObject);
 }

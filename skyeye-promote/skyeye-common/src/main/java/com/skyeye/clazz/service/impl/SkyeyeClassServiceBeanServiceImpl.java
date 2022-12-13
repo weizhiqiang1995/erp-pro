@@ -5,14 +5,20 @@
 package com.skyeye.clazz.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.lang.tree.Tree;
+import cn.hutool.core.lang.tree.TreeNodeConfig;
+import cn.hutool.core.lang.tree.TreeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.skyeye.application.service.ApplicationService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.clazz.dao.SkyeyeClassServiceBeanDao;
 import com.skyeye.clazz.entity.classservice.SkyeyeClassServiceBean;
 import com.skyeye.clazz.entity.classservice.SkyeyeClassServiceBeanApi;
 import com.skyeye.clazz.service.SkyeyeClassServiceBeanService;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.MapUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.exception.CustomException;
 import org.apache.commons.lang3.StringUtils;
@@ -24,8 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.net.URI;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -42,6 +47,9 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
     @Autowired
     private DiscoveryClient discoveryClient;
 
+    @Autowired
+    private ApplicationService applicationService;
+
     /**
      * 服务类注册
      *
@@ -49,7 +57,7 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
+    @Transactional(value = TRANSACTION_MANAGER_VALUE, rollbackFor = Exception.class)
     public void registerServiceBean(InputObject inputObject, OutputObject outputObject) {
         SkyeyeClassServiceBeanApi skyeyeClassServiceBeanApi = inputObject.getParams(SkyeyeClassServiceBeanApi.class);
 
@@ -61,7 +69,10 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
 
         // 获取入参的数据
         List<SkyeyeClassServiceBean> classNameList = skyeyeClassServiceBeanApi.getClassNameList();
-        classNameList.forEach(className -> className.setSpringApplicationName(skyeyeClassServiceBeanApi.getSpringApplicationName()));
+        classNameList.forEach(className -> {
+            className.setAppId(skyeyeClassServiceBeanApi.getAppId());
+            className.setSpringApplicationName(skyeyeClassServiceBeanApi.getSpringApplicationName());
+        });
 
         List<String> newKeys = classNameList.stream().map(bean -> bean.getClassName()).collect(Collectors.toList());
 
@@ -96,6 +107,97 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
             throw new CustomException(String.format(Locale.ROOT, "this service[%s] has no instance.", serviceBean.getSpringApplicationName()));
         }
         return allInstances.get(0).getUri();
+    }
+
+    /**
+     * 获取服务类信息(树结构)
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryServiceClassForTree(InputObject inputObject, OutputObject outputObject) {
+        List<Map<String, Object>> applications = applicationService.queryApplicationList();
+        List<Map<String, Object>> serviceClass = super.listMaps();
+        List<Map<String, Object>> result = buildResult(serviceClass);
+        applications.forEach(application -> {
+            result.add(getResultMap(application.get("appId").toString(), application.get("appName").toString(), "0", true));
+        });
+        // 转为树
+        List<Tree<String>> treeNodes = TreeUtil.build(result, String.valueOf(CommonNumConstants.NUM_ZERO), new TreeNodeConfig(),
+            (treeNode, tree) -> {
+                tree.setId(treeNode.get("key").toString());
+                tree.setParentId(treeNode.get("parentKey").toString());
+                tree.setName(treeNode.get("name").toString());
+                tree.putExtra("isParent", treeNode.get("isParent"));
+            });
+        outputObject.setBeans(treeNodes);
+        outputObject.settotal(treeNodes.size());
+
+    }
+
+    private List<Map<String, Object>> buildResult(List<Map<String, Object>> serviceClass) {
+        List<Map<String, Object>> result = new ArrayList<>();
+        Map<String, List<Map<String, Object>>> collect = serviceClass.stream().collect(Collectors.groupingBy(bean -> bean.get("appId").toString()));
+        collect.forEach((appId, classNameList) -> {
+            // 获取没有分组的业务对象服务类
+            List<String> noGroupNameClassNameIdList = classNameList.stream()
+                .filter(bean -> MapUtil.checkKeyIsNull(bean, "groupName"))
+                .map(bean -> bean.get("id").toString()).collect(Collectors.toList());
+            if (CollectionUtil.isNotEmpty(noGroupNameClassNameIdList)) {
+                String groupKey = appId + ".noGroupName";
+                result.add(getResultMap(groupKey, "未分组", appId, true));
+                serviceClass.forEach(bean -> {
+                    String id = bean.get("id").toString();
+                    if (noGroupNameClassNameIdList.indexOf(id) >= 0) {
+                        result.add(getResultMap(bean.get("className").toString(), bean.get("name").toString(), groupKey, false));
+                    }
+                });
+            }
+            // 获取有分组的业务对象服务类
+            Map<String, List<Map<String, Object>>> hasGroupNameIdList = classNameList.stream()
+                .filter(bean -> !MapUtil.checkKeyIsNull(bean, "groupName"))
+                .collect(Collectors.groupingBy(bean -> bean.get("groupName").toString()));
+            hasGroupNameIdList.forEach((groupName, classNames) -> {
+                String groupKey = appId + ".hasGroupName" + "." + groupName;
+                result.add(getResultMap(groupKey, groupName, appId, true));
+
+                List<String> classNameIds = classNames.stream().map(bean -> bean.get("id").toString()).collect(Collectors.toList());
+                serviceClass.forEach(bean -> {
+                    String id = bean.get("id").toString();
+                    if (classNameIds.indexOf(id) >= 0) {
+                        result.add(getResultMap(bean.get("className").toString(), bean.get("name").toString(), groupKey, false));
+                    }
+                });
+            });
+        });
+        return result;
+    }
+
+    private Map<String, Object> getResultMap(String key, String name, String parentKey, Boolean isParent) {
+        Map<String, Object> groupName = new HashMap<>();
+        groupName.put("key", key);
+        groupName.put("name", name);
+        groupName.put("parentKey", parentKey);
+        groupName.put("isParent", isParent);
+        return groupName;
+    }
+
+    /**
+     * 获取服务类信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryServiceClass(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> params = inputObject.getParams();
+        String className = params.get("className").toString();
+        QueryWrapper<SkyeyeClassServiceBean> wrapper = new QueryWrapper<>();
+        wrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassServiceBean::getClassName), className);
+        SkyeyeClassServiceBean skyeyeClassServiceBean = getOne(wrapper);
+        outputObject.setBean(skyeyeClassServiceBean);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
 }

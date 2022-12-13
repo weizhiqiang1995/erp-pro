@@ -9,12 +9,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
+import com.skyeye.attr.entity.AttrDefinition;
 import com.skyeye.common.entity.CommonInfo;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
+import java.util.List;
 
 /**
  * @ClassName: SkyeyeClassServiceBean
@@ -25,11 +24,9 @@ import java.io.Serializable;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @TableName(value = "skyeye_class_service_bean", autoResultMap = true)
 @ApiModel("服务类注册实体类")
-public class SkyeyeClassServiceBean extends CommonInfo implements Serializable {
+public class SkyeyeClassServiceBean extends CommonInfo {
 
     @TableId("id")
     private String id;
@@ -37,15 +34,45 @@ public class SkyeyeClassServiceBean extends CommonInfo implements Serializable {
     /**
      * 服务名
      */
-    @TableField("spring_application_name")
+    @TableField(value = "spring_application_name")
     private String springApplicationName;
+
+    /**
+     * 应用的appId
+     */
+    @TableField(value = "app_id")
+    private String appId;
 
     @TableField("class_name")
     @ApiModelProperty(value = "服务类的className", required = "required")
     private String className;
 
+    @TableField("`name`")
+    @ApiModelProperty(value = "服务名称", required = "required")
+    private String name;
+
+    @TableField("remark")
+    @ApiModelProperty(value = "备注")
+    private String remark;
+
+    @TableField("group_name")
+    @ApiModelProperty(value = "所属分组")
+    private String groupName;
+
+    @TableField("tenant")
+    @ApiModelProperty(value = "租户类型")
+    private String tenant;
+
+    @TableField("manage_show")
+    @ApiModelProperty(value = "是否可以在界面上进行管理")
+    private Boolean manageShow;
+
     @TableField("entity_class_name")
-    @ApiModelProperty(value = "实体类的chassName", required = "required")
+    @ApiModelProperty(value = "实体类的className", required = "required")
     private String entityClassName;
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "实体类的属性集合", required = "json")
+    private List<AttrDefinition> attrDefinitionList;
 
 }

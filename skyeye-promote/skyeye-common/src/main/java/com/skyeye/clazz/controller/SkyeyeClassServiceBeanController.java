@@ -5,6 +5,7 @@
 package com.skyeye.clazz.controller;
 
 import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.clazz.entity.classservice.SkyeyeClassServiceBeanApi;
@@ -41,6 +42,32 @@ public class SkyeyeClassServiceBeanController {
     @RequestMapping("/post/SkyeyeClassServiceBeanController/registerServiceBean")
     public void registerServiceBean(InputObject inputObject, OutputObject outputObject) {
         skyeyeClassServiceBeanService.registerServiceBean(inputObject, outputObject);
+    }
+
+    /**
+     * 获取服务类信息(树结构)
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryServiceClassForTree", value = "获取服务类信息(树结构)", method = "GET", allUse = "2")
+    @RequestMapping("/post/SkyeyeClassServiceBeanController/queryServiceClassForTree")
+    public void queryServiceClassForTree(InputObject inputObject, OutputObject outputObject) {
+        skyeyeClassServiceBeanService.queryServiceClassForTree(inputObject, outputObject);
+    }
+
+    /**
+     * 获取服务类信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryServiceClass", value = "获取服务类信息(树结构)", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "className", name = "className", value = "业务对象的className", required = "required")})
+    @RequestMapping("/post/SkyeyeClassServiceBeanController/queryServiceClass")
+    public void queryServiceClass(InputObject inputObject, OutputObject outputObject) {
+        skyeyeClassServiceBeanService.queryServiceClass(inputObject, outputObject);
     }
 
 }
