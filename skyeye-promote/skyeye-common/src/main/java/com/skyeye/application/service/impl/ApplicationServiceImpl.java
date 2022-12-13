@@ -4,6 +4,7 @@
 
 package com.skyeye.application.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName: ApplicationServiceImpl
@@ -52,10 +54,10 @@ public class ApplicationServiceImpl extends SkyeyeBusinessServiceImpl<Applicatio
 
     @Override
     public List<Map<String, Object>> queryApplicationList() {
-        List<Map<String, Object>> applicationList = super.listMaps();
+        List<Application> applicationList = super.list();
         if (CollectionUtil.isEmpty(applicationList)) {
             return new ArrayList<>();
         }
-        return applicationList;
+        return applicationList.stream().map(bean -> BeanUtil.beanToMap(bean)).collect(Collectors.toList());
     }
 }

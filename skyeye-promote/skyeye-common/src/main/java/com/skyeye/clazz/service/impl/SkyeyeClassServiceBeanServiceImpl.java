@@ -4,12 +4,15 @@
 
 package com.skyeye.clazz.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNodeConfig;
 import cn.hutool.core.lang.tree.TreeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.application.service.ApplicationService;
+import com.skyeye.attr.entity.AttrDefinition;
+import com.skyeye.attr.service.AttrDefinitionService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.clazz.dao.SkyeyeClassServiceBeanDao;
 import com.skyeye.clazz.entity.classservice.SkyeyeClassServiceBean;
@@ -49,6 +52,9 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
 
     @Autowired
     private ApplicationService applicationService;
+
+    @Autowired
+    private AttrDefinitionService attrDefinitionService;
 
     /**
      * 服务类注册
@@ -91,6 +97,17 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
         if (!CollectionUtils.isEmpty(addBeans)) {
             createEntity(addBeans, StringUtils.EMPTY);
         }
+
+        // 保存属性信息
+        saveAttrDefinition(skyeyeClassServiceBeanApi.getAppId(), classNameList);
+    }
+
+    private void saveAttrDefinition(String appId, List<SkyeyeClassServiceBean> classNameList) {
+        List<AttrDefinition> attrDefinitionList = classNameList.stream()
+            .filter(classNamee -> CollectionUtil.isNotEmpty(classNamee.getAttrDefinitionList()))
+            .flatMap(className -> className.getAttrDefinitionList().stream())
+            .filter(Objects::nonNull).collect(Collectors.toList());
+        attrDefinitionService.saveBarchAttrDefinition(appId, attrDefinitionList);
     }
 
     @Override
@@ -118,7 +135,8 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
     @Override
     public void queryServiceClassForTree(InputObject inputObject, OutputObject outputObject) {
         List<Map<String, Object>> applications = applicationService.queryApplicationList();
-        List<Map<String, Object>> serviceClass = super.listMaps();
+        List<Map<String, Object>> serviceClass = super.list()
+            .stream().map(bean -> BeanUtil.beanToMap(bean)).collect(Collectors.toList());
         List<Map<String, Object>> result = buildResult(serviceClass);
         applications.forEach(application -> {
             result.add(getResultMap(application.get("appId").toString(), application.get("appName").toString(), "0", true));

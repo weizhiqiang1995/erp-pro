@@ -30,11 +30,13 @@ public class AttrTransform extends OperatorUserInfo {
     @TableId("id")
     private String id;
 
+    @TableField("`name`")
     @ApiModelProperty(value = "左侧显示栏", required = "required")
-    private String label;
+    private String name;
 
+    @TableField(value = "order_by")
     @ApiModelProperty(value = "排序，值越大越往后", required = "required,num")
-    private Integer order;
+    private Integer orderBy;
 
     @TableField("class_name")
     @ApiModelProperty(value = "服务类的className", required = "required")
@@ -44,9 +46,11 @@ public class AttrTransform extends OperatorUserInfo {
     @ApiModelProperty(value = "字段名", required = "required")
     private String attrKey;
 
+    @TableField("show_type")
     @ApiModelProperty(value = "显示类型", required = "required,num")
     private Integer showType;
 
+    @TableField("proportion")
     @ApiModelProperty(value = "显示宽度", required = "required")
     private String proportion;
 

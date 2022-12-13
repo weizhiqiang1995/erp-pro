@@ -43,7 +43,7 @@ public class AttrDefinition extends CommonInfo {
     private String attrKey;
 
     @TableField("`name`")
-    @ApiModelProperty(value = "属性名称")
+    @ApiModelProperty(value = "属性名称", required = "required")
     private String name;
 
     @TableField("remark")
