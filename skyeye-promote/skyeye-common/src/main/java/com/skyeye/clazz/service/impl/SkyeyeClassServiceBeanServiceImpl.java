@@ -104,8 +104,13 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
 
     private void saveAttrDefinition(String appId, List<SkyeyeClassServiceBean> classNameList) {
         List<AttrDefinition> attrDefinitionList = classNameList.stream()
-            .filter(classNamee -> CollectionUtil.isNotEmpty(classNamee.getAttrDefinitionList()))
-            .flatMap(className -> className.getAttrDefinitionList().stream())
+            .filter(className -> CollectionUtil.isNotEmpty(className.getAttrDefinitionList()))
+            .flatMap(className -> {
+                className.getAttrDefinitionList().forEach(bean -> {
+                    bean.setClassName(className.getClassName());
+                });
+                return className.getAttrDefinitionList().stream();
+            })
             .filter(Objects::nonNull).collect(Collectors.toList());
         attrDefinitionService.saveBarchAttrDefinition(appId, attrDefinitionList);
     }

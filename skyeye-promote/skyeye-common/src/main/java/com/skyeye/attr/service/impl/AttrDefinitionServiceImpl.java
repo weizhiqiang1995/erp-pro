@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -94,7 +95,8 @@ public class AttrDefinitionServiceImpl extends SkyeyeBusinessServiceImpl<AttrDef
     }
 
     private String getKey(AttrDefinition attrDefinition) {
-        return attrDefinition.getClassName() + attrDefinition.getAttrKey();
+        return String.format(Locale.ROOT, "%s:%s:%s", attrDefinition.getClassName(),
+            attrDefinition.getParentAttrKey(), attrDefinition.getAttrKey());
     }
 
     /**
