@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
+import com.skyeye.annotation.api.Property;
 import com.skyeye.annotation.cache.RedisCacheField;
 import com.skyeye.common.constans.CacheConstants;
 import com.skyeye.common.constans.RedisConstants;
@@ -30,6 +31,7 @@ import lombok.Data;
 public class Enclosure extends OperatorUserInfo {
 
     @TableId("id")
+    @Property("主键id")
     private String id;
 
     @TableField(value = "`name`")

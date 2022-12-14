@@ -135,7 +135,10 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
     @Override
     public void queryServiceClassForTree(InputObject inputObject, OutputObject outputObject) {
         List<Map<String, Object>> applications = applicationService.queryApplicationList();
-        List<Map<String, Object>> serviceClass = super.list()
+        // 查询服务类信息
+        QueryWrapper<SkyeyeClassServiceBean> wrapper = new QueryWrapper<>();
+        wrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassServiceBean::getManageShow), true);
+        List<Map<String, Object>> serviceClass = super.list(wrapper)
             .stream().map(bean -> BeanUtil.beanToMap(bean)).collect(Collectors.toList());
         List<Map<String, Object>> result = buildResult(serviceClass);
         applications.forEach(application -> {

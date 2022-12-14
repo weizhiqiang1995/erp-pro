@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
+import com.skyeye.annotation.api.Property;
 import com.skyeye.common.entity.CommonInfo;
 import lombok.Data;
 
@@ -26,6 +27,7 @@ import lombok.Data;
 public class AttrDefinition extends CommonInfo {
 
     @TableId("id")
+    @Property("主键id")
     private String id;
 
     /**
@@ -41,6 +43,14 @@ public class AttrDefinition extends CommonInfo {
     @TableField("attr_key")
     @ApiModelProperty(value = "字段名", required = "required")
     private String attrKey;
+
+    @TableField("parent_attr_key")
+    @ApiModelProperty(value = "所属父节点的字段名", required = "required")
+    private String parentAttrKey;
+
+    @TableField("attr_type")
+    @ApiModelProperty(value = "字段类型", required = "required")
+    private String attrType;
 
     @TableField("`name`")
     @ApiModelProperty(value = "属性名称", required = "required")

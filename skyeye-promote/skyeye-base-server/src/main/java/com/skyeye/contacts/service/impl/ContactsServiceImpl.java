@@ -54,6 +54,7 @@ public class ContactsServiceImpl extends SkyeyeTeamAuthServiceImpl<ContactsDao, 
 
     @Override
     public void writePostpose(ContactsMation entity, String userId) {
+        super.writePostpose(entity, userId);
         if (entity.getIsDefault().equals(IsDefaultEnum.IS_DEFAULT.getKey())) {
             // 如果设置为默认联系人，则修改之前的联系人为非默认
             contactsDao.setContactsIsNotDefault(entity.getObjectId(), IsDefaultEnum.NOT_DEFAULT.getKey());

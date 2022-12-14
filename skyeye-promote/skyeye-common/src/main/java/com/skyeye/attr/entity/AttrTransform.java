@@ -13,6 +13,8 @@ import com.skyeye.annotation.unique.UniqueField;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @ClassName: AttrTransform
  * @Description: 业务对象提交到工作流的模型属性
@@ -28,6 +30,7 @@ import lombok.Data;
 public class AttrTransform extends OperatorUserInfo {
 
     @TableId("id")
+    @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")
     private String id;
 
     @TableField("`name`")
@@ -47,11 +50,15 @@ public class AttrTransform extends OperatorUserInfo {
     private String attrKey;
 
     @TableField("show_type")
-    @ApiModelProperty(value = "显示类型", required = "required,num")
+    @ApiModelProperty(value = "显示类型，参考#TransformShowType枚举类", required = "required,num")
     private Integer showType;
 
     @TableField("proportion")
     @ApiModelProperty(value = "显示宽度", required = "required")
     private String proportion;
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "展示类型为表格展示时的表格数据", required = "json")
+    private List<AttrTransformTable> attrTransformTableList;
 
 }

@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
+import com.skyeye.annotation.api.Property;
 import com.skyeye.attr.entity.AttrDefinition;
 import com.skyeye.common.entity.CommonInfo;
 import lombok.Data;
@@ -29,6 +30,7 @@ import java.util.List;
 public class SkyeyeClassServiceBean extends CommonInfo {
 
     @TableId("id")
+    @Property("主键id")
     private String id;
 
     /**

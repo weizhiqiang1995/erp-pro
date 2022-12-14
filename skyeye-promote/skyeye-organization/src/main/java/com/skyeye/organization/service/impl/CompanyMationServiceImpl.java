@@ -62,6 +62,7 @@ public class CompanyMationServiceImpl extends SkyeyeBusinessServiceImpl<CompanyM
 
     @Override
     public void writePostpose(Company entity, String userId) {
+        super.writePostpose(entity, userId);
         dealTaxRate(entity);
     }
 

@@ -57,6 +57,7 @@ public class CompanyJobScoreServiceImpl extends SkyeyeBusinessServiceImpl<Compan
 
     @Override
     public void writePostpose(JobScore entity, String userId) {
+        super.writePostpose(entity, userId);
         companyJobScoreFieldService.saveJobScoreFieldList(entity.getId(), entity.getScoreFields(), userId);
     }
 

@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.google.common.base.Joiner;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
+import com.skyeye.annotation.api.Property;
 import com.skyeye.common.constans.CommonCharConstants;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.AllArgsConstructor;
@@ -38,6 +39,7 @@ import java.util.stream.Collectors;
 public class SkyeyeClassFlowableLinkMation extends OperatorUserInfo implements Serializable {
 
     @TableId("id")
+    @Property("主键id")
     private String id;
 
     /**
