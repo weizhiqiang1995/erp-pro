@@ -95,8 +95,7 @@ public class AttrDefinitionServiceImpl extends SkyeyeBusinessServiceImpl<AttrDef
     }
 
     private String getKey(AttrDefinition attrDefinition) {
-        return String.format(Locale.ROOT, "%s:%s:%s", attrDefinition.getClassName(),
-            attrDefinition.getParentAttrKey(), attrDefinition.getAttrKey());
+        return String.format(Locale.ROOT, "%s:%s", attrDefinition.getClassName(), attrDefinition.getAttrKey());
     }
 
     /**

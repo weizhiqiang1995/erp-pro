@@ -44,10 +44,6 @@ public class AttrDefinition extends CommonInfo {
     @ApiModelProperty(value = "字段名", required = "required")
     private String attrKey;
 
-    @TableField("parent_attr_key")
-    @ApiModelProperty(value = "所属父节点的字段名", required = "required")
-    private String parentAttrKey;
-
     @TableField("attr_type")
     @ApiModelProperty(value = "字段类型", required = "required")
     private String attrType;
