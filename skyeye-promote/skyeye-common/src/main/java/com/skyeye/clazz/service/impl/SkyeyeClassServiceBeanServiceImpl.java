@@ -205,7 +205,7 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
     }
 
     /**
-     * 获取服务类信息
+     * 获取服务类详情信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象

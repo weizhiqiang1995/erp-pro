@@ -57,12 +57,12 @@ public class SkyeyeClassServiceBeanController {
     }
 
     /**
-     * 获取服务类信息
+     * 获取服务类详情信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "queryServiceClass", value = "获取服务类信息(树结构)", method = "GET", allUse = "2")
+    @ApiOperation(id = "queryServiceClass", value = "获取服务类详情信息", method = "GET", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "className", name = "className", value = "业务对象的className", required = "required")})
     @RequestMapping("/post/SkyeyeClassServiceBeanController/queryServiceClass")
