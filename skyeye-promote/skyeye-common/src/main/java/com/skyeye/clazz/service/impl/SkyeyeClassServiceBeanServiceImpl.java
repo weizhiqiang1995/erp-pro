@@ -71,7 +71,7 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
         QueryWrapper<SkyeyeClassServiceBean> wrapper = new QueryWrapper<>();
         wrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassServiceBean::getSpringApplicationName), skyeyeClassServiceBeanApi.getSpringApplicationName());
         List<SkyeyeClassServiceBean> oldList = super.list(wrapper);
-        List<String> oldKeys = oldList.stream().map(bean -> bean.getClassName()).collect(Collectors.toList());
+        List<String> oldKeys = oldList.stream().map(bean -> getKey(bean)).collect(Collectors.toList());
 
         // 获取入参的数据
         List<SkyeyeClassServiceBean> classNameList = skyeyeClassServiceBeanApi.getClassNameList();
@@ -80,10 +80,10 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
             className.setSpringApplicationName(skyeyeClassServiceBeanApi.getSpringApplicationName());
         });
 
-        List<String> newKeys = classNameList.stream().map(bean -> bean.getClassName()).collect(Collectors.toList());
+        List<String> newKeys = classNameList.stream().map(bean -> getKey(bean)).collect(Collectors.toList());
 
         // (旧数据 - 新数据) 从数据库删除
-        List<SkyeyeClassServiceBean> deleteBeans = oldList.stream().filter(item -> !newKeys.contains(item.getClassName())).collect(Collectors.toList());
+        List<SkyeyeClassServiceBean> deleteBeans = oldList.stream().filter(item -> !newKeys.contains(getKey(item))).collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(deleteBeans)) {
             List<String> classNames = deleteBeans.stream().map(bean -> bean.getClassName()).collect(Collectors.toList());
             QueryWrapper<SkyeyeClassServiceBean> deleteWrapper = new QueryWrapper<>();
@@ -93,13 +93,17 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
         }
 
         // (新数据 - 旧数据) 添加到数据库
-        List<SkyeyeClassServiceBean> addBeans = classNameList.stream().filter(item -> !oldKeys.contains(item.getClassName())).collect(Collectors.toList());
+        List<SkyeyeClassServiceBean> addBeans = classNameList.stream().filter(item -> !oldKeys.contains(getKey(item))).collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(addBeans)) {
             createEntity(addBeans, StringUtils.EMPTY);
         }
 
         // 保存属性信息
         saveAttrDefinition(skyeyeClassServiceBeanApi.getAppId(), classNameList);
+    }
+
+    private String getKey(SkyeyeClassServiceBean bean) {
+        return String.format(Locale.ROOT, "%s_%s_%s", bean.getClassName(), bean.getManageShow(), bean.getTenant());
     }
 
     private void saveAttrDefinition(String appId, List<SkyeyeClassServiceBean> classNameList) {
