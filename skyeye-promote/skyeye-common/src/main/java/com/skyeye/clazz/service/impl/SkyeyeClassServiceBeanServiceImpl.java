@@ -156,6 +156,7 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
                 tree.setParentId(treeNode.get("parentKey").toString());
                 tree.setName(treeNode.get("name").toString());
                 tree.putExtra("isParent", treeNode.get("isParent"));
+                tree.putExtra("disabled", treeNode.get("disabled"));
             });
         outputObject.setBeans(treeNodes);
         outputObject.settotal(treeNodes.size());
@@ -206,6 +207,11 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
         groupName.put("name", name);
         groupName.put("parentKey", parentKey);
         groupName.put("isParent", isParent);
+        if (isParent) {
+            groupName.put("disabled", true);
+        } else {
+            groupName.put("disabled", false);
+        }
         return groupName;
     }
 
