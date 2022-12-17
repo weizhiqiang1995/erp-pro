@@ -56,6 +56,7 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
     @Autowired
     private AttrDefinitionService attrDefinitionService;
 
+
     /**
      * 服务类注册
      *
