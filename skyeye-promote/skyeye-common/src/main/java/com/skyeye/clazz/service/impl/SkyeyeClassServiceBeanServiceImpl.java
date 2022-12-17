@@ -157,6 +157,7 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
                 tree.setName(treeNode.get("name").toString());
                 tree.putExtra("isParent", treeNode.get("isParent"));
                 tree.putExtra("disabled", treeNode.get("disabled"));
+                tree.putExtra("classMation", treeNode.get("classMation"));
             });
         outputObject.setBeans(treeNodes);
         outputObject.settotal(treeNodes.size());
@@ -174,12 +175,7 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
             if (CollectionUtil.isNotEmpty(noGroupNameClassNameIdList)) {
                 String groupKey = appId + ".noGroupName";
                 result.add(getResultMap(groupKey, "未分组", appId, true));
-                serviceClass.forEach(bean -> {
-                    String id = bean.get("id").toString();
-                    if (noGroupNameClassNameIdList.indexOf(id) >= 0) {
-                        result.add(getResultMap(bean.get("className").toString(), bean.get("name").toString(), groupKey, false));
-                    }
-                });
+                setClassName(serviceClass, result, noGroupNameClassNameIdList, groupKey);
             }
             // 获取有分组的业务对象服务类
             Map<String, List<Map<String, Object>>> hasGroupNameIdList = classNameList.stream()
@@ -188,17 +184,22 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
             hasGroupNameIdList.forEach((groupName, classNames) -> {
                 String groupKey = appId + ".hasGroupName" + "." + groupName;
                 result.add(getResultMap(groupKey, groupName, appId, true));
-
                 List<String> classNameIds = classNames.stream().map(bean -> bean.get("id").toString()).collect(Collectors.toList());
-                serviceClass.forEach(bean -> {
-                    String id = bean.get("id").toString();
-                    if (classNameIds.indexOf(id) >= 0) {
-                        result.add(getResultMap(bean.get("className").toString(), bean.get("name").toString(), groupKey, false));
-                    }
-                });
+                setClassName(classNames, result, classNameIds, groupKey);
             });
         });
         return result;
+    }
+
+    private void setClassName(List<Map<String, Object>> serviceClass, List<Map<String, Object>> result, List<String> classNameIds, String groupKey) {
+        serviceClass.forEach(bean -> {
+            String id = bean.get("id").toString();
+            if (classNameIds.indexOf(id) >= 0) {
+                Map<String, Object> resultMap = getResultMap(bean.get("className").toString(), bean.get("name").toString(), groupKey, false);
+                resultMap.put("classMation", bean);
+                result.add(resultMap);
+            }
+        });
     }
 
     private Map<String, Object> getResultMap(String key, String name, String parentKey, Boolean isParent) {

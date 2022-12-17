@@ -77,4 +77,8 @@ public class SkyeyeClassServiceBean extends CommonInfo {
     @ApiModelProperty(value = "实体类的属性集合", required = "json")
     private List<AttrDefinition> attrDefinitionList;
 
+    @TableField("flowable")
+    @ApiModelProperty(value = "是否开启流程", required = "required")
+    private Boolean flowable;
+
 }

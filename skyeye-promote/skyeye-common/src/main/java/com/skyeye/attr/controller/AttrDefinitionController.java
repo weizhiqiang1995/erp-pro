@@ -36,7 +36,7 @@ public class AttrDefinitionController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "queryAttrDefinitionList", value = "根据service的className获取属性信息", method = "GET", allUse = "2")
+    @ApiOperation(id = "queryAttrDefinitionList", value = "根据service的className获取属性信息", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "className", name = "className", value = "service的className", required = "required")})
     @RequestMapping("/post/AttrDefinitionController/queryAttrDefinitionList")

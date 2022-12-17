@@ -54,7 +54,9 @@ public class ApplicationServiceImpl extends SkyeyeBusinessServiceImpl<Applicatio
 
     @Override
     public List<Map<String, Object>> queryApplicationList() {
-        List<Application> applicationList = super.list();
+        QueryWrapper<Application> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc(MybatisPlusUtil.toColumns(Application::getAppId));
+        List<Application> applicationList = super.list(wrapper);
         if (CollectionUtil.isEmpty(applicationList)) {
             return new ArrayList<>();
         }
