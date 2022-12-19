@@ -118,8 +118,8 @@ public class SkyeyeClassDsFormLinkServiceImpl extends ServiceImpl<SkyeyeClassDsF
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
         Page pages = PageHelper.startPage(commonPageInfo.getPage(), commonPageInfo.getLimit());
         List<Map<String, Object>> beans = skyeyeClassDsFormLinkDao.queryDsFormLinkList(commonPageInfo);
-        iAuthUserService.setNameByIdList(beans, "createId", "createName");
-        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
+        iAuthUserService.setNameForMap(beans, "createId", "createName");
+        iAuthUserService.setNameForMap(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }
@@ -153,8 +153,8 @@ public class SkyeyeClassDsFormLinkServiceImpl extends ServiceImpl<SkyeyeClassDsF
             });
             bean.put("dsFormPageMations", dsFormPageMations);
         }
-        iAuthUserService.setNameByIdBean(bean, "createId", "createName");
-        iAuthUserService.setNameByIdBean(bean, "lastUpdateId", "lastUpdateName");
+        iAuthUserService.setNameForMap(bean, "createId", "createName");
+        iAuthUserService.setNameForMap(bean, "lastUpdateId", "lastUpdateName");
         outputObject.setBean(bean);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
     }

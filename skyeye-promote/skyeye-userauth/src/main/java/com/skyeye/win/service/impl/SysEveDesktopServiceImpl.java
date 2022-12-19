@@ -75,8 +75,8 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
         Page pages = PageHelper.startPage(commonPageInfo.getPage(), commonPageInfo.getLimit());
         List<Map<String, Object>> beans = sysEveDesktopDao.querySysDesktopList(commonPageInfo);
-        iAuthUserService.setNameByIdList(beans, "createId", "createName");
-        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
+        iAuthUserService.setNameForMap(beans, "createId", "createName");
+        iAuthUserService.setNameForMap(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

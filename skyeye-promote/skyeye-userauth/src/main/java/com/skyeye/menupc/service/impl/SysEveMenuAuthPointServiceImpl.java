@@ -86,8 +86,8 @@ public class SysEveMenuAuthPointServiceImpl implements SysEveMenuAuthPointServic
     public void querySysEveMenuAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysEveMenuAuthPointDao.querySysEveMenuAuthPointListByMenuId(map);
-        iAuthUserService.setNameByIdList(beans, "createId", "createName");
-        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
+        iAuthUserService.setNameForMap(beans, "createId", "createName");
+        iAuthUserService.setNameForMap(beans, "lastUpdateId", "lastUpdateName");
         beans.forEach(bean -> {
             bean.put("typeName", Type.getTypeName(Integer.parseInt(bean.get("type").toString())));
         });

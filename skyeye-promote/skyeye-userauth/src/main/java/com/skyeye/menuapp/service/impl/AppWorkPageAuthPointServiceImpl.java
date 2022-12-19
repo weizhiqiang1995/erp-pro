@@ -87,8 +87,8 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
     public void queryAppWorkPageAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = appWorkPageAuthPointDao.queryAppWorkPageAuthPointListByMenuId(map);
-        iAuthUserService.setNameByIdList(beans, "createId", "createName");
-        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
+        iAuthUserService.setNameForMap(beans, "createId", "createName");
+        iAuthUserService.setNameForMap(beans, "lastUpdateId", "lastUpdateName");
         beans.forEach(bean -> {
             bean.put("typeName", SysEveMenuAuthPointServiceImpl.Type.getTypeName(Integer.parseInt(bean.get("type").toString())));
         });

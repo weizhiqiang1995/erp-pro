@@ -51,8 +51,8 @@ public class CodeModelServiceImpl implements CodeModelService {
         CodeModelQueryDo codeModelQuery = inputObject.getParams(CodeModelQueryDo.class);
         Page pages = PageHelper.startPage(codeModelQuery.getPage(), codeModelQuery.getLimit());
         List<Map<String, Object>> beans = codeModelDao.queryCodeModelList(codeModelQuery);
-        iAuthUserService.setNameByIdList(beans, "createId", "createName");
-        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
+        iAuthUserService.setNameForMap(beans, "createId", "createName");
+        iAuthUserService.setNameForMap(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

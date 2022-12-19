@@ -80,7 +80,7 @@ public class MainPageServiceImpl implements MainPageService {
         beans.forEach(bean -> {
             try {
                 List<Map<String, Object>> content = mainPageDao.queryNoticeContentListByUserIdAndTypeId(userId, bean.get("id").toString());
-                iAuthUserService.setNameByIdList(content, "createId", "createName");
+                iAuthUserService.setNameForMap(content, "createId", "createName");
                 bean.put("content", content);
             } catch (Exception e) {
                 LOGGER.warn("queryNoticeContentListByUserId failed, reason is {}.", e);

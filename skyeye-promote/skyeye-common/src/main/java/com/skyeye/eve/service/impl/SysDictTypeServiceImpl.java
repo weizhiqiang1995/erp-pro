@@ -61,8 +61,8 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
         Page pages = PageHelper.startPage(commonPageInfo.getPage(), commonPageInfo.getLimit());
         List<SysDictTypeMation> beans = sysDictTypeDao.queryDictTypeList(commonPageInfo);
-        iAuthUserService.setNameByIdForEntity(beans, "createId", "createName");
-        iAuthUserService.setNameByIdForEntity(beans, "lastUpdateId", "lastUpdateName");
+        iAuthUserService.setName(beans, "createId", "createName");
+        iAuthUserService.setName(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

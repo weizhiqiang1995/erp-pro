@@ -75,8 +75,8 @@ public class SysEveMenuServiceImpl implements SysEveMenuService {
         List<String> childIds = sysEveMenuDao.queryAllChildIdsByParentId(ids);
         beans = sysEveMenuDao.querySysMenuListByIds(childIds);
 
-        iAuthUserService.setNameByIdList(beans, "createId", "createName");
-        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
+        iAuthUserService.setNameForMap(beans, "createId", "createName");
+        iAuthUserService.setNameForMap(beans, "lastUpdateId", "lastUpdateName");
         beans.forEach(bean -> {
             bean.put("lay_is_open", true);
         });

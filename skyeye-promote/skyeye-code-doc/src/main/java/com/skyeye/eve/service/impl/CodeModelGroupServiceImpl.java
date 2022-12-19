@@ -57,8 +57,8 @@ public class CodeModelGroupServiceImpl implements CodeModelGroupService {
         CodeModelGroupQueryDo codeModelGroupQuery = inputObject.getParams(CodeModelGroupQueryDo.class);
         Page pages = PageHelper.startPage(codeModelGroupQuery.getPage(), codeModelGroupQuery.getLimit());
         List<Map<String, Object>> beans = codeModelGroupDao.queryCodeModelGroupList(codeModelGroupQuery);
-        iAuthUserService.setNameByIdList(beans, "createId", "createName");
-        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
+        iAuthUserService.setNameForMap(beans, "createId", "createName");
+        iAuthUserService.setNameForMap(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

@@ -97,7 +97,7 @@ public class TeamBusinessServiceImpl extends AbstractTeamServiceImpl<TeamBusines
         // 设置名称
         TeamTemplate teamTemplate = teamTemplateService.selectById(teamBusiness.getTeamTemplateId());
         teamBusiness.setName(teamTemplate.getName());
-        teamBusiness.setChargeUserMation(iAuthUserService.queryUserNameList(teamBusiness.getChargeUser()).stream().findFirst().orElse(null));
+        teamBusiness.setChargeUserMation(iAuthUserService.queryDataMationById(teamBusiness.getChargeUser()));
         outputObject.setBean(teamBusiness);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
     }

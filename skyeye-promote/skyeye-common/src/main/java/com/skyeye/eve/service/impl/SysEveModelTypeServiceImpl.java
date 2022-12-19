@@ -46,8 +46,8 @@ public class SysEveModelTypeServiceImpl implements SysEveModelTypeService {
     public void querySysEveModelTypeList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> inputParams = inputObject.getParams();
         List<Map<String, Object>> beans = sysEveModelTypeDao.querySysEveModelTypeList(inputParams);
-        iAuthUserService.setNameByIdList(beans, "createId", "createName");
-        iAuthUserService.setNameByIdList(beans, "lastUpdateId", "lastUpdateName");
+        iAuthUserService.setNameForMap(beans, "createId", "createName");
+        iAuthUserService.setNameForMap(beans, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
     }
