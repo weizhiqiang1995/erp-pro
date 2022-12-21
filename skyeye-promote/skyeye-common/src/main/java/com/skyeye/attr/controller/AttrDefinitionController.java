@@ -44,4 +44,19 @@ public class AttrDefinitionController {
         attrDefinitionService.queryAttrDefinitionList(inputObject, outputObject);
     }
 
+    /**
+     * 获取子属性信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryChildAttrDefinitionList", value = "获取子属性信息", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "className", name = "className", value = "service的className", required = "required"),
+        @ApiImplicitParam(id = "attrKey", name = "attrKey", value = "属性", required = "required")})
+    @RequestMapping("/post/AttrDefinitionController/queryChildAttrDefinitionList")
+    public void queryChildAttrDefinitionList(InputObject inputObject, OutputObject outputObject) {
+        attrDefinitionService.queryChildAttrDefinitionList(inputObject, outputObject);
+    }
+
 }

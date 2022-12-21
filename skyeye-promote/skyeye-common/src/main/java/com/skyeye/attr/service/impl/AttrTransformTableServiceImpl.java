@@ -67,6 +67,7 @@ public class AttrTransformTableServiceImpl extends SkyeyeBusinessServiceImpl<Att
     @Override
     public List<AttrTransformTable> queryAttrTransformTable(String serviceClassName, String parentAttrKey) {
         QueryWrapper<AttrTransformTable> queryWrapper = new QueryWrapper();
+        queryWrapper.orderByAsc(MybatisPlusUtil.toColumns(AttrTransformTable::getOrderBy));
         queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransformTable::getClassName), serviceClassName);
         queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransformTable::getParentAttrKey), parentAttrKey);
         return list(queryWrapper);

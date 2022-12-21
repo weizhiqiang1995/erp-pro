@@ -6,7 +6,7 @@ package com.skyeye.attr.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.skyeye.attr.classenum.TransformShowType;
+import com.skyeye.attr.classenum.DsFormShowType;
 import com.skyeye.attr.dao.AttrTransformDao;
 import com.skyeye.attr.entity.AttrTransform;
 import com.skyeye.attr.entity.AttrTransformTable;
@@ -40,15 +40,18 @@ public class AttrTransformServiceImpl extends SkyeyeBusinessServiceImpl<AttrTran
     public List<Map<String, Object>> queryDataList(InputObject inputObject) {
         Map<String, Object> params = inputObject.getParams();
         String className = params.get("className").toString();
+        String actFlowId = params.get("actFlowId").toString();
         QueryWrapper<AttrTransform> queryWrapper = new QueryWrapper();
+        queryWrapper.orderByAsc(MybatisPlusUtil.toColumns(AttrTransform::getOrderBy));
         queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransform::getClassName), className);
+        queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransform::getActFlowId), actFlowId);
         return list(queryWrapper).stream().map(bean -> BeanUtil.beanToMap(bean)).collect(Collectors.toList());
     }
 
     @Override
     public void writePostpose(AttrTransform entity, String userId) {
         super.writePostpose(entity, userId);
-        if (entity.getShowType().equals(TransformShowType.TABLE.getKey())) {
+        if (entity.getShowType().equals(DsFormShowType.TABLE.getKey())) {
             attrTransformTableService.saveAttrTransformTable(entity.getClassName(), entity.getAttrKey(), entity.getAttrTransformTableList());
         }
     }
@@ -62,9 +65,11 @@ public class AttrTransformServiceImpl extends SkyeyeBusinessServiceImpl<AttrTran
     @Override
     public AttrTransform getDataFromDb(String id) {
         AttrTransform attrTransform = super.getDataFromDb(id);
-        List<AttrTransformTable> attrTransformTableList = attrTransformTableService
-            .queryAttrTransformTable(attrTransform.getClassName(), attrTransform.getAttrKey());
-        attrTransform.setAttrTransformTableList(attrTransformTableList);
+        if (attrTransform.getShowType() == DsFormShowType.TABLE.getKey()) {
+            List<AttrTransformTable> attrTransformTableList = attrTransformTableService
+                .queryAttrTransformTable(attrTransform.getClassName(), attrTransform.getAttrKey());
+            attrTransform.setAttrTransformTableList(attrTransformTableList);
+        }
         return attrTransform;
     }
 

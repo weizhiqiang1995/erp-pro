@@ -10,7 +10,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.api.Property;
-import com.skyeye.annotation.unique.UniqueField;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
 
@@ -23,7 +22,6 @@ import lombok.Data;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Data
-@UniqueField(value = {"className", "attrKey"})
 @TableName(value = "skyeye_attr_transform_table", autoResultMap = true)
 @ApiModel("表格模型属性")
 public class AttrTransformTable extends OperatorUserInfo {
@@ -44,10 +42,6 @@ public class AttrTransformTable extends OperatorUserInfo {
     @ApiModelProperty(value = "所属父节点的字段名", required = "required")
     private String parentAttrKey;
 
-    @TableField("`name`")
-    @ApiModelProperty(value = "名称，相当于表格中的title", required = "required")
-    private String name;
-
     @TableField("align")
     @ApiModelProperty(value = "对齐方式，可参考#Alignment枚举类，相当于表格中的align", required = "required")
     private String align;
@@ -63,5 +57,9 @@ public class AttrTransformTable extends OperatorUserInfo {
     @TableField("templet")
     @ApiModelProperty(value = "列内容展示的脚本，相当于表格中的templet")
     private String templet;
+
+    @TableField("act_flow_id")
+    @ApiModelProperty(value = "工作流模型id", required = "required")
+    private String actFlowId;
 
 }

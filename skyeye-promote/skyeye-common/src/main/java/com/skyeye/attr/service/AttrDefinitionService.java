@@ -30,4 +30,6 @@ public interface AttrDefinitionService extends SkyeyeBusinessService<AttrDefinit
     void saveBarchAttrDefinition(String appId, List<AttrDefinition> attrDefinitionList);
 
     void queryAttrDefinitionList(InputObject inputObject, OutputObject outputObject);
+
+    void queryChildAttrDefinitionList(InputObject inputObject, OutputObject outputObject);
 }

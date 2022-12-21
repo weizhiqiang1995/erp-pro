@@ -11,9 +11,12 @@ import com.skyeye.attr.dao.AttrDefinitionDao;
 import com.skyeye.attr.entity.AttrDefinition;
 import com.skyeye.attr.service.AttrDefinitionService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
+import com.skyeye.clazz.entity.classservice.SkyeyeClassServiceBean;
+import com.skyeye.clazz.service.SkyeyeClassServiceBeanService;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -33,6 +36,9 @@ import java.util.stream.Collectors;
  */
 @Service
 public class AttrDefinitionServiceImpl extends SkyeyeBusinessServiceImpl<AttrDefinitionDao, AttrDefinition> implements AttrDefinitionService {
+
+    @Autowired
+    private SkyeyeClassServiceBeanService skyeyeClassServiceBeanService;
 
     /**
      * 系统启动时，批量扫描业务对象属性入库
@@ -108,9 +114,43 @@ public class AttrDefinitionServiceImpl extends SkyeyeBusinessServiceImpl<AttrDef
     public void queryAttrDefinitionList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         String className = params.get("className").toString();
+        List<AttrDefinition> attrDefinitionList = getAttrDefinitions(className);
+        outputObject.setBeans(attrDefinitionList);
+        outputObject.settotal(attrDefinitionList.size());
+    }
+
+    private List<AttrDefinition> getAttrDefinitions(String className) {
         QueryWrapper<AttrDefinition> wrapper = new QueryWrapper<>();
         wrapper.eq(MybatisPlusUtil.toColumns(AttrDefinition::getClassName), className);
         List<AttrDefinition> attrDefinitionList = list(wrapper);
+        return attrDefinitionList;
+    }
+
+    /**
+     * 获取子属性信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryChildAttrDefinitionList(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> params = inputObject.getParams();
+        String className = params.get("className").toString();
+        String attrKey = params.get("attrKey").toString();
+
+        QueryWrapper<AttrDefinition> wrapper = new QueryWrapper<>();
+        wrapper.eq(MybatisPlusUtil.toColumns(AttrDefinition::getClassName), className);
+        wrapper.eq(MybatisPlusUtil.toColumns(AttrDefinition::getAttrKey), attrKey);
+        AttrDefinition attrDefinition = getOne(wrapper);
+        if (attrDefinition == null) {
+            return;
+        }
+
+        SkyeyeClassServiceBean service = skyeyeClassServiceBeanService.getByEntityClassName(attrDefinition.getAttrType());
+        if (service == null) {
+            return;
+        }
+        List<AttrDefinition> attrDefinitionList = getAttrDefinitions(service.getClassName());
         outputObject.setBeans(attrDefinitionList);
         outputObject.settotal(attrDefinitionList.size());
     }

@@ -233,4 +233,11 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
         outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
+    @Override
+    public SkyeyeClassServiceBean getByEntityClassName(String entityClassName) {
+        QueryWrapper<SkyeyeClassServiceBean> wrapper = new QueryWrapper<>();
+        wrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassServiceBean::getEntityClassName), entityClassName);
+        return getOne(wrapper);
+    }
+
 }

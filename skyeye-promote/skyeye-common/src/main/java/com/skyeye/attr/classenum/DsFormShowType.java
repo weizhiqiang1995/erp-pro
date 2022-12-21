@@ -10,8 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * @ClassName: TransformShowType
- * @Description: 业务对象提交到工作流的展示类型枚举类
+ * @ClassName: DsFormShowType
+ * @Description: 组件展示类型枚举类
  * @author: skyeye云系列--卫志强
  * @date: 2021/7/18 23:29
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public enum TransformShowType implements SkyeyeEnumClass {
+public enum DsFormShowType implements SkyeyeEnumClass {
     TEXT(1, "文本展示", true, false),
     ENCLOSURE(2, "附件展示", true, false),
     RICH_TEXT(3, "富文本展示", true, false),

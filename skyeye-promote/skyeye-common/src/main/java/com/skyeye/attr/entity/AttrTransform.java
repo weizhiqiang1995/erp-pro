@@ -24,7 +24,7 @@ import java.util.List;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Data
-@UniqueField(value = {"className", "attrKey"})
+@UniqueField(value = {"className", "attrKey", "actFlowId"})
 @TableName(value = "skyeye_attr_transform", autoResultMap = true)
 @ApiModel("业务对象提交到工作流的模型属性")
 public class AttrTransform extends OperatorUserInfo {
@@ -32,10 +32,6 @@ public class AttrTransform extends OperatorUserInfo {
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")
     private String id;
-
-    @TableField("`name`")
-    @ApiModelProperty(value = "左侧显示栏", required = "required")
-    private String name;
 
     @TableField(value = "order_by")
     @ApiModelProperty(value = "排序，值越大越往后", required = "required,num")
@@ -50,12 +46,16 @@ public class AttrTransform extends OperatorUserInfo {
     private String attrKey;
 
     @TableField("show_type")
-    @ApiModelProperty(value = "显示类型，参考#TransformShowType枚举类", required = "required,num")
+    @ApiModelProperty(value = "显示类型，参考#DsFormShowType枚举类", required = "required,num")
     private Integer showType;
 
     @TableField("proportion")
-    @ApiModelProperty(value = "显示宽度", required = "required")
+    @ApiModelProperty(value = "显示宽度，可参考#WidthScale", required = "required")
     private String proportion;
+
+    @TableField("act_flow_id")
+    @ApiModelProperty(value = "工作流模型id", required = "required")
+    private String actFlowId;
 
     @TableField(exist = false)
     @ApiModelProperty(value = "展示类型为表格展示时的表格数据", required = "json")

@@ -25,33 +25,34 @@ import org.springframework.web.bind.annotation.RestController;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @RestController
-@Api(value = "提交到流程的属性信息管理", tags = "提交到流程的属性信息管理", modelName = "系统公共模块")
+@Api(value = "流程属性信息管理", tags = "流程属性信息管理", modelName = "系统公共模块")
 public class AttrTransformController {
 
     @Autowired
     private AttrTransformService attrTransformService;
 
     /**
-     * 根据service的className获取提交到流程的属性信息
+     * 根据service的className获取流程属性信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "queryAttrTransformList", value = "根据service的className获取提交到流程的属性信息", method = "POST", allUse = "2")
+    @ApiOperation(id = "queryAttrTransformList", value = "根据service的className获取流程属性信息", method = "POST", allUse = "2")
     @ApiImplicitParams({
-        @ApiImplicitParam(id = "className", name = "className", value = "service的className", required = "required")})
+        @ApiImplicitParam(id = "className", name = "className", value = "service的className", required = "required"),
+        @ApiImplicitParam(id = "actFlowId", name = "actFlowId", value = "工作流模型id")})
     @RequestMapping("/post/AttrTransformController/queryAttrTransformList")
     public void queryAttrTransformList(InputObject inputObject, OutputObject outputObject) {
         attrTransformService.queryList(inputObject, outputObject);
     }
 
     /**
-     * 新增/编辑提交到流程的属性
+     * 新增/编辑流程属性
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "writeAttrTransform", value = "新增/编辑提交到流程的属性", method = "POST", allUse = "2")
+    @ApiOperation(id = "writeAttrTransform", value = "新增/编辑流程属性", method = "POST", allUse = "2")
     @ApiImplicitParams(classBean = AttrTransform.class)
     @RequestMapping("/post/AttrTransformController/writeAttrTransform")
     public void writeAttrTransform(InputObject inputObject, OutputObject outputObject) {
@@ -59,12 +60,12 @@ public class AttrTransformController {
     }
 
     /**
-     * 删除提交到流程的属性
+     * 删除流程属性
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "deleteAttrTransformById", value = "删除提交到流程的属性", method = "DELETE", allUse = "2")
+    @ApiOperation(id = "deleteAttrTransformById", value = "删除流程属性", method = "DELETE", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
     @RequestMapping("/post/AttrTransformController/deleteAttrTransformById")
@@ -73,12 +74,12 @@ public class AttrTransformController {
     }
 
     /**
-     * 查询提交到流程的属性信息
+     * 查询流程属性信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "queryAttrTransformById", value = "查询提交到流程的属性信息", method = "GET", allUse = "2")
+    @ApiOperation(id = "queryAttrTransformById", value = "查询流程属性信息", method = "GET", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
     @RequestMapping("/post/AttrTransformController/queryAttrTransformById")
