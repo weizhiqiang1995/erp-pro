@@ -15,7 +15,7 @@ import com.skyeye.eve.dao.BarCodeDao;
 import com.skyeye.eve.entity.barcode.BarCodeApiMation;
 import com.skyeye.eve.entity.barcode.BarCodeMation;
 import com.skyeye.eve.service.BarCodeService;
-import com.skyeye.eve.service.IBarCodeService;
+import com.skyeye.sdk.data.service.IDataService;
 import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -42,7 +42,7 @@ public class BarCodeServiceImpl extends ServiceImpl<BarCodeDao, BarCodeMation> i
     private BarCodeDao barCodeDao;
 
     @Autowired
-    private IBarCodeService iBarCodeService;
+    private IDataService iDataService;
 
     @Autowired
     private DiscoveryClient discoveryClient;
@@ -88,7 +88,7 @@ public class BarCodeServiceImpl extends ServiceImpl<BarCodeDao, BarCodeMation> i
         }
 
         // 调用SDK服务获取数据信息
-        Map<String, Object> result = iBarCodeService.getDataSdkByObjectId(allInstances.get(0).getUri(), barCodeMation.getObjectId(),
+        Map<String, Object> result = iDataService.getDataByObjectId(allInstances.get(0).getUri(), barCodeMation.getObjectId(),
             barCodeMation.getCodeImplClass());
         outputObject.setBean(result);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
