@@ -12,7 +12,10 @@ import com.skyeye.attr.entity.AttrTransform;
 import com.skyeye.attr.entity.AttrTransformTable;
 import com.skyeye.attr.service.AttrTransformService;
 import com.skyeye.attr.service.AttrTransformTableService;
+import com.skyeye.attr.service.IAttrTransformService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
+import com.skyeye.cache.redis.RedisCache;
+import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +39,25 @@ public class AttrTransformServiceImpl extends SkyeyeBusinessServiceImpl<AttrTran
     @Autowired
     private AttrTransformTableService attrTransformTableService;
 
+    @Autowired
+    private IAttrTransformService iAttrTransformService;
+
+    @Autowired
+    protected RedisCache redisCache;
+
     @Override
     public List<Map<String, Object>> queryDataList(InputObject inputObject) {
         Map<String, Object> params = inputObject.getParams();
         String className = params.get("className").toString();
         String actFlowId = params.get("actFlowId").toString();
-        QueryWrapper<AttrTransform> queryWrapper = new QueryWrapper();
-        queryWrapper.orderByAsc(MybatisPlusUtil.toColumns(AttrTransform::getOrderBy));
-        queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransform::getClassName), className);
-        queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransform::getActFlowId), actFlowId);
-        return list(queryWrapper).stream().map(bean -> BeanUtil.beanToMap(bean)).collect(Collectors.toList());
+        String cacheKey = iAttrTransformService.getCacheKey(className, actFlowId);
+        return redisCache.getList(cacheKey, key -> {
+            QueryWrapper<AttrTransform> queryWrapper = new QueryWrapper();
+            queryWrapper.orderByAsc(MybatisPlusUtil.toColumns(AttrTransform::getOrderBy));
+            queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransform::getClassName), className);
+            queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransform::getActFlowId), actFlowId);
+            return list(queryWrapper).stream().map(bean -> BeanUtil.beanToMap(bean)).collect(Collectors.toList());
+        }, RedisConstants.THIRTY_DAY_SECONDS);
     }
 
     @Override
@@ -54,18 +66,23 @@ public class AttrTransformServiceImpl extends SkyeyeBusinessServiceImpl<AttrTran
         if (entity.getShowType().equals(DsFormShowType.TABLE.getKey())) {
             attrTransformTableService.saveAttrTransformTable(entity.getClassName(), entity.getAttrKey(), entity.getAttrTransformTableList());
         }
+        String cacheKey = iAttrTransformService.getCacheKey(entity.getClassName(), entity.getActFlowId());
+        jedisClientService.del(cacheKey);
     }
 
     @Override
     public void deletePreExecution(String id) {
         AttrTransform attrTransform = selectById(id);
         attrTransformTableService.deleteAttrTransformTable(attrTransform.getClassName(), attrTransform.getAttrKey());
+
+        String cacheKey = iAttrTransformService.getCacheKey(attrTransform.getClassName(), attrTransform.getActFlowId());
+        jedisClientService.del(cacheKey);
     }
 
     @Override
     public AttrTransform getDataFromDb(String id) {
         AttrTransform attrTransform = super.getDataFromDb(id);
-        if (attrTransform.getShowType() == DsFormShowType.TABLE.getKey()) {
+        if (attrTransform.getShowType().equals(DsFormShowType.TABLE.getKey())) {
             List<AttrTransformTable> attrTransformTableList = attrTransformTableService
                 .queryAttrTransformTable(attrTransform.getClassName(), attrTransform.getAttrKey());
             attrTransform.setAttrTransformTableList(attrTransformTableList);
