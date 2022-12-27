@@ -10,6 +10,7 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: AttrDefinitionService
@@ -32,4 +33,15 @@ public interface AttrDefinitionService extends SkyeyeBusinessService<AttrDefinit
     void queryAttrDefinitionList(InputObject inputObject, OutputObject outputObject);
 
     void queryChildAttrDefinitionList(InputObject inputObject, OutputObject outputObject);
+
+    /**
+     * 批量获取业务对象指定的属性信息
+     *
+     * @param className
+     * @param attrKey
+     * @return
+     */
+    List<AttrDefinition> queryAttrDefinitionList(String className, List<String> attrKey);
+
+    Map<String, AttrDefinition> queryAttrDefinitionMap(String className, List<String> attrKey);
 }

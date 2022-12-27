@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
+import com.skyeye.annotation.api.Property;
 import com.skyeye.annotation.unique.UniqueField;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
@@ -44,6 +45,10 @@ public class AttrTransform extends OperatorUserInfo {
     @TableField("attr_key")
     @ApiModelProperty(value = "字段名", required = "required")
     private String attrKey;
+
+    @TableField(exist = false)
+    @Property("字段名显示名称。例如：姓名、单据编号等")
+    private String label;
 
     @TableField("show_type")
     @ApiModelProperty(value = "显示类型，参考#DsFormShowType枚举类", required = "required,num")

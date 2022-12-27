@@ -5,11 +5,14 @@
 package com.skyeye.attr.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.attr.classenum.DsFormShowType;
 import com.skyeye.attr.dao.AttrTransformDao;
+import com.skyeye.attr.entity.AttrDefinition;
 import com.skyeye.attr.entity.AttrTransform;
 import com.skyeye.attr.entity.AttrTransformTable;
+import com.skyeye.attr.service.AttrDefinitionService;
 import com.skyeye.attr.service.AttrTransformService;
 import com.skyeye.attr.service.AttrTransformTableService;
 import com.skyeye.attr.service.IAttrTransformService;
@@ -40,6 +43,9 @@ public class AttrTransformServiceImpl extends SkyeyeBusinessServiceImpl<AttrTran
     private AttrTransformTableService attrTransformTableService;
 
     @Autowired
+    private AttrDefinitionService attrDefinitionService;
+
+    @Autowired
     private IAttrTransformService iAttrTransformService;
 
     @Autowired
@@ -51,13 +57,27 @@ public class AttrTransformServiceImpl extends SkyeyeBusinessServiceImpl<AttrTran
         String className = params.get("className").toString();
         String actFlowId = params.get("actFlowId").toString();
         String cacheKey = iAttrTransformService.getCacheKey(className, actFlowId);
-        return redisCache.getList(cacheKey, key -> {
+        List<AttrTransform> result = redisCache.getList(cacheKey, key -> {
             QueryWrapper<AttrTransform> queryWrapper = new QueryWrapper();
             queryWrapper.orderByAsc(MybatisPlusUtil.toColumns(AttrTransform::getOrderBy));
             queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransform::getClassName), className);
             queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransform::getActFlowId), actFlowId);
-            return list(queryWrapper).stream().map(bean -> BeanUtil.beanToMap(bean)).collect(Collectors.toList());
-        }, RedisConstants.THIRTY_DAY_SECONDS);
+            List<AttrTransform> attrTransformList = list(queryWrapper);
+            // 获取属性的基本信息
+            List<String> attrKeyList = attrTransformList.stream().map(AttrTransform::getAttrKey).collect(Collectors.toList());
+            Map<String, AttrDefinition> attrDefinitionMap = attrDefinitionService.queryAttrDefinitionMap(className, attrKeyList);
+            // 将属性的基本信息进行赋值
+            attrTransformList.forEach(attrTransform -> {
+                AttrDefinition attrDefinition = attrDefinitionMap.get(attrTransform.getAttrKey());
+                if (attrDefinition != null) {
+                    attrTransform.setLabel(attrDefinition.getName());
+                }
+            });
+            // 移除掉已经不存在的属性
+            attrTransformList.removeIf(bean -> StrUtil.isEmpty(bean.getLabel()));
+            return attrTransformList;
+        }, RedisConstants.THIRTY_DAY_SECONDS, AttrTransform.class);
+        return result.stream().map(bean -> BeanUtil.beanToMap(bean)).collect(Collectors.toList());
     }
 
     @Override

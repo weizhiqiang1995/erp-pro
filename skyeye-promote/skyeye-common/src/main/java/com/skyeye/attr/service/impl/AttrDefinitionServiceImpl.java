@@ -155,4 +155,33 @@ public class AttrDefinitionServiceImpl extends SkyeyeBusinessServiceImpl<AttrDef
         outputObject.settotal(attrDefinitionList.size());
     }
 
+    /**
+     * 批量获取业务对象指定的属性信息
+     *
+     * @param className
+     * @param attrKey
+     * @return
+     */
+    @Override
+    public List<AttrDefinition> queryAttrDefinitionList(String className, List<String> attrKey) {
+        QueryWrapper<AttrDefinition> wrapper = new QueryWrapper<>();
+        wrapper.eq(MybatisPlusUtil.toColumns(AttrDefinition::getClassName), className);
+        wrapper.in(MybatisPlusUtil.toColumns(AttrDefinition::getAttrKey), attrKey);
+        List<AttrDefinition> attrDefinitionList = list(wrapper);
+        return attrDefinitionList;
+    }
+
+    /**
+     * 批量获取业务对象指定的属性信息
+     *
+     * @param className
+     * @param attrKey
+     * @return
+     */
+    @Override
+    public Map<String, AttrDefinition> queryAttrDefinitionMap(String className, List<String> attrKey) {
+        List<AttrDefinition> attrDefinitionList = queryAttrDefinitionList(className, attrKey);
+        return attrDefinitionList.stream().collect(Collectors.toMap(AttrDefinition::getAttrKey, item -> item));
+    }
+
 }
