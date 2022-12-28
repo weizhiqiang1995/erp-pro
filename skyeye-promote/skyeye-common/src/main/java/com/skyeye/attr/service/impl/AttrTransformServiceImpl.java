@@ -5,6 +5,7 @@
 package com.skyeye.attr.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.attr.classenum.DsFormShowType;
@@ -75,6 +76,18 @@ public class AttrTransformServiceImpl extends SkyeyeBusinessServiceImpl<AttrTran
             });
             // 移除掉已经不存在的属性
             attrTransformList.removeIf(bean -> StrUtil.isEmpty(bean.getLabel()));
+            // 设置表格的属性
+            List<String> tableAttrKeyList = attrTransformList.stream()
+                .filter(bean -> bean.getShowType().equals(DsFormShowType.TABLE.getKey()))
+                .map(AttrTransform::getAttrKey).collect(Collectors.toList());
+            if (CollectionUtil.isNotEmpty(tableAttrKeyList)) {
+                Map<String, List<AttrTransformTable>> attrTransformTable = attrTransformTableService
+                    .queryAttrTransformTable(className, tableAttrKeyList);
+                attrTransformList.forEach(attrTransform -> {
+                    attrTransform.setAttrTransformTableList(attrTransformTable.get(attrTransform.getAttrKey()));
+                });
+            }
+
             return attrTransformList;
         }, RedisConstants.THIRTY_DAY_SECONDS, AttrTransform.class);
         return result.stream().map(bean -> BeanUtil.beanToMap(bean)).collect(Collectors.toList());

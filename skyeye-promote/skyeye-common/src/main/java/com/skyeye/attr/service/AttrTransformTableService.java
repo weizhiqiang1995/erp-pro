@@ -8,6 +8,7 @@ import com.skyeye.attr.entity.AttrTransformTable;
 import com.skyeye.base.business.service.SkyeyeBusinessService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: AttrTransformTableService
@@ -24,5 +25,7 @@ public interface AttrTransformTableService extends SkyeyeBusinessService<AttrTra
     void deleteAttrTransformTable(String serviceClassName, String parentAttrKey);
 
     List<AttrTransformTable> queryAttrTransformTable(String serviceClassName, String parentAttrKey);
+
+    Map<String, List<AttrTransformTable>> queryAttrTransformTable(String serviceClassName, List<String> parentAttrKey);
 
 }

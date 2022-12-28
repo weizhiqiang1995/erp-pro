@@ -38,9 +38,17 @@ public class AttrTransformTable extends OperatorUserInfo {
     @ApiModelProperty(value = "字段名，相当于表格中的field", required = "required")
     private String attrKey;
 
+    @TableField(exist = false)
+    @Property("字段名显示名称。例如：姓名、单据编号等")
+    private String label;
+
     @TableField("parent_attr_key")
     @ApiModelProperty(value = "所属父节点的字段名", required = "required")
     private String parentAttrKey;
+
+    @TableField("parent_class_name")
+    @ApiModelProperty(value = "所属父节点的className", required = "required")
+    private String parentClassName;
 
     @TableField("align")
     @ApiModelProperty(value = "对齐方式，可参考#Alignment枚举类，相当于表格中的align", required = "required")
