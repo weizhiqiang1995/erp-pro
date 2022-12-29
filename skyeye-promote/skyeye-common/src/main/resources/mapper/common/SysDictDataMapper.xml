@@ -34,7 +34,7 @@
         ORDER BY s.dict_sort ASC
     </select>
 
-    <select id="queryDictDataListByDictTypeCode" resultType="com.skyeye.eve.entity.dict.SysDictDataMation">
+    <select id="queryDictDataListByDictTypeCode" resultType="com.skyeye.eve.entity.dict.SysDictData">
         SELECT
             s.id,
             s.dict_name dictName,

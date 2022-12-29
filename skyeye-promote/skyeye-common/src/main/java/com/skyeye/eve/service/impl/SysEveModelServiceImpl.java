@@ -39,9 +39,6 @@ public class SysEveModelServiceImpl implements SysEveModelService {
     @Autowired
     private SysEveModelDao sysEveModelDao;
 
-    @Autowired
-    private JedisClientService jedisClient;
-
     @Value("${IMAGES_PATH}")
     private String tPath;
 

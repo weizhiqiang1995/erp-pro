@@ -11,7 +11,7 @@ import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.eve.entity.dict.SysDictTypeMation;
+import com.skyeye.eve.entity.dict.SysDictType;
 import com.skyeye.eve.service.SysDictTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +42,7 @@ public class SysDictTypeController {
     @ApiImplicitParams(classBean = CommonPageInfo.class)
     @RequestMapping("/post/SysDictTypeController/queryDictTypeList")
     public void queryDictTypeList(InputObject inputObject, OutputObject outputObject) {
-        sysDictTypeService.queryDictTypeList(inputObject, outputObject);
+        sysDictTypeService.queryPageList(inputObject, outputObject);
     }
 
     /**
@@ -52,10 +52,10 @@ public class SysDictTypeController {
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "writeDictTypeMation", value = "新增/编辑数据字典类型", method = "POST", allUse = "1")
-    @ApiImplicitParams(classBean = SysDictTypeMation.class)
+    @ApiImplicitParams(classBean = SysDictType.class)
     @RequestMapping("/post/SysDictTypeController/writeDictTypeMation")
     public void writeDictTypeMation(InputObject inputObject, OutputObject outputObject) {
-        sysDictTypeService.writeDictTypeMation(inputObject, outputObject);
+        sysDictTypeService.saveOrUpdateEntity(inputObject, outputObject);
     }
 
     /**
@@ -69,7 +69,7 @@ public class SysDictTypeController {
         @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
     @RequestMapping("/post/SysDictTypeController/queryDictTypeMationById")
     public void queryDictTypeMationById(InputObject inputObject, OutputObject outputObject) {
-        sysDictTypeService.queryDictTypeMationById(inputObject, outputObject);
+        sysDictTypeService.selectById(inputObject, outputObject);
     }
 
     /**
@@ -83,7 +83,7 @@ public class SysDictTypeController {
         @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
     @RequestMapping("/post/SysDictTypeController/deleteDictTypeMationById")
     public void deleteDictTypeMationById(InputObject inputObject, OutputObject outputObject) {
-        sysDictTypeService.deleteDictTypeMationById(inputObject, outputObject);
+        sysDictTypeService.deleteById(inputObject, outputObject);
     }
 
     /**

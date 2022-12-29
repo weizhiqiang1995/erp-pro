@@ -5,7 +5,7 @@
 package com.skyeye.eve.dao;
 
 import com.skyeye.common.entity.search.CommonPageInfo;
-import com.skyeye.eve.entity.dict.SysDictTypeMation;
+import com.skyeye.eve.entity.dict.SysDictType;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ import java.util.List;
  * @Copyright: 2022 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-public interface SysDictTypeDao extends SkyeyeBaseMapper<SysDictTypeMation> {
+public interface SysDictTypeDao extends SkyeyeBaseMapper<SysDictType> {
 
-    List<SysDictTypeMation> queryDictTypeList(CommonPageInfo commonPageInfo);
+    List<SysDictType> queryDictTypeList(CommonPageInfo commonPageInfo);
 
 }
