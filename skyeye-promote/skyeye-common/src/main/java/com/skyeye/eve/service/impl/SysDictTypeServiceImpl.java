@@ -5,6 +5,7 @@
 package com.skyeye.eve.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.common.constans.CommonConstants;
@@ -19,7 +20,6 @@ import com.skyeye.eve.service.SysDictTypeService;
 import com.skyeye.exception.CustomException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ public class SysDictTypeServiceImpl extends SkyeyeBusinessServiceImpl<SysDictTyp
             queryWrapper.ne(CommonConstants.ID, entity.getId());
         }
         SysDictType checkDictType = getOne(queryWrapper);
-        if (ObjectUtils.isEmpty(checkDictType)) {
+        if (ObjectUtil.isNotEmpty(checkDictType)) {
             throw new CustomException("this name or dictCode is exist.");
         }
     }
