@@ -47,7 +47,7 @@ public class AttrTransformTable extends OperatorUserInfo {
     private String parentAttrKey;
 
     @TableField("parent_class_name")
-    @ApiModelProperty(value = "所属父节点的className", required = "required")
+    @Property(value = "所属父节点的className")
     private String parentClassName;
 
     @TableField("align")
