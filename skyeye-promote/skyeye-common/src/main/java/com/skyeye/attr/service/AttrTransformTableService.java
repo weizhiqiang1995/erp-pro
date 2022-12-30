@@ -20,12 +20,14 @@ import java.util.Map;
  */
 public interface AttrTransformTableService extends SkyeyeBusinessService<AttrTransformTable> {
 
-    void saveAttrTransformTable(String serviceClassName, String parentAttrKey, List<AttrTransformTable> attrTransformTableList);
+    void saveAttrTransformTable(String parentServiceClassName, String parentAttrKey, List<AttrTransformTable> attrTransformTableList);
 
-    void deleteAttrTransformTable(String serviceClassName, String parentAttrKey);
+    void deleteAttrTransformTable(String parentServiceClassName, String parentAttrKey);
 
-    List<AttrTransformTable> queryAttrTransformTable(String serviceClassName, String parentAttrKey);
+    List<AttrTransformTable> queryAttrTransformTable(String parentServiceClassName, String parentAttrKey);
 
-    Map<String, List<AttrTransformTable>> queryAttrTransformTable(String serviceClassName, List<String> parentAttrKey);
+    Map<String, List<AttrTransformTable>> queryAttrTransformTable(String parentServiceClassName, List<String> parentAttrKey);
+
+    List<String> queryParentServiceName(String serviceClassName, String attrKey);
 
 }

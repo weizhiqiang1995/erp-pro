@@ -39,15 +39,15 @@ public class AttrTransformTableServiceImpl extends SkyeyeBusinessServiceImpl<Att
     /**
      * 批量保存表格模型属性
      *
-     * @param serviceClassName
+     * @param parentServiceClassName
      * @param parentAttrKey
      * @param attrTransformTableList
      */
     @Override
-    public void saveAttrTransformTable(String serviceClassName, String parentAttrKey, List<AttrTransformTable> attrTransformTableList) {
-        deleteAttrTransformTable(serviceClassName, parentAttrKey);
+    public void saveAttrTransformTable(String parentServiceClassName, String parentAttrKey, List<AttrTransformTable> attrTransformTableList) {
+        deleteAttrTransformTable(parentServiceClassName, parentAttrKey);
         attrTransformTableList.forEach(attrTransformTable -> {
-            attrTransformTable.setParentClassName(serviceClassName);
+            attrTransformTable.setParentClassName(parentServiceClassName);
             attrTransformTable.setParentAttrKey(parentAttrKey);
         });
         String userId = InputObject.getLogParamsStatic().get("id").toString();
@@ -57,13 +57,13 @@ public class AttrTransformTableServiceImpl extends SkyeyeBusinessServiceImpl<Att
     /**
      * 根据父节点的属性字段删除表格模型属性
      *
-     * @param serviceClassName
+     * @param parentServiceClassName
      * @param parentAttrKey
      */
     @Override
-    public void deleteAttrTransformTable(String serviceClassName, String parentAttrKey) {
+    public void deleteAttrTransformTable(String parentServiceClassName, String parentAttrKey) {
         QueryWrapper<AttrTransformTable> queryWrapper = new QueryWrapper();
-        queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransformTable::getParentClassName), serviceClassName);
+        queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransformTable::getParentClassName), parentServiceClassName);
         queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransformTable::getParentAttrKey), parentAttrKey);
         remove(queryWrapper);
     }
@@ -71,14 +71,14 @@ public class AttrTransformTableServiceImpl extends SkyeyeBusinessServiceImpl<Att
     /**
      * 根据父节点的属性字段查询表格模型属性
      *
-     * @param serviceClassName
+     * @param parentServiceClassName
      * @param parentAttrKey
      */
     @Override
-    public List<AttrTransformTable> queryAttrTransformTable(String serviceClassName, String parentAttrKey) {
+    public List<AttrTransformTable> queryAttrTransformTable(String parentServiceClassName, String parentAttrKey) {
         QueryWrapper<AttrTransformTable> queryWrapper = new QueryWrapper();
         queryWrapper.orderByAsc(MybatisPlusUtil.toColumns(AttrTransformTable::getOrderBy));
-        queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransformTable::getParentClassName), serviceClassName);
+        queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransformTable::getParentClassName), parentServiceClassName);
         queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransformTable::getParentAttrKey), parentAttrKey);
         return list(queryWrapper);
     }
@@ -86,14 +86,14 @@ public class AttrTransformTableServiceImpl extends SkyeyeBusinessServiceImpl<Att
     /**
      * 根据父节点的属性字段查询表格模型属性
      *
-     * @param serviceClassName
+     * @param parentServiceClassName
      * @param parentAttrKey
      */
     @Override
-    public Map<String, List<AttrTransformTable>> queryAttrTransformTable(String serviceClassName, List<String> parentAttrKey) {
+    public Map<String, List<AttrTransformTable>> queryAttrTransformTable(String parentServiceClassName, List<String> parentAttrKey) {
         QueryWrapper<AttrTransformTable> queryWrapper = new QueryWrapper();
         queryWrapper.orderByAsc(MybatisPlusUtil.toColumns(AttrTransformTable::getOrderBy));
-        queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransformTable::getParentClassName), serviceClassName);
+        queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransformTable::getParentClassName), parentServiceClassName);
         queryWrapper.in(MybatisPlusUtil.toColumns(AttrTransformTable::getParentAttrKey), parentAttrKey);
         List<AttrTransformTable> attrTransformTableList = list(queryWrapper);
         if (CollectionUtil.isEmpty(attrTransformTableList)) {
@@ -112,6 +112,15 @@ public class AttrTransformTableServiceImpl extends SkyeyeBusinessServiceImpl<Att
             }
         });
         return attrTransformTableList.stream().collect(Collectors.groupingBy(AttrTransformTable::getParentAttrKey));
+    }
+
+    @Override
+    public List<String> queryParentServiceName(String serviceClassName, String attrKey) {
+        QueryWrapper<AttrTransformTable> queryWrapper = new QueryWrapper();
+        queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransformTable::getClassName), serviceClassName);
+        queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransformTable::getAttrKey), attrKey);
+        List<AttrTransformTable> attrTransformTableList = list(queryWrapper);
+        return attrTransformTableList.stream().map(AttrTransformTable::getParentClassName).distinct().collect(Collectors.toList());
     }
 
 }

@@ -4,6 +4,7 @@
 
 package com.skyeye.attr.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.attr.dao.AttrDefinitionCustomDao;
@@ -11,6 +12,7 @@ import com.skyeye.attr.entity.AttrDefinition;
 import com.skyeye.attr.entity.AttrDefinitionCustom;
 import com.skyeye.attr.service.AttrDefinitionCustomService;
 import com.skyeye.attr.service.AttrDefinitionService;
+import com.skyeye.attr.service.AttrTransformTableService;
 import com.skyeye.attr.service.IAttrTransformService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.common.constans.CommonNumConstants;
@@ -41,11 +43,22 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
     @Autowired
     private IAttrTransformService iAttrTransformService;
 
+    @Autowired
+    private AttrTransformTableService attrTransformTableService;
+
     @Override
     public void writePostpose(AttrDefinitionCustom entity, String userId) {
         super.writePostpose(entity, userId);
+        // 1. 删除当前业务对象的工作流缓存属性信息
         String cacheKey = iAttrTransformService.getCacheKey(entity.getClassName(), "*");
         jedisClientService.delKeys(cacheKey);
+        // 2. 获取该业务对象所属父类的信息
+        List<String> list = attrTransformTableService.queryParentServiceName(entity.getClassName(), entity.getAttrKey());
+        if (CollectionUtil.isNotEmpty(list)) {
+            list.forEach(str -> {
+                jedisClientService.delKeys(iAttrTransformService.getCacheKey(str, "*"));
+            });
+        }
     }
 
     @Override
