@@ -38,6 +38,10 @@ public class AttrTransformTable extends OperatorUserInfo {
     @ApiModelProperty(value = "字段名，相当于表格中的field", required = "required")
     private String attrKey;
 
+    @TableField("`name`")
+    @ApiModelProperty(value = "属性名称")
+    private String name;
+
     @TableField(exist = false)
     @Property("字段名显示名称。例如：姓名、单据编号等")
     private String label;

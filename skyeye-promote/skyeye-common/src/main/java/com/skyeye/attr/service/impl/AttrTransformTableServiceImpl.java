@@ -100,6 +100,8 @@ public class AttrTransformTableServiceImpl extends SkyeyeBusinessServiceImpl<Att
         if (CollectionUtil.isEmpty(attrTransformTableList)) {
             return new HashMap<>();
         }
+        // 用户自定义的属性名称
+        attrTransformTableList.forEach(attrTransformTable -> attrTransformTable.setLabel(attrTransformTable.getName()));
 
         Map<String, List<AttrTransformTable>> collect = attrTransformTableList.stream().collect(Collectors.groupingBy(AttrTransformTable::getClassName));
         collect.forEach((className, value) -> {
@@ -108,6 +110,10 @@ public class AttrTransformTableServiceImpl extends SkyeyeBusinessServiceImpl<Att
             Map<String, AttrDefinition> attrDefinitionMap = attrDefinitionService.queryAttrDefinitionMap(className, attrKeyList);
             // 将属性的基本信息进行赋值
             attrTransformTableList.forEach(attrTransformTable -> {
+                // 判断用户是否自定义有属性名称，如果有，则不设置属性的名称
+                if (StrUtil.isNotEmpty(attrTransformTable.getLabel())) {
+                    return;
+                }
                 AttrDefinition attrDefinition = attrDefinitionMap.get(attrTransformTable.getAttrKey());
                 if (attrDefinition != null && StrUtil.equals(attrTransformTable.getClassName(), className)) {
                     attrTransformTable.setLabel(attrDefinition.getName());

@@ -172,6 +172,7 @@ public class AttrDefinitionServiceImpl extends SkyeyeBusinessServiceImpl<AttrDef
             return;
         }
         List<AttrDefinition> attrDefinitionList = getAttrDefinitions(service.getClassName());
+        setCustomDefinition(service.getClassName(), attrDefinitionList);
         outputObject.setBeans(attrDefinitionList);
         outputObject.settotal(attrDefinitionList.size());
     }
