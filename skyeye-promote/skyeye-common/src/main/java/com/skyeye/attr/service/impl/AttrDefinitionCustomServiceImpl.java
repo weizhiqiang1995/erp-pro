@@ -49,11 +49,15 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
     @Override
     public void writePostpose(AttrDefinitionCustom entity, String userId) {
         super.writePostpose(entity, userId);
+        refreshCache(entity.getClassName(), entity.getAttrKey());
+    }
+
+    private void refreshCache(String className, String attrKey) {
         // 1. 删除当前业务对象的工作流缓存属性信息
-        String cacheKey = iAttrTransformService.getCacheKey(entity.getClassName(), "*");
+        String cacheKey = iAttrTransformService.getCacheKey(className, "*");
         jedisClientService.delKeys(cacheKey);
         // 2. 获取该业务对象所属父类的信息
-        List<String> list = attrTransformTableService.queryParentServiceName(entity.getClassName(), entity.getAttrKey());
+        List<String> list = attrTransformTableService.queryParentServiceName(className, attrKey);
         if (CollectionUtil.isNotEmpty(list)) {
             list.forEach(str -> {
                 jedisClientService.delKeys(iAttrTransformService.getCacheKey(str, "*"));
@@ -119,5 +123,6 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
         wrapper.eq(MybatisPlusUtil.toColumns(AttrDefinitionCustom::getClassName), className);
         wrapper.eq(MybatisPlusUtil.toColumns(AttrDefinitionCustom::getAttrKey), attrKey);
         remove(wrapper);
+        refreshCache(className, attrKey);
     }
 }
