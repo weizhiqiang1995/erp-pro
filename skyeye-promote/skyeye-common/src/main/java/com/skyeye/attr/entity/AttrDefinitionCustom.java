@@ -29,7 +29,7 @@ import lombok.Data;
 public class AttrDefinitionCustom extends OperatorUserInfo {
 
     @TableId("id")
-    @Property("主键id")
+    @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")
     private String id;
 
     @TableField("class_name")

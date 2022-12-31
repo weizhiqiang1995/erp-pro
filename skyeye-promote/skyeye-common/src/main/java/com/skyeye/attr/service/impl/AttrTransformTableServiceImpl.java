@@ -5,6 +5,7 @@
 package com.skyeye.attr.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.attr.dao.AttrTransformTableDao;
 import com.skyeye.attr.entity.AttrDefinition;
@@ -100,16 +101,18 @@ public class AttrTransformTableServiceImpl extends SkyeyeBusinessServiceImpl<Att
             return new HashMap<>();
         }
 
-        String className = attrTransformTableList.get(0).getClassName();
-        // 获取属性的基本信息
-        List<String> attrKeyList = attrTransformTableList.stream().map(AttrTransformTable::getAttrKey).collect(Collectors.toList());
-        Map<String, AttrDefinition> attrDefinitionMap = attrDefinitionService.queryAttrDefinitionMap(className, attrKeyList);
-        // 将属性的基本信息进行赋值
-        attrTransformTableList.forEach(attrTransformTable -> {
-            AttrDefinition attrDefinition = attrDefinitionMap.get(attrTransformTable.getAttrKey());
-            if (attrDefinition != null) {
-                attrTransformTable.setLabel(attrDefinition.getName());
-            }
+        Map<String, List<AttrTransformTable>> collect = attrTransformTableList.stream().collect(Collectors.groupingBy(AttrTransformTable::getClassName));
+        collect.forEach((className, value) -> {
+            // 获取属性的基本信息
+            List<String> attrKeyList = attrTransformTableList.stream().map(AttrTransformTable::getAttrKey).collect(Collectors.toList());
+            Map<String, AttrDefinition> attrDefinitionMap = attrDefinitionService.queryAttrDefinitionMap(className, attrKeyList);
+            // 将属性的基本信息进行赋值
+            attrTransformTableList.forEach(attrTransformTable -> {
+                AttrDefinition attrDefinition = attrDefinitionMap.get(attrTransformTable.getAttrKey());
+                if (attrDefinition != null && StrUtil.equals(attrTransformTable.getClassName(), className)) {
+                    attrTransformTable.setLabel(attrDefinition.getName());
+                }
+            });
         });
         return attrTransformTableList.stream().collect(Collectors.groupingBy(AttrTransformTable::getParentAttrKey));
     }

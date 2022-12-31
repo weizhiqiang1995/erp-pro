@@ -30,6 +30,10 @@ public class AttrDefinition extends CommonInfo {
     @Property("主键id")
     private String id;
 
+    @TableField(exist = false)
+    @Property("自定义属性的id")
+    private String attrDefinitionCustomId;
+
     /**
      * 应用的APPID
      */

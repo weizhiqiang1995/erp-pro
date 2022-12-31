@@ -9,6 +9,8 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.attr.dao.AttrDefinitionDao;
 import com.skyeye.attr.entity.AttrDefinition;
+import com.skyeye.attr.entity.AttrDefinitionCustom;
+import com.skyeye.attr.service.AttrDefinitionCustomService;
 import com.skyeye.attr.service.AttrDefinitionService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.clazz.entity.classservice.SkyeyeClassServiceBean;
@@ -39,6 +41,9 @@ public class AttrDefinitionServiceImpl extends SkyeyeBusinessServiceImpl<AttrDef
 
     @Autowired
     private SkyeyeClassServiceBeanService skyeyeClassServiceBeanService;
+
+    @Autowired
+    private AttrDefinitionCustomService attrDefinitionCustomService;
 
     /**
      * 系统启动时，批量扫描业务对象属性入库
@@ -115,8 +120,24 @@ public class AttrDefinitionServiceImpl extends SkyeyeBusinessServiceImpl<AttrDef
         Map<String, Object> params = inputObject.getParams();
         String className = params.get("className").toString();
         List<AttrDefinition> attrDefinitionList = getAttrDefinitions(className);
+        setCustomDefinition(className, attrDefinitionList);
+
         outputObject.setBeans(attrDefinitionList);
         outputObject.settotal(attrDefinitionList.size());
+    }
+
+    private void setCustomDefinition(String className, List<AttrDefinition> attrDefinitionList) {
+        // 获取自定义属性id
+        List<String> attrKey = attrDefinitionList.stream().map(AttrDefinition::getAttrKey).collect(Collectors.toList());
+        Map<String, AttrDefinitionCustom> attrDefinitionCustomMap = attrDefinitionCustomService.queryAttrDefinitionCustomMap(className, attrKey);
+        attrDefinitionList.forEach(attrDefinition -> {
+            AttrDefinitionCustom attrDefinitionCustom = attrDefinitionCustomMap.get(attrDefinition.getAttrKey());
+            if (attrDefinitionCustom != null) {
+                attrDefinition.setAttrDefinitionCustomId(attrDefinitionCustom.getId());
+                attrDefinition.setName(attrDefinitionCustom.getName());
+                attrDefinition.setRemark(attrDefinitionCustom.getRemark());
+            }
+        });
     }
 
     private List<AttrDefinition> getAttrDefinitions(String className) {
@@ -168,6 +189,7 @@ public class AttrDefinitionServiceImpl extends SkyeyeBusinessServiceImpl<AttrDef
         wrapper.eq(MybatisPlusUtil.toColumns(AttrDefinition::getClassName), className);
         wrapper.in(MybatisPlusUtil.toColumns(AttrDefinition::getAttrKey), attrKey);
         List<AttrDefinition> attrDefinitionList = list(wrapper);
+        setCustomDefinition(className, attrDefinitionList);
         return attrDefinitionList;
     }
 
