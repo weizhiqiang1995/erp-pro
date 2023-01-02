@@ -23,10 +23,10 @@ public interface DsFormPageService {
     /**
      * 通过id查找对应的动态表单页面
      *
-     * @param rowId
+     * @param id
      * @return
      */
     @GetMapping("/dsformpage006")
-    String queryDsFormPageById(@RequestParam("rowId") String rowId);
+    String queryDsFormPageById(@RequestParam("id") String id);
 
 }
