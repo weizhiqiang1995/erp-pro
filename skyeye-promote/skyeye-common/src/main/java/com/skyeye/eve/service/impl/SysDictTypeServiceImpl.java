@@ -70,6 +70,7 @@ public class SysDictTypeServiceImpl extends SkyeyeBusinessServiceImpl<SysDictTyp
     public void queryDictTypeListByEnabled(InputObject inputObject, OutputObject outputObject) {
         String enabled = inputObject.getParams().get("enabled").toString();
         QueryWrapper<SysDictType> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByAsc(MybatisPlusUtil.toColumns(SysDictType::getDictName));
         if (StringUtils.isNotEmpty(enabled)) {
             queryWrapper.eq(MybatisPlusUtil.toColumns(SysDictType::getEnabled), enabled);
         }
