@@ -25,6 +25,7 @@ import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -64,6 +65,9 @@ public class AttrTransformServiceImpl extends SkyeyeBusinessServiceImpl<AttrTran
             queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransform::getClassName), className);
             queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransform::getActFlowId), actFlowId);
             List<AttrTransform> attrTransformList = list(queryWrapper);
+            if (CollectionUtil.isEmpty(attrTransformList)) {
+                return new ArrayList<>();
+            }
             // 获取属性的基本信息
             List<String> attrKeyList = attrTransformList.stream().map(AttrTransform::getAttrKey).collect(Collectors.toList());
             Map<String, AttrDefinition> attrDefinitionMap = attrDefinitionService.queryAttrDefinitionMap(className, attrKeyList);
