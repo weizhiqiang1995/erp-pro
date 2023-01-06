@@ -17,7 +17,7 @@ import com.skyeye.catalog.dao.CatalogDao;
 import com.skyeye.catalog.entity.Catalog;
 import com.skyeye.catalog.service.CatalogService;
 import com.skyeye.catalog.service.ICatalogService;
-import com.skyeye.clazz.service.SkyeyeClassServiceBeanService;
+import com.skyeye.server.service.ServiceBeanService;
 import com.skyeye.common.constans.CommonCharConstants;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
@@ -48,7 +48,7 @@ public class CatalogServiceImpl extends SkyeyeBusinessServiceImpl<CatalogDao, Ca
     private ICatalogService iCatalogService;
 
     @Autowired
-    private SkyeyeClassServiceBeanService skyeyeClassServiceBeanService;
+    private ServiceBeanService serviceBeanService;
 
     /**
      * 一次性获取所有的目录为树结构
@@ -131,7 +131,7 @@ public class CatalogServiceImpl extends SkyeyeBusinessServiceImpl<CatalogDao, Ca
     @Override
     public void deleteById(String id) {
         Catalog catalog = selectById(id);
-        URI serviceBeanUri = skyeyeClassServiceBeanService.getServiceBean(catalog.getObjectKey());
+        URI serviceBeanUri = serviceBeanService.getServiceBean(catalog.getObjectKey());
         // 获取当前目录与所有的子目录id
         List<String> ids = catalogDao.queryAllChildIdsByParentId(Arrays.asList(id));
         super.deleteById(ids);

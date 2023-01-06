@@ -2,7 +2,7 @@
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
 
-package com.skyeye.clazz.service.impl;
+package com.skyeye.server.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
@@ -14,16 +14,16 @@ import com.skyeye.application.service.ApplicationService;
 import com.skyeye.attr.entity.AttrDefinition;
 import com.skyeye.attr.service.AttrDefinitionService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
-import com.skyeye.clazz.dao.SkyeyeClassServiceBeanDao;
-import com.skyeye.clazz.entity.classservice.SkyeyeClassServiceBean;
-import com.skyeye.clazz.entity.classservice.SkyeyeClassServiceBeanApi;
-import com.skyeye.clazz.service.SkyeyeClassServiceBeanService;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.MapUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.exception.CustomException;
+import com.skyeye.server.dao.ServiceBeanDao;
+import com.skyeye.server.entity.ServiceBean;
+import com.skyeye.server.entity.ServiceBeanApi;
+import com.skyeye.server.service.ServiceBeanService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -37,7 +37,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * @ClassName: SkyeyeClassServiceBeanServiceImpl
+ * @ClassName: ServiceBeanServiceImpl
  * @Description: 所有实现了SkyeyeBusinessService的服务类的注册服务
  * @author: skyeye云系列--卫志强
  * @date: 2022/11/29 22:30
@@ -45,7 +45,7 @@ import java.util.stream.Collectors;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
-public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl<SkyeyeClassServiceBeanDao, SkyeyeClassServiceBean> implements SkyeyeClassServiceBeanService {
+public class ServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl<ServiceBeanDao, ServiceBean> implements ServiceBeanService {
 
     @Autowired
     private DiscoveryClient discoveryClient;
@@ -66,48 +66,48 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
     @Override
     @Transactional(value = TRANSACTION_MANAGER_VALUE, rollbackFor = Exception.class)
     public void registerServiceBean(InputObject inputObject, OutputObject outputObject) {
-        SkyeyeClassServiceBeanApi skyeyeClassServiceBeanApi = inputObject.getParams(SkyeyeClassServiceBeanApi.class);
+        ServiceBeanApi serviceBeanApi = inputObject.getParams(ServiceBeanApi.class);
 
         // 获取数据库中的数据
-        QueryWrapper<SkyeyeClassServiceBean> wrapper = new QueryWrapper<>();
-        wrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassServiceBean::getSpringApplicationName), skyeyeClassServiceBeanApi.getSpringApplicationName());
-        List<SkyeyeClassServiceBean> oldList = super.list(wrapper);
+        QueryWrapper<ServiceBean> wrapper = new QueryWrapper<>();
+        wrapper.eq(MybatisPlusUtil.toColumns(ServiceBean::getSpringApplicationName), serviceBeanApi.getSpringApplicationName());
+        List<ServiceBean> oldList = super.list(wrapper);
         List<String> oldKeys = oldList.stream().map(bean -> getKey(bean)).collect(Collectors.toList());
 
         // 获取入参的数据
-        List<SkyeyeClassServiceBean> classNameList = skyeyeClassServiceBeanApi.getClassNameList();
+        List<ServiceBean> classNameList = serviceBeanApi.getClassNameList();
         classNameList.forEach(className -> {
-            className.setAppId(skyeyeClassServiceBeanApi.getAppId());
-            className.setSpringApplicationName(skyeyeClassServiceBeanApi.getSpringApplicationName());
+            className.setAppId(serviceBeanApi.getAppId());
+            className.setSpringApplicationName(serviceBeanApi.getSpringApplicationName());
         });
 
         List<String> newKeys = classNameList.stream().map(bean -> getKey(bean)).collect(Collectors.toList());
 
         // (旧数据 - 新数据) 从数据库删除
-        List<SkyeyeClassServiceBean> deleteBeans = oldList.stream().filter(item -> !newKeys.contains(getKey(item))).collect(Collectors.toList());
+        List<ServiceBean> deleteBeans = oldList.stream().filter(item -> !newKeys.contains(getKey(item))).collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(deleteBeans)) {
             List<String> classNames = deleteBeans.stream().map(bean -> bean.getClassName()).collect(Collectors.toList());
-            QueryWrapper<SkyeyeClassServiceBean> deleteWrapper = new QueryWrapper<>();
-            deleteWrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassServiceBean::getSpringApplicationName), skyeyeClassServiceBeanApi.getSpringApplicationName());
-            deleteWrapper.in(MybatisPlusUtil.toColumns(SkyeyeClassServiceBean::getClassName), classNames);
+            QueryWrapper<ServiceBean> deleteWrapper = new QueryWrapper<>();
+            deleteWrapper.eq(MybatisPlusUtil.toColumns(ServiceBean::getSpringApplicationName), serviceBeanApi.getSpringApplicationName());
+            deleteWrapper.in(MybatisPlusUtil.toColumns(ServiceBean::getClassName), classNames);
             remove(deleteWrapper);
         }
 
         // (新数据 - 旧数据) 添加到数据库
-        List<SkyeyeClassServiceBean> addBeans = classNameList.stream().filter(item -> !oldKeys.contains(getKey(item))).collect(Collectors.toList());
+        List<ServiceBean> addBeans = classNameList.stream().filter(item -> !oldKeys.contains(getKey(item))).collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(addBeans)) {
             createEntity(addBeans, StringUtils.EMPTY);
         }
 
         // 保存属性信息
-        saveAttrDefinition(skyeyeClassServiceBeanApi.getAppId(), classNameList);
+        saveAttrDefinition(serviceBeanApi.getAppId(), classNameList);
     }
 
-    private String getKey(SkyeyeClassServiceBean bean) {
+    private String getKey(ServiceBean bean) {
         return String.format(Locale.ROOT, "%s_%s_%s", bean.getClassName(), bean.getManageShow(), bean.getTenant());
     }
 
-    private void saveAttrDefinition(String appId, List<SkyeyeClassServiceBean> classNameList) {
+    private void saveAttrDefinition(String appId, List<ServiceBean> classNameList) {
         List<AttrDefinition> attrDefinitionList = classNameList.stream()
             .filter(className -> CollectionUtil.isNotEmpty(className.getAttrDefinitionList()))
             .flatMap(className -> className.getAttrDefinitionList().stream())
@@ -117,9 +117,7 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
 
     @Override
     public URI getServiceBean(String className) {
-        QueryWrapper<SkyeyeClassServiceBean> wrapper = new QueryWrapper<>();
-        wrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassServiceBean::getClassName), className);
-        SkyeyeClassServiceBean serviceBean = getOne(wrapper);
+        ServiceBean serviceBean = queryServiceClass(className);
         if (serviceBean == null) {
             throw new CustomException("未找到 service bean 对应的业务类配置信息.");
         }
@@ -141,8 +139,8 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
     public void queryServiceClassForTree(InputObject inputObject, OutputObject outputObject) {
         List<Map<String, Object>> applications = applicationService.queryApplicationList();
         // 查询服务类信息
-        QueryWrapper<SkyeyeClassServiceBean> wrapper = new QueryWrapper<>();
-        wrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassServiceBean::getManageShow), true);
+        QueryWrapper<ServiceBean> wrapper = new QueryWrapper<>();
+        wrapper.eq(MybatisPlusUtil.toColumns(ServiceBean::getManageShow), true);
         List<Map<String, Object>> serviceClass = super.list(wrapper)
             .stream().map(bean -> BeanUtil.beanToMap(bean)).collect(Collectors.toList());
         List<Map<String, Object>> result = buildResult(serviceClass);
@@ -216,27 +214,18 @@ public class SkyeyeClassServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl
         return groupName;
     }
 
-    /**
-     * 获取服务类详情信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    public void queryServiceClass(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> params = inputObject.getParams();
-        String className = params.get("className").toString();
-        QueryWrapper<SkyeyeClassServiceBean> wrapper = new QueryWrapper<>();
-        wrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassServiceBean::getClassName), className);
-        SkyeyeClassServiceBean skyeyeClassServiceBean = getOne(wrapper);
-        outputObject.setBean(skyeyeClassServiceBean);
-        outputObject.settotal(CommonNumConstants.NUM_ONE);
+    public ServiceBean queryServiceClass(String className) {
+        QueryWrapper<ServiceBean> wrapper = new QueryWrapper<>();
+        wrapper.eq(MybatisPlusUtil.toColumns(ServiceBean::getClassName), className);
+        ServiceBean skyeyeClassServiceBean = getOne(wrapper);
+        return skyeyeClassServiceBean;
     }
 
     @Override
-    public SkyeyeClassServiceBean getByEntityClassName(String entityClassName) {
-        QueryWrapper<SkyeyeClassServiceBean> wrapper = new QueryWrapper<>();
-        wrapper.eq(MybatisPlusUtil.toColumns(SkyeyeClassServiceBean::getEntityClassName), entityClassName);
+    public ServiceBean getByEntityClassName(String entityClassName) {
+        QueryWrapper<ServiceBean> wrapper = new QueryWrapper<>();
+        wrapper.eq(MybatisPlusUtil.toColumns(ServiceBean::getEntityClassName), entityClassName);
         return getOne(wrapper);
     }
 

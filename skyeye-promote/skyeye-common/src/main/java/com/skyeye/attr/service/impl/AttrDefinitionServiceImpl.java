@@ -13,8 +13,8 @@ import com.skyeye.attr.entity.AttrDefinitionCustom;
 import com.skyeye.attr.service.AttrDefinitionCustomService;
 import com.skyeye.attr.service.AttrDefinitionService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
-import com.skyeye.clazz.entity.classservice.SkyeyeClassServiceBean;
-import com.skyeye.clazz.service.SkyeyeClassServiceBeanService;
+import com.skyeye.server.entity.ServiceBean;
+import com.skyeye.server.service.ServiceBeanService;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 public class AttrDefinitionServiceImpl extends SkyeyeBusinessServiceImpl<AttrDefinitionDao, AttrDefinition> implements AttrDefinitionService {
 
     @Autowired
-    private SkyeyeClassServiceBeanService skyeyeClassServiceBeanService;
+    private ServiceBeanService skyeyeClassServiceBeanService;
 
     @Autowired
     private AttrDefinitionCustomService attrDefinitionCustomService;
@@ -167,7 +167,7 @@ public class AttrDefinitionServiceImpl extends SkyeyeBusinessServiceImpl<AttrDef
             return;
         }
 
-        SkyeyeClassServiceBean service = skyeyeClassServiceBeanService.getByEntityClassName(attrDefinition.getAttrType());
+        ServiceBean service = skyeyeClassServiceBeanService.getByEntityClassName(attrDefinition.getAttrType());
         if (service == null) {
             return;
         }

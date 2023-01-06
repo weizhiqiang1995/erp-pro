@@ -2,7 +2,7 @@
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
 
-package com.skyeye.clazz.entity.classservice;
+package com.skyeye.server.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -17,7 +17,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @ClassName: SkyeyeClassServiceBean
+ * @ClassName: ServiceBean
  * @Description: 服务类注册实体类
  * @author: skyeye云系列--卫志强
  * @date: 2022/9/18 13:11
@@ -27,7 +27,7 @@ import java.util.List;
 @Data
 @TableName(value = "skyeye_class_service_bean", autoResultMap = true)
 @ApiModel("服务类注册实体类")
-public class SkyeyeClassServiceBean extends CommonInfo {
+public class ServiceBean extends CommonInfo {
 
     @TableId("id")
     @Property("主键id")
