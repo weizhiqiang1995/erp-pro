@@ -12,6 +12,7 @@ import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.api.Property;
 import com.skyeye.annotation.cache.RedisCacheField;
 import com.skyeye.annotation.unique.UniqueField;
+import com.skyeye.coderule.entity.CodeRule;
 import com.skyeye.common.constans.CacheConstants;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
@@ -44,8 +45,8 @@ public class ServiceBeanCustom extends OperatorUserInfo {
     private String codeRuleId;
 
     @TableField(exist = false)
-    @Property(value = "编码规则名称")
-    private String codeRuleName;
+    @Property(value = "编码规则信息")
+    private CodeRule codeRule;
 
     @TableField(exist = false)
     @Property(value = "服务的原始信息")

@@ -2,17 +2,24 @@
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
 
-package com.skyeye.eve.service.impl;
+package com.skyeye.coderule.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
+import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.cache.redis.RedisCache;
+import com.skyeye.coderule.dao.CodeMaxSerialDao;
+import com.skyeye.coderule.dao.CodeRuleDao;
+import com.skyeye.coderule.entity.CodeMaxSerial;
+import com.skyeye.coderule.entity.CodeRule;
+import com.skyeye.coderule.entity.util.CodePattern;
+import com.skyeye.coderule.entity.util.FeatureScriptUtil;
+import com.skyeye.coderule.service.CodeRuleService;
+import com.skyeye.common.constans.CacheConstants;
 import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.RedisConstants;
@@ -23,25 +30,14 @@ import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.coderule.entity.CodeMation;
-import com.skyeye.eve.dao.CodeMaxSerialDao;
-import com.skyeye.eve.dao.CodeRuleDao;
-import com.skyeye.eve.entity.coderule.CodeMaxSerialMation;
-import com.skyeye.eve.entity.coderule.CodeRuleMation;
-import com.skyeye.eve.entity.coderule.util.CodePattern;
-import com.skyeye.eve.entity.coderule.util.FeatureScriptUtil;
-import com.skyeye.eve.service.CodeRuleService;
-import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.exception.CustomException;
-import com.skyeye.jedis.JedisClientService;
 import com.skyeye.jedis.util.RedisLock;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.ObjectUtils;
 
 import java.util.*;
 import java.util.concurrent.Executor;
@@ -55,7 +51,7 @@ import java.util.concurrent.Executor;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
-public class CodeRuleServiceImpl extends ServiceImpl<CodeRuleDao, CodeRuleMation> implements CodeRuleService {
+public class CodeRuleServiceImpl extends SkyeyeBusinessServiceImpl<CodeRuleDao, CodeRule> implements CodeRuleService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CodeRuleServiceImpl.class);
 
@@ -73,129 +69,60 @@ public class CodeRuleServiceImpl extends ServiceImpl<CodeRuleDao, CodeRuleMation
     private RedisCache redisCache;
 
     @Autowired
-    private JedisClientService jedisClient;
-
-    @Autowired
-    private IAuthUserService iAuthUserService;
-
-    @Autowired
     private Executor codeRuleExecutor;
 
-    /**
-     * 获取编码规则列表
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    public void queryCodeRuleList(InputObject inputObject, OutputObject outputObject) {
+    public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
-        Page pages = PageHelper.startPage(commonPageInfo.getPage(), commonPageInfo.getLimit());
         List<Map<String, Object>> beans = codeRuleDao.queryCodeRuleList(commonPageInfo);
-        iAuthUserService.setNameForMap(beans, "createId", "createName");
-        iAuthUserService.setNameForMap(beans, "lastUpdateId", "lastUpdateName");
-        outputObject.setBeans(beans);
-        outputObject.settotal(pages.getTotal());
+        return beans;
     }
 
-    /**
-     * 新增/编辑编码规则
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void writeCodeRuleMation(InputObject inputObject, OutputObject outputObject) {
-        CodeRuleMation codeRule = inputObject.getParams(CodeRuleMation.class);
-        // 1. 校验
-        QueryWrapper<CodeRuleMation> queryWrapper = new QueryWrapper<>();
+    public void validatorEntity(CodeRule entity) {
+        QueryWrapper<CodeRule> queryWrapper = new QueryWrapper<>();
         queryWrapper.and(wrapper ->
-            wrapper.eq(MybatisPlusUtil.toColumns(CodeRuleMation::getCodeNum), codeRule.getCodeNum())
-                .or().eq(MybatisPlusUtil.toColumns(CodeRuleMation::getName), codeRule.getName())
-                .or().eq(MybatisPlusUtil.toColumns(CodeRuleMation::getPattern), codeRule.getPattern()));
-        if (StringUtils.isNotEmpty(codeRule.getId())) {
-            queryWrapper.ne(CommonConstants.ID, codeRule.getId());
+            wrapper.eq(MybatisPlusUtil.toColumns(CodeRule::getCodeNum), entity.getCodeNum())
+                .or().eq(MybatisPlusUtil.toColumns(CodeRule::getName), entity.getName())
+                .or().eq(MybatisPlusUtil.toColumns(CodeRule::getPattern), entity.getPattern()));
+        if (StringUtils.isNotEmpty(entity.getId())) {
+            queryWrapper.ne(CommonConstants.ID, entity.getId());
         }
-        CodeRuleMation checkCodeRule = codeRuleDao.selectOne(queryWrapper);
-        if (ObjectUtils.isEmpty(checkCodeRule)) {
-            CodePattern.validationCodeRulePatten(codeRule.getPattern());
-            this.validFeatureScript(codeRule.getFeatureScript());
-            // 2.新增/编辑数据
-            if (StringUtils.isNotEmpty(codeRule.getId())) {
-                LOGGER.info("update codeRule data, id is {}", codeRule.getId());
-                codeRuleDao.updateById(codeRule);
-            } else {
-                DataCommonUtil.setId(codeRule);
-                LOGGER.info("insert codeRule data, id is {}", codeRule.getId());
-                codeRuleDao.insert(codeRule);
-            }
-        } else {
-            outputObject.setreturnMessage("this data is non-existent.");
+        CodeRule checkCodeRule = codeRuleDao.selectOne(queryWrapper);
+        if (ObjectUtil.isNotEmpty(checkCodeRule)) {
+            throw new CustomException("this data is non-existent.");
         }
+        CodePattern.validationCodeRulePatten(entity.getPattern());
+        this.validFeatureScript(entity.getFeatureScript());
     }
 
     private void validFeatureScript(String featureScript) {
         if (StringUtils.isNotBlank(featureScript)) {
             if (!JSONUtil.isJsonObj(featureScript)) {
                 throw new CustomException("特征码附加脚本格式错误，未成功解析成json");
-            } else {
-                JSONObject parse = JSONUtil.parseObj(featureScript);
-                parse.keySet().forEach(key -> {
-                    JSONObject jsonObject = parse.getJSONObject(key);
-                    if (!jsonObject.containsKey("type")) {
-                        throw new CustomException("特征码附加脚本中未包含脚本类型");
-                    }
-                    String type = jsonObject.getStr("type");
-                    if ("map".equalsIgnoreCase(type)) {
-                        String content = jsonObject.getStr("content");
-                        if (!JSONUtil.isJsonObj(content)) {
-                            throw new CustomException("特征码扩展脚本map映射内容错误");
-                        }
-                    } else if ("javaScript".equalsIgnoreCase(type)) {
-                        String content = jsonObject.getStr("content");
-                        if (!FeatureScriptUtil.testScript(content)) {
-                            throw new CustomException("特征码扩展脚本JavaScript脚本内容错误");
-                        }
-                    } else {
-                        throw new CustomException("特征码扩展脚本中不包含" + type + "的实现");
-                    }
-                });
             }
+            JSONObject parse = JSONUtil.parseObj(featureScript);
+            parse.keySet().forEach(key -> {
+                JSONObject jsonObject = parse.getJSONObject(key);
+                if (!jsonObject.containsKey("type")) {
+                    throw new CustomException("特征码附加脚本中未包含脚本类型");
+                }
+                String type = jsonObject.getStr("type");
+                if ("map".equalsIgnoreCase(type)) {
+                    String content = jsonObject.getStr("content");
+                    if (!JSONUtil.isJsonObj(content)) {
+                        throw new CustomException("特征码扩展脚本map映射内容错误");
+                    }
+                } else if ("javaScript".equalsIgnoreCase(type)) {
+                    String content = jsonObject.getStr("content");
+                    if (!FeatureScriptUtil.testScript(content)) {
+                        throw new CustomException("特征码扩展脚本JavaScript脚本内容错误");
+                    }
+                } else {
+                    throw new CustomException("特征码扩展脚本中不包含" + type + "的实现");
+                }
+            });
         }
-    }
-
-    /**
-     * 根据ID获取编码规则信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryCodeRuleMationById(InputObject inputObject, OutputObject outputObject) {
-        String id = inputObject.getParams().get("id").toString();
-        CodeRuleMation codeRule = codeRuleDao.selectById(id);
-        outputObject.setBean(codeRule);
-        outputObject.settotal(CommonNumConstants.NUM_ONE);
-    }
-
-    /**
-     * 根据ID删除编码规则
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteCodeRuleMationById(InputObject inputObject, OutputObject outputObject) {
-        String id = inputObject.getParams().get("id").toString();
-        codeRuleDao.deleteById(id);
-    }
-
-    private CodeRuleMation getCodeRuleBycode(String code) {
-        QueryWrapper<CodeRuleMation> wrapper = new QueryWrapper<>();
-        wrapper.eq(MybatisPlusUtil.toColumns(CodeRuleMation::getCodeNum), code);
-        return codeRuleDao.selectOne(wrapper);
     }
 
     /**
@@ -221,7 +148,7 @@ public class CodeRuleServiceImpl extends ServiceImpl<CodeRuleDao, CodeRuleMation
         if (size > SERIAL_NO_MAX_SIZE) {
             size = SERIAL_NO_MAX_SIZE;
         }
-        CodeRuleMation codeRuleMation = this.getCodeRuleBycode(ruleCode);
+        CodeRule codeRuleMation = selectById(ruleCode);
         if (codeRuleMation == null) {
             throw new CustomException("未找到命名规则或附加关系");
         }
@@ -287,11 +214,11 @@ public class CodeRuleServiceImpl extends ServiceImpl<CodeRuleDao, CodeRuleMation
     }
 
     private void saveCodeMaxSerial(String featureCode, String relationId, int size) {
-        CodeMaxSerialMation codeMaxSerialMation = new CodeMaxSerialMation();
+        CodeMaxSerial codeMaxSerialMation = new CodeMaxSerial();
         codeMaxSerialMation.setFeatureCode(featureCode);
         codeMaxSerialMation.setCodeRuleId(relationId);
         codeMaxSerialMation.setSerialCode(String.valueOf(size));
-        DataCommonUtil.setCommonDataByGenericity(codeMaxSerialMation, "0dc9dd4cd4d446ae9455215fe753c44e");
+        DataCommonUtil.setCommonDataByGenericity(codeMaxSerialMation, CommonConstants.ADMIN_USER_ID);
         DataCommonUtil.setId(codeMaxSerialMation);
         codeMaxSerialDao.insert(codeMaxSerialMation);
     }
@@ -299,9 +226,9 @@ public class CodeRuleServiceImpl extends ServiceImpl<CodeRuleDao, CodeRuleMation
     private Map<String, Object> getCodeMaxSerial(String featureCode, String relationId) {
         String cacheKey = getCacheKey(featureCode, relationId);
         return redisCache.getMap(cacheKey, key -> {
-            QueryWrapper<CodeMaxSerialMation> wrapper = new QueryWrapper<>();
-            wrapper.eq(MybatisPlusUtil.toColumns(CodeMaxSerialMation::getFeatureCode), featureCode);
-            wrapper.eq(MybatisPlusUtil.toColumns(CodeMaxSerialMation::getCodeRuleId), relationId);
+            QueryWrapper<CodeMaxSerial> wrapper = new QueryWrapper<>();
+            wrapper.eq(MybatisPlusUtil.toColumns(CodeMaxSerial::getFeatureCode), featureCode);
+            wrapper.eq(MybatisPlusUtil.toColumns(CodeMaxSerial::getCodeRuleId), relationId);
             return codeMaxSerialDao.selectOne(wrapper);
         }, RedisConstants.THIRTY_DAY_SECONDS);
     }
@@ -309,25 +236,25 @@ public class CodeRuleServiceImpl extends ServiceImpl<CodeRuleDao, CodeRuleMation
     private void refresh(String featureCode, String relationId, String serialCode) {
         // 异步更新数据库
         codeRuleExecutor.execute(() -> {
-            UpdateWrapper<CodeMaxSerialMation> updateWrapper = new UpdateWrapper<>();
-            updateWrapper.set(MybatisPlusUtil.toColumns(CodeMaxSerialMation::getSerialCode), serialCode);
-            updateWrapper.set(MybatisPlusUtil.toColumns(CodeMaxSerialMation::getLastUpdateTime), DateUtil.getTimeAndToString());
-            updateWrapper.eq(MybatisPlusUtil.toColumns(CodeMaxSerialMation::getCodeRuleId), relationId);
-            updateWrapper.eq(MybatisPlusUtil.toColumns(CodeMaxSerialMation::getFeatureCode), featureCode);
+            UpdateWrapper<CodeMaxSerial> updateWrapper = new UpdateWrapper<>();
+            updateWrapper.set(MybatisPlusUtil.toColumns(CodeMaxSerial::getSerialCode), serialCode);
+            updateWrapper.set(MybatisPlusUtil.toColumns(CodeMaxSerial::getLastUpdateTime), DateUtil.getTimeAndToString());
+            updateWrapper.eq(MybatisPlusUtil.toColumns(CodeMaxSerial::getCodeRuleId), relationId);
+            updateWrapper.eq(MybatisPlusUtil.toColumns(CodeMaxSerial::getFeatureCode), featureCode);
             codeMaxSerialDao.update(null, updateWrapper);
         });
 
         // 更新缓存
-        CodeMaxSerialMation codeMaxSerialMation = new CodeMaxSerialMation();
+        CodeMaxSerial codeMaxSerialMation = new CodeMaxSerial();
         codeMaxSerialMation.setFeatureCode(featureCode);
         codeMaxSerialMation.setCodeRuleId(relationId);
         codeMaxSerialMation.setSerialCode(serialCode);
         String cacheKey = getCacheKey(featureCode, relationId);
-        jedisClient.set(cacheKey, JSON.toJSONString(codeMaxSerialMation), RedisConstants.THIRTY_DAY_SECONDS);
+        jedisClientService.set(cacheKey, JSON.toJSONString(codeMaxSerialMation), RedisConstants.THIRTY_DAY_SECONDS);
     }
 
     private String getCacheKey(String featureCode, String relationId) {
-        String cacheKey = String.format(Locale.ROOT, "codeMaxSerial:%s_%s", featureCode, relationId);
+        String cacheKey = String.format(Locale.ROOT, "%s:maxSerial:%s_%s", CacheConstants.CODE_RULE_CACHE_KEY, featureCode, relationId);
         return cacheKey;
     }
 
@@ -339,7 +266,7 @@ public class CodeRuleServiceImpl extends ServiceImpl<CodeRuleDao, CodeRuleMation
      */
     @Override
     public void getAllCodeRuleList(InputObject inputObject, OutputObject outputObject) {
-        List<CodeRuleMation> codeRuleMationList = super.list();
+        List<CodeRule> codeRuleMationList = list();
         outputObject.setBeans(codeRuleMationList);
         outputObject.settotal(codeRuleMationList.size());
     }

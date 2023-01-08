@@ -4,8 +4,11 @@
 
 package com.skyeye.server.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
+import com.skyeye.coderule.entity.CodeRule;
+import com.skyeye.coderule.service.CodeRuleService;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -34,6 +37,9 @@ public class ServiceBeanCustomServiceImpl extends SkyeyeBusinessServiceImpl<Serv
     @Autowired
     private ServiceBeanService serviceBeanService;
 
+    @Autowired
+    private CodeRuleService codeRuleService;
+
     @Override
     public void queryServiceBeanCustom(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
@@ -51,6 +57,10 @@ public class ServiceBeanCustomServiceImpl extends SkyeyeBusinessServiceImpl<Serv
             serviceBeanCustom = new ServiceBeanCustom();
         }
         serviceBeanCustom.setServiceBean(serviceBean);
+        if (StrUtil.isNotEmpty(serviceBeanCustom.getCodeRuleId())) {
+            CodeRule codeRule = codeRuleService.selectById(serviceBeanCustom.getCodeRuleId());
+            serviceBeanCustom.setCodeRule(codeRule);
+        }
         return serviceBeanCustom;
     }
 

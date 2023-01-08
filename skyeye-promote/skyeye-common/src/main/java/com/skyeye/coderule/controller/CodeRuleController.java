@@ -2,7 +2,7 @@
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
 
-package com.skyeye.eve.controller;
+package com.skyeye.coderule.controller;
 
 import com.skyeye.annotation.api.Api;
 import com.skyeye.annotation.api.ApiImplicitParam;
@@ -12,8 +12,8 @@ import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.eve.coderule.entity.CodeMation;
-import com.skyeye.eve.entity.coderule.CodeRuleMation;
-import com.skyeye.eve.service.CodeRuleService;
+import com.skyeye.coderule.entity.CodeRule;
+import com.skyeye.coderule.service.CodeRuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +43,7 @@ public class CodeRuleController {
     @ApiImplicitParams(classBean = CommonPageInfo.class)
     @RequestMapping("/post/CodeRuleController/queryCodeRuleList")
     public void queryCodeRuleList(InputObject inputObject, OutputObject outputObject) {
-        codeRuleService.queryCodeRuleList(inputObject, outputObject);
+        codeRuleService.queryPageList(inputObject, outputObject);
     }
 
     /**
@@ -53,10 +53,10 @@ public class CodeRuleController {
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "writeCodeRuleMation", value = "新增/编辑编码规则", method = "POST", allUse = "1")
-    @ApiImplicitParams(classBean = CodeRuleMation.class)
+    @ApiImplicitParams(classBean = CodeRule.class)
     @RequestMapping("/post/CodeRuleController/writeCodeRuleMation")
     public void writeCodeRuleMation(InputObject inputObject, OutputObject outputObject) {
-        codeRuleService.writeCodeRuleMation(inputObject, outputObject);
+        codeRuleService.saveOrUpdateEntity(inputObject, outputObject);
     }
 
     /**
@@ -70,7 +70,7 @@ public class CodeRuleController {
         @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
     @RequestMapping("/post/CodeRuleController/queryCodeRuleMationById")
     public void queryCodeRuleMationById(InputObject inputObject, OutputObject outputObject) {
-        codeRuleService.queryCodeRuleMationById(inputObject, outputObject);
+        codeRuleService.selectById(inputObject, outputObject);
     }
 
     /**
@@ -84,7 +84,7 @@ public class CodeRuleController {
         @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
     @RequestMapping("/post/CodeRuleController/deleteCodeRuleMationById")
     public void deleteCodeRuleMationById(InputObject inputObject, OutputObject outputObject) {
-        codeRuleService.deleteCodeRuleMationById(inputObject, outputObject);
+        codeRuleService.deleteById(inputObject, outputObject);
     }
 
     /**

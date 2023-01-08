@@ -6,6 +6,7 @@ package com.skyeye.eve.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.json.JSONUtil;
+import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -82,6 +83,7 @@ public class CompanyChatServiceImpl implements CompanyChatService {
         for (Map<String, Object> depart : companyDepartment) {
             List<Map<String, Object>> userList = null;
             if (ToolUtil.isBlank(jedisService.get(Constants.getSysTalkGroupUserListMationById(depart.get("id").toString() + "_" + userId)))) {
+                depart.put("notUserId", CommonConstants.ADMIN_USER_ID);
                 userList = companyChatDao.queryDepartmentUserByDepartId(depart);
                 iCompanyService.setNameForMap(userList, "companyId", "companyName");
                 iDepmentService.setNameForMap(userList, "departmentId", "departmentName");

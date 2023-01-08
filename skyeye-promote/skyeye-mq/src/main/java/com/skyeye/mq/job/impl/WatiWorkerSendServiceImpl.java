@@ -5,6 +5,7 @@
 package com.skyeye.mq.job.impl;
 
 import cn.hutool.json.JSONUtil;
+import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.constans.MqConstants;
 import com.skyeye.common.util.DataCommonUtil;
@@ -76,7 +77,7 @@ public class WatiWorkerSendServiceImpl implements RocketMQListener<String> {
                     notice.put("userId", mation.get("userId").toString());
                     // 消息类型
                     notice.put("type", "3");
-                    DataCommonUtil.setCommonData(notice, "0dc9dd4cd4d446ae9455215fe753c44e");
+                    DataCommonUtil.setCommonData(notice, CommonConstants.ADMIN_USER_ID);
                     notices.add(notice);
                     //1.2发送邮件
                     String email = mation.get("email").toString();
@@ -101,7 +102,7 @@ public class WatiWorkerSendServiceImpl implements RocketMQListener<String> {
                         notice.put("userId", user.get("id").toString());
                         // 消息类型
                         notice.put("type", "3");
-                        DataCommonUtil.setCommonData(notice, "0dc9dd4cd4d446ae9455215fe753c44e");
+                        DataCommonUtil.setCommonData(notice, CommonConstants.ADMIN_USER_ID);
                         notices.add(notice);
                         //2.2发送邮件
                         String email = user.get("email").toString();

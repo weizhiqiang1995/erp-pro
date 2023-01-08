@@ -64,7 +64,7 @@
 		AND a.user_id = b.id
 		AND a.state = '1'
 		AND b.id != #{thisUserId}
-		AND b.id != '0dc9dd4cd4d446ae9455215fe753c44e'
+		AND b.id != #{notUserId}
 	</select>
 	
 	<update id="editUserSignByUserId" parameterType="java.util.Map">

@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
@@ -62,7 +63,7 @@ public class SkyeyeClassFlowableServiceImpl extends ServiceImpl<SkyeyeClassFlowa
         List<SkyeyeClassFlowableLinkMation> flowableServiceList = skyeyeClassFlowableLinkApiMation.getFlowableServiceList();
         for (SkyeyeClassFlowableLinkMation classNameBean : flowableServiceList) {
             classNameBean.setAppId(skyeyeClassFlowableLinkApiMation.getAppId());
-            DataCommonUtil.setCommonDataByGenericity(classNameBean, "0dc9dd4cd4d446ae9455215fe753c44e");
+            DataCommonUtil.setCommonDataByGenericity(classNameBean, CommonConstants.ADMIN_USER_ID);
             DataCommonUtil.setId(classNameBean);
         }
         List<String> newKeys = flowableServiceList.stream().map(bean -> bean.getClassName() + bean.getServiceName() + bean.getListenerClassStr()).collect(Collectors.toList());

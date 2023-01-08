@@ -2,7 +2,7 @@
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
 
-package com.skyeye.eve.entity.coderule;
+package com.skyeye.coderule.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -16,7 +16,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @ClassName: CodeMaxSerialMation
+ * @ClassName: CodeMaxSerial
  * @Description: 编码最大序列值实体类
  * @author: skyeye云系列--卫志强
  * @date: 2022/9/16 13:14
@@ -26,7 +26,7 @@ import java.io.Serializable;
 @Data
 @TableName(value = "skyeye_code_max_serial", autoResultMap = true)
 @ApiModel("编码最大序列值实体类")
-public class CodeMaxSerialMation extends OperatorUserInfo implements Serializable {
+public class CodeMaxSerial extends OperatorUserInfo implements Serializable {
 
     @TableId("id")
     @Property("主键id")

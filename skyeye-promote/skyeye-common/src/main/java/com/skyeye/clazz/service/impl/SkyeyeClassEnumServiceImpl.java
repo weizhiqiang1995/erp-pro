@@ -11,6 +11,7 @@ import com.skyeye.clazz.entity.classenum.SkyeyeClassEnumApiMation;
 import com.skyeye.clazz.entity.classenum.SkyeyeClassEnumMation;
 import com.skyeye.clazz.service.SkyeyeClassEnumService;
 import com.skyeye.common.constans.CommonCharConstants;
+import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
@@ -63,7 +64,7 @@ public class SkyeyeClassEnumServiceImpl extends ServiceImpl<SkyeyeClassEnumDao, 
             skyeyeClassEnumMation.setClassName(className);
             skyeyeClassEnumMation.setValueList(enumDto);
             skyeyeClassEnumMation.setAppId(skyeyeClassEnumApiMation.getAppId());
-            DataCommonUtil.setCommonDataByGenericity(skyeyeClassEnumMation, "0dc9dd4cd4d446ae9455215fe753c44e");
+            DataCommonUtil.setCommonDataByGenericity(skyeyeClassEnumMation, CommonConstants.ADMIN_USER_ID);
             DataCommonUtil.setId(skyeyeClassEnumMation);
             skyeyeClassEnumMationList.add(skyeyeClassEnumMation);
         });

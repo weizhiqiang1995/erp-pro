@@ -2,7 +2,7 @@
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
 
-package com.skyeye.eve.entity.coderule.util;
+package com.skyeye.coderule.entity.util;
 
 import com.skyeye.common.script.ScriptUtil;
 import lombok.extern.slf4j.Slf4j;

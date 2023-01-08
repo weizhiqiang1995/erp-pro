@@ -15,6 +15,7 @@ import com.skyeye.clazz.rest.DsFormPageContentService;
 import com.skyeye.clazz.rest.DsFormPageService;
 import com.skyeye.clazz.service.SkyeyeClassDsFormLinkService;
 import com.skyeye.common.client.ExecuteFeignClient;
+import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
@@ -82,7 +83,7 @@ public class SkyeyeClassDsFormLinkServiceImpl extends ServiceImpl<SkyeyeClassDsF
         for (SkyeyeClassDsFormLinkMation classNameBean : classNameList) {
             classNameBean.setAppId(skyeyeClassDsFormLinkApiMation.getAppId());
             classNameBean.setAppName(skyeyeClassDsFormLinkApiMation.getAppName());
-            DataCommonUtil.setCommonDataByGenericity(classNameBean, "0dc9dd4cd4d446ae9455215fe753c44e");
+            DataCommonUtil.setCommonDataByGenericity(classNameBean, CommonConstants.ADMIN_USER_ID);
             DataCommonUtil.setId(classNameBean);
         }
         List<String> newKeys = classNameList.stream().map(bean -> bean.getClassName() + bean.getServiceName()).collect(Collectors.toList());

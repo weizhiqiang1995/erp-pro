@@ -12,6 +12,7 @@ import com.skyeye.clazz.dao.SkyeyeClassCodeRuleDao;
 import com.skyeye.clazz.entity.coderule.SkyeyeClassCodeRuleApiMation;
 import com.skyeye.clazz.entity.coderule.SkyeyeClassCodeRuleMation;
 import com.skyeye.clazz.service.SkyeyeClassCodeRuleService;
+import com.skyeye.coderule.service.CodeRuleService;
 import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
@@ -19,8 +20,8 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
-import com.skyeye.eve.dao.CodeRuleDao;
-import com.skyeye.eve.entity.coderule.CodeRuleMation;
+import com.skyeye.coderule.dao.CodeRuleDao;
+import com.skyeye.coderule.entity.CodeRule;
 import com.skyeye.exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,7 @@ import java.util.stream.Collectors;
 public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeRuleDao, SkyeyeClassCodeRuleMation> implements SkyeyeClassCodeRuleService {
 
     @Autowired
-    private CodeRuleDao codeRuleDao;
+    private CodeRuleService codeRuleService;
 
     /**
      * 批量新增需要获取编码的服务类
@@ -69,7 +70,7 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
         for (SkyeyeClassCodeRuleMation classNameBean : classNameList) {
             classNameBean.setAppId(skyeyeClassCodeRuleApiMation.getAppId());
             classNameBean.setAppName(skyeyeClassCodeRuleApiMation.getAppName());
-            DataCommonUtil.setCommonDataByGenericity(classNameBean, "0dc9dd4cd4d446ae9455215fe753c44e");
+            DataCommonUtil.setCommonDataByGenericity(classNameBean, CommonConstants.ADMIN_USER_ID);
             DataCommonUtil.setId(classNameBean);
         }
         List<String> newKeys = classNameList.stream().map(bean -> bean.getClassName() + bean.getGroupName() + bean.getServiceName()).collect(Collectors.toList());
@@ -120,7 +121,7 @@ public class SkyeyeClassCodeRuleServiceImpl extends ServiceImpl<SkyeyeClassCodeR
 
         // 获取编码规则
         if (!ToolUtil.isBlank(classCodeRuleMation.getCodeRuleId())) {
-            CodeRuleMation codeRuleMation = codeRuleDao.selectById(classCodeRuleMation.getCodeRuleId());
+            CodeRule codeRuleMation = codeRuleService.selectById(classCodeRuleMation.getCodeRuleId());
             if (codeRuleMation == null) {
                 throw new CustomException("编码不存在");
             }
