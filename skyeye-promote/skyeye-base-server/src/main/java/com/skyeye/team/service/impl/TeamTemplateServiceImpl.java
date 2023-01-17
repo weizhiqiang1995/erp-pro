@@ -7,7 +7,6 @@ package com.skyeye.team.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.skyeye.annotation.coderule.CodeRuleService;
 import com.skyeye.annotation.service.SkyeyeService;
 import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.entity.search.CommonPageInfo;
@@ -35,7 +34,6 @@ import java.util.Map;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
-@CodeRuleService(value = "团队模板", groupName = "团队管理")
 @SkyeyeService(name = "团队模板管理", groupName = "团队管理")
 public class TeamTemplateServiceImpl extends AbstractTeamServiceImpl<TeamTemplateDao, TeamTemplate> implements TeamTemplateService {
 

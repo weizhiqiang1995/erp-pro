@@ -61,7 +61,7 @@ public class SysQuartzServiceImpl implements SysQuartzService {
 
     private XxlJobInfo getXxlJobInfo(String objectId, String groupId, String delayedTime, String jobDesc, String taskType, String userId) {
         XxlJobInfo xxlJobInfo = new XxlJobInfo();
-        Map<String, Object> user = iAuthUserService.queryUserMationByUserId(userId);
+        Map<String, Object> user = iAuthUserService.queryDataMationById(userId);
         xxlJobInfo.setAuthor(user.get("name").toString());
         xxlJobInfo.setJobGroup(Integer.parseInt(groupId));
         xxlJobInfo.setJobDesc(QuartzConstants.QuartzMateMationJobType.getRemarkPrefixByTaskType(taskType, jobDesc));
