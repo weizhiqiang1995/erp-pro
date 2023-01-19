@@ -12,6 +12,7 @@ import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.api.Property;
 import com.skyeye.annotation.unique.UniqueField;
 import com.skyeye.common.entity.features.OperatorUserInfo;
+import com.skyeye.dsform.entity.DsFormComponent;
 import lombok.Data;
 
 /**
@@ -43,6 +44,22 @@ public class AttrDefinitionCustom extends OperatorUserInfo {
     @TableField("`name`")
     @ApiModelProperty(value = "属性名称", required = "required")
     private String name;
+
+    @TableField("component_id")
+    @ApiModelProperty(value = "组件id")
+    private String componentId;
+
+    @TableField(exist = false)
+    @Property(value = "自定义属性关联的组件")
+    private DsFormComponent dsFormComponent;
+
+    @TableField("min_length")
+    @ApiModelProperty(value = "最小长度")
+    private Integer minLength;
+
+    @TableField("max_length")
+    @ApiModelProperty(value = "最大长度")
+    private Integer maxLength;
 
     @TableField("remark")
     @ApiModelProperty(value = "属性描述")

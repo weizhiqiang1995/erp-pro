@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyeye.dsform.dao.DsFormPageContentDao">
+
+    <select id="queryDsFormPageOrderby" resultType="java.util.Map">
+        SELECT
+            MAX(a.order_by) orderBy
+        FROM
+            ds_form_page_content a
+        WHERE a.page_id = #{pageId}
+    </select>
+
+</mapper>

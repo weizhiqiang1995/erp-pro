@@ -13,11 +13,11 @@ import com.skyeye.attr.entity.AttrDefinitionCustom;
 import com.skyeye.attr.service.AttrDefinitionCustomService;
 import com.skyeye.attr.service.AttrDefinitionService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
-import com.skyeye.server.entity.ServiceBean;
-import com.skyeye.server.service.ServiceBeanService;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
+import com.skyeye.server.entity.ServiceBean;
+import com.skyeye.server.service.ServiceBeanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -136,6 +136,7 @@ public class AttrDefinitionServiceImpl extends SkyeyeBusinessServiceImpl<AttrDef
                 attrDefinition.setAttrDefinitionCustomId(attrDefinitionCustom.getId());
                 attrDefinition.setName(attrDefinitionCustom.getName());
                 attrDefinition.setRemark(attrDefinitionCustom.getRemark());
+                attrDefinition.setDsFormComponent(attrDefinitionCustom.getDsFormComponent());
             }
         });
     }

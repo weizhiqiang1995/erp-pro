@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyeye.dsform.dao.DsFormComponentDao">
+
+	<select id="queryDsFormComponentList" resultType="java.util.Map">
+		SELECT
+			a.id,
+			a.num_code numCode,
+			a.`name`,
+			a.show_type showType,
+			a.icon icon,
+			a.icon_color iconColor,
+			a.icon_bg iconBg,
+			a.icon_type iconType,
+			a.icon_pic iconPic,
+			a.type_id typeId,
+			a.create_id createId,
+			CONVERT(a.create_time, char) createTime,
+			a.last_update_id lastUpdateId,
+			CONVERT(a.last_update_time, char) lastUpdateTime
+		FROM
+			ds_form_component a
+		<where>
+			<if test="sqlExtract != '' and sqlExtract != null">
+				${sqlExtract}
+			</if>
+			<if test="keyword != null and keyword != ''">
+				AND (a.`name` like '%${keyword}%' OR a.num_code like '%${keyword}%')
+			</if>
+		</where>
+		ORDER BY a.create_time DESC
+	</select>
+
+</mapper>

@@ -11,6 +11,7 @@ import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.api.Property;
 import com.skyeye.common.entity.CommonInfo;
+import com.skyeye.dsform.entity.DsFormComponent;
 import lombok.Data;
 
 /**
@@ -33,6 +34,10 @@ public class AttrDefinition extends CommonInfo {
     @TableField(exist = false)
     @Property("自定义属性的id")
     private String attrDefinitionCustomId;
+
+    @TableField(exist = false)
+    @Property(value = "自定义属性关联的组件")
+    private DsFormComponent dsFormComponent;
 
     /**
      * 应用的APPID

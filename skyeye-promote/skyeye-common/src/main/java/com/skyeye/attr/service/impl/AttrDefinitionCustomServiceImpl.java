@@ -6,6 +6,7 @@ package com.skyeye.attr.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.attr.dao.AttrDefinitionCustomDao;
 import com.skyeye.attr.entity.AttrDefinition;
@@ -19,6 +20,8 @@ import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
+import com.skyeye.dsform.entity.DsFormComponent;
+import com.skyeye.dsform.service.DsFormComponentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +49,9 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
     @Autowired
     private AttrTransformTableService attrTransformTableService;
 
+    @Autowired
+    private DsFormComponentService dsFormComponentService;
+
     @Override
     public void writePostpose(AttrDefinitionCustom entity, String userId) {
         super.writePostpose(entity, userId);
@@ -71,6 +77,16 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
         wrapper.eq(MybatisPlusUtil.toColumns(AttrDefinitionCustom::getClassName), className);
         wrapper.in(MybatisPlusUtil.toColumns(AttrDefinitionCustom::getAttrKey), attrKey);
         List<AttrDefinitionCustom> attrDefinitionCustomList = list(wrapper);
+        // 获取关联的组件信息
+        List<String> componentIdList = attrDefinitionCustomList.stream()
+            .filter(attrDefinitionCustom -> StrUtil.isNotEmpty(attrDefinitionCustom.getComponentId()))
+            .map(AttrDefinitionCustom::getComponentId).collect(Collectors.toList());
+        Map<String, DsFormComponent> componentMap = dsFormComponentService.selectMapByIds(componentIdList);
+        attrDefinitionCustomList.forEach(attrDefinitionCustom -> {
+            if (StrUtil.isNotEmpty(attrDefinitionCustom.getComponentId())) {
+                attrDefinitionCustom.setDsFormComponent(componentMap.get(attrDefinitionCustom.getComponentId()));
+            }
+        });
         return attrDefinitionCustomList;
     }
 
