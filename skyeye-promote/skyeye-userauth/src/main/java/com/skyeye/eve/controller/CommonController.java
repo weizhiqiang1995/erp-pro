@@ -83,4 +83,32 @@ public class CommonController {
         commonService.queryFilePathByFileType(inputObject, outputObject);
     }
 
+    /**
+     * 验证接口是否正确
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "dsformpage010", value = "验证接口是否正确", method = "P0ST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "interfa", name = "interfa", value = "数据")})
+    @RequestMapping("/post/CommonController/queryInterfaceIsTrueOrNot")
+    public void queryInterfaceIsTrueOrNot(InputObject inputObject, OutputObject outputObject) {
+        commonService.queryInterfaceIsTrueOrNot(inputObject, outputObject);
+    }
+
+    /**
+     * 获取接口中的值
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "dsformpage011", value = "获取接口中的值", method = "P0ST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "interfa", name = "interfa", value = "数据")})
+    @RequestMapping("/post/CommonController/queryInterfaceValue")
+    public void queryInterfaceValue(InputObject inputObject, OutputObject outputObject) {
+        commonService.queryInterfaceValue(inputObject, outputObject);
+    }
+
 }

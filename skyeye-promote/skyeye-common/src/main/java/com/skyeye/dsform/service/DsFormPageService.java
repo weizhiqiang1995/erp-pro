@@ -11,8 +11,6 @@ import com.skyeye.dsform.entity.DsFormPage;
 
 public interface DsFormPageService extends SkyeyeBusinessService<DsFormPage> {
 
-    void queryInterfaceIsTrueOrNot(InputObject inputObject, OutputObject outputObject);
-
-    void queryInterfaceValue(InputObject inputObject, OutputObject outputObject);
+    void queryDsFormPageList(InputObject inputObject, OutputObject outputObject);
 
 }

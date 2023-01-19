@@ -16,11 +16,11 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.object.PutObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.FileUtil;
+import com.skyeye.common.util.HttpClient;
 import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.CommonDao;
 import com.skyeye.eve.service.CommonService;
 import com.skyeye.exception.CustomException;
-import com.skyeye.personnel.dao.SysEveUserStaffDao;
 import com.skyeye.win.dao.SysEveWinBgPicDao;
 import com.skyeye.win.dao.SysEveWinLockBgPicDao;
 import com.skyeye.win.dao.SysEveWinThemeColorDao;
@@ -67,9 +67,6 @@ public class CommonServiceImpl implements CommonService {
 
     @Autowired
     private SysEveWinThemeColorDao sysEveWinThemeColorDao;
-
-    @Autowired
-    private SysEveUserStaffDao sysEveUserStaffDao;
 
     @Value("${IMAGES_PATH}")
     private String tPath;
@@ -292,6 +289,57 @@ public class CommonServiceImpl implements CommonService {
         result.put("visitPath", visitPath);
         outputObject.setBean(result);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
+    }
+
+    /**
+     * 验证接口是否正确
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryInterfaceIsTrueOrNot(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        map.put("loginPCIp", PutObject.getRequest().getParameter("loginPCIp"));
+        map.put("userToken", PutObject.getRequest().getParameter("userToken"));
+        String str = HttpClient.doPost(map.get("interfa").toString(), map);
+        if (!ToolUtil.isBlank(str)) {
+            if (ToolUtil.isJson(str)) {
+                Map<String, Object> json = JSONUtil.toBean(str, null);
+                if ("0".equals(json.get("returnCode").toString())) {
+                    if (!ToolUtil.isBlank(json.get("rows").toString())) {
+                        map.put("aData", json.get("rows").toString());
+                        outputObject.setBean(map);
+                        outputObject.settotal(CommonNumConstants.NUM_ONE);
+                    } else {
+                        outputObject.setreturnMessage("该接口没有拿到数据，请重新填写接口！");
+                    }
+                } else {
+                    outputObject.setreturnMessage("该接口无效，请重新填写接口!");
+                }
+            } else {
+                outputObject.setreturnMessage("接口拿到的不是json串，请重新填写接口!");
+            }
+        } else {
+            outputObject.setreturnMessage("该接口无效，请重新填写接口!");
+        }
+    }
+
+    /**
+     * 获取接口中的值
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryInterfaceValue(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        map.put("loginPCIp", PutObject.getRequest().getParameter("loginPCIp"));
+        map.put("userToken", PutObject.getRequest().getParameter("userToken"));
+        String str = HttpClient.doPost(map.get("interfa").toString(), map);
+        Map<String, Object> json = JSONUtil.toBean(str, null);
+        map.put("aData", json.get("rows").toString());
+        outputObject.setBean(map);
     }
 
 }

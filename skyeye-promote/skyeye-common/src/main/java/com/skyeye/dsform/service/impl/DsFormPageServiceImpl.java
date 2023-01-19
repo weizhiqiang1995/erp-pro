@@ -5,17 +5,13 @@
 package com.skyeye.dsform.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.annotation.service.SkyeyeService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
-import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.DsFormConstants;
-import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.object.PutObject;
-import com.skyeye.common.util.HttpClient;
-import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.dsform.dao.DsFormPageDao;
 import com.skyeye.dsform.entity.DsFormPage;
 import com.skyeye.dsform.service.DsFormPageContentService;
@@ -42,10 +38,16 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
     private DsFormPageContentService dsFormPageContentService;
 
     @Override
-    public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
-        CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
-        List<Map<String, Object>> beans = skyeyeBaseMapper.queryDsFormPageList(commonPageInfo);
-        return beans;
+    public void queryDsFormPageList(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> params = inputObject.getParams();
+        String className = params.get("className").toString();
+
+        QueryWrapper<DsFormPage> wrapper = new QueryWrapper<>();
+        wrapper.eq(MybatisPlusUtil.toColumns(DsFormPage::getClassName), className);
+        List<DsFormPage> dsFormPageList = list(wrapper);
+
+        outputObject.setBeans(dsFormPageList);
+        outputObject.settotal(dsFormPageList.size());
     }
 
     @Override
@@ -63,68 +65,17 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
     }
 
     @Override
-    public DsFormPage getDataFromDb(String id) {
-        DsFormPage dsFormPage = super.getDataFromDb(id);
+    public DsFormPage selectById(String id) {
+        DsFormPage dsFormPage = super.selectById(id);
         // todo 后续获取页面关联的组件信息
         return dsFormPage;
     }
 
     @Override
-    public List<DsFormPage> getDataFromDb(List<String> idList) {
-        List<DsFormPage> dsFormPageList = super.getDataFromDb(idList);
+    public List<DsFormPage> selectByIds(String... ids) {
+        List<DsFormPage> dsFormPageList = super.selectByIds(ids);
         // todo 后续获取页面关联的组件信息
         return dsFormPageList;
-    }
-
-    /**
-     * 验证接口是否正确
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryInterfaceIsTrueOrNot(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        map.put("loginPCIp", PutObject.getRequest().getParameter("loginPCIp"));
-        map.put("userToken", PutObject.getRequest().getParameter("userToken"));
-        String str = HttpClient.doPost(map.get("interfa").toString(), map);
-        if (!ToolUtil.isBlank(str)) {
-            if (ToolUtil.isJson(str)) {
-                Map<String, Object> json = JSONUtil.toBean(str, null);
-                if ("0".equals(json.get("returnCode").toString())) {
-                    if (!ToolUtil.isBlank(json.get("rows").toString())) {
-                        map.put("aData", json.get("rows").toString());
-                        outputObject.setBean(map);
-                        outputObject.settotal(CommonNumConstants.NUM_ONE);
-                    } else {
-                        outputObject.setreturnMessage("该接口没有拿到数据，请重新填写接口！");
-                    }
-                } else {
-                    outputObject.setreturnMessage("该接口无效，请重新填写接口!");
-                }
-            } else {
-                outputObject.setreturnMessage("接口拿到的不是json串，请重新填写接口!");
-            }
-        } else {
-            outputObject.setreturnMessage("该接口无效，请重新填写接口!");
-        }
-    }
-
-    /**
-     * 获取接口中的值
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryInterfaceValue(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        map.put("loginPCIp", PutObject.getRequest().getParameter("loginPCIp"));
-        map.put("userToken", PutObject.getRequest().getParameter("userToken"));
-        String str = HttpClient.doPost(map.get("interfa").toString(), map);
-        Map<String, Object> json = JSONUtil.toBean(str, null);
-        map.put("aData", json.get("rows").toString());
-        outputObject.setBean(map);
     }
 
 }

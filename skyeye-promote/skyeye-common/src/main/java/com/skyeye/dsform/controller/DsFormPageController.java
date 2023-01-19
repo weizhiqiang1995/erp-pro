@@ -38,11 +38,12 @@ public class DsFormPageController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "dsformpage001", value = "获取表单布局列表", method = "POST", allUse = "2")
-    @ApiImplicitParams(classBean = CommonPageInfo.class)
+    @ApiOperation(id = "queryDsFormPageList", value = "获取表单布局列表", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "className", name = "className", value = "service的className", required = "required")})
     @RequestMapping("/post/DsFormPageController/queryDsFormPageList")
     public void queryDsFormPageList(InputObject inputObject, OutputObject outputObject) {
-        dsFormPageService.queryPageList(inputObject, outputObject);
+        dsFormPageService.queryDsFormPageList(inputObject, outputObject);
     }
 
 
@@ -85,28 +86,6 @@ public class DsFormPageController {
     @RequestMapping("/post/DsFormPageController/selectDsFormPageById")
     public void selectDsFormPageById(InputObject inputObject, OutputObject outputObject) {
         dsFormPageService.selectById(inputObject, outputObject);
-    }
-
-    /**
-     * 验证接口是否正确
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/DsFormPageController/queryInterfaceIsTrueOrNot")
-    public void queryInterfaceIsTrueOrNot(InputObject inputObject, OutputObject outputObject) {
-        dsFormPageService.queryInterfaceIsTrueOrNot(inputObject, outputObject);
-    }
-
-    /**
-     * 获取接口中的值
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/DsFormPageController/queryInterfaceValue")
-    public void queryInterfaceValue(InputObject inputObject, OutputObject outputObject) {
-        dsFormPageService.queryInterfaceValue(inputObject, outputObject);
     }
 
 }
