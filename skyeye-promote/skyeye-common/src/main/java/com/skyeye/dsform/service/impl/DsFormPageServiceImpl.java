@@ -45,7 +45,8 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
         QueryWrapper<DsFormPage> wrapper = new QueryWrapper<>();
         wrapper.eq(MybatisPlusUtil.toColumns(DsFormPage::getClassName), className);
         List<DsFormPage> dsFormPageList = list(wrapper);
-
+        iAuthUserService.setName(dsFormPageList, "createId", "createName");
+        iAuthUserService.setName(dsFormPageList, "lastUpdateId", "lastUpdateName");
         outputObject.setBeans(dsFormPageList);
         outputObject.settotal(dsFormPageList.size());
     }
