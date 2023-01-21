@@ -233,9 +233,6 @@
 		<property id="page" name="page" ref="required,num" var="分页参数,第几页"/>
 		<property id="userName" name="userName" ref="" var="员工姓名" />
 	</url>
-    <url id="sys038" path="/post/SysEveRoleController/querySysRoleToAppMenuEditById" val="手机端菜单授权时的信息回显" allUse="2" groupName="系统管理">
-        <property id="rowId" name="id" ref="required" var="角色ID"/>
-    </url>
 
 	<url id="icon001" path="/post/SysEveIconController/querySysIconList" val="获取ICON列表" allUse="1" groupName="系统ICON图标">
 		<property id="limit" name="limit" ref="required,num" var="分页参数,每页多少条数据" />

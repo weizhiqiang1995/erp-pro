@@ -11,7 +11,7 @@ import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.eve.entity.userauth.auth.RoleMation;
+import com.skyeye.role.entity.Role;
 import com.skyeye.role.service.SysEveRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +42,48 @@ public class SysEveRoleController {
     @ApiImplicitParams(classBean = CommonPageInfo.class)
     @RequestMapping("/post/SysEveRoleController/querySysRoleList")
     public void querySysRoleList(InputObject inputObject, OutputObject outputObject) {
-        sysEveRoleService.querySysRoleList(inputObject, outputObject);
+        sysEveRoleService.queryPageList(inputObject, outputObject);
+    }
+
+    /**
+     * 新增/编辑角色
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "writeSysRole", value = "新增/编辑角色", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = Role.class)
+    @RequestMapping("/post/SysEveRoleController/writeSysRole")
+    public void writeSysRole(InputObject inputObject, OutputObject outputObject) {
+        sysEveRoleService.saveOrUpdateEntity(inputObject, outputObject);
+    }
+
+    /**
+     * 根据id查询角色信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "querySysRoleById", value = "根据id查询角色信息", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "id", name = "id", value = "角色ID", required = "required")})
+    @RequestMapping("/post/SysEveRoleController/querySysRoleById")
+    public void querySysRoleById(InputObject inputObject, OutputObject outputObject) {
+        sysEveRoleService.selectById(inputObject, outputObject);
+    }
+
+    /**
+     * 删除角色
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "deleteRoleById", value = "删除角色", method = "DELETE", allUse = "1")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "id", name = "id", value = "角色ID", required = "required")})
+    @RequestMapping("/post/SysEveRoleController/deleteRoleById")
+    public void deleteRoleById(InputObject inputObject, OutputObject outputObject) {
+        sysEveRoleService.deleteById(inputObject, outputObject);
     }
 
     /**
@@ -58,72 +99,17 @@ public class SysEveRoleController {
     }
 
     /**
-     * 新增角色
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @ApiOperation(id = "sys015", value = "新增角色", method = "POST", allUse = "1")
-    @ApiImplicitParams(classBean = RoleMation.class)
-    @RequestMapping("/post/SysEveRoleController/insertSysRoleMation")
-    public void insertSysRoleMation(InputObject inputObject, OutputObject outputObject) {
-        sysEveRoleService.insertSysRoleMation(inputObject, outputObject);
-    }
-
-    /**
-     * 编辑角色时进行回显
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @ApiOperation(id = "sys016", value = "编辑角色时的信息回显", method = "GET", allUse = "2")
-    @ApiImplicitParams({
-        @ApiImplicitParam(id = "rowId", name = "id", value = "角色ID", required = "required")})
-    @RequestMapping("/post/SysEveRoleController/querySysRoleMationToEditById")
-    public void querySysRoleMationToEditById(InputObject inputObject, OutputObject outputObject) {
-        sysEveRoleService.querySysRoleMationToEditById(inputObject, outputObject);
-    }
-
-    /**
-     * 编辑角色
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @ApiOperation(id = "sys017", value = "编辑角色", method = "PUT", allUse = "1")
-    @ApiImplicitParams(classBean = RoleMation.class, value = {
-        @ApiImplicitParam(id = "rowId", name = "id", value = "主键id", required = "required")})
-    @RequestMapping("/post/SysEveRoleController/editSysRoleMationById")
-    public void editSysRoleMationById(InputObject inputObject, OutputObject outputObject) {
-        sysEveRoleService.editSysRoleMationById(inputObject, outputObject);
-    }
-
-    /**
      * 编辑角色PC端权限
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "editSysRolePCAuth", value = "编辑角色PC端权限", method = "PUT", allUse = "1")
-    @ApiImplicitParams(classBean = RoleMation.class, value = {
+    @ApiImplicitParams(classBean = Role.class, value = {
         @ApiImplicitParam(id = "rowId", name = "id", value = "主键id", required = "required")})
     @RequestMapping("/post/SysEveRoleController/editSysRolePCAuth")
     public void editSysRolePCAuth(InputObject inputObject, OutputObject outputObject) {
         sysEveRoleService.editSysRolePCAuth(inputObject, outputObject);
-    }
-
-    /**
-     * 删除角色
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @ApiOperation(id = "sys018", value = "删除角色", method = "DELETE", allUse = "1")
-    @ApiImplicitParams({
-        @ApiImplicitParam(id = "rowId", name = "id", value = "角色ID", required = "required")})
-    @RequestMapping("/post/SysEveRoleController/deleteSysRoleMationById")
-    public void deleteSysRoleMationById(InputObject inputObject, OutputObject outputObject) {
-        sysEveRoleService.deleteSysRoleMationById(inputObject, outputObject);
     }
 
     /**
@@ -136,17 +122,6 @@ public class SysEveRoleController {
     @RequestMapping("/post/SysEveRoleController/querySysRoleBandAppMenuList")
     public void querySysRoleBandAppMenuList(InputObject inputObject, OutputObject outputObject) {
         sysEveRoleService.querySysRoleBandAppMenuList(inputObject, outputObject);
-    }
-
-    /**
-     * 手机端菜单授权时的信息回显
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @RequestMapping("/post/SysEveRoleController/querySysRoleToAppMenuEditById")
-    public void querySysRoleToAppMenuEditById(InputObject inputObject, OutputObject outputObject) {
-        sysEveRoleService.querySysRoleToAppMenuEditById(inputObject, outputObject);
     }
 
     /**

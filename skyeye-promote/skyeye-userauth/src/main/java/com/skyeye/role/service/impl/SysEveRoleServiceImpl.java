@@ -4,16 +4,16 @@
 
 package com.skyeye.role.service.impl;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
+import com.skyeye.annotation.service.SkyeyeService;
+import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
-import com.skyeye.jedis.JedisClientService;
+import com.skyeye.exception.CustomException;
 import com.skyeye.role.dao.SysEveRoleDao;
+import com.skyeye.role.entity.Role;
 import com.skyeye.role.service.SysEveRoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,29 +35,35 @@ import java.util.Map;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
-public class SysEveRoleServiceImpl implements SysEveRoleService {
+@SkyeyeService(name = "角色管理", groupName = "系统设置")
+public class SysEveRoleServiceImpl extends SkyeyeBusinessServiceImpl<SysEveRoleDao, Role> implements SysEveRoleService {
 
     private static Logger LOGGER = LoggerFactory.getLogger(SysEveRoleServiceImpl.class);
 
     @Autowired
     private SysEveRoleDao sysEveRoleDao;
 
-    @Autowired
-    private JedisClientService jedisClient;
-
-    /**
-     * 获取角色列表
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    public void querySysRoleList(InputObject inputObject, OutputObject outputObject) {
+    public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
-        Page pages = PageHelper.startPage(commonPageInfo.getPage(), commonPageInfo.getLimit());
         List<Map<String, Object>> beans = sysEveRoleDao.querySysRoleList(commonPageInfo);
-        outputObject.setBeans(beans);
-        outputObject.settotal(pages.getTotal());
+        return beans;
+    }
+
+    @Override
+    public Role getDataFromDb(String id) {
+        Role role = super.getDataFromDb(id);
+        List<String> menuIds = sysEveRoleDao.querySysRoleMenuIdByRoleId(id);
+        List<String> appMenuIds = sysEveRoleDao.querySysRoleAppMenuIdByRoleId(id);
+        role.setMenuIds(menuIds);
+        role.setAppMenuIds(appMenuIds);
+        return role;
+    }
+
+    @Override
+    public void updatePostpose(Role entity, String userId) {
+        // 删除缓存
+        deleteRoleCache(entity.getId(), "delete");
     }
 
     /**
@@ -86,81 +92,21 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
     }
 
     /**
-     * 新增角色
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void insertSysRoleMation(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> roleName = sysEveRoleDao.querySysRoleNameByName(map);
-        if (roleName == null) {
-            DataCommonUtil.setCommonData(map, inputObject.getLogParams().get("id").toString());
-            sysEveRoleDao.insertSysRoleMation(map);
-            LOGGER.info("add role [{}] success", map.get("roleName").toString());
-        } else {
-            outputObject.setreturnMessage("该角色名称已存在，请更换！");
-        }
-    }
-
-    /**
-     * 编辑角色时进行回显
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void querySysRoleMationToEditById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> roleMation = sysEveRoleDao.querySysRoleMationByRoleId(map);
-        List<Map<String, Object>> roleMenuId = sysEveRoleDao.querySysRoleMenuIdByRoleId(map);
-        outputObject.setBean(roleMation);
-        outputObject.setBeans(roleMenuId);
-        outputObject.settotal(roleMenuId.size());
-    }
-
-    /**
-     * 编辑角色
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void editSysRoleMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> roleName = sysEveRoleDao.queryRoleNameByIdAndName(map);
-        if (roleName == null) {
-            String roleId = map.get("id").toString();
-            sysEveRoleDao.editSysRoleMationById(map);
-            // 删除缓存
-            this.deleteRoleCache(roleId, "delete");
-        } else {
-            outputObject.setreturnMessage("该角色名称已存在，请更换！");
-        }
-    }
-
-    /**
      * 编辑角色PC端权限
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
+    @Transactional(value = TRANSACTION_MANAGER_VALUE, rollbackFor = Exception.class)
     public void editSysRolePCAuth(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         Map<String, Object> user = inputObject.getLogParams();
-        Map<String, Object> roleName = sysEveRoleDao.queryRoleNameByIdAndName(map);
-        if (roleName == null) {
-            String roleId = map.get("id").toString();
-            saveRoleMenuMation(map, roleId, user.get("id").toString(), DateUtil.getTimeAndToString());
-            // 删除缓存
-            this.deleteRoleCache(roleId, "delete");
-        } else {
-            outputObject.setreturnMessage("该角色名称已存在，请更换！");
-        }
+        String roleId = map.get("id").toString();
+        saveRoleMenuMation(map, roleId, user.get("id").toString(), DateUtil.getTimeAndToString());
+        // 删除缓存
+        deleteRoleCache(roleId, "delete");
+        refreshCache(roleId);
     }
 
     private void saveRoleMenuMation(Map<String, Object> map, String roleId, String createId, String createTime) {
@@ -182,38 +128,21 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
         }
     }
 
-    /**
-     * 删除角色
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysRoleMationById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String roleId = map.get("id").toString();
+    public void deletePreExecution(String id) {
         // 判断当前是否有用户在使用该角色
-        Map<String, Object> bean = sysEveRoleDao.queryUserRoleByRoleId(map);
-        if (Integer.parseInt(bean.get("num").toString()) == 0) {
-            // 删除角色菜单关联表信息
-            sysEveRoleDao.deleteRoleMenuByRoleId(roleId);
-            // 删除角色信息
-            sysEveRoleDao.deleteRoleByRoleId(map);
-            // 删除缓存
-            this.deleteRoleCache(map.get("id").toString(), "delete");
-        } else {
-            outputObject.setreturnMessage("该角色下有用户正在使用，只能对角色进行维护。");
+        Integer useNum = sysEveRoleDao.queryUserRoleByRoleId(id);
+        if (useNum > 0) {
+            throw new CustomException("该角色下有用户正在使用，只能对角色进行维护.");
         }
     }
 
-    private void deleteRoleCache(String roleId, String type) {
-        LOGGER.info("delete Role Cache, roleId is {}", roleId);
-        jedisClient.del(String.format("roleHasMenu:%s", roleId));
-        jedisClient.del(String.format("roleHasMenuPoint:%s", roleId));
-        if ("delete".equals(type)) {
-            this.deleteAPPRoleCache(roleId);
-        }
+    @Override
+    public void deletePostpose(String id) {
+        // 删除角色菜单关联表信息
+        sysEveRoleDao.deleteRoleMenuByRoleId(id);
+        // 删除缓存
+        deleteRoleCache(id, "delete");
     }
 
     /**
@@ -227,22 +156,6 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysEveRoleDao.querySysRoleBandAppMenuList(map);
         outputObject.setBeans(beans);
-    }
-
-    /**
-     * 手机端菜单授权时的信息回显
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void querySysRoleToAppMenuEditById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        Map<String, Object> roleMation = sysEveRoleDao.querySysRoleMationByRoleId(map);
-        List<Map<String, Object>> roleMenuId = sysEveRoleDao.querySysRoleAppMenuIdByRoleId(map);
-        outputObject.setBean(roleMation);
-        outputObject.setBeans(roleMenuId);
-        outputObject.settotal(roleMenuId.size());
     }
 
     /**
@@ -287,16 +200,26 @@ public class SysEveRoleServiceImpl implements SysEveRoleService {
                 sysEveRoleDao.insertSysRoleAppPointMation(authPointList);
             }
             // 删除角色关联的APP菜单信息
-            this.deleteAPPRoleCache(roleId);
+            deleteAPPRoleCache(roleId);
+            refreshCache(roleId);
         } else {
             outputObject.setreturnMessage("请选择该角色即将拥有的权限！");
         }
     }
 
+    private void deleteRoleCache(String roleId, String type) {
+        LOGGER.info("delete Role Cache, roleId is {}", roleId);
+        jedisClientService.del(String.format("roleHasMenu:%s", roleId));
+        jedisClientService.del(String.format("roleHasMenuPoint:%s", roleId));
+        if ("delete".equals(type)) {
+            deleteAPPRoleCache(roleId);
+        }
+    }
+
     private void deleteAPPRoleCache(String roleId) {
         LOGGER.info("delete Role app Cache");
-        jedisClient.del(String.format("roleHasAppMenu:%s", roleId));
-        jedisClient.del(String.format("roleHasAppMenuPoint:%s", roleId));
+        jedisClientService.del(String.format("roleHasAppMenu:%s", roleId));
+        jedisClientService.del(String.format("roleHasAppMenuPoint:%s", roleId));
     }
 
 }

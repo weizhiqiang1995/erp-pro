@@ -4,26 +4,16 @@
 
 package com.skyeye.role.service;
 
+import com.skyeye.base.business.service.SkyeyeBusinessService;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.role.entity.Role;
 
-public interface SysEveRoleService {
-
-    void querySysRoleList(InputObject inputObject, OutputObject outputObject);
+public interface SysEveRoleService extends SkyeyeBusinessService<Role> {
 
     void querySysRoleBandMenuList(InputObject inputObject, OutputObject outputObject);
 
-    void insertSysRoleMation(InputObject inputObject, OutputObject outputObject);
-
-    void querySysRoleMationToEditById(InputObject inputObject, OutputObject outputObject);
-
-    void editSysRoleMationById(InputObject inputObject, OutputObject outputObject);
-
-    void deleteSysRoleMationById(InputObject inputObject, OutputObject outputObject);
-
     void querySysRoleBandAppMenuList(InputObject inputObject, OutputObject outputObject);
-
-    void querySysRoleToAppMenuEditById(InputObject inputObject, OutputObject outputObject);
 
     void editSysRoleAppMenuById(InputObject inputObject, OutputObject outputObject);
 
