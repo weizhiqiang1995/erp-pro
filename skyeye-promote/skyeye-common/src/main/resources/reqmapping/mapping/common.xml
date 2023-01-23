@@ -73,10 +73,4 @@
     </url>
     <!-- 系统编辑器模板结束 -->
 
-    <!-- 动态表单页面设计开始 -->
-    <url id="dsformpage009" path="/post/DsFormPageContentController/editDsFormPageContentByPageId" val="编辑表单内容中的组件" allUse="1" groupName="表单页面设计接口">
-        <property id="formedit" name="formedit" ref="" var="数据" />
-    </url>
-    <!-- 动态表单页面设计结束 -->
-
 </controller>

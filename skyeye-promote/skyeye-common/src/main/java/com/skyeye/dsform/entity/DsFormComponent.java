@@ -76,19 +76,7 @@ public class DsFormComponent extends IconOrImgInfo {
     private String jsFitValue;
 
     @TableField("linked_data")
-    @ApiModelProperty(value = "关联数据 1.允许 2.不允许", required = "required,num")
+    @ApiModelProperty(value = "关联数据 1.是 2.否", required = "required,num")
     private Integer linkedData;
-
-    @TableField("display_template_id")
-    @ApiModelProperty(value = "数据展示模板id")
-    private String displayTemplateId;
-
-    @TableField(exist = false)
-    @Property("数据展示模板对象信息")
-    private DsFormDisplayTemplate dsFormDisplayTemplate;
-
-    @TableField("default_data")
-    @ApiModelProperty(value = "默认数据，需要是json字符串", required = "json")
-    private String defaultData;
 
 }

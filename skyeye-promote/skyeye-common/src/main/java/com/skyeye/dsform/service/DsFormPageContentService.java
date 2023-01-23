@@ -22,20 +22,18 @@ import java.util.Map;
  */
 public interface DsFormPageContentService extends SkyeyeBusinessService<DsFormPageContent> {
 
-    void editDsFormPageContentByPageId(InputObject inputObject, OutputObject outputObject);
-
-    void queryFormPageContentByPageId(InputObject inputObject, OutputObject outputObject);
-
     /**
      * 根据动态表单pageId获取动态表单的内容项
      *
-     * @param dsFormPageId 动态表单pageId
+     * @param pageId 动态表单pageId
      * @return 动态表单的内容项
      */
-    List<DsFormPageContent> getDsFormPageContentByPageId(String dsFormPageId);
+    List<DsFormPageContent> getDsFormPageContentByPageId(String pageId);
 
-    Map<String, Map<String, DsFormPageContent>> getDsFormPageContentByPageId(List<String> dsFormPageId);
+    Map<String, Map<String, DsFormPageContent>> getDsFormPageContentByPageId(List<String> pageIdList);
 
-    void deleteDsFormContentByPageId(String dsFormPageId);
+    Map<String, List<DsFormPageContent>> getDsFormPageContentListByPageId(List<String> pageIdList);
+
+    void deleteDsFormContentByPageId(String pageId);
 
 }

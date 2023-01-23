@@ -14,11 +14,13 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.dsform.dao.DsFormPageDao;
 import com.skyeye.dsform.entity.DsFormPage;
+import com.skyeye.dsform.entity.DsFormPageContent;
 import com.skyeye.dsform.service.DsFormPageContentService;
 import com.skyeye.dsform.service.DsFormPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -68,14 +70,18 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
     @Override
     public DsFormPage selectById(String id) {
         DsFormPage dsFormPage = super.selectById(id);
-        // todo 后续获取页面关联的组件信息
+        List<DsFormPageContent> dsFormPageContents = dsFormPageContentService.getDsFormPageContentByPageId(id);
+        dsFormPage.setDsFormPageContents(dsFormPageContents);
         return dsFormPage;
     }
 
     @Override
     public List<DsFormPage> selectByIds(String... ids) {
         List<DsFormPage> dsFormPageList = super.selectByIds(ids);
-        // todo 后续获取页面关联的组件信息
+        Map<String, List<DsFormPageContent>> pageContentMap = dsFormPageContentService.getDsFormPageContentListByPageId(Arrays.asList(ids));
+        dsFormPageList.forEach(dsFormPage -> {
+            dsFormPage.setDsFormPageContents(pageContentMap.get(dsFormPage.getId()));
+        });
         return dsFormPageList;
     }
 

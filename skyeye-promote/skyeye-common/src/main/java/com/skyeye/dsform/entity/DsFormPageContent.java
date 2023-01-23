@@ -66,17 +66,25 @@ public class DsFormPageContent extends OperatorUserInfo {
     @ApiModelProperty(value = "排序", required = "num")
     private Integer orderBy;
 
-    @TableField(value = "associated_data_types")
-    @ApiModelProperty(value = "关联数据类型 1.json串，2.接口", required = "num")
-    private Integer associatedDataTypes;
-
-    @TableField("a_data")
-    @ApiModelProperty(value = "数据 associated_data_types=1：json串，associated_data_types=2：接口地址")
-    private String aData;
-
     @TableField("attr_key")
     @ApiModelProperty(value = "属性key")
     private String attrKey;
+
+    @TableField("data_type")
+    @ApiModelProperty(value = "数据类型，参考#ComponentDataType", required = "num")
+    private Integer dataType;
+
+    @TableField("display_template_id")
+    @ApiModelProperty(value = "数据展示模板id")
+    private String displayTemplateId;
+
+    @TableField(exist = false)
+    @Property("数据展示模板对象信息")
+    private DsFormDisplayTemplate dsFormDisplayTemplate;
+
+    @TableField("default_data")
+    @ApiModelProperty(value = "默认数据，需要是json字符串", required = "json")
+    private String defaultData;
 
     /**
      * 删除标记，0未删除，1删除

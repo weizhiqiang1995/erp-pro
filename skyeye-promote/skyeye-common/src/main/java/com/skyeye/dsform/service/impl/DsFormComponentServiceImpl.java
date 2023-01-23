@@ -5,7 +5,6 @@
 package com.skyeye.dsform.service.impl;
 
 import cn.hutool.core.lang.tree.Tree;
-import cn.hutool.core.util.StrUtil;
 import com.google.common.base.Joiner;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.common.constans.CommonCharConstants;
@@ -15,10 +14,7 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.dsform.dao.DsFormComponentDao;
 import com.skyeye.dsform.entity.DsFormComponent;
-import com.skyeye.dsform.entity.DsFormDisplayTemplate;
 import com.skyeye.dsform.service.DsFormComponentService;
-import com.skyeye.dsform.service.DsFormDisplayTemplateService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,41 +33,12 @@ import java.util.stream.Collectors;
 @Service
 public class DsFormComponentServiceImpl extends SkyeyeBusinessServiceImpl<DsFormComponentDao, DsFormComponent> implements DsFormComponentService {
 
-    @Autowired
-    private DsFormDisplayTemplateService dsFormDisplayTemplateService;
-
     @Override
     public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
         List<Map<String, Object>> beans = skyeyeBaseMapper.queryDsFormComponentList(commonPageInfo);
         iSysDictDataService.setNameForMap(beans, "typeId", "typeName");
         return beans;
-    }
-
-    @Override
-    public DsFormComponent selectById(String id) {
-        DsFormComponent dsFormComponent = super.selectById(id);
-        if (StrUtil.isNotEmpty(dsFormComponent.getDisplayTemplateId())) {
-            DsFormDisplayTemplate displayTemplate = dsFormDisplayTemplateService.selectById(dsFormComponent.getDisplayTemplateId());
-            dsFormComponent.setDsFormDisplayTemplate(displayTemplate);
-        }
-        return dsFormComponent;
-    }
-
-    @Override
-    public List<DsFormComponent> selectByIds(String... ids) {
-        List<DsFormComponent> dsFormComponents = super.selectByIds(ids);
-        // 获取数据展示模板信息
-        List<String> displayTemplateIdList = dsFormComponents.stream()
-            .filter(dsFormComponent -> StrUtil.isNotEmpty(dsFormComponent.getDisplayTemplateId()))
-            .map(DsFormComponent::getDisplayTemplateId).collect(Collectors.toList());
-        Map<String, DsFormDisplayTemplate> displayTemplateMap = dsFormDisplayTemplateService.selectMapByIds(displayTemplateIdList);
-        dsFormComponents.forEach(dsFormComponent -> {
-            if (StrUtil.isNotEmpty(dsFormComponent.getDisplayTemplateId())) {
-                dsFormComponent.setDsFormDisplayTemplate(displayTemplateMap.get(dsFormComponent.getDisplayTemplateId()));
-            }
-        });
-        return dsFormComponents;
     }
 
     /**

@@ -16,6 +16,8 @@ import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @ClassName: DsFormPage
  * @Description: 表单布局实体类
@@ -58,5 +60,9 @@ public class DsFormPage extends OperatorUserInfo {
     @TableField("class_name")
     @ApiModelProperty(value = "服务类的className", required = "required")
     private String className;
+
+    @TableField(exist = false)
+    @Property("表单布局关联的组件信息")
+    private List<DsFormPageContent> dsFormPageContents;
 
 }
