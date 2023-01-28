@@ -156,7 +156,7 @@ public class CompanyMationController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "queryCompanyListByIds", value = "根据id批量查询公司信息", method = "POST", allUse = "2")
+    @ApiOperation(id = "queryCompanyListByIds", value = "根据id批量查询公司信息", method = "POST", allUse = "0")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "ids", name = "ids", value = "主键id，多个用逗号隔开", required = "required")})
     @RequestMapping("/post/CompanyMationController/queryCompanyListByIds")
