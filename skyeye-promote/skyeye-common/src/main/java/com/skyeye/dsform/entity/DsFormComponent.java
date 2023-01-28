@@ -7,6 +7,7 @@ package com.skyeye.dsform.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.api.Property;
@@ -15,6 +16,8 @@ import com.skyeye.annotation.unique.UniqueField;
 import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.entity.features.IconOrImgInfo;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * @ClassName: DsFormComponent
@@ -26,8 +29,8 @@ import lombok.Data;
  */
 @Data
 @UniqueField(value = {"numCode"})
-@RedisCacheField(name = "dsForm:component", cacheTime = RedisConstants.ALL_USE_TIME)
-@TableName(value = "ds_form_component")
+@RedisCacheField(name = "dsForm:component")
+@TableName(value = "ds_form_component", autoResultMap = true)
 @ApiModel("表单组件实体类")
 public class DsFormComponent extends IconOrImgInfo {
 
@@ -78,5 +81,9 @@ public class DsFormComponent extends IconOrImgInfo {
     @TableField("linked_data")
     @ApiModelProperty(value = "关联数据 1.是 2.否", required = "required,num")
     private Integer linkedData;
+
+    @TableField(value = "attr_keys", typeHandler = JacksonTypeHandler.class)
+    @ApiModelProperty(value = "组件关联的属性，可参考#ComponentAttr枚举类", required = "json")
+    private List<String> attrKeys;
 
 }

@@ -5,7 +5,6 @@
 package com.skyeye.dsform.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
@@ -15,13 +14,10 @@ import com.skyeye.common.constans.DsFormConstants;
 import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.enumeration.DeleteFlagEnum;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
-import com.skyeye.dsform.classenum.PageComponentDataType;
 import com.skyeye.dsform.dao.DsFormPageContentDao;
 import com.skyeye.dsform.entity.DsFormComponent;
-import com.skyeye.dsform.entity.DsFormDisplayTemplate;
 import com.skyeye.dsform.entity.DsFormPageContent;
 import com.skyeye.dsform.service.DsFormComponentService;
-import com.skyeye.dsform.service.DsFormDisplayTemplateService;
 import com.skyeye.dsform.service.DsFormPageContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,9 +45,6 @@ public class DsFormPageContentServiceImpl extends SkyeyeBusinessServiceImpl<DsFo
     @Autowired
     private DsFormComponentService dsFormComponentService;
 
-    @Autowired
-    private DsFormDisplayTemplateService dsFormDisplayTemplateService;
-
     /**
      * 根据表单布局id获取组件列表
      *
@@ -75,16 +68,6 @@ public class DsFormPageContentServiceImpl extends SkyeyeBusinessServiceImpl<DsFo
         Map<String, DsFormComponent> dsFormComponentMap = dsFormComponentService.selectMapByIds(componentIds);
         dsFormPageContentList.forEach(dsFormPageData -> {
             dsFormPageData.setDsFormComponent(dsFormComponentMap.get(dsFormPageData.getFormContentId()));
-        });
-        // 获取数据展示模板信息
-        List<String> displayTemplateIdList = dsFormPageContentList.stream()
-            .filter(dsFormComponent -> StrUtil.isNotEmpty(dsFormComponent.getDisplayTemplateId()))
-            .map(DsFormPageContent::getDisplayTemplateId).collect(Collectors.toList());
-        Map<String, DsFormDisplayTemplate> displayTemplateMap = dsFormDisplayTemplateService.selectMapByIds(displayTemplateIdList);
-        dsFormPageContentList.forEach(dsFormPageContent -> {
-            if (dsFormPageContent.getDataType() == PageComponentDataType.CUSTOM.getKey()) {
-                dsFormPageContent.setDsFormDisplayTemplate(displayTemplateMap.get(dsFormPageContent.getDisplayTemplateId()));
-            }
         });
         return dsFormPageContentList;
     }

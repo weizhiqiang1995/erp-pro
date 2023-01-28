@@ -7,11 +7,14 @@ package com.skyeye.dsform.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.api.Property;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * @ClassName: DsFormPageContent
@@ -22,7 +25,7 @@ import lombok.Data;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Data
-@TableName(value = "ds_form_page_content")
+@TableName(value = "ds_form_page_content", autoResultMap = true)
 @ApiModel("表单布局关联的组件实体类")
 public class DsFormPageContent extends OperatorUserInfo {
 
@@ -38,9 +41,9 @@ public class DsFormPageContent extends OperatorUserInfo {
     @ApiModelProperty(value = "文本提示语")
     private String placeholder;
 
-    @TableField("`require`")
+    @TableField(value = "`require`", typeHandler = JacksonTypeHandler.class)
     @ApiModelProperty(value = "组件限制条件")
-    private String require;
+    private List<String> require;
 
     @TableField("default_value")
     @ApiModelProperty(value = "默认值")
@@ -74,17 +77,13 @@ public class DsFormPageContent extends OperatorUserInfo {
     @ApiModelProperty(value = "数据类型，参考#ComponentDataType", required = "num")
     private Integer dataType;
 
-    @TableField("display_template_id")
-    @ApiModelProperty(value = "数据展示模板id")
-    private String displayTemplateId;
-
-    @TableField(exist = false)
-    @Property("数据展示模板对象信息")
-    private DsFormDisplayTemplate dsFormDisplayTemplate;
-
     @TableField("default_data")
-    @ApiModelProperty(value = "默认数据，需要是json字符串", required = "json")
+    @ApiModelProperty(value = "数据类型为1时，默认数据，需要是json字符串", required = "json")
     private String defaultData;
+
+    @TableField("object_id")
+    @ApiModelProperty(value = "数据类型为其他时，数据的id")
+    private String objectId;
 
     /**
      * 删除标记，0未删除，1删除
