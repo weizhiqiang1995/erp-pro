@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.api.Property;
+import com.skyeye.attr.entity.AttrDefinition;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
 
@@ -32,10 +33,6 @@ public class DsFormPageContent extends OperatorUserInfo {
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")
     private String id;
-
-    @TableField("title")
-    @ApiModelProperty(value = "左侧提醒，例如：姓名", required = "required")
-    private String title;
 
     @TableField("placeholder")
     @ApiModelProperty(value = "文本提示语")
@@ -62,16 +59,20 @@ public class DsFormPageContent extends OperatorUserInfo {
     private DsFormComponent dsFormComponent;
 
     @TableField("page_id")
-    @ApiModelProperty(value = "表单布局id", required = "required")
+    @Property("表单布局id")
     private String pageId;
 
     @TableField(value = "order_by")
-    @ApiModelProperty(value = "排序", required = "num")
+    @ApiModelProperty(value = "排序", required = "required,num")
     private Integer orderBy;
 
     @TableField("attr_key")
-    @ApiModelProperty(value = "属性key")
+    @ApiModelProperty(value = "属性key", required = "required")
     private String attrKey;
+
+    @TableField(exist = false)
+    @Property("属性信息")
+    private AttrDefinition attrDefinition;
 
     @TableField("data_type")
     @ApiModelProperty(value = "数据类型，参考#ComponentDataType", required = "num")
@@ -84,11 +85,5 @@ public class DsFormPageContent extends OperatorUserInfo {
     @TableField("object_id")
     @ApiModelProperty(value = "数据类型为其他时，数据的id")
     private String objectId;
-
-    /**
-     * 删除标记，0未删除，1删除
-     */
-    @TableField(value = "delete_flag")
-    private Integer deleteFlag;
 
 }

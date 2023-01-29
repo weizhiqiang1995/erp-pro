@@ -23,7 +23,6 @@ import lombok.NoArgsConstructor;
 public enum ComponentAttr implements SkyeyeEnumClass {
 
     ATTR_KEY("attrKeyBox", "关联属性", true, true, true),
-    TITLE("titleBox", "名称", true, true, true),
     LINK_DATA("linkDataBox", "关联数据", false, true, false),
     PLACEHOLDER("placeholderBox", "提示语", false, true, false),
     REQUIRE("requireBox", "限制条件", false, true, false),

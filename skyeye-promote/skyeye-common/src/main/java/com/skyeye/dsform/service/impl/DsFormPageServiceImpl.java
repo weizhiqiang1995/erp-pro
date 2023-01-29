@@ -5,8 +5,11 @@
 package com.skyeye.dsform.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.annotation.service.SkyeyeService;
+import com.skyeye.attr.entity.AttrDefinition;
+import com.skyeye.attr.service.AttrDefinitionService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.common.constans.DsFormConstants;
 import com.skyeye.common.object.InputObject;
@@ -15,6 +18,7 @@ import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.dsform.dao.DsFormPageDao;
 import com.skyeye.dsform.entity.DsFormPage;
 import com.skyeye.dsform.entity.DsFormPageContent;
+import com.skyeye.dsform.entity.DsFormPageContentVo;
 import com.skyeye.dsform.service.DsFormPageContentService;
 import com.skyeye.dsform.service.DsFormPageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName: DsFormPageServiceImpl
@@ -38,6 +43,9 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
 
     @Autowired
     private DsFormPageContentService dsFormPageContentService;
+
+    @Autowired
+    private AttrDefinitionService attrDefinitionService;
 
     @Override
     public void queryDsFormPageList(InputObject inputObject, OutputObject outputObject) {
@@ -72,6 +80,14 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
         DsFormPage dsFormPage = super.selectById(id);
         List<DsFormPageContent> dsFormPageContents = dsFormPageContentService.getDsFormPageContentByPageId(id);
         dsFormPage.setDsFormPageContents(dsFormPageContents);
+        // 获取属性信息
+        List<String> attrKeys = dsFormPageContents.stream().map(DsFormPageContent::getAttrKey).collect(Collectors.toList());
+        if (CollectionUtil.isNotEmpty(attrKeys)) {
+            Map<String, AttrDefinition> attrDefinitionMap = attrDefinitionService.queryAttrDefinitionMap(dsFormPage.getClassName(), attrKeys);
+            dsFormPageContents.forEach(dsFormPageContent -> {
+                dsFormPageContent.setAttrDefinition(attrDefinitionMap.get(dsFormPageContent.getAttrKey()));
+            });
+        }
         return dsFormPage;
     }
 
@@ -83,6 +99,28 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
             dsFormPage.setDsFormPageContents(pageContentMap.get(dsFormPage.getId()));
         });
         return dsFormPageList;
+    }
+
+    /**
+     * 保存表单布局关联的组件信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void writeDsFormPageContent(InputObject inputObject, OutputObject outputObject) {
+        DsFormPageContentVo dsFormPageContentVo = inputObject.getParams(DsFormPageContentVo.class);
+        List<DsFormPageContent> dsFormPageContentList = dsFormPageContentVo.getDsFormPageContentList();
+        dsFormPageContentList.forEach(dsFormPageContent -> {
+            dsFormPageContent.setPageId(dsFormPageContentVo.getPageId());
+        });
+        // 删除之前已经保存的
+        dsFormPageContentService.deleteDsFormContentByPageId(dsFormPageContentVo.getPageId());
+        // 保存新的组件关联信息
+        String userId = inputObject.getLogParams().get("id").toString();
+        dsFormPageContentService.createEntity(dsFormPageContentList, userId);
+        // 刷新表单布局的缓存
+        refreshCache(dsFormPageContentVo.getPageId());
     }
 
 }

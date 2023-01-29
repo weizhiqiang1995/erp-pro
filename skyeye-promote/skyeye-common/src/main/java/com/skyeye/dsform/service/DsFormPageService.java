@@ -13,4 +13,5 @@ public interface DsFormPageService extends SkyeyeBusinessService<DsFormPage> {
 
     void queryDsFormPageList(InputObject inputObject, OutputObject outputObject);
 
+    void writeDsFormPageContent(InputObject inputObject, OutputObject outputObject);
 }

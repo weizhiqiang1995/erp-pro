@@ -6,13 +6,10 @@ package com.skyeye.dsform.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.cache.redis.RedisCache;
-import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.DsFormConstants;
 import com.skyeye.common.constans.RedisConstants;
-import com.skyeye.common.enumeration.DeleteFlagEnum;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.dsform.dao.DsFormPageContentDao;
 import com.skyeye.dsform.entity.DsFormComponent;
@@ -58,7 +55,6 @@ public class DsFormPageContentServiceImpl extends SkyeyeBusinessServiceImpl<DsFo
             // 查询该表单布局绑定的组件信息
             QueryWrapper<DsFormPageContent> queryWrapper = new QueryWrapper<>();
             queryWrapper.orderByAsc(MybatisPlusUtil.toColumns(DsFormPageContent::getOrderBy));
-            queryWrapper.eq(MybatisPlusUtil.toColumns(clazz, CommonConstants.DELETE_FLAG), DeleteFlagEnum.NOT_DELETE.getKey());
             queryWrapper.eq(MybatisPlusUtil.toColumns(DsFormPageContent::getPageId), pageId);
             return list(queryWrapper);
         }, RedisConstants.ALL_USE_TIME, DsFormPageContent.class);
@@ -102,10 +98,11 @@ public class DsFormPageContentServiceImpl extends SkyeyeBusinessServiceImpl<DsFo
 
     @Override
     public void deleteDsFormContentByPageId(String pageId) {
-        UpdateWrapper<DsFormPageContent> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.eq(MybatisPlusUtil.toColumns(DsFormPageContent::getPageId), pageId);
-        updateWrapper.set(MybatisPlusUtil.toColumns(clazz, CommonConstants.DELETE_FLAG), DeleteFlagEnum.DELETED.getKey());
-        update(updateWrapper);
+        QueryWrapper<DsFormPageContent> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(MybatisPlusUtil.toColumns(DsFormPageContent::getPageId), pageId);
+        remove(queryWrapper);
+        String cacheKey = DsFormConstants.dsFormContentListByPageId(pageId);
+        jedisClientService.del(cacheKey);
     }
 
 }

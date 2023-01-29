@@ -12,6 +12,7 @@ import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.dsform.entity.DsFormPage;
+import com.skyeye.dsform.entity.DsFormPageContentVo;
 import com.skyeye.dsform.service.DsFormPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -86,6 +87,19 @@ public class DsFormPageController {
     @RequestMapping("/post/DsFormPageController/selectDsFormPageById")
     public void selectDsFormPageById(InputObject inputObject, OutputObject outputObject) {
         dsFormPageService.selectById(inputObject, outputObject);
+    }
+
+    /**
+     * 保存表单布局关联的组件信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "writeDsFormPageContent", value = "保存表单布局关联的组件信息", method = "POST", allUse = "2")
+    @ApiImplicitParams(classBean = DsFormPageContentVo.class)
+    @RequestMapping("/post/DsFormPageController/writeDsFormPageContent")
+    public void writeDsFormPageContent(InputObject inputObject, OutputObject outputObject) {
+        dsFormPageService.writeDsFormPageContent(inputObject, outputObject);
     }
 
 }
