@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  * @ClassName: OperateApi
- * @Description: 操作管理对应的接口信息实体类
+ * @Description: 操作信息对应的接口信息实体类
  * @author: skyeye云系列--卫志强
  * @date: 2023/1/29 18:07
  * @Copyright: 2023 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
@@ -26,7 +26,7 @@ import java.util.Map;
  */
 @Data
 @TableName(value = "skyeye_operate_api", autoResultMap = true)
-@ApiModel("操作管理对应的接口信息实体类")
+@ApiModel("操作信息对应的接口信息实体类")
 public class OperateApi extends OperatorUserInfo {
 
     @TableId("id")
@@ -34,7 +34,7 @@ public class OperateApi extends OperatorUserInfo {
     private String id;
 
     @TableField("operate_id")
-    @Property(value = "操作管理的id")
+    @Property(value = "操作信息的id")
     private String operateId;
 
     @TableField("service_str")

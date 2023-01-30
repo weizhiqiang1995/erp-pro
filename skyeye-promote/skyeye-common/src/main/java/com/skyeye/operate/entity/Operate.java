@@ -43,9 +43,21 @@ public class Operate extends OperatorUserInfo {
     @ApiModelProperty(value = "操作按钮的颜色，展示位置为操作栏时必填，参考#ButtonColorType")
     private String color;
 
+    @TableField("auth_point_num")
+    @ApiModelProperty(value = "权限控制编号")
+    private String authPointNum;
+
     @TableField("event_type")
     @ApiModelProperty(value = "事件类型，参考#EventType", required = "required")
     private String eventType;
+
+    @TableField(value = "order_by")
+    @ApiModelProperty(value = "排序，值越大越往后", required = "required,num")
+    private Integer orderBy;
+
+    @TableField("class_name")
+    @ApiModelProperty(value = "服务类的className", required = "required")
+    private String className;
 
     @TableField(exist = false)
     @ApiModelProperty(value = "当事件类型为请求事件时，填写的接口信息", required = "json")

@@ -5,8 +5,14 @@
 package com.skyeye.operate.controller;
 
 import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParam;
+import com.skyeye.annotation.api.ApiImplicitParams;
+import com.skyeye.annotation.api.ApiOperation;
+import com.skyeye.common.object.InputObject;
+import com.skyeye.common.object.OutputObject;
 import com.skyeye.operate.service.OperateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -23,5 +29,19 @@ public class OperateController {
 
     @Autowired
     private OperateService operateService;
+
+    /**
+     * 获取操作列表
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryOperateList", value = "获取操作列表", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "className", name = "className", value = "service的className", required = "required")})
+    @RequestMapping("/post/OperateController/queryOperateList")
+    public void queryOperateList(InputObject inputObject, OutputObject outputObject) {
+        operateService.queryOperateList(inputObject, outputObject);
+    }
 
 }

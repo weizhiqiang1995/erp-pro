@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @ClassName: OperateApiServiceImpl
- * @Description: 操作管理对应的接口信息服务层
+ * @Description: 操作信息对应的接口信息服务层
  * @author: skyeye云系列--卫志强
  * @date: 2023/1/29 18:07
  * @Copyright: 2023 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
