@@ -4,6 +4,9 @@
 
 package com.skyeye.operate.dao;
 
+import com.skyeye.eve.dao.SkyeyeBaseMapper;
+import com.skyeye.operate.entity.Operate;
+
 /**
  * @ClassName: OperateDao
  * @Description: 操作管理数据接口层
@@ -12,5 +15,5 @@ package com.skyeye.operate.dao;
  * @Copyright: 2023 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-public interface OperateDao {
+public interface OperateDao extends SkyeyeBaseMapper<Operate> {
 }

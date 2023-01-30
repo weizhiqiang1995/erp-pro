@@ -4,12 +4,12 @@
 
 package com.skyeye.operate.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.cache.RedisCacheField;
-import com.skyeye.annotation.unique.UniqueField;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
 
@@ -22,14 +22,37 @@ import lombok.Data;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Data
-@UniqueField(value = {"numCode"})
-@RedisCacheField(name = "dsForm:component")
-@TableName(value = "", autoResultMap = true)
+@RedisCacheField(name = "skyeye:operate")
+@TableName(value = "skyeye_operate", autoResultMap = true)
 @ApiModel("操作管理实体类")
 public class Operate extends OperatorUserInfo {
 
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")
     private String id;
+
+    @TableField("`name`")
+    @ApiModelProperty(value = "名称", required = "required")
+    private String name;
+
+    @TableField("position")
+    @ApiModelProperty(value = "展示位置，参考#OperatePosition", required = "required")
+    private String position;
+
+    @TableField("color")
+    @ApiModelProperty(value = "操作按钮的颜色，展示位置为操作栏时必填，参考#ButtonColorType")
+    private String color;
+
+    @TableField("event_type")
+    @ApiModelProperty(value = "事件类型，参考#EventType", required = "required")
+    private String eventType;
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "当事件类型为请求事件时，填写的接口信息", required = "json")
+    private OperateApi operateApi;
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "当事件类型为新开页面时，填写的页面/布局信息", required = "json")
+    private OperateOpenPage operateOpenPage;
 
 }

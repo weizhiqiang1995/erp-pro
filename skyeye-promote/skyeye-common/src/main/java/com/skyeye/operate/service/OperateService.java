@@ -4,6 +4,9 @@
 
 package com.skyeye.operate.service;
 
+import com.skyeye.base.business.service.SkyeyeBusinessService;
+import com.skyeye.operate.entity.Operate;
+
 /**
  * @ClassName: OperateService
  * @Description: 操作管理服务接口类
@@ -12,5 +15,6 @@ package com.skyeye.operate.service;
  * @Copyright: 2023 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-public interface OperateService {
+public interface OperateService extends SkyeyeBusinessService<Operate> {
+
 }
