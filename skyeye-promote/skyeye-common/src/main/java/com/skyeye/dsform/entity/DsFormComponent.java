@@ -63,7 +63,7 @@ public class DsFormComponent extends IconOrImgInfo {
     private String htmlContent;
 
     @TableField("html_data_from")
-    @ApiModelProperty(value = "数据展示来源的加载脚本", required = "required")
+    @ApiModelProperty(value = "数据展示来源的加载脚本")
     private String htmlDataFrom;
 
     @TableField("js_content")

@@ -6,6 +6,7 @@ package com.skyeye.dsform.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.annotation.service.SkyeyeService;
 import com.skyeye.attr.entity.AttrDefinition;
@@ -81,11 +82,15 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
         List<DsFormPageContent> dsFormPageContents = dsFormPageContentService.getDsFormPageContentByPageId(id);
         dsFormPage.setDsFormPageContents(dsFormPageContents);
         // 获取属性信息
-        List<String> attrKeys = dsFormPageContents.stream().map(DsFormPageContent::getAttrKey).collect(Collectors.toList());
+        List<String> attrKeys = dsFormPageContents.stream()
+            .filter(bean -> StrUtil.isNotEmpty(bean.getAttrKey()))
+            .map(DsFormPageContent::getAttrKey).collect(Collectors.toList());
         if (CollectionUtil.isNotEmpty(attrKeys)) {
             Map<String, AttrDefinition> attrDefinitionMap = attrDefinitionService.queryAttrDefinitionMap(dsFormPage.getClassName(), attrKeys);
             dsFormPageContents.forEach(dsFormPageContent -> {
-                dsFormPageContent.setAttrDefinition(attrDefinitionMap.get(dsFormPageContent.getAttrKey()));
+                if (StrUtil.isNotEmpty(dsFormPageContent.getAttrKey())) {
+                    dsFormPageContent.setAttrDefinition(attrDefinitionMap.get(dsFormPageContent.getAttrKey()));
+                }
             });
         }
         return dsFormPage;

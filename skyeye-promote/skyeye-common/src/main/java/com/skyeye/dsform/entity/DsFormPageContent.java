@@ -34,6 +34,10 @@ public class DsFormPageContent extends OperatorUserInfo {
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")
     private String id;
 
+    @TableField("title")
+    @ApiModelProperty(value = "左侧标题，例如：姓名")
+    private String title;
+
     @TableField("placeholder")
     @ApiModelProperty(value = "文本提示语")
     private String placeholder;
@@ -67,7 +71,7 @@ public class DsFormPageContent extends OperatorUserInfo {
     private Integer orderBy;
 
     @TableField("attr_key")
-    @ApiModelProperty(value = "属性key", required = "required")
+    @ApiModelProperty(value = "属性key")
     private String attrKey;
 
     @TableField(exist = false)
