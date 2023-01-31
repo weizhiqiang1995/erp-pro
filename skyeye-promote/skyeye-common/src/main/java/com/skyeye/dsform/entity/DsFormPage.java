@@ -12,6 +12,7 @@ import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.api.Property;
 import com.skyeye.annotation.cache.RedisCacheField;
 import com.skyeye.annotation.unique.UniqueField;
+import com.skyeye.business.entity.BusinessApi;
 import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import com.skyeye.operate.entity.Operate;
@@ -63,11 +64,15 @@ public class DsFormPage extends OperatorUserInfo {
     private String className;
 
     @TableField(exist = false)
-    @Property("表单布局关联的组件信息")
+    @ApiModelProperty(value = "表单布局关联的接口信息", required = "required,json")
+    private BusinessApi businessApi;
+
+    @TableField(exist = false)
+    @Property("表单布局关联的组件信息，非列表布局才拥有关联的组件信息")
     private List<DsFormPageContent> dsFormPageContents;
 
     @TableField(exist = false)
-    @Property("表单布局关联的操作按钮信息")
+    @Property("表单布局关联的操作按钮信息，列表布局才拥有操作按钮信息")
     private List<Operate> operateList;
 
 }

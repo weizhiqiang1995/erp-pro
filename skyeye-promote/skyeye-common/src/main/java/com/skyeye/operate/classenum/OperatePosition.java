@@ -22,8 +22,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public enum OperatePosition implements SkyeyeEnumClass {
 
-    TOOLBAR("toolbar", "工具栏", true, false),
-    ACTIONBAR("actionbar", "操作栏", true, true);
+    TOOL_BAR("toolBar", "工具栏", true, false),
+    ACTION_BAR("actionBar", "操作栏", true, true),
+    RIGHT_MENU_BAR("rightMenuBar", "右键菜单栏", true, true);
 
     private String key;
 
