@@ -14,6 +14,7 @@ import com.skyeye.annotation.cache.RedisCacheField;
 import com.skyeye.annotation.unique.UniqueField;
 import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.entity.features.OperatorUserInfo;
+import com.skyeye.operate.entity.Operate;
 import lombok.Data;
 
 import java.util.List;
@@ -64,5 +65,9 @@ public class DsFormPage extends OperatorUserInfo {
     @TableField(exist = false)
     @Property("表单布局关联的组件信息")
     private List<DsFormPageContent> dsFormPageContents;
+
+    @TableField(exist = false)
+    @Property("表单布局关联的操作按钮信息")
+    private List<Operate> operateList;
 
 }

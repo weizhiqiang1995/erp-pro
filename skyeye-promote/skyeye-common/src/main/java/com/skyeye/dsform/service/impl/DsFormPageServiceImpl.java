@@ -22,6 +22,8 @@ import com.skyeye.dsform.entity.DsFormPageContent;
 import com.skyeye.dsform.entity.DsFormPageContentVo;
 import com.skyeye.dsform.service.DsFormPageContentService;
 import com.skyeye.dsform.service.DsFormPageService;
+import com.skyeye.operate.entity.Operate;
+import com.skyeye.operate.service.OperateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +49,9 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
 
     @Autowired
     private AttrDefinitionService attrDefinitionService;
+
+    @Autowired
+    private OperateService operateService;
 
     @Override
     public void queryDsFormPageList(InputObject inputObject, OutputObject outputObject) {
@@ -93,6 +98,9 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
                 }
             });
         }
+        // 获取操作信息
+        List<Operate> operateList = operateService.getOperatesByClassName(dsFormPage.getClassName());
+        dsFormPage.setOperateList(operateList);
         return dsFormPage;
     }
 

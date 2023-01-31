@@ -108,9 +108,11 @@ public class AttrTransformServiceImpl extends SkyeyeBusinessServiceImpl<AttrTran
     }
 
     @Override
-    public void deletePreExecution(String id) {
-        AttrTransform attrTransform = selectById(id);
-        attrTransformTableService.deleteAttrTransformTable(attrTransform.getClassName(), attrTransform.getAttrKey());
+    public void deletePostpose(AttrTransform attrTransform) {
+        if (attrTransform.getShowType().equals(DsFormShowType.TABLE.getKey())) {
+            // 如果该属性是表格类型的属性，则删除该属性下的表格信息
+            attrTransformTableService.deleteAttrTransformTable(attrTransform.getClassName(), attrTransform.getAttrKey());
+        }
 
         String cacheKey = iAttrTransformService.getCacheKey(attrTransform.getClassName(), attrTransform.getActFlowId());
         jedisClientService.del(cacheKey);

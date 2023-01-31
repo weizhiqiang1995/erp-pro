@@ -10,6 +10,7 @@ import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.operate.entity.Operate;
 import com.skyeye.operate.service.OperateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,47 @@ public class OperateController {
     @RequestMapping("/post/OperateController/queryOperateList")
     public void queryOperateList(InputObject inputObject, OutputObject outputObject) {
         operateService.queryOperateList(inputObject, outputObject);
+    }
+
+    /**
+     * 新增/编辑操作
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "writeOperate", value = "新增/编辑操作", method = "POST", allUse = "2")
+    @ApiImplicitParams(classBean = Operate.class)
+    @RequestMapping("/post/OperateController/writeOperate")
+    public void writeOperate(InputObject inputObject, OutputObject outputObject) {
+        operateService.saveOrUpdateEntity(inputObject, outputObject);
+    }
+
+    /**
+     * 根据id查看操作信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryOperateById", value = "根据id查看操作信息", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "id", name = "id", value = "操作信息的id", required = "required")})
+    @RequestMapping("/post/OperateController/queryOperateById")
+    public void queryOperateById(InputObject inputObject, OutputObject outputObject) {
+        operateService.selectById(inputObject, outputObject);
+    }
+
+    /**
+     * 根据id删除操作信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "deleteOperateById", value = "根据id删除操作信息", method = "DELETE", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "id", name = "id", value = "操作信息的id", required = "required")})
+    @RequestMapping("/post/OperateController/deleteOperateById")
+    public void deleteOperateById(InputObject inputObject, OutputObject outputObject) {
+        operateService.deleteById(inputObject, outputObject);
     }
 
 }

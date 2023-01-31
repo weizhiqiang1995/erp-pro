@@ -4,6 +4,7 @@
 
 package com.skyeye.operate.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
@@ -14,6 +15,11 @@ import com.skyeye.operate.entity.OperateOpenPage;
 import com.skyeye.operate.service.OperateOpenPageService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName: OperateOpenPageServiceImpl
@@ -42,5 +48,23 @@ public class OperateOpenPageServiceImpl extends SkyeyeBusinessServiceImpl<Operat
         QueryWrapper<OperateOpenPage> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(MybatisPlusUtil.toColumns(OperateOpenPage::getOperateId), operateId);
         remove(queryWrapper);
+    }
+
+    @Override
+    public OperateOpenPage selectByOperateId(String operateId) {
+        QueryWrapper<OperateOpenPage> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(MybatisPlusUtil.toColumns(OperateOpenPage::getOperateId), operateId);
+        return getOne(queryWrapper);
+    }
+
+    @Override
+    public Map<String, OperateOpenPage> selectByOperateIds(List<String> operateIds) {
+        if (CollectionUtil.isEmpty(operateIds)) {
+            return new HashMap<>();
+        }
+        QueryWrapper<OperateOpenPage> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in(MybatisPlusUtil.toColumns(OperateOpenPage::getOperateId), operateIds);
+        List<OperateOpenPage> operateOpenPageList = list(queryWrapper);
+        return operateOpenPageList.stream().collect(Collectors.toMap(OperateOpenPage::getOperateId, bean -> bean));
     }
 }

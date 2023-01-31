@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.cache.RedisCacheField;
+import com.skyeye.business.entity.BusinessApi;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
 
@@ -61,7 +62,7 @@ public class Operate extends OperatorUserInfo {
 
     @TableField(exist = false)
     @ApiModelProperty(value = "当事件类型为请求事件时，填写的接口信息", required = "json")
-    private OperateApi operateApi;
+    private BusinessApi businessApi;
 
     @TableField(exist = false)
     @ApiModelProperty(value = "当事件类型为新开页面时，填写的页面/布局信息", required = "json")

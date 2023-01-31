@@ -9,6 +9,8 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.operate.entity.Operate;
 
+import java.util.List;
+
 /**
  * @ClassName: OperateService
  * @Description: 操作管理服务接口类
@@ -20,5 +22,7 @@ import com.skyeye.operate.entity.Operate;
 public interface OperateService extends SkyeyeBusinessService<Operate> {
 
     void queryOperateList(InputObject inputObject, OutputObject outputObject);
+
+    List<Operate> getOperatesByClassName(String className);
 
 }

@@ -7,6 +7,9 @@ package com.skyeye.operate.service;
 import com.skyeye.base.business.service.SkyeyeBusinessService;
 import com.skyeye.operate.entity.OperateOpenPage;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @ClassName: OperateOpenPageService
  * @Description: 操作信息对应的新开页面信息服务接口层
@@ -18,5 +21,9 @@ import com.skyeye.operate.entity.OperateOpenPage;
 public interface OperateOpenPageService extends SkyeyeBusinessService<OperateOpenPage> {
 
     void deleteByOperateId(String operateId);
+
+    OperateOpenPage selectByOperateId(String operateId);
+
+    Map<String, OperateOpenPage> selectByOperateIds(List<String> operateIds);
 
 }
