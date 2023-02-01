@@ -66,7 +66,19 @@ public class AttrDefinitionCustom extends OperatorUserInfo {
     private String remark;
 
     @TableField(exist = false)
-    @Property(value = "属性的原始信息")
-    private AttrDefinition attrDefinition;
+    @Property(value = "是否可以作为入参，数据来源：属性原始信息")
+    private Boolean whetherInputParams;
+
+    @TableField("data_type")
+    @ApiModelProperty(value = "数据类型，参考#AttrKeyDataType", required = "num")
+    private Integer dataType;
+
+    @TableField("default_data")
+    @ApiModelProperty(value = "数据类型为1时，默认数据，需要是json字符串", required = "json")
+    private String defaultData;
+
+    @TableField("object_id")
+    @ApiModelProperty(value = "数据类型为其他时，数据的id")
+    private String objectId;
 
 }

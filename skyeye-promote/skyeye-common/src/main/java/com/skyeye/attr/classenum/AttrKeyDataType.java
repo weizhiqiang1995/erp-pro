@@ -2,7 +2,7 @@
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
 
-package com.skyeye.dsform.classenum;
+package com.skyeye.attr.classenum;
 
 import com.skyeye.common.base.classenum.SkyeyeEnumClass;
 import lombok.AllArgsConstructor;
@@ -10,8 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * @ClassName: PageComponentDataType
- * @Description: 表单布局里面的组件关联的数据类型
+ * @ClassName: AttrKeyDataType
+ * @Description: 属性关联的数据类型
  * @author: skyeye云系列--卫志强
  * @date: 2023/1/23 15:07
  * @Copyright: 2023 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public enum PageComponentDataType implements SkyeyeEnumClass {
+public enum AttrKeyDataType implements SkyeyeEnumClass {
 
     CUSTOM(1, "自定义JSON串", true, false),
     ENUM_DATA(2, "枚举类型", true, false),

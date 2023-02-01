@@ -78,16 +78,4 @@ public class DsFormPageContent extends OperatorUserInfo {
     @Property("属性信息")
     private AttrDefinition attrDefinition;
 
-    @TableField("data_type")
-    @ApiModelProperty(value = "数据类型，参考#ComponentDataType", required = "num")
-    private Integer dataType;
-
-    @TableField("default_data")
-    @ApiModelProperty(value = "数据类型为1时，默认数据，需要是json字符串", required = "json")
-    private String defaultData;
-
-    @TableField("object_id")
-    @ApiModelProperty(value = "数据类型为其他时，数据的id")
-    private String objectId;
-
 }

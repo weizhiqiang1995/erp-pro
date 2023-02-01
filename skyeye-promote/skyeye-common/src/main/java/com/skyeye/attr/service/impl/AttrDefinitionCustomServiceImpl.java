@@ -119,7 +119,7 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
             attrDefinitionCustom.setRemark(attrDefinition.getRemark());
             attrDefinitionCustom.setAttrKey(attrDefinition.getAttrKey());
         }
-        attrDefinitionCustom.setAttrDefinition(attrDefinition);
+        attrDefinitionCustom.setWhetherInputParams(attrDefinition.getWhetherInputParams());
         outputObject.setBean(attrDefinitionCustom);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
     }

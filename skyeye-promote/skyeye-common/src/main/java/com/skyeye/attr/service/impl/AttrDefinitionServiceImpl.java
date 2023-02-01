@@ -132,12 +132,7 @@ public class AttrDefinitionServiceImpl extends SkyeyeBusinessServiceImpl<AttrDef
         Map<String, AttrDefinitionCustom> attrDefinitionCustomMap = attrDefinitionCustomService.queryAttrDefinitionCustomMap(className, attrKey);
         attrDefinitionList.forEach(attrDefinition -> {
             AttrDefinitionCustom attrDefinitionCustom = attrDefinitionCustomMap.get(attrDefinition.getAttrKey());
-            if (attrDefinitionCustom != null) {
-                attrDefinition.setAttrDefinitionCustomId(attrDefinitionCustom.getId());
-                attrDefinition.setName(attrDefinitionCustom.getName());
-                attrDefinition.setRemark(attrDefinitionCustom.getRemark());
-                attrDefinition.setDsFormComponent(attrDefinitionCustom.getDsFormComponent());
-            }
+            attrDefinition.setAttrDefinitionCustom(attrDefinitionCustom);
         });
     }
 

@@ -47,7 +47,6 @@ public class DsFormPageController {
         dsFormPageService.queryDsFormPageList(inputObject, outputObject);
     }
 
-
     /**
      * 新增/编辑表单布局
      *
