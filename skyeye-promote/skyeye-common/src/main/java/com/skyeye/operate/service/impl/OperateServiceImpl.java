@@ -71,6 +71,7 @@ public class OperateServiceImpl extends SkyeyeBusinessServiceImpl<OperateDao, Op
         String cacheKey = getCacheKeyByClassName(className);
         List<Operate> operateList = redisCache.getList(cacheKey, key -> {
             QueryWrapper<Operate> wrapper = new QueryWrapper<>();
+            wrapper.orderByAsc(MybatisPlusUtil.toColumns(Operate::getOrderBy));
             wrapper.eq(MybatisPlusUtil.toColumns(Operate::getClassName), className);
             List<Operate> operates = list(wrapper);
             List<String> ids = operates.stream().map(Operate::getId).collect(Collectors.toList());
