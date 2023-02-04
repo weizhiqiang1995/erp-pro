@@ -16,6 +16,7 @@ import com.skyeye.business.entity.BusinessApi;
 import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import com.skyeye.operate.entity.Operate;
+import com.skyeye.server.entity.ServiceBeanCustom;
 import lombok.Data;
 
 import java.util.List;
@@ -62,6 +63,10 @@ public class DsFormPage extends OperatorUserInfo {
     @TableField("class_name")
     @ApiModelProperty(value = "服务类的className", required = "required")
     private String className;
+
+    @TableField(exist = false)
+    @Property(value = "服务类的信息")
+    private ServiceBeanCustom serviceBeanCustom;
 
     @TableField(exist = false)
     @ApiModelProperty(value = "表单布局关联的接口信息", required = "required,json")

@@ -98,6 +98,7 @@ public class OperateServiceImpl extends SkyeyeBusinessServiceImpl<OperateDao, Op
             // 保存请求事件
             BusinessApi businessApi = entity.getBusinessApi();
             businessApi.setObjectId(entity.getId());
+            businessApi.setObjectKey(getServiceClassName());
             businessApiService.createEntity(businessApi, userId);
         } else if (StrUtil.equals(entity.getEventType(), EventType.OPEN_PAGE.getKey())) {
             // 保存新开页面事件

@@ -61,11 +61,11 @@ public class Operate extends OperatorUserInfo {
     private String className;
 
     @TableField(exist = false)
-    @ApiModelProperty(value = "当事件类型为请求事件时，填写的接口信息", required = "json")
+    @ApiModelProperty(value = "当事件类型为请求事件时，填写的接口信息")
     private BusinessApi businessApi;
 
     @TableField(exist = false)
-    @ApiModelProperty(value = "当事件类型为新开页面时，填写的页面/布局信息", required = "json")
+    @ApiModelProperty(value = "当事件类型为新开页面时，填写的页面/布局信息")
     private OperateOpenPage operateOpenPage;
 
 }

@@ -24,6 +24,8 @@ import com.skyeye.dsform.service.DsFormPageContentService;
 import com.skyeye.dsform.service.DsFormPageService;
 import com.skyeye.operate.entity.Operate;
 import com.skyeye.operate.service.OperateService;
+import com.skyeye.server.entity.ServiceBeanCustom;
+import com.skyeye.server.service.ServiceBeanCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,16 +55,23 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
     @Autowired
     private OperateService operateService;
 
+    @Autowired
+    private ServiceBeanCustomService serviceBeanCustomService;
+
     @Override
     public void queryDsFormPageList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         String className = params.get("className").toString();
+        ServiceBeanCustom serviceBeanCustom = serviceBeanCustomService.selectById(className);
 
         QueryWrapper<DsFormPage> wrapper = new QueryWrapper<>();
         wrapper.eq(MybatisPlusUtil.toColumns(DsFormPage::getClassName), className);
         List<DsFormPage> dsFormPageList = list(wrapper);
         iAuthUserService.setName(dsFormPageList, "createId", "createName");
         iAuthUserService.setName(dsFormPageList, "lastUpdateId", "lastUpdateName");
+        dsFormPageList.forEach(dsFormPage -> {
+            dsFormPage.setServiceBeanCustom(serviceBeanCustom);
+        });
         outputObject.setBeans(dsFormPageList);
         outputObject.settotal(dsFormPageList.size());
     }
@@ -87,9 +96,7 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
         List<DsFormPageContent> dsFormPageContents = dsFormPageContentService.getDsFormPageContentByPageId(id);
         dsFormPage.setDsFormPageContents(dsFormPageContents);
         // 获取属性信息
-        List<String> attrKeys = dsFormPageContents.stream()
-            .filter(bean -> StrUtil.isNotEmpty(bean.getAttrKey()))
-            .map(DsFormPageContent::getAttrKey).collect(Collectors.toList());
+        List<String> attrKeys = dsFormPageContents.stream().filter(bean -> StrUtil.isNotEmpty(bean.getAttrKey())).map(DsFormPageContent::getAttrKey).collect(Collectors.toList());
         if (CollectionUtil.isNotEmpty(attrKeys)) {
             Map<String, AttrDefinition> attrDefinitionMap = attrDefinitionService.queryAttrDefinitionMap(dsFormPage.getClassName(), attrKeys);
             dsFormPageContents.forEach(dsFormPageContent -> {

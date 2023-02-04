@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public enum EventType implements SkyeyeEnumClass {
 
     AJAX("ajax", "请求事件", true, false),
-    OPEN_PAGE("openPage", "新开页面", true, true);
+    OPEN_PAGE("openPage", "新开页面", true, false);
 
     private String key;
 
