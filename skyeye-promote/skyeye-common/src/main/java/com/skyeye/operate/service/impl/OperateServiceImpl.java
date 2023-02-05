@@ -14,12 +14,16 @@ import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
+import com.skyeye.dsform.entity.DsFormPage;
+import com.skyeye.dsform.service.DsFormPageService;
 import com.skyeye.operate.classenum.EventType;
 import com.skyeye.operate.dao.OperateDao;
 import com.skyeye.operate.entity.Operate;
 import com.skyeye.operate.entity.OperateOpenPage;
 import com.skyeye.operate.service.OperateOpenPageService;
 import com.skyeye.operate.service.OperateService;
+import com.skyeye.server.entity.ServiceBeanCustom;
+import com.skyeye.server.service.ServiceBeanCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +51,12 @@ public class OperateServiceImpl extends SkyeyeBusinessServiceImpl<OperateDao, Op
 
     @Autowired
     private RedisCache redisCache;
+
+    @Autowired
+    private DsFormPageService dsFormPageService;
+
+    @Autowired
+    private ServiceBeanCustomService serviceBeanCustomService;
 
     /**
      * 获取操作列表
@@ -108,6 +118,29 @@ public class OperateServiceImpl extends SkyeyeBusinessServiceImpl<OperateDao, Op
         }
         String cacheKey = getCacheKeyByClassName(entity.getClassName());
         jedisClientService.del(cacheKey);
+    }
+
+    /**
+     * 根据id查询数据
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Operate selectById(String id) {
+        Operate operate = super.selectById(id);
+        if (StrUtil.equals(operate.getEventType(), EventType.OPEN_PAGE.getKey())) {
+            // 新开页面
+            OperateOpenPage operateOpenPage = operate.getOperateOpenPage();
+            if (!operateOpenPage.getType()) {
+                // 表单布局
+                DsFormPage dsFormPage = dsFormPageService.getDataFromDb(operateOpenPage.getPageUrl());
+                ServiceBeanCustom serviceBeanCustom = serviceBeanCustomService.selectById(operate.getClassName());
+                dsFormPage.setServiceBeanCustom(serviceBeanCustom);
+                operateOpenPage.setDsFormPage(dsFormPage);
+            }
+        }
+        return operate;
     }
 
     @Override

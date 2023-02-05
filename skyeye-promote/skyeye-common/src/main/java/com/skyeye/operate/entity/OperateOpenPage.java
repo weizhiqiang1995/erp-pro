@@ -12,6 +12,7 @@ import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.api.Property;
 import com.skyeye.common.entity.features.OperatorUserInfo;
+import com.skyeye.dsform.entity.DsFormPage;
 import lombok.Data;
 
 import java.util.Map;
@@ -48,6 +49,10 @@ public class OperateOpenPage extends OperatorUserInfo {
     @TableField("page_url")
     @ApiModelProperty(value = "自定义页面的地址/表单布局的id", required = "required")
     private String pageUrl;
+
+    @TableField(exist = false)
+    @Property(value = "当 type 为表单布局时，存储的表单布局信息")
+    private DsFormPage dsFormPage;
 
     @TableField(value = "params", typeHandler = JacksonTypeHandler.class)
     @ApiModelProperty(value = "请求参数，数据格式：{入参key: 需要解析的属性key}", required = "json")
