@@ -12,6 +12,8 @@ import com.skyeye.annotation.service.SkyeyeService;
 import com.skyeye.attr.entity.AttrDefinition;
 import com.skyeye.attr.service.AttrDefinitionService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
+import com.skyeye.business.entity.BusinessApi;
+import com.skyeye.business.service.BusinessApiService;
 import com.skyeye.common.constans.DsFormConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -58,6 +60,9 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
     @Autowired
     private ServiceBeanCustomService serviceBeanCustomService;
 
+    @Autowired
+    private BusinessApiService businessApiService;
+
     @Override
     public void queryDsFormPageList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
@@ -81,6 +86,16 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
         Map<String, Object> business = BeanUtil.beanToMap(entity);
         String oddNumber = iCodeRuleService.getNextCodeByClassName(getClass().getName(), business);
         entity.setNumCode(oddNumber);
+    }
+
+    @Override
+    public void writePostpose(DsFormPage entity, String userId) {
+        super.writePostpose(entity, userId);
+        // 保存请求事件
+        BusinessApi businessApi = entity.getBusinessApi();
+        businessApi.setObjectId(entity.getId());
+        businessApi.setObjectKey(getServiceClassName());
+        businessApiService.createEntity(businessApi, userId);
     }
 
     @Override
@@ -108,6 +123,9 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
         // 获取操作信息
         List<Operate> operateList = operateService.getOperatesByClassName(dsFormPage.getClassName());
         dsFormPage.setOperateList(operateList);
+        // 接口信息
+        BusinessApi businessApi = businessApiService.selectByObjectId(id);
+        dsFormPage.setBusinessApi(businessApi);
         return dsFormPage;
     }
 
