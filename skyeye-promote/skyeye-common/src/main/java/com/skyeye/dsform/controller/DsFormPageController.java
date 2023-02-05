@@ -12,6 +12,7 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.dsform.entity.DsFormPage;
 import com.skyeye.dsform.entity.DsFormPageContentVo;
+import com.skyeye.dsform.entity.TableColumnVo;
 import com.skyeye.dsform.service.DsFormPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -98,6 +99,19 @@ public class DsFormPageController {
     @RequestMapping("/post/DsFormPageController/writeDsFormPageContent")
     public void writeDsFormPageContent(InputObject inputObject, OutputObject outputObject) {
         dsFormPageService.writeDsFormPageContent(inputObject, outputObject);
+    }
+
+    /**
+     * 保存表格类型的布局的信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "writeDsFormPageTable", value = "保存表格类型的布局的信息", method = "POST", allUse = "2")
+    @ApiImplicitParams(classBean = TableColumnVo.class)
+    @RequestMapping("/post/DsFormPageController/writeDsFormPageTable")
+    public void writeDsFormPageTable(InputObject inputObject, OutputObject outputObject) {
+        dsFormPageService.writeDsFormPageTable(inputObject, outputObject);
     }
 
 }

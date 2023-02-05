@@ -14,24 +14,23 @@ import com.skyeye.attr.service.AttrDefinitionService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.business.entity.BusinessApi;
 import com.skyeye.business.service.BusinessApiService;
-import com.skyeye.common.constans.DsFormConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
+import com.skyeye.dsform.classenum.DsFormPageType;
 import com.skyeye.dsform.dao.DsFormPageDao;
-import com.skyeye.dsform.entity.DsFormPage;
-import com.skyeye.dsform.entity.DsFormPageContent;
-import com.skyeye.dsform.entity.DsFormPageContentVo;
+import com.skyeye.dsform.entity.*;
 import com.skyeye.dsform.service.DsFormPageContentService;
 import com.skyeye.dsform.service.DsFormPageService;
+import com.skyeye.dsform.service.TableColumnService;
 import com.skyeye.operate.entity.Operate;
 import com.skyeye.operate.service.OperateService;
 import com.skyeye.server.entity.ServiceBeanCustom;
 import com.skyeye.server.service.ServiceBeanCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -62,6 +61,9 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
 
     @Autowired
     private BusinessApiService businessApiService;
+
+    @Autowired
+    private TableColumnService tableColumnService;
 
     @Override
     public void queryDsFormPageList(InputObject inputObject, OutputObject outputObject) {
@@ -99,16 +101,36 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
     }
 
     @Override
-    public void deletePostpose(String id) {
-        // 删除页面内容项信息
-        dsFormPageContentService.deleteDsFormContentByPageId(id);
-        jedisClientService.del(DsFormConstants.dsFormContentListByPageId(id));
+    public void deletePostpose(DsFormPage dsFormPage) {
+        if (StrUtil.equals(dsFormPage.getType(), DsFormPageType.SIMPLE_TABLE.getKey())) {
+            // 删除页面内容项信息
+            dsFormPageContentService.deleteDsFormContentByPageId(dsFormPage.getId());
+        } else {
+            // 删除表单布局(表格类型关联的列信息)
+            tableColumnService.deleteByPageId(dsFormPage.getId());
+        }
     }
 
     @Override
     public DsFormPage selectById(String id) {
         DsFormPage dsFormPage = super.selectById(id);
-        List<DsFormPageContent> dsFormPageContents = dsFormPageContentService.getDsFormPageContentByPageId(id);
+        if (!StrUtil.equals(dsFormPage.getType(), DsFormPageType.SIMPLE_TABLE.getKey())) {
+            selectPageContent(dsFormPage);
+        } else {
+            selectTableColumn(dsFormPage);
+            // 获取操作信息 todo 待和表单布局id联合查询
+            List<Operate> operateList = operateService.getOperatesByClassName(dsFormPage.getClassName());
+            dsFormPage.setOperateList(operateList);
+        }
+
+        // 接口信息
+        BusinessApi businessApi = businessApiService.selectByObjectId(id);
+        dsFormPage.setBusinessApi(businessApi);
+        return dsFormPage;
+    }
+
+    private void selectPageContent(DsFormPage dsFormPage) {
+        List<DsFormPageContent> dsFormPageContents = dsFormPageContentService.getDsFormPageContentByPageId(dsFormPage.getId());
         dsFormPage.setDsFormPageContents(dsFormPageContents);
         // 获取属性信息
         List<String> attrKeys = dsFormPageContents.stream().filter(bean -> StrUtil.isNotEmpty(bean.getAttrKey())).map(DsFormPageContent::getAttrKey).collect(Collectors.toList());
@@ -120,23 +142,19 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
                 }
             });
         }
-        // 获取操作信息
-        List<Operate> operateList = operateService.getOperatesByClassName(dsFormPage.getClassName());
-        dsFormPage.setOperateList(operateList);
-        // 接口信息
-        BusinessApi businessApi = businessApiService.selectByObjectId(id);
-        dsFormPage.setBusinessApi(businessApi);
-        return dsFormPage;
     }
 
-    @Override
-    public List<DsFormPage> selectByIds(String... ids) {
-        List<DsFormPage> dsFormPageList = super.selectByIds(ids);
-        Map<String, List<DsFormPageContent>> pageContentMap = dsFormPageContentService.getDsFormPageContentListByPageId(Arrays.asList(ids));
-        dsFormPageList.forEach(dsFormPage -> {
-            dsFormPage.setDsFormPageContents(pageContentMap.get(dsFormPage.getId()));
-        });
-        return dsFormPageList;
+    private void selectTableColumn(DsFormPage dsFormPage) {
+        List<TableColumn> tableColumnList = tableColumnService.getTableColumnByPageId(dsFormPage.getId());
+        // 获取属性信息
+        List<String> attrKeys = tableColumnList.stream().map(TableColumn::getAttrKey).collect(Collectors.toList());
+        if (CollectionUtil.isNotEmpty(attrKeys)) {
+            Map<String, AttrDefinition> attrDefinitionMap = attrDefinitionService.queryAttrDefinitionMap(dsFormPage.getClassName(), attrKeys);
+            tableColumnList.forEach(tableColumn -> {
+                tableColumn.setAttrDefinition(attrDefinitionMap.get(tableColumn.getAttrKey()));
+            });
+        }
+        dsFormPage.setTableColumnList(tableColumnList);
     }
 
     /**
@@ -146,6 +164,7 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
+    @Transactional(value = TRANSACTION_MANAGER_VALUE, rollbackFor = Exception.class)
     public void writeDsFormPageContent(InputObject inputObject, OutputObject outputObject) {
         DsFormPageContentVo dsFormPageContentVo = inputObject.getParams(DsFormPageContentVo.class);
         List<DsFormPageContent> dsFormPageContentList = dsFormPageContentVo.getDsFormPageContentList();
@@ -159,6 +178,20 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
         dsFormPageContentService.createEntity(dsFormPageContentList, userId);
         // 刷新表单布局的缓存
         refreshCache(dsFormPageContentVo.getPageId());
+    }
+
+    /**
+     * 保存表格类型的布局的信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    @Transactional(value = TRANSACTION_MANAGER_VALUE, rollbackFor = Exception.class)
+    public void writeDsFormPageTable(InputObject inputObject, OutputObject outputObject) {
+        TableColumnVo tableColumnVo = inputObject.getParams(TableColumnVo.class);
+        String userId = inputObject.getLogParams().get("id").toString();
+        tableColumnService.createList(tableColumnVo.getTableColumnList(), userId, tableColumnVo.getPageId());
     }
 
 }

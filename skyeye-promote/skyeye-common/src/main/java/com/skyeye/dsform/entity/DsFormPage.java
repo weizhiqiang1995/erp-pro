@@ -56,10 +56,6 @@ public class DsFormPage extends OperatorUserInfo {
     @ApiModelProperty(value = "表单布局的类型，可以参考#DsFormPageType", required = "required")
     private String type;
 
-    @TableField(exist = false)
-    @Property("表单布局的类型名称")
-    private String typeName;
-
     @TableField("class_name")
     @ApiModelProperty(value = "服务类的className", required = "required")
     private String className;
@@ -79,5 +75,9 @@ public class DsFormPage extends OperatorUserInfo {
     @TableField(exist = false)
     @Property("表单布局关联的操作按钮信息，列表布局才拥有操作按钮信息")
     private List<Operate> operateList;
+
+    @TableField(exist = false)
+    @Property("表单布局(表格类型关联的列信息)")
+    private List<TableColumn> tableColumnList;
 
 }

@@ -5,12 +5,9 @@
 package com.skyeye.dsform.service;
 
 import com.skyeye.base.business.service.SkyeyeBusinessService;
-import com.skyeye.common.object.InputObject;
-import com.skyeye.common.object.OutputObject;
 import com.skyeye.dsform.entity.DsFormPageContent;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @ClassName: DsFormPageContentService
@@ -29,10 +26,6 @@ public interface DsFormPageContentService extends SkyeyeBusinessService<DsFormPa
      * @return 动态表单的内容项
      */
     List<DsFormPageContent> getDsFormPageContentByPageId(String pageId);
-
-    Map<String, Map<String, DsFormPageContent>> getDsFormPageContentByPageId(List<String> pageIdList);
-
-    Map<String, List<DsFormPageContent>> getDsFormPageContentListByPageId(List<String> pageIdList);
 
     void deleteDsFormContentByPageId(String pageId);
 

@@ -4,11 +4,9 @@
 
 package com.skyeye.dsform.service.impl;
 
-import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.cache.redis.RedisCache;
-import com.skyeye.common.constans.DsFormConstants;
 import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.dsform.dao.DsFormPageContentDao;
@@ -19,10 +17,9 @@ import com.skyeye.dsform.service.DsFormPageContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -50,7 +47,7 @@ public class DsFormPageContentServiceImpl extends SkyeyeBusinessServiceImpl<DsFo
      */
     @Override
     public List<DsFormPageContent> getDsFormPageContentByPageId(String pageId) {
-        String cacheKey = DsFormConstants.dsFormContentListByPageId(pageId);
+        String cacheKey = getCacheKeyByPageId(pageId);
         List<DsFormPageContent> dsFormPageContentList = redisCache.getList(cacheKey, key -> {
             // 查询该表单布局绑定的组件信息
             QueryWrapper<DsFormPageContent> queryWrapper = new QueryWrapper<>();
@@ -69,40 +66,16 @@ public class DsFormPageContentServiceImpl extends SkyeyeBusinessServiceImpl<DsFo
     }
 
     @Override
-    public Map<String, Map<String, DsFormPageContent>> getDsFormPageContentByPageId(List<String> pageIdList) {
-        Map<String, Map<String, DsFormPageContent>> result = new HashMap<>();
-        if (CollectionUtil.isEmpty(pageIdList)) {
-            return result;
-        }
-        pageIdList.forEach(pageId -> {
-            List<DsFormPageContent> beans = getDsFormPageContentByPageId(pageId);
-            Map<String, DsFormPageContent> formPageContentMap = beans.stream().collect(Collectors.toMap(DsFormPageContent::getId,
-                Function.identity(), (key1, key2) -> key2));
-            result.put(pageId, formPageContentMap);
-        });
-        return result;
-    }
-
-    @Override
-    public Map<String, List<DsFormPageContent>> getDsFormPageContentListByPageId(List<String> pageIdList) {
-        Map<String, List<DsFormPageContent>> result = new HashMap<>();
-        if (CollectionUtil.isEmpty(pageIdList)) {
-            return result;
-        }
-        pageIdList.forEach(pageId -> {
-            List<DsFormPageContent> beans = getDsFormPageContentByPageId(pageId);
-            result.put(pageId, beans);
-        });
-        return result;
-    }
-
-    @Override
     public void deleteDsFormContentByPageId(String pageId) {
         QueryWrapper<DsFormPageContent> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(MybatisPlusUtil.toColumns(DsFormPageContent::getPageId), pageId);
         remove(queryWrapper);
-        String cacheKey = DsFormConstants.dsFormContentListByPageId(pageId);
+        String cacheKey = getCacheKeyByPageId(pageId);
         jedisClientService.del(cacheKey);
+    }
+
+    private String getCacheKeyByPageId(String pageId) {
+        return String.format(Locale.ROOT, "skyeye:pageContent:pageId:%s", pageId);
     }
 
 }
