@@ -50,7 +50,7 @@ public class TableColumn extends OperatorUserInfo {
     private String align;
 
     @TableField("fixed")
-    @ApiModelProperty(value = "对其方式，参考#FixedType枚举类", required = "required")
+    @ApiModelProperty(value = "固定位置，参考#FixedType枚举类")
     private String fixed;
 
     @TableField("templet")
