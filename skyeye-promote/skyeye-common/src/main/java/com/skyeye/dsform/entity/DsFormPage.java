@@ -7,6 +7,7 @@ package com.skyeye.dsform.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.api.Property;
@@ -32,7 +33,7 @@ import java.util.List;
 @Data
 @UniqueField
 @RedisCacheField(name = "dsForm:page", cacheTime = RedisConstants.A_YEAR_SECONDS)
-@TableName(value = "ds_form_page")
+@TableName(value = "ds_form_page", autoResultMap = true)
 @ApiModel("表单布局实体类")
 public class DsFormPage extends OperatorUserInfo {
 
@@ -79,5 +80,9 @@ public class DsFormPage extends OperatorUserInfo {
     @TableField(exist = false)
     @Property("表单布局(表格类型关联的列信息)")
     private List<TableColumn> tableColumnList;
+
+    @TableField(value = "operate_id_list", typeHandler = JacksonTypeHandler.class)
+    @ApiModelProperty(value = "页面关联的操作信息，可为空", required = "json")
+    private List<String> operateIdList;
 
 }

@@ -118,8 +118,11 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
             selectPageContent(dsFormPage);
         } else {
             selectTableColumn(dsFormPage);
-            // 获取操作信息 todo 待和表单布局id联合查询
+        }
+        if (CollectionUtil.isNotEmpty(dsFormPage.getOperateIdList())) {
+            // 获取操作信息
             List<Operate> operateList = operateService.getOperatesByClassName(dsFormPage.getClassName());
+            operateList = operateList.stream().filter(operate -> dsFormPage.getOperateIdList().contains(operate.getId())).collect(Collectors.toList());
             dsFormPage.setOperateList(operateList);
         }
 
