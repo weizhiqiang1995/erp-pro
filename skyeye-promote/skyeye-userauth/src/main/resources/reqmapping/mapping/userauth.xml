@@ -27,9 +27,6 @@
 	<url id="login008" path="/post/SysEveUserController/queryUserLockByLockPwd" val="锁屏密码解锁" allUse="2" method="POST" groupName="登陆相关" notRead="1">
 		<property id="password" name="password" ref="required" var="密码"/>
 	</url>
-	<url id="login009" path="/post/SysEveUserController/querySysDeskTopByUserId" val="获取该用户拥有的桌面" allUse="2" groupName="登陆相关" method="GET">
-		<property id="language" name="language" ref="" var="语言类型" defaultValue="zh" />
-    </url>
 	<!-- 登录结束 -->
 	
 	<!-- 聊天开始 -->
@@ -181,19 +178,10 @@
 	<!-- 员工操作结束 -->
 	
     <!-- 系统管理开始 -->
-	<url id="sys011" path="/post/SysEveMenuController/deleteSysMenuMationById" val="删除菜单信息" allUse="1" groupName="菜单管理">
-		<property id="rowId" name="id" ref="required" var="菜单ID" />
-	</url>
 	<url id="sys019" path="/post/SysEveUserController/queryRoleAndBindRoleByUserId" val="获取角色和当前已经绑定的角色信息" allUse="2" groupName="角色管理">
 		<property id="rowId" name="id" ref="required" var="账号ID" />
 	</url>
-	<url id="sys022" path="/post/SysEveMenuController/editSysEveMenuSortTopById" val="菜单展示顺序上移" allUse="1" groupName="菜单管理">
-		<property id="rowId" name="id" ref="required" var="菜单ID" />
-	</url>
-	<url id="sys023" path="/post/SysEveMenuController/editSysEveMenuSortLowerById" val="菜单展示顺序下移" allUse="1" groupName="菜单管理">
-		<property id="rowId" name="id" ref="required" var="菜单ID" />
-	</url>
-	
+
 	<url id="sys024" path="/post/SysEveUserController/editUserInstallThemeColor" val="自定义设置主题颜色" allUse="2" method="PUT" groupName="系统管理">
 		<property id="themeColor" name="themeColor" ref="required,num" var="颜色的color数字" />
 	</url>

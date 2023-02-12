@@ -13,7 +13,7 @@ import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.menuapp.dao.AppWorkPageAuthPointDao;
-import com.skyeye.eve.entity.userauth.menu.AppWorkPageAuthPointMation;
+import com.skyeye.menuapp.entity.AppWorkPageAuthPointMation;
 import com.skyeye.menuapp.service.AppWorkPageAuthPointService;
 import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.menupc.service.impl.SysEveMenuAuthPointServiceImpl;

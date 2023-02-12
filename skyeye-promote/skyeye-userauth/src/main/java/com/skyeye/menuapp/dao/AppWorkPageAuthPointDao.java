@@ -5,7 +5,7 @@
 package com.skyeye.menuapp.dao;
 
 import com.skyeye.eve.dao.SkyeyeBaseMapper;
-import com.skyeye.eve.entity.userauth.menu.AppWorkPageAuthPointMation;
+import com.skyeye.menuapp.entity.AppWorkPageAuthPointMation;
 
 import java.util.List;
 import java.util.Map;

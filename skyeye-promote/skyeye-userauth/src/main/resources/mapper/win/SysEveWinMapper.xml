@@ -5,7 +5,7 @@
 	<select id="queryWinMationList" resultType="java.util.Map">
 		SELECT
 			a.id,
-			a.sys_name sysName,
+			a.`name`,
 			a.sys_url sysUrl,
 			a.content,
 			a.create_id createId,
@@ -21,7 +21,7 @@
 				${sqlExtract}
 			</if>
 			<if test="keyword != null and keyword != ''">
-				AND a.sys_name LIKE '%${keyword}%'
+				AND a.`name` LIKE '%${keyword}%'
 			</if>
 		</where>
 		GROUP BY a.id
@@ -41,7 +41,7 @@
 	<select id="querySysEveWinList" resultType="java.util.Map">
 		SELECT
 			a.id,
-			a.sys_name `name`,
+			a.`name`,
 			'0' pId,
 			false isParent,
 			'/assets/images/syswinlogo.png' icon

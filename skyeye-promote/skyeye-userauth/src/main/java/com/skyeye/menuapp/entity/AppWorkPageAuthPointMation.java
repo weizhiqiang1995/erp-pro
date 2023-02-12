@@ -2,7 +2,7 @@
  * Copyright 卫志强 QQ：598748873@qq.com Inc. All rights reserved. 开源地址：https://gitee.com/doc_wei01/skyeye
  ******************************************************************************/
 
-package com.skyeye.eve.entity.userauth.menu;
+package com.skyeye.menuapp.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -14,38 +14,38 @@ import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
 
 /**
- * @ClassName: SysMenuAuthPointMation
- * @Description: 菜单权限点实体类
+ * @ClassName: AppWorkPageAuthPointMation
+ * @Description: 手机端菜单权限点实体类
  * @author: skyeye云系列--卫志强
- * @date: 2022/7/23 19:14
+ * @date: 2022/7/26 22:45
  * @Copyright: 2022 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Data
-@TableName(value = "sys_eve_menu_auth_point")
-@ApiModel("菜单权限点实体类")
-public class SysMenuAuthPointMation extends OperatorUserInfo {
+@TableName(value = "app_workbench_page_auth")
+@ApiModel("手机端菜单权限点实体类")
+public class AppWorkPageAuthPointMation extends OperatorUserInfo {
 
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")
     private String id;
 
-    @TableField(value = "menu_id", fill = FieldFill.INSERT)
+    @TableField(value = "page_id", fill = FieldFill.INSERT)
     @ApiModelProperty(value = "所属菜单id【不可修改】", required = "required")
     private String menuId;
 
-    @TableField("auth_menu_name")
+    @TableField("title")
     @ApiModelProperty(value = "权限点名称/分组名称/数据权限名称", required = "required")
-    private String authMenuName;
+    private String title;
 
-    @TableField("auth_menu")
+    @TableField("url")
     @ApiModelProperty(value = "接口id/分组标识/数据权限表达式", required = "required")
     private String authMenu;
 
     /**
      * 菜单数字码
      */
-    @TableField("menu_num")
+    @TableField("auth_num")
     private String menuNum;
 
     @TableField(value = "parent_id", fill = FieldFill.INSERT)

@@ -5,7 +5,7 @@
 package com.skyeye.menupc.dao;
 
 import com.skyeye.eve.dao.SkyeyeBaseMapper;
-import com.skyeye.eve.entity.userauth.menu.SysMenuAuthPointMation;
+import com.skyeye.menupc.entity.SysMenuAuthPointMation;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

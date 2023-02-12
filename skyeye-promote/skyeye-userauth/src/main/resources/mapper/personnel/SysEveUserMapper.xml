@@ -13,7 +13,7 @@
 			k.user_sex sexName,
 			a.user_lock userLock,
 			(SELECT c.user_name FROM sys_eve_user_staff c WHERE a.creater = c.user_id) createName,
-			(SELECT group_concat(distinct b.role_name) FROM sys_eve_role b WHERE INSTR(CONCAT(',', a.role_id, ','), CONCAT(',', b.id, ','))) roleName,
+			(SELECT group_concat(distinct b.`name`) FROM sys_eve_role b WHERE INSTR(CONCAT(',', a.role_id, ','), CONCAT(',', b.id, ','))) roleName,
 			k.company_id companyId,
 			k.department_id departmentId,
 			k.job_id jobId,
@@ -99,15 +99,6 @@
 		AND a.id = c.user_id
 	</select>
 	
-	<select id="queryRoleList" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.role_name roleName,
-			a.role_desc roleDesc
-		FROM
-			sys_eve_role a
-	</select>
-	
 	<select id="queryBindRoleMationByUserId" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 			IFNULL(a.role_id, '') roleIds
@@ -131,21 +122,20 @@
 		FROM 
 			(SELECT
 				c.id,
-				c.menu_name `name`,
-				c.menu_name_en menuNameEn,
+				c.`name`,
 				c.icon,
-				c.menu_url pageURL,
+				c.page_url pageURL,
 				c.open_type openType,
-				c.menu_type menuType,
+				c.type menuType,
 				'-1' maxOpen,
 				'false' extend,
 				null childs,
-				IFNULL(e.parent_id, c.menu_parent_id) parentId,
-				IFNULL(e.menu_level, c.menu_level) menuLevel,
-				c.icon_color menuIconColor,
-				c.icon_bg menuIconBg,
-				c.icon_pic menuIconPic,
-				c.icon_type menuIconType,
+				IFNULL(e.parent_id, c.parent_id) parentId,
+				IFNULL(e.menu_level, c.level) menuLevel,
+				c.icon_color iconColor,
+				c.icon_bg iconBg,
+				c.icon_pic iconPic,
+				c.icon_type iconType,
 				IFNULL(c.desktop_id, '') deskTopId,
 			    IFNULL(g.sys_url, '') sysWinUrl # 分布式开发时，其他前台服务的域名地址
 			FROM
@@ -156,7 +146,7 @@
 				sys_eve_win g
 			WHERE a.id = #{userId}
 			AND INSTR(CONCAT(',', a.role_id, ','), CONCAT(',', b.role_id, ','))
-			AND b.menu_id = c.id AND c.menu_sys_type = '1'
+			AND b.menu_id = c.id AND c.sys_type = '1'
 			AND c.id NOT IN(SELECT d.menu_id FROM sys_eve_user_custom_menu_del d WHERE d.create_id = #{userId})
 			AND g.id = c.sys_win_id
 			GROUP BY c.id
@@ -165,7 +155,6 @@
 			SELECT
 				a.id,
 				a.menu_name `name`,
-				a.menu_name_en menuNameEn,
 				a.menu_icon icon,
 				a.menu_url pageURL,
 				a.open_type openType,
@@ -175,10 +164,10 @@
 				null childs,
 				IFNULL(e.parent_id, a.menu_parent_id) parentId,
 				IFNULL(e.menu_level, 1) menuLevel,
-				a.menu_icon_color menuIconColor,
-				a.menu_icon_bg menuIconBg,
-				a.menu_icon_pic menuIconPic,
-				a.menu_icon_type menuIconType,
+				a.menu_icon_color iconColor,
+				a.menu_icon_bg iconBg,
+				a.menu_icon_pic iconPic,
+				a.menu_icon_type iconType,
 				IFNULL(a.desktop_id, '') deskTopId,
 			    '' sysWinUrl
 			FROM
@@ -189,7 +178,6 @@
 			SELECT
 				a.id,
 				a.menu_box_name `name`,
-				a.menu_box_name menuNameEn,
 				'' icon,
 				'--' pageURL,
 				2 openType,
@@ -199,10 +187,10 @@
 				null childs,
 				'0' parentId,
 				0 menuLevel,
-				'' menuIconColor,
-				'' menuIconBg,
-				'' menuIconPic,
-				'' menuIconType,
+				'' iconColor,
+				'' iconBg,
+				'' iconPic,
+				'' iconType,
 				IFNULL(a.desktop_id, '') deskTopId,
 			    '' sysWinUrl
 			FROM
@@ -378,7 +366,7 @@
 	<select id="querySysDeskTopByUserId" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT
 			d.id,
-			CASE #{language} WHEN 'zh' THEN d.desktop_name WHEN 'cn' THEN d.desktop_name_cn ELSE '' END `name`
+			d.`name`
 		FROM
 			sys_eve_user a,
 			sys_eve_role_menu b,
@@ -387,9 +375,9 @@
 			a.id = #{id}
 		AND INSTR(CONCAT(',', a.role_id, ','), CONCAT(',', b.role_id, ','))
 		AND b.menu_id = d.id
-		AND d.state = '1'
+		AND d.enabled = '1'
 		GROUP BY d.id
-		ORDER BY d.order_by DESC
+		ORDER BY d.order_by ASC
     </select>
     
 	<select id="queryUserSchoolMationByUserId" parameterType="java.util.Map" resultType="java.util.Map">

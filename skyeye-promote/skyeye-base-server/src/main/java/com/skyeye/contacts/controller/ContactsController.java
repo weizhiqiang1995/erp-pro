@@ -11,7 +11,7 @@ import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.contacts.service.ContactsService;
-import com.skyeye.contacts.entity.ContactsMation;
+import com.skyeye.contacts.entity.Contacts;
 import com.skyeye.eve.entity.object.query.BaseServerQueryDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +52,7 @@ public class ContactsController {
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "writeContactsMation", value = "新增/编辑联系人信息", method = "POST", allUse = "2")
-    @ApiImplicitParams(classBean = ContactsMation.class)
+    @ApiImplicitParams(classBean = Contacts.class)
     @RequestMapping("/post/ContactsController/writeContactsMation")
     public void writeContactsMation(InputObject inputObject, OutputObject outputObject) {
         contactsService.saveOrUpdateEntity(inputObject, outputObject);

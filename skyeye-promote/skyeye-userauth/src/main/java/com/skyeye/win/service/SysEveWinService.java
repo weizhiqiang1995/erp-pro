@@ -4,18 +4,13 @@
 
 package com.skyeye.win.service;
 
+import com.skyeye.base.business.service.SkyeyeBusinessService;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.win.entity.SysWin;
 
-public interface SysEveWinService {
-
-    void queryWinMationList(InputObject inputObject, OutputObject outputObject);
-
-    void insertWinMation(InputObject inputObject, OutputObject outputObject);
-
-    void queryWinMationToEditById(InputObject inputObject, OutputObject outputObject);
-
-    void deleteWinMationById(InputObject inputObject, OutputObject outputObject);
+public interface SysEveWinService extends SkyeyeBusinessService<SysWin> {
 
     void querySysEveWinList(InputObject inputObject, OutputObject outputObject);
+
 }

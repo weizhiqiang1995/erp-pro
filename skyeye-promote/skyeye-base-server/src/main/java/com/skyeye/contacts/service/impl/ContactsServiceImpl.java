@@ -10,7 +10,7 @@ import com.skyeye.common.enumeration.IsDefaultEnum;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.contacts.classenum.ContactsAuthEnum;
 import com.skyeye.contacts.dao.ContactsDao;
-import com.skyeye.contacts.entity.ContactsMation;
+import com.skyeye.contacts.entity.Contacts;
 import com.skyeye.contacts.service.ContactsService;
 import com.skyeye.eve.entity.object.query.BaseServerQueryDo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ import java.util.Map;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
-public class ContactsServiceImpl extends SkyeyeTeamAuthServiceImpl<ContactsDao, ContactsMation> implements ContactsService {
+public class ContactsServiceImpl extends SkyeyeTeamAuthServiceImpl<ContactsDao, Contacts> implements ContactsService {
 
     @Autowired
     private ContactsDao contactsDao;
@@ -53,7 +53,7 @@ public class ContactsServiceImpl extends SkyeyeTeamAuthServiceImpl<ContactsDao, 
     }
 
     @Override
-    public void writePostpose(ContactsMation entity, String userId) {
+    public void writePostpose(Contacts entity, String userId) {
         super.writePostpose(entity, userId);
         if (entity.getIsDefault().equals(IsDefaultEnum.IS_DEFAULT.getKey())) {
             // 如果设置为默认联系人，则修改之前的联系人为非默认

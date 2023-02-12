@@ -13,7 +13,7 @@ import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.menupc.dao.SysEveMenuAuthPointDao;
-import com.skyeye.eve.entity.userauth.menu.SysMenuAuthPointMation;
+import com.skyeye.menupc.entity.SysMenuAuthPointMation;
 import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.menupc.service.SysEveMenuAuthPointService;
 import org.apache.commons.lang3.StringUtils;

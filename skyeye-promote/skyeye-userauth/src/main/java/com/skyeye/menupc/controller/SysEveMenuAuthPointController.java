@@ -9,7 +9,7 @@ import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.eve.entity.userauth.menu.SysMenuAuthPointMation;
+import com.skyeye.menupc.entity.SysMenuAuthPointMation;
 import com.skyeye.menupc.service.SysEveMenuAuthPointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -4,154 +4,74 @@
 
 package com.skyeye.win.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
+import com.skyeye.annotation.service.SkyeyeService;
+import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.common.constans.CommonConstants;
-import com.skyeye.common.constans.CommonNumConstants;
-import com.skyeye.common.constans.Constants;
 import com.skyeye.common.entity.search.CommonPageInfo;
+import com.skyeye.common.enumeration.DeleteFlagEnum;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
-import com.skyeye.eve.entity.userauth.desktop.SysEveDesktopMation;
-import com.skyeye.eve.service.IAuthUserService;
+import com.skyeye.exception.CustomException;
 import com.skyeye.win.dao.SysEveDesktopDao;
+import com.skyeye.win.entity.SysDesktop;
 import com.skyeye.win.service.SysEveDesktopService;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.ObjectUtils;
 
-import java.util.HashMap;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
-public class SysEveDesktopServiceImpl implements SysEveDesktopService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(SysEveDesktopServiceImpl.class);
+@SkyeyeService(name = "桌面信息管理", groupName = "基础模块")
+public class SysEveDesktopServiceImpl extends SkyeyeBusinessServiceImpl<SysEveDesktopDao, SysDesktop> implements SysEveDesktopService {
 
     @Autowired
     private SysEveDesktopDao sysEveDesktopDao;
 
-    @Autowired
-    private IAuthUserService iAuthUserService;
-
-    public enum State {
-        START_DELETE(0, "删除"),
-        START_NEW(1, "启用"),
-        START_UP(2, "禁用");
-        private int state;
-        private String name;
-
-        State(int state, String name) {
-            this.state = state;
-            this.name = name;
-        }
-
-        public int getState() {
-            return state;
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
-
-    /**
-     * 查出所有桌面列表
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    public void querySysDesktopList(InputObject inputObject, OutputObject outputObject) {
+    protected List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
-        Page pages = PageHelper.startPage(commonPageInfo.getPage(), commonPageInfo.getLimit());
+        commonPageInfo.setDeleteFlag(DeleteFlagEnum.NOT_DELETE.getKey());
         List<Map<String, Object>> beans = sysEveDesktopDao.querySysDesktopList(commonPageInfo);
-        iAuthUserService.setNameForMap(beans, "createId", "createName");
-        iAuthUserService.setNameForMap(beans, "lastUpdateId", "lastUpdateName");
-        outputObject.setBeans(beans);
-        outputObject.settotal(pages.getTotal());
+        return beans;
     }
 
-    /**
-     * 新增/编辑桌面信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void writeSysEveDesktopMation(InputObject inputObject, OutputObject outputObject) {
-        SysEveDesktopMation sysEveDesktopMation = inputObject.getParams(SysEveDesktopMation.class);
-        // 1.根据条件进行校验
-        QueryWrapper<SysEveDesktopMation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.ne(MybatisPlusUtil.toColumns(SysEveDesktopMation::getState), State.START_DELETE.getState());
+    public void validatorEntity(SysDesktop entity) {
+        QueryWrapper<SysDesktop> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(MybatisPlusUtil.toColumns(SysDesktop::getDeleteFlag), DeleteFlagEnum.NOT_DELETE.getKey());
         queryWrapper.and(wrapper ->
-            wrapper.eq(MybatisPlusUtil.toColumns(SysEveDesktopMation::getDesktopName), sysEveDesktopMation.getDesktopName())
-                .or().eq(MybatisPlusUtil.toColumns(SysEveDesktopMation::getDesktopCode), sysEveDesktopMation.getDesktopCode()));
-        if (StringUtils.isNotEmpty(sysEveDesktopMation.getId())) {
-            queryWrapper.ne(CommonConstants.ID, sysEveDesktopMation.getId());
+            wrapper.eq(MybatisPlusUtil.toColumns(SysDesktop::getName), entity.getName())
+                .or().eq(MybatisPlusUtil.toColumns(SysDesktop::getDesktopCode), entity.getDesktopCode()));
+        if (StringUtils.isNotEmpty(entity.getId())) {
+            queryWrapper.ne(CommonConstants.ID, entity.getId());
         }
-        SysEveDesktopMation checkSysEveDesktop = sysEveDesktopDao.selectOne(queryWrapper);
-
-        if (ObjectUtils.isEmpty(checkSysEveDesktop)) {
-            // 2.新增/编辑数据
-            if (StringUtils.isNotEmpty(sysEveDesktopMation.getId())) {
-                LOGGER.info("update sys desktop data, id is {}", sysEveDesktopMation.getId());
-                sysEveDesktopDao.updateById(sysEveDesktopMation);
-            } else {
-                // 获取序号
-                Integer nextOrderBy = sysEveDesktopDao.querySysEveDesktopMaxOrderBum();
-                sysEveDesktopMation.setOrderBy(nextOrderBy);
-                DataCommonUtil.setId(sysEveDesktopMation);
-                LOGGER.info("insert sys desktop data, id is {}", sysEveDesktopMation.getId());
-                sysEveDesktopDao.insert(sysEveDesktopMation);
-            }
-        } else {
-            outputObject.setreturnMessage("该桌面名称已存在，请更换.");
+        SysDesktop checkSysEveDesktop = getOne(queryWrapper);
+        if (ObjectUtil.isNotEmpty(checkSysEveDesktop)) {
+            throw new CustomException("该桌面名称已存在，请更换.");
         }
     }
 
-    /**
-     * 删除桌面
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
     @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void deleteSysDesktopById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String id = map.get("id").toString();
+    protected void createPrepose(SysDesktop entity) {
+        Integer nextOrderBy = sysEveDesktopDao.querySysEveDesktopMaxOrderBum();
+        entity.setOrderBy(nextOrderBy);
+    }
+
+    @Override
+    protected void deletePreExecution(String id) {
         Map<String, Object> bean = sysEveDesktopDao.querySysDesktopStateAndMenuNumById(id);
-        if ("0".equals(bean.get("allNum").toString())) {
-            // 该桌面下没有菜单可以删除
-            sysEveDesktopDao.editSysDesktopStateById(id, State.START_DELETE.getState());
-        } else {
-            outputObject.setreturnMessage("该桌面下包含有子菜单，无法删除.");
+        if (!"0".equals(bean.get("allNum").toString())) {
+            throw new CustomException("该桌面下包含有子菜单，无法删除.");
         }
-    }
-
-    /**
-     * 通过id查找对应的桌面
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void selectSysDesktopById(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        SysEveDesktopMation sysEveDesktop = sysEveDesktopDao.selectById(map.get("id").toString());
-        outputObject.setBean(sysEveDesktop);
-        outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 
     /**
@@ -208,13 +128,7 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
      */
     @Override
     public void queryAllSysDesktopList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        String language = map.get("language").toString();
-        List<Map<String, Object>> beans = sysEveDesktopDao.queryAllSysDesktopList(map);
-        Map<String, Object> m = new HashMap<>();
-        m.put("name", Constants.LANGUAGE_ZH.equals(language) ? "默认桌面" : "Default desktop");
-        m.put("id", "winfixedpage00000000");
-        beans.add(0, m);
+        List<Map<String, Object>> beans = queryAllDataForMap();
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
     }
@@ -233,4 +147,17 @@ public class SysEveDesktopServiceImpl implements SysEveDesktopService {
         sysEveDesktopDao.removeAllSysEveMenuByDesktopId(map);
     }
 
+    @Override
+    public List<Map<String, Object>> queryAllDataForMap() {
+        List<Map<String, Object>> desktopList = super.queryAllDataForMap();
+        desktopList.forEach(desktop -> {
+            desktop.put("pId", "0");
+            desktop.put("sysName", "基础系统");
+            desktop.put("pageType", "桌面");
+            desktop.put("type", "page");
+        });
+        desktopList = desktopList.stream()
+            .sorted(Comparator.comparing(bean -> Integer.parseInt(bean.get("orderBy").toString()))).collect(Collectors.toList());
+        return desktopList;
+    }
 }

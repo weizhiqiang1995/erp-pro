@@ -4,25 +4,17 @@
 
 package com.skyeye.menupc.service;
 
+import com.skyeye.base.business.service.SkyeyeBusinessService;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.menupc.entity.SysMenu;
 
-public interface SysEveMenuService {
-
-    void querySysMenuList(InputObject inputObject, OutputObject outputObject);
-
-    void insertSysMenuMation(InputObject inputObject, OutputObject outputObject);
+public interface SysEveMenuService extends SkyeyeBusinessService<SysMenu> {
 
     void querySysMenuMationBySimpleLevel(InputObject inputObject, OutputObject outputObject);
-
-    void editSysMenuMationById(InputObject inputObject, OutputObject outputObject);
-
-    void deleteSysMenuMationById(InputObject inputObject, OutputObject outputObject);
 
     void editSysEveMenuSortTopById(InputObject inputObject, OutputObject outputObject);
 
     void editSysEveMenuSortLowerById(InputObject inputObject, OutputObject outputObject);
-
-    void querySysEveMenuBySysId(InputObject inputObject, OutputObject outputObject);
 
 }

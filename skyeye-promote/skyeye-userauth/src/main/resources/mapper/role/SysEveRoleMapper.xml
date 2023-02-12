@@ -30,10 +30,10 @@
 		FROM
 		(SELECT
 			a.id,
-			a.menu_name name,
-			CASE a.menu_parent_id WHEN '0' THEN (CASE WHEN a.desktop_id IS NULL THEN 'winfixedpage00000000' WHEN LENGTH(a.desktop_id) = 0 THEN 'winfixedpage00000000' ELSE a.desktop_id END) ELSE a.menu_parent_id END pId,
-			b.sys_name sysName,
-			CASE a.menu_url WHEN '--' THEN '盒子' ELSE '页面' END pageType
+			a.`name`,
+			CASE a.parent_id WHEN '0' THEN a.desktop_id ELSE a.parent_id END pId,
+			b.`name` sysName,
+			CASE a.page_url WHEN '--' THEN '盒子' ELSE '页面' END pageType
 		FROM
 			sys_eve_menu a
 			LEFT JOIN sys_eve_win b ON a.sys_win_id = b.id
@@ -43,27 +43,13 @@
 			a.id,
 			a.auth_menu_name name,
 			CASE a.parent_id WHEN '0' THEN a.menu_id ELSE a.parent_id END pId,
-			c.sys_name sysName,
+			c.`name` sysName,
 			CASE a.type WHEN '1' THEN '权限点' WHEN '2' THEN '数据权限分组' WHEN '3' THEN '数据权限' ELSE '' END pageType
 		FROM
 			sys_eve_menu_auth_point a,
 			sys_eve_menu b
 			LEFT JOIN sys_eve_win c ON b.sys_win_id = c.id
 		WHERE a.menu_id = b.id
-		UNION ALL
-		SELECT 
-			*
-		FROM
-        (SELECT
-            a.id,
-            a.desktop_name name,
-            '0' pId,
-            '基础系统' sysName,
-            '桌面' pageType
-        FROM
-            sys_eve_desktop a
-        WHERE a.state != '0'
-        ORDER BY a.order_by DESC) k
 	</select>
 	
 	<insert id="insertSysRoleMenuMation" parameterType="java.util.Map">
@@ -99,7 +85,7 @@
             a.id,
             a.title name,
 			CASE a.parent_id WHEN '0' THEN a.desktop_id ELSE a.parent_id END pId,
-			c.desktop_name sysName,
+			c.`name` sysName,
 			CASE (select parent_id from app_workbench_page where a.id = id) WHEN '0' THEN '目录' ELSE '页面' END pageType,
 			'page' type
         FROM
@@ -111,7 +97,7 @@
             a.id,
             a.title name,
 			CASE a.parent_id WHEN '0' THEN a.page_id ELSE a.parent_id END pId,
-			c.desktop_name sysName,
+			c.`name` sysName,
 			CASE a.type WHEN '1' THEN '权限点' WHEN '2' THEN '数据权限分组' WHEN '3' THEN '数据权限' ELSE '' END pageType,
 			'authPoint' type
         FROM
@@ -119,21 +105,6 @@
             app_workbench_page b
 			LEFT JOIN sys_eve_desktop c ON b.desktop_id = c.id
         WHERE a.page_id = b.id
-		UNION ALL
-		SELECT
-			*
-		FROM
-			(SELECT
-				 a.id,
-				 a.desktop_name name,
-				 '0' pId,
-				 '基础系统' sysName,
-				 '桌面' pageType,
-				 'page' type
-			 FROM
-				 sys_eve_desktop a
-			 WHERE a.state != '0'
-			 ORDER BY a.order_by DESC) k
     </select>
 	
     <select id="querySysRoleAppMenuIdByRoleId" resultType="java.lang.String">

@@ -17,7 +17,7 @@ import com.skyeye.common.entity.features.SkyeyeTeamAuth;
 import lombok.Data;
 
 /**
- * @ClassName: ContactsMation
+ * @ClassName: Contacts
  * @Description: 联系人信息实体类
  * @author: skyeye云系列--卫志强
  * @date: 2022/10/24 15:58
@@ -29,7 +29,7 @@ import lombok.Data;
 @RedisCacheField(name = CacheConstants.SKYEYE_CONTACTS_CACHE_KEY, cacheTime = RedisConstants.THIRTY_DAY_SECONDS)
 @TableName(value = "skyeye_contacts")
 @ApiModel("联系人信息实体类")
-public class ContactsMation extends SkyeyeTeamAuth {
+public class Contacts extends SkyeyeTeamAuth {
 
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")

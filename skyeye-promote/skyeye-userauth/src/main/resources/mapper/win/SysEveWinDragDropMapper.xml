@@ -4,7 +4,7 @@
 	
 	<select id="queryMenuBoxNameInByName" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
-			a.menu_name menuBoxName
+			a.`name` menuBoxName
 		FROM
 			sys_eve_menu a,
 			sys_eve_role_menu b,
@@ -14,10 +14,10 @@
 		AND d.id = b.role_id
 		AND a.id = b.menu_id
 		AND c.id = #{userId}
-		AND a.menu_url = '--'
-		AND a.menu_level = '0'
+		AND a.page_url = '--'
+		AND a.level = '0'
 		AND a.id NOT IN (SELECT e.menu_id AS id FROM sys_eve_user_custom_menu_del e WHERE e.create_id = #{userId})
-		AND a.menu_name = #{menuBoxName}
+		AND a.`name` = #{menuBoxName}
 		GROUP BY a.id
 		UNION
 		SELECT
@@ -48,7 +48,7 @@
 	
 	<select id="queryMenuNameInByName" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
-			a.menu_name menuName
+			a.`name` menuName
 		FROM
 			sys_eve_menu a,
 			sys_eve_role_menu b,
@@ -58,10 +58,10 @@
 		AND d.id = b.role_id
 		AND a.id = b.menu_id
 		AND c.id = #{userId}
-		AND a.menu_url != '--'
-		AND a.menu_level != '0'
+		AND a.page_url != '--'
+		AND a.level != '0'
 		AND a.id NOT IN (SELECT e.menu_id AS id FROM sys_eve_user_custom_menu_del e WHERE e.create_id = #{userId})
-		AND a.menu_name = #{menuName}
+		AND a.`name` = #{menuName}
 		GROUP BY a.id
 		UNION
 		SELECT
@@ -130,7 +130,7 @@
 			sys_eve_role_menu b,
 			sys_eve_user c,
 			sys_eve_role d
-		WHERE INSTR(CONCAT(',', a.menu_parent_id, ','), CONCAT(',', #{id}, ','))
+		WHERE INSTR(CONCAT(',', a.parent_id, ','), CONCAT(',', #{id}, ','))
 		AND INSTR(CONCAT(',', c.role_id, ','), CONCAT(',', d.id, ','))
 		AND d.id = b.role_id
 		AND a.id = b.menu_id
@@ -301,15 +301,14 @@
 	<select id="queryMenuToDeskTopById" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 			c.id,
-			c.menu_name `name`,
-			c.menu_name_en menuNameEn,
-			c.menu_url pageURL,
+			c.`name`,
+			c.page_url pageURL,
 			c.open_type openType,
 			'-1' maxOpen,
 			'false' extend,
 			null childs,
-			IFNULL(e.parent_id, c.menu_parent_id) parentId,
-			IFNULL(e.menu_level, c.menu_level) menuLevel,
+			IFNULL(e.parent_id, c.parent_id) parentId,
+			IFNULL(e.menu_level, c.level) menuLevel,
 			c.icon_color menuIconColor,
 			c.icon_bg menuIconBg,
 			c.icon_pic menuIconPic,

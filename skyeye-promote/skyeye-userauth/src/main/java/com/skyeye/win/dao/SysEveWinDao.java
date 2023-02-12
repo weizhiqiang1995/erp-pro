@@ -6,7 +6,7 @@ package com.skyeye.win.dao;
 
 import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.eve.dao.SkyeyeBaseMapper;
-import com.skyeye.eve.entity.userauth.win.SysEveWinMation;
+import com.skyeye.win.entity.SysWin;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.Map;
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-public interface SysEveWinDao extends SkyeyeBaseMapper<SysEveWinMation> {
+public interface SysEveWinDao extends SkyeyeBaseMapper<SysWin> {
 
     List<Map<String, Object>> queryWinMationList(CommonPageInfo commonPageInfo);
 

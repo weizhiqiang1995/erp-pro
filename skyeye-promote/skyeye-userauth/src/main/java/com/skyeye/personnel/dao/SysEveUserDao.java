@@ -31,8 +31,6 @@ public interface SysEveUserDao {
 
     Map<String, Object> queryMationByUserCode(@Param("userCode") String userCode);
 
-    List<Map<String, Object>> queryRoleList(Map<String, Object> map);
-
     Map<String, Object> queryBindRoleMationByUserId(Map<String, Object> map);
 
     int editRoleIdsByUserId(Map<String, Object> map);

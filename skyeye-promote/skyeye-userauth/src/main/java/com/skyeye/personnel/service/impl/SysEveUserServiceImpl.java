@@ -26,6 +26,7 @@ import com.skyeye.personnel.classenum.UserLockState;
 import com.skyeye.personnel.dao.SysEveUserDao;
 import com.skyeye.personnel.dao.SysEveUserStaffDao;
 import com.skyeye.personnel.service.SysEveUserService;
+import com.skyeye.role.service.SysEveRoleService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +51,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
 
     @Autowired
     private SysEveUserDao sysEveUserDao;
+
+    @Autowired
+    private SysEveRoleService sysEveRoleService;
 
     @Autowired
     private SysEveUserStaffDao sysEveUserStaffDao;
@@ -383,7 +387,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     public void queryRoleAndBindRoleByUserId(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 获取角色列表
-        List<Map<String, Object>> roles = sysEveUserDao.queryRoleList(map);
+        List<Map<String, Object>> roles = sysEveRoleService.queryAllDataForMap();
         // 获取用户绑定的角色ID串
         Map<String, Object> userRole = sysEveUserDao.queryBindRoleMationByUserId(map);
         String[] roleIds = userRole.get("roleIds").toString().split(",");

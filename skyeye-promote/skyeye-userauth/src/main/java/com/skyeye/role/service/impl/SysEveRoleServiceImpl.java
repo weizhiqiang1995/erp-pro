@@ -15,6 +15,7 @@ import com.skyeye.exception.CustomException;
 import com.skyeye.role.dao.SysEveRoleDao;
 import com.skyeye.role.entity.Role;
 import com.skyeye.role.service.SysEveRoleService;
+import com.skyeye.win.service.SysEveDesktopService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,9 @@ public class SysEveRoleServiceImpl extends SkyeyeBusinessServiceImpl<SysEveRoleD
 
     @Autowired
     private SysEveRoleDao sysEveRoleDao;
+
+    @Autowired
+    private SysEveDesktopService sysEveDesktopService;
 
     @Override
     public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
@@ -76,18 +80,15 @@ public class SysEveRoleServiceImpl extends SkyeyeBusinessServiceImpl<SysEveRoleD
     public void querySysRoleBandMenuList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysEveRoleDao.querySysRoleBandMenuList(map);
+        // 获取桌面信息
+        List<Map<String, Object>> desktopList = sysEveDesktopService.queryAllDataForMap();
+        beans.addAll(desktopList);
+
         String[] str;
         for (Map<String, Object> bean : beans) {
             str = bean.get("pId").toString().split(",");
             bean.put("pId", str[str.length - 1]);
         }
-        Map<String, Object> deskDefault = new HashMap<>();
-        deskDefault.put("id", "winfixedpage00000000");
-        deskDefault.put("name", "默认桌面");
-        deskDefault.put("pId", "0");
-        deskDefault.put("sysName", "基础系统");
-        deskDefault.put("pageType", "桌面");
-        beans.add(deskDefault);
         outputObject.setBeans(beans);
     }
 
@@ -155,6 +156,9 @@ public class SysEveRoleServiceImpl extends SkyeyeBusinessServiceImpl<SysEveRoleD
     public void querySysRoleBandAppMenuList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = sysEveRoleDao.querySysRoleBandAppMenuList(map);
+        // 获取桌面信息
+        List<Map<String, Object>> desktopList = sysEveDesktopService.queryAllDataForMap();
+        beans.addAll(desktopList);
         outputObject.setBeans(beans);
     }
 

@@ -5,9 +5,8 @@
 	<select id="querySysDesktopList" resultType="java.util.Map">
 		SELECT
 			a.id,
-			a.desktop_name desktopName,
-			a.desktop_name_cn desktopCnName,
-			a.state,
+			a.`name`,
+			a.enabled,
 			a.logo,
 			a.code,
 			a.app_page_url appPageUrl,
@@ -20,24 +19,16 @@
 		FROM
 			sys_eve_desktop a
 		<where>
-			a.state != 0
+			a.delete_flag = #{deleteFlag}
 			<if test="sqlExtract != '' and sqlExtract != null">
 				${sqlExtract}
 			</if>
 			<if test="keyword != null and keyword != ''">
-				AND a.desktop_name LIKE '%${keyword}%'
+				AND a.`name` LIKE '%${keyword}%'
 			</if>
 		</where>
-		ORDER BY a.order_by DESC
+		ORDER BY a.order_by ASC
 	</select>
-	
-	<update id="editSysDesktopStateById">
-		UPDATE sys_eve_desktop
-		<set>
-			state = #{state}
-		</set>
-		WHERE id = #{id}
-	</update>
 	
 	<select id="querySysDesktopUpMationById" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
@@ -50,9 +41,9 @@
 		WHERE
 			a.id = #{id}
 		AND b.order_by > a.order_by
-		AND b.state != 0
-		ORDER BY
-			b.order_by ASC
+		AND a.delete_flag = 0
+	    AND b.delete_flag = 0
+		ORDER BY b.order_by DESC
 		LIMIT 1
 	</select>
 	
@@ -75,22 +66,12 @@
 		WHERE
 			a.id = #{id}
 		AND a.order_by > b.order_by
-		AND b.state != 0
-		ORDER BY
-			b.order_by DESC
+		AND a.delete_flag = 0
+		AND b.delete_flag = 0
+		ORDER BY b.order_by ASC
 		LIMIT 1
 	</select>
 	
-	<select id="queryAllSysDesktopList" parameterType="java.util.Map" resultType="java.util.Map">
-        SELECT
-            a.id,
-            CASE #{language} WHEN 'zh' THEN a.desktop_name WHEN 'cn' THEN a.desktop_name_cn ELSE '' END name
-        FROM
-            sys_eve_desktop a
-        WHERE a.state != 0
-            ORDER BY a.order_by DESC
-    </select>
-    
     <update id="removeAllSysEveMenuByDesktopId" parameterType="java.util.Map">
         UPDATE sys_eve_menu
         <set>
@@ -101,12 +82,11 @@
 	
     <select id="querySysDesktopStateAndMenuNumById" resultType="java.util.Map">
         SELECT
-            a.state,
+            a.enabled,
             (SELECT COUNT(*) FROM sys_eve_menu b WHERE b.desktop_id = a.id) allNum
         FROM
             sys_eve_desktop a	
-        WHERE 
-            a.id = #{id}
+        WHERE a.id = #{id}
     </select>
 
 	<select id="querySysEveDesktopMaxOrderBum" resultType="java.lang.Integer">
@@ -114,7 +94,7 @@
 			(IFNULL(a.order_by, 0) + 1) orderBy
 		FROM
 			sys_eve_desktop a
-		WHERE a.state != 0
+		WHERE a.delete_flag = 0
 		ORDER BY a.order_by DESC
 		LIMIT 1
 	</select>

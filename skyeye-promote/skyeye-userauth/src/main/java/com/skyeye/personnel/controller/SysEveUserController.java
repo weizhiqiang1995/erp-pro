@@ -324,6 +324,7 @@ public class SysEveUserController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "login009", value = "获取该用户拥有的桌面", method = "GET", allUse = "2")
     @RequestMapping("/post/SysEveUserController/querySysDeskTopByUserId")
     public void querySysDeskTopByUserId(InputObject inputObject, OutputObject outputObject) {
         sysEveUserService.querySysDeskTopByUserId(inputObject, outputObject);

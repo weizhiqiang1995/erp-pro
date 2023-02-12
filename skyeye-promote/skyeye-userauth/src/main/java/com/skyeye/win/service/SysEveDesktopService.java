@@ -4,18 +4,12 @@
 
 package com.skyeye.win.service;
 
+import com.skyeye.base.business.service.SkyeyeBusinessService;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.win.entity.SysDesktop;
 
-public interface SysEveDesktopService {
-
-    void querySysDesktopList(InputObject inputObject, OutputObject outputObject);
-
-    void writeSysEveDesktopMation(InputObject inputObject, OutputObject outputObject);
-
-    void deleteSysDesktopById(InputObject inputObject, OutputObject outputObject);
-
-    void selectSysDesktopById(InputObject inputObject, OutputObject outputObject);
+public interface SysEveDesktopService extends SkyeyeBusinessService<SysDesktop> {
 
     void editSysDesktopMationOrderNumUpById(InputObject inputObject, OutputObject outputObject);
 

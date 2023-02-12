@@ -11,7 +11,7 @@ import com.skyeye.annotation.api.ApiOperation;
 import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.eve.entity.userauth.win.SysEveWinMation;
+import com.skyeye.win.entity.SysWin;
 import com.skyeye.win.service.SysEveWinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +42,7 @@ public class SysEveWinController {
     @ApiImplicitParams(classBean = CommonPageInfo.class)
     @RequestMapping("/post/SysEveWinController/queryWinMationList")
     public void queryWinMationList(InputObject inputObject, OutputObject outputObject) {
-        sysEveWinService.queryWinMationList(inputObject, outputObject);
+        sysEveWinService.queryPageList(inputObject, outputObject);
     }
 
     /**
@@ -52,24 +52,24 @@ public class SysEveWinController {
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "writeSysEveWinMation", value = "新增/编辑服务信息", method = "POST", allUse = "1")
-    @ApiImplicitParams(classBean = SysEveWinMation.class)
+    @ApiImplicitParams(classBean = SysWin.class)
     @RequestMapping("/post/SysEveWinController/insertWinMation")
     public void insertWinMation(InputObject inputObject, OutputObject outputObject) {
-        sysEveWinService.insertWinMation(inputObject, outputObject);
+        sysEveWinService.saveOrUpdateEntity(inputObject, outputObject);
     }
 
     /**
-     * 编辑服务信息时进行回显
+     * 根据id查询服务信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "sysevewin003", value = "编辑服务信息时进行回显", method = "GET", allUse = "2")
+    @ApiOperation(id = "sysevewin003", value = "根据id查询服务信息", method = "GET", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
-    @RequestMapping("/post/SysEveWinController/queryWinMationToEditById")
-    public void queryWinMationToEditById(InputObject inputObject, OutputObject outputObject) {
-        sysEveWinService.queryWinMationToEditById(inputObject, outputObject);
+    @RequestMapping("/post/SysEveWinController/querySysWinById")
+    public void querySysWinById(InputObject inputObject, OutputObject outputObject) {
+        sysEveWinService.selectById(inputObject, outputObject);
     }
 
     /**
@@ -83,7 +83,7 @@ public class SysEveWinController {
         @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
     @RequestMapping("/post/SysEveWinController/deleteWinMationById")
     public void deleteWinMationById(InputObject inputObject, OutputObject outputObject) {
-        sysEveWinService.deleteWinMationById(inputObject, outputObject);
+        sysEveWinService.deleteById(inputObject, outputObject);
     }
 
     /**
