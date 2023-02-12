@@ -99,7 +99,7 @@
 			a.id = #{id}
 		AND b.parent_id = a.parent_id
 		AND b.order_num > a.order_num
-		ORDER BY b.order_num DESC LIMIT 1
+		ORDER BY b.order_num ASC LIMIT 1
 	</select>
 	
 	<update id="editSysEveMenuSortLowerById" parameterType="java.util.Map">

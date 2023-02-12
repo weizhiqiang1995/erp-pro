@@ -43,8 +43,7 @@
 		AND b.order_by > a.order_by
 		AND a.delete_flag = 0
 	    AND b.delete_flag = 0
-		ORDER BY b.order_by DESC
-		LIMIT 1
+		ORDER BY b.order_by DESC LIMIT 1
 	</select>
 	
 	<update id="editSysDesktopMationOrderNumUpById" parameterType="java.util.Map">
@@ -68,8 +67,7 @@
 		AND a.order_by > b.order_by
 		AND a.delete_flag = 0
 		AND b.delete_flag = 0
-		ORDER BY b.order_by ASC
-		LIMIT 1
+		ORDER BY b.order_by ASC LIMIT 1
 	</select>
 	
     <update id="removeAllSysEveMenuByDesktopId" parameterType="java.util.Map">

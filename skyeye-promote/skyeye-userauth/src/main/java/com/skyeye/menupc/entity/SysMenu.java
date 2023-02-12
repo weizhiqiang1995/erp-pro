@@ -12,6 +12,7 @@ import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.api.Property;
 import com.skyeye.annotation.cache.RedisCacheField;
 import com.skyeye.common.entity.features.IconOrImgInfo;
+import com.skyeye.dsform.entity.DsFormPage;
 import com.skyeye.win.entity.SysDesktop;
 import com.skyeye.win.entity.SysWin;
 import lombok.Data;
@@ -38,6 +39,14 @@ public class SysMenu extends IconOrImgInfo {
     @ApiModelProperty(value = "菜单名称", required = "required")
     private String name;
 
+    @TableField("page_type")
+    @ApiModelProperty(value = "页面类型，true: 自定义页面 false: 表单布局", required = "required")
+    private Boolean pageType;
+
+    @TableField(exist = false)
+    @Property(value = "当 pageType 为表单布局时，存储的表单布局信息")
+    private DsFormPage dsFormPage;
+
     @TableField("page_url")
     @ApiModelProperty(value = "菜单链接", required = "required")
     private String pageUrl;
@@ -51,8 +60,12 @@ public class SysMenu extends IconOrImgInfo {
     private Integer sysType;
 
     @TableField("parent_id")
-    @ApiModelProperty(value = "菜单父ID", required = "required")
+    @ApiModelProperty(value = "父菜单ID", required = "required")
     private String parentId;
+
+    @TableField(exist = false)
+    @Property(value = "父菜单")
+    private SysMenu parentMenu;
 
     @TableField("level")
     @ApiModelProperty(value = "菜单级别    0：父菜单   1：子菜单", required = "required,num")

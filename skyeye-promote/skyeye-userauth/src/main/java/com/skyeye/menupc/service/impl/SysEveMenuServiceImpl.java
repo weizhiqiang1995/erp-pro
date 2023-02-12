@@ -13,11 +13,15 @@ import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
+import com.skyeye.dsform.entity.DsFormPage;
+import com.skyeye.dsform.service.DsFormPageService;
 import com.skyeye.exception.CustomException;
 import com.skyeye.menupc.dao.SysEveMenuDao;
 import com.skyeye.menupc.entity.SysMenu;
 import com.skyeye.menupc.entity.SysMenuQueryDo;
 import com.skyeye.menupc.service.SysEveMenuService;
+import com.skyeye.server.entity.ServiceBeanCustom;
+import com.skyeye.server.service.ServiceBeanCustomService;
 import com.skyeye.win.entity.SysDesktop;
 import com.skyeye.win.entity.SysWin;
 import com.skyeye.win.service.SysEveDesktopService;
@@ -26,6 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -50,6 +55,12 @@ public class SysEveMenuServiceImpl extends SkyeyeBusinessServiceImpl<SysEveMenuD
     @Autowired
     private SysEveWinService sysEveWinService;
 
+    @Autowired
+    private DsFormPageService dsFormPageService;
+
+    @Autowired
+    private ServiceBeanCustomService serviceBeanCustomService;
+
     /**
      * 菜单链接打开类型，父菜单默认为1.1：打开iframe，2：打开html。
      */
@@ -73,6 +84,8 @@ public class SysEveMenuServiceImpl extends SkyeyeBusinessServiceImpl<SysEveMenuD
         // 查询子节点信息(包含当前节点)
         List<String> childIds = sysEveMenuDao.queryAllChildIdsByParentId(ids);
         beans = selectMapByIds(childIds).values().stream().map(bean -> BeanUtil.beanToMap(bean)).collect(Collectors.toList());
+        beans = beans.stream()
+            .sorted(Comparator.comparing(bean -> Integer.parseInt(bean.get("orderNum").toString()))).collect(Collectors.toList());
         beans.forEach(bean -> {
             bean.put("lay_is_open", true);
         });
@@ -196,6 +209,17 @@ public class SysEveMenuServiceImpl extends SkyeyeBusinessServiceImpl<SysEveMenuD
 
         SysWin sysWin = sysEveWinService.selectById(sysMenu.getSysWinId());
         sysMenu.setSysWin(sysWin);
+
+        if (!sysMenu.getPageType()) {
+            // 表单布局
+            DsFormPage dsFormPage = dsFormPageService.getDataFromDb(sysMenu.getPageUrl());
+            ServiceBeanCustom serviceBeanCustom = serviceBeanCustomService.selectById(dsFormPage.getClassName());
+            dsFormPage.setServiceBeanCustom(serviceBeanCustom);
+            sysMenu.setDsFormPage(dsFormPage);
+        }
+        if (!sysMenu.getParentId().equals("0")) {
+            sysMenu.setParentMenu(selectById(sysMenu.getParentId()));
+        }
         return sysMenu;
     }
 
@@ -252,6 +276,8 @@ public class SysEveMenuServiceImpl extends SkyeyeBusinessServiceImpl<SysEveMenuD
             topBean.put("orderNum", topBean.get("thisOrderNum"));
             sysEveMenuDao.editSysEveMenuSortTopById(map);
             sysEveMenuDao.editSysEveMenuSortTopById(topBean);
+            refreshCache(map.get("id").toString());
+            refreshCache(topBean.get("id").toString());
         }
     }
 
@@ -274,6 +300,8 @@ public class SysEveMenuServiceImpl extends SkyeyeBusinessServiceImpl<SysEveMenuD
             topBean.put("orderNum", topBean.get("thisOrderNum"));
             sysEveMenuDao.editSysEveMenuSortLowerById(map);
             sysEveMenuDao.editSysEveMenuSortLowerById(topBean);
+            refreshCache(map.get("id").toString());
+            refreshCache(topBean.get("id").toString());
         }
     }
 

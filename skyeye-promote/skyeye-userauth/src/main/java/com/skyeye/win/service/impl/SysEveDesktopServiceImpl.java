@@ -94,6 +94,8 @@ public class SysEveDesktopServiceImpl extends SkyeyeBusinessServiceImpl<SysEveDe
             bean.put("upOrderBy", bean.get("thisOrderBy"));
             sysEveDesktopDao.editSysDesktopMationOrderNumUpById(map);
             sysEveDesktopDao.editSysDesktopMationOrderNumUpById(bean);
+            refreshCache(map.get("id").toString());
+            refreshCache(bean.get("id").toString());
         }
     }
 
@@ -117,6 +119,8 @@ public class SysEveDesktopServiceImpl extends SkyeyeBusinessServiceImpl<SysEveDe
             bean.put("upOrderBy", bean.get("thisOrderBy"));
             sysEveDesktopDao.editSysDesktopMationOrderNumUpById(map);
             sysEveDesktopDao.editSysDesktopMationOrderNumUpById(bean);
+            refreshCache(map.get("id").toString());
+            refreshCache(bean.get("id").toString());
         }
     }
 
