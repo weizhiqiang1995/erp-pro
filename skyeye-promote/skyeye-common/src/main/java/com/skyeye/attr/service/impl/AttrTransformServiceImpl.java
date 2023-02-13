@@ -6,11 +6,13 @@ package com.skyeye.attr.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.attr.classenum.DsFormShowType;
 import com.skyeye.attr.dao.AttrTransformDao;
 import com.skyeye.attr.entity.AttrDefinition;
+import com.skyeye.attr.entity.AttrDefinitionCustom;
 import com.skyeye.attr.entity.AttrTransform;
 import com.skyeye.attr.entity.AttrTransformTable;
 import com.skyeye.attr.service.AttrDefinitionService;
@@ -65,6 +67,7 @@ public class AttrTransformServiceImpl extends SkyeyeBusinessServiceImpl<AttrTran
             queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransform::getClassName), className);
             queryWrapper.eq(MybatisPlusUtil.toColumns(AttrTransform::getActFlowId), actFlowId);
             List<AttrTransform> attrTransformList = list(queryWrapper);
+
             if (CollectionUtil.isEmpty(attrTransformList)) {
                 return new ArrayList<>();
             }
@@ -74,15 +77,13 @@ public class AttrTransformServiceImpl extends SkyeyeBusinessServiceImpl<AttrTran
             // 将属性的基本信息进行赋值
             attrTransformList.forEach(attrTransform -> {
                 AttrDefinition attrDefinition = attrDefinitionMap.get(attrTransform.getAttrKey());
-                if (attrDefinition != null) {
-                    attrTransform.setLabel(attrDefinition.getName());
-                }
+                attrTransform.setAttrDefinition(attrDefinition);
             });
             // 移除掉已经不存在的属性
-            attrTransformList.removeIf(bean -> StrUtil.isEmpty(bean.getLabel()));
+            attrTransformList.removeIf(bean -> ObjectUtil.isEmpty(bean.getAttrDefinition()));
             // 设置表格的属性
             List<String> tableAttrKeyList = attrTransformList.stream()
-                .filter(bean -> bean.getShowType().equals(DsFormShowType.TABLE.getKey()))
+                .filter(bean -> getShowType(bean.getAttrDefinition()).equals(DsFormShowType.TABLE.getKey()))
                 .map(AttrTransform::getAttrKey).collect(Collectors.toList());
             if (CollectionUtil.isNotEmpty(tableAttrKeyList)) {
                 Map<String, List<AttrTransformTable>> attrTransformTable = attrTransformTableService
@@ -97,10 +98,19 @@ public class AttrTransformServiceImpl extends SkyeyeBusinessServiceImpl<AttrTran
         return result.stream().map(bean -> BeanUtil.beanToMap(bean)).collect(Collectors.toList());
     }
 
+    private Integer getShowType(AttrDefinition attrDefinition) {
+        AttrDefinitionCustom attrDefinitionCustom = attrDefinition.getAttrDefinitionCustom();
+        if (StrUtil.isNotEmpty(attrDefinitionCustom.getComponentId())) {
+            return attrDefinitionCustom.getDsFormComponent().getShowType();
+        }
+        return attrDefinitionCustom.getShowType();
+    }
+
     @Override
     public void writePostpose(AttrTransform entity, String userId) {
         super.writePostpose(entity, userId);
-        if (entity.getShowType().equals(DsFormShowType.TABLE.getKey())) {
+        AttrDefinition attrDefinition = attrDefinitionService.queryAttrDefinition(entity.getClassName(), entity.getAttrKey());
+        if (getShowType(attrDefinition).equals(DsFormShowType.TABLE.getKey())) {
             attrTransformTableService.saveAttrTransformTable(entity.getClassName(), entity.getAttrKey(), entity.getAttrTransformTableList());
         }
         String cacheKey = iAttrTransformService.getCacheKey(entity.getClassName(), entity.getActFlowId());
@@ -109,7 +119,8 @@ public class AttrTransformServiceImpl extends SkyeyeBusinessServiceImpl<AttrTran
 
     @Override
     public void deletePostpose(AttrTransform attrTransform) {
-        if (attrTransform.getShowType().equals(DsFormShowType.TABLE.getKey())) {
+        AttrDefinition attrDefinition = attrDefinitionService.queryAttrDefinition(attrTransform.getClassName(), attrTransform.getAttrKey());
+        if (getShowType(attrDefinition).equals(DsFormShowType.TABLE.getKey())) {
             // 如果该属性是表格类型的属性，则删除该属性下的表格信息
             attrTransformTableService.deleteAttrTransformTable(attrTransform.getClassName(), attrTransform.getAttrKey());
         }
@@ -121,7 +132,8 @@ public class AttrTransformServiceImpl extends SkyeyeBusinessServiceImpl<AttrTran
     @Override
     public AttrTransform getDataFromDb(String id) {
         AttrTransform attrTransform = super.getDataFromDb(id);
-        if (attrTransform.getShowType().equals(DsFormShowType.TABLE.getKey())) {
+        AttrDefinition attrDefinition = attrDefinitionService.queryAttrDefinition(attrTransform.getClassName(), attrTransform.getAttrKey());
+        if (getShowType(attrDefinition).equals(DsFormShowType.TABLE.getKey())) {
             List<AttrTransformTable> attrTransformTableList = attrTransformTableService
                 .queryAttrTransformTable(attrTransform.getClassName(), attrTransform.getAttrKey());
             attrTransform.setAttrTransformTableList(attrTransformTableList);

@@ -47,12 +47,8 @@ public class AttrTransform extends OperatorUserInfo {
     private String attrKey;
 
     @TableField(exist = false)
-    @Property("字段名显示名称。例如：姓名、单据编号等")
-    private String label;
-
-    @TableField("show_type")
-    @ApiModelProperty(value = "显示类型，参考#DsFormShowType枚举类", required = "required,num")
-    private Integer showType;
+    @Property("属性信息")
+    private AttrDefinition attrDefinition;
 
     @TableField("proportion")
     @ApiModelProperty(value = "显示宽度，可参考#WidthScale", required = "required")

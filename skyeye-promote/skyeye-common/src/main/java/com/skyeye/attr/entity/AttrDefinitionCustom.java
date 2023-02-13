@@ -53,6 +53,10 @@ public class AttrDefinitionCustom extends OperatorUserInfo {
     @Property(value = "自定义属性关联的组件")
     private DsFormComponent dsFormComponent;
 
+    @TableField("show_type")
+    @ApiModelProperty(value = "显示类型，参考#DsFormShowType", required = "num")
+    private Integer showType;
+
     @TableField("min_length")
     @ApiModelProperty(value = "最小长度")
     private Integer minLength;

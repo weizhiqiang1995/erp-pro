@@ -101,7 +101,12 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
         QueryWrapper<AttrDefinitionCustom> wrapper = new QueryWrapper<>();
         wrapper.eq(MybatisPlusUtil.toColumns(AttrDefinitionCustom::getClassName), className);
         wrapper.eq(MybatisPlusUtil.toColumns(AttrDefinitionCustom::getAttrKey), attrKey);
-        return getOne(wrapper);
+        AttrDefinitionCustom attrDefinitionCustom = getOne(wrapper);
+        if (ObjectUtil.isNotEmpty(attrDefinitionCustom) && StrUtil.isNotEmpty(attrDefinitionCustom.getComponentId())) {
+            DsFormComponent dsFormComponent = dsFormComponentService.selectById(attrDefinitionCustom.getComponentId());
+            attrDefinitionCustom.setDsFormComponent(dsFormComponent);
+        }
+        return attrDefinitionCustom;
     }
 
     @Override

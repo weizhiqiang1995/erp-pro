@@ -215,7 +215,15 @@ public class AttrDefinitionServiceImpl extends SkyeyeBusinessServiceImpl<AttrDef
         QueryWrapper<AttrDefinition> wrapper = new QueryWrapper<>();
         wrapper.eq(MybatisPlusUtil.toColumns(AttrDefinition::getClassName), className);
         wrapper.eq(MybatisPlusUtil.toColumns(AttrDefinition::getAttrKey), attrKey);
-        return getOne(wrapper);
+        AttrDefinition attrDefinition = getOne(wrapper);
+        setCustomDefinition(className, attrDefinition);
+        return attrDefinition;
+    }
+
+    private void setCustomDefinition(String className, AttrDefinition attrDefinition) {
+        // 获取自定义属性id
+        AttrDefinitionCustom attrDefinitionCustom = attrDefinitionCustomService.queryAttrDefinitionCustom(className, attrDefinition.getAttrKey());
+        attrDefinition.setAttrDefinitionCustom(attrDefinitionCustom);
     }
 
 }
