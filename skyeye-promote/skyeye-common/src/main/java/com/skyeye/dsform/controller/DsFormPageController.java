@@ -114,4 +114,19 @@ public class DsFormPageController {
         dsFormPageService.writeDsFormPageTable(inputObject, outputObject);
     }
 
+    /**
+     * 根据业务数据id获取业务数据信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryBusinessDataByObject", value = "根据业务数据id获取业务数据信息", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "objectId", name = "objectId", value = "所属第三方业务数据id", required = "required"),
+        @ApiImplicitParam(id = "objectKey", name = "objectKey", value = "所属第三方业务数据的key", required = "required")})
+    @RequestMapping("/post/DsFormPageController/queryBusinessDataByObject")
+    public void queryBusinessDataByObject(InputObject inputObject, OutputObject outputObject) {
+        dsFormPageService.queryBusinessDataByObject(inputObject, outputObject);
+    }
+
 }

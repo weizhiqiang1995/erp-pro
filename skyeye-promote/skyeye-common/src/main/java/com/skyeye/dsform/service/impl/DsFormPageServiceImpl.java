@@ -14,6 +14,7 @@ import com.skyeye.attr.service.AttrDefinitionService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.business.entity.BusinessApi;
 import com.skyeye.business.service.BusinessApiService;
+import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
@@ -25,6 +26,7 @@ import com.skyeye.dsform.service.DsFormPageService;
 import com.skyeye.dsform.service.TableColumnService;
 import com.skyeye.operate.entity.Operate;
 import com.skyeye.operate.service.OperateService;
+import com.skyeye.sdk.data.service.IDataService;
 import com.skyeye.server.entity.ServiceBeanCustom;
 import com.skyeye.server.service.ServiceBeanCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +66,9 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
 
     @Autowired
     private TableColumnService tableColumnService;
+
+    @Autowired
+    private IDataService iDataService;
 
     @Override
     public void queryDsFormPageList(InputObject inputObject, OutputObject outputObject) {
@@ -197,4 +202,20 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
         tableColumnService.createList(tableColumnVo.getTableColumnList(), userId, tableColumnVo.getPageId());
     }
 
+    /**
+     * 根据业务数据id获取业务数据信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryBusinessDataByObject(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> params = inputObject.getParams();
+        String objectId = params.get("objectId").toString();
+        String objectKey = params.get("objectKey").toString();
+        // 获取业务数据
+        Map<String, Object> businessData = iDataService.getDataByObjectId(null, objectId, objectKey);
+        outputObject.setBean(businessData);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
+    }
 }
