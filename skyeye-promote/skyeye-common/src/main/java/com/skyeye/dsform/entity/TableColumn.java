@@ -46,12 +46,16 @@ public class TableColumn extends OperatorUserInfo {
     private String width;
 
     @TableField("align")
-    @ApiModelProperty(value = "对其方式，参考#Alignment枚举类", required = "required")
+    @ApiModelProperty(value = "对其方式，参考#Alignment", required = "required")
     private String align;
 
     @TableField("fixed")
-    @ApiModelProperty(value = "固定位置，参考#FixedType枚举类")
+    @ApiModelProperty(value = "固定位置，参考#FixedType")
     private String fixed;
+
+    @TableField("hide")
+    @ApiModelProperty(value = "是否初始隐藏，参考#WhetherEnum")
+    private Integer hide;
 
     @TableField("templet")
     @ApiModelProperty(value = "列内容展示的脚本，相当于表格中的templet")

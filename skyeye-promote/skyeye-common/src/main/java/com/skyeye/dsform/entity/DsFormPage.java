@@ -61,6 +61,14 @@ public class DsFormPage extends OperatorUserInfo {
     @ApiModelProperty(value = "服务类的className", required = "required")
     private String className;
 
+    @TableField("is_page")
+    @ApiModelProperty(value = "表格时拥有，是否分页，参考#WhetherEnum")
+    private Integer isPage;
+
+    @TableField("search_tips")
+    @ApiModelProperty(value = "表格时拥有，搜索框提示语")
+    private String searchTips;
+
     @TableField(exist = false)
     @Property(value = "服务类的信息")
     private ServiceBeanCustom serviceBeanCustom;
