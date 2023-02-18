@@ -32,7 +32,7 @@ public class SysDesktop extends OperatorUserInfo {
     private String id;
 
     @TableField("`name`")
-    @ApiModelProperty(value = "桌面名称(中文)", required = "required")
+    @ApiModelProperty(value = "桌面名称", required = "required")
     private String name;
 
     @TableField("logo")

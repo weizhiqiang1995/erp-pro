@@ -155,6 +155,7 @@ public class ServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl<ServiceBea
                 tree.setName(treeNode.get("name").toString());
                 tree.putExtra("isParent", treeNode.get("isParent"));
                 tree.putExtra("disabled", treeNode.get("disabled"));
+                tree.putExtra("nocheck", treeNode.get("nocheck"));
                 tree.putExtra("classMation", treeNode.get("classMation"));
             });
         outputObject.setBeans(treeNodes);
@@ -208,6 +209,7 @@ public class ServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl<ServiceBea
         groupName.put("isParent", isParent);
         if (isParent) {
             groupName.put("disabled", true);
+            groupName.put("nocheck", true);
         } else {
             groupName.put("disabled", false);
         }

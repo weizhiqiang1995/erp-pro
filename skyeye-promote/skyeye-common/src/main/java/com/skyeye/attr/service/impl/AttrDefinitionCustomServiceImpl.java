@@ -80,7 +80,7 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
         // 获取关联的组件信息
         List<String> componentIdList = attrDefinitionCustomList.stream()
             .filter(attrDefinitionCustom -> StrUtil.isNotEmpty(attrDefinitionCustom.getComponentId()))
-            .map(AttrDefinitionCustom::getComponentId).collect(Collectors.toList());
+            .map(AttrDefinitionCustom::getComponentId).distinct().collect(Collectors.toList());
         Map<String, DsFormComponent> componentMap = dsFormComponentService.selectMapByIds(componentIdList);
         attrDefinitionCustomList.forEach(attrDefinitionCustom -> {
             if (StrUtil.isNotEmpty(attrDefinitionCustom.getComponentId())) {

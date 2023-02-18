@@ -13,7 +13,6 @@ import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.api.Property;
 import com.skyeye.annotation.cache.RedisCacheField;
 import com.skyeye.annotation.unique.UniqueField;
-import com.skyeye.common.constans.RedisConstants;
 import com.skyeye.common.entity.features.IconOrImgInfo;
 import lombok.Data;
 
@@ -55,7 +54,7 @@ public class DsFormComponent extends IconOrImgInfo {
     private String typeName;
 
     @TableField("show_type")
-    @ApiModelProperty(value = "显示类型，参考#DsFormShowType枚举类", required = "required,num")
+    @ApiModelProperty(value = "显示类型，参考#DsFormShowType", required = "required,num")
     private Integer showType;
 
     @TableField("html_content")
@@ -87,7 +86,15 @@ public class DsFormComponent extends IconOrImgInfo {
     private Integer linkedData;
 
     @TableField(value = "attr_keys", typeHandler = JacksonTypeHandler.class)
-    @ApiModelProperty(value = "组件关联的属性，可参考#ComponentAttr枚举类", required = "json")
+    @ApiModelProperty(value = "组件关联的属性，可参考#ComponentAttr", required = "json")
     private List<String> attrKeys;
+
+    @TableField("apply_range")
+    @ApiModelProperty(value = "适用范围，参考#ComponentApplyRange", required = "required,num")
+    private Integer applyRange;
+
+    @TableField(value = "apply_object", typeHandler = JacksonTypeHandler.class)
+    @ApiModelProperty(value = "局部适用对象", required = "json")
+    private List<String> applyObject;
 
 }
