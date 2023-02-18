@@ -22,10 +22,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public enum ComponentApplyRange implements SkyeyeEnumClass {
 
-    GLOBALLY_APPLICABLE("1", "全局适用", true, true),
-    LOCAL_APPLICATION("2", "局部适用", true, false);
+    GLOBALLY_APPLICABLE(1, "全局适用", true, true),
+    LOCAL_APPLICATION(2, "局部适用", true, false);
 
-    private String key;
+    private Integer key;
 
     private String value;
 

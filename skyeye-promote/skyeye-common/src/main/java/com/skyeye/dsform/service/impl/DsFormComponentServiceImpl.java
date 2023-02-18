@@ -4,6 +4,7 @@
 
 package com.skyeye.dsform.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.tree.Tree;
 import com.google.common.base.Joiner;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
@@ -12,6 +13,7 @@ import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.dsform.classenum.ComponentApplyRange;
 import com.skyeye.dsform.dao.DsFormComponentDao;
 import com.skyeye.dsform.entity.DsFormComponent;
 import com.skyeye.dsform.service.DsFormComponentService;
@@ -49,7 +51,25 @@ public class DsFormComponentServiceImpl extends SkyeyeBusinessServiceImpl<DsForm
      */
     @Override
     public void queryAllDsFormComponentList(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> params = inputObject.getParams();
+        String serviceClassName = params.get("serviceClassName").toString();
+        String dsFormPageType = params.get("dsFormPageType").toString();
+
         List<DsFormComponent> formComponentList = list();
+        // 过滤数据
+        formComponentList = formComponentList.stream()
+            .filter(component -> {
+                if (CollectionUtil.isNotEmpty(component.getApplyFormType()) && component.getApplyFormType().indexOf(dsFormPageType) >= 0) {
+                    // 适用布局匹配
+                    if (component.getApplyRange().equals(ComponentApplyRange.GLOBALLY_APPLICABLE.getKey())
+                        || (component.getApplyRange().equals(ComponentApplyRange.LOCAL_APPLICATION.getKey()) &&
+                        CollectionUtil.isNotEmpty(component.getApplyObject()) && component.getApplyObject().indexOf(serviceClassName) >= 0)) {
+                        // 适配全局对象适用并且局部范围内适用包含指定serviceClassName的
+                        return true;
+                    }
+                }
+                return false;
+            }).collect(Collectors.toList());
         // 获取组件的详细信息
         List<String> componentIds = formComponentList.stream()
             .map(DsFormComponent::getId).collect(Collectors.toList());

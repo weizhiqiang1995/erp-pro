@@ -89,6 +89,10 @@ public class DsFormComponent extends IconOrImgInfo {
     @ApiModelProperty(value = "组件关联的属性，可参考#ComponentAttr", required = "json")
     private List<String> attrKeys;
 
+    @TableField(value = "apply_form_type", typeHandler = JacksonTypeHandler.class)
+    @ApiModelProperty(value = "适用表单布局类型，可参考#DsFormPageType", required = "json")
+    private List<String> applyFormType;
+
     @TableField("apply_range")
     @ApiModelProperty(value = "适用范围，参考#ComponentApplyRange", required = "required,num")
     private Integer applyRange;

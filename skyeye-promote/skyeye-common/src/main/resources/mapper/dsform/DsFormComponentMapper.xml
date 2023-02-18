@@ -14,6 +14,7 @@
 			a.icon_type iconType,
 			a.icon_pic iconPic,
 			a.type_id typeId,
+			a.apply_range applyRange,
 			a.create_id createId,
 			CONVERT(a.create_time, char) createTime,
 			a.last_update_id lastUpdateId,
