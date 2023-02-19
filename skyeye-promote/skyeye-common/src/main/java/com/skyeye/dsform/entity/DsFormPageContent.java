@@ -78,4 +78,20 @@ public class DsFormPageContent extends OperatorUserInfo {
     @Property("属性信息")
     private AttrDefinition attrDefinition;
 
+    @TableField("upload_num")
+    @ApiModelProperty(value = "限制上传的文件数量", required = "num")
+    private Integer uploadNum;
+
+    @TableField(value = "upload_data_type", typeHandler = JacksonTypeHandler.class)
+    @ApiModelProperty(value = "文件上传类型", required = "json")
+    private List<String> uploadDataType;
+
+    @TableField(value = "upload_type")
+    @ApiModelProperty(value = "文件上传类型", required = "num")
+    private Integer uploadType;
+
+    @TableField(value = "data_show_type")
+    @ApiModelProperty(value = "枚举/数据字典类的数据展示类型")
+    private String dataShowType;
+
 }

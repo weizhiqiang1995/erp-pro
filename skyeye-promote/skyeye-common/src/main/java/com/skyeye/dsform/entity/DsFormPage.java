@@ -31,7 +31,7 @@ import java.util.List;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Data
-@UniqueField
+@UniqueField({"name", "className"})
 @RedisCacheField(name = "dsForm:page", cacheTime = RedisConstants.A_YEAR_SECONDS)
 @TableName(value = "ds_form_page", autoResultMap = true)
 @ApiModel("表单布局实体类")
