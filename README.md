@@ -6,8 +6,7 @@
 - [2023年全年更新计划](https://mp.weixin.qq.com/s/deBkHLLeo1JDy6nqhvtWZg)
 - [软件更新资讯](https://gitee.com/doc_wei01/skyeye/blob/company_server/HISTORY_UPDATE.md)
 - 开源版请下载`master`分支
-- 作者本人承诺，知识星球人数达到1000人，即开放所有功能模块源代码(仅供星球内部成员使用)
-- 基础模块 (源代码) 针对星球内部用户开放，具体包含功能可查看：[https://docs.qq.com/sheet/DYWZWUWZQUkFTcmh2?tab=BB08J2](https://docs.qq.com/sheet/DYWZWUWZQUkFTcmh2?tab=BB08J2)
+- Skyeye企业版基础模块部署包已开放，需要部署或者二开的联系作者获取 ，具体包含功能可查看：[https://docs.qq.com/sheet/DYWZWUWZQUkFTcmh2?tab=BB08J2](https://docs.qq.com/sheet/DYWZWUWZQUkFTcmh2?tab=BB08J2)
 - 此软件为个人软件，暂不能开发票，需要发票的勿扰，企业版报价：https://docs.qq.com/sheet/DYUh5RUlGSkVPeHVo
 
 ### 沟通交流
