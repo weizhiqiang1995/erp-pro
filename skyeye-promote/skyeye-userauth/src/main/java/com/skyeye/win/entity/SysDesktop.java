@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
+import com.skyeye.annotation.api.Property;
 import com.skyeye.annotation.cache.RedisCacheField;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
@@ -43,10 +44,8 @@ public class SysDesktop extends OperatorUserInfo {
     @ApiModelProperty(value = "手机端页面跳转地址")
     private String appPageUrl;
 
-    /**
-     * 序号
-     */
     @TableField("order_by")
+    @Property(value = "序号")
     private Integer orderBy;
 
     /**
@@ -56,9 +55,6 @@ public class SysDesktop extends OperatorUserInfo {
     @ApiModelProperty(value = "状态，参考#EnableEnum枚举类", required = "required,num")
     private Integer enabled;
 
-    /**
-     * 序号
-     */
     @TableField("code")
     @ApiModelProperty(value = "区分桌面的code，唯一", required = "required")
     private String desktopCode;

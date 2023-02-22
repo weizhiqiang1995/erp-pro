@@ -29,6 +29,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * @ClassName: SysEveDesktopServiceImpl
+ * @Description: 桌面信息管理服务层
+ * @author: skyeye云系列--卫志强
+ * @date: 2023/2/22 19:22
+ * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
+ * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
+ */
 @Service
 @SkyeyeService(name = "桌面信息管理", groupName = "基础模块")
 public class SysEveDesktopServiceImpl extends SkyeyeBusinessServiceImpl<SysEveDesktopDao, SysDesktop> implements SysEveDesktopService {
@@ -84,7 +92,7 @@ public class SysEveDesktopServiceImpl extends SkyeyeBusinessServiceImpl<SysEveDe
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysDesktopMationOrderNumUpById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        // 获取当前数据的同级分类下的上一条数据
+        // 获取上一条数据
         Map<String, Object> bean = sysEveDesktopDao.querySysDesktopUpMationById(map);
         if (CollectionUtils.isEmpty(bean)) {
             outputObject.setreturnMessage("当前桌面名称已经是首位，无须进行上移。");
@@ -109,7 +117,7 @@ public class SysEveDesktopServiceImpl extends SkyeyeBusinessServiceImpl<SysEveDe
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysDesktopMationOrderNumDownById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        // 获取当前数据的同级分类下的下一条数据
+        // 获取下一条数据
         Map<String, Object> bean = sysEveDesktopDao.querySysDesktopDownMationById(map);
         if (CollectionUtils.isEmpty(bean)) {
             outputObject.setreturnMessage("当前桌面名称已经是末位，无须进行下移。");
@@ -135,20 +143,6 @@ public class SysEveDesktopServiceImpl extends SkyeyeBusinessServiceImpl<SysEveDe
         List<Map<String, Object>> beans = queryAllDataForMap();
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
-    }
-
-    /**
-     * 一键移除所有菜单
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
-    public void removeAllSysEveMenuByDesktopId(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        map.put("desktopId", "winfixedpage00000000");
-        sysEveDesktopDao.removeAllSysEveMenuByDesktopId(map);
     }
 
     @Override

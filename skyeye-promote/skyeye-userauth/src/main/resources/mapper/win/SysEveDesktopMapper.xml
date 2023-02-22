@@ -8,7 +8,7 @@
 			a.`name`,
 			a.enabled,
 			a.logo,
-			a.code,
+			a.code desktopCode,
 			a.app_page_url appPageUrl,
 			a.order_by orderBy,
 			(SELECT COUNT(*) FROM sys_eve_menu b WHERE b.desktop_id = a.id) allNum,
@@ -40,7 +40,7 @@
 			sys_eve_desktop b
 		WHERE
 			a.id = #{id}
-		AND b.order_by > a.order_by
+		AND a.order_by > b.order_by
 		AND a.delete_flag = 0
 	    AND b.delete_flag = 0
 		ORDER BY b.order_by DESC LIMIT 1
@@ -64,19 +64,11 @@
 			sys_eve_desktop b
 		WHERE
 			a.id = #{id}
-		AND a.order_by > b.order_by
+		AND b.order_by > a.order_by
 		AND a.delete_flag = 0
 		AND b.delete_flag = 0
 		ORDER BY b.order_by ASC LIMIT 1
 	</select>
-	
-    <update id="removeAllSysEveMenuByDesktopId" parameterType="java.util.Map">
-        UPDATE sys_eve_menu
-        <set>
-            desktop_id = #{desktopId},
-        </set>
-        WHERE desktop_id = #{id}
-    </update>
 	
     <select id="querySysDesktopStateAndMenuNumById" resultType="java.util.Map">
         SELECT

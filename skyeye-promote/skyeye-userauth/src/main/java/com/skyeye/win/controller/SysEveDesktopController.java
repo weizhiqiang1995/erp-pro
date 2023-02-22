@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @ClassName: SysEveDesktopController
- * @Description: 桌面管理
+ * @Description: 桌面信息管理控制层
  * @author: skyeye云系列--卫志强
  * @date: 2022/7/30 0:19
  * @Copyright: 2022 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
@@ -125,20 +125,6 @@ public class SysEveDesktopController {
     @RequestMapping("/post/SysEveDesktopController/queryAllSysDesktopList")
     public void queryAllSysDesktopList(InputObject inputObject, OutputObject outputObject) {
         sysEveDesktopService.queryAllSysDesktopList(inputObject, outputObject);
-    }
-
-    /**
-     * 一键移除所有菜单
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @ApiOperation(id = "desktop012", value = "一键移除所有菜单", method = "POST", allUse = "1")
-    @ApiImplicitParams({
-        @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
-    @RequestMapping("/post/SysEveDesktopController/removeAllSysEveMenuByDesktopId")
-    public void removeAllSysEveMenuByDesktopId(InputObject inputObject, OutputObject outputObject) {
-        sysEveDesktopService.removeAllSysEveMenuByDesktopId(inputObject, outputObject);
     }
 
 }
