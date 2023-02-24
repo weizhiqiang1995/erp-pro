@@ -10,6 +10,7 @@ import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.skyeye.annotation.service.SkyeyeService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.cache.redis.RedisCache;
 import com.skyeye.coderule.dao.CodeMaxSerialDao;
@@ -51,6 +52,7 @@ import java.util.concurrent.Executor;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
+@SkyeyeService(name = "编码规则管理", groupName = "系统设置")
 public class CodeRuleServiceImpl extends SkyeyeBusinessServiceImpl<CodeRuleDao, CodeRule> implements CodeRuleService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CodeRuleServiceImpl.class);
