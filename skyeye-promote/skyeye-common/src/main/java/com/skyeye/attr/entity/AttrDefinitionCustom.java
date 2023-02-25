@@ -4,6 +4,7 @@
 
 package com.skyeye.attr.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -11,6 +12,7 @@ import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.annotation.api.Property;
 import com.skyeye.annotation.unique.UniqueField;
+import com.skyeye.business.entity.BusinessApi;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import com.skyeye.dsform.entity.DsFormComponent;
 import lombok.Data;
@@ -73,7 +75,7 @@ public class AttrDefinitionCustom extends OperatorUserInfo {
     @Property(value = "是否可以作为入参，数据来源：属性原始信息")
     private Boolean whetherInputParams;
 
-    @TableField("data_type")
+    @TableField(value = "data_type", updateStrategy = FieldStrategy.IGNORED)
     @ApiModelProperty(value = "数据类型，参考#AttrKeyDataType", required = "num")
     private Integer dataType;
 
@@ -84,5 +86,9 @@ public class AttrDefinitionCustom extends OperatorUserInfo {
     @TableField("object_id")
     @ApiModelProperty(value = "数据类型为其他时，数据的id")
     private String objectId;
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "dataType=4时，自定义api接口的请求", required = "json")
+    private BusinessApi businessApi;
 
 }

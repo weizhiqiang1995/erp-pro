@@ -8,6 +8,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.skyeye.attr.classenum.AttrKeyDataType;
 import com.skyeye.attr.dao.AttrDefinitionCustomDao;
 import com.skyeye.attr.entity.AttrDefinition;
 import com.skyeye.attr.entity.AttrDefinitionCustom;
@@ -16,6 +17,8 @@ import com.skyeye.attr.service.AttrDefinitionService;
 import com.skyeye.attr.service.AttrTransformTableService;
 import com.skyeye.attr.service.IAttrTransformService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
+import com.skyeye.business.entity.BusinessApi;
+import com.skyeye.business.service.BusinessApiService;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -52,9 +55,20 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
     @Autowired
     private DsFormComponentService dsFormComponentService;
 
+    @Autowired
+    private BusinessApiService businessApiService;
+
     @Override
     public void writePostpose(AttrDefinitionCustom entity, String userId) {
         super.writePostpose(entity, userId);
+        businessApiService.deleteByObjectId(entity.getId());
+        if (entity.getDataType() != null && entity.getDataType().equals(AttrKeyDataType.CUSTOM_API.getKey())) {
+            // 保存属性关联的自定义的api接口
+            BusinessApi businessApi = entity.getBusinessApi();
+            businessApi.setObjectId(entity.getId());
+            businessApi.setObjectKey(getServiceClassName());
+            businessApiService.createEntity(businessApi, userId);
+        }
         refreshCache(entity.getClassName(), entity.getAttrKey());
     }
 
@@ -87,6 +101,18 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
                 attrDefinitionCustom.setDsFormComponent(componentMap.get(attrDefinitionCustom.getComponentId()));
             }
         });
+        // 查询属性关联的自定义的api接口
+        List<String> ids = attrDefinitionCustomList.stream()
+            .filter(bean -> bean.getDataType() != null && bean.getDataType().equals(AttrKeyDataType.CUSTOM_API.getKey()))
+            .map(AttrDefinitionCustom::getId).collect(Collectors.toList());
+        if (CollectionUtil.isNotEmpty(ids)) {
+            Map<String, BusinessApi> businessApiMap = businessApiService.selectByObjectIds(ids);
+            attrDefinitionCustomList.forEach(attrDefinitionCustom -> {
+                if (attrDefinitionCustom.getDataType() != null && attrDefinitionCustom.getDataType().equals(AttrKeyDataType.CUSTOM_API.getKey())) {
+                    attrDefinitionCustom.setBusinessApi(businessApiMap.get(attrDefinitionCustom.getId()));
+                }
+            });
+        }
         return attrDefinitionCustomList;
     }
 
@@ -103,8 +129,13 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
         wrapper.eq(MybatisPlusUtil.toColumns(AttrDefinitionCustom::getAttrKey), attrKey);
         AttrDefinitionCustom attrDefinitionCustom = getOne(wrapper);
         if (ObjectUtil.isNotEmpty(attrDefinitionCustom) && StrUtil.isNotEmpty(attrDefinitionCustom.getComponentId())) {
+            // 查询组件信息
             DsFormComponent dsFormComponent = dsFormComponentService.selectById(attrDefinitionCustom.getComponentId());
             attrDefinitionCustom.setDsFormComponent(dsFormComponent);
+            // 查询属性关联的自定义的api接口
+            if (attrDefinitionCustom.getDataType() != null && attrDefinitionCustom.getDataType().equals(AttrKeyDataType.CUSTOM_API.getKey())) {
+                attrDefinitionCustom.setBusinessApi(businessApiService.selectByObjectId(attrDefinitionCustom.getId()));
+            }
         }
         return attrDefinitionCustom;
     }
@@ -140,10 +171,15 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
         Map<String, Object> params = inputObject.getParams();
         String className = params.get("className").toString();
         String attrKey = params.get("attrKey").toString();
-        QueryWrapper<AttrDefinitionCustom> wrapper = new QueryWrapper<>();
-        wrapper.eq(MybatisPlusUtil.toColumns(AttrDefinitionCustom::getClassName), className);
-        wrapper.eq(MybatisPlusUtil.toColumns(AttrDefinitionCustom::getAttrKey), attrKey);
-        remove(wrapper);
+        AttrDefinitionCustom attrDefinitionCustom = queryAttrDefinitionCustom(className, attrKey);
+        if (ObjectUtil.isEmpty(attrDefinitionCustom)) {
+            return;
+        }
+        // 删除属性关联的自定义的api接口
+        if (attrDefinitionCustom.getDataType() != null && attrDefinitionCustom.getDataType().equals(AttrKeyDataType.CUSTOM_API.getKey())) {
+            businessApiService.deleteByObjectId(attrDefinitionCustom.getId());
+        }
+        removeById(attrDefinitionCustom.getId());
         refreshCache(className, attrKey);
     }
 }
