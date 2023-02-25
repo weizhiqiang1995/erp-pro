@@ -94,8 +94,7 @@ public class DsFormComponentController {
      */
     @ApiOperation(id = "queryAllDsFormComponentList", value = "获取所有的动态表单组件", method = "GET", allUse = "2")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(id = "serviceClassName", name = "serviceClassName", value = "业务对象的服务层className", required = "required"),
-        @ApiImplicitParam(id = "dsFormPageType", name = "dsFormPageType", value = "表单布局类型")})
+        @ApiImplicitParam(id = "serviceClassName", name = "serviceClassName", value = "业务对象的服务层className", required = "required")})
     @RequestMapping("/post/DsFormComponentController/queryAllDsFormComponentList")
     public void queryAllDsFormComponentList(InputObject inputObject, OutputObject outputObject) {
         dsFormComponentService.queryAllDsFormComponentList(inputObject, outputObject);

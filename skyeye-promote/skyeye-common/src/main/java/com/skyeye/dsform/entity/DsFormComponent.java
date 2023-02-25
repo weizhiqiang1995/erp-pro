@@ -89,10 +89,6 @@ public class DsFormComponent extends IconOrImgInfo {
     @ApiModelProperty(value = "组件关联的属性，可参考#ComponentAttr", required = "json")
     private List<String> attrKeys;
 
-    @TableField(value = "apply_form_type", typeHandler = JacksonTypeHandler.class)
-    @ApiModelProperty(value = "适用表单布局类型，可参考#DsFormPageType", required = "json")
-    private List<String> applyFormType;
-
     @TableField("apply_range")
     @ApiModelProperty(value = "适用范围，参考#ComponentApplyRange", required = "required,num")
     private Integer applyRange;
@@ -100,5 +96,9 @@ public class DsFormComponent extends IconOrImgInfo {
     @TableField(value = "apply_object", typeHandler = JacksonTypeHandler.class)
     @ApiModelProperty(value = "局部适用对象", required = "json")
     private List<String> applyObject;
+
+    @TableField("value_merg_type")
+    @ApiModelProperty(value = "组件获取的值的合入接口入参的方式，参考#ComponentValueMergType", required = "required")
+    private String valueMergType;
 
 }

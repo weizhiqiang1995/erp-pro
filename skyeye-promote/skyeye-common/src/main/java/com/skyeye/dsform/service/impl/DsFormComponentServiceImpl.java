@@ -54,7 +54,6 @@ public class DsFormComponentServiceImpl extends SkyeyeBusinessServiceImpl<DsForm
     public void queryAllDsFormComponentList(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> params = inputObject.getParams();
         String serviceClassName = params.get("serviceClassName").toString();
-        String dsFormPageType = params.get("dsFormPageType").toString();
 
         List<DsFormComponent> formComponentList = list();
         // 过滤数据
@@ -64,11 +63,7 @@ public class DsFormComponentServiceImpl extends SkyeyeBusinessServiceImpl<DsForm
                     || (component.getApplyRange().equals(ComponentApplyRange.LOCAL_APPLICATION.getKey()) &&
                     CollectionUtil.isNotEmpty(component.getApplyObject()) && component.getApplyObject().indexOf(serviceClassName) >= 0)) {
                     // 适配全局对象适用并且局部范围内适用包含指定serviceClassName的
-                    if ((CollectionUtil.isNotEmpty(component.getApplyFormType()) && component.getApplyFormType().indexOf(dsFormPageType) >= 0)
-                        || StrUtil.isEmpty(dsFormPageType)) {
-                        // 适用布局匹配
-                        return true;
-                    }
+                    return true;
                 }
                 return false;
             }).collect(Collectors.toList());
