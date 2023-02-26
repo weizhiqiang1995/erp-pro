@@ -81,4 +81,8 @@ public class ServiceBean extends CommonInfo {
     @ApiModelProperty(value = "是否开启流程", required = "required")
     private Boolean flowable;
 
+    @TableField("team_auth")
+    @ApiModelProperty(value = "是否开启团队权限管理", required = "required")
+    private Boolean teamAuth;
+
 }
