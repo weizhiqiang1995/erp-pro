@@ -120,8 +120,10 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
     public DsFormPage selectById(String id) {
         DsFormPage dsFormPage = super.selectById(id);
         if (!StrUtil.equals(dsFormPage.getType(), DsFormPageType.SIMPLE_TABLE.getKey())) {
+            // 查询表单布局的内容信息
             selectPageContent(dsFormPage);
         } else {
+            // 查询表格的字段列信息
             selectTableColumn(dsFormPage);
         }
         if (CollectionUtil.isNotEmpty(dsFormPage.getOperateIdList())) {
@@ -132,7 +134,7 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
         }
 
         // 接口信息
-        BusinessApi businessApi = businessApiService.selectByObjectId(id);
+        BusinessApi businessApi = businessApiService.selectByObjectId(dsFormPage.getId());
         dsFormPage.setBusinessApi(businessApi);
         return dsFormPage;
     }

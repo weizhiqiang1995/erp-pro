@@ -93,4 +93,12 @@ public class DsFormPage extends OperatorUserInfo {
     @ApiModelProperty(value = "页面关联的操作信息，可为空", required = "json")
     private List<String> operateIdList;
 
+    @TableField("is_data_auth")
+    @ApiModelProperty(value = "表格时拥有，是否开启数据权限，参考#WhetherEnum")
+    private Integer isDataAuth;
+
+    @TableField("data_auth_point_num")
+    @ApiModelProperty(value = "开启数据权限后，需要填写权限点编号(列表接口的权限点编号)")
+    private String dataAuthPointNum;
+
 }
