@@ -136,6 +136,11 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
         // 接口信息
         BusinessApi businessApi = businessApiService.selectByObjectId(dsFormPage.getId());
         dsFormPage.setBusinessApi(businessApi);
+
+        // 服务类的信息
+        ServiceBeanCustom serviceBeanCustom = serviceBeanCustomService.selectById(dsFormPage.getClassName());
+        dsFormPage.setServiceBeanCustom(serviceBeanCustom);
+
         return dsFormPage;
     }
 

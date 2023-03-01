@@ -4,6 +4,7 @@
 
 package com.skyeye.contacts.service.impl;
 
+import com.skyeye.annotation.service.SkyeyeService;
 import com.skyeye.base.business.service.impl.SkyeyeTeamAuthServiceImpl;
 import com.skyeye.common.enumeration.DeleteFlagEnum;
 import com.skyeye.common.enumeration.IsDefaultEnum;
@@ -29,6 +30,7 @@ import java.util.Map;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
+@SkyeyeService(name = "联系人管理", groupName = "基础模块", teamAuth = true)
 public class ContactsServiceImpl extends SkyeyeTeamAuthServiceImpl<ContactsDao, Contacts> implements ContactsService {
 
     @Autowired
