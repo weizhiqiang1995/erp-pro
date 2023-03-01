@@ -94,4 +94,8 @@ public class DsFormPageContent extends OperatorUserInfo {
     @ApiModelProperty(value = "枚举/数据字典类的数据展示类型")
     private String dataShowType;
 
+    @TableField(value = "team_object_type")
+    @ApiModelProperty(value = "团队适用对象(团队组件拥有)")
+    private String teamObjectType;
+
 }
