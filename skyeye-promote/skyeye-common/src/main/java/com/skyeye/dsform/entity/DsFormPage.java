@@ -32,7 +32,7 @@ import java.util.List;
  */
 @Data
 @UniqueField({"name", "className"})
-@RedisCacheField(name = "dsForm:page", cacheTime = RedisConstants.A_YEAR_SECONDS)
+@RedisCacheField(name = "dsForm:page", value = {"id", "numCode"}, cacheTime = RedisConstants.A_YEAR_SECONDS)
 @TableName(value = "ds_form_page", autoResultMap = true)
 @ApiModel("表单布局实体类")
 public class DsFormPage extends OperatorUserInfo {

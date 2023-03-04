@@ -25,7 +25,7 @@ import java.util.List;
 @AllArgsConstructor
 public enum TeamObjectTypeEnum implements SkyeyeEnumClass {
 
-    CUSTOMER(1, "客户团队", Arrays.asList("contactsAuthEnum", "crmContractAuthEnum", "crmOpportunityAuthEnum"), true, true),
+    CUSTOMER(1, "客户团队", Arrays.asList("crmContractAuthEnum", "contactsAuthEnum", "crmOpportunityAuthEnum"), true, true),
     SUPPLIER(2, "供应商团队", Arrays.asList("contactsAuthEnum"), true, false),
     PROJECT(3, "项目团队", Arrays.asList(), true, false);
 

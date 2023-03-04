@@ -5,12 +5,12 @@
 package com.skyeye.discussion.service.impl;
 
 import com.skyeye.base.business.service.impl.SkyeyeTeamAuthServiceImpl;
+import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.discussion.classenum.DisCussionAuthEnum;
 import com.skyeye.discussion.dao.DiscussionDao;
 import com.skyeye.discussion.entity.Discussion;
 import com.skyeye.discussion.service.DiscussionService;
-import com.skyeye.eve.entity.object.query.BaseServerQueryDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,8 +44,8 @@ public class DiscussionServiceImpl extends SkyeyeTeamAuthServiceImpl<DiscussionD
 
     @Override
     public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
-        BaseServerQueryDo baseServerQuery = inputObject.getParams(BaseServerQueryDo.class);
-        List<Map<String, Object>> beans = discussionDao.queryDiscussionList(baseServerQuery);
+        CommonPageInfo pageInfo = inputObject.getParams(CommonPageInfo.class);
+        List<Map<String, Object>> beans = discussionDao.queryDiscussionList(pageInfo);
         return beans;
     }
 

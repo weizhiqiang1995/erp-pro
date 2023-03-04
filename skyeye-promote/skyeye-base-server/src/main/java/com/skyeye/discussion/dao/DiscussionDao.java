@@ -4,15 +4,15 @@
 
 package com.skyeye.discussion.dao;
 
+import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.discussion.entity.Discussion;
 import com.skyeye.eve.dao.SkyeyeBaseMapper;
-import com.skyeye.eve.entity.object.query.BaseServerQueryDo;
 
 import java.util.List;
 import java.util.Map;
 
 public interface DiscussionDao extends SkyeyeBaseMapper<Discussion> {
 
-    List<Map<String, Object>> queryDiscussionList(BaseServerQueryDo baseServerQuery);
+    List<Map<String, Object>> queryDiscussionList(CommonPageInfo pageInfo);
 
 }

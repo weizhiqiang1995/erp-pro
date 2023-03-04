@@ -4,9 +4,9 @@
 
 package com.skyeye.contacts.dao;
 
-import com.skyeye.eve.dao.SkyeyeBaseMapper;
+import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.contacts.entity.Contacts;
-import com.skyeye.eve.entity.object.query.BaseServerQueryDo;
+import com.skyeye.eve.dao.SkyeyeBaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public interface ContactsDao extends SkyeyeBaseMapper<Contacts> {
 
-    List<Map<String, Object>> queryContactsList(BaseServerQueryDo baseServerQuery);
+    List<Map<String, Object>> queryContactsList(CommonPageInfo pageInfo);
 
     int setContactsIsNotDefault(@Param("objectId") String objectId, @Param("isDefault") Integer isDefault);
 

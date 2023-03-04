@@ -8,11 +8,11 @@ import com.skyeye.annotation.api.Api;
 import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
+import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.contacts.service.ContactsService;
 import com.skyeye.contacts.entity.Contacts;
-import com.skyeye.eve.entity.object.query.BaseServerQueryDo;
+import com.skyeye.contacts.service.ContactsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +39,7 @@ public class ContactsController {
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryContactsList", value = "获取联系人列表", method = "POST", allUse = "2")
-    @ApiImplicitParams(classBean = BaseServerQueryDo.class)
+    @ApiImplicitParams(classBean = CommonPageInfo.class)
     @RequestMapping("/post/ContactsController/queryContactsList")
     public void queryContactsList(InputObject inputObject, OutputObject outputObject) {
         contactsService.queryPageList(inputObject, outputObject);
@@ -56,20 +56,6 @@ public class ContactsController {
     @RequestMapping("/post/ContactsController/writeContactsMation")
     public void writeContactsMation(InputObject inputObject, OutputObject outputObject) {
         contactsService.saveOrUpdateEntity(inputObject, outputObject);
-    }
-
-    /**
-     * 根据id获取联系人信息
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @ApiOperation(id = "queryContactsMationById", value = "根据id获取联系人信息", method = "GET", allUse = "2")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
-    @RequestMapping("/post/ContactsController/queryContactsMationById")
-    public void queryContactsMationById(InputObject inputObject, OutputObject outputObject) {
-        contactsService.selectById(inputObject, outputObject);
     }
 
     /**

@@ -5,6 +5,7 @@
 package com.skyeye.db.config;
 
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.exception.CustomException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -45,40 +46,7 @@ public class BaseDataSourceConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseDataSourceConfig.class);
 
-    protected static Properties databaseTypeMappings = getDefaultDatabaseTypeMappings();
-
-    public static Properties getDefaultDatabaseTypeMappings() {
-        Properties databaseTypeMappings = new Properties();
-        databaseTypeMappings.setProperty("H2", "h2");
-        databaseTypeMappings.setProperty("HSQL Database Engine", "hsql");
-        databaseTypeMappings.setProperty("MySQL", "mysql");
-        databaseTypeMappings.setProperty("Oracle", "oracle");
-        databaseTypeMappings.setProperty("PostgreSQL", "postgres");
-        databaseTypeMappings.setProperty("Microsoft SQL Server", "mssql");
-        databaseTypeMappings.setProperty("db2", "db2");
-        databaseTypeMappings.setProperty("DB2", "db2");
-        databaseTypeMappings.setProperty("DB2/NT", "db2");
-        databaseTypeMappings.setProperty("DB2/NT64", "db2");
-        databaseTypeMappings.setProperty("DB2 UDP", "db2");
-        databaseTypeMappings.setProperty("DB2/LINUX", "db2");
-        databaseTypeMappings.setProperty("DB2/LINUX390", "db2");
-        databaseTypeMappings.setProperty("DB2/LINUXX8664", "db2");
-        databaseTypeMappings.setProperty("DB2/LINUXZ64", "db2");
-        databaseTypeMappings.setProperty("DB2/LINUXPPC64", "db2");
-        databaseTypeMappings.setProperty("DB2/400 SQL", "db2");
-        databaseTypeMappings.setProperty("DB2/6000", "db2");
-        databaseTypeMappings.setProperty("DB2 UDB iSeries", "db2");
-        databaseTypeMappings.setProperty("DB2/AIX64", "db2");
-        databaseTypeMappings.setProperty("DB2/HPUX", "db2");
-        databaseTypeMappings.setProperty("DB2/HP64", "db2");
-        databaseTypeMappings.setProperty("DB2/SUN", "db2");
-        databaseTypeMappings.setProperty("DB2/SUN64", "db2");
-        databaseTypeMappings.setProperty("DB2/PTX", "db2");
-        databaseTypeMappings.setProperty("DB2/2", "db2");
-        databaseTypeMappings.setProperty("DB2 UDB AS400", "db2");
-        databaseTypeMappings.setProperty("DM DBMS", "dm");
-        return databaseTypeMappings;
-    }
+    protected static Properties databaseTypeMappings = CommonConstants.getDefaultDatabaseTypeMappings();
 
     @Autowired
     protected ResourceLoader resourceLoader;

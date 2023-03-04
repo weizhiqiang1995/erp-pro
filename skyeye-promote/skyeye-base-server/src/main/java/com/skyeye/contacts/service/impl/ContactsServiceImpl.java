@@ -6,6 +6,7 @@ package com.skyeye.contacts.service.impl;
 
 import com.skyeye.annotation.service.SkyeyeService;
 import com.skyeye.base.business.service.impl.SkyeyeTeamAuthServiceImpl;
+import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.enumeration.DeleteFlagEnum;
 import com.skyeye.common.enumeration.IsDefaultEnum;
 import com.skyeye.common.object.InputObject;
@@ -13,7 +14,6 @@ import com.skyeye.contacts.classenum.ContactsAuthEnum;
 import com.skyeye.contacts.dao.ContactsDao;
 import com.skyeye.contacts.entity.Contacts;
 import com.skyeye.contacts.service.ContactsService;
-import com.skyeye.eve.entity.object.query.BaseServerQueryDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,9 +48,9 @@ public class ContactsServiceImpl extends SkyeyeTeamAuthServiceImpl<ContactsDao, 
 
     @Override
     public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
-        BaseServerQueryDo baseServerQuery = inputObject.getParams(BaseServerQueryDo.class);
-        baseServerQuery.setDeleteFlag(DeleteFlagEnum.NOT_DELETE.getKey());
-        List<Map<String, Object>> beans = contactsDao.queryContactsList(baseServerQuery);
+        CommonPageInfo pageInfo = inputObject.getParams(CommonPageInfo.class);
+        pageInfo.setDeleteFlag(DeleteFlagEnum.NOT_DELETE.getKey());
+        List<Map<String, Object>> beans = contactsDao.queryContactsList(pageInfo);
         return beans;
     }
 

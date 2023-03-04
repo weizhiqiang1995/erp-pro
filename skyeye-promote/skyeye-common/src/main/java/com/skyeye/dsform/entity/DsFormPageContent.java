@@ -98,4 +98,8 @@ public class DsFormPageContent extends OperatorUserInfo {
     @ApiModelProperty(value = "团队适用对象(团队组件拥有)")
     private String teamObjectType;
 
+    @TableField("is_edit")
+    @ApiModelProperty(value = "是否可以编辑，参考#WhetherEnum")
+    private Integer isEdit;
+
 }

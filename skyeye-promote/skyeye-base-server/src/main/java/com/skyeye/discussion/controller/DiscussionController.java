@@ -8,11 +8,11 @@ import com.skyeye.annotation.api.Api;
 import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
+import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.discussion.entity.Discussion;
 import com.skyeye.discussion.service.DiscussionService;
-import com.skyeye.eve.entity.object.query.BaseServerQueryDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +39,7 @@ public class DiscussionController {
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "queryDiscussionList", value = "获取讨论帖列表", method = "POST", allUse = "2")
-    @ApiImplicitParams(classBean = BaseServerQueryDo.class)
+    @ApiImplicitParams(classBean = CommonPageInfo.class)
     @RequestMapping("/post/DiscussionController/queryDiscussionList")
     public void queryDiscussionList(InputObject inputObject, OutputObject outputObject) {
         discussionService.queryPageList(inputObject, outputObject);
