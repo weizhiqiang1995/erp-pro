@@ -4,12 +4,15 @@
 
 package com.skyeye.contacts.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.annotation.service.SkyeyeService;
 import com.skyeye.base.business.service.impl.SkyeyeTeamAuthServiceImpl;
 import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.enumeration.DeleteFlagEnum;
 import com.skyeye.common.enumeration.IsDefaultEnum;
 import com.skyeye.common.object.InputObject;
+import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.contacts.classenum.ContactsAuthEnum;
 import com.skyeye.contacts.dao.ContactsDao;
 import com.skyeye.contacts.entity.Contacts;
@@ -64,4 +67,20 @@ public class ContactsServiceImpl extends SkyeyeTeamAuthServiceImpl<ContactsDao, 
         }
     }
 
+    /**
+     * 根据业务数据id获取联系人列表
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryContactsListByObject(InputObject inputObject, OutputObject outputObject) {
+        String objectId = inputObject.getParams().get("objectId").toString();
+        QueryWrapper<Contacts> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(MybatisPlusUtil.toColumns(Contacts::getObjectId), objectId);
+        queryWrapper.eq(MybatisPlusUtil.toColumns(Contacts::getDeleteFlag), DeleteFlagEnum.NOT_DELETE.getKey());
+        List<Contacts> contactsList = list(queryWrapper);
+        outputObject.setBeans(contactsList);
+        outputObject.settotal(contactsList.size());
+    }
 }

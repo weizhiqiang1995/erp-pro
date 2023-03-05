@@ -102,4 +102,20 @@ public class DsFormPageContent extends OperatorUserInfo {
     @ApiModelProperty(value = "是否可以编辑，参考#WhetherEnum")
     private Integer isEdit;
 
+    @TableField("date_time_type")
+    @ApiModelProperty(value = "日期组件的类型，参考#DateTimeType")
+    private String dateTimeType;
+
+    @TableField("choose_or_not_my")
+    @ApiModelProperty(value = "人员列表中是否包含自己--1.包含；其他参数不包含")
+    private Integer chooseOrNotMy;
+
+    @TableField("choose_or_not_email")
+    @ApiModelProperty(value = "人员列表中是否必须绑定邮箱--1.必须；其他参数没必要")
+    private Integer chooseOrNotEmail;
+
+    @TableField("check_type")
+    @ApiModelProperty(value = "人员选择类型，1.多选；其他。单选")
+    private Integer checkType;
+
 }

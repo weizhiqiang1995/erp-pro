@@ -5,6 +5,8 @@
 package com.skyeye.contacts.service;
 
 import com.skyeye.base.business.service.SkyeyeTeamAuthService;
+import com.skyeye.common.object.InputObject;
+import com.skyeye.common.object.OutputObject;
 import com.skyeye.contacts.entity.Contacts;
 
 /**
@@ -16,5 +18,7 @@ import com.skyeye.contacts.entity.Contacts;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 public interface ContactsService extends SkyeyeTeamAuthService<Contacts> {
+
+    void queryContactsListByObject(InputObject inputObject, OutputObject outputObject);
 
 }

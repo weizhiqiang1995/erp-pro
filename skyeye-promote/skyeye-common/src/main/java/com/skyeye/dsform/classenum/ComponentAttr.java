@@ -33,7 +33,9 @@ public enum ComponentAttr implements SkyeyeEnumClass {
     UPLOAD_NUM("uploadNumBox", "文件数量", false, true, false),
     DATA_SHOW_TYPE("dataShowTypeBox", "枚举/数据字典展示类型", false, true, false),
     TEAM_OBJECT_TYPE("teamObjectTypeBox", "团队适用对象", false, true, false),
-    IS_EDIT("isEditBox", "是否可以编辑", false, true, false);
+    IS_EDIT("isEditBox", "是否可以编辑", false, true, false),
+    DATE_TIME_TYPE("dateTimeTypeBox", "日期类型", false, true, false),
+    USER_SEL("userSelBox", "用户选择配置", false, true, false);
 
     private String key;
 

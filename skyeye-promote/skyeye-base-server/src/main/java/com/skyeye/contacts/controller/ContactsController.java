@@ -72,4 +72,18 @@ public class ContactsController {
         contactsService.deleteById(inputObject, outputObject);
     }
 
+    /**
+     * 根据业务数据id获取联系人列表
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryContactsListByObject", value = "根据业务数据id获取联系人列表", method = "GET", allUse = "2")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(id = "objectId", name = "objectId", value = "业务数据id")})
+    @RequestMapping("/post/ContactsController/queryContactsListByObject")
+    public void queryContactsListByObject(InputObject inputObject, OutputObject outputObject) {
+        contactsService.queryContactsListByObject(inputObject, outputObject);
+    }
+
 }
