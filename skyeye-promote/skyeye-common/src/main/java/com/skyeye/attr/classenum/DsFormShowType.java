@@ -27,7 +27,8 @@ public enum DsFormShowType implements SkyeyeEnumClass {
     PICTURE(4, "图片展示", true, false),
     TABLE(5, "表格展示", true, false),
     VOUCHER(6, "凭证展示", true, false),
-    SCRIPT(7, "脚本展示", true, false);
+    SCRIPT(7, "脚本展示", true, false),
+    ID_TURN_MATION(8, "Id转Mation取值转换", true, false);
 
     private Integer key;
 
