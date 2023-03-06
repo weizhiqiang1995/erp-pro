@@ -118,4 +118,8 @@ public class DsFormPageContent extends OperatorUserInfo {
     @ApiModelProperty(value = "人员选择类型，1.多选；其他。单选")
     private Integer checkType;
 
+    @TableField(value = "attr_transform_table_list", typeHandler = AttrTransformTableListTypeHandler.class)
+    @ApiModelProperty(value = "展示类型为表格展示时的表格数据", required = "json")
+    private List<AttrTransformTable> attrTransformTableList;
+
 }

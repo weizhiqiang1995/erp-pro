@@ -101,4 +101,8 @@ public class DsFormPage extends OperatorUserInfo {
     @ApiModelProperty(value = "开启数据权限后，需要填写权限点编号(列表接口的权限点编号)")
     private String dataAuthPointNum;
 
+    @TableField("act_flow_id")
+    @ApiModelProperty(value = "工作流模型id")
+    private String actFlowId;
+
 }

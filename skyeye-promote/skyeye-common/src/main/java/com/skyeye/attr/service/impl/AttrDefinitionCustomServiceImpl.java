@@ -14,8 +14,6 @@ import com.skyeye.attr.entity.AttrDefinition;
 import com.skyeye.attr.entity.AttrDefinitionCustom;
 import com.skyeye.attr.service.AttrDefinitionCustomService;
 import com.skyeye.attr.service.AttrDefinitionService;
-import com.skyeye.attr.service.AttrTransformTableService;
-import com.skyeye.attr.service.IAttrTransformService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.business.entity.BusinessApi;
 import com.skyeye.business.service.BusinessApiService;
@@ -47,12 +45,6 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
     private AttrDefinitionService attrDefinitionService;
 
     @Autowired
-    private IAttrTransformService iAttrTransformService;
-
-    @Autowired
-    private AttrTransformTableService attrTransformTableService;
-
-    @Autowired
     private DsFormComponentService dsFormComponentService;
 
     @Autowired
@@ -68,20 +60,6 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
             businessApi.setObjectId(entity.getId());
             businessApi.setObjectKey(getServiceClassName());
             businessApiService.createEntity(businessApi, userId);
-        }
-        refreshCache(entity.getClassName(), entity.getAttrKey());
-    }
-
-    private void refreshCache(String className, String attrKey) {
-        // 1. 删除当前业务对象的工作流缓存属性信息
-        String cacheKey = iAttrTransformService.getCacheKey(className, "*");
-        jedisClientService.delKeys(cacheKey);
-        // 2. 获取该业务对象所属父类的信息
-        List<String> list = attrTransformTableService.queryParentServiceName(className, attrKey);
-        if (CollectionUtil.isNotEmpty(list)) {
-            list.forEach(str -> {
-                jedisClientService.delKeys(iAttrTransformService.getCacheKey(str, "*"));
-            });
         }
     }
 
@@ -180,6 +158,5 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
             businessApiService.deleteByObjectId(attrDefinitionCustom.getId());
         }
         removeById(attrDefinitionCustom.getId());
-        refreshCache(className, attrKey);
     }
 }

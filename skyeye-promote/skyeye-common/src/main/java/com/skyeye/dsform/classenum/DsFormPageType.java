@@ -25,7 +25,8 @@ public enum DsFormPageType implements SkyeyeEnumClass {
     CREATE("create", "创建布局", true, false),
     EDIT("edit", "编辑布局", true, false),
     DETAILS("details", "详情布局", true, false),
-    SIMPLE_TABLE("simpleTable", "基础表格", true, false);
+    SIMPLE_TABLE("simpleTable", "基础表格", true, false),
+    PROCESS_ATTR("processAttr", "流程属性布局", true, false);
 
     private String key;
 
