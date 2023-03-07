@@ -15,7 +15,6 @@ import com.skyeye.attr.service.AttrDefinitionService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.business.entity.BusinessApi;
 import com.skyeye.business.service.BusinessApiService;
-import com.skyeye.coderule.entity.CodeRule;
 import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
@@ -27,7 +26,6 @@ import com.skyeye.dsform.entity.*;
 import com.skyeye.dsform.service.DsFormPageContentService;
 import com.skyeye.dsform.service.DsFormPageService;
 import com.skyeye.dsform.service.TableColumnService;
-import com.skyeye.eve.entity.dict.SysDictType;
 import com.skyeye.exception.CustomException;
 import com.skyeye.operate.entity.Operate;
 import com.skyeye.operate.service.OperateService;
@@ -98,7 +96,7 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
     public void validatorEntity(DsFormPage entity) {
         super.validatorEntity(entity);
         if (entity.getType().equals(DsFormPageType.PROCESS_ATTR.getKey())) {
-            if (StrUtil.isEmpty(entity.getActFlowId())){
+            if (StrUtil.isEmpty(entity.getActFlowId())) {
                 throw new CustomException("Process information cannot be empty.");
             }
             QueryWrapper<DsFormPage> queryWrapper = new QueryWrapper<>();
@@ -249,6 +247,31 @@ public class DsFormPageServiceImpl extends SkyeyeBusinessServiceImpl<DsFormPageD
         // 获取业务数据
         Map<String, Object> businessData = iDataService.getDataByObjectId(null, objectId, objectKey);
         outputObject.setBean(businessData);
+        outputObject.settotal(CommonNumConstants.NUM_ONE);
+    }
+
+    /**
+     * 根据业务对象的serviceClassName和流程模型id查找表单布局
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryDsFormPageForProcess(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> params = inputObject.getParams();
+        String serviceClassName = params.get("serviceClassName").toString();
+        String actFlowId = params.get("actFlowId").toString();
+        // 根据业务对象的serviceClassName和流程模型id查询
+        QueryWrapper<DsFormPage> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(MybatisPlusUtil.toColumns(DsFormPage::getClassName), serviceClassName);
+        queryWrapper.eq(MybatisPlusUtil.toColumns(DsFormPage::getActFlowId), actFlowId);
+        queryWrapper.select(CommonConstants.ID);
+        DsFormPage dsFormPage = getOne(queryWrapper);
+        if (ObjectUtil.isEmpty(dsFormPage)) {
+            throw new CustomException("未配置流程布局.");
+        }
+        dsFormPage = selectById(dsFormPage.getId());
+        outputObject.setBean(dsFormPage);
         outputObject.settotal(CommonNumConstants.NUM_ONE);
     }
 }

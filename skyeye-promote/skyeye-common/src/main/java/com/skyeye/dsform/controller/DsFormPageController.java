@@ -89,6 +89,21 @@ public class DsFormPageController {
     }
 
     /**
+     * 根据业务对象的serviceClassName和流程模型id查找表单布局
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryDsFormPageForProcess", value = "根据业务对象的serviceClassName和流程模型id查找表单布局", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "serviceClassName", name = "serviceClassName", value = "业务对象的serviceClassName", required = "required"),
+        @ApiImplicitParam(id = "actFlowId", name = "actFlowId", value = "流程模型id", required = "required")})
+    @RequestMapping("/post/DsFormPageController/queryDsFormPageForProcess")
+    public void queryDsFormPageForProcess(InputObject inputObject, OutputObject outputObject) {
+        dsFormPageService.queryDsFormPageForProcess(inputObject, outputObject);
+    }
+
+    /**
      * 保存表单布局关联的组件信息
      *
      * @param inputObject  入参以及用户信息等获取对象

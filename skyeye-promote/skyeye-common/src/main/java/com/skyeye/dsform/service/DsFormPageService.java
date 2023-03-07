@@ -18,4 +18,6 @@ public interface DsFormPageService extends SkyeyeBusinessService<DsFormPage> {
     void writeDsFormPageTable(InputObject inputObject, OutputObject outputObject);
 
     void queryBusinessDataByObject(InputObject inputObject, OutputObject outputObject);
+
+    void queryDsFormPageForProcess(InputObject inputObject, OutputObject outputObject);
 }
