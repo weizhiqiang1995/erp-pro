@@ -2,12 +2,11 @@
 
 > 基于SpringBoot 2.X框架，为中小企业打造开源好用的ERP软件。主要模块有零售管理、采购管理、销售管理、仓库管理、财务管理、报表查询、系统管理等。支持预付款、收入支出、仓库调拨、组装拆卸、订单，生产等特色功能。拥有库存状况、出入库统计等报表。对权限进行精确划分，同时支持多系统集成方案，可与OA，CRM，知识库等多个系统进行集成使用。同时对角色和权限进行了细致全面控制，精确到每个按钮和菜单。集成Nacos配置中心、服务注册中心。
 
--  **作者目前想找一份全职远程办公的工作，有需求的金主可以加我私聊，添加时请备注：远程** 
 - [2023年全年更新计划](https://mp.weixin.qq.com/s/deBkHLLeo1JDy6nqhvtWZg)
 - [软件更新资讯](https://gitee.com/doc_wei01/skyeye/blob/company_server/HISTORY_UPDATE.md)
 - 开源版请下载`master`分支
 - Skyeye企业版基础模块部署包已开放，需要部署或者二开的联系作者获取 ，具体包含功能可查看：[https://docs.qq.com/sheet/DYWZWUWZQUkFTcmh2?tab=BB08J2](https://docs.qq.com/sheet/DYWZWUWZQUkFTcmh2?tab=BB08J2)
-- 此软件为个人软件，暂不能开发票，需要发票的勿扰，企业版报价：https://docs.qq.com/sheet/DYUh5RUlGSkVPeHVo
+- 企业版报价：https://docs.qq.com/sheet/DYUh5RUlGSkVPeHVo
 
 ### 沟通交流
 
