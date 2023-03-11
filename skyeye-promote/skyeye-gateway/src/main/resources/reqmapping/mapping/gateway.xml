@@ -26,18 +26,6 @@
     </url>
     <!-- erp首页接口结束 -->
     
-    <!-- crm统计接口开始 -->
-    <url id="crmpage001" path="/post/CrmPageController/queryInsertNumByYear" val="获取指定年度的客户新增量，联系人新增量" allUse="2">
-    	<property id="year" name="year" ref="required" var="指定年度"></property>
-    </url>
-    <url id="crmpage004" path="/post/CrmPageController/queryNewContractNum" val="获取合同在指定年度的月新增量" allUse="2">
-    	<property id="year" name="year" ref="required" var="指定年度"></property>
-    </url>
-    <url id="crmpage005" path="/post/CrmPageController/queryNewDocumentaryNum" val="获取员工跟单在指定年度的月新增量" allUse="2">
-    	<property id="year" name="year" ref="required" var="指定年度"></property>
-    </url>
-    <!-- crm统计接口结束 -->
-    
     <!-- 生产模块统计接口开始 -->
     <url id="erpproduce001" path="/post/ErpProducePageController/queryDepartmentPickMaterial" val="统计当前部门月度领料图" allUse="2">
     	<property id="year" name="year" ref="required" var="指定年度"></property>
