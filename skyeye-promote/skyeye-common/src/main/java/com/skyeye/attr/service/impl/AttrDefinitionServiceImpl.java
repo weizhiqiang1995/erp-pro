@@ -123,7 +123,8 @@ public class AttrDefinitionServiceImpl extends SkyeyeBusinessServiceImpl<AttrDef
         List<AttrDefinition> attrDefinitionList = getAttrDefinitions(className);
         setCustomDefinition(className, attrDefinitionList);
 
-        attrDefinitionList = attrDefinitionList.stream().sorted(Comparator.comparing(AttrDefinition::getWhetherInputParams, Comparator.reverseOrder())).collect(Collectors.toList());
+        attrDefinitionList = attrDefinitionList.stream()
+            .sorted(Comparator.comparing(AttrDefinition::getWhetherInputParams, Comparator.reverseOrder())).collect(Collectors.toList());
         outputObject.setBeans(attrDefinitionList);
         outputObject.settotal(attrDefinitionList.size());
     }
