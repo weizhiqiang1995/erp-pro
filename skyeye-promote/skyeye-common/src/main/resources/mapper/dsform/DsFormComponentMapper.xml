@@ -15,6 +15,7 @@
 			a.icon_pic iconPic,
 			a.type_id typeId,
 			a.apply_range applyRange,
+			a.value_merg_type valueMergType,
 			a.create_id createId,
 			CONVERT(a.create_time, char) createTime,
 			a.last_update_id lastUpdateId,
