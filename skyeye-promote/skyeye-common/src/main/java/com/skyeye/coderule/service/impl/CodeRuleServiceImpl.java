@@ -92,7 +92,7 @@ public class CodeRuleServiceImpl extends SkyeyeBusinessServiceImpl<CodeRuleDao, 
         }
         CodeRule checkCodeRule = codeRuleDao.selectOne(queryWrapper);
         if (ObjectUtil.isNotEmpty(checkCodeRule)) {
-            throw new CustomException("this data is non-existent.");
+            throw new CustomException("this 【名称/编码/命名模式】 is exist.");
         }
         CodePattern.validationCodeRulePatten(entity.getPattern());
         this.validFeatureScript(entity.getFeatureScript());
