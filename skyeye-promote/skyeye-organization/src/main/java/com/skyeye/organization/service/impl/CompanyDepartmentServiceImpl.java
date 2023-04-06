@@ -8,8 +8,8 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
-import com.skyeye.common.constans.OrganizationConstants;
 import com.skyeye.common.entity.search.CommonPageInfo;
+import com.skyeye.common.enumeration.OvertimeSettlementType;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.ToolUtil;
@@ -56,7 +56,7 @@ public class CompanyDepartmentServiceImpl extends SkyeyeBusinessServiceImpl<Comp
         iCompanyService.setNameForMap(beans, "companyId", "companyName");
         beans.forEach(bean -> {
             Integer overtimeSettlementType = Integer.parseInt(bean.get("overtimeSettlementType").toString());
-            bean.put("overtimeSettlementTypeName", OrganizationConstants.OvertimeSettlementType.getTitleByType(overtimeSettlementType));
+            bean.put("overtimeSettlementTypeName", OvertimeSettlementType.getTitleByType(overtimeSettlementType));
         });
         return beans;
     }
