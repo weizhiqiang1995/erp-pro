@@ -6,10 +6,11 @@ package com.skyeye.dsform.entity;
 
 import com.skyeye.annotation.api.ApiModel;
 import com.skyeye.annotation.api.ApiModelProperty;
-import com.skyeye.annotation.api.Property;
+import com.skyeye.business.entity.BusinessApi;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @ClassName: AttrTransformTable
@@ -26,7 +27,7 @@ public class AttrTransformTable implements Serializable {
     @ApiModelProperty(value = "字段名，相当于表格中的field", required = "required")
     private String attrKey;
 
-    @ApiModelProperty(value = "属性名称")
+    @ApiModelProperty(value = "显示名称")
     private String name;
 
     @ApiModelProperty(value = "对齐方式，可参考#Alignment枚举类，相当于表格中的align", required = "required")
@@ -37,6 +38,24 @@ public class AttrTransformTable implements Serializable {
 
     @ApiModelProperty(value = "宽度，相当于表格中的width", required = "required,num")
     private Integer width;
+
+    @ApiModelProperty(value = "组件限制条件")
+    private List<String> require;
+
+    @ApiModelProperty(value = "显示方式", required = "required")
+    private String showType;
+
+    @ApiModelProperty(value = "数据类型，参考#AttrKeyDataType", required = "num")
+    private Integer dataType;
+
+    @ApiModelProperty(value = "数据类型为1时，默认数据，需要是json字符串", required = "json")
+    private String defaultData;
+
+    @ApiModelProperty(value = "数据类型为其他时，数据的id")
+    private String objectId;
+
+    @ApiModelProperty(value = "dataType=4时，自定义api接口的请求", required = "json")
+    private BusinessApi businessApi;
 
     @ApiModelProperty(value = "列内容展示的脚本，相当于表格中的templet")
     private String templet;
