@@ -57,6 +57,18 @@ public class AttrTransformTable implements Serializable {
     @ApiModelProperty(value = "dataType=4时，自定义api接口的请求", required = "json")
     private BusinessApi businessApi;
 
+    @ApiModelProperty(value = "表单监听Filter")
+    private String layFilter;
+
+    @ApiModelProperty(value = "默认值")
+    private String value;
+
+    @ApiModelProperty(value = "额外的class属性")
+    private String className;
+
+    @ApiModelProperty(value = "当formType为chooseInput时，指定的icon图标的class属性")
+    private String iconClassName;
+
     @ApiModelProperty(value = "列内容展示的脚本，相当于表格中的templet")
     private String templet;
 

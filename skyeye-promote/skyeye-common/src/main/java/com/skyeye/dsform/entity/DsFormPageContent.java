@@ -122,4 +122,20 @@ public class DsFormPageContent extends OperatorUserInfo {
     @ApiModelProperty(value = "展示类型为表格展示时的表格数据", required = "json")
     private List<AttrTransformTable> attrTransformTableList;
 
+    @TableField("min_data")
+    @ApiModelProperty(value = "表格组件最小数据行数")
+    private Integer minData;
+
+    @TableField("delete_row_callback")
+    @ApiModelProperty(value = "删除行之后的回调函数")
+    private String deleteRowCallback;
+
+    @TableField("add_row_callback")
+    @ApiModelProperty(value = "新增行之后的回调函数")
+    private String addRowCallback;
+
+    @TableField("after_script")
+    @ApiModelProperty(value = "组件加载完成后执行的脚本")
+    private String afterScript;
+
 }
