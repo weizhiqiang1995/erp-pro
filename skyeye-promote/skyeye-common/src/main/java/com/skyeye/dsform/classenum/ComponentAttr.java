@@ -40,7 +40,8 @@ public enum ComponentAttr implements SkyeyeEnumClass {
     MIN_DATA("minDataBox", "表格组件最小数据行数", false, true, false),
     DELETE_ROW_CALLBACK("deleteRowCallbackBox", "删除行之后的回调函数", false, true, false),
     ADD_ROW_CALLBACK("addRowCallbackBox", "新增行之后的回调函数", false, true, false),
-    AFTER_SCRIPT("afterScriptBox", "组件加载完成后执行的脚本", false, true, false);
+    AFTER_SCRIPT("afterScriptBox", "组件加载完成后执行的脚本", false, true, false),
+    AFTER_HTML("afterHtmlBox", "组件加载完成后执行的HTML脚本", false, true, false);
 
     private String key;
 

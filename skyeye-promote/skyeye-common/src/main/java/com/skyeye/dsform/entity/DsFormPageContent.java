@@ -138,4 +138,8 @@ public class DsFormPageContent extends OperatorUserInfo {
     @ApiModelProperty(value = "组件加载完成后执行的脚本")
     private String afterScript;
 
+    @TableField("after_html")
+    @ApiModelProperty(value = "组件加载完成后执行的HTML脚本")
+    private String afterHtml;
+
 }
