@@ -112,7 +112,7 @@ public class CompanyJobController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "companyjob007", value = "根据部门id获取职位列表展示为下拉选择框", method = "POST", allUse = "2")
+    @ApiOperation(id = "companyjob008", value = "根据部门id获取职位同级列表且不包含当前id的值展示为下拉选择框", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "departmentId", name = "departmentId", value = "部门id", required = "required"),
         @ApiImplicitParam(id = "id", name = "id", value = "不包含的职位id"),
