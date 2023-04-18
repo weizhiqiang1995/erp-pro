@@ -84,7 +84,7 @@ public class CompanyJobController {
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "companyjob006", value = "根据部门id获取该部门所有的职位信息展示为树", method = "GET", allUse = "2")
+    @ApiOperation(id = "companyjob006", value = "根据部门id获取该部门所有的职位信息展示为树", method = "POST", allUse = "2")
     @ApiImplicitParams({
         @ApiImplicitParam(id = "departmentId", name = "departmentId", value = "部门id", required = "required")})
     @RequestMapping("/post/CompanyJobController/queryCompanyJobListTreeByDepartmentId")
