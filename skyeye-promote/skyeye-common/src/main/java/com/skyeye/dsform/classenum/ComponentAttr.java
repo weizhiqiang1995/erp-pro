@@ -44,6 +44,8 @@ public enum ComponentAttr implements SkyeyeEnumClass {
     ADD_ROW_CALLBACK("addRowCallbackBox", "新增行之后的回调函数", false, true, false),
     BEFORE_SCRIPT("beforeScriptBox", "组件加载前执行的脚本", false, true, false),
     AFTER_SCRIPT("afterScriptBox", "组件加载完成后执行的脚本", false, true, false),
+    EDIT_ECHO_SCRIPT("editEchoScriptBox", "数据编辑回显时执行的脚本", false, true, false),
+    DATA_ECHO_AFTER_SCRIPT("dataEchoAfterScriptBox", "数据回显完之后执行的脚本", false, true, false),
     AFTER_HTML("afterHtmlBox", "组件加载完成后执行的HTML脚本", false, true, false);
 
     private String key;

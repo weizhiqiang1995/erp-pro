@@ -154,4 +154,12 @@ public class DsFormPageContent extends OperatorUserInfo {
     @ApiModelProperty(value = "class属性")
     private String className;
 
+    @TableField("edit_echo_script")
+    @ApiModelProperty(value = "数据编辑回显时执行的脚本")
+    private String editEchoScript;
+
+    @TableField("data_echo_after_script")
+    @ApiModelProperty(value = "数据回显完之后执行的脚本")
+    private String dataEchoAfterScript;
+
 }
