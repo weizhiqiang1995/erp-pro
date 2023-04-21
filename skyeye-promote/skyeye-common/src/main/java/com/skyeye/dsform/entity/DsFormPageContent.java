@@ -134,6 +134,10 @@ public class DsFormPageContent extends OperatorUserInfo {
     @ApiModelProperty(value = "新增行之后的回调函数")
     private String addRowCallback;
 
+    @TableField("before_script")
+    @ApiModelProperty(value = "组件加载前执行的脚本")
+    private String beforeScript;
+
     @TableField("after_script")
     @ApiModelProperty(value = "组件加载完成后执行的脚本")
     private String afterScript;
