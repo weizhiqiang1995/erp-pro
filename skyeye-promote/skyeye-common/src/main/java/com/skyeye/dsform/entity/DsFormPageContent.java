@@ -150,4 +150,8 @@ public class DsFormPageContent extends OperatorUserInfo {
     @ApiModelProperty(value = "备注")
     private String remark;
 
+    @TableField("class_name")
+    @ApiModelProperty(value = "class属性")
+    private String className;
+
 }

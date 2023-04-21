@@ -26,6 +26,7 @@ public enum ComponentAttr implements SkyeyeEnumClass {
     TITLE("titleBox", "标题", false, true, false),
     PLACEHOLDER("placeholderBox", "提示语", false, true, false),
     REMARK("remarkBox", "备注", false, true, false),
+    CLASS_NAME("classNameBox", "class属性", false, true, false),
     REQUIRE("requireBox", "限制条件", false, true, false),
     WIDTH("widthBox", "宽度", true, true, true),
     DEFAULT_VALUE("defaultValueBox", "默认值", false, true, false),
