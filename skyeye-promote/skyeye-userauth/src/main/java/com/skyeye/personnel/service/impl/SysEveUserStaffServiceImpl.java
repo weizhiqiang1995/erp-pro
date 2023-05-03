@@ -9,6 +9,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.Constants;
+import com.skyeye.common.enumeration.UserStaffState;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
@@ -26,7 +27,6 @@ import com.skyeye.personnel.dao.SysEveUserDao;
 import com.skyeye.personnel.dao.SysEveUserStaffDao;
 import com.skyeye.personnel.service.SysEveUserService;
 import com.skyeye.personnel.service.SysEveUserStaffService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -76,42 +76,6 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
 
     @Autowired
     private ICompanyJobScoreService iCompanyJobScoreService;
-
-    /**
-     * 员工状态
-     */
-    public enum State {
-        ON_THE_JOB(1, "在职(转正的员工)"),
-        QUIT(2, "离职"),
-        PROBATION(3, "见习(用于实习生)"),
-        PROBATION_PERIOD(4, "试用期(用于未转正的员工)"),
-        RETIRE(5, "退休");
-
-        private int state;
-        private String name;
-
-        State(int state, String name) {
-            this.state = state;
-            this.name = name;
-        }
-
-        public int getState() {
-            return state;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public static String getNameByState(Integer state) {
-            for (State bean : State.values()) {
-                if (state == bean.getState()) {
-                    return bean.getName();
-                }
-            }
-            return StringUtils.EMPTY;
-        }
-    }
 
     /**
      * 查出所有员工列表
@@ -284,7 +248,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         String staffId = map.get("id").toString();
         Map<String, Object> bean = sysEveUserStaffDao.querySysUserStaffById(staffId);
         if (bean != null && !bean.isEmpty()) {
-            bean.put("stateName", State.getNameByState(Integer.parseInt(bean.get("state").toString())));
+            bean.put("stateName", UserStaffState.getNameByState(Integer.parseInt(bean.get("state").toString())));
             // 1.员工考勤时间段信息
             List<Map<String, Object>> staffTimeMation = sysEveUserStaffDao
                 .queryStaffCheckWorkTimeRelationByStaffId(bean.get("id").toString());
@@ -347,7 +311,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
             iDepmentService.setNameForMap(bean, "departmentId", "departmentName");
             iCompanyJobService.setNameForMap(bean, "jobId", "jobName");
             iCompanyJobScoreService.setNameForMap(bean, "jobScoreId", "jobScoreName");
-            bean.put("stateName", State.getNameByState(Integer.parseInt(bean.get("state").toString())));
+            bean.put("stateName", UserStaffState.getNameByState(Integer.parseInt(bean.get("state").toString())));
             // 1.员工考勤时间段信息
             List<Map<String, Object>> staffTimeMation = sysEveUserStaffDao
                 .queryStaffCheckWorkTimeRelationNameByStaffId(staffId);
@@ -369,7 +333,7 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
     @Transactional(value = "transactionManager", rollbackFor = Exception.class)
     public void editSysUserStaffState(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
-        map.put("state", State.QUIT.getState());
+        map.put("state", UserStaffState.QUIT.getKey());
         sysEveUserStaffDao.editSysUserStaffState(map);
         String staffId = map.get("id").toString();
         Map<String, Object> staffMation = sysEveUserStaffDao.querySysUserStaffByIdToDetails(staffId);

@@ -10,6 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.constans.SysUserAuthConstants;
+import com.skyeye.common.enumeration.UserStaffState;
 import com.skyeye.common.object.GetUserToken;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -862,9 +863,9 @@ public class SysEveUserServiceImpl implements SysEveUserService {
 
     private List<Integer> getIncumbencyState() {
         List<Integer> list = new ArrayList<>();
-        list.add(SysEveUserStaffServiceImpl.State.ON_THE_JOB.getState());
-        list.add(SysEveUserStaffServiceImpl.State.PROBATION.getState());
-        list.add(SysEveUserStaffServiceImpl.State.PROBATION_PERIOD.getState());
+        list.add(UserStaffState.ON_THE_JOB.getKey());
+        list.add(UserStaffState.PROBATION.getKey());
+        list.add(UserStaffState.PROBATION_PERIOD.getKey());
         return list;
     }
 
