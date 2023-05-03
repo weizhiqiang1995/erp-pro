@@ -15,17 +15,6 @@
     </url>
     <!-- 首页接口结束 -->
     
-    <!-- erp首页接口开始 -->
-    <url id="erppage001" path="/post/ErpPageController/queryFourTypeMoneyList" val="获取本月累计销售，本月累计零售，本月累计采购，本月利润（已审核通过）" allUse="2">
-    </url>
-    <url id="erppage002" path="/post/ErpPageController/querySixMonthPurchaseMoneyList" val="获取近半年的采购统计" allUse="2">
-    </url>
-    <url id="erppage003" path="/post/ErpPageController/querySixMonthSealsMoneyList" val="获取近半年的销售统计" allUse="2">
-    </url>
-    <url id="erppage004" path="/post/ErpPageController/queryTwelveMonthProfitMoneyList" val="获取近十二个月的利润统计" allUse="2">
-    </url>
-    <!-- erp首页接口结束 -->
-    
     <!-- 生产模块统计接口开始 -->
     <url id="erpproduce001" path="/post/ErpProducePageController/queryDepartmentPickMaterial" val="统计当前部门月度领料图" allUse="2">
     	<property id="year" name="year" ref="required" var="指定年度"></property>
