@@ -158,6 +158,10 @@ public class DsFormPageContent extends OperatorUserInfo {
     @ApiModelProperty(value = "数据编辑回显时执行的脚本")
     private String editEchoScript;
 
+    @TableField("data_change")
+    @ApiModelProperty(value = "数据变化监听的JS")
+    private String dataChange;
+
     @TableField("data_echo_after_script")
     @ApiModelProperty(value = "数据回显完之后执行的脚本")
     private String dataEchoAfterScript;
