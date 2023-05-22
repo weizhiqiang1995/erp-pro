@@ -29,6 +29,8 @@ public enum ComponentAttr implements SkyeyeEnumClass {
     CLASS_NAME("classNameBox", "class属性", false, true, false),
     REQUIRE("requireBox", "限制条件", false, true, false),
     WIDTH("widthBox", "宽度", true, true, true),
+    PRE_ATTRIBUTE("preAttributeBox", "前置属性", false, true, false),
+    POST_ATTRIBUTE("postAttributeBox", "后置属性", false, true, false),
     DEFAULT_VALUE("defaultValueBox", "默认值", false, true, false),
     UPLOAD_DATA_TYPE("uploadDataTypeBox", "文件后缀类型", false, true, false),
     UPLOAD_TYPE("uploadTypeBox", "文件上传类型", false, true, false),

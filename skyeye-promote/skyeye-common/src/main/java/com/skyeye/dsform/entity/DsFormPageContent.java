@@ -54,6 +54,14 @@ public class DsFormPageContent extends OperatorUserInfo {
     @ApiModelProperty(value = "宽度", required = "required")
     private String width;
 
+    @TableField("pre_attribute")
+    @ApiModelProperty(value = "前置属性")
+    private String preAttribute;
+
+    @TableField("post_attribute")
+    @ApiModelProperty(value = "后置属性")
+    private String postAttribute;
+
     @TableField("form_content_id")
     @ApiModelProperty(value = "动态表单组件id", required = "required")
     private String formContentId;

@@ -114,7 +114,7 @@ public class CompanyJobServiceImpl extends SkyeyeBusinessServiceImpl<CompanyJobD
     public void queryCompanyJobListByToSelect(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyJobDao.queryCompanyJobSimpleList(map);
-        if (!beans.isEmpty()) {
+        if (CollectionUtil.isNotEmpty(beans)) {
             outputObject.setBeans(beans);
             outputObject.settotal(beans.size());
         }
@@ -130,7 +130,7 @@ public class CompanyJobServiceImpl extends SkyeyeBusinessServiceImpl<CompanyJobD
     public void queryCompanyJobSimpleListByToSelect(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         List<Map<String, Object>> beans = companyJobDao.queryCompanyJobSimpleList(map);
-        if (!beans.isEmpty()) {
+        if (CollectionUtil.isNotEmpty(beans)) {
             outputObject.setBeans(beans);
             outputObject.settotal(beans.size());
         }
