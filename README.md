@@ -15,16 +15,6 @@
 | ------------ | ------------ | ------------ | ------------ |
 | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/知识星球.png)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/微信.jpg)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/Skyeye智能制造云办公官方①群群二维码.png)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/Skyeye视频微信小程序.jpg) |
 
-
-#### 环境搭建
-
-> 该项目是maven工程，如果遇到jar包没下载下来的问题，请更换镜像地址.
-
-- 1.搭建apollo配置中心，将`docs/配置中心参数.md`复制到配置中心
-- 2.搭建redis（3.2）集群
-- 3.MySQL 5.5.X
-- 4.最后修改配置中心参数，启动`SkyeyeErpApplication.java`项目
-
 #### 开源版功能介绍
 
 | 功能        | 描述                                    | 功能     | 描述                             |
