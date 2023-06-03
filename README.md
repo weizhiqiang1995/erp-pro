@@ -58,7 +58,7 @@ xxl-job|定时任务|https://gitee.com/xuxueli0323/xxl-job?_from=gitee_search/
 ##### 前端技术：
 
 |技术|名称| 官网                                       |
-|---|---|------------------------------------------|
+|---|----|------------------------------------------|
 |layui|模块化前端UI| https://www.layui.com/                   |
 |winui|win10风格UI| https://gitee.com/doc_wei01_admin/skyeye |
 
