@@ -21,6 +21,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public enum DsFormShowType implements SkyeyeEnumClass {
+
+    CUSTOMER(-1, "自定义", true, false),
     TEXT(1, "文本展示", true, false),
     ENCLOSURE(2, "附件展示", true, false),
     RICH_TEXT(3, "富文本展示", true, false),

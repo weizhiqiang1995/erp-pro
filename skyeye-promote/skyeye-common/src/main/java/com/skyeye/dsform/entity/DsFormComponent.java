@@ -101,6 +101,14 @@ public class DsFormComponent extends IconOrImgInfo {
     @ApiModelProperty(value = "组件获取的值的合入接口入参的方式，参考#ComponentValueMergType", required = "required")
     private String valueMergType;
 
+    @TableField("detail_html_content")
+    @ApiModelProperty(value = "详情页面(showType=0)：组件的html内容")
+    private String detailHtmlContent;
+
+    @TableField("detail_js_content")
+    @ApiModelProperty(value = "详情页面(showType=0)：组件的js脚本")
+    private String detailJsContent;
+
     @TableField("remark")
     @ApiModelProperty(value = "组件备注")
     private String remark;
