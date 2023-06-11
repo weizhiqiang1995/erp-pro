@@ -89,6 +89,10 @@ public class DsFormPage extends OperatorUserInfo {
     @Property("表单布局(表格类型关联的列信息)")
     private List<TableColumn> tableColumnList;
 
+    @TableField("whether_choose")
+    @ApiModelProperty(value = "表格类型的布局是否开启选择功能")
+    private String whetherChoose;
+
     @TableField(value = "operate_id_list", typeHandler = JacksonTypeHandler.class)
     @ApiModelProperty(value = "页面关联的操作信息，可为空", required = "json")
     private List<String> operateIdList;
