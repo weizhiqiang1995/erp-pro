@@ -14,6 +14,8 @@ import com.skyeye.business.entity.BusinessApi;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @ClassName: Operate
  * @Description: 操作管理实体类
@@ -67,5 +69,9 @@ public class Operate extends OperatorUserInfo {
     @TableField(exist = false)
     @ApiModelProperty(value = "当事件类型为新开页面时，填写的页面/布局信息")
     private OperateOpenPage operateOpenPage;
+
+    @TableField(value = "show_condition", typeHandler = OperateListTypeHandler.class)
+    @ApiModelProperty(value = "操作按钮显示的条件")
+    private List<OperateShowCondition> showConditionList;
 
 }

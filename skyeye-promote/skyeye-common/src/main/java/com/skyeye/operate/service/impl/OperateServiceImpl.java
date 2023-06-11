@@ -4,8 +4,10 @@
 
 package com.skyeye.operate.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.skyeye.attr.classenum.AttrSymbols;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.business.entity.BusinessApi;
 import com.skyeye.business.service.BusinessApiService;
@@ -98,6 +100,14 @@ public class OperateServiceImpl extends SkyeyeBusinessServiceImpl<OperateDao, Op
 
             return operates;
         }, RedisConstants.ALL_USE_TIME, Operate.class);
+
+        operateList.forEach(operate -> {
+            if (CollectionUtil.isNotEmpty(operate.getShowConditionList())) {
+                operate.getShowConditionList().forEach(condition -> {
+                    condition.setSymbolsMark(AttrSymbols.getSymbols(condition.getSymbols()));
+                });
+            }
+        });
         return operateList;
     }
 

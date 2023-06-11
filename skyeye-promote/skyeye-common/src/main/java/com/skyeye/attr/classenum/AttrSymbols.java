@@ -8,6 +8,7 @@ import com.skyeye.common.base.classenum.SkyeyeEnumClass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * @ClassName: AttrSymbols
@@ -37,4 +38,14 @@ public enum AttrSymbols implements SkyeyeEnumClass {
     private Boolean show;
 
     private Boolean isDefault;
+
+    public static String getSymbols(String key) {
+        for (AttrSymbols q : AttrSymbols.values()) {
+            if (q.getKey().equals(key)) {
+                return q.getSymbols();
+            }
+        }
+        return StringUtils.EMPTY;
+    }
+
 }
