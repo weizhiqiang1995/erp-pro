@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public enum SimpleTableWhetherChoose implements SkyeyeEnumClass {
 
-    CLOSE("close", "关闭", true, false),
+    CLOSE("close", "关闭", true, true),
     RADIO("radio", "单选", true, false),
     CHECKBOX("checkbox", "多选", true, false);
 
