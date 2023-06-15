@@ -240,6 +240,7 @@
 			a.id,
 			a.job_number jobNumber,
 			a.user_name userName,
+			CONCAT_WS('_', a.job_number, a.user_name) `name`,
 			a.user_photo userPhoto,
 			a.user_idcard userIdCard,
 			a.user_sex userSex,
