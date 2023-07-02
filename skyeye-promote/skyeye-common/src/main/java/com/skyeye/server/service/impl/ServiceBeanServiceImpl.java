@@ -104,7 +104,7 @@ public class ServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl<ServiceBea
     }
 
     private String getKey(ServiceBean bean) {
-        return String.format(Locale.ROOT, "%s_%s_%s", bean.getClassName(), bean.getManageShow(), bean.getTeamAuth(), bean.getTenant());
+        return String.format(Locale.ROOT, "%s_%s_%s_%s_%s", bean.getClassName(), bean.getManageShow(), bean.getTeamAuth(), bean.getTenant(), bean.getFlowable());
     }
 
     private void saveAttrDefinition(String appId, List<ServiceBean> classNameList) {
