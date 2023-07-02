@@ -24,7 +24,7 @@ public enum AttrKeyDataType implements SkyeyeEnumClass {
 
     CUSTOM(1, "自定义JSON串", true, false),
     ENUM_DATA(2, "枚举类型", true, false),
-    DICT_DATA(3, "数组字典类型", true, false),
+    DICT_DATA(3, "数据字典类型", true, false),
     CUSTOM_API(4, "自定义API", true, false);
 
     private Integer key;
