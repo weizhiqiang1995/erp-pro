@@ -5,13 +5,12 @@
 - [2023年全年更新计划](https://mp.weixin.qq.com/s/deBkHLLeo1JDy6nqhvtWZg)
 - [软件更新资讯](https://gitee.com/doc_wei01/skyeye/blob/company_server/HISTORY_UPDATE.md)
 - 开源版请下载`master`分支
-- **企业版价格** ， **开源版二开规则**， **文档**， **相关视频** 等资料请扫描下方小程序查看
-- **扫描下面的微信小程序，有企业版价格优惠哦**
 - 接定制开发，无需求的不接
+- 具备**低代码**、**快捷开发**、**可视化设计**、**微服务**等特点
 
 ### 沟通交流
 
-| 企业部署版 | 作者微信(添加时请备注个人信息：姓名-联系方式)，其余一律不通过 |  QQ群    | 微信小程序 |
+| 企业部署版 | 作者微信(添加时请备注个人信息：姓名-联系方式)，其余一律不通过 |  QQ群    | 微信小程序（包含企业版价格，文档资料等） |
 | ------------ | ------------ | ------------ | ------------ |
 | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/知识星球.png)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/微信.jpg)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/Skyeye智能制造云办公官方①群群二维码.png)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/Skyeye视频微信小程序.jpg) |
 
