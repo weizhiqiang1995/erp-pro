@@ -309,13 +309,13 @@
 		SELECT
 			a.staff_id staffId,
 			a.check_work_time_id timeId,
-			b.title,
+			b.`name`,
 			b.start_time startTime,
 			b.end_time endTime,
 			b.rest_start_time restStartTime,
 			b.rest_end_time restEndTime,
 			b.`type`,
-			b.state,
+			b.enabled,
 			CASE b.type WHEN 1 THEN '单休' WHEN 2 THEN '双休' WHEN 3 THEN '单双休' WHEN 4 THEN '自定义' ELSE '' END typeName
 		FROM
 			sys_eve_user_staff_time a,
