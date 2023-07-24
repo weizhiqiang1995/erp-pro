@@ -46,7 +46,7 @@ public class DocumentServiceImpl extends SkyeyeTeamAuthServiceImpl<DocumentDao, 
 
     @Override
     public List<String> getAuthPermissionKeyList() {
-        return Arrays.asList(DocumentAuthEnum.ADD_DOCUMENT.getKey(), DocumentAuthEnum.EDIT_DOCUMENT.getKey(), DocumentAuthEnum.DELETE_DOCUMENT.getKey(), DocumentAuthEnum.DETAILS_DOCUMENT.getKey());
+        return Arrays.asList(DocumentAuthEnum.ADD_DOCUMENT.getKey(), DocumentAuthEnum.EDIT_DOCUMENT.getKey(), DocumentAuthEnum.DELETE_DOCUMENT.getKey());
     }
 
     @Override

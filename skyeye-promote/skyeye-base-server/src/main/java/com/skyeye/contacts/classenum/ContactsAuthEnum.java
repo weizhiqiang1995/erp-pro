@@ -23,8 +23,7 @@ import lombok.NoArgsConstructor;
 public enum ContactsAuthEnum implements SkyeyeEnumClass {
     ADD("add", "新增", true, false),
     EDIT("edit", "编辑", true, false),
-    DELETE("delete", "删除", true, false),
-    DETAILS("details", "详情", true, false);
+    DELETE("delete", "删除", true, false);
 
     private String key;
 

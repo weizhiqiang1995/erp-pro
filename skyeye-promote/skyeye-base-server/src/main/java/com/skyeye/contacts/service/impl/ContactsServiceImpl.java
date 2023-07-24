@@ -46,7 +46,7 @@ public class ContactsServiceImpl extends SkyeyeTeamAuthServiceImpl<ContactsDao, 
 
     @Override
     public List<String> getAuthPermissionKeyList() {
-        return Arrays.asList(ContactsAuthEnum.ADD.getKey(), ContactsAuthEnum.EDIT.getKey(), ContactsAuthEnum.DELETE.getKey(), ContactsAuthEnum.DETAILS.getKey());
+        return Arrays.asList(ContactsAuthEnum.ADD.getKey(), ContactsAuthEnum.EDIT.getKey(), ContactsAuthEnum.DELETE.getKey());
     }
 
     @Override

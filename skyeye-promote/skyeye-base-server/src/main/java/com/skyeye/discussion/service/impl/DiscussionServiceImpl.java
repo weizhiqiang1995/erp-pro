@@ -39,7 +39,7 @@ public class DiscussionServiceImpl extends SkyeyeTeamAuthServiceImpl<DiscussionD
 
     @Override
     public List<String> getAuthPermissionKeyList() {
-        return Arrays.asList(DisCussionAuthEnum.ADD.getKey(), DisCussionAuthEnum.EDIT.getKey(), DisCussionAuthEnum.DELETE.getKey(), DisCussionAuthEnum.DETAILS.getKey());
+        return Arrays.asList(DisCussionAuthEnum.ADD.getKey(), DisCussionAuthEnum.EDIT.getKey(), DisCussionAuthEnum.DELETE.getKey());
     }
 
     @Override
