@@ -26,7 +26,7 @@ import java.util.List;
 @AllArgsConstructor
 public enum DocumentAuthEnum implements SkyeyeEnumClass {
     ADD_DOCUMENT("addDocument", "上传文档", true, false),
-    EDIT_DOCUMENT("coverDocument", "覆盖文档", true, false),
+    EDIT_DOCUMENT("editDocument", "编辑文档", true, false),
     DELETE_DOCUMENT("deleteDocument", "删除文档", true, false),
     DETAILS_DOCUMENT("detailsDocument", "文档详情", true, false);
 

@@ -17,12 +17,12 @@ import com.skyeye.catalog.dao.CatalogDao;
 import com.skyeye.catalog.entity.Catalog;
 import com.skyeye.catalog.service.CatalogService;
 import com.skyeye.catalog.service.ICatalogService;
-import com.skyeye.server.service.ServiceBeanService;
 import com.skyeye.common.constans.CommonCharConstants;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
+import com.skyeye.server.service.ServiceBeanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +61,9 @@ public class CatalogServiceImpl extends SkyeyeBusinessServiceImpl<CatalogDao, Ca
         Map<String, Object> params = inputObject.getParams();
         String objectId = params.get("objectId").toString();
         String objectKey = params.get("objectKey").toString();
+        if (StrUtil.isEmpty(objectKey)) {
+            return;
+        }
         Boolean addOrUser = Boolean.valueOf(params.get("addOrUser").toString());
         String userId = inputObject.getLogParams().get("id").toString();
         List<Catalog> result = getCatalogs(objectId, objectKey, addOrUser, userId);
@@ -137,6 +140,21 @@ public class CatalogServiceImpl extends SkyeyeBusinessServiceImpl<CatalogDao, Ca
         super.deleteById(ids);
         // 删除业务数据
         iCatalogService.deleteDataMationByCatalogIds(serviceBeanUri, catalog.getObjectKey(), ids);
+    }
+
+    @Override
+    public Catalog getDataFromDb(String id) {
+        Catalog catalog = super.getDataFromDb(id);
+        // 设置路径id
+        List<Map<String, Object>> parentList = catalogDao.queryAllParentNodeById(Arrays.asList(id));
+        parentList.stream()
+            .sorted(Comparator.comparing(bean -> bean.get("level").toString(), Comparator.reverseOrder()));
+
+        if (CollectionUtil.isNotEmpty(parentList)) {
+            List<String> parentIds = parentList.stream().map(bean -> bean.get("_id").toString()).collect(Collectors.toList());
+            catalog.setParentIds(Joiner.on(CommonCharConstants.COMMA_MARK).join(parentIds));
+        }
+        return catalog;
     }
 
     @Override
