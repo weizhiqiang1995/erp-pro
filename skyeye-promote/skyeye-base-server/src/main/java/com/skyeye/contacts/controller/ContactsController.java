@@ -73,17 +73,17 @@ public class ContactsController {
     }
 
     /**
-     * 根据id获取联系人信息
+     * 根据id批量获取联系人信息
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @ApiOperation(id = "queryContactsById", value = "根据id获取联系人信息", method = "GET", allUse = "2")
+    @ApiOperation(id = "queryContactsByIds", value = "根据id批量获取联系人信息", method = "POST", allUse = "2")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
-    @RequestMapping("/post/ContactsController/queryContactsById")
+        @ApiImplicitParam(id = "ids", name = "ids", value = "主键id", required = "required")})
+    @RequestMapping("/post/ContactsController/queryContactsByIds")
     public void queryContactsById(InputObject inputObject, OutputObject outputObject) {
-        contactsService.selectById(inputObject, outputObject);
+        contactsService.selectByIds(inputObject, outputObject);
     }
 
     /**
