@@ -27,7 +27,7 @@ public enum TeamObjectTypeEnum implements SkyeyeEnumClass {
 
     CUSTOMER(1, "客户团队", Arrays.asList("crmContractAuthEnum", "contactsAuthEnum", "crmOpportunityAuthEnum", "crmDocumentaryAuthEnum", "documentAuthEnum"), true, true),
     SUPPLIER(2, "供应商团队", Arrays.asList("supplierContractAuthEnum", "contactsAuthEnum", "documentAuthEnum"), true, false),
-    PROJECT(3, "项目团队", Arrays.asList(), true, false);
+    PROJECT(3, "项目团队", Arrays.asList("taskAuthEnum", "documentAuthEnum"), true, false);
 
     private Integer key;
 
