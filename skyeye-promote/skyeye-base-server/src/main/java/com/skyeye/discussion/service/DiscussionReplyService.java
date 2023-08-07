@@ -17,5 +17,6 @@ import com.skyeye.discussion.entity.DiscussionReply;
  */
 public interface DiscussionReplyService extends SkyeyeBusinessService<DiscussionReply> {
 
+    void deleteByDiscussionId(String discussionId);
 
 }

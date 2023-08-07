@@ -4,12 +4,14 @@
 
 package com.skyeye.discussion.service.impl;
 
+import com.skyeye.annotation.service.SkyeyeService;
 import com.skyeye.base.business.service.impl.SkyeyeTeamAuthServiceImpl;
 import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.discussion.classenum.DisCussionAuthEnum;
 import com.skyeye.discussion.dao.DiscussionDao;
 import com.skyeye.discussion.entity.Discussion;
+import com.skyeye.discussion.service.DiscussionReplyService;
 import com.skyeye.discussion.service.DiscussionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,10 +29,11 @@ import java.util.Map;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
+@SkyeyeService(name = "讨论帖管理", groupName = "基本服务", teamAuth = true)
 public class DiscussionServiceImpl extends SkyeyeTeamAuthServiceImpl<DiscussionDao, Discussion> implements DiscussionService {
 
     @Autowired
-    private DiscussionDao discussionDao;
+    private DiscussionReplyService discussionReplyService;
 
     @Override
     public Class getAuthEnumClass() {
@@ -45,8 +48,19 @@ public class DiscussionServiceImpl extends SkyeyeTeamAuthServiceImpl<DiscussionD
     @Override
     public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
         CommonPageInfo pageInfo = inputObject.getParams(CommonPageInfo.class);
-        List<Map<String, Object>> beans = discussionDao.queryDiscussionList(pageInfo);
+        List<Map<String, Object>> beans = skyeyeBaseMapper.queryDiscussionList(pageInfo);
         return beans;
     }
 
+    @Override
+    public Discussion selectById(String id) {
+        Discussion discussion = super.selectById(id);
+        iAuthUserService.setName(discussion, "createId", "createName");
+        return discussion;
+    }
+
+    @Override
+    public void deletePostpose(String id) {
+        discussionReplyService.deleteByDiscussionId(id);
+    }
 }

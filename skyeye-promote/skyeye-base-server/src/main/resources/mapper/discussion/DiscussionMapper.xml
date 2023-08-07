@@ -6,8 +6,6 @@
         SELECT
 			a.id,
             a.title,
-            a.object_id objectId,
-            a.object_key objectKey,
 			a.link_id linkId,
             a.link_key linkKey,
             a.create_id createId,

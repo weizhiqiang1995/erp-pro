@@ -8,15 +8,16 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNodeConfig;
 import cn.hutool.core.lang.tree.TreeUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.discussion.dao.DiscussionReplyDao;
 import com.skyeye.discussion.entity.DiscussionReply;
 import com.skyeye.discussion.entity.DiscussionReplyQueryDo;
 import com.skyeye.discussion.service.DiscussionReplyService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,20 +37,18 @@ import java.util.stream.Collectors;
 @Service
 public class DiscussionReplyServiceImpl extends SkyeyeBusinessServiceImpl<DiscussionReplyDao, DiscussionReply> implements DiscussionReplyService {
 
-    @Autowired
-    private DiscussionReplyDao discussionReplyDao;
-
     @Override
     public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
         DiscussionReplyQueryDo pageInfo = inputObject.getParams(DiscussionReplyQueryDo.class);
-        List<Map<String, Object>> beans = discussionReplyDao.queryDiscussionReplyList(pageInfo);
+        List<Map<String, Object>> beans = skyeyeBaseMapper.queryDiscussionReplyList(pageInfo);
         List<String> ids = beans.stream().map(bean -> bean.get("id").toString()).collect(Collectors.toList());
         if (CollectionUtil.isEmpty(ids)) {
             return new ArrayList<>();
         }
         // 查询子节点信息(包含当前节点)
-        List<String> childIds = discussionReplyDao.queryAllChildIdsByParentId(ids);
-        beans = discussionReplyDao.queryDiscussionReplyListByIds(childIds);
+        List<String> childIds = skyeyeBaseMapper.queryAllChildIdsByParentId(ids);
+        beans = skyeyeBaseMapper.queryDiscussionReplyListByIds(childIds);
+        iAuthUserService.setMationForMap(beans, "createId", "createMation");
         return beans;
     }
 
@@ -62,6 +61,7 @@ public class DiscussionReplyServiceImpl extends SkyeyeBusinessServiceImpl<Discus
                 tree.setName(treeNode.get("content").toString());
                 tree.putExtra("createName", treeNode.get("createName").toString());
                 tree.putExtra("createTime", treeNode.get("createTime").toString());
+                tree.putExtra("createMation", treeNode.get("createMation"));
             });
         outputObject.setBeans(treeNodes);
         outputObject.settotal(treeNodes.size());
@@ -71,8 +71,14 @@ public class DiscussionReplyServiceImpl extends SkyeyeBusinessServiceImpl<Discus
     @Override
     public void deleteById(String id) {
         // 获取当前回帖和所有的子回帖信息
-        List<String> ids = discussionReplyDao.queryAllChildIdsByParentId(Arrays.asList(id));
+        List<String> ids = skyeyeBaseMapper.queryAllChildIdsByParentId(Arrays.asList(id));
         super.deleteById(ids);
     }
 
+    @Override
+    public void deleteByDiscussionId(String discussionId) {
+        QueryWrapper<DiscussionReply> deleteWrapper = new QueryWrapper<>();
+        deleteWrapper.eq(MybatisPlusUtil.toColumns(DiscussionReply::getDiscussionId), discussionId);
+        remove(deleteWrapper);
+    }
 }
