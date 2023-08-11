@@ -4,15 +4,16 @@
 
 package com.skyeye.eve.service.impl;
 
+import cn.hutool.json.JSONUtil;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.common.entity.search.TableSelectInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.common.util.ToolUtil;
 import com.skyeye.eve.dao.SysTAreaDao;
 import com.skyeye.eve.entity.userauth.area.SysTArea;
 import com.skyeye.eve.service.SysTAreaService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,13 +30,12 @@ import java.util.Map;
 @Service
 public class SysTAreaServiceImpl extends SkyeyeBusinessServiceImpl<SysTAreaDao, SysTArea> implements SysTAreaService {
 
-    @Autowired
-    private SysTAreaDao sysTAreaDao;
+    public static String SYS_ALL_T_AREA_LIST = "sys_all_t_area_list";
 
     @Override
     public List<Map<String, Object>> queryDataList(InputObject inputObject) {
         TableSelectInfo selectInfo = inputObject.getParams(TableSelectInfo.class);
-        return sysTAreaDao.querySysTAreaList(selectInfo);
+        return skyeyeBaseMapper.querySysTAreaList(selectInfo);
     }
 
     /**
@@ -54,7 +54,28 @@ public class SysTAreaServiceImpl extends SkyeyeBusinessServiceImpl<SysTAreaDao, 
             SysTArea sysTArea = selectById(pId);
             parentCode = sysTArea.getCodeId();
         }
-        List<Map<String, Object>> beans = sysTAreaDao.queryAreaListByParentCode(parentCode);
+        List<Map<String, Object>> beans = skyeyeBaseMapper.queryAreaListByParentCode(parentCode);
+        outputObject.setBeans(beans);
+        outputObject.settotal(beans.size());
+    }
+
+    /**
+     * 查询省市区数据
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryPartAreaList(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        List<Map<String, Object>> beans;
+        if (ToolUtil.isBlank(jedisClientService.get(SYS_ALL_T_AREA_LIST))) {
+            beans = skyeyeBaseMapper.queryTAreaPhoneList(map);
+            beans = ToolUtil.listToTree(beans, "codeId", "parentCodeId", "children");
+            jedisClientService.set(SYS_ALL_T_AREA_LIST, JSONUtil.toJsonStr(beans));
+        } else {
+            beans = JSONUtil.toList(jedisClientService.get(SYS_ALL_T_AREA_LIST), null);
+        }
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
     }

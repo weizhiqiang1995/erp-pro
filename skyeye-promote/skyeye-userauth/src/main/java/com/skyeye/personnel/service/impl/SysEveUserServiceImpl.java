@@ -269,7 +269,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
                     List<Map<String, Object>> authPoints = getMenuAndAuthToRedis(userMation, userId);
                     judgeAndGetSchoolMation(userMation, userId);
                     LOGGER.info("set userMation to redis cache start.");
-                    SysUserAuthConstants.setUserLoginRedisCache(userId, userMation);
+                    setUserLoginRedisMation(userId, userMation);
                     LOGGER.info("set userMation to redis cache end.");
                     String userToken = GetUserToken.createNewToken(userId, userDBPassword);
                     userMation.put("userToken", userToken);
@@ -280,6 +280,10 @@ public class SysEveUserServiceImpl implements SysEveUserService {
                 outputObject.setreturnMessage("密码输入错误！");
             }
         }
+    }
+
+    private void setUserLoginRedisMation(String userId, Map<String, Object> userMation) {
+        SysUserAuthConstants.setUserLoginRedisCache(userId, userMation);
     }
 
     private void setUserOtherMation(Map<String, Object> userMation) {
@@ -452,7 +456,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         map.put("userId", user.get("id"));
         //修改reids中的用户信息
         user.put("winThemeColor", map.get("themeColor"));
-        SysUserAuthConstants.setUserLoginRedisCache(user.get("id").toString(), user);
+        setUserLoginRedisMation(user.get("id").toString(), user);
         sysEveUserDao.editUserInstallThemeColor(map);
     }
 
@@ -470,7 +474,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         map.put("userId", user.get("id"));
         // 修改reids中的用户信息
         user.put("winBgPicUrl", map.get("winBgPicUrl"));
-        SysUserAuthConstants.setUserLoginRedisCache(user.get("id").toString(), user);
+        setUserLoginRedisMation(user.get("id").toString(), user);
         sysEveUserDao.editUserInstallWinBgPic(map);
     }
 
@@ -488,7 +492,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         map.put("userId", user.get("id"));
         // 修改reids中的用户信息
         user.put("winLockBgPicUrl", map.get("winLockBgPicUrl"));
-        SysUserAuthConstants.setUserLoginRedisCache(user.get("id").toString(), user);
+        setUserLoginRedisMation(user.get("id").toString(), user);
         sysEveUserDao.editUserInstallWinLockBgPic(map);
     }
 
@@ -506,7 +510,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         map.put("userId", user.get("id"));
         // 修改reids中的用户信息
         user.put("winStartMenuSize", map.get("winStartMenuSize"));
-        SysUserAuthConstants.setUserLoginRedisCache(user.get("id").toString(), user);
+        setUserLoginRedisMation(user.get("id").toString(), user);
         sysEveUserDao.editUserInstallWinStartMenuSize(map);
     }
 
@@ -524,7 +528,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         map.put("userId", user.get("id"));
         // 修改reids中的用户信息
         user.put("winTaskPosition", map.get("winTaskPosition"));
-        SysUserAuthConstants.setUserLoginRedisCache(user.get("id").toString(), user);
+        setUserLoginRedisMation(user.get("id").toString(), user);
         sysEveUserDao.editUserInstallWinTaskPosition(map);
     }
 
@@ -576,7 +580,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         // 修改reids中的用户信息
         user.put("winBgPicVague", map.get("winBgPicVague"));
         user.put("winBgPicVagueValue", map.get("winBgPicVagueValue"));
-        SysUserAuthConstants.setUserLoginRedisCache(user.get("id").toString(), user);
+        setUserLoginRedisMation(user.get("id").toString(), user);
         sysEveUserDao.editUserInstallVagueBgSrc(map);
     }
 
@@ -594,7 +598,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         map.put("userId", user.get("id"));
         // 修改reids中的用户信息
         user.put("loadBottomMenuIcon", map.get("loadBottomMenuIcon"));
-        SysUserAuthConstants.setUserLoginRedisCache(user.get("id").toString(), user);
+        setUserLoginRedisMation(user.get("id").toString(), user);
         sysEveUserDao.editUserInstallLoadMenuIconById(map);
     }
 

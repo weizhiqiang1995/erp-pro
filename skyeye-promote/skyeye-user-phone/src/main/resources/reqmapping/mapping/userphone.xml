@@ -5,8 +5,6 @@
 	 -->
 	
 	<!-- 手机端公共部分开始 -->
-	<url id="commonphone001" path="/post/TAreaPhoneController/queryTAreaPhoneList" val="手机端查询省市区数据" allUse="2">
-	</url>
 	<url id="commonphone002" path="/post/UserPhoneController/queryAllPeopleToTree" val="人员选择获取所有公司和人" allUse="2">
 		<property id="chooseOrNotMy" name="chooseOrNotMy" ref="required,num" var="人员列表中是否包含自己--1.包含；其他参数不包含" />
 		<property id="chooseOrNotEmail" name="chooseOrNotEmail" ref="required,num" var="人员列表中是否必须绑定邮箱--1.必须；其他参数没必要" />

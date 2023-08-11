@@ -13,22 +13,6 @@
 	</url>
 	<!-- 公共请求结束 -->
 	
-	<!-- 登录开始 -->
-	<url id="login001" path="/post/SysEveUserController/queryUserToLogin" val="登录" allUse="0" groupName="登陆相关" notRead="1">
-		<property id="userCode" name="userCode" ref="required" var="账号"/>
-		<property id="password" name="password" ref="required" var="密码"/>
-	</url>
-	<url id="login002" path="/post/SysEveUserController/queryUserMationBySession" val="从session中获取用户信息" allUse="2" groupName="登陆相关" notRead="1">
-	</url>
-	<url id="login007" path="/post/SysEveUserController/editUserPassword" val="修改密码" allUse="2" method="POST" groupName="登陆相关" notRead="1">
-		<property id="newPassword" name="newPassword" ref="required" var="新密码"/>
-		<property id="oldPassword" name="oldPassword" ref="required" var="旧密码"/>
-	</url>
-	<url id="login008" path="/post/SysEveUserController/queryUserLockByLockPwd" val="锁屏密码解锁" allUse="2" method="POST" groupName="登陆相关" notRead="1">
-		<property id="password" name="password" ref="required" var="密码"/>
-	</url>
-	<!-- 登录结束 -->
-	
 	<!-- 聊天开始 -->
 	<url id="companychat001" path="/post/CompanyChatController/getList" val="获取好友列表，群聊信息，个人信息" allUse="2" method="GET" groupName="聊天模块">
 	</url>

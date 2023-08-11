@@ -29,5 +29,17 @@
 			t_area a
 		WHERE a.parent_code_id = #{parentCode}
 	</select>
+
+	<select id="queryTAreaPhoneList" resultType="java.util.Map">
+		SELECT
+			a.id,
+			a.code_id codeId,
+			a.`name`,
+			a.parent_code_id parentCodeId
+		FROM
+			t_area a
+		WHERE 3 > a.`level`
+		ORDER BY a.`level` ASC
+	</select>
 	
 </mapper>

@@ -72,4 +72,16 @@ public class SysTAreaController {
         sysTAreaService.selectByIds(inputObject, outputObject);
     }
 
+    /**
+     * 查询省市区数据
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryPartAreaList", value = "查询省市区数据", method = "GET", allUse = "2")
+    @RequestMapping("/post/SysTAreaController/queryPartAreaList")
+    public void queryPartAreaList(InputObject inputObject, OutputObject outputObject) {
+        sysTAreaService.queryPartAreaList(inputObject, outputObject);
+    }
+
 }
