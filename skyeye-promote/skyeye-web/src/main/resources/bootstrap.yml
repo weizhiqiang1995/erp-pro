@@ -39,5 +39,3 @@ topic:
   ordinary-mail-delivery-service: ORDINARY_MAIL_DELIVERY_SERVICE
   # 消息通知的topic
   notice-send-service: NOTICE_SEND_SERVICE
-  # 派工通知的topic
-  wati-worker-send-service: WATI_WORKER_SEND_SERVICE
