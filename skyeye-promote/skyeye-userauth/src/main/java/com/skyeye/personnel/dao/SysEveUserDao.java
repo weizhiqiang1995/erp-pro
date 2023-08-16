@@ -86,4 +86,14 @@ public interface SysEveUserDao {
 
     List<Map<String, Object>> queryTalkGroupUserListByUserId(UserTreeQueryDo queryDo);
 
+    Map<String, Object> queryWxUserMationByOpenId(@Param("openId") String openId);
+
+    Map<String, Object> queryUserMationByOpenId(@Param("openId") String openId);
+
+    Map<String, Object> queryUserBindMationByUserId(@Param("userId") String userId);
+
+    int updateBindUserMation(Map<String, Object> map);
+
+    int insertWxUserMation(Map<String, Object> map);
+
 }

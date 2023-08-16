@@ -10,6 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.constans.SysUserAuthConstants;
+import com.skyeye.common.constans.WxchatUtil;
 import com.skyeye.common.enumeration.UserStaffState;
 import com.skyeye.common.object.GetUserToken;
 import com.skyeye.common.object.InputObject;
@@ -871,6 +872,184 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         list.add(UserStaffState.PROBATION.getKey());
         list.add(UserStaffState.PROBATION_PERIOD.getKey());
         return list;
+    }
+
+    /**
+     * 手机端用户登录
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryPhoneToLogin(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        String userCode = map.get("userCode").toString();
+        Map<String, Object> userMation = sysEveUserDao.queryMationByUserCode(userCode);
+        if (userMation == null) {
+            outputObject.setreturnMessage("请确保用户名输入无误！");
+        } else {
+            int pwdNum = Integer.parseInt(userMation.get("pwdNum").toString());
+            String password = map.get("password").toString();
+            for (int i = 0; i < pwdNum; i++) {
+                password = ToolUtil.MD5(password);
+            }
+            if (password.equals(userMation.get("password").toString())) {
+                int userLock = Integer.parseInt(userMation.get("userLock").toString());
+                if (UserLockState.SYS_USER_LOCK_STATE_ISLOCK.getKey() == userLock) {
+                    outputObject.setreturnMessage("您的账号已被锁定，请联系管理员解除！");
+                } else {
+                    String userId = userMation.get("id").toString();
+                    String roleIds = userMation.get("roleId").toString();
+                    userMation.remove("roleId");
+
+                    // 获取动态token
+                    String userToken = GetUserToken.createNewToken(userId, password);
+                    userMation.put("userToken", userToken);
+
+                    String appUserId = userId + SysUserAuthConstants.APP_IDENTIFYING;
+                    iDepmentService.setNameForMap(userMation, "departmentId", "departmentName");
+                    iCompanyJobService.setNameForMap(userMation, "jobId", "jobName");
+                    SysUserAuthConstants.setUserLoginRedisCache(appUserId, userMation);
+                    jedisClient.set("allMenuMation:" + appUserId, roleIds);
+                    jedisClient.set("authPointsMation:" + appUserId, roleIds);
+                    // 获取用户权限点返回给前台
+                    List<Map<String, Object>> authPoints = sysAuthorityService.getRoleHasMenuPointListByRoleIds(roleIds, userId);
+                    outputObject.setBean(userMation);
+                    outputObject.setBeans(authPoints);
+                }
+            } else {
+                outputObject.setreturnMessage("密码输入错误！");
+            }
+        }
+    }
+
+    /**
+     * 根据openId获取用户信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryUserMationByOpenId(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        String openId = map.get("openId").toString();
+        //判断该微信用户在redis中是否存在数据
+        String key = WxchatUtil.getWechatUserOpenIdMation(openId);
+        if (ToolUtil.isBlank(jedisClient.get(key))) {
+            //该用户没有绑定账号
+            Map<String, Object> bean = sysEveUserDao.queryWxUserMationByOpenId(openId);
+            //判断该用户的openId是否存在于数据库
+            if (bean != null && !bean.isEmpty()) {
+                //存在数据库
+                map.putAll(bean);
+                //1.将微信和账号的绑定信息存入redis
+                jedisClient.set(key, JSONUtil.toJsonStr(bean));
+                //如果已经绑定用户，则获取用户信息
+                if (bean.containsKey("userId") && !ToolUtil.isBlank(bean.get("userId").toString())) {
+                    Map<String, Object> userMation = sysEveUserDao.queryUserMationByOpenId(openId);
+                    iCompanyService.setNameForMap(userMation, "companyId", "companyName");
+                    iDepmentService.setNameForMap(userMation, "departmentId", "departmentName");
+                    // 2.将账号的信息存入redis
+                    SysUserAuthConstants.setUserLoginRedisCache(bean.get("userId").toString() + SysUserAuthConstants.APP_IDENTIFYING, userMation);
+                    //3.将权限的信息存入redis
+                    jedisClient.set("authPointsMation:" + bean.get("userId").toString() + SysUserAuthConstants.APP_IDENTIFYING, "");
+                }
+            } else {
+                //不存在
+                map.put("id", ToolUtil.getSurFaceId());
+                map.put("joinTime", DateUtil.getTimeAndToString());
+                map.put("openId", openId);
+                map.put("userId", "");
+                sysEveUserDao.insertWxUserMation(map);
+                //1.将微信和账号的绑定信息存入redis
+                jedisClient.set(key, JSONUtil.toJsonStr(map));
+            }
+        } else {
+            map = JSONUtil.toBean(jedisClient.get(key), null);
+            //如果已经绑定用户，则获取用户信息
+            if (map.containsKey("userId") && !ToolUtil.isBlank(map.get("userId").toString())) {
+                Map<String, Object> userMation = sysEveUserDao.queryUserMationByOpenId(openId);
+                iCompanyService.setNameForMap(userMation, "companyId", "companyName");
+                //2.将账号的信息存入redis
+                SysUserAuthConstants.setUserLoginRedisCache(map.get("userId").toString() + SysUserAuthConstants.APP_IDENTIFYING, userMation);
+                //3.将权限的信息存入redis
+                jedisClient.set("authPointsMation:" + map.get("userId").toString() + SysUserAuthConstants.APP_IDENTIFYING, "");
+            } else {
+                outputObject.setreturnMessage("您还未绑定用户，请前往绑定.", "-9000");
+            }
+        }
+        outputObject.setBean(map);
+    }
+
+    /**
+     * openId绑定用户信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void insertUserMationByOpenId(InputObject inputObject, OutputObject outputObject) {
+        Map<String, Object> map = inputObject.getParams();
+        String userCode = map.get("userCode").toString();
+        String password = map.get("password").toString();
+        String openId = map.get("openId").toString();
+        // 根据账号获取用户信息
+        Map<String, Object> userMation = sysEveUserDao.queryMationByUserCode(userCode);
+        // 判断该账号是否存在
+        if (userMation != null && !userMation.isEmpty()) {
+            int pwdNum = Integer.parseInt(userMation.get("pwdNum").toString());
+            for (int i = 0; i < pwdNum; i++) {
+                password = ToolUtil.MD5(password);
+            }
+            //判断密码是否正确
+            if (password.equals(userMation.get("password").toString())) {
+                //判断账号是否锁定
+                int userLock = Integer.parseInt(userMation.get("userLock").toString());
+                if (UserLockState.SYS_USER_LOCK_STATE_ISLOCK.getKey() == userLock) {
+                    outputObject.setreturnMessage("您的账号已被锁定，请联系管理员解除.");
+                } else {
+                    Map<String, Object> wxUserMation = sysEveUserDao.queryWxUserMationByOpenId(openId);
+                    //判断该用户的openId是否存在于数据库
+                    if (wxUserMation != null && !wxUserMation.isEmpty()) {
+                        //判断当前openId是否已经绑定账号
+                        if (wxUserMation.containsKey("userId") && !ToolUtil.isBlank(wxUserMation.get("userId").toString())) {
+                            outputObject.setreturnMessage("该微信用户已绑定账号.");
+                        } else {
+                            //判断该账号是否被别人绑定
+                            Map<String, Object> isBindInWx = sysEveUserDao.queryUserBindMationByUserId(userMation.get("id").toString());
+                            if (isBindInWx != null && !isBindInWx.isEmpty()) {
+                                outputObject.setreturnMessage("该账号已被绑定.");
+                            } else {
+                                iCompanyJobService.setNameForMap(userMation, "jobId", "jobName");
+                                //构建绑定信息对象
+                                map = new HashMap<>();
+                                String userId = userMation.get("id").toString();
+                                map.put("userId", userId);
+                                map.put("bindTime", DateUtil.getTimeAndToString());
+                                map.put("openId", openId);
+                                sysEveUserDao.updateBindUserMation(map);
+                                //重新获取绑定信息，存入redis，返回前端
+                                map = sysEveUserDao.queryWxUserMationByOpenId(openId);
+                                //1.将微信和账号的绑定信息存入redis
+                                String key = WxchatUtil.getWechatUserOpenIdMation(openId);
+                                jedisClient.set(key, JSONUtil.toJsonStr(map));
+                                //2.将账号的信息存入redis
+                                SysUserAuthConstants.setUserLoginRedisCache(userId + SysUserAuthConstants.APP_IDENTIFYING, userMation);
+                                //3.将权限的信息存入redis
+                                jedisClient.set("authPointsMation:" + userId + SysUserAuthConstants.APP_IDENTIFYING, "");
+                                outputObject.setBean(map);
+                            }
+                        }
+                    } else {
+                        outputObject.setreturnMessage("该微信用户不存在.");
+                    }
+                }
+            } else {
+                outputObject.setreturnMessage("密码输入错误.");
+            }
+        } else {
+            outputObject.setreturnMessage("该账号不存在，请核实后进行登录.");
+        }
     }
 
 }

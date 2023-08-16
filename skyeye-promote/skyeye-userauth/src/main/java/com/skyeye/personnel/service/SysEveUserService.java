@@ -81,4 +81,11 @@ public interface SysEveUserService {
     void queryTalkGroupUserListByUserId(InputObject inputObject, OutputObject outputObject);
 
     void queryAllSysUserIsIncumbency(InputObject inputObject, OutputObject outputObject);
+
+    void queryPhoneToLogin(InputObject inputObject, OutputObject outputObject);
+
+    void queryUserMationByOpenId(InputObject inputObject, OutputObject outputObject);
+
+    void insertUserMationByOpenId(InputObject inputObject, OutputObject outputObject);
+
 }

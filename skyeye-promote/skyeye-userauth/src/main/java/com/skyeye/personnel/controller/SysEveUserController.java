@@ -446,4 +446,50 @@ public class SysEveUserController {
         sysEveUserService.queryAllSysUserIsIncumbency(inputObject, outputObject);
     }
 
+    /**
+     * 手机端用户登录
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "userphone001", value = "手机端用户登录", method = "POST", allUse = "0")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "userCode", name = "userCode", value = "账号", required = "required"),
+        @ApiImplicitParam(id = "password", name = "password", value = "密码", required = "required"),
+        @ApiImplicitParam(id = "cId", name = "cId", value = "cId,用于手机端消息通知")})
+    @RequestMapping("/post/SysEveUserController/queryPhoneToLogin")
+    public void queryPhoneToLogin(InputObject inputObject, OutputObject outputObject) {
+        sysEveUserService.queryPhoneToLogin(inputObject, outputObject);
+    }
+
+    /**
+     * 根据openId获取用户信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "userphone004", value = "根据openId获取用户信息", method = "POST", allUse = "0")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "openId", name = "openId", value = "用户openId", required = "required")})
+    @RequestMapping("/post/SysEveUserController/queryUserMationByOpenId")
+    public void queryUserMationByOpenId(InputObject inputObject, OutputObject outputObject) {
+        sysEveUserService.queryUserMationByOpenId(inputObject, outputObject);
+    }
+
+    /**
+     * openId绑定用户信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "userphone005", value = "openId绑定用户信息", method = "POST", allUse = "0")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "userCode", name = "userCode", value = "账号", required = "required"),
+        @ApiImplicitParam(id = "password", name = "password", value = "密码", required = "required"),
+        @ApiImplicitParam(id = "openId", name = "openId", value = "用户openId", required = "required")})
+    @RequestMapping("/post/SysEveUserController/insertUserMationByOpenId")
+    public void insertUserMationByOpenId(InputObject inputObject, OutputObject outputObject) {
+        sysEveUserService.insertUserMationByOpenId(inputObject, outputObject);
+    }
+
 }
