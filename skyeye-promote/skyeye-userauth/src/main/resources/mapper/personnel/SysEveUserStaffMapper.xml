@@ -177,14 +177,6 @@
 		</foreach>
     </select>
     
-    <update id="editStaffTypeById" parameterType="java.util.Map">
-		UPDATE sys_eve_user_staff
-		<set>
-			`type` = '2'
-		</set>
-		WHERE id = #{staffId}
-	</update>
-
 	<insert id="insertSchoolStaffMation" parameterType="java.util.Map">
 	    INSERT into school_staff_mation 
 	    (id, staff_id, school_id)

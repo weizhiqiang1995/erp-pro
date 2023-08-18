@@ -13,8 +13,6 @@ import com.skyeye.annotation.api.ApiModelProperty;
 import com.skyeye.common.entity.CommonInfo;
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * @ClassName: BarCodeMation
  * @Description: 条形码实体类
@@ -26,7 +24,7 @@ import java.io.Serializable;
 @Data
 @TableName(value = "bar_code")
 @ApiModel("条形码实体类")
-public class BarCodeMation extends CommonInfo implements Serializable {
+public class BarCodeMation extends CommonInfo {
 
     @TableId("id")
     @ApiModelProperty(value = "主键id。为空时新增，不为空时编辑")

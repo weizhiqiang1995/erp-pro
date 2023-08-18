@@ -5,8 +5,12 @@
 package com.skyeye.personnel.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.ObjectUtil;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
+import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.constans.Constants;
 import com.skyeye.common.enumeration.UserStaffState;
@@ -14,6 +18,7 @@ import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
+import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.eve.dao.WagesFieldTypeDao;
 import com.skyeye.eve.entity.userauth.user.SysUserStaffQueryDo;
 import com.skyeye.exception.CustomException;
@@ -23,8 +28,10 @@ import com.skyeye.organization.service.ICompanyJobService;
 import com.skyeye.organization.service.ICompanyService;
 import com.skyeye.organization.service.IDepmentService;
 import com.skyeye.personnel.classenum.UserLockState;
+import com.skyeye.personnel.classenum.UserStaffType;
 import com.skyeye.personnel.dao.SysEveUserDao;
 import com.skyeye.personnel.dao.SysEveUserStaffDao;
+import com.skyeye.personnel.entity.SysEveUserStaff;
 import com.skyeye.personnel.service.SysEveUserService;
 import com.skyeye.personnel.service.SysEveUserStaffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +52,7 @@ import java.util.stream.Collectors;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
-public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
+public class SysEveUserStaffServiceImpl extends SkyeyeBusinessServiceImpl<SysEveUserStaffDao, SysEveUserStaff> implements SysEveUserStaffService {
 
     @Autowired
     private SysEveUserStaffDao sysEveUserStaffDao;
@@ -362,13 +369,17 @@ public class SysEveUserStaffServiceImpl implements SysEveUserStaffService {
         String staffId = map.get("staffId").toString();
 
         // 员工类型判断
-        Map<String, Object> staffMation = sysEveUserStaffDao.querySysUserStaffByIdToDetails(staffId);
-        if (CollectionUtil.isNotEmpty(staffMation)) {
-            //如果是普通员工，则允许转教职工
-            if ("1".equals(staffMation.get("staffType").toString())) {
-                //修改类型
-                sysEveUserStaffDao.editStaffTypeById(staffId);
-                //添加教职工学校绑定信息
+        SysEveUserStaff userStaff = selectById(staffId);
+        if (ObjectUtil.isNotEmpty(userStaff)) {
+            // 如果是普通员工，则允许转教职工
+            if (userStaff.getType() == UserStaffType.SIMPLE_STAFF.getKey()) {
+                // 修改员工类型
+                UpdateWrapper<SysEveUserStaff> updateWrapper = new UpdateWrapper<>();
+                updateWrapper.eq(CommonConstants.ID, staffId);
+                updateWrapper.set(MybatisPlusUtil.toColumns(SysEveUserStaff::getType), UserStaffType.TEACHER.getKey());
+                update(updateWrapper);
+
+                // 添加教职工学校绑定信息
                 Map<String, Object> schoolStaff = new HashMap<>();
                 schoolStaff.put("id", ToolUtil.getSurFaceId());
                 schoolStaff.put("staffId", staffId);

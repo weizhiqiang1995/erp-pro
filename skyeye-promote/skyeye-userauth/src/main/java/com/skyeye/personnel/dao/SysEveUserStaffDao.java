@@ -4,7 +4,9 @@
 
 package com.skyeye.personnel.dao;
 
+import com.skyeye.eve.dao.SkyeyeBaseMapper;
 import com.skyeye.eve.entity.userauth.user.SysUserStaffQueryDo;
+import com.skyeye.personnel.entity.SysEveUserStaff;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.Map;
  * @Copyright: 2021 https://gitee.com/doc_wei01/skyeye Inc. All rights reserved.
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
-public interface SysEveUserStaffDao {
+public interface SysEveUserStaffDao extends SkyeyeBaseMapper<SysEveUserStaff> {
 
     List<Map<String, Object>> querySysUserStaffList(SysUserStaffQueryDo sysUserStaffQuery);
 
@@ -43,8 +45,6 @@ public interface SysEveUserStaffDao {
     List<Map<String, Object>> queryAllSysUserIsIncumbency(Map<String, Object> map);
 
     Map<String, Object> querySysUserStaffMationByIdCardAndId(Map<String, Object> map);
-
-    int editStaffTypeById(@Param("staffId") String staffId);
 
     int insertSchoolStaffMation(Map<String, Object> schoolStaff);
 
