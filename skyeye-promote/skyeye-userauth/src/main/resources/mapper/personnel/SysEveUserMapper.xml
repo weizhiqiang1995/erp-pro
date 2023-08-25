@@ -386,7 +386,7 @@
 			c.power schoolPower
 		FROM
 			sys_eve_user_staff a,
-			school_staff_mation b,
+			sys_eve_user_staff_teacher b,
 			school_mation c
 		WHERE
 			a.user_id = #{userId}

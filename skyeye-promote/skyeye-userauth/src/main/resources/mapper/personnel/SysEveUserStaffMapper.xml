@@ -178,7 +178,7 @@
     </select>
     
 	<insert id="insertSchoolStaffMation" parameterType="java.util.Map">
-	    INSERT into school_staff_mation 
+	    INSERT into sys_eve_user_staff_teacher
 	    (id, staff_id, school_id)
 	    VALUES(#{id}, #{staffId}, #{schoolId})
 	</insert>
