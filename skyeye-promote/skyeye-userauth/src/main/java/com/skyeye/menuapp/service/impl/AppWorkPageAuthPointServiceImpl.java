@@ -12,11 +12,11 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
+import com.skyeye.eve.service.IAuthUserService;
 import com.skyeye.menuapp.dao.AppWorkPageAuthPointDao;
 import com.skyeye.menuapp.entity.AppWorkPageAuthPointMation;
 import com.skyeye.menuapp.service.AppWorkPageAuthPointService;
-import com.skyeye.eve.service.IAuthUserService;
-import com.skyeye.menupc.service.impl.SysEveMenuAuthPointServiceImpl;
+import com.skyeye.menupc.classenum.MenuPointType;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,36 +47,6 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
     @Autowired
     private IAuthUserService iAuthUserService;
 
-    public enum Type {
-        AUTH_POINT(1, "权限点"),
-        DATA_GROUP(2, "数据分组"),
-        DATA_POINT(3, "数据权限");
-        private int type;
-        private String name;
-
-        Type(int type, String name) {
-            this.type = type;
-            this.name = name;
-        }
-
-        public int getType() {
-            return type;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public static String getTypeName(int type) {
-            for (SysEveMenuAuthPointServiceImpl.Type bean : SysEveMenuAuthPointServiceImpl.Type.values()) {
-                if (bean.getType() == type) {
-                    return bean.getName();
-                }
-            }
-            return "";
-        }
-    }
-
     /**
      * 根据菜单id获取菜单权限点列表
      *
@@ -90,7 +60,7 @@ public class AppWorkPageAuthPointServiceImpl implements AppWorkPageAuthPointServ
         iAuthUserService.setNameForMap(beans, "createId", "createName");
         iAuthUserService.setNameForMap(beans, "lastUpdateId", "lastUpdateName");
         beans.forEach(bean -> {
-            bean.put("typeName", SysEveMenuAuthPointServiceImpl.Type.getTypeName(Integer.parseInt(bean.get("type").toString())));
+            bean.put("typeName", MenuPointType.getTypeName(Integer.parseInt(bean.get("type").toString())));
         });
         outputObject.setBeans(beans);
         outputObject.settotal(beans.size());

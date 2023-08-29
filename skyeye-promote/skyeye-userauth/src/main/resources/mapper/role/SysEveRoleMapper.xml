@@ -41,15 +41,15 @@
 		UNION
 		SELECT
 			a.id,
-			a.auth_menu_name name,
-			CASE a.parent_id WHEN '0' THEN a.menu_id ELSE a.parent_id END pId,
+			a.`name`,
+			CASE a.parent_id WHEN '0' THEN a.object_id ELSE a.parent_id END pId,
 			c.`name` sysName,
 			CASE a.type WHEN '1' THEN '权限点' WHEN '2' THEN '数据权限分组' WHEN '3' THEN '数据权限' ELSE '' END pageType
 		FROM
 			sys_eve_menu_auth_point a,
 			sys_eve_menu b
 			LEFT JOIN sys_eve_win c ON b.sys_win_id = c.id
-		WHERE a.menu_id = b.id
+		WHERE a.object_id = b.id
 	</select>
 	
 	<insert id="insertSysRoleMenuMation" parameterType="java.util.Map">

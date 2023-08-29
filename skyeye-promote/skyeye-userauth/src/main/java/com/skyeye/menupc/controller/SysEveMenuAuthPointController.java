@@ -5,11 +5,14 @@
 package com.skyeye.menupc.controller;
 
 import com.skyeye.annotation.api.Api;
+import com.skyeye.annotation.api.ApiImplicitParam;
 import com.skyeye.annotation.api.ApiImplicitParams;
 import com.skyeye.annotation.api.ApiOperation;
+import com.skyeye.common.entity.search.CommonPageInfo;
+import com.skyeye.common.entity.search.TableSelectInfo;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
-import com.skyeye.menupc.entity.SysMenuAuthPointMation;
+import com.skyeye.menupc.entity.SysMenuAuthPoint;
 import com.skyeye.menupc.service.SysEveMenuAuthPointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,21 +29,23 @@ import org.springframework.web.bind.annotation.RestController;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @RestController
-@Api(value = "菜单权限点管理", tags = "菜单权限点管理", modelName = "基础模块")
+@Api(value = "菜单权限点管理", tags = "菜单权限点管理", modelName = "菜单管理")
 public class SysEveMenuAuthPointController {
 
     @Autowired
     private SysEveMenuAuthPointService sysEveMenuAuthPointService;
 
     /**
-     * 获取菜单权限点列表根据菜单id
+     * 根据菜单id获取菜单权限点列表
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
+    @ApiOperation(id = "sysevemenuauthpoint001", value = "根据菜单id获取菜单权限点列表", method = "POST", allUse = "1")
+    @ApiImplicitParams(classBean = TableSelectInfo.class)
     @RequestMapping("/post/SysEveMenuAuthPointController/querySysEveMenuAuthPointListByMenuId")
     public void querySysEveMenuAuthPointListByMenuId(InputObject inputObject, OutputObject outputObject) {
-        sysEveMenuAuthPointService.querySysEveMenuAuthPointListByMenuId(inputObject, outputObject);
+        sysEveMenuAuthPointService.queryList(inputObject, outputObject);
     }
 
     /**
@@ -50,32 +55,38 @@ public class SysEveMenuAuthPointController {
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @ApiOperation(id = "writeSysEveMenuAuthPointMation", value = "新增/编辑菜单权限点", method = "POST", allUse = "1")
-    @ApiImplicitParams(classBean = SysMenuAuthPointMation.class)
+    @ApiImplicitParams(classBean = SysMenuAuthPoint.class)
     @RequestMapping("/post/SysEveMenuAuthPointController/writeSysEveMenuAuthPointMation")
     public void writeSysEveMenuAuthPointMation(InputObject inputObject, OutputObject outputObject) {
-        sysEveMenuAuthPointService.writeSysEveMenuAuthPointMation(inputObject, outputObject);
+        sysEveMenuAuthPointService.saveOrUpdateEntity(inputObject, outputObject);
     }
 
     /**
-     * 编辑菜单权限点时进行回显
+     * 根据id查询菜单权限点
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @RequestMapping("/post/SysEveMenuAuthPointController/querySysEveMenuAuthPointMationToEditById")
-    public void querySysEveMenuAuthPointMationToEditById(InputObject inputObject, OutputObject outputObject) {
-        sysEveMenuAuthPointService.querySysEveMenuAuthPointMationToEditById(inputObject, outputObject);
+    @ApiOperation(id = "sysevemenuauthpoint003", value = "根据id查询菜单权限点", method = "GET", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
+    @RequestMapping("/post/SysEveMenuAuthPointController/querySysEveMenuAuthPointById")
+    public void querySysEveMenuAuthPointById(InputObject inputObject, OutputObject outputObject) {
+        sysEveMenuAuthPointService.selectById(inputObject, outputObject);
     }
 
     /**
-     * 删除菜单权限点
+     * 根据id删除菜单权限点
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
      */
-    @RequestMapping("/post/SysEveMenuAuthPointController/deleteSysEveMenuAuthPointMationById")
-    public void deleteSysEveMenuAuthPointMationById(InputObject inputObject, OutputObject outputObject) {
-        sysEveMenuAuthPointService.deleteSysEveMenuAuthPointMationById(inputObject, outputObject);
+    @ApiOperation(id = "sysevemenuauthpoint005", value = "根据id删除菜单权限点", method = "DELETE", allUse = "1")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "id", name = "id", value = "主键id", required = "required")})
+    @RequestMapping("/post/SysEveMenuAuthPointController/deleteSysEveMenuAuthPointById")
+    public void deleteSysEveMenuAuthPointById(InputObject inputObject, OutputObject outputObject) {
+        sysEveMenuAuthPointService.deleteById(inputObject, outputObject);
     }
 
 }
