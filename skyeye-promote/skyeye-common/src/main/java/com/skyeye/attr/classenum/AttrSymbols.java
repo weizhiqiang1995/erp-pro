@@ -27,7 +27,8 @@ public enum AttrSymbols implements SkyeyeEnumClass {
     EQUAL_TO("equalTo", "等于", "==", true, false),
     NOT_EQUAL("notEqual", "不等于", "!=", true, false),
     LESS_THAN_OR_EQUAL("lessThanOrEqual", "小于等于", "<=", true, false),
-    GREATER_THAN_OR_EQUAL("greaterThanOrEqual", "大于等于", ">=", true, false);
+    GREATER_THAN_OR_EQUAL("greaterThanOrEqual", "大于等于", ">=", true, false),
+    CONTAIN("contain", "包含", "contain", true, false);
 
     private String key;
 
