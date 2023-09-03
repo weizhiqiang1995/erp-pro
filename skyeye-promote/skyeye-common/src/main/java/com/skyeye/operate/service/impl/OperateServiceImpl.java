@@ -26,6 +26,7 @@ import com.skyeye.operate.service.OperateOpenPageService;
 import com.skyeye.operate.service.OperateService;
 import com.skyeye.server.entity.ServiceBeanCustom;
 import com.skyeye.server.service.ServiceBeanCustomService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,7 @@ import java.util.stream.Collectors;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
+@Slf4j
 public class OperateServiceImpl extends SkyeyeBusinessServiceImpl<OperateDao, Operate> implements OperateService {
 
     @Autowired
@@ -144,10 +146,14 @@ public class OperateServiceImpl extends SkyeyeBusinessServiceImpl<OperateDao, Op
             OperateOpenPage operateOpenPage = operate.getOperateOpenPage();
             if (!operateOpenPage.getType()) {
                 // 表单布局
-                DsFormPage dsFormPage = dsFormPageService.getDataFromDb(operateOpenPage.getPageUrl());
-                ServiceBeanCustom serviceBeanCustom = serviceBeanCustomService.selectById(dsFormPage.getClassName());
-                dsFormPage.setServiceBeanCustom(serviceBeanCustom);
-                operateOpenPage.setDsFormPage(dsFormPage);
+                try {
+                    DsFormPage dsFormPage = dsFormPageService.getDataFromDb(operateOpenPage.getPageUrl());
+                    ServiceBeanCustom serviceBeanCustom = serviceBeanCustomService.selectById(dsFormPage.getClassName());
+                    dsFormPage.setServiceBeanCustom(serviceBeanCustom);
+                    operateOpenPage.setDsFormPage(dsFormPage);
+                } catch (Exception ex) {
+                    log.info(String.format(Locale.ROOT, "FormPage %s is not exits. 【selectById】", operateOpenPage.getPageUrl()));
+                }
             }
         }
         return operate;
