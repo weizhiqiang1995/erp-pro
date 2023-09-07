@@ -19,6 +19,7 @@ import com.skyeye.menuapp.dao.AppWorkPageDao;
 import com.skyeye.menuapp.entity.AppWorkPageMation;
 import com.skyeye.menuapp.service.AppWorkPageService;
 import com.skyeye.eve.service.IAuthUserService;
+import com.skyeye.win.service.SysEveDesktopService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +50,9 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
     @Autowired
     private IAuthUserService iAuthUserService;
 
+    @Autowired
+    private SysEveDesktopService sysEveDesktopService;
+
     /**
      * 获取菜单列表
      *
@@ -62,6 +66,7 @@ public class AppWorkPageServiceImpl implements AppWorkPageService {
         List<Map<String, Object>> beans = appWorkPageDao.queryAppWorkPageList(commonPageInfo);
         iAuthUserService.setNameForMap(beans, "createId", "createName");
         iAuthUserService.setNameForMap(beans, "lastUpdateId", "lastUpdateName");
+        sysEveDesktopService.setMationForMap(beans, "deskTopId", "deskTopMation");
         outputObject.setBeans(beans);
         outputObject.settotal(pages.getTotal());
     }

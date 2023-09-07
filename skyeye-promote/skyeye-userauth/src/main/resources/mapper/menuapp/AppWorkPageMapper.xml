@@ -22,7 +22,7 @@
 			a.parent_id parentId,
 			b.title parentTitle,
 			a.order_by orderBy,
-			c.desktop_name desktopName,
+			a.desktop_id deskTopId,
 			(SELECT COUNT(1) FROM app_workbench_page d WHERE a.id = d.parent_id) childNum,
 			a.create_id createId,
 			CONVERT(a.create_time, char) createTime,
@@ -31,7 +31,6 @@
 		FROM
 			app_workbench_page a
 			LEFT JOIN app_workbench_page b ON a.parent_id = b.id
-			LEFT JOIN sys_eve_desktop c ON a.desktop_id = c.id
 		<where>
 			<if test="sqlExtract != '' and sqlExtract != null">
 				${sqlExtract}
