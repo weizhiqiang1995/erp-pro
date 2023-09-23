@@ -11,9 +11,9 @@
 
 ### 沟通交流
 
-| 企业部署版 | 作者微信(添加时请备注个人信息：姓名-联系方式)，其余一律不通过 |  QQ群    | 微信小程序（包含企业版价格，文档资料等） |
+| 企业部署版 | 作者微信 |  QQ群    | 微信小程序（包含企业版价格，文档资料等） |
 | ------------ | ------------ | ------------ | ------------ |
-| ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/知识星球.png)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/微信.jpg)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/Skyeye智能制造云办公官方①群群二维码.png)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/Skyeye视频微信小程序.jpg) |
+| ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/知识星球.png)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/chatgpt的微信.jpg)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/Skyeye智能制造云办公官方①群群二维码.png)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/Skyeye视频微信小程序.jpg) |
 
 #### 开源版功能介绍
 
