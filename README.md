@@ -11,9 +11,9 @@
 
 ### 沟通交流
 
-| 企业部署版 | 作者微信 |  QQ群    | 微信小程序（包含企业版价格，文档资料等） |
-| ------------ | ------------ | ------------ | ------------ |
-| ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/知识星球.png)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/chatgpt的微信.jpg)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/Skyeye智能制造云办公官方①群群二维码.png)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/Skyeye视频微信小程序.jpg) |
+| 企业部署版 | 作者微信 |  QQ群    | 微信小程序（包含企业版价格，文档资料等） | Java学习 知识星球 |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/知识星球.png)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/chatgpt的微信.jpg)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/Skyeye智能制造云办公官方①群群二维码.png)  | ![](https://gitee.com/doc_wei01/skyeye/raw/company_server/images/mindMap/Skyeye视频微信小程序.jpg) | ![输入图片说明](images/Java%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%98%9F%E7%90%83.png) |
 
 #### 开源版功能介绍
 
