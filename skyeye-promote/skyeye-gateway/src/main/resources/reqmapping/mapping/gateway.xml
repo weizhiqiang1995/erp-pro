@@ -15,19 +15,4 @@
     </url>
     <!-- 首页接口结束 -->
     
-    <!-- 生产模块统计接口开始 -->
-    <url id="erpproduce001" path="/post/ErpProducePageController/queryDepartmentPickMaterial" val="统计当前部门月度领料图" allUse="2">
-    	<property id="year" name="year" ref="required" var="指定年度"></property>
-    </url>
-    <url id="erpproduce002" path="/post/ErpProducePageController/queryDepartmentPatchMaterial" val="统计当前部门月度补料图" allUse="2">
-    	<property id="year" name="year" ref="required" var="指定年度"></property>
-    </url>
-    <url id="erpproduce003" path="/post/ErpProducePageController/queryDepartmentReturnMaterial" val="统计当前部门月度退料图" allUse="2">
-    	<property id="year" name="year" ref="required" var="指定年度"></property>
-    </url>
-    <url id="erpproduce004" path="/post/ErpProducePageController/queryDepartmentMachin" val="统计当前部门月度新建加工单图" allUse="2">
-    	<property id="year" name="year" ref="required" var="指定年度"></property>
-    </url>
-    <!-- 生产模块统计接口结束 -->
-	
 </controller>
