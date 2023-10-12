@@ -12,10 +12,7 @@ import com.skyeye.common.constans.Constants;
 import com.skyeye.common.constans.SysUserAuthConstants;
 import com.skyeye.common.constans.WxchatUtil;
 import com.skyeye.common.enumeration.UserStaffState;
-import com.skyeye.common.object.GetUserToken;
-import com.skyeye.common.object.InputObject;
-import com.skyeye.common.object.OutputObject;
-import com.skyeye.common.object.PutObject;
+import com.skyeye.common.object.*;
 import com.skyeye.common.util.DataCommonUtil;
 import com.skyeye.common.util.DateUtil;
 import com.skyeye.common.util.ToolUtil;
@@ -309,8 +306,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
         List<Map<String, Object>> authPoints = sysAuthorityService.getRoleHasMenuPointListByRoleIds(roleIds, userId);
 
         LOGGER.info("set menu and auth mation to redis cache start.");
-        jedisClient.set("deskTopsMation:" + userId, JSONUtil.toJsonStr(deskTops));
-        jedisClient.set("allMenuMation:" + userId, roleIds);
+        jedisClient.set(ObjectConstant.getDeskTopsCacheKey(userId), JSONUtil.toJsonStr(deskTops));
+        jedisClient.set(ObjectConstant.getAllMenuCacheKey(userId), roleIds);
         jedisClient.set("authPointsMation:" + userId, roleIds);
         LOGGER.info("set menu and auth mation to redis cache end.");
         userMation.remove("roleId");
@@ -378,8 +375,8 @@ public class SysEveUserServiceImpl implements SysEveUserService {
     @Override
     public void removeLogin(String userId) {
         SysUserAuthConstants.delUserLoginRedisCache(userId);
-        jedisClient.del("deskTopsMation:" + userId);
-        jedisClient.del("allMenuMation:" + userId);
+        jedisClient.del(ObjectConstant.getDeskTopsCacheKey(userId));
+        jedisClient.del(ObjectConstant.getAllMenuCacheKey(userId));
         jedisClient.del("authPointsMation:" + userId);
     }
 
@@ -910,7 +907,7 @@ public class SysEveUserServiceImpl implements SysEveUserService {
                     iDepmentService.setNameForMap(userMation, "departmentId", "departmentName");
                     iCompanyJobService.setNameForMap(userMation, "jobId", "jobName");
                     SysUserAuthConstants.setUserLoginRedisCache(appUserId, userMation);
-                    jedisClient.set("allMenuMation:" + appUserId, roleIds);
+                    jedisClient.set(ObjectConstant.getAllMenuCacheKey(userId), roleIds);
                     jedisClient.set("authPointsMation:" + appUserId, roleIds);
                     // 获取用户权限点返回给前台
                     List<Map<String, Object>> authPoints = sysAuthorityService.getRoleHasMenuPointListByRoleIds(roleIds, userId);
