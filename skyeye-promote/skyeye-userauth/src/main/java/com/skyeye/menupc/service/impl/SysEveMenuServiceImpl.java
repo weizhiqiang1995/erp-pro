@@ -8,7 +8,10 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.skyeye.annotation.service.SkyeyeService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
+import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -44,6 +47,7 @@ import java.util.stream.Collectors;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @Service
+@SkyeyeService(name = "菜单管理", groupName = "菜单管理")
 public class SysEveMenuServiceImpl extends SkyeyeBusinessServiceImpl<SysEveMenuDao, SysMenu> implements SysEveMenuService {
 
     @Autowired
@@ -264,7 +268,7 @@ public class SysEveMenuServiceImpl extends SkyeyeBusinessServiceImpl<SysEveMenuD
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
+    @Transactional(value = TRANSACTION_MANAGER_VALUE, rollbackFor = Exception.class)
     public void editSysEveMenuSortTopById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 根据同一级排序获取这条数据的上一条数据
@@ -272,13 +276,19 @@ public class SysEveMenuServiceImpl extends SkyeyeBusinessServiceImpl<SysEveMenuD
         if (topBean == null) {
             outputObject.setreturnMessage("已经是最靠前菜单，无法移动。");
         } else {
-            map.put("orderNum", topBean.get("orderNum"));
-            topBean.put("orderNum", topBean.get("thisOrderNum"));
-            sysEveMenuDao.editSysEveMenuSortTopById(map);
-            sysEveMenuDao.editSysEveMenuSortTopById(topBean);
-            refreshCache(map.get("id").toString());
-            refreshCache(topBean.get("id").toString());
+            String id = map.get("id").toString();
+            String otherId = topBean.get("id").toString();
+            updateOrderNumById(id, Integer.parseInt(topBean.get("orderNum").toString()));
+            updateOrderNumById(otherId, Integer.parseInt(topBean.get("thisOrderNum").toString()));
         }
+    }
+
+    private void updateOrderNumById(String id, Integer orderNum) {
+        UpdateWrapper<SysMenu> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq(CommonConstants.ID, id);
+        updateWrapper.set(MybatisPlusUtil.toColumns(SysMenu::getOrderNum), orderNum);
+        update(updateWrapper);
+        refreshCache(id);
     }
 
     /**
@@ -288,7 +298,7 @@ public class SysEveMenuServiceImpl extends SkyeyeBusinessServiceImpl<SysEveMenuD
      * @param outputObject 出参以及提示信息的返回值对象
      */
     @Override
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
+    @Transactional(value = TRANSACTION_MANAGER_VALUE, rollbackFor = Exception.class)
     public void editSysEveMenuSortLowerById(InputObject inputObject, OutputObject outputObject) {
         Map<String, Object> map = inputObject.getParams();
         // 根据同一级排序获取这条数据的下一条数据
@@ -296,12 +306,10 @@ public class SysEveMenuServiceImpl extends SkyeyeBusinessServiceImpl<SysEveMenuD
         if (topBean == null) {
             outputObject.setreturnMessage("已经是最靠后菜单，无法移动。");
         } else {
-            map.put("orderNum", topBean.get("orderNum"));
-            topBean.put("orderNum", topBean.get("thisOrderNum"));
-            sysEveMenuDao.editSysEveMenuSortLowerById(map);
-            sysEveMenuDao.editSysEveMenuSortLowerById(topBean);
-            refreshCache(map.get("id").toString());
-            refreshCache(topBean.get("id").toString());
+            String id = map.get("id").toString();
+            String otherId = topBean.get("id").toString();
+            updateOrderNumById(id, Integer.parseInt(topBean.get("orderNum").toString()));
+            updateOrderNumById(otherId, Integer.parseInt(topBean.get("thisOrderNum").toString()));
         }
     }
 

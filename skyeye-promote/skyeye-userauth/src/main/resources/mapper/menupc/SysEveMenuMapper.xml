@@ -79,14 +79,6 @@
 		ORDER BY b.order_num DESC LIMIT 1
 	</select>
 	
-	<update id="editSysEveMenuSortTopById" parameterType="java.util.Map">
-		UPDATE sys_eve_menu
-		<set>
-			order_num = #{orderNum},
-		</set>
-		WHERE id = #{id}
-	</update>
-	
 	<select id="querySysEveMenuISLowerByThisId" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 			b.id,
@@ -101,14 +93,6 @@
 		AND b.order_num > a.order_num
 		ORDER BY b.order_num ASC LIMIT 1
 	</select>
-	
-	<update id="editSysEveMenuSortLowerById" parameterType="java.util.Map">
-		UPDATE sys_eve_menu
-		<set>
-			order_num = #{orderNum},
-		</set>
-		WHERE id = #{id}
-	</update>
 	
 	<select id="queryAllChildIdsByParentId" resultType="java.lang.String">
 		<foreach collection="ids" item="id" index="idx" separator="UNION">

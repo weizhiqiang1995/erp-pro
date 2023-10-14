@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 注意：本内容仅限购买后使用.禁止私自外泄以及用于其他的商业目的
  */
 @RestController
-@Api(value = "菜单管理", tags = "菜单管理", modelName = "基础模块")
+@Api(value = "菜单管理", tags = "菜单管理", modelName = "菜单管理")
 public class SysEveMenuController {
 
     @Autowired
