@@ -106,7 +106,7 @@ public class CommonServiceImpl implements CommonService {
             }
             // 文件名称
             fileName = file.getOriginalFilename();
-            //得到文件扩展名
+            // 得到文件扩展名
             String fileExtName = fileName.substring(fileName.lastIndexOf(".") + 1);
             FileUtil.createDirs(basePath);
             // 自定义的文件名称
