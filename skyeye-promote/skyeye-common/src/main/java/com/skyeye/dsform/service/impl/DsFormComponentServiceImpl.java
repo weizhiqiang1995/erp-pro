@@ -105,6 +105,7 @@ public class DsFormComponentServiceImpl extends SkyeyeBusinessServiceImpl<DsForm
                 componentNode.setParentId(dsFormComponent.getTypeId());
                 componentNode.putExtra("disabled", false);
                 componentNode.putExtra("linkedData", dsFormComponent.getLinkedData());
+                componentNode.putExtra("htmlDataFrom", dsFormComponent.getHtmlDataFrom());
                 chiledren.add(componentNode);
             });
             tree.setChildren(chiledren);
