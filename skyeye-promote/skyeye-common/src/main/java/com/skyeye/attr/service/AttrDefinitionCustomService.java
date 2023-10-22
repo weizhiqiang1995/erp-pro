@@ -31,4 +31,6 @@ public interface AttrDefinitionCustomService extends SkyeyeBusinessService<AttrD
     void queryAttrDefinitionCustom(InputObject inputObject, OutputObject outputObject);
 
     void deleteAttrDefinitionCustom(InputObject inputObject, OutputObject outputObject);
+
+    void setDsFormComponentUseNum(List<Map<String, Object>> beans);
 }

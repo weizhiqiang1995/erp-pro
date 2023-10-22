@@ -6,8 +6,8 @@ package com.skyeye.dsform.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.tree.Tree;
-import cn.hutool.core.util.StrUtil;
 import com.google.common.base.Joiner;
+import com.skyeye.attr.service.AttrDefinitionCustomService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.common.constans.CommonCharConstants;
 import com.skyeye.common.constans.CommonNumConstants;
@@ -18,6 +18,7 @@ import com.skyeye.dsform.classenum.ComponentApplyRange;
 import com.skyeye.dsform.dao.DsFormComponentDao;
 import com.skyeye.dsform.entity.DsFormComponent;
 import com.skyeye.dsform.service.DsFormComponentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,11 +37,15 @@ import java.util.stream.Collectors;
 @Service
 public class DsFormComponentServiceImpl extends SkyeyeBusinessServiceImpl<DsFormComponentDao, DsFormComponent> implements DsFormComponentService {
 
+    @Autowired
+    private AttrDefinitionCustomService attrDefinitionCustomService;
+
     @Override
     public List<Map<String, Object>> queryPageDataList(InputObject inputObject) {
         CommonPageInfo commonPageInfo = inputObject.getParams(CommonPageInfo.class);
         List<Map<String, Object>> beans = skyeyeBaseMapper.queryDsFormComponentList(commonPageInfo);
         iSysDictDataService.setNameForMap(beans, "typeId", "typeName");
+        attrDefinitionCustomService.setDsFormComponentUseNum(beans);
         return beans;
     }
 

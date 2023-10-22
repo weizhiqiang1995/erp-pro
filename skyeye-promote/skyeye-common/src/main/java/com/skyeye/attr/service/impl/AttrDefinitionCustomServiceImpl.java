@@ -17,6 +17,7 @@ import com.skyeye.attr.service.AttrDefinitionService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.business.entity.BusinessApi;
 import com.skyeye.business.service.BusinessApiService;
+import com.skyeye.common.constans.CommonConstants;
 import com.skyeye.common.constans.CommonNumConstants;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
@@ -158,5 +159,19 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
             businessApiService.deleteByObjectId(attrDefinitionCustom.getId());
         }
         removeById(attrDefinitionCustom.getId());
+    }
+
+    @Override
+    public void setDsFormComponentUseNum(List<Map<String, Object>> beans) {
+        List<String> dsFormComponentId = beans.stream().map(bean -> bean.get("id").toString()).collect(Collectors.toList());
+        QueryWrapper<AttrDefinitionCustom> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in(MybatisPlusUtil.toColumns(AttrDefinitionCustom::getComponentId), dsFormComponentId);
+        queryWrapper.select(CommonConstants.ID, MybatisPlusUtil.toColumns(AttrDefinitionCustom::getComponentId));
+        List<AttrDefinitionCustom> list = list(queryWrapper);
+        Map<String, Long> collect = list.stream().collect(Collectors.groupingBy(AttrDefinitionCustom::getComponentId, Collectors.counting()));
+        beans.forEach(bean -> {
+            String id = bean.get("id").toString();
+            bean.put("attrUseNum", collect.get(id));
+        });
     }
 }
