@@ -5,13 +5,11 @@
 	 -->
 	
 	<!-- 首页接口开始 -->
-	<url id="mainpage001" path="/post/MainPageController/queryFourNumListByUserId" val="获取本月考勤天数，我的文件数，我的论坛帖数，我的知识库文档数" allUse="2">
+	<url id="mainpage001" path="/post/MainPageController/queryFourNumListByUserId" val="获取本月考勤天数，我的文件数，我的论坛帖数" allUse="2">
     </url>
     <url id="mainpage002" path="/post/MainPageController/queryNoticeContentListByUserId" val="获取公告类型以及前八条内容" allUse="2">
     </url>
     <url id="mainpage003" path="/post/MainPageController/queryHotForumList" val="获取前八条热门论坛帖" allUse="2">
-    </url>
-    <url id="mainpage004" path="/post/MainPageController/queryKnowledgeEightList" val="获取近期八条已审核的知识库" allUse="2">
     </url>
     <!-- 首页接口结束 -->
     

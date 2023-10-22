@@ -36,7 +36,7 @@ public class MainPageServiceImpl implements MainPageService {
     private IAuthUserService iAuthUserService;
 
     /**
-     * 获取本月考勤天数，我的文件数，我的论坛帖数，我的知识库文档数
+     * 获取本月考勤天数，我的文件数，我的论坛帖数
      *
      * @param inputObject  入参以及用户信息等获取对象
      * @param outputObject 出参以及提示信息的返回值对象
@@ -50,13 +50,10 @@ public class MainPageServiceImpl implements MainPageService {
         String diskCloudFileNum = mainPageDao.queryDiskCloudFileNumByUserId(userId);
         // 3.获取我的论坛帖数
         String forumNum = mainPageDao.queryForumNumByUserId(userId);
-        // 4.获取我的知识库文档数
-        String knowledgeNum = mainPageDao.queryKnowledgeNumByUserId(userId);
         Map<String, Object> map = new HashMap<>();
         map.put("checkOnWorkNum", checkOnWorkNum);
         map.put("diskCloudFileNum", diskCloudFileNum);
         map.put("forumNum", forumNum);
-        map.put("knowledgeNum", knowledgeNum);
         outputObject.setBean(map);
     }
 
@@ -128,20 +125,6 @@ public class MainPageServiceImpl implements MainPageService {
             pageMaxSize = count;
         }
         outputObject.setBeans(beans.subList(0, pageMaxSize));
-        outputObject.settotal(beans.size());
-    }
-
-    /**
-     * 获取近期八条已审核的知识库
-     *
-     * @param inputObject  入参以及用户信息等获取对象
-     * @param outputObject 出参以及提示信息的返回值对象
-     */
-    @Override
-    public void queryKnowledgeEightList(InputObject inputObject, OutputObject outputObject) {
-        Map<String, Object> map = inputObject.getParams();
-        List<Map<String, Object>> beans = mainPageDao.queryKnowledgeContentPhoneList(map);
-        outputObject.setBeans(beans);
         outputObject.settotal(beans.size());
     }
 

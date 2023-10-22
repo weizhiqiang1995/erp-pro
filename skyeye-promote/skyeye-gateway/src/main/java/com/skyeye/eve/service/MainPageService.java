@@ -15,6 +15,4 @@ public interface MainPageService {
 
     void queryHotForumList(InputObject inputObject, OutputObject outputObject);
 
-    void queryKnowledgeEightList(InputObject inputObject, OutputObject outputObject);
-
 }

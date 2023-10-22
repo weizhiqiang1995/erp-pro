@@ -31,16 +31,6 @@
 			a.create_id = #{userId}
 	</select>
 	
-	<select id="queryKnowledgeNumByUserId" resultType="String">
-		SELECT
-			COUNT(a.id) knowledgeNum
-		FROM
-			knowlg_content a
-		WHERE
-			a.create_id = #{userId}
-		AND a.state = '2'
-	</select>
-	
 	<select id="queryFirstSysNoticeTypeUpStateList" resultType="java.util.Map">
 		SELECT
 			a.id,
@@ -122,20 +112,4 @@
         WHERE a.state = '1' AND (a.type = '1' OR (a.type = '2' AND a.create_id = #{userId})) AND a.anonymous = '2' AND a.id in (SELECT t.id FROM(select DISTINCT(forum_id) id from forum_hot ORDER BY update_time desc LIMIT 6)t)
     </select>
     
-    <select id="queryKnowledgeContentPhoneList" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			a.id,
-			a.title,
-			b.`name` typeName,
-			DATE_FORMAT(a.create_time, '%Y-%m-%d') createTime
-		FROM
-			knowlg_content a
-			LEFT JOIN knowlg_type b ON a.type_id = b.id
-		WHERE
-			a.state = 2
-		ORDER BY
-			a.examine_time DESC
-		LIMIT 8
-	</select>
-
 </mapper>
