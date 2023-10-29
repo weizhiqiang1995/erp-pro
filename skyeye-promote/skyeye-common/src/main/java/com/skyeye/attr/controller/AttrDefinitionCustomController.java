@@ -74,4 +74,18 @@ public class AttrDefinitionCustomController {
         attrDefinitionCustomService.deleteAttrDefinitionCustom(inputObject, outputObject);
     }
 
+    /**
+     * 根据组件id查询正在使用该组件的服务类信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @ApiOperation(id = "queryAttrByComponentId", value = "根据组件id查询正在使用该组件的服务类信息", method = "POST", allUse = "2")
+    @ApiImplicitParams({
+        @ApiImplicitParam(id = "componentId", name = "componentId", value = "组件id", required = "required")})
+    @RequestMapping("/post/AttrDefinitionCustomController/queryAttrByComponentId")
+    public void queryAttrByComponentId(InputObject inputObject, OutputObject outputObject) {
+        attrDefinitionCustomService.queryAttrByComponentId(inputObject, outputObject);
+    }
+
 }

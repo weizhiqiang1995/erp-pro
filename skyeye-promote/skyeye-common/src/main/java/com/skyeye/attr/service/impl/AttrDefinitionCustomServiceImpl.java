@@ -24,6 +24,8 @@ import com.skyeye.common.object.OutputObject;
 import com.skyeye.common.util.mybatisplus.MybatisPlusUtil;
 import com.skyeye.dsform.entity.DsFormComponent;
 import com.skyeye.dsform.service.DsFormComponentService;
+import com.skyeye.server.entity.ServiceBean;
+import com.skyeye.server.service.ServiceBeanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +52,9 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
 
     @Autowired
     private BusinessApiService businessApiService;
+
+    @Autowired
+    private ServiceBeanService serviceBeanService;
 
     @Override
     public void writePostpose(AttrDefinitionCustom entity, String userId) {
@@ -173,5 +178,29 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
             String id = bean.get("id").toString();
             bean.put("attrUseNum", collect.get(id));
         });
+    }
+
+    /**
+     * 根据组件id查询正在使用该组件的服务类信息
+     *
+     * @param inputObject  入参以及用户信息等获取对象
+     * @param outputObject 出参以及提示信息的返回值对象
+     */
+    @Override
+    public void queryAttrByComponentId(InputObject inputObject, OutputObject outputObject) {
+        String componentId = inputObject.getParams().get("componentId").toString();
+        if (StrUtil.isEmpty(componentId)) {
+            return;
+        }
+        QueryWrapper<AttrDefinitionCustom> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(MybatisPlusUtil.toColumns(AttrDefinitionCustom::getComponentId), componentId);
+        List<AttrDefinitionCustom> attrDefinitionCustoms = list(queryWrapper);
+        List<String> classNames = attrDefinitionCustoms.stream().map(AttrDefinitionCustom::getClassName).collect(Collectors.toList());
+        Map<String, ServiceBean> serviceBeanMap = serviceBeanService.queryServiceClass(classNames);
+        attrDefinitionCustoms.forEach(attrDefinitionCustom -> {
+            attrDefinitionCustom.setServiceBean(serviceBeanMap.get(attrDefinitionCustom.getClassName()));
+        });
+        outputObject.setBeans(attrDefinitionCustoms);
+        outputObject.settotal(attrDefinitionCustoms.size());
     }
 }

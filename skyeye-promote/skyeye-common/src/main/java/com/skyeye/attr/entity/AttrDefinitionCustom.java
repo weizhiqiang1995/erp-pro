@@ -15,6 +15,7 @@ import com.skyeye.annotation.unique.UniqueField;
 import com.skyeye.business.entity.BusinessApi;
 import com.skyeye.common.entity.features.OperatorUserInfo;
 import com.skyeye.dsform.entity.DsFormComponent;
+import com.skyeye.server.entity.ServiceBean;
 import lombok.Data;
 
 /**
@@ -38,6 +39,10 @@ public class AttrDefinitionCustom extends OperatorUserInfo {
     @TableField("class_name")
     @ApiModelProperty(value = "服务类的className", required = "required")
     private String className;
+
+    @TableField(exist = false)
+    @Property(value = "服务类信息")
+    private ServiceBean serviceBean;
 
     @TableField("attr_key")
     @ApiModelProperty(value = "字段名", required = "required")

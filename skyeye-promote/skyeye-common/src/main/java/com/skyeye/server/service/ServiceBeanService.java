@@ -5,11 +5,13 @@
 package com.skyeye.server.service;
 
 import com.skyeye.base.business.service.SkyeyeBusinessService;
-import com.skyeye.server.entity.ServiceBean;
 import com.skyeye.common.object.InputObject;
 import com.skyeye.common.object.OutputObject;
+import com.skyeye.server.entity.ServiceBean;
 
 import java.net.URI;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: ServiceBeanService
@@ -28,6 +30,8 @@ public interface ServiceBeanService extends SkyeyeBusinessService<ServiceBean> {
     void queryServiceClassForTree(InputObject inputObject, OutputObject outputObject);
 
     ServiceBean queryServiceClass(String className);
+
+    Map<String, ServiceBean> queryServiceClass(List<String> classNames);
 
     ServiceBean getByEntityClassName(String entityClassName);
 }

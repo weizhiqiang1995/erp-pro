@@ -39,6 +39,10 @@ public class ServiceBean extends CommonInfo {
     @TableField(value = "spring_application_name")
     private String springApplicationName;
 
+    @TableField(exist = false)
+    @Property("服务名(中文名称)")
+    private String applicationName;
+
     /**
      * 应用的appId
      */

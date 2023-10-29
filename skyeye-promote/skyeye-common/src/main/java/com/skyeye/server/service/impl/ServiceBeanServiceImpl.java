@@ -225,6 +225,26 @@ public class ServiceBeanServiceImpl extends SkyeyeBusinessServiceImpl<ServiceBea
     }
 
     @Override
+    public Map<String, ServiceBean> queryServiceClass(List<String> classNames) {
+        if (CollectionUtil.isEmpty(classNames)) {
+            return CollectionUtil.newHashMap();
+        }
+        // 获取所属应用信息
+        List<Map<String, Object>> applications = applicationService.queryApplicationList();
+        Map<String, String> applicationMap = applications.stream().collect(Collectors.toMap(bean -> bean.get("appId").toString(), bean -> bean.get("appName").toString()));
+        // 查询属性列表
+        classNames = classNames.stream().distinct().collect(Collectors.toList());
+        QueryWrapper<ServiceBean> wrapper = new QueryWrapper<>();
+        wrapper.in(MybatisPlusUtil.toColumns(ServiceBean::getClassName), classNames);
+        List<ServiceBean> serviceBeans = list(wrapper);
+        serviceBeans.forEach(serviceBean -> {
+            serviceBean.setApplicationName(applicationMap.get(serviceBean.getAppId()));
+        });
+        Map<String, ServiceBean> serviceBeanMap = serviceBeans.stream().collect(Collectors.toMap(ServiceBean::getClassName, bean -> bean));
+        return serviceBeanMap;
+    }
+
+    @Override
     public ServiceBean getByEntityClassName(String entityClassName) {
         QueryWrapper<ServiceBean> wrapper = new QueryWrapper<>();
         wrapper.eq(MybatisPlusUtil.toColumns(ServiceBean::getEntityClassName), entityClassName);
