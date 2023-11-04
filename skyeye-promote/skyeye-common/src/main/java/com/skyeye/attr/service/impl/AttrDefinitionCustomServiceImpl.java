@@ -169,6 +169,9 @@ public class AttrDefinitionCustomServiceImpl extends SkyeyeBusinessServiceImpl<A
     @Override
     public void setDsFormComponentUseNum(List<Map<String, Object>> beans) {
         List<String> dsFormComponentId = beans.stream().map(bean -> bean.get("id").toString()).collect(Collectors.toList());
+        if (CollectionUtil.isEmpty(dsFormComponentId)) {
+            return;
+        }
         QueryWrapper<AttrDefinitionCustom> queryWrapper = new QueryWrapper<>();
         queryWrapper.in(MybatisPlusUtil.toColumns(AttrDefinitionCustom::getComponentId), dsFormComponentId);
         queryWrapper.select(CommonConstants.ID, MybatisPlusUtil.toColumns(AttrDefinitionCustom::getComponentId));
