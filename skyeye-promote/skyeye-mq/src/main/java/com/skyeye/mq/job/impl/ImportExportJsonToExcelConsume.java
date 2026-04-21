@@ -22,11 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,9 +40,6 @@ import java.util.Map;
 public class ImportExportJsonToExcelConsume implements RocketMQListener<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ImportExportJsonToExcelConsume.class);
-
-    /** 超过此大小的 JSON 走 Jackson 流式解析 + SXSSF 写 xlsx，避免整文件进内存 */
-    private static final long MAX_JSON_FILE_BYTES_BUFFERED = 50L * 1024 * 1024;
 
     private static final int SXSSF_ROW_ACCESS_WINDOW = 500;
 
@@ -85,29 +80,11 @@ public class ImportExportJsonToExcelConsume implements RocketMQListener<String> 
             String saveDir = tPath + FileConstants.FileUploadPath.getSavePath(exportType);
             Files.createDirectories(Paths.get(saveDir));
 
-            long jsonBytes = Files.size(jsonPath);
-            String excelFileName;
-            Path outPath;
-            if (jsonBytes <= MAX_JSON_FILE_BYTES_BUFFERED) {
-                String jsonContent = new String(Files.readAllBytes(jsonPath), StandardCharsets.UTF_8);
-                JSONArray arr = JSONUtil.parseArray(jsonContent);
-                List<Map<String, Object>> rows = new ArrayList<>();
-                for (int i = 0; i < arr.size(); i++) {
-                    rows.add(arr.getJSONObject(i));
-                }
-                excelFileName = "export-excel-" + System.currentTimeMillis() + ".xls";
-                outPath = Paths.get(saveDir).resolve(excelFileName);
-                String title = map.containsKey("title") ? map.get("title").toString() : "导出数据";
-                String[] dataType = new String[0];
-                ExcelUtil.SheetExportStyle exportStyle = parseExportStyle(map.get("exportStyleJson"));
-                ExcelUtil.createWorkBookToFile(title, "导出数据", rows, keys, columnNames, dataType, outPath.toFile(), exportStyle);
-            } else {
-                excelFileName = "export-excel-" + System.currentTimeMillis() + ".xlsx";
-                outPath = Paths.get(saveDir).resolve(excelFileName);
-                ExcelUtil.SheetExportStyle exportStyle = parseExportStyle(map.get("exportStyleJson"));
-                ExcelUtil.createSxssfExcelFromJsonArrayFile(jsonPath.toFile(), "导出数据", keys, columnNames,
-                    outPath.toFile(), SXSSF_ROW_ACCESS_WINDOW, exportStyle);
-            }
+            String excelFileName = "export-excel-" + System.currentTimeMillis() + ".xlsx";
+            Path outPath = Paths.get(saveDir).resolve(excelFileName);
+            ExcelUtil.SheetExportStyle exportStyle = parseExportStyle(map.get("exportStyleJson"));
+            ExcelUtil.createSxssfExcelFromJsonArrayFile(jsonPath.toFile(), "导出数据", keys, columnNames,
+                outPath.toFile(), SXSSF_ROW_ACCESS_WINDOW, exportStyle);
             Files.deleteIfExists(jsonPath);
 
             String visitExcel = FileConstants.FileUploadPath.getVisitPath(exportType) + excelFileName;
