@@ -414,7 +414,46 @@ public class CheckWorkServiceImpl extends SkyeyeBusinessServiceImpl<CheckWorkDao
         }
         List<Map<String, Object>> beans = skyeyeBaseMapper.queryCheckWorkList(pageInfo);
         checkWorkTimeService.setMationForMap(beans, "timeId", "timeMation");
+        for (Map<String, Object> bean : beans) {
+            String workHours = ObjectUtil.isEmpty(bean.get("workHours")) ? "" : bean.get("workHours").toString();
+            boolean isOver8Hours = false;
+            boolean isUnder8Hours = false;
+            if (StrUtil.isNotBlank(workHours) && !"0".equals(workHours)) {
+                double hours = parseWorkHoursToHours(workHours);
+                if (hours >= 8) {
+                    isOver8Hours = true;
+                } else {
+                    isUnder8Hours = true;
+                }
+            }
+            bean.put("isOver8Hours", isOver8Hours);
+            bean.put("isUnder8Hours", isUnder8Hours);
+        }
         return beans;
+    }
+
+    /**
+     * 将工时字符串（格式：HH:mm:ss 或 H:mm:ss）转换为小时数
+     *
+     * @param workHours 工时字符串
+     * @return 小时数（保留两位小数）
+     */
+    private double parseWorkHoursToHours(String workHours) {
+        if (StrUtil.isBlank(workHours) || "0".equals(workHours)) {
+            return 0.0;
+        }
+        try {
+            String[] parts = workHours.split(":");
+            if (parts.length >= 2) {
+                int hours = Integer.parseInt(parts[0]);
+                int minutes = Integer.parseInt(parts[1]);
+                int seconds = parts.length >= 3 ? Integer.parseInt(parts[2]) : 0;
+                return hours + (minutes / 60.0) + (seconds / 3600.0);
+            }
+        } catch (Exception e) {
+            LOGGER.error("解析工时失败: {}", workHours, e);
+        }
+        return 0.0;
     }
 
     @Override
