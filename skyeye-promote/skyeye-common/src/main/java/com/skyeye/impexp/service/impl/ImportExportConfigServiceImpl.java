@@ -16,6 +16,7 @@ import com.skyeye.attr.service.AttrDefinitionCustomService;
 import com.skyeye.attr.service.AttrDefinitionService;
 import com.skyeye.base.business.service.impl.SkyeyeBusinessServiceImpl;
 import com.skyeye.common.constans.CommonConstants;
+import com.skyeye.common.constans.FileConstants;
 import com.skyeye.common.constans.MqConstants;
 import com.skyeye.common.entity.search.CommonPageInfo;
 import com.skyeye.common.entity.search.DynamicCondition;
@@ -44,8 +45,13 @@ import com.skyeye.impexp.support.ImportExportConfigJsonHelper.ParsedConfig;
 import com.skyeye.impexp.support.ImportExportConfigJsonHelper.SheetLayoutOptions;
 import com.skyeye.sdk.data.service.IDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -70,6 +76,12 @@ public class ImportExportConfigServiceImpl extends SkyeyeBusinessServiceImpl<Imp
 
     @Autowired
     private IJobMateMationService iJobMateMationService;
+
+    @Value("${IMAGES_PATH}")
+    private String tPath;
+
+    @Value("${skyeye.tenant.enable}")
+    private boolean tenantEnable;
 
     @Override
     protected void validatorEntity(ImportExportConfig entity) {
@@ -228,7 +240,29 @@ public class ImportExportConfigServiceImpl extends SkyeyeBusinessServiceImpl<Imp
         if (rows == null) {
             rows = CollectionUtil.newArrayList();
         }
-        writeExcelTemplate(config.getName(), "导出数据", specs, titleMap, rows, buildSheetExportStyle(specs, layout));
+        String filePath = saveRowsToJsonFile(rows);
+        sendImportExportJsonToExcelJob(config, specs, layout, titleMap, filePath, inputObject);
+        Map<String, Object> asyncTip = new LinkedHashMap<>();
+        asyncTip.put("async", true);
+        asyncTip.put("message", "已提交后台生成 Excel，请稍后在「我的输出」查看任务进度。");
+        asyncTip.put("total", rows.size());
+        outputObject.setBean(asyncTip);
+        outputObject.settotal(0);
+    }
+
+    private String saveRowsToJsonFile(List<Map<String, Object>> rows) {
+        try {
+            int exportType = FileConstants.FileUploadPath.EXPORT_DATA.getType()[0];
+            String saveDir = tPath + FileConstants.FileUploadPath.getSavePath(exportType);
+            Files.createDirectories(Paths.get(saveDir));
+            String fileName = "export-json-" + System.currentTimeMillis() + ".json";
+            String fullPath = saveDir + File.separator + fileName;
+            String jsonContent = JSONUtil.toJsonStr(rows);
+            Files.write(Paths.get(fullPath), jsonContent.getBytes(StandardCharsets.UTF_8));
+            return FileConstants.FileUploadPath.getVisitPath(exportType) + fileName;
+        } catch (Exception e) {
+            throw new CustomException("保存导出数据失败: " + e.getMessage());
+        }
     }
 
     private Map<String, Object> buildAsyncExportTip(Map<String, Object> exportBean) {
